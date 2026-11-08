@@ -1,0 +1,40 @@
+{
+  "at": "2026-11-08T09:21:49.803669+00:00",
+  "syntax_and_skills": {
+    "python": 28,
+    "javascript": 12,
+    "skills": 9
+  },
+  "validation_errors": [],
+  "original_files": 734,
+  "missing_original_files": [],
+  "modified_original_files": [
+    ".agents/skills/ipanema-storefront/SKILL.md",
+    ".gitignore",
+    "AGENTS.md",
+    "README.md",
+    "projects/ipanema.json",
+    "tools/additional_states.mjs",
+    "tools/audit_source.py",
+    "tools/browser_audit.mjs",
+    "tools/browser_runtime.mjs",
+    "tools/check_workspace.py",
+    "tools/crawl_storefront.mjs",
+    "tools/find_component.py",
+    "tools/inspect_storefront.mjs",
+    "tools/lighthouse_audit.mjs",
+    "tools/no_js_audit.mjs",
+    "tools/render_inventory.py",
+    "tools/route_matrix.mjs",
+    "tools/semantic_audit.mjs",
+    "tools/state_audit.mjs"
+  ],
+  "discovery_files_identical": 712,
+  "discovery_files_modified": [],
+  "theme_files_unchanged": 330,
+  "personal_absolute_paths_in_active_tools_and_shared_projects": [],
+  "effective_verified_solutions": [
+    "portable-project-configuration-v1",
+    "readonly-lighthouse-tabs-v1"
+  ]
+}

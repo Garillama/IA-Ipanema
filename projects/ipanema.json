@@ -1,13 +1,30 @@
 {
-  "name": "RHINO IPANEMA — discovery de merganser",
-  "source_root": "/home/alanrichard/orca/workspaces/scentperfumesclaude/merganser",
+  "schema_version": 2,
+  "id": "ipanema",
+  "name": "RHINO IPANEMA",
+  "theme_root": null,
+  "environment": "production-read-only",
   "theme_installation_id": 14837617,
   "public_url": "https://rhinoipanema.mitiendanube.com/?exit_preview_theme_installation",
   "preview_url": "https://rhinoipanema.mitiendanube.com/?theme_installation_id=14837617",
   "discovery_root": "ipanema-discovery",
+  "knowledge_reference_project": "ipanema",
+  "evidence_dir": "reports/runs/ipanema",
+  "qa": {
+    "widths": [360, 390, 768, 1024, 1440, 1920],
+    "pages": {
+      "home": "/",
+      "category": "/productos/",
+      "pdp": "/productos/botas-presoterapia-inalambricas-pro-air/"
+    },
+    "max_pages": 10,
+    "visual": {"pixel_threshold": 12, "max_changed_ratio": 0.005, "masks": []},
+    "budgets": {"lcp_ms": 2500, "cls": 0.1, "tbt_ms": 200, "js_bytes": 350000, "css_bytes": 150000, "image_bytes": 600000, "font_bytes": 120000, "requests": 60}
+  },
   "initial_scope": "discovery-read-only",
   "verified_on": "2026-11-08",
   "remote_observation": {
+    "observed_at": "2026-11-08",
     "theme": "ipanema",
     "variant": "Deco",
     "version": "1.8.0",

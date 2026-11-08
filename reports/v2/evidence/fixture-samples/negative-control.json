@@ -1,0 +1,184 @@
+{
+  "kind": "browser-qa",
+  "at": "2026-11-08T09:07:14.347Z",
+  "project": "fixture",
+  "records": [
+    {
+      "page": "home",
+      "width": 390,
+      "mode": "rendered",
+      "file": "home-390-rendered.json",
+      "screenshot": "home-390-rendered.png"
+    }
+  ],
+  "checks": [
+    {
+      "name": "home-390-rendered:http",
+      "status": "passed",
+      "details": {
+        "actual": 200,
+        "expected": 200
+      }
+    },
+    {
+      "name": "home-390-rendered:overflow",
+      "status": "failed",
+      "details": {
+        "viewport": 1560,
+        "scroll_width": 2000,
+        "overflow_candidates": [
+          {
+            "tag": "MAIN",
+            "id": "",
+            "class": ""
+          },
+          {
+            "tag": "H1",
+            "id": "",
+            "class": ""
+          },
+          {
+            "tag": "DIV",
+            "id": "",
+            "class": "user-content"
+          },
+          {
+            "tag": "H1",
+            "id": "",
+            "class": ""
+          },
+          {
+            "tag": "SECTION",
+            "id": "",
+            "class": ""
+          },
+          {
+            "tag": "H2",
+            "id": "hero-title",
+            "class": ""
+          },
+          {
+            "tag": "PICTURE",
+            "id": "",
+            "class": ""
+          },
+          {
+            "tag": "SECTION",
+            "id": "",
+            "class": ""
+          },
+          {
+            "tag": "H2",
+            "id": "categories-title",
+            "class": ""
+          },
+          {
+            "tag": "DIV",
+            "id": "",
+            "class": "cards"
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "class": ""
+          }
+        ],
+        "clipping_candidates": [],
+        "overlap_candidates": [],
+        "reading_order": [
+          {
+            "key": "category",
+            "top": 658.03125,
+            "left": 20
+          },
+          {
+            "key": "product",
+            "top": 658.03125,
+            "left": 1008
+          }
+        ]
+      }
+    },
+    {
+      "name": "home-390-rendered:h1",
+      "status": "failed",
+      "details": {
+        "count": 2,
+        "locations": [
+          {
+            "text": "Fixture de tienda",
+            "in_user_content": false
+          },
+          {
+            "text": "Otro encabezado",
+            "in_user_content": true
+          }
+        ]
+      }
+    },
+    {
+      "name": "home-390-rendered:title",
+      "status": "passed"
+    },
+    {
+      "name": "home-390-rendered:jsonld",
+      "status": "failed",
+      "details": [
+        {
+          "valid": false
+        }
+      ]
+    },
+    {
+      "name": "home-390-rendered:canonical",
+      "status": "failed",
+      "details": []
+    },
+    {
+      "name": "home-390-rendered:carousel-links",
+      "status": "failed",
+      "details": [
+        {
+          "href": "javascript:void(0)",
+          "text": "Ver categoría",
+          "carousel": true
+        },
+        {
+          "href": "/product/",
+          "text": "Ver producto",
+          "carousel": true
+        }
+      ]
+    },
+    {
+      "name": "home-390-rendered:axe",
+      "status": "passed",
+      "details": {
+        "version": "4.14.0",
+        "violations": [],
+        "incomplete": []
+      }
+    },
+    {
+      "name": "home-390-rendered:menu:assert_hidden",
+      "status": "failed",
+      "details": {
+        "visible": true,
+        "focus": true
+      }
+    }
+  ],
+  "limitations": [
+    "Chrome automatizado; sin certificación WCAG ni lector de pantalla humano.",
+    "Geometría: solapamientos y recortes son candidatos para revisión; no toda intersección es un defecto.",
+    "HTML, DOM y enlaces no prueban indexación real. No se envían formularios comerciales.",
+    "Métricas de laboratorio; sin INP de campo. Bytes recibidos no prueban decodificación o visibilidad de imágenes.",
+    "La red de escritura está bloqueada: apps o lecturas por POST pueden comportarse distinto. No atribuir ese efecto al tema sin reproducción autorizada; comparar bajo la misma protección."
+  ],
+  "environment": {
+    "browser": "Chrome/155.0.8059.84",
+    "node": "24.22.0",
+    "os": "linux"
+  },
+  "outcome": "failed"
+}

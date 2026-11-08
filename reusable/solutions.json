@@ -1,0 +1,130 @@
+{
+  "schema_version": 1,
+  "solutions": [
+    {
+      "id": "portable-project-configuration-v1",
+      "problem": "Las herramientas dependían de una ruta personal y una única tienda.",
+      "context": "IA-Ipanema V2 local; configuración y arranque de herramientas Python.",
+      "component": "Project/registro/entrada CLI",
+      "files": [
+        "tools/ipanema/core.py",
+        "tools/ia.py",
+        "tools/ipanema/validation.py"
+      ],
+      "cause": "source_root absoluto y validación que trataba una observación histórica como requisito del entorno.",
+      "solution": "Registro compartido, overrides locales ignorados, selección CLI/env/local/default y validación sin acceso obligatorio al tema.",
+      "tests": [
+        "tests/unit/test_config.py",
+        "tests/integration/test_cli_portability.py"
+      ],
+      "results": "QA offline aprobado; arranque reubicado, sin tema, configuración incompleta, varios proyectos y rechazo de QA remoto sin flag.",
+      "limitations": [
+        "Simulación en rutas temporales de una sola máquina Linux/Python 3.12.3.",
+        "No se verificó conexión con tiendas nuevas ni Windows/macOS reales."
+      ],
+      "risks": [
+        "Una configuración de otro proyecto exige volver a verificar archivos y compatibilidad."
+      ],
+      "compatibility": {
+        "agent": "2.0.0",
+        "tested_os": "linux",
+        "python_tested": "3.12.3"
+      },
+      "reuse": "Procedimiento del agente aplicable a varios proyectos sin copiar código del tema.",
+      "scope": "workspace",
+      "status": "verified",
+      "agent_version": "2.0.0",
+      "agent_fingerprint": "b1e3eae0edc507728daa8edd905a1e739d2bc365e7ef898f2bee3c6c1d1f6aff",
+      "project": "ipanema",
+      "theme_installation_id": 14837617,
+      "at": "2026-11-08T09:11:15.040984+00:00",
+      "source_hashes": {
+        "tools/ipanema/core.py": "56f3550cebb31ed01ef1df2777a04bb5335974dab7349a001f6d65b77c164bc9",
+        "tools/ia.py": "91118a5fe253ea0708c76cf8b93d885ba8ea346c1811d943f10d30ab2a3e630d",
+        "tools/ipanema/validation.py": "c6df1819a2a7c2badf777f84a7b81d9b4910a2064066a881935b4a97710fbe5a"
+      },
+      "evidence": [
+        {
+          "path": "reports/v2/evidence/qa-offline.json",
+          "sha256": "1d9dbe31f93b373a0ffbe828f054194d19c5680aa09ed922dda9f821c9ee2df7"
+        }
+      ],
+      "remote_version_observation": {
+        "observed_at": "2026-11-08",
+        "theme": "ipanema",
+        "variant": "Deco",
+        "version": "1.8.0",
+        "forked": true,
+        "productive": true,
+        "must_reverify_before_changes": true
+      }
+    },
+    {
+      "id": "readonly-lighthouse-tabs-v1",
+      "problem": "La protección inicial de red no cubría las pestañas usadas por Lighthouse.",
+      "context": "Fixture de loopback con fetch POST sintético, perfiles mobile y desktop.",
+      "component": "browser_runtime/qa_browser",
+      "files": [
+        "tools/browser_runtime.mjs",
+        "tools/qa_browser.mjs"
+      ],
+      "cause": "Solo se protegían páginas creadas por las funciones envueltas; la pestaña inicial o creada desde otra conexión podía escapar del interceptor.",
+      "solution": "Proteger pestañas iniciales y targetcreated con inicialización compartida por promesas; mantener la excepción de autenticación acotada a página/origen.",
+      "tests": [
+        "tests/browser/test_browser_qa.py:test_runtime_blocks_page_post_requests",
+        "tests/browser/test_browser_qa.py:test_lighthouse_local_profiles_have_real_lab_metrics"
+      ],
+      "results": {
+        "before_server_posts": 2,
+        "after_server_posts": 0,
+        "profiles": [
+          "mobile",
+          "desktop"
+        ],
+        "evidence_before": "reports/v2/evidence/interception-before.json",
+        "evidence_after": "reports/v2/evidence/interception-after.json"
+      },
+      "limitations": [
+        "Verificado sobre servidor sintético local; no es pentest ni certificación de aislamiento del runtime.",
+        "Bloquear POST puede alterar apps o lecturas que usan ese método y los tiempos medidos.",
+        "No protege herramientas externas que no usan este runtime."
+      ],
+      "risks": [
+        "Comparar solo bajo la misma política de red y configuración."
+      ],
+      "compatibility": {
+        "agent": "2.0.0",
+        "puppeteer": "25.16.0",
+        "lighthouse": "13.6.0",
+        "tested_os": "linux"
+      },
+      "reuse": "Procedimiento de QA de lectura, independiente del código del tema.",
+      "scope": "workspace",
+      "status": "verified",
+      "agent_version": "2.0.0",
+      "agent_fingerprint": "b1e3eae0edc507728daa8edd905a1e739d2bc365e7ef898f2bee3c6c1d1f6aff",
+      "project": "ipanema",
+      "theme_installation_id": 14837617,
+      "at": "2026-11-08T09:11:15.110743+00:00",
+      "source_hashes": {
+        "tools/browser_runtime.mjs": "2a9c4cb7e5a92084514dc5e1acef84a7f6f3e2742fe6b02399adbf3bc03c4fc6",
+        "tools/qa_browser.mjs": "beaa84c6cc0378ffcd2ffe84439860588f0cc521fe61b65b7d669386ff4d21cd"
+      },
+      "evidence": [
+        {
+          "path": "reports/v2/evidence/qa-fixtures.json",
+          "sha256": "281c208827db2e7d26e9e408c36715f16a0cf50d7c42b2758004ce3006cc46a8"
+        }
+      ],
+      "remote_version_observation": {
+        "observed_at": "2026-11-08",
+        "theme": "ipanema",
+        "variant": "Deco",
+        "version": "1.8.0",
+        "forked": true,
+        "productive": true,
+        "must_reverify_before_changes": true
+      }
+    }
+  ]
+}

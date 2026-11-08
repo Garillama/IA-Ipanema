@@ -1,16 +1,16 @@
 #!/usr/bin/env node
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import {puppeteer,authenticate,cliRequire} from './browser_runtime.mjs';
-const summary=JSON.parse(await fs.readFile('ipanema-discovery/13-evidence/measurements/crawl/summary.json','utf8'));
+import {puppeteer,authenticate,cliRequire,evidenceRoot,projectUrl,knowledgeFile} from './browser_runtime.mjs';
+const summary=JSON.parse(await fs.readFile(knowledgeFile('13-evidence/measurements/crawl/summary.json'),'utf8'));
 const representative=new Map();
 for(const r of summary.pages)if(r.bodyClass?.trim()&&!r.error&&!representative.has(r.bodyClass.trim()))representative.set(r.bodyClass.trim(),r.url);
 representative.delete('template-home'); // Ya tiene seis cargas independientes, no repetirlas.
 const jobs=[];for(const [template,url] of representative)for(const width of [360,390,768,1024,1440,1920])jobs.push({template,url,width});
-const out='ipanema-discovery/13-evidence/measurements/responsive-matrix';const shots='ipanema-discovery/13-evidence/screenshots/matrix';await fs.mkdir(out,{recursive:true});await fs.mkdir(shots,{recursive:true});
-const browser=await puppeteer.launch({executablePath:'/usr/bin/google-chrome',headless:true,args:['--disable-dev-shm-usage']});const results=[];
+const out=`${evidenceRoot}/measurements/responsive-matrix`;const shots=`${evidenceRoot}/screenshots/matrix`;await fs.mkdir(out,{recursive:true});await fs.mkdir(shots,{recursive:true});
+const browser=await puppeteer.launch({headless:true,args:['--disable-dev-shm-usage']});const results=[];
 try{
- const cookies=await authenticate(browser,'https://rhinoipanema.mitiendanube.com/?exit_preview_theme_installation');
+ const cookies=await authenticate(browser,projectUrl());
  async function worker(){while(jobs.length){const job=jobs.shift();const ctx=await browser.createBrowserContext();await ctx.setCookie(...cookies);try{
   const page=await ctx.newPage();await page.setViewport({width:job.width,height:900,deviceScaleFactor:1,isMobile:job.width<768,hasTouch:job.width<768});
   const res=await page.goto(job.url,{waitUntil:'domcontentloaded',timeout:40000});await page.waitForNetworkIdle({idleTime:600,timeout:6000}).catch(()=>{});

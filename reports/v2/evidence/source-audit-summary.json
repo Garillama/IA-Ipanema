@@ -1,0 +1,33 @@
+{
+  "verified_at": "2026-11-08T09:11:14.482943+00:00",
+  "source": "/home/alanrichard/orca/workspaces/scentperfumesclaude/merganser",
+  "head": "cca5e352d1b68907f80b4ac8c10c96b47a9c52d1",
+  "git_clean": true,
+  "local_status": "",
+  "manifest": {
+    "theme": null,
+    "theme_version": "1",
+    "forked": false
+  },
+  "files": 330,
+  "sections": 51,
+  "blocks": 54,
+  "snippets": 118,
+  "templates": 25,
+  "settings": 708,
+  "instances": 178,
+  "dependencies": 646,
+  "json_schema_errors": [],
+  "exclusions": [
+    ".nuvem",
+    ".git",
+    ".agents",
+    "secciones.md"
+  ],
+  "limitations": [
+    "Análisis estático; no ejecuta Twig ni prueba editor, red o navegador.",
+    "Las clases extraídas son candidatas; Twig puede producir clases dinámicas.",
+    "Scopes responsive inferidos de IDs; revisar su consumo CSS/Twig.",
+    "Referencias dinámicas no resueltas por este inventario."
+  ]
+}

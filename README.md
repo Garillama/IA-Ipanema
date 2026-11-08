@@ -1,23 +1,119 @@
-# Agente cotidiano para Ipanema
+# IA-Ipanema V2
 
-Esta carpeta prepara al asistente que abras aquí para investigar y mantener Tiendanube con las reglas de [AGENTS.md](AGENTS.md), una [skill local](.agents/skills/ipanema-storefront/SKILL.md), herramientas de lectura y una [base de conocimiento](ipanema-discovery/README.md). La configuración por carpeta y las skills siguen los mecanismos de la [documentación oficial de OpenAI](https://developers.openai.com/codex/guides/agents-md).
+Agente de ingeniería para temas seccionables Ipanema de Tiendanube. Combina instrucciones de trabajo, nueve skills, conocimiento existente y herramientas locales para investigar, preparar cambios, probarlos y registrar evidencia. Necesita el runtime de IA con el que abras esta carpeta; no incluye un modelo ni un servidor de inferencia propio.
 
-Puedes pedir, por ejemplo: «Analiza cómo cambiar este hero usando los controles existentes», «Prepara una variante mobile sin duplicar contenido» o «Revisa la product card y sus consumidores antes de editarla». La primera entrega es discovery; no se modificó el tema. Una futura petición de implementación define el alcance del trabajo local; publicar o sincronizar la tienda requiere instrucciones aplicables.
+La V2 conserva el discovery original. **El tema y las tiendas remotas no se modifican al instalar o ejecutar las pruebas offline.** [Evolución y cobertura](reports/v2/evolution-report.md), [arquitectura](reports/v2/architecture.md), [auditoría inicial](reports/v2/initial-audit.md).
 
-El proyecto inicial se encuentra en [projects/ipanema.json](projects/ipanema.json). Se comprobó sincronización remota y acceso autorizado al storefront Ipanema 1.8.0. Se recorrieron 48 URLs y 13 tipos públicos en seis anchos representativos. La pantalla de contraseña sin sesión entrega recursos de otra instalación y se documenta aparte. Consulta el [informe de cobertura](ipanema-discovery/DISCOVERY-COMPLETENESS-REPORT.md) para los estados y superficies que siguen pendientes.
+## Preparación
 
-```bash
-python3 tools/find_component.py "producto"
-python3 tools/find_component.py "hero"
-python3 tools/check_workspace.py
-```
-
-Para una nueva captura estática usa un destino de evidencia nuevo, fuera del tema:
+Necesitas Git y Python 3.10 o superior. Clona o copia este repositorio y abre la carpeta con tu asistente. [AGENTS.md](AGENTS.md) define permisos y método; las [skills de OpenAI](https://learn.chatgpt.com/docs/build-skills) se descubren por sus descripciones y cargan su contenido cuando corresponde.
 
 ```bash
-python3 tools/audit_source.py --source /ruta/autorizada/del/tema --output /ruta/fuera-del-tema/evidencia-fechada
+python3 tools/ia.py --version
+python3 tools/ia.py projects list
+python3 tools/ia.py doctor
+python3 tools/ia.py qa --suite quick
 ```
 
-Los scripts no instalan dependencias. Las auditorías de navegador ya ejecutadas usan Chrome y paquetes existentes del CLI de Tiendanube. No hay servicio en segundo plano ni automatización que publique al guardar.
+Los comandos también funcionan desde otro directorio usando la ruta completa a `tools/ia.py`. Las pruebas básicas usan la biblioteca estándar de Python, sin pip ni npm. `doctor` muestra dependencias opcionales y disponibilidad local; no se conecta a Tiendanube ni instala paquetes.
 
-Se revisó [Craft Anything](https://github.com/storytold/craft-anything) y se adoptó su enfoque de investigación con evidencia y verificación: [evaluación y alcance](ipanema-discovery/01-architecture/craft-anything-assessment.md). No se copió su aplicación Rust ni código del tema a una biblioteca. El ejecutable Craft Anything no está instalado en este entorno.
+Para navegador se necesitan Node >=22.19, Chrome/Chromium y Puppeteer, axe-core y, si vas a medir rendimiento, Lighthouse. El runtime reutiliza paquetes ya instalados, incluidos los del CLI de Tiendanube; también admite node_modules del repositorio o `IPANEMA_NODE_MODULE_ROOT`. `IPANEMA_CHROME_PATH` selecciona otro Chrome. [package.json](package.json) registra las versiones usadas. Si decides instalar dependencias en otro equipo, revisa primero ese archivo y ejecuta `npm install` de manera explícita; no hay instalación automática ni lockfile de dependencias transitivas todavía.
+
+## Configurar y seleccionar una tienda
+
+El [registro](projects/registry.json) contiene proyectos compartidos. La ubicación real del tema va en `projects/ipanema.local.json`, ignorado por Git:
+
+```json
+{"theme_root":"/ruta/real/al/tema"}
+```
+
+También puedes usar `IPANEMA_THEME_ROOT`. Nunca se usa la ruta personal antigua de las evidencias como requisito ni fallback. Sin tema puedes consultar el conocimiento y probar el agente; los cambios/auditorías de código necesitan una ruta válida.
+
+```bash
+python3 tools/ia.py projects register tienda-dos --name "Tienda dos" --theme-root /ruta/real/al/tema --url https://ejemplo.mitiendanube.com
+python3 tools/ia.py projects use tienda-dos
+python3 tools/ia.py --project ipanema doctor
+```
+
+La selección sigue `--project` → `IPANEMA_PROJECT` → selección local → default. Registrar un proyecto no descarga el tema ni verifica su instalación remota. La versión/variante/fork guardada es una observación con fecha. [Configuración, páginas, presupuestos e interacciones](projects/README.md).
+
+## Uso cotidiano
+
+Puedes pedir: «Modifica esta product card sin duplicar la lógica», «Haz otro layout móvil con el mismo contenido» o «Comprueba cómo descubre Google los enlaces de este carrusel».
+
+El asistente selecciona especialidades, recupera fuentes y verifica la implementación real. El router propone capacidades mediante reglas; necesita el juicio del agente. No se invocan subagentes automáticamente.
+
+```bash
+python3 tools/ia.py route "Quiero modificar una product card"
+python3 tools/ia.py search "tarjeta de producto" --limit 2
+python3 tools/ia.py search "padding_top" --limit 2
+python3 tools/ia.py plan "Modificar la product card compartida" --action local-change --authorize-local --save
+```
+
+`search` devuelve fichas, configuraciones, consumidores directos/transitivos, hallazgos, fuentes y vigencia. Comprueba el archivo actual: un hash igual no acredita sincronización remota. Un proyecto nuevo recibe referencias históricas con compatibilidad sin comprobar. El plan contiene candidatos y pruebas pendientes; no sustituye la inspección del código.
+
+La preferencia es configuración nativa, composición existente, tokens, componente compartido, extensión y solo después código nuevo. Se conservan contratos LS, js-*, data-store, precio/stock/variantes y formularios. No se agregan `!important`, motores de carrusel o copias de componentes por defecto.
+
+## QA reproducible
+
+| Comando | Alcance |
+|---|---|
+| `python3 tools/ia.py qa --suite quick` | Repositorio, unitarias, integración de portabilidad y diez evaluaciones del coordinador; offline |
+| `python3 tools/ia.py qa --suite repo` | Enlaces, JSON, skills, inventario y estado del tema si está disponible |
+| `python3 tools/ia.py qa --suite source` | Captura estática del tema configurado y métricas de assets sin modificarlo |
+| `python3 tools/ia.py qa --suite fixtures` | Chrome, axe, responsive, teclado, red y Lighthouse en servidor sintético de loopback |
+| `python3 tools/ia.py qa --suite page --page home --allow-network` | Página real configurada; solo con lectura remota autorizada |
+| `python3 tools/ia.py qa --suite component --page category --component ".js-product-container" --allow-network` | Selector real del componente en página configurada |
+| `python3 tools/ia.py qa --suite full --page home --allow-network --lighthouse` | Offline más navegador, seis anchos, sin JS, reduced motion, Coverage y Lighthouse |
+
+Los últimos tres comandos requieren un entorno preparado y autorizado; no se ejecutaron contra la tienda durante esta migración. El QA por selector no equivale a todos sus consumidores: selecciona y verifica las páginas/estados pertinentes. Las interacciones se configuran con selectores inspeccionados, sin enviar compras, registros, contacto o newsletter. El runtime bloquea solicitudes de escritura salvo el acceso de storefront expresamente provisto; se detiene ante límites de acceso. No es un sandbox del resto de herramientas que pudiera usar un runtime externo.
+
+Los runs usan directorios nuevos en `reports/runs/<proyecto>/`, ignorados por Git. Sus JSON registran herramientas, versiones, perfiles, resultados, limitaciones y hashes; las capturas/mediciones se preservan ahí. Copia solo evidencia revisada y sin datos confidenciales a un informe compartido.
+
+```bash
+python3 tools/ia.py compare visual /ruta/antes.png /ruta/despues.png --pixel-threshold 12 --max-changed-ratio 0.005
+python3 tools/ia.py compare visual /ruta/antes.png /ruta/despues.png --mask 0,0,200,60
+python3 tools/ia.py compare metrics /ruta/antes-metrics.json /ruta/despues-metrics.json
+```
+
+La protección incluye pestañas iniciales y las creadas por Lighthouse. Bloquear POST puede alterar apps que lo usan para lectura; no atribuyas ese efecto al tema y compara bajo la misma política de red.
+
+PNG admite RGB/RGBA 8-bit hasta 20 MP. Las dimensiones distintas se reportan; diferencias por encima del umbral requieren revisión de intención. Las máscaras no deben cubrir lo que se está comprobando. Métricas necesitan misma página/perfil. Comparar una muestra de laboratorio no demuestra mejora estadística; TBT no es INP. Las solicitudes se separan por fase para distinguir navegación de efectos de la propia captura/instrumentación.
+
+## Corrección controlada
+
+Para una corrección no trivial conserva primero un QA que reproduzca el fallo. El agente diagnostica y propone el parche; las herramientas limitan cambios y verificación, sin generar parches arbitrarios en bucle.
+
+```bash
+python3 tools/ia.py attempt begin --file sections/mi-seccion.tpl --max-attempts 2 --authorize-local
+python3 tools/ia.py attempt apply ID --patch /ruta/parche-local.json
+python3 tools/ia.py attempt verify ID --suite quick --baseline /ruta/qa-del-fallo/report.json
+```
+
+El patch es un objeto JSON `{ "ruta/relativa": "contenido nuevo completo" }` para archivos declarados; guárdalo fuera de Git si contiene código del cliente. `verify` ejecuta QA, acepta solo si hay pruebas aprobadas posteriores con los hashes actuales y corrección del fallo anterior; ante fallo revierte el intento si no hay cambios posteriores ajenos. Para aceptar con otro QA pertinente usa `attempt accept ID --evidence REPORTE --baseline BASELINE`; `attempt revert ID` revierte explícitamente el intento. Los archivos nuevos se eliminan solo si siguen siendo los creados por el intento. Nunca se usa reset/clean.
+
+El máximo predeterminado es dos intentos, configurable hasta cinco. Un conflicto o límite detiene el proceso y requiere un informe. Las transacciones privadas están ignoradas y conservan el estado previo del usuario, no solo HEAD. Una comparación insuficiente no se convierte en aprobación; completar el contexto/pruebas puede requerir intervención del agente.
+
+## Conocimiento reutilizable y evaluación
+
+El [catálogo y contratos](reusable/README.md) distinguen conocimiento, patrones, procedimientos, código autorizado, código de cliente, funcionalidad nativa y recursos propietarios. No contienen copias de implementación del tema ni conceden derechos sobre ellas. Usa `python3 tools/ia.py solutions` para consultar soluciones efectivamente vigentes; [el registro](reusable/solutions.json) exige evidencia QA y se invalida al cambiar código, instrucciones, proyecto o evidencia pertinentes.
+
+```bash
+python3 tools/ia.py evals
+python3 tools/ia.py evals --responses /ruta/respuestas.jsonl
+```
+
+La primera ejecución prueba selección, recuperación de referencias y planificación del coordinador. **No es una evaluación completa de un modelo implementando diez tiendas.** La segunda recibe artefactos de una ejecución externa para calificar decisiones/referencias/pruebas; requiere revisión humana de calidad funcional y visual. [Casos y protocolo](tests/agent-evals/README.md), [resultados y límites](reports/v2/evaluation.md).
+
+## Errores frecuentes y permisos
+
+- Tema ausente: configura una ubicación real en el override local o variable; no se hace pull automático.
+- Proyecto incompleto: corrige id/schema_version/registro según doctor; el CLI termina con error claro.
+- Paquete o Chrome ausente: usa doctor y configura las dependencias opcionales; los tests offline siguen disponibles.
+- Resultado `blocked`: falta acceso/dependencia o hubo 403/429; no es una prueba aprobada. No reintentes ni evadas el control automáticamente.
+- Captura de password: no se acredita la página solicitada; usa acceso de lectura autorizado mediante variable de entorno temporal. No pongas contraseñas en argumentos, archivos o logs.
+- Baseline cambiado: la validación normal lo informa y la búsqueda marca obsolescencia. `python3 tools/check_workspace.py --strict-source` exige coincidencia con la captura; es control de integridad, no QA de un cambio intencional.
+
+El CLI no publica ni sincroniza tiendas. watch, push, publish, cambios de catálogo/checkout y operaciones comerciales necesitan autorización específica. Los scripts históricos se conservan, con rutas/runtime portables y destinos nuevos; los renderizadores reconstruyen documentos fechados y no deben usarse como actualización automática del discovery.
+
+La [base original](ipanema-discovery/README.md), sus [hallazgos](ipanema-discovery/11-opportunities/critical-findings.md) y su [cobertura](ipanema-discovery/DISCOVERY-COMPLETENESS-REPORT.md) siguen disponibles. Craft Anything se estudió como metodología en el [análisis original](ipanema-discovery/01-architecture/craft-anything-assessment.md); no se instaló como motor de esta V2.

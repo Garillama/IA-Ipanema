@@ -53,23 +53,33 @@ def md(value):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--source', type=Path, required=True)
+    parser.add_argument('--source', type=Path)
+    parser.add_argument('--project')
     parser.add_argument('--output', type=Path, required=True)
     args = parser.parse_args()
-    root, out = args.source.resolve(), args.output.resolve()
+    if args.source:
+        root = args.source.resolve()
+    else:
+        from ipanema.core import Project, IpanemaError
+        try:
+            root = Project(project_id=args.project).require_theme()
+        except IpanemaError as exc:
+            parser.error(str(exc))
+    out = args.output.resolve()
     if root == out or root in out.parents or out in root.parents:
         parser.error('El destino debe estar fuera del árbol de origen y no ser su ancestro.')
     for required in ['layouts/layout.tpl', 'config/settings_schema.json', 'templates/pages/home.json']:
         if not (root / required).is_file():
             parser.error('No se reconoce el tema seccionable: falta ' + required)
-    if (out / 'source-summary.json').exists():
+    if out.exists() and any(out.iterdir()):
         parser.error('El destino ya contiene una captura. Usa un directorio nuevo para conservar la evidencia histórica.')
     out.mkdir(parents=True, exist_ok=True)
     now = dt.datetime.now(dt.timezone.utc).isoformat()
     files, components, settings, edges, uses, errors = [], [], [], [], [], []
-    paths = sorted(p for area in AREAS for p in (root / area).rglob('*') if p.is_file())
+    paths = sorted(p for area in AREAS for p in (root / area).rglob('*') if p.is_file() and not p.is_symlink() and root in p.resolve().parents)
     paths += [root / 'manifest.json'] if (root / 'manifest.json').is_file() else []
-    labels = json.loads((root / 'translations/es_MX.schema.json').read_text())
+    labels_path = root / 'translations/es_MX.schema.json'
+    labels = json.loads(labels_path.read_text()) if labels_path.is_file() else {}
 
     def label(s):
         if not isinstance(s, str) or not s.startswith('t:'):
@@ -157,9 +167,9 @@ def main():
     try:
         status = subprocess.run(['git', '-C', str(root), 'status', '--porcelain=v1'], capture_output=True, text=True, check=True).stdout
         head = subprocess.run(['git', '-C', str(root), 'rev-parse', 'HEAD'], capture_output=True, text=True, check=True).stdout.strip()
-    except subprocess.SubprocessError:
+    except (subprocess.SubprocessError, FileNotFoundError):
         status, head = 'no disponible', 'no disponible'
-    manifest = json.loads((root / 'manifest.json').read_text())
+    manifest = json.loads((root / 'manifest.json').read_text()) if (root / 'manifest.json').exists() else {}
     safe_manifest = {k: manifest.get(k) for k in ('theme', 'theme_version', 'forked')}
     summary = dict(verified_at=now, source=str(root), head=head, git_clean=status == '',
                    local_status=status, manifest=safe_manifest, files=len(files),

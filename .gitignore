@@ -6,3 +6,8 @@ __pycache__/
 node_modules/
 *.har
 *.trace.zip
+.local/
+projects/*.local.json
+reports/runs/
+reports/transactions/
+coverage/

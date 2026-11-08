@@ -1,0 +1,29 @@
+{
+  "at": "2026-11-08T09:15:34.675521+00:00",
+  "target": "external-evaluator-artifact-protocol",
+  "controls": [
+    {
+      "fixture": "valid-artifacts",
+      "expected": "passed",
+      "actual": "passed",
+      "cases_graded": 10
+    },
+    {
+      "fixture": "missing-cases",
+      "expected": "partial",
+      "actual": "partial",
+      "cases_graded": 1
+    },
+    {
+      "fixture": "invalid-reference",
+      "expected": "failed",
+      "actual": "failed",
+      "cases_graded": 1
+    }
+  ],
+  "model_inference_performed": false,
+  "limitations": [
+    "Entradas sintéticas del evaluador; no respuestas generadas por un modelo ni prueba de implementación.",
+    "El QA genérico válido demuestra validación formal; la pertinencia y calidad siguen requiriendo revisión."
+  ]
+}

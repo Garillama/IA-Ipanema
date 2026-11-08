@@ -1,0 +1,18 @@
+{
+  "id":"native-commerce",
+  "contract_version":"1.0.0",
+  "source":"snippets/product-list/product-item/item.tpl",
+  "observed_at":"2026-11-08",
+  "observed_theme_version":"1.8.0",
+  "inputs":{
+    "product":"Objeto nativo; no recrear precio/stock/variantes",
+    "settings":"Configuración global existente",
+    "template":"Contexto de página",
+    "slide_item":"Modo slider; default false observado",
+    "reduced_item":"Modo reducido; afecta labels, precio y quick shop",
+    "has_filters":"Afecta URL con variante y slider de imágenes"
+  },
+  "invariants":["Conservar js-product-container y js-item-product","Conservar data-store y atributos de variantes/editor presentes en la fuente","Formularios y operaciones LS nativos","No confundir evento cart.updated con cart:update del SDK","Checkout no pertenece íntegramente al tema"],
+  "verification":["Consumidores directos y transitivos del grafo","Home/categoría/búsqueda/relacionados pertinentes","Estados de precio, variantes y disponibilidad accesibles","No enviar compra sin autorización específica"],
+  "limitations":["Referencia a interfaz observada; no API pública estable ni código redistribuido","Estados comerciales no ejercitados requieren entorno autorizado"]
+}

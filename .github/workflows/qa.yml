@@ -1,0 +1,20 @@
+name: IA-Ipanema offline QA
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  offline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - name: Repositorio, herramientas y evaluaciones sin tiendas ni secretos
+        run: python3 tools/ia.py qa --suite quick
+      - name: Sintaxis JavaScript sin instalar dependencias
+        run: |
+          for script in tools/*.mjs; do node --check "$script"; done

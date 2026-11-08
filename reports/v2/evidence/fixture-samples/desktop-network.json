@@ -1,0 +1,373 @@
+{
+  "page": "home",
+  "profile": {
+    "width": 1440,
+    "mode": "rendered",
+    "cpu_rate": 1,
+    "network": null
+  },
+  "at": "2026-11-08T09:07:29.981Z",
+  "status": 200,
+  "final_url": "http://127.0.0.1:38495/",
+  "initial": {
+    "title": "Fixture Ipanema QA",
+    "h1": [
+      {
+        "text": "Fixture de tienda",
+        "in_user_content": false
+      }
+    ],
+    "headings": [
+      {
+        "tag": "H1",
+        "text": "Fixture de tienda"
+      },
+      {
+        "tag": "H2",
+        "text": "Hero nativo de prueba"
+      },
+      {
+        "tag": "H2",
+        "text": "Categorías"
+      }
+    ],
+    "canonical": [
+      "/"
+    ],
+    "robots": [],
+    "links": [
+      {
+        "href": "/category/",
+        "text": "Categorías",
+        "carousel": false
+      },
+      {
+        "href": "/product/",
+        "text": "Producto",
+        "carousel": false
+      },
+      {
+        "href": "/category/",
+        "text": "Ver categoría",
+        "carousel": true
+      },
+      {
+        "href": "/product/",
+        "text": "Ver producto",
+        "carousel": true
+      }
+    ],
+    "jsonld": [
+      {
+        "valid": true
+      }
+    ],
+    "breadcrumbs": [],
+    "product_count": 1
+  },
+  "sample": {
+    "title": "Fixture Ipanema QA",
+    "lang": "es",
+    "bodyClass": "",
+    "viewport": {
+      "innerWidth": 1440,
+      "innerHeight": 900,
+      "scrollWidth": 1440
+    },
+    "headings": [
+      {
+        "tag": "H1",
+        "text": "Fixture de tienda"
+      },
+      {
+        "tag": "H2",
+        "text": "Hero nativo de prueba"
+      },
+      {
+        "tag": "H2",
+        "text": "Categorías"
+      }
+    ],
+    "metadata": [
+      {
+        "name": "viewport",
+        "content": "width=device-width, initial-scale=1",
+        "href": null,
+        "hreflang": null
+      },
+      {
+        "name": "canonical",
+        "content": null,
+        "href": "/",
+        "hreflang": null
+      }
+    ],
+    "links": [
+      {
+        "href": "http://127.0.0.1:38495/category/",
+        "text": "Categorías",
+        "ariaLabel": null
+      },
+      {
+        "href": "http://127.0.0.1:38495/product/",
+        "text": "Producto",
+        "ariaLabel": null
+      },
+      {
+        "href": "http://127.0.0.1:38495/category/",
+        "text": "Ver categoría",
+        "ariaLabel": null
+      },
+      {
+        "href": "http://127.0.0.1:38495/product/",
+        "text": "Ver producto",
+        "ariaLabel": null
+      }
+    ],
+    "images": [
+      {
+        "src": "/desktop.png",
+        "currentSrc": "http://127.0.0.1:38495/desktop.png",
+        "srcset": null,
+        "sizes": null,
+        "alt": "Imagen de prueba",
+        "width": 600,
+        "height": 300,
+        "naturalWidth": 60,
+        "naturalHeight": 30,
+        "loading": "auto",
+        "fetchPriority": "high",
+        "display": "block",
+        "visible": true
+      }
+    ],
+    "fonts": [],
+    "jsonld": [
+      {
+        "value": {
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "name": "Fixture"
+        }
+      }
+    ],
+    "navigation": [
+      {
+        "name": "http://127.0.0.1:38495/",
+        "entryType": "navigation",
+        "startTime": 0,
+        "duration": 29.899999998509884,
+        "navigationId": 7085,
+        "initiatorType": "navigation",
+        "deliveryType": "",
+        "nextHopProtocol": "http/1.0",
+        "renderBlockingStatus": "non-blocking",
+        "contentType": "text/html",
+        "contentEncoding": "",
+        "workerStart": 0,
+        "workerRouterEvaluationStart": 0,
+        "workerCacheLookupStart": 0,
+        "workerMatchedSourceType": "",
+        "workerFinalSourceType": "",
+        "redirectStart": 0,
+        "redirectEnd": 0,
+        "fetchStart": 0.5999999977648258,
+        "domainLookupStart": 0.5999999977648258,
+        "domainLookupEnd": 0.5999999977648258,
+        "connectStart": 0.5999999977648258,
+        "secureConnectionStart": 0,
+        "connectEnd": 0.5999999977648258,
+        "requestStart": 6.699999999254942,
+        "responseStart": 7.300000000745058,
+        "firstInterimResponseStart": 0,
+        "finalResponseHeadersStart": 7.300000000745058,
+        "responseEnd": 7.800000000745058,
+        "transferSize": 2642,
+        "encodedBodySize": 2342,
+        "decodedBodySize": 2342,
+        "responseStatus": 200,
+        "serverTiming": [],
+        "unloadEventStart": 0,
+        "unloadEventEnd": 0,
+        "domInteractive": 20.599999997764826,
+        "domContentLoadedEventStart": 20.599999997764826,
+        "domContentLoadedEventEnd": 20.699999999254942,
+        "domComplete": 29.899999998509884,
+        "loadEventStart": 29.899999998509884,
+        "loadEventEnd": 29.899999998509884,
+        "type": "navigate",
+        "redirectCount": 0,
+        "activationStart": 0,
+        "criticalCHRestart": 0,
+        "notRestoredReasons": null,
+        "confidence": {}
+      }
+    ],
+    "paint": [
+      {
+        "name": "first-paint",
+        "entryType": "paint",
+        "startTime": 36,
+        "duration": 0,
+        "navigationId": 7085,
+        "paintTime": 28,
+        "presentationTime": 36
+      },
+      {
+        "name": "first-contentful-paint",
+        "entryType": "paint",
+        "startTime": 36,
+        "duration": 0,
+        "navigationId": 7085,
+        "paintTime": 28,
+        "presentationTime": 36
+      }
+    ],
+    "performance": {
+      "lcp": [
+        {
+          "startTime": 36,
+          "duration": 0,
+          "size": 9252
+        }
+      ],
+      "shifts": [],
+      "longTasks": []
+    },
+    "resources": [
+      {
+        "name": "http://127.0.0.1:38495/desktop.png",
+        "initiatorType": "img",
+        "transferSize": 424,
+        "encodedBodySize": 124,
+        "decodedBodySize": 124,
+        "duration": 12.199999999254942
+      },
+      {
+        "name": "http://127.0.0.1:38495/favicon.ico",
+        "initiatorType": "other",
+        "transferSize": 300,
+        "encodedBodySize": 0,
+        "decodedBodySize": 0,
+        "duration": 4.399999998509884
+      }
+    ],
+    "domNodes": 28,
+    "forms": []
+  },
+  "geometry": {
+    "viewport": 1440,
+    "scroll_width": 1440,
+    "overflow_candidates": [],
+    "clipping_candidates": [],
+    "overlap_candidates": [],
+    "reading_order": [
+      {
+        "key": "category",
+        "top": 599.59375,
+        "left": 260
+      },
+      {
+        "key": "product",
+        "top": 599.59375,
+        "left": 494
+      }
+    ]
+  },
+  "axe": {
+    "version": "4.14.0",
+    "violations": [],
+    "incomplete": []
+  },
+  "interactions": [],
+  "network_metrics": {
+    "requests": 3,
+    "js_bytes": 0,
+    "css_bytes": 0,
+    "image_bytes": 262,
+    "font_bytes": 0
+  },
+  "navigation_network": [
+    {
+      "url": "http://127.0.0.1:38495/",
+      "method": "GET",
+      "type": "Document",
+      "requested": true,
+      "phase": "navigation",
+      "status": 200,
+      "mime": "text/html",
+      "completed": true,
+      "encoded_bytes": 2496
+    },
+    {
+      "url": "http://127.0.0.1:38495/desktop.png",
+      "method": "GET",
+      "type": "Image",
+      "requested": true,
+      "phase": "navigation",
+      "status": 200,
+      "mime": "image/png",
+      "completed": true,
+      "encoded_bytes": 262
+    },
+    {
+      "url": "http://127.0.0.1:38495/favicon.ico",
+      "method": "GET",
+      "type": "Other",
+      "requested": true,
+      "phase": "navigation",
+      "status": 200,
+      "mime": "image/x-icon",
+      "completed": true,
+      "encoded_bytes": 139
+    }
+  ],
+  "network": [
+    {
+      "url": "http://127.0.0.1:38495/",
+      "method": "GET",
+      "type": "Document",
+      "requested": true,
+      "phase": "navigation",
+      "status": 200,
+      "mime": "text/html",
+      "completed": true,
+      "encoded_bytes": 2496
+    },
+    {
+      "url": "http://127.0.0.1:38495/desktop.png",
+      "method": "GET",
+      "type": "Image",
+      "requested": true,
+      "phase": "navigation",
+      "status": 200,
+      "mime": "image/png",
+      "completed": true,
+      "encoded_bytes": 262
+    },
+    {
+      "url": "http://127.0.0.1:38495/favicon.ico",
+      "method": "GET",
+      "type": "Other",
+      "requested": true,
+      "phase": "navigation",
+      "status": 200,
+      "mime": "image/x-icon",
+      "completed": true,
+      "encoded_bytes": 139
+    },
+    {
+      "url": "http://127.0.0.1:38495/mobile.png",
+      "method": "GET",
+      "type": "Image",
+      "requested": true,
+      "phase": "screenshot",
+      "status": 200,
+      "mime": "image/png",
+      "completed": true,
+      "encoded_bytes": 262
+    }
+  ],
+  "errors": [],
+  "coverage": null
+}

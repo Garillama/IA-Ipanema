@@ -3,13 +3,13 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import crypto from 'node:crypto';
-import {puppeteer,authenticate,cliRequire} from './browser_runtime.mjs';
+import {puppeteer,authenticate,cliRequire,evidenceRoot} from './browser_runtime.mjs';
 const start=process.argv[2];if(!start)throw Error('URL inicial necesaria.');
 const origin=new URL(start).origin;
-const out=path.resolve('ipanema-discovery/13-evidence/measurements/crawl');
-const shots=path.resolve('ipanema-discovery/13-evidence/screenshots/routes');
+const out=path.resolve(`${evidenceRoot}/measurements/crawl`);
+const shots=path.resolve(`${evidenceRoot}/screenshots/routes`);
 await fs.mkdir(out,{recursive:true});await fs.mkdir(shots,{recursive:true});
-const browser=await puppeteer.launch({executablePath:'/usr/bin/google-chrome',headless:true,args:['--disable-dev-shm-usage']});
+const browser=await puppeteer.launch({headless:true,args:['--disable-dev-shm-usage']});
 const queue=[],seen=new Set(),results=[],skipped=[];
 function enqueue(raw,from){
  let u;try{u=new URL(raw,origin);}catch{return;}

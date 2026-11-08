@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "classes": {
+    "A": "Conocimiento reutilizable",
+    "B": "Patrón de diseño reutilizable",
+    "C": "Procedimiento reutilizable",
+    "D": "Código compartible autorizado",
+    "E": "Código exclusivo de un cliente",
+    "F": "Funcionalidad nativa dependiente de Tiendanube",
+    "G": "Recurso propietario sin permiso de redistribución comprobado"
+  },
+  "entries": [
+    {"id":"native-product-card","version":"1.0.0","class":"F","component":"snippets/product-list/product-item/item.tpl","contract":"reusable/contracts/native-commerce.json","knowledge":"ipanema-discovery/07-commerce/product-cards.md","observed_theme":"Ipanema 1.8.0","distribution":"reference-only","implementation_copy_authorized":false},
+    {"id":"native-image","version":"1.0.0","class":"F","component":"snippets/image.tpl","contract":"reusable/contracts/native-image.json","knowledge":"ipanema-discovery/05-performance/image-loading.md","observed_theme":"Ipanema 1.8.0","distribution":"reference-only","implementation_copy_authorized":false},
+    {"id":"crawlable-carousel","version":"1.0.0","class":"B","knowledge":"ipanema-discovery/04-seo/carousel-seo.md","distribution":"pattern-no-theme-code","requirements":["HTML anchors","progressive enhancement","keyboard","no second native engine without evidence"]},
+    {"id":"local-attempt","version":"1.0.0","class":"C","implementation":"tools/ipanema/transactions.py","distribution":"repository-procedure","requirements":["explicit local scope","hash conflict detection","bounded attempts","executed QA"]},
+    {"id":"responsive-single-content","version":"1.0.0","class":"B","knowledge":"ipanema-discovery/08-design-system/responsive-system.md","distribution":"pattern-no-theme-code"},
+    {"id":"discovery-knowledge","version":"2026-11-08","class":"A","knowledge":"ipanema-discovery/README.md","distribution":"references-with-observed-context","requirements":["reverify per project/version"]}
+  ]
+}

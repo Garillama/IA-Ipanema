@@ -1,0 +1,22 @@
+{
+  "id":"native-image",
+  "contract_version":"1.0.0",
+  "source":"snippets/image.tpl",
+  "observed_at":"2026-11-08",
+  "observed_theme_version":"1.8.0",
+  "inputs":{
+    "image_src":"Objeto de imagen, referencia @media-lib o URL según contexto nativo",
+    "product_image":"Indica objeto de producto",
+    "category_image":"Indica objeto de categoría",
+    "post_image":"Indica imagen de post",
+    "image_thumbs":"Lista de tamaños o false; no inventar tamaños nuevos",
+    "image_width":"Dimensión intrínseca cuando está disponible",
+    "image_height":"Dimensión intrínseca cuando está disponible",
+    "image_sizes":"sizes acorde al layout real",
+    "image_priority_high":"Prioridad de la imagen LCP cuando corresponde",
+    "image_lazy_js":"Conservar compatibilidad con motor existente"
+  },
+  "invariants":["Un único helper compartido","MetafieldItem debe desembalar value en el caller","Prioridad high desactiva lazy según rama nativa","No inferir descarga solo por DOM"],
+  "verification":["Revisar fuente actual/hash","Network y currentSrc por dispositivo","Imagen esencial con y sin JavaScript","LCP y CLS antes/después"],
+  "limitations":["Contrato descriptivo; no garantiza firma estable de plataforma","No incluye implementación propietaria","Compatibilidad fuera de 1.8.0 pendiente"]
+}

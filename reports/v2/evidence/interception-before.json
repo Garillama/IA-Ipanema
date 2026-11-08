@@ -1,0 +1,12 @@
+{
+  "recorded_at": "2026-11-08T09:06:30.066507+00:00",
+  "test": "Fixture local con fetch POST sintético y dos perfiles Lighthouse",
+  "result": {
+    "exit_code": 0,
+    "outcome": "passed",
+    "server_post_requests": 2
+  },
+  "finding": "La prueba general no detectaba escrituras de pestañas no protegidas.",
+  "remote_store_requests": 0,
+  "runtime_sha256": "eeae5437d617ad486b3a49df76751fbc7a095f86943c0bde630f6246e1338323"
+}

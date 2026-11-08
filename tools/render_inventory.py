@@ -26,8 +26,17 @@ def anchor(path):
 
 
 def main():
+    import argparse
+    from ipanema.core import Project, IpanemaError
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--source', type=Path)
+    parser.add_argument('--project')
+    args = parser.parse_args()
+    try:
+        source = args.source.resolve() if args.source else Project(project_id=args.project).require_theme()
+    except IpanemaError as exc:
+        parser.error(str(exc))
     summary, comps, settings, edges, uses, files = [load(n) for n in ['source-summary', 'components', 'settings', 'dependency-graph', 'template-instances', 'source-inventory']]
-    source = Path(summary['source'])
     date = summary['verified_at'][:10]
     def source_link(p, line=1):
         if Path(p).suffix.lower() in ['.webp','.png','.jpg','.svg','.avif','.woff2']:
