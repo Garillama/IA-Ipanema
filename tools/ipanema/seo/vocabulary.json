@@ -1,0 +1,1370 @@
+{
+  "schema_version": 1,
+  "source": {
+    "url": "https://schema.org/version/latest/schemaorg-current-https.jsonld",
+    "at": "2026-11-08T10:01:09.819087+00:00",
+    "sha256": "0a4b8c4c910fc831ec8695196510973390906a5ee34dc6b862dfec4d21a12f74",
+    "bytes": 1521575
+  },
+  "scope": "Subconjunto factual de tipos, ancestros, dominios y rangos; no es un procesador JSON-LD/RDFa completo.",
+  "types": {
+    "ShippingRateSettings": [
+      "StructuredValue"
+    ],
+    "StructuredValue": [
+      "Intangible"
+    ],
+    "Intangible": [
+      "Thing"
+    ],
+    "Thing": [],
+    "ShippingConditions": [
+      "StructuredValue"
+    ],
+    "ShippingService": [
+      "StructuredValue"
+    ],
+    "MerchantReturnPolicySeasonalOverride": [
+      "Intangible"
+    ],
+    "PropertyValue": [
+      "StructuredValue"
+    ],
+    "SizeSpecification": [
+      "QualitativeValue"
+    ],
+    "QualitativeValue": [
+      "Enumeration"
+    ],
+    "Enumeration": [
+      "Intangible"
+    ],
+    "Course": [
+      "CreativeWork",
+      "LearningResource"
+    ],
+    "LearningResource": [
+      "CreativeWork"
+    ],
+    "CreativeWork": [
+      "Thing"
+    ],
+    "Recipe": [
+      "HowTo"
+    ],
+    "HowTo": [
+      "CreativeWork"
+    ],
+    "Movie": [
+      "CreativeWork"
+    ],
+    "Event": [
+      "Thing"
+    ],
+    "Hotel": [
+      "LodgingBusiness"
+    ],
+    "LodgingBusiness": [
+      "LocalBusiness"
+    ],
+    "LocalBusiness": [
+      "Organization",
+      "Place"
+    ],
+    "Place": [
+      "Thing"
+    ],
+    "Organization": [
+      "Thing"
+    ],
+    "Restaurant": [
+      "FoodEstablishment"
+    ],
+    "FoodEstablishment": [
+      "LocalBusiness"
+    ],
+    "Answer": [
+      "Comment"
+    ],
+    "Comment": [
+      "CreativeWork"
+    ],
+    "Question": [
+      "Comment"
+    ],
+    "FAQPage": [
+      "WebPage"
+    ],
+    "WebPage": [
+      "CreativeWork"
+    ],
+    "EntryPoint": [
+      "Intangible"
+    ],
+    "SearchAction": [
+      "Action"
+    ],
+    "Action": [
+      "Thing"
+    ],
+    "Country": [
+      "GeopoliticalEntity",
+      "AdministrativeArea"
+    ],
+    "AdministrativeArea": [
+      "Place"
+    ],
+    "ContactPoint": [
+      "StructuredValue"
+    ],
+    "PostalAddress": [
+      "ContactPoint"
+    ],
+    "UnitPriceSpecification": [
+      "PriceSpecification"
+    ],
+    "PriceSpecification": [
+      "StructuredValue"
+    ],
+    "QuantitativeValue": [
+      "StructuredValue"
+    ],
+    "AggregateRating": [
+      "Rating"
+    ],
+    "Rating": [
+      "Intangible"
+    ],
+    "Review": [
+      "CreativeWork"
+    ],
+    "MonetaryAmount": [
+      "StructuredValue"
+    ],
+    "DefinedRegion": [
+      "Place",
+      "StructuredValue"
+    ],
+    "ShippingDeliveryTime": [
+      "StructuredValue"
+    ],
+    "OfferShippingDetails": [
+      "StructuredValue"
+    ],
+    "MerchantReturnPolicy": [
+      "Intangible"
+    ],
+    "VideoObject": [
+      "MediaObject"
+    ],
+    "MediaObject": [
+      "CreativeWork"
+    ],
+    "ImageObject": [
+      "MediaObject"
+    ],
+    "Brand": [
+      "Classifier",
+      "Intangible"
+    ],
+    "Person": [
+      "Thing"
+    ],
+    "NewsArticle": [
+      "Article"
+    ],
+    "Article": [
+      "CreativeWork"
+    ],
+    "BlogPosting": [
+      "SocialMediaPosting"
+    ],
+    "SocialMediaPosting": [
+      "Article"
+    ],
+    "Blog": [
+      "CreativeWork"
+    ],
+    "ListItem": [
+      "Intangible"
+    ],
+    "ItemList": [
+      "Intangible"
+    ],
+    "BreadcrumbList": [
+      "ItemList"
+    ],
+    "AggregateOffer": [
+      "Offer"
+    ],
+    "Offer": [
+      "Intangible"
+    ],
+    "ProductGroup": [
+      "Classifier",
+      "Collection",
+      "Product"
+    ],
+    "Product": [
+      "Thing"
+    ],
+    "Collection": [
+      "CreativeWork"
+    ],
+    "CollectionPage": [
+      "WebPage"
+    ],
+    "WebSite": [
+      "CreativeWork"
+    ],
+    "OnlineStore": [
+      "OnlineBusiness"
+    ],
+    "OnlineBusiness": [
+      "Organization"
+    ]
+  },
+  "properties": {
+    "name": {
+      "domain": [
+        "Thing"
+      ],
+      "range": [
+        "Text"
+      ]
+    },
+    "url": {
+      "domain": [
+        "Thing"
+      ],
+      "range": [
+        "URL"
+      ]
+    },
+    "sameAs": {
+      "domain": [
+        "Thing"
+      ],
+      "range": [
+        "URL"
+      ]
+    },
+    "logo": {
+      "domain": [
+        "Brand",
+        "Certification",
+        "Organization",
+        "Place",
+        "Product",
+        "Service"
+      ],
+      "range": [
+        "ImageObject",
+        "URL"
+      ]
+    },
+    "description": {
+      "domain": [
+        "Thing"
+      ],
+      "range": [
+        "Text",
+        "TextObject"
+      ]
+    },
+    "mainEntity": {
+      "domain": [
+        "CreativeWork"
+      ],
+      "range": [
+        "Thing"
+      ]
+    },
+    "mainEntityOfPage": {
+      "domain": [
+        "Thing"
+      ],
+      "range": [
+        "CreativeWork",
+        "URL"
+      ]
+    },
+    "isPartOf": {
+      "domain": [
+        "CreativeWork"
+      ],
+      "range": [
+        "CreativeWork",
+        "URL"
+      ]
+    },
+    "publisher": {
+      "domain": [
+        "CreativeWork",
+        "FinancialIncentive"
+      ],
+      "range": [
+        "Organization",
+        "Person"
+      ]
+    },
+    "author": {
+      "domain": [
+        "CreativeWork",
+        "Rating"
+      ],
+      "range": [
+        "Organization",
+        "Person"
+      ]
+    },
+    "datePublished": {
+      "domain": [
+        "Certification",
+        "CreativeWork"
+      ],
+      "range": [
+        "Date",
+        "DateTime"
+      ]
+    },
+    "dateModified": {
+      "domain": [
+        "CreativeWork",
+        "DataFeedItem"
+      ],
+      "range": [
+        "Date",
+        "DateTime"
+      ]
+    },
+    "headline": {
+      "domain": [
+        "CreativeWork"
+      ],
+      "range": [
+        "Text"
+      ]
+    },
+    "image": {
+      "domain": [
+        "Thing"
+      ],
+      "range": [
+        "ImageObject",
+        "URL"
+      ]
+    },
+    "inLanguage": {
+      "domain": [
+        "BroadcastService",
+        "CommunicateAction",
+        "CreativeWork",
+        "Event",
+        "LinkRole",
+        "PronounceableText",
+        "WriteAction"
+      ],
+      "range": [
+        "Language",
+        "Text"
+      ]
+    },
+    "articleSection": {
+      "domain": [
+        "Article"
+      ],
+      "range": [
+        "Text"
+      ]
+    },
+    "keywords": {
+      "domain": [
+        "CreativeWork",
+        "Event",
+        "Organization",
+        "Place",
+        "Product"
+      ],
+      "range": [
+        "DefinedTerm",
+        "Text",
+        "URL"
+      ]
+    },
+    "blogPost": {
+      "domain": [
+        "Blog"
+      ],
+      "range": [
+        "BlogPosting"
+      ]
+    },
+    "breadcrumb": {
+      "domain": [
+        "WebPage"
+      ],
+      "range": [
+        "BreadcrumbList",
+        "Text"
+      ]
+    },
+    "itemListElement": {
+      "domain": [
+        "ItemList"
+      ],
+      "range": [
+        "ListItem",
+        "Text",
+        "Thing"
+      ]
+    },
+    "position": {
+      "domain": [
+        "CreativeWork",
+        "ListItem"
+      ],
+      "range": [
+        "Integer",
+        "Text"
+      ]
+    },
+    "item": {
+      "domain": [
+        "DataFeedItem",
+        "ListItem"
+      ],
+      "range": [
+        "Thing"
+      ]
+    },
+    "numberOfItems": {
+      "domain": [
+        "ItemList"
+      ],
+      "range": [
+        "Integer"
+      ]
+    },
+    "itemListOrder": {
+      "domain": [
+        "ItemList"
+      ],
+      "range": [
+        "ItemListOrderType",
+        "Text"
+      ]
+    },
+    "sku": {
+      "domain": [
+        "Demand",
+        "Offer",
+        "Product"
+      ],
+      "range": [
+        "Text"
+      ]
+    },
+    "gtin": {
+      "domain": [
+        "Demand",
+        "Offer",
+        "Product"
+      ],
+      "range": [
+        "Text",
+        "URL"
+      ]
+    },
+    "gtin8": {
+      "domain": [
+        "Demand",
+        "Offer",
+        "Product"
+      ],
+      "range": [
+        "Text"
+      ]
+    },
+    "gtin12": {
+      "domain": [
+        "Demand",
+        "Offer",
+        "Product"
+      ],
+      "range": [
+        "Text"
+      ]
+    },
+    "gtin13": {
+      "domain": [
+        "Demand",
+        "Offer",
+        "Product"
+      ],
+      "range": [
+        "Text"
+      ]
+    },
+    "gtin14": {
+      "domain": [
+        "Demand",
+        "Offer",
+        "Product"
+      ],
+      "range": [
+        "Text"
+      ]
+    },
+    "mpn": {
+      "domain": [
+        "Demand",
+        "Offer",
+        "Product"
+      ],
+      "range": [
+        "Text"
+      ]
+    },
+    "productID": {
+      "domain": [
+        "Product"
+      ],
+      "range": [
+        "Text"
+      ]
+    },
+    "productGroupID": {
+      "domain": [
+        "ProductGroup"
+      ],
+      "range": [
+        "Text"
+      ]
+    },
+    "inProductGroupWithID": {
+      "domain": [
+        "Product"
+      ],
+      "range": [
+        "Text"
+      ]
+    },
+    "isVariantOf": {
+      "domain": [
+        "Product",
+        "ProductModel"
+      ],
+      "range": [
+        "ProductGroup",
+        "ProductModel"
+      ]
+    },
+    "variesBy": {
+      "domain": [
+        "ProductGroup"
+      ],
+      "range": [
+        "DefinedTerm",
+        "PropertyValue",
+        "Text"
+      ]
+    },
+    "hasVariant": {
+      "domain": [
+        "ProductGroup"
+      ],
+      "range": [
+        "Product"
+      ]
+    },
+    "brand": {
+      "domain": [
+        "Organization",
+        "Person",
+        "Product",
+        "Service"
+      ],
+      "range": [
+        "Brand",
+        "Organization"
+      ]
+    },
+    "category": {
+      "domain": [
+        "ActionAccessSpecification",
+        "Guide",
+        "Invoice",
+        "Offer",
+        "PhysicalActivity",
+        "Product",
+        "Recommendation",
+        "Service",
+        "SpecialAnnouncement"
+      ],
+      "range": [
+        "CategoryCode",
+        "PhysicalActivityCategory",
+        "Text",
+        "Thing",
+        "URL"
+      ]
+    },
+    "color": {
+      "domain": [
+        "Product"
+      ],
+      "range": [
+        "Text"
+      ]
+    },
+    "size": {
+      "domain": [
+        "CreativeWork",
+        "Product"
+      ],
+      "range": [
+        "DefinedTerm",
+        "QuantitativeValue",
+        "SizeSpecification",
+        "Text"
+      ]
+    },
+    "material": {
+      "domain": [
+        "CreativeWork",
+        "Product"
+      ],
+      "range": [
+        "Product",
+        "Text",
+        "URL"
+      ]
+    },
+    "pattern": {
+      "domain": [
+        "CreativeWork",
+        "Product"
+      ],
+      "range": [
+        "DefinedTerm",
+        "Text"
+      ]
+    },
+    "offers": {
+      "domain": [
+        "AggregateOffer",
+        "CreativeWork",
+        "EducationalOccupationalProgram",
+        "Event",
+        "MenuItem",
+        "Product",
+        "Service",
+        "Trip"
+      ],
+      "range": [
+        "Demand",
+        "Offer"
+      ]
+    },
+    "price": {
+      "domain": [
+        "DonateAction",
+        "Offer",
+        "PriceSpecification",
+        "TradeAction"
+      ],
+      "range": [
+        "Number",
+        "Text"
+      ]
+    },
+    "priceCurrency": {
+      "domain": [
+        "DonateAction",
+        "Offer",
+        "PriceSpecification",
+        "Reservation",
+        "Ticket",
+        "TradeAction"
+      ],
+      "range": [
+        "Text"
+      ]
+    },
+    "priceSpecification": {
+      "domain": [
+        "Demand",
+        "DonateAction",
+        "Offer",
+        "TradeAction"
+      ],
+      "range": [
+        "PriceSpecification"
+      ]
+    },
+    "lowPrice": {
+      "domain": [
+        "AggregateOffer"
+      ],
+      "range": [
+        "Number",
+        "Text"
+      ]
+    },
+    "highPrice": {
+      "domain": [
+        "AggregateOffer"
+      ],
+      "range": [
+        "Number",
+        "Text"
+      ]
+    },
+    "offerCount": {
+      "domain": [
+        "AggregateOffer"
+      ],
+      "range": [
+        "Integer"
+      ]
+    },
+    "priceValidUntil": {
+      "domain": [
+        "Offer"
+      ],
+      "range": [
+        "Date"
+      ]
+    },
+    "validFrom": {
+      "domain": [
+        "Certification",
+        "Demand",
+        "FinancialIncentive",
+        "LocationFeatureSpecification",
+        "MonetaryAmount",
+        "Offer",
+        "OpeningHoursSpecification",
+        "Permit",
+        "PriceSpecification"
+      ],
+      "range": [
+        "Date",
+        "DateTime"
+      ]
+    },
+    "validThrough": {
+      "domain": [
+        "Demand",
+        "FinancialIncentive",
+        "JobPosting",
+        "LocationFeatureSpecification",
+        "MonetaryAmount",
+        "Offer",
+        "OpeningHoursSpecification",
+        "PriceSpecification"
+      ],
+      "range": [
+        "Date",
+        "DateTime"
+      ]
+    },
+    "availability": {
+      "domain": [
+        "Demand",
+        "Offer"
+      ],
+      "range": [
+        "ItemAvailability"
+      ]
+    },
+    "inventoryLevel": {
+      "domain": [
+        "Demand",
+        "Offer",
+        "SomeProducts"
+      ],
+      "range": [
+        "QuantitativeValue"
+      ]
+    },
+    "weight": {
+      "domain": [
+        "OfferShippingDetails",
+        "Person",
+        "Product",
+        "ShippingConditions",
+        "VisualArtwork"
+      ],
+      "range": [
+        "Mass",
+        "QuantitativeValue"
+      ]
+    },
+    "unitCode": {
+      "domain": [
+        "PropertyValue",
+        "QuantitativeValue",
+        "TypeAndQuantityNode",
+        "UnitPriceSpecification"
+      ],
+      "range": [
+        "Text",
+        "URL"
+      ]
+    },
+    "value": {
+      "domain": [
+        "MonetaryAmount",
+        "PropertyValue",
+        "QuantitativeValue"
+      ],
+      "range": [
+        "Boolean",
+        "Number",
+        "QualitativeValue",
+        "StructuredValue",
+        "Text"
+      ]
+    },
+    "minValue": {
+      "domain": [
+        "MonetaryAmount",
+        "PropertyValue",
+        "PropertyValueSpecification",
+        "QuantitativeValue"
+      ],
+      "range": [
+        "Number"
+      ]
+    },
+    "maxValue": {
+      "domain": [
+        "MonetaryAmount",
+        "PropertyValue",
+        "PropertyValueSpecification",
+        "QuantitativeValue"
+      ],
+      "range": [
+        "Number"
+      ]
+    },
+    "seller": {
+      "domain": [
+        "BuyAction",
+        "Demand",
+        "Flight",
+        "Offer",
+        "Order"
+      ],
+      "range": [
+        "Organization",
+        "Person"
+      ]
+    },
+    "itemCondition": {
+      "domain": [
+        "Demand",
+        "MerchantReturnPolicy",
+        "Offer",
+        "Product"
+      ],
+      "range": [
+        "OfferItemCondition"
+      ]
+    },
+    "shippingDetails": {
+      "domain": [
+        "Offer"
+      ],
+      "range": [
+        "OfferShippingDetails"
+      ]
+    },
+    "shippingRate": {
+      "domain": [
+        "OfferShippingDetails",
+        "ShippingConditions",
+        "ShippingRateSettings"
+      ],
+      "range": [
+        "MonetaryAmount",
+        "ShippingRateSettings"
+      ]
+    },
+    "shippingDestination": {
+      "domain": [
+        "DeliveryTimeSettings",
+        "OfferShippingDetails",
+        "ShippingConditions",
+        "ShippingRateSettings"
+      ],
+      "range": [
+        "DefinedRegion"
+      ]
+    },
+    "deliveryTime": {
+      "domain": [
+        "DeliveryTimeSettings",
+        "OfferShippingDetails"
+      ],
+      "range": [
+        "ShippingDeliveryTime"
+      ]
+    },
+    "handlingTime": {
+      "domain": [
+        "ShippingDeliveryTime",
+        "ShippingService"
+      ],
+      "range": [
+        "QuantitativeValue",
+        "ServicePeriod"
+      ]
+    },
+    "transitTime": {
+      "domain": [
+        "ShippingConditions",
+        "ShippingDeliveryTime"
+      ],
+      "range": [
+        "QuantitativeValue",
+        "ServicePeriod"
+      ]
+    },
+    "businessDays": {
+      "domain": [
+        "ServicePeriod",
+        "ShippingDeliveryTime"
+      ],
+      "range": [
+        "DayOfWeek",
+        "OpeningHoursSpecification"
+      ]
+    },
+    "cutoffTime": {
+      "domain": [
+        "ServicePeriod",
+        "ShippingDeliveryTime"
+      ],
+      "range": [
+        "Time"
+      ]
+    },
+    "addressCountry": {
+      "domain": [
+        "DefinedRegion",
+        "GeoCoordinates",
+        "GeoShape",
+        "PostalAddress"
+      ],
+      "range": [
+        "Country",
+        "Text"
+      ]
+    },
+    "addressRegion": {
+      "domain": [
+        "DefinedRegion",
+        "PostalAddress"
+      ],
+      "range": [
+        "AdministrativeArea",
+        "Text"
+      ]
+    },
+    "postalCode": {
+      "domain": [
+        "DefinedRegion",
+        "GeoCoordinates",
+        "GeoShape",
+        "PostalAddress"
+      ],
+      "range": [
+        "Text"
+      ]
+    },
+    "hasMerchantReturnPolicy": {
+      "domain": [
+        "Offer",
+        "Organization",
+        "Product"
+      ],
+      "range": [
+        "MerchantReturnPolicy"
+      ]
+    },
+    "merchantReturnDays": {
+      "domain": [
+        "MerchantReturnPolicy",
+        "MerchantReturnPolicySeasonalOverride"
+      ],
+      "range": [
+        "Date",
+        "DateTime",
+        "Integer"
+      ]
+    },
+    "returnPolicyCategory": {
+      "domain": [
+        "MerchantReturnPolicy",
+        "MerchantReturnPolicySeasonalOverride"
+      ],
+      "range": [
+        "MerchantReturnEnumeration"
+      ]
+    },
+    "applicableCountry": {
+      "domain": [
+        "MerchantReturnPolicy"
+      ],
+      "range": [
+        "Country",
+        "Text"
+      ]
+    },
+    "returnPolicyCountry": {
+      "domain": [
+        "MerchantReturnPolicy"
+      ],
+      "range": [
+        "Country",
+        "Text"
+      ]
+    },
+    "returnMethod": {
+      "domain": [
+        "MerchantReturnPolicy",
+        "MerchantReturnPolicySeasonalOverride"
+      ],
+      "range": [
+        "ReturnMethodEnumeration"
+      ]
+    },
+    "returnFees": {
+      "domain": [
+        "MerchantReturnPolicy",
+        "MerchantReturnPolicySeasonalOverride"
+      ],
+      "range": [
+        "ReturnFeesEnumeration"
+      ]
+    },
+    "returnShippingFeesAmount": {
+      "domain": [
+        "MerchantReturnPolicy",
+        "MerchantReturnPolicySeasonalOverride"
+      ],
+      "range": [
+        "MonetaryAmount"
+      ]
+    },
+    "merchantReturnLink": {
+      "domain": [
+        "MerchantReturnPolicy"
+      ],
+      "range": [
+        "URL"
+      ]
+    },
+    "returnPolicySeasonalOverride": {
+      "domain": [
+        "MerchantReturnPolicy"
+      ],
+      "range": [
+        "MerchantReturnPolicySeasonalOverride"
+      ]
+    },
+    "review": {
+      "domain": [
+        "Brand",
+        "CreativeWork",
+        "Event",
+        "Offer",
+        "Organization",
+        "Place",
+        "Product",
+        "Service"
+      ],
+      "range": [
+        "Review"
+      ]
+    },
+    "aggregateRating": {
+      "domain": [
+        "Brand",
+        "CreativeWork",
+        "Event",
+        "Offer",
+        "Organization",
+        "Place",
+        "Product",
+        "Service"
+      ],
+      "range": [
+        "AggregateRating"
+      ]
+    },
+    "ratingValue": {
+      "domain": [
+        "Rating"
+      ],
+      "range": [
+        "Number",
+        "Text"
+      ]
+    },
+    "ratingCount": {
+      "domain": [
+        "AggregateRating"
+      ],
+      "range": [
+        "Integer"
+      ]
+    },
+    "reviewCount": {
+      "domain": [
+        "AggregateRating"
+      ],
+      "range": [
+        "Integer"
+      ]
+    },
+    "bestRating": {
+      "domain": [
+        "Rating"
+      ],
+      "range": [
+        "Number",
+        "Text"
+      ]
+    },
+    "worstRating": {
+      "domain": [
+        "Rating"
+      ],
+      "range": [
+        "Number",
+        "Text"
+      ]
+    },
+    "reviewRating": {
+      "domain": [
+        "Review"
+      ],
+      "range": [
+        "Rating"
+      ]
+    },
+    "reviewBody": {
+      "domain": [
+        "Review"
+      ],
+      "range": [
+        "Text"
+      ]
+    },
+    "reviewAspect": {
+      "domain": [
+        "Guide",
+        "Rating",
+        "Review"
+      ],
+      "range": [
+        "StructuredValue",
+        "Text"
+      ]
+    },
+    "uploadDate": {
+      "domain": [
+        "MediaObject"
+      ],
+      "range": [
+        "Date",
+        "DateTime"
+      ]
+    },
+    "duration": {
+      "domain": [
+        "Audiobook",
+        "Episode",
+        "Event",
+        "MediaObject",
+        "Movie",
+        "MusicRecording",
+        "MusicRelease",
+        "QuantitativeValueDistribution",
+        "Schedule",
+        "ServicePeriod"
+      ],
+      "range": [
+        "Duration",
+        "QuantitativeValue"
+      ]
+    },
+    "contentUrl": {
+      "domain": [
+        "MediaObject"
+      ],
+      "range": [
+        "URL"
+      ]
+    },
+    "embedUrl": {
+      "domain": [
+        "MediaObject"
+      ],
+      "range": [
+        "URL"
+      ]
+    },
+    "thumbnailUrl": {
+      "domain": [
+        "CreativeWork"
+      ],
+      "range": [
+        "URL"
+      ]
+    },
+    "potentialAction": {
+      "domain": [
+        "Thing"
+      ],
+      "range": [
+        "Action"
+      ]
+    },
+    "target": {
+      "domain": [
+        "Action"
+      ],
+      "range": [
+        "EntryPoint",
+        "URL"
+      ]
+    },
+    "address": {
+      "domain": [
+        "GeoCoordinates",
+        "GeoShape",
+        "Organization",
+        "Person",
+        "Place"
+      ],
+      "range": [
+        "PostalAddress",
+        "Text"
+      ]
+    },
+    "telephone": {
+      "domain": [
+        "ContactPoint",
+        "Organization",
+        "Person",
+        "Place"
+      ],
+      "range": [
+        "Text"
+      ]
+    },
+    "email": {
+      "domain": [
+        "ContactPoint",
+        "Organization",
+        "Person"
+      ],
+      "range": [
+        "Text"
+      ]
+    },
+    "contactPoint": {
+      "domain": [
+        "HealthInsurancePlan",
+        "Organization",
+        "Person"
+      ],
+      "range": [
+        "ContactPoint"
+      ]
+    },
+    "caption": {
+      "domain": [
+        "AudioObject",
+        "ImageObject",
+        "VideoObject"
+      ],
+      "range": [
+        "MediaObject",
+        "Text"
+      ]
+    },
+    "width": {
+      "domain": [
+        "MediaObject",
+        "OfferShippingDetails",
+        "Product",
+        "ShippingConditions",
+        "VisualArtwork"
+      ],
+      "range": [
+        "Distance",
+        "QuantitativeValue"
+      ]
+    },
+    "height": {
+      "domain": [
+        "MediaObject",
+        "OfferShippingDetails",
+        "Person",
+        "Product",
+        "ShippingConditions",
+        "VisualArtwork"
+      ],
+      "range": [
+        "Distance",
+        "QuantitativeValue"
+      ]
+    },
+    "suggestedAge": {
+      "domain": [
+        "PeopleAudience",
+        "SizeSpecification"
+      ],
+      "range": [
+        "QuantitativeValue"
+      ]
+    },
+    "suggestedGender": {
+      "domain": [
+        "PeopleAudience",
+        "SizeSpecification"
+      ],
+      "range": [
+        "GenderType",
+        "Text"
+      ]
+    },
+    "currency": {
+      "domain": [
+        "DatedMoneySpecification",
+        "ExchangeRateSpecification",
+        "LoanOrCredit",
+        "MonetaryAmount",
+        "MonetaryAmountDistribution"
+      ],
+      "range": [
+        "Text"
+      ]
+    },
+    "hasShippingService": {
+      "domain": [
+        "OfferShippingDetails",
+        "Organization"
+      ],
+      "range": [
+        "ShippingService"
+      ]
+    }
+  }
+}

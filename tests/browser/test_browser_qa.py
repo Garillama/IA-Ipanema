@@ -32,7 +32,7 @@ class BrowserQATests(unittest.TestCase):
 
     def run_job(self, base, suffix='', *, widths=None, mode='quick', interactions=None, pages=None, lighthouse=False):
         job={'project':'fixture','output':str(self.root/'out'),'pages':pages or [{'name':'home','url':base+suffix}],
-             'widths':widths or [390,1440],'mode':mode,'axe':True,'interactions':interactions or [],'lighthouse':lighthouse}
+             'widths':widths or [390,1440],'mode':mode,'axe':True,'interactions':interactions or [],'lighthouse':lighthouse,'capture_seo':True}
         put(self.root/'job.json',job)
         env={k:v for k,v in os.environ.items() if not k.startswith('IPANEMA_') or k in ('IPANEMA_NODE_MODULE_ROOT','IPANEMA_CHROME_PATH')}
         env.update({'IPANEMA_PUBLIC_URL':base,'IPANEMA_EVIDENCE_DIR':str(self.root/'out'),'IPANEMA_ALLOW_NETWORK':'0'})
@@ -73,6 +73,24 @@ class BrowserQATests(unittest.TestCase):
             failures=[c['name'] for c in result['checks'] if c['status']=='failed']
             for check in ('overflow','h1','canonical','jsonld','carousel-links','assert_hidden'):
                 self.assertTrue(any(check in name for name in failures),(check,failures))
+            self.assertEqual(state['posts'],0)
+
+    def test_seo_projection_tracks_js_and_removes_private_values(self):
+        from ipanema.seo.extractor import extract
+        from ipanema.seo.page_audit import snapshot_delta
+        with server() as (base,state):
+            r,result=self.run_job(base,'/?probe=seo',widths=[390],mode='full')
+            self.assertEqual(r.returncode,0,(r.stderr,result.get('error')))
+            path=self.root/'out/home-390-rendered.seo.json';capture=json.loads(path.read_text())
+            delta=snapshot_delta(extract(capture['initial']['html'],base),extract(capture['rendered']['html'],base))
+            self.assertIn(base+'/late-product/',delta['links_only_after_js'])
+            self.assertEqual(delta['structured_data_added_after_js'],1)
+            self.assertIn('9007199254740993',capture['initial']['html'])
+            self.assertEqual(capture['initial']['html'].count('"name":"Fixture"'),2)
+            self.assertIn('duplicada',extract(capture['initial']['html'],base)['json_ld'][0]['error']['message'])
+            self.assertNotIn('fixture-private-value',path.read_text());self.assertNotIn('fixture-input-value',path.read_text())
+            nojs=json.loads((self.root/'out/home-390-no-js.seo.json').read_text())
+            self.assertNotIn('/late-product/',nojs['rendered']['html'])
             self.assertEqual(state['posts'],0)
 
     def test_runtime_blocks_page_post_requests(self):

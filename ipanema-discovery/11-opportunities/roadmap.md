@@ -2,6 +2,8 @@
 
 Fecha: 2026-11-08. Implementación todavía no autorizada por este discovery; cada lote se convierte primero en diff local revisable. [Matriz](priority-matrix.md).
 
+La evolución local del agente SEO sí fue autorizada y está implementada en V2.1: [resultados](../../reports/seo/evolution-report.md). La restricción anterior sigue aplicando al tema/tienda. Para el lote SEO hay un diff no aplicado y [prioridades con evidencia actual](../../reports/seo/audited-pages.md); conectar cuentas o publicar requiere autorización específica.
+
 1. **Estabilizar contexto y contrato.** Mantener perfil por tienda, estado remoto y source efectivo. Resolver qué código es propio y estrategia de actualización del fork. IPN-001/002/022/023.
 2. **Corregir barreras de interacción y responsive.** Menú/foco/cierre, nombres de controles y overflow intermedio, mediante fuentes compartidas y pruebas de consumidores. IPN-004/005/006/015.
 3. **Asegurar catálogo descubrible y semántica.** Paginación con fallback, JSON-LD 404, title de error y jerarquía de contenido importado. No tomar un score SEO como diagnóstico suficiente. IPN-007/008/009/017/018.

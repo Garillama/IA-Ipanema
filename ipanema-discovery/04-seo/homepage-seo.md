@@ -1,0 +1,9 @@
+# Home: identidad y descubrimiento del catálogo
+
+Verificado 2026-11-08: [auditoría viva](../../reports/seo/audited-pages.md). Home contiene un H1 de tienda, WebPage/BreadcrumbList, Organization y Products de tarjetas emitidos por el componente compartido. No se encontraron WebSite/OnlineStore en esos snippets. Su ausencia no obliga a agregar scripts; primero revisar identidad existente y propósito. La [guía Organization](https://developers.google.com/search/docs/appearance/structured-data/organization) admite describir el negocio real, incluido subtipo pertinente, sin promesa de presentación.
+
+Auditar hero, títulos de secciones, banners/categorías, productos, navegación y footer con headings reales, alt según función y anchors de destinos. Un hero con texto dentro de imagen no sustituye contenido semántico. Los enlaces de producto/categoría presentes inicialmente se conservan aunque sus imágenes usen lazy loading. No inferir cobertura de todo el catálogo porque varios productos destacados estén visibles.
+
+`seo audit --type home` conserva Title/description/headings/canonical/robots, entidades y enlaces; `seo corpus` relaciona categoría y PDP auditadas con profundidad dentro de la muestra. No generar Product completo por tarjeta para perseguir merchant listings de PDP. ItemList solo describe una lista real; diferenciar la beta regional de la representación semántica. SearchAction no produce el searchbox retirado y exige búsqueda real.
+
+Para CTR bajo, combinar consultas/país/dispositivo/posición/periodo de GSC con metadata e intención. Analytics añade landing/engagement/compras únicamente con filtros/consentimiento y cuenta autorizados. No atribuir CTR a una sola causa, ni ingresos a schema. La integración aún no dispone de cuentas reales: [fuentes y límites](google-integrations.md).

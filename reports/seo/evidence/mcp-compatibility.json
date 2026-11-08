@@ -1,0 +1,38 @@
+{
+  "verified_at": "2026-11-08",
+  "method": "GitHub connector: metadata, README, manifests; GSC server source read, never executed.",
+  "connections": {
+    "gsc": false,
+    "analytics": false,
+    "merchant": false,
+    "chrome_devtools_mcp": false
+  },
+  "repositories": [
+    {
+      "repository": "AminForou/mcp-gsc",
+      "url": "https://github.com/AminForou/mcp-gsc",
+      "pushed_at": "2026-11-06T02:52:11Z",
+      "archived": false,
+      "license": "MIT"
+    },
+    {
+      "repository": "ChromeDevTools/chrome-devtools-mcp",
+      "url": "https://github.com/ChromeDevTools/chrome-devtools-mcp",
+      "pushed_at": "2026-11-08T01:06:56Z",
+      "archived": false,
+      "license": "Apache-2.0"
+    },
+    {
+      "repository": "googleanalytics/google-analytics-mcp",
+      "url": "https://github.com/googleanalytics/google-analytics-mcp",
+      "pushed_at": "2026-11-05T22:04:58Z",
+      "archived": false,
+      "license": "Apache-2.0"
+    }
+  ],
+  "limits": [
+    "No transitive dependency security audit or MCP installation.",
+    "Repository activity does not prove absence of vulnerabilities.",
+    "Offline adapters and schemas do not prove live account access."
+  ]
+}

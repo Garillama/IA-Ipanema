@@ -1,0 +1,854 @@
+{
+  "theme_root_name": "merganser",
+  "ld_json_files": [
+    "snippets/structured-data/structured-data-organization.tpl",
+    "snippets/structured-data/structured-data.tpl"
+  ],
+  "audits": [
+    {
+      "snippet": "snippets/structured-data/structured-data-organization.tpl",
+      "sha256": "335953d39eccb14b",
+      "scripts": [
+        {
+          "component": "structured-data.organization",
+          "types": [
+            "Organization"
+          ],
+          "line": 9
+        }
+      ],
+      "consumers": [
+        {
+          "file": "layouts/layout.tpl",
+          "line": 44,
+          "flags": {},
+          "conditions": []
+        }
+      ],
+      "contexts_simulated": 16,
+      "invalid_paths": [],
+      "paths_truncated": false,
+      "interpolations": [
+        {
+          "expr": "_self.escape_text(store.name)",
+          "in_string": true,
+          "protected": false,
+          "line": 13
+        },
+        {
+          "expr": "'https:' ~ store.logo",
+          "in_string": true,
+          "protected": false,
+          "line": 15
+        },
+        {
+          "expr": "store.url",
+          "in_string": true,
+          "protected": false,
+          "line": 17
+        },
+        {
+          "expr": "link",
+          "in_string": true,
+          "protected": false,
+          "line": 22
+        }
+      ]
+    },
+    {
+      "snippet": "snippets/structured-data/structured-data.tpl",
+      "sha256": "9eb2edf924e8faf5",
+      "scripts": [
+        {
+          "component": "structured-data.item",
+          "types": [
+            "Offer",
+            "Organization",
+            "Product",
+            "QuantitativeValue",
+            "Thing",
+            "WebPage"
+          ],
+          "line": 45
+        },
+        {
+          "component": "structured-data.blog-post",
+          "types": [
+            "BlogPosting",
+            "ImageObject",
+            "Organization",
+            "WebPage"
+          ],
+          "line": 94
+        },
+        {
+          "component": "structured-data.blog",
+          "types": [
+            "Blog",
+            "BlogPosting",
+            "ImageObject",
+            "Organization",
+            "WebPage"
+          ],
+          "line": 123
+        },
+        {
+          "component": "structured-data.page",
+          "types": [
+            "BreadcrumbList",
+            "ListItem",
+            "Offer",
+            "Organization",
+            "Product",
+            "QuantitativeValue",
+            "Thing",
+            "WebPage"
+          ],
+          "line": 167
+        }
+      ],
+      "consumers": [
+        {
+          "file": "layouts/layout.tpl",
+          "line": 45,
+          "flags": {},
+          "conditions": []
+        },
+        {
+          "file": "snippets/blog/blog-post-item.tpl",
+          "line": 37,
+          "flags": {
+            "blog_item": true
+          },
+          "conditions": []
+        },
+        {
+          "file": "snippets/product-list/product-item/item.tpl",
+          "line": 247,
+          "flags": {
+            "item": true
+          },
+          "conditions": [
+            "(not product.is_placeholder)",
+            "(template != 'product')"
+          ]
+        }
+      ],
+      "contexts_simulated": 47,
+      "invalid_paths": [
+        {
+          "component": "structured-data.page",
+          "hint": "missing_comma_or_unescaped_quote",
+          "message": "Expecting ',' delimiter",
+          "contexts": {
+            "layouts/layout.tpl:45 flags={}": [
+              "home"
+            ]
+          },
+          "example_decisions": {
+            "cond:page_description": false,
+            "iter:breadcrumbs": 2
+          },
+          "example": "{\n\t\t\"@context\": \"https://schema.org/\",\n\t\t\"@type\": \"WebPage\",\n\t\t\"name\": \"s\",\n\t\t\n\t\t\"breadcrumb\": {\n\t\t\t\"@type\": \"BreadcrumbList\",\n\t\t\t\"itemListElement\": [\n\t\t\t{\n\t\t\t\t\"@type\": \"ListItem\",\n\t\t\t\t\"position\": 1,\n\t\t\t\t\"name\": \"x\",\n\t\t\t\t\"item\": \"x\"\n\t\t\t}\n\t\t\t\n\t\t\t\t\n\t\t\t\t\t{\n\t\t\t\t\t\t\"@type\": \"ListItem\",\n\t\t\t\t\t\t\"position\": 1,\n\t\t\t\t\t\t\"name\": \"s\",\n\t\t\t\t\t\t\"item\": \"xx\"\n\t\t\t\t\t},\n\t\t\t\t\n\t\t\t\t\t{\n\t\t\t\t\t\t\"@type\": \"ListItem\",\n\t\t\t\t\t\t\"position\": 1,\n\t\t\t\t\t\t\"name\": \"s\",\n\t\t\t\t\t\t\"item\": \"xx\"\n\t\t\t\t\t}\n\t\t\t\t\n\t\t\t\n\t\t\t]\n\t\t}\n\t}"
+        },
+        {
+          "component": "structured-data.page",
+          "hint": "trailing_comma",
+          "message": "Expecting value",
+          "contexts": {
+            "layouts/layout.tpl:45 flags={}": [
+              "404",
+              "account.index",
+              "account.login",
+              "account.orders",
+              "account.register",
+              "category",
+              "contact",
+              "password",
+              "post",
+              "product"
+            ]
+          },
+          "example_decisions": {
+            "cond:page_description": false,
+            "iter:breadcrumbs": 0
+          },
+          "example": "{\n\t\t\"@context\": \"https://schema.org/\",\n\t\t\"@type\": \"WebPage\",\n\t\t\"name\": \"s\",\n\t\t\n\t\t\"breadcrumb\": {\n\t\t\t\"@type\": \"BreadcrumbList\",\n\t\t\t\"itemListElement\": [\n\t\t\t{\n\t\t\t\t\"@type\": \"ListItem\",\n\t\t\t\t\"position\": 1,\n\t\t\t\t\"name\": \"x\",\n\t\t\t\t\"item\": \"x\"\n\t\t\t},\n\t\t\t\n\t\t\t\t\n\t\t\t\n\t\t\t]\n\t\t}\n\t}"
+        }
+      ],
+      "paths_truncated": false,
+      "interpolations": [
+        {
+          "expr": "_self.json_description(product.seo_description)",
+          "in_string": false,
+          "protected": true,
+          "line": 55
+        },
+        {
+          "expr": "page_info.canonical_url",
+          "in_string": true,
+          "protected": false,
+          "line": 127
+        },
+        {
+          "expr": "_self.json_string(post.seo_title)",
+          "in_string": false,
+          "protected": true,
+          "line": 139
+        },
+        {
+          "expr": "_self.json_string(post.author_name)",
+          "in_string": false,
+          "protected": true,
+          "line": 141
+        },
+        {
+          "expr": "_self.json_description(post.seo_description)",
+          "in_string": false,
+          "protected": true,
+          "line": 143
+        },
+        {
+          "expr": "post.handle",
+          "in_string": true,
+          "protected": false,
+          "line": 144
+        },
+        {
+          "expr": "post.published_at",
+          "in_string": true,
+          "protected": false,
+          "line": 149
+        },
+        {
+          "expr": "post.updated_at",
+          "in_string": true,
+          "protected": false,
+          "line": 150
+        },
+        {
+          "expr": "post.thumbnail",
+          "in_string": true,
+          "protected": false,
+          "line": 158
+        },
+        {
+          "expr": "_self.json_string(page_title)",
+          "in_string": false,
+          "protected": true,
+          "line": 171
+        },
+        {
+          "expr": "_self.json_description(page_description)",
+          "in_string": false,
+          "protected": true,
+          "line": 173
+        },
+        {
+          "expr": "'breadcrumbs.home' | t",
+          "in_string": true,
+          "protected": false,
+          "line": 181
+        },
+        {
+          "expr": "store.url",
+          "in_string": true,
+          "protected": false,
+          "line": 182
+        },
+        {
+          "expr": "_self.json_string(page.name)",
+          "in_string": false,
+          "protected": true,
+          "line": 188
+        },
+        {
+          "expr": "page.url",
+          "in_string": true,
+          "protected": false,
+          "line": 189
+        },
+        {
+          "expr": "'breadcrumbs.cart' | t",
+          "in_string": true,
+          "protected": false,
+          "line": 195
+        },
+        {
+          "expr": "store.cart_url",
+          "in_string": true,
+          "protected": false,
+          "line": 196
+        },
+        {
+          "expr": "'breadcrumbs.search_results' | t",
+          "in_string": true,
+          "protected": false,
+          "line": 202
+        },
+        {
+          "expr": "store.search_url",
+          "in_string": true,
+          "protected": false,
+          "line": 203
+        },
+        {
+          "expr": "'breadcrumbs.order_number' | t | replace('{1}', order.number)",
+          "in_string": true,
+          "protected": false,
+          "line": 209
+        },
+        {
+          "expr": "store.customer_order_url(order)",
+          "in_string": true,
+          "protected": false,
+          "line": 210
+        },
+        {
+          "expr": "loop.index + 1",
+          "in_string": false,
+          "protected": false,
+          "line": 216
+        },
+        {
+          "expr": "_self.json_string(crumb.name)",
+          "in_string": false,
+          "protected": true,
+          "line": 217
+        },
+        {
+          "expr": "crumb.url",
+          "in_string": true,
+          "protected": false,
+          "line": 218
+        },
+        {
+          "expr": "product.canonical_url",
+          "in_string": true,
+          "protected": false,
+          "line": 226
+        },
+        {
+          "expr": "_self.json_string(product.name)",
+          "in_string": false,
+          "protected": true,
+          "line": 227
+        },
+        {
+          "expr": "'https:' ~ product.featured_image | product_image_url('large')",
+          "in_string": true,
+          "protected": false,
+          "line": 228
+        },
+        {
+          "expr": "_self.json_string(product.get_product_variant_meta_content_id(store_has_preexisting_meta_catalog_tag, store_has_meta_track_product_groups_tag))",
+          "in_string": false,
+          "protected": true,
+          "line": 231
+        },
+        {
+          "expr": "_self.json_string(product.sku)",
+          "in_string": false,
+          "protected": true,
+          "line": 233
+        },
+        {
+          "expr": "_self.json_string(product.brand)",
+          "in_string": false,
+          "protected": true,
+          "line": 238
+        },
+        {
+          "expr": "product.weight_unit | iso_to_uncefact",
+          "in_string": true,
+          "protected": false,
+          "line": 244
+        },
+        {
+          "expr": "product.weight",
+          "in_string": true,
+          "protected": false,
+          "line": 245
+        },
+        {
+          "expr": "product.currency",
+          "in_string": true,
+          "protected": false,
+          "line": 251
+        },
+        {
+          "expr": "structured_data_price / 100",
+          "in_string": true,
+          "protected": false,
+          "line": 252
+        },
+        {
+          "expr": "product.stock ? 'InStock' : 'OutOfStock'",
+          "in_string": true,
+          "protected": false,
+          "line": 254
+        },
+        {
+          "expr": "product.stock",
+          "in_string": true,
+          "protected": false,
+          "line": 257
+        },
+        {
+          "expr": "_self.json_string(store.name)",
+          "in_string": false,
+          "protected": true,
+          "line": 262
+        }
+      ]
+    }
+  ],
+  "static": [
+    {
+      "rule": "S010",
+      "severity": "warning",
+      "file": "snippets/structured-data/structured-data-organization.tpl",
+      "line": 1,
+      "message": "Escape manual (`replace` encadenado) en lugar de json_encode: no reemplaza los caracteres de control U+0000–U+001F salvo \\n, \\r, \\t; los valores en `sameAs` se interpolan sin escape."
+    },
+    {
+      "rule": "S001",
+      "severity": "warning",
+      "file": "snippets/structured-data/structured-data.tpl",
+      "line": 63,
+      "message": "Brand declarado como `Thing`; Google documenta `Brand`."
+    },
+    {
+      "rule": "S001",
+      "severity": "warning",
+      "file": "snippets/structured-data/structured-data.tpl",
+      "line": 237,
+      "message": "Brand declarado como `Thing`; Google documenta `Brand`."
+    },
+    {
+      "rule": "S002",
+      "severity": "optional",
+      "file": "snippets/structured-data/structured-data.tpl",
+      "line": 96,
+      "message": "@context con http://."
+    },
+    {
+      "rule": "S003",
+      "severity": "optional",
+      "file": "snippets/structured-data/structured-data.tpl",
+      "line": 80,
+      "message": "availability con prefijo http://schema.org/."
+    },
+    {
+      "rule": "S003",
+      "severity": "optional",
+      "file": "snippets/structured-data/structured-data.tpl",
+      "line": 254,
+      "message": "availability con prefijo http://schema.org/."
+    },
+    {
+      "rule": "S004",
+      "severity": "recommendation",
+      "file": "snippets/structured-data/structured-data.tpl",
+      "line": 100,
+      "message": "`author` como texto plano en BlogPosting."
+    },
+    {
+      "rule": "S004",
+      "severity": "recommendation",
+      "file": "snippets/structured-data/structured-data.tpl",
+      "line": 141,
+      "message": "`author` como texto plano en BlogPosting."
+    },
+    {
+      "rule": "S005",
+      "severity": "optional",
+      "file": "snippets/structured-data/structured-data.tpl",
+      "line": 81,
+      "message": "Se publica inventoryLevel (existencias numéricas)."
+    },
+    {
+      "rule": "S005",
+      "severity": "optional",
+      "file": "snippets/structured-data/structured-data.tpl",
+      "line": 255,
+      "message": "Se publica inventoryLevel (existencias numéricas)."
+    },
+    {
+      "rule": "S006",
+      "severity": "warning",
+      "file": "snippets/structured-data/structured-data.tpl",
+      "line": 54,
+      "message": "image se construye como 'https:' + valor; si el valor está vacío queda `https:`."
+    },
+    {
+      "rule": "S006",
+      "severity": "warning",
+      "file": "snippets/structured-data/structured-data.tpl",
+      "line": 228,
+      "message": "image se construye como 'https:' + valor; si el valor está vacío queda `https:`."
+    },
+    {
+      "rule": "S007",
+      "severity": "recommendation",
+      "file": "snippets/structured-data/structured-data.tpl",
+      "line": 78,
+      "message": "price se calcula dividiendo centavos entre 100 en Twig; el formato numérico depende del motor (verificar en HTML real)."
+    },
+    {
+      "rule": "S007",
+      "severity": "recommendation",
+      "file": "snippets/structured-data/structured-data.tpl",
+      "line": 252,
+      "message": "price se calcula dividiendo centavos entre 100 en Twig; el formato numérico depende del motor (verificar en HTML real)."
+    }
+  ],
+  "microdata_in_templates": [],
+  "kind": "seo-source-audit",
+  "project": "ipanema",
+  "at": "2026-11-08T10:52:14.312110+00:00",
+  "native_markers": {
+    "structured-data.item": [
+      "snippets/structured-data/structured-data.tpl:45"
+    ],
+    "structured-data.blog-post": [
+      "snippets/structured-data/structured-data.tpl:94"
+    ],
+    "structured-data.blog": [
+      "snippets/structured-data/structured-data.tpl:123"
+    ],
+    "structured-data.page": [
+      "snippets/structured-data/structured-data.tpl:167"
+    ],
+    "structured-data.organization": [
+      "snippets/structured-data/structured-data-organization.tpl:9"
+    ]
+  },
+  "breadcrumb_proposal": {
+    "status": "proposal_only",
+    "file": "snippets/structured-data/structured-data.tpl",
+    "source_sha256": "9eb2edf924e8faf5627b25a6c442518c1e2c24ec346cfff0004d53c977d50e2f",
+    "patch": "--- a/snippets/structured-data/structured-data.tpl\n+++ b/snippets/structured-data/structured-data.tpl\n@@ -180,7 +180,7 @@\n \t\t\t\t\"position\": 1,\n \t\t\t\t\"name\": \"{{ 'breadcrumbs.home' | t }}\",\n \t\t\t\t\"item\": \"{{ store.url }}\"\n-\t\t\t}{% if template != 'home' %},{% endif %}\n+\t\t\t}{% if breadcrumbs | length > 0 or template == 'page' or template == 'cart' or template == 'search' or template == 'account.order' %},{% endif %}\n \t\t\t{% if template == 'page' %}\n \t\t\t\t{\n \t\t\t\t\t\"@type\": \"ListItem\",\n",
+    "cases": [
+      {
+        "template": "home",
+        "breadcrumb_count": 0,
+        "before": {
+          "paths": 2,
+          "invalid_json_blocks": 0,
+          "truncated": false
+        },
+        "after": {
+          "paths": 2,
+          "invalid_json_blocks": 0,
+          "truncated": false
+        }
+      },
+      {
+        "template": "home",
+        "breadcrumb_count": 2,
+        "before": {
+          "paths": 2,
+          "invalid_json_blocks": 2,
+          "truncated": false
+        },
+        "after": {
+          "paths": 2,
+          "invalid_json_blocks": 0,
+          "truncated": false
+        }
+      },
+      {
+        "template": "category",
+        "breadcrumb_count": 0,
+        "before": {
+          "paths": 2,
+          "invalid_json_blocks": 2,
+          "truncated": false
+        },
+        "after": {
+          "paths": 2,
+          "invalid_json_blocks": 0,
+          "truncated": false
+        }
+      },
+      {
+        "template": "category",
+        "breadcrumb_count": 2,
+        "before": {
+          "paths": 2,
+          "invalid_json_blocks": 0,
+          "truncated": false
+        },
+        "after": {
+          "paths": 2,
+          "invalid_json_blocks": 0,
+          "truncated": false
+        }
+      },
+      {
+        "template": "product",
+        "breadcrumb_count": 0,
+        "before": {
+          "paths": 50,
+          "invalid_json_blocks": 50,
+          "truncated": false
+        },
+        "after": {
+          "paths": 50,
+          "invalid_json_blocks": 0,
+          "truncated": false
+        }
+      },
+      {
+        "template": "product",
+        "breadcrumb_count": 2,
+        "before": {
+          "paths": 50,
+          "invalid_json_blocks": 0,
+          "truncated": false
+        },
+        "after": {
+          "paths": 50,
+          "invalid_json_blocks": 0,
+          "truncated": false
+        }
+      },
+      {
+        "template": "blog",
+        "breadcrumb_count": 0,
+        "before": {
+          "paths": 5,
+          "invalid_json_blocks": 0,
+          "truncated": false
+        },
+        "after": {
+          "paths": 5,
+          "invalid_json_blocks": 0,
+          "truncated": false
+        }
+      },
+      {
+        "template": "blog",
+        "breadcrumb_count": 2,
+        "before": {
+          "paths": 5,
+          "invalid_json_blocks": 0,
+          "truncated": false
+        },
+        "after": {
+          "paths": 5,
+          "invalid_json_blocks": 0,
+          "truncated": false
+        }
+      },
+      {
+        "template": "post",
+        "breadcrumb_count": 0,
+        "before": {
+          "paths": 2,
+          "invalid_json_blocks": 2,
+          "truncated": false
+        },
+        "after": {
+          "paths": 2,
+          "invalid_json_blocks": 0,
+          "truncated": false
+        }
+      },
+      {
+        "template": "post",
+        "breadcrumb_count": 2,
+        "before": {
+          "paths": 2,
+          "invalid_json_blocks": 0,
+          "truncated": false
+        },
+        "after": {
+          "paths": 2,
+          "invalid_json_blocks": 0,
+          "truncated": false
+        }
+      },
+      {
+        "template": "cart",
+        "breadcrumb_count": 0,
+        "before": {
+          "paths": 2,
+          "invalid_json_blocks": 0,
+          "truncated": false
+        },
+        "after": {
+          "paths": 2,
+          "invalid_json_blocks": 0,
+          "truncated": false
+        }
+      },
+      {
+        "template": "cart",
+        "breadcrumb_count": 2,
+        "before": {
+          "paths": 2,
+          "invalid_json_blocks": 0,
+          "truncated": false
+        },
+        "after": {
+          "paths": 2,
+          "invalid_json_blocks": 0,
+          "truncated": false
+        }
+      },
+      {
+        "template": "search",
+        "breadcrumb_count": 0,
+        "before": {
+          "paths": 2,
+          "invalid_json_blocks": 0,
+          "truncated": false
+        },
+        "after": {
+          "paths": 2,
+          "invalid_json_blocks": 0,
+          "truncated": false
+        }
+      },
+      {
+        "template": "search",
+        "breadcrumb_count": 2,
+        "before": {
+          "paths": 2,
+          "invalid_json_blocks": 0,
+          "truncated": false
+        },
+        "after": {
+          "paths": 2,
+          "invalid_json_blocks": 0,
+          "truncated": false
+        }
+      },
+      {
+        "template": "page",
+        "breadcrumb_count": 0,
+        "before": {
+          "paths": 2,
+          "invalid_json_blocks": 0,
+          "truncated": false
+        },
+        "after": {
+          "paths": 2,
+          "invalid_json_blocks": 0,
+          "truncated": false
+        }
+      },
+      {
+        "template": "page",
+        "breadcrumb_count": 2,
+        "before": {
+          "paths": 2,
+          "invalid_json_blocks": 0,
+          "truncated": false
+        },
+        "after": {
+          "paths": 2,
+          "invalid_json_blocks": 0,
+          "truncated": false
+        }
+      },
+      {
+        "template": "account.order",
+        "breadcrumb_count": 0,
+        "before": {
+          "paths": 2,
+          "invalid_json_blocks": 0,
+          "truncated": false
+        },
+        "after": {
+          "paths": 2,
+          "invalid_json_blocks": 0,
+          "truncated": false
+        }
+      },
+      {
+        "template": "account.order",
+        "breadcrumb_count": 2,
+        "before": {
+          "paths": 2,
+          "invalid_json_blocks": 0,
+          "truncated": false
+        },
+        "after": {
+          "paths": 2,
+          "invalid_json_blocks": 0,
+          "truncated": false
+        }
+      },
+      {
+        "template": "404",
+        "breadcrumb_count": 0,
+        "before": {
+          "paths": 2,
+          "invalid_json_blocks": 2,
+          "truncated": false
+        },
+        "after": {
+          "paths": 2,
+          "invalid_json_blocks": 0,
+          "truncated": false
+        }
+      },
+      {
+        "template": "404",
+        "breadcrumb_count": 2,
+        "before": {
+          "paths": 2,
+          "invalid_json_blocks": 0,
+          "truncated": false
+        },
+        "after": {
+          "paths": 2,
+          "invalid_json_blocks": 0,
+          "truncated": false
+        }
+      },
+      {
+        "template": "password",
+        "breadcrumb_count": 0,
+        "before": {
+          "paths": 2,
+          "invalid_json_blocks": 2,
+          "truncated": false
+        },
+        "after": {
+          "paths": 2,
+          "invalid_json_blocks": 0,
+          "truncated": false
+        }
+      },
+      {
+        "template": "password",
+        "breadcrumb_count": 2,
+        "before": {
+          "paths": 2,
+          "invalid_json_blocks": 0,
+          "truncated": false
+        },
+        "after": {
+          "paths": 2,
+          "invalid_json_blocks": 0,
+          "truncated": false
+        }
+      }
+    ],
+    "method": "Modelo abstracto de ramas del snippet actual; no ejecuta Twig ni filtros de plataforma.",
+    "limitations": [
+      "Los valores interpolados son marcadores sintéticos, no datos de productos.",
+      "La corrección de la fuente requiere revisión y render real en un tema aislado autorizado."
+    ],
+    "theme_modified": false
+  },
+  "theme_modified": false,
+  "limitations": [
+    "Inspección de código actual y modelo abstracto de ramas, no ejecución de Twig/plataforma.",
+    "No identifica automáticamente qué aplicación inyecta marcado en tiempo de ejecución."
+  ]
+}

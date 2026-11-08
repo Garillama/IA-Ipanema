@@ -1,0 +1,204 @@
+{
+  "project": "ipanema",
+  "agent_version": "2.1.0",
+  "at": "2026-11-08T11:05:48.881657+00:00",
+  "status": "passed_local_scope",
+  "counts": {
+    "unit-tests": 86,
+    "integration-tests": 14,
+    "browser-fixtures": 8
+  },
+  "automated_tests_total": 108,
+  "coordinator_cases": 10,
+  "seo_action_cases": 8,
+  "executed": [
+    {
+      "suite": "quick",
+      "report": "reports/runs/ipanema/20261108T110501-quick-83fb3218/report.json",
+      "sha256": "1876630112ebe1944821dce3b3df590c2530bb6dfd9b89e179695e5c941e90cf",
+      "outcome": "passed"
+    },
+    {
+      "suite": "browser-fixtures",
+      "report": "reports/runs/ipanema/20261108T105820-fixtures-a5cff661/report.json",
+      "sha256": "09db8cc9e5d1fc17587b1bb3d1a08156ab878612937ea538303296dcaaae8d48",
+      "outcome": "passed"
+    },
+    {
+      "suite": "repository-final",
+      "report": "reports/runs/ipanema/20261108T110307-repo-3cda7c39/report.json",
+      "outcome": "passed"
+    }
+  ],
+  "browser_relevant_files_still_match_fixture_report": {
+    "tools/browser_runtime.mjs": true,
+    "tools/page_collectors.mjs": true,
+    "tools/qa_browser.mjs": true,
+    "tests/browser/test_browser_qa.py": true,
+    "tests/browser/fixture_server.py": true,
+    "tools/ipanema/seo/link_contracts.json": true
+  },
+  "seo_evals": {
+    "kind": "seo-agent-evals",
+    "agent_version": "2.1.0",
+    "at": "2026-11-08T11:05:11.809363+00:00",
+    "outcome": "passed",
+    "cases": [
+      {
+        "id": "SEO-1",
+        "task": "Categoría no indexada: conservar señales sin inventar causa",
+        "status": "passed",
+        "executed_action": {
+          "audit_indexation_claim": false,
+          "google_known_state": "Discovered - currently not indexed",
+          "causal_diagnosis": "not_demonstrated"
+        },
+        "duration_ms": 1.08,
+        "data_source": "synthetic_fixture",
+        "live_google_test": false
+      },
+      {
+        "id": "SEO-2",
+        "task": "Producto: detectar precio mal formado y fuente candidata",
+        "status": "passed",
+        "executed_action": {
+          "detected_rule": "B010",
+          "source_candidates": [
+            "snippets/structured-data/structured-data.tpl"
+          ],
+          "runtime_attribution": "unconfirmed"
+        },
+        "duration_ms": 0.99,
+        "data_source": "synthetic_fixture",
+        "live_google_test": false
+      },
+      {
+        "id": "SEO-3",
+        "task": "Home con CTR bajo: relacionar consultas y contexto, sin causa única",
+        "status": "passed",
+        "executed_action": {
+          "observed_ctr": 0.01,
+          "position_context": 12,
+          "single_cause_claim": false,
+          "review": [
+            "title/description",
+            "intent",
+            "query",
+            "position"
+          ]
+        },
+        "duration_ms": 0.31,
+        "data_source": "synthetic_fixture",
+        "live_google_test": false
+      },
+      {
+        "id": "SEO-4",
+        "task": "Blog sin datos: investigar contenido sin equiparar ausencia de datos a cero tráfico",
+        "status": "passed",
+        "executed_action": {
+          "traffic": "not_observed_not_zero",
+          "indexation": "not_observed",
+          "editorial_rule": true
+        },
+        "duration_ms": 0.28,
+        "data_source": "synthetic_fixture",
+        "live_google_test": false
+      },
+      {
+        "id": "SEO-5",
+        "task": "Carrusel: comparar enlaces iniciales, DOM y sin JavaScript",
+        "status": "passed",
+        "executed_action": {
+          "rules": [
+            "C221",
+            "SEO005",
+            "SEO010",
+            "SEO020"
+          ],
+          "links_only_after_js": [
+            "https://example.invalid/product"
+          ],
+          "indexation_claim": false
+        },
+        "duration_ms": 0.94,
+        "data_source": "synthetic_fixture",
+        "live_google_test": false
+      },
+      {
+        "id": "SEO-6",
+        "task": "Variantes: generar grupo desde fuentes distintas y validar cada oferta",
+        "status": "passed",
+        "executed_action": {
+          "generated_type": "ProductGroup",
+          "prices": [
+            "12",
+            "15"
+          ],
+          "availability": [
+            "InStock",
+            "OutOfStock"
+          ],
+          "theme_modified": false,
+          "data_kind": "synthetic_fixture"
+        },
+        "duration_ms": 1.19,
+        "data_source": "synthetic_fixture",
+        "live_google_test": false
+      },
+      {
+        "id": "SEO-7",
+        "task": "MCP ausente: continuar con validación local",
+        "status": "passed",
+        "executed_action": {
+          "remote": "not_connected",
+          "local_audit": "executed",
+          "google_data_fabricated": false
+        },
+        "duration_ms": 0.21,
+        "data_source": "synthetic_fixture",
+        "live_google_test": false
+      },
+      {
+        "id": "SEO-8",
+        "task": "Seguridad: datos externos maliciosos y dominio incorrecto",
+        "status": "passed",
+        "executed_action": {
+          "unknown_instructions": "discarded",
+          "wrong_domain": "rejected",
+          "published": false
+        },
+        "duration_ms": 0.08,
+        "data_source": "synthetic_fixture",
+        "live_google_test": false
+      }
+    ],
+    "duration_ms": 12.87,
+    "context_tokens": null,
+    "cost": null,
+    "manual_interventions": 0,
+    "limitations": [
+      "Pruebas de decisiones operativas de las herramientas con fixtures; no evaluación independiente de un modelo.",
+      "No utiliza credenciales, MCP real, índice de Google, Merchant ni Analytics reales."
+    ]
+  },
+  "coordinator_outcome": "passed",
+  "live_store_captures": 41,
+  "live_store_outcome": "findings_present_not_passed",
+  "real_google_account_tests": "not_executed",
+  "rich_results_test": "not_consulted",
+  "schema_markup_validator": "not_consulted",
+  "preservation_evidence": "reports/seo/evidence/preservation.json",
+  "skill_validation": "quick_validate.py: Skill is valid!",
+  "theme_changes": false,
+  "production_publication": false,
+  "limitations": [
+    "No independent LLM evaluation or inferred token/cost figures.",
+    "MCP/Google API responses tested with mocks only.",
+    "Storefront findings remain unapplied; local agent tests are separate."
+  ],
+  "credential_pattern_scan": {
+    "high_confidence_alerts": [],
+    "method": "private-key/Google API-key/GitHub token patterns over Git tracked and untracked nonignored text files",
+    "limitation": "Not a universal credential/privacy certificate."
+  }
+}

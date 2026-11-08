@@ -1,0 +1,2038 @@
+{
+  "project": "ipanema",
+  "analysis_at": "2026-11-08T10:52:14.347172+00:00",
+  "store_domain": "rhinoipanema.mitiendanube.com",
+  "capture_runtime": {
+    "browser": "Chrome/155.0.8059.84",
+    "node": "24.22.0",
+    "os": "linux"
+  },
+  "browser_captures": 40,
+  "pages": [
+    {
+      "page": "blog",
+      "url": "https://rhinoipanema.mitiendanube.com/blog/",
+      "observed_at": "2026-11-08T10:38:30.493Z",
+      "width": 1024,
+      "http": 200,
+      "canonical": [
+        "https://rhinoipanema.mitiendanube.com/blog/"
+      ],
+      "h1": [
+        {
+          "text": "Blog",
+          "user_content": false
+        }
+      ],
+      "schema_types": [
+        "Blog",
+        "BlogPosting",
+        "ImageObject",
+        "Organization",
+        "WebPage"
+      ],
+      "entity_count": 57,
+      "schema_counts": {
+        "error": 0,
+        "warning": 48,
+        "recommendation": 0,
+        "optional": 8
+      },
+      "finding_counts": {
+        "B002": 7,
+        "B030": 14,
+        "G001": 20,
+        "G005": 1,
+        "B100": 14
+      },
+      "source_candidates": [
+        "snippets/structured-data/structured-data-organization.tpl:9",
+        "snippets/structured-data/structured-data.tpl:123",
+        "snippets/structured-data/structured-data.tpl:94"
+      ],
+      "initial_dom_delta": {
+        "links_only_after_js": [],
+        "links_removed_after_js": [],
+        "structured_data_added_after_js": 0,
+        "structured_data_removed_after_js": 0,
+        "attribution": "Cambio observado; no prueba qué app/script lo causó ni qué indexó Google."
+      },
+      "link_count": 62,
+      "pagination_links": [],
+      "non_navigation_carousel_controls": 0,
+      "network_lab": {
+        "requests": 25,
+        "js_bytes": 175266,
+        "css_bytes": 38890,
+        "image_bytes": 499321,
+        "font_bytes": 57197
+      },
+      "input_sha256": "f7b1d02b8c95bd3e78e3e3540981108de5ee1367e710ebf2e7432579d670daf2",
+      "local_input": "reports/runs/ipanema/20261108T103715-seo-live-0a786089/browser/blog-1024-rendered.seo.json"
+    },
+    {
+      "page": "blog",
+      "url": "https://rhinoipanema.mitiendanube.com/blog/",
+      "observed_at": "2026-11-08T10:38:33.213Z",
+      "width": 1440,
+      "http": 200,
+      "canonical": [
+        "https://rhinoipanema.mitiendanube.com/blog/"
+      ],
+      "h1": [
+        {
+          "text": "Blog",
+          "user_content": false
+        }
+      ],
+      "schema_types": [
+        "Blog",
+        "BlogPosting",
+        "ImageObject",
+        "Organization",
+        "WebPage"
+      ],
+      "entity_count": 57,
+      "schema_counts": {
+        "error": 0,
+        "warning": 48,
+        "recommendation": 0,
+        "optional": 8
+      },
+      "finding_counts": {
+        "B002": 7,
+        "B030": 14,
+        "G001": 20,
+        "G005": 1,
+        "B100": 14
+      },
+      "source_candidates": [
+        "snippets/structured-data/structured-data-organization.tpl:9",
+        "snippets/structured-data/structured-data.tpl:123",
+        "snippets/structured-data/structured-data.tpl:94"
+      ],
+      "initial_dom_delta": {
+        "links_only_after_js": [],
+        "links_removed_after_js": [],
+        "structured_data_added_after_js": 0,
+        "structured_data_removed_after_js": 0,
+        "attribution": "Cambio observado; no prueba qué app/script lo causó ni qué indexó Google."
+      },
+      "link_count": 62,
+      "pagination_links": [],
+      "non_navigation_carousel_controls": 0,
+      "network_lab": {
+        "requests": 25,
+        "js_bytes": 175329,
+        "css_bytes": 38800,
+        "image_bytes": 499299,
+        "font_bytes": 57197
+      },
+      "input_sha256": "c7f1c1cbc13268c1f892921b9a5a027c7bc6e4565989f9520653234dab7c7fe6",
+      "local_input": "reports/runs/ipanema/20261108T103715-seo-live-0a786089/browser/blog-1440-rendered.seo.json"
+    },
+    {
+      "page": "blog",
+      "url": "https://rhinoipanema.mitiendanube.com/blog/",
+      "observed_at": "2026-11-08T10:38:35.771Z",
+      "width": 1920,
+      "http": 200,
+      "canonical": [
+        "https://rhinoipanema.mitiendanube.com/blog/"
+      ],
+      "h1": [
+        {
+          "text": "Blog",
+          "user_content": false
+        }
+      ],
+      "schema_types": [
+        "Blog",
+        "BlogPosting",
+        "ImageObject",
+        "Organization",
+        "WebPage"
+      ],
+      "entity_count": 57,
+      "schema_counts": {
+        "error": 0,
+        "warning": 48,
+        "recommendation": 0,
+        "optional": 8
+      },
+      "finding_counts": {
+        "B002": 7,
+        "B030": 14,
+        "G001": 20,
+        "G005": 1,
+        "B100": 14
+      },
+      "source_candidates": [
+        "snippets/structured-data/structured-data-organization.tpl:9",
+        "snippets/structured-data/structured-data.tpl:123",
+        "snippets/structured-data/structured-data.tpl:94"
+      ],
+      "initial_dom_delta": {
+        "links_only_after_js": [],
+        "links_removed_after_js": [],
+        "structured_data_added_after_js": 0,
+        "structured_data_removed_after_js": 0,
+        "attribution": "Cambio observado; no prueba qué app/script lo causó ni qué indexó Google."
+      },
+      "link_count": 62,
+      "pagination_links": [],
+      "non_navigation_carousel_controls": 0,
+      "network_lab": {
+        "requests": 25,
+        "js_bytes": 175625,
+        "css_bytes": 38910,
+        "image_bytes": 499344,
+        "font_bytes": 57197
+      },
+      "input_sha256": "ae82e2e9f87dedd2b2238cb816d1b3146a85fa7c8ea9edcaab3b312a197e7b1f",
+      "local_input": "reports/runs/ipanema/20261108T103715-seo-live-0a786089/browser/blog-1920-rendered.seo.json"
+    },
+    {
+      "page": "blog",
+      "url": "https://rhinoipanema.mitiendanube.com/blog/",
+      "observed_at": "2026-11-08T10:38:24.512Z",
+      "width": 360,
+      "http": 200,
+      "canonical": [
+        "https://rhinoipanema.mitiendanube.com/blog/"
+      ],
+      "h1": [
+        {
+          "text": "Blog",
+          "user_content": false
+        }
+      ],
+      "schema_types": [
+        "Blog",
+        "BlogPosting",
+        "ImageObject",
+        "Organization",
+        "WebPage"
+      ],
+      "entity_count": 57,
+      "schema_counts": {
+        "error": 0,
+        "warning": 48,
+        "recommendation": 0,
+        "optional": 8
+      },
+      "finding_counts": {
+        "B002": 7,
+        "B030": 14,
+        "G001": 20,
+        "G005": 1,
+        "B100": 14
+      },
+      "source_candidates": [
+        "snippets/structured-data/structured-data-organization.tpl:9",
+        "snippets/structured-data/structured-data.tpl:123",
+        "snippets/structured-data/structured-data.tpl:94"
+      ],
+      "initial_dom_delta": {
+        "links_only_after_js": [],
+        "links_removed_after_js": [],
+        "structured_data_added_after_js": 0,
+        "structured_data_removed_after_js": 0,
+        "attribution": "Cambio observado; no prueba qué app/script lo causó ni qué indexó Google."
+      },
+      "link_count": 62,
+      "pagination_links": [],
+      "non_navigation_carousel_controls": 0,
+      "network_lab": {
+        "requests": 22,
+        "js_bytes": 175222,
+        "css_bytes": 38785,
+        "image_bytes": 251075,
+        "font_bytes": 57197
+      },
+      "input_sha256": "80ec6916622c667b8e6da89ebca38a9e20dc1f8d598d4e9087dcc577e38a3484",
+      "local_input": "reports/runs/ipanema/20261108T103715-seo-live-0a786089/browser/blog-360-rendered.seo.json"
+    },
+    {
+      "page": "blog",
+      "url": "https://rhinoipanema.mitiendanube.com/blog/",
+      "observed_at": "2026-11-08T10:38:26.589Z",
+      "width": 390,
+      "http": 200,
+      "canonical": [
+        "https://rhinoipanema.mitiendanube.com/blog/"
+      ],
+      "h1": [
+        {
+          "text": "Blog",
+          "user_content": false
+        }
+      ],
+      "schema_types": [
+        "Blog",
+        "BlogPosting",
+        "ImageObject",
+        "Organization",
+        "WebPage"
+      ],
+      "entity_count": 57,
+      "schema_counts": {
+        "error": 0,
+        "warning": 48,
+        "recommendation": 0,
+        "optional": 8
+      },
+      "finding_counts": {
+        "B002": 7,
+        "B030": 14,
+        "G001": 20,
+        "G005": 1,
+        "B100": 14
+      },
+      "source_candidates": [
+        "snippets/structured-data/structured-data-organization.tpl:9",
+        "snippets/structured-data/structured-data.tpl:123",
+        "snippets/structured-data/structured-data.tpl:94"
+      ],
+      "initial_dom_delta": {
+        "links_only_after_js": [],
+        "links_removed_after_js": [],
+        "structured_data_added_after_js": 0,
+        "structured_data_removed_after_js": 0,
+        "attribution": "Cambio observado; no prueba qué app/script lo causó ni qué indexó Google."
+      },
+      "link_count": 62,
+      "pagination_links": [],
+      "non_navigation_carousel_controls": 0,
+      "network_lab": {
+        "requests": 22,
+        "js_bytes": 175288,
+        "css_bytes": 38816,
+        "image_bytes": 251081,
+        "font_bytes": 57197
+      },
+      "input_sha256": "06a84564aa2b30f9d1bf7dd97e7e8dd7d7dca0780fd5806e5f4f4d0783b867d2",
+      "local_input": "reports/runs/ipanema/20261108T103715-seo-live-0a786089/browser/blog-390-rendered.seo.json"
+    },
+    {
+      "page": "blog",
+      "url": "https://rhinoipanema.mitiendanube.com/blog/",
+      "observed_at": "2026-11-08T10:38:28.611Z",
+      "width": 768,
+      "http": 200,
+      "canonical": [
+        "https://rhinoipanema.mitiendanube.com/blog/"
+      ],
+      "h1": [
+        {
+          "text": "Blog",
+          "user_content": false
+        }
+      ],
+      "schema_types": [
+        "Blog",
+        "BlogPosting",
+        "ImageObject",
+        "Organization",
+        "WebPage"
+      ],
+      "entity_count": 57,
+      "schema_counts": {
+        "error": 0,
+        "warning": 48,
+        "recommendation": 0,
+        "optional": 8
+      },
+      "finding_counts": {
+        "B002": 7,
+        "B030": 14,
+        "G001": 20,
+        "G005": 1,
+        "B100": 14
+      },
+      "source_candidates": [
+        "snippets/structured-data/structured-data-organization.tpl:9",
+        "snippets/structured-data/structured-data.tpl:123",
+        "snippets/structured-data/structured-data.tpl:94"
+      ],
+      "initial_dom_delta": {
+        "links_only_after_js": [],
+        "links_removed_after_js": [],
+        "structured_data_added_after_js": 0,
+        "structured_data_removed_after_js": 0,
+        "attribution": "Cambio observado; no prueba qué app/script lo causó ni qué indexó Google."
+      },
+      "link_count": 62,
+      "pagination_links": [],
+      "non_navigation_carousel_controls": 0,
+      "network_lab": {
+        "requests": 25,
+        "js_bytes": 175288,
+        "css_bytes": 38862,
+        "image_bytes": 499321,
+        "font_bytes": 57197
+      },
+      "input_sha256": "487f66b2a2774108f7fbb1c4de2404671e8e3ac0ef0e8ded03557d7aa1196647",
+      "local_input": "reports/runs/ipanema/20261108T103715-seo-live-0a786089/browser/blog-768-rendered.seo.json"
+    },
+    {
+      "page": "category",
+      "url": "https://rhinoipanema.mitiendanube.com/productos/",
+      "observed_at": "2026-11-08T10:37:55.258Z",
+      "width": 1024,
+      "http": 200,
+      "canonical": [
+        "https://rhinoipanema.mitiendanube.com/productos/"
+      ],
+      "h1": [
+        {
+          "text": "Productos",
+          "user_content": false
+        }
+      ],
+      "schema_types": [
+        "BreadcrumbList",
+        "ListItem",
+        "Offer",
+        "Organization",
+        "Product",
+        "QuantitativeValue",
+        "Thing",
+        "WebPage"
+      ],
+      "entity_count": 88,
+      "schema_counts": {
+        "error": 0,
+        "warning": 25,
+        "recommendation": 0,
+        "optional": 13
+      },
+      "finding_counts": {
+        "B020b": 12,
+        "B013": 12,
+        "C200": 1,
+        "G005": 1,
+        "B100": 12,
+        "SEO011": 1
+      },
+      "source_candidates": [
+        "snippets/structured-data/structured-data-organization.tpl:9",
+        "snippets/structured-data/structured-data.tpl:45",
+        "snippets/structured-data/structured-data.tpl:167"
+      ],
+      "initial_dom_delta": {
+        "links_only_after_js": [],
+        "links_removed_after_js": [],
+        "structured_data_added_after_js": 0,
+        "structured_data_removed_after_js": 0,
+        "attribution": "Cambio observado; no prueba qué app/script lo causó ni qué indexó Google."
+      },
+      "link_count": 83,
+      "pagination_links": [
+        {
+          "href": null,
+          "text": "Mostrar más productos",
+          "class": "btn btn-primary"
+        }
+      ],
+      "non_navigation_carousel_controls": 0,
+      "network_lab": {
+        "requests": 41,
+        "js_bytes": 175321,
+        "css_bytes": 38830,
+        "image_bytes": 893558,
+        "font_bytes": 57197
+      },
+      "input_sha256": "3e332fa6eed438a7e83f0eade71f031f600dab474e5dd69b86cff3f46d7523b7",
+      "local_input": "reports/runs/ipanema/20261108T103715-seo-live-0a786089/browser/category-1024-rendered.seo.json"
+    },
+    {
+      "page": "category",
+      "url": "https://rhinoipanema.mitiendanube.com/productos/",
+      "observed_at": "2026-11-08T10:37:57.743Z",
+      "width": 1440,
+      "http": 200,
+      "canonical": [
+        "https://rhinoipanema.mitiendanube.com/productos/"
+      ],
+      "h1": [
+        {
+          "text": "Productos",
+          "user_content": false
+        }
+      ],
+      "schema_types": [
+        "BreadcrumbList",
+        "ListItem",
+        "Offer",
+        "Organization",
+        "Product",
+        "QuantitativeValue",
+        "Thing",
+        "WebPage"
+      ],
+      "entity_count": 88,
+      "schema_counts": {
+        "error": 0,
+        "warning": 25,
+        "recommendation": 0,
+        "optional": 13
+      },
+      "finding_counts": {
+        "B020b": 12,
+        "B013": 12,
+        "C200": 1,
+        "G005": 1,
+        "B100": 12,
+        "SEO011": 1
+      },
+      "source_candidates": [
+        "snippets/structured-data/structured-data-organization.tpl:9",
+        "snippets/structured-data/structured-data.tpl:45",
+        "snippets/structured-data/structured-data.tpl:167"
+      ],
+      "initial_dom_delta": {
+        "links_only_after_js": [],
+        "links_removed_after_js": [],
+        "structured_data_added_after_js": 0,
+        "structured_data_removed_after_js": 0,
+        "attribution": "Cambio observado; no prueba qué app/script lo causó ni qué indexó Google."
+      },
+      "link_count": 83,
+      "pagination_links": [
+        {
+          "href": null,
+          "text": "Mostrar más productos",
+          "class": "btn btn-primary"
+        }
+      ],
+      "non_navigation_carousel_controls": 0,
+      "network_lab": {
+        "requests": 41,
+        "js_bytes": 175322,
+        "css_bytes": 38961,
+        "image_bytes": 1805969,
+        "font_bytes": 57197
+      },
+      "input_sha256": "2b7155981f83892e9e9103440b391d386f2a0ffda8126ad2e2df27e54f8ed91a",
+      "local_input": "reports/runs/ipanema/20261108T103715-seo-live-0a786089/browser/category-1440-rendered.seo.json"
+    },
+    {
+      "page": "category",
+      "url": "https://rhinoipanema.mitiendanube.com/productos/",
+      "observed_at": "2026-11-08T10:38:00.124Z",
+      "width": 1920,
+      "http": 200,
+      "canonical": [
+        "https://rhinoipanema.mitiendanube.com/productos/"
+      ],
+      "h1": [
+        {
+          "text": "Productos",
+          "user_content": false
+        }
+      ],
+      "schema_types": [
+        "BreadcrumbList",
+        "ListItem",
+        "Offer",
+        "Organization",
+        "Product",
+        "QuantitativeValue",
+        "Thing",
+        "WebPage"
+      ],
+      "entity_count": 88,
+      "schema_counts": {
+        "error": 0,
+        "warning": 25,
+        "recommendation": 0,
+        "optional": 13
+      },
+      "finding_counts": {
+        "B020b": 12,
+        "B013": 12,
+        "C200": 1,
+        "G005": 1,
+        "B100": 12,
+        "SEO011": 1
+      },
+      "source_candidates": [
+        "snippets/structured-data/structured-data-organization.tpl:9",
+        "snippets/structured-data/structured-data.tpl:45",
+        "snippets/structured-data/structured-data.tpl:167"
+      ],
+      "initial_dom_delta": {
+        "links_only_after_js": [],
+        "links_removed_after_js": [],
+        "structured_data_added_after_js": 0,
+        "structured_data_removed_after_js": 0,
+        "attribution": "Cambio observado; no prueba qué app/script lo causó ni qué indexó Google."
+      },
+      "link_count": 83,
+      "pagination_links": [
+        {
+          "href": null,
+          "text": "Mostrar más productos",
+          "class": "btn btn-primary"
+        }
+      ],
+      "non_navigation_carousel_controls": 0,
+      "network_lab": {
+        "requests": 43,
+        "js_bytes": 175271,
+        "css_bytes": 38992,
+        "image_bytes": 1959741,
+        "font_bytes": 57197
+      },
+      "input_sha256": "4785ec794c9b457f8ac222cc55383683b65f56abf542df7ea9e4a6c33982ae96",
+      "local_input": "reports/runs/ipanema/20261108T103715-seo-live-0a786089/browser/category-1920-rendered.seo.json"
+    },
+    {
+      "page": "category",
+      "url": "https://rhinoipanema.mitiendanube.com/productos/",
+      "observed_at": "2026-11-08T10:37:47.932Z",
+      "width": 360,
+      "http": 200,
+      "canonical": [
+        "https://rhinoipanema.mitiendanube.com/productos/"
+      ],
+      "h1": [
+        {
+          "text": "Productos",
+          "user_content": false
+        }
+      ],
+      "schema_types": [
+        "BreadcrumbList",
+        "ListItem",
+        "Offer",
+        "Organization",
+        "Product",
+        "QuantitativeValue",
+        "Thing",
+        "WebPage"
+      ],
+      "entity_count": 89,
+      "schema_counts": {
+        "error": 0,
+        "warning": 25,
+        "recommendation": 0,
+        "optional": 13
+      },
+      "finding_counts": {
+        "B020b": 12,
+        "B013": 12,
+        "C200": 1,
+        "G005": 1,
+        "B100": 12,
+        "SEO011": 1,
+        "SEO021": 1
+      },
+      "source_candidates": [
+        "snippets/structured-data/structured-data-organization.tpl:9",
+        "snippets/structured-data/structured-data.tpl:45",
+        "snippets/structured-data/structured-data.tpl:167"
+      ],
+      "initial_dom_delta": {
+        "links_only_after_js": [],
+        "links_removed_after_js": [],
+        "structured_data_added_after_js": 0,
+        "structured_data_removed_after_js": 0,
+        "attribution": "Cambio observado; no prueba qué app/script lo causó ni qué indexó Google."
+      },
+      "link_count": 83,
+      "pagination_links": [
+        {
+          "href": null,
+          "text": "Mostrar más productos",
+          "class": "btn btn-primary"
+        }
+      ],
+      "non_navigation_carousel_controls": 0,
+      "network_lab": {
+        "requests": 27,
+        "js_bytes": 175362,
+        "css_bytes": 38964,
+        "image_bytes": 113026,
+        "font_bytes": 57197
+      },
+      "input_sha256": "c87613aac6c05b398947bc38b49f97315c6465a81e885ebb42a6f6bc2615e11d",
+      "local_input": "reports/runs/ipanema/20261108T103715-seo-live-0a786089/browser/category-360-rendered.seo.json"
+    },
+    {
+      "page": "category",
+      "url": "https://rhinoipanema.mitiendanube.com/productos/",
+      "observed_at": "2026-11-08T10:37:50.215Z",
+      "width": 390,
+      "http": 200,
+      "canonical": [
+        "https://rhinoipanema.mitiendanube.com/productos/"
+      ],
+      "h1": [
+        {
+          "text": "Productos",
+          "user_content": false
+        }
+      ],
+      "schema_types": [
+        "BreadcrumbList",
+        "ListItem",
+        "Offer",
+        "Organization",
+        "Product",
+        "QuantitativeValue",
+        "Thing",
+        "WebPage"
+      ],
+      "entity_count": 88,
+      "schema_counts": {
+        "error": 0,
+        "warning": 25,
+        "recommendation": 0,
+        "optional": 13
+      },
+      "finding_counts": {
+        "B020b": 12,
+        "B013": 12,
+        "C200": 1,
+        "G005": 1,
+        "B100": 12,
+        "SEO011": 1
+      },
+      "source_candidates": [
+        "snippets/structured-data/structured-data-organization.tpl:9",
+        "snippets/structured-data/structured-data.tpl:45",
+        "snippets/structured-data/structured-data.tpl:167"
+      ],
+      "initial_dom_delta": {
+        "links_only_after_js": [],
+        "links_removed_after_js": [],
+        "structured_data_added_after_js": 0,
+        "structured_data_removed_after_js": 0,
+        "attribution": "Cambio observado; no prueba qué app/script lo causó ni qué indexó Google."
+      },
+      "link_count": 83,
+      "pagination_links": [
+        {
+          "href": null,
+          "text": "Mostrar más productos",
+          "class": "btn btn-primary"
+        }
+      ],
+      "non_navigation_carousel_controls": 0,
+      "network_lab": {
+        "requests": 27,
+        "js_bytes": 175361,
+        "css_bytes": 38984,
+        "image_bytes": 113019,
+        "font_bytes": 57197
+      },
+      "input_sha256": "812c0508697147df41b172c0ff198350b28f80f69d42224bd0d8c0f1249539b4",
+      "local_input": "reports/runs/ipanema/20261108T103715-seo-live-0a786089/browser/category-390-rendered.seo.json"
+    },
+    {
+      "page": "category",
+      "url": "https://rhinoipanema.mitiendanube.com/productos/",
+      "observed_at": "2026-11-08T10:37:52.740Z",
+      "width": 768,
+      "http": 200,
+      "canonical": [
+        "https://rhinoipanema.mitiendanube.com/productos/"
+      ],
+      "h1": [
+        {
+          "text": "Productos",
+          "user_content": false
+        }
+      ],
+      "schema_types": [
+        "BreadcrumbList",
+        "ListItem",
+        "Offer",
+        "Organization",
+        "Product",
+        "QuantitativeValue",
+        "Thing",
+        "WebPage"
+      ],
+      "entity_count": 88,
+      "schema_counts": {
+        "error": 0,
+        "warning": 25,
+        "recommendation": 0,
+        "optional": 13
+      },
+      "finding_counts": {
+        "B020b": 12,
+        "B013": 12,
+        "C200": 1,
+        "G005": 1,
+        "B100": 12,
+        "SEO011": 1
+      },
+      "source_candidates": [
+        "snippets/structured-data/structured-data-organization.tpl:9",
+        "snippets/structured-data/structured-data.tpl:45",
+        "snippets/structured-data/structured-data.tpl:167"
+      ],
+      "initial_dom_delta": {
+        "links_only_after_js": [],
+        "links_removed_after_js": [],
+        "structured_data_added_after_js": 0,
+        "structured_data_removed_after_js": 0,
+        "attribution": "Cambio observado; no prueba qué app/script lo causó ni qué indexó Google."
+      },
+      "link_count": 83,
+      "pagination_links": [
+        {
+          "href": null,
+          "text": "Mostrar más productos",
+          "class": "btn btn-primary"
+        }
+      ],
+      "non_navigation_carousel_controls": 0,
+      "network_lab": {
+        "requests": 35,
+        "js_bytes": 175245,
+        "css_bytes": 39093,
+        "image_bytes": 393567,
+        "font_bytes": 57197
+      },
+      "input_sha256": "80057f019dc814aa54a9c87022dd6b6098d236705d0938a3172f25078cd8b4dd",
+      "local_input": "reports/runs/ipanema/20261108T103715-seo-live-0a786089/browser/category-768-rendered.seo.json"
+    },
+    {
+      "page": "home",
+      "url": "https://rhinoipanema.mitiendanube.com/",
+      "observed_at": "2026-11-08T10:37:36.081Z",
+      "width": 1024,
+      "http": 200,
+      "canonical": [
+        "https://rhinoipanema.mitiendanube.com/"
+      ],
+      "h1": [
+        {
+          "text": "RHINO IPANEMA",
+          "user_content": false
+        }
+      ],
+      "schema_types": [
+        "BreadcrumbList",
+        "ListItem",
+        "Offer",
+        "Organization",
+        "Product",
+        "QuantitativeValue",
+        "Thing",
+        "WebPage"
+      ],
+      "entity_count": 74,
+      "schema_counts": {
+        "error": 0,
+        "warning": 36,
+        "recommendation": 0,
+        "optional": 12
+      },
+      "finding_counts": {
+        "B020b": 10,
+        "B013": 10,
+        "C200": 1,
+        "C220": 1,
+        "G001": 15,
+        "G005": 1,
+        "B100": 10
+      },
+      "source_candidates": [
+        "snippets/structured-data/structured-data-organization.tpl:9",
+        "snippets/structured-data/structured-data.tpl:45",
+        "snippets/structured-data/structured-data.tpl:167"
+      ],
+      "initial_dom_delta": {
+        "links_only_after_js": [],
+        "links_removed_after_js": [],
+        "structured_data_added_after_js": 0,
+        "structured_data_removed_after_js": 0,
+        "attribution": "Cambio observado; no prueba qué app/script lo causó ni qué indexó Google."
+      },
+      "link_count": 68,
+      "pagination_links": [],
+      "non_navigation_carousel_controls": 8,
+      "network_lab": {
+        "requests": 24,
+        "js_bytes": 175484,
+        "css_bytes": 38870,
+        "image_bytes": 62934,
+        "font_bytes": 57197
+      },
+      "input_sha256": "753fde86167b8cac111faf586666394f3b5c87b6dbe0162dbe2fe8dad23a8e1b",
+      "local_input": "reports/runs/ipanema/20261108T103715-seo-live-0a786089/browser/home-1024-rendered.seo.json"
+    },
+    {
+      "page": "home",
+      "url": "https://rhinoipanema.mitiendanube.com/",
+      "observed_at": "2026-11-08T10:37:38.430Z",
+      "width": 1440,
+      "http": 200,
+      "canonical": [
+        "https://rhinoipanema.mitiendanube.com/"
+      ],
+      "h1": [
+        {
+          "text": "RHINO IPANEMA",
+          "user_content": false
+        }
+      ],
+      "schema_types": [
+        "BreadcrumbList",
+        "ListItem",
+        "Offer",
+        "Organization",
+        "Product",
+        "QuantitativeValue",
+        "Thing",
+        "WebPage"
+      ],
+      "entity_count": 74,
+      "schema_counts": {
+        "error": 0,
+        "warning": 36,
+        "recommendation": 0,
+        "optional": 12
+      },
+      "finding_counts": {
+        "B020b": 10,
+        "B013": 10,
+        "C200": 1,
+        "C220": 1,
+        "G001": 15,
+        "G005": 1,
+        "B100": 10
+      },
+      "source_candidates": [
+        "snippets/structured-data/structured-data-organization.tpl:9",
+        "snippets/structured-data/structured-data.tpl:45",
+        "snippets/structured-data/structured-data.tpl:167"
+      ],
+      "initial_dom_delta": {
+        "links_only_after_js": [],
+        "links_removed_after_js": [],
+        "structured_data_added_after_js": 0,
+        "structured_data_removed_after_js": 0,
+        "attribution": "Cambio observado; no prueba qué app/script lo causó ni qué indexó Google."
+      },
+      "link_count": 68,
+      "pagination_links": [],
+      "non_navigation_carousel_controls": 8,
+      "network_lab": {
+        "requests": 24,
+        "js_bytes": 175451,
+        "css_bytes": 38814,
+        "image_bytes": 62980,
+        "font_bytes": 57197
+      },
+      "input_sha256": "06b89a0ad1c6094fbb95841ae0ea4afcb6f54580393724fdee6916e58a2cfa5c",
+      "local_input": "reports/runs/ipanema/20261108T103715-seo-live-0a786089/browser/home-1440-rendered.seo.json"
+    },
+    {
+      "page": "home",
+      "url": "https://rhinoipanema.mitiendanube.com/",
+      "observed_at": "2026-11-08T10:37:40.985Z",
+      "width": 1920,
+      "http": 200,
+      "canonical": [
+        "https://rhinoipanema.mitiendanube.com/"
+      ],
+      "h1": [
+        {
+          "text": "RHINO IPANEMA",
+          "user_content": false
+        }
+      ],
+      "schema_types": [
+        "BreadcrumbList",
+        "ListItem",
+        "Offer",
+        "Organization",
+        "Product",
+        "QuantitativeValue",
+        "Thing",
+        "WebPage"
+      ],
+      "entity_count": 74,
+      "schema_counts": {
+        "error": 0,
+        "warning": 36,
+        "recommendation": 0,
+        "optional": 12
+      },
+      "finding_counts": {
+        "B020b": 10,
+        "B013": 10,
+        "C200": 1,
+        "C220": 1,
+        "G001": 15,
+        "G005": 1,
+        "B100": 10
+      },
+      "source_candidates": [
+        "snippets/structured-data/structured-data-organization.tpl:9",
+        "snippets/structured-data/structured-data.tpl:45",
+        "snippets/structured-data/structured-data.tpl:167"
+      ],
+      "initial_dom_delta": {
+        "links_only_after_js": [],
+        "links_removed_after_js": [],
+        "structured_data_added_after_js": 0,
+        "structured_data_removed_after_js": 0,
+        "attribution": "Cambio observado; no prueba qué app/script lo causó ni qué indexó Google."
+      },
+      "link_count": 68,
+      "pagination_links": [],
+      "non_navigation_carousel_controls": 8,
+      "network_lab": {
+        "requests": 24,
+        "js_bytes": 175451,
+        "css_bytes": 38809,
+        "image_bytes": 62953,
+        "font_bytes": 57197
+      },
+      "input_sha256": "090732eeeeca2ebc092cec05d496e1c92fed466ba1e3316b0fdb2fbf5c2528c0",
+      "local_input": "reports/runs/ipanema/20261108T103715-seo-live-0a786089/browser/home-1920-rendered.seo.json"
+    },
+    {
+      "page": "home",
+      "url": "https://rhinoipanema.mitiendanube.com/",
+      "observed_at": "2026-11-08T10:37:29.454Z",
+      "width": 360,
+      "http": 200,
+      "canonical": [
+        "https://rhinoipanema.mitiendanube.com/"
+      ],
+      "h1": [
+        {
+          "text": "RHINO IPANEMA",
+          "user_content": false
+        }
+      ],
+      "schema_types": [
+        "BreadcrumbList",
+        "ListItem",
+        "Offer",
+        "Organization",
+        "Product",
+        "QuantitativeValue",
+        "Thing",
+        "WebPage"
+      ],
+      "entity_count": 74,
+      "schema_counts": {
+        "error": 0,
+        "warning": 36,
+        "recommendation": 0,
+        "optional": 12
+      },
+      "finding_counts": {
+        "B020b": 10,
+        "B013": 10,
+        "C200": 1,
+        "C220": 1,
+        "G001": 15,
+        "G005": 1,
+        "B100": 10
+      },
+      "source_candidates": [
+        "snippets/structured-data/structured-data-organization.tpl:9",
+        "snippets/structured-data/structured-data.tpl:45",
+        "snippets/structured-data/structured-data.tpl:167"
+      ],
+      "initial_dom_delta": {
+        "links_only_after_js": [],
+        "links_removed_after_js": [],
+        "structured_data_added_after_js": 0,
+        "structured_data_removed_after_js": 0,
+        "attribution": "Cambio observado; no prueba qué app/script lo causó ni qué indexó Google."
+      },
+      "link_count": 68,
+      "pagination_links": [],
+      "non_navigation_carousel_controls": 8,
+      "network_lab": {
+        "requests": 24,
+        "js_bytes": 175298,
+        "css_bytes": 38803,
+        "image_bytes": 63101,
+        "font_bytes": 57197
+      },
+      "input_sha256": "912e3f9746d3e2b96010f65df46cdc4b2358c8ac7008c2768f26ae505504e934",
+      "local_input": "reports/runs/ipanema/20261108T103715-seo-live-0a786089/browser/home-360-rendered.seo.json"
+    },
+    {
+      "page": "home",
+      "url": "https://rhinoipanema.mitiendanube.com/",
+      "observed_at": "2026-11-08T10:37:31.736Z",
+      "width": 390,
+      "http": 200,
+      "canonical": [
+        "https://rhinoipanema.mitiendanube.com/"
+      ],
+      "h1": [
+        {
+          "text": "RHINO IPANEMA",
+          "user_content": false
+        }
+      ],
+      "schema_types": [
+        "BreadcrumbList",
+        "ListItem",
+        "Offer",
+        "Organization",
+        "Product",
+        "QuantitativeValue",
+        "Thing",
+        "WebPage"
+      ],
+      "entity_count": 74,
+      "schema_counts": {
+        "error": 0,
+        "warning": 36,
+        "recommendation": 0,
+        "optional": 12
+      },
+      "finding_counts": {
+        "B020b": 10,
+        "B013": 10,
+        "C200": 1,
+        "C220": 1,
+        "G001": 15,
+        "G005": 1,
+        "B100": 10
+      },
+      "source_candidates": [
+        "snippets/structured-data/structured-data-organization.tpl:9",
+        "snippets/structured-data/structured-data.tpl:45",
+        "snippets/structured-data/structured-data.tpl:167"
+      ],
+      "initial_dom_delta": {
+        "links_only_after_js": [],
+        "links_removed_after_js": [],
+        "structured_data_added_after_js": 0,
+        "structured_data_removed_after_js": 0,
+        "attribution": "Cambio observado; no prueba qué app/script lo causó ni qué indexó Google."
+      },
+      "link_count": 68,
+      "pagination_links": [],
+      "non_navigation_carousel_controls": 8,
+      "network_lab": {
+        "requests": 24,
+        "js_bytes": 175347,
+        "css_bytes": 38759,
+        "image_bytes": 63052,
+        "font_bytes": 57197
+      },
+      "input_sha256": "17740c4b0c22ad0578bdfc81d24d6736acf5b305749a8ca2dce1bce8017594b2",
+      "local_input": "reports/runs/ipanema/20261108T103715-seo-live-0a786089/browser/home-390-rendered.seo.json"
+    },
+    {
+      "page": "home",
+      "url": "https://rhinoipanema.mitiendanube.com/",
+      "observed_at": "2026-11-08T10:37:33.837Z",
+      "width": 768,
+      "http": 200,
+      "canonical": [
+        "https://rhinoipanema.mitiendanube.com/"
+      ],
+      "h1": [
+        {
+          "text": "RHINO IPANEMA",
+          "user_content": false
+        }
+      ],
+      "schema_types": [
+        "BreadcrumbList",
+        "ListItem",
+        "Offer",
+        "Organization",
+        "Product",
+        "QuantitativeValue",
+        "Thing",
+        "WebPage"
+      ],
+      "entity_count": 74,
+      "schema_counts": {
+        "error": 0,
+        "warning": 36,
+        "recommendation": 0,
+        "optional": 12
+      },
+      "finding_counts": {
+        "B020b": 10,
+        "B013": 10,
+        "C200": 1,
+        "C220": 1,
+        "G001": 15,
+        "G005": 1,
+        "B100": 10
+      },
+      "source_candidates": [
+        "snippets/structured-data/structured-data-organization.tpl:9",
+        "snippets/structured-data/structured-data.tpl:45",
+        "snippets/structured-data/structured-data.tpl:167"
+      ],
+      "initial_dom_delta": {
+        "links_only_after_js": [],
+        "links_removed_after_js": [],
+        "structured_data_added_after_js": 0,
+        "structured_data_removed_after_js": 0,
+        "attribution": "Cambio observado; no prueba qué app/script lo causó ni qué indexó Google."
+      },
+      "link_count": 68,
+      "pagination_links": [],
+      "non_navigation_carousel_controls": 8,
+      "network_lab": {
+        "requests": 24,
+        "js_bytes": 175214,
+        "css_bytes": 38896,
+        "image_bytes": 63086,
+        "font_bytes": 57197
+      },
+      "input_sha256": "92b41fb234ee1cc79262e881f253ac149fa48e665f108edcf2cfebbe9d9b1fb7",
+      "local_input": "reports/runs/ipanema/20261108T103715-seo-live-0a786089/browser/home-768-rendered.seo.json"
+    },
+    {
+      "page": "product",
+      "url": "https://rhinoipanema.mitiendanube.com/productos/botas-presoterapia-inalambricas-pro-air/",
+      "observed_at": "2026-11-08T10:38:13.560Z",
+      "width": 1024,
+      "http": 200,
+      "canonical": [
+        "https://rhinoipanema.mitiendanube.com/productos/botas-presoterapia-inalambricas-pro-air/"
+      ],
+      "h1": [
+        {
+          "text": "Botas de Presoterapia Inalámbricas PRO AIR",
+          "user_content": false
+        },
+        {
+          "text": "Incluye: BOTAS + BATERÍAS + CABLE DE CARGA + MALETA",
+          "user_content": true
+        }
+      ],
+      "schema_types": [
+        "BreadcrumbList",
+        "ListItem",
+        "Offer",
+        "Organization",
+        "Product",
+        "QuantitativeValue",
+        "Thing",
+        "WebPage"
+      ],
+      "entity_count": 12,
+      "schema_counts": {
+        "error": 0,
+        "warning": 2,
+        "recommendation": 5,
+        "optional": 6
+      },
+      "finding_counts": {
+        "B020b": 1,
+        "B013": 1,
+        "C112": 6,
+        "C120": 1,
+        "G005": 1,
+        "D022": 1,
+        "D042": 1,
+        "B100": 1,
+        "SEO003": 1,
+        "SEO012": 1
+      },
+      "source_candidates": [
+        "snippets/structured-data/structured-data-organization.tpl:9",
+        "snippets/structured-data/structured-data.tpl:167"
+      ],
+      "initial_dom_delta": {
+        "links_only_after_js": [],
+        "links_removed_after_js": [],
+        "structured_data_added_after_js": 0,
+        "structured_data_removed_after_js": 0,
+        "attribution": "Cambio observado; no prueba qué app/script lo causó ni qué indexó Google."
+      },
+      "link_count": 67,
+      "pagination_links": [],
+      "non_navigation_carousel_controls": 20,
+      "network_lab": {
+        "requests": 32,
+        "js_bytes": 175388,
+        "css_bytes": 38873,
+        "image_bytes": 209321,
+        "font_bytes": 57197
+      },
+      "input_sha256": "ecaf2fc0bb84439486240d6de4d2f6f8fe80dc09103c631531031d54b81df02e",
+      "local_input": "reports/runs/ipanema/20261108T103715-seo-live-0a786089/browser/pdp-1024-rendered.seo.json"
+    },
+    {
+      "page": "product",
+      "url": "https://rhinoipanema.mitiendanube.com/productos/botas-presoterapia-inalambricas-pro-air/",
+      "observed_at": "2026-11-08T10:38:15.887Z",
+      "width": 1440,
+      "http": 200,
+      "canonical": [
+        "https://rhinoipanema.mitiendanube.com/productos/botas-presoterapia-inalambricas-pro-air/"
+      ],
+      "h1": [
+        {
+          "text": "Botas de Presoterapia Inalámbricas PRO AIR",
+          "user_content": false
+        },
+        {
+          "text": "Incluye: BOTAS + BATERÍAS + CABLE DE CARGA + MALETA",
+          "user_content": true
+        }
+      ],
+      "schema_types": [
+        "BreadcrumbList",
+        "ListItem",
+        "Offer",
+        "Organization",
+        "Product",
+        "QuantitativeValue",
+        "Thing",
+        "WebPage"
+      ],
+      "entity_count": 12,
+      "schema_counts": {
+        "error": 0,
+        "warning": 2,
+        "recommendation": 5,
+        "optional": 6
+      },
+      "finding_counts": {
+        "B020b": 1,
+        "B013": 1,
+        "C112": 6,
+        "C120": 1,
+        "G005": 1,
+        "D022": 1,
+        "D042": 1,
+        "B100": 1,
+        "SEO003": 1,
+        "SEO012": 1
+      },
+      "source_candidates": [
+        "snippets/structured-data/structured-data-organization.tpl:9",
+        "snippets/structured-data/structured-data.tpl:167"
+      ],
+      "initial_dom_delta": {
+        "links_only_after_js": [],
+        "links_removed_after_js": [],
+        "structured_data_added_after_js": 0,
+        "structured_data_removed_after_js": 0,
+        "attribution": "Cambio observado; no prueba qué app/script lo causó ni qué indexó Google."
+      },
+      "link_count": 67,
+      "pagination_links": [],
+      "non_navigation_carousel_controls": 20,
+      "network_lab": {
+        "requests": 34,
+        "js_bytes": 175253,
+        "css_bytes": 38889,
+        "image_bytes": 325826,
+        "font_bytes": 57197
+      },
+      "input_sha256": "79e4f697f4e7b44e793b2c2dbc1ab8d3fb39b699f4f0400a70f30c51576553c9",
+      "local_input": "reports/runs/ipanema/20261108T103715-seo-live-0a786089/browser/pdp-1440-rendered.seo.json"
+    },
+    {
+      "page": "product",
+      "url": "https://rhinoipanema.mitiendanube.com/productos/botas-presoterapia-inalambricas-pro-air/",
+      "observed_at": "2026-11-08T10:38:18.242Z",
+      "width": 1920,
+      "http": 200,
+      "canonical": [
+        "https://rhinoipanema.mitiendanube.com/productos/botas-presoterapia-inalambricas-pro-air/"
+      ],
+      "h1": [
+        {
+          "text": "Botas de Presoterapia Inalámbricas PRO AIR",
+          "user_content": false
+        },
+        {
+          "text": "Incluye: BOTAS + BATERÍAS + CABLE DE CARGA + MALETA",
+          "user_content": true
+        }
+      ],
+      "schema_types": [
+        "BreadcrumbList",
+        "ListItem",
+        "Offer",
+        "Organization",
+        "Product",
+        "QuantitativeValue",
+        "Thing",
+        "WebPage"
+      ],
+      "entity_count": 12,
+      "schema_counts": {
+        "error": 0,
+        "warning": 2,
+        "recommendation": 5,
+        "optional": 6
+      },
+      "finding_counts": {
+        "B020b": 1,
+        "B013": 1,
+        "C112": 6,
+        "C120": 1,
+        "G005": 1,
+        "D022": 1,
+        "D042": 1,
+        "B100": 1,
+        "SEO003": 1,
+        "SEO012": 1
+      },
+      "source_candidates": [
+        "snippets/structured-data/structured-data-organization.tpl:9",
+        "snippets/structured-data/structured-data.tpl:167"
+      ],
+      "initial_dom_delta": {
+        "links_only_after_js": [],
+        "links_removed_after_js": [],
+        "structured_data_added_after_js": 0,
+        "structured_data_removed_after_js": 0,
+        "attribution": "Cambio observado; no prueba qué app/script lo causó ni qué indexó Google."
+      },
+      "link_count": 67,
+      "pagination_links": [],
+      "non_navigation_carousel_controls": 20,
+      "network_lab": {
+        "requests": 34,
+        "js_bytes": 175365,
+        "css_bytes": 38739,
+        "image_bytes": 326063,
+        "font_bytes": 57197
+      },
+      "input_sha256": "ba14451018adb83cde378cab44d9f926e7727b35fd19c1897e2dfa48fd2ca784",
+      "local_input": "reports/runs/ipanema/20261108T103715-seo-live-0a786089/browser/pdp-1920-rendered.seo.json"
+    },
+    {
+      "page": "product",
+      "url": "https://rhinoipanema.mitiendanube.com/productos/botas-presoterapia-inalambricas-pro-air/",
+      "observed_at": "2026-11-08T10:38:06.571Z",
+      "width": 360,
+      "http": 200,
+      "canonical": [
+        "https://rhinoipanema.mitiendanube.com/productos/botas-presoterapia-inalambricas-pro-air/"
+      ],
+      "h1": [
+        {
+          "text": "Botas de Presoterapia Inalámbricas PRO AIR",
+          "user_content": false
+        },
+        {
+          "text": "Incluye: BOTAS + BATERÍAS + CABLE DE CARGA + MALETA",
+          "user_content": true
+        }
+      ],
+      "schema_types": [
+        "BreadcrumbList",
+        "ListItem",
+        "Offer",
+        "Organization",
+        "Product",
+        "QuantitativeValue",
+        "Thing",
+        "WebPage"
+      ],
+      "entity_count": 12,
+      "schema_counts": {
+        "error": 0,
+        "warning": 2,
+        "recommendation": 5,
+        "optional": 6
+      },
+      "finding_counts": {
+        "B020b": 1,
+        "B013": 1,
+        "C112": 6,
+        "C120": 1,
+        "G005": 1,
+        "D022": 1,
+        "D042": 1,
+        "B100": 1,
+        "SEO003": 1,
+        "SEO012": 1
+      },
+      "source_candidates": [
+        "snippets/structured-data/structured-data-organization.tpl:9",
+        "snippets/structured-data/structured-data.tpl:167"
+      ],
+      "initial_dom_delta": {
+        "links_only_after_js": [],
+        "links_removed_after_js": [],
+        "structured_data_added_after_js": 0,
+        "structured_data_removed_after_js": 0,
+        "attribution": "Cambio observado; no prueba qué app/script lo causó ni qué indexó Google."
+      },
+      "link_count": 67,
+      "pagination_links": [],
+      "non_navigation_carousel_controls": 20,
+      "network_lab": {
+        "requests": 31,
+        "js_bytes": 175214,
+        "css_bytes": 38850,
+        "image_bytes": 146623,
+        "font_bytes": 57197
+      },
+      "input_sha256": "a85d9e7259781f416e2a43a8d26a050d6ef9725c1faa10b294f3bc8e261158e9",
+      "local_input": "reports/runs/ipanema/20261108T103715-seo-live-0a786089/browser/pdp-360-rendered.seo.json"
+    },
+    {
+      "page": "product",
+      "url": "https://rhinoipanema.mitiendanube.com/productos/botas-presoterapia-inalambricas-pro-air/",
+      "observed_at": "2026-11-08T10:38:08.886Z",
+      "width": 390,
+      "http": 200,
+      "canonical": [
+        "https://rhinoipanema.mitiendanube.com/productos/botas-presoterapia-inalambricas-pro-air/"
+      ],
+      "h1": [
+        {
+          "text": "Botas de Presoterapia Inalámbricas PRO AIR",
+          "user_content": false
+        },
+        {
+          "text": "Incluye: BOTAS + BATERÍAS + CABLE DE CARGA + MALETA",
+          "user_content": true
+        }
+      ],
+      "schema_types": [
+        "BreadcrumbList",
+        "ListItem",
+        "Offer",
+        "Organization",
+        "Product",
+        "QuantitativeValue",
+        "Thing",
+        "WebPage"
+      ],
+      "entity_count": 12,
+      "schema_counts": {
+        "error": 0,
+        "warning": 2,
+        "recommendation": 5,
+        "optional": 6
+      },
+      "finding_counts": {
+        "B020b": 1,
+        "B013": 1,
+        "C112": 6,
+        "C120": 1,
+        "G005": 1,
+        "D022": 1,
+        "D042": 1,
+        "B100": 1,
+        "SEO003": 1,
+        "SEO012": 1
+      },
+      "source_candidates": [
+        "snippets/structured-data/structured-data-organization.tpl:9",
+        "snippets/structured-data/structured-data.tpl:167"
+      ],
+      "initial_dom_delta": {
+        "links_only_after_js": [],
+        "links_removed_after_js": [],
+        "structured_data_added_after_js": 0,
+        "structured_data_removed_after_js": 0,
+        "attribution": "Cambio observado; no prueba qué app/script lo causó ni qué indexó Google."
+      },
+      "link_count": 67,
+      "pagination_links": [],
+      "non_navigation_carousel_controls": 20,
+      "network_lab": {
+        "requests": 31,
+        "js_bytes": 175223,
+        "css_bytes": 38803,
+        "image_bytes": 146819,
+        "font_bytes": 57197
+      },
+      "input_sha256": "ea47d50f880ae8658a858e68853eba0180ab9ad3205184557b8df4a99271abc2",
+      "local_input": "reports/runs/ipanema/20261108T103715-seo-live-0a786089/browser/pdp-390-rendered.seo.json"
+    },
+    {
+      "page": "product",
+      "url": "https://rhinoipanema.mitiendanube.com/productos/botas-presoterapia-inalambricas-pro-air/",
+      "observed_at": "2026-11-08T10:38:11.219Z",
+      "width": 768,
+      "http": 200,
+      "canonical": [
+        "https://rhinoipanema.mitiendanube.com/productos/botas-presoterapia-inalambricas-pro-air/"
+      ],
+      "h1": [
+        {
+          "text": "Botas de Presoterapia Inalámbricas PRO AIR",
+          "user_content": false
+        },
+        {
+          "text": "Incluye: BOTAS + BATERÍAS + CABLE DE CARGA + MALETA",
+          "user_content": true
+        }
+      ],
+      "schema_types": [
+        "BreadcrumbList",
+        "ListItem",
+        "Offer",
+        "Organization",
+        "Product",
+        "QuantitativeValue",
+        "Thing",
+        "WebPage"
+      ],
+      "entity_count": 12,
+      "schema_counts": {
+        "error": 0,
+        "warning": 2,
+        "recommendation": 5,
+        "optional": 6
+      },
+      "finding_counts": {
+        "B020b": 1,
+        "B013": 1,
+        "C112": 6,
+        "C120": 1,
+        "G005": 1,
+        "D022": 1,
+        "D042": 1,
+        "B100": 1,
+        "SEO003": 1,
+        "SEO012": 1
+      },
+      "source_candidates": [
+        "snippets/structured-data/structured-data-organization.tpl:9",
+        "snippets/structured-data/structured-data.tpl:167"
+      ],
+      "initial_dom_delta": {
+        "links_only_after_js": [],
+        "links_removed_after_js": [],
+        "structured_data_added_after_js": 0,
+        "structured_data_removed_after_js": 0,
+        "attribution": "Cambio observado; no prueba qué app/script lo causó ni qué indexó Google."
+      },
+      "link_count": 67,
+      "pagination_links": [],
+      "non_navigation_carousel_controls": 20,
+      "network_lab": {
+        "requests": 32,
+        "js_bytes": 175327,
+        "css_bytes": 38870,
+        "image_bytes": 209361,
+        "font_bytes": 57197
+      },
+      "input_sha256": "94a094446d2ba74f60d3bd977917dd03ed6f3daa3905286c11010ca5959add78",
+      "local_input": "reports/runs/ipanema/20261108T103715-seo-live-0a786089/browser/pdp-768-rendered.seo.json"
+    },
+    {
+      "page": "post",
+      "url": "https://rhinoipanema.mitiendanube.com/blog/posts/lo-que-separa-a-los-pros-no-es-el-talento-es-la-recuperacin-7cc2ca9b1e3b",
+      "observed_at": "2026-11-08T10:38:47.137Z",
+      "width": 1024,
+      "http": 200,
+      "canonical": [
+        "https://rhinoipanema.mitiendanube.com/blog/posts/lo-que-separa-a-los-pros-no-es-el-talento-es-la-recuperacin-7cc2ca9b1e3b/"
+      ],
+      "h1": [
+        {
+          "text": "Lo que separa a los pros no es el talento, es la recuperación",
+          "user_content": false
+        }
+      ],
+      "schema_types": [
+        "BlogPosting",
+        "ImageObject",
+        "Organization",
+        "WebPage"
+      ],
+      "entity_count": 5,
+      "schema_counts": {
+        "error": 0,
+        "warning": 2,
+        "recommendation": 1,
+        "optional": 2
+      },
+      "finding_counts": {
+        "B002": 1,
+        "B030": 1,
+        "C221": 1,
+        "G005": 1,
+        "B100": 1,
+        "SEO006": 1
+      },
+      "source_candidates": [
+        "snippets/structured-data/structured-data-organization.tpl:9",
+        "snippets/structured-data/structured-data.tpl:94"
+      ],
+      "initial_dom_delta": {
+        "links_only_after_js": [],
+        "links_removed_after_js": [],
+        "structured_data_added_after_js": 0,
+        "structured_data_removed_after_js": 0,
+        "attribution": "Cambio observado; no prueba qué app/script lo causó ni qué indexó Google."
+      },
+      "link_count": 54,
+      "pagination_links": [],
+      "non_navigation_carousel_controls": 0,
+      "network_lab": {
+        "requests": 23,
+        "js_bytes": 175347,
+        "css_bytes": 38904,
+        "image_bytes": 275717,
+        "font_bytes": 57197
+      },
+      "input_sha256": "f28ce6233b4215da8a1b7c20c2dd7f927a56dccd1b8cc6face5f507b63c8f742",
+      "local_input": "reports/runs/ipanema/20261108T103715-seo-live-0a786089/browser/post-1024-rendered.seo.json"
+    },
+    {
+      "page": "post",
+      "url": "https://rhinoipanema.mitiendanube.com/blog/posts/lo-que-separa-a-los-pros-no-es-el-talento-es-la-recuperacin-7cc2ca9b1e3b",
+      "observed_at": "2026-11-08T10:38:49.275Z",
+      "width": 1440,
+      "http": 200,
+      "canonical": [
+        "https://rhinoipanema.mitiendanube.com/blog/posts/lo-que-separa-a-los-pros-no-es-el-talento-es-la-recuperacin-7cc2ca9b1e3b/"
+      ],
+      "h1": [
+        {
+          "text": "Lo que separa a los pros no es el talento, es la recuperación",
+          "user_content": false
+        }
+      ],
+      "schema_types": [
+        "BlogPosting",
+        "ImageObject",
+        "Organization",
+        "WebPage"
+      ],
+      "entity_count": 5,
+      "schema_counts": {
+        "error": 0,
+        "warning": 2,
+        "recommendation": 1,
+        "optional": 2
+      },
+      "finding_counts": {
+        "B002": 1,
+        "B030": 1,
+        "C221": 1,
+        "G005": 1,
+        "B100": 1,
+        "SEO006": 1
+      },
+      "source_candidates": [
+        "snippets/structured-data/structured-data-organization.tpl:9",
+        "snippets/structured-data/structured-data.tpl:94"
+      ],
+      "initial_dom_delta": {
+        "links_only_after_js": [],
+        "links_removed_after_js": [],
+        "structured_data_added_after_js": 0,
+        "structured_data_removed_after_js": 0,
+        "attribution": "Cambio observado; no prueba qué app/script lo causó ni qué indexó Google."
+      },
+      "link_count": 54,
+      "pagination_links": [],
+      "non_navigation_carousel_controls": 0,
+      "network_lab": {
+        "requests": 23,
+        "js_bytes": 175474,
+        "css_bytes": 38818,
+        "image_bytes": 292512,
+        "font_bytes": 57197
+      },
+      "input_sha256": "e99b4d550bbd4263b0ed8b370418e633401f75503ac18c2c961f8b1e529a2ab4",
+      "local_input": "reports/runs/ipanema/20261108T103715-seo-live-0a786089/browser/post-1440-rendered.seo.json"
+    },
+    {
+      "page": "post",
+      "url": "https://rhinoipanema.mitiendanube.com/blog/posts/lo-que-separa-a-los-pros-no-es-el-talento-es-la-recuperacin-7cc2ca9b1e3b",
+      "observed_at": "2026-11-08T10:38:51.480Z",
+      "width": 1920,
+      "http": 200,
+      "canonical": [
+        "https://rhinoipanema.mitiendanube.com/blog/posts/lo-que-separa-a-los-pros-no-es-el-talento-es-la-recuperacin-7cc2ca9b1e3b/"
+      ],
+      "h1": [
+        {
+          "text": "Lo que separa a los pros no es el talento, es la recuperación",
+          "user_content": false
+        }
+      ],
+      "schema_types": [
+        "BlogPosting",
+        "ImageObject",
+        "Organization",
+        "WebPage"
+      ],
+      "entity_count": 5,
+      "schema_counts": {
+        "error": 0,
+        "warning": 2,
+        "recommendation": 1,
+        "optional": 2
+      },
+      "finding_counts": {
+        "B002": 1,
+        "B030": 1,
+        "C221": 1,
+        "G005": 1,
+        "B100": 1,
+        "SEO006": 1
+      },
+      "source_candidates": [
+        "snippets/structured-data/structured-data-organization.tpl:9",
+        "snippets/structured-data/structured-data.tpl:94"
+      ],
+      "initial_dom_delta": {
+        "links_only_after_js": [],
+        "links_removed_after_js": [],
+        "structured_data_added_after_js": 0,
+        "structured_data_removed_after_js": 0,
+        "attribution": "Cambio observado; no prueba qué app/script lo causó ni qué indexó Google."
+      },
+      "link_count": 54,
+      "pagination_links": [],
+      "non_navigation_carousel_controls": 0,
+      "network_lab": {
+        "requests": 23,
+        "js_bytes": 175455,
+        "css_bytes": 38796,
+        "image_bytes": 287747,
+        "font_bytes": 57197
+      },
+      "input_sha256": "fe141611208a8b5d79b64d72ca9d4bc0ada830cb43cbb1228d214aafa3969ed5",
+      "local_input": "reports/runs/ipanema/20261108T103715-seo-live-0a786089/browser/post-1920-rendered.seo.json"
+    },
+    {
+      "page": "post",
+      "url": "https://rhinoipanema.mitiendanube.com/blog/posts/lo-que-separa-a-los-pros-no-es-el-talento-es-la-recuperacin-7cc2ca9b1e3b",
+      "observed_at": "2026-11-08T10:38:41.210Z",
+      "width": 360,
+      "http": 200,
+      "canonical": [
+        "https://rhinoipanema.mitiendanube.com/blog/posts/lo-que-separa-a-los-pros-no-es-el-talento-es-la-recuperacin-7cc2ca9b1e3b/"
+      ],
+      "h1": [
+        {
+          "text": "Lo que separa a los pros no es el talento, es la recuperación",
+          "user_content": false
+        }
+      ],
+      "schema_types": [
+        "BlogPosting",
+        "ImageObject",
+        "Organization",
+        "WebPage"
+      ],
+      "entity_count": 5,
+      "schema_counts": {
+        "error": 0,
+        "warning": 2,
+        "recommendation": 1,
+        "optional": 2
+      },
+      "finding_counts": {
+        "B002": 1,
+        "B030": 1,
+        "C221": 1,
+        "G005": 1,
+        "B100": 1,
+        "SEO006": 1
+      },
+      "source_candidates": [
+        "snippets/structured-data/structured-data-organization.tpl:9",
+        "snippets/structured-data/structured-data.tpl:94"
+      ],
+      "initial_dom_delta": {
+        "links_only_after_js": [],
+        "links_removed_after_js": [],
+        "structured_data_added_after_js": 0,
+        "structured_data_removed_after_js": 0,
+        "attribution": "Cambio observado; no prueba qué app/script lo causó ni qué indexó Google."
+      },
+      "link_count": 54,
+      "pagination_links": [],
+      "non_navigation_carousel_controls": 0,
+      "network_lab": {
+        "requests": 22,
+        "js_bytes": 175500,
+        "css_bytes": 38788,
+        "image_bytes": 154512,
+        "font_bytes": 57197
+      },
+      "input_sha256": "3169f3dfa186a20546ffc5d870ef073261c9b460e4b637916e0e9731ef53f0ff",
+      "local_input": "reports/runs/ipanema/20261108T103715-seo-live-0a786089/browser/post-360-rendered.seo.json"
+    },
+    {
+      "page": "post",
+      "url": "https://rhinoipanema.mitiendanube.com/blog/posts/lo-que-separa-a-los-pros-no-es-el-talento-es-la-recuperacin-7cc2ca9b1e3b",
+      "observed_at": "2026-11-08T10:38:43.177Z",
+      "width": 390,
+      "http": 200,
+      "canonical": [
+        "https://rhinoipanema.mitiendanube.com/blog/posts/lo-que-separa-a-los-pros-no-es-el-talento-es-la-recuperacin-7cc2ca9b1e3b/"
+      ],
+      "h1": [
+        {
+          "text": "Lo que separa a los pros no es el talento, es la recuperación",
+          "user_content": false
+        }
+      ],
+      "schema_types": [
+        "BlogPosting",
+        "ImageObject",
+        "Organization",
+        "WebPage"
+      ],
+      "entity_count": 5,
+      "schema_counts": {
+        "error": 0,
+        "warning": 2,
+        "recommendation": 1,
+        "optional": 2
+      },
+      "finding_counts": {
+        "B002": 1,
+        "B030": 1,
+        "C221": 1,
+        "G005": 1,
+        "B100": 1,
+        "SEO006": 1
+      },
+      "source_candidates": [
+        "snippets/structured-data/structured-data-organization.tpl:9",
+        "snippets/structured-data/structured-data.tpl:94"
+      ],
+      "initial_dom_delta": {
+        "links_only_after_js": [],
+        "links_removed_after_js": [],
+        "structured_data_added_after_js": 0,
+        "structured_data_removed_after_js": 0,
+        "attribution": "Cambio observado; no prueba qué app/script lo causó ni qué indexó Google."
+      },
+      "link_count": 54,
+      "pagination_links": [],
+      "non_navigation_carousel_controls": 0,
+      "network_lab": {
+        "requests": 22,
+        "js_bytes": 175245,
+        "css_bytes": 38887,
+        "image_bytes": 154510,
+        "font_bytes": 57197
+      },
+      "input_sha256": "9aaf8d89f042c4589a787faca414c17a84e061f20123629cdeb9d6185ac6fdfd",
+      "local_input": "reports/runs/ipanema/20261108T103715-seo-live-0a786089/browser/post-390-rendered.seo.json"
+    },
+    {
+      "page": "post",
+      "url": "https://rhinoipanema.mitiendanube.com/blog/posts/lo-que-separa-a-los-pros-no-es-el-talento-es-la-recuperacin-7cc2ca9b1e3b",
+      "observed_at": "2026-11-08T10:38:45.001Z",
+      "width": 768,
+      "http": 200,
+      "canonical": [
+        "https://rhinoipanema.mitiendanube.com/blog/posts/lo-que-separa-a-los-pros-no-es-el-talento-es-la-recuperacin-7cc2ca9b1e3b/"
+      ],
+      "h1": [
+        {
+          "text": "Lo que separa a los pros no es el talento, es la recuperación",
+          "user_content": false
+        }
+      ],
+      "schema_types": [
+        "BlogPosting",
+        "ImageObject",
+        "Organization",
+        "WebPage"
+      ],
+      "entity_count": 5,
+      "schema_counts": {
+        "error": 0,
+        "warning": 2,
+        "recommendation": 1,
+        "optional": 2
+      },
+      "finding_counts": {
+        "B002": 1,
+        "B030": 1,
+        "C221": 1,
+        "G005": 1,
+        "B100": 1,
+        "SEO006": 1
+      },
+      "source_candidates": [
+        "snippets/structured-data/structured-data-organization.tpl:9",
+        "snippets/structured-data/structured-data.tpl:94"
+      ],
+      "initial_dom_delta": {
+        "links_only_after_js": [],
+        "links_removed_after_js": [],
+        "structured_data_added_after_js": 0,
+        "structured_data_removed_after_js": 0,
+        "attribution": "Cambio observado; no prueba qué app/script lo causó ni qué indexó Google."
+      },
+      "link_count": 54,
+      "pagination_links": [],
+      "non_navigation_carousel_controls": 0,
+      "network_lab": {
+        "requests": 23,
+        "js_bytes": 175332,
+        "css_bytes": 38819,
+        "image_bytes": 227545,
+        "font_bytes": 57197
+      },
+      "input_sha256": "bd1446720b1ccff3db75b34f476c101365c0a4be57327bac79e85205863d1c9f",
+      "local_input": "reports/runs/ipanema/20261108T103715-seo-live-0a786089/browser/post-768-rendered.seo.json"
+    }
+  ],
+  "original_qa": {
+    "checks": 235,
+    "failed": {
+      "carousel-links": 12,
+      "overflow": 4,
+      "essential-images": 5,
+      "h1": 6
+    },
+    "outcome": "failed",
+    "note": "12 carousel-link candidates were false positives caused by native action controls; engine rechecked without relaunching browser."
+  },
+  "corpus": {
+    "scope_urls": 5,
+    "roots": [
+      "https://rhinoipanema.mitiendanube.com/"
+    ],
+    "depth_in_observed_corpus": {
+      "https://rhinoipanema.mitiendanube.com/": 0,
+      "https://rhinoipanema.mitiendanube.com/productos/": 1,
+      "https://rhinoipanema.mitiendanube.com/blog/": 1,
+      "https://rhinoipanema.mitiendanube.com/productos/botas-presoterapia-inalambricas-pro-air/": 1,
+      "https://rhinoipanema.mitiendanube.com/blog/posts/lo-que-separa-a-los-pros-no-es-el-talento-es-la-recuperacin-7cc2ca9b1e3b": 2
+    },
+    "not_reached_in_corpus": [],
+    "without_inlinks_in_corpus": [],
+    "duplicate_titles": [],
+    "sitemap_not_observed": [],
+    "sitemap_comparison_performed": false,
+    "limitations": [
+      "No declarar huérfana una URL por no verla en un corpus parcial.",
+      "Títulos iguales son candidatos editoriales, no prueba de canibalización ni contenido duplicado completo."
+    ]
+  },
+  "google_accounts_connected": false,
+  "theme_modified": false,
+  "local_recheck_run": "reports/runs/ipanema/20261108T105156-seo-rechecked-592aa745",
+  "limitations": [
+    "Fresh read-only browser capture, no catalog/CMS export provided for independent commercial verification.",
+    "No Lighthouse or field INP measured during this SEO pass.",
+    "Link corpus of five pages is partial, not full-store orphan proof.",
+    "No RRT, Schema Validator, Search Console, Analytics or Merchant account was consulted.",
+    "The v1 projection reserialized syntactically valid JSON-LD. Strict original literal/duplicate-key/number fidelity is not certified for these live captures; v2 now preserves literals and is covered by browser tests."
+  ],
+  "capture_projection_version": "seo-public-markup-v1"
+}

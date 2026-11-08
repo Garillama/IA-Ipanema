@@ -1,0 +1,7 @@
+{
+  "version": 1,
+  "verified_at": "2026-11-08",
+  "native_action_pattern": "js-(variant-button|product-thumb|play-button|play-native-button|product-video-link|modal-close-private|accordion-private-toggle)(?:[ \\t]|$)",
+  "source_examples": ["snippets/product/product-variants.tpl", "snippets/product/product-image-thumbs.tpl", "snippets/product/product-video-item.tpl", "snippets/cart/cart-button.tpl"],
+  "limitation": "Clasifica acciones conocidas, no certifica accesibilidad ni descubre el destino de enlaces que solo existen por JS."
+}

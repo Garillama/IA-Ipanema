@@ -17,6 +17,8 @@ def cli():
     parser.add_argument("--version", action="version", version=VERSION)
     parser.add_argument("--project")
     sub = parser.add_subparsers(dest="command", required=True)
+    from ipanema.seo.cli import add_parser as add_seo_parser
+    add_seo_parser(sub)
     sub.add_parser("doctor")
     projects = sub.add_parser("projects")
     project_sub = projects.add_subparsers(dest="operation", required=True)
@@ -39,7 +41,7 @@ def cli():
             p.add_argument("--authorize-local", action="store_true")
             p.add_argument("--save", action="store_true")
     qa = sub.add_parser("qa")
-    qa.add_argument("--suite", choices=["repo", "source", "unit", "integration", "quick", "evals", "fixtures", "browser", "page", "component", "full"], default="quick")
+    qa.add_argument("--suite", choices=["repo", "source", "unit", "integration", "quick", "evals", "fixtures", "seo", "browser", "page", "component", "full"], default="quick")
     qa.add_argument("--page", action="append")
     qa.add_argument("--component")
     qa.add_argument("--allow-network", action="store_true")
@@ -105,6 +107,9 @@ def cli():
         write_json(registry_path, registry, overwrite=True)
         return {"registered": project_id, "remote_connection_checked": False}, 0
     project = Project(project_id=args.project)
+    if args.command == 'seo':
+        from ipanema.seo.cli import execute as seo_execute
+        return seo_execute(project, args)
     if args.command == "doctor":
         result = doctor(project)
         import shutil

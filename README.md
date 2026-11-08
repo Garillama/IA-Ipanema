@@ -2,7 +2,7 @@
 
 Agente de ingeniería para temas seccionables Ipanema de Tiendanube. Combina instrucciones de trabajo, nueve skills, conocimiento existente y herramientas locales para investigar, preparar cambios, probarlos y registrar evidencia. Necesita el runtime de IA con el que abras esta carpeta; no incluye un modelo ni un servidor de inferencia propio.
 
-La V2 conserva el discovery original. **El tema y las tiendas remotas no se modifican al instalar o ejecutar las pruebas offline.** [Evolución y cobertura](reports/v2/evolution-report.md), [arquitectura](reports/v2/architecture.md), [auditoría inicial](reports/v2/initial-audit.md).
+La V2 conserva el discovery original. **El tema y las tiendas remotas no se modifican al instalar o ejecutar las pruebas offline.** [Evolución y cobertura V2](reports/v2/evolution-report.md), [arquitectura](reports/v2/architecture.md), [auditoría inicial](reports/v2/initial-audit.md). La extensión **V2.1 SEO** añade auditorías por página, grafo/validación de schemas, propuestas con procedencia y adaptadores Google opcionales: [resultado y límites](reports/seo/evolution-report.md).
 
 ## Preparación
 
@@ -58,7 +58,8 @@ La preferencia es configuración nativa, composición existente, tokens, compone
 
 | Comando | Alcance |
 |---|---|
-| `python3 tools/ia.py qa --suite quick` | Repositorio, unitarias, integración de portabilidad y diez evaluaciones del coordinador; offline |
+| `python3 tools/ia.py qa --suite quick` | Repositorio, unitarias, integración, diez evaluaciones del coordinador y ocho acciones SEO con fixtures; offline |
+| `python3 tools/ia.py qa --suite seo` | Pruebas SEO unitarias/integración y ocho evaluaciones de acciones; no conecta cuentas |
 | `python3 tools/ia.py qa --suite repo` | Enlaces, JSON, skills, inventario y estado del tema si está disponible |
 | `python3 tools/ia.py qa --suite source` | Captura estática del tema configurado y métricas de assets sin modificarlo |
 | `python3 tools/ia.py qa --suite fixtures` | Chrome, axe, responsive, teclado, red y Lighthouse en servidor sintético de loopback |
@@ -66,7 +67,7 @@ La preferencia es configuración nativa, composición existente, tokens, compone
 | `python3 tools/ia.py qa --suite component --page category --component ".js-product-container" --allow-network` | Selector real del componente en página configurada |
 | `python3 tools/ia.py qa --suite full --page home --allow-network --lighthouse` | Offline más navegador, seis anchos, sin JS, reduced motion, Coverage y Lighthouse |
 
-Los últimos tres comandos requieren un entorno preparado y autorizado; no se ejecutaron contra la tienda durante esta migración. El QA por selector no equivale a todos sus consumidores: selecciona y verifica las páginas/estados pertinentes. Las interacciones se configuran con selectores inspeccionados, sin enviar compras, registros, contacto o newsletter. El runtime bloquea solicitudes de escritura salvo el acceso de storefront expresamente provisto; se detiene ante límites de acceso. No es un sandbox del resto de herramientas que pudiera usar un runtime externo.
+Los comandos de tienda requieren un entorno preparado y autorizado. Durante V2.1 se ejecutó el runner existente en lectura sobre cinco tipos de página/seis anchos y una 404: [resultados reales](reports/seo/audited-pages.md). El QA por selector no equivale a todos sus consumidores: selecciona y verifica las páginas/estados pertinentes. Las interacciones se configuran con selectores inspeccionados, sin enviar compras, registros, contacto o newsletter. El runtime bloquea solicitudes de escritura salvo el acceso de storefront expresamente provisto; se detiene ante límites de acceso. No es un sandbox del resto de herramientas que pudiera usar un runtime externo.
 
 Los runs usan directorios nuevos en `reports/runs/<proyecto>/`, ignorados por Git. Sus JSON registran herramientas, versiones, perfiles, resultados, limitaciones y hashes; las capturas/mediciones se preservan ahí. Copia solo evidencia revisada y sin datos confidenciales a un informe compartido.
 
@@ -77,6 +78,19 @@ python3 tools/ia.py compare metrics /ruta/antes-metrics.json /ruta/despues-metri
 ```
 
 La protección incluye pestañas iniciales y las creadas por Lighthouse. Bloquear POST puede alterar apps que lo usan para lectura; no atribuyas ese efecto al tema y compara bajo la misma política de red.
+
+## SEO y datos estructurados
+
+```bash
+python3 tools/ia.py seo source
+python3 tools/ia.py seo audit --capture /ruta/al/run/browser/category-390-rendered.seo.json
+python3 tools/ia.py seo connections
+python3 tools/ia.py seo evals
+```
+
+El [manual SEO](ipanema-discovery/04-seo/seo-engine.md) explica auditoría offline, HTML/DOM/sin JS, corpus de enlaces, fuentes comerciales y generación de propuestas. `seo source` prepara un diff revisable del defecto nativo cuando coincide con el patrón encontrado; no aplica cambios. JSON válido, vocabulario comprobado, requisitos Google, consistencia, prueba externa y aparición en Google son estados distintos. No se inventan datos ni se duplica el marcado nativo para compensar errores.
+
+`seo generate` exige HTML actual y datos referenciados/hash del mismo proyecto; su salida queda fuera del tema. Search Console/GA/Merchant y MCP son [integraciones opcionales](ipanema-discovery/04-seo/google-integrations.md), desconectadas por defecto. No se instalan servidores ni conectan cuentas con estos comandos básicos. Los mocks prueban contratos; no demuestran acceso real a Google ni indexación.
 
 PNG admite RGB/RGBA 8-bit hasta 20 MP. Las dimensiones distintas se reportan; diferencias por encima del umbral requieren revisión de intención. Las máscaras no deben cubrir lo que se está comprobando. Métricas necesitan misma página/perfil. Comparar una muestra de laboratorio no demuestra mejora estadística; TBT no es INP. Las solicitudes se separan por fase para distinguir navegación de efectos de la propia captura/instrumentación.
 

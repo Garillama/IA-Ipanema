@@ -1,0 +1,74 @@
+{
+  "project": "ipanema",
+  "url": "https://rhinoipanema.mitiendanube.com/__ia-ipanema-seo-not-found-check__/",
+  "http_status": 404,
+  "observed_at": "2026-11-08T10:51:11.461Z",
+  "states": {
+    "syntax_valid": false,
+    "semantic_valid_for_checked_rules": true,
+    "google_requirements_met_by_feature": {},
+    "consistency": "not_verified_no_facts",
+    "potentially_eligible": "unconfirmed — cumplir propiedades no garantiza resultados enriquecidos",
+    "confirmed_by_external_tool": "not_checked",
+    "observed_in_google": "not_checked"
+  },
+  "findings": [
+    {
+      "rule": "A001",
+      "level": "A",
+      "severity": "error",
+      "message": "JSON-LD no parseable (Expecting value; causa probable: trailing_comma).",
+      "path": "línea 14, columna 19 del script",
+      "evidence": {
+        "message": "Expecting value",
+        "line": 14,
+        "column": 19,
+        "hint": "trailing_comma"
+      },
+      "source": null
+    },
+    {
+      "rule": "SEO001",
+      "level": "D",
+      "severity": "warning",
+      "message": "Title ausente; comprobar head-tags de plataforma.",
+      "path": null,
+      "evidence": null,
+      "source": null
+    },
+    {
+      "rule": "SEO006",
+      "level": "D",
+      "severity": "recommendation",
+      "message": "Canonical distinto de la URL solicitada; revisar variante/parámetros/duplicación sin asumir error.",
+      "path": null,
+      "evidence": [
+        "https://rhinoipanema.mitiendanube.com/404/"
+      ],
+      "source": null
+    }
+  ],
+  "source_candidates": [
+    {
+      "block": 0,
+      "marker": "structured-data.organization",
+      "source_candidates": [
+        "snippets/structured-data/structured-data-organization.tpl:9"
+      ],
+      "attribution": "native_source_match_candidate",
+      "confirmed_runtime_initiator": false
+    },
+    {
+      "block": 1,
+      "marker": "structured-data.page",
+      "source_candidates": [
+        "snippets/structured-data/structured-data.tpl:167"
+      ],
+      "attribution": "native_source_match_candidate",
+      "confirmed_runtime_initiator": false
+    }
+  ],
+  "capture_sha256": "1cad2450278a324f915fe078061076962cdb6512a88373c7646e70f7101a426b",
+  "local_input": "reports/runs/ipanema/20261108T105057-seo-live-404-5fd5861e/browser/404-390-rendered.seo.json",
+  "theme_modified": false
+}

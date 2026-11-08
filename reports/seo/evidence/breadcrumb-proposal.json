@@ -1,0 +1,322 @@
+{
+  "status": "proposal_only",
+  "file": "snippets/structured-data/structured-data.tpl",
+  "source_sha256": "9eb2edf924e8faf5627b25a6c442518c1e2c24ec346cfff0004d53c977d50e2f",
+  "patch": "--- a/snippets/structured-data/structured-data.tpl\n+++ b/snippets/structured-data/structured-data.tpl\n@@ -180,7 +180,7 @@\n \t\t\t\t\"position\": 1,\n \t\t\t\t\"name\": \"{{ 'breadcrumbs.home' | t }}\",\n \t\t\t\t\"item\": \"{{ store.url }}\"\n-\t\t\t}{% if template != 'home' %},{% endif %}\n+\t\t\t}{% if breadcrumbs | length > 0 or template == 'page' or template == 'cart' or template == 'search' or template == 'account.order' %},{% endif %}\n \t\t\t{% if template == 'page' %}\n \t\t\t\t{\n \t\t\t\t\t\"@type\": \"ListItem\",\n",
+  "cases": [
+    {
+      "template": "home",
+      "breadcrumb_count": 0,
+      "before": {
+        "paths": 2,
+        "invalid_json_blocks": 0,
+        "truncated": false
+      },
+      "after": {
+        "paths": 2,
+        "invalid_json_blocks": 0,
+        "truncated": false
+      }
+    },
+    {
+      "template": "home",
+      "breadcrumb_count": 2,
+      "before": {
+        "paths": 2,
+        "invalid_json_blocks": 2,
+        "truncated": false
+      },
+      "after": {
+        "paths": 2,
+        "invalid_json_blocks": 0,
+        "truncated": false
+      }
+    },
+    {
+      "template": "category",
+      "breadcrumb_count": 0,
+      "before": {
+        "paths": 2,
+        "invalid_json_blocks": 2,
+        "truncated": false
+      },
+      "after": {
+        "paths": 2,
+        "invalid_json_blocks": 0,
+        "truncated": false
+      }
+    },
+    {
+      "template": "category",
+      "breadcrumb_count": 2,
+      "before": {
+        "paths": 2,
+        "invalid_json_blocks": 0,
+        "truncated": false
+      },
+      "after": {
+        "paths": 2,
+        "invalid_json_blocks": 0,
+        "truncated": false
+      }
+    },
+    {
+      "template": "product",
+      "breadcrumb_count": 0,
+      "before": {
+        "paths": 50,
+        "invalid_json_blocks": 50,
+        "truncated": false
+      },
+      "after": {
+        "paths": 50,
+        "invalid_json_blocks": 0,
+        "truncated": false
+      }
+    },
+    {
+      "template": "product",
+      "breadcrumb_count": 2,
+      "before": {
+        "paths": 50,
+        "invalid_json_blocks": 0,
+        "truncated": false
+      },
+      "after": {
+        "paths": 50,
+        "invalid_json_blocks": 0,
+        "truncated": false
+      }
+    },
+    {
+      "template": "blog",
+      "breadcrumb_count": 0,
+      "before": {
+        "paths": 5,
+        "invalid_json_blocks": 0,
+        "truncated": false
+      },
+      "after": {
+        "paths": 5,
+        "invalid_json_blocks": 0,
+        "truncated": false
+      }
+    },
+    {
+      "template": "blog",
+      "breadcrumb_count": 2,
+      "before": {
+        "paths": 5,
+        "invalid_json_blocks": 0,
+        "truncated": false
+      },
+      "after": {
+        "paths": 5,
+        "invalid_json_blocks": 0,
+        "truncated": false
+      }
+    },
+    {
+      "template": "post",
+      "breadcrumb_count": 0,
+      "before": {
+        "paths": 2,
+        "invalid_json_blocks": 2,
+        "truncated": false
+      },
+      "after": {
+        "paths": 2,
+        "invalid_json_blocks": 0,
+        "truncated": false
+      }
+    },
+    {
+      "template": "post",
+      "breadcrumb_count": 2,
+      "before": {
+        "paths": 2,
+        "invalid_json_blocks": 0,
+        "truncated": false
+      },
+      "after": {
+        "paths": 2,
+        "invalid_json_blocks": 0,
+        "truncated": false
+      }
+    },
+    {
+      "template": "cart",
+      "breadcrumb_count": 0,
+      "before": {
+        "paths": 2,
+        "invalid_json_blocks": 0,
+        "truncated": false
+      },
+      "after": {
+        "paths": 2,
+        "invalid_json_blocks": 0,
+        "truncated": false
+      }
+    },
+    {
+      "template": "cart",
+      "breadcrumb_count": 2,
+      "before": {
+        "paths": 2,
+        "invalid_json_blocks": 0,
+        "truncated": false
+      },
+      "after": {
+        "paths": 2,
+        "invalid_json_blocks": 0,
+        "truncated": false
+      }
+    },
+    {
+      "template": "search",
+      "breadcrumb_count": 0,
+      "before": {
+        "paths": 2,
+        "invalid_json_blocks": 0,
+        "truncated": false
+      },
+      "after": {
+        "paths": 2,
+        "invalid_json_blocks": 0,
+        "truncated": false
+      }
+    },
+    {
+      "template": "search",
+      "breadcrumb_count": 2,
+      "before": {
+        "paths": 2,
+        "invalid_json_blocks": 0,
+        "truncated": false
+      },
+      "after": {
+        "paths": 2,
+        "invalid_json_blocks": 0,
+        "truncated": false
+      }
+    },
+    {
+      "template": "page",
+      "breadcrumb_count": 0,
+      "before": {
+        "paths": 2,
+        "invalid_json_blocks": 0,
+        "truncated": false
+      },
+      "after": {
+        "paths": 2,
+        "invalid_json_blocks": 0,
+        "truncated": false
+      }
+    },
+    {
+      "template": "page",
+      "breadcrumb_count": 2,
+      "before": {
+        "paths": 2,
+        "invalid_json_blocks": 0,
+        "truncated": false
+      },
+      "after": {
+        "paths": 2,
+        "invalid_json_blocks": 0,
+        "truncated": false
+      }
+    },
+    {
+      "template": "account.order",
+      "breadcrumb_count": 0,
+      "before": {
+        "paths": 2,
+        "invalid_json_blocks": 0,
+        "truncated": false
+      },
+      "after": {
+        "paths": 2,
+        "invalid_json_blocks": 0,
+        "truncated": false
+      }
+    },
+    {
+      "template": "account.order",
+      "breadcrumb_count": 2,
+      "before": {
+        "paths": 2,
+        "invalid_json_blocks": 0,
+        "truncated": false
+      },
+      "after": {
+        "paths": 2,
+        "invalid_json_blocks": 0,
+        "truncated": false
+      }
+    },
+    {
+      "template": "404",
+      "breadcrumb_count": 0,
+      "before": {
+        "paths": 2,
+        "invalid_json_blocks": 2,
+        "truncated": false
+      },
+      "after": {
+        "paths": 2,
+        "invalid_json_blocks": 0,
+        "truncated": false
+      }
+    },
+    {
+      "template": "404",
+      "breadcrumb_count": 2,
+      "before": {
+        "paths": 2,
+        "invalid_json_blocks": 0,
+        "truncated": false
+      },
+      "after": {
+        "paths": 2,
+        "invalid_json_blocks": 0,
+        "truncated": false
+      }
+    },
+    {
+      "template": "password",
+      "breadcrumb_count": 0,
+      "before": {
+        "paths": 2,
+        "invalid_json_blocks": 2,
+        "truncated": false
+      },
+      "after": {
+        "paths": 2,
+        "invalid_json_blocks": 0,
+        "truncated": false
+      }
+    },
+    {
+      "template": "password",
+      "breadcrumb_count": 2,
+      "before": {
+        "paths": 2,
+        "invalid_json_blocks": 0,
+        "truncated": false
+      },
+      "after": {
+        "paths": 2,
+        "invalid_json_blocks": 0,
+        "truncated": false
+      }
+    }
+  ],
+  "method": "Modelo abstracto de ramas del snippet actual; no ejecuta Twig ni filtros de plataforma.",
+  "limitations": [
+    "Los valores interpolados son marcadores sintéticos, no datos de productos.",
+    "La corrección de la fuente requiere revisión y render real en un tema aislado autorizado."
+  ],
+  "theme_modified": false
+}

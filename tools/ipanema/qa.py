@@ -43,7 +43,7 @@ def browser_job(project: Project, run_dir: Path, *, pages=None, full=False, comp
            "mode": "full" if full else "quick", "axe": project.qa.get("axe", True),
            "component_selector": component, "interactions": project.qa.get("interactions", []),
            "masks": project.qa.get("visual", {}).get("masks", []), "budgets": project.qa.get("budgets", {}),
-           "lighthouse": lighthouse, "coverage": full, "cpu_rate": project.qa.get("cpu_rate"), "network": project.qa.get("network")}
+           "lighthouse": lighthouse, "capture_seo": True, "coverage": full, "cpu_rate": project.qa.get("cpu_rate"), "network": project.qa.get("network")}
     return job
 
 
@@ -62,6 +62,7 @@ def execute(project: Project, suite="quick", *, pages=None, component=None, allo
     workspace_files = [*project.root.joinpath("tools").rglob("*.py"), *project.root.joinpath("tools").glob("*.mjs"),
                        *project.root.joinpath(".agents/skills").rglob("SKILL.md"), project.root / "AGENTS.md"]
     workspace_files += [project.root / "README.md", project.root / "package.json"]
+    workspace_files += list(project.root.joinpath('tools/ipanema/seo').glob('*.json'))
     workspace_files += [p for p in project.root.joinpath("projects").glob("*.json") if not p.name.endswith(".local.json")]
     workspace_files += list(project.root.joinpath("tests").rglob("*.py"))
     workspace_files += list(project.root.joinpath("reusable").rglob("*.json"))
@@ -114,6 +115,16 @@ def execute(project: Project, suite="quick", *, pages=None, component=None, allo
         write_json(run_dir / "agent-evals.json", evaluation)
         record("coordinator-evals", evaluation["outcome"] == "passed", {"file": "agent-evals.json", "cases": len(evaluation["cases"])})
         result["limitations"].append("Evaluación del coordinador determinista; evaluación externa del modelo no ejecutada.")
+    if suite in ('seo', 'quick', 'full'):
+        from .seo.evals import evaluate as evaluate_seo
+        if suite == 'seo':
+            for area in ('unit', 'integration'):
+                tested = run_command([sys.executable, '-m', 'unittest', 'discover', '-s', 'tests/' + area, '-p', 'test_seo*.py', '-v'], cwd=project.root, timeout=180)
+                record('seo-' + area, tested['exit_code'] == 0, tested)
+        seo_evaluation = evaluate_seo()
+        write_json(run_dir / 'seo-evals.json', seo_evaluation)
+        record('seo-action-evals', seo_evaluation['outcome'] == 'passed', {'file': 'seo-evals.json', 'cases': len(seo_evaluation['cases'])})
+        result['limitations'].append('Evaluaciones SEO con fixtures, sin conexión real a cuentas Google.')
     if needs_browser:
         node = shutil.which("node")
         if not node:

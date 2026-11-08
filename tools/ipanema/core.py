@@ -38,7 +38,7 @@ def digest(path: Path) -> str:
 
 
 def agent_fingerprint(root: Path) -> str:
-    paths = [*root.joinpath("tools").rglob("*.py"), *root.joinpath("tools").glob("*.mjs"),
+    paths = [*root.joinpath("tools").rglob("*.py"), *root.joinpath("tools").rglob("*.json"), *root.joinpath("tools").glob("*.mjs"),
              *root.joinpath(".agents/skills").rglob("SKILL.md"), root / "AGENTS.md"]
     payload = "\n".join(str(p.relative_to(root)) + ":" + digest(p) for p in sorted(paths) if p.is_file())
     return hashlib.sha256(payload.encode()).hexdigest()
@@ -150,8 +150,8 @@ class Project:
         overrides = read_json(override) if override.exists() else {}
         if not isinstance(overrides, dict):
             raise IpanemaError("La configuración local debe ser un objeto JSON.")
-        if set(overrides) - {"theme_root", "browser", "qa_base_url"}:
-            raise IpanemaError("Override local desconocido; solo theme_root, browser y qa_base_url.")
+        if set(overrides) - {"theme_root", "browser", "qa_base_url", "google"}:
+            raise IpanemaError("Override local desconocido; solo theme_root, browser, qa_base_url y google.")
         self.data = {**self.data, **overrides}
         reject_secrets(self.data)
         raw_theme = os.getenv("IPANEMA_THEME_ROOT") or self.data.get("theme_root")

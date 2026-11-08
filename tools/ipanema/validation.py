@@ -46,7 +46,8 @@ def validate(project: Project, *, strict_source=False):
     else:
         warnings.append("Tema sin configurar: no se acredita integridad del origen; sí se valida el repositorio.")
     managed_json = [*doc.rglob("*.json"), *(root / "projects").glob("*.json"),
-                    *(root / "reusable").rglob("*.json"), *(root / "tests/agent-evals").glob("*.json")]
+                    *(root / "reusable").rglob("*.json"), *(root / "tests/agent-evals").glob("*.json"),
+                    *(root / "tools/ipanema/seo").glob("*.json")]
     for path in managed_json:
         try:
             value = read_json(path)
@@ -59,7 +60,7 @@ def validate(project: Project, *, strict_source=False):
             errors.append(str(exc))
     managed_md = [root / "README.md", root / "AGENTS.md", *doc.rglob("*.md"),
                   *(root / ".agents/skills").rglob("*.md"), *(root / "projects").glob("*.md"),
-                  *(root / "reusable").rglob("*.md"), *(root / "reports/v2").glob("*.md")]
+                  *(root / "reusable").rglob("*.md"), *(root / "reports/v2").glob("*.md"), *(root / "reports/seo").rglob("*.md")]
     for path in managed_md:
         text = path.read_text(encoding="utf-8")
         if not text.strip():

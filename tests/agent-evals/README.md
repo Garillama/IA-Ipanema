@@ -21,3 +21,7 @@ Las decisiones esperadas están en cases.json, para el evaluador. `evals --respo
 La revisión funcional/visual debe calificar: cumplimiento, calidad de decisión, reutilización, regresiones y seguridad. Adjunta evidencia que cubra el caso, no un QA genérico. Las tareas que requieren estado comercial, producción, un modelo externo o una tienda inaccesible quedan pendientes, sin inventar aprobaciones.
 
 [Resultados de esta migración](../../reports/v2/evaluation.md).
+
+## Acciones SEO V2.1
+
+`python3 tools/ia.py seo evals` añade ocho escenarios ejecutables en [tools/ipanema/seo/evals.py](../../tools/ipanema/seo/evals.py): categoría no indexada, schema incorrecto/fuente, CTR, blog sin datos, carrusel inicial/DOM/sin JS, variantes, MCP ausente y respuesta maliciosa. Cada caso invoca auditoría/generación/correlación/guardas reales con fixtures sintéticos y conserva resultado observable, tiempo y limitaciones. `qa --suite seo` y `quick` los integran sin reemplazar A–J. No son conexiones Google reales ni evaluación independiente de decisiones de un modelo. [Evidencia final](../../reports/seo/evidence/final-qa.json).

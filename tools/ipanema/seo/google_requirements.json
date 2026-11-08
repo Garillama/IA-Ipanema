@@ -1,0 +1,367 @@
+{
+  "schema_version": 2,
+  "retrieved_at": "2026-11-08",
+  "retrieval_method": "Documentación oficial abierta y contrastada el 2026-11-08; reglas locales parciales, sin usar los validadores externos.",
+  "disclaimer": "Comprobar reglas locales no demuestra elegibilidad completa ni aparición real. RRT no garantiza presentación; la observación en Google requiere evidencia independiente.",
+  "features": {
+    "product_snippet": {
+      "source": "https://developers.google.com/search/docs/appearance/structured-data/product-snippet",
+      "applies_to_page_types": [
+        "product"
+      ],
+      "Product": {
+        "required": [
+          "name"
+        ],
+        "required_one_of": [
+          [
+            "review",
+            "aggregateRating",
+            "offers"
+          ]
+        ],
+        "recommended": [
+          "aggregateRating",
+          "offers",
+          "review"
+        ]
+      },
+      "Offer": {
+        "required": [
+          "price|priceSpecification.price"
+        ],
+        "recommended": [
+          "availability",
+          "priceCurrency",
+          "priceValidUntil"
+        ]
+      },
+      "AggregateOffer": {
+        "required": [
+          "lowPrice",
+          "priceCurrency"
+        ],
+        "recommended": [
+          "highPrice",
+          "offerCount"
+        ]
+      },
+      "availability_values": [
+        "BackOrder",
+        "Discontinued",
+        "InStock",
+        "InStoreOnly",
+        "LimitedAvailability",
+        "OnlineOnly",
+        "OutOfStock",
+        "PreOrder",
+        "PreSale",
+        "SoldOut"
+      ],
+      "notes": [
+        "Rich Results Test puede advertir si hay offers sin review ni aggregateRating."
+      ]
+    },
+    "merchant_listing": {
+      "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+      "applies_to_page_types": [
+        "product"
+      ],
+      "not_for_page_types": [
+        "category",
+        "home",
+        "blog",
+        "post",
+        "page",
+        "search"
+      ],
+      "Product": {
+        "required": [
+          "name",
+          "image",
+          "offers"
+        ],
+        "recommended": [
+          "aggregateRating",
+          "brand",
+          "category",
+          "color",
+          "description",
+          "gtin",
+          "mpn",
+          "sku",
+          "inProductGroupWithID",
+          "isVariantOf",
+          "material",
+          "pattern",
+          "review",
+          "size",
+          "audience",
+          "hasAdultConsideration"
+        ],
+        "gtin_alternatives": [
+          "gtin",
+          "gtin8",
+          "gtin12",
+          "gtin13",
+          "gtin14",
+          "isbn"
+        ]
+      },
+      "Offer": {
+        "required": [
+          "price|priceSpecification.price",
+          "priceCurrency|priceSpecification.priceCurrency"
+        ],
+        "recommended": [
+          "availability",
+          "hasMerchantReturnPolicy",
+          "itemCondition",
+          "priceValidUntil",
+          "shippingDetails",
+          "url",
+          "validFrom",
+          "validThrough"
+        ],
+        "constraints": [
+          "El precio activo debe ser mayor que cero."
+        ]
+      },
+      "OfferShippingDetails": {
+        "required_if_used": [
+          "deliveryTime",
+          "shippingDestination",
+          "shippingRate"
+        ],
+        "reference_exception": "hasShippingService.@id puede referenciar una política global; no exigir campos directos en ese caso."
+      },
+      "MerchantReturnPolicy": {
+        "required": [
+          "applicableCountry",
+          "returnPolicyCategory"
+        ],
+        "recommended": [
+          "merchantReturnDays",
+          "returnFees",
+          "returnMethod",
+          "returnShippingFeesAmount"
+        ],
+        "conditional_required": {
+          "MerchantReturnFiniteReturnWindow": [
+            "merchantReturnDays"
+          ]
+        }
+      },
+      "scope": "Páginas centradas en un producto (o variantes con URL distinta) donde se puede comprar. Google recomienda páginas de producto y no páginas que listan productos o categorías."
+    },
+    "product_variants": {
+      "source": "https://developers.google.com/search/docs/appearance/structured-data/product-variants",
+      "applies_to_page_types": [
+        "product"
+      ],
+      "ProductGroup": {
+        "required": [
+          "name"
+        ],
+        "recommended": [
+          "productGroupID",
+          "variesBy",
+          "hasVariant",
+          "brand",
+          "description",
+          "aggregateRating",
+          "review"
+        ],
+        "variesBy_values": [
+          "color",
+          "size",
+          "suggestedAge",
+          "suggestedGender",
+          "material",
+          "pattern"
+        ]
+      },
+      "constraints": [
+        "Cada variante es un Product con identificador único (sku/gtin) y cumple los requisitos de merchant listing.",
+        "Cada variante debe poder preseleccionarse con una URL distinta mostrando imagen, precio y disponibilidad correctos.",
+        "Una página: canonical del grupo. Multipágina: cada página autocontenida para sus variantes; puede enlazar variantes fuera de página solo por url.",
+        "El marcado de Product generado por JavaScript puede reducir la frecuencia y fiabilidad del rastreo de Shopping."
+      ],
+      "group_id_required_alternative": [
+        "productGroupID",
+        "hasVariant.inProductGroupWithID"
+      ]
+    },
+    "breadcrumb": {
+      "source": "https://developers.google.com/search/docs/appearance/structured-data/breadcrumb",
+      "applies_to_page_types": [
+        "category",
+        "product",
+        "post",
+        "page",
+        "blog"
+      ],
+      "BreadcrumbList": {
+        "required": [
+          "itemListElement"
+        ],
+        "min_items": 2
+      },
+      "ListItem": {
+        "required": [
+          "position",
+          "name",
+          "item"
+        ],
+        "last_item_item_optional": true
+      }
+    },
+    "carousel": {
+      "source": "https://developers.google.com/search/docs/appearance/structured-data/carousel",
+      "eligible_content_types": [
+        "Course",
+        "Movie",
+        "Recipe",
+        "Restaurant"
+      ],
+      "ItemList": {
+        "required": [
+          "itemListElement"
+        ],
+        "min_items": 2
+      },
+      "ListItem": {
+        "required": [
+          "position"
+        ],
+        "summary_page_requires": [
+          "url"
+        ]
+      },
+      "notes": [
+        "Carrusel tradicional: no confundir con carousels-beta. ItemList de productos por sí solo no habilita esta función."
+      ]
+    },
+    "article": {
+      "source": "https://developers.google.com/search/docs/appearance/structured-data/article",
+      "applies_to_page_types": [
+        "post"
+      ],
+      "required": [],
+      "recommended": [
+        "author",
+        "author.name",
+        "author.url",
+        "headline",
+        "image",
+        "datePublished",
+        "dateModified"
+      ],
+      "constraints": [
+        "author debe ser Person u Organization, un objeto por autor.",
+        "datePublished y dateModified en ISO 8601 con zona horaria.",
+        "La imagen no debe ser un logotipo."
+      ]
+    },
+    "faq": {
+      "source": "https://developers.google.com/search/updates#may-2026",
+      "status": "retired",
+      "notes": [
+        "El resultado enriquecido FAQ dejó de mostrarse el 2026-05-07 y su documentación se retiró el 2026-06-15. FAQPage sigue siendo vocabulario schema.org válido, pero no debe proponerse como beneficio de presentación en Google."
+      ]
+    },
+    "sitelinks_searchbox": {
+      "source": "https://developers.google.com/search/blog/2024/10/sitelinks-search-box",
+      "status": "retired",
+      "notes": [
+        "Documentación retirada el 2024-11-29. WebSite/SearchAction solo se justifica semánticamente si existe una búsqueda interna real; no promete función en Google."
+      ]
+    },
+    "carousel_beta": {
+      "source": "https://developers.google.com/search/docs/appearance/structured-data/carousels-beta",
+      "applies_to_page_types": [
+        "category",
+        "home",
+        "post",
+        "blog"
+      ],
+      "status": "beta",
+      "eligible_content_types": [
+        "LocalBusiness",
+        "Product",
+        "Event"
+      ],
+      "min_items": 3,
+      "required_item_properties": [
+        "name",
+        "image",
+        "url"
+      ],
+      "product_markets": [
+        "EEA",
+        "ZA"
+      ],
+      "other_markets": [
+        "TR"
+      ],
+      "excluded_product_markets": [
+        "MX"
+      ],
+      "constraints": [
+        "Página resumen con enlaces a detalles distintos del mismo sitio.",
+        "Elegibilidad regional y programas adicionales deben comprobarse; no prometer disponibilidad.",
+        "La beta no convierte categorías genéricas en PDP ni autoriza copiar precios/reseñas."
+      ]
+    },
+    "organization": {
+      "source": "https://developers.google.com/search/docs/appearance/structured-data/organization",
+      "applies_to_page_types": [
+        "home"
+      ],
+      "required": [],
+      "recommended": [
+        "name",
+        "url",
+        "logo",
+        "sameAs"
+      ],
+      "notes": [
+        "OnlineStore puede ser subtipo pertinente, según el negocio real.",
+        "No duplicar la misma identidad ni cambiar @id sin revisar referencias."
+      ]
+    }
+  },
+  "schema_org": {
+    "known_types_checked": [
+      "Organization",
+      "OnlineStore",
+      "WebSite",
+      "WebPage",
+      "CollectionPage",
+      "ItemList",
+      "ListItem",
+      "BreadcrumbList",
+      "Product",
+      "ProductGroup",
+      "Offer",
+      "AggregateOffer",
+      "Brand",
+      "Blog",
+      "BlogPosting",
+      "Article",
+      "Person",
+      "ImageObject",
+      "VideoObject",
+      "QuantitativeValue",
+      "MerchantReturnPolicy",
+      "OfferShippingDetails",
+      "Review",
+      "AggregateRating",
+      "FAQPage",
+      "SearchAction",
+      "Thing"
+    ],
+    "note": "Verificación semántica parcial y propia del motor: no sustituye al Schema Markup Validator."
+  },
+  "ruleset_version": "2026-11-08.1"
+}

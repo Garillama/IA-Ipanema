@@ -3,9 +3,10 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import {puppeteer,authenticate,cliRequire,cleanUrl,loadDependency} from './browser_runtime.mjs';
-import {collectRendered} from './page_collectors.mjs';
+import {collectRendered,collectSEOProjection} from './page_collectors.mjs';
 
 const job=JSON.parse(await fs.readFile(process.argv[2],'utf8'));
+const linkContracts=JSON.parse(await fs.readFile(new URL('./ipanema/seo/link_contracts.json',import.meta.url),'utf8'));
 const out=path.resolve(job.output);
 await fs.mkdir(out,{recursive:true});
 const result={kind:'browser-qa',at:new Date().toISOString(),project:job.project,records:[],checks:[],limitations:[
@@ -45,17 +46,18 @@ try{
     if(job.coverage&&mode!=='no-js'){await page.coverage.startJSCoverage();await page.coverage.startCSSCoverage();}
     const response=await page.goto(spec.url,{waitUntil:'domcontentloaded',timeout:30000});
     if(new URL(page.url()).pathname.startsWith('/password'))throw Error('La página final es una barrera de acceso, no el storefront.');
-    const initial=await page.evaluate(html=>{
+    const initialHTML=await response.text();
+    const initial=await page.evaluate((html,contracts)=>{
      const d=new DOMParser().parseFromString(html,'text/html');
      return {title:d.title,h1:[...d.querySelectorAll('h1')].map(e=>({text:e.textContent.trim(),in_user_content:!!e.closest('.user-content')})),
       headings:[...d.querySelectorAll('h1,h2,h3,h4,h5,h6')].map(e=>({tag:e.tagName,text:e.textContent.trim()})),
       canonical:[...d.querySelectorAll('link[rel="canonical"]')].map(e=>e.getAttribute('href')),
       robots:[...d.querySelectorAll('meta[name=robots]')].map(e=>e.content),
-      links:[...d.querySelectorAll('a')].map(e=>({href:e.getAttribute('href'),text:e.textContent.trim(),carousel:!!e.closest('[data-qa-carousel],.swiper,.swiper-container,[data-component="slider"]')})),
+      links:[...d.querySelectorAll('a')].map(e=>({href:e.getAttribute('href'),text:e.textContent.trim(),action_hint:new RegExp(contracts.native_action_pattern,'i').test(e.className)||e.getAttribute('role')==='button',carousel:!!e.closest('[data-qa-carousel],.swiper,.swiper-container,[data-component="slider"]')})),
       jsonld:[...d.querySelectorAll('script[type="application/ld+json"]')].map(e=>{try{JSON.parse(e.textContent);return {valid:true};}catch{return {valid:false};}}),
       breadcrumbs:[...d.querySelectorAll('[aria-label*="readcrumb"],.breadcrumb,[data-component="breadcrumbs"] a')].map(e=>({tag:e.tagName,href:e.getAttribute('href')})),
       product_count:d.querySelectorAll('[data-product-id]').length};
-    },await response.text());
+    },initialHTML,linkContracts);
     await page.waitForNetworkIdle({idleTime:400,timeout:5000}).catch(()=>{});
     await page.evaluate(()=>document.fonts.ready);
     const navigationNetwork=[...network.values()].map(entry=>({...entry}));
@@ -63,6 +65,14 @@ try{
     for(const [name,type] of [['js_bytes','Script'],['css_bytes','Stylesheet'],['image_bytes','Image'],['font_bytes','Font']])networkMetrics[name]=navigationNetwork.filter(e=>e.type===type&&e.completed).reduce((n,e)=>n+(e.encoded_bytes||0),0);
     for(const [name,value] of Object.entries(networkMetrics))if(job.budgets?.[name]!=null)check(`${spec.name}-${width}-${mode}:budget:${name}`,value<=job.budgets[name],{value,budget:job.budgets[name],method:'CDP solicitudes y encodedDataLength de navegación, antes de axe/interacciones'});
     phase='dom-inspection';
+    // Capture before axe, masks, interactions and full-page screenshots alter DOM/network.
+    let seoProjection=null;
+    if(job.capture_seo){
+     const allowedHeaders={};for(const key of ['x-robots-tag','content-type','content-language','location'])if(response.headers()[key])allowedHeaders[key]=response.headers()[key];
+     seoProjection={kind:'seo-browser-projection',project:job.project,page:spec.name,page_type:spec.page_type||spec.name,
+      url:cleanUrl(page.url()),at:new Date().toISOString(),status:response.status(),headers:allowedHeaders,
+      width,mode,initial:await collectSEOProjection(page,initialHTML),rendered:await collectSEOProjection(page)};
+    }
     const sample=await collectRendered(page);
     for(const image of sample.images)for(const k of ['src','currentSrc'])if(image[k])image[k]=cleanUrl(image[k]);
     sample.resources.forEach(r=>r.name=cleanUrl(r.name));
@@ -86,6 +96,7 @@ try{
      return {viewport:innerWidth,scroll_width:document.documentElement.scrollWidth,overflow_candidates:overflows,clipping_candidates:clipped,overlap_candidates:overlaps,reading_order:reading};
     },job.component_selector||null);
     const label=`${spec.name}-${width}-${mode}`;
+    if(seoProjection)await fs.writeFile(path.join(out,label+'.seo.json'),JSON.stringify(seoProjection,null,2));
     check(label+':http',response.status()===(spec.expected_status||200),{actual:response.status(),expected:spec.expected_status||200});
     check(label+':overflow',!geometry.missing_component&&geometry.scroll_width<=width+1,geometry);
     if(mode==='rendered'){
@@ -93,7 +104,7 @@ try{
      check(label+':title',!!initial.title.trim());
      check(label+':jsonld',initial.jsonld.every(j=>j.valid),initial.jsonld);
      if(spec.expect_canonical!==false)check(label+':canonical',initial.canonical.length===1,initial.canonical);
-     check(label+':carousel-links',initial.links.filter(e=>e.carousel).every(e=>!!e.href&&!/^(javascript:|#|$)/i.test(e.href)),initial.links.filter(e=>e.carousel));
+     check(label+':carousel-links',initial.links.filter(e=>e.carousel&&!e.action_hint).every(e=>!!e.href&&!/^(javascript:|#|$)/i.test(e.href)),initial.links.filter(e=>e.carousel&&!e.action_hint));
      for(const test of job.link_assertions||[]){const found=initial.links.some(e=>e.href&&new URL(e.href,spec.url).pathname===test.path);check(label+':link:'+test.path,found);}
     }
     if(mode==='no-js'){

@@ -2,6 +2,8 @@
 
 Verificado 2026-11-08. Estado y severidad corresponden a la evidencia indicada; ninguna solución se implementó en el tema. No hay una vulnerabilidad crítica demostrada por esta auditoría. Los resultados de password y storefront están separados.
 
+Revalidación SEO V2.1: [auditoría viva y hallazgos SEO-IPN](../../reports/seo/audited-pages.md) confirma nuevamente la coma JSON-LD de 404, el H1 editorial adicional y el control de carga de catálogo sin href. Distingue defectos de falsos positivos del QA corregidos y conserva los estados originales; no convierte la propuesta de parche en solución desplegada. [Motor de validación](../04-seo/seo-engine.md).
+
 ## IPN-001
 
 **Identificador:** IPN-001 · **Fecha:** 2026-11-08
