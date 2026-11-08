@@ -1,0 +1,35 @@
+{
+  "template": "template-contact",
+  "url": "https://rhinoipanema.mitiendanube.com/contacto/",
+  "width": 768,
+  "verifiedAt": "2026-11-08T07:26:04.120Z",
+  "status": 200,
+  "dom": {
+    "finalUrl": "https://rhinoipanema.mitiendanube.com/contacto/",
+    "title": "Contacto - RHINO IPANEMA",
+    "bodyClass": " template-contact ",
+    "innerWidth": 768,
+    "scrollWidth": 768,
+    "h1": [
+      "Contacto"
+    ],
+    "images": 7,
+    "domNodes": 772,
+    "sections": [
+      "navigation-bar",
+      "navigation-bar",
+      "header",
+      "header",
+      "page-header",
+      "main-contact",
+      "footer",
+      "cart-drawer"
+    ]
+  },
+  "axe": null,
+  "limitations": [
+    "Una ruta representativa de este template; no todas sus variantes.",
+    "Geometría y screenshot con recarga y emulación de dispositivo; no benchmark de velocidad.",
+    "Dos páginas concurrentes; no usar estos tiempos como medición de rendimiento."
+  ]
+}

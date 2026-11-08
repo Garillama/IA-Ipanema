@@ -1,0 +1,1068 @@
+{
+  "template": "template-category",
+  "url": "https://rhinoipanema.mitiendanube.com/productos/",
+  "width": 390,
+  "verifiedAt": "2026-11-08T07:26:12.017Z",
+  "status": 200,
+  "dom": {
+    "finalUrl": "https://rhinoipanema.mitiendanube.com/productos/",
+    "title": "Compra en línea productos en RHINO IPANEMA",
+    "bodyClass": " template-category ",
+    "innerWidth": 390,
+    "scrollWidth": 390,
+    "h1": [
+      "Productos"
+    ],
+    "images": 67,
+    "domNodes": 2299,
+    "sections": [
+      "navigation-bar",
+      "navigation-bar",
+      "header",
+      "header",
+      "category-hero",
+      "page-header",
+      "main-products-grid",
+      "footer",
+      "cart-drawer"
+    ]
+  },
+  "axe": {
+    "engine": {
+      "name": "axe-core",
+      "version": "4.14.0"
+    },
+    "violations": [
+      {
+        "id": "label-content-name-mismatch",
+        "impact": "serious",
+        "tags": [
+          "cat.semantics",
+          "wcag21a",
+          "wcag253",
+          "EN-301-549",
+          "EN-9.2.5.3",
+          "RGAAv4",
+          "RGAA-6.1.5"
+        ],
+        "description": "Ensure that elements labelled through their content must have their visible text as part of their accessible name",
+        "help": "Elements must have their visible text as part of their accessible name",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.14/label-content-name-mismatch?application=axeAPI",
+        "nodes": [
+          {
+            "any": [
+              {
+                "id": "label-content-name-mismatch",
+                "data": null,
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Text inside the element is not included in the accessible name"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<a href=\"https://rhinoipanema.mitiendanube.com/productos/manga-frio-y-calor-pierna-y-brazo/?entry_path=category\" title=\"Manga de Compresión Frío y Calor\" aria-label=\"Manga de Compresión Frío y Calor\" class=\"js-product-item-image-link-private \">",
+            "target": [
+              "div[data-store=\"product-item-image-367609975\"] > div:nth-child(10) > .js-product-item-image-link-private"
+            ],
+            "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+          },
+          {
+            "any": [
+              {
+                "id": "label-content-name-mismatch",
+                "data": null,
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Text inside the element is not included in the accessible name"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<a href=\"https://rhinoipanema.mitiendanube.com/productos/manga-frio-y-calor-pierna-y-brazo/?entry_path=category\" title=\"Manga de Compresión Frío y Calor\" aria-label=\"Manga de Compresión Frío y Calor\" class=\"product-item-link \">",
+            "target": [
+              "div[data-store=\"product-item-info-367609975\"] > .product-item-link"
+            ],
+            "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+          },
+          {
+            "any": [
+              {
+                "id": "label-content-name-mismatch",
+                "data": null,
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Text inside the element is not included in the accessible name"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<a href=\"https://rhinoipanema.mitiendanube.com/productos/kit-tina-de-hielo-tub-air-chiller-ice-pro/?entry_path=category\" title=\"Kit Tina de Hielo TUB AIR + Chiller ICE PRO\" aria-label=\"Kit Tina de Hielo TUB AIR + Chiller ICE PRO\" class=\"js-product-item-image-link-private \">",
+            "target": [
+              "div[data-store=\"product-item-image-367609979\"] > div:nth-child(10) > .js-product-item-image-link-private"
+            ],
+            "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+          },
+          {
+            "any": [
+              {
+                "id": "label-content-name-mismatch",
+                "data": null,
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Text inside the element is not included in the accessible name"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<a href=\"https://rhinoipanema.mitiendanube.com/productos/kit-tina-de-hielo-tub-air-chiller-ice-pro/?entry_path=category\" title=\"Kit Tina de Hielo TUB AIR + Chiller ICE PRO\" aria-label=\"Kit Tina de Hielo TUB AIR + Chiller ICE PRO\" class=\"product-item-link \">",
+            "target": [
+              "div[data-store=\"product-item-info-367609979\"] > .product-item-link"
+            ],
+            "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+          },
+          {
+            "any": [
+              {
+                "id": "label-content-name-mismatch",
+                "data": null,
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Text inside the element is not included in the accessible name"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<a href=\"https://rhinoipanema.mitiendanube.com/productos/botas-presoterapia-pro-3/?entry_path=category\" title=\"Botas de Presoterapia PRO 3\" aria-label=\"Botas de Presoterapia PRO 3\" class=\"js-product-item-image-link-private \">",
+            "target": [
+              ".js-product-item-image-link-private[title=\"Botas de Presoterapia PRO 3\"][aria-label=\"Botas de Presoterapia PRO 3\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+          },
+          {
+            "any": [
+              {
+                "id": "label-content-name-mismatch",
+                "data": null,
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Text inside the element is not included in the accessible name"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<a href=\"https://rhinoipanema.mitiendanube.com/productos/botas-presoterapia-pro-3/?entry_path=category\" title=\"Botas de Presoterapia PRO 3\" aria-label=\"Botas de Presoterapia PRO 3\" class=\"product-item-link \">",
+            "target": [
+              ".product-item-link[title=\"Botas de Presoterapia PRO 3\"][aria-label=\"Botas de Presoterapia PRO 3\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+          },
+          {
+            "any": [
+              {
+                "id": "label-content-name-mismatch",
+                "data": null,
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Text inside the element is not included in the accessible name"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<a href=\"https://rhinoipanema.mitiendanube.com/productos/kit-botas-de-presoterapia-pro-3/?entry_path=category\" title=\"Kit Botas de Presoterapia PRO 3\" aria-label=\"Kit Botas de Presoterapia PRO 3\" class=\"js-product-item-image-link-private \">",
+            "target": [
+              "div[data-store=\"product-item-image-367609977\"] > div:nth-child(10) > .js-product-item-image-link-private"
+            ],
+            "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+          },
+          {
+            "any": [
+              {
+                "id": "label-content-name-mismatch",
+                "data": null,
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Text inside the element is not included in the accessible name"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<a href=\"https://rhinoipanema.mitiendanube.com/productos/kit-botas-de-presoterapia-pro-3/?entry_path=category\" title=\"Kit Botas de Presoterapia PRO 3\" aria-label=\"Kit Botas de Presoterapia PRO 3\" class=\"product-item-link \">",
+            "target": [
+              "div[data-store=\"product-item-info-367609977\"] > .product-item-link"
+            ],
+            "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+          },
+          {
+            "any": [
+              {
+                "id": "label-content-name-mismatch",
+                "data": null,
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Text inside the element is not included in the accessible name"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<a href=\"https://rhinoipanema.mitiendanube.com/productos/brazo-presoterapia-pro-3-individual/?entry_path=category\" title=\"Brazo de Presoterapia PRO 3\" aria-label=\"Brazo de Presoterapia PRO 3\" class=\"product-item-link \">",
+            "target": [
+              ".product-item-link[title=\"Brazo de Presoterapia PRO 3\"][aria-label=\"Brazo de Presoterapia PRO 3\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+          },
+          {
+            "any": [
+              {
+                "id": "label-content-name-mismatch",
+                "data": null,
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Text inside the element is not included in the accessible name"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<a href=\"https://rhinoipanema.mitiendanube.com/productos/kit-botas-y-brazos-de-presoterapia-pro-3/?entry_path=category\" title=\"Kit Botas y Brazos de Presoterapia PRO 3\" aria-label=\"Kit Botas y Brazos de Presoterapia PRO 3\" class=\"product-item-link \">",
+            "target": [
+              "div[data-store=\"product-item-info-367609973\"] > .product-item-link"
+            ],
+            "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+          },
+          {
+            "any": [
+              {
+                "id": "label-content-name-mismatch",
+                "data": null,
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Text inside the element is not included in the accessible name"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<a href=\"https://rhinoipanema.mitiendanube.com/productos/hombrera-frio-y-calor/?entry_path=category\" title=\"Hombrera de Compresión Frío y Calor\" aria-label=\"Hombrera de Compresión Frío y Calor\" class=\"product-item-link \">",
+            "target": [
+              "div[data-store=\"product-item-info-367609972\"] > .product-item-link"
+            ],
+            "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+          },
+          {
+            "any": [
+              {
+                "id": "label-content-name-mismatch",
+                "data": null,
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Text inside the element is not included in the accessible name"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<a href=\"https://rhinoipanema.mitiendanube.com/productos/tobillera-frio-y-calor/?entry_path=category\" title=\"Tobillera de Compresión Frío y Calor\" aria-label=\"Tobillera de Compresión Frío y Calor\" class=\"product-item-link \">",
+            "target": [
+              "div[data-store=\"product-item-info-367609971\"] > .product-item-link"
+            ],
+            "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+          },
+          {
+            "any": [
+              {
+                "id": "label-content-name-mismatch",
+                "data": null,
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Text inside the element is not included in the accessible name"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<a href=\"https://rhinoipanema.mitiendanube.com/productos/botas-presoterapia-inalambricas-pro-air/?entry_path=category\" title=\"Botas de Presoterapia Inalámbricas PRO AIR\" aria-label=\"Botas de Presoterapia Inalámbricas PRO AIR\" class=\"product-item-link \">",
+            "target": [
+              "div[data-store=\"product-item-info-367609970\"] > .product-item-link"
+            ],
+            "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+          },
+          {
+            "any": [
+              {
+                "id": "label-content-name-mismatch",
+                "data": null,
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Text inside the element is not included in the accessible name"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<a href=\"https://rhinoipanema.mitiendanube.com/productos/brazos-presoterapia-pro-3/?entry_path=category\" title=\"Par de Brazos de Presoterapia PRO 3\" aria-label=\"Par de Brazos de Presoterapia PRO 3\" class=\"product-item-link \">",
+            "target": [
+              "div[data-store=\"product-item-info-367609969\"] > .product-item-link"
+            ],
+            "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+          },
+          {
+            "any": [
+              {
+                "id": "label-content-name-mismatch",
+                "data": null,
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Text inside the element is not included in the accessible name"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<a href=\"https://rhinoipanema.mitiendanube.com/productos/faja-lumbar-frio-y-calor/?entry_path=category\" title=\"Faja Lumbar de Compresión Frío y Calor\" aria-label=\"Faja Lumbar de Compresión Frío y Calor\" class=\"product-item-link \">",
+            "target": [
+              "div[data-store=\"product-item-info-367609968\"] > .product-item-link"
+            ],
+            "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+          },
+          {
+            "any": [
+              {
+                "id": "label-content-name-mismatch",
+                "data": null,
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Text inside the element is not included in the accessible name"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<a href=\"https://rhinoipanema.mitiendanube.com/productos/compresor-pro-3-presoterapia/?entry_path=category\" title=\"Compresor PRO 3\" aria-label=\"Compresor PRO 3\" class=\"product-item-link \">",
+            "target": [
+              ".product-item-link[title=\"Compresor PRO 3\"][aria-label=\"Compresor PRO 3\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+          }
+        ]
+      }
+    ],
+    "incomplete": [
+      {
+        "id": "aria-prohibited-attr",
+        "impact": "serious",
+        "tags": [
+          "cat.aria",
+          "wcag2a",
+          "wcag412",
+          "EN-301-549",
+          "EN-9.4.1.2",
+          "RGAAv4",
+          "RGAA-7.1.1"
+        ],
+        "description": "Ensure ARIA attributes are not prohibited for an element's role",
+        "help": "Elements must only use permitted ARIA attributes",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.14/aria-prohibited-attr?application=axeAPI",
+        "nodes": [
+          {
+            "any": [],
+            "all": [],
+            "none": [
+              {
+                "id": "aria-prohibited-attr",
+                "data": {
+                  "role": null,
+                  "nodeName": "span",
+                  "messageKey": "noRoleSingular",
+                  "prohibited": [
+                    "aria-label"
+                  ]
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "aria-label attribute is not well supported on \"span\" elements with no valid role attribute."
+              }
+            ],
+            "impact": "serious",
+            "html": "<span class=\"product-item-quick-s...\" title=\"Compra rápida de Man...\" aria-label=\"Compra rápida de Man...\" data-target=\"#quickshop-modal\" data-component=\"product-list-item.ad...\" data-component-value=\"367609975\">",
+            "target": [
+              ".product-item-quick-shop-modal-trigger.js-quickshop-modal-open[data-component-value=\"367609975\"]"
+            ],
+            "failureSummary": "Fix all of the following:\n  aria-label attribute is not well supported on \"span\" elements with no valid role attribute."
+          },
+          {
+            "any": [],
+            "all": [],
+            "none": [
+              {
+                "id": "aria-prohibited-attr",
+                "data": {
+                  "role": null,
+                  "nodeName": "span",
+                  "messageKey": "noRoleSingular",
+                  "prohibited": [
+                    "aria-label"
+                  ]
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "aria-label attribute is not well supported on \"span\" elements with no valid role attribute."
+              }
+            ],
+            "impact": "serious",
+            "html": "<span class=\"product-item-quick-s...\" title=\"Compra rápida de Bot...\" aria-label=\"Compra rápida de Bot...\" data-target=\"#quickshop-modal\" data-component=\"product-list-item.ad...\" data-component-value=\"367609978\">",
+            "target": [
+              ".product-item-quick-shop-modal-trigger.js-quickshop-modal-open[data-component-value=\"367609978\"]"
+            ],
+            "failureSummary": "Fix all of the following:\n  aria-label attribute is not well supported on \"span\" elements with no valid role attribute."
+          },
+          {
+            "any": [],
+            "all": [],
+            "none": [
+              {
+                "id": "aria-prohibited-attr",
+                "data": {
+                  "role": null,
+                  "nodeName": "span",
+                  "messageKey": "noRoleSingular",
+                  "prohibited": [
+                    "aria-label"
+                  ]
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "aria-label attribute is not well supported on \"span\" elements with no valid role attribute."
+              }
+            ],
+            "impact": "serious",
+            "html": "<span class=\"product-item-quick-s...\" title=\"Compra rápida de Kit...\" aria-label=\"Compra rápida de Kit...\" data-target=\"#quickshop-modal\" data-component=\"product-list-item.ad...\" data-component-value=\"367609977\">",
+            "target": [
+              ".product-item-quick-shop-modal-trigger.js-quickshop-modal-open[data-component-value=\"367609977\"]"
+            ],
+            "failureSummary": "Fix all of the following:\n  aria-label attribute is not well supported on \"span\" elements with no valid role attribute."
+          },
+          {
+            "any": [],
+            "all": [],
+            "none": [
+              {
+                "id": "aria-prohibited-attr",
+                "data": {
+                  "role": null,
+                  "nodeName": "span",
+                  "messageKey": "noRoleSingular",
+                  "prohibited": [
+                    "aria-label"
+                  ]
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "aria-label attribute is not well supported on \"span\" elements with no valid role attribute."
+              }
+            ],
+            "impact": "serious",
+            "html": "<span class=\"product-item-quick-s...\" title=\"Compra rápida de Bra...\" aria-label=\"Compra rápida de Bra...\" data-target=\"#quickshop-modal\" data-component=\"product-list-item.ad...\" data-component-value=\"367609976\">",
+            "target": [
+              ".product-item-quick-shop-modal-trigger.js-quickshop-modal-open[data-component-value=\"367609976\"]"
+            ],
+            "failureSummary": "Fix all of the following:\n  aria-label attribute is not well supported on \"span\" elements with no valid role attribute."
+          },
+          {
+            "any": [],
+            "all": [],
+            "none": [
+              {
+                "id": "aria-prohibited-attr",
+                "data": {
+                  "role": null,
+                  "nodeName": "span",
+                  "messageKey": "noRoleSingular",
+                  "prohibited": [
+                    "aria-label"
+                  ]
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "aria-label attribute is not well supported on \"span\" elements with no valid role attribute."
+              }
+            ],
+            "impact": "serious",
+            "html": "<span class=\"product-item-quick-s...\" title=\"Compra rápida de Kit...\" aria-label=\"Compra rápida de Kit...\" data-target=\"#quickshop-modal\" data-component=\"product-list-item.ad...\" data-component-value=\"367609973\">",
+            "target": [
+              ".product-item-quick-shop-modal-trigger.js-quickshop-modal-open[data-component-value=\"367609973\"]"
+            ],
+            "failureSummary": "Fix all of the following:\n  aria-label attribute is not well supported on \"span\" elements with no valid role attribute."
+          },
+          {
+            "any": [],
+            "all": [],
+            "none": [
+              {
+                "id": "aria-prohibited-attr",
+                "data": {
+                  "role": null,
+                  "nodeName": "span",
+                  "messageKey": "noRoleSingular",
+                  "prohibited": [
+                    "aria-label"
+                  ]
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "aria-label attribute is not well supported on \"span\" elements with no valid role attribute."
+              }
+            ],
+            "impact": "serious",
+            "html": "<span class=\"product-item-quick-s...\" title=\"Compra rápida de Hom...\" aria-label=\"Compra rápida de Hom...\" data-target=\"#quickshop-modal\" data-component=\"product-list-item.ad...\" data-component-value=\"367609972\">",
+            "target": [
+              ".product-item-quick-shop-modal-trigger.js-quickshop-modal-open[data-component-value=\"367609972\"]"
+            ],
+            "failureSummary": "Fix all of the following:\n  aria-label attribute is not well supported on \"span\" elements with no valid role attribute."
+          },
+          {
+            "any": [],
+            "all": [],
+            "none": [
+              {
+                "id": "aria-prohibited-attr",
+                "data": {
+                  "role": null,
+                  "nodeName": "span",
+                  "messageKey": "noRoleSingular",
+                  "prohibited": [
+                    "aria-label"
+                  ]
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "aria-label attribute is not well supported on \"span\" elements with no valid role attribute."
+              }
+            ],
+            "impact": "serious",
+            "html": "<span class=\"product-item-quick-s...\" title=\"Compra rápida de Tob...\" aria-label=\"Compra rápida de Tob...\" data-target=\"#quickshop-modal\" data-component=\"product-list-item.ad...\" data-component-value=\"367609971\">",
+            "target": [
+              ".product-item-quick-shop-modal-trigger.js-quickshop-modal-open[data-component-value=\"367609971\"]"
+            ],
+            "failureSummary": "Fix all of the following:\n  aria-label attribute is not well supported on \"span\" elements with no valid role attribute."
+          },
+          {
+            "any": [],
+            "all": [],
+            "none": [
+              {
+                "id": "aria-prohibited-attr",
+                "data": {
+                  "role": null,
+                  "nodeName": "span",
+                  "messageKey": "noRoleSingular",
+                  "prohibited": [
+                    "aria-label"
+                  ]
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "aria-label attribute is not well supported on \"span\" elements with no valid role attribute."
+              }
+            ],
+            "impact": "serious",
+            "html": "<span class=\"product-item-quick-s...\" title=\"Compra rápida de Bot...\" aria-label=\"Compra rápida de Bot...\" data-target=\"#quickshop-modal\" data-component=\"product-list-item.ad...\" data-component-value=\"367609970\">",
+            "target": [
+              ".product-item-quick-shop-modal-trigger.js-quickshop-modal-open[data-component-value=\"367609970\"]"
+            ],
+            "failureSummary": "Fix all of the following:\n  aria-label attribute is not well supported on \"span\" elements with no valid role attribute."
+          }
+        ]
+      },
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "tags": [
+          "cat.color",
+          "wcag2aa",
+          "wcag143",
+          "TTv5",
+          "TT13.c",
+          "EN-301-549",
+          "EN-9.1.4.3",
+          "ACT",
+          "RGAAv4",
+          "RGAA-3.2.1"
+        ],
+        "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+        "help": "Elements must meet minimum color contrast ratio thresholds",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.14/color-contrast?application=axeAPI",
+        "nodes": [
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "9.0pt (12px)",
+                  "fontWeight": "normal",
+                  "messageKey": "elmPartiallyObscured",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<div class=\"js-head-main head-ma...\" data-store=\"head\" data-section-id=\"header\" data-section-type=\"header\" data-sticky-header=\"true\" data-transparent-hea...=\"false\" data-normal-style=\"--header-background:...\" style=\"--header-background:...\">",
+                    "target": [
+                      ".js-head-main"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element's background color could not be determined because it's partially obscured by another element"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<a href=\"https://rhinoipanema.mitiendanube.com/compresion-frio-y-calor/\" class=\"nav-list-link\">COMPRESIÓN FRÍO Y CALOR</a>",
+            "target": [
+              ".list-item.nav-item:nth-child(4) > .nav-list-link"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined because it's partially obscured by another element"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "9.0pt (12px)",
+                  "fontWeight": "normal",
+                  "messageKey": "elmPartiallyObscured",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<div class=\"js-head-main head-ma...\" data-store=\"head\" data-section-id=\"header\" data-section-type=\"header\" data-sticky-header=\"true\" data-transparent-hea...=\"false\" data-normal-style=\"--header-background:...\" style=\"--header-background:...\">",
+                    "target": [
+                      ".js-head-main"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element's background color could not be determined because it's partially obscured by another element"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<a href=\"https://rhinoipanema.mitiendanube.com/accesorios/\" class=\"nav-list-link\">ACCESORIOS</a>",
+            "target": [
+              ".list-item.nav-item:nth-child(5) > .nav-list-link"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined because it's partially obscured by another element"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "9.0pt (12px)",
+                  "fontWeight": "normal",
+                  "messageKey": "elmPartiallyObscuring",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element's background color could not be determined because it partially overlaps other elements"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span class=\"notification-message\">Al navegar por este sitio <strong>aceptas el uso de cookies</strong> para agilizar tu experiencia de compra.</span>",
+            "target": [
+              ".notification-message"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined because it partially overlaps other elements"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "9.0pt (12px)",
+                  "fontWeight": "normal",
+                  "messageKey": "shortTextContent",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<img fetchpriority=\"high\" width=\"2000\" height=\"2000\" class=\" image-priority-high...\" sizes=\"(min-width: 768px) 5...\" data-expand=\"50\" alt=\"Manga de Compresión ...\" src=\"//dcdn-us.mitiendanu...\" srcset=\"//dcdn-us.mitiendanu...\">",
+                    "target": [
+                      "div[data-image=\"1273353244\"] > .image-priority-high.product-item-image-featured[fetchpriority=\"high\"]"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element content is too short to determine if it is actual text content"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span class=\"swiper-pagination-current\">1</span>",
+            "target": [
+              ".swiper-pagination-fraction.js-product-item-slider-pagination-private[data-item-slider-id=\"367609975\"] > .swiper-pagination-current"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content is too short to determine if it is actual text content"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "9.0pt (12px)",
+                  "fontWeight": "normal",
+                  "messageKey": "shortTextContent",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<img fetchpriority=\"high\" width=\"2000\" height=\"2000\" class=\" image-priority-high...\" sizes=\"(min-width: 768px) 5...\" data-expand=\"50\" alt=\"Manga de Compresión ...\" src=\"//dcdn-us.mitiendanu...\" srcset=\"//dcdn-us.mitiendanu...\">",
+                    "target": [
+                      "div[data-image=\"1273353244\"] > .image-priority-high.product-item-image-featured[fetchpriority=\"high\"]"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element content is too short to determine if it is actual text content"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span class=\"swiper-pagination-total\">8</span>",
+            "target": [
+              ".swiper-pagination-fraction.js-product-item-slider-pagination-private[data-item-slider-id=\"367609975\"] > .swiper-pagination-total"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content is too short to determine if it is actual text content"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "9.0pt (12px)",
+                  "fontWeight": "normal",
+                  "messageKey": "shortTextContent",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<img fetchpriority=\"high\" width=\"1280\" height=\"1280\" class=\" image-priority-high...\" sizes=\"(min-width: 768px) 5...\" data-expand=\"50\" alt=\"Kit Tina de Hielo TU...\" src=\"//dcdn-us.mitiendanu...\" srcset=\"//dcdn-us.mitiendanu...\">",
+                    "target": [
+                      ".image-priority-high[fetchpriority=\"high\"][width=\"1280\"]"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element content is too short to determine if it is actual text content"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span class=\"swiper-pagination-current\">1</span>",
+            "target": [
+              ".swiper-pagination-fraction.js-product-item-slider-pagination-private[data-item-slider-id=\"367609979\"] > .swiper-pagination-current"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content is too short to determine if it is actual text content"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "9.0pt (12px)",
+                  "fontWeight": "normal",
+                  "messageKey": "shortTextContent",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<img fetchpriority=\"high\" width=\"1280\" height=\"1280\" class=\" image-priority-high...\" sizes=\"(min-width: 768px) 5...\" data-expand=\"50\" alt=\"Kit Tina de Hielo TU...\" src=\"//dcdn-us.mitiendanu...\" srcset=\"//dcdn-us.mitiendanu...\">",
+                    "target": [
+                      ".image-priority-high[fetchpriority=\"high\"][width=\"1280\"]"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element content is too short to determine if it is actual text content"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span class=\"swiper-pagination-total\">7</span>",
+            "target": [
+              ".swiper-pagination-fraction.js-product-item-slider-pagination-private[data-item-slider-id=\"367609979\"] > .swiper-pagination-total"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content is too short to determine if it is actual text content"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "9.0pt (12px)",
+                  "fontWeight": "normal",
+                  "messageKey": "shortTextContent",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<img width=\"4500\" height=\"4500\" class=\"js-product-item-imag...\" sizes=\"(min-width: 768px) 5...\" data-expand=\"50\" alt=\"Botas de Presoterapi...\" src=\"data:image/gif;base6...\" data-srcset=\"//dcdn-us.mitiendanu...\" srcset=\"//dcdn-us.mitiendanu...\">",
+                    "target": [
+                      ".ls-is-cached.lazyloaded[alt=\"Botas de Presoterapia PRO 3\"]"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element content is too short to determine if it is actual text content"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span class=\"swiper-pagination-current\">1</span>",
+            "target": [
+              ".swiper-pagination-fraction.js-product-item-slider-pagination-private[data-item-slider-id=\"367609978\"] > .swiper-pagination-current"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content is too short to determine if it is actual text content"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "9.0pt (12px)",
+                  "fontWeight": "normal",
+                  "messageKey": "shortTextContent",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<img width=\"4500\" height=\"4500\" class=\"js-product-item-imag...\" sizes=\"(min-width: 768px) 5...\" data-expand=\"50\" alt=\"Botas de Presoterapi...\" src=\"data:image/gif;base6...\" data-srcset=\"//dcdn-us.mitiendanu...\" srcset=\"//dcdn-us.mitiendanu...\">",
+                    "target": [
+                      ".ls-is-cached.lazyloaded[alt=\"Botas de Presoterapia PRO 3\"]"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element content is too short to determine if it is actual text content"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span class=\"swiper-pagination-total\">5</span>",
+            "target": [
+              ".swiper-pagination-fraction.js-product-item-slider-pagination-private[data-item-slider-id=\"367609978\"] > .swiper-pagination-total"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content is too short to determine if it is actual text content"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "9.0pt (12px)",
+                  "fontWeight": "normal",
+                  "messageKey": "shortTextContent",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<img width=\"4500\" height=\"4500\" class=\"js-product-item-imag...\" sizes=\"(min-width: 768px) 5...\" data-expand=\"50\" alt=\"Kit Botas de Presote...\" src=\"data:image/gif;base6...\" data-srcset=\"//dcdn-us.mitiendanu...\" srcset=\"//dcdn-us.mitiendanu...\">",
+                    "target": [
+                      "div[data-image=\"1273353259\"] > .ls-is-cached.lazyloaded.product-item-image-featured"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element content is too short to determine if it is actual text content"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span class=\"swiper-pagination-current\">1</span>",
+            "target": [
+              ".swiper-pagination-fraction.js-product-item-slider-pagination-private[data-item-slider-id=\"367609977\"] > .swiper-pagination-current"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content is too short to determine if it is actual text content"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "9.0pt (12px)",
+                  "fontWeight": "normal",
+                  "messageKey": "shortTextContent",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<img width=\"4500\" height=\"4500\" class=\"js-product-item-imag...\" sizes=\"(min-width: 768px) 5...\" data-expand=\"50\" alt=\"Kit Botas de Presote...\" src=\"data:image/gif;base6...\" data-srcset=\"//dcdn-us.mitiendanu...\" srcset=\"//dcdn-us.mitiendanu...\">",
+                    "target": [
+                      "div[data-image=\"1273353259\"] > .ls-is-cached.lazyloaded.product-item-image-featured"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element content is too short to determine if it is actual text content"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span class=\"swiper-pagination-total\">9</span>",
+            "target": [
+              ".swiper-pagination-fraction.js-product-item-slider-pagination-private[data-item-slider-id=\"367609977\"] > .swiper-pagination-total"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content is too short to determine if it is actual text content"
+          }
+        ]
+      },
+      {
+        "id": "duplicate-id-aria",
+        "impact": "critical",
+        "tags": [
+          "cat.parsing",
+          "wcag2a",
+          "wcag412",
+          "EN-301-549",
+          "EN-9.4.1.2",
+          "RGAAv4",
+          "RGAA-8.2.1"
+        ],
+        "description": "Ensure every id attribute value used in ARIA and in labels is unique",
+        "help": "IDs used in ARIA and labels must be unique",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.14/duplicate-id-aria?application=axeAPI",
+        "nodes": [
+          {
+            "any": [
+              {
+                "id": "duplicate-id-aria",
+                "data": "variation_1",
+                "relatedNodes": [
+                  {
+                    "html": "<select id=\"variation_1\" class=\"form-select js-variation-option js-refresh-installment-data \" name=\"variation[0]\">",
+                    "target": [
+                      "div[data-store=\"product-item-info-367609978\"] > .js-item-variants.hidden > .js-product-form[action=\"/comprar/\"][method=\"post\"] > .js-product-variants.product-detail-variants.js-product-quickshop-variants > .js-product-variants-group.product-detail-variants-group.product-detail-variants-group-spaced > .form-group.d-none > .js-variation-option.js-refresh-installment-data[name=\"variation[0]\"]"
+                    ]
+                  },
+                  {
+                    "html": "<select id=\"variation_1\" class=\"form-select js-variation-option js-refresh-installment-data \" name=\"variation[0]\">",
+                    "target": [
+                      "div[data-store=\"product-item-info-367609977\"] > .js-item-variants.hidden > .js-product-form[action=\"/comprar/\"][method=\"post\"] > .js-product-variants.product-detail-variants.js-product-quickshop-variants > .js-product-variants-group.product-detail-variants-group.product-detail-variants-group-spaced > .form-group.d-none > .js-variation-option.js-refresh-installment-data[name=\"variation[0]\"]"
+                    ]
+                  },
+                  {
+                    "html": "<select id=\"variation_1\" class=\"form-select js-variation-option js-refresh-installment-data \" name=\"variation[0]\">\n        \t\t\t\t\t\t\t\t\t\t\t\t\t<option value=\"Talla única\" selected=\"selected\">Talla única</option>\n\t\t\t\t\t\t\t\t\t\t\t    </select>",
+                    "target": [
+                      "div[data-store=\"product-item-info-367609976\"] > .js-item-variants.hidden > .js-product-form[action=\"/comprar/\"][method=\"post\"] > .js-product-variants.product-detail-variants.js-product-quickshop-variants > .js-product-variants-group.product-detail-variants-group.product-detail-variants-group-spaced > .form-group.d-none > .js-variation-option.js-refresh-installment-data[name=\"variation[0]\"]"
+                    ]
+                  },
+                  {
+                    "html": "<select id=\"variation_1\" class=\"form-select js-variation-option js-refresh-installment-data \" name=\"variation[0]\">",
+                    "target": [
+                      "div[data-store=\"product-item-info-367609973\"] > .js-item-variants.hidden > .js-product-form[action=\"/comprar/\"][method=\"post\"] > .js-product-variants.product-detail-variants.js-product-quickshop-variants > .js-product-variants-group.product-detail-variants-group.product-detail-variants-group-spaced > .form-group.d-none > .js-variation-option.js-refresh-installment-data[name=\"variation[0]\"]"
+                    ]
+                  },
+                  {
+                    "html": "<select id=\"variation_1\" class=\"form-select js-variation-option js-refresh-installment-data \" name=\"variation[0]\">",
+                    "target": [
+                      "div[data-store=\"product-item-info-367609972\"] > .js-item-variants.hidden > .js-product-form[action=\"/comprar/\"][method=\"post\"] > .js-product-variants.product-detail-variants.js-product-quickshop-variants > .js-product-variants-group.product-detail-variants-group.product-detail-variants-group-spaced > .form-group.d-none > .js-variation-option.js-refresh-installment-data[name=\"variation[0]\"]"
+                    ]
+                  },
+                  {
+                    "html": "<select id=\"variation_1\" class=\"form-select js-variation-option js-refresh-installment-data \" name=\"variation[0]\">",
+                    "target": [
+                      "div[data-store=\"product-item-info-367609971\"] > .js-item-variants.hidden > .js-product-form[action=\"/comprar/\"][method=\"post\"] > .js-product-variants.product-detail-variants.js-product-quickshop-variants > .js-product-variants-group.product-detail-variants-group.product-detail-variants-group-spaced > .form-group.d-none > .js-variation-option.js-refresh-installment-data[name=\"variation[0]\"]"
+                    ]
+                  },
+                  {
+                    "html": "<select id=\"variation_1\" class=\"form-select js-variation-option js-refresh-installment-data \" name=\"variation[0]\">",
+                    "target": [
+                      "div[data-store=\"product-item-info-367609970\"] > .js-item-variants.hidden > .js-product-form[action=\"/comprar/\"][method=\"post\"] > .js-product-variants.product-detail-variants.js-product-quickshop-variants > .js-product-variants-group.product-detail-variants-group.product-detail-variants-group-spaced > .form-group.d-none > .js-variation-option.js-refresh-installment-data[name=\"variation[0]\"]"
+                    ]
+                  }
+                ],
+                "impact": "critical",
+                "message": "Document has multiple elements referenced with ARIA with the same id attribute: variation_1"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "critical",
+            "html": "<select id=\"variation_1\" class=\"form-select js-variation-option js-refresh-installment-data \" name=\"variation[0]\">",
+            "target": [
+              "div[data-store=\"product-item-info-367609975\"] > .js-item-variants.hidden > .js-product-form[action=\"/comprar/\"][method=\"post\"] > .js-product-variants.product-detail-variants.js-product-quickshop-variants > .js-product-variants-group.product-detail-variants-group.product-detail-variants-group-spaced > .form-group.d-none > .js-variation-option.js-refresh-installment-data[name=\"variation[0]\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Document has multiple elements referenced with ARIA with the same id attribute: variation_1"
+          }
+        ]
+      }
+    ],
+    "passes": [
+      "aria-allowed-attr",
+      "aria-conditional-attr",
+      "aria-deprecated-role",
+      "aria-hidden-body",
+      "aria-hidden-focus",
+      "aria-prohibited-attr",
+      "aria-required-attr",
+      "aria-roles",
+      "aria-valid-attr-value",
+      "aria-valid-attr",
+      "avoid-inline-spacing",
+      "button-name",
+      "bypass",
+      "color-contrast",
+      "document-title",
+      "duplicate-id-aria",
+      "html-has-lang",
+      "html-lang-valid",
+      "image-alt",
+      "input-button-name",
+      "link-name",
+      "list",
+      "listitem",
+      "meta-viewport",
+      "nested-interactive",
+      "scrollable-region-focusable",
+      "target-size"
+    ]
+  },
+  "limitations": [
+    "Una ruta representativa de este template; no todas sus variantes.",
+    "Geometría y screenshot con recarga y emulación de dispositivo; no benchmark de velocidad.",
+    "Dos páginas concurrentes; no usar estos tiempos como medición de rendimiento."
+  ]
+}

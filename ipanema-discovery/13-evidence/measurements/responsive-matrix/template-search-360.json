@@ -1,0 +1,35 @@
+{
+  "template": "template-search",
+  "url": "https://rhinoipanema.mitiendanube.com/search/?q=rhino",
+  "width": 360,
+  "verifiedAt": "2026-11-08T07:26:36.274Z",
+  "status": 200,
+  "dom": {
+    "finalUrl": "https://rhinoipanema.mitiendanube.com/search/?q=rhino",
+    "title": "rhino - RHINO IPANEMA",
+    "bodyClass": " template-search ",
+    "innerWidth": 360,
+    "scrollWidth": 360,
+    "h1": [
+      "Resultados de búsqueda"
+    ],
+    "images": 12,
+    "domNodes": 1050,
+    "sections": [
+      "navigation-bar",
+      "navigation-bar",
+      "header",
+      "header",
+      "page-header",
+      "main-products-grid",
+      "footer",
+      "cart-drawer"
+    ]
+  },
+  "axe": null,
+  "limitations": [
+    "Una ruta representativa de este template; no todas sus variantes.",
+    "Geometría y screenshot con recarga y emulación de dispositivo; no benchmark de velocidad.",
+    "Dos páginas concurrentes; no usar estos tiempos como medición de rendimiento."
+  ]
+}

@@ -1,0 +1,646 @@
+{
+  "template": "template-product",
+  "url": "https://rhinoipanema.mitiendanube.com/productos/baterias-doble-capacidad-pro-air/",
+  "width": 1440,
+  "verifiedAt": "2026-11-08T07:26:33.604Z",
+  "status": 200,
+  "dom": {
+    "finalUrl": "https://rhinoipanema.mitiendanube.com/productos/baterias-doble-capacidad-pro-air/",
+    "title": "Baterías Doble Capacidad para Botas PRO AIR | RHINO",
+    "bodyClass": " template-product ",
+    "innerWidth": 1440,
+    "scrollWidth": 1440,
+    "h1": [
+      "Baterías PRO AIR - Doble Capacidad",
+      "Incluye: 2 BATERÍAS DE DOBLE CAPACIDAD"
+    ],
+    "images": 28,
+    "domNodes": 1271,
+    "sections": [
+      "navigation-bar",
+      "navigation-bar",
+      "header",
+      "header",
+      "main-product",
+      "related-products",
+      "related-products",
+      "footer",
+      "cart-drawer"
+    ]
+  },
+  "axe": {
+    "engine": {
+      "name": "axe-core",
+      "version": "4.14.0"
+    },
+    "violations": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "tags": [
+          "cat.color",
+          "wcag2aa",
+          "wcag143",
+          "TTv5",
+          "TT13.c",
+          "EN-301-549",
+          "EN-9.1.4.3",
+          "ACT",
+          "RGAAv4",
+          "RGAA-3.2.1"
+        ],
+        "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+        "help": "Elements must meet minimum color contrast ratio thresholds",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.14/color-contrast?application=axeAPI",
+        "nodes": [
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "fgColor": "#898581",
+                  "bgColor": "#ffffff",
+                  "contrastRatio": 3.66,
+                  "fontSize": "9.0pt (12px)",
+                  "fontWeight": "normal",
+                  "messageKey": null,
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<body class=\" template-product \" data-ajax-cart=\"true\" data-inactive-tab-msg1=\"No te lo pierdas...\" data-inactive-tab-msg2=\"¡Vuelve!\" data-preview=\"false\">",
+                    "target": [
+                      "body"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element has insufficient color contrast of 3.66 (foreground color: #898581, background color: #ffffff, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<div class=\"product-sku\">\n\t\t\t\tSKU: <span class=\"js-product-sku\">07503045340580</span>\n\t\t\t</div>",
+            "target": [
+              ".product-sku"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.66 (foreground color: #898581, background color: #ffffff, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "fgColor": "#898581",
+                  "bgColor": "#ffffff",
+                  "contrastRatio": 3.66,
+                  "fontSize": "9.0pt (12px)",
+                  "fontWeight": "normal",
+                  "messageKey": null,
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<body class=\" template-product \" data-ajax-cart=\"true\" data-inactive-tab-msg1=\"No te lo pierdas...\" data-inactive-tab-msg2=\"¡Vuelve!\" data-preview=\"false\">",
+                    "target": [
+                      "body"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element has insufficient color contrast of 3.66 (foreground color: #898581, background color: #ffffff, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span class=\"js-product-sku\">07503045340580</span>",
+            "target": [
+              ".js-product-sku"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.66 (foreground color: #898581, background color: #ffffff, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ]
+      },
+      {
+        "id": "label-content-name-mismatch",
+        "impact": "serious",
+        "tags": [
+          "cat.semantics",
+          "wcag21a",
+          "wcag253",
+          "EN-301-549",
+          "EN-9.2.5.3",
+          "RGAAv4",
+          "RGAA-6.1.5"
+        ],
+        "description": "Ensure that elements labelled through their content must have their visible text as part of their accessible name",
+        "help": "Elements must have their visible text as part of their accessible name",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.14/label-content-name-mismatch?application=axeAPI",
+        "nodes": [
+          {
+            "any": [
+              {
+                "id": "label-content-name-mismatch",
+                "data": null,
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Text inside the element is not included in the accessible name"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<button class=\"js-modal-open-private header-utility\" data-target=\"#modal-cart\" aria-label=\"Carrito de compras\">",
+            "target": [
+              "button[aria-label=\"Carrito de compras\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+          },
+          {
+            "any": [
+              {
+                "id": "label-content-name-mismatch",
+                "data": null,
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Text inside the element is not included in the accessible name"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<a href=\"https://rhinoipanema.mitiendanube.com/productos/botas-presoterapia-pro-3/\" title=\"Botas de Presoterapia PRO 3\" aria-label=\"Botas de Presoterapia PRO 3\" class=\"product-item-link \">",
+            "target": [
+              ".product-item-link[title=\"Botas de Presoterapia PRO 3\"][aria-label=\"Botas de Presoterapia PRO 3\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+          },
+          {
+            "any": [
+              {
+                "id": "label-content-name-mismatch",
+                "data": null,
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Text inside the element is not included in the accessible name"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<a href=\"https://rhinoipanema.mitiendanube.com/productos/compresor-pro-3-presoterapia/\" title=\"Compresor PRO 3\" aria-label=\"Compresor PRO 3\" class=\"product-item-link \">",
+            "target": [
+              ".product-item-link[title=\"Compresor PRO 3\"][aria-label=\"Compresor PRO 3\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+          },
+          {
+            "any": [
+              {
+                "id": "label-content-name-mismatch",
+                "data": null,
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Text inside the element is not included in the accessible name"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<a href=\"https://rhinoipanema.mitiendanube.com/productos/brazos-presoterapia-pro-3/\" title=\"Par de Brazos de Presoterapia PRO 3\" aria-label=\"Par de Brazos de Presoterapia PRO 3\" class=\"product-item-link \">",
+            "target": [
+              "div[data-store=\"product-item-info-367609969\"] > .product-item-link"
+            ],
+            "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+          },
+          {
+            "any": [
+              {
+                "id": "label-content-name-mismatch",
+                "data": null,
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Text inside the element is not included in the accessible name"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<a href=\"https://rhinoipanema.mitiendanube.com/productos/brazo-presoterapia-pro-3-individual/\" title=\"Brazo de Presoterapia PRO 3\" aria-label=\"Brazo de Presoterapia PRO 3\" class=\"product-item-link \">",
+            "target": [
+              ".product-item-link[title=\"Brazo de Presoterapia PRO 3\"][aria-label=\"Brazo de Presoterapia PRO 3\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+          }
+        ]
+      },
+      {
+        "id": "target-size",
+        "impact": "serious",
+        "tags": [
+          "cat.sensory-and-visual-cues",
+          "wcag22aa",
+          "wcag258",
+          "EN-301-549v4",
+          "EN-9.2.5.8"
+        ],
+        "description": "Ensure touch targets have sufficient size and space",
+        "help": "All touch targets must be 24px large, or leave sufficient space",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.14/target-size?application=axeAPI",
+        "nodes": [
+          {
+            "any": [
+              {
+                "id": "target-size",
+                "data": {
+                  "minSize": 24,
+                  "width": 14,
+                  "height": 14
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Target has insufficient size (14px by 14px, should be at least 24px by 24px)"
+              },
+              {
+                "id": "target-offset",
+                "data": {
+                  "closestOffset": 20,
+                  "minOffset": 24
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<a href=\"https://twitter.com/share?url=https://rhinoipanema.mitiendanube.com/productos/baterias-doble-capacidad-pro-air/\" class=\"social-share-link\" target=\"_blank\" rel=\"noopener noreferrer\" data-network=\"twitter\" title=\"Compartir en Twitter\" aria-label=\"Compartir en Twitter\">",
+                    "target": [
+                      "a[data-network=\"twitter\"]"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Target has insufficient space to its closest neighbors. Safe clickable space has a diameter of 20px instead of at least 24px."
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<a href=\"https://www.facebook.com/sharer/sharer.php?u=https://rhinoipanema.mitiendanube.com/productos/baterias-doble-capacidad-pro-air/\" class=\"social-share-link\" target=\"_blank\" rel=\"noopener noreferrer\" data-network=\"facebook\" title=\"Compartir en Facebook\" aria-label=\"Compartir en Facebook\">",
+            "target": [
+              "a[data-network=\"facebook\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Target has insufficient size (14px by 14px, should be at least 24px by 24px)\n  Target has insufficient space to its closest neighbors. Safe clickable space has a diameter of 20px instead of at least 24px."
+          },
+          {
+            "any": [
+              {
+                "id": "target-size",
+                "data": {
+                  "minSize": 24,
+                  "width": 14,
+                  "height": 14
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Target has insufficient size (14px by 14px, should be at least 24px by 24px)"
+              },
+              {
+                "id": "target-offset",
+                "data": {
+                  "closestOffset": 20,
+                  "minOffset": 24
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<a href=\"https://www.facebook.com/sharer/sharer.php?u=https://rhinoipanema.mitiendanube.com/productos/baterias-doble-capacidad-pro-air/\" class=\"social-share-link\" target=\"_blank\" rel=\"noopener noreferrer\" data-network=\"facebook\" title=\"Compartir en Facebook\" aria-label=\"Compartir en Facebook\">",
+                    "target": [
+                      "a[data-network=\"facebook\"]"
+                    ]
+                  },
+                  {
+                    "html": "<a href=\"#\" class=\"js-pinterest-share social-share-link\" target=\"_blank\" rel=\"noopener noreferrer\" data-network=\"pinterest\" title=\"Compartir en Pinterest\" aria-label=\"Compartir en Pinterest\">\n\t\t<svg class=\"icon-inline\"><use xlink:href=\"#pinterest\"></use></svg>\n\t</a>",
+                    "target": [
+                      ".js-pinterest-share"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Target has insufficient space to its closest neighbors. Safe clickable space has a diameter of 20px instead of at least 24px."
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<a href=\"https://twitter.com/share?url=https://rhinoipanema.mitiendanube.com/productos/baterias-doble-capacidad-pro-air/\" class=\"social-share-link\" target=\"_blank\" rel=\"noopener noreferrer\" data-network=\"twitter\" title=\"Compartir en Twitter\" aria-label=\"Compartir en Twitter\">",
+            "target": [
+              "a[data-network=\"twitter\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Target has insufficient size (14px by 14px, should be at least 24px by 24px)\n  Target has insufficient space to its closest neighbors. Safe clickable space has a diameter of 20px instead of at least 24px."
+          },
+          {
+            "any": [
+              {
+                "id": "target-size",
+                "data": {
+                  "minSize": 24,
+                  "width": 14,
+                  "height": 14
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Target has insufficient size (14px by 14px, should be at least 24px by 24px)"
+              },
+              {
+                "id": "target-offset",
+                "data": {
+                  "closestOffset": 20,
+                  "minOffset": 24
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<a href=\"https://twitter.com/share?url=https://rhinoipanema.mitiendanube.com/productos/baterias-doble-capacidad-pro-air/\" class=\"social-share-link\" target=\"_blank\" rel=\"noopener noreferrer\" data-network=\"twitter\" title=\"Compartir en Twitter\" aria-label=\"Compartir en Twitter\">",
+                    "target": [
+                      "a[data-network=\"twitter\"]"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Target has insufficient space to its closest neighbors. Safe clickable space has a diameter of 20px instead of at least 24px."
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<a href=\"#\" class=\"js-pinterest-share social-share-link\" target=\"_blank\" rel=\"noopener noreferrer\" data-network=\"pinterest\" title=\"Compartir en Pinterest\" aria-label=\"Compartir en Pinterest\">\n\t\t<svg class=\"icon-inline\"><use xlink:href=\"#pinterest\"></use></svg>\n\t</a>",
+            "target": [
+              ".js-pinterest-share"
+            ],
+            "failureSummary": "Fix any of the following:\n  Target has insufficient size (14px by 14px, should be at least 24px by 24px)\n  Target has insufficient space to its closest neighbors. Safe clickable space has a diameter of 20px instead of at least 24px."
+          }
+        ]
+      }
+    ],
+    "incomplete": [
+      {
+        "id": "aria-prohibited-attr",
+        "impact": "serious",
+        "tags": [
+          "cat.aria",
+          "wcag2a",
+          "wcag412",
+          "EN-301-549",
+          "EN-9.4.1.2",
+          "RGAAv4",
+          "RGAA-7.1.1"
+        ],
+        "description": "Ensure ARIA attributes are not prohibited for an element's role",
+        "help": "Elements must only use permitted ARIA attributes",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.14/aria-prohibited-attr?application=axeAPI",
+        "nodes": [
+          {
+            "any": [],
+            "all": [],
+            "none": [
+              {
+                "id": "aria-prohibited-attr",
+                "data": {
+                  "role": null,
+                  "nodeName": "span",
+                  "messageKey": "noRoleSingular",
+                  "prohibited": [
+                    "aria-label"
+                  ]
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "aria-label attribute is not well supported on \"span\" elements with no valid role attribute."
+              }
+            ],
+            "impact": "serious",
+            "html": "<span class=\"product-item-quick-s...\" title=\"Compra rápida de Bot...\" aria-label=\"Compra rápida de Bot...\" data-target=\"#quickshop-modal\" data-component=\"product-list-item.ad...\" data-component-value=\"367609978\">",
+            "target": [
+              "div[data-store=\"product-item-info-367609978\"] > .product-item-quick-shop-container.js-item-submit-container > .product-item-quick-shop-modal-trigger.js-quickshop-modal-open.js-quickshop-slide"
+            ],
+            "failureSummary": "Fix all of the following:\n  aria-label attribute is not well supported on \"span\" elements with no valid role attribute."
+          },
+          {
+            "any": [],
+            "all": [],
+            "none": [
+              {
+                "id": "aria-prohibited-attr",
+                "data": {
+                  "role": null,
+                  "nodeName": "span",
+                  "messageKey": "noRoleSingular",
+                  "prohibited": [
+                    "aria-label"
+                  ]
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "aria-label attribute is not well supported on \"span\" elements with no valid role attribute."
+              }
+            ],
+            "impact": "serious",
+            "html": "<span class=\"product-item-quick-s...\" title=\"Compra rápida de Bra...\" aria-label=\"Compra rápida de Bra...\" data-target=\"#quickshop-modal\" data-component=\"product-list-item.ad...\" data-component-value=\"367609976\">",
+            "target": [
+              "div[data-store=\"product-item-info-367609976\"] > .product-item-quick-shop-container.js-item-submit-container > .product-item-quick-shop-modal-trigger.js-quickshop-modal-open.js-quickshop-slide"
+            ],
+            "failureSummary": "Fix all of the following:\n  aria-label attribute is not well supported on \"span\" elements with no valid role attribute."
+          }
+        ]
+      },
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "tags": [
+          "cat.color",
+          "wcag2aa",
+          "wcag143",
+          "TTv5",
+          "TT13.c",
+          "EN-301-549",
+          "EN-9.1.4.3",
+          "ACT",
+          "RGAAv4",
+          "RGAA-3.2.1"
+        ],
+        "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+        "help": "Elements must meet minimum color contrast ratio thresholds",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.14/color-contrast?application=axeAPI",
+        "nodes": [
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "9.0pt (12px)",
+                  "fontWeight": "normal",
+                  "messageKey": "elmPartiallyObscuring",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element's background color could not be determined because it partially overlaps other elements"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span class=\"notification-message\">Al navegar por este sitio <strong>aceptas el uso de cookies</strong> para agilizar tu experiencia de compra.</span>",
+            "target": [
+              ".notification-message"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined because it partially overlaps other elements"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "10.5pt (14px)",
+                  "fontWeight": "normal",
+                  "messageKey": "shortTextContent",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<img fetchpriority=\"high\" width=\"1280\" height=\"1280\" class=\" image-priority-high...\" alt=\"Baterías PRO AIR - D...\" src=\"//dcdn-us.mitiendanu...\" srcset=\"//dcdn-us.mitiendanu...\">",
+                    "target": [
+                      ".image-priority-high"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element content is too short to determine if it is actual text content"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span class=\"swiper-pagination-current\">1</span>",
+            "target": [
+              ".swiper-pagination-current"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content is too short to determine if it is actual text content"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "10.5pt (14px)",
+                  "fontWeight": "normal",
+                  "messageKey": "shortTextContent",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<img fetchpriority=\"high\" width=\"1280\" height=\"1280\" class=\" image-priority-high...\" alt=\"Baterías PRO AIR - D...\" src=\"//dcdn-us.mitiendanu...\" srcset=\"//dcdn-us.mitiendanu...\">",
+                    "target": [
+                      ".image-priority-high"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element content is too short to determine if it is actual text content"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span class=\"swiper-pagination-total\">5</span>",
+            "target": [
+              ".swiper-pagination-total"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content is too short to determine if it is actual text content"
+          }
+        ]
+      },
+      {
+        "id": "duplicate-id-aria",
+        "impact": "critical",
+        "tags": [
+          "cat.parsing",
+          "wcag2a",
+          "wcag412",
+          "EN-301-549",
+          "EN-9.4.1.2",
+          "RGAAv4",
+          "RGAA-8.2.1"
+        ],
+        "description": "Ensure every id attribute value used in ARIA and in labels is unique",
+        "help": "IDs used in ARIA and labels must be unique",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.14/duplicate-id-aria?application=axeAPI",
+        "nodes": [
+          {
+            "any": [
+              {
+                "id": "duplicate-id-aria",
+                "data": "variation_1",
+                "relatedNodes": [
+                  {
+                    "html": "<select id=\"variation_1\" class=\"form-select js-variation-option js-refresh-installment-data \" name=\"variation[0]\">\n        \t\t\t\t\t\t\t\t\t\t\t\t\t<option value=\"Talla única\" selected=\"selected\">Talla única</option>\n\t\t\t\t\t\t\t\t\t\t\t    </select>",
+                    "target": [
+                      "div[data-store=\"product-item-info-367609976\"] > .js-item-variants.hidden > .js-product-form[action=\"/comprar/\"][method=\"post\"] > .js-product-variants.product-detail-variants.js-product-quickshop-variants > .js-product-variants-group.product-detail-variants-group.product-detail-variants-group-spaced > .d-none.form-group > select"
+                    ]
+                  }
+                ],
+                "impact": "critical",
+                "message": "Document has multiple elements referenced with ARIA with the same id attribute: variation_1"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "critical",
+            "html": "<select id=\"variation_1\" class=\"form-select js-variation-option js-refresh-installment-data \" name=\"variation[0]\">",
+            "target": [
+              "div[data-store=\"product-item-info-367609978\"] > .js-item-variants.hidden > .js-product-form[action=\"/comprar/\"][method=\"post\"] > .js-product-variants.product-detail-variants.js-product-quickshop-variants > .js-product-variants-group.product-detail-variants-group.product-detail-variants-group-spaced > .d-none.form-group > select"
+            ],
+            "failureSummary": "Fix any of the following:\n  Document has multiple elements referenced with ARIA with the same id attribute: variation_1"
+          }
+        ]
+      }
+    ],
+    "passes": [
+      "aria-allowed-attr",
+      "aria-conditional-attr",
+      "aria-deprecated-role",
+      "aria-hidden-body",
+      "aria-hidden-focus",
+      "aria-prohibited-attr",
+      "aria-required-attr",
+      "aria-roles",
+      "aria-valid-attr-value",
+      "aria-valid-attr",
+      "avoid-inline-spacing",
+      "button-name",
+      "bypass",
+      "color-contrast",
+      "document-title",
+      "duplicate-id-aria",
+      "form-field-multiple-labels",
+      "html-has-lang",
+      "html-lang-valid",
+      "image-alt",
+      "input-button-name",
+      "label-content-name-mismatch",
+      "label",
+      "link-name",
+      "list",
+      "listitem",
+      "meta-viewport",
+      "nested-interactive",
+      "target-size",
+      "td-headers-attr"
+    ]
+  },
+  "limitations": [
+    "Una ruta representativa de este template; no todas sus variantes.",
+    "Geometría y screenshot con recarga y emulación de dispositivo; no benchmark de velocidad.",
+    "Dos páginas concurrentes; no usar estos tiempos como medición de rendimiento."
+  ]
+}

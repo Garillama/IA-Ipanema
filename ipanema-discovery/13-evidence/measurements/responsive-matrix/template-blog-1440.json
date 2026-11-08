@@ -1,0 +1,244 @@
+{
+  "template": "template-blog",
+  "url": "https://rhinoipanema.mitiendanube.com/blog/",
+  "width": 1440,
+  "verifiedAt": "2026-11-08T07:27:23.301Z",
+  "status": 200,
+  "dom": {
+    "finalUrl": "https://rhinoipanema.mitiendanube.com/blog/",
+    "title": "Blog - RHINO IPANEMA",
+    "bodyClass": " template-blog ",
+    "innerWidth": 1440,
+    "scrollWidth": 1440,
+    "h1": [
+      "Blog"
+    ],
+    "images": 13,
+    "domNodes": 785,
+    "sections": [
+      "navigation-bar",
+      "navigation-bar",
+      "header",
+      "header",
+      "page-header",
+      "main-blog",
+      "footer",
+      "cart-drawer"
+    ]
+  },
+  "axe": {
+    "engine": {
+      "name": "axe-core",
+      "version": "4.14.0"
+    },
+    "violations": [
+      {
+        "id": "label-content-name-mismatch",
+        "impact": "serious",
+        "tags": [
+          "cat.semantics",
+          "wcag21a",
+          "wcag253",
+          "EN-301-549",
+          "EN-9.2.5.3",
+          "RGAAv4",
+          "RGAA-6.1.5"
+        ],
+        "description": "Ensure that elements labelled through their content must have their visible text as part of their accessible name",
+        "help": "Elements must have their visible text as part of their accessible name",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.14/label-content-name-mismatch?application=axeAPI",
+        "nodes": [
+          {
+            "any": [
+              {
+                "id": "label-content-name-mismatch",
+                "data": null,
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Text inside the element is not included in the accessible name"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<button class=\"js-modal-open-private header-utility\" data-target=\"#modal-cart\" aria-label=\"Carrito de compras\">",
+            "target": [
+              "button[aria-label=\"Carrito de compras\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+          },
+          {
+            "any": [
+              {
+                "id": "label-content-name-mismatch",
+                "data": null,
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Text inside the element is not included in the accessible name"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<a href=\"/blog/posts/lo-que-separa-a-los-pros-no-es-el-talento-es-la-recuperacin-d2cc07bb9c46\" title=\"Lo que separa a los pros no es el talento, es la recuperación\" aria-label=\"Lo que separa a los pros no es el talento, es la recuperación\" class=\"post-item-link\">",
+            "target": [
+              ".post-item:nth-child(1) > .post-item-information > .post-item-link"
+            ],
+            "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+          },
+          {
+            "any": [
+              {
+                "id": "label-content-name-mismatch",
+                "data": null,
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Text inside the element is not included in the accessible name"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<a href=\"/blog/posts/lo-que-separa-a-los-pros-no-es-el-talento-es-la-recuperacin-7cc2ca9b1e3b\" title=\"Lo que separa a los pros no es el talento, es la recuperación\" aria-label=\"Lo que separa a los pros no es el talento, es la recuperación\" class=\"post-item-link\">",
+            "target": [
+              ".post-item:nth-child(2) > .post-item-information > .post-item-link"
+            ],
+            "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+          },
+          {
+            "any": [
+              {
+                "id": "label-content-name-mismatch",
+                "data": null,
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Text inside the element is not included in the accessible name"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<a href=\"/blog/posts/ests-respirando-mal-y-est-afectando-tu-rendimiento-5c3710aca4a6\" title=\"Estás respirando mal (y está afectando tu rendimiento)\" aria-label=\"Estás respirando mal (y está afectando tu rendimiento)\" class=\"post-item-link\">",
+            "target": [
+              ".post-item:nth-child(3) > .post-item-information > .post-item-link"
+            ],
+            "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+          },
+          {
+            "any": [
+              {
+                "id": "label-content-name-mismatch",
+                "data": null,
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Text inside the element is not included in the accessible name"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<a href=\"/blog/posts/no-es-solo-fuerza-es-lo-que-tu-brazo-acumula-en-cada-remada-b1ff2320ff44\" title=\"No es solo fuerza: es lo que tu brazo acumula en cada remada\" aria-label=\"No es solo fuerza: es lo que tu brazo acumula en cada remada\" class=\"post-item-link\">",
+            "target": [
+              ".post-item:nth-child(4) > .post-item-information > .post-item-link"
+            ],
+            "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+          },
+          {
+            "any": [
+              {
+                "id": "label-content-name-mismatch",
+                "data": null,
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Text inside the element is not included in the accessible name"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<a href=\"/blog/posts/el-fro-no-es-sufrimiento-es-estrategia-99f512d89990\" title=\"El frío no es sufrimiento, es estrategia.\" aria-label=\"El frío no es sufrimiento, es estrategia.\" class=\"post-item-link\">",
+            "target": [
+              ".post-item:nth-child(5) > .post-item-information > .post-item-link"
+            ],
+            "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+          },
+          {
+            "any": [
+              {
+                "id": "label-content-name-mismatch",
+                "data": null,
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Text inside the element is not included in the accessible name"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<a href=\"/blog/posts/sdsadsa-2d5dbba3053e\" title=\"8 cosas buenas que le pasan a tu cuerpo cuando empiezas a correr\" aria-label=\"8 cosas buenas que le pasan a tu cuerpo cuando empiezas a correr\" class=\"post-item-link\">",
+            "target": [
+              ".post-item:nth-child(6) > .post-item-information > .post-item-link"
+            ],
+            "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+          },
+          {
+            "any": [
+              {
+                "id": "label-content-name-mismatch",
+                "data": null,
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Text inside the element is not included in the accessible name"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<a href=\"/blog/posts/fdsads-e7fa1639e04b\" title=\"Septiembre es de boxeo. Y el boxeo no perdona los brazos que no recuperan.\" aria-label=\"Septiembre es de boxeo. Y el boxeo no perdona los brazos que no recuperan.\" class=\"post-item-link\">",
+            "target": [
+              ".post-item:nth-child(7) > .post-item-information > .post-item-link"
+            ],
+            "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+          }
+        ]
+      }
+    ],
+    "incomplete": [],
+    "passes": [
+      "aria-allowed-attr",
+      "aria-conditional-attr",
+      "aria-deprecated-role",
+      "aria-hidden-body",
+      "aria-hidden-focus",
+      "aria-prohibited-attr",
+      "aria-required-attr",
+      "aria-roles",
+      "aria-valid-attr-value",
+      "aria-valid-attr",
+      "avoid-inline-spacing",
+      "button-name",
+      "bypass",
+      "color-contrast",
+      "document-title",
+      "duplicate-id-aria",
+      "form-field-multiple-labels",
+      "html-has-lang",
+      "html-lang-valid",
+      "image-alt",
+      "input-button-name",
+      "label-content-name-mismatch",
+      "label",
+      "link-name",
+      "list",
+      "listitem",
+      "meta-viewport",
+      "nested-interactive",
+      "target-size"
+    ]
+  },
+  "limitations": [
+    "Una ruta representativa de este template; no todas sus variantes.",
+    "Geometría y screenshot con recarga y emulación de dispositivo; no benchmark de velocidad.",
+    "Dos páginas concurrentes; no usar estos tiempos como medición de rendimiento."
+  ]
+}

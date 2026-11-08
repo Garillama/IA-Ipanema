@@ -1,0 +1,89 @@
+{
+  "date": "2026-11-08",
+  "crawl_attempts": 48,
+  "unique_html_destinations": 46,
+  "public_template_types": 13,
+  "template_distribution": {
+    "template-home": 1,
+    "template-contact": 1,
+    "template-category": 6,
+    "template-page": 6,
+    "template-product": 17,
+    "template-search": 2,
+    "template-cart": 1,
+    "template-404": 1,
+    "template-account-login": 2,
+    "template-account-register": 1,
+    "template-blog": 1,
+    "template-account-reset": 1,
+    "template-blog-post": 7
+  },
+  "remaining_queue": 0,
+  "responsive_samples_other_than_home": 72,
+  "responsive_errors": [],
+  "responsive_overflows": [
+    {
+      "template": "template-product",
+      "url": "https://rhinoipanema.mitiendanube.com/productos/baterias-doble-capacidad-pro-air/",
+      "width": 768,
+      "status": 200,
+      "overflow": true
+    },
+    {
+      "template": "template-product",
+      "url": "https://rhinoipanema.mitiendanube.com/productos/baterias-doble-capacidad-pro-air/",
+      "width": 1024,
+      "status": 200,
+      "overflow": true
+    }
+  ],
+  "screenshots": 216,
+  "lighthouse_runs": 8,
+  "jsonld_errors": [
+    {
+      "url": "https://rhinoipanema.mitiendanube.com/__ipanema_discovery_404__/",
+      "errors": [
+        "SyntaxError: Unexpected token ']', ...\"\t\t\t\t\t\t\t\t\t\t]\n\t\t}\t}\n\t\" is not valid JSON"
+      ]
+    }
+  ],
+  "multiple_h1_routes": [
+    "https://rhinoipanema.mitiendanube.com/productos/baterias-doble-capacidad-pro-air/",
+    "https://rhinoipanema.mitiendanube.com/productos/pistola-de-masaje-gun-air/",
+    "https://rhinoipanema.mitiendanube.com/productos/compresor-pro-3-presoterapia/",
+    "https://rhinoipanema.mitiendanube.com/productos/botas-presoterapia-inalambricas-pro-air/",
+    "https://rhinoipanema.mitiendanube.com/productos/tobillera-frio-y-calor/",
+    "https://rhinoipanema.mitiendanube.com/productos/hombrera-frio-y-calor/",
+    "https://rhinoipanema.mitiendanube.com/productos/manga-frio-y-calor-pierna-y-brazo/",
+    "https://rhinoipanema.mitiendanube.com/productos/brazo-presoterapia-pro-3-individual/",
+    "https://rhinoipanema.mitiendanube.com/productos/kit-botas-de-presoterapia-pro-3/"
+  ],
+  "observed_section_types": [
+    "banners",
+    "cart-drawer",
+    "category-hero",
+    "divider",
+    "featured-categories",
+    "footer",
+    "header",
+    "hero",
+    "icon-text",
+    "main-404",
+    "main-blog",
+    "main-blog-post",
+    "main-cart",
+    "main-contact",
+    "main-login",
+    "main-page",
+    "main-product",
+    "main-products-grid",
+    "main-register",
+    "main-reset",
+    "navigation-bar",
+    "newsletter",
+    "page-header",
+    "product-list",
+    "related-products",
+    "rich-text"
+  ]
+}

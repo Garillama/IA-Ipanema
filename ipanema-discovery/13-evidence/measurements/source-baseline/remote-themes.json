@@ -1,0 +1,39 @@
+{
+  "verified_at": "2026-11-08T07:02:45.134860+00:00",
+  "method": "tiendanube theme list --json; solo registros relevantes, sin credenciales ni revision_token",
+  "meta": {
+    "max_installations": 21
+  },
+  "themes": [
+    {
+      "theme_id": 14517784,
+      "base_theme": "ipanema",
+      "base_theme_variant": "Clothing",
+      "theme_display_name": "Ipanema",
+      "theme_version": "1.2.1",
+      "is_sectionable": true,
+      "is_productive": false,
+      "forked": true,
+      "update_status": {
+        "has_update": true,
+        "should_notify": false,
+        "target_version": "1.8.0"
+      }
+    },
+    {
+      "theme_id": 14837617,
+      "base_theme": "ipanema",
+      "base_theme_variant": "Deco",
+      "theme_display_name": "Ipanema",
+      "theme_version": "1.8.0",
+      "is_sectionable": true,
+      "is_productive": true,
+      "forked": true,
+      "update_status": {
+        "has_update": false,
+        "should_notify": false,
+        "target_version": null
+      }
+    }
+  ]
+}

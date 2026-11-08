@@ -1,0 +1,83 @@
+{
+  "device": "desktop",
+  "requestedUrl": "https://rhinoipanema.mitiendanube.com/?theme_installation_id=14837617",
+  "finalDisplayedUrl": "https://rhinoipanema.mitiendanube.com/password/",
+  "fetchTime": "2026-11-08T06:58:54.834Z",
+  "lighthouseVersion": "13.6.0",
+  "configSettings": {
+    "output": [
+      "json",
+      "html"
+    ],
+    "maxWaitForFcp": 30000,
+    "maxWaitForLoad": 45000,
+    "pauseAfterFcpMs": 1000,
+    "pauseAfterLoadMs": 1000,
+    "networkQuietThresholdMs": 1000,
+    "cpuQuietThresholdMs": 1000,
+    "formFactor": "desktop",
+    "throttling": {
+      "rttMs": 40,
+      "throughputKbps": 10240,
+      "requestLatencyMs": 0,
+      "downloadThroughputKbps": 0,
+      "uploadThroughputKbps": 0,
+      "cpuSlowdownMultiplier": 1
+    },
+    "throttlingMethod": "simulate",
+    "screenEmulation": {
+      "mobile": false,
+      "width": 1350,
+      "height": 940,
+      "deviceScaleFactor": 1,
+      "disabled": false
+    },
+    "emulatedUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+    "auditMode": false,
+    "gatherMode": false,
+    "clearStorageTypes": [
+      "file_systems",
+      "shader_cache",
+      "service_workers",
+      "cache_storage"
+    ],
+    "disableStorageReset": false,
+    "debugNavigation": false,
+    "channel": "node",
+    "usePassiveGathering": false,
+    "disableFullPageScreenshot": false,
+    "skipAboutBlank": false,
+    "blankPage": "about:blank",
+    "ignoreStatusCode": false,
+    "locale": "en-US",
+    "blockedUrlPatterns": null,
+    "additionalTraceCategories": null,
+    "extraHeaders": null,
+    "precomputedLanternData": null,
+    "onlyAudits": null,
+    "onlyCategories": [
+      "performance",
+      "accessibility",
+      "best-practices",
+      "seo"
+    ],
+    "skipAudits": null
+  },
+  "categories": {
+    "performance": 0.83,
+    "accessibility": 0.92,
+    "best-practices": 1,
+    "seo": 0.75
+  },
+  "metrics": {
+    "first-contentful-paint": 431.30400000000003,
+    "largest-contentful-paint": 1063.48056,
+    "cumulative-layout-shift": 0.2960622026676006,
+    "total-blocking-time": 1,
+    "speed-index": 581.0573966252573,
+    "server-response-time": 107
+  },
+  "warnings": [
+    "The page may not be loading as expected because your test URL (https://rhinoipanema.mitiendanube.com/?theme_installation_id=14837617) was redirected to https://rhinoipanema.mitiendanube.com/password/. Try testing the second URL directly."
+  ]
+}

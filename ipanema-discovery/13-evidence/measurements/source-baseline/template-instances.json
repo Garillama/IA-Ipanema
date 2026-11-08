@@ -1,0 +1,3200 @@
+[
+  {
+    "file": "templates/layout/cart_drawer.json",
+    "location": "templates/layout/cart_drawer.json#/cart_drawer",
+    "kind": "section",
+    "type": "cart-drawer",
+    "disabled": false,
+    "settings": {},
+    "order": [
+      "cart_drawer"
+    ]
+  },
+  {
+    "file": "templates/layout/footer.json",
+    "location": "templates/layout/footer.json#/footer",
+    "kind": "section",
+    "type": "footer",
+    "disabled": false,
+    "settings": {
+      "background_color": "#F7F7F7",
+      "text_color": "#3A332D",
+      "vertical_padding": 60,
+      "menus_toggle": true,
+      "footer_payments_show": true,
+      "footer_shipping_show": true
+    },
+    "order": [
+      "footer"
+    ]
+  },
+  {
+    "file": "templates/layout/footer.json",
+    "location": "templates/layout/footer.json#/footer/institutional",
+    "kind": "block",
+    "type": "footer-institutional",
+    "disabled": true,
+    "settings": {
+      "description": "t:defaults.footer.description"
+    },
+    "order": [
+      "institutional",
+      "menu_1",
+      "menu_2",
+      "menu_3",
+      "newsletter"
+    ]
+  },
+  {
+    "file": "templates/layout/footer.json",
+    "location": "templates/layout/footer.json#/footer/menu_1",
+    "kind": "block",
+    "type": "footer-menu",
+    "disabled": false,
+    "settings": {
+      "title": "t:defaults.footer.menu_1_title",
+      "menu": "navigation"
+    },
+    "order": [
+      "institutional",
+      "menu_1",
+      "menu_2",
+      "menu_3",
+      "newsletter"
+    ]
+  },
+  {
+    "file": "templates/layout/footer.json",
+    "location": "templates/layout/footer.json#/footer/menu_2",
+    "kind": "block",
+    "type": "footer-menu",
+    "disabled": false,
+    "settings": {
+      "title": "t:defaults.footer.menu_2_title",
+      "menu": "navigation"
+    },
+    "order": [
+      "institutional",
+      "menu_1",
+      "menu_2",
+      "menu_3",
+      "newsletter"
+    ]
+  },
+  {
+    "file": "templates/layout/footer.json",
+    "location": "templates/layout/footer.json#/footer/menu_3",
+    "kind": "block",
+    "type": "footer-menu",
+    "disabled": false,
+    "settings": {
+      "title": "t:defaults.footer.menu_3_title",
+      "menu": "navigation"
+    },
+    "order": [
+      "institutional",
+      "menu_1",
+      "menu_2",
+      "menu_3",
+      "newsletter"
+    ]
+  },
+  {
+    "file": "templates/layout/footer.json",
+    "location": "templates/layout/footer.json#/footer/newsletter",
+    "kind": "block",
+    "type": "footer-newsletter",
+    "disabled": false,
+    "settings": {
+      "title": "t:names.newsletter",
+      "description": "t:defaults.newsletter.description"
+    },
+    "order": [
+      "institutional",
+      "menu_1",
+      "menu_2",
+      "menu_3",
+      "newsletter"
+    ]
+  },
+  {
+    "file": "templates/layout/header.json",
+    "location": "templates/layout/header.json#/navigation_bar_top",
+    "kind": "section",
+    "type": "navigation-bar",
+    "disabled": false,
+    "settings": {
+      "section_width": "full",
+      "horizontal_padding": 40,
+      "background_color": "#614a3b"
+    },
+    "order": [
+      "navigation_bar_top",
+      "header",
+      "navigation_bar_bottom"
+    ]
+  },
+  {
+    "file": "templates/layout/header.json",
+    "location": "templates/layout/header.json#/navigation_bar_top/nav_announcements",
+    "kind": "block",
+    "type": "nav-announcements",
+    "disabled": false,
+    "settings": {
+      "alignment": "left",
+      "gap": 16
+    },
+    "order": [
+      "nav_announcements",
+      "nav_social"
+    ]
+  },
+  {
+    "file": "templates/layout/header.json",
+    "location": "templates/layout/header.json#/navigation_bar_top/nav_announcements/announcement_1",
+    "kind": "block",
+    "type": "announcement",
+    "disabled": false,
+    "settings": {
+      "text": "t:defaults.announcements.announcement_1"
+    },
+    "order": [
+      "announcement_1",
+      "announcement_2"
+    ]
+  },
+  {
+    "file": "templates/layout/header.json",
+    "location": "templates/layout/header.json#/navigation_bar_top/nav_announcements/announcement_2",
+    "kind": "block",
+    "type": "announcement",
+    "disabled": false,
+    "settings": {
+      "text": "t:defaults.announcements.announcement_2"
+    },
+    "order": [
+      "announcement_1",
+      "announcement_2"
+    ]
+  },
+  {
+    "file": "templates/layout/header.json",
+    "location": "templates/layout/header.json#/navigation_bar_top/nav_social",
+    "kind": "block",
+    "type": "nav-social",
+    "disabled": false,
+    "settings": {
+      "alignment": "right",
+      "gap": 16
+    },
+    "order": [
+      "nav_announcements",
+      "nav_social"
+    ]
+  },
+  {
+    "file": "templates/layout/header.json",
+    "location": "templates/layout/header.json#/header",
+    "kind": "section",
+    "type": "header",
+    "disabled": false,
+    "settings": {
+      "logo_position_desktop": "center",
+      "section_width": "full",
+      "vertical_padding": 20,
+      "horizontal_padding": 40,
+      "use_different_mobile_padding": true,
+      "vertical_padding_mobile": 16,
+      "horizontal_padding_mobile": 20,
+      "background_color": "#FFFFFF",
+      "text_color": "#614a3b"
+    },
+    "order": [
+      "navigation_bar_top",
+      "header",
+      "navigation_bar_bottom"
+    ]
+  },
+  {
+    "file": "templates/layout/header.json",
+    "location": "templates/layout/header.json#/header/logo",
+    "kind": "block",
+    "type": "header-logo",
+    "disabled": false,
+    "settings": {
+      "height": 28,
+      "use_different_mobile_height": false
+    },
+    "order": [
+      "logo",
+      "utilities",
+      "navigation"
+    ]
+  },
+  {
+    "file": "templates/layout/header.json",
+    "location": "templates/layout/header.json#/header/utilities",
+    "kind": "block",
+    "type": "header-utilities",
+    "disabled": false,
+    "settings": {
+      "format": "icons_text",
+      "search_type": "expanded",
+      "cart_icon": "cart"
+    },
+    "order": [
+      "logo",
+      "utilities",
+      "navigation"
+    ]
+  },
+  {
+    "file": "templates/layout/header.json",
+    "location": "templates/layout/header.json#/header/navigation",
+    "kind": "block",
+    "type": "header-navigation",
+    "disabled": false,
+    "settings": {
+      "nav_uppercase": false,
+      "show_categories_link": true,
+      "nav_alignment_desktop": "left",
+      "vertical_padding": 22,
+      "nav_divider_color": "#E3E3E3",
+      "show_secondary_menu": true
+    },
+    "order": [
+      "logo",
+      "utilities",
+      "navigation"
+    ]
+  },
+  {
+    "file": "templates/layout/header.json",
+    "location": "templates/layout/header.json#/navigation_bar_bottom",
+    "kind": "section",
+    "type": "navigation-bar",
+    "disabled": false,
+    "settings": {
+      "mobile_placement": "menu",
+      "section_width": "page",
+      "item_gap": 32,
+      "vertical_padding": 32,
+      "horizontal_padding": 32,
+      "background_color": "#f7f7f7",
+      "text_color": "#664d3a"
+    },
+    "order": [
+      "navigation_bar_top",
+      "header",
+      "navigation_bar_bottom"
+    ]
+  },
+  {
+    "file": "templates/layout/header.json",
+    "location": "templates/layout/header.json#/navigation_bar_bottom/nav_announcements",
+    "kind": "block",
+    "type": "nav-announcements",
+    "disabled": false,
+    "settings": {
+      "gap": 76
+    },
+    "order": [
+      "nav_announcements"
+    ]
+  },
+  {
+    "file": "templates/layout/header.json",
+    "location": "templates/layout/header.json#/navigation_bar_bottom/nav_announcements/announcement_1",
+    "kind": "block",
+    "type": "announcement",
+    "disabled": false,
+    "settings": {
+      "text": "t:defaults.announcements.announcement_1"
+    },
+    "order": [
+      "announcement_1",
+      "announcement_2",
+      "announcement_3",
+      "announcement_4"
+    ]
+  },
+  {
+    "file": "templates/layout/header.json",
+    "location": "templates/layout/header.json#/navigation_bar_bottom/nav_announcements/announcement_2",
+    "kind": "block",
+    "type": "announcement",
+    "disabled": false,
+    "settings": {
+      "text": "t:defaults.announcements.announcement_2"
+    },
+    "order": [
+      "announcement_1",
+      "announcement_2",
+      "announcement_3",
+      "announcement_4"
+    ]
+  },
+  {
+    "file": "templates/layout/header.json",
+    "location": "templates/layout/header.json#/navigation_bar_bottom/nav_announcements/announcement_3",
+    "kind": "block",
+    "type": "announcement",
+    "disabled": false,
+    "settings": {
+      "text": "t:defaults.announcements.announcement_3"
+    },
+    "order": [
+      "announcement_1",
+      "announcement_2",
+      "announcement_3",
+      "announcement_4"
+    ]
+  },
+  {
+    "file": "templates/layout/header.json",
+    "location": "templates/layout/header.json#/navigation_bar_bottom/nav_announcements/announcement_4",
+    "kind": "block",
+    "type": "announcement",
+    "disabled": false,
+    "settings": {
+      "text": "t:defaults.announcements.announcement_4"
+    },
+    "order": [
+      "announcement_1",
+      "announcement_2",
+      "announcement_3",
+      "announcement_4"
+    ]
+  },
+  {
+    "file": "templates/pages/404.json",
+    "location": "templates/pages/404.json#/main_404",
+    "kind": "section",
+    "type": "main-404",
+    "disabled": false,
+    "settings": [],
+    "order": [
+      "main_404",
+      "featured_products"
+    ]
+  },
+  {
+    "file": "templates/pages/404.json",
+    "location": "templates/pages/404.json#/featured_products",
+    "kind": "section",
+    "type": "product-list",
+    "disabled": false,
+    "settings": {
+      "alignment": "center",
+      "section_width": "full",
+      "gap": 32,
+      "horizontal_padding": 16,
+      "background_color": "transparent"
+    },
+    "order": [
+      "main_404",
+      "featured_products"
+    ]
+  },
+  {
+    "file": "templates/pages/404.json",
+    "location": "templates/pages/404.json#/featured_products/heading",
+    "kind": "block",
+    "type": "heading",
+    "disabled": false,
+    "settings": {
+      "title": "t:defaults.product_list",
+      "size": "h3"
+    },
+    "order": [
+      "heading",
+      "products"
+    ]
+  },
+  {
+    "file": "templates/pages/404.json",
+    "location": "templates/pages/404.json#/featured_products/products",
+    "kind": "block",
+    "type": "products",
+    "disabled": false,
+    "settings": {
+      "products_source": "featured",
+      "format": "grid",
+      "columns": "4",
+      "columns_mobile": "2"
+    },
+    "order": [
+      "heading",
+      "products"
+    ]
+  },
+  {
+    "file": "templates/pages/account/address.json",
+    "location": "templates/pages/account/address.json#/heading",
+    "kind": "section",
+    "type": "page-header",
+    "disabled": false,
+    "settings": {},
+    "order": [
+      "heading",
+      "account_address"
+    ]
+  },
+  {
+    "file": "templates/pages/account/address.json",
+    "location": "templates/pages/account/address.json#/account_address",
+    "kind": "section",
+    "type": "main-account-address",
+    "disabled": false,
+    "settings": {},
+    "order": [
+      "heading",
+      "account_address"
+    ]
+  },
+  {
+    "file": "templates/pages/account/addresses.json",
+    "location": "templates/pages/account/addresses.json#/heading",
+    "kind": "section",
+    "type": "page-header",
+    "disabled": false,
+    "settings": {},
+    "order": [
+      "heading",
+      "account_addresses"
+    ]
+  },
+  {
+    "file": "templates/pages/account/addresses.json",
+    "location": "templates/pages/account/addresses.json#/account_addresses",
+    "kind": "section",
+    "type": "main-account-addresses",
+    "disabled": false,
+    "settings": {},
+    "order": [
+      "heading",
+      "account_addresses"
+    ]
+  },
+  {
+    "file": "templates/pages/account/info.json",
+    "location": "templates/pages/account/info.json#/heading",
+    "kind": "section",
+    "type": "page-header",
+    "disabled": false,
+    "settings": {},
+    "order": [
+      "heading",
+      "account_info"
+    ]
+  },
+  {
+    "file": "templates/pages/account/info.json",
+    "location": "templates/pages/account/info.json#/account_info",
+    "kind": "section",
+    "type": "main-account-info",
+    "disabled": false,
+    "settings": {},
+    "order": [
+      "heading",
+      "account_info"
+    ]
+  },
+  {
+    "file": "templates/pages/account/login.json",
+    "location": "templates/pages/account/login.json#/heading",
+    "kind": "section",
+    "type": "page-header",
+    "disabled": false,
+    "settings": {},
+    "order": [
+      "heading",
+      "login_form"
+    ]
+  },
+  {
+    "file": "templates/pages/account/login.json",
+    "location": "templates/pages/account/login.json#/login_form",
+    "kind": "section",
+    "type": "main-login",
+    "disabled": false,
+    "settings": {},
+    "order": [
+      "heading",
+      "login_form"
+    ]
+  },
+  {
+    "file": "templates/pages/account/newpass.json",
+    "location": "templates/pages/account/newpass.json#/heading",
+    "kind": "section",
+    "type": "page-header",
+    "disabled": false,
+    "settings": {},
+    "order": [
+      "heading",
+      "newpass_form"
+    ]
+  },
+  {
+    "file": "templates/pages/account/newpass.json",
+    "location": "templates/pages/account/newpass.json#/newpass_form",
+    "kind": "section",
+    "type": "main-newpass",
+    "disabled": false,
+    "settings": {},
+    "order": [
+      "heading",
+      "newpass_form"
+    ]
+  },
+  {
+    "file": "templates/pages/account/order.json",
+    "location": "templates/pages/account/order.json#/heading",
+    "kind": "section",
+    "type": "page-header",
+    "disabled": false,
+    "settings": {},
+    "order": [
+      "heading",
+      "account_order"
+    ]
+  },
+  {
+    "file": "templates/pages/account/order.json",
+    "location": "templates/pages/account/order.json#/account_order",
+    "kind": "section",
+    "type": "main-account-order",
+    "disabled": false,
+    "settings": {},
+    "order": [
+      "heading",
+      "account_order"
+    ]
+  },
+  {
+    "file": "templates/pages/account/orders.json",
+    "location": "templates/pages/account/orders.json#/heading",
+    "kind": "section",
+    "type": "page-header",
+    "disabled": false,
+    "settings": {},
+    "order": [
+      "heading",
+      "account_orders"
+    ]
+  },
+  {
+    "file": "templates/pages/account/orders.json",
+    "location": "templates/pages/account/orders.json#/account_orders",
+    "kind": "section",
+    "type": "main-account-orders",
+    "disabled": false,
+    "settings": {},
+    "order": [
+      "heading",
+      "account_orders"
+    ]
+  },
+  {
+    "file": "templates/pages/account/register.json",
+    "location": "templates/pages/account/register.json#/heading",
+    "kind": "section",
+    "type": "page-header",
+    "disabled": false,
+    "settings": {},
+    "order": [
+      "heading",
+      "register_form"
+    ]
+  },
+  {
+    "file": "templates/pages/account/register.json",
+    "location": "templates/pages/account/register.json#/register_form",
+    "kind": "section",
+    "type": "main-register",
+    "disabled": false,
+    "settings": {},
+    "order": [
+      "heading",
+      "register_form"
+    ]
+  },
+  {
+    "file": "templates/pages/account/reset.json",
+    "location": "templates/pages/account/reset.json#/heading",
+    "kind": "section",
+    "type": "page-header",
+    "disabled": false,
+    "settings": {},
+    "order": [
+      "heading",
+      "reset_form"
+    ]
+  },
+  {
+    "file": "templates/pages/account/reset.json",
+    "location": "templates/pages/account/reset.json#/reset_form",
+    "kind": "section",
+    "type": "main-reset",
+    "disabled": false,
+    "settings": {},
+    "order": [
+      "heading",
+      "reset_form"
+    ]
+  },
+  {
+    "file": "templates/pages/account/subscription-address.json",
+    "location": "templates/pages/account/subscription-address.json#/heading",
+    "kind": "section",
+    "type": "page-header",
+    "disabled": false,
+    "settings": {},
+    "order": [
+      "heading",
+      "account_subscription_address"
+    ]
+  },
+  {
+    "file": "templates/pages/account/subscription-address.json",
+    "location": "templates/pages/account/subscription-address.json#/account_subscription_address",
+    "kind": "section",
+    "type": "main-account-subscription-address",
+    "disabled": false,
+    "settings": {},
+    "order": [
+      "heading",
+      "account_subscription_address"
+    ]
+  },
+  {
+    "file": "templates/pages/account/subscription-product.json",
+    "location": "templates/pages/account/subscription-product.json#/heading",
+    "kind": "section",
+    "type": "page-header",
+    "disabled": false,
+    "settings": {},
+    "order": [
+      "heading",
+      "account_subscription_product"
+    ]
+  },
+  {
+    "file": "templates/pages/account/subscription-product.json",
+    "location": "templates/pages/account/subscription-product.json#/account_subscription_product",
+    "kind": "section",
+    "type": "main-account-subscription-product",
+    "disabled": false,
+    "settings": {},
+    "order": [
+      "heading",
+      "account_subscription_product"
+    ]
+  },
+  {
+    "file": "templates/pages/blog-post.json",
+    "location": "templates/pages/blog-post.json#/heading",
+    "kind": "section",
+    "type": "page-header",
+    "disabled": false,
+    "settings": {},
+    "order": [
+      "heading",
+      "blog_post_content"
+    ]
+  },
+  {
+    "file": "templates/pages/blog-post.json",
+    "location": "templates/pages/blog-post.json#/blog_post_content",
+    "kind": "section",
+    "type": "main-blog-post",
+    "disabled": false,
+    "settings": {},
+    "order": [
+      "heading",
+      "blog_post_content"
+    ]
+  },
+  {
+    "file": "templates/pages/blog.json",
+    "location": "templates/pages/blog.json#/heading",
+    "kind": "section",
+    "type": "page-header",
+    "disabled": false,
+    "settings": {},
+    "order": [
+      "heading",
+      "blog_posts"
+    ]
+  },
+  {
+    "file": "templates/pages/blog.json",
+    "location": "templates/pages/blog.json#/blog_posts",
+    "kind": "section",
+    "type": "main-blog",
+    "disabled": false,
+    "settings": [],
+    "order": [
+      "heading",
+      "blog_posts"
+    ]
+  },
+  {
+    "file": "templates/pages/cart.json",
+    "location": "templates/pages/cart.json#/heading",
+    "kind": "section",
+    "type": "page-header",
+    "disabled": false,
+    "settings": {},
+    "order": [
+      "heading",
+      "cart_form"
+    ]
+  },
+  {
+    "file": "templates/pages/cart.json",
+    "location": "templates/pages/cart.json#/cart_form",
+    "kind": "section",
+    "type": "main-cart",
+    "disabled": false,
+    "settings": [],
+    "order": [
+      "heading",
+      "cart_form"
+    ]
+  },
+  {
+    "file": "templates/pages/category.json",
+    "location": "templates/pages/category.json#/category_hero",
+    "kind": "section",
+    "type": "category-hero",
+    "disabled": false,
+    "settings": {
+      "show_category_image": true,
+      "section_width": "full",
+      "vertical_padding": 0,
+      "horizontal_padding": 0
+    },
+    "order": [
+      "category_hero",
+      "heading",
+      "product_list"
+    ]
+  },
+  {
+    "file": "templates/pages/category.json",
+    "location": "templates/pages/category.json#/heading",
+    "kind": "section",
+    "type": "page-header",
+    "disabled": false,
+    "settings": {
+      "section_width": "page",
+      "vertical_padding": 32,
+      "horizontal_padding": 32
+    },
+    "order": [
+      "category_hero",
+      "heading",
+      "product_list"
+    ]
+  },
+  {
+    "file": "templates/pages/category.json",
+    "location": "templates/pages/category.json#/product_list",
+    "kind": "section",
+    "type": "main-products-grid",
+    "disabled": false,
+    "settings": {
+      "columns": "4",
+      "columns_mobile": "2",
+      "pagination": "infinite",
+      "section_width": "page",
+      "vertical_padding": 0,
+      "horizontal_padding": 32
+    },
+    "order": [
+      "category_hero",
+      "heading",
+      "product_list"
+    ]
+  },
+  {
+    "file": "templates/pages/contact.json",
+    "location": "templates/pages/contact.json#/heading",
+    "kind": "section",
+    "type": "page-header",
+    "disabled": false,
+    "settings": {},
+    "order": [
+      "heading",
+      "contact_form"
+    ]
+  },
+  {
+    "file": "templates/pages/contact.json",
+    "location": "templates/pages/contact.json#/contact_form",
+    "kind": "section",
+    "type": "main-contact",
+    "disabled": false,
+    "settings": {},
+    "order": [
+      "heading",
+      "contact_form"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/hero",
+    "kind": "section",
+    "type": "hero",
+    "disabled": false,
+    "settings": {
+      "alignment": "center",
+      "alignment_vertical": "center",
+      "height": 85,
+      "vertical_padding": 32,
+      "horizontal_padding": 32
+    },
+    "order": [
+      "hero",
+      "banners_4_grid",
+      "banner_full_1",
+      "divider_1",
+      "editorial_1",
+      "divider_2",
+      "featured_products_1",
+      "featured_categories_pills",
+      "banners_6_grid",
+      "divider_3",
+      "banner_full_2",
+      "banners_3_text_outside",
+      "featured_products_2",
+      "icon_text",
+      "banner_full_3",
+      "banners_2_text_inside",
+      "divider_5",
+      "editorial_2",
+      "divider_4",
+      "newsletter"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/hero/heading",
+    "kind": "block",
+    "type": "heading",
+    "disabled": false,
+    "settings": {
+      "title": "t:defaults.heading",
+      "size": "h1",
+      "mobile_font_size": true,
+      "mobile_size": "h3"
+    },
+    "order": [
+      "heading",
+      "text",
+      "button"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/hero/text",
+    "kind": "block",
+    "type": "text",
+    "disabled": false,
+    "settings": {
+      "text": "t:defaults.text"
+    },
+    "order": [
+      "heading",
+      "text",
+      "button"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/hero/button",
+    "kind": "block",
+    "type": "button",
+    "disabled": false,
+    "settings": {
+      "label": "t:defaults.button",
+      "size": "medium"
+    },
+    "order": [
+      "heading",
+      "text",
+      "button"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/banners_4_grid",
+    "kind": "section",
+    "type": "banners",
+    "disabled": false,
+    "settings": {
+      "format": "grid",
+      "columns": "4",
+      "columns_mobile": "2",
+      "section_width": "page",
+      "vertical_padding": 40
+    },
+    "order": [
+      "hero",
+      "banners_4_grid",
+      "banner_full_1",
+      "divider_1",
+      "editorial_1",
+      "divider_2",
+      "featured_products_1",
+      "featured_categories_pills",
+      "banners_6_grid",
+      "divider_3",
+      "banner_full_2",
+      "banners_3_text_outside",
+      "featured_products_2",
+      "icon_text",
+      "banner_full_3",
+      "banners_2_text_inside",
+      "divider_5",
+      "editorial_2",
+      "divider_4",
+      "newsletter"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/banners_4_grid/banner_1",
+    "kind": "block",
+    "type": "banner",
+    "disabled": false,
+    "settings": {
+      "text_outside": false,
+      "alignment": "center",
+      "alignment_vertical": "bottom",
+      "vertical_padding": 32,
+      "horizontal_padding": 32
+    },
+    "order": [
+      "banner_1",
+      "banner_2",
+      "banner_3",
+      "banner_4"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/banners_4_grid/banner_1/heading",
+    "kind": "block",
+    "type": "heading",
+    "disabled": false,
+    "settings": {
+      "title": "t:defaults.banner.heading",
+      "size": "h6"
+    },
+    "order": [
+      "heading"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/banners_4_grid/banner_2",
+    "kind": "block",
+    "type": "banner",
+    "disabled": false,
+    "settings": {
+      "text_outside": false,
+      "alignment": "center",
+      "alignment_vertical": "bottom",
+      "vertical_padding": 32,
+      "horizontal_padding": 32
+    },
+    "order": [
+      "banner_1",
+      "banner_2",
+      "banner_3",
+      "banner_4"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/banners_4_grid/banner_2/heading",
+    "kind": "block",
+    "type": "heading",
+    "disabled": false,
+    "settings": {
+      "title": "t:defaults.banner.heading",
+      "size": "h6"
+    },
+    "order": [
+      "heading"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/banners_4_grid/banner_3",
+    "kind": "block",
+    "type": "banner",
+    "disabled": false,
+    "settings": {
+      "text_outside": false,
+      "alignment": "center",
+      "alignment_vertical": "bottom",
+      "vertical_padding": 32,
+      "horizontal_padding": 32
+    },
+    "order": [
+      "banner_1",
+      "banner_2",
+      "banner_3",
+      "banner_4"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/banners_4_grid/banner_3/heading",
+    "kind": "block",
+    "type": "heading",
+    "disabled": false,
+    "settings": {
+      "title": "t:defaults.banner.heading",
+      "size": "h6"
+    },
+    "order": [
+      "heading"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/banners_4_grid/banner_4",
+    "kind": "block",
+    "type": "banner",
+    "disabled": false,
+    "settings": {
+      "text_outside": false,
+      "alignment": "center",
+      "alignment_vertical": "bottom",
+      "vertical_padding": 32,
+      "horizontal_padding": 32
+    },
+    "order": [
+      "banner_1",
+      "banner_2",
+      "banner_3",
+      "banner_4"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/banners_4_grid/banner_4/heading",
+    "kind": "block",
+    "type": "heading",
+    "disabled": false,
+    "settings": {
+      "title": "t:defaults.banner.heading",
+      "size": "h6"
+    },
+    "order": [
+      "heading"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/banner_full_1",
+    "kind": "section",
+    "type": "banners",
+    "disabled": false,
+    "settings": {
+      "format": "grid",
+      "columns": "1",
+      "columns_mobile": "1",
+      "section_width": "page",
+      "banner_aspect_ratio": "horizontal",
+      "vertical_padding": 0
+    },
+    "order": [
+      "hero",
+      "banners_4_grid",
+      "banner_full_1",
+      "divider_1",
+      "editorial_1",
+      "divider_2",
+      "featured_products_1",
+      "featured_categories_pills",
+      "banners_6_grid",
+      "divider_3",
+      "banner_full_2",
+      "banners_3_text_outside",
+      "featured_products_2",
+      "icon_text",
+      "banner_full_3",
+      "banners_2_text_inside",
+      "divider_5",
+      "editorial_2",
+      "divider_4",
+      "newsletter"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/banner_full_1/banner_1",
+    "kind": "block",
+    "type": "banner",
+    "disabled": false,
+    "settings": {
+      "text_outside": false,
+      "alignment": "start",
+      "alignment_vertical": "top",
+      "vertical_padding": 32,
+      "horizontal_padding": 32
+    },
+    "order": [
+      "banner_1"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/banner_full_1/banner_1/heading",
+    "kind": "block",
+    "type": "heading",
+    "disabled": false,
+    "settings": {
+      "title": "t:defaults.banner.heading",
+      "size": "h4"
+    },
+    "order": [
+      "heading",
+      "text",
+      "button"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/banner_full_1/banner_1/text",
+    "kind": "block",
+    "type": "text",
+    "disabled": false,
+    "settings": {
+      "text": "t:defaults.banner.description"
+    },
+    "order": [
+      "heading",
+      "text",
+      "button"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/banner_full_1/banner_1/button",
+    "kind": "block",
+    "type": "button",
+    "disabled": false,
+    "settings": {
+      "label": "t:defaults.banner.button",
+      "size": "medium"
+    },
+    "order": [
+      "heading",
+      "text",
+      "button"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/divider_1",
+    "kind": "section",
+    "type": "divider",
+    "disabled": false,
+    "settings": {
+      "section_width": "page",
+      "vertical_padding": 24,
+      "show_line": false
+    },
+    "order": [
+      "hero",
+      "banners_4_grid",
+      "banner_full_1",
+      "divider_1",
+      "editorial_1",
+      "divider_2",
+      "featured_products_1",
+      "featured_categories_pills",
+      "banners_6_grid",
+      "divider_3",
+      "banner_full_2",
+      "banners_3_text_outside",
+      "featured_products_2",
+      "icon_text",
+      "banner_full_3",
+      "banners_2_text_inside",
+      "divider_5",
+      "editorial_2",
+      "divider_4",
+      "newsletter"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/editorial_1",
+    "kind": "section",
+    "type": "rich-text",
+    "disabled": false,
+    "settings": {
+      "alignment": "left",
+      "section_width": "page",
+      "background_color": "#8c6b5f",
+      "text_color": "#ffffff",
+      "vertical_padding": 40
+    },
+    "order": [
+      "hero",
+      "banners_4_grid",
+      "banner_full_1",
+      "divider_1",
+      "editorial_1",
+      "divider_2",
+      "featured_products_1",
+      "featured_categories_pills",
+      "banners_6_grid",
+      "divider_3",
+      "banner_full_2",
+      "banners_3_text_outside",
+      "featured_products_2",
+      "icon_text",
+      "banner_full_3",
+      "banners_2_text_inside",
+      "divider_5",
+      "editorial_2",
+      "divider_4",
+      "newsletter"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/editorial_1/outer_group",
+    "kind": "block",
+    "type": "group",
+    "disabled": false,
+    "settings": {
+      "direction": "row",
+      "mobile_direction_enabled": true,
+      "mobile_direction": "column",
+      "alignment": "start",
+      "alignment_vertical": "center",
+      "gap": 12,
+      "vertical_padding": 0,
+      "horizontal_padding": 0
+    },
+    "order": [
+      "outer_group"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/editorial_1/outer_group/inner_group",
+    "kind": "block",
+    "type": "group",
+    "disabled": false,
+    "settings": {
+      "gap": 8,
+      "vertical_padding": 0,
+      "horizontal_padding": 0
+    },
+    "order": [
+      "inner_group",
+      "button"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/editorial_1/outer_group/inner_group/description_1",
+    "kind": "block",
+    "type": "text",
+    "disabled": false,
+    "settings": {
+      "text": "t:defaults.text"
+    },
+    "order": [
+      "description_1",
+      "heading",
+      "description_2"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/editorial_1/outer_group/inner_group/heading",
+    "kind": "block",
+    "type": "heading",
+    "disabled": false,
+    "settings": {
+      "title": "t:defaults.heading",
+      "size": "h5"
+    },
+    "order": [
+      "description_1",
+      "heading",
+      "description_2"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/editorial_1/outer_group/inner_group/description_2",
+    "kind": "block",
+    "type": "text",
+    "disabled": false,
+    "settings": {
+      "text": "t:defaults.text"
+    },
+    "order": [
+      "description_1",
+      "heading",
+      "description_2"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/editorial_1/outer_group/button",
+    "kind": "block",
+    "type": "button",
+    "disabled": false,
+    "settings": {
+      "label": "t:defaults.button",
+      "variant": "primary",
+      "size": "medium",
+      "custom_background_color": "#f5f5f5",
+      "custom_text_color": "#010101"
+    },
+    "order": [
+      "inner_group",
+      "button"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/divider_2",
+    "kind": "section",
+    "type": "divider",
+    "disabled": false,
+    "settings": {
+      "section_width": "page",
+      "vertical_padding": 24,
+      "show_line": false
+    },
+    "order": [
+      "hero",
+      "banners_4_grid",
+      "banner_full_1",
+      "divider_1",
+      "editorial_1",
+      "divider_2",
+      "featured_products_1",
+      "featured_categories_pills",
+      "banners_6_grid",
+      "divider_3",
+      "banner_full_2",
+      "banners_3_text_outside",
+      "featured_products_2",
+      "icon_text",
+      "banner_full_3",
+      "banners_2_text_inside",
+      "divider_5",
+      "editorial_2",
+      "divider_4",
+      "newsletter"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/featured_products_1",
+    "kind": "section",
+    "type": "product-list",
+    "disabled": false,
+    "settings": {
+      "section_width": "page",
+      "vertical_padding": 0
+    },
+    "order": [
+      "hero",
+      "banners_4_grid",
+      "banner_full_1",
+      "divider_1",
+      "editorial_1",
+      "divider_2",
+      "featured_products_1",
+      "featured_categories_pills",
+      "banners_6_grid",
+      "divider_3",
+      "banner_full_2",
+      "banners_3_text_outside",
+      "featured_products_2",
+      "icon_text",
+      "banner_full_3",
+      "banners_2_text_inside",
+      "divider_5",
+      "editorial_2",
+      "divider_4",
+      "newsletter"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/featured_products_1/products",
+    "kind": "block",
+    "type": "products",
+    "disabled": false,
+    "settings": {
+      "products_source": {
+        "kind": "collection",
+        "id": "primary"
+      },
+      "format": "grid",
+      "columns": "4",
+      "columns_mobile": "2"
+    },
+    "order": [
+      "products"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/featured_categories_pills",
+    "kind": "section",
+    "type": "featured-categories",
+    "disabled": false,
+    "settings": {
+      "orientation": "horizontal",
+      "use_different_mobile_orientation": true,
+      "orientation_mobile": "vertical",
+      "text_alignment": "center",
+      "section_width": "page",
+      "vertical_padding": 64
+    },
+    "order": [
+      "hero",
+      "banners_4_grid",
+      "banner_full_1",
+      "divider_1",
+      "editorial_1",
+      "divider_2",
+      "featured_products_1",
+      "featured_categories_pills",
+      "banners_6_grid",
+      "divider_3",
+      "banner_full_2",
+      "banners_3_text_outside",
+      "featured_products_2",
+      "icon_text",
+      "banner_full_3",
+      "banners_2_text_inside",
+      "divider_5",
+      "editorial_2",
+      "divider_4",
+      "newsletter"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/featured_categories_pills/heading",
+    "kind": "block",
+    "type": "heading",
+    "disabled": false,
+    "settings": {
+      "title": "t:defaults.featured_categories.heading",
+      "size": "h6"
+    },
+    "order": [
+      "heading",
+      "category_nav"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/featured_categories_pills/category_nav",
+    "kind": "block",
+    "type": "category-nav",
+    "disabled": false,
+    "settings": {
+      "category_type": "text_pill",
+      "format_text": "square",
+      "gap": 16,
+      "background_color": "#f5f5f5",
+      "border_color": "transparent"
+    },
+    "order": [
+      "heading",
+      "category_nav"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/featured_categories_pills/category_nav/cat_1",
+    "kind": "block",
+    "type": "category-item",
+    "disabled": false,
+    "settings": {
+      "text": "t:defaults.featured_categories.category_text"
+    },
+    "order": [
+      "cat_1",
+      "cat_2",
+      "cat_3",
+      "cat_4",
+      "cat_5",
+      "cat_6"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/featured_categories_pills/category_nav/cat_2",
+    "kind": "block",
+    "type": "category-item",
+    "disabled": false,
+    "settings": {
+      "text": "t:defaults.featured_categories.category_text"
+    },
+    "order": [
+      "cat_1",
+      "cat_2",
+      "cat_3",
+      "cat_4",
+      "cat_5",
+      "cat_6"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/featured_categories_pills/category_nav/cat_3",
+    "kind": "block",
+    "type": "category-item",
+    "disabled": false,
+    "settings": {
+      "text": "t:defaults.featured_categories.category_text"
+    },
+    "order": [
+      "cat_1",
+      "cat_2",
+      "cat_3",
+      "cat_4",
+      "cat_5",
+      "cat_6"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/featured_categories_pills/category_nav/cat_4",
+    "kind": "block",
+    "type": "category-item",
+    "disabled": false,
+    "settings": {
+      "text": "t:defaults.featured_categories.category_text"
+    },
+    "order": [
+      "cat_1",
+      "cat_2",
+      "cat_3",
+      "cat_4",
+      "cat_5",
+      "cat_6"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/featured_categories_pills/category_nav/cat_5",
+    "kind": "block",
+    "type": "category-item",
+    "disabled": false,
+    "settings": {
+      "text": "t:defaults.featured_categories.category_text"
+    },
+    "order": [
+      "cat_1",
+      "cat_2",
+      "cat_3",
+      "cat_4",
+      "cat_5",
+      "cat_6"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/featured_categories_pills/category_nav/cat_6",
+    "kind": "block",
+    "type": "category-item",
+    "disabled": false,
+    "settings": {
+      "text": "t:defaults.featured_categories.category_text"
+    },
+    "order": [
+      "cat_1",
+      "cat_2",
+      "cat_3",
+      "cat_4",
+      "cat_5",
+      "cat_6"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/banners_6_grid",
+    "kind": "section",
+    "type": "banners",
+    "disabled": false,
+    "settings": {
+      "format": "grid",
+      "columns": "3",
+      "columns_mobile": "2",
+      "section_width": "page",
+      "background_color": "#f0efed"
+    },
+    "order": [
+      "hero",
+      "banners_4_grid",
+      "banner_full_1",
+      "divider_1",
+      "editorial_1",
+      "divider_2",
+      "featured_products_1",
+      "featured_categories_pills",
+      "banners_6_grid",
+      "divider_3",
+      "banner_full_2",
+      "banners_3_text_outside",
+      "featured_products_2",
+      "icon_text",
+      "banner_full_3",
+      "banners_2_text_inside",
+      "divider_5",
+      "editorial_2",
+      "divider_4",
+      "newsletter"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/banners_6_grid/banner_1",
+    "kind": "block",
+    "type": "banner",
+    "disabled": false,
+    "settings": {
+      "text_outside": false,
+      "alignment": "center",
+      "alignment_vertical": "bottom",
+      "vertical_padding": 32,
+      "horizontal_padding": 32
+    },
+    "order": [
+      "banner_1",
+      "banner_2",
+      "banner_3",
+      "banner_4",
+      "banner_5",
+      "banner_6"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/banners_6_grid/banner_1/heading",
+    "kind": "block",
+    "type": "heading",
+    "disabled": false,
+    "settings": {
+      "title": "t:defaults.banner.heading",
+      "size": "h6"
+    },
+    "order": [
+      "heading"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/banners_6_grid/banner_2",
+    "kind": "block",
+    "type": "banner",
+    "disabled": false,
+    "settings": {
+      "text_outside": false,
+      "alignment": "center",
+      "alignment_vertical": "bottom",
+      "vertical_padding": 32,
+      "horizontal_padding": 32
+    },
+    "order": [
+      "banner_1",
+      "banner_2",
+      "banner_3",
+      "banner_4",
+      "banner_5",
+      "banner_6"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/banners_6_grid/banner_2/heading",
+    "kind": "block",
+    "type": "heading",
+    "disabled": false,
+    "settings": {
+      "title": "t:defaults.banner.heading",
+      "size": "h6"
+    },
+    "order": [
+      "heading"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/banners_6_grid/banner_3",
+    "kind": "block",
+    "type": "banner",
+    "disabled": false,
+    "settings": {
+      "text_outside": false,
+      "alignment": "center",
+      "alignment_vertical": "bottom",
+      "vertical_padding": 32,
+      "horizontal_padding": 32
+    },
+    "order": [
+      "banner_1",
+      "banner_2",
+      "banner_3",
+      "banner_4",
+      "banner_5",
+      "banner_6"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/banners_6_grid/banner_3/heading",
+    "kind": "block",
+    "type": "heading",
+    "disabled": false,
+    "settings": {
+      "title": "t:defaults.banner.heading",
+      "size": "h6"
+    },
+    "order": [
+      "heading"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/banners_6_grid/banner_4",
+    "kind": "block",
+    "type": "banner",
+    "disabled": false,
+    "settings": {
+      "text_outside": false,
+      "alignment": "center",
+      "alignment_vertical": "bottom",
+      "vertical_padding": 32,
+      "horizontal_padding": 32
+    },
+    "order": [
+      "banner_1",
+      "banner_2",
+      "banner_3",
+      "banner_4",
+      "banner_5",
+      "banner_6"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/banners_6_grid/banner_4/heading",
+    "kind": "block",
+    "type": "heading",
+    "disabled": false,
+    "settings": {
+      "title": "t:defaults.banner.heading",
+      "size": "h6"
+    },
+    "order": [
+      "heading"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/banners_6_grid/banner_5",
+    "kind": "block",
+    "type": "banner",
+    "disabled": false,
+    "settings": {
+      "text_outside": false,
+      "alignment": "center",
+      "alignment_vertical": "bottom",
+      "vertical_padding": 32,
+      "horizontal_padding": 32
+    },
+    "order": [
+      "banner_1",
+      "banner_2",
+      "banner_3",
+      "banner_4",
+      "banner_5",
+      "banner_6"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/banners_6_grid/banner_5/heading",
+    "kind": "block",
+    "type": "heading",
+    "disabled": false,
+    "settings": {
+      "title": "t:defaults.banner.heading",
+      "size": "h6"
+    },
+    "order": [
+      "heading"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/banners_6_grid/banner_6",
+    "kind": "block",
+    "type": "banner",
+    "disabled": false,
+    "settings": {
+      "text_outside": false,
+      "alignment": "center",
+      "alignment_vertical": "bottom",
+      "vertical_padding": 32,
+      "horizontal_padding": 32
+    },
+    "order": [
+      "banner_1",
+      "banner_2",
+      "banner_3",
+      "banner_4",
+      "banner_5",
+      "banner_6"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/banners_6_grid/banner_6/heading",
+    "kind": "block",
+    "type": "heading",
+    "disabled": false,
+    "settings": {
+      "title": "t:defaults.banner.heading",
+      "size": "h6"
+    },
+    "order": [
+      "heading"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/divider_3",
+    "kind": "section",
+    "type": "divider",
+    "disabled": false,
+    "settings": {
+      "section_width": "page",
+      "vertical_padding": 40,
+      "show_line": false
+    },
+    "order": [
+      "hero",
+      "banners_4_grid",
+      "banner_full_1",
+      "divider_1",
+      "editorial_1",
+      "divider_2",
+      "featured_products_1",
+      "featured_categories_pills",
+      "banners_6_grid",
+      "divider_3",
+      "banner_full_2",
+      "banners_3_text_outside",
+      "featured_products_2",
+      "icon_text",
+      "banner_full_3",
+      "banners_2_text_inside",
+      "divider_5",
+      "editorial_2",
+      "divider_4",
+      "newsletter"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/banner_full_2",
+    "kind": "section",
+    "type": "banners",
+    "disabled": false,
+    "settings": {
+      "format": "grid",
+      "columns": "1",
+      "columns_mobile": "1",
+      "section_width": "page",
+      "banner_aspect_ratio": "horizontal",
+      "vertical_padding": 0
+    },
+    "order": [
+      "hero",
+      "banners_4_grid",
+      "banner_full_1",
+      "divider_1",
+      "editorial_1",
+      "divider_2",
+      "featured_products_1",
+      "featured_categories_pills",
+      "banners_6_grid",
+      "divider_3",
+      "banner_full_2",
+      "banners_3_text_outside",
+      "featured_products_2",
+      "icon_text",
+      "banner_full_3",
+      "banners_2_text_inside",
+      "divider_5",
+      "editorial_2",
+      "divider_4",
+      "newsletter"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/banner_full_2/banner_1",
+    "kind": "block",
+    "type": "banner",
+    "disabled": false,
+    "settings": {
+      "text_outside": false,
+      "alignment": "start",
+      "alignment_vertical": "top",
+      "vertical_padding": 32,
+      "horizontal_padding": 32
+    },
+    "order": [
+      "banner_1"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/banner_full_2/banner_1/heading",
+    "kind": "block",
+    "type": "heading",
+    "disabled": false,
+    "settings": {
+      "title": "t:defaults.banner.heading",
+      "size": "h4"
+    },
+    "order": [
+      "heading",
+      "text",
+      "button"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/banner_full_2/banner_1/text",
+    "kind": "block",
+    "type": "text",
+    "disabled": false,
+    "settings": {
+      "text": "t:defaults.banner.description"
+    },
+    "order": [
+      "heading",
+      "text",
+      "button"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/banner_full_2/banner_1/button",
+    "kind": "block",
+    "type": "button",
+    "disabled": false,
+    "settings": {
+      "label": "t:defaults.banner.button",
+      "size": "medium"
+    },
+    "order": [
+      "heading",
+      "text",
+      "button"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/banners_3_text_outside",
+    "kind": "section",
+    "type": "banners",
+    "disabled": false,
+    "settings": {
+      "format": "grid",
+      "columns": "3",
+      "columns_mobile": "1",
+      "section_width": "page",
+      "vertical_padding": 24
+    },
+    "order": [
+      "hero",
+      "banners_4_grid",
+      "banner_full_1",
+      "divider_1",
+      "editorial_1",
+      "divider_2",
+      "featured_products_1",
+      "featured_categories_pills",
+      "banners_6_grid",
+      "divider_3",
+      "banner_full_2",
+      "banners_3_text_outside",
+      "featured_products_2",
+      "icon_text",
+      "banner_full_3",
+      "banners_2_text_inside",
+      "divider_5",
+      "editorial_2",
+      "divider_4",
+      "newsletter"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/banners_3_text_outside/banner_1",
+    "kind": "block",
+    "type": "banner",
+    "disabled": false,
+    "settings": {
+      "text_outside": true,
+      "alignment": "center",
+      "alignment_vertical": "bottom",
+      "horizontal_padding": 0,
+      "vertical_padding": 24
+    },
+    "order": [
+      "banner_1",
+      "banner_2",
+      "banner_3"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/banners_3_text_outside/banner_1/heading",
+    "kind": "block",
+    "type": "heading",
+    "disabled": false,
+    "settings": {
+      "title": "t:defaults.banner.heading",
+      "size": "h6"
+    },
+    "order": [
+      "heading"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/banners_3_text_outside/banner_2",
+    "kind": "block",
+    "type": "banner",
+    "disabled": false,
+    "settings": {
+      "text_outside": true,
+      "alignment": "center",
+      "alignment_vertical": "bottom",
+      "horizontal_padding": 0,
+      "vertical_padding": 24
+    },
+    "order": [
+      "banner_1",
+      "banner_2",
+      "banner_3"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/banners_3_text_outside/banner_2/heading",
+    "kind": "block",
+    "type": "heading",
+    "disabled": false,
+    "settings": {
+      "title": "t:defaults.banner.heading",
+      "size": "h6"
+    },
+    "order": [
+      "heading"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/banners_3_text_outside/banner_3",
+    "kind": "block",
+    "type": "banner",
+    "disabled": false,
+    "settings": {
+      "text_outside": true,
+      "alignment": "center",
+      "alignment_vertical": "bottom",
+      "horizontal_padding": 0,
+      "vertical_padding": 24
+    },
+    "order": [
+      "banner_1",
+      "banner_2",
+      "banner_3"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/banners_3_text_outside/banner_3/heading",
+    "kind": "block",
+    "type": "heading",
+    "disabled": false,
+    "settings": {
+      "title": "t:defaults.banner.heading",
+      "size": "h6"
+    },
+    "order": [
+      "heading"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/featured_products_2",
+    "kind": "section",
+    "type": "product-list",
+    "disabled": false,
+    "settings": {
+      "section_width": "page",
+      "vertical_padding": 24
+    },
+    "order": [
+      "hero",
+      "banners_4_grid",
+      "banner_full_1",
+      "divider_1",
+      "editorial_1",
+      "divider_2",
+      "featured_products_1",
+      "featured_categories_pills",
+      "banners_6_grid",
+      "divider_3",
+      "banner_full_2",
+      "banners_3_text_outside",
+      "featured_products_2",
+      "icon_text",
+      "banner_full_3",
+      "banners_2_text_inside",
+      "divider_5",
+      "editorial_2",
+      "divider_4",
+      "newsletter"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/featured_products_2/products",
+    "kind": "block",
+    "type": "products",
+    "disabled": false,
+    "settings": {
+      "products_source": {
+        "kind": "collection",
+        "id": "primary"
+      },
+      "format": "slider",
+      "columns": "4",
+      "columns_mobile": "1"
+    },
+    "order": [
+      "products"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/icon_text",
+    "kind": "section",
+    "type": "icon-text",
+    "disabled": false,
+    "settings": {
+      "alignment": "center",
+      "section_width": "page",
+      "vertical_padding": 64,
+      "background_color": "#f5f5f5",
+      "text_color": "#614a3b",
+      "icon_color": "#614a3b"
+    },
+    "order": [
+      "hero",
+      "banners_4_grid",
+      "banner_full_1",
+      "divider_1",
+      "editorial_1",
+      "divider_2",
+      "featured_products_1",
+      "featured_categories_pills",
+      "banners_6_grid",
+      "divider_3",
+      "banner_full_2",
+      "banners_3_text_outside",
+      "featured_products_2",
+      "icon_text",
+      "banner_full_3",
+      "banners_2_text_inside",
+      "divider_5",
+      "editorial_2",
+      "divider_4",
+      "newsletter"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/icon_text/icon_text_group",
+    "kind": "block",
+    "type": "icon-text-group",
+    "disabled": false,
+    "settings": {
+      "show_icon": true,
+      "icon_position": "vertical",
+      "alignment": "center",
+      "mobile_format": "carousel",
+      "icon_size": 38
+    },
+    "order": [
+      "icon_text_group"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/icon_text/icon_text_group/item_1",
+    "kind": "block",
+    "type": "icon-text-item",
+    "disabled": false,
+    "settings": {
+      "title": "t:defaults.icon_text.item_1_title",
+      "description": "t:defaults.icon_text.item_1_description"
+    },
+    "order": [
+      "item_1",
+      "item_2",
+      "item_3",
+      "item_4"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/icon_text/icon_text_group/item_2",
+    "kind": "block",
+    "type": "icon-text-item",
+    "disabled": false,
+    "settings": {
+      "icon": "card",
+      "title": "t:defaults.icon_text.item_2_title",
+      "description": "t:defaults.icon_text.item_2_description"
+    },
+    "order": [
+      "item_1",
+      "item_2",
+      "item_3",
+      "item_4"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/icon_text/icon_text_group/item_3",
+    "kind": "block",
+    "type": "icon-text-item",
+    "disabled": false,
+    "settings": {
+      "icon": "security",
+      "title": "t:defaults.icon_text.item_3_title",
+      "description": "t:defaults.icon_text.item_3_description"
+    },
+    "order": [
+      "item_1",
+      "item_2",
+      "item_3",
+      "item_4"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/icon_text/icon_text_group/item_4",
+    "kind": "block",
+    "type": "icon-text-item",
+    "disabled": false,
+    "settings": {
+      "icon": "whatsapp",
+      "title": "t:defaults.icon_text.item_4_title",
+      "description": "t:defaults.icon_text.item_4_description"
+    },
+    "order": [
+      "item_1",
+      "item_2",
+      "item_3",
+      "item_4"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/banner_full_3",
+    "kind": "section",
+    "type": "banners",
+    "disabled": false,
+    "settings": {
+      "format": "grid",
+      "columns": "1",
+      "columns_mobile": "1",
+      "section_width": "page",
+      "banner_aspect_ratio": "horizontal",
+      "vertical_padding": 40
+    },
+    "order": [
+      "hero",
+      "banners_4_grid",
+      "banner_full_1",
+      "divider_1",
+      "editorial_1",
+      "divider_2",
+      "featured_products_1",
+      "featured_categories_pills",
+      "banners_6_grid",
+      "divider_3",
+      "banner_full_2",
+      "banners_3_text_outside",
+      "featured_products_2",
+      "icon_text",
+      "banner_full_3",
+      "banners_2_text_inside",
+      "divider_5",
+      "editorial_2",
+      "divider_4",
+      "newsletter"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/banner_full_3/banner_1",
+    "kind": "block",
+    "type": "banner",
+    "disabled": false,
+    "settings": {
+      "text_outside": false,
+      "alignment": "start",
+      "alignment_vertical": "bottom",
+      "vertical_padding": 32,
+      "horizontal_padding": 32
+    },
+    "order": [
+      "banner_1"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/banner_full_3/banner_1/heading",
+    "kind": "block",
+    "type": "heading",
+    "disabled": false,
+    "settings": {
+      "title": "t:defaults.banner.heading",
+      "size": "h4"
+    },
+    "order": [
+      "heading",
+      "text",
+      "button"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/banner_full_3/banner_1/text",
+    "kind": "block",
+    "type": "text",
+    "disabled": false,
+    "settings": {
+      "text": "t:defaults.banner.description"
+    },
+    "order": [
+      "heading",
+      "text",
+      "button"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/banner_full_3/banner_1/button",
+    "kind": "block",
+    "type": "button",
+    "disabled": false,
+    "settings": {
+      "label": "t:defaults.banner.button",
+      "size": "medium"
+    },
+    "order": [
+      "heading",
+      "text",
+      "button"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/banners_2_text_inside",
+    "kind": "section",
+    "type": "banners",
+    "disabled": false,
+    "settings": {
+      "format": "grid",
+      "columns": "2",
+      "columns_mobile": "1",
+      "section_width": "page",
+      "vertical_padding": 0
+    },
+    "order": [
+      "hero",
+      "banners_4_grid",
+      "banner_full_1",
+      "divider_1",
+      "editorial_1",
+      "divider_2",
+      "featured_products_1",
+      "featured_categories_pills",
+      "banners_6_grid",
+      "divider_3",
+      "banner_full_2",
+      "banners_3_text_outside",
+      "featured_products_2",
+      "icon_text",
+      "banner_full_3",
+      "banners_2_text_inside",
+      "divider_5",
+      "editorial_2",
+      "divider_4",
+      "newsletter"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/banners_2_text_inside/banner_1",
+    "kind": "block",
+    "type": "banner",
+    "disabled": false,
+    "settings": {
+      "text_outside": false,
+      "alignment": "start",
+      "alignment_vertical": "bottom",
+      "vertical_padding": 32,
+      "horizontal_padding": 32
+    },
+    "order": [
+      "banner_1",
+      "banner_2"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/banners_2_text_inside/banner_1/group",
+    "kind": "block",
+    "type": "group",
+    "disabled": false,
+    "settings": {
+      "direction": "row",
+      "alignment_vertical": "center",
+      "gap": 48,
+      "vertical_padding": 0,
+      "horizontal_padding": 0
+    },
+    "order": [
+      "group"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/banners_2_text_inside/banner_1/group/heading",
+    "kind": "block",
+    "type": "heading",
+    "disabled": false,
+    "settings": {
+      "title": "t:defaults.banner.heading",
+      "size": "h6"
+    },
+    "order": [
+      "heading",
+      "button"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/banners_2_text_inside/banner_1/group/button",
+    "kind": "block",
+    "type": "button",
+    "disabled": false,
+    "settings": {
+      "label": "t:defaults.banner.button",
+      "variant": "primary",
+      "size": "medium",
+      "custom_background_color": "#ffffff",
+      "custom_text_color": "#614a3b"
+    },
+    "order": [
+      "heading",
+      "button"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/banners_2_text_inside/banner_2",
+    "kind": "block",
+    "type": "banner",
+    "disabled": false,
+    "settings": {
+      "text_outside": false,
+      "alignment": "start",
+      "alignment_vertical": "bottom",
+      "vertical_padding": 32,
+      "horizontal_padding": 32
+    },
+    "order": [
+      "banner_1",
+      "banner_2"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/banners_2_text_inside/banner_2/group",
+    "kind": "block",
+    "type": "group",
+    "disabled": false,
+    "settings": {
+      "direction": "row",
+      "alignment_vertical": "center",
+      "gap": 48,
+      "vertical_padding": 0,
+      "horizontal_padding": 0
+    },
+    "order": [
+      "group"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/banners_2_text_inside/banner_2/group/heading",
+    "kind": "block",
+    "type": "heading",
+    "disabled": false,
+    "settings": {
+      "title": "t:defaults.banner.heading",
+      "size": "h6"
+    },
+    "order": [
+      "heading",
+      "button"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/banners_2_text_inside/banner_2/group/button",
+    "kind": "block",
+    "type": "button",
+    "disabled": false,
+    "settings": {
+      "label": "t:defaults.banner.button",
+      "variant": "primary",
+      "size": "medium",
+      "custom_background_color": "#ffffff",
+      "custom_text_color": "#614a3b"
+    },
+    "order": [
+      "heading",
+      "button"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/divider_5",
+    "kind": "section",
+    "type": "divider",
+    "disabled": false,
+    "settings": {
+      "section_width": "page",
+      "vertical_padding": 40,
+      "show_line": false
+    },
+    "order": [
+      "hero",
+      "banners_4_grid",
+      "banner_full_1",
+      "divider_1",
+      "editorial_1",
+      "divider_2",
+      "featured_products_1",
+      "featured_categories_pills",
+      "banners_6_grid",
+      "divider_3",
+      "banner_full_2",
+      "banners_3_text_outside",
+      "featured_products_2",
+      "icon_text",
+      "banner_full_3",
+      "banners_2_text_inside",
+      "divider_5",
+      "editorial_2",
+      "divider_4",
+      "newsletter"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/editorial_2",
+    "kind": "section",
+    "type": "rich-text",
+    "disabled": false,
+    "settings": {
+      "alignment": "left",
+      "section_width": "page",
+      "background_color": "#8c7a5f",
+      "text_color": "#ffffff",
+      "vertical_padding": 40
+    },
+    "order": [
+      "hero",
+      "banners_4_grid",
+      "banner_full_1",
+      "divider_1",
+      "editorial_1",
+      "divider_2",
+      "featured_products_1",
+      "featured_categories_pills",
+      "banners_6_grid",
+      "divider_3",
+      "banner_full_2",
+      "banners_3_text_outside",
+      "featured_products_2",
+      "icon_text",
+      "banner_full_3",
+      "banners_2_text_inside",
+      "divider_5",
+      "editorial_2",
+      "divider_4",
+      "newsletter"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/editorial_2/outer_group",
+    "kind": "block",
+    "type": "group",
+    "disabled": false,
+    "settings": {
+      "direction": "row",
+      "mobile_direction_enabled": true,
+      "mobile_direction": "column",
+      "alignment": "start",
+      "alignment_vertical": "center",
+      "gap": 12,
+      "vertical_padding": 0,
+      "horizontal_padding": 0
+    },
+    "order": [
+      "outer_group"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/editorial_2/outer_group/inner_group",
+    "kind": "block",
+    "type": "group",
+    "disabled": false,
+    "settings": {
+      "gap": 8,
+      "vertical_padding": 0,
+      "horizontal_padding": 0
+    },
+    "order": [
+      "inner_group",
+      "button"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/editorial_2/outer_group/inner_group/description_1",
+    "kind": "block",
+    "type": "text",
+    "disabled": false,
+    "settings": {
+      "text": "t:defaults.text"
+    },
+    "order": [
+      "description_1",
+      "heading",
+      "description_2"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/editorial_2/outer_group/inner_group/heading",
+    "kind": "block",
+    "type": "heading",
+    "disabled": false,
+    "settings": {
+      "title": "t:defaults.heading",
+      "size": "h4"
+    },
+    "order": [
+      "description_1",
+      "heading",
+      "description_2"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/editorial_2/outer_group/inner_group/description_2",
+    "kind": "block",
+    "type": "text",
+    "disabled": false,
+    "settings": {
+      "text": "t:defaults.text"
+    },
+    "order": [
+      "description_1",
+      "heading",
+      "description_2"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/editorial_2/outer_group/button",
+    "kind": "block",
+    "type": "button",
+    "disabled": false,
+    "settings": {
+      "label": "t:defaults.button",
+      "variant": "primary",
+      "size": "medium",
+      "custom_background_color": "#f5f5f5",
+      "custom_text_color": "#010101"
+    },
+    "order": [
+      "inner_group",
+      "button"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/divider_4",
+    "kind": "section",
+    "type": "divider",
+    "disabled": false,
+    "settings": {
+      "section_width": "page",
+      "vertical_padding": 40,
+      "show_line": false
+    },
+    "order": [
+      "hero",
+      "banners_4_grid",
+      "banner_full_1",
+      "divider_1",
+      "editorial_1",
+      "divider_2",
+      "featured_products_1",
+      "featured_categories_pills",
+      "banners_6_grid",
+      "divider_3",
+      "banner_full_2",
+      "banners_3_text_outside",
+      "featured_products_2",
+      "icon_text",
+      "banner_full_3",
+      "banners_2_text_inside",
+      "divider_5",
+      "editorial_2",
+      "divider_4",
+      "newsletter"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/newsletter",
+    "kind": "section",
+    "type": "newsletter",
+    "disabled": false,
+    "settings": {
+      "image_position": "background",
+      "text_alignment": "center"
+    },
+    "order": [
+      "hero",
+      "banners_4_grid",
+      "banner_full_1",
+      "divider_1",
+      "editorial_1",
+      "divider_2",
+      "featured_products_1",
+      "featured_categories_pills",
+      "banners_6_grid",
+      "divider_3",
+      "banner_full_2",
+      "banners_3_text_outside",
+      "featured_products_2",
+      "icon_text",
+      "banner_full_3",
+      "banners_2_text_inside",
+      "divider_5",
+      "editorial_2",
+      "divider_4",
+      "newsletter"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/newsletter/heading",
+    "kind": "block",
+    "type": "heading",
+    "disabled": false,
+    "settings": {
+      "title": "t:defaults.newsletter.heading",
+      "size": "h6"
+    },
+    "order": [
+      "heading",
+      "text",
+      "newsletter_form"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/newsletter/text",
+    "kind": "block",
+    "type": "text",
+    "disabled": false,
+    "settings": {
+      "text": "t:defaults.newsletter.description"
+    },
+    "order": [
+      "heading",
+      "text",
+      "newsletter_form"
+    ]
+  },
+  {
+    "file": "templates/pages/home.json",
+    "location": "templates/pages/home.json#/newsletter/newsletter_form",
+    "kind": "block",
+    "type": "newsletter-form",
+    "disabled": false,
+    "settings": {
+      "text_and_lines_color": "#3a332d"
+    },
+    "order": [
+      "heading",
+      "text",
+      "newsletter_form"
+    ]
+  },
+  {
+    "file": "templates/pages/page.json",
+    "location": "templates/pages/page.json#/heading",
+    "kind": "section",
+    "type": "page-header",
+    "disabled": false,
+    "settings": {},
+    "order": [
+      "heading",
+      "page_content"
+    ]
+  },
+  {
+    "file": "templates/pages/page.json",
+    "location": "templates/pages/page.json#/page_content",
+    "kind": "section",
+    "type": "main-page",
+    "disabled": false,
+    "settings": {},
+    "order": [
+      "heading",
+      "page_content"
+    ]
+  },
+  {
+    "file": "templates/pages/password.json",
+    "location": "templates/pages/password.json#/logo",
+    "kind": "section",
+    "type": "password-logo",
+    "disabled": false,
+    "settings": [],
+    "order": [
+      "logo",
+      "content"
+    ]
+  },
+  {
+    "file": "templates/pages/password.json",
+    "location": "templates/pages/password.json#/content",
+    "kind": "section",
+    "type": "main-password",
+    "disabled": false,
+    "settings": [],
+    "order": [
+      "logo",
+      "content"
+    ]
+  },
+  {
+    "file": "templates/pages/product.json",
+    "location": "templates/pages/product.json#/main_product",
+    "kind": "section",
+    "type": "main-product",
+    "disabled": false,
+    "settings": {},
+    "order": [
+      "main_product",
+      "product_description",
+      "complementary_products",
+      "alternative_products"
+    ]
+  },
+  {
+    "file": "templates/pages/product.json",
+    "location": "templates/pages/product.json#/main_product/product_media",
+    "kind": "block",
+    "type": "product-media",
+    "disabled": false,
+    "settings": {
+      "show_thumbnails": true,
+      "thumbnail_position": "left"
+    },
+    "order": [
+      "product_media",
+      "product_info"
+    ]
+  },
+  {
+    "file": "templates/pages/product.json",
+    "location": "templates/pages/product.json#/main_product/product_info",
+    "kind": "block",
+    "type": "product-info",
+    "disabled": false,
+    "settings": {
+      "gap": 40,
+      "vertical_padding": 8,
+      "horizontal_padding": 0
+    },
+    "order": [
+      "product_media",
+      "product_info"
+    ]
+  },
+  {
+    "file": "templates/pages/product.json",
+    "location": "templates/pages/product.json#/main_product/product_info/description",
+    "kind": "block",
+    "type": "description",
+    "disabled": false,
+    "settings": {
+      "show_title": true,
+      "show_social": true
+    },
+    "order": [
+      "description",
+      "purchase_info"
+    ]
+  },
+  {
+    "file": "templates/pages/product.json",
+    "location": "templates/pages/product.json#/main_product/product_info/purchase_info",
+    "kind": "block",
+    "type": "purchase-info",
+    "disabled": false,
+    "settings": {
+      "icon_size": 24,
+      "title_size": "paragraph",
+      "description_size": "paragraph_small",
+      "gap": 24
+    },
+    "order": [
+      "description",
+      "purchase_info"
+    ]
+  },
+  {
+    "file": "templates/pages/product.json",
+    "location": "templates/pages/product.json#/main_product/product_info/purchase_info/icon_returns",
+    "kind": "block",
+    "type": "icon-text-item",
+    "disabled": false,
+    "settings": {
+      "icon": "returns",
+      "title": "t:defaults.main_product.icon_1_title",
+      "description": "t:defaults.main_product.icon_1_description"
+    },
+    "order": [
+      "icon_returns",
+      "icon_security"
+    ]
+  },
+  {
+    "file": "templates/pages/product.json",
+    "location": "templates/pages/product.json#/main_product/product_info/purchase_info/icon_security",
+    "kind": "block",
+    "type": "icon-text-item",
+    "disabled": false,
+    "settings": {
+      "icon": "security",
+      "title": "t:defaults.main_product.icon_2_title",
+      "description": "t:defaults.main_product.icon_2_description"
+    },
+    "order": [
+      "icon_returns",
+      "icon_security"
+    ]
+  },
+  {
+    "file": "templates/pages/product.json",
+    "location": "templates/pages/product.json#/complementary_products",
+    "kind": "section",
+    "type": "related-products",
+    "disabled": false,
+    "settings": {
+      "_custom_name": "t:names.complementary",
+      "products_source": "complementary",
+      "section_width": "page",
+      "gap": 32,
+      "vertical_padding": 0,
+      "horizontal_padding": 0
+    },
+    "order": [
+      "main_product",
+      "product_description",
+      "complementary_products",
+      "alternative_products"
+    ]
+  },
+  {
+    "file": "templates/pages/product.json",
+    "location": "templates/pages/product.json#/complementary_products/complementary_heading",
+    "kind": "block",
+    "type": "heading",
+    "disabled": false,
+    "settings": {
+      "title": "t:defaults.complementary_products.heading",
+      "size": "h2"
+    },
+    "order": [
+      "complementary_heading",
+      "complementary_products_block"
+    ]
+  },
+  {
+    "file": "templates/pages/product.json",
+    "location": "templates/pages/product.json#/complementary_products/complementary_products_block",
+    "kind": "block",
+    "type": "product-recommendations",
+    "disabled": false,
+    "settings": {
+      "columns": "4",
+      "columns_mobile": "2"
+    },
+    "order": [
+      "complementary_heading",
+      "complementary_products_block"
+    ]
+  },
+  {
+    "file": "templates/pages/product.json",
+    "location": "templates/pages/product.json#/alternative_products",
+    "kind": "section",
+    "type": "related-products",
+    "disabled": false,
+    "settings": {
+      "_custom_name": "t:names.alternative",
+      "products_source": "alternative",
+      "section_width": "page",
+      "gap": 32,
+      "vertical_padding": 0,
+      "horizontal_padding": 0
+    },
+    "order": [
+      "main_product",
+      "product_description",
+      "complementary_products",
+      "alternative_products"
+    ]
+  },
+  {
+    "file": "templates/pages/product.json",
+    "location": "templates/pages/product.json#/alternative_products/alternative_heading",
+    "kind": "block",
+    "type": "heading",
+    "disabled": false,
+    "settings": {
+      "title": "t:defaults.alternative_products.heading",
+      "size": "h2"
+    },
+    "order": [
+      "alternative_heading",
+      "alternative_products_block"
+    ]
+  },
+  {
+    "file": "templates/pages/product.json",
+    "location": "templates/pages/product.json#/alternative_products/alternative_products_block",
+    "kind": "block",
+    "type": "product-recommendations",
+    "disabled": false,
+    "settings": {
+      "columns": "4",
+      "columns_mobile": "2"
+    },
+    "order": [
+      "alternative_heading",
+      "alternative_products_block"
+    ]
+  },
+  {
+    "file": "templates/pages/product.json",
+    "location": "templates/pages/product.json#/product_description",
+    "kind": "section",
+    "type": "product-description",
+    "disabled": true,
+    "settings": {
+      "show_title": true,
+      "show_social": true,
+      "section_width": "page",
+      "vertical_padding": 8,
+      "horizontal_padding": 0
+    },
+    "order": [
+      "main_product",
+      "product_description",
+      "complementary_products",
+      "alternative_products"
+    ]
+  },
+  {
+    "file": "templates/pages/search.json",
+    "location": "templates/pages/search.json#/heading",
+    "kind": "section",
+    "type": "page-header",
+    "disabled": false,
+    "settings": {},
+    "order": [
+      "heading",
+      "product_list"
+    ]
+  },
+  {
+    "file": "templates/pages/search.json",
+    "location": "templates/pages/search.json#/product_list",
+    "kind": "section",
+    "type": "main-products-grid",
+    "disabled": false,
+    "settings": {
+      "columns_mobile": "2",
+      "columns": "4",
+      "pagination": "infinite"
+    },
+    "order": [
+      "heading",
+      "product_list"
+    ]
+  }
+]

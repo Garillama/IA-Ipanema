@@ -1,0 +1,230 @@
+{
+  "template": "template-account-reset",
+  "url": "https://rhinoipanema.mitiendanube.com/account/reset",
+  "width": 390,
+  "verifiedAt": "2026-11-08T07:27:27.605Z",
+  "status": 200,
+  "dom": {
+    "finalUrl": "https://rhinoipanema.mitiendanube.com/account/reset",
+    "title": "RHINO IPANEMA",
+    "bodyClass": " template-account-reset ",
+    "innerWidth": 390,
+    "scrollWidth": 390,
+    "h1": [
+      "Recuperar contraseña"
+    ],
+    "images": 7,
+    "domNodes": 741,
+    "sections": [
+      "navigation-bar",
+      "navigation-bar",
+      "header",
+      "header",
+      "page-header",
+      "main-reset",
+      "footer",
+      "cart-drawer"
+    ]
+  },
+  "axe": {
+    "engine": {
+      "name": "axe-core",
+      "version": "4.14.0"
+    },
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "tags": [
+          "cat.color",
+          "wcag2aa",
+          "wcag143",
+          "TTv5",
+          "TT13.c",
+          "EN-301-549",
+          "EN-9.1.4.3",
+          "ACT",
+          "RGAAv4",
+          "RGAA-3.2.1"
+        ],
+        "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+        "help": "Elements must meet minimum color contrast ratio thresholds",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.14/color-contrast?application=axeAPI",
+        "nodes": [
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "9.0pt (12px)",
+                  "fontWeight": "normal",
+                  "messageKey": "elmPartiallyObscured",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<div class=\"js-head-main head-ma...\" data-store=\"head\" data-section-id=\"header\" data-section-type=\"header\" data-sticky-header=\"true\" data-transparent-hea...=\"false\" data-normal-style=\"--header-background:...\" style=\"--header-background:...\">",
+                    "target": [
+                      ".js-head-main"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element's background color could not be determined because it's partially obscured by another element"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<a href=\"https://rhinoipanema.mitiendanube.com/compresion-frio-y-calor/\" class=\"nav-list-link\">COMPRESIÓN FRÍO Y CALOR</a>",
+            "target": [
+              ".list-item:nth-child(4) > .nav-list-link"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined because it's partially obscured by another element"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "9.0pt (12px)",
+                  "fontWeight": "normal",
+                  "messageKey": "elmPartiallyObscured",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<div class=\"js-head-main head-ma...\" data-store=\"head\" data-section-id=\"header\" data-section-type=\"header\" data-sticky-header=\"true\" data-transparent-hea...=\"false\" data-normal-style=\"--header-background:...\" style=\"--header-background:...\">",
+                    "target": [
+                      ".js-head-main"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element's background color could not be determined because it's partially obscured by another element"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<a href=\"https://rhinoipanema.mitiendanube.com/accesorios/\" class=\"nav-list-link\">ACCESORIOS</a>",
+            "target": [
+              ".list-item:nth-child(5) > .nav-list-link"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined because it's partially obscured by another element"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "9.0pt (12px)",
+                  "fontWeight": "normal",
+                  "messageKey": "elmPartiallyObscuring",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element's background color could not be determined because it partially overlaps other elements"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span class=\"notification-message\">Al navegar por este sitio <strong>aceptas el uso de cookies</strong> para agilizar tu experiencia de compra.</span>",
+            "target": [
+              ".notification-message"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined because it partially overlaps other elements"
+          }
+        ]
+      },
+      {
+        "id": "duplicate-id-aria",
+        "impact": "critical",
+        "tags": [
+          "cat.parsing",
+          "wcag2a",
+          "wcag412",
+          "EN-301-549",
+          "EN-9.4.1.2",
+          "RGAAv4",
+          "RGAA-8.2.1"
+        ],
+        "description": "Ensure every id attribute value used in ARIA and in labels is unique",
+        "help": "IDs used in ARIA and labels must be unique",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.14/duplicate-id-aria?application=axeAPI",
+        "nodes": [
+          {
+            "any": [
+              {
+                "id": "duplicate-id-aria",
+                "data": "email",
+                "relatedNodes": [
+                  {
+                    "html": "<input type=\"email\" id=\"email\" class=\" form-control  \" autocorrect=\"off\" autocapitalize=\"off\" name=\"email\" placeholder=\"ej.: tucorreo@email.com\">",
+                    "target": [
+                      "input[autocorrect=\"off\"]"
+                    ]
+                  }
+                ],
+                "impact": "critical",
+                "message": "Document has multiple elements referenced with ARIA with the same id attribute: email"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "critical",
+            "html": "<symbol id=\"email\" viewBox=\"0 0 512 512\">",
+            "target": [
+              "symbol[viewBox=\"0 0 512 512\"]:nth-child(31)"
+            ],
+            "failureSummary": "Fix any of the following:\n  Document has multiple elements referenced with ARIA with the same id attribute: email"
+          }
+        ]
+      }
+    ],
+    "passes": [
+      "aria-allowed-attr",
+      "aria-conditional-attr",
+      "aria-deprecated-role",
+      "aria-hidden-body",
+      "aria-hidden-focus",
+      "aria-prohibited-attr",
+      "aria-required-attr",
+      "aria-roles",
+      "aria-valid-attr-value",
+      "aria-valid-attr",
+      "avoid-inline-spacing",
+      "button-name",
+      "bypass",
+      "color-contrast",
+      "document-title",
+      "duplicate-id-aria",
+      "form-field-multiple-labels",
+      "frame-title-unique",
+      "frame-title",
+      "html-has-lang",
+      "html-lang-valid",
+      "image-alt",
+      "input-button-name",
+      "label",
+      "link-name",
+      "list",
+      "listitem",
+      "meta-viewport",
+      "nested-interactive",
+      "scrollable-region-focusable",
+      "target-size"
+    ]
+  },
+  "limitations": [
+    "Una ruta representativa de este template; no todas sus variantes.",
+    "Geometría y screenshot con recarga y emulación de dispositivo; no benchmark de velocidad.",
+    "Dos páginas concurrentes; no usar estos tiempos como medición de rendimiento."
+  ]
+}

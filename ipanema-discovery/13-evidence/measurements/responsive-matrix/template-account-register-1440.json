@@ -1,0 +1,302 @@
+{
+  "template": "template-account-register",
+  "url": "https://rhinoipanema.mitiendanube.com/account/register",
+  "width": 1440,
+  "verifiedAt": "2026-11-08T07:27:16.014Z",
+  "status": 200,
+  "dom": {
+    "finalUrl": "https://rhinoipanema.mitiendanube.com/account/register",
+    "title": "Crea tu cuenta - RHINO IPANEMA",
+    "bodyClass": " template-account-register ",
+    "innerWidth": 1440,
+    "scrollWidth": 1440,
+    "h1": [
+      "Crear cuenta"
+    ],
+    "images": 7,
+    "domNodes": 778,
+    "sections": [
+      "navigation-bar",
+      "navigation-bar",
+      "header",
+      "header",
+      "page-header",
+      "main-register",
+      "footer",
+      "cart-drawer"
+    ]
+  },
+  "axe": {
+    "engine": {
+      "name": "axe-core",
+      "version": "4.14.0"
+    },
+    "violations": [
+      {
+        "id": "aria-prohibited-attr",
+        "impact": "serious",
+        "tags": [
+          "cat.aria",
+          "wcag2a",
+          "wcag412",
+          "EN-301-549",
+          "EN-9.4.1.2",
+          "RGAAv4",
+          "RGAA-7.1.1"
+        ],
+        "description": "Ensure ARIA attributes are not prohibited for an element's role",
+        "help": "Elements must only use permitted ARIA attributes",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.14/aria-prohibited-attr?application=axeAPI",
+        "nodes": [
+          {
+            "any": [],
+            "all": [],
+            "none": [
+              {
+                "id": "aria-prohibited-attr",
+                "data": {
+                  "role": null,
+                  "nodeName": "a",
+                  "messageKey": "noRoleSingular",
+                  "prohibited": [
+                    "aria-label"
+                  ]
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "aria-label attribute cannot be used on \"a\" elements with no valid role attribute."
+              }
+            ],
+            "impact": "serious",
+            "html": "<a aria-label=\"Ver contraseña\" class=\"js-password-toggle password-toggle btn\">",
+            "target": [
+              ".form-group:nth-child(5) > .js-password-toggle.password-toggle[aria-label=\"Ver contraseña\"]"
+            ],
+            "failureSummary": "Fix all of the following:\n  aria-label attribute cannot be used on \"a\" elements with no valid role attribute."
+          },
+          {
+            "any": [],
+            "all": [],
+            "none": [
+              {
+                "id": "aria-prohibited-attr",
+                "data": {
+                  "role": null,
+                  "nodeName": "a",
+                  "messageKey": "noRoleSingular",
+                  "prohibited": [
+                    "aria-label"
+                  ]
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "aria-label attribute cannot be used on \"a\" elements with no valid role attribute."
+              }
+            ],
+            "impact": "serious",
+            "html": "<a aria-label=\"Ver contraseña\" class=\"js-password-toggle password-toggle btn\">",
+            "target": [
+              ".form-group:nth-child(6) > .js-password-toggle.password-toggle[aria-label=\"Ver contraseña\"]"
+            ],
+            "failureSummary": "Fix all of the following:\n  aria-label attribute cannot be used on \"a\" elements with no valid role attribute."
+          }
+        ]
+      },
+      {
+        "id": "label-content-name-mismatch",
+        "impact": "serious",
+        "tags": [
+          "cat.semantics",
+          "wcag21a",
+          "wcag253",
+          "EN-301-549",
+          "EN-9.2.5.3",
+          "RGAAv4",
+          "RGAA-6.1.5"
+        ],
+        "description": "Ensure that elements labelled through their content must have their visible text as part of their accessible name",
+        "help": "Elements must have their visible text as part of their accessible name",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.14/label-content-name-mismatch?application=axeAPI",
+        "nodes": [
+          {
+            "any": [
+              {
+                "id": "label-content-name-mismatch",
+                "data": null,
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Text inside the element is not included in the accessible name"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<button class=\"js-modal-open-private header-utility\" data-target=\"#modal-cart\" aria-label=\"Carrito de compras\">",
+            "target": [
+              "button[aria-label=\"Carrito de compras\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+          }
+        ]
+      }
+    ],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "tags": [
+          "cat.color",
+          "wcag2aa",
+          "wcag143",
+          "TTv5",
+          "TT13.c",
+          "EN-301-549",
+          "EN-9.1.4.3",
+          "ACT",
+          "RGAAv4",
+          "RGAA-3.2.1"
+        ],
+        "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+        "help": "Elements must meet minimum color contrast ratio thresholds",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.14/color-contrast?application=axeAPI",
+        "nodes": [
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "9.0pt (12px)",
+                  "fontWeight": "normal",
+                  "messageKey": "elmPartiallyObscuring",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element's background color could not be determined because it partially overlaps other elements"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span class=\"notification-message\">Al navegar por este sitio <strong>aceptas el uso de cookies</strong> para agilizar tu experiencia de compra.</span>",
+            "target": [
+              ".notification-message"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined because it partially overlaps other elements"
+          }
+        ]
+      },
+      {
+        "id": "duplicate-id-aria",
+        "impact": "critical",
+        "tags": [
+          "cat.parsing",
+          "wcag2a",
+          "wcag412",
+          "EN-301-549",
+          "EN-9.4.1.2",
+          "RGAAv4",
+          "RGAA-8.2.1"
+        ],
+        "description": "Ensure every id attribute value used in ARIA and in labels is unique",
+        "help": "IDs used in ARIA and labels must be unique",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.14/duplicate-id-aria?application=axeAPI",
+        "nodes": [
+          {
+            "any": [
+              {
+                "id": "duplicate-id-aria",
+                "data": "phone",
+                "relatedNodes": [
+                  {
+                    "html": "<input type=\"tel\" id=\"phone\" name=\"phone\" value=\"\" autocorrect=\"off\" autocapitalize=\"off\" class=\"js-account-input form-control\" placeholder=\"ej.: 5512341234\">",
+                    "target": [
+                      "input[name=\"phone\"]"
+                    ]
+                  }
+                ],
+                "impact": "critical",
+                "message": "Document has multiple elements referenced with ARIA with the same id attribute: phone"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "critical",
+            "html": "<symbol id=\"phone\" viewBox=\"0 0 512 512\">",
+            "target": [
+              "symbol[viewBox=\"0 0 512 512\"]:nth-child(30)"
+            ],
+            "failureSummary": "Fix any of the following:\n  Document has multiple elements referenced with ARIA with the same id attribute: phone"
+          },
+          {
+            "any": [
+              {
+                "id": "duplicate-id-aria",
+                "data": "email",
+                "relatedNodes": [
+                  {
+                    "html": "<input type=\"email\" id=\"email\" name=\"email\" value=\"\" autocorrect=\"off\" autocapitalize=\"off\" class=\"js-account-input form-control\" placeholder=\"ej.: tuemail@email.com\">",
+                    "target": [
+                      "input[placeholder=\"ej.: tuemail@email.com\"]"
+                    ]
+                  }
+                ],
+                "impact": "critical",
+                "message": "Document has multiple elements referenced with ARIA with the same id attribute: email"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "critical",
+            "html": "<symbol id=\"email\" viewBox=\"0 0 512 512\">",
+            "target": [
+              "symbol[viewBox=\"0 0 512 512\"]:nth-child(31)"
+            ],
+            "failureSummary": "Fix any of the following:\n  Document has multiple elements referenced with ARIA with the same id attribute: email"
+          }
+        ]
+      }
+    ],
+    "passes": [
+      "aria-allowed-attr",
+      "aria-conditional-attr",
+      "aria-deprecated-role",
+      "aria-hidden-body",
+      "aria-hidden-focus",
+      "aria-prohibited-attr",
+      "aria-required-attr",
+      "aria-roles",
+      "aria-valid-attr-value",
+      "aria-valid-attr",
+      "autocomplete-valid",
+      "avoid-inline-spacing",
+      "button-name",
+      "bypass",
+      "color-contrast",
+      "document-title",
+      "duplicate-id-aria",
+      "form-field-multiple-labels",
+      "frame-title-unique",
+      "frame-title",
+      "html-has-lang",
+      "html-lang-valid",
+      "image-alt",
+      "input-button-name",
+      "label-content-name-mismatch",
+      "label",
+      "link-in-text-block",
+      "link-name",
+      "list",
+      "listitem",
+      "meta-viewport",
+      "nested-interactive",
+      "target-size"
+    ]
+  },
+  "limitations": [
+    "Una ruta representativa de este template; no todas sus variantes.",
+    "Geometría y screenshot con recarga y emulación de dispositivo; no benchmark de velocidad.",
+    "Dos páginas concurrentes; no usar estos tiempos como medición de rendimiento."
+  ]
+}

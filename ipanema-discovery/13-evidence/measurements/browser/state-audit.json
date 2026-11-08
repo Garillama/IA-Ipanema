@@ -1,0 +1,2308 @@
+{
+  "verifiedAt": "2026-11-08T07:26:21.169Z",
+  "states": [
+    {
+      "name": "menu",
+      "opened": {
+        "exists": true,
+        "display": "flex",
+        "role": null,
+        "ariaModal": null,
+        "label": null,
+        "labelledby": null,
+        "text": "PRODUCTOS\nARMA TU PACK\nBLOG\n Mi cuenta",
+        "active": {
+          "tag": "BUTTON",
+          "id": "",
+          "class": "js-modal-open-private header-icon header-utility",
+          "label": "Menú"
+        },
+        "focusInside": false
+      },
+      "focusPath": [
+        {
+          "exists": true,
+          "display": "flex",
+          "role": null,
+          "ariaModal": null,
+          "label": null,
+          "labelledby": null,
+          "text": "PRODUCTOS\nARMA TU PACK\nBLOG\n Mi cuenta",
+          "active": {
+            "tag": "BUTTON",
+            "id": "",
+            "class": "js-search-trigger search-trigger header-icon header-utility",
+            "label": "Buscar"
+          },
+          "focusInside": false
+        },
+        {
+          "exists": true,
+          "display": "flex",
+          "role": null,
+          "ariaModal": null,
+          "label": null,
+          "labelledby": null,
+          "text": "PRODUCTOS\nARMA TU PACK\nBLOG\n Mi cuenta",
+          "active": {
+            "tag": "BUTTON",
+            "id": "",
+            "class": "js-modal-open-private header-utility",
+            "label": "Carrito de compras"
+          },
+          "focusInside": false
+        },
+        {
+          "exists": true,
+          "display": "flex",
+          "role": null,
+          "ariaModal": null,
+          "label": null,
+          "labelledby": null,
+          "text": "PRODUCTOS\nARMA TU PACK\nBLOG\n Mi cuenta",
+          "active": {
+            "tag": "A",
+            "id": "",
+            "class": "nav-list-link",
+            "label": null
+          },
+          "focusInside": false
+        },
+        {
+          "exists": true,
+          "display": "flex",
+          "role": null,
+          "ariaModal": null,
+          "label": null,
+          "labelledby": null,
+          "text": "PRODUCTOS\nARMA TU PACK\nBLOG\n Mi cuenta",
+          "active": {
+            "tag": "A",
+            "id": "",
+            "class": "nav-list-link",
+            "label": null
+          },
+          "focusInside": false
+        },
+        {
+          "exists": true,
+          "display": "flex",
+          "role": null,
+          "ariaModal": null,
+          "label": null,
+          "labelledby": null,
+          "text": "PRODUCTOS\nARMA TU PACK\nBLOG\n Mi cuenta",
+          "active": {
+            "tag": "A",
+            "id": "",
+            "class": "nav-list-link",
+            "label": null
+          },
+          "focusInside": false
+        },
+        {
+          "exists": true,
+          "display": "flex",
+          "role": null,
+          "ariaModal": null,
+          "label": null,
+          "labelledby": null,
+          "text": "PRODUCTOS\nARMA TU PACK\nBLOG\n Mi cuenta",
+          "active": {
+            "tag": "A",
+            "id": "",
+            "class": "nav-list-link",
+            "label": null
+          },
+          "focusInside": false
+        }
+      ],
+      "closedByEscape": {
+        "exists": true,
+        "display": "flex",
+        "role": null,
+        "ariaModal": null,
+        "label": null,
+        "labelledby": null,
+        "text": "PRODUCTOS\nARMA TU PACK\nBLOG\n Mi cuenta",
+        "active": {
+          "tag": "A",
+          "id": "",
+          "class": "nav-list-link",
+          "label": null
+        },
+        "focusInside": false
+      },
+      "axe": {
+        "violations": [
+          {
+            "id": "button-name",
+            "impact": "critical",
+            "tags": [
+              "cat.name-role-value",
+              "wcag2a",
+              "wcag412",
+              "section508",
+              "section508.22.a",
+              "TTv5",
+              "TT6.a",
+              "EN-301-549",
+              "EN-9.4.1.2",
+              "ACT",
+              "RGAAv4",
+              "RGAA-11.9.1"
+            ],
+            "description": "Ensure buttons have discernible text",
+            "help": "Buttons must have discernible text",
+            "helpUrl": "https://dequeuniversity.com/rules/axe/4.14/button-name?application=axeAPI",
+            "nodes": [
+              {
+                "any": [
+                  {
+                    "id": "button-has-visible-text",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "critical",
+                    "message": "Element does not have inner text that is visible to screen readers"
+                  },
+                  {
+                    "id": "aria-label",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "critical",
+                    "message": "aria-label attribute does not exist or is empty"
+                  },
+                  {
+                    "id": "aria-labelledby",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "critical",
+                    "message": "aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty"
+                  },
+                  {
+                    "id": "non-empty-title",
+                    "data": {
+                      "messageKey": "noAttr"
+                    },
+                    "relatedNodes": [],
+                    "impact": "critical",
+                    "message": "Element has no title attribute"
+                  },
+                  {
+                    "id": "implicit-label",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "critical",
+                    "message": "Element does not have an implicit (wrapped) <label>"
+                  },
+                  {
+                    "id": "explicit-label",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "critical",
+                    "message": "Element does not have an explicit <label>"
+                  },
+                  {
+                    "id": "presentational-role",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "critical",
+                    "message": "Element's default semantics were not overridden with role=\"none\" or role=\"presentation\""
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "critical",
+                "html": "<button class=\"js-modal-close-private js-modal-close-all-private modal-close \" data-target=\"#nav-hamburger\" data-modal-url=\"nav-hamburger\">\n\t\t\t\t\t<svg class=\"modal-close-icon icon-inline\"><use xlink:href=\"#times\"></use></svg>\n\t\t\t\t</button>",
+                "target": [
+                  ".no-title > .js-modal-close-all-private[data-modal-url=\"nav-hamburger\"][data-target=\"#nav-hamburger\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Element does not have inner text that is visible to screen readers\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute\n  Element does not have an implicit (wrapped) <label>\n  Element does not have an explicit <label>\n  Element's default semantics were not overridden with role=\"none\" or role=\"presentation\""
+              }
+            ]
+          }
+        ],
+        "incomplete": []
+      }
+    },
+    {
+      "name": "cart-empty",
+      "target": "#modal-cart",
+      "status": "No se abrió con el clic automatizado en esta ejecución",
+      "snapshot": {
+        "exists": true,
+        "display": "none",
+        "role": null,
+        "ariaModal": null,
+        "label": null,
+        "labelledby": null,
+        "text": "\n\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tCarrito de compras\n\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\n\t\t\t\n\t\t\t\n\t\t\t\t\t\t\t\n\n\n\n\n                                                            \n            \n\n\n\t\t\n\n\n\n\n\n                                                            \n            \n\n\n\t\tTu carrito está vacío \n\n\n\t\n\t\t¡Ups! No tenemos más stock de este producto para agregarlo al carrito. Si quieres puedesver otros aquí\n\t\n\n\n\n\t\n\t\t\n\t\t\n\t\t\n\t\n\n\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\n\t\t\n\t\n\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t¡Genial! Tienes envío gratis\n\t\t\t\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t¡Estás a  de tener envío gratis!\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\tGratis\n\t\t\t\t\t\t\t\t\t\tsuperando los \n\t\t\t\t\n\t\t\t\n\t\t\t\t\t\n\n\n  \n\n\t\t\t\n\t\n\t\n\t\t\n\t\n\n\t\n\t\n\n\t\n\t\n\n\n\n                                                            \n            \n\n\t\n\n  \n    \n\n      \n      \n        El método de envío que habías elegido ya no se encuentra disponible para este carrito.\n        ¡No te preocupes! Puedes elegir otro.\n      \n\n      \n      \n\n        \n        \n\n        \n                  \n\n\n\n\n\n\t\n\t\t\n\t\t\t\n\t\t\t\t\n\t\t\t\t\tEntregas para el CP:\n\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\tCambiar CP\n\t\t\t\t\n\t\t\t\n\t\t\n\n\t\t\n\n\t\t\t\n\t\t\t\n\t\t\t\tMedios de envío\n\t\t\t\n\n\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\tCalcular\n\t\t\t\t\tCalculando\n\t\t\t\t\t\n\t\t\t\t\t\t\n  \n\n  \n\n\t\t\t\t\t\n\t\t\t\t\n\t\t\t\n\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tNo sé mi código postal\n\t\t\t\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tNo encontramos este código postal. ¿Está bien escrito?\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\tOcurrió un error al calcular el envío. Por favor intenta de nuevo en unos segundos.\n\t\t\t\tEl cálculo falló por un problema con el medio de envío. Por favor intenta de nuevo en unos segundos.\n\t\t\t\n\t\t\n\t\n\t\n\t\t\n    \n        \n        \n    \n    \n        \n    \n\n\n\n   ",
+        "active": {
+          "tag": "BODY",
+          "id": "",
+          "class": "template-home modal-visible modal-show",
+          "label": null
+        },
+        "focusInside": false
+      },
+      "url": "https://rhinoipanema.mitiendanube.com/"
+    },
+    {
+      "name": "search-expanded",
+      "state": {
+        "exists": true,
+        "display": "block",
+        "role": null,
+        "ariaModal": null,
+        "label": null,
+        "labelledby": null,
+        "text": "\n\t\t\n\t\t\t\n\t\t\t\n\t\t\t\t\t\t\t\t\t\n\n\n  \n\n\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\n\t",
+        "active": {
+          "tag": "BUTTON",
+          "id": "",
+          "class": "js-search-trigger search-trigger header-icon header-utility",
+          "label": "Buscar"
+        },
+        "focusInside": false
+      }
+    },
+    {
+      "name": "pdp-variant-selection",
+      "options": [
+        {
+          "value": "XL (Altura >1.90 m · Muslo ≤80 cm)",
+          "text": "XL (Altura >1.90 m · Muslo ≤80 cm)",
+          "disabled": false,
+          "selected": true
+        },
+        {
+          "value": "S (Altura ≤1.60 m · Muslo ≤68 cm)",
+          "text": "S (Altura ≤1.60 m · Muslo ≤68 cm)",
+          "disabled": false,
+          "selected": false
+        },
+        {
+          "value": "L (Altura 1.75–1.90 m · Muslo ≤76 cm)",
+          "text": "L (Altura 1.75–1.90 m · Muslo ≤76 cm)",
+          "disabled": false,
+          "selected": false
+        },
+        {
+          "value": "M (Altura 1.60–1.75 m · Muslo ≤76 cm)",
+          "text": "M (Altura 1.60–1.75 m · Muslo ≤76 cm)",
+          "disabled": false,
+          "selected": false
+        }
+      ],
+      "before": {
+        "url": "https://rhinoipanema.mitiendanube.com/productos/botas-presoterapia-inalambricas-pro-air/",
+        "price": "\n\t\t\t\t\t\t\t\t\t\t\t\t\t$12,590.00\n\t\t\t\t\t\t\t\t\t\t\t",
+        "submit": ""
+      },
+      "after": {
+        "url": "https://rhinoipanema.mitiendanube.com/productos/botas-presoterapia-inalambricas-pro-air/",
+        "price": "$12,590.00",
+        "submit": ""
+      }
+    }
+  ],
+  "overflow": [
+    {
+      "width": 768,
+      "scrollWidth": 778,
+      "candidates": [
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "class": "js-swiper-products-list-prev swiper-button-prev swiper-button-outside ",
+          "rect": {
+            "left": -8,
+            "right": 22,
+            "width": 30
+          }
+        },
+        {
+          "tag": "svg",
+          "id": "",
+          "class": "svg",
+          "rect": {
+            "left": -8,
+            "right": 24,
+            "width": 32
+          }
+        },
+        {
+          "tag": "use",
+          "id": "",
+          "class": "svg",
+          "rect": {
+            "left": -6.081281661987305,
+            "right": 21,
+            "width": 27.081281661987305
+          }
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "class": "js-swiper-products-list-next swiper-button-next swiper-button-outside ",
+          "rect": {
+            "left": 746,
+            "right": 776,
+            "width": 30
+          }
+        },
+        {
+          "tag": "svg",
+          "id": "",
+          "class": "svg",
+          "rect": {
+            "left": 746,
+            "right": 778,
+            "width": 32
+          }
+        },
+        {
+          "tag": "use",
+          "id": "",
+          "class": "svg",
+          "rect": {
+            "left": 749,
+            "right": 776.081298828125,
+            "width": 27.081298828125
+          }
+        }
+      ]
+    },
+    {
+      "width": 1024,
+      "scrollWidth": 1026,
+      "candidates": [
+        {
+          "tag": "svg",
+          "id": "",
+          "class": "svg",
+          "rect": {
+            "left": 994,
+            "right": 1026,
+            "width": 32
+          }
+        }
+      ]
+    }
+  ],
+  "media": [
+    {
+      "name": "home",
+      "url": "https://rhinoipanema.mitiendanube.com/",
+      "before": {
+        "images": 50,
+        "loaded": 7,
+        "duplicates": 2
+      },
+      "after": {
+        "images": [
+          {
+            "src": "https://dcdn-us.mitiendanube.com/stores/008/246/325/themes/common/logo-907077932689793243-1776182785-34dcf83471458f3155c38cfd64058ea61776182785.png?0",
+            "loading": "lazy",
+            "fetchPriority": "auto",
+            "naturalWidth": 1675,
+            "width": 90,
+            "height": 28,
+            "visible": true
+          },
+          {
+            "src": "",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 0,
+            "width": 0,
+            "height": 0,
+            "visible": false
+          },
+          {
+            "src": "https://ftp-cdn.mitiendanube.com/releases/ipanema/1.8.0/static/images/placeholders/hero/hero.webp",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1280,
+            "width": 390,
+            "height": 765,
+            "visible": true
+          },
+          {
+            "src": "https://ftp-cdn.mitiendanube.com/releases/ipanema/1.8.0/static/images/placeholders/banners/banner-1.webp",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 500,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "https://ftp-cdn.mitiendanube.com/releases/ipanema/1.8.0/static/images/placeholders/banners/banner-2.webp",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1000,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "https://ftp-cdn.mitiendanube.com/releases/ipanema/1.8.0/static/images/placeholders/banners/banner-3.webp",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 500,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "https://ftp-cdn.mitiendanube.com/releases/ipanema/1.8.0/static/images/placeholders/banners/banner-4.webp",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1000,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "https://ftp-cdn.mitiendanube.com/releases/ipanema/1.8.0/static/images/placeholders/banners/banner-1.webp",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 500,
+            "width": 358,
+            "height": 269,
+            "visible": true
+          },
+          {
+            "src": "https://dcdn-us.mitiendanube.com/stores/008/246/325/products/rhino-tina-tub-air-chiller-ice-pro-carrusel-38486222588af828d117885915609300-240-0.webp",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 194,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 1280,
+            "height": 1280,
+            "visible": false
+          },
+          {
+            "src": "https://dcdn-us.mitiendanube.com/stores/008/246/325/products/kit-botas-de-presoterapia-pro-air-1-2-aefbc830fbd8eb0aca17852047770296-240-0.webp",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 194,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 2000,
+            "height": 2000,
+            "visible": false
+          },
+          {
+            "src": "https://dcdn-us.mitiendanube.com/stores/008/246/325/products/rhino-gun-pro-carrusel-8194d1019bbddb842517887497698642-240-0.webp",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 194,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 1280,
+            "height": 1280,
+            "visible": false
+          },
+          {
+            "src": "https://dcdn-us.mitiendanube.com/stores/008/246/325/products/rhino-gun-air-carrusel-706469bdc49690a1f417887432053357-240-0.webp",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 194,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 1280,
+            "height": 1280,
+            "visible": false
+          },
+          {
+            "src": "https://dcdn-us.mitiendanube.com/stores/008/246/325/products/rhino-tina-tub-air-carrusel-b09ece51431a13db8617887512365509-240-0.webp",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 194,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 1280,
+            "height": 1280,
+            "visible": false
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "https://ftp-cdn.mitiendanube.com/releases/ipanema/1.8.0/static/images/placeholders/banners/banner-5.webp",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1000,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "https://ftp-cdn.mitiendanube.com/releases/ipanema/1.8.0/static/images/placeholders/banners/banner-6.webp",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 500,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "https://ftp-cdn.mitiendanube.com/releases/ipanema/1.8.0/static/images/placeholders/banners/banner-1.webp",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 500,
+            "width": 358,
+            "height": 269,
+            "visible": true
+          },
+          {
+            "src": "https://ftp-cdn.mitiendanube.com/releases/ipanema/1.8.0/static/images/placeholders/banners/banner-1.webp",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 500,
+            "width": 358,
+            "height": 358,
+            "visible": true
+          },
+          {
+            "src": "https://ftp-cdn.mitiendanube.com/releases/ipanema/1.8.0/static/images/placeholders/banners/banner-2.webp",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1000,
+            "width": 358,
+            "height": 358,
+            "visible": true
+          },
+          {
+            "src": "https://ftp-cdn.mitiendanube.com/releases/ipanema/1.8.0/static/images/placeholders/banners/banner-3.webp",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 500,
+            "width": 358,
+            "height": 358,
+            "visible": true
+          },
+          {
+            "src": "https://dcdn-us.mitiendanube.com/stores/008/246/325/products/rhino-tina-tub-air-carrusel-b09ece51431a13db8617887512365509-480-0.webp",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 389,
+            "width": 358,
+            "height": 358,
+            "visible": true
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 1280,
+            "height": 1280,
+            "visible": false
+          },
+          {
+            "src": "https://dcdn-us.mitiendanube.com/stores/008/246/325/products/rhino-tina-tub-air-chiller-ice-pro-carrusel-38486222588af828d117885915609300-480-0.webp",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 389,
+            "width": 358,
+            "height": 358,
+            "visible": true
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 1280,
+            "height": 1280,
+            "visible": false
+          },
+          {
+            "src": "https://dcdn-us.mitiendanube.com/stores/008/246/325/products/kit-botas-de-presoterapia-pro-air-1-2-aefbc830fbd8eb0aca17852047770296-480-0.webp",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 389,
+            "width": 358,
+            "height": 358,
+            "visible": true
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 2000,
+            "height": 2000,
+            "visible": false
+          },
+          {
+            "src": "https://dcdn-us.mitiendanube.com/stores/008/246/325/products/rhino-gun-pro-carrusel-8194d1019bbddb842517887497698642-480-0.webp",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 389,
+            "width": 358,
+            "height": 358,
+            "visible": true
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 1280,
+            "height": 1280,
+            "visible": false
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 358,
+            "height": 358,
+            "visible": true
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 1280,
+            "height": 1280,
+            "visible": false
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 358,
+            "height": 358,
+            "visible": true
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 1280,
+            "height": 1280,
+            "visible": false
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 358,
+            "height": 358,
+            "visible": true
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 1280,
+            "height": 1280,
+            "visible": false
+          },
+          {
+            "src": "https://ftp-cdn.mitiendanube.com/releases/ipanema/1.8.0/static/images/placeholders/banners/banner-1.webp",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 500,
+            "width": 358,
+            "height": 269,
+            "visible": true
+          },
+          {
+            "src": "https://ftp-cdn.mitiendanube.com/releases/ipanema/1.8.0/static/images/placeholders/banners/banner-1.webp",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 500,
+            "width": 358,
+            "height": 358,
+            "visible": true
+          },
+          {
+            "src": "https://ftp-cdn.mitiendanube.com/releases/ipanema/1.8.0/static/images/placeholders/banners/banner-2.webp",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1000,
+            "width": 358,
+            "height": 358,
+            "visible": true
+          },
+          {
+            "src": "https://d26lpennugtm8s.cloudfront.net/assets/common/img/logos/payment/new_logos_payment/cash@2x.png",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 150,
+            "width": 29,
+            "height": 18,
+            "visible": true
+          },
+          {
+            "src": "https://d26lpennugtm8s.cloudfront.net/assets/common/img/logos/payment/new_logos_payment/custom@2x.png",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 150,
+            "width": 29,
+            "height": 18,
+            "visible": true
+          },
+          {
+            "src": "https://d26lpennugtm8s.cloudfront.net/assets/common/img/logos/shipping/api/8539@2x.png",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 120,
+            "width": 36,
+            "height": 18,
+            "visible": true
+          },
+          {
+            "src": "",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 0,
+            "width": 0,
+            "height": 0,
+            "visible": false
+          },
+          {
+            "src": "",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 0,
+            "width": 0,
+            "height": 0,
+            "visible": false
+          }
+        ],
+        "duplicates": 2,
+        "duplicateIds": [
+          [
+            "ns-block-heading",
+            23
+          ],
+          [
+            "ns-block-text",
+            5
+          ],
+          [
+            "ns-block-button",
+            8
+          ],
+          [
+            "ns-block-banner_1",
+            7
+          ],
+          [
+            "ns-block-banner_2",
+            4
+          ],
+          [
+            "ns-block-banner_3",
+            3
+          ],
+          [
+            "ns-block-banner_4",
+            2
+          ],
+          [
+            "ns-block-outer_group",
+            2
+          ],
+          [
+            "ns-block-inner_group",
+            2
+          ],
+          [
+            "ns-block-description_1",
+            2
+          ],
+          [
+            "ns-block-description_2",
+            2
+          ],
+          [
+            "ns-block-products",
+            2
+          ],
+          [
+            "variation_1",
+            2
+          ],
+          [
+            "ns-block-group",
+            2
+          ]
+        ]
+      },
+      "additionalImageResponses": [
+        {
+          "url": "https://rhinoipanema.mitiendanube.com/stats/record_visit/?referrer=&url=https%3A%2F%2Frhinoipanema.mitiendanube.com%2F&social_event_id_suffix=cc4cf57e-8a26-4f5d-93c8-7e30c8c81ab7",
+          "status": 200
+        },
+        {
+          "url": "https://dcdn-us.mitiendanube.com/stores/008/246/325/products/rhino-tina-tub-air-chiller-ice-pro-carrusel-38486222588af828d117885915609300-240-0.webp",
+          "status": 200
+        },
+        {
+          "url": "https://dcdn-us.mitiendanube.com/stores/008/246/325/products/kit-botas-de-presoterapia-pro-air-1-2-aefbc830fbd8eb0aca17852047770296-240-0.webp",
+          "status": 200
+        },
+        {
+          "url": "https://dcdn-us.mitiendanube.com/stores/008/246/325/products/rhino-tina-tub-air-carrusel-b09ece51431a13db8617887512365509-240-0.webp",
+          "status": 200
+        },
+        {
+          "url": "https://dcdn-us.mitiendanube.com/stores/008/246/325/products/rhino-gun-pro-carrusel-8194d1019bbddb842517887497698642-240-0.webp",
+          "status": 200
+        },
+        {
+          "url": "https://dcdn-us.mitiendanube.com/stores/008/246/325/products/rhino-gun-air-carrusel-706469bdc49690a1f417887432053357-240-0.webp",
+          "status": 200
+        },
+        {
+          "url": "https://ftp-cdn.mitiendanube.com/releases/ipanema/1.8.0/static/images/placeholders/banners/banner-6.webp",
+          "status": 200
+        },
+        {
+          "url": "https://ftp-cdn.mitiendanube.com/releases/ipanema/1.8.0/static/images/placeholders/banners/banner-5.webp",
+          "status": 200
+        },
+        {
+          "url": "https://dcdn-us.mitiendanube.com/stores/008/246/325/products/kit-botas-de-presoterapia-pro-air-1-2-aefbc830fbd8eb0aca17852047770296-480-0.webp",
+          "status": 200
+        },
+        {
+          "url": "https://dcdn-us.mitiendanube.com/stores/008/246/325/products/rhino-tina-tub-air-carrusel-b09ece51431a13db8617887512365509-480-0.webp",
+          "status": 200
+        },
+        {
+          "url": "https://dcdn-us.mitiendanube.com/stores/008/246/325/products/rhino-tina-tub-air-chiller-ice-pro-carrusel-38486222588af828d117885915609300-480-0.webp",
+          "status": 200
+        },
+        {
+          "url": "https://dcdn-us.mitiendanube.com/stores/008/246/325/products/rhino-gun-pro-carrusel-8194d1019bbddb842517887497698642-480-0.webp",
+          "status": 200
+        },
+        {
+          "url": "https://www.gstatic.com/recaptcha/api2/logo_48.png",
+          "status": 200
+        },
+        {
+          "url": "https://d26lpennugtm8s.cloudfront.net/assets/common/img/logos/payment/new_logos_payment/custom@2x.png",
+          "status": 200
+        },
+        {
+          "url": "https://d26lpennugtm8s.cloudfront.net/assets/common/img/logos/payment/new_logos_payment/cash@2x.png",
+          "status": 200
+        },
+        {
+          "url": "https://d26lpennugtm8s.cloudfront.net/assets/common/img/logos/shipping/api/8539@2x.png",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "name": "category",
+      "url": "https://rhinoipanema.mitiendanube.com/productos/",
+      "before": {
+        "images": 67,
+        "loaded": 9,
+        "duplicates": 0
+      },
+      "after": {
+        "images": [
+          {
+            "src": "https://dcdn-us.mitiendanube.com/stores/008/246/325/themes/common/logo-907077932689793243-1776182785-34dcf83471458f3155c38cfd64058ea61776182785.png?0",
+            "loading": "lazy",
+            "fetchPriority": "auto",
+            "naturalWidth": 1675,
+            "width": 90,
+            "height": 28,
+            "visible": true
+          },
+          {
+            "src": "",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 0,
+            "width": 0,
+            "height": 0,
+            "visible": false
+          },
+          {
+            "src": "https://dcdn-us.mitiendanube.com/stores/008/246/325/products/manga-de-compresion-frio-calor-5-21c9967576e345800a17852038833165-240-0.webp",
+            "loading": "auto",
+            "fetchPriority": "high",
+            "naturalWidth": 194,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 2000,
+            "height": 2000,
+            "visible": false
+          },
+          {
+            "src": "https://dcdn-us.mitiendanube.com/stores/008/246/325/products/manga-de-compresion-frio-calor-1-55ab1c402a5527f94117852038831823-240-0.webp",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 194,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "https://dcdn-us.mitiendanube.com/stores/008/246/325/products/rhino-tina-tub-air-chiller-ice-pro-carrusel-38486222588af828d117885915609300-480-0.webp",
+            "loading": "auto",
+            "fetchPriority": "high",
+            "naturalWidth": 194,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 1280,
+            "height": 1280,
+            "visible": false
+          },
+          {
+            "src": "https://dcdn-us.mitiendanube.com/stores/008/246/325/products/rhino-tina-tub-air-chiller-ice-pro-carrusel-3-08893697b04231c76b17885915788744-240-0.webp",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 194,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "https://dcdn-us.mitiendanube.com/stores/008/246/325/products/botas-presoterapia-pro3-0fa0166f90c859a83c17885600062581-240-0.webp",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 194,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 4500,
+            "height": 4500,
+            "visible": false
+          },
+          {
+            "src": "https://dcdn-us.mitiendanube.com/stores/008/246/325/products/botas-de-presoterapia-pro-3-2-f999e657513c71377317852031015588-240-0.webp",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 194,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "https://dcdn-us.mitiendanube.com/stores/008/246/325/products/kit-botas-presoterapia-pro3-590f8aca4c051d7fa417885600852030-240-0.webp",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 194,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 4500,
+            "height": 4500,
+            "visible": false
+          },
+          {
+            "src": "https://dcdn-us.mitiendanube.com/stores/008/246/325/products/rhino-botas-de-presoterapia-pro-3-2-28a9d0aa01dcd5693817852032152891-240-0.webp",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 194,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "https://dcdn-us.mitiendanube.com/stores/008/246/325/products/brazo-presoterapia-pro3-57177d2132cd87ff4417885601232397-240-0.webp",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 194,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 4500,
+            "height": 4500,
+            "visible": false
+          },
+          {
+            "src": "https://dcdn-us.mitiendanube.com/stores/008/246/325/products/brazo-de-presoterapia-pro-3-2-369656c8ba9a9fd70d17852036018300-240-0.webp",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 194,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "https://dcdn-us.mitiendanube.com/stores/008/246/325/products/kit-botas-brazos-presoterapia-pro3-a3d13e4ef14f06367c17885602094186-240-0.webp",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 194,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 4500,
+            "height": 4500,
+            "visible": false
+          },
+          {
+            "src": "https://dcdn-us.mitiendanube.com/stores/008/246/325/products/rhino-botas-y-brazos-de-presoterapia-pro-3-2-e6a2efb79b5e875cd017852042644084-240-0.webp",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 194,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "https://dcdn-us.mitiendanube.com/stores/008/246/325/products/hombrera-de-compresion-frio-calor-2-7ef0a017d48f7f072717852044021824-240-0.webp",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 194,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 2000,
+            "height": 2000,
+            "visible": false
+          },
+          {
+            "src": "https://dcdn-us.mitiendanube.com/stores/008/246/325/products/hombrera-de-compresion-frio-calor-1-8e0ddc4ae39a87a6a817852044020820-240-0.webp",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 194,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "https://dcdn-us.mitiendanube.com/stores/008/246/325/products/tobillera-de-compresion-frio-calor-2-9b1f674c955ecdb96817852045897848-240-0.webp",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 194,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 2000,
+            "height": 2000,
+            "visible": false
+          },
+          {
+            "src": "https://dcdn-us.mitiendanube.com/stores/008/246/325/products/tobillera-de-compresion-frio-calor-1-6c77422e942d910bab17852045900989-240-0.webp",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 194,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "https://dcdn-us.mitiendanube.com/stores/008/246/325/products/kit-botas-de-presoterapia-pro-air-1-2-aefbc830fbd8eb0aca17852047770296-480-0.webp",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 194,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 2000,
+            "height": 2000,
+            "visible": false
+          },
+          {
+            "src": "https://dcdn-us.mitiendanube.com/stores/008/246/325/products/kit-botas-de-presoterapia-pro-air-2-23c65fdbddbec13fad17852047765846-240-0.webp",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 194,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "https://dcdn-us.mitiendanube.com/stores/008/246/325/products/brazos-presoterapia-pro3-4b907e16ebe5ca02cb17885602478075-240-0.webp",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 194,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 4500,
+            "height": 4500,
+            "visible": false
+          },
+          {
+            "src": "https://dcdn-us.mitiendanube.com/stores/008/246/325/products/brazos-de-presoterapia-pro-3-2-b066a730138ea7aaae17852050724358-240-0.webp",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 194,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "https://dcdn-us.mitiendanube.com/stores/008/246/325/products/faja-lumbar-de-compresion-frio-calor-2-3872642e4c624a015b17852052743659-240-0.webp",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 194,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 2000,
+            "height": 2000,
+            "visible": false
+          },
+          {
+            "src": "https://dcdn-us.mitiendanube.com/stores/008/246/325/products/faja-lumbar-de-compresion-frio-calor-1-57ffbf9290a7c659a117852052741001-240-0.webp",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 194,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "https://dcdn-us.mitiendanube.com/stores/008/246/325/products/compresor-64d3e6e82985b621dd17885602784749-240-0.webp",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 194,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 4500,
+            "height": 4500,
+            "visible": false
+          },
+          {
+            "src": "https://dcdn-us.mitiendanube.com/stores/008/246/325/products/compresor_pro3_3-f69e7ced6eb0bf745517852056368275-240-0.webp",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 194,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "https://dcdn-us.mitiendanube.com/stores/008/246/325/products/rhino-chiller-ice-pro-carrusel-e4bb4af0aabfdd30c517885917239272-240-0.webp",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 194,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 1280,
+            "height": 1280,
+            "visible": false
+          },
+          {
+            "src": "https://dcdn-us.mitiendanube.com/stores/008/246/325/products/rhino-tina-tub-air-chiller-ice-pro-carrusel-2-60eb0c65173bc7988b17885917535766-240-0.webp",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 194,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "https://dcdn-us.mitiendanube.com/stores/008/246/325/products/rhino-tina-tub-air-carrusel-b09ece51431a13db8617887512365509-480-0.webp",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 194,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 1280,
+            "height": 1280,
+            "visible": false
+          },
+          {
+            "src": "https://dcdn-us.mitiendanube.com/stores/008/246/325/products/rhino-tina-tub-air-carrusel-4-67d9dc1a4ca806fa6717885922096438-240-0.webp",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 194,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 1280,
+            "height": 1280,
+            "visible": false
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 1280,
+            "height": 1280,
+            "visible": false
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 1280,
+            "height": 1280,
+            "visible": false
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 18,
+            "height": 18,
+            "visible": true
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 18,
+            "height": 18,
+            "visible": true
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 18,
+            "height": 18,
+            "visible": true
+          },
+          {
+            "src": "",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 0,
+            "width": 0,
+            "height": 0,
+            "visible": false
+          },
+          {
+            "src": "",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 0,
+            "width": 0,
+            "height": 0,
+            "visible": false
+          }
+        ],
+        "duplicates": 0,
+        "duplicateIds": [
+          [
+            "filters",
+            2
+          ],
+          [
+            "variation_1",
+            8
+          ]
+        ]
+      },
+      "additionalImageResponses": [
+        {
+          "url": "https://dcdn-us.mitiendanube.com/stores/008/246/325/products/brazo-de-presoterapia-pro-3-2-369656c8ba9a9fd70d17852036018300-240-0.webp",
+          "status": 200
+        },
+        {
+          "url": "https://dcdn-us.mitiendanube.com/stores/008/246/325/products/kit-botas-brazos-presoterapia-pro3-a3d13e4ef14f06367c17885602094186-240-0.webp",
+          "status": 200
+        },
+        {
+          "url": "https://dcdn-us.mitiendanube.com/stores/008/246/325/products/hombrera-de-compresion-frio-calor-1-8e0ddc4ae39a87a6a817852044020820-240-0.webp",
+          "status": 200
+        },
+        {
+          "url": "https://dcdn-us.mitiendanube.com/stores/008/246/325/products/tobillera-de-compresion-frio-calor-2-9b1f674c955ecdb96817852045897848-240-0.webp",
+          "status": 200
+        },
+        {
+          "url": "https://dcdn-us.mitiendanube.com/stores/008/246/325/products/hombrera-de-compresion-frio-calor-2-7ef0a017d48f7f072717852044021824-240-0.webp",
+          "status": 200
+        },
+        {
+          "url": "https://dcdn-us.mitiendanube.com/stores/008/246/325/products/brazo-presoterapia-pro3-57177d2132cd87ff4417885601232397-240-0.webp",
+          "status": 200
+        },
+        {
+          "url": "https://dcdn-us.mitiendanube.com/stores/008/246/325/products/rhino-botas-y-brazos-de-presoterapia-pro-3-2-e6a2efb79b5e875cd017852042644084-240-0.webp",
+          "status": 200
+        },
+        {
+          "url": "https://dcdn-us.mitiendanube.com/stores/008/246/325/products/tobillera-de-compresion-frio-calor-1-6c77422e942d910bab17852045900989-240-0.webp",
+          "status": 200
+        },
+        {
+          "url": "https://dcdn-us.mitiendanube.com/stores/008/246/325/products/kit-botas-de-presoterapia-pro-air-1-2-aefbc830fbd8eb0aca17852047770296-480-0.webp",
+          "status": 200
+        },
+        {
+          "url": "https://dcdn-us.mitiendanube.com/stores/008/246/325/products/brazos-presoterapia-pro3-4b907e16ebe5ca02cb17885602478075-240-0.webp",
+          "status": 200
+        },
+        {
+          "url": "https://dcdn-us.mitiendanube.com/stores/008/246/325/products/faja-lumbar-de-compresion-frio-calor-2-3872642e4c624a015b17852052743659-240-0.webp",
+          "status": 200
+        },
+        {
+          "url": "https://dcdn-us.mitiendanube.com/stores/008/246/325/products/faja-lumbar-de-compresion-frio-calor-1-57ffbf9290a7c659a117852052741001-240-0.webp",
+          "status": 200
+        },
+        {
+          "url": "https://dcdn-us.mitiendanube.com/stores/008/246/325/products/compresor-64d3e6e82985b621dd17885602784749-240-0.webp",
+          "status": 200
+        },
+        {
+          "url": "https://dcdn-us.mitiendanube.com/stores/008/246/325/products/kit-botas-de-presoterapia-pro-air-2-23c65fdbddbec13fad17852047765846-240-0.webp",
+          "status": 200
+        },
+        {
+          "url": "https://dcdn-us.mitiendanube.com/stores/008/246/325/products/brazos-de-presoterapia-pro-3-2-b066a730138ea7aaae17852050724358-240-0.webp",
+          "status": 200
+        },
+        {
+          "url": "https://dcdn-us.mitiendanube.com/stores/008/246/325/products/compresor_pro3_3-f69e7ced6eb0bf745517852056368275-240-0.webp",
+          "status": 200
+        },
+        {
+          "url": "https://www.gstatic.com/recaptcha/api2/logo_48.png",
+          "status": 200
+        },
+        {
+          "url": "https://dcdn-us.mitiendanube.com/stores/008/246/325/products/rhino-tina-tub-air-carrusel-b09ece51431a13db8617887512365509-480-0.webp",
+          "status": 200
+        },
+        {
+          "url": "https://dcdn-us.mitiendanube.com/stores/008/246/325/products/rhino-chiller-ice-pro-carrusel-e4bb4af0aabfdd30c517885917239272-240-0.webp",
+          "status": 200
+        },
+        {
+          "url": "https://dcdn-us.mitiendanube.com/stores/008/246/325/products/rhino-tina-tub-air-carrusel-4-67d9dc1a4ca806fa6717885922096438-240-0.webp",
+          "status": 200
+        },
+        {
+          "url": "https://dcdn-us.mitiendanube.com/stores/008/246/325/products/rhino-tina-tub-air-chiller-ice-pro-carrusel-2-60eb0c65173bc7988b17885917535766-240-0.webp",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "name": "pdp",
+      "url": "https://rhinoipanema.mitiendanube.com/productos/botas-presoterapia-inalambricas-pro-air/",
+      "before": {
+        "images": 37,
+        "loaded": 13,
+        "duplicates": 0
+      },
+      "after": {
+        "images": [
+          {
+            "src": "https://dcdn-us.mitiendanube.com/stores/008/246/325/themes/common/logo-907077932689793243-1776182785-34dcf83471458f3155c38cfd64058ea61776182785.png?0",
+            "loading": "lazy",
+            "fetchPriority": "auto",
+            "naturalWidth": 1675,
+            "width": 90,
+            "height": 28,
+            "visible": true
+          },
+          {
+            "src": "",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 0,
+            "width": 0,
+            "height": 0,
+            "visible": false
+          },
+          {
+            "src": "https://dcdn-us.mitiendanube.com/stores/008/246/325/products/kit-botas-de-presoterapia-pro-air-1-2-aefbc830fbd8eb0aca17852047770296-480-0.webp",
+            "loading": "auto",
+            "fetchPriority": "high",
+            "naturalWidth": 389,
+            "width": 358,
+            "height": 358,
+            "visible": true
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 358,
+            "height": 358,
+            "visible": true
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 358,
+            "height": 358,
+            "visible": true
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 358,
+            "height": 358,
+            "visible": true
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 358,
+            "height": 358,
+            "visible": true
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 358,
+            "height": 358,
+            "visible": true
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 358,
+            "height": 358,
+            "visible": true
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 358,
+            "height": 358,
+            "visible": true
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 358,
+            "height": 358,
+            "visible": true
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 358,
+            "height": 358,
+            "visible": true
+          },
+          {
+            "src": "",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 0,
+            "width": 179,
+            "height": 201,
+            "visible": true
+          },
+          {
+            "src": "",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 0,
+            "width": 0,
+            "height": 0,
+            "visible": false
+          },
+          {
+            "src": "https://dcdn-us.mitiendanube.com/stores/008/246/325/products/kit-botas-de-presoterapia-pro-air-1-2-aefbc830fbd8eb0aca17852047770296-240-0.webp",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 389,
+            "width": 60,
+            "height": 60,
+            "visible": true
+          },
+          {
+            "src": "https://dcdn-us.mitiendanube.com/stores/008/246/325/products/kit-botas-de-presoterapia-pro-air-2-23c65fdbddbec13fad17852047765846-240-0.webp",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 389,
+            "width": 60,
+            "height": 60,
+            "visible": true
+          },
+          {
+            "src": "https://dcdn-us.mitiendanube.com/stores/008/246/325/products/kit-botas-de-presoterapia-pro-air-1-30da4795a2898471c517881993026179-240-0.webp",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 389,
+            "width": 60,
+            "height": 60,
+            "visible": true
+          },
+          {
+            "src": "https://dcdn-us.mitiendanube.com/stores/008/246/325/products/kit-botas-de-presoterapia-pro-air-1-1-86c4344788fe4828dc17882000067505-240-0.webp",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 389,
+            "width": 60,
+            "height": 60,
+            "visible": true
+          },
+          {
+            "src": "https://dcdn-us.mitiendanube.com/stores/008/246/325/products/kit-botas-de-presoterapia-pro-air-3-9a9bd25c24682e313117852047770276-240-0.webp",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 389,
+            "width": 60,
+            "height": 60,
+            "visible": true
+          },
+          {
+            "src": "https://dcdn-us.mitiendanube.com/stores/008/246/325/products/kit-botas-de-presoterapia-pro-air-4-57988db086634257e217852047766506-240-0.webp",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 389,
+            "width": 60,
+            "height": 60,
+            "visible": true
+          },
+          {
+            "src": "https://dcdn-us.mitiendanube.com/stores/008/246/325/products/kit-botas-de-presoterapia-pro-air-5-81a852376fff29795317852047767866-240-0.webp",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 389,
+            "width": 60,
+            "height": 60,
+            "visible": true
+          },
+          {
+            "src": "https://dcdn-us.mitiendanube.com/stores/008/246/325/products/kit-botas-de-presoterapia-pro-air-6-87b845d19cf0ef4b0d17852047763663-240-0.webp",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 389,
+            "width": 60,
+            "height": 60,
+            "visible": true
+          },
+          {
+            "src": "https://dcdn-us.mitiendanube.com/stores/008/246/325/products/kit-botas-de-presoterapia-pro-air-7-5a58d691941de1f92c17852047765524-240-0.webp",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 389,
+            "width": 60,
+            "height": 60,
+            "visible": true
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 60,
+            "height": 60,
+            "visible": true
+          },
+          {
+            "src": "https://img.youtube.com/vi/wdBj7doq5Uw/mqdefault.jpg",
+            "loading": "lazy",
+            "fetchPriority": "auto",
+            "naturalWidth": 320,
+            "width": 60,
+            "height": 34,
+            "visible": true
+          },
+          {
+            "src": "",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 0,
+            "width": 0,
+            "height": 0,
+            "visible": false
+          },
+          {
+            "src": "",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 0,
+            "width": 0,
+            "height": 0,
+            "visible": false
+          },
+          {
+            "src": "https://assets.pinterest.com/images/PinExt.png",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 43,
+            "width": 43,
+            "height": 21,
+            "visible": false
+          },
+          {
+            "src": "https://dcdn-us.mitiendanube.com/stores/008/246/325/products/kit-botas-brazos-presoterapia-pro3-a3d13e4ef14f06367c17885602094186-240-0.webp",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 194,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 4500,
+            "height": 4500,
+            "visible": false
+          },
+          {
+            "src": "https://dcdn-us.mitiendanube.com/stores/008/246/325/products/kit-botas-presoterapia-pro3-590f8aca4c051d7fa417885600852030-240-0.webp",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 194,
+            "width": 171,
+            "height": 171,
+            "visible": true
+          },
+          {
+            "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 1,
+            "width": 4500,
+            "height": 4500,
+            "visible": false
+          },
+          {
+            "src": "https://d26lpennugtm8s.cloudfront.net/assets/common/img/logos/payment/new_logos_payment/cash@2x.png",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 150,
+            "width": 29,
+            "height": 18,
+            "visible": true
+          },
+          {
+            "src": "https://d26lpennugtm8s.cloudfront.net/assets/common/img/logos/payment/new_logos_payment/custom@2x.png",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 150,
+            "width": 29,
+            "height": 18,
+            "visible": true
+          },
+          {
+            "src": "https://d26lpennugtm8s.cloudfront.net/assets/common/img/logos/shipping/api/8539@2x.png",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 120,
+            "width": 36,
+            "height": 18,
+            "visible": true
+          },
+          {
+            "src": "",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 0,
+            "width": 0,
+            "height": 0,
+            "visible": false
+          },
+          {
+            "src": "",
+            "loading": "auto",
+            "fetchPriority": "auto",
+            "naturalWidth": 0,
+            "width": 0,
+            "height": 0,
+            "visible": false
+          }
+        ],
+        "duplicates": 0,
+        "duplicateIds": [
+          [
+            "variation_1",
+            3
+          ]
+        ]
+      },
+      "additionalImageResponses": [
+        {
+          "url": "https://rhinoipanema.mitiendanube.com/stats/record_visit/?referrer=&url=https%3A%2F%2Frhinoipanema.mitiendanube.com%2Fproductos%2Fbotas-presoterapia-inalambricas-pro-air%2F&product_id=367609970&social_event_id_suffix=d5cf90d7-4427-478b-8cdd-a39b33f356a4",
+          "status": 200
+        },
+        {
+          "url": "https://dcdn-us.mitiendanube.com/stores/008/246/325/products/kit-botas-brazos-presoterapia-pro3-a3d13e4ef14f06367c17885602094186-240-0.webp",
+          "status": 200
+        },
+        {
+          "url": "https://dcdn-us.mitiendanube.com/stores/008/246/325/products/kit-botas-presoterapia-pro3-590f8aca4c051d7fa417885600852030-240-0.webp",
+          "status": 200
+        },
+        {
+          "url": "https://www.gstatic.com/recaptcha/api2/logo_48.png",
+          "status": 200
+        },
+        {
+          "url": "https://d26lpennugtm8s.cloudfront.net/assets/common/img/logos/payment/new_logos_payment/cash@2x.png",
+          "status": 200
+        },
+        {
+          "url": "https://d26lpennugtm8s.cloudfront.net/assets/common/img/logos/payment/new_logos_payment/custom@2x.png",
+          "status": 200
+        },
+        {
+          "url": "https://d26lpennugtm8s.cloudfront.net/assets/common/img/logos/shipping/api/8539@2x.png",
+          "status": 200
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "Prueba sin transacciones: no agrega productos, aplica cupones, envía contacto/newsletter ni crea cuentas.",
+    "Lectura de foco automatizada, sin lector de pantalla humano."
+  ]
+}

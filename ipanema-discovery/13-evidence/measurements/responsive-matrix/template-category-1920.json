@@ -1,0 +1,36 @@
+{
+  "template": "template-category",
+  "url": "https://rhinoipanema.mitiendanube.com/productos/",
+  "width": 1920,
+  "verifiedAt": "2026-11-08T07:26:17.154Z",
+  "status": 200,
+  "dom": {
+    "finalUrl": "https://rhinoipanema.mitiendanube.com/productos/",
+    "title": "Compra en línea productos en RHINO IPANEMA",
+    "bodyClass": " template-category ",
+    "innerWidth": 1920,
+    "scrollWidth": 1920,
+    "h1": [
+      "Productos"
+    ],
+    "images": 59,
+    "domNodes": 2291,
+    "sections": [
+      "navigation-bar",
+      "navigation-bar",
+      "header",
+      "header",
+      "category-hero",
+      "page-header",
+      "main-products-grid",
+      "footer",
+      "cart-drawer"
+    ]
+  },
+  "axe": null,
+  "limitations": [
+    "Una ruta representativa de este template; no todas sus variantes.",
+    "Geometría y screenshot con recarga y emulación de dispositivo; no benchmark de velocidad.",
+    "Dos páginas concurrentes; no usar estos tiempos como medición de rendimiento."
+  ]
+}

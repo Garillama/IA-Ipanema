@@ -1,0 +1,35 @@
+{
+  "template": "template-blog",
+  "url": "https://rhinoipanema.mitiendanube.com/blog/",
+  "width": 1024,
+  "verifiedAt": "2026-11-08T07:27:21.577Z",
+  "status": 200,
+  "dom": {
+    "finalUrl": "https://rhinoipanema.mitiendanube.com/blog/",
+    "title": "Blog - RHINO IPANEMA",
+    "bodyClass": " template-blog ",
+    "innerWidth": 1024,
+    "scrollWidth": 1024,
+    "h1": [
+      "Blog"
+    ],
+    "images": 13,
+    "domNodes": 785,
+    "sections": [
+      "navigation-bar",
+      "navigation-bar",
+      "header",
+      "header",
+      "page-header",
+      "main-blog",
+      "footer",
+      "cart-drawer"
+    ]
+  },
+  "axe": null,
+  "limitations": [
+    "Una ruta representativa de este template; no todas sus variantes.",
+    "Geometría y screenshot con recarga y emulación de dispositivo; no benchmark de velocidad.",
+    "Dos páginas concurrentes; no usar estos tiempos como medición de rendimiento."
+  ]
+}

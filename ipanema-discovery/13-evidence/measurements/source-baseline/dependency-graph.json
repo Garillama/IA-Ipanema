@@ -1,0 +1,4275 @@
+[
+  {
+    "source": "blocks/accordion.tpl",
+    "target": "snippets/icon.tpl",
+    "line": 13,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "blocks/accordion.tpl",
+    "target": "snippets/icon.tpl",
+    "line": 18,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "blocks/banner.tpl",
+    "target": "snippets/image.tpl",
+    "line": 83,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "blocks/banner.tpl",
+    "target": "snippets/image.tpl",
+    "line": 100,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "blocks/banner.tpl",
+    "target": "snippets/image.tpl",
+    "line": 117,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "blocks/banner.tpl",
+    "target": "blocks/",
+    "line": 148,
+    "kind": "twig-dynamic-prefix",
+    "exists": null
+  },
+  {
+    "source": "blocks/blog-posts-list.tpl",
+    "target": "snippets/blog/blog-post-item.tpl",
+    "line": 26,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "blocks/brand-group.tpl",
+    "target": "blocks/brand-logo.tpl",
+    "line": 24,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "blocks/brand-logo.tpl",
+    "target": "snippets/image.tpl",
+    "line": 16,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "blocks/category-item.tpl",
+    "target": "snippets/image.tpl",
+    "line": 18,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "blocks/category-item.tpl",
+    "target": "snippets/image.tpl",
+    "line": 27,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "blocks/description.tpl",
+    "target": "snippets/social/social-share.tpl",
+    "line": 21,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "blocks/description.tpl",
+    "target": "nubesdk-slot",
+    "line": 9,
+    "kind": "platform-component"
+  },
+  {
+    "source": "blocks/description.tpl",
+    "target": "nubesdk-slot",
+    "line": 18,
+    "kind": "platform-component"
+  },
+  {
+    "source": "blocks/faq-group.tpl",
+    "target": "blocks/",
+    "line": 13,
+    "kind": "twig-dynamic-prefix",
+    "exists": null
+  },
+  {
+    "source": "blocks/faq-list.tpl",
+    "target": "blocks/",
+    "line": 15,
+    "kind": "twig-dynamic-prefix",
+    "exists": null
+  },
+  {
+    "source": "blocks/footer-institutional.tpl",
+    "target": "snippets/image.tpl",
+    "line": 19,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "blocks/group.tpl",
+    "target": "blocks/",
+    "line": 62,
+    "kind": "twig-dynamic-prefix",
+    "exists": null
+  },
+  {
+    "source": "blocks/header-logo.tpl",
+    "target": "snippets/logo/logo-img.tpl",
+    "line": 6,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "blocks/header-logo.tpl",
+    "target": "snippets/logo/logo-text.tpl",
+    "line": 8,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "blocks/header-logo.tpl",
+    "target": "snippets/image.tpl",
+    "line": 14,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "blocks/header-navigation.tpl",
+    "target": "blocks/navigation-banner.tpl",
+    "line": 128,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "blocks/header-navigation.tpl",
+    "target": "snippets/header/header-language.tpl",
+    "line": 155,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "blocks/header-navigation.tpl",
+    "target": "snippets/header/header-language.tpl",
+    "line": 160,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "blocks/header-utilities.tpl",
+    "target": "snippets/icon.tpl",
+    "line": 26,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "blocks/header-utilities.tpl",
+    "target": "snippets/header/search-form.tpl",
+    "line": 32,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "blocks/header-utilities.tpl",
+    "target": "snippets/header/header-language.tpl",
+    "line": 39,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "blocks/icon-text-group.tpl",
+    "target": "blocks/",
+    "line": 37,
+    "kind": "twig-dynamic-prefix",
+    "exists": null
+  },
+  {
+    "source": "blocks/icon-text-item.tpl",
+    "target": "snippets/image.tpl",
+    "line": 32,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "blocks/icon-text-item.tpl",
+    "target": "snippets/icon.tpl",
+    "line": 40,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "blocks/image-with-text.tpl",
+    "target": "blocks/image.tpl",
+    "line": 32,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "blocks/image-with-text.tpl",
+    "target": "snippets/image.tpl",
+    "line": 37,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "blocks/image-with-text.tpl",
+    "target": "blocks/text-group.tpl",
+    "line": 56,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "blocks/image.tpl",
+    "target": "snippets/image.tpl",
+    "line": 21,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "blocks/image.tpl",
+    "target": "snippets/image.tpl",
+    "line": 35,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "blocks/image.tpl",
+    "target": "snippets/image.tpl",
+    "line": 55,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "blocks/instagram-posts.tpl",
+    "target": "snippets/image.tpl",
+    "line": 25,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "blocks/nav-announcements.tpl",
+    "target": "blocks/announcement.tpl",
+    "line": 12,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "blocks/nav-announcements.tpl",
+    "target": "blocks/announcement.tpl",
+    "line": 20,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "blocks/nav-icon-text-group.tpl",
+    "target": "blocks/nav-icon-text-item.tpl",
+    "line": 15,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "blocks/nav-icon-text-group.tpl",
+    "target": "blocks/nav-icon-text-item.tpl",
+    "line": 23,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "blocks/nav-icon-text-item.tpl",
+    "target": "snippets/image.tpl",
+    "line": 22,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "blocks/nav-icon-text-item.tpl",
+    "target": "snippets/icon.tpl",
+    "line": 29,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "blocks/navigation-banner.tpl",
+    "target": "snippets/image.tpl",
+    "line": 24,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "blocks/navigation-banner.tpl",
+    "target": "snippets/image.tpl",
+    "line": 33,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "blocks/newsletter-form.tpl",
+    "target": "snippets/forms/newsletter.tpl",
+    "line": 7,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "blocks/payment-icons.tpl",
+    "target": "snippets/image.tpl",
+    "line": 17,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "blocks/product-info.tpl",
+    "target": "snippets/product/product-form.tpl",
+    "line": 15,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "blocks/product-info.tpl",
+    "target": "blocks/purchase-info.tpl",
+    "line": 20,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "blocks/product-info.tpl",
+    "target": "blocks/description.tpl",
+    "line": 22,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "blocks/product-info.tpl",
+    "target": "blocks/",
+    "line": 24,
+    "kind": "twig-dynamic-prefix",
+    "exists": null
+  },
+  {
+    "source": "blocks/product-media.tpl",
+    "target": "snippets/product/product-image.tpl",
+    "line": 4,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "blocks/product-recommendations.tpl",
+    "target": "snippets/product-list/products-section.tpl",
+    "line": 12,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "blocks/products.tpl",
+    "target": "snippets/product-list/product-item/item.tpl",
+    "line": 66,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "blocks/purchase-info.tpl",
+    "target": "blocks/icon-text-item.tpl",
+    "line": 24,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "blocks/slide.tpl",
+    "target": "snippets/image.tpl",
+    "line": 52,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "blocks/slide.tpl",
+    "target": "snippets/image.tpl",
+    "line": 70,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "blocks/slide.tpl",
+    "target": "snippets/image.tpl",
+    "line": 89,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "blocks/slide.tpl",
+    "target": "blocks/",
+    "line": 123,
+    "kind": "twig-dynamic-prefix",
+    "exists": null
+  },
+  {
+    "source": "blocks/testimonial-group.tpl",
+    "target": "blocks/",
+    "line": 31,
+    "kind": "twig-dynamic-prefix",
+    "exists": null
+  },
+  {
+    "source": "blocks/testimonial.tpl",
+    "target": "snippets/image.tpl",
+    "line": 19,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "blocks/text-group.tpl",
+    "target": "blocks/",
+    "line": 47,
+    "kind": "twig-dynamic-prefix",
+    "exists": null
+  },
+  {
+    "source": "blocks/timer-products.tpl",
+    "target": "snippets/product-list/products-section.tpl",
+    "line": 25,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "blocks/timer.tpl",
+    "target": "snippets/image.tpl",
+    "line": 35,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "blocks/timer.tpl",
+    "target": "blocks/",
+    "line": 47,
+    "kind": "twig-dynamic-prefix",
+    "exists": null
+  },
+  {
+    "source": "blocks/video.tpl",
+    "target": "snippets/image.tpl",
+    "line": 59,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "layouts/layout.tpl",
+    "target": "layouts/resources/style-tokens.tpl",
+    "line": 19,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "layouts/layout.tpl",
+    "target": "snippets/structured-data/structured-data-organization.tpl",
+    "line": 44,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "layouts/layout.tpl",
+    "target": "snippets/structured-data/structured-data.tpl",
+    "line": 45,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "layouts/layout.tpl",
+    "target": "layouts/resources/icons-sprite.tpl",
+    "line": 64,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "layouts/layout.tpl",
+    "target": "snippets/notification.tpl",
+    "line": 79,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "layouts/layout.tpl",
+    "target": "snippets/modals/quick-shop-modal.tpl",
+    "line": 95,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "layouts/layout.tpl",
+    "target": "snippets/cart/add-to-cart-recommendations.tpl",
+    "line": 100,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "layouts/layout.tpl",
+    "target": "snippets/social/whatsapp-chat.tpl",
+    "line": 103,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "layouts/layout.tpl",
+    "target": "snippets/promotional-modal.tpl",
+    "line": 107,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "layouts/layout.tpl",
+    "target": "static/js/libraries.js.tpl",
+    "line": 124,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "layouts/layout.tpl",
+    "target": "head-tags",
+    "line": 5,
+    "kind": "platform-component"
+  },
+  {
+    "source": "layouts/layout.tpl",
+    "target": "nubesdk-slot",
+    "line": 61,
+    "kind": "platform-component"
+  },
+  {
+    "source": "layouts/layout.tpl",
+    "target": "nubesdk-slot",
+    "line": 74,
+    "kind": "platform-component"
+  },
+  {
+    "source": "layouts/layout.tpl",
+    "target": "templates/layout/header.json",
+    "line": 72,
+    "kind": "layout-template"
+  },
+  {
+    "source": "layouts/layout.tpl",
+    "target": "templates/layout/footer.json",
+    "line": 90,
+    "kind": "layout-template"
+  },
+  {
+    "source": "layouts/layout.tpl",
+    "target": "templates/layout/cart_drawer.json",
+    "line": 99,
+    "kind": "layout-template"
+  },
+  {
+    "source": "sections/banners.tpl",
+    "target": "blocks/banner.tpl",
+    "line": 68,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/blog-posts.tpl",
+    "target": "blocks/",
+    "line": 45,
+    "kind": "twig-dynamic-prefix",
+    "exists": null
+  },
+  {
+    "source": "sections/cart-drawer.tpl",
+    "target": "snippets/cart/cart-modal.tpl",
+    "line": 3,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/category-hero.tpl",
+    "target": "snippets/image.tpl",
+    "line": 41,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/category-hero.tpl",
+    "target": "snippets/image.tpl",
+    "line": 55,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/custom.tpl",
+    "target": "blocks/",
+    "line": 70,
+    "kind": "twig-dynamic-prefix",
+    "exists": null
+  },
+  {
+    "source": "sections/faq.tpl",
+    "target": "blocks/",
+    "line": 35,
+    "kind": "twig-dynamic-prefix",
+    "exists": null
+  },
+  {
+    "source": "sections/featured-brands.tpl",
+    "target": "blocks/brand-group.tpl",
+    "line": 54,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/featured-brands.tpl",
+    "target": "blocks/",
+    "line": 56,
+    "kind": "twig-dynamic-prefix",
+    "exists": null
+  },
+  {
+    "source": "sections/featured-categories.tpl",
+    "target": "blocks/heading.tpl",
+    "line": 113,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/featured-categories.tpl",
+    "target": "blocks/category-item.tpl",
+    "line": 129,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/featured-product.tpl",
+    "target": "snippets/product/product-image.tpl",
+    "line": 51,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/featured-product.tpl",
+    "target": "snippets/product/product-form.tpl",
+    "line": 54,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/footer.tpl",
+    "target": "blocks/",
+    "line": 61,
+    "kind": "twig-dynamic-prefix",
+    "exists": null
+  },
+  {
+    "source": "sections/footer.tpl",
+    "target": "snippets/footer/footer-country-selector.tpl",
+    "line": 65,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/footer.tpl",
+    "target": "snippets/footer/footer-legal.tpl",
+    "line": 70,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/footer.tpl",
+    "target": "nubesdk-slot",
+    "line": 47,
+    "kind": "platform-component"
+  },
+  {
+    "source": "sections/footer.tpl",
+    "target": "nubesdk-slot",
+    "line": 77,
+    "kind": "platform-component"
+  },
+  {
+    "source": "sections/header.tpl",
+    "target": "blocks/header-logo.tpl",
+    "line": 138,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/header.tpl",
+    "target": "blocks/header-navigation.tpl",
+    "line": 141,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/header.tpl",
+    "target": "blocks/header-utilities.tpl",
+    "line": 144,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/header.tpl",
+    "target": "blocks/header-navigation.tpl",
+    "line": 170,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/header.tpl",
+    "target": "snippets/notification.tpl",
+    "line": 176,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/header.tpl",
+    "target": "snippets/notification.tpl",
+    "line": 183,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/header.tpl",
+    "target": "snippets/header/header-nav-modals.tpl",
+    "line": 188,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/hero-divided.tpl",
+    "target": "snippets/image.tpl",
+    "line": 59,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/hero-divided.tpl",
+    "target": "snippets/image.tpl",
+    "line": 74,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/hero-divided.tpl",
+    "target": "snippets/image.tpl",
+    "line": 90,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/hero-divided.tpl",
+    "target": "snippets/image.tpl",
+    "line": 112,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/hero-divided.tpl",
+    "target": "snippets/image.tpl",
+    "line": 124,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/hero-divided.tpl",
+    "target": "snippets/image.tpl",
+    "line": 137,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/hero-divided.tpl",
+    "target": "blocks/",
+    "line": 159,
+    "kind": "twig-dynamic-prefix",
+    "exists": null
+  },
+  {
+    "source": "sections/hero.tpl",
+    "target": "snippets/image.tpl",
+    "line": 53,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/hero.tpl",
+    "target": "snippets/image.tpl",
+    "line": 67,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/hero.tpl",
+    "target": "snippets/image.tpl",
+    "line": 82,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/hero.tpl",
+    "target": "blocks/",
+    "line": 106,
+    "kind": "twig-dynamic-prefix",
+    "exists": null
+  },
+  {
+    "source": "sections/icon-text.tpl",
+    "target": "blocks/",
+    "line": 37,
+    "kind": "twig-dynamic-prefix",
+    "exists": null
+  },
+  {
+    "source": "sections/image-with-text.tpl",
+    "target": "blocks/image-with-text.tpl",
+    "line": 36,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/instagram-feed.tpl",
+    "target": "blocks/",
+    "line": 35,
+    "kind": "twig-dynamic-prefix",
+    "exists": null
+  },
+  {
+    "source": "sections/main-404.tpl",
+    "target": "snippets/breadcrumbs.tpl",
+    "line": 20,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/main-account-address.tpl",
+    "target": "snippets/forms/form.tpl",
+    "line": 27,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/main-account-address.tpl",
+    "target": "snippets/forms/form-input.tpl",
+    "line": 29,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/main-account-address.tpl",
+    "target": "snippets/forms/form-input.tpl",
+    "line": 43,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/main-account-address.tpl",
+    "target": "snippets/forms/form-input.tpl",
+    "line": 52,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/main-account-address.tpl",
+    "target": "snippets/forms/form-input.tpl",
+    "line": 60,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/main-account-address.tpl",
+    "target": "snippets/forms/form-input.tpl",
+    "line": 68,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/main-account-address.tpl",
+    "target": "snippets/forms/form-input.tpl",
+    "line": 77,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/main-account-address.tpl",
+    "target": "snippets/forms/form-input.tpl",
+    "line": 85,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/main-account-address.tpl",
+    "target": "snippets/forms/form-input.tpl",
+    "line": 93,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/main-account-address.tpl",
+    "target": "snippets/forms/form-select.tpl",
+    "line": 101,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/main-account-address.tpl",
+    "target": "snippets/forms/form-input.tpl",
+    "line": 110,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/main-account-address.tpl",
+    "target": "nubesdk-slot",
+    "line": 19,
+    "kind": "platform-component"
+  },
+  {
+    "source": "sections/main-account-address.tpl",
+    "target": "nubesdk-slot",
+    "line": 121,
+    "kind": "platform-component"
+  },
+  {
+    "source": "sections/main-account-addresses.tpl",
+    "target": "nubesdk-slot",
+    "line": 19,
+    "kind": "platform-component"
+  },
+  {
+    "source": "sections/main-account-addresses.tpl",
+    "target": "nubesdk-slot",
+    "line": 51,
+    "kind": "platform-component"
+  },
+  {
+    "source": "sections/main-account-info.tpl",
+    "target": "snippets/forms/form.tpl",
+    "line": 22,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/main-account-info.tpl",
+    "target": "snippets/forms/form-input.tpl",
+    "line": 24,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/main-account-info.tpl",
+    "target": "snippets/forms/form-input.tpl",
+    "line": 32,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/main-account-info.tpl",
+    "target": "snippets/forms/form-input.tpl",
+    "line": 42,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/main-account-info.tpl",
+    "target": "nubesdk-slot",
+    "line": 19,
+    "kind": "platform-component"
+  },
+  {
+    "source": "sections/main-account-info.tpl",
+    "target": "nubesdk-slot",
+    "line": 49,
+    "kind": "platform-component"
+  },
+  {
+    "source": "sections/main-account-order.tpl",
+    "target": "snippets/subscriptions/subscription-detail.tpl",
+    "line": 20,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/main-account-order.tpl",
+    "target": "snippets/subscriptions/subscription-summary.tpl",
+    "line": 89,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/main-account-order.tpl",
+    "target": "snippets/modals/cancel-order-modal.tpl",
+    "line": 91,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/main-account-order.tpl",
+    "target": "nubesdk-slot",
+    "line": 23,
+    "kind": "platform-component"
+  },
+  {
+    "source": "sections/main-account-order.tpl",
+    "target": "nubesdk-slot",
+    "line": 25,
+    "kind": "platform-component"
+  },
+  {
+    "source": "sections/main-account-order.tpl",
+    "target": "nubesdk-slot",
+    "line": 95,
+    "kind": "platform-component"
+  },
+  {
+    "source": "sections/main-account-order.tpl",
+    "target": "nubesdk-slot",
+    "line": 127,
+    "kind": "platform-component"
+  },
+  {
+    "source": "sections/main-account-order.tpl",
+    "target": "nubesdk-slot",
+    "line": 171,
+    "kind": "platform-component"
+  },
+  {
+    "source": "sections/main-account-order.tpl",
+    "target": "nubesdk-slot",
+    "line": 173,
+    "kind": "platform-component"
+  },
+  {
+    "source": "sections/main-account-orders.tpl",
+    "target": "snippets/subscriptions/subscription-list.tpl",
+    "line": 89,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/main-account-orders.tpl",
+    "target": "snippets/card.tpl",
+    "line": 108,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/main-account-orders.tpl",
+    "target": "snippets/modals/cancel-order-modal.tpl",
+    "line": 171,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/main-account-orders.tpl",
+    "target": "nubesdk-slot",
+    "line": 19,
+    "kind": "platform-component"
+  },
+  {
+    "source": "sections/main-account-orders.tpl",
+    "target": "nubesdk-slot",
+    "line": 106,
+    "kind": "platform-component"
+  },
+  {
+    "source": "sections/main-account-orders.tpl",
+    "target": "nubesdk-slot",
+    "line": 175,
+    "kind": "platform-component"
+  },
+  {
+    "source": "sections/main-account-orders.tpl",
+    "target": "nubesdk-slot",
+    "line": 190,
+    "kind": "platform-component"
+  },
+  {
+    "source": "sections/main-account-subscription-address.tpl",
+    "target": "snippets/subscriptions/subscription-address-form.tpl",
+    "line": 21,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/main-account-subscription-product.tpl",
+    "target": "snippets/subscriptions/subscription-product-form.tpl",
+    "line": 20,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/main-blog-post.tpl",
+    "target": "snippets/blog/blog-post-content.tpl",
+    "line": 19,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/main-blog.tpl",
+    "target": "snippets/blog/blog-post-item.tpl",
+    "line": 21,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/main-blog.tpl",
+    "target": "snippets/product-list/pagination.tpl",
+    "line": 30,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/main-cart.tpl",
+    "target": "snippets/forms/alert.tpl",
+    "line": 22,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/main-cart.tpl",
+    "target": "snippets/cart/_cart-item.tpl",
+    "line": 51,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/main-cart.tpl",
+    "target": "snippets/promotions/gift-promotion-progress.tpl",
+    "line": 60,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/main-cart.tpl",
+    "target": "snippets/shipping/shipping-free-rest.tpl",
+    "line": 65,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/main-cart.tpl",
+    "target": "snippets/cart/cart-fulfillment.tpl",
+    "line": 72,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/main-cart.tpl",
+    "target": "snippets/cart/cart-summary.tpl",
+    "line": 79,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/main-cart.tpl",
+    "target": "nubesdk-slot",
+    "line": 46,
+    "kind": "platform-component"
+  },
+  {
+    "source": "sections/main-cart.tpl",
+    "target": "nubesdk-slot",
+    "line": 56,
+    "kind": "platform-component"
+  },
+  {
+    "source": "sections/main-cart.tpl",
+    "target": "nubesdk-slot",
+    "line": 69,
+    "kind": "platform-component"
+  },
+  {
+    "source": "sections/main-cart.tpl",
+    "target": "nubesdk-slot",
+    "line": 75,
+    "kind": "platform-component"
+  },
+  {
+    "source": "sections/main-contact.tpl",
+    "target": "snippets/social/contact-links.tpl",
+    "line": 87,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/main-contact.tpl",
+    "target": "snippets/image.tpl",
+    "line": 96,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/main-contact.tpl",
+    "target": "snippets/forms/form.tpl",
+    "line": 131,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/main-contact.tpl",
+    "target": "snippets/forms/form-input.tpl",
+    "line": 145,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/main-contact.tpl",
+    "target": "snippets/forms/form-input.tpl",
+    "line": 148,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/main-contact.tpl",
+    "target": "snippets/forms/form-input.tpl",
+    "line": 152,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/main-contact.tpl",
+    "target": "snippets/forms/form-input.tpl",
+    "line": 155,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/main-login.tpl",
+    "target": "snippets/forms/login.tpl",
+    "line": 29,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/main-login.tpl",
+    "target": "forms/login-passwordless",
+    "line": 21,
+    "kind": "platform-component"
+  },
+  {
+    "source": "sections/main-newpass.tpl",
+    "target": "snippets/social/contact-links.tpl",
+    "line": 36,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/main-newpass.tpl",
+    "target": "snippets/forms/form.tpl",
+    "line": 44,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/main-newpass.tpl",
+    "target": "snippets/forms/form-input.tpl",
+    "line": 46,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/main-newpass.tpl",
+    "target": "snippets/forms/form-input.tpl",
+    "line": 49,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/main-password.tpl",
+    "target": "snippets/forms/form.tpl",
+    "line": 22,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/main-password.tpl",
+    "target": "snippets/forms/form-input.tpl",
+    "line": 24,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/main-product.tpl",
+    "target": "blocks/product-media.tpl",
+    "line": 23,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/main-product.tpl",
+    "target": "blocks/product-info.tpl",
+    "line": 25,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/main-products-grid.tpl",
+    "target": "snippets/product-list/filters/filters-modals.tpl",
+    "line": 70,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/main-products-grid.tpl",
+    "target": "snippets/product-list/filters/filters-controls.tpl",
+    "line": 77,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/main-products-grid.tpl",
+    "target": "snippets/product-list/filters/sort-by.tpl",
+    "line": 101,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/main-products-grid.tpl",
+    "target": "snippets/product-list/product-item/item.tpl",
+    "line": 115,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/main-products-grid.tpl",
+    "target": "snippets/product-list/pagination.tpl",
+    "line": 122,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/main-products-grid.tpl",
+    "target": "snippets/product-list/pagination.tpl",
+    "line": 124,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/main-products-grid.tpl",
+    "target": "snippets/product-list/product-item/item.tpl",
+    "line": 154,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/main-register.tpl",
+    "target": "snippets/forms/register.tpl",
+    "line": 25,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/main-register.tpl",
+    "target": "nubesdk-slot",
+    "line": 21,
+    "kind": "platform-component"
+  },
+  {
+    "source": "sections/main-register.tpl",
+    "target": "nubesdk-slot",
+    "line": 27,
+    "kind": "platform-component"
+  },
+  {
+    "source": "sections/main-reset.tpl",
+    "target": "snippets/forms/form.tpl",
+    "line": 26,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/main-reset.tpl",
+    "target": "snippets/forms/form-input.tpl",
+    "line": 28,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/navigation-bar.tpl",
+    "target": "blocks/",
+    "line": 48,
+    "kind": "twig-dynamic-prefix",
+    "exists": null
+  },
+  {
+    "source": "sections/navigation-bar.tpl",
+    "target": "blocks/",
+    "line": 66,
+    "kind": "twig-dynamic-prefix",
+    "exists": null
+  },
+  {
+    "source": "sections/newsletter.tpl",
+    "target": "snippets/image.tpl",
+    "line": 54,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/newsletter.tpl",
+    "target": "snippets/image.tpl",
+    "line": 70,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/newsletter.tpl",
+    "target": "blocks/",
+    "line": 95,
+    "kind": "twig-dynamic-prefix",
+    "exists": null
+  },
+  {
+    "source": "sections/newsletter.tpl",
+    "target": "snippets/image.tpl",
+    "line": 113,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/newsletter.tpl",
+    "target": "blocks/",
+    "line": 132,
+    "kind": "twig-dynamic-prefix",
+    "exists": null
+  },
+  {
+    "source": "sections/page-header.tpl",
+    "target": "snippets/breadcrumbs.tpl",
+    "line": 30,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/page-header.tpl",
+    "target": "nubesdk-slot",
+    "line": 16,
+    "kind": "platform-component"
+  },
+  {
+    "source": "sections/page-header.tpl",
+    "target": "nubesdk-slot",
+    "line": 107,
+    "kind": "platform-component"
+  },
+  {
+    "source": "sections/password-logo.tpl",
+    "target": "snippets/logo/logo-img.tpl",
+    "line": 8,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/password-logo.tpl",
+    "target": "snippets/logo/logo-text.tpl",
+    "line": 10,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/product-description.tpl",
+    "target": "snippets/social/social-share.tpl",
+    "line": 44,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/product-description.tpl",
+    "target": "nubesdk-slot",
+    "line": 32,
+    "kind": "platform-component"
+  },
+  {
+    "source": "sections/product-description.tpl",
+    "target": "nubesdk-slot",
+    "line": 41,
+    "kind": "platform-component"
+  },
+  {
+    "source": "sections/product-list.tpl",
+    "target": "blocks/",
+    "line": 69,
+    "kind": "twig-dynamic-prefix",
+    "exists": null
+  },
+  {
+    "source": "sections/related-products.tpl",
+    "target": "blocks/",
+    "line": 96,
+    "kind": "twig-dynamic-prefix",
+    "exists": null
+  },
+  {
+    "source": "sections/rich-text.tpl",
+    "target": "blocks/",
+    "line": 38,
+    "kind": "twig-dynamic-prefix",
+    "exists": null
+  },
+  {
+    "source": "sections/slideshow.tpl",
+    "target": "blocks/slide.tpl",
+    "line": 55,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/testimonials.tpl",
+    "target": "blocks/",
+    "line": 36,
+    "kind": "twig-dynamic-prefix",
+    "exists": null
+  },
+  {
+    "source": "sections/timer-offers.tpl",
+    "target": "blocks/timer.tpl",
+    "line": 94,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/timer-offers.tpl",
+    "target": "blocks/timer-products.tpl",
+    "line": 96,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/video-with-text.tpl",
+    "target": "blocks/video.tpl",
+    "line": 58,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/video-with-text.tpl",
+    "target": "blocks/text-group.tpl",
+    "line": 65,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/video.tpl",
+    "target": "snippets/image.tpl",
+    "line": 76,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/video.tpl",
+    "target": "snippets/image.tpl",
+    "line": 104,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "sections/video.tpl",
+    "target": "blocks/",
+    "line": 136,
+    "kind": "twig-dynamic-prefix",
+    "exists": null
+  },
+  {
+    "source": "snippets/blog/blog-post-content.tpl",
+    "target": "snippets/image.tpl",
+    "line": 13,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/blog/blog-post-item.tpl",
+    "target": "snippets/image.tpl",
+    "line": 15,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/blog/blog-post-item.tpl",
+    "target": "snippets/structured-data/structured-data.tpl",
+    "line": 37,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/cart/_cart-item.tpl",
+    "target": "snippets/image.tpl",
+    "line": 19,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/cart/_cart-item.tpl",
+    "target": "snippets/modals/modal.tpl",
+    "line": 45,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/cart/_cart-item.tpl",
+    "target": "snippets/product/kit-products.tpl",
+    "line": 60,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/cart/_cart-item.tpl",
+    "target": "snippets/cart/cart-labels.tpl",
+    "line": 68,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/cart/_cart-item.tpl",
+    "target": "snippets/forms/form-input.tpl",
+    "line": 91,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/cart/_cart-item.tpl",
+    "target": "nubesdk-slot",
+    "line": 11,
+    "kind": "platform-component"
+  },
+  {
+    "source": "snippets/cart/_cross-selling.tpl",
+    "target": "snippets/image.tpl",
+    "line": 28,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/cart/_cross-selling.tpl",
+    "target": "snippets/placeholders/button-placeholder.tpl",
+    "line": 79,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/cart/add-to-cart-recommendations.tpl",
+    "target": "snippets/modals/modal.tpl",
+    "line": 9,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/cart/add-to-cart-recommendations.tpl",
+    "target": "snippets/notification.tpl",
+    "line": 24,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/cart/add-to-cart-recommendations.tpl",
+    "target": "snippets/modals/modal.tpl",
+    "line": 35,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/cart/cart-button.tpl",
+    "target": "snippets/forms/checkout-enabled-validation-messages.tpl",
+    "line": 24,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/cart/cart-button.tpl",
+    "target": "snippets/forms/checkout-enabled-validation-messages.tpl",
+    "line": 37,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/cart/cart-button.tpl",
+    "target": "nubesdk-slot",
+    "line": 6,
+    "kind": "platform-component"
+  },
+  {
+    "source": "snippets/cart/cart-button.tpl",
+    "target": "nubesdk-slot",
+    "line": 44,
+    "kind": "platform-component"
+  },
+  {
+    "source": "snippets/cart/cart-fulfillment.tpl",
+    "target": "snippets/shipping/shipping-calculator.tpl",
+    "line": 27,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/cart/cart-fulfillment.tpl",
+    "target": "snippets/shipping/branches.tpl",
+    "line": 33,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/cart/cart-modal.tpl",
+    "target": "snippets/modals/modal.tpl",
+    "line": 5,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/cart/cart-modal.tpl",
+    "target": "snippets/cart/cart-panel.tpl",
+    "line": 26,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/cart/cart-panel.tpl",
+    "target": "snippets/cart/_cart-item.tpl",
+    "line": 12,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/cart/cart-panel.tpl",
+    "target": "snippets/cart/cart-summary.tpl",
+    "line": 30,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/cart/cart-panel.tpl",
+    "target": "nubesdk-slot",
+    "line": 6,
+    "kind": "platform-component"
+  },
+  {
+    "source": "snippets/cart/cart-panel.tpl",
+    "target": "nubesdk-slot",
+    "line": 17,
+    "kind": "platform-component"
+  },
+  {
+    "source": "snippets/cart/cart-summary.tpl",
+    "target": "snippets/promotions/gift-promotion-progress.tpl",
+    "line": 4,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/cart/cart-summary.tpl",
+    "target": "snippets/shipping/shipping-free-rest.tpl",
+    "line": 8,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/cart/cart-summary.tpl",
+    "target": "snippets/cart/cart-fulfillment.tpl",
+    "line": 15,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/cart/cart-summary.tpl",
+    "target": "snippets/promotions/coupon-input.tpl",
+    "line": 25,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/cart/cart-summary.tpl",
+    "target": "snippets/promotions/gift-promotion-progress.tpl",
+    "line": 34,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/cart/cart-summary.tpl",
+    "target": "snippets/shipping/shipping-free-rest.tpl",
+    "line": 39,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/cart/cart-summary.tpl",
+    "target": "snippets/cart/cart-totals.tpl",
+    "line": 47,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/cart/cart-summary.tpl",
+    "target": "snippets/cart/cart-button.tpl",
+    "line": 53,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/cart/cart-summary.tpl",
+    "target": "nubesdk-slot",
+    "line": 13,
+    "kind": "platform-component"
+  },
+  {
+    "source": "snippets/cart/cart-summary.tpl",
+    "target": "nubesdk-slot",
+    "line": 17,
+    "kind": "platform-component"
+  },
+  {
+    "source": "snippets/cart/cart-totals.tpl",
+    "target": "snippets/product/price-without-taxes.tpl",
+    "line": 30,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/cart/cart-totals.tpl",
+    "target": "snippets/payments/payment-discount-price.tpl",
+    "line": 145,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/cart/cart-totals.tpl",
+    "target": "snippets/payments/installments.tpl",
+    "line": 154,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/cart/cart-totals.tpl",
+    "target": "nubesdk-slot",
+    "line": 126,
+    "kind": "platform-component"
+  },
+  {
+    "source": "snippets/footer/footer-legal.tpl",
+    "target": "snippets/footer/payment-shipping-logos.tpl",
+    "line": 17,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/footer/footer-legal.tpl",
+    "target": "snippets/footer/payment-shipping-logos.tpl",
+    "line": 26,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/footer/footer-legal.tpl",
+    "target": "snippets/image.tpl",
+    "line": 54,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/footer/footer-legal.tpl",
+    "target": "snippets/footer/claim-info.tpl",
+    "line": 80,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/footer/footer-legal.tpl",
+    "target": "nubesdk-slot",
+    "line": 72,
+    "kind": "platform-component"
+  },
+  {
+    "source": "snippets/footer/footer-legal.tpl",
+    "target": "nubesdk-slot",
+    "line": 77,
+    "kind": "platform-component"
+  },
+  {
+    "source": "snippets/footer/payment-shipping-logos.tpl",
+    "target": "snippets/image.tpl",
+    "line": 19,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/forms/login.tpl",
+    "target": "snippets/forms/alert.tpl",
+    "line": 8,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/forms/login.tpl",
+    "target": "snippets/forms/alert.tpl",
+    "line": 14,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/forms/login.tpl",
+    "target": "snippets/forms/alert.tpl",
+    "line": 32,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/forms/login.tpl",
+    "target": "snippets/forms/alert.tpl",
+    "line": 38,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/forms/login.tpl",
+    "target": "snippets/icon.tpl",
+    "line": 83,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/forms/login.tpl",
+    "target": "snippets/forms/alert.tpl",
+    "line": 94,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/forms/newsletter.tpl",
+    "target": "snippets/icon.tpl",
+    "line": 48,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/forms/register.tpl",
+    "target": "snippets/forms/alert.tpl",
+    "line": 18,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/forms/register.tpl",
+    "target": "snippets/forms/alert.tpl",
+    "line": 26,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/forms/register.tpl",
+    "target": "snippets/icon.tpl",
+    "line": 124,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/forms/register.tpl",
+    "target": "snippets/forms/recaptcha-script.tpl",
+    "line": 138,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/forms/register.tpl",
+    "target": "nubesdk-slot",
+    "line": 39,
+    "kind": "platform-component"
+  },
+  {
+    "source": "snippets/forms/register.tpl",
+    "target": "nubesdk-slot",
+    "line": 113,
+    "kind": "platform-component"
+  },
+  {
+    "source": "snippets/forms/register.tpl",
+    "target": "nubesdk-slot",
+    "line": 119,
+    "kind": "platform-component"
+  },
+  {
+    "source": "snippets/forms/register.tpl",
+    "target": "nubesdk-slot",
+    "line": 128,
+    "kind": "platform-component"
+  },
+  {
+    "source": "snippets/header/header-language.tpl",
+    "target": "snippets/navigation/country-options.tpl",
+    "line": 19,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/header/header-nav-modals.tpl",
+    "target": "snippets/modals/modal.tpl",
+    "line": 5,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/header/header-nav-modals.tpl",
+    "target": "snippets/navigation/navigation-panel.tpl",
+    "line": 24,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/header/header-nav-modals.tpl",
+    "target": "snippets/navigation/navigation-panel.tpl",
+    "line": 27,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/header/header-nav-modals.tpl",
+    "target": "snippets/modals/modal.tpl",
+    "line": 32,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/header/header-nav-modals.tpl",
+    "target": "snippets/header/search-form.tpl",
+    "line": 49,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/header/header-nav-modals.tpl",
+    "target": "snippets/modals/modal.tpl",
+    "line": 55,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/header/header-nav-modals.tpl",
+    "target": "snippets/navigation/country-options.tpl",
+    "line": 68,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/header/search-form.tpl",
+    "target": "snippets/icon.tpl",
+    "line": 13,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/labels.tpl",
+    "target": "snippets/promotions/promotion-label-text.tpl",
+    "line": 97,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/logo/logo-img.tpl",
+    "target": "snippets/image.tpl",
+    "line": 10,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/modals/cancel-order-modal.tpl",
+    "target": "snippets/modals/modal.tpl",
+    "line": 9,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/modals/cancel-order-modal.tpl",
+    "target": "snippets/forms/form-select.tpl",
+    "line": 42,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/modals/quick-shop-modal.tpl",
+    "target": "snippets/modals/modal.tpl",
+    "line": 3,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/modals/quick-shop-modal.tpl",
+    "target": "snippets/image.tpl",
+    "line": 25,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/modals/quick-shop-modal.tpl",
+    "target": "snippets/payments/payment-discount-price.tpl",
+    "line": 39,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/navigation/country-options.tpl",
+    "target": "snippets/image.tpl",
+    "line": 8,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/navigation/navigation-list-hamburger.tpl",
+    "target": "snippets/modals/modal.tpl",
+    "line": 33,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/navigation/navigation-list-hamburger.tpl",
+    "target": "snippets/navigation/navigation-list-hamburger.tpl",
+    "line": 68,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/navigation/navigation-list-hamburger.tpl",
+    "target": "blocks/navigation-banner.tpl",
+    "line": 72,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/navigation/navigation-panel.tpl",
+    "target": "snippets/navigation/navigation-list-hamburger.tpl",
+    "line": 8,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/notification.tpl",
+    "target": "snippets/image.tpl",
+    "line": 48,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/payments/payments-details.tpl",
+    "target": "snippets/payments/payments-info-banks.tpl",
+    "line": 45,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/payments/payments-details.tpl",
+    "target": "snippets/payments/payments-info.tpl",
+    "line": 50,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/payments/payments-info-banks.tpl",
+    "target": "snippets/image.tpl",
+    "line": 22,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/payments/payments-info-banks.tpl",
+    "target": "snippets/image.tpl",
+    "line": 64,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/payments/payments-info-banks.tpl",
+    "target": "snippets/image.tpl",
+    "line": 103,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/payments/payments-info-banks.tpl",
+    "target": "snippets/image.tpl",
+    "line": 132,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/payments/payments-info-banks.tpl",
+    "target": "snippets/image.tpl",
+    "line": 161,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/payments/payments-info-banks.tpl",
+    "target": "snippets/payments/payments-info-methods.tpl",
+    "line": 185,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/payments/payments-info-methods.tpl",
+    "target": "snippets/image.tpl",
+    "line": 22,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/payments/payments-info-methods.tpl",
+    "target": "snippets/image.tpl",
+    "line": 119,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/payments/payments-info.tpl",
+    "target": "snippets/image.tpl",
+    "line": 21,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/payments/payments-info.tpl",
+    "target": "snippets/image.tpl",
+    "line": 146,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/payments/payments-info.tpl",
+    "target": "snippets/payments/payments-info-methods.tpl",
+    "line": 166,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/product/_related-products-notifications.tpl",
+    "target": "snippets/product-list/products-section.tpl",
+    "line": 21,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/product/kit-product-variants.tpl",
+    "target": "snippets/image.tpl",
+    "line": 32,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/product/kit-products.tpl",
+    "target": "snippets/image.tpl",
+    "line": 22,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/product/kit-products.tpl",
+    "target": "snippets/product/kit-product-variants.tpl",
+    "line": 43,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/product/product-form.tpl",
+    "target": "snippets/breadcrumbs.tpl",
+    "line": 26,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/product/product-form.tpl",
+    "target": "snippets/promotions/compare-price-saved-amount.tpl",
+    "line": 106,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/product/product-form.tpl",
+    "target": "snippets/promotions/price-discount-disclaimer.tpl",
+    "line": 111,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/product/product-form.tpl",
+    "target": "snippets/product/price-without-taxes.tpl",
+    "line": 115,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/product/product-form.tpl",
+    "target": "snippets/payments/payment-discount-price.tpl",
+    "line": 120,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/product/product-form.tpl",
+    "target": "snippets/subscriptions/subscription-price.tpl",
+    "line": 131,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/product/product-form.tpl",
+    "target": "snippets/payments/installments.tpl",
+    "line": 156,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/product/product-form.tpl",
+    "target": "snippets/promotions/gift-promotion-message.tpl",
+    "line": 201,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/product/product-form.tpl",
+    "target": "snippets/promotions/promotions-details.tpl",
+    "line": 249,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/product/product-form.tpl",
+    "target": "snippets/product/product-variants.tpl",
+    "line": 258,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/product/product-form.tpl",
+    "target": "snippets/product/kit-products.tpl",
+    "line": 266,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/product/product-form.tpl",
+    "target": "snippets/product/product-quantity.tpl",
+    "line": 289,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/product/product-form.tpl",
+    "target": "snippets/subscriptions/subscription-selector.tpl",
+    "line": 292,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/product/product-form.tpl",
+    "target": "snippets/placeholders/button-placeholder.tpl",
+    "line": 308,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/product/product-form.tpl",
+    "target": "snippets/shipping/shipping-calculator.tpl",
+    "line": 338,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/product/product-form.tpl",
+    "target": "snippets/shipping/branches.tpl",
+    "line": 344,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/product/product-form.tpl",
+    "target": "snippets/product/product-payment-details.tpl",
+    "line": 357,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/product/product-form.tpl",
+    "target": "nubesdk-slot",
+    "line": 57,
+    "kind": "platform-component"
+  },
+  {
+    "source": "snippets/product/product-form.tpl",
+    "target": "nubesdk-slot",
+    "line": 61,
+    "kind": "platform-component"
+  },
+  {
+    "source": "snippets/product/product-form.tpl",
+    "target": "nubesdk-slot",
+    "line": 69,
+    "kind": "platform-component"
+  },
+  {
+    "source": "snippets/product/product-form.tpl",
+    "target": "promotional-price-details",
+    "line": 91,
+    "kind": "platform-component"
+  },
+  {
+    "source": "snippets/product/product-form.tpl",
+    "target": "nubesdk-slot",
+    "line": 144,
+    "kind": "platform-component"
+  },
+  {
+    "source": "snippets/product/product-form.tpl",
+    "target": "nubesdk-slot",
+    "line": 150,
+    "kind": "platform-component"
+  },
+  {
+    "source": "snippets/product/product-form.tpl",
+    "target": "nubesdk-slot",
+    "line": 188,
+    "kind": "platform-component"
+  },
+  {
+    "source": "snippets/product/product-form.tpl",
+    "target": "nubesdk-slot",
+    "line": 192,
+    "kind": "platform-component"
+  },
+  {
+    "source": "snippets/product/product-form.tpl",
+    "target": "nubesdk-slot",
+    "line": 323,
+    "kind": "platform-component"
+  },
+  {
+    "source": "snippets/product/product-form.tpl",
+    "target": "nubesdk-slot",
+    "line": 330,
+    "kind": "platform-component"
+  },
+  {
+    "source": "snippets/product/product-form.tpl",
+    "target": "nubesdk-slot",
+    "line": 350,
+    "kind": "platform-component"
+  },
+  {
+    "source": "snippets/product/product-image-thumbs.tpl",
+    "target": "snippets/image.tpl",
+    "line": 7,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/product/product-image-thumbs.tpl",
+    "target": "snippets/image.tpl",
+    "line": 21,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/product/product-image.tpl",
+    "target": "snippets/labels.tpl",
+    "line": 31,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/product/product-image.tpl",
+    "target": "snippets/image.tpl",
+    "line": 58,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/product/product-image.tpl",
+    "target": "snippets/product/product-video.tpl",
+    "line": 80,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/product/product-image.tpl",
+    "target": "snippets/product/product-video.tpl",
+    "line": 85,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/product/product-image.tpl",
+    "target": "snippets/product/product-image-thumbs.tpl",
+    "line": 109,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/product/product-image.tpl",
+    "target": "snippets/product/product-video.tpl",
+    "line": 115,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/product/product-image.tpl",
+    "target": "nubesdk-slot",
+    "line": 26,
+    "kind": "platform-component"
+  },
+  {
+    "source": "snippets/product/product-image.tpl",
+    "target": "nubesdk-slot",
+    "line": 39,
+    "kind": "platform-component"
+  },
+  {
+    "source": "snippets/product/product-image.tpl",
+    "target": "nubesdk-slot",
+    "line": 130,
+    "kind": "platform-component"
+  },
+  {
+    "source": "snippets/product/product-payment-details.tpl",
+    "target": "snippets/modals/modal.tpl",
+    "line": 4,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/product/product-payment-details.tpl",
+    "target": "snippets/payments/payments-details.tpl",
+    "line": 19,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/product/product-quantity.tpl",
+    "target": "snippets/forms/form-input.tpl",
+    "line": 9,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/product/product-variants.tpl",
+    "target": "snippets/forms/form-select.tpl",
+    "line": 40,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/product/product-variants.tpl",
+    "target": "snippets/forms/form-select.tpl",
+    "line": 48,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/product/product-variants.tpl",
+    "target": "snippets/image.tpl",
+    "line": 63,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/product/product-variants.tpl",
+    "target": "snippets/image.tpl",
+    "line": 74,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/product/product-variants.tpl",
+    "target": "snippets/modals/modal.tpl",
+    "line": 104,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/product/product-video-item.tpl",
+    "target": "snippets/image.tpl",
+    "line": 20,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/product/product-video-item.tpl",
+    "target": "snippets/image.tpl",
+    "line": 60,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/product/product-video-item.tpl",
+    "target": "snippets/image.tpl",
+    "line": 71,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/product/product-video.tpl",
+    "target": "snippets/product/product-video-item.tpl",
+    "line": 18,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/product/product-video.tpl",
+    "target": "snippets/product/product-video-item.tpl",
+    "line": 25,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/product/product-video.tpl",
+    "target": "snippets/product/product-video-item.tpl",
+    "line": 27,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/product-list/_product-grid.tpl",
+    "target": "snippets/product-list/product-item/item.tpl",
+    "line": 9,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/product-list/filters/filters-controls.tpl",
+    "target": "snippets/product-list/filters/remove-filters.tpl",
+    "line": 8,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/product-list/filters/filters-controls.tpl",
+    "target": "snippets/product-list/filters/filters.tpl",
+    "line": 13,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/product-list/filters/filters-modals.tpl",
+    "target": "snippets/modals/modal.tpl",
+    "line": 41,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/product-list/filters/filters-modals.tpl",
+    "target": "snippets/product-list/filters/filters.tpl",
+    "line": 57,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/product-list/filters/filters-modals.tpl",
+    "target": "snippets/modals/modal.tpl",
+    "line": 66,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/product-list/filters/filters-modals.tpl",
+    "target": "snippets/product-list/filters/sort-by.tpl",
+    "line": 82,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/product-list/filters/filters.tpl",
+    "target": "snippets/product-list/filters/category-filters.tpl",
+    "line": 9,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/product-list/filters/filters.tpl",
+    "target": "snippets/product-list/filters/property-filters.tpl",
+    "line": 12,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/product-list/filters/property-filters.tpl",
+    "target": "snippets/product-list/filters/price-filter.tpl",
+    "line": 12,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/product-list/product-item/item-image.tpl",
+    "target": "snippets/product-list/product-item/item-slider.tpl",
+    "line": 118,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/product-list/product-item/item-image.tpl",
+    "target": "snippets/image.tpl",
+    "line": 124,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/product-list/product-item/item-image.tpl",
+    "target": "snippets/image.tpl",
+    "line": 136,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/product-list/product-item/item-image.tpl",
+    "target": "snippets/labels.tpl",
+    "line": 153,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/product-list/product-item/item-image.tpl",
+    "target": "nubesdk-slot",
+    "line": 107,
+    "kind": "platform-component"
+  },
+  {
+    "source": "snippets/product-list/product-item/item-quick-shop.tpl",
+    "target": "snippets/placeholders/button-placeholder.tpl",
+    "line": 39,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/product-list/product-item/item-slider.tpl",
+    "target": "snippets/image.tpl",
+    "line": 21,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/product-list/product-item/item-slider.tpl",
+    "target": "snippets/image.tpl",
+    "line": 28,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/product-list/product-item/item-slider.tpl",
+    "target": "snippets/image.tpl",
+    "line": 41,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/product-list/product-item/item.tpl",
+    "target": "snippets/product-list/product-item/item-image.tpl",
+    "line": 102,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/product-list/product-item/item.tpl",
+    "target": "snippets/subscriptions/subscription-price.tpl",
+    "line": 123,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/product-list/product-item/item.tpl",
+    "target": "snippets/payments/installments.tpl",
+    "line": 144,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/product-list/product-item/item.tpl",
+    "target": "snippets/labels.tpl",
+    "line": 159,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/product-list/product-item/item.tpl",
+    "target": "snippets/payments/payment-discount-price.tpl",
+    "line": 171,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/product-list/product-item/item.tpl",
+    "target": "snippets/subscriptions/subscription-message.tpl",
+    "line": 180,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/product-list/product-item/item.tpl",
+    "target": "snippets/product-list/product-item/item-colors.tpl",
+    "line": 199,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/product-list/product-item/item.tpl",
+    "target": "snippets/product/product-variants.tpl",
+    "line": 214,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/product-list/product-item/item.tpl",
+    "target": "snippets/product/product-quantity.tpl",
+    "line": 225,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/product-list/product-item/item.tpl",
+    "target": "snippets/placeholders/button-placeholder.tpl",
+    "line": 229,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/product-list/product-item/item.tpl",
+    "target": "snippets/product-list/product-item/item-quick-shop.tpl",
+    "line": 237,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/product-list/product-item/item.tpl",
+    "target": "snippets/structured-data/structured-data.tpl",
+    "line": 247,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/product-list/product-item/item.tpl",
+    "target": "nubesdk-slot",
+    "line": 113,
+    "kind": "platform-component"
+  },
+  {
+    "source": "snippets/product-list/product-item/item.tpl",
+    "target": "nubesdk-slot",
+    "line": 117,
+    "kind": "platform-component"
+  },
+  {
+    "source": "snippets/product-list/product-item/item.tpl",
+    "target": "nubesdk-slot",
+    "line": 119,
+    "kind": "platform-component"
+  },
+  {
+    "source": "snippets/product-list/product-item/item.tpl",
+    "target": "nubesdk-slot",
+    "line": 155,
+    "kind": "platform-component"
+  },
+  {
+    "source": "snippets/product-list/product-item/item.tpl",
+    "target": "nubesdk-slot",
+    "line": 221,
+    "kind": "platform-component"
+  },
+  {
+    "source": "snippets/progress-bar.tpl",
+    "target": "snippets/icon.tpl",
+    "line": 13,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/promotional-modal.tpl",
+    "target": "snippets/modals/modal.tpl",
+    "line": 26,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/promotional-modal.tpl",
+    "target": "snippets/image.tpl",
+    "line": 51,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/promotional-modal.tpl",
+    "target": "snippets/image.tpl",
+    "line": 59,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/promotional-modal.tpl",
+    "target": "snippets/forms/newsletter.tpl",
+    "line": 84,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/promotions/coupon-input.tpl",
+    "target": "snippets/icon.tpl",
+    "line": 65,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/promotions/coupon-input.tpl",
+    "target": "snippets/icon.tpl",
+    "line": 96,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/promotions/gift-promotion-progress.tpl",
+    "target": "snippets/progress-bar.tpl",
+    "line": 31,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/promotions/promotions-details.tpl",
+    "target": "snippets/promotions/progressive-discounts-table.tpl",
+    "line": 10,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/shipping/_shipping-options.tpl",
+    "target": "snippets/icon.tpl",
+    "line": 63,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/shipping/_shipping-options.tpl",
+    "target": "snippets/shipping/shipping-calculator-item.tpl",
+    "line": 72,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/shipping/_shipping-options.tpl",
+    "target": "snippets/shipping/shipping-calculator-item.tpl",
+    "line": 82,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/shipping/_shipping-options.tpl",
+    "target": "snippets/icon.tpl",
+    "line": 111,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/shipping/_shipping-options.tpl",
+    "target": "snippets/shipping/shipping-calculator-item.tpl",
+    "line": 120,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/shipping/_shipping-options.tpl",
+    "target": "snippets/shipping/shipping-calculator-item.tpl",
+    "line": 130,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/shipping/_shipping-suboptions.tpl",
+    "target": "snippets/modals/modal.tpl",
+    "line": 16,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/shipping/_shipping-suboptions.tpl",
+    "target": "snippets/icon.tpl",
+    "line": 41,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/shipping/shipping-calculator-item.tpl",
+    "target": "snippets/shipping/_shipping-suboptions.tpl",
+    "line": 61,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/shipping/shipping-calculator.tpl",
+    "target": "snippets/icon.tpl",
+    "line": 46,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/shipping/shipping-calculator.tpl",
+    "target": "snippets/placeholders/shipping-placeholder.tpl",
+    "line": 93,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/shipping/shipping-calculator.tpl",
+    "target": "snippets/modals/modal.tpl",
+    "line": 106,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/shipping/shipping-free-rest.tpl",
+    "target": "snippets/progress-bar.tpl",
+    "line": 36,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/social/whatsapp-chat.tpl",
+    "target": "snippets/icon.tpl",
+    "line": 11,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/subscriptions/subscription-address-form.tpl",
+    "target": "snippets/forms/form-input.tpl",
+    "line": 22,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/subscriptions/subscription-address-form.tpl",
+    "target": "snippets/forms/form-input.tpl",
+    "line": 37,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/subscriptions/subscription-address-form.tpl",
+    "target": "snippets/forms/form-input.tpl",
+    "line": 51,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/subscriptions/subscription-address-form.tpl",
+    "target": "snippets/forms/form-input.tpl",
+    "line": 66,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/subscriptions/subscription-address-form.tpl",
+    "target": "snippets/forms/form-input.tpl",
+    "line": 76,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/subscriptions/subscription-address-form.tpl",
+    "target": "snippets/forms/form-input.tpl",
+    "line": 90,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/subscriptions/subscription-address-form.tpl",
+    "target": "snippets/forms/form-input.tpl",
+    "line": 105,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/subscriptions/subscription-cancel-modal.tpl",
+    "target": "snippets/modals/modal.tpl",
+    "line": 25,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/subscriptions/subscription-cancel-modal.tpl",
+    "target": "snippets/forms/form-select.tpl",
+    "line": 45,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/subscriptions/subscription-detail-info.tpl",
+    "target": "snippets/subscriptions/subscription-cancel-modal.tpl",
+    "line": 9,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/subscriptions/subscription-detail-info.tpl",
+    "target": "snippets/subscriptions/subscription-skip-modal.tpl",
+    "line": 30,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/subscriptions/subscription-detail.tpl",
+    "target": "snippets/subscriptions/subscription-detail-info.tpl",
+    "line": 23,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/subscriptions/subscription-detail.tpl",
+    "target": "snippets/subscriptions/subscription-detail-items.tpl",
+    "line": 26,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/subscriptions/subscription-list.tpl",
+    "target": "snippets/card.tpl",
+    "line": 15,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/subscriptions/subscription-options.tpl",
+    "target": "snippets/forms/dropdown.tpl",
+    "line": 44,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/subscriptions/subscription-price.tpl",
+    "target": "snippets/product/price-without-taxes.tpl",
+    "line": 103,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/subscriptions/subscription-product-confirm-modal.tpl",
+    "target": "snippets/modals/modal.tpl",
+    "line": 8,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/subscriptions/subscription-product-form.tpl",
+    "target": "snippets/forms/form-select.tpl",
+    "line": 36,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/subscriptions/subscription-product-form.tpl",
+    "target": "snippets/forms/form-input.tpl",
+    "line": 54,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/subscriptions/subscription-product-form.tpl",
+    "target": "snippets/subscriptions/subscription-product-confirm-modal.tpl",
+    "line": 118,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/subscriptions/subscription-selector.tpl",
+    "target": "snippets/subscriptions/subscription-options.tpl",
+    "line": 40,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/subscriptions/subscription-selector.tpl",
+    "target": "snippets/forms/radio-button.tpl",
+    "line": 103,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/subscriptions/subscription-selector.tpl",
+    "target": "snippets/forms/radio-button.tpl",
+    "line": 152,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/subscriptions/subscription-selector.tpl",
+    "target": "snippets/subscriptions/subscription-alerts.tpl",
+    "line": 172,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "snippets/subscriptions/subscription-skip-modal.tpl",
+    "target": "snippets/modals/modal.tpl",
+    "line": 16,
+    "kind": "twig-literal",
+    "exists": true
+  },
+  {
+    "source": "templates/layout/cart_drawer.json",
+    "target": "sections/cart-drawer.tpl",
+    "kind": "json-instance",
+    "location": "templates/layout/cart_drawer.json#/cart_drawer"
+  },
+  {
+    "source": "templates/layout/footer.json",
+    "target": "sections/footer.tpl",
+    "kind": "json-instance",
+    "location": "templates/layout/footer.json#/footer"
+  },
+  {
+    "source": "templates/layout/footer.json",
+    "target": "blocks/footer-institutional.tpl",
+    "kind": "json-instance",
+    "location": "templates/layout/footer.json#/footer/institutional"
+  },
+  {
+    "source": "templates/layout/footer.json",
+    "target": "blocks/footer-menu.tpl",
+    "kind": "json-instance",
+    "location": "templates/layout/footer.json#/footer/menu_1"
+  },
+  {
+    "source": "templates/layout/footer.json",
+    "target": "blocks/footer-menu.tpl",
+    "kind": "json-instance",
+    "location": "templates/layout/footer.json#/footer/menu_2"
+  },
+  {
+    "source": "templates/layout/footer.json",
+    "target": "blocks/footer-menu.tpl",
+    "kind": "json-instance",
+    "location": "templates/layout/footer.json#/footer/menu_3"
+  },
+  {
+    "source": "templates/layout/footer.json",
+    "target": "blocks/footer-newsletter.tpl",
+    "kind": "json-instance",
+    "location": "templates/layout/footer.json#/footer/newsletter"
+  },
+  {
+    "source": "templates/layout/header.json",
+    "target": "sections/navigation-bar.tpl",
+    "kind": "json-instance",
+    "location": "templates/layout/header.json#/navigation_bar_top"
+  },
+  {
+    "source": "templates/layout/header.json",
+    "target": "blocks/nav-announcements.tpl",
+    "kind": "json-instance",
+    "location": "templates/layout/header.json#/navigation_bar_top/nav_announcements"
+  },
+  {
+    "source": "templates/layout/header.json",
+    "target": "blocks/announcement.tpl",
+    "kind": "json-instance",
+    "location": "templates/layout/header.json#/navigation_bar_top/nav_announcements/announcement_1"
+  },
+  {
+    "source": "templates/layout/header.json",
+    "target": "blocks/announcement.tpl",
+    "kind": "json-instance",
+    "location": "templates/layout/header.json#/navigation_bar_top/nav_announcements/announcement_2"
+  },
+  {
+    "source": "templates/layout/header.json",
+    "target": "blocks/nav-social.tpl",
+    "kind": "json-instance",
+    "location": "templates/layout/header.json#/navigation_bar_top/nav_social"
+  },
+  {
+    "source": "templates/layout/header.json",
+    "target": "sections/header.tpl",
+    "kind": "json-instance",
+    "location": "templates/layout/header.json#/header"
+  },
+  {
+    "source": "templates/layout/header.json",
+    "target": "blocks/header-logo.tpl",
+    "kind": "json-instance",
+    "location": "templates/layout/header.json#/header/logo"
+  },
+  {
+    "source": "templates/layout/header.json",
+    "target": "blocks/header-utilities.tpl",
+    "kind": "json-instance",
+    "location": "templates/layout/header.json#/header/utilities"
+  },
+  {
+    "source": "templates/layout/header.json",
+    "target": "blocks/header-navigation.tpl",
+    "kind": "json-instance",
+    "location": "templates/layout/header.json#/header/navigation"
+  },
+  {
+    "source": "templates/layout/header.json",
+    "target": "sections/navigation-bar.tpl",
+    "kind": "json-instance",
+    "location": "templates/layout/header.json#/navigation_bar_bottom"
+  },
+  {
+    "source": "templates/layout/header.json",
+    "target": "blocks/nav-announcements.tpl",
+    "kind": "json-instance",
+    "location": "templates/layout/header.json#/navigation_bar_bottom/nav_announcements"
+  },
+  {
+    "source": "templates/layout/header.json",
+    "target": "blocks/announcement.tpl",
+    "kind": "json-instance",
+    "location": "templates/layout/header.json#/navigation_bar_bottom/nav_announcements/announcement_1"
+  },
+  {
+    "source": "templates/layout/header.json",
+    "target": "blocks/announcement.tpl",
+    "kind": "json-instance",
+    "location": "templates/layout/header.json#/navigation_bar_bottom/nav_announcements/announcement_2"
+  },
+  {
+    "source": "templates/layout/header.json",
+    "target": "blocks/announcement.tpl",
+    "kind": "json-instance",
+    "location": "templates/layout/header.json#/navigation_bar_bottom/nav_announcements/announcement_3"
+  },
+  {
+    "source": "templates/layout/header.json",
+    "target": "blocks/announcement.tpl",
+    "kind": "json-instance",
+    "location": "templates/layout/header.json#/navigation_bar_bottom/nav_announcements/announcement_4"
+  },
+  {
+    "source": "templates/pages/404.json",
+    "target": "sections/main-404.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/404.json#/main_404"
+  },
+  {
+    "source": "templates/pages/404.json",
+    "target": "sections/product-list.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/404.json#/featured_products"
+  },
+  {
+    "source": "templates/pages/404.json",
+    "target": "blocks/heading.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/404.json#/featured_products/heading"
+  },
+  {
+    "source": "templates/pages/404.json",
+    "target": "blocks/products.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/404.json#/featured_products/products"
+  },
+  {
+    "source": "templates/pages/account/address.json",
+    "target": "sections/page-header.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/account/address.json#/heading"
+  },
+  {
+    "source": "templates/pages/account/address.json",
+    "target": "sections/main-account-address.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/account/address.json#/account_address"
+  },
+  {
+    "source": "templates/pages/account/addresses.json",
+    "target": "sections/page-header.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/account/addresses.json#/heading"
+  },
+  {
+    "source": "templates/pages/account/addresses.json",
+    "target": "sections/main-account-addresses.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/account/addresses.json#/account_addresses"
+  },
+  {
+    "source": "templates/pages/account/info.json",
+    "target": "sections/page-header.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/account/info.json#/heading"
+  },
+  {
+    "source": "templates/pages/account/info.json",
+    "target": "sections/main-account-info.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/account/info.json#/account_info"
+  },
+  {
+    "source": "templates/pages/account/login.json",
+    "target": "sections/page-header.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/account/login.json#/heading"
+  },
+  {
+    "source": "templates/pages/account/login.json",
+    "target": "sections/main-login.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/account/login.json#/login_form"
+  },
+  {
+    "source": "templates/pages/account/newpass.json",
+    "target": "sections/page-header.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/account/newpass.json#/heading"
+  },
+  {
+    "source": "templates/pages/account/newpass.json",
+    "target": "sections/main-newpass.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/account/newpass.json#/newpass_form"
+  },
+  {
+    "source": "templates/pages/account/order.json",
+    "target": "sections/page-header.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/account/order.json#/heading"
+  },
+  {
+    "source": "templates/pages/account/order.json",
+    "target": "sections/main-account-order.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/account/order.json#/account_order"
+  },
+  {
+    "source": "templates/pages/account/orders.json",
+    "target": "sections/page-header.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/account/orders.json#/heading"
+  },
+  {
+    "source": "templates/pages/account/orders.json",
+    "target": "sections/main-account-orders.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/account/orders.json#/account_orders"
+  },
+  {
+    "source": "templates/pages/account/register.json",
+    "target": "sections/page-header.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/account/register.json#/heading"
+  },
+  {
+    "source": "templates/pages/account/register.json",
+    "target": "sections/main-register.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/account/register.json#/register_form"
+  },
+  {
+    "source": "templates/pages/account/reset.json",
+    "target": "sections/page-header.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/account/reset.json#/heading"
+  },
+  {
+    "source": "templates/pages/account/reset.json",
+    "target": "sections/main-reset.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/account/reset.json#/reset_form"
+  },
+  {
+    "source": "templates/pages/account/subscription-address.json",
+    "target": "sections/page-header.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/account/subscription-address.json#/heading"
+  },
+  {
+    "source": "templates/pages/account/subscription-address.json",
+    "target": "sections/main-account-subscription-address.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/account/subscription-address.json#/account_subscription_address"
+  },
+  {
+    "source": "templates/pages/account/subscription-product.json",
+    "target": "sections/page-header.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/account/subscription-product.json#/heading"
+  },
+  {
+    "source": "templates/pages/account/subscription-product.json",
+    "target": "sections/main-account-subscription-product.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/account/subscription-product.json#/account_subscription_product"
+  },
+  {
+    "source": "templates/pages/blog-post.json",
+    "target": "sections/page-header.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/blog-post.json#/heading"
+  },
+  {
+    "source": "templates/pages/blog-post.json",
+    "target": "sections/main-blog-post.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/blog-post.json#/blog_post_content"
+  },
+  {
+    "source": "templates/pages/blog.json",
+    "target": "sections/page-header.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/blog.json#/heading"
+  },
+  {
+    "source": "templates/pages/blog.json",
+    "target": "sections/main-blog.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/blog.json#/blog_posts"
+  },
+  {
+    "source": "templates/pages/cart.json",
+    "target": "sections/page-header.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/cart.json#/heading"
+  },
+  {
+    "source": "templates/pages/cart.json",
+    "target": "sections/main-cart.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/cart.json#/cart_form"
+  },
+  {
+    "source": "templates/pages/category.json",
+    "target": "sections/category-hero.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/category.json#/category_hero"
+  },
+  {
+    "source": "templates/pages/category.json",
+    "target": "sections/page-header.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/category.json#/heading"
+  },
+  {
+    "source": "templates/pages/category.json",
+    "target": "sections/main-products-grid.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/category.json#/product_list"
+  },
+  {
+    "source": "templates/pages/contact.json",
+    "target": "sections/page-header.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/contact.json#/heading"
+  },
+  {
+    "source": "templates/pages/contact.json",
+    "target": "sections/main-contact.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/contact.json#/contact_form"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "sections/hero.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/hero"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "blocks/heading.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/hero/heading"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "blocks/text.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/hero/text"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "blocks/button.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/hero/button"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "sections/banners.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/banners_4_grid"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "blocks/banner.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/banners_4_grid/banner_1"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "blocks/heading.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/banners_4_grid/banner_1/heading"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "blocks/banner.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/banners_4_grid/banner_2"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "blocks/heading.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/banners_4_grid/banner_2/heading"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "blocks/banner.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/banners_4_grid/banner_3"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "blocks/heading.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/banners_4_grid/banner_3/heading"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "blocks/banner.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/banners_4_grid/banner_4"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "blocks/heading.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/banners_4_grid/banner_4/heading"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "sections/banners.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/banner_full_1"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "blocks/banner.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/banner_full_1/banner_1"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "blocks/heading.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/banner_full_1/banner_1/heading"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "blocks/text.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/banner_full_1/banner_1/text"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "blocks/button.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/banner_full_1/banner_1/button"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "sections/divider.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/divider_1"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "sections/rich-text.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/editorial_1"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "blocks/group.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/editorial_1/outer_group"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "blocks/group.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/editorial_1/outer_group/inner_group"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "blocks/text.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/editorial_1/outer_group/inner_group/description_1"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "blocks/heading.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/editorial_1/outer_group/inner_group/heading"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "blocks/text.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/editorial_1/outer_group/inner_group/description_2"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "blocks/button.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/editorial_1/outer_group/button"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "sections/divider.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/divider_2"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "sections/product-list.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/featured_products_1"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "blocks/products.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/featured_products_1/products"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "sections/featured-categories.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/featured_categories_pills"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "blocks/heading.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/featured_categories_pills/heading"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "blocks/category-nav.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/featured_categories_pills/category_nav"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "blocks/category-item.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/featured_categories_pills/category_nav/cat_1"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "blocks/category-item.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/featured_categories_pills/category_nav/cat_2"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "blocks/category-item.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/featured_categories_pills/category_nav/cat_3"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "blocks/category-item.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/featured_categories_pills/category_nav/cat_4"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "blocks/category-item.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/featured_categories_pills/category_nav/cat_5"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "blocks/category-item.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/featured_categories_pills/category_nav/cat_6"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "sections/banners.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/banners_6_grid"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "blocks/banner.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/banners_6_grid/banner_1"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "blocks/heading.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/banners_6_grid/banner_1/heading"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "blocks/banner.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/banners_6_grid/banner_2"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "blocks/heading.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/banners_6_grid/banner_2/heading"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "blocks/banner.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/banners_6_grid/banner_3"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "blocks/heading.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/banners_6_grid/banner_3/heading"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "blocks/banner.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/banners_6_grid/banner_4"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "blocks/heading.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/banners_6_grid/banner_4/heading"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "blocks/banner.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/banners_6_grid/banner_5"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "blocks/heading.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/banners_6_grid/banner_5/heading"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "blocks/banner.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/banners_6_grid/banner_6"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "blocks/heading.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/banners_6_grid/banner_6/heading"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "sections/divider.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/divider_3"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "sections/banners.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/banner_full_2"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "blocks/banner.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/banner_full_2/banner_1"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "blocks/heading.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/banner_full_2/banner_1/heading"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "blocks/text.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/banner_full_2/banner_1/text"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "blocks/button.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/banner_full_2/banner_1/button"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "sections/banners.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/banners_3_text_outside"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "blocks/banner.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/banners_3_text_outside/banner_1"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "blocks/heading.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/banners_3_text_outside/banner_1/heading"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "blocks/banner.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/banners_3_text_outside/banner_2"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "blocks/heading.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/banners_3_text_outside/banner_2/heading"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "blocks/banner.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/banners_3_text_outside/banner_3"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "blocks/heading.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/banners_3_text_outside/banner_3/heading"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "sections/product-list.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/featured_products_2"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "blocks/products.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/featured_products_2/products"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "sections/icon-text.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/icon_text"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "blocks/icon-text-group.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/icon_text/icon_text_group"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "blocks/icon-text-item.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/icon_text/icon_text_group/item_1"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "blocks/icon-text-item.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/icon_text/icon_text_group/item_2"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "blocks/icon-text-item.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/icon_text/icon_text_group/item_3"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "blocks/icon-text-item.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/icon_text/icon_text_group/item_4"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "sections/banners.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/banner_full_3"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "blocks/banner.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/banner_full_3/banner_1"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "blocks/heading.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/banner_full_3/banner_1/heading"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "blocks/text.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/banner_full_3/banner_1/text"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "blocks/button.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/banner_full_3/banner_1/button"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "sections/banners.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/banners_2_text_inside"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "blocks/banner.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/banners_2_text_inside/banner_1"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "blocks/group.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/banners_2_text_inside/banner_1/group"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "blocks/heading.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/banners_2_text_inside/banner_1/group/heading"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "blocks/button.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/banners_2_text_inside/banner_1/group/button"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "blocks/banner.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/banners_2_text_inside/banner_2"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "blocks/group.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/banners_2_text_inside/banner_2/group"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "blocks/heading.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/banners_2_text_inside/banner_2/group/heading"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "blocks/button.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/banners_2_text_inside/banner_2/group/button"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "sections/divider.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/divider_5"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "sections/rich-text.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/editorial_2"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "blocks/group.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/editorial_2/outer_group"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "blocks/group.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/editorial_2/outer_group/inner_group"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "blocks/text.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/editorial_2/outer_group/inner_group/description_1"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "blocks/heading.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/editorial_2/outer_group/inner_group/heading"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "blocks/text.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/editorial_2/outer_group/inner_group/description_2"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "blocks/button.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/editorial_2/outer_group/button"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "sections/divider.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/divider_4"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "sections/newsletter.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/newsletter"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "blocks/heading.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/newsletter/heading"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "blocks/text.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/newsletter/text"
+  },
+  {
+    "source": "templates/pages/home.json",
+    "target": "blocks/newsletter-form.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/home.json#/newsletter/newsletter_form"
+  },
+  {
+    "source": "templates/pages/page.json",
+    "target": "sections/page-header.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/page.json#/heading"
+  },
+  {
+    "source": "templates/pages/page.json",
+    "target": "sections/main-page.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/page.json#/page_content"
+  },
+  {
+    "source": "templates/pages/password.json",
+    "target": "sections/password-logo.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/password.json#/logo"
+  },
+  {
+    "source": "templates/pages/password.json",
+    "target": "sections/main-password.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/password.json#/content"
+  },
+  {
+    "source": "templates/pages/product.json",
+    "target": "sections/main-product.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/product.json#/main_product"
+  },
+  {
+    "source": "templates/pages/product.json",
+    "target": "blocks/product-media.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/product.json#/main_product/product_media"
+  },
+  {
+    "source": "templates/pages/product.json",
+    "target": "blocks/product-info.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/product.json#/main_product/product_info"
+  },
+  {
+    "source": "templates/pages/product.json",
+    "target": "blocks/description.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/product.json#/main_product/product_info/description"
+  },
+  {
+    "source": "templates/pages/product.json",
+    "target": "blocks/purchase-info.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/product.json#/main_product/product_info/purchase_info"
+  },
+  {
+    "source": "templates/pages/product.json",
+    "target": "blocks/icon-text-item.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/product.json#/main_product/product_info/purchase_info/icon_returns"
+  },
+  {
+    "source": "templates/pages/product.json",
+    "target": "blocks/icon-text-item.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/product.json#/main_product/product_info/purchase_info/icon_security"
+  },
+  {
+    "source": "templates/pages/product.json",
+    "target": "sections/related-products.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/product.json#/complementary_products"
+  },
+  {
+    "source": "templates/pages/product.json",
+    "target": "blocks/heading.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/product.json#/complementary_products/complementary_heading"
+  },
+  {
+    "source": "templates/pages/product.json",
+    "target": "blocks/product-recommendations.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/product.json#/complementary_products/complementary_products_block"
+  },
+  {
+    "source": "templates/pages/product.json",
+    "target": "sections/related-products.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/product.json#/alternative_products"
+  },
+  {
+    "source": "templates/pages/product.json",
+    "target": "blocks/heading.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/product.json#/alternative_products/alternative_heading"
+  },
+  {
+    "source": "templates/pages/product.json",
+    "target": "blocks/product-recommendations.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/product.json#/alternative_products/alternative_products_block"
+  },
+  {
+    "source": "templates/pages/product.json",
+    "target": "sections/product-description.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/product.json#/product_description"
+  },
+  {
+    "source": "templates/pages/search.json",
+    "target": "sections/page-header.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/search.json#/heading"
+  },
+  {
+    "source": "templates/pages/search.json",
+    "target": "sections/main-products-grid.tpl",
+    "kind": "json-instance",
+    "location": "templates/pages/search.json#/product_list"
+  }
+]
