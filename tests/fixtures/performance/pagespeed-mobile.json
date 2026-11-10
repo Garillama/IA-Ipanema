@@ -1,0 +1,66 @@
+{
+  "_fixture": "SIMULATED; not DaMar measurements",
+  "lighthouseResult": {
+    "requestedUrl": "https://example.invalid",
+    "finalUrl": "https://example.invalid",
+    "fetchTime": "2026-11-10T00:00:00Z",
+    "lighthouseVersion": "13.0.0",
+    "environment": {
+      "hostUserAgent": "Chrome/130.1.2.3"
+    },
+    "configSettings": {
+      "screenEmulation": {
+        "mobile": true,
+        "width": 390
+      },
+      "throttlingMethod": "simulate",
+      "throttling": {
+        "rttMs": 150,
+        "cpuSlowdownMultiplier": 4
+      },
+      "disableStorageReset": false
+    },
+    "categories": {
+      "performance": {
+        "score": 0.9
+      },
+      "accessibility": {
+        "score": 0.9
+      },
+      "best-practices": {
+        "score": 0.9
+      },
+      "seo": {
+        "score": 0.9
+      }
+    },
+    "audits": {
+      "largest-contentful-paint": {
+        "numericValue": 2400,
+        "score": 0.9,
+        "title": "Synthetic observation"
+      },
+      "first-contentful-paint": {
+        "numericValue": 1400,
+        "score": 0.9,
+        "title": "Synthetic observation"
+      },
+      "cumulative-layout-shift": {
+        "numericValue": 0.04,
+        "score": 0.9,
+        "title": "Synthetic observation"
+      },
+      "total-blocking-time": {
+        "numericValue": 120,
+        "score": 0.9,
+        "title": "Synthetic observation"
+      },
+      "speed-index": {
+        "numericValue": 2500,
+        "score": 0.9,
+        "title": "Synthetic observation"
+      }
+    },
+    "runWarnings": []
+  }
+}

@@ -1,0 +1,3771 @@
+--- a/tools/ia.py
++++ b/tools/ia.py
+@@ -23,6 +23,8 @@
+     add_access_parser(sub)
+     from ipanema.orchestration.cli import add_parser as add_orchestration_parser
+     add_orchestration_parser(sub)
++    from ipanema.performance.cli import add_parser as add_performance_parser
++    add_performance_parser(sub)
+     sub.add_parser("doctor")
+     projects = sub.add_parser("projects")
+     project_sub = projects.add_subparsers(dest="operation", required=True)
+@@ -111,6 +113,9 @@
+         write_json(registry_path, registry, overwrite=True)
+         return {"registered": project_id, "remote_connection_checked": False}, 0
+     project = Project(project_id=args.project)
++    if args.command == 'performance':
++        from ipanema.performance.cli import execute as performance_execute
++        return performance_execute(project, args)
+     if args.command == 'access':
+         from ipanema.access.cli import execute as access_execute
+         return access_execute(project, args)
+--- a/tools/ipanema/access/policy.py
++++ b/tools/ipanema/access/policy.py
+@@ -16,6 +16,8 @@
+ CAPABILITIES = {
+     'devtools.read': ('devtools_open', 'devtools_snapshot', 'devtools_network', 'devtools_console'),
+     'devtools.performance': ('devtools_trace', 'devtools_insight'),
++    'psi.read': ('psi_run_pagespeed',),
++    'crux.read': ('crux_query_record', 'crux_query_history'),
+     'gsc.read': ('gsc_search_analytics', 'gsc_inspect_url', 'gsc_sitemaps'),
+     'analytics.read': ('analytics_run_report',),
+     'merchant.read': ('merchant_products',),
+@@ -101,7 +103,7 @@
+         return {name for cap in grant['capabilities'] for name in CAPABILITIES[cap]}
+ 
+     def stop_path(self, provider):
+-        if provider not in ('gsc', 'analytics', 'merchant', 'devtools'):
++        if provider not in ('gsc', 'analytics', 'merchant', 'devtools', 'psi', 'crux'):
+             raise IpanemaError('Proveedor inválido.')
+         return self.root / (self.project.id + '-' + provider + '-stop.json')
+ 
+--- a/tools/ipanema/access/gateway.py
++++ b/tools/ipanema/access/gateway.py
+@@ -23,6 +23,9 @@
+     'devtools_console': ('Leer mensajes de consola.', schema()),
+     'devtools_trace': ('Traza de carga con recarga y parada automática; CrUX desactivado.', schema()),
+     'devtools_insight': ('Analizar insight de una traza de esta sesión.', schema({'insightSetId': {'type': 'string'}, 'insightName': {'type': 'string'}}, ['insightSetId', 'insightName'])),
++    'psi_run_pagespeed': ('Medición PageSpeed del origen registrado; requiere clave privada en controlador.', REQUEST),
++    'crux_query_record': ('CrUX URL u origen explícito; sin fallback silencioso.', REQUEST),
++    'crux_query_history': ('CrUX History; periodos agregados y datos faltantes explícitos.', REQUEST),
+     'gsc_search_analytics': ('Consultar Search Analytics en la propiedad registrada; filas parciales.', REQUEST),
+     'gsc_inspect_url': ('Consultar estado conocido de indexación; no es inspección en vivo.', REQUEST),
+     'gsc_sitemaps': ('Listar metadatos de sitemaps registrados; sin envío ni eliminación.', REQUEST),
+@@ -44,11 +47,12 @@
+ 
+ 
+ class Gateway:
+-    def __init__(self, project, grant_id, *, devtools_factory=DevTools, rest_factory=OfficialREST):
++    def __init__(self, project, grant_id, *, devtools_factory=DevTools, rest_factory=OfficialREST, performance_factory=None):
+         self.project, self.grant_id = project, grant_id
+         self.policy = Policy(project)
+         self.policy.load(grant_id)
+         self.devtools_factory, self.rest_factory = devtools_factory, rest_factory
++        self.performance_factory = performance_factory
+         self.browser = None
+ 
+     def tools(self):
+@@ -67,6 +71,11 @@
+                     if self.browser is None:
+                         self.browser = self.devtools_factory(self.project, profile=grant.get('browser_profile', 'security'))
+                     result = self.browser.call(name, arguments)
++                elif provider in ('psi','crux'):
++                    from ..performance.service import Service
++                    source = 'pagespeed' if provider == 'psi' else 'crux_history' if operation == 'query_history' else 'crux'
++                    # Policy.consume already checked capability and task quota under this lock.
++                    result = (self.performance_factory or Service)(self.project).read(source, authorized=True, already_locked=True, **arguments['request'])
+                 else:
+                     cfg = self.project.data.get('google', {}).get(provider, {})
+                     env_name = cfg.get('oauth_token_env', '')
+--- a/tools/lighthouse_audit.mjs
++++ b/tools/lighthouse_audit.mjs
+@@ -1,9 +1,33 @@
+ #!/usr/bin/env node
+ import fs from 'node:fs/promises';
+ import path from 'node:path';
+-import {cliRequire as require,puppeteer,authenticate,evidenceRoot} from './browser_runtime.mjs';
++import {cliRequire as require,puppeteer,authenticate,evidenceRoot,assertUrl} from './browser_runtime.mjs';
+ const {default:lighthouse}=await import(require.resolve('lighthouse'));
+ const {default:desktopConfig}=await import(require.resolve('lighthouse/core/config/desktop-config.js'));
++import {safeLighthouseReport} from './performance_evidence.mjs';
++if(process.argv[2]==='--job'){
++ const job=JSON.parse(await fs.readFile(process.argv[3],'utf8'));
++ if(!['mobile','desktop'].includes(job.device)||!Number.isInteger(job.runs)||job.runs<1||job.runs>5)throw Error('Trabajo Lighthouse inválido');
++ assertUrl(job.url);
++ const samples=[];
++ for(let index=0;index<job.runs;index++){
++  const browser=await puppeteer.launch({headless:true,args:['--disable-dev-shm-usage']});
++  try{
++   const port=Number(new URL(browser.wsEndpoint()).port);
++   const throttling=job.device==='mobile'?{rttMs:150,throughputKbps:1638.4,cpuSlowdownMultiplier:4,requestLatencyMs:562.5,downloadThroughputKbps:1474.56,uploadThroughputKbps:675}:{rttMs:40,throughputKbps:10240,cpuSlowdownMultiplier:1,requestLatencyMs:0,downloadThroughputKbps:0,uploadThroughputKbps:0};
++   const result=await lighthouse(job.url,{port,output:'json',logLevel:'error',onlyCategories:job.categories,locale:job.locale,throttlingMethod:'simulate',throttling,disableStorageReset:false},job.device==='desktop'?desktopConfig:undefined);
++   result.lhr.environment={...result.lhr.environment,hostUserAgent:await browser.userAgent(),actualBrowserVersion:await browser.version()};
++   if(browser.__accessLimited)throw Error('access_limited_stop');
++   for(const value of [result.lhr.requestedUrl,result.lhr.finalDisplayedUrl||result.lhr.finalUrl]){if(typeof value!=='string')throw Error('incomplete_response');assertUrl(value);}
++   const safe=safeLighthouseReport(result.lhr);
++   samples.push(safe);
++
++  }finally{await browser.close();}
++ }
++ for(let index=0;index<samples.length;index++)await fs.writeFile(path.join(evidenceRoot,'sample-'+(index+1)+'.json'),JSON.stringify(samples[index],null,2),{flag:'wx'});
++ await fs.writeFile(path.join(evidenceRoot,'samples.json'),JSON.stringify(samples,null,2),{flag:'wx'});
++ console.log(JSON.stringify({samples:samples.length,source:'lighthouse_local'}));
++}else{
+ const url=process.argv[2];
+ const prefix=process.argv[3]||'';
+ if(!/^[a-z0-9-]*$/.test(prefix))throw Error('Prefijo no válido');
+@@ -25,3 +49,5 @@
+   console.log(JSON.stringify(summary));
+  }finally{await browser.close();}
+ }
++
++}
+--- a/tools/performance_evidence.mjs
++++ b/tools/performance_evidence.mjs
+@@ -4,7 +4,7 @@
+  const clean=value=>{
+   if(typeof value!=='string'||!value)return null;
+   if(value.startsWith('data:'))return '[inline-resource]';
+-  try{const u=new URL(value,location.href);u.username='';u.password='';u.hash='';for(const k of [...u.searchParams.keys()])if(/token|secret|password|auth|session|email|phone|api.?key/i.test(k))u.searchParams.set(k,'[redacted]');return u.href;}catch{return null;}
++  try{const u=new URL(value,location.href);u.username='';u.password='';u.hash='';for(const k of [...u.searchParams.keys()])if(/token|key|secret|password|auth|session|email|phone/i.test(k))u.searchParams.set(k,'[redacted]');return u.href;}catch{return null;}
+  };
+  const srcset=value=>!value?null:value.split(',').map(part=>{const [url,...descriptor]=part.trim().split(/\s+/);return [clean(url),...descriptor].join(' ');}).join(', ');
+  window.__audit={lcp:[],shifts:[],longTasks:[]};
+@@ -26,21 +26,25 @@
+  }
+ }
+ 
++export function sanitizePerformanceValue(value,key=''){
++  const decode=x=>{try{return decodeURIComponent(decodeURIComponent(x));}catch{return x;}};
++  if(/token|api.?key|secret|password|cookie|authorization|session|email|phone|snippet|nodeLabel|headers|postData/i.test(decode(key)))return '[redacted]';
++  if(Array.isArray(value))return value.map(x=>sanitizePerformanceValue(x));
++  if(value&&typeof value==='object')return Object.fromEntries(Object.entries(value).map(([k,v])=>[k,sanitizePerformanceValue(v,k)]));
++  if(typeof value==='string'&&value.startsWith('data:'))return '[inline-resource]';
++  if(typeof value==='string')return value.replace(/https?:\/\/[^\s<>"\]]+/gi,match=>{
++   try{const u=new URL(match);u.username='';u.password='';u.hash='';for(const k of [...u.searchParams.keys()])if(/token|key|secret|password|auth|session|email|phone/i.test(decode(k)))u.searchParams.set(k,'[redacted]');return u.href;}catch{return '[invalid-url]';}
++  });
++  return value;
++
++}
++
+ // Do not persist the full LHR: node snippets and URL credentials can contain private data.
+ export function lighthouseEvidence(lhr){
+  const ids=['lcp-breakdown-insight','lcp-discovery-insight','largest-contentful-paint-element',
+   'network-requests','server-response-time','render-blocking-insight','render-blocking-resources',
+   'font-display-insight','mainthread-work-breakdown','bootup-time'];
+- const sanitize=(value,key='')=>{
+-  if(/token|secret|password|cookie|authorization|session|email|phone|snippet|nodeLabel/i.test(key))return '[redacted]';
+-  if(Array.isArray(value))return value.map(x=>sanitize(x));
+-  if(value&&typeof value==='object')return Object.fromEntries(Object.entries(value).map(([k,v])=>[k,sanitize(v,k)]));
+-  if(typeof value==='string'&&/^https?:\/\//i.test(value)){
+-   try{const u=new URL(value);u.username='';u.password='';u.hash='';for(const k of [...u.searchParams.keys()])if(/token|secret|password|auth|session|email|phone|api.?key/i.test(k))u.searchParams.set(k,'[redacted]');return u.href;}catch{return '[invalid-url]';}
+-  }
+-  if(typeof value==='string'&&value.startsWith('data:'))return '[inline-resource]';
+-  return value;
+- };
++ const sanitize=sanitizePerformanceValue;
+  const audits={};const missing=[];
+  for(const id of ids){
+   const audit=lhr?.audits?.[id];
+@@ -94,3 +98,11 @@
+   snapshot(){return records.map(row=>({...row}));}
+  };
+ }
++
++// Safe observational projection for new repeatable jobs; legacy runner remains compatible.
++export function safeLighthouseReport(lhr){
++ const report={};
++ for(const field of ['requestedUrl','finalUrl','finalDisplayedUrl','fetchTime','lighthouseVersion','configSettings','environment','categories','runWarnings','runtimeError'])report[field]=lhr[field];
++ report.audits=Object.fromEntries(Object.entries(lhr.audits||{}).map(([id,a])=>[id,Object.fromEntries(['id','title','description','score','scoreDisplayMode','numericValue','numericUnit','displayValue','details','errorMessage'].filter(k=>k in a).map(k=>[k,a[k]]))]));
++ return sanitizePerformanceValue(report);
++}
+--- /dev/null
++++ b/tools/ipanema/performance/model.py
+@@ -0,0 +1,206 @@
++"""Proyecciones observadas; laboratorio, campo y comparabilidad sin puntuación inventada."""
++from __future__ import annotations
++import copy
++import datetime as dt
++import math
++import re
++import statistics
++from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit, quote, unquote
++
++CATEGORIES = ('performance', 'accessibility', 'best-practices', 'seo')
++LAB_METRICS = {'lcp': 'largest-contentful-paint', 'fcp': 'first-contentful-paint',
++               'cls': 'cumulative-layout-shift', 'tbt': 'total-blocking-time', 'speed_index': 'speed-index'}
++FIELD_METRICS = {'lcp': 'largest_contentful_paint', 'inp': 'interaction_to_next_paint',
++                 'cls': 'cumulative_layout_shift', 'fcp': 'first_contentful_paint'}
++SENSITIVE = re.compile(r'key|token|secret|password|cookie|authorization|session|email|phone|snippet|nodeLabel|headers|postData', re.I)
++
++
++def numeric(value):
++    if isinstance(value, bool):
++        return None
++    try:
++        number = float(value)
++        return number if math.isfinite(number) else None
++    except (ValueError, TypeError):
++        return None
++
++
++def sanitize(value, secrets=(), key=''):
++    """Keep public observations, never transport URLs, headers, node HTML or key echoes."""
++    identity_key = key == 'key' and isinstance(value, dict) and set(value) <= {'url','origin','formFactor'}
++    if not identity_key and SENSITIVE.search(unquote(unquote(key))):
++        return '[redacted]'
++    if isinstance(value, dict):
++        return {sanitize(str(k), secrets): sanitize(v, secrets, str(k)) for k, v in value.items()}
++    if isinstance(value, list):
++        return [sanitize(v, secrets) for v in value]
++    if isinstance(value, float) and not math.isfinite(value):
++        return None
++    if not isinstance(value, str):
++        return value
++    for secret in secrets:
++        if secret:
++            for version in (secret, quote(secret, safe=''), quote(quote(secret, safe=''), safe='')):
++                value = value.replace(version, '[redacted]')
++    if value.startswith('data:'):
++        return '[inline-resource]'
++    def clean(match):
++        try:
++            u = urlsplit(match.group(0))
++            host = u.hostname or ''
++            netloc = ('[' + host + ']' if ':' in host else host) + (':' + str(u.port) if u.port else '')
++            query = [(k, '[redacted]' if SENSITIVE.search(unquote(unquote(k))) else v) for k, v in parse_qsl(u.query)]
++            return urlunsplit((u.scheme, netloc, u.path, urlencode(query), ''))
++        except ValueError:
++            return '[invalid-url]'
++    return re.sub(r'https?://[^\s<>"\]]+', clean, value)
++
++
++def lighthouse(payload, request, *, source='pagespeed'):
++    lhr = payload.get('lighthouseResult', {}) if source == 'pagespeed' else payload
++    if not isinstance(lhr, dict):
++        return {'status': 'invalid_response', 'source': source}
++    audits = lhr.get('audits') or {}
++    categories = lhr.get('categories') or {}
++    metrics = {k: numeric((audits.get(v) or {}).get('numericValue')) for k, v in LAB_METRICS.items()}
++    scores = {k: numeric((categories.get(k) or {}).get('score')) for k in request['categories']}
++    settings = lhr.get('configSettings') or {}
++    ua = ((lhr.get('environment') or {}).get('actualBrowserVersion') if source == 'lighthouse_local' else None) or (lhr.get('environment') or {}).get('hostUserAgent') or lhr.get('userAgent') or ''
++    chrome = re.search(r'(?:HeadlessChrome|Chrome)/([\d.]+)', ua)
++    profile = {'source': source, 'url': request['url'],
++               'final_url': lhr.get('finalDisplayedUrl') or lhr.get('finalUrl'),
++               'device': request['device'], 'categories': request['categories'], 'locale': request['locale'],
++               'lighthouse_version': lhr.get('lighthouseVersion'), 'chrome_version': chrome.group(1) if chrome and not chrome.group(1).endswith('.0.0.0') else None,
++               'screen': settings.get('screenEmulation'), 'throttling_method': settings.get('throttlingMethod'),
++               'throttling': settings.get('throttling'), 'cache': settings.get('disableStorageReset'),
++               'network_policy': request.get('network_policy', 'google-managed')}
++    # Missing requested metrics/categories never become zero or a complete success.
++    missing = [k for k, v in metrics.items() if v is None] + ['category:' + k for k, v in scores.items() if v is None]
++    observed = {k: lhr.get(k) for k in ('requestedUrl','finalUrl','finalDisplayedUrl','fetchTime',
++                'lighthouseVersion','configSettings','environment','categories','runWarnings','runtimeError')}
++    observed['audits'] = {k: {field: a[field] for field in ('id','title','description','score','scoreDisplayMode',
++        'numericValue','numericUnit','displayValue','details','errorMessage') if field in a}
++        for k, a in audits.items() if isinstance(a, dict)}
++    return {'source': source, 'measurement': 'laboratory', 'status': 'runtime_error' if lhr.get('runtimeError') else 'partial' if missing else 'observed',
++            'measured_at': lhr.get('fetchTime') or payload.get('analysisUTCTimestamp'),
++            'metrics': metrics, 'units': {k: 'unitless' if k == 'cls' else 'ms' for k in metrics},
++            'scores': scores, 'profile': profile, 'missing': missing,
++            'observations': observed, 'warnings': lhr.get('runWarnings') or [],
++            'runtime_error': lhr.get('runtimeError'), 'field_inp': None,
++            'limitations': ['Laboratorio; TBT no mide INP. Scores no certifican SEO/WCAG.',
++                            'PSI no mide cambios locales sin una URL publicada accesible.']}
++
++
++def crux(payload, request):
++    record = payload.get('record')
++    if not isinstance(record, dict) or not isinstance(record.get('key'), dict):
++        return {'status': 'invalid_response', 'source': request['source']}
++    identity = record['key']
++    scope = request['scope']
++    expected = request['url'] if scope == 'url' else request['origin']
++    returned = identity.get(scope)
++    normalized = payload.get('urlNormalizationDetails') or {}
++    identity_matches = returned == expected
++    if scope == 'url' and not identity_matches:
++        identity_matches = normalized.get('originalUrl') == expected and normalized.get('normalizedUrl') == returned
++    if not identity_matches or identity.get('formFactor') != request['form_factor'] or ('origin' if scope == 'url' else 'url') in identity:
++        return {'status': 'identity_mismatch', 'source': request['source'], 'requested_identity': {scope: expected, 'formFactor': request['form_factor']}}
++    history = request['source'] == 'crux_history'
++    periods = record.get('collectionPeriods') if history else record.get('collectionPeriod')
++    if periods is not None:
++        try:
++            ordered = []
++            for period in periods if history else [periods]:
++                first = dt.date(**period['firstDate'])
++                last = dt.date(**period['lastDate'])
++                if first > last or ordered and last <= ordered[-1]:
++                    raise ValueError('invalid_period')
++                ordered.append(last)
++        except (TypeError, KeyError, ValueError):
++            return {'status': 'invalid_response', 'source': request['source']}
++    metrics = {}
++    incomplete = []
++    for name, field in FIELD_METRICS.items():
++        item = (record.get('metrics') or {}).get(field)
++        if not isinstance(item, dict):
++            continue
++        if history:
++            p75s = (item.get('percentilesTimeseries') or {}).get('p75s')
++            bins = item.get('histogramTimeseries')
++            if (not isinstance(periods, list) or not isinstance(p75s, list) or len(p75s) != len(periods)
++                    or not isinstance(bins, list) or any(not isinstance(b.get('densities'), list) or len(b['densities']) != len(periods) for b in bins)):
++                return {'status': 'invalid_response', 'source': request['source']}
++            metrics[name] = {'p75s': [numeric(v) for v in p75s], 'histogram_timeseries':
++                             [{**b, 'densities': [numeric(v) for v in b['densities']]} for b in bins]}
++            if any(numeric(v) is None for v in p75s) or any(numeric(v) is None for b in bins for v in b['densities']):
++                incomplete.append(name + ':nullable_history')
++        else:
++            metrics[name] = {'p75': numeric((item.get('percentiles') or {}).get('p75')), 'histogram': item.get('histogram')}
++            if metrics[name]['p75'] is None or not isinstance(item.get('histogram'), list) or not item['histogram']:
++                incomplete.append(name + ':missing_values')
++        metrics[name]['unit'] = 'unitless' if name == 'cls' else 'ms'
++    missing = sorted(set(FIELD_METRICS) - set(metrics)) + incomplete
++    return {'source': request['source'], 'status': 'partial' if missing or not periods else 'observed',
++            'measurement': 'field_history' if history else 'field', 'scope': scope,
++            'requested_identity': {scope: expected, 'formFactor': request['form_factor']}, 'returned_identity': identity,
++            'collection_periods' if history else 'collection_period': periods,
++            'metrics': metrics, 'missing': missing, 'observations': payload,
++            'limitations': ['Periodos agregados de usuarios reales; sin causalidad inmediata.',
++                            'Origen no representa una URL individual. No hay fallback silencioso.']}
++
++
++def compare(before, after, *, profile_only=False):
++    if before.get('source') != after.get('source') or before.get('measurement') != 'laboratory' or after.get('measurement') != 'laboratory':
++        return {'status': 'not_comparable', 'reason': 'Solo laboratorio de la misma fuente; CrUX conserva periodos, no certifica mejoras inmediatas.'}
++    required = ('source','url','final_url','device','categories','locale','lighthouse_version','chrome_version',
++                'screen','throttling_method','throttling','cache','network_policy')
++    a, b = before.get('profile', {}), after.get('profile', {})
++    invalid = [k for k in required if a.get(k) is None or b.get(k) is None or a.get(k) != b.get(k)]
++    if before.get('sample_count', 1) != after.get('sample_count', 1):
++        invalid.append('sample_count')
++    if before.get('status') != 'observed' or after.get('status') != 'observed':
++        invalid.append('status')
++    if invalid:
++        return {'status': 'not_comparable', 'fields': invalid}
++    if not profile_only and (not before.get('measured_at') or not after.get('measured_at') or before['measured_at'] == after['measured_at']):
++        return {'status': 'not_comparable', 'reason': 'Se necesitan observaciones distintas y fechadas; la caché no es una medición nueva.'}
++    delta = {k: after['metrics'][k] - value for k, value in before.get('metrics', {}).items()
++             if numeric(value) is not None and numeric(after.get('metrics', {}).get(k)) is not None}
++    return {'status': 'compared', 'delta_after_minus_before': delta,
++            'regressions': [k for k, v in delta.items() if v > 0], 'causality_confirmed': False}
++
++
++def summarize(samples):
++    if not samples:
++        return {'status': 'not_measured'}
++    profiles = [s.get('profile') for s in samples]
++    if compare(samples[0], samples[0], profile_only=True).get('status') != 'compared':
++        return {'status': 'not_comparable', 'samples': samples}
++    if any(p != profiles[0] for p in profiles) or any(s.get('status') != 'observed' for s in samples):
++        return {'status': 'not_comparable', 'samples': samples}
++    summary = copy.deepcopy(samples[0])
++    summary.update(sample_count=len(samples), samples=samples, statistics={})
++    for name in LAB_METRICS:
++        values = [s['metrics'].get(name) for s in samples if numeric(s.get('metrics', {}).get(name)) is not None]
++        summary['statistics'][name] = {'median': statistics.median(values) if values else None,
++                                      'min': min(values) if values else None, 'max': max(values) if values else None,
++                                      'available_samples': len(values)}
++        summary['metrics'][name] = summary['statistics'][name]['median']
++    return summary
++
++
++def findings(result, url, device):
++    rows = []
++    for name, audit in result.get('observations', {}).get('audits', {}).items():
++        score = numeric(audit.get('score'))
++        if score is None or score >= 1:
++            continue
++        rows.append({'id': 'PERF-' + name, 'source': result['source'], 'url': url, 'device': device,
++                     'metric_affected': [k for k, v in LAB_METRICS.items() if v == name] or ['requires_diagnosis'],
++                     'evidence': {'audit': name, 'score': score, 'details': audit.get('details')},
++                     'cause_state': 'hypothesis', 'severity': 'review_required',
++                     'potential_impact': 'No cuantificado; comprobar recurso, interacción y consumidores.',
++                     'candidate_files': [], 'consumers': [], 'alternatives': ['Inspeccionar motor/componente nativo y confirmar causa antes de cambiar.'],
++                     'risks': ['Regresión fuera del alcance de una auditoría automática.'], 'estimated_cost': None,
++                     'required_tests': ['Perfil comparable antes/después', 'QA funcional, SEO, accesibilidad y revisión independiente']})
++    return rows
+--- /dev/null
++++ b/tools/ipanema/performance/service.py
+@@ -0,0 +1,268 @@
++"""Servicio común CLI/MCP: origen, permiso, parada, caché privada y presupuesto."""
++from __future__ import annotations
++from contextlib import nullcontext
++import datetime as dt
++import hashlib
++import ipaddress
++import json
++import os
++from pathlib import Path
++import re
++import subprocess
++import time
++from urllib.parse import urlsplit, urlunsplit, parse_qsl, unquote
++from ..core import IpanemaError, now
++from ..seo.adapters import authorize_url
++from ..access.policy import Policy, fingerprint
++from . import model, providers
++
++
++def checked_url(project, value):
++    authorize_url(project, value)
++    u = urlsplit(value)
++    if u.scheme != 'https' or u.username or u.password or u.fragment or u.port not in (None,443):
++        raise IpanemaError('Se requiere URL pública HTTPS del origen registrado, sin credenciales ni fragmento.')
++    host = (u.hostname or '').lower()
++    try:
++        address = ipaddress.ip_address(host)
++    except ValueError:
++        address = None
++    if address is not None and not address.is_global or address is None and ('.' not in host or host.endswith(('.local','.localhost'))):
++        raise IpanemaError('Destino privado no permitido.')
++    for key, _ in parse_qsl(u.query):
++        if model.SENSITIVE.search(unquote(unquote(key))):
++            raise IpanemaError('La URL contiene parámetros sensibles; no se enviará a Google.')
++    if re.search(r'/(?:admin|checkout|password|logout)(?:/|$)', unquote(u.path), re.I):
++        raise IpanemaError('Ruta privada/comercial no permitida.')
++    return value
++
++
++def url_identity(value):
++    u = urlsplit(value)
++    return urlunsplit((u.scheme, u.netloc, u.path or '/', u.query, ''))
++
++
++def options(project, source, url=None, device='mobile', categories=None, locale='es', scope='url', period_count=25):
++    if source not in providers.ENDPOINTS or device not in ('mobile','desktop') or scope not in ('url','origin'):
++        raise IpanemaError('Fuente, dispositivo o granularidad inválidos.')
++    url = checked_url(project, url or project.data.get('public_url') or '')
++    categories = sorted(set(categories or model.CATEGORIES))
++    if not categories or set(categories) - set(model.CATEGORIES) or not re.fullmatch(r'[a-z]{2,3}(?:[-_][A-Za-z]{2,8})?', locale):
++        raise IpanemaError('Categorías o locale inválidos.')
++    if type(period_count) is not int or not 1 <= period_count <= 40:
++        raise IpanemaError('History admite 1–40 periodos con el contrato verificado.')
++    u = urlsplit(url)
++    return {'source': source, 'url': url, 'origin': u.scheme + '://' + u.netloc,
++            'device': device, 'categories': categories, 'locale': locale, 'scope': scope,
++            'form_factor': 'PHONE' if device == 'mobile' else 'DESKTOP', 'period_count': period_count,
++            'metrics': list(model.FIELD_METRICS.values()), 'contract': '2026-11-10-v1'}
++
++
++def private_dir(path, root):
++    for candidate in reversed([path, *path.parents]):
++        if candidate == root or root in candidate.parents:
++            if candidate.is_symlink():
++                raise IpanemaError('Almacén privado con symlink rechazado.')
++    path.mkdir(parents=True, exist_ok=True, mode=0o700)
++    path.chmod(0o700)
++    return path
++
++
++def load_private(path):
++    if not path.exists() and not path.is_symlink():
++        return None
++    if path.is_symlink() or path.stat().st_mode & 0o077:
++        raise IpanemaError('Archivo privado inseguro.')
++    if path.stat().st_size > 12_000_000:
++        raise IpanemaError('Archivo privado excesivo.')
++    try:
++        return json.loads(path.read_text(), parse_constant=lambda _: (_ for _ in ()).throw(ValueError()))
++    except (ValueError, UnicodeError):
++        return None
++
++
++def save_private(path, value):
++    # Atomic replacement; never follow an existing or temporary symlink.
++    import tempfile
++    if path.is_symlink():
++        raise IpanemaError('Archivo privado con symlink rechazado.')
++    fd, temp = tempfile.mkstemp(dir=path.parent, prefix='.write-')
++    try:
++        with os.fdopen(fd, 'w') as stream:
++            json.dump(value, stream, ensure_ascii=False, allow_nan=False)
++        os.replace(temp, path)
++    finally:
++        if os.path.exists(temp):
++            os.unlink(temp)
++
++
++class Service:
++    def __init__(self, project, *, transport=providers.request, clock=time.time, sleep=time.sleep, max_calls=4):
++        self.project, self.transport, self.clock, self.sleep = project, transport, clock, sleep
++        self.policy = Policy(project)
++        self.root = private_dir(project.root / '.local/performance' / project.id, project.root)
++        self.cfg = project.data.get('google', {}).get('performance', {})
++        self.attempts, self.max_calls = 0, max_calls
++        if type(max_calls) is not int or not 1 <= max_calls <= 10:
++            raise IpanemaError('Presupuesto de ejecución: 1–10 solicitudes.')
++
++    def setting(self, key, default, lower, upper):
++        value = self.cfg.get(key, default)
++        if type(value) not in (int,float) or not lower <= value <= upper:
++            raise IpanemaError('Configuración performance inválida: ' + key)
++        return value
++
++    def read(self, source, *, authorized=False, already_locked=False, refresh=False, **kwargs):
++        if not authorized:
++            raise IpanemaError('Requiere permiso de lectura de red explícito (--allow-network o grant MCP).')
++        if type(refresh) is not bool:
++            raise IpanemaError('refresh debe ser booleano.')
++        self.read_start = self.attempts
++        opt = options(self.project, source, **kwargs)
++        provider = 'psi' if source == 'pagespeed' else 'crux'
++        with nullcontext() if already_locked else self.policy.locked():
++            if self.policy.stop_path(provider).exists():
++                return self.envelope(opt, {'status':'provider_stopped'})
++            cache_id = hashlib.sha256(json.dumps({'project':self.project.id, 'config':fingerprint(self.project), 'options':opt}, sort_keys=True).encode()).hexdigest()
++            path = self.root / (cache_id + '.json')
++            ttl = self.setting('cache_ttl_seconds', 86400, 0, 604800)
++            cached = load_private(path)
++            if (not refresh and isinstance(cached, dict) and cached.get('project') == self.project.id and cached.get('request') == opt
++                    and type(cached.get('cached_at')) in (int,float) and 0 <= self.clock() - cached['cached_at'] < ttl
++                    and isinstance(cached.get('result'), dict) and cached.get('result', {}).get('status') in ('observed','partial','insufficient_field_data')):
++                result = cached['result']
++                result['cache_hit'] = True
++                result['network_attempts'] = 0
++                result['retrieved_at'] = now()
++                return result
++            env_name = self.cfg.get('pagespeed_key_env' if source == 'pagespeed' else 'crux_key_env', '')
++            key = os.environ.get(env_name) if re.fullmatch(r'IPANEMA_[A-Z0-9_]+_KEY', env_name) else None
++            if not key:
++                return self.envelope(opt, {'status':'credentials_unavailable', 'network_attempts':0})
++            retries = int(self.setting('max_retries', 1, 0, 2))
++            timeout = self.setting('timeout_seconds', 90, 5, 180)
++            for retry in range(retries + 1):
++                budget = self.reserve(provider)
++                if budget:
++                    return self.envelope(opt, {'status':budget})
++                try:
++                    raw = self.transport(source, opt, key, timeout)
++                    if not isinstance(raw, dict):
++                        raise providers.Failure('invalid_response')
++                    if source == 'pagespeed':
++                        lhr = raw.get('lighthouseResult')
++                        if not isinstance(lhr, dict):
++                            raise providers.Failure('invalid_response')
++                        for url_field in (raw.get('id'), lhr.get('requestedUrl'), lhr.get('finalUrl'), lhr.get('finalDisplayedUrl')):
++                            if url_field:
++                                try:
++                                    checked_url(self.project, url_field)
++                                except IpanemaError:
++                                    raise providers.Failure('redirect_not_authorized') from None
++                        if not isinstance(lhr.get('requestedUrl'), str) or url_identity(lhr['requestedUrl']) != url_identity(opt['url']):
++                            raise providers.Failure('identity_mismatch')
++                    if source != 'pagespeed':
++                        identity = (raw.get('record') or {}).get('key') or {}
++                        returned = identity.get(opt['scope'])
++                        if returned:
++                            try:
++                                checked_url(self.project, returned)
++                            except IpanemaError:
++                                raise providers.Failure('identity_mismatch') from None
++                    safe = model.sanitize(raw, (key,))
++                    result = model.lighthouse(safe, opt) if source == 'pagespeed' else model.crux(safe, opt)
++                    result['response_sha256'] = hashlib.sha256(json.dumps(raw, sort_keys=True, allow_nan=False).encode()).hexdigest()
++                    result = self.envelope(opt, result)
++                    break
++                except providers.Failure as error:
++                    if error.http in (403,429):
++                        self.policy.stop(provider, error.status)
++                    if error.status == 'not_found' and source != 'pagespeed':
++                        result = self.envelope(opt, {'status':'insufficient_field_data', 'http_status':404})
++                        break
++                    retryable = error.status == 'network_error' or error.http in (500,502,503,504)
++                    if retryable and retry < retries:
++                        self.sleep(min(2 ** retry, 4))
++                        continue
++                    return self.envelope(opt, {'status':error.status, 'http_status':error.http})
++                except (ValueError, TypeError, KeyError, AttributeError):
++                    return self.envelope(opt, {'status':'invalid_response'})
++            if result['status'] in ('observed','partial','insufficient_field_data'):
++                save_private(path, {'project':self.project.id, 'request':opt, 'cached_at':self.clock(), 'result':result})
++            return result
++
++    def reserve(self, provider):
++        if self.attempts >= self.max_calls:
++            return 'run_budget_exhausted'
++        path = self.root / ('budget-' + provider + '.json')
++        budget = load_private(path)
++        if path.exists() and not isinstance(budget, dict):
++            return 'budget_invalid'
++        budget = budget or {}
++        day = dt.datetime.fromtimestamp(self.clock(), dt.timezone.utc).date().isoformat()
++        count = budget.get('count', 0) if budget.get('day') == day else 0
++        if type(count) is not int or count < 0:
++            return 'budget_invalid'
++        if count >= self.setting('daily_request_limit', 20, 1, 200):
++            return 'daily_budget_exhausted'
++        save_private(path, {'project':self.project.id, 'day':day, 'count':count + 1})
++        self.attempts += 1
++        return None
++
++    def envelope(self, opt, result):
++        result.update(project=self.project.id, source=opt['source'], request=opt,
++                      retrieved_at=now(), cache_hit=False, untrusted_external_data=True,
++                      network_attempts=self.attempts - self.read_start)
++        return result
++
++
++def persist(project, sources):
++    from ..core import write_json
++    run = project.new_run('performance')
++    findings = [f for result in sources.values() for f in model.findings(result, result.get('request',{}).get('url'), result.get('request',{}).get('device'))]
++    report = {'kind':'performance-intelligence', 'project':project.id, 'at':now(), 'sources':sources,
++              'findings':findings, 'proposals':[], 'validation':{'theme_changed':False,'production_changed':False,
++              'external_request_attempted':any(x.get('network_attempts',0) > 0 for x in sources.values())}, 'report':str(run/'performance.json')}
++    write_json(run / 'performance.json', report)
++    return report
++
++
++def local(project, *, url=None, device='mobile', runs=3, authorized=False):
++    if not authorized:
++        raise IpanemaError('Lighthouse remoto requiere --allow-network.')
++    url = checked_url(project, url or project.data.get('public_url') or '')
++    if device not in ('mobile','desktop') or type(runs) is not int or not 1 <= runs <= 5:
++        raise IpanemaError('Perfil Lighthouse inválido (1–5 muestras).')
++    run = project.new_run('lighthouse-job')
++    job = {'url':url, 'device':device, 'runs':runs, 'categories':list(model.CATEGORIES), 'locale':'es'}
++    (run/'job.json').write_text(json.dumps(job))
++    u = urlsplit(url)
++    # Deliberate whitelist: no customer credentials, API keys or browser session inherited.
++    env = {k:v for k,v in os.environ.items() if k in ('PATH','LANG','LC_ALL','DISPLAY','IPANEMA_CHROME_PATH','IPANEMA_NODE_MODULE_ROOT')}
++    env.update(IPANEMA_ALLOW_NETWORK='1', IPANEMA_PUBLIC_URL=url, IPANEMA_ALLOWED_ORIGINS=u.scheme+'://'+u.netloc,
++               IPANEMA_EVIDENCE_DIR=str(run/'browser'))
++    try:
++        process = subprocess.run(['node',str(project.root/'tools/lighthouse_audit.mjs'),'--job',str(run/'job.json')],
++                                 cwd=project.root, env=env, capture_output=True, timeout=180*runs+30)
++    except (OSError, subprocess.TimeoutExpired):
++        return {'source':'lighthouse_local','status':'local_runtime_unavailable'}
++    output = run/'browser'/'samples.json'
++    if process.returncode or not output.is_file():
++        return {'source':'lighthouse_local','status':'local_runtime_failed','exit_code':process.returncode,
++                'limitations':['Salida del proceso no persistida: puede incluir URLs o datos privados.']}
++    try:
++        samples = json.loads(output.read_text())
++        normalized = [model.lighthouse(sample, {**job,'network_policy':'guarded-read-only'}, source='lighthouse_local') for sample in samples]
++        for sample in normalized:
++            for field in ('url','final_url'):
++                value = sample.get('profile', {}).get(field)
++                if not isinstance(value, str):
++                    return {'source':'lighthouse_local','status':'local_incomplete_response'}
++                checked_url(project, value)
++        result = model.summarize(normalized)
++    except (IpanemaError, ValueError, TypeError, KeyError, AttributeError):
++        # Keep earlier PSI/CrUX results in audit; do not abort report persistence.
++        return {'source':'lighthouse_local','status':'local_invalid_response'}
++    result['request'] = job
++    result['source'] = 'lighthouse_local'
++    return result
+--- /dev/null
++++ b/tools/ipanema/performance/providers.py
+@@ -0,0 +1,50 @@
++"""Transporte de clave API: endpoints oficiales fijos, sin redirects ni errores privados."""
++import json
++from urllib.error import HTTPError, URLError
++from urllib.parse import urlencode
++from urllib.request import Request, build_opener
++from ..seo.adapters import _NoRedirect
++
++ENDPOINTS = {'pagespeed': 'https://pagespeedonline.googleapis.com/pagespeedonline/v5/runPagespeed',
++             'crux': 'https://chromeuxreport.googleapis.com/v1/records:queryRecord',
++             'crux_history': 'https://chromeuxreport.googleapis.com/v1/records:queryHistoryRecord'}
++
++
++class Failure(Exception):
++    def __init__(self, status, http=None):
++        self.status, self.http = status, http
++        super().__init__(status)
++
++
++def request(source, options, key, timeout=90):
++    pairs = [('key', key)]
++    body = None
++    if source == 'pagespeed':
++        pairs += [('url', options['url']), ('strategy', options['device']), ('locale', options['locale'])]
++        pairs += [('category', category) for category in options['categories']]
++    else:
++        payload = {options['scope']: options['url'] if options['scope'] == 'url' else options['origin'],
++                   'formFactor': options['form_factor'], 'metrics': options['metrics']}
++        if source == 'crux_history':
++            payload['collectionPeriodCount'] = options['period_count']
++        body = json.dumps(payload).encode()
++    req = Request(ENDPOINTS[source] + '?' + urlencode(pairs), data=body,
++                  headers={'Accept': 'application/json', 'Content-Type': 'application/json'},
++                  method='GET' if source == 'pagespeed' else 'POST')
++    try:
++        with build_opener(_NoRedirect()).open(req, timeout=timeout) as response:
++            raw = response.read(10_000_001)
++            if len(raw) > 10_000_000:
++                raise Failure('response_too_large')
++            result = json.loads(raw, parse_constant=lambda _: (_ for _ in ()).throw(ValueError()))
++            if not isinstance(result, dict):
++                raise Failure('invalid_response')
++            return result
++    except HTTPError as error:
++        code = error.code
++        # Never stringify HTTPError: it includes a credential-bearing URL.
++        raise Failure({403:'forbidden_stop', 429:'quota_stop', 404:'not_found', 401:'authentication_failed'}.get(code, 'http_error'), code) from None
++    except (URLError, TimeoutError, OSError):
++        raise Failure('network_error') from None
++    except (ValueError, UnicodeError):
++        raise Failure('invalid_response') from None
+--- /dev/null
++++ b/tools/ipanema/performance/cli.py
+@@ -0,0 +1,70 @@
++"""CLI del servicio compartido; sin consultas implícitas ni credenciales en argumentos."""
++import json
++import os
++from pathlib import Path
++from ..core import IpanemaError, read_json
++from . import model
++from .service import Service, local, persist
++
++
++def add_parser(sub):
++    parser = sub.add_parser('performance', help='PageSpeed, CrUX y Lighthouse separados por procedencia.')
++    commands = parser.add_subparsers(dest='performance_operation', required=True)
++    commands.add_parser('doctor')
++    for name in ('pagespeed','crux','history','local','audit'):
++        command = commands.add_parser(name)
++        command.add_argument('--url')
++        command.add_argument('--device', choices=('mobile','desktop'), default='mobile')
++        command.add_argument('--allow-network', action='store_true')
++        command.add_argument('--refresh', action='store_true', help='Nueva consulta dentro de permisos/cuotas; no reutilizar caché.')
++        command.add_argument('--category', action='append', choices=model.CATEGORIES)
++        command.add_argument('--locale', default='es')
++        command.add_argument('--scope', choices=('url','origin'), default='url')
++        command.add_argument('--period-count', type=int, default=25)
++        command.add_argument('--runs', type=int, default=3)
++        command.add_argument('--max-calls', type=int, default=4)
++        if name == 'audit':
++            command.add_argument('--all-sources', action='store_true', required=True)
++            command.add_argument('--include-history', action='store_true')
++    compare = commands.add_parser('compare')
++    compare.add_argument('before', type=Path)
++    compare.add_argument('after', type=Path)
++    compare.add_argument('--source', choices=('pagespeed','lighthouse_local'), default='pagespeed')
++
++
++def execute(project, args):
++    op = args.performance_operation
++    if op == 'doctor':
++        cfg = project.data.get('google', {}).get('performance', {})
++        credentials = {provider: {'configured':bool(cfg.get(field)), 'environment_present':bool(os.getenv(cfg.get(field,'')))}
++                       for provider,field in (('pagespeed','pagespeed_key_env'),('crux','crux_key_env'))}
++        return {'project':project.id, 'credentials':credentials, 'network_tested':False,
++                'local_lighthouse':'Usa doctor general para versiones instaladas.',
++                'production_operations':False}, 0
++    if op == 'compare':
++        before, after = read_json(args.before), read_json(args.after)
++        result = model.compare(before.get('sources',{}).get(args.source,before), after.get('sources',{}).get(args.source,after))
++        return result, 0 if result['status'] == 'compared' else 2
++    if not args.allow_network:
++        raise IpanemaError('Lectura externa desactivada; añade --allow-network con origen registrado y credenciales privadas.')
++    service = Service(project, max_calls=args.max_calls)
++    kwargs = dict(url=args.url, device=args.device, categories=args.category, locale=args.locale,
++                  scope=args.scope, period_count=args.period_count, refresh=args.refresh)
++    sources = {}
++    requested = ['pagespeed','crux'] if op == 'audit' else [{'history':'crux_history'}.get(op,op)]
++    if op == 'audit' and args.include_history:
++        requested.append('crux_history')
++    stopped = False
++    for source in requested:
++        if source == 'local':
++            continue
++        result = service.read(source, authorized=True, **kwargs)
++        sources[source] = result
++        if result['status'] in ('forbidden_stop','quota_stop','provider_stopped'):
++            stopped = True
++            break
++    if op in ('audit','local') and not stopped:
++        sources['lighthouse_local'] = local(project, url=args.url, device=args.device, runs=args.runs, authorized=True)
++    result = persist(project, sources)
++    result['status'] = 'observed' if all(v.get('status') == 'observed' for v in sources.values()) else 'partial_or_blocked'
++    return result, 0 if result['status'] == 'observed' else 2
+--- /dev/null
++++ b/tools/ipanema/performance/__init__.py
+@@ -0,0 +1 @@
++"""Evidencia de laboratorio y campo con procedencia y permisos separados."""
+--- a/.agents/skills/ipanema-performance/SKILL.md
++++ b/.agents/skills/ipanema-performance/SKILL.md
+@@ -19,3 +19,4 @@
+ 
+ Entrega y cierre: identifica fuente nativa, decisión/alternativas, archivos y consumidores, diff si fue autorizado, pruebas ejecutadas con evidencia y pendientes. Finaliza al comprobar el alcance; si faltan accesos/datos, registra el límite sin declarar aprobación. Hallazgo, propuesta y solución verificada conservan estados distintos.
+ 
++Para PageSpeed/CrUX o comparar fuentes, consulta el [motor integrado de rendimiento](../../../reports/performance/README.md). Usa `performance doctor` antes de una lectura remota; CLI y MCP comparten permisos, caché y presupuestos. Conserva fuente, granularidad URL/origen, fecha y periodo; `performance compare` bloquea perfiles incompletos o incompatibles. Recupera solo auditorías y recursos relevantes para el consejo; un fallo de contrato o datos de campo insuficientes no autoriza inferir métricas ni optimizar.
+--- a/README.md
++++ b/README.md
+@@ -141,3 +141,4 @@
+ El orquestador incorpora deliberación previa para L3/L4 y colaboración total opcional para tareas pequeñas. Consulta [uso, ADR, gates y límites](reports/orchestration/council.md). Reutiliza los mismos proyectos, skills, aislamiento y QA; no publica tiendas.
+ El [informe de verificación](reports/orchestration/council-verification.md) separa la estabilización histórica de tres participantes del modo dual actual. El modo dual tiene QA aprobado y dos deliberaciones reales de solo lectura completas, con propuestas, contraste y defensas. Sus ADR permanecen `needs_evidence` y no autorizan implementación. No se publica ni se modifica DaMar Beauty.
+ 
++El [motor de rendimiento](reports/performance/README.md) incorpora PageSpeed Insights, CrUX y CrUX History mediante el servicio CLI/MCP existente, conserva Lighthouse local y DevTools y separa laboratorio de datos de campo. `python3 tools/ia.py --project damarbeauty performance doctor` comprueba configuración sin red; las consultas exigen permiso de lectura y claves privadas. [ADR y límites](reports/performance/ADR-001.md).
+--- /dev/null
++++ b/tests/unit/test_performance.py
+@@ -0,0 +1,263 @@
++"""Offline: fixtures sintéticos. No certifican conectividad ni cobertura de Google."""
++import copy
++import json
++import os
++from pathlib import Path
++import sys
++import tempfile
++import unittest
++from unittest.mock import patch, Mock
++sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
++from support import make_project, ROOT
++from ipanema.core import Project, IpanemaError
++from ipanema.performance import model, providers
++from ipanema.performance.service import Service, options, checked_url, persist
++
++FIXTURES = ROOT/'tests/fixtures/performance'
++
++
++class PerformanceTests(unittest.TestCase):
++    def setUp(self):
++        self.temp=tempfile.TemporaryDirectory();self.addCleanup(self.temp.cleanup)
++        self.root=make_project(Path(self.temp.name),theme=False)
++        self.project=Project(root=self.root)
++        self.project.data['google']={'performance':{'pagespeed_key_env':'IPANEMA_SAMPLE_PSI_KEY','crux_key_env':'IPANEMA_SAMPLE_CRUX_KEY'}}
++        self.env=patch.dict(os.environ,{'IPANEMA_SAMPLE_PSI_KEY':'fixture-secret+/','IPANEMA_SAMPLE_CRUX_KEY':'fixture-crux'})
++        self.env.start();self.addCleanup(self.env.stop)
++        self.payload=json.loads((FIXTURES/'pagespeed-mobile.json').read_text())
++        self.crux=json.loads((FIXTURES/'crux-mobile.json').read_text())
++        self.transport=Mock(return_value=self.payload)
++        self.service=Service(self.project,transport=self.transport,sleep=lambda _:None)
++
++    def read(self,source='pagespeed',**kw):
++        return self.service.read(source,authorized=True,**kw)
++
++    def test_complete_psi_and_profiles(self):
++        r=self.read();self.assertEqual(r['status'],'observed');self.assertEqual(r['metrics']['lcp'],2400)
++        self.assertIsNone(r['field_inp']);self.assertEqual(r['profile']['chrome_version'],'130.1.2.3')
++
++    def test_partial_not_zero(self):
++        del self.payload['lighthouseResult']['audits']['largest-contentful-paint']
++        r=self.read();self.assertEqual(r['status'],'partial');self.assertIsNone(r['metrics']['lcp'])
++
++    def test_runtime_and_warnings(self):
++        self.payload['lighthouseResult']['runtimeError']={'code':'ERRORED_DOCUMENT_REQUEST','message':'unsafe fixture-secret+/'}
++        r=self.read();self.assertEqual(r['status'],'runtime_error');self.assertNotIn('fixture-secret',json.dumps(r))
++
++    def test_permission_before_transport_or_cache(self):
++        self.read()
++        with self.assertRaises(IpanemaError):self.service.read('pagespeed')
++        self.assertEqual(self.transport.call_count,1)
++
++    def test_missing_key_no_anonymous(self):
++        with patch.dict(os.environ,{},clear=True):self.assertEqual(self.read()['status'],'credentials_unavailable')
++        self.transport.assert_not_called()
++
++    def test_sensitive_encoded_url_and_domain(self):
++        for url in ['https://evil.invalid/','https://example.invalid/?%2561pi_key=x','https://example.invalid/?token=x','https://example.invalid/checkout/']:
++            with self.assertRaises(IpanemaError):self.read(url=url)
++        self.transport.assert_not_called()
++
++    def test_private_origin_rejected(self):
++        self.project.data['public_url']='https://127.0.0.1'
++        with self.assertRaises(IpanemaError):checked_url(self.project,'https://127.0.0.1/')
++
++    def test_foreign_final_url_not_saved(self):
++        self.payload['lighthouseResult']['finalUrl']='https://foreign.invalid/'
++        self.assertEqual(self.read()['status'],'redirect_not_authorized')
++
++    def test_request_identity_mismatch(self):
++        self.payload['lighthouseResult']['requestedUrl']='https://example.invalid/other'
++        self.assertEqual(self.read()['status'],'identity_mismatch')
++
++    def test_stop_403_429_no_retry_persistent(self):
++        for status,http in [('forbidden_stop',403),('quota_stop',429)]:
++            self.transport.side_effect=providers.Failure(status,http)
++            self.assertEqual(self.read()['status'],status)
++            self.assertEqual(self.read()['status'],'provider_stopped')
++            self.service.policy.stop_path('psi').unlink() # operator fixture cleanup only
++        self.assertEqual(self.transport.call_count,2)
++
++    def test_bounded_retry_counts_budget(self):
++        self.transport.side_effect=[providers.Failure('http_error',503),self.payload]
++        r=self.read();self.assertEqual(r['status'],'observed');self.assertEqual(r['network_attempts'],2)
++        self.assertEqual(json.loads((self.service.root/'budget-psi.json').read_text())['count'],2)
++
++    def test_daily_and_run_budget(self):
++        self.project.data['google']['performance']['daily_request_limit']=1
++        self.read();self.assertEqual(self.read(device='desktop')['status'],'daily_budget_exhausted')
++        self.assertEqual(self.transport.call_count,1)
++        other=Service(self.project,transport=self.transport,max_calls=1)
++        other.attempts=1;self.assertEqual(other.read('crux',authorized=True)['status'],'run_budget_exhausted')
++
++    def test_cache_ttl_and_no_secret(self):
++        self.assertFalse(self.read()['cache_hit']);self.assertTrue(self.read()['cache_hit'])
++        self.assertEqual(self.transport.call_count,1)
++        self.service.clock=lambda:9999999999
++        self.assertFalse(self.read()['cache_hit']);self.assertEqual(self.transport.call_count,2)
++        self.assertNotIn('fixture-secret', ''.join(p.read_text() for p in self.service.root.glob('*.json')))
++
++    def test_cache_invalidates_configuration(self):
++        self.read();self.project.data['google']['performance']['timeout_seconds']=60
++        self.assertFalse(self.read()['cache_hit']);self.assertEqual(self.transport.call_count,2)
++
++    def test_cache_unsafe_file_rejected(self):
++        self.read()
++        path=next(p for p in self.service.root.glob('*.json') if not p.name.startswith('budget'))
++        path.chmod(0o644)
++        with self.assertRaises(IpanemaError):self.read()
++
++    def test_cache_corrupt_is_not_success(self):
++        self.read()
++        path=next(p for p in self.service.root.glob('*.json') if not p.name.startswith('budget'))
++        path.write_text('{')
++        self.assertFalse(self.read()['cache_hit']);self.assertEqual(self.transport.call_count,2)
++
++    def test_crux_real_scope_and_inp(self):
++        self.transport.return_value=self.crux
++        r=self.read('crux');self.assertEqual(r['status'],'observed');self.assertEqual(r['metrics']['inp']['p75'],190)
++        self.assertEqual(r['scope'],'url');self.assertEqual(r['returned_identity']['url'],'https://example.invalid')
++
++    def test_crux_origin_never_url_fallback(self):
++        self.transport.return_value=self.crux
++        self.assertEqual(self.read('crux',scope='origin')['status'],'identity_mismatch')
++        self.crux['record']['key']={'origin':'https://example.invalid','formFactor':'PHONE'}
++        r=self.read('crux',scope='origin');self.assertEqual(r['status'],'observed');self.assertEqual(r['scope'],'origin')
++
++    def test_crux_insufficient_does_not_query_origin(self):
++        self.transport.side_effect=providers.Failure('not_found',404)
++        r=self.read('crux');self.assertEqual(r['status'],'insufficient_field_data');self.assertEqual(self.transport.call_count,1)
++
++    def test_crux_form_factor_and_partial(self):
++        self.transport.return_value=self.crux
++        self.assertEqual(self.read('crux',device='desktop')['status'],'identity_mismatch')
++        del self.crux['record']['metrics']['interaction_to_next_paint']
++        self.assertEqual(self.read('crux')['status'],'partial')
++
++    def test_history_null_and_alignment(self):
++        raw=json.loads((FIXTURES/'crux-history.json').read_text());self.transport.return_value=raw
++        r=self.read('crux_history');self.assertEqual(r['metrics']['lcp']['p75s'],[2400,None])
++        self.assertEqual(r['status'],'partial')
++        raw['record']['metrics']['largest_contentful_paint']['percentilesTimeseries']['p75s']=[1]
++        self.assertEqual(self.read('crux_history',period_count=3)['status'],'invalid_response')
++
++    def test_comparison_identity_unknown_and_cross_source(self):
++        a=self.read();b=copy.deepcopy(a);b['metrics']['lcp']=2000;b['measured_at']='2026-11-10T01:00:00Z'
++        self.assertEqual(model.compare(a,b)['delta_after_minus_before']['lcp'],-400)
++        b['profile']['chrome_version']=None;self.assertEqual(model.compare(a,b)['status'],'not_comparable')
++        b=copy.deepcopy(a);b['source']='lighthouse_local';self.assertEqual(model.compare(a,b)['status'],'not_comparable')
++
++    def test_median_range_and_partial_sample(self):
++        a=self.read();b=copy.deepcopy(a);c=copy.deepcopy(a)
++        b['metrics']['lcp']=6000;c['metrics']['lcp']=3000
++        r=model.summarize([a,b,c]);self.assertEqual(r['metrics']['lcp'],3000)
++        self.assertEqual(r['statistics']['lcp']['max'],6000)
++        b['profile']['cache']=True;self.assertEqual(model.summarize([a,b])['status'],'not_comparable')
++
++    def test_secret_echoes_encoded_and_private_nodes(self):
++        raw={'message':'https://example.invalid/?key=fixture-secret%2B%2F','snippet':'<input value=private>',
++             'url':'https://user:pass@example.invalid/?%2561pi_key=secret'}
++        clean=json.dumps(model.sanitize(raw,('fixture-secret+/',)))
++        for value in ['fixture-secret','private','user:pass','api_key=secret']:self.assertNotIn(value,clean)
++
++    def test_repeated_categories_fixed_endpoint(self):
++        response=Mock();response.read.return_value=b'{}';response.__enter__=Mock(return_value=response);response.__exit__=Mock(return_value=False)
++        opener=Mock();opener.open.return_value=response
++        with patch('ipanema.performance.providers.build_opener',return_value=opener):
++            providers.request('pagespeed',options(self.project,'pagespeed'),'fixture',5)
++        request=opener.open.call_args.args[0]
++        from urllib.parse import parse_qs,urlsplit
++        self.assertEqual(len(parse_qs(urlsplit(request.full_url).query)['category']),4)
++        self.assertTrue(request.full_url.startswith(providers.ENDPOINTS['pagespeed']))
++        self.assertEqual(request.method,'GET')
++
++    def test_history_uses_post_with_exclusive_identity(self):
++        response=Mock();response.read.return_value=b'{}';response.__enter__=Mock(return_value=response);response.__exit__=Mock(return_value=False)
++        opener=Mock();opener.open.return_value=response
++        with patch('ipanema.performance.providers.build_opener',return_value=opener):
++            providers.request('crux_history',options(self.project,'crux_history',scope='origin'),'fixture',5)
++        request=opener.open.call_args.args[0];payload=json.loads(request.data)
++        self.assertEqual(request.method,'POST');self.assertNotIn('url',payload);self.assertEqual(payload['collectionPeriodCount'],25)
++
++    def test_http_error_never_exposes_key(self):
++        from urllib.error import HTTPError
++        opener=Mock();opener.open.side_effect=HTTPError('https://example.invalid/?key=fixture-secret+/',403,'private',{},None)
++        with patch('ipanema.performance.providers.build_opener',return_value=opener):
++            with self.assertRaises(providers.Failure) as caught:providers.request('pagespeed',options(self.project,'pagespeed'),'fixture-secret+/',5)
++        self.assertEqual(str(caught.exception),'forbidden_stop')
++
++
++class PerformanceRobustness(unittest.TestCase):
++    setUp = PerformanceTests.setUp
++    read = PerformanceTests.read
++    def test_budget_corruption_blocks_network(self):
++        path=self.service.root/'budget-psi.json';path.write_text('{');path.chmod(0o600)
++        self.assertEqual(self.read()['status'],'budget_invalid');self.transport.assert_not_called()
++
++    def test_normalization_foreign_origin_denied(self):
++        self.transport.return_value=self.crux
++        self.crux['record']['key']['url']='https://foreign.invalid/'
++        self.crux['urlNormalizationDetails']={'originalUrl':'https://example.invalid','normalizedUrl':'https://foreign.invalid/'}
++        self.assertEqual(self.read('crux')['status'],'identity_mismatch')
++
++    def test_null_field_values_partial_and_bad_period_invalid(self):
++        self.transport.return_value=self.crux
++        self.crux['record']['metrics']['interaction_to_next_paint']['percentiles']['p75']=None
++        self.assertEqual(self.read('crux')['status'],'partial')
++        self.crux['record']['collectionPeriod']['lastDate']['month']=50
++        self.assertEqual(self.read('crux',device='mobile',period_count=20)['status'],'invalid_response')
++
++    def test_concurrent_daily_budget_is_serialized(self):
++        from concurrent.futures import ThreadPoolExecutor
++        self.project.data['google']['performance']['daily_request_limit']=1
++        def read(device):
++            return Service(self.project,transport=self.transport).read('pagespeed',device=device,authorized=True)['status']
++        with ThreadPoolExecutor(max_workers=2)as pool:statuses=list(pool.map(read,['mobile','desktop']))
++        self.assertEqual(self.transport.call_count,1);self.assertIn('daily_budget_exhausted',statuses)
++
++    def test_non_json_provider_response_is_not_success(self):
++        response=Mock();response.read.return_value=b'{';response.__enter__=Mock(return_value=response);response.__exit__=Mock(return_value=False)
++        opener=Mock();opener.open.return_value=response
++        with patch('ipanema.performance.providers.build_opener',return_value=opener):
++            with self.assertRaises(providers.Failure)as error:providers.request('pagespeed',options(self.project,'pagespeed'),'fixture',5)
++        self.assertEqual(error.exception.status,'invalid_response')
++
++    def test_future_cache_rejected(self):
++        self.read();self.service.clock=lambda:0
++        self.assertFalse(self.read()['cache_hit']);self.assertEqual(self.transport.call_count,2)
++
++    def test_missing_versions_prevent_aggregation(self):
++        a=self.read();a['profile']['chrome_version']=None
++        self.assertEqual(model.summarize([a,a])['status'],'not_comparable')
++
++    def test_root_slash_normalization(self):
++        self.payload['lighthouseResult']['requestedUrl']='https://example.invalid/'
++        self.assertEqual(self.read()['status'],'observed')
++
++    def test_refresh_consumes_budget_and_cache_is_not_new_measurement(self):
++        a=self.read();b=self.read()
++        self.assertEqual(model.compare(a,b)['status'],'not_comparable')
++        self.assertFalse(self.read(refresh=True)['cache_hit']);self.assertEqual(self.transport.call_count,2)
++
++    def test_reduced_chrome_user_agent_blocks_comparison(self):
++        self.payload['lighthouseResult']['environment']['hostUserAgent']='Chrome/130.0.0.0'
++        a=self.read();self.assertEqual(a['status'],'observed');self.assertIsNone(a['profile']['chrome_version'])
++        self.assertEqual(model.compare(a,a)['status'],'not_comparable')
++
++    def test_local_incomplete_response_keeps_audit_available(self):
++        from ipanema.performance.service import local
++        def child(argv, **kwargs):
++            job=Path(argv[-1]);folder=job.parent/'browser';folder.mkdir()
++            (folder/'samples.json').write_text(json.dumps([{'requestedUrl':'https://example.invalid'}]))
++            return Mock(returncode=0)
++        with patch('subprocess.run',side_effect=child):
++            result=local(self.project,authorized=True)
++        self.assertEqual(result['status'],'local_incomplete_response')
++
++    def test_missing_local_permission_precedes_node(self):
++        from ipanema.performance.service import local
++        with patch('subprocess.run')as call:
++            with self.assertRaises(IpanemaError):local(self.project,authorized=False)
++        call.assert_not_called()
++
++if __name__=='__main__':unittest.main()
+--- /dev/null
++++ b/tests/unit/test_performance_js.py
+@@ -0,0 +1,19 @@
++"""Verificación Node de proyecciones nuevas, sin navegador ni red."""
++import json
++import subprocess
++import unittest
++from tests.support import ROOT
++
++
++class LighthouseProjection(unittest.TestCase):
++    def test_safe_projection_reuses_diagnostics_without_private_html(self):
++        script="""
++import {safeLighthouseReport,lighthouseEvidence} from './tools/performance_evidence.mjs';
++const lhr={audits:{'network-requests':{score:1,details:{items:[{url:'https://user:pass@example.invalid/?%2561pi_key=hidden',snippet:'private-html'}]}}},runWarnings:['See https://example.invalid/?token=hidden']};
++console.log(JSON.stringify({report:safeLighthouseReport(lhr),diagnostics:lighthouseEvidence(lhr)}));
++"""
++        result=subprocess.run(['node','--input-type=module','-e',script],cwd=ROOT,capture_output=True,text=True,timeout=10)
++        self.assertEqual(result.returncode,0,result.stderr)
++        for value in ('private-html','user:pass','hidden'):self.assertNotIn(value,result.stdout)
++        report=json.loads(result.stdout);self.assertIn('network-requests',report['report']['audits'])
++        self.assertIsNone(report['diagnostics']['field_inp'])
+--- /dev/null
++++ b/tests/integration/test_performance_cli.py
+@@ -0,0 +1,81 @@
++"""CLI y MCP reales sobre pipes; proveedores sin credenciales/red, fixtures aparte."""
++import json
++import os
++from pathlib import Path
++import shutil
++import subprocess
++import sys
++import tempfile
++import unittest
++from unittest.mock import Mock
++from tests.support import ROOT, make_project
++from ipanema.core import Project, IpanemaError
++from ipanema.access.gateway import Gateway
++from ipanema.access.policy import Policy
++from ipanema.access.mcp import StdioClient
++from ipanema.performance.service import Service
++
++
++class PerformanceCLI(unittest.TestCase):
++    def setUp(self):
++        self.tmp=tempfile.TemporaryDirectory(prefix='performance relocated ');self.addCleanup(self.tmp.cleanup)
++        self.root=make_project(Path(self.tmp.name)/'repo con espacios',theme=False)
++        shutil.copytree(ROOT/'tools',self.root/'tools',ignore=shutil.ignore_patterns('__pycache__'))
++        self.env={k:v for k,v in os.environ.items()if not k.startswith('IPANEMA_')}
++
++    def cli(self,*args):
++        return subprocess.run([sys.executable,str(self.root/'tools/ia.py'),*args],cwd=self.tmp.name,env=self.env,capture_output=True,text=True,timeout=15)
++
++    def test_relocated_and_no_theme_required(self):
++        result=self.cli('performance','doctor')
++        self.assertEqual(result.returncode,0,result.stderr)
++        self.assertFalse(json.loads(result.stdout)['network_tested'])
++
++    def test_network_permission_and_missing_keys(self):
++        for device in ('mobile','desktop'):
++            denied=self.cli('performance','pagespeed','--device',device)
++            self.assertEqual(denied.returncode,2)
++            allowed=self.cli('performance','pagespeed','--device',device,'--allow-network')
++            report=json.loads(allowed.stdout);r=report['sources']['pagespeed']
++            self.assertEqual(r['status'],'credentials_unavailable');self.assertEqual(r['network_attempts'],0)
++            self.assertFalse(report['validation']['external_request_attempted'])
++
++    def test_crux_not_anonymous(self):
++        for command in ('crux','history'):
++            report=json.loads(self.cli('performance',command,'--allow-network').stdout)
++            self.assertEqual(next(iter(report['sources'].values()))['status'],'credentials_unavailable')
++
++    def test_foreign_url_denied(self):
++        result=self.cli('performance','pagespeed','--url','https://foreign.invalid','--allow-network')
++        self.assertEqual(result.returncode,2);self.assertNotIn('sources',json.loads(result.stderr))
++
++    def test_real_mcp_transport_missing_keys_and_no_write_tools(self):
++        project=Project(root=self.root)
++        for agent in ('claude','codex'):
++            grant=Policy(project).issue(agent,'perf-read',['psi.read','crux.read'],allow_network=True,max_calls=5)
++            client=StdioClient([sys.executable,str(self.root/'tools/access_mcp.py'),'--project','sample','--grant',grant['id']],cwd=self.root,env=self.env)
++            try:
++                tools=client.tools();self.assertEqual(len(tools),3)
++                response=client.request('tools/call',{'name':'psi_run_pagespeed','arguments':{'request':{'device':'mobile'}}})
++                result=json.loads(response['content'][0]['text'])
++                self.assertEqual(result['status'],'credentials_unavailable')
++                self.assertTrue(response['isError'])
++                denied=client.request('tools/call',{'name':'publish','arguments':{}})
++                self.assertTrue(denied['isError'])
++            finally:client.close()
++
++    def test_gateway_shares_service_and_counts_cache_as_task_call(self):
++        project=Project(root=self.root)
++        transport=Mock(return_value=json.loads((ROOT/'tests/fixtures/performance/pagespeed-mobile.json').read_text()))
++        # Offline fixture env is explicitly installed and removed; no real API request.
++        from unittest.mock import patch
++        with patch.dict(os.environ,{'IPANEMA_SAMPLE_PSI_KEY':'synthetic'}):
++            project.data['google']={'performance':{'pagespeed_key_env':'IPANEMA_SAMPLE_PSI_KEY'}}
++            grant=Policy(project).issue('codex','perf-fixture',['psi.read'],allow_network=True,max_calls=3)
++            gateway=Gateway(project,grant['id'],performance_factory=lambda p:Service(p,transport=transport))
++            a=gateway.call('psi_run_pagespeed',{'request':{}})
++            b=gateway.call('psi_run_pagespeed',{'request':{}})
++            self.assertEqual(a['status'],'observed');self.assertTrue(b['cache_hit'])
++            self.assertEqual(transport.call_count,1);self.assertEqual(Policy(project).load(grant['id'])['calls'],2)
++            with self.assertRaises(IpanemaError):gateway.call('crux_query_record',{'request':{}})
++            with self.assertRaises(IpanemaError):Policy(project).issue('commandcode','disabled',['psi.read'],allow_network=True)
+--- /dev/null
++++ b/tests/fixtures/performance/crux-mobile.json
+@@ -0,0 +1,87 @@
++{
++  "_fixture": "SIMULATED; not DaMar field data",
++  "record": {
++    "key": {
++      "url": "https://example.invalid",
++      "formFactor": "PHONE"
++    },
++    "collectionPeriod": {
++      "firstDate": {
++        "year": 2026,
++        "month": 10,
++        "day": 10
++      },
++      "lastDate": {
++        "year": 2026,
++        "month": 11,
++        "day": 6
++      }
++    },
++    "metrics": {
++      "largest_contentful_paint": {
++        "percentiles": {
++          "p75": 2400
++        },
++        "histogram": [
++          {
++            "start": 0,
++            "end": 2500,
++            "density": 0.8
++          },
++          {
++            "start": 2500,
++            "density": 0.2
++          }
++        ]
++      },
++      "interaction_to_next_paint": {
++        "percentiles": {
++          "p75": 190
++        },
++        "histogram": [
++          {
++            "start": 0,
++            "end": 200,
++            "density": 0.8
++          },
++          {
++            "start": 200,
++            "density": 0.2
++          }
++        ]
++      },
++      "cumulative_layout_shift": {
++        "percentiles": {
++          "p75": "0.04"
++        },
++        "histogram": [
++          {
++            "start": 0,
++            "end": 0.1,
++            "density": 0.8
++          },
++          {
++            "start": 0.1,
++            "density": 0.2
++          }
++        ]
++      },
++      "first_contentful_paint": {
++        "percentiles": {
++          "p75": 1400
++        },
++        "histogram": [
++          {
++            "start": 0,
++            "end": 1800,
++            "density": 0.8
++          },
++          {
++            "start": 1800,
++            "density": 0.2
++          }
++        ]
++      }
++    }
++  }
++}--- /dev/null
++++ b/tests/fixtures/performance/crux-history.json
+@@ -0,0 +1,55 @@
++{
++  "_fixture": "SIMULATED; not DaMar field data",
++  "record": {
++    "key": {
++      "url": "https://example.invalid",
++      "formFactor": "PHONE"
++    },
++    "metrics": {
++      "largest_contentful_paint": {
++        "percentilesTimeseries": {
++          "p75s": [
++            2400,
++            null
++          ]
++        },
++        "histogramTimeseries": [
++          {
++            "start": 0,
++            "end": 2500,
++            "densities": [
++              0.8,
++              "NaN"
++            ]
++          }
++        ]
++      }
++    },
++    "collectionPeriods": [
++      {
++        "firstDate": {
++          "year": 2026,
++          "month": 10,
++          "day": 10
++        },
++        "lastDate": {
++          "year": 2026,
++          "month": 11,
++          "day": 6
++        }
++      },
++      {
++        "firstDate": {
++          "year": 2026,
++          "month": 10,
++          "day": 17
++        },
++        "lastDate": {
++          "year": 2026,
++          "month": 11,
++          "day": 13
++        }
++      }
++    ]
++  }
++}--- /dev/null
++++ b/tests/fixtures/performance/pagespeed-desktop.json
+@@ -0,0 +1,66 @@
++{
++  "_fixture": "SIMULATED; not DaMar measurements",
++  "lighthouseResult": {
++    "requestedUrl": "https://example.invalid",
++    "finalUrl": "https://example.invalid",
++    "fetchTime": "2026-11-10T00:00:00Z",
++    "lighthouseVersion": "13.0.0",
++    "environment": {
++      "hostUserAgent": "Chrome/130.1.2.3"
++    },
++    "configSettings": {
++      "screenEmulation": {
++        "mobile": false,
++        "width": 1440
++      },
++      "throttlingMethod": "simulate",
++      "throttling": {
++        "rttMs": 150,
++        "cpuSlowdownMultiplier": 4
++      },
++      "disableStorageReset": false
++    },
++    "categories": {
++      "performance": {
++        "score": 0.9
++      },
++      "accessibility": {
++        "score": 0.9
++      },
++      "best-practices": {
++        "score": 0.9
++      },
++      "seo": {
++        "score": 0.9
++      }
++    },
++    "audits": {
++      "largest-contentful-paint": {
++        "numericValue": 2400,
++        "score": 0.9,
++        "title": "Synthetic observation"
++      },
++      "first-contentful-paint": {
++        "numericValue": 1400,
++        "score": 0.9,
++        "title": "Synthetic observation"
++      },
++      "cumulative-layout-shift": {
++        "numericValue": 0.04,
++        "score": 0.9,
++        "title": "Synthetic observation"
++      },
++      "total-blocking-time": {
++        "numericValue": 120,
++        "score": 0.9,
++        "title": "Synthetic observation"
++      },
++      "speed-index": {
++        "numericValue": 2500,
++        "score": 0.9,
++        "title": "Synthetic observation"
++      }
++    },
++    "runWarnings": []
++  }
++}--- /dev/null
++++ b/tests/fixtures/performance/pagespeed-mobile.json
+@@ -0,0 +1,66 @@
++{
++  "_fixture": "SIMULATED; not DaMar measurements",
++  "lighthouseResult": {
++    "requestedUrl": "https://example.invalid",
++    "finalUrl": "https://example.invalid",
++    "fetchTime": "2026-11-10T00:00:00Z",
++    "lighthouseVersion": "13.0.0",
++    "environment": {
++      "hostUserAgent": "Chrome/130.1.2.3"
++    },
++    "configSettings": {
++      "screenEmulation": {
++        "mobile": true,
++        "width": 390
++      },
++      "throttlingMethod": "simulate",
++      "throttling": {
++        "rttMs": 150,
++        "cpuSlowdownMultiplier": 4
++      },
++      "disableStorageReset": false
++    },
++    "categories": {
++      "performance": {
++        "score": 0.9
++      },
++      "accessibility": {
++        "score": 0.9
++      },
++      "best-practices": {
++        "score": 0.9
++      },
++      "seo": {
++        "score": 0.9
++      }
++    },
++    "audits": {
++      "largest-contentful-paint": {
++        "numericValue": 2400,
++        "score": 0.9,
++        "title": "Synthetic observation"
++      },
++      "first-contentful-paint": {
++        "numericValue": 1400,
++        "score": 0.9,
++        "title": "Synthetic observation"
++      },
++      "cumulative-layout-shift": {
++        "numericValue": 0.04,
++        "score": 0.9,
++        "title": "Synthetic observation"
++      },
++      "total-blocking-time": {
++        "numericValue": 120,
++        "score": 0.9,
++        "title": "Synthetic observation"
++      },
++      "speed-index": {
++        "numericValue": 2500,
++        "score": 0.9,
++        "title": "Synthetic observation"
++      }
++    },
++    "runWarnings": []
++  }
++}--- /dev/null
++++ b/reports/performance/ADR-001.md
+@@ -0,0 +1,41 @@
++# ADR-PERF-001 — fuentes de rendimiento independientes
++
++Fecha: 2026-11-10. Proyecto: herramientas IA-Ipanema. Estado: **approved_with_conditions para implementar localmente; verificación integrada pendiente**. No autoriza temas, consultas reales ni producción.
++
++## Investigación y contraste reales
++
++Registro: `reports/runs/ipanema/20261110T180852-performance-integration-council-c15673d7/summary.json` (local ignorado). Seis invocaciones reales: dos propuestas independientes, dos contrastes y dos defensas. Claude `claude-sonnet-5-5`, Codex `gpt-6.1-sol`, esfuerzo medium. Ambos recomendaron transporte dedicado de clave API y servicio común. Sus respuestas permanecieron `changes_requested`: describen requisitos de implementación todavía sin probar; no se presentan como aprobación funcional.
++
++Claude objetó filtración de claves, permisos ausentes, comparación incompleta y evidencia Lighthouse sin sanear. Codex objetó despacho CLI/MCP ausente, persistencia Lighthouse sobrescribible y garantías superiores a la evidencia. Claude retiró extender OfficialREST OAuth. Ambos respondieron las seis preguntas cruzadas y corrigieron sus propuestas.
++
++## Decisión acotada del controlador
++
++Implementar transporte específico con endpoints oficiales fijos; conservar OAuth y DevTools sin reemplazo. Un servicio compartido CLI/MCP valida origen, permiso y parada antes de caché o credenciales. Claves únicamente por referencias de entorno de `google.performance` en configuración privada de proyecto; nunca se entregan al worker. Reservar presupuesto antes de cada intento HTTP. No seguir redirecciones autenticadas. 403/429 producen parada persistente sin reintento. Caché privada por proyecto y solicitud con vencimiento. No guardar URL autenticada, cuerpos de error ni LHR privado completo.
++
++Implementar PageSpeed primero, después CrUX actual e histórico. URL/origen requieren selección explícita y validación de identidad devuelta. No usar el campo CrUX de PSI como dependencia. Preservar métricas, histogramas, periodos y nulos. Datos parciales permanecen parciales.
++
++Reutilizar el runner Lighthouse actual mediante modo de trabajo parametrizado; conservar su interfaz histórica. Evidencias nuevas inmutables y saneadas, muestras individuales, mediana y rango. No crear un segundo motor. Comparación específica por fuente, URL efectiva, dispositivo, categorías, locale, versiones Chrome/Lighthouse y condiciones CPU/red/caché; valores desconocidos bloquean comparación. CrUX conserva periodos agregados y nunca acredita causalidad inmediata.
++
++## Condiciones que bloquean aprobación final
++
++Las objeciones de implementación se convierten en gates verificables, no en afirmaciones resueltas: tests de claves codificadas y excepciones, permiso CLI/MCP, identidad CrUX, cuotas/paradas, caché, comparación incompatible, repetición Lighthouse, QA y revisión independiente Claude del diff. Si fallan, corregir antes de aprobar. Consultas reales quedan bloqueadas hasta claves y permiso explícito. Ninguna métrica de fixtures se atribuye a DaMar.
++
++## Alternativas
++
++Extender OfficialREST: descartada por contrato OAuth distinto. Herramientas separadas por cliente: descartadas por duplicar controles. Quitar Lighthouse: descartada por perder diagnóstico local. Otro runner Lighthouse: evitado extendiendo el actual y manteniendo consumidores.
++
++## Impactos y reversión
++
++No cambia SEO, diseño, comercio ni archivos de tiendas. Aporta evidencia, no mejoras de velocidad demostradas. Riesgos: contratos Google cambiantes, cuotas externas y falta de cobertura CrUX. Reversión: retirar únicamente el diff propio de módulos/registro, conservando historial. Resultados y QA: [README](README.md).
++
++Fuentes oficiales verificadas: [PSI](https://developers.google.com/speed/docs/insights/rest/v5/pagespeedapi/runpagespeed), [CrUX](https://developer.chrome.com/docs/crux/api), [History](https://developer.chrome.com/docs/crux/history-api). Presupuestos locales son controles internos, no cuotas comerciales de Google.
++
++## Cierre de gates locales
++
++2026-11-10: QA final **278 unitarias + 40 de integración**, todas aprobadas. Incluye **46 pruebas específicas** nuevas de rendimiento. Chrome real sobre fixture loopback: mobile 2 muestras, desktop 1; Lighthouse 13.6.0, Chrome 155.0.8059.84. Sin solicitudes remotas en esa prueba.
++
++Claude pidió correcciones: ruta personal en evidencia pública, guardas Lighthouse antes de persistir, semántica de UA reducido y barra final PSI. Se corrigieron y probaron. Una segunda respuesta falló por JSON inválido: no fue aprobación; proceso terminado, recuperación única con schema nativo y contexto reducido, sin cambiar el modelo ni el motor. La revisión recuperada **approve** cubre implementación local probada, no conectividad Google. Hashes de los archivos revisados coinciden con el código actual. Recibos y propuestas completas: [verification.json](verification.json).
++
++Además, `--refresh` mantiene cuotas/permisos y permite observaciones nuevas. El comparador bloquea reutilizar la misma fecha desde caché como antes/después. Los UA reducidos de PSI pueden impedir comparación; la herramienta lo declara en vez de inventar un build.
++
++Estado final: **implementación local verificada; integración contra Google pendiente de credenciales**. Mantener pendiente conectividad PSI mobile/desktop, cobertura CrUX actual/History URL/origen y comparación real de perfiles. No se modificaron temas ni producción.
+--- /dev/null
++++ b/reports/performance/README.md
+@@ -0,0 +1,108 @@
++# Performance Intelligence — uso y verificación
++
++Integra PageSpeed primero y CrUX actual/History después, conservando el motor Lighthouse y Chrome DevTools MCP. No instala dependencias, conecta cuentas ni modifica tiendas. [Decisión y objeciones reales](ADR-001.md). Estado: implementación local; QA y revisión se registran en [verification.json](verification.json). Conectividad Google no comprobada sin claves.
++
++## Fuentes y alcance
++
++| Fuente | Observación | Condiciones y límites |
++|---|---|---|
++| PageSpeed API | Lighthouse remoto: categorías 0–1, LCP/FCP/TBT/Speed Index en ms, CLS sin unidad; auditorías, recursos, avisos y errores cuando existen | Entorno Google; no equivale al navegador local ni mide un diff local consultando producción |
++| Lighthouse local | Motor existente, modo `--job`; Chrome/Lighthouse, viewport, CPU/red simulada, caché, locale, fecha y muestras | Muestras individuales, mediana, mínimo/máximo; no INP de usuarios reales |
++| CrUX API | LCP/INP/CLS/FCP p75, distribuciones y periodo, por URL u origen y PHONE/DESKTOP | Puede faltar cobertura; `insufficient_field_data`. Sin fallback implícito a origen |
++| CrUX History | Series semanales de periodos agregados, incluidos nulos y bins | Periodos solapados; no atribuir efectos inmediatos a un despliegue |
++| DevTools MCP existente | DOM, red, trazas y diagnóstico de recursos/interacciones | Conserva sus permisos actuales; no se inicia por consultar estas APIs |
++
++Google anuncia que dejará de incluir CrUX en PSI; los datos de campo se consultan directamente. La documentación vigente de History describe 25 periodos predeterminados y hasta 40, con actualización semanal. CrUX declara 150 consultas/minuto por proyecto Cloud, sin cargo; los presupuestos internos de esta herramienta son independientes. PSI: revisar las cuotas efectivas de la API habilitada en Cloud Console; no se comprobó una cuenta ni se estima un coste sin evidencia.
++
++Fuentes verificadas el 2026-11-10: [PSI método](https://developers.google.com/speed/docs/insights/rest/v5/pagespeedapi/runpagespeed), [PSI y retirada de campo](https://developers.google.com/speed/docs/insights/v5/get-started), [CrUX: identidad, límites y coste](https://developer.chrome.com/docs/crux/api), [History: contrato y periodos](https://developer.chrome.com/docs/crux/history-api).
++
++## Configuración privada por tienda
++
++Mantén el registro existente. Edita únicamente el subárbol `google.performance` en `projects/<id>.local.json`, preservando las otras claves del archivo. `.local.json` está ignorado por Git. No escribas claves reales en JSON: solo referencias a variables de entorno.
++
++```json
++{
++  "google": {
++    "performance": {
++      "pagespeed_key_env": "IPANEMA_DAMARBEAUTY_PSI_KEY",
++      "crux_key_env": "IPANEMA_DAMARBEAUTY_CRUX_KEY",
++      "daily_request_limit": 20,
++      "cache_ttl_seconds": 86400,
++      "timeout_seconds": 90,
++      "max_retries": 1
++    }
++  }
++}
++```
++
++Habilita PageSpeed Insights API y Chrome UX Report API en tu proyecto Google Cloud y restringe las claves a las APIs correspondientes. No se reutiliza OAuth de GSC. Para introducirlas en una terminal Bash sin escribir sus valores en el historial:
++
++```bash
++read -rs -p 'Clave PSI: ' IPANEMA_DAMARBEAUTY_PSI_KEY
++export IPANEMA_DAMARBEAUTY_PSI_KEY
++read -rs -p 'Clave CrUX: ' IPANEMA_DAMARBEAUTY_CRUX_KEY
++export IPANEMA_DAMARBEAUTY_CRUX_KEY
++python3 tools/ia.py --project damarbeauty performance doctor
++```
++
++Las variables deben estar en el proceso controlador. No las pases al worker, a argumentos CLI ni a configuraciones MCP compartidas. `doctor` informa presencia, sin revelar valores ni consultar Google. Desconexión: `unset` de esas variables y revocación de grants existentes; no modifica cuentas Google.
++
++## Comandos
++
++El acceso requiere `--allow-network`, URL HTTPS del origen exacto registrado y ausencia de parámetros sensibles. No se autoriza un dominio alternativo por redirección. Las consultas de URL con claves, tokens o rutas privadas se rechazan antes de la red. No hay consultas masivas ni acceso anónimo automático. `--refresh` solicita una observación nueva sin reutilizar caché; conserva permisos, paradas y presupuestos. Úsalo en mediciones PageSpeed antes/después.
++
++```bash
++python3 tools/ia.py --project damarbeauty performance pagespeed --device mobile --allow-network
++python3 tools/ia.py --project damarbeauty performance pagespeed --device desktop --allow-network
++python3 tools/ia.py --project damarbeauty performance pagespeed --category performance --category accessibility --locale es --allow-network
++python3 tools/ia.py --project damarbeauty performance crux --device mobile --scope url --allow-network
++python3 tools/ia.py --project damarbeauty performance crux --device desktop --scope origin --allow-network
++python3 tools/ia.py --project damarbeauty performance history --period-count 25 --allow-network
++python3 tools/ia.py --project damarbeauty performance local --device mobile --runs 3 --allow-network
++python3 tools/ia.py --project damarbeauty performance audit --all-sources --device mobile --runs 3 --allow-network
++```
++
++`audit` obtiene PSI + CrUX actual + Lighthouse local, una URL y un dispositivo. History se añade solo con `--include-history`. `--runs` afecta únicamente Lighthouse local (1–5 muestras). PageSpeed envía cada `category` como parámetro repetido. Todos los resultados conservan fuente, fecha, parámetros, ausencias y errores. Código de salida 2 indica parcial/bloqueado, no éxito completo. `audit` detiene la secuencia ante 403/429 o parada persistente.
++
++Los trabajos Lighthouse usan CPU x4/red RTT 150 ms/1638.4 Kbps en mobile y CPU x1/RTT 40 ms/10240 Kbps en desktop, simulación Lighthouse, almacenamiento reiniciado por muestra y versiones reales en el resultado. El viewport efectivo queda en `configSettings.screenEmulation`. `--runs` genera muestras individuales saneadas y un agregado; nunca promedia perfiles diferentes. La CLI histórica `lighthouse_audit.mjs URL prefijo` sigue disponible; el servicio nuevo usa `--job` para no depender de sus destinos históricos ni de su LHR completo. Pruebas nuevas no guardan HTML de nodos, cabeceras ni sesiones.
++
++## Claude y Codex: acceso al mismo servicio
++
++Se añadieron `psi.read` y `crux.read` al **gateway existente**, no otro MCP. El operador emite el grant para el proyecto/tarea/agente y obtiene la configuración MCP con los comandos ya existentes:
++
++```bash
++python3 tools/ia.py --project damarbeauty access grant --agent claude --task performance-read --capability psi.read --capability crux.read --allow-network --max-calls 6
++python3 tools/ia.py --project damarbeauty access config --grant ID_DEL_PERMISO
++```
++
++Repite para Codex con un grant propio. Herramientas: `psi_run_pagespeed`, `crux_query_record`, `crux_query_history`; argumentos `{"request":{"device":"mobile","scope":"url"}}`. Los campos opcionales son `url`, `categories`, `locale`, `period_count`. Las claves se resuelven dentro del controlador. El gateway valida la capacidad y contabiliza incluso hits de caché; cada intento HTTP consume además el presupuesto persistente. CommandCode permanece bloqueado por la política dual existente. Dar acceso no autoriza publicar ni cambiar el tema.
++
++## Persistencia y fallos
++
++Caché y presupuesto: `.local/performance/<proyecto>/`, carpetas 0700/archivos 0600, escritura atómica, solicitud + configuración + proyecto vinculados. TTL predeterminado 24h; configuración modificada invalida la caché. Límite interno predeterminado: 20 intentos HTTP/día UTC/proveedor y 4 por ejecución (`--max-calls`, máximo 10). Cada reintento consume presupuesto. Una respuesta 403/429 produce parada persistente en el almacén `Policy` existente, sin reintento ni cambiar de dispositivo para evadirla. El operador debe diagnosticar cuota/permisos antes de retirar manualmente su archivo de parada; los agentes no tienen herramienta de desbloqueo. Las consultas de History consumen el mismo presupuesto CrUX.
++
++Solo red/500/502/503/504 permiten reintento, máximo 2, espera exponencial acotada. Sin redirecciones autenticadas. Se acotan tiempo y tamaño de respuesta (10 MB). Los errores no contienen URLs autenticadas ni cuerpos privados. Los hallazgos externos son datos no confiables, nunca instrucciones.
++
++Evidencia nueva en `reports/runs/<proyecto>/<ejecución>/performance.json`. Se conserva una proyección saneada de lo observado y hash de la respuesta, además de normalización; nunca se sustituyen datos faltantes con valores de IA. El historial original saneado conserva `NaN`/nulos; su proyección numérica representa ausencias con `null`. Los archivos candidatos quedan vacíos hasta inspeccionar el tema. El servicio no genera parches ni registra recomendaciones como soluciones verificadas.
++
++## Comparar y decidir
++
++```bash
++python3 tools/ia.py --project damarbeauty performance compare ANTES.json DESPUES.json --source pagespeed
++python3 tools/ia.py --project damarbeauty performance compare ANTES.json DESPUES.json --source lighthouse_local
++```
++
++Exige fuente, URL solicitada/final, dispositivo, categorías, locale, Chrome/Lighthouse, viewport, CPU/red, caché, política de red y cantidad de muestras iguales y conocidas. Un dato desconocido produce `not_comparable`, incluso si falta en ambos. Los user agents reducidos como `Chrome/130.0.0.0` no revelan una versión completa: PSI puede quedar no comparable por ese motivo. Se conserva el user agent observado; no se inventa el build. Lighthouse local registra `browser.version()` real. La misma observación fechada repetida desde caché tampoco cuenta como comparación nueva. `compared` solo describe deltas; `regressions` marca aumentos, no certifica causalidad ni aprobación de QA. CrUX se consulta aparte con sus periodos: no se mezcla con laboratorio ni se interpreta como comprobación inmediata de un cambio.
++
++Flujo recomendado: preparar un paquete factual acotado de las fuentes disponibles y trazas/recursos → propuestas independientes Claude/Codex → resolver hipótesis con pruebas → ADR → cambio local autorizado → QA y revisión independiente → comparación con perfil equivalente. LCP requiere elemento y tiempos observados; CLS exige desplazamientos concretos; INP exige campo y diagnóstico de interacciones; TBT no lo reemplaza. Scores SEO/accessibility no prueban indexación ni certificación AA.
++
++## Ejemplos y QA
++
++[Mobile](example-mobile.json) y [desktop](example-desktop.json) son **fixtures sintéticos de example.invalid**, no mediciones de DaMar ni consultas Google. [verification.json](verification.json) distingue tests offline, navegador real sobre fixture local, consejo real y consultas bloqueadas. Reproducción:
++
++```bash
++python3 -m unittest tests.unit.test_performance tests.unit.test_performance_js tests.integration.test_performance_cli
++python3 tools/ia.py --project ipanema qa --suite quick
++```
++
++Pendiente hasta claves y autorización: conectividad real PSI mobile/desktop, cobertura CrUX URL/origen, cuota de esa cuenta y comparación real de la misma tienda. Sin esos requisitos, la integración no se presenta como validada contra servicios Google. La validación de redirecciones del trabajo Lighthouse ocurre antes de persistir sus muestras y el navegador protege el origen durante la navegación; respuestas incompletas/fallidas locales quedan como estado y conservan los resultados PSI/CrUX del mismo informe. No se optimizó DaMar en esta tarea.
+--- /dev/null
++++ b/reports/performance/example-mobile.json
+@@ -0,0 +1,475 @@
++{
++  "kind": "performance-intelligence-example",
++  "simulated": true,
++  "project": "synthetic-fixture",
++  "url": "https://example.invalid",
++  "device": "mobile",
++  "sources": {
++    "pagespeed": {
++      "source": "pagespeed",
++      "measurement": "laboratory",
++      "status": "observed",
++      "measured_at": "2026-11-10T00:00:00Z",
++      "metrics": {
++        "lcp": 2400.0,
++        "fcp": 1400.0,
++        "cls": 0.04,
++        "tbt": 120.0,
++        "speed_index": 2500.0
++      },
++      "units": {
++        "lcp": "ms",
++        "fcp": "ms",
++        "cls": "unitless",
++        "tbt": "ms",
++        "speed_index": "ms"
++      },
++      "scores": {
++        "accessibility": 0.9,
++        "best-practices": 0.9,
++        "performance": 0.9,
++        "seo": 0.9
++      },
++      "profile": {
++        "source": "pagespeed",
++        "url": "https://example.invalid",
++        "final_url": "https://example.invalid",
++        "device": "mobile",
++        "categories": [
++          "accessibility",
++          "best-practices",
++          "performance",
++          "seo"
++        ],
++        "locale": "es",
++        "lighthouse_version": "13.0.0",
++        "chrome_version": "130.1.2.3",
++        "screen": {
++          "mobile": true,
++          "width": 390
++        },
++        "throttling_method": "simulate",
++        "throttling": {
++          "rttMs": 150,
++          "cpuSlowdownMultiplier": 4
++        },
++        "cache": false,
++        "network_policy": "google-managed"
++      },
++      "missing": [],
++      "observations": {
++        "requestedUrl": "https://example.invalid",
++        "finalUrl": "https://example.invalid",
++        "finalDisplayedUrl": null,
++        "fetchTime": "2026-11-10T00:00:00Z",
++        "lighthouseVersion": "13.0.0",
++        "configSettings": {
++          "screenEmulation": {
++            "mobile": true,
++            "width": 390
++          },
++          "throttlingMethod": "simulate",
++          "throttling": {
++            "rttMs": 150,
++            "cpuSlowdownMultiplier": 4
++          },
++          "disableStorageReset": false
++        },
++        "environment": {
++          "hostUserAgent": "Chrome/130.1.2.3"
++        },
++        "categories": {
++          "performance": {
++            "score": 0.9
++          },
++          "accessibility": {
++            "score": 0.9
++          },
++          "best-practices": {
++            "score": 0.9
++          },
++          "seo": {
++            "score": 0.9
++          }
++        },
++        "runWarnings": [],
++        "runtimeError": null,
++        "audits": {
++          "largest-contentful-paint": {
++            "title": "Synthetic observation",
++            "score": 0.9,
++            "numericValue": 2400
++          },
++          "first-contentful-paint": {
++            "title": "Synthetic observation",
++            "score": 0.9,
++            "numericValue": 1400
++          },
++          "cumulative-layout-shift": {
++            "title": "Synthetic observation",
++            "score": 0.9,
++            "numericValue": 0.04
++          },
++          "total-blocking-time": {
++            "title": "Synthetic observation",
++            "score": 0.9,
++            "numericValue": 120
++          },
++          "speed-index": {
++            "title": "Synthetic observation",
++            "score": 0.9,
++            "numericValue": 2500
++          }
++        }
++      },
++      "warnings": [],
++      "runtime_error": null,
++      "field_inp": null,
++      "limitations": [
++        "Laboratorio; TBT no mide INP. Scores no certifican SEO/WCAG.",
++        "PSI no mide cambios locales sin una URL publicada accesible."
++      ]
++    },
++    "crux": {
++      "source": "crux",
++      "status": "observed",
++      "measurement": "field",
++      "scope": "url",
++      "requested_identity": {
++        "url": "https://example.invalid",
++        "formFactor": "PHONE"
++      },
++      "returned_identity": {
++        "url": "https://example.invalid",
++        "formFactor": "PHONE"
++      },
++      "collection_period": {
++        "firstDate": {
++          "year": 2026,
++          "month": 10,
++          "day": 10
++        },
++        "lastDate": {
++          "year": 2026,
++          "month": 11,
++          "day": 6
++        }
++      },
++      "metrics": {
++        "lcp": {
++          "p75": 2400.0,
++          "histogram": [
++            {
++              "start": 0,
++              "end": 2500,
++              "density": 0.8
++            },
++            {
++              "start": 2500,
++              "density": 0.2
++            }
++          ],
++          "unit": "ms"
++        },
++        "inp": {
++          "p75": 190.0,
++          "histogram": [
++            {
++              "start": 0,
++              "end": 200,
++              "density": 0.8
++            },
++            {
++              "start": 200,
++              "density": 0.2
++            }
++          ],
++          "unit": "ms"
++        },
++        "cls": {
++          "p75": 0.04,
++          "histogram": [
++            {
++              "start": 0,
++              "end": 0.1,
++              "density": 0.8
++            },
++            {
++              "start": 0.1,
++              "density": 0.2
++            }
++          ],
++          "unit": "unitless"
++        },
++        "fcp": {
++          "p75": 1400.0,
++          "histogram": [
++            {
++              "start": 0,
++              "end": 1800,
++              "density": 0.8
++            },
++            {
++              "start": 1800,
++              "density": 0.2
++            }
++          ],
++          "unit": "ms"
++        }
++      },
++      "missing": [],
++      "observations": {
++        "_fixture": "SIMULATED; not DaMar field data",
++        "record": {
++          "key": {
++            "url": "https://example.invalid",
++            "formFactor": "PHONE"
++          },
++          "collectionPeriod": {
++            "firstDate": {
++              "year": 2026,
++              "month": 10,
++              "day": 10
++            },
++            "lastDate": {
++              "year": 2026,
++              "month": 11,
++              "day": 6
++            }
++          },
++          "metrics": {
++            "largest_contentful_paint": {
++              "percentiles": {
++                "p75": 2400
++              },
++              "histogram": [
++                {
++                  "start": 0,
++                  "end": 2500,
++                  "density": 0.8
++                },
++                {
++                  "start": 2500,
++                  "density": 0.2
++                }
++              ]
++            },
++            "interaction_to_next_paint": {
++              "percentiles": {
++                "p75": 190
++              },
++              "histogram": [
++                {
++                  "start": 0,
++                  "end": 200,
++                  "density": 0.8
++                },
++                {
++                  "start": 200,
++                  "density": 0.2
++                }
++              ]
++            },
++            "cumulative_layout_shift": {
++              "percentiles": {
++                "p75": "0.04"
++              },
++              "histogram": [
++                {
++                  "start": 0,
++                  "end": 0.1,
++                  "density": 0.8
++                },
++                {
++                  "start": 0.1,
++                  "density": 0.2
++                }
++              ]
++            },
++            "first_contentful_paint": {
++              "percentiles": {
++                "p75": 1400
++              },
++              "histogram": [
++                {
++                  "start": 0,
++                  "end": 1800,
++                  "density": 0.8
++                },
++                {
++                  "start": 1800,
++                  "density": 0.2
++                }
++              ]
++            }
++          }
++        }
++      },
++      "limitations": [
++        "Periodos agregados de usuarios reales; sin causalidad inmediata.",
++        "Origen no representa una URL individual. No hay fallback silencioso."
++      ]
++    },
++    "lighthouse_local": {
++      "source": "lighthouse_local",
++      "status": "not_measured",
++      "reason": "Verificación Chrome real separada, no sustituida por este ejemplo."
++    }
++  },
++  "findings": [
++    {
++      "id": "PERF-largest-contentful-paint",
++      "source": "pagespeed",
++      "url": "https://example.invalid",
++      "device": "mobile",
++      "metric_affected": [
++        "lcp"
++      ],
++      "evidence": {
++        "audit": "largest-contentful-paint",
++        "score": 0.9,
++        "details": null
++      },
++      "cause_state": "hypothesis",
++      "severity": "review_required",
++      "potential_impact": "No cuantificado; comprobar recurso, interacción y consumidores.",
++      "candidate_files": [],
++      "consumers": [],
++      "alternatives": [
++        "Inspeccionar motor/componente nativo y confirmar causa antes de cambiar."
++      ],
++      "risks": [
++        "Regresión fuera del alcance de una auditoría automática."
++      ],
++      "estimated_cost": null,
++      "required_tests": [
++        "Perfil comparable antes/después",
++        "QA funcional, SEO, accesibilidad y revisión independiente"
++      ]
++    },
++    {
++      "id": "PERF-first-contentful-paint",
++      "source": "pagespeed",
++      "url": "https://example.invalid",
++      "device": "mobile",
++      "metric_affected": [
++        "fcp"
++      ],
++      "evidence": {
++        "audit": "first-contentful-paint",
++        "score": 0.9,
++        "details": null
++      },
++      "cause_state": "hypothesis",
++      "severity": "review_required",
++      "potential_impact": "No cuantificado; comprobar recurso, interacción y consumidores.",
++      "candidate_files": [],
++      "consumers": [],
++      "alternatives": [
++        "Inspeccionar motor/componente nativo y confirmar causa antes de cambiar."
++      ],
++      "risks": [
++        "Regresión fuera del alcance de una auditoría automática."
++      ],
++      "estimated_cost": null,
++      "required_tests": [
++        "Perfil comparable antes/después",
++        "QA funcional, SEO, accesibilidad y revisión independiente"
++      ]
++    },
++    {
++      "id": "PERF-cumulative-layout-shift",
++      "source": "pagespeed",
++      "url": "https://example.invalid",
++      "device": "mobile",
++      "metric_affected": [
++        "cls"
++      ],
++      "evidence": {
++        "audit": "cumulative-layout-shift",
++        "score": 0.9,
++        "details": null
++      },
++      "cause_state": "hypothesis",
++      "severity": "review_required",
++      "potential_impact": "No cuantificado; comprobar recurso, interacción y consumidores.",
++      "candidate_files": [],
++      "consumers": [],
++      "alternatives": [
++        "Inspeccionar motor/componente nativo y confirmar causa antes de cambiar."
++      ],
++      "risks": [
++        "Regresión fuera del alcance de una auditoría automática."
++      ],
++      "estimated_cost": null,
++      "required_tests": [
++        "Perfil comparable antes/después",
++        "QA funcional, SEO, accesibilidad y revisión independiente"
++      ]
++    },
++    {
++      "id": "PERF-total-blocking-time",
++      "source": "pagespeed",
++      "url": "https://example.invalid",
++      "device": "mobile",
++      "metric_affected": [
++        "tbt"
++      ],
++      "evidence": {
++        "audit": "total-blocking-time",
++        "score": 0.9,
++        "details": null
++      },
++      "cause_state": "hypothesis",
++      "severity": "review_required",
++      "potential_impact": "No cuantificado; comprobar recurso, interacción y consumidores.",
++      "candidate_files": [],
++      "consumers": [],
++      "alternatives": [
++        "Inspeccionar motor/componente nativo y confirmar causa antes de cambiar."
++      ],
++      "risks": [
++        "Regresión fuera del alcance de una auditoría automática."
++      ],
++      "estimated_cost": null,
++      "required_tests": [
++        "Perfil comparable antes/después",
++        "QA funcional, SEO, accesibilidad y revisión independiente"
++      ]
++    },
++    {
++      "id": "PERF-speed-index",
++      "source": "pagespeed",
++      "url": "https://example.invalid",
++      "device": "mobile",
++      "metric_affected": [
++        "speed_index"
++      ],
++      "evidence": {
++        "audit": "speed-index",
++        "score": 0.9,
++        "details": null
++      },
++      "cause_state": "hypothesis",
++      "severity": "review_required",
++      "potential_impact": "No cuantificado; comprobar recurso, interacción y consumidores.",
++      "candidate_files": [],
++      "consumers": [],
++      "alternatives": [
++        "Inspeccionar motor/componente nativo y confirmar causa antes de cambiar."
++      ],
++      "risks": [
++        "Regresión fuera del alcance de una auditoría automática."
++      ],
++      "estimated_cost": null,
++      "required_tests": [
++        "Perfil comparable antes/después",
++        "QA funcional, SEO, accesibilidad y revisión independiente"
++      ]
++    }
++  ],
++  "validation": {
++    "google_called": false,
++    "not_damarbeauty": true
++  }
++}--- /dev/null
++++ b/reports/performance/example-desktop.json
+@@ -0,0 +1,300 @@
++{
++  "kind": "performance-intelligence-example",
++  "simulated": true,
++  "project": "synthetic-fixture",
++  "url": "https://example.invalid",
++  "device": "desktop",
++  "sources": {
++    "pagespeed": {
++      "source": "pagespeed",
++      "measurement": "laboratory",
++      "status": "observed",
++      "measured_at": "2026-11-10T00:00:00Z",
++      "metrics": {
++        "lcp": 2400.0,
++        "fcp": 1400.0,
++        "cls": 0.04,
++        "tbt": 120.0,
++        "speed_index": 2500.0
++      },
++      "units": {
++        "lcp": "ms",
++        "fcp": "ms",
++        "cls": "unitless",
++        "tbt": "ms",
++        "speed_index": "ms"
++      },
++      "scores": {
++        "accessibility": 0.9,
++        "best-practices": 0.9,
++        "performance": 0.9,
++        "seo": 0.9
++      },
++      "profile": {
++        "source": "pagespeed",
++        "url": "https://example.invalid",
++        "final_url": "https://example.invalid",
++        "device": "desktop",
++        "categories": [
++          "accessibility",
++          "best-practices",
++          "performance",
++          "seo"
++        ],
++        "locale": "es",
++        "lighthouse_version": "13.0.0",
++        "chrome_version": "130.1.2.3",
++        "screen": {
++          "mobile": false,
++          "width": 1440
++        },
++        "throttling_method": "simulate",
++        "throttling": {
++          "rttMs": 150,
++          "cpuSlowdownMultiplier": 4
++        },
++        "cache": false,
++        "network_policy": "google-managed"
++      },
++      "missing": [],
++      "observations": {
++        "requestedUrl": "https://example.invalid",
++        "finalUrl": "https://example.invalid",
++        "finalDisplayedUrl": null,
++        "fetchTime": "2026-11-10T00:00:00Z",
++        "lighthouseVersion": "13.0.0",
++        "configSettings": {
++          "screenEmulation": {
++            "mobile": false,
++            "width": 1440
++          },
++          "throttlingMethod": "simulate",
++          "throttling": {
++            "rttMs": 150,
++            "cpuSlowdownMultiplier": 4
++          },
++          "disableStorageReset": false
++        },
++        "environment": {
++          "hostUserAgent": "Chrome/130.1.2.3"
++        },
++        "categories": {
++          "performance": {
++            "score": 0.9
++          },
++          "accessibility": {
++            "score": 0.9
++          },
++          "best-practices": {
++            "score": 0.9
++          },
++          "seo": {
++            "score": 0.9
++          }
++        },
++        "runWarnings": [],
++        "runtimeError": null,
++        "audits": {
++          "largest-contentful-paint": {
++            "title": "Synthetic observation",
++            "score": 0.9,
++            "numericValue": 2400
++          },
++          "first-contentful-paint": {
++            "title": "Synthetic observation",
++            "score": 0.9,
++            "numericValue": 1400
++          },
++          "cumulative-layout-shift": {
++            "title": "Synthetic observation",
++            "score": 0.9,
++            "numericValue": 0.04
++          },
++          "total-blocking-time": {
++            "title": "Synthetic observation",
++            "score": 0.9,
++            "numericValue": 120
++          },
++          "speed-index": {
++            "title": "Synthetic observation",
++            "score": 0.9,
++            "numericValue": 2500
++          }
++        }
++      },
++      "warnings": [],
++      "runtime_error": null,
++      "field_inp": null,
++      "limitations": [
++        "Laboratorio; TBT no mide INP. Scores no certifican SEO/WCAG.",
++        "PSI no mide cambios locales sin una URL publicada accesible."
++      ]
++    },
++    "crux": {
++      "source": "crux",
++      "status": "not_measured",
++      "reason": "No fixture desktop de campo; no inventar datos."
++    },
++    "lighthouse_local": {
++      "source": "lighthouse_local",
++      "status": "not_measured",
++      "reason": "Verificación Chrome real separada, no sustituida por este ejemplo."
++    }
++  },
++  "findings": [
++    {
++      "id": "PERF-largest-contentful-paint",
++      "source": "pagespeed",
++      "url": "https://example.invalid",
++      "device": "desktop",
++      "metric_affected": [
++        "lcp"
++      ],
++      "evidence": {
++        "audit": "largest-contentful-paint",
++        "score": 0.9,
++        "details": null
++      },
++      "cause_state": "hypothesis",
++      "severity": "review_required",
++      "potential_impact": "No cuantificado; comprobar recurso, interacción y consumidores.",
++      "candidate_files": [],
++      "consumers": [],
++      "alternatives": [
++        "Inspeccionar motor/componente nativo y confirmar causa antes de cambiar."
++      ],
++      "risks": [
++        "Regresión fuera del alcance de una auditoría automática."
++      ],
++      "estimated_cost": null,
++      "required_tests": [
++        "Perfil comparable antes/después",
++        "QA funcional, SEO, accesibilidad y revisión independiente"
++      ]
++    },
++    {
++      "id": "PERF-first-contentful-paint",
++      "source": "pagespeed",
++      "url": "https://example.invalid",
++      "device": "desktop",
++      "metric_affected": [
++        "fcp"
++      ],
++      "evidence": {
++        "audit": "first-contentful-paint",
++        "score": 0.9,
++        "details": null
++      },
++      "cause_state": "hypothesis",
++      "severity": "review_required",
++      "potential_impact": "No cuantificado; comprobar recurso, interacción y consumidores.",
++      "candidate_files": [],
++      "consumers": [],
++      "alternatives": [
++        "Inspeccionar motor/componente nativo y confirmar causa antes de cambiar."
++      ],
++      "risks": [
++        "Regresión fuera del alcance de una auditoría automática."
++      ],
++      "estimated_cost": null,
++      "required_tests": [
++        "Perfil comparable antes/después",
++        "QA funcional, SEO, accesibilidad y revisión independiente"
++      ]
++    },
++    {
++      "id": "PERF-cumulative-layout-shift",
++      "source": "pagespeed",
++      "url": "https://example.invalid",
++      "device": "desktop",
++      "metric_affected": [
++        "cls"
++      ],
++      "evidence": {
++        "audit": "cumulative-layout-shift",
++        "score": 0.9,
++        "details": null
++      },
++      "cause_state": "hypothesis",
++      "severity": "review_required",
++      "potential_impact": "No cuantificado; comprobar recurso, interacción y consumidores.",
++      "candidate_files": [],
++      "consumers": [],
++      "alternatives": [
++        "Inspeccionar motor/componente nativo y confirmar causa antes de cambiar."
++      ],
++      "risks": [
++        "Regresión fuera del alcance de una auditoría automática."
++      ],
++      "estimated_cost": null,
++      "required_tests": [
++        "Perfil comparable antes/después",
++        "QA funcional, SEO, accesibilidad y revisión independiente"
++      ]
++    },
++    {
++      "id": "PERF-total-blocking-time",
++      "source": "pagespeed",
++      "url": "https://example.invalid",
++      "device": "desktop",
++      "metric_affected": [
++        "tbt"
++      ],
++      "evidence": {
++        "audit": "total-blocking-time",
++        "score": 0.9,
++        "details": null
++      },
++      "cause_state": "hypothesis",
++      "severity": "review_required",
++      "potential_impact": "No cuantificado; comprobar recurso, interacción y consumidores.",
++      "candidate_files": [],
++      "consumers": [],
++      "alternatives": [
++        "Inspeccionar motor/componente nativo y confirmar causa antes de cambiar."
++      ],
++      "risks": [
++        "Regresión fuera del alcance de una auditoría automática."
++      ],
++      "estimated_cost": null,
++      "required_tests": [
++        "Perfil comparable antes/después",
++        "QA funcional, SEO, accesibilidad y revisión independiente"
++      ]
++    },
++    {
++      "id": "PERF-speed-index",
++      "source": "pagespeed",
++      "url": "https://example.invalid",
++      "device": "desktop",
++      "metric_affected": [
++        "speed_index"
++      ],
++      "evidence": {
++        "audit": "speed-index",
++        "score": 0.9,
++        "details": null
++      },
++      "cause_state": "hypothesis",
++      "severity": "review_required",
++      "potential_impact": "No cuantificado; comprobar recurso, interacción y consumidores.",
++      "candidate_files": [],
++      "consumers": [],
++      "alternatives": [
++        "Inspeccionar motor/componente nativo y confirmar causa antes de cambiar."
++      ],
++      "risks": [
++        "Regresión fuera del alcance de una auditoría automática."
++      ],
++      "estimated_cost": null,
++      "required_tests": [
++        "Perfil comparable antes/después",
++        "QA funcional, SEO, accesibilidad y revisión independiente"
++      ]
++    }
++  ],
++  "validation": {
++    "google_called": false,
++    "not_damarbeauty": true
++  }
++}--- /dev/null
++++ b/reports/performance/verification.json
+@@ -0,0 +1,1375 @@
++{
++  "at": "2026-11-10T18:33:56.241981+00:00",
++  "status": "local_verified_google_live_pending",
++  "scope": "Local adapter implementation; not live Google certification",
++  "council": {
++    "run": "reports/runs/ipanema/20261110T180852-performance-integration-council-c15673d7",
++    "invocations": [
++      {
++        "agent": "claude",
++        "phase": "proposal",
++        "valid": true,
++        "response": {
++          "decision": "proposed",
++          "summary": "Paquete performance/ dedicado, solo stdlib, con transporte de clave API y endpoints oficiales fijos para PSI y CrUX. Reutiliza authorize_url, _NoRedirect, Policy y redact. Conserva Lighthouse y DevTools sin cambios ni temas. Aprobación solo de arquitectura local sujeta al QA del controlador. Nada medido.",
++          "changes": [],
++          "evidence": [
++            "source:integration-context.json",
++            "source:tools/ipanema/seo/adapters.py",
++            "source:tools/ipanema/access/policy.py",
++            "source:tools/ipanema/access/gateway.py",
++            "source:tools/ipanema/compare.py",
++            "source:tools/lighthouse_audit.mjs"
++          ],
++          "analysis": {
++            "problem": "Integrar PageSpeed Insights primero y CrUX después como evidencia de rendimiento, conservando Lighthouse local y DevTools MCP, sin tocar temas ni producción y sin llamadas reales sin clave ni permiso.",
++            "cause": "OfficialREST es específico de OAuth Bearer y de endpoints GSC/GA/Merchant. PSI y CrUX usan clave API, endpoints fijos y semánticas distintas (laboratorio frente a campo, periodos de colección). compare.metrics solo compara JSON de Lighthouse local sin distinguir fuente. Policy y Gateway no definen capacidades de rendimiento.",
++            "recommendation": "claude-dedicated-key-transport",
++            "evidence_refs": [
++              "source:tools/ipanema/seo/adapters.py",
++              "source:tools/ipanema/access/policy.py",
++              "source:tools/ipanema/access/gateway.py",
++              "source:tools/ipanema/compare.py",
++              "source:tools/lighthouse_audit.mjs",
++              "source:tools/performance_evidence.mjs",
++              "source:integration-context.json",
++              "source:tools/ipanema/core.py"
++            ],
++            "hypotheses": [
++              "Un transporte dedicado de clave API con endpoints fijos es más seguro que generalizar OfficialREST y evita mezclar credenciales OAuth y de clave.",
++              "Reutilizar authorize_url, _NoRedirect, el tope de 4 MB, redact y Policy.stop/consume cubre la mayoría de los controles sin duplicar código.",
++              "La viabilidad en vivo (clave, cuota, datos de campo de la tienda) es unknown: no se midió.",
++              "Un loadingExperience nulo o parcial en PSI debe tratarse como datos insuficientes, nunca como cero."
++            ],
++            "native_components": [
++              "authorize_url",
++              "_NoRedirect",
++              "Policy.consume/stop",
++              "redact",
++              "tools/lighthouse_audit.mjs",
++              "DevTools MCP",
++              "compare.metrics"
++            ],
++            "risks": [
++              "La clave API en query string puede filtrarse por logs o excepciones si no se redacta antes de registrar.",
++              "La cuota diaria local no coincide con la cuota real de Google.",
++              "Los periodos de colección de CrUX pueden confundirse con efecto de un despliegue.",
++              "Cambios de contrato de Google no cubiertos por fixtures simuladas.",
++              "Sin clave ni datos de campo, el primer objetivo real queda pendiente."
++            ],
++            "tests": [
++              "Fixtures simuladas PSI y CrUX con etiqueta explícita de simulación",
++              "Verificación de redacción y de ausencia de claves en artefactos",
++              "Comparación solo entre perfiles idénticos",
++              "qa --suite quick del controlador"
++            ],
++            "files": [
++              "tools/ipanema/performance/cli.py",
++              "tools/ipanema/performance/service.py",
++              "tools/ipanema/performance/providers.py",
++              "tools/ipanema/performance/model.py"
++            ],
++            "impacts": {
++              "seo": "Ninguno directo; aporta evidencia CWV sin demostrar indexación ni ranking.",
++              "performance": "Solo mide; PSI es laboratorio más campo opcional, y no se infiere INP a partir de TBT.",
++              "responsive": "Sin cambios; los perfiles móvil y escritorio se comparan por separado.",
++              "accessibility": "Sin cambios; la categoría se informa solo si PSI la devuelve.",
++              "uiux": "Sin cambios en el tema.",
++              "commerce": "Sin impacto; solo lecturas del storefront autorizado."
++            },
++            "confidence": 0.7,
++            "alternatives": [
++              {
++                "id": "claude-dedicated-key-transport",
++                "description": "Paquete tools/ipanema/performance/ (cli, service, providers, model), solo stdlib. providers: transporte de clave API con endpoints oficiales fijos (PSI runPagespeed con category repetido; CrUX queryRecord y queryHistoryRecord), reutilizando _NoRedirect, tope de 4 MB y authorize_url. Clave solo por nombre de variable de entorno en google.performance; sin argumento CLI; sin clave devuelve unavailable sin caer a OAuth ni a anónimo. service: capacidad nueva en Policy, 403/429 detienen y persisten, reintento acotado solo en 5xx/red, cuota diaria local persistente, caché con TTL validando proyecto/permiso/petición antes de leer. model: evidencia saneada inmutable separada de hechos normalizados; URL y origen CrUX por separado; historial con periodos y bins nulos preservados. Comparación por fuente+URL+dispositivo+categorías+locale+versiones. Lighthouse local se mantiene con trabajos repetibles, mediana y rango.",
++                "constraints": {
++                  "functional": {
++                    "status": "pass",
++                    "evidence_refs": [
++                      "source:integration-context.json"
++                    ]
++                  },
++                  "security": {
++                    "status": "pass",
++                    "evidence_refs": [
++                      "source:tools/ipanema/seo/adapters.py",
++                      "source:tools/ipanema/access/policy.py",
++                      "source:tools/ipanema/core.py"
++                    ]
++                  },
++                  "compatibility": {
++                    "status": "pass",
++                    "evidence_refs": [
++                      "source:tools/ipanema/access/gateway.py",
++                      "source:tools/lighthouse_audit.mjs"
++                    ]
++                  },
++                  "native_reuse": {
++                    "status": "pass",
++                    "evidence_refs": [
++                      "source:tools/ipanema/seo/adapters.py",
++                      "source:tools/ipanema/compare.py",
++                      "source:tools/lighthouse_audit.mjs"
++                    ]
++                  },
++                  "seo": {
++                    "status": "unknown",
++                    "evidence_refs": []
++                  },
++                  "performance": {
++                    "status": "unknown",
++                    "evidence_refs": []
++                  },
++                  "accessibility": {
++                    "status": "unknown",
++                    "evidence_refs": []
++                  },
++                  "responsive": {
++                    "status": "unknown",
++                    "evidence_refs": []
++                  },
++                  "maintainability": {
++                    "status": "pass",
++                    "evidence_refs": [
++                      "source:tools/ipanema/seo/adapters.py"
++                    ]
++                  },
++                  "reversibility": {
++                    "status": "pass",
++                    "evidence_refs": [
++                      "source:integration-context.json"
++                    ]
++                  },
++                  "complexity": {
++                    "status": "unknown",
++                    "evidence_refs": []
++                  },
++                  "development_cost": {
++                    "status": "unknown",
++                    "evidence_refs": []
++                  },
++                  "execution_cost": {
++                    "status": "unknown",
++                    "evidence_refs": []
++                  }
++                },
++                "files": [
++                  "tools/ipanema/performance/cli.py",
++                  "tools/ipanema/performance/service.py",
++                  "tools/ipanema/performance/providers.py",
++                  "tools/ipanema/performance/model.py",
++                  "tools/ipanema/access/policy.py",
++                  "tools/ipanema/compare.py"
++                ],
++                "tests": [
++                  "Fixtures simuladas PSI completa/parcial, category repetido, errores y runtimeError",
++                  "CrUX URL y origen separados, datos insuficientes, historial con bins y periodos nulos",
++                  "Clave codificada en query redactada, sin redirecciones con credenciales, 403/429 sin reintentos",
++                  "Sin caché entre proyectos, archivos malformados y límites de tamaño/cuota",
++                  "Sin clave o permiso: unavailable y cero llamadas de red"
++                ]
++              },
++              {
++                "id": "claude-generalize-officialrest",
++                "description": "Extender OfficialREST con un modo de clave API y los endpoints PSI/CrUX, reutilizando la clase existente en lugar de un transporte nuevo.",
++                "constraints": {
++                  "functional": {
++                    "status": "pass",
++                    "evidence_refs": [
++                      "source:tools/ipanema/seo/adapters.py"
++                    ]
++                  },
++                  "security": {
++                    "status": "unknown",
++                    "evidence_refs": [
++                      "source:tools/ipanema/seo/adapters.py"
++                    ]
++                  },
++                  "compatibility": {
++                    "status": "unknown",
++                    "evidence_refs": [
++                      "source:tools/ipanema/seo/adapters.py"
++                    ]
++                  },
++                  "native_reuse": {
++                    "status": "pass",
++                    "evidence_refs": [
++                      "source:tools/ipanema/seo/adapters.py"
++                    ]
++                  },
++                  "seo": {
++                    "status": "unknown",
++                    "evidence_refs": []
++                  },
++                  "performance": {
++                    "status": "unknown",
++                    "evidence_refs": []
++                  },
++                  "accessibility": {
++                    "status": "unknown",
++                    "evidence_refs": []
++                  },
++                  "responsive": {
++                    "status": "unknown",
++                    "evidence_refs": []
++                  },
++                  "maintainability": {
++                    "status": "unknown",
++                    "evidence_refs": []
++                  },
++                  "reversibility": {
++                    "status": "pass",
++                    "evidence_refs": [
++                      "source:integration-context.json"
++                    ]
++                  },
++                  "complexity": {
++                    "status": "unknown",
++                    "evidence_refs": []
++                  },
++                  "development_cost": {
++                    "status": "unknown",
++                    "evidence_refs": []
++                  },
++                  "execution_cost": {
++                    "status": "unknown",
++                    "evidence_refs": []
++                  }
++                },
++                "files": [
++                  "tools/ipanema/seo/adapters.py"
++                ],
++                "tests": [
++                  "Regresión de GSC/GA/Merchant tras extender OfficialREST",
++                  "Clave API nunca enviada como Bearer ni a hosts OAuth"
++                ]
++              }
++            ]
++          }
++        },
++        "model": {
++          "model": "claude-sonnet-5-5",
++          "effort": "medium",
++          "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
++          "verified_at": "2026-11-08"
++        },
++        "duration_s": 48.731,
++        "usage": {
++          "provider_reported": {
++            "total_cost_usd": 0.287506,
++            "duration_ms": 46186,
++            "input_tokens": 4,
++            "cache_creation_input_tokens": 52029,
++            "cache_read_input_tokens": 50320,
++            "output_tokens": 7435
++          },
++          "measured_cost_available": true,
++          "estimated_cost": null
++        }
++      },
++      {
++        "agent": "codex",
++        "phase": "proposal",
++        "valid": true,
++        "response": {
++          "decision": "proposed",
++          "summary": "Propongo un servicio compartido con transporte dedicado para claves API: PageSpeed primero, CrUX después. Conserva Lighthouse y DevTools. La propuesta solo define arquitectura local; faltan implementación, QA del controlador y validación real autorizada.",
++          "changes": [],
++          "evidence": [
++            "El contexto suministrado documenta contratos oficiales y exige separar laboratorio, campo e historial.",
++            "OfficialREST incorpora autenticación Bearer OAuth; no representa directamente el contrato de claves API propuesto.",
++            "Policy ya dispone de permisos, cuotas y paradas persistentes, pero enumera capacidades y proveedores sin PSI ni CrUX.",
++            "Gateway permite centralizar acceso MCP, aunque actualmente deriva los proveedores REST hacia credenciales OAuth.",
++            "compare.metrics compara algunos campos que pueden faltar en ambos documentos, sin exigir identidad completa de la fuente.",
++            "lighthouse_audit.mjs guarda LHR completo y utiliza destinos repetibles; requiere adaptación para evidencia saneada e inmutable.",
++            "performance_evidence.mjs ofrece una proyección saneada de Lighthouse reutilizable, pendiente de pruebas específicas para PSI."
++          ],
++          "analysis": {
++            "problem": "Incorporar PageSpeed y posteriormente CrUX al agente sin modificar temas, perder diagnóstico local ni presentar observaciones de laboratorio como experiencia real o causalidad demostrada.",
++            "cause": "No existen los módulos performance suministrados como candidatos. Los adaptadores actuales atienden OAuth y DevTools; permisos, gateway, comparación y persistencia necesitan contratos específicos para las nuevas fuentes.",
++            "recommendation": "codex-performance-service",
++            "evidence_refs": [
++              "source:integration-context.json",
++              "source:tools/ia.py",
++              "source:tools/ipanema/access/policy.py",
++              "source:tools/ipanema/access/gateway.py",
++              "source:tools/ipanema/seo/adapters.py",
++              "source:tools/ipanema/compare.py",
++              "source:tools/lighthouse_audit.mjs",
++              "source:tools/performance_evidence.mjs"
++            ],
++            "hypotheses": [
++              "Un servicio independiente del cliente puede compartir validación, cuotas, caché y normalización entre CLI y MCP; su funcionamiento aún no está probado.",
++              "Un transporte dedicado evita mezclar claves API con OAuth y permite conservar intactos los contratos de GSC.",
++              "Los fixtures pueden validar la arquitectura sin credenciales reales, pero no demostrar conectividad, cobertura CrUX ni costes efectivos."
++            ],
++            "native_components": [
++              "Project: selección, referencias de entorno en google.performance y directorios de ejecución.",
++              "authorize_url: comprobación de origen, complementada con validación específica de destinos y parámetros.",
++              "Policy: permisos ligados a proyecto/tarea/agente, bloqueo, cuotas y paradas persistentes.",
++              "Gateway: fachada MCP del mismo servicio usado por CLI; las claves permanecen en el controlador.",
++              "ProviderError y patrón de transporte inyectable, sin reutilizar autenticación OAuth.",
++              "lighthouseEvidence: proyección saneada, con revisión específica para respuestas PSI.",
++              "Runner Lighthouse existente y DevTools conservados.",
++              "Semántica de comparación existente como referencia, reforzada en performance/model."
++            ],
++            "risks": [
++              "Condición obligatoria: validar proyecto, origen, capacidad y solicitud antes de consultar caché o resolver claves; ausencia de clave produce unavailable sin OAuth ni petición anónima.",
++              "Condición obligatoria: endpoints fijos, sin redirecciones, respuestas acotadas y errores sin cuerpos sensibles. 403/429 persisten parada sin reintentos; otros reintentos son limitados y consumen presupuesto.",
++              "La cuota diaria persistente debe agregarse por proyecto/proveedor y coordinarse bajo bloqueo con cuotas por tarea; cambiar de agente o usar caché no debe eludir permisos.",
++              "La caché debe vincular proyecto, proveedor, contrato, destino y opciones normalizadas; TTL, archivos malformados y permisos inseguros deben tratarse explícitamente.",
++              "Conservar evidencia saneada e inmutable y hechos normalizados con procedencia y hashes. No persistir respuestas originales privadas, claves, snippets ni errores libres del proveedor.",
++              "Comparar laboratorio solo con identidad completa: fuente, URL efectiva, dispositivo, categorías, locale, versiones y condiciones. Campos desconocidos no equivalen a perfiles iguales.",
++              "CrUX debe preservar identidad devuelta, granularidad URL/origen, formulario, periodo, unidades, histogramas y nulos; no aplicar fallback de origen silencioso ni atribuir periodos solapados a un despliegue.",
++              "Faltan recibos de QA, revisión independiente y verificación de consumidores del runner. La reversión prevista retira módulos y registros propios mediante diff revisado; no elimina evidencia histórica."
++            ],
++            "tests": [
++              "Pendiente: fixtures simulados PSI completos/parciales, parámetros repetidos, runtimeError, categorías y métricas ausentes; ningún parcial debe convertirse en éxito completo.",
++              "Pendiente: CrUX URL/origen excluyentes, identidad devuelta, datos insuficientes, form factors y métricas; History con periodos ordenados, nulos y bins incompletos.",
++              "Pendiente: orígenes ajenos, consultas sensibles codificadas, claves ausentes, redacción de artefactos, endpoints fijos y rechazo de redirecciones.",
++              "Pendiente: paradas persistentes 403/429 sin reintento, presupuestos diarios y por tarea, concurrencia y reintentos acotados con transporte simulado.",
++              "Pendiente: caché entre proyectos, cambios de permisos/configuración, TTL, archivos corruptos y validación previa a cualquier hit.",
++              "Pendiente: paridad CLI/MCP y denegación de capacidades no otorgadas; regresión de GSC y DevTools.",
++              "Pendiente: trabajos Lighthouse repetibles con muestras individuales saneadas, mediana/rango e identidad completa; comparación bloqueada ante versiones o condiciones desconocidas.",
++              "Pendiente: QA del repositorio y revisión independiente del diff. Sin llamadas reales durante esta auditoría; validación externa posterior exige autorización, origen y clave disponibles."
++            ],
++            "files": [
++              "tools/ipanema/performance/cli.py",
++              "tools/ipanema/performance/service.py",
++              "tools/ipanema/performance/providers.py",
++              "tools/ipanema/performance/model.py",
++              "tools/ia.py",
++              "tools/ipanema/access/policy.py",
++              "tools/ipanema/access/gateway.py",
++              "tools/lighthouse_audit.mjs"
++            ],
++            "impacts": {
++              "seo": "Añade observaciones técnicas; no demuestra indexación ni mejora de posicionamiento.",
++              "performance": "Separa PSI/Lighthouse de CrUX. No promete mejoras; TBT permanece distinto de INP.",
++              "responsive": "Sin cambios de tema; estrategias y form factors no sustituyen QA responsive.",
++              "accessibility": "Conserva observaciones Lighthouse; no certifica conformidad AA.",
++              "uiux": "La salida debe identificar fuente, fecha, identidad, datos parciales y limitaciones sin convertir hipótesis en hallazgos.",
++              "commerce": "Sin cambios de catálogo, formularios, carrito, checkout ni publicación."
++            },
++            "confidence": 0.8,
++            "alternatives": [
++              {
++                "id": "codex-performance-service",
++                "description": "Crear cli/service/providers/model con stdlib. providers usa endpoints oficiales fijos y claves obtenidas de referencias de entorno; service centraliza permisos, presupuesto, paradas, caché y evidencia para CLI/MCP. Fase 1: PSI y conservación de Lighthouse/DevTools. Fase 2: CrUX actual e histórico, con URL/origen y periodos explícitos. No extender OfficialREST OAuth para estas claves.",
++                "constraints": {
++                  "functional": {
++                    "status": "unknown",
++                    "evidence_refs": [
++                      "source:integration-context.json",
++                      "source:tools/ia.py"
++                    ]
++                  },
++                  "security": {
++                    "status": "unknown",
++                    "evidence_refs": [
++                      "source:tools/ipanema/access/policy.py",
++                      "source:tools/ipanema/access/gateway.py",
++                      "source:tools/ipanema/seo/adapters.py"
++                    ]
++                  },
++                  "compatibility": {
++                    "status": "unknown",
++                    "evidence_refs": [
++                      "source:tools/lighthouse_audit.mjs",
++                      "source:tools/ipanema/access/gateway.py"
++                    ]
++                  },
++                  "native_reuse": {
++                    "status": "pass",
++                    "evidence_refs": [
++                      "source:tools/ipanema/access/policy.py",
++                      "source:tools/ipanema/seo/adapters.py",
++                      "source:tools/performance_evidence.mjs"
++                    ]
++                  },
++                  "seo": {
++                    "status": "unknown",
++                    "evidence_refs": []
++                  },
++                  "performance": {
++                    "status": "unknown",
++                    "evidence_refs": []
++                  },
++                  "accessibility": {
++                    "status": "unknown",
++                    "evidence_refs": []
++                  },
++                  "responsive": {
++                    "status": "unknown",
++                    "evidence_refs": []
++                  },
++                  "maintainability": {
++                    "status": "unknown",
++                    "evidence_refs": []
++                  },
++                  "reversibility": {
++                    "status": "unknown",
++                    "evidence_refs": []
++                  },
++                  "complexity": {
++                    "status": "unknown",
++                    "evidence_refs": []
++                  },
++                  "development_cost": {
++                    "status": "unknown",
++                    "evidence_refs": []
++                  },
++                  "execution_cost": {
++                    "status": "unknown",
++                    "evidence_refs": []
++                  }
++                },
++                "files": [
++                  "tools/ipanema/performance/cli.py",
++                  "tools/ipanema/performance/service.py",
++                  "tools/ipanema/performance/providers.py",
++                  "tools/ipanema/performance/model.py",
++                  "tools/ia.py",
++                  "tools/ipanema/access/policy.py",
++                  "tools/ipanema/access/gateway.py",
++                  "tools/lighthouse_audit.mjs"
++                ],
++                "tests": [
++                  "Pendientes: fixtures PSI completos/parciales, categorías repetidas, estrategias, runtimeError y versiones ausentes.",
++                  "Pendientes: aislamiento CLI/MCP, permisos, secretos, cuotas, caché, paradas y contratos CrUX."
++                ]
++              }
++            ]
++          }
++        },
++        "model": {
++          "model": "gpt-6.1-sol",
++          "effort": "medium",
++          "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
++          "verified_at": "2026-11-08"
++        },
++        "duration_s": 65.662,
++        "usage": {
++          "provider_reported": {
++            "input_tokens": 43249,
++            "cached_input_tokens": 0,
++            "cache_write_input_tokens": 0,
++            "output_tokens": 2497,
++            "reasoning_output_tokens": 251
++          },
++          "measured_cost_available": false,
++          "estimated_cost": null
++        }
++      },
++      {
++        "agent": "claude",
++        "phase": "contrast",
++        "valid": true,
++        "response": {
++          "decision": "changes_requested",
++          "summary": "Ambas propuestas coinciden en un servicio performance/ con transporte dedicado de clave API, sin extender OfficialREST. Prefiero codex-performance-service (servicio compartido CLI/MCP, dos fases), con condiciones previas a implementar: capacidades en Policy, redacción de la clave, caché validada e identidad CrUX. Nada medido; solo arquitectura local.",
++          "changes": [],
++          "evidence": [
++            "source:integration-context.json",
++            "source:tools/ipanema/access/policy.py",
++            "source:tools/ipanema/access/gateway.py",
++            "source:tools/ipanema/seo/adapters.py",
++            "source:tools/ipanema/compare.py",
++            "source:tools/lighthouse_audit.mjs",
++            "source:tools/performance_evidence.mjs"
++          ],
++          "objections": [
++            {
++              "id": "claude-obj-1",
++              "alternative_id": "claude-generalize-officialrest",
++              "category": "security",
++              "severity": "high",
++              "claim": "OfficialREST es Bearer OAuth con URLs GSC/GA/Merchant fijas en código. Añadir un modo de clave API arriesga enviar la clave como Bearer, mezclar credenciales y regresionar GSC. Debe descartarse.",
++              "status": "open",
++              "evidence_refs": [
++                "source:tools/ipanema/seo/adapters.py"
++              ],
++              "resolution_evidence_refs": []
++            },
++            {
++              "id": "claude-obj-2",
++              "alternative_id": "codex-performance-service",
++              "category": "security",
++              "severity": "high",
++              "claim": "La clave PSI/CrUX viaja en query string. El transporte debe redactarla, también codificada, antes de cualquier excepción, log o artefacto. safe_url y redact solo cubren parte de estos casos y no hay pruebas definidas.",
++              "status": "open",
++              "evidence_refs": [
++                "source:tools/ipanema/core.py",
++                "source:tools/ipanema/seo/adapters.py"
++              ],
++              "resolution_evidence_refs": []
++            },
++            {
++              "id": "claude-obj-3",
++              "alternative_id": "codex-performance-service",
++              "category": "architecture",
++              "severity": "medium",
++              "claim": "Policy.CAPABILITIES y stop_path solo admiten gsc/analytics/merchant/devtools, y consume deriva el proveedor del prefijo del nombre de herramienta. Hay que definir capacidades psi/crux y su stop sin alterar los permisos existentes. La propuesta no lo especifica.",
++              "status": "open",
++              "evidence_refs": [
++                "source:tools/ipanema/access/policy.py",
++                "source:tools/ipanema/access/gateway.py"
++              ],
++              "resolution_evidence_refs": []
++            },
++            {
++              "id": "claude-obj-4",
++              "alternative_id": "codex-performance-service",
++              "category": "architecture",
++              "severity": "medium",
++              "claim": "compare.metrics solo exige igualdad de profile/page/config/lighthouse_version/network_policy, sin fuente, locale, Chrome ni periodo de colección. Los campos ausentes en ambos lados pasan como iguales (None==None). La comparación debe vivir en performance/model con identidad completa y bloquear ante desconocidos.",
++              "status": "open",
++              "evidence_refs": [
++                "source:tools/ipanema/compare.py"
++              ],
++              "resolution_evidence_refs": []
++            },
++            {
++              "id": "claude-obj-5",
++              "alternative_id": "codex-performance-service",
++              "category": "architecture",
++              "severity": "low",
++              "claim": "lighthouse_audit.mjs persiste el LHR completo con nodos y URLs sin sanear. Los trabajos repetibles deben usar lighthouseEvidence de performance_evidence.mjs para evidencia nueva. La propuesta cita ambos archivos sin decidir cuál prevalece.",
++              "status": "open",
++              "evidence_refs": [
++                "source:tools/lighthouse_audit.mjs",
++                "source:tools/performance_evidence.mjs"
++              ],
++              "resolution_evidence_refs": []
++            }
++          ],
++          "preferred_alternative": "codex-performance-service",
++          "questions": [
++            {
++              "id": "claude-q1",
++              "to_agent": "codex",
++              "alternative_id": "codex-performance-service",
++              "question": "¿Cómo evitas que el servicio compartido entregue la clave al worker vía MCP? Concreta si la clave se resuelve solo en el controlador (gateway) y qué campos de la respuesta saneada se exponen. Cita la fuente que respalda ese límite.",
++              "evidence_refs": [
++                "source:tools/ipanema/access/gateway.py"
++              ]
++            },
++            {
++              "id": "claude-q2",
++              "to_agent": "codex",
++              "alternative_id": "codex-performance-service",
++              "question": "¿Qué capacidades nuevas añadirías a Policy.CAPABILITIES (nombres exactos) y cómo agregarías la cuota diaria por proyecto/proveedor bajo el mismo lock sin romper consume por tarea?",
++              "evidence_refs": [
++                "source:tools/ipanema/access/policy.py"
++              ]
++            },
++            {
++              "id": "claude-q3",
++              "to_agent": "codex",
++              "alternative_id": "codex-performance-service",
++              "question": "Para CrUX, ¿rechazas el fallback silencioso de URL a origen y cómo representas en model la identidad devuelta y los periodos solapados del History API? Indica qué campo del contexto de integración lo respalda.",
++              "evidence_refs": [
++                "source:integration-context.json"
++              ]
++            }
++          ]
++        },
++        "model": {
++          "model": "claude-sonnet-5-5",
++          "effort": "medium",
++          "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
++          "verified_at": "2026-11-08"
++        },
++        "duration_s": 30.958,
++        "usage": {
++          "provider_reported": {
++            "total_cost_usd": 0.269715,
++            "duration_ms": 26967,
++            "input_tokens": 4,
++            "cache_creation_input_tokens": 56089,
++            "cache_read_input_tokens": 54810,
++            "output_tokens": 3987
++          },
++          "measured_cost_available": true,
++          "estimated_cost": null
++        }
++      },
++      {
++        "agent": "codex",
++        "phase": "contrast",
++        "valid": true,
++        "response": {
++          "decision": "changes_requested",
++          "summary": "Ambas propuestas coinciden en el transporte dedicado y el servicio compartido. Mantengo codex-performance-service: la alternativa de Claude necesita concretar la integración CLI/MCP y corregir las garantías sobre Lighthouse y comparación. Viabilidad real, seguridad ejecutada y costes: unknown; solo se evalúa arquitectura local.",
++          "changes": [],
++          "evidence": [
++            "source:tools/ia.py",
++            "source:tools/ipanema/access/gateway.py",
++            "source:tools/ipanema/access/policy.py",
++            "source:tools/ipanema/seo/adapters.py",
++            "source:tools/ipanema/compare.py",
++            "source:tools/lighthouse_audit.mjs",
++            "source:tools/performance_evidence.mjs",
++            "source:integration-context.json"
++          ],
++          "objections": [
++            {
++              "id": "codex-obj-integracion",
++              "alternative_id": "claude-dedicated-key-transport",
++              "category": "integración",
++              "severity": "high",
++              "claim": "El alcance de archivos omite tools/ia.py y access/gateway.py. El CLI necesita registrar performance y Gateway actualmente conduce los proveedores distintos de DevTools hacia OAuth. Añadir capacidades a Policy no conecta por sí solo el servicio compartido ni evita esa ruta.",
++              "status": "open",
++              "evidence_refs": [
++                "source:tools/ia.py",
++                "source:tools/ipanema/access/gateway.py",
++                "source:tools/ipanema/access/policy.py"
++              ],
++              "resolution_evidence_refs": []
++            },
++            {
++              "id": "codex-obj-lighthouse",
++              "alternative_id": "claude-dedicated-key-transport",
++              "category": "evidencia",
++              "severity": "high",
++              "claim": "Conservar Lighthouse sin cambios no satisface la evidencia saneada e inmutable ni los trabajos repetibles con mediana/rango: el runner suministrado guarda LHR completo, sobrescribe destinos por prefijo y ejecuta una muestra por dispositivo. Debe concretarse una adaptación o una envoltura que cubra esas diferencias.",
++              "status": "open",
++              "evidence_refs": [
++                "source:tools/lighthouse_audit.mjs",
++                "source:tools/performance_evidence.mjs",
++                "source:integration-context.json"
++              ],
++              "resolution_evidence_refs": []
++            },
++            {
++              "id": "codex-obj-comparacion",
++              "alternative_id": "claude-dedicated-key-transport",
++              "category": "validez de comparación",
++              "severity": "medium",
++              "claim": "La identidad propuesta para comparar omite Chrome y condiciones de caché, red y CPU exigidas por el contexto. compare.metrics permite igualdad entre campos ausentes y carece de identidad de fuente; reutilizarlo exige rechazar comparaciones cuyos campos obligatorios sean unknown.",
++              "status": "open",
++              "evidence_refs": [
++                "source:tools/ipanema/compare.py",
++                "source:integration-context.json"
++              ],
++              "resolution_evidence_refs": []
++            },
++            {
++              "id": "codex-obj-garantias",
++              "alternative_id": "claude-dedicated-key-transport",
++              "category": "calibración de evidencia",
++              "severity": "low",
++              "claim": "Los estados pass de seguridad y compatibilidad exceden lo demostrado por las fuentes: estas describen componentes existentes, pero no prueban los módulos nuevos, la paridad CLI/MCP ni la ausencia de filtraciones. Deben distinguirse reutilización prevista y comportamiento verificado.",
++              "status": "open",
++              "evidence_refs": [
++                "source:tools/ipanema/access/gateway.py",
++                "source:tools/ipanema/seo/adapters.py",
++                "source:integration-context.json"
++              ],
++              "resolution_evidence_refs": []
++            }
++          ],
++          "preferred_alternative": "codex-performance-service",
++          "questions": [
++            {
++              "id": "codex-q-integracion",
++              "to_agent": "claude",
++              "alternative_id": "claude-dedicated-key-transport",
++              "question": "En access/gateway.py, Gateway.call deriva los proveedores no DevTools hacia OAuth. ¿Qué cambio de despacho propones para invocar el mismo servicio desde CLI y MCP, y dónde se comprobarán permisos, paradas y presupuestos antes de consultar caché o claves?",
++              "evidence_refs": [
++                "source:tools/ipanema/access/gateway.py",
++                "source:tools/ipanema/access/policy.py",
++                "source:tools/ia.py"
++              ]
++            },
++            {
++              "id": "codex-q-lighthouse",
++              "to_agent": "claude",
++              "alternative_id": "claude-dedicated-key-transport",
++              "question": "tools/lighthouse_audit.mjs persiste el LHR completo y una muestra por dispositivo. ¿Cómo corriges tu compromiso de conservarlo sin cambios para obtener muestras saneadas e inmutables, mediana/rango y compatibilidad con sus consumidores?",
++              "evidence_refs": [
++                "source:tools/lighthouse_audit.mjs",
++                "source:tools/performance_evidence.mjs"
++              ]
++            },
++            {
++              "id": "codex-q-comparacion",
++              "to_agent": "claude",
++              "alternative_id": "claude-dedicated-key-transport",
++              "question": "Dado que compare.metrics acepta campos ausentes iguales, ¿qué identidad mínima exigirás y qué resultado devolverás cuando PSI no proporcione Chrome o las condiciones necesarias para una comparación válida?",
++              "evidence_refs": [
++                "source:tools/ipanema/compare.py",
++                "source:integration-context.json"
++              ]
++            }
++          ]
++        },
++        "model": {
++          "model": "gpt-6.1-sol",
++          "effort": "medium",
++          "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
++          "verified_at": "2026-11-08"
++        },
++        "duration_s": 42.663,
++        "usage": {
++          "provider_reported": {
++            "input_tokens": 46232,
++            "cached_input_tokens": 0,
++            "cache_write_input_tokens": 0,
++            "output_tokens": 1316,
++            "reasoning_output_tokens": 52
++          },
++          "measured_cost_available": false,
++          "estimated_cost": null
++        }
++      },
++      {
++        "agent": "claude",
++        "phase": "defense",
++        "valid": true,
++        "response": {
++          "decision": "changes_requested",
++          "summary": "Acepto las tres objeciones de Codex y reviso mi alternativa. El servicio compartido y el transporte dedicado se mantienen, pero el despacho de Gateway, el runner de Lighthouse y la identidad de comparación pasan a ser requisitos explícitos. Retiro claude-generalize-officialrest. Prefiero codex-performance-service. Nada se ha medido ni ejecutado: solo arquitectura local.",
++          "changes": [],
++          "evidence": [
++            "source:tools/ipanema/access/gateway.py",
++            "source:tools/ipanema/access/policy.py",
++            "source:tools/lighthouse_audit.mjs",
++            "source:tools/performance_evidence.mjs",
++            "source:tools/ipanema/compare.py",
++            "source:integration-context.json",
++            "source:tools/ia.py"
++          ],
++          "objections": [
++            {
++              "id": "claude-obj-1",
++              "alternative_id": "claude-generalize-officialrest",
++              "category": "security",
++              "severity": "high",
++              "claim": "OfficialREST es Bearer OAuth con endpoints fijos de GSC/GA/Merchant. Extenderlo con clave API arriesga mezclar credenciales y regresionar GSC. Retirada.",
++              "status": "resolved",
++              "evidence_refs": [
++                "source:tools/ipanema/seo/adapters.py"
++              ],
++              "resolution_evidence_refs": [
++                "source:tools/ipanema/seo/adapters.py"
++              ]
++            },
++            {
++              "id": "claude-obj-2",
++              "alternative_id": "codex-performance-service",
++              "category": "security",
++              "severity": "high",
++              "claim": "La clave API viaja en la query. El transporte debe redactarla, también codificada, antes de excepciones, logs o artefactos. Faltan pruebas que lo demuestren.",
++              "status": "open",
++              "evidence_refs": [
++                "source:tools/ipanema/core.py",
++                "source:tools/ipanema/seo/adapters.py"
++              ],
++              "resolution_evidence_refs": []
++            },
++            {
++              "id": "claude-obj-3",
++              "alternative_id": "codex-performance-service",
++              "category": "architecture",
++              "severity": "medium",
++              "claim": "Policy.CAPABILITIES y stop_path no incluyen proveedores PSI/CrUX, y Gateway.call envía los proveedores no DevTools a OAuth. Faltan capacidades nuevas y despacho al servicio, sin alterar los permisos existentes.",
++              "status": "open",
++              "evidence_refs": [
++                "source:tools/ipanema/access/policy.py",
++                "source:tools/ipanema/access/gateway.py"
++              ],
++              "resolution_evidence_refs": []
++            },
++            {
++              "id": "claude-obj-4",
++              "alternative_id": "codex-performance-service",
++              "category": "architecture",
++              "severity": "medium",
++              "claim": "compare.metrics no exige identidad de fuente, Chrome ni locale, y trata None==None como igual. La comparación debe vivir en performance/model y devolver not_comparable ante campos desconocidos.",
++              "status": "open",
++              "evidence_refs": [
++                "source:tools/ipanema/compare.py"
++              ],
++              "resolution_evidence_refs": []
++            }
++          ],
++          "preferred_alternative": "codex-performance-service",
++          "answers": [
++            {
++              "question_id": "codex-q-integracion",
++              "from_agent": "codex",
++              "answer": "Acepto la objeción y amplío el alcance a tools/ia.py, access/gateway.py y access/policy.py. En Gateway.call añadiría, antes de la rama OAuth, un despacho para providers psi/crux que delegue en performance.service. El CLI llamaría al mismo servicio. Dentro del servicio, bajo policy.locked, el orden sería: cargar el permiso, comprobar capacidad y parada, validar proyecto, origen y petición, aplicar presupuestos y solo entonces consultar la caché. La clave se resuelve únicamente en el proceso controlador y solo si hay fallo de caché. Ningún worker la recibe. El CLI usa un permiso de operador con --allow-network.",
++              "disposition": "revise",
++              "evidence_refs": [
++                "source:tools/ipanema/access/gateway.py",
++                "source:tools/ipanema/access/policy.py",
++                "source:tools/ia.py"
++              ]
++            },
++            {
++              "question_id": "codex-q-lighthouse",
++              "from_agent": "codex",
++              "answer": "Corrijo: conservarlo sin cambios no cumple lo exigido. Mantengo lighthouse_audit.mjs con su comportamiento actual, porque sus consumidores no se han verificado (unknown). Añado un runner nuevo de trabajos repetibles. Cada ejecución escribe con un id de ejecución único y creación exclusiva, sin sobrescribir. Persiste solo lighthouseEvidence(lhr) más el resumen, sin LHR completo ni HTML. La mediana y el rango se calculan en performance/model a partir de las muestras individuales. Esto no se ha ejecutado.",
++              "disposition": "revise",
++              "evidence_refs": [
++                "source:tools/lighthouse_audit.mjs",
++                "source:tools/performance_evidence.mjs",
++                "source:integration-context.json"
++              ]
++            },
++            {
++              "question_id": "codex-q-comparacion",
++              "from_agent": "codex",
++              "answer": "Identidad mínima obligatoria: fuente, URL solicitada y final, estrategia/dispositivo, categorías, locale, versión de Lighthouse, versión de Chrome, caché, red y CPU, y número de muestras. Si falta cualquiera, por ejemplo Chrome en una respuesta PSI, el resultado es status not_comparable y nunca passed. La comparación se implementa en performance/model. Si se reutiliza compare.metrics, se corrige para rechazar claves obligatorias ausentes en ambos lados. Si PSI expone o no esos campos en su respuesta es unknown y debe verificarse con fixtures.",
++              "disposition": "revise",
++              "evidence_refs": [
++                "source:tools/ipanema/compare.py",
++                "source:integration-context.json"
++              ]
++            }
++          ],
++          "withdrawn_alternatives": [
++            "claude-generalize-officialrest"
++          ],
++          "revision_notes": [
++            "claude-dedicated-key-transport queda alineada con codex-performance-service: servicio compartido CLI/MCP, dos fases (PSI y después CrUX) y transporte dedicado de clave API.",
++            "El alcance de archivos incluye tools/ia.py, access/gateway.py, access/policy.py y un runner nuevo de Lighthouse.",
++            "Los estados pass de seguridad y compatibilidad de mi propuesta inicial reflejaban reutilización prevista, no comportamiento verificado. Quedan como unknown hasta que el QA del controlador los respalde.",
++            "Condición previa a implementar: redactar la clave, también codificada, antes de cualquier excepción, log o artefacto.",
++            "CrUX: sin fallback silencioso de URL a origen, y los periodos solapados de History no se tratan como muestras independientes.",
++            "La aprobación cubre solo la arquitectura local, sujeta al QA del controlador. No cubre API en vivo ni despliegue."
++          ]
++        },
++        "model": {
++          "model": "claude-sonnet-5-5",
++          "effort": "medium",
++          "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
++          "verified_at": "2026-11-08"
++        },
++        "duration_s": 44.248,
++        "usage": {
++          "provider_reported": {
++            "total_cost_usd": 0.3258474,
++            "duration_ms": 40626,
++            "input_tokens": 6,
++            "cache_creation_input_tokens": 64219,
++            "cache_read_input_tokens": 60394,
++            "output_tokens": 6292
++          },
++          "measured_cost_available": true,
++          "estimated_cost": null
++        }
++      },
++      {
++        "agent": "codex",
++        "phase": "defense",
++        "valid": true,
++        "response": {
++          "decision": "changes_requested",
++          "summary": "Mantengo codex-performance-service y concreto sus contratos de credenciales, permisos y datos CrUX. La arquitectura sigue propuesta: faltan implementación, revisión independiente y QA del controlador. Conectividad, seguridad ejecutada, cobertura y costes: unknown.",
++          "changes": [],
++          "evidence": [
++            "source:tools/ipanema/access/gateway.py",
++            "source:tools/ipanema/access/policy.py",
++            "source:tools/ipanema/seo/adapters.py",
++            "source:tools/ipanema/core.py",
++            "source:tools/ipanema/compare.py",
++            "source:tools/lighthouse_audit.mjs",
++            "source:tools/performance_evidence.mjs",
++            "source:integration-context.json"
++          ],
++          "objections": [
++            {
++              "id": "codex-obj-integracion",
++              "alternative_id": "claude-dedicated-key-transport",
++              "category": "integración",
++              "severity": "high",
++              "claim": "El alcance declarado omite el registro CLI y el despacho específico de Gateway hacia performance. Añadir capacidades no evita por sí solo la ruta OAuth existente.",
++              "status": "open",
++              "evidence_refs": [
++                "source:tools/ia.py",
++                "source:tools/ipanema/access/gateway.py"
++              ],
++              "resolution_evidence_refs": []
++            },
++            {
++              "id": "codex-obj-lighthouse",
++              "alternative_id": "claude-dedicated-key-transport",
++              "category": "evidencia",
++              "severity": "high",
++              "claim": "Conservar el runner sin cambios deja persistencia del LHR completo, destinos sobrescribibles y una muestra por dispositivo. Faltan adaptación y comprobación de consumidores.",
++              "status": "open",
++              "evidence_refs": [
++                "source:tools/lighthouse_audit.mjs",
++                "source:tools/performance_evidence.mjs"
++              ],
++              "resolution_evidence_refs": []
++            },
++            {
++              "id": "codex-obj-comparacion",
++              "alternative_id": "claude-dedicated-key-transport",
++              "category": "validez de comparación",
++              "severity": "medium",
++              "claim": "La comparación necesita identidad de fuente y condiciones completas; los campos obligatorios desconocidos deben impedirla. compare.metrics permite igualdad entre campos ausentes.",
++              "status": "open",
++              "evidence_refs": [
++                "source:tools/ipanema/compare.py",
++                "source:integration-context.json"
++              ],
++              "resolution_evidence_refs": []
++            },
++            {
++              "id": "codex-obj-garantias",
++              "alternative_id": "claude-dedicated-key-transport",
++              "category": "calibración de evidencia",
++              "severity": "low",
++              "claim": "Seguridad y compatibilidad del servicio nuevo permanecen unknown; las fuentes existentes no justifican estados pass de comportamiento integrado.",
++              "status": "open",
++              "evidence_refs": [
++                "source:tools/ipanema/access/gateway.py",
++                "source:integration-context.json"
++              ],
++              "resolution_evidence_refs": []
++            }
++          ],
++          "preferred_alternative": "codex-performance-service",
++          "answers": [
++            {
++              "question_id": "claude-q1",
++              "from_agent": "claude",
++              "answer": "La clave se resolverá exclusivamente en el proceso confiable del controlador que aloja Gateway o CLI, después de validar permisos y solicitud; el worker no heredará su entorno ni almacén. Gateway muestra el precedente de resolución local de credenciales, pero no prueba este aislamiento nuevo. MCP expondrá únicamente campos permitidos: estado, procedencia, solicitud sin secretos, identidad, fechas/versiones, métricas, categorías, auditorías saneadas, periodos y limitaciones. Excluirá claves, URL de transporte, cabeceras, cuerpos originales, snippets y errores libres. Faltan fixtures de filtración y comprobación del entorno del worker.",
++              "disposition": "revise",
++              "evidence_refs": [
++                "source:tools/ipanema/access/gateway.py",
++                "source:tools/performance_evidence.mjs",
++                "source:integration-context.json"
++              ]
++            },
++            {
++              "question_id": "claude-q2",
++              "from_agent": "claude",
++              "answer": "Propongo psi.read → psi_run_pagespeed y crux.read → crux_query_record/crux_query_history; stop_path admitirá psi y crux. CLI y Gateway delegarán en el servicio con una única contabilización por solicitud. Bajo Policy.locked se validarán grant, capacidad, configuración, parada y presupuesto antes de caché o claves. consume contará la solicitud por tarea, incluso en caché. Antes de cada intento HTTP se reservará y persistirá presupuesto diario por proyecto/proveedor y presupuesto de intentos de la ejecución; cada reintento consumirá ambos. El servicio conservará el bloqueo hasta registrar resultado/parada para evitar llamadas concurrentes posteriores a 403/429. Los grants existentes mantendrán su contrato; falta QA de concurrencia y regresión.",
++              "disposition": "revise",
++              "evidence_refs": [
++                "source:tools/ipanema/access/policy.py",
++                "source:tools/ipanema/access/gateway.py",
++                "source:integration-context.json"
++              ]
++            },
++            {
++              "question_id": "claude-q3",
++              "from_agent": "claude",
++              "answer": "Sí: una consulta URL sin datos devolverá datos insuficientes; consultar origen requerirá otra solicitud explícita. model conservará requested_identity y returned_identity con granularidad url/origin y formFactor, validando su correspondencia antes de normalizar. History conservará collectionPeriods y series alineadas por índice, p75s, densidades, unidades y nulos; no generará muestras diarias independientes ni atribuirá diferencias a despliegues. Lo respaldan verified_contracts sobre exclusión URL/origin e historial, proposed_scope sobre identidad y periodos, y acceptance sobre URL/origen separados y nulos de integration-context.json. La validación aún es unknown.",
++              "disposition": "defend",
++              "evidence_refs": [
++                "source:integration-context.json"
++              ]
++            }
++          ],
++          "withdrawn_alternatives": [],
++          "revision_notes": [
++            "La propuesta inicial ya incluía pruebas de consultas sensibles codificadas; su ejecución sigue pendiente. La redacción genérica no basta: el transporte no registrará URLs autenticadas ni excepciones originales.",
++            "performance/model exigirá identidad completa para comparaciones; un campo obligatorio unknown producirá comparación no válida.",
++            "Para evidencia nueva, Lighthouse usará una proyección saneada revisada, destinos inmutables y muestras individuales con mediana/rango; se comprobarán sus consumidores.",
++            "Estas precisiones no resuelven objeciones mediante pruebas. No hay recibos nuevos del controlador ni autorización de llamadas reales o publicación."
++          ]
++        },
++        "model": {
++          "model": "gpt-6.1-sol",
++          "effort": "medium",
++          "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
++          "verified_at": "2026-11-08"
++        },
++        "duration_s": 50.277,
++        "usage": {
++          "provider_reported": {
++            "input_tokens": 49434,
++            "cached_input_tokens": 0,
++            "cache_write_input_tokens": 0,
++            "output_tokens": 1633,
++            "reasoning_output_tokens": 120
++          },
++          "measured_cost_available": false,
++          "estimated_cost": null
++        }
++      }
++    ],
++    "architecture_gate": "approved_with_conditions by controller; original agents retained open implementation QA gates",
++    "original_snapshot_sha256": {
++      "tools/ia.py": "85e955b9dcbffb42a7f97eeeb65d4dc2b82f76f56f14cb72c4c7f28b74ce4b15",
++      "tools/ipanema/core.py": "07731645318b727cefcf80f3f25e977842ab422280ca873a36cef0f4c0aeee25",
++      "tools/ipanema/access/credentials.py": "10e0c0a7dff5f087426668ace5f0d1aab76c504d34ded284ab629ebc2697f6b1",
++      "tools/ipanema/access/policy.py": "803a4a3e9af209195f44f89beabf03ed9253d9af6e2b55b8f2f3837976df6163",
++      "tools/ipanema/access/gateway.py": "c97a5b7444a6772d3c17a2bca5f71b0225738636059ad87725ed9dfb1cf72234",
++      "tools/ipanema/compare.py": "7bf6446f3e54003325dd8d314bae48e2f486b311ece0570cb4d5026ab49cbe78",
++      "tools/lighthouse_audit.mjs": "c0873b5b1dfdf018b9d4d5d37df37ef01f321a1990b4c4e569431dce75e0e80d",
++      "tools/performance_evidence.mjs": "8dacf6eb1348fca7cf3494a89e8e15a21c8b898a46ae3b5d9b0e70da64fe4dc7",
++      "tools/ipanema/seo/adapters.py": "a7919bedc8a48741a09587f95f244e08cd360263a329d88f6052dc58643d02c0",
++      "integration-context.json": "e4e78d40f5dfd75e697919e9e558b13c75acbf4ecb58fd28bae86d38d24fee21"
++    }
++  },
++  "qa": {
++    "summary": {
++      "kind": "qa",
++      "suite": "quick",
++      "at": "2026-11-10T18:29:15.075461+00:00",
++      "outcome": "passed",
++      "report": "reports/runs/ipanema/20261110T182915-quick-dcde08a0/report.json",
++      "limitations": [
++        "Evaluación del coordinador determinista; evaluación externa del modelo no ejecutada.",
++        "Evaluaciones SEO con fixtures, sin conexión real a cuentas Google."
++      ],
++      "checks": [
++        {
++          "name": "repository",
++          "status": "passed"
++        },
++        {
++          "name": "unit-tests",
++          "status": "passed"
++        },
++        {
++          "name": "integration-tests",
++          "status": "passed"
++        },
++        {
++          "name": "coordinator-evals",
++          "status": "passed"
++        },
++        {
++          "name": "seo-action-evals",
++          "status": "passed"
++        },
++        {
++          "name": "sources-stable-during-qa",
++          "status": "passed"
++        }
++      ]
++    },
++    "counts": {
++      "unit-tests": 278,
++      "integration-tests": 40
++    }
++  },
++  "browser_fixture": {
++    "run": "reports/runs/ipanema/20261110T182855-performance-browser-fixture-53ef2841",
++    "simulated_content": true,
++    "actual_browser": true,
++    "remote_requests_authorized": false,
++    "results": [
++      {
++        "device": "mobile",
++        "exit_code": 0,
++        "profile": {
++          "source": "lighthouse_local",
++          "url": "http://127.0.0.1:44269/",
++          "final_url": "http://127.0.0.1:44269/",
++          "device": "mobile",
++          "categories": [
++            "performance",
++            "accessibility",
++            "best-practices",
++            "seo"
++          ],
++          "locale": "es",
++          "lighthouse_version": "13.6.0",
++          "chrome_version": "155.0.8059.84",
++          "screen": {
++            "mobile": true,
++            "width": 412,
++            "height": 823,
++            "deviceScaleFactor": 1.75,
++            "disabled": false
++          },
++          "throttling_method": "simulate",
++          "throttling": {
++            "rttMs": 150,
++            "throughputKbps": 1638.4,
++            "requestLatencyMs": 562.5,
++            "downloadThroughputKbps": 1474.56,
++            "uploadThroughputKbps": 675,
++            "cpuSlowdownMultiplier": 4
++          },
++          "cache": false,
++          "network_policy": "loopback-only-fixture"
++        },
++        "sample_count": 2,
++        "statistics": {
++          "lcp": {
++            "median": 626.1965250000001,
++            "min": 625.65835,
++            "max": 626.7347,
++            "available_samples": 2
++          },
++          "fcp": {
++            "median": 626.1965250000001,
++            "min": 625.65835,
++            "max": 626.7347,
++            "available_samples": 2
++          },
++          "cls": {
++            "median": 0.0,
++            "min": 0.0,
++            "max": 0.0,
++            "available_samples": 2
++          },
++          "tbt": {
++            "median": 5.75,
++            "min": 1.5,
++            "max": 10.0,
++            "available_samples": 2
++          },
++          "speed_index": {
++            "median": 626.1965250000001,
++            "min": 625.65835,
++            "max": 626.7347,
++            "available_samples": 2
++          }
++        }
++      },
++      {
++        "device": "desktop",
++        "exit_code": 0,
++        "profile": {
++          "source": "lighthouse_local",
++          "url": "http://127.0.0.1:44269/",
++          "final_url": "http://127.0.0.1:44269/",
++          "device": "desktop",
++          "categories": [
++            "performance",
++            "accessibility",
++            "best-practices",
++            "seo"
++          ],
++          "locale": "es",
++          "lighthouse_version": "13.6.0",
++          "chrome_version": "155.0.8059.84",
++          "screen": {
++            "mobile": false,
++            "width": 1350,
++            "height": 940,
++            "deviceScaleFactor": 1,
++            "disabled": false
++          },
++          "throttling_method": "simulate",
++          "throttling": {
++            "rttMs": 40,
++            "throughputKbps": 10240,
++            "requestLatencyMs": 0,
++            "downloadThroughputKbps": 0,
++            "uploadThroughputKbps": 0,
++            "cpuSlowdownMultiplier": 1
++          },
++          "cache": false,
++          "network_policy": "loopback-only-fixture"
++        },
++        "sample_count": 1,
++        "statistics": {
++          "lcp": {
++            "median": 170.5745,
++            "min": 170.5745,
++            "max": 170.5745,
++            "available_samples": 1
++          },
++          "fcp": {
++            "median": 170.5745,
++            "min": 170.5745,
++            "max": 170.5745,
++            "available_samples": 1
++          },
++          "cls": {
++            "median": 0.0,
++            "min": 0.0,
++            "max": 0.0,
++            "available_samples": 1
++          },
++          "tbt": {
++            "median": 0.0,
++            "min": 0.0,
++            "max": 0.0,
++            "available_samples": 1
++          },
++          "speed_index": {
++            "median": 170.5745,
++            "min": 170.5745,
++            "max": 170.5745,
++            "available_samples": 1
++          }
++        }
++      }
++    ]
++  },
++  "google_live": {
++    "status": "blocked_credentials_unavailable",
++    "pagespeed_mobile": "credentials_unavailable",
++    "pagespeed_desktop": "credentials_unavailable",
++    "crux_mobile": "credentials_unavailable",
++    "http_attempts": 0
++  },
++  "limitations": [
++    "Fixtures never count as Google connectivity.",
++    "No store/theme optimization or writes.",
++    "PSI cannot measure an unpublished local diff.",
++    "No immediate CrUX causal claims."
++  ],
++  "production_modified": false,
++  "themes_modified": false,
++  "independent_review": {
++    "agent": "claude",
++    "status": "approve_local_scope_only",
++    "attempts": [
++      {
++        "run": "reports/runs/ipanema/20261110T182542-performance-independent-review-9a45cfa3",
++        "decision": "changes_requested",
++        "error": null,
++        "response": {
++          "decision": "changes_requested",
++          "summary": "El diff cumple en lo esencial el objetivo local: servicio compartido CLI/MCP, transporte con endpoints fijos, 403/429 con parada persistente, presupuesto reservado antes de cada intento HTTP, caché privada, identidad CrUX sin fallback y comparación que devuelve not_comparable ante datos desconocidos. No ejecuté pruebas. Me baso en el QA del controlador (quick: passed, 274 unit y 40 integration) y en la lectura del diff. Hay un defecto de privacidad en la evidencia entregada y dos riesgos menores que conviene corregir o documentar antes de aprobar. Esta decisión no certifica producción ni conectividad real con Google.",
++          "evidence": [
++            "DEFECTO (privacidad): reports/performance/verification.json, campo qa.summary.report, contiene la ruta absoluta 'reports/runs/...', que incluye el nombre de usuario del sistema. Las reglas del repositorio reservan las rutas personales para configuración local y prohíben datos privados en evidencias. Sustituir por una ruta relativa al repositorio (reports/runs/ipanema/20261110T182515-quick-cee95919/report.json) y revisar que no queden otras rutas absolutas en el archivo.",
++            "RIESGO (service.py, local()): la validación de origen de url y final_url se hace después de ejecutar Lighthouse y de que el runner escriba sample-N.json y samples.json en run/browser. Si Chrome sigue una redirección a un dominio ajeno, esa evidencia ya queda persistida. Además checked_url lanza IpanemaError sin capturar, lo que aborta el comando y descarta los resultados PSI/CrUX ya obtenidos en 'audit' (persist no se llega a ejecutar). Si final_url es None, authorize_url recibe None y puede fallar con una excepción distinta de IpanemaError. Sugerencia: capturar el error y devolver un estado explícito (p. ej. redirect_not_authorized) sin conservar las muestras, o documentar que el control es posterior al hecho. Esto contradice parcialmente la frase del README 'No se autoriza un dominio alternativo por redirección'.",
++            "RIESGO (model.py, lighthouse()): chrome_version se descarta cuando termina en '.0.0.0'. Los user agents reducidos de Chrome siempre tienen esa forma, así que con respuestas reales de PSI es probable que chrome_version sea None y 'performance compare --source pagespeed' devuelva siempre not_comparable. El comportamiento es conservador y coherente con la política de desconocidos bloqueantes, pero los fixtures sintéticos usan '130.1.2.3', lo que oculta el problema. El README debe decirlo, o debe obtenerse la versión de otro campo verificado.",
++            "RIESGO (service.py, read()): se exige lhr.requestedUrl == opt['url'] sin normalizar. Si PSI devuelve la URL con barra final (public_url sin ella), habría un identity_mismatch falso. El caso solo está cubierto con fixtures, no con la API real. Documentarlo como no verificado o comparar tras normalizar, como ya se hace en CrUX con urlNormalizationDetails.",
++            "VERIFICADO POR LECTURA: gateway.py pasa already_locked=True para no reentrar en el flock; los kwargs duplicados ('authorized', 'already_locked', 'source') provocan TypeError y se convierten en IpanemaError genérico. policy.py admite psi y crux en stop_path y CAPABILITIES. providers.py no incluye el HTTPError original en la excepción (raise ... from None). model.sanitize cubre claves codificadas dos veces y el eco de la clave API en sus tres codificaciones. Los tests offline cubren estos puntos, y el QA del controlador los reporta como pasados.",
++            "NO VERIFICABLE CON LO ENTREGADO: tests/fixtures/performance/*, reports/performance/example-mobile.json y example-desktop.json no están entre los archivos revisables; el README los enlaza. La conectividad real con PSI/CrUX queda bloqueada por credenciales (http_attempts=0, google_live.status=blocked_credentials_unavailable), y verification.json lo declara así sin sobrevalorarlo."
++          ],
++          "changes": []
++        },
++        "duration_s": 54.822,
++        "model": {
++          "model": "claude-sonnet-5-5",
++          "effort": "medium",
++          "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
++          "verified_at": "2026-11-08"
++        },
++        "usage": {
++          "provider_reported": {
++            "total_cost_usd": 0.6133589,
++            "duration_ms": 53077,
++            "input_tokens": 2,
++            "cache_creation_input_tokens": 137465,
++            "cache_read_input_tokens": 649,
++            "output_tokens": 6343
++          },
++          "measured_cost_available": true,
++          "estimated_cost": null
++        },
++        "contract_status": "passed",
++        "process_reaped": true
++      },
++      {
++        "run": "reports/runs/ipanema/20261110T182943-performance-independent-review-a54a2e57",
++        "decision": null,
++        "error": "Contrato rechazado: json_syntax en $",
++        "response": null,
++        "duration_s": 56.528,
++        "model": null,
++        "usage": {
++          "provider_reported": {
++            "total_cost_usd": 0.7415048999999999,
++            "duration_ms": 54313,
++            "input_tokens": 2,
++            "cache_creation_input_tokens": 168671,
++            "cache_read_input_tokens": 1369,
++            "output_tokens": 6668
++          },
++          "measured_cost_available": true,
++          "estimated_cost": null
++        },
++        "contract_status": "failed",
++        "process_reaped": true
++      },
++      {
++        "run": "reports/runs/ipanema/20261110T183215-performance-review-native-recovery-77bfd376",
++        "decision": "approve",
++        "error": null,
++        "response": {
++          "decision": "approve",
++          "summary": "Aprobado solo para el alcance local de este fixture. No es una certificación de producción ni de conectividad con Google.\n\nRevisé el diff y la evidencia aportada. No encontré defectos que bloqueen el objetivo.\n\n- **Permisos y red.** `performance` exige `--allow-network` o un grant con capacidades `psi.read`/`crux.read`, y valida la URL contra el origen registrado antes de cualquier solicitud. La URL debe ser HTTPS y pública, sin credenciales ni parámetros sensibles, ni siquiera codificados dos veces.\n- **Credenciales.** Las claves se resuelven solo desde variables de entorno del controlador. Sin clave, el estado es `credentials_unavailable` y no hay solicitudes. El transporte no sigue redirecciones ni expone la clave en los errores HTTP. La sanitización cubre ecos de la clave, incluso codificados.\n- **Cuotas y paradas.** Los 403/429 dejan una parada persistente en `Policy` y no hay reintento. El presupuesto diario y por ejecución se aplica bajo el lock de `Policy`, y un archivo de presupuesto corrupto bloquea la red. La caché es privada (0700/0600), rechaza symlinks, archivos futuros o corruptos, y se invalida si cambia la configuración.\n- **Identidad y comparación.** CrUX valida URL u origen y `formFactor`, sin fallback silencioso de URL a origen. Los datos faltantes o nulos producen `partial`, no ceros. `compare` y `summarize` devuelven `not_comparable` ante cualquier dato desconocido o diferente, incluido un user agent reducido (`.0.0.0`) y una repetición servida desde caché.\n- **Lighthouse local.** El modo `--job` usa una lista blanca de variables de entorno y valida las URLs finales antes de persistir las muestras. Guarda una proyección saneada, sin snippets ni cabeceras. Un fallo local no descarta los resultados PSI/CrUX del mismo informe. El flujo histórico de `lighthouse_audit.mjs` queda intacto, dentro del `else`.\n- **Gateway.** Reutiliza el servicio con `already_locked=True` bajo el lock de `Policy`. El consumo de cuota por llamada también cuenta los aciertos de caché. No se añaden herramientas de escritura, y CommandCode sigue bloqueado.\n- **Pruebas.** Los registros del controlador reportan la suite `quick` aprobada (278 unitarias y 40 de integración) y una ejecución de navegador real sobre un fixture loopback con perfiles mobile/desktop. Las pruebas del diff cubren permisos, identidad, presupuesto, caché, paradas, secretos, historial con nulos, sanitización en Node, MCP real por stdio y rutas con espacios. Yo no ejecuté nada, y lo que cito sale de los recibos.\n\nObservaciones menores, no bloqueantes:\n- Un agente MCP puede pasar `refresh` dentro de `request`. Sigue acotado por el presupuesto y el grant.\n- La sanitización Python redacta cualquier clave que contenga `key`, más amplia que la de JS. Es más conservadora, no menos.\n- El README enlaza `ADR-001.md`, `verification.json` y los ejemplos mobile/desktop, que no estaban entre los archivos revisados. Conviene comprobar que existen.\n\nPendiente, como declara el propio README: conectividad real con PSI/CrUX, cobertura de CrUX, cuota de la cuenta y una comparación real, todo bloqueado por falta de claves.",
++          "evidence": [
++            "review-receipts.json: qa quick passed (repository, unit-tests, integration-tests, coordinator-evals, seo-action-evals, sources-stable-during-qa); 278 unitarias y 40 de integración.",
++            "review-receipts.json: browser_fixture con navegador real sobre un fixture loopback (simulated_content=true, remote_requests_authorized=false), perfiles mobile y desktop con versiones reales de Lighthouse y Chrome.",
++            "review-receipts.json: google_live=blocked_credentials_unavailable con http_attempts=0; no se afirma conectividad con Google.",
++            "tools/ipanema/performance/service.py: `read` exige `authorized`, comprueba la parada persistente, valida la caché y llama a `reserve` (presupuesto bajo lock) antes de cada intento. 403/429 llaman a `policy.stop`. Los reintentos se limitan a red y 5xx.",
++            "tools/ipanema/performance/providers.py: endpoints fijos, `_NoRedirect`, límite de 10 MB. `HTTPError` se convierte en `Failure` con `from None`, sin exponer la URL con clave.",
++            "tools/ipanema/performance/model.py: `compare` y `summarize` rechazan perfiles con datos None, diferentes o `chrome_version` reducido. `crux` valida identidad y `formFactor`, y marca `partial` ante nulos en lugar de ceros.",
++            "tools/ipanema/access/gateway.py: las ramas psi/crux reutilizan `Service` con `already_locked=True`. Las capacidades y la cuota las valida `Policy.consume`. El test de integración confirma 1 llamada de transporte y 2 consumos de grant (el segundo, un acierto de caché).",
++            "tests/unit/test_performance.py, test_performance_js.py y tests/integration/test_performance_cli.py cubren permisos previos a la red, secretos codificados, caché, presupuesto concurrente, identidad CrUX, historial con nulos, fallos locales incompletos, proyección Node saneada y MCP real."
++          ],
++          "changes": []
++        },
++        "duration_s": 34.808,
++        "model": {
++          "model": "claude-sonnet-5-5",
++          "effort": "medium",
++          "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
++          "verified_at": "2026-11-08"
++        },
++        "usage": {
++          "provider_reported": {
++            "total_cost_usd": 0.409562,
++            "duration_ms": 33345,
++            "input_tokens": 2,
++            "cache_creation_input_tokens": 91712,
++            "cache_read_input_tokens": 0,
++            "output_tokens": 4271
++          },
++          "measured_cost_available": true,
++          "estimated_cost": null
++        },
++        "contract_status": "passed",
++        "process_reaped": true
++      }
++    ],
++    "source_hashes_match_current": {
++      "tools/lighthouse_audit.mjs": true,
++      "tools/performance_evidence.mjs": true,
++      "tools/ipanema/performance/model.py": true,
++      "tools/ipanema/performance/service.py": true,
++      "tools/ipanema/performance/providers.py": true,
++      "tools/ipanema/performance/cli.py": true,
++      "tools/ipanema/access/gateway.py": true,
++      "tests/unit/test_performance.py": true,
++      "tests/unit/test_performance_js.py": true,
++      "tests/integration/test_performance_cli.py": true,
++      "reports/performance/README.md": true,
++      "tests/fixtures/performance/crux-mobile.json": true,
++      "tests/fixtures/performance/crux-history.json": true,
++      "tests/fixtures/performance/pagespeed-desktop.json": true,
++      "tests/fixtures/performance/pagespeed-mobile.json": true
++    },
++    "latest_run": "reports/runs/ipanema/20261110T183215-performance-review-native-recovery-77bfd376"
++  },
++  "costs": {
++    "claude_reported_subtotal_usd": 2.6474941999999997,
++    "codex_cost_usd": null,
++    "note": "Subtotal declarado por Claude, no factura total. Codex informa tokens, no coste. APIs Google no consultadas."
++  },
++  "changed_files": [
++    "tools/ia.py",
++    "tools/ipanema/access/policy.py",
++    "tools/ipanema/access/gateway.py",
++    "tools/lighthouse_audit.mjs",
++    "tools/performance_evidence.mjs",
++    "tools/ipanema/performance/model.py",
++    "tools/ipanema/performance/service.py",
++    "tools/ipanema/performance/providers.py",
++    "tools/ipanema/performance/cli.py",
++    "tools/ipanema/performance/__init__.py",
++    ".agents/skills/ipanema-performance/SKILL.md",
++    "README.md",
++    "tests/unit/test_performance.py",
++    "tests/unit/test_performance_js.py",
++    "tests/integration/test_performance_cli.py",
++    "tests/fixtures/performance/crux-mobile.json",
++    "tests/fixtures/performance/crux-history.json",
++    "tests/fixtures/performance/pagespeed-desktop.json",
++    "tests/fixtures/performance/pagespeed-mobile.json",
++    "reports/performance/ADR-001.md",
++    "reports/performance/README.md",
++    "reports/performance/example-mobile.json",
++    "reports/performance/example-desktop.json",
++    "reports/performance/verification.json"
++  ]
++}

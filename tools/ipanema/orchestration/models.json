@@ -52,11 +52,11 @@
         "effort": null
       },
       "strong": {
-        "model": "moonshotai/kimi-k3.1-pro",
+        "model": "moonshotai/Kimi-K3.1-Pro",
         "effort": null
       },
       "critical": {
-        "model": "moonshotai/kimi-k3.1-pro",
+        "model": "moonshotai/Kimi-K3.1-Pro",
         "effort": null
       }
     }
@@ -67,5 +67,34 @@
     "CommandCode critical reuses strong: review independence, not maximum provider capacity.",
     "Claude Fable critical can require additional credits and is never a silent automatic fallback.",
     "No ultra effort: automatic provider delegation would conflict with central scheduling."
-  ]
+  ],
+  "verification_observation": {
+    "at": "2026-11-10",
+    "sources_checked": [
+      "https://learn.chatgpt.com/docs/models",
+      "https://learn.chatgpt.com/docs/config-file/config-reference",
+      "https://code.claude.com/docs/en/model-config",
+      "https://commandcode.ai/docs/reference/cli/models"
+    ],
+    "scope": "Selected IDs/effort documentation, not authenticated account availability",
+    "change": "CommandCode strong/critical use official case-sensitive Kimi ID; no automatic premium escalation."
+  },
+  "council": {
+    "mode": "dual-agent",
+    "enabled": true,
+    "members": [
+      "claude",
+      "codex"
+    ],
+    "disabled": [
+      "commandcode"
+    ],
+    "require_both_for_major_decisions": true,
+    "independent_proposals": true,
+    "cross_examination": true,
+    "require_defense": true,
+    "evidence_based_decisions": true,
+    "max_deliberation_rounds": 2,
+    "production_requires_human_authorization": true
+  }
 }

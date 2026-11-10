@@ -16,7 +16,10 @@ from .broker import TaskBroker
 from .policy import Policy
 
 
-def probe_agents(project, url, *, profile='security', agents=('claude', 'codex', 'commandcode'), include_gsc=False):
+def probe_agents(project, url, *, profile='security', agents=None, include_gsc=False):
+    from ..orchestration.adapters import enabled_agents,require_agent
+    agents=tuple(agents) if agents is not None else enabled_agents()
+    for agent in agents:require_agent(agent)
     settings = config(project)
     supervisor = Supervisor(settings)
     run = project.new_run('access-agents')

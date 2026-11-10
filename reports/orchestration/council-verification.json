@@ -1,0 +1,565 @@
+{
+  "schema_version": 1,
+  "at": "2026-11-10T00:51:36.566329+00:00",
+  "status": "partial",
+  "base_commit": "649a0c883e1b460dfed6bf1dbf64b407679aeb7c",
+  "implementation_sha256": {
+    "AGENTS.md": "52da01674d72e26fafa97d6283a4007e7648acacd0619a9bf5dfe23c35617e74",
+    "tests/fixtures/council/read-only.txt": "24bd0b2ed0ba0b3779afe4fccab615a849dea6601d7901ae58bd7b0f330b1f36",
+    "tests/integration/test_council_cli.py": "e8af450d2800463f291fd21b019d14c078a7b641cfe3e54bbd70b6d5571aac4f",
+    "tests/unit/test_council_engine.py": "700a85d9293fa9839ec354a83a522e10e48a665b622eba3548b74ffd2df45d46",
+    "tests/unit/test_council_policy.py": "4595f42c824de6d31c48ca7ff901873a646487f1dfa5b372d76102d96d93aabc",
+    "tests/unit/test_council_receipts.py": "a70bffee039ef3e5e901eabb2f2add4ad8e28535445a90d5291aaec1274942ff",
+    "tools/ipanema/orchestration/__init__.py": "d36de51224b4946f8db8df4b83d8feecb5852a86064fc09f762d6e5468dc0b39",
+    "tools/ipanema/orchestration/adapters.py": "0e242b37a71f2d008a93e27a1c5e715aac950692e5c831f05ed7514aa256854b",
+    "tools/ipanema/orchestration/cli.py": "603ca44ad961f95731dce2af11eb8daeb28704f6a9f74b0b4bc2b1c9b837c8e8",
+    "tools/ipanema/orchestration/council.py": "89b52259567f2b422a62724e4e74a9c05c48d894e577d2310fbb4e0175a79122",
+    "tools/ipanema/orchestration/council_runtime.py": "8a7f14e3e1d25e09b159f6073f045903aea94fa3eb2f83c2a42bc24de986db19",
+    "tools/ipanema/orchestration/engine.py": "22d9925300cff3bd11cb42066070f4e367fc1ab76f880d4ae9ad95a22626f2af",
+    "tools/ipanema/orchestration/isolation.py": "1937862def1ee079f225016e192a69ac2917d4ea15fdc4ae3340a8b7a89c9bea",
+    "tools/ipanema/orchestration/models.json": "ecc01e3ff39b35d510d260b67664f03af149014886597deaa7066fe423305f0b",
+    "tools/ipanema/orchestration/planner.py": "83c8428a7a49ce7eb05a2443c3c3715ae207f8a683420865a4980b2f703f73a5",
+    "tools/ipanema/orchestration/recovery.py": "046fa0586a89cbba6a6604aefb1c4a8f18ac336fb8a1cd3793ca6882669f92a3",
+    "tools/ipanema/qa.py": "33408fbd17dc1f66e1b3fd11e635209ad1fcb1f2d31edbbbbaee953e42570c07"
+  },
+  "offline": {
+    "specific_council_tests": 57,
+    "quick_unit_tests": 203,
+    "quick_integration_tests": 34,
+    "orchestration_suite": "passed",
+    "quick_suite": "passed",
+    "independent_source_review": "APPROVE",
+    "providers_simulated_in_offline_tests": true
+  },
+  "real_scenarios": [
+    {
+      "run": "reports/runs/ipanema/20261110T004157-orchestration-8b64d865",
+      "project": "ipanema",
+      "classification": "L1",
+      "state": "blocked",
+      "adr_status": "needs_evidence",
+      "coverage": {
+        "required_agents": [
+          "claude",
+          "codex",
+          "commandcode"
+        ],
+        "participants": [
+          {
+            "requested_agent": "claude",
+            "effective_agent": "claude",
+            "status": "available"
+          },
+          {
+            "requested_agent": "codex",
+            "effective_agent": "codex",
+            "status": "unavailable",
+            "error": {
+              "category": "invalid_contract_or_unavailable",
+              "summary": "No se recibió una propuesta válida; no cuenta como participación completa."
+            }
+          },
+          {
+            "requested_agent": "commandcode",
+            "effective_agent": "commandcode",
+            "status": "unavailable",
+            "error": {
+              "category": "inactivity",
+              "summary": "No se recibió una propuesta válida; no cuenta como participación completa."
+            }
+          }
+        ],
+        "effective_agents": [
+          "claude"
+        ],
+        "complete": false,
+        "objections_complete": false,
+        "consensus": "incomplete_or_disagreement"
+      },
+      "rounds_executed": 1,
+      "worker_attempt_budget": {
+        "limit": 6,
+        "used": 3,
+        "includes_retries_and_substitutions": true,
+        "provider_internal_api_call_count": "not_available"
+      },
+      "participants": [
+        {
+          "requested_agent": "claude",
+          "effective_agent": "claude",
+          "model": "claude-haiku-5-5",
+          "effort": "low",
+          "proposal_valid": true,
+          "error_category": null,
+          "duration_s": 14.631,
+          "process_reaped": true,
+          "context_complete": true,
+          "usage": {
+            "provider_reported": {
+              "total_cost_usd": 0.00540959,
+              "duration_ms": 12432,
+              "input_tokens": 2,
+              "cache_creation_input_tokens": 20377,
+              "cache_read_input_tokens": 649,
+              "output_tokens": 2655
+            },
+            "measured_cost_available": true,
+            "estimated_cost": null
+          }
+        },
+        {
+          "requested_agent": "codex",
+          "effective_agent": "codex",
+          "model": "gpt-6-luna",
+          "effort": "low",
+          "proposal_valid": false,
+          "error_category": "invalid_contract_or_unavailable",
+          "duration_s": 18.992,
+          "process_reaped": true,
+          "context_complete": true,
+          "usage": {
+            "provider_reported": {
+              "input_tokens": 24559,
+              "cached_input_tokens": 11520,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 786,
+              "reasoning_output_tokens": 0
+            },
+            "measured_cost_available": false,
+            "estimated_cost": null
+          }
+        },
+        {
+          "requested_agent": "commandcode",
+          "effective_agent": "commandcode",
+          "model": "deepseek/deepseek-v4.1-flash",
+          "effort": null,
+          "proposal_valid": false,
+          "error_category": "inactivity",
+          "duration_s": 45.102,
+          "process_reaped": true,
+          "context_complete": true,
+          "usage": {
+            "provider_reported": {},
+            "measured_cost_available": false,
+            "estimated_cost": null
+          }
+        }
+      ],
+      "source_hashes": {
+        "tests/fixtures/council/read-only.txt": "24bd0b2ed0ba0b3779afe4fccab615a849dea6601d7901ae58bd7b0f330b1f36"
+      },
+      "original_still_matches": true,
+      "production_modified": false,
+      "patch_empty": true,
+      "baseline": {
+        "executed": true,
+        "passed": true,
+        "kind": "unit-tests-isolated",
+        "skips_observed": true
+      }
+    },
+    {
+      "run": "reports/runs/damarbeauty/20261110T004308-orchestration-6c893c1d",
+      "project": "damarbeauty",
+      "classification": "L3",
+      "state": "blocked",
+      "adr_status": "needs_evidence",
+      "coverage": {
+        "required_agents": [
+          "claude",
+          "codex",
+          "commandcode"
+        ],
+        "participants": [
+          {
+            "requested_agent": "claude",
+            "effective_agent": "claude",
+            "status": "unavailable",
+            "error": {
+              "category": "inactivity",
+              "summary": "No se recibió una propuesta válida; no cuenta como participación completa."
+            }
+          },
+          {
+            "requested_agent": "codex",
+            "effective_agent": "codex",
+            "status": "unavailable",
+            "error": {
+              "category": "inactivity",
+              "summary": "No se recibió una propuesta válida; no cuenta como participación completa."
+            }
+          },
+          {
+            "requested_agent": "commandcode",
+            "effective_agent": "commandcode",
+            "status": "unavailable",
+            "error": {
+              "category": "inactivity",
+              "summary": "No se recibió una propuesta válida; no cuenta como participación completa."
+            }
+          }
+        ],
+        "effective_agents": [],
+        "complete": false,
+        "objections_complete": false,
+        "consensus": "incomplete_or_disagreement"
+      },
+      "rounds_executed": 1,
+      "worker_attempt_budget": {
+        "limit": 6,
+        "used": 3,
+        "includes_retries_and_substitutions": true,
+        "provider_internal_api_call_count": "not_available"
+      },
+      "participants": [
+        {
+          "requested_agent": "claude",
+          "effective_agent": "claude",
+          "model": "claude-opus-5-5",
+          "effort": "high",
+          "proposal_valid": false,
+          "error_category": "inactivity",
+          "duration_s": 45.666,
+          "process_reaped": true,
+          "context_complete": true,
+          "usage": {
+            "provider_reported": {},
+            "measured_cost_available": false,
+            "estimated_cost": null
+          }
+        },
+        {
+          "requested_agent": "codex",
+          "effective_agent": "codex",
+          "model": "gpt-6.1-sol",
+          "effort": "high",
+          "proposal_valid": false,
+          "error_category": "inactivity",
+          "duration_s": 45.946,
+          "process_reaped": true,
+          "context_complete": true,
+          "usage": {
+            "provider_reported": {},
+            "measured_cost_available": false,
+            "estimated_cost": null
+          }
+        },
+        {
+          "requested_agent": "commandcode",
+          "effective_agent": "commandcode",
+          "model": "moonshotai/Kimi-K3.1-Pro",
+          "effort": null,
+          "proposal_valid": false,
+          "error_category": "inactivity",
+          "duration_s": 47.189,
+          "process_reaped": true,
+          "context_complete": true,
+          "usage": {
+            "provider_reported": {},
+            "measured_cost_available": false,
+            "estimated_cost": null
+          }
+        }
+      ],
+      "source_hashes": {
+        "snippets/product-list/pagination.tpl": "c715cc6c77d07dced5cdad6066785142c307b0f3ca3429cf88f5290cf7f2edc2",
+        "sections/main-products-grid.tpl": "034dfa1c537f91c8bbb67896e82534be876bea3c4f49a23b9d5b88487184ba9f"
+      },
+      "original_still_matches": true,
+      "production_modified": false,
+      "patch_empty": true,
+      "baseline": {
+        "executed": true,
+        "passed": true,
+        "kind": "source-schema-only",
+        "skips_observed": null
+      }
+    },
+    {
+      "run": "reports/runs/ipanema/20261110T004740-orchestration-9d0c8b50",
+      "project": "ipanema",
+      "classification": "L1",
+      "state": "blocked",
+      "adr_status": "needs_evidence",
+      "coverage": {
+        "required_agents": [
+          "claude",
+          "codex",
+          "commandcode"
+        ],
+        "participants": [
+          {
+            "requested_agent": "claude",
+            "effective_agent": "claude",
+            "status": "available"
+          },
+          {
+            "requested_agent": "codex",
+            "effective_agent": "codex",
+            "status": "unavailable",
+            "error": {
+              "category": "invalid_council_contract",
+              "summary": "No se recibió una propuesta válida; no cuenta como participación completa."
+            }
+          },
+          {
+            "requested_agent": "commandcode",
+            "effective_agent": "commandcode",
+            "status": "available"
+          }
+        ],
+        "effective_agents": [
+          "claude",
+          "commandcode"
+        ],
+        "complete": false,
+        "objections_complete": false,
+        "consensus": "incomplete_or_disagreement"
+      },
+      "rounds_executed": 1,
+      "worker_attempt_budget": {
+        "limit": 6,
+        "used": 3,
+        "includes_retries_and_substitutions": true,
+        "provider_internal_api_call_count": "not_available"
+      },
+      "participants": [
+        {
+          "requested_agent": "claude",
+          "effective_agent": "claude",
+          "model": "claude-haiku-5-5",
+          "effort": "low",
+          "proposal_valid": true,
+          "error_category": null,
+          "duration_s": 12.887,
+          "process_reaped": true,
+          "context_complete": true,
+          "usage": {
+            "provider_reported": {
+              "total_cost_usd": 0.004965219999999999,
+              "duration_ms": 10557,
+              "input_tokens": 2,
+              "cache_creation_input_tokens": 18969,
+              "cache_read_input_tokens": 2172,
+              "output_tokens": 2299
+            },
+            "measured_cost_available": true,
+            "estimated_cost": null
+          }
+        },
+        {
+          "requested_agent": "codex",
+          "effective_agent": "codex",
+          "model": "gpt-6-luna",
+          "effort": "low",
+          "proposal_valid": false,
+          "error_category": "invalid_council_contract",
+          "duration_s": 21.318,
+          "process_reaped": true,
+          "context_complete": true,
+          "usage": {
+            "provider_reported": {
+              "input_tokens": 24630,
+              "cached_input_tokens": 11520,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 752,
+              "reasoning_output_tokens": 0
+            },
+            "measured_cost_available": false,
+            "estimated_cost": null
+          }
+        },
+        {
+          "requested_agent": "commandcode",
+          "effective_agent": "commandcode",
+          "model": "deepseek/deepseek-v4.1-flash",
+          "effort": null,
+          "proposal_valid": true,
+          "error_category": null,
+          "duration_s": 34.582,
+          "process_reaped": true,
+          "context_complete": true,
+          "usage": {
+            "provider_reported": {},
+            "measured_cost_available": false,
+            "estimated_cost": null
+          }
+        }
+      ],
+      "source_hashes": {
+        "tests/fixtures/council/read-only.txt": "24bd0b2ed0ba0b3779afe4fccab615a849dea6601d7901ae58bd7b0f330b1f36"
+      },
+      "original_still_matches": true,
+      "production_modified": false,
+      "patch_empty": true,
+      "baseline": {
+        "executed": true,
+        "passed": true,
+        "kind": "unit-tests-isolated",
+        "skips_observed": true
+      }
+    },
+    {
+      "run": "reports/runs/damarbeauty/20261110T004825-orchestration-1aea849c",
+      "project": "damarbeauty",
+      "classification": "L3",
+      "state": "blocked",
+      "adr_status": "needs_evidence",
+      "coverage": {
+        "required_agents": [
+          "claude",
+          "codex",
+          "commandcode"
+        ],
+        "participants": [
+          {
+            "requested_agent": "claude",
+            "effective_agent": "claude",
+            "status": "unavailable",
+            "error": {
+              "category": "timeout",
+              "summary": "No se recibió una propuesta válida; no cuenta como participación completa."
+            }
+          },
+          {
+            "requested_agent": "codex",
+            "effective_agent": "codex",
+            "status": "unavailable",
+            "error": {
+              "category": "invalid_council_contract",
+              "summary": "No se recibió una propuesta válida; no cuenta como participación completa."
+            }
+          },
+          {
+            "requested_agent": "commandcode",
+            "effective_agent": "commandcode",
+            "status": "unavailable",
+            "error": {
+              "category": "timeout",
+              "summary": "No se recibió una propuesta válida; no cuenta como participación completa."
+            }
+          }
+        ],
+        "effective_agents": [],
+        "complete": false,
+        "objections_complete": false,
+        "consensus": "incomplete_or_disagreement"
+      },
+      "rounds_executed": 1,
+      "worker_attempt_budget": {
+        "limit": 6,
+        "used": 3,
+        "includes_retries_and_substitutions": true,
+        "provider_internal_api_call_count": "not_available"
+      },
+      "participants": [
+        {
+          "requested_agent": "claude",
+          "effective_agent": "claude",
+          "model": "claude-opus-5-5",
+          "effort": "high",
+          "proposal_valid": false,
+          "error_category": "timeout",
+          "duration_s": 120.07,
+          "process_reaped": true,
+          "context_complete": true,
+          "usage": {
+            "provider_reported": {},
+            "measured_cost_available": false,
+            "estimated_cost": null
+          }
+        },
+        {
+          "requested_agent": "codex",
+          "effective_agent": "codex",
+          "model": "gpt-6.1-sol",
+          "effort": "high",
+          "proposal_valid": false,
+          "error_category": "invalid_council_contract",
+          "duration_s": 75.962,
+          "process_reaped": true,
+          "context_complete": true,
+          "usage": {
+            "provider_reported": {
+              "input_tokens": 42899,
+              "cached_input_tokens": 12288,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 3533,
+              "reasoning_output_tokens": 493
+            },
+            "measured_cost_available": false,
+            "estimated_cost": null
+          }
+        },
+        {
+          "requested_agent": "commandcode",
+          "effective_agent": "commandcode",
+          "model": "moonshotai/Kimi-K3.1-Pro",
+          "effort": null,
+          "proposal_valid": false,
+          "error_category": "timeout",
+          "duration_s": 120.11,
+          "process_reaped": true,
+          "context_complete": true,
+          "usage": {
+            "provider_reported": {},
+            "measured_cost_available": false,
+            "estimated_cost": null
+          }
+        }
+      ],
+      "source_hashes": {
+        "snippets/product-list/pagination.tpl": "c715cc6c77d07dced5cdad6066785142c307b0f3ca3429cf88f5290cf7f2edc2",
+        "sections/main-products-grid.tpl": "034dfa1c537f91c8bbb67896e82534be876bea3c4f49a23b9d5b88487184ba9f"
+      },
+      "original_still_matches": true,
+      "production_modified": false,
+      "patch_empty": true,
+      "baseline": {
+        "executed": true,
+        "passed": true,
+        "kind": "source-schema-only",
+        "skips_observed": null
+      }
+    }
+  ],
+  "individual_contract_probes": [
+    {
+      "run": "reports/runs/ipanema/20261110T004440-council-contract-check-80ccfe6e",
+      "provider": "codex",
+      "passed": true,
+      "decision": "blocked",
+      "model": {
+        "model": "gpt-6-luna",
+        "effort": "low",
+        "reason": "fast según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+        "verified_at": "2026-11-08"
+      },
+      "duration_s": 16.268,
+      "not_a_complete_council": true
+    },
+    {
+      "run": "reports/runs/ipanema/20261110T004556-council-contract-check-69c207b2",
+      "provider": "commandcode",
+      "passed": true,
+      "decision": "proposed",
+      "model": {
+        "model": "deepseek/deepseek-v4.1-flash",
+        "effort": null,
+        "reason": "fast según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+        "verified_at": "2026-11-08"
+      },
+      "duration_s": 30.306,
+      "not_a_complete_council": true
+    }
+  ],
+  "full_real_council_demonstrated": false,
+  "real_implementation_qa_demonstrated": false,
+  "limitations": [
+    "Contracts not consistently satisfied by actual providers.",
+    "No completed real second round.",
+    "Timeouts do not establish authentication failures.",
+    "No external Google or storefront browser QA executed."
+  ]
+}

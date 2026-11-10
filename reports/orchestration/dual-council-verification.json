@@ -1,0 +1,3455 @@
+{
+  "kind": "dual-council-verification",
+  "at": "2026-11-10T16:26:50.612272+00:00",
+  "state": "real_dual_deliberation_verified_read_only",
+  "policy": {
+    "mode": "dual-agent",
+    "enabled": true,
+    "members": [
+      "claude",
+      "codex"
+    ],
+    "disabled": [
+      "commandcode"
+    ],
+    "require_both_for_major_decisions": true,
+    "independent_proposals": true,
+    "cross_examination": true,
+    "require_defense": true,
+    "evidence_based_decisions": true,
+    "max_deliberation_rounds": 2,
+    "production_requires_human_authorization": "[redacted]"
+  },
+  "configuration_source": "tools/ipanema/orchestration/models.json:council",
+  "source_hashes": {
+    "tools/ipanema/orchestration/models.json": "14fede6b13b294a8e685b8ce1072777959850d8ae05bf3270f5dd9ea527aba39",
+    "tools/ipanema/orchestration/adapters.py": "bae25bee06cf7574ee35f65e9f9055dfa8a495336f80615165ddd5232359d01d",
+    "tools/ipanema/orchestration/planner.py": "b09a3bc644618502680e8804ed7f135eaa074e7b82812d2013c5293ef909117e",
+    "tools/ipanema/orchestration/engine.py": "74885e94f8f9cbf8f7a6e71c0cc8f5f44eec032fac8892f7507e2eb06879319f",
+    "tools/ipanema/orchestration/recovery.py": "1d8b3a4d0e22bb0c8507f036ab7ff1b285e6517d8fbe670b70d679a0c317f12c",
+    "tools/ipanema/orchestration/council.py": "4ec261a0d84fbdc12d5abf85eab489d21cf85f30af57eac9769c722d17541261",
+    "tools/ipanema/orchestration/council_runtime.py": "92b6e47eb8942c26161c240a3258e481ae108b42ee2894cd0577403ea0d49635",
+    "tools/ipanema/orchestration/isolation.py": "0d734fcbf6d10e839d2a7cb46f3416ca60f0751e1491974d73186a8d56408079",
+    "tools/ipanema/orchestration/cli.py": "04e661d92b687da162887aaca8ad5c7905359e7c8376cc0ddec2370d9d58c99b",
+    "tools/ipanema/access/policy.py": "803a4a3e9af209195f44f89beabf03ed9253d9af6e2b55b8f2f3837976df6163",
+    "tools/ipanema/access/agents.py": "8ab4965c594583b0ba40d841a31a9f20e4bf69af69b7f02c260b32ab0a8a9cc3",
+    "tools/ipanema/access/cli.py": "a0abbf194221b683818f81b2e34525a8de9a41354f560b63d91e21877b1db358"
+  },
+  "real_cases": [
+    {
+      "case": "synthetic",
+      "at": "2026-11-10T16:00:23.439310+00:00",
+      "run": "reports/runs/ipanema/20261110T155918-orchestration-798cb495",
+      "state": "blocked",
+      "error": "ADR bloqueado o pendiente de evidencia; no se inicia implementación.",
+      "adr_status": "needs_evidence",
+      "coverage": {
+        "required_agents": [
+          "claude",
+          "codex"
+        ],
+        "participants": [
+          {
+            "requested_agent": "claude",
+            "effective_agent": "claude",
+            "status": "unavailable",
+            "error": {
+              "category": "authentication",
+              "summary": "No se recibió una propuesta válida; no cuenta como participación completa."
+            }
+          },
+          {
+            "requested_agent": "codex",
+            "effective_agent": "codex",
+            "status": "unavailable",
+            "error": {
+              "category": "invalid_council_contract",
+              "summary": "No se recibió una propuesta válida; no cuenta como participación completa.",
+              "semantic_rule": "Identificador de alternativa inválido."
+            }
+          }
+        ],
+        "effective_agents": [],
+        "complete": false,
+        "objections_complete": false,
+        "deliberation_complete": false,
+        "defense_complete": false,
+        "agreement": "incomplete",
+        "consensus": "incomplete_or_disagreement"
+      },
+      "questions": 0,
+      "answers": 0,
+      "phases": [
+        "independent_proposals"
+      ],
+      "duration_s": 64.453,
+      "original_source_unchanged": true,
+      "source_hashes": {
+        "tests/fixtures/council/read-only.txt": "24bd0b2ed0ba0b3779afe4fccab615a849dea6601d7901ae58bd7b0f330b1f36"
+      },
+      "production_modified": false
+    },
+    {
+      "case": "real-readonly",
+      "at": "2026-11-10T16:01:52.336513+00:00",
+      "run": "reports/runs/ipanema/20261110T160024-orchestration-8579c16d",
+      "state": "blocked",
+      "error": "ADR bloqueado o pendiente de evidencia; no se inicia implementación.",
+      "adr_status": "needs_evidence",
+      "coverage": {
+        "required_agents": [
+          "claude",
+          "codex"
+        ],
+        "participants": [
+          {
+            "requested_agent": "claude",
+            "effective_agent": "claude",
+            "status": "unavailable",
+            "error": {
+              "category": "authentication",
+              "summary": "No se recibió una propuesta válida; no cuenta como participación completa."
+            }
+          },
+          {
+            "requested_agent": "codex",
+            "effective_agent": "codex",
+            "status": "available"
+          }
+        ],
+        "effective_agents": [
+          "codex"
+        ],
+        "complete": false,
+        "objections_complete": false,
+        "deliberation_complete": false,
+        "defense_complete": false,
+        "agreement": "incomplete",
+        "consensus": "incomplete_or_disagreement"
+      },
+      "questions": 0,
+      "answers": 0,
+      "phases": [
+        "independent_proposals"
+      ],
+      "duration_s": 88.077,
+      "original_source_unchanged": true,
+      "source_hashes": {
+        "tools/ipanema/orchestration/models.json": "14fede6b13b294a8e685b8ce1072777959850d8ae05bf3270f5dd9ea527aba39",
+        "tools/ipanema/orchestration/adapters.py": "a33eae7b8ca353eeb39c2a353c255488bea09f3278b8c60de28f281fd2a54a8d",
+        "tools/ipanema/orchestration/recovery.py": "1d8b3a4d0e22bb0c8507f036ab7ff1b285e6517d8fbe670b70d679a0c317f12c",
+        "tools/ipanema/orchestration/planner.py": "b09a3bc644618502680e8804ed7f135eaa074e7b82812d2013c5293ef909117e",
+        "tools/ipanema/orchestration/engine.py": "69a7bcb06eb75219a095c183d134e604763630baafebf26e05ba0c9267fc0604",
+        "tools/ipanema/orchestration/isolation.py": "0d734fcbf6d10e839d2a7cb46f3416ca60f0751e1491974d73186a8d56408079",
+        "tools/ipanema/access/policy.py": "803a4a3e9af209195f44f89beabf03ed9253d9af6e2b55b8f2f3837976df6163"
+      },
+      "production_modified": false
+    }
+  ],
+  "real_initial_invocations": [
+    {
+      "case": "synthetic",
+      "checkpoint": "reports/runs/ipanema/20261110T155918-orchestration-798cb495/council/council-proposal-claude.json",
+      "agent": "claude",
+      "effective_agent": "claude",
+      "model": {
+        "model": "claude-haiku-5-5",
+        "effort": "low",
+        "reason": "fast según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+        "verified_at": "2026-11-08"
+      },
+      "status": "rejected",
+      "error": {
+        "category": "authentication",
+        "summary": "No se recibió una propuesta válida; no cuenta como participación completa."
+      },
+      "execution": {
+        "exit_code": 1,
+        "timed_out": false,
+        "output_limited": false,
+        "idle_timed_out": false,
+        "cancelled": false,
+        "process_started": true,
+        "process_reaped": true,
+        "stdin_bytes_written": 18943,
+        "context_complete": true,
+        "duration_s": 5.056,
+        "timing": {
+          "spawn_s": 0.000462,
+          "input_complete_s": 0.000684,
+          "first_stdout_s": 2.24961,
+          "first_stderr_s": null,
+          "timeout_phase": null,
+          "event_counts": {
+            "system": 4,
+            "assistant": 1,
+            "result": 1
+          },
+          "inference_vs_initialization": "not_separable_without_provider_events"
+        },
+        "output_accounting": {
+          "transport_bytes": 5476,
+          "retained_bytes": 5476,
+          "discarded_progress_bytes": 0,
+          "transport_limit_bytes": 20000000,
+          "retained_limit_bytes": 2000000
+        },
+        "isolation": {
+          "backend": "bubblewrap",
+          "snapshot_read_only": true,
+          "host_home_mounted": false,
+          "network": "enabled_no_destination_firewall",
+          "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+        },
+        "started_at": "2026-11-10T15:59:25.478821+00:00",
+        "prompt_bytes": 18943,
+        "prompt_sha256": "e906a6e160af9dba70c08814ca1a90ebcfac4af1fbb4e73817ef0c0d761e8de1",
+        "usage": {
+          "provider_reported": {
+            "total_cost_usd": 0,
+            "duration_ms": 2265,
+            "input_tokens": 0,
+            "cache_creation_input_tokens": 0,
+            "cache_read_input_tokens": 0,
+            "output_tokens": 0
+          },
+          "measured_cost_available": true,
+          "estimated_cost": null
+        },
+        "limits": {
+          "timeout": 120,
+          "idle_timeout": 90,
+          "startup_timeout": 30,
+          "first_response_timeout": 120
+        },
+        "structured_output": "native_schema",
+        "error_category": "authentication"
+      }
+    },
+    {
+      "case": "synthetic",
+      "checkpoint": "reports/runs/ipanema/20261110T155918-orchestration-798cb495/council/council-proposal-codex-retry-1.json",
+      "agent": "codex",
+      "effective_agent": "codex",
+      "model": {
+        "model": "gpt-6-luna",
+        "effort": "low",
+        "reason": "fast según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+        "verified_at": "2026-11-08"
+      },
+      "status": "rejected",
+      "error": {
+        "category": "invalid_council_contract",
+        "summary": "No se recibió una propuesta válida; no cuenta como participación completa.",
+        "semantic_rule": "Identificador de alternativa inválido."
+      },
+      "execution": {
+        "exit_code": 0,
+        "timed_out": false,
+        "output_limited": false,
+        "idle_timed_out": false,
+        "cancelled": false,
+        "process_started": true,
+        "process_reaped": true,
+        "stdin_bytes_written": 19150,
+        "context_complete": true,
+        "duration_s": 26.147,
+        "timing": {
+          "spawn_s": 0.000357,
+          "input_complete_s": 0.000428,
+          "first_stdout_s": 0.694198,
+          "first_stderr_s": null,
+          "timeout_phase": null,
+          "event_counts": {
+            "thread.started": 1,
+            "item.completed": 2,
+            "turn.started": 1,
+            "turn.completed": 1
+          },
+          "inference_vs_initialization": "not_separable_without_provider_events"
+        },
+        "output_accounting": {
+          "transport_bytes": 4250,
+          "retained_bytes": 4250,
+          "discarded_progress_bytes": 0,
+          "transport_limit_bytes": 20000000,
+          "retained_limit_bytes": 2000000
+        },
+        "isolation": {
+          "backend": "bubblewrap",
+          "snapshot_read_only": true,
+          "host_home_mounted": false,
+          "network": "enabled_no_destination_firewall",
+          "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+        },
+        "started_at": "2026-11-10T15:59:57.185611+00:00",
+        "prompt_bytes": 19150,
+        "prompt_sha256": "013ebd27150ef1d7edf6068cfd50248e1bbc83ea3a367a937024d4b46e38ca89",
+        "usage": {
+          "provider_reported": {
+            "input_tokens": 19299,
+            "cached_input_tokens": 0,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 737,
+            "reasoning_output_tokens": 0
+          },
+          "measured_cost_available": false,
+          "estimated_cost": null
+        },
+        "limits": {
+          "timeout": 120,
+          "idle_timeout": 90,
+          "startup_timeout": 30,
+          "first_response_timeout": 150
+        },
+        "structured_output": "native_schema",
+        "contract_validation": {
+          "status": "passed",
+          "duration_s": 0.000478
+        }
+      }
+    },
+    {
+      "case": "synthetic",
+      "checkpoint": "reports/runs/ipanema/20261110T155918-orchestration-798cb495/council/council-proposal-codex.json",
+      "agent": "codex",
+      "effective_agent": "codex",
+      "model": {
+        "model": "gpt-6-luna",
+        "effort": "low",
+        "reason": "fast según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+        "verified_at": "2026-11-08"
+      },
+      "status": "rejected",
+      "error": {
+        "category": "invalid_council_contract",
+        "summary": "No se recibió una propuesta válida; no cuenta como participación completa.",
+        "semantic_rule": "Identificador de alternativa inválido."
+      },
+      "execution": {
+        "exit_code": 0,
+        "timed_out": false,
+        "output_limited": false,
+        "idle_timed_out": false,
+        "cancelled": false,
+        "process_started": true,
+        "process_reaped": true,
+        "stdin_bytes_written": 18939,
+        "context_complete": true,
+        "duration_s": 28.803,
+        "timing": {
+          "spawn_s": 0.000395,
+          "input_complete_s": 0.000437,
+          "first_stdout_s": 0.671156,
+          "first_stderr_s": null,
+          "timeout_phase": null,
+          "event_counts": {
+            "thread.started": 1,
+            "item.completed": 2,
+            "turn.started": 1,
+            "turn.completed": 1
+          },
+          "inference_vs_initialization": "not_separable_without_provider_events"
+        },
+        "output_accounting": {
+          "transport_bytes": 3559,
+          "retained_bytes": 3559,
+          "discarded_progress_bytes": 0,
+          "transport_limit_bytes": 20000000,
+          "retained_limit_bytes": 2000000
+        },
+        "isolation": {
+          "backend": "bubblewrap",
+          "snapshot_read_only": true,
+          "host_home_mounted": false,
+          "network": "enabled_no_destination_firewall",
+          "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+        },
+        "started_at": "2026-11-10T15:59:25.478907+00:00",
+        "prompt_bytes": 18939,
+        "prompt_sha256": "8fed035d198af7c05406e7c76ca8c30325f5328147541028b85e0051d6f3b2ea",
+        "usage": {
+          "provider_reported": {
+            "input_tokens": 19261,
+            "cached_input_tokens": 0,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 596,
+            "reasoning_output_tokens": 0
+          },
+          "measured_cost_available": false,
+          "estimated_cost": null
+        },
+        "limits": {
+          "timeout": 120,
+          "idle_timeout": 90,
+          "startup_timeout": 30,
+          "first_response_timeout": 150
+        },
+        "structured_output": "native_schema",
+        "contract_validation": {
+          "status": "passed",
+          "duration_s": 0.006762
+        }
+      }
+    },
+    {
+      "case": "real-readonly",
+      "checkpoint": "reports/runs/ipanema/20261110T160024-orchestration-8579c16d/council/council-proposal-claude.json",
+      "agent": "claude",
+      "effective_agent": "claude",
+      "model": {
+        "model": "claude-opus-5-5",
+        "effort": "high",
+        "reason": "strong según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+        "verified_at": "2026-11-08"
+      },
+      "status": "rejected",
+      "error": {
+        "category": "authentication",
+        "summary": "No se recibió una propuesta válida; no cuenta como participación completa."
+      },
+      "execution": {
+        "exit_code": 1,
+        "timed_out": false,
+        "output_limited": false,
+        "idle_timed_out": false,
+        "cancelled": false,
+        "process_started": true,
+        "process_reaped": true,
+        "stdin_bytes_written": 68930,
+        "context_complete": true,
+        "duration_s": 4.181,
+        "timing": {
+          "spawn_s": 0.000488,
+          "input_complete_s": 0.596316,
+          "first_stdout_s": 1.146831,
+          "first_stderr_s": null,
+          "timeout_phase": null,
+          "event_counts": {
+            "system": 4,
+            "assistant": 1,
+            "result": 1
+          },
+          "inference_vs_initialization": "not_separable_without_provider_events"
+        },
+        "output_accounting": {
+          "transport_bytes": 5475,
+          "retained_bytes": 5475,
+          "discarded_progress_bytes": 0,
+          "transport_limit_bytes": 20000000,
+          "retained_limit_bytes": 2000000
+        },
+        "isolation": {
+          "backend": "bubblewrap",
+          "snapshot_read_only": true,
+          "host_home_mounted": false,
+          "network": "enabled_no_destination_firewall",
+          "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+        },
+        "started_at": "2026-11-10T16:00:30.481278+00:00",
+        "prompt_bytes": 68930,
+        "prompt_sha256": "4dcd2c87c00956b5297ade398f6aaff8e6d61e528b66ed8373b6dec3c3f24176",
+        "usage": {
+          "provider_reported": {
+            "total_cost_usd": 0,
+            "duration_ms": 2511,
+            "input_tokens": 0,
+            "cache_creation_input_tokens": 0,
+            "cache_read_input_tokens": 0,
+            "output_tokens": 0
+          },
+          "measured_cost_available": true,
+          "estimated_cost": null
+        },
+        "limits": {
+          "timeout": 360,
+          "idle_timeout": 90,
+          "startup_timeout": 30,
+          "first_response_timeout": 240
+        },
+        "structured_output": "native_schema",
+        "error_category": "authentication"
+      }
+    },
+    {
+      "case": "real-readonly",
+      "checkpoint": "reports/runs/ipanema/20261110T160024-orchestration-8579c16d/council/council-proposal-codex.json",
+      "agent": "codex",
+      "effective_agent": "codex",
+      "model": {
+        "model": "gpt-6.1-sol",
+        "effort": "high",
+        "reason": "strong según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+        "verified_at": "2026-11-08"
+      },
+      "status": "valid",
+      "error": null,
+      "execution": {
+        "exit_code": 0,
+        "timed_out": false,
+        "output_limited": false,
+        "idle_timed_out": false,
+        "cancelled": false,
+        "process_started": true,
+        "process_reaped": true,
+        "stdin_bytes_written": 68926,
+        "context_complete": true,
+        "duration_s": 81.623,
+        "timing": {
+          "spawn_s": 0.000421,
+          "input_complete_s": 0.085694,
+          "first_stdout_s": 0.655264,
+          "first_stderr_s": null,
+          "timeout_phase": null,
+          "event_counts": {
+            "thread.started": 1,
+            "item.completed": 2,
+            "turn.started": 1,
+            "turn.completed": 1
+          },
+          "inference_vs_initialization": "not_separable_without_provider_events"
+        },
+        "output_accounting": {
+          "transport_bytes": 11085,
+          "retained_bytes": 11085,
+          "discarded_progress_bytes": 0,
+          "transport_limit_bytes": 20000000,
+          "retained_limit_bytes": 2000000
+        },
+        "isolation": {
+          "backend": "bubblewrap",
+          "snapshot_read_only": true,
+          "host_home_mounted": false,
+          "network": "enabled_no_destination_firewall",
+          "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+        },
+        "started_at": "2026-11-10T16:00:30.468181+00:00",
+        "prompt_bytes": 68926,
+        "prompt_sha256": "54afdbbd20515f9dd4771ce14323f0fa677307896d91c51cdaa2c28e6fe61e7c",
+        "usage": {
+          "provider_reported": {
+            "input_tokens": 32425,
+            "cached_input_tokens": 0,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 2936,
+            "reasoning_output_tokens": 785
+          },
+          "measured_cost_available": false,
+          "estimated_cost": null
+        },
+        "limits": {
+          "timeout": 360,
+          "idle_timeout": 90,
+          "startup_timeout": 30,
+          "first_response_timeout": 300
+        },
+        "structured_output": "native_schema",
+        "contract_validation": {
+          "status": "passed",
+          "duration_s": 0.000373
+        }
+      }
+    }
+  ],
+  "real_contract_followups": [
+    {
+      "report": "reports/runs/ipanema/20261110T160604-dual-contract-recheck-9ea321b2/report.json",
+      "passed": false,
+      "error": "La propuesta debe declarar pruebas de aceptación.",
+      "model": {
+        "model": "gpt-6-luna",
+        "effort": "low",
+        "reason": "fast según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+        "verified_at": "2026-11-08"
+      },
+      "execution": {
+        "exit_code": 0,
+        "timed_out": false,
+        "output_limited": false,
+        "idle_timed_out": false,
+        "cancelled": false,
+        "process_started": true,
+        "process_reaped": true,
+        "stdin_bytes_written": 17032,
+        "context_complete": true,
+        "duration_s": 25.542,
+        "timing": {
+          "spawn_s": 0.000428,
+          "input_complete_s": 0.000503,
+          "first_stdout_s": 4.524229,
+          "first_stderr_s": null,
+          "timeout_phase": null,
+          "event_counts": {
+            "thread.started": 1,
+            "item.completed": 2,
+            "turn.started": 1,
+            "turn.completed": 1
+          },
+          "inference_vs_initialization": "not_separable_without_provider_events"
+        },
+        "output_accounting": {
+          "transport_bytes": 3323,
+          "retained_bytes": 3323,
+          "discarded_progress_bytes": 0,
+          "transport_limit_bytes": 20000000,
+          "retained_limit_bytes": 2000000
+        },
+        "isolation": {
+          "backend": "bubblewrap",
+          "snapshot_read_only": true,
+          "host_home_mounted": false,
+          "network": "enabled_no_destination_firewall",
+          "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+        },
+        "started_at": "2026-11-10T16:06:04.300082+00:00",
+        "prompt_bytes": 17032,
+        "prompt_sha256": "116c5815c01271fa582367a142d878de9db45fa247a9c4825a36f0ca129e26b9",
+        "usage": {
+          "provider_reported": {
+            "input_tokens": 18690,
+            "cached_input_tokens": 0,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 525,
+            "reasoning_output_tokens": 0
+          },
+          "measured_cost_available": false,
+          "estimated_cost": null
+        },
+        "limits": {
+          "timeout": 120,
+          "idle_timeout": 90,
+          "startup_timeout": 30,
+          "first_response_timeout": 150
+        },
+        "structured_output": "native_schema",
+        "contract_validation": {
+          "status": "passed",
+          "duration_s": 0.000313
+        }
+      },
+      "scope": "One real Codex native-schema proposal; not a complete council and not a Claude substitute."
+    },
+    {
+      "report": "reports/runs/ipanema/20261110T160723-dual-contract-recheck-0a5c08d6/report.json",
+      "passed": false,
+      "error": "La recomendación debe referir una alternativa incluida.",
+      "model": {
+        "model": "gpt-6-luna",
+        "effort": "low",
+        "reason": "fast según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+        "verified_at": "2026-11-08"
+      },
+      "execution": {
+        "exit_code": 0,
+        "timed_out": false,
+        "output_limited": false,
+        "idle_timed_out": false,
+        "cancelled": false,
+        "process_started": true,
+        "process_reaped": true,
+        "stdin_bytes_written": 17450,
+        "context_complete": true,
+        "duration_s": 32.862,
+        "timing": {
+          "spawn_s": 0.000427,
+          "input_complete_s": 0.000507,
+          "first_stdout_s": 5.305749,
+          "first_stderr_s": 5.084676,
+          "timeout_phase": null,
+          "event_counts": {
+            "thread.started": 1,
+            "item.completed": 2,
+            "turn.started": 1,
+            "turn.completed": 1
+          },
+          "inference_vs_initialization": "not_separable_without_provider_events"
+        },
+        "output_accounting": {
+          "transport_bytes": 3751,
+          "retained_bytes": 3751,
+          "discarded_progress_bytes": 0,
+          "transport_limit_bytes": 20000000,
+          "retained_limit_bytes": 2000000
+        },
+        "isolation": {
+          "backend": "bubblewrap",
+          "snapshot_read_only": true,
+          "host_home_mounted": false,
+          "network": "enabled_no_destination_firewall",
+          "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+        },
+        "started_at": "2026-11-10T16:07:23.729322+00:00",
+        "prompt_bytes": 17450,
+        "prompt_sha256": "cd2331b26554c680f624f073514ce29e6e577be4b43d7f3178236bb81b5af618",
+        "usage": {
+          "provider_reported": {
+            "input_tokens": 18840,
+            "cached_input_tokens": 0,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 571,
+            "reasoning_output_tokens": 0
+          },
+          "measured_cost_available": false,
+          "estimated_cost": null
+        },
+        "limits": {
+          "timeout": 120,
+          "idle_timeout": 90,
+          "startup_timeout": 30,
+          "first_response_timeout": 150
+        },
+        "structured_output": "native_schema",
+        "contract_validation": {
+          "status": "passed",
+          "duration_s": 0.000603
+        }
+      },
+      "scope": "One real Codex native-schema proposal; not a complete council and not a Claude substitute."
+    }
+  ],
+  "qa": [
+    {
+      "suite": "quick",
+      "outcome": "passed",
+      "report": "reports/runs/ipanema/20261110T162510-quick-77dfa9a3/report.json",
+      "checks": [
+        {
+          "name": "repository",
+          "status": "passed",
+          "tests": null
+        },
+        {
+          "name": "unit-tests",
+          "status": "passed",
+          "tests": 238
+        },
+        {
+          "name": "integration-tests",
+          "status": "passed",
+          "tests": 34
+        },
+        {
+          "name": "coordinator-evals",
+          "status": "passed",
+          "tests": null
+        },
+        {
+          "name": "seo-action-evals",
+          "status": "passed",
+          "tests": null
+        },
+        {
+          "name": "sources-stable-during-qa",
+          "status": "passed",
+          "tests": null
+        }
+      ]
+    },
+    {
+      "suite": "orchestration",
+      "outcome": "passed",
+      "report": "reports/runs/ipanema/20261110T162533-orchestration-7028d949/report.json",
+      "checks": [
+        {
+          "name": "orchestration-unit",
+          "status": "passed",
+          "tests": 41
+        },
+        {
+          "name": "council-unit",
+          "status": "passed",
+          "tests": 87
+        },
+        {
+          "name": "orchestration-integration",
+          "status": "passed",
+          "tests": 11
+        },
+        {
+          "name": "council-integration",
+          "status": "passed",
+          "tests": 5
+        },
+        {
+          "name": "sources-stable-during-qa",
+          "status": "passed",
+          "tests": null
+        }
+      ]
+    }
+  ],
+  "themes": {
+    "damarbeauty": {
+      "before": {
+        "file_count": 471,
+        "hash": "bb2df14f6f37d9c6723e284954d4b2f76ce8816cef6fa643fc807a43dcb29fc5"
+      },
+      "after": {
+        "file_count": 471,
+        "hash": "bb2df14f6f37d9c6723e284954d4b2f76ce8816cef6fa643fc807a43dcb29fc5"
+      },
+      "unchanged": true,
+      "scope": "All non-hidden theme files; personal dotfiles/credentials not inspected."
+    },
+    "ipanema": {
+      "before": {
+        "file_count": 397,
+        "hash": "3fd79c131175f3c4fb7dad98056a4842d93683d187ee6e60e30219b234b0a63b"
+      },
+      "after": {
+        "file_count": 397,
+        "hash": "3fd79c131175f3c4fb7dad98056a4842d93683d187ee6e60e30219b234b0a63b"
+      },
+      "unchanged": true,
+      "scope": "All non-hidden theme files; personal dotfiles/credentials not inspected."
+    }
+  },
+  "commandcode_new_invocations": 0,
+  "google_or_store_connections_started": false,
+  "production_operations": [],
+  "synthetic_provider_tests": "Explicit offline fixtures; real Git/worktrees/controller, no fabricated provider participation.",
+  "skills_validation": {
+    "ipanema-storefront": "quick_validate passed",
+    "ipanema-seo-expert": "quick_validate passed"
+  },
+  "findings": [
+    {
+      "id": "DUAL-001",
+      "finding": "Real Claude CLI failed with authentication category in both cases.",
+      "status": "recovered_verified_real_inference",
+      "limits": "Error category observed; missing/expired credentials or account/model authorization not distinguished. No login, refresh or secret inspection performed.",
+      "historical_status": "blocked_external",
+      "current_evidence": "authentication_recovery: successful Claude proposals, contrasts and defenses in two read-only cases."
+    },
+    {
+      "id": "DUAL-002",
+      "finding": "Synthetic fast Codex proposals failed semantic contracts: alternative ID, missing tests, recommendation not referencing an included alternative.",
+      "status": "rejected_safely",
+      "correction": "Native and local schemas now enforce ID pattern, nonempty text and acceptance tests. Cross-field reference validation remains mandatory; no automatic repair.",
+      "limits": "Latest fast-model followup failed the recommendation reference. Native JSON/schema validity alone is insufficient. Invalid values are not retained."
+    },
+    {
+      "id": "DUAL-003",
+      "finding": "Real Codex source proposal detected L2 received plans could omit reviews.",
+      "status": "fixed_and_tested_locally",
+      "correction": "Controller independently requires review from L2, before and after execution; regression test rejects plan without reviewers before QA or inference.",
+      "limits": "Source snapshot changed after this finding. Prior read-only proposal does not approve the patched source; new cross-provider review is still required."
+    }
+  ],
+  "limitations": [
+    "Read-only protocol verified on these snapshots/models, not a universal guarantee or permission to implement.",
+    "Both ADRs are needs_evidence; no application or storefront changes approved.",
+    "Real source audit snapshot predates the focused context fix in engine.py. Drift is recorded; it is not approval of all current source.",
+    "Tool QA and actual recovered synthetic defense verify the fix; broader independent implementation review still requires its own evidence.",
+    "No storefront rendering, SEO/performance, Google data, installation or production operations."
+  ],
+  "next_action": "Resolve the specific evidence requirements of an authorized task before implementation; no remaining authentication blocker observed in these runs.",
+  "prior_state": "partial_real_validation_blocked",
+  "authentication_recovery": {
+    "at": "2026-11-10T16:26:50.612272+00:00",
+    "state": "real_dual_deliberation_verified_read_only",
+    "cases": [
+      {
+        "case": "real-readonly",
+        "run": "reports/runs/ipanema/20261110T161702-orchestration-da5f9463",
+        "adr": "ADR-2612277f24bd",
+        "adr_status": "needs_evidence",
+        "coverage": {
+          "required_agents": [
+            "claude",
+            "codex"
+          ],
+          "participants": [
+            {
+              "requested_agent": "claude",
+              "effective_agent": "claude",
+              "status": "available"
+            },
+            {
+              "requested_agent": "codex",
+              "effective_agent": "codex",
+              "status": "available"
+            }
+          ],
+          "effective_agents": [
+            "claude",
+            "codex"
+          ],
+          "complete": true,
+          "objections_complete": true,
+          "deliberation_complete": true,
+          "defense_complete": true,
+          "agreement": "disagreement",
+          "consensus": "incomplete_or_disagreement"
+        },
+        "phases": [
+          "independent_proposals",
+          "cross_examination",
+          "defense"
+        ],
+        "questions": 5,
+        "answers": 5,
+        "objections": 11,
+        "questions_exactly_answered": true,
+        "nodes": [
+          {
+            "role": "council_proposal",
+            "agent": "codex",
+            "model": {
+              "model": "gpt-6.1-sol",
+              "effort": "medium",
+              "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+              "verified_at": "2026-11-08"
+            },
+            "execution": {
+              "exit_code": 0,
+              "timed_out": false,
+              "output_limited": false,
+              "idle_timed_out": false,
+              "cancelled": false,
+              "process_started": true,
+              "process_reaped": true,
+              "stdin_bytes_written": 77082,
+              "context_complete": true,
+              "duration_s": 42.544,
+              "timing": {
+                "spawn_s": 0.001201,
+                "input_complete_s": 0.121787,
+                "first_stdout_s": 0.762677,
+                "first_stderr_s": null,
+                "timeout_phase": null,
+                "event_counts": {
+                  "thread.started": 1,
+                  "item.completed": 2,
+                  "turn.started": 1,
+                  "turn.completed": 1
+                },
+                "inference_vs_initialization": "not_separable_without_provider_events"
+              },
+              "output_accounting": {
+                "transport_bytes": 8013,
+                "retained_bytes": 8013,
+                "discarded_progress_bytes": 0,
+                "transport_limit_bytes": 20000000,
+                "retained_limit_bytes": 2000000
+              },
+              "isolation": {
+                "backend": "bubblewrap",
+                "snapshot_read_only": true,
+                "host_home_mounted": false,
+                "network": "enabled_no_destination_firewall",
+                "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+              },
+              "started_at": "2026-11-10T16:17:14.349329+00:00",
+              "prompt_bytes": 77082,
+              "prompt_sha256": "a978638f43a3bbce704757c4ef1affa3ba31260078462c89eddfb8addb890c56",
+              "usage": {
+                "provider_reported": {
+                  "input_tokens": 34320,
+                  "cached_input_tokens": 0,
+                  "cache_write_input_tokens": 0,
+                  "output_tokens": 1605,
+                  "reasoning_output_tokens": 159
+                },
+                "measured_cost_available": false,
+                "estimated_cost": null
+              },
+              "limits": {
+                "timeout": 240,
+                "idle_timeout": 90,
+                "startup_timeout": 30,
+                "first_response_timeout": 150
+              },
+              "structured_output": "native_schema",
+              "contract_validation": {
+                "status": "passed",
+                "duration_s": 0.000408
+              }
+            },
+            "checkpoint": "reports/runs/ipanema/20261110T161702-orchestration-da5f9463/council/council-proposal-codex.json",
+            "selected_valid_node": true
+          },
+          {
+            "role": "council_proposal",
+            "agent": "claude",
+            "model": {
+              "model": "claude-sonnet-5-5",
+              "effort": "medium",
+              "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+              "verified_at": "2026-11-08"
+            },
+            "execution": {
+              "exit_code": 0,
+              "timed_out": false,
+              "output_limited": false,
+              "idle_timed_out": false,
+              "cancelled": false,
+              "process_started": true,
+              "process_reaped": true,
+              "stdin_bytes_written": 77086,
+              "context_complete": true,
+              "duration_s": 80.477,
+              "timing": {
+                "spawn_s": 0.001006,
+                "input_complete_s": 0.79676,
+                "first_stdout_s": 1.480819,
+                "first_stderr_s": null,
+                "timeout_phase": null,
+                "event_counts": {
+                  "system": 22,
+                  "stream_event": 1206,
+                  "event:message_start": 2,
+                  "event:content_block_start": 3,
+                  "event:content_block_delta": 1194,
+                  "assistant": 3,
+                  "event:content_block_stop": 3,
+                  "user": 2,
+                  "event:message_delta": 2,
+                  "event:message_stop": 2,
+                  "rate_limit_event": 2,
+                  "result": 1
+                },
+                "inference_vs_initialization": "not_separable_without_provider_events"
+              },
+              "output_accounting": {
+                "transport_bytes": 456660,
+                "retained_bytes": 456660,
+                "discarded_progress_bytes": 0,
+                "transport_limit_bytes": 20000000,
+                "retained_limit_bytes": 2000000
+              },
+              "isolation": {
+                "backend": "bubblewrap",
+                "snapshot_read_only": true,
+                "host_home_mounted": false,
+                "network": "enabled_no_destination_firewall",
+                "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+              },
+              "started_at": "2026-11-10T16:17:14.387982+00:00",
+              "prompt_bytes": 77086,
+              "prompt_sha256": "3c5356c276435bbd3576013ad7daf6686e716cef78c701d354b65e00d5fd3b6a",
+              "usage": {
+                "provider_reported": {
+                  "total_cost_usd": 0.28797490000000003,
+                  "duration_ms": 78247,
+                  "input_tokens": 4,
+                  "cache_creation_input_tokens": 39982,
+                  "cache_read_input_tokens": 35789,
+                  "output_tokens": 12446
+                },
+                "measured_cost_available": true,
+                "estimated_cost": null
+              },
+              "limits": {
+                "timeout": 240,
+                "idle_timeout": 90,
+                "startup_timeout": 30,
+                "first_response_timeout": 120
+              },
+              "structured_output": "native_schema",
+              "contract_validation": {
+                "status": "passed",
+                "duration_s": 0.256407
+              }
+            },
+            "checkpoint": "reports/runs/ipanema/20261110T161702-orchestration-da5f9463/council/council-proposal-claude.json",
+            "selected_valid_node": true
+          },
+          {
+            "role": "council_objection",
+            "agent": "claude",
+            "model": {
+              "model": "claude-sonnet-5-5",
+              "effort": "medium",
+              "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+              "verified_at": "2026-11-08"
+            },
+            "execution": {
+              "exit_code": 0,
+              "timed_out": false,
+              "output_limited": false,
+              "idle_timed_out": false,
+              "cancelled": false,
+              "process_started": true,
+              "process_reaped": true,
+              "stdin_bytes_written": 93397,
+              "context_complete": true,
+              "duration_s": 11.911,
+              "timing": {
+                "spawn_s": 0.000599,
+                "input_complete_s": 0.45872,
+                "first_stdout_s": 1.139135,
+                "first_stderr_s": null,
+                "timeout_phase": null,
+                "event_counts": {
+                  "system": 2,
+                  "stream_event": 255,
+                  "event:message_start": 1,
+                  "event:content_block_start": 1,
+                  "event:content_block_delta": 250,
+                  "assistant": 1,
+                  "event:content_block_stop": 1,
+                  "user": 1,
+                  "event:message_delta": 1,
+                  "event:message_stop": 1,
+                  "rate_limit_event": 1,
+                  "result": 1
+                },
+                "inference_vs_initialization": "not_separable_without_provider_events"
+              },
+              "output_accounting": {
+                "transport_bytes": 102449,
+                "retained_bytes": 102449,
+                "discarded_progress_bytes": 0,
+                "transport_limit_bytes": 20000000,
+                "retained_limit_bytes": 2000000
+              },
+              "isolation": {
+                "backend": "bubblewrap",
+                "snapshot_read_only": true,
+                "host_home_mounted": false,
+                "network": "enabled_no_destination_firewall",
+                "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+              },
+              "started_at": "2026-11-10T16:18:36.086150+00:00",
+              "prompt_bytes": 93397,
+              "prompt_sha256": "01f025fc147eb635d2cc936c327881a490d3b2f0dc4b448ce55efba121aa42e4",
+              "usage": {
+                "provider_reported": {
+                  "total_cost_usd": 0.177568,
+                  "duration_ms": 10482,
+                  "input_tokens": 2,
+                  "cache_creation_input_tokens": 40406,
+                  "cache_read_input_tokens": 0,
+                  "output_tokens": 1594
+                },
+                "measured_cost_available": true,
+                "estimated_cost": null
+              },
+              "limits": {
+                "timeout": 240,
+                "idle_timeout": 90,
+                "startup_timeout": 30,
+                "first_response_timeout": 120
+              },
+              "structured_output": "native_schema",
+              "contract_validation": {
+                "status": "passed",
+                "duration_s": 0.002261
+              }
+            },
+            "checkpoint": "reports/runs/ipanema/20261110T161702-orchestration-da5f9463/council/council-objection-claude.json",
+            "selected_valid_node": true
+          },
+          {
+            "role": "council_objection",
+            "agent": "codex",
+            "model": {
+              "model": "gpt-6.1-sol",
+              "effort": "medium",
+              "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+              "verified_at": "2026-11-08"
+            },
+            "execution": {
+              "exit_code": 0,
+              "timed_out": false,
+              "output_limited": false,
+              "idle_timed_out": false,
+              "cancelled": false,
+              "process_started": true,
+              "process_reaped": true,
+              "stdin_bytes_written": 93393,
+              "context_complete": true,
+              "duration_s": 27.643,
+              "timing": {
+                "spawn_s": 0.00046,
+                "input_complete_s": 0.093475,
+                "first_stdout_s": 0.647671,
+                "first_stderr_s": null,
+                "timeout_phase": null,
+                "event_counts": {
+                  "thread.started": 1,
+                  "item.completed": 2,
+                  "turn.started": 1,
+                  "turn.completed": 1
+                },
+                "inference_vs_initialization": "not_separable_without_provider_events"
+              },
+              "output_accounting": {
+                "transport_bytes": 5169,
+                "retained_bytes": 5169,
+                "discarded_progress_bytes": 0,
+                "transport_limit_bytes": 20000000,
+                "retained_limit_bytes": 2000000
+              },
+              "isolation": {
+                "backend": "bubblewrap",
+                "snapshot_read_only": true,
+                "host_home_mounted": false,
+                "network": "enabled_no_destination_firewall",
+                "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+              },
+              "started_at": "2026-11-10T16:18:36.085463+00:00",
+              "prompt_bytes": 93393,
+              "prompt_sha256": "dfb44a22df974a705104c94d4295c659d253940ba1c73e1f65b51a9cc27ce1d2",
+              "usage": {
+                "provider_reported": {
+                  "input_tokens": 37547,
+                  "cached_input_tokens": 0,
+                  "cache_write_input_tokens": 0,
+                  "output_tokens": 1059,
+                  "reasoning_output_tokens": 44
+                },
+                "measured_cost_available": false,
+                "estimated_cost": null
+              },
+              "limits": {
+                "timeout": 240,
+                "idle_timeout": 90,
+                "startup_timeout": 30,
+                "first_response_timeout": 150
+              },
+              "structured_output": "native_schema",
+              "contract_validation": {
+                "status": "passed",
+                "duration_s": 0.000202
+              }
+            },
+            "checkpoint": "reports/runs/ipanema/20261110T161702-orchestration-da5f9463/council/council-objection-codex.json",
+            "selected_valid_node": true
+          },
+          {
+            "role": "council_defense",
+            "agent": "claude",
+            "model": {
+              "model": "claude-sonnet-5-5",
+              "effort": "medium",
+              "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+              "verified_at": "2026-11-08"
+            },
+            "execution": {
+              "exit_code": 0,
+              "timed_out": false,
+              "output_limited": false,
+              "idle_timed_out": false,
+              "cancelled": false,
+              "process_started": true,
+              "process_reaped": true,
+              "stdin_bytes_written": 107761,
+              "context_complete": true,
+              "duration_s": 18.934,
+              "timing": {
+                "spawn_s": 0.000477,
+                "input_complete_s": 0.50303,
+                "first_stdout_s": 1.154092,
+                "first_stderr_s": null,
+                "timeout_phase": null,
+                "event_counts": {
+                  "system": 10,
+                  "stream_event": 253,
+                  "event:message_start": 1,
+                  "event:content_block_start": 2,
+                  "event:content_block_delta": 246,
+                  "assistant": 2,
+                  "event:content_block_stop": 2,
+                  "user": 1,
+                  "event:message_delta": 1,
+                  "event:message_stop": 1,
+                  "rate_limit_event": 1,
+                  "result": 1
+                },
+                "inference_vs_initialization": "not_separable_without_provider_events"
+              },
+              "output_accounting": {
+                "transport_bytes": 141367,
+                "retained_bytes": 141367,
+                "discarded_progress_bytes": 0,
+                "transport_limit_bytes": 20000000,
+                "retained_limit_bytes": 2000000
+              },
+              "isolation": {
+                "backend": "bubblewrap",
+                "snapshot_read_only": true,
+                "host_home_mounted": false,
+                "network": "enabled_no_destination_firewall",
+                "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+              },
+              "started_at": "2026-11-10T16:19:04.413655+00:00",
+              "prompt_bytes": 107761,
+              "prompt_sha256": "dec1dd557f3fda824d23295cb00f05230f665867a9c0a94d8b4a68aa53ae35d3",
+              "usage": {
+                "provider_reported": {
+                  "total_cost_usd": 0.2122,
+                  "duration_ms": 17417,
+                  "input_tokens": 2,
+                  "cache_creation_input_tokens": 46614,
+                  "cache_read_input_tokens": 0,
+                  "output_tokens": 2574
+                },
+                "measured_cost_available": true,
+                "estimated_cost": null
+              },
+              "limits": {
+                "timeout": 240,
+                "idle_timeout": 90,
+                "startup_timeout": 30,
+                "first_response_timeout": 120
+              },
+              "structured_output": "native_schema",
+              "contract_validation": {
+                "status": "passed",
+                "duration_s": 0.002535
+              }
+            },
+            "checkpoint": "reports/runs/ipanema/20261110T161702-orchestration-da5f9463/council/council-defense-claude.json",
+            "selected_valid_node": true
+          },
+          {
+            "role": "council_defense",
+            "agent": "codex",
+            "model": {
+              "model": "gpt-6.1-sol",
+              "effort": "medium",
+              "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+              "verified_at": "2026-11-08"
+            },
+            "execution": {
+              "exit_code": 0,
+              "timed_out": false,
+              "output_limited": false,
+              "idle_timed_out": false,
+              "cancelled": false,
+              "process_started": true,
+              "process_reaped": true,
+              "stdin_bytes_written": 107757,
+              "context_complete": true,
+              "duration_s": 29.268,
+              "timing": {
+                "spawn_s": 0.000684,
+                "input_complete_s": 0.076367,
+                "first_stdout_s": 0.739962,
+                "first_stderr_s": null,
+                "timeout_phase": null,
+                "event_counts": {
+                  "thread.started": 1,
+                  "item.completed": 2,
+                  "turn.started": 1,
+                  "turn.completed": 1
+                },
+                "inference_vs_initialization": "not_separable_without_provider_events"
+              },
+              "output_accounting": {
+                "transport_bytes": 5246,
+                "retained_bytes": 5246,
+                "discarded_progress_bytes": 0,
+                "transport_limit_bytes": 20000000,
+                "retained_limit_bytes": 2000000
+              },
+              "isolation": {
+                "backend": "bubblewrap",
+                "snapshot_read_only": true,
+                "host_home_mounted": false,
+                "network": "enabled_no_destination_firewall",
+                "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+              },
+              "started_at": "2026-11-10T16:19:04.411384+00:00",
+              "prompt_bytes": 107757,
+              "prompt_sha256": "6f9e11323cccce7f5f2a4cbd47cda034ad970185be2ce70febabcae83428e8a3",
+              "usage": {
+                "provider_reported": {
+                  "input_tokens": 41196,
+                  "cached_input_tokens": 0,
+                  "cache_write_input_tokens": 0,
+                  "output_tokens": 1106,
+                  "reasoning_output_tokens": 81
+                },
+                "measured_cost_available": false,
+                "estimated_cost": null
+              },
+              "limits": {
+                "timeout": 240,
+                "idle_timeout": 90,
+                "startup_timeout": 30,
+                "first_response_timeout": 150
+              },
+              "structured_output": "native_schema",
+              "contract_validation": {
+                "status": "passed",
+                "duration_s": 0.000193
+              }
+            },
+            "checkpoint": "reports/runs/ipanema/20261110T161702-orchestration-da5f9463/council/council-defense-codex.json",
+            "selected_valid_node": true
+          }
+        ],
+        "independent_initial_proposals": true,
+        "production_modified": false,
+        "patch_empty": true,
+        "original_unchanged_at_execution": true,
+        "source_binding": {
+          "project": "ipanema",
+          "run_id": "20261110T161702-orchestration-da5f9463",
+          "source_sha256": "c9b17b364ffc6cbd747f2337f85b326553584cac3f7cea3ec7599098b12ea498",
+          "objective_sha256": "8ec16761a0277e8c11ee5b3405da88389dbee8721c879e494a1e4e3caf590459",
+          "files": {
+            "tools/ipanema/orchestration/models.json": "14fede6b13b294a8e685b8ce1072777959850d8ae05bf3270f5dd9ea527aba39",
+            "tools/ipanema/orchestration/recovery.py": "1d8b3a4d0e22bb0c8507f036ab7ff1b285e6517d8fbe670b70d679a0c317f12c",
+            "tools/ipanema/orchestration/engine.py": "59245c294661b07cf8a319227dcb12022e09e43b55d4eac1e578655a4d370e73"
+          },
+          "required_constraints": [],
+          "instructions_sha256": "d9bc523b0fd41c829b25c0c80964dd88fb4a2b035ed1837d52e1e8e620c2cda8",
+          "require_objections": true,
+          "require_defense": true,
+          "participation_sha256": "9ff597857187450dc19d945e8124e6a50c9a76a12101de1d08f41ada93399d8c"
+        },
+        "frozen_snapshot_matches": true,
+        "current_source_drift_since_case": [
+          "tools/ipanema/orchestration/engine.py"
+        ],
+        "worker_attempt_budget": {
+          "limit": 6,
+          "used": 6,
+          "includes_retries_and_substitutions": true,
+          "provider_internal_api_call_count": "not_available"
+        },
+        "initial_controller_duration_to_adr_s": 151.844,
+        "recovery": null
+      },
+      {
+        "case": "synthetic-balanced",
+        "run": "reports/runs/ipanema/20261110T161944-orchestration-35e5e13b",
+        "adr": "ADR-316e5b302ad2",
+        "adr_status": "needs_evidence",
+        "coverage": {
+          "required_agents": [
+            "claude",
+            "codex"
+          ],
+          "participants": [
+            {
+              "requested_agent": "claude",
+              "effective_agent": "claude",
+              "status": "available"
+            },
+            {
+              "requested_agent": "codex",
+              "effective_agent": "codex",
+              "status": "available"
+            }
+          ],
+          "effective_agents": [
+            "claude",
+            "codex"
+          ],
+          "complete": true,
+          "objections_complete": true,
+          "deliberation_complete": true,
+          "defense_complete": true,
+          "agreement": "disagreement",
+          "consensus": "incomplete_or_disagreement"
+        },
+        "phases": [
+          "independent_proposals",
+          "cross_examination",
+          "defense"
+        ],
+        "questions": 3,
+        "answers": 3,
+        "objections": 7,
+        "questions_exactly_answered": true,
+        "nodes": [
+          {
+            "role": "council_proposal",
+            "agent": "claude",
+            "model": {
+              "model": "claude-sonnet-5-5",
+              "effort": "medium",
+              "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+              "verified_at": "2026-11-08"
+            },
+            "execution": {
+              "exit_code": 0,
+              "timed_out": false,
+              "output_limited": false,
+              "idle_timed_out": false,
+              "cancelled": false,
+              "process_started": true,
+              "process_reaped": true,
+              "stdin_bytes_written": 19121,
+              "context_complete": true,
+              "duration_s": 11.183,
+              "timing": {
+                "spawn_s": 0.000302,
+                "input_complete_s": 0.000351,
+                "first_stdout_s": 1.181944,
+                "first_stderr_s": null,
+                "timeout_phase": null,
+                "event_counts": {
+                  "system": 4,
+                  "stream_event": 245,
+                  "event:message_start": 1,
+                  "event:content_block_start": 1,
+                  "event:content_block_delta": 240,
+                  "assistant": 1,
+                  "event:content_block_stop": 1,
+                  "user": 1,
+                  "event:message_delta": 1,
+                  "event:message_stop": 1,
+                  "rate_limit_event": 1,
+                  "result": 1
+                },
+                "inference_vs_initialization": "not_separable_without_provider_events"
+              },
+              "output_accounting": {
+                "transport_bytes": 126070,
+                "retained_bytes": 126070,
+                "discarded_progress_bytes": 0,
+                "transport_limit_bytes": 20000000,
+                "retained_limit_bytes": 2000000
+              },
+              "isolation": {
+                "backend": "bubblewrap",
+                "snapshot_read_only": true,
+                "host_home_mounted": false,
+                "network": "enabled_no_destination_firewall",
+                "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+              },
+              "started_at": "2026-11-10T16:19:50.727374+00:00",
+              "prompt_bytes": 19121,
+              "prompt_sha256": "a77380e5c65899d45930d38fd440ad02946c599aa43b20184dc4b449b7581e00",
+              "usage": {
+                "provider_reported": {
+                  "total_cost_usd": 0.0487694,
+                  "duration_ms": 9490,
+                  "input_tokens": 2,
+                  "cache_creation_input_tokens": 8362,
+                  "cache_read_input_tokens": 4774,
+                  "output_tokens": 1484
+                },
+                "measured_cost_available": true,
+                "estimated_cost": null
+              },
+              "limits": {
+                "timeout": 240,
+                "idle_timeout": 90,
+                "startup_timeout": 30,
+                "first_response_timeout": 120
+              },
+              "structured_output": "native_schema",
+              "contract_validation": {
+                "status": "passed",
+                "duration_s": 0.003191
+              }
+            },
+            "checkpoint": "reports/runs/ipanema/20261110T161944-orchestration-35e5e13b/council/council-proposal-claude.json",
+            "selected_valid_node": true
+          },
+          {
+            "role": "council_proposal",
+            "agent": "codex",
+            "model": {
+              "model": "gpt-6.1-sol",
+              "effort": "medium",
+              "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+              "verified_at": "2026-11-08"
+            },
+            "execution": {
+              "exit_code": 0,
+              "timed_out": false,
+              "output_limited": false,
+              "idle_timed_out": false,
+              "cancelled": false,
+              "process_started": true,
+              "process_reaped": true,
+              "stdin_bytes_written": 19117,
+              "context_complete": true,
+              "duration_s": 29.472,
+              "timing": {
+                "spawn_s": 0.000434,
+                "input_complete_s": 0.000507,
+                "first_stdout_s": 0.947599,
+                "first_stderr_s": null,
+                "timeout_phase": null,
+                "event_counts": {
+                  "thread.started": 1,
+                  "item.completed": 2,
+                  "turn.started": 1,
+                  "turn.completed": 1
+                },
+                "inference_vs_initialization": "not_separable_without_provider_events"
+              },
+              "output_accounting": {
+                "transport_bytes": 5737,
+                "retained_bytes": 5737,
+                "discarded_progress_bytes": 0,
+                "transport_limit_bytes": 20000000,
+                "retained_limit_bytes": 2000000
+              },
+              "isolation": {
+                "backend": "bubblewrap",
+                "snapshot_read_only": true,
+                "host_home_mounted": false,
+                "network": "enabled_no_destination_firewall",
+                "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+              },
+              "started_at": "2026-11-10T16:19:50.696542+00:00",
+              "prompt_bytes": 19117,
+              "prompt_sha256": "a09dfde7e2f3d19a01a0619b99c38f25b6620f986ca7d7d23c91fe2c51f60755",
+              "usage": {
+                "provider_reported": {
+                  "input_tokens": 20073,
+                  "cached_input_tokens": 0,
+                  "cache_write_input_tokens": 0,
+                  "output_tokens": 1064,
+                  "reasoning_output_tokens": 50
+                },
+                "measured_cost_available": false,
+                "estimated_cost": null
+              },
+              "limits": {
+                "timeout": 240,
+                "idle_timeout": 90,
+                "startup_timeout": 30,
+                "first_response_timeout": 150
+              },
+              "structured_output": "native_schema",
+              "contract_validation": {
+                "status": "passed",
+                "duration_s": 0.000309
+              }
+            },
+            "checkpoint": "reports/runs/ipanema/20261110T161944-orchestration-35e5e13b/council/council-proposal-codex.json",
+            "selected_valid_node": true
+          },
+          {
+            "role": "council_objection",
+            "agent": "claude",
+            "model": {
+              "model": "claude-sonnet-5-5",
+              "effort": "medium",
+              "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+              "verified_at": "2026-11-08"
+            },
+            "execution": {
+              "exit_code": 0,
+              "timed_out": false,
+              "output_limited": false,
+              "idle_timed_out": false,
+              "cancelled": false,
+              "process_started": true,
+              "process_reaped": true,
+              "stdin_bytes_written": 28614,
+              "context_complete": true,
+              "duration_s": 10.948,
+              "timing": {
+                "spawn_s": 0.000651,
+                "input_complete_s": 0.000917,
+                "first_stdout_s": 1.718216,
+                "first_stderr_s": null,
+                "timeout_phase": null,
+                "event_counts": {
+                  "system": 4,
+                  "stream_event": 208,
+                  "event:message_start": 1,
+                  "event:content_block_start": 1,
+                  "event:content_block_delta": 203,
+                  "assistant": 1,
+                  "event:content_block_stop": 1,
+                  "user": 1,
+                  "event:message_delta": 1,
+                  "event:message_stop": 1,
+                  "rate_limit_event": 1,
+                  "result": 1
+                },
+                "inference_vs_initialization": "not_separable_without_provider_events"
+              },
+              "output_accounting": {
+                "transport_bytes": 111769,
+                "retained_bytes": 111769,
+                "discarded_progress_bytes": 0,
+                "transport_limit_bytes": 20000000,
+                "retained_limit_bytes": 2000000
+              },
+              "isolation": {
+                "backend": "bubblewrap",
+                "snapshot_read_only": true,
+                "host_home_mounted": false,
+                "network": "enabled_no_destination_firewall",
+                "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+              },
+              "started_at": "2026-11-10T16:20:20.701178+00:00",
+              "prompt_bytes": 28614,
+              "prompt_sha256": "272f99983729238491650b85b572e1c68d77c3b6f3f4167eaa439c1160271d08",
+              "usage": {
+                "provider_reported": {
+                  "total_cost_usd": 0.0625194,
+                  "duration_ms": 8942,
+                  "input_tokens": 2,
+                  "cache_creation_input_tokens": 12422,
+                  "cache_read_input_tokens": 2674,
+                  "output_tokens": 1256
+                },
+                "measured_cost_available": true,
+                "estimated_cost": null
+              },
+              "limits": {
+                "timeout": 240,
+                "idle_timeout": 90,
+                "startup_timeout": 30,
+                "first_response_timeout": 120
+              },
+              "structured_output": "native_schema",
+              "contract_validation": {
+                "status": "passed",
+                "duration_s": 0.002128
+              }
+            },
+            "checkpoint": "reports/runs/ipanema/20261110T161944-orchestration-35e5e13b/council/council-objection-claude.json",
+            "selected_valid_node": true
+          },
+          {
+            "role": "council_objection",
+            "agent": "codex",
+            "model": {
+              "model": "gpt-6.1-sol",
+              "effort": "medium",
+              "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+              "verified_at": "2026-11-08"
+            },
+            "execution": {
+              "exit_code": 0,
+              "timed_out": false,
+              "output_limited": false,
+              "idle_timed_out": false,
+              "cancelled": false,
+              "process_started": true,
+              "process_reaped": true,
+              "stdin_bytes_written": 28610,
+              "context_complete": true,
+              "duration_s": 18.973,
+              "timing": {
+                "spawn_s": 0.000375,
+                "input_complete_s": 0.000419,
+                "first_stdout_s": 1.631341,
+                "first_stderr_s": null,
+                "timeout_phase": null,
+                "event_counts": {
+                  "thread.started": 1,
+                  "item.completed": 2,
+                  "turn.started": 1,
+                  "turn.completed": 1
+                },
+                "inference_vs_initialization": "not_separable_without_provider_events"
+              },
+              "output_accounting": {
+                "transport_bytes": 2980,
+                "retained_bytes": 2980,
+                "discarded_progress_bytes": 0,
+                "transport_limit_bytes": 20000000,
+                "retained_limit_bytes": 2000000
+              },
+              "isolation": {
+                "backend": "bubblewrap",
+                "snapshot_read_only": true,
+                "host_home_mounted": false,
+                "network": "enabled_no_destination_firewall",
+                "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+              },
+              "started_at": "2026-11-10T16:20:20.690409+00:00",
+              "prompt_bytes": 28610,
+              "prompt_sha256": "c80e0944e2810dc7a882b87ede3df858b236dd57c9151ef0a329b161f3a6b3e6",
+              "usage": {
+                "provider_reported": {
+                  "input_tokens": 21780,
+                  "cached_input_tokens": 0,
+                  "cache_write_input_tokens": 0,
+                  "output_tokens": 577,
+                  "reasoning_output_tokens": 49
+                },
+                "measured_cost_available": false,
+                "estimated_cost": null
+              },
+              "limits": {
+                "timeout": 240,
+                "idle_timeout": 90,
+                "startup_timeout": 30,
+                "first_response_timeout": 150
+              },
+              "structured_output": "native_schema",
+              "contract_validation": {
+                "status": "passed",
+                "duration_s": 0.000187
+              }
+            },
+            "checkpoint": "reports/runs/ipanema/20261110T161944-orchestration-35e5e13b/council/council-objection-codex.json",
+            "selected_valid_node": true
+          },
+          {
+            "role": "council_defense",
+            "agent": "claude",
+            "model": {
+              "model": "claude-sonnet-5-5",
+              "effort": "medium",
+              "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+              "verified_at": "2026-11-08"
+            },
+            "execution": {
+              "exit_code": 0,
+              "timed_out": false,
+              "output_limited": false,
+              "idle_timed_out": false,
+              "cancelled": false,
+              "process_started": true,
+              "process_reaped": true,
+              "stdin_bytes_written": 40348,
+              "context_complete": true,
+              "duration_s": 29.452,
+              "timing": {
+                "spawn_s": 0.000467,
+                "input_complete_s": 0.00055,
+                "first_stdout_s": 1.254766,
+                "first_stderr_s": null,
+                "timeout_phase": null,
+                "event_counts": {
+                  "system": 10,
+                  "stream_event": 590,
+                  "event:message_start": 3,
+                  "event:content_block_start": 5,
+                  "event:content_block_delta": 571,
+                  "assistant": 5,
+                  "event:content_block_stop": 5,
+                  "event:message_delta": 3,
+                  "event:message_stop": 3,
+                  "rate_limit_event": 2,
+                  "user": 3,
+                  "result": 1
+                },
+                "inference_vs_initialization": "not_separable_without_provider_events"
+              },
+              "output_accounting": {
+                "transport_bytes": 231594,
+                "retained_bytes": 231594,
+                "discarded_progress_bytes": 0,
+                "transport_limit_bytes": 20000000,
+                "retained_limit_bytes": 2000000
+              },
+              "isolation": {
+                "backend": "bubblewrap",
+                "snapshot_read_only": true,
+                "host_home_mounted": false,
+                "network": "enabled_no_destination_firewall",
+                "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+              },
+              "started_at": "2026-11-10T16:20:40.229039+00:00",
+              "prompt_bytes": 40348,
+              "prompt_sha256": "7d069fe284e9701f82907132af5b3bccd372003a022c4446735ae46f4b80c87b",
+              "usage": {
+                "provider_reported": {
+                  "total_cost_usd": 0.1377477,
+                  "duration_ms": 27917,
+                  "input_tokens": 8,
+                  "cache_creation_input_tokens": 21008,
+                  "cache_read_input_tokens": 45197,
+                  "output_tokens": 4918
+                },
+                "measured_cost_available": true,
+                "estimated_cost": null
+              },
+              "limits": {
+                "timeout": 240,
+                "idle_timeout": 90,
+                "startup_timeout": 30,
+                "first_response_timeout": 120
+              },
+              "structured_output": "native_schema",
+              "contract_validation": {
+                "status": "passed",
+                "duration_s": 0.005387
+              }
+            },
+            "checkpoint": "reports/runs/ipanema/20261110T161944-orchestration-35e5e13b/council/council-defense-claude.json",
+            "selected_valid_node": false
+          },
+          {
+            "role": "council_defense",
+            "agent": "codex",
+            "model": {
+              "model": "gpt-6.1-sol",
+              "effort": "medium",
+              "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+              "verified_at": "2026-11-08"
+            },
+            "execution": {
+              "exit_code": 0,
+              "timed_out": false,
+              "output_limited": false,
+              "idle_timed_out": false,
+              "cancelled": false,
+              "process_started": true,
+              "process_reaped": true,
+              "stdin_bytes_written": 40344,
+              "context_complete": true,
+              "duration_s": 20.664,
+              "timing": {
+                "spawn_s": 0.000397,
+                "input_complete_s": 0.000461,
+                "first_stdout_s": 0.838436,
+                "first_stderr_s": null,
+                "timeout_phase": null,
+                "event_counts": {
+                  "thread.started": 1,
+                  "item.completed": 2,
+                  "turn.started": 1,
+                  "turn.completed": 1
+                },
+                "inference_vs_initialization": "not_separable_without_provider_events"
+              },
+              "output_accounting": {
+                "transport_bytes": 4047,
+                "retained_bytes": 4047,
+                "discarded_progress_bytes": 0,
+                "transport_limit_bytes": 20000000,
+                "retained_limit_bytes": 2000000
+              },
+              "isolation": {
+                "backend": "bubblewrap",
+                "snapshot_read_only": true,
+                "host_home_mounted": false,
+                "network": "enabled_no_destination_firewall",
+                "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+              },
+              "started_at": "2026-11-10T16:20:40.214282+00:00",
+              "prompt_bytes": 40344,
+              "prompt_sha256": "c736f61a97116c699e5eddfcccd0a70ae1a87697de16b5555bc55818a1c3958a",
+              "usage": {
+                "provider_reported": {
+                  "input_tokens": 24829,
+                  "cached_input_tokens": 0,
+                  "cache_write_input_tokens": 0,
+                  "output_tokens": 779,
+                  "reasoning_output_tokens": 41
+                },
+                "measured_cost_available": false,
+                "estimated_cost": null
+              },
+              "limits": {
+                "timeout": 240,
+                "idle_timeout": 90,
+                "startup_timeout": 30,
+                "first_response_timeout": 150
+              },
+              "structured_output": "native_schema",
+              "contract_validation": {
+                "status": "passed",
+                "duration_s": 0.000213
+              }
+            },
+            "checkpoint": "reports/runs/ipanema/20261110T161944-orchestration-35e5e13b/council/council-defense-codex.json",
+            "selected_valid_node": true
+          },
+          {
+            "role": "council_defense",
+            "agent": "claude",
+            "model": {
+              "model": "claude-sonnet-5-5",
+              "effort": "medium",
+              "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+              "verified_at": "2026-11-08"
+            },
+            "execution": {
+              "exit_code": 0,
+              "timed_out": false,
+              "output_limited": false,
+              "idle_timed_out": false,
+              "cancelled": false,
+              "process_started": true,
+              "process_reaped": true,
+              "stdin_bytes_written": 40352,
+              "context_complete": true,
+              "duration_s": 7.57,
+              "timing": {
+                "spawn_s": 0.000387,
+                "input_complete_s": 0.000464,
+                "first_stdout_s": 1.167158,
+                "first_stderr_s": null,
+                "timeout_phase": null,
+                "event_counts": {
+                  "system": 2,
+                  "stream_event": 123,
+                  "event:message_start": 1,
+                  "event:content_block_start": 1,
+                  "event:content_block_delta": 118,
+                  "assistant": 1,
+                  "event:content_block_stop": 1,
+                  "user": 1,
+                  "event:message_delta": 1,
+                  "event:message_stop": 1,
+                  "rate_limit_event": 1,
+                  "result": 1
+                },
+                "inference_vs_initialization": "not_separable_without_provider_events"
+              },
+              "output_accounting": {
+                "transport_bytes": 53959,
+                "retained_bytes": 53959,
+                "discarded_progress_bytes": 0,
+                "transport_limit_bytes": 20000000,
+                "retained_limit_bytes": 2000000
+              },
+              "isolation": {
+                "backend": "bubblewrap",
+                "snapshot_read_only": true,
+                "host_home_mounted": false,
+                "network": "enabled_no_destination_firewall",
+                "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+              },
+              "started_at": "2026-11-10T16:25:09.863432+00:00",
+              "prompt_bytes": 40352,
+              "prompt_sha256": "0c51310757b06fbccb9a8786d6d12f37c7aeee50c49b2ef295fe4ac697268e90",
+              "usage": {
+                "provider_reported": {
+                  "total_cost_usd": 0.09006600000000001,
+                  "duration_ms": 5763,
+                  "input_tokens": 2,
+                  "cache_creation_input_tokens": 20288,
+                  "cache_read_input_tokens": 0,
+                  "output_tokens": 891
+                },
+                "measured_cost_available": true,
+                "estimated_cost": null
+              },
+              "limits": {
+                "timeout": 240,
+                "idle_timeout": 90,
+                "startup_timeout": 30,
+                "first_response_timeout": 120
+              },
+              "structured_output": "native_schema",
+              "contract_validation": {
+                "status": "passed",
+                "duration_s": 0.001234
+              }
+            },
+            "checkpoint": "reports/runs/ipanema/20261110T161944-orchestration-35e5e13b/council/council-defense-claude-resume-1.json",
+            "selected_valid_node": true
+          }
+        ],
+        "independent_initial_proposals": true,
+        "production_modified": false,
+        "patch_empty": true,
+        "original_unchanged_at_execution": true,
+        "source_binding": {
+          "project": "ipanema",
+          "run_id": "20261110T161944-orchestration-35e5e13b",
+          "source_sha256": "d96a22c1e8e0562447166289d18808a3a42d91b2d1f6303fcb9c4946fbb2c22f",
+          "objective_sha256": "3cc01ef36c0cff75b23e2ba8f355040c98415df44b36c951195f43edb27f2fb2",
+          "files": {
+            "tests/fixtures/council/read-only.txt": "24bd0b2ed0ba0b3779afe4fccab615a849dea6601d7901ae58bd7b0f330b1f36"
+          },
+          "required_constraints": [],
+          "instructions_sha256": "8ca35f90a32acb20ebd96d55f366425c86703249b25cb20e6e0b4edb54d46007",
+          "require_objections": true,
+          "require_defense": true,
+          "participation_sha256": "9ff597857187450dc19d945e8124e6a50c9a76a12101de1d08f41ada93399d8c"
+        },
+        "frozen_snapshot_matches": true,
+        "current_source_drift_since_case": [],
+        "worker_attempt_budget": {
+          "limit": 8,
+          "used": 7,
+          "includes_retries_and_substitutions": true,
+          "provider_internal_api_call_count": "not_available"
+        },
+        "initial_controller_duration_to_adr_s": 85.325,
+        "recovery": {
+          "at": "2026-11-10T16:25:17.657260+00:00",
+          "duration_s": 8.536,
+          "reason": "Contextual defense validation and identity attribution corrected; preserve five valid nodes.",
+          "prior_budget": 6,
+          "recovery_budget": 8,
+          "production_modified": false
+        }
+      }
+    ],
+    "real_worker_invocations": 13,
+    "selected_valid_nodes": 12,
+    "rejected_contextual_defenses": 1,
+    "commandcode_invocations": 0,
+    "production_operations": [],
+    "themes": {
+      "ipanema": {
+        "before": {
+          "files": 397,
+          "hash": "3fd79c131175f3c4fb7dad98056a4842d93683d187ee6e60e30219b234b0a63b"
+        },
+        "after": {
+          "files": 397,
+          "hash": "3fd79c131175f3c4fb7dad98056a4842d93683d187ee6e60e30219b234b0a63b"
+        },
+        "unchanged": true
+      },
+      "damarbeauty": {
+        "before": {
+          "files": 471,
+          "hash": "bb2df14f6f37d9c6723e284954d4b2f76ce8816cef6fa643fc807a43dcb29fc5"
+        },
+        "after": {
+          "files": 471,
+          "hash": "bb2df14f6f37d9c6723e284954d4b2f76ce8816cef6fa643fc807a43dcb29fc5"
+        },
+        "unchanged": true
+      }
+    },
+    "qa": [
+      {
+        "suite": "quick",
+        "outcome": "passed",
+        "report": "reports/runs/ipanema/20261110T162510-quick-77dfa9a3/report.json",
+        "checks": [
+          {
+            "name": "repository",
+            "status": "passed",
+            "tests": null
+          },
+          {
+            "name": "unit-tests",
+            "status": "passed",
+            "tests": 238
+          },
+          {
+            "name": "integration-tests",
+            "status": "passed",
+            "tests": 34
+          },
+          {
+            "name": "coordinator-evals",
+            "status": "passed",
+            "tests": null
+          },
+          {
+            "name": "seo-action-evals",
+            "status": "passed",
+            "tests": null
+          },
+          {
+            "name": "sources-stable-during-qa",
+            "status": "passed",
+            "tests": null
+          }
+        ]
+      },
+      {
+        "suite": "orchestration",
+        "outcome": "passed",
+        "report": "reports/runs/ipanema/20261110T162533-orchestration-7028d949/report.json",
+        "checks": [
+          {
+            "name": "orchestration-unit",
+            "status": "passed",
+            "tests": 41
+          },
+          {
+            "name": "council-unit",
+            "status": "passed",
+            "tests": 87
+          },
+          {
+            "name": "orchestration-integration",
+            "status": "passed",
+            "tests": 11
+          },
+          {
+            "name": "council-integration",
+            "status": "passed",
+            "tests": 5
+          },
+          {
+            "name": "sources-stable-during-qa",
+            "status": "passed",
+            "tests": null
+          }
+        ]
+      }
+    ],
+    "claude_observed_cost_usd": 1.0168454,
+    "codex_cost_usd": null,
+    "combined_cost_usd": null,
+    "authentication_observed": "Successful native Claude CLI inference in the same isolated engine; no login/refresh or credential inspection by controller.",
+    "contextual_repair": {
+      "files": [
+        "tools/ipanema/orchestration/engine.py",
+        "tools/ipanema/orchestration/council.py",
+        "tools/ipanema/orchestration/council_runtime.py",
+        "tests/unit/test_council_dual.py"
+      ],
+      "cause": "One Claude defense answered its own questions rather than the questions addressed to Claude. Aggregation blocked approval but completeness counted provider envelopes.",
+      "changes": [
+        "Retain original participant identity in the frozen council prompt; no provider substitution inside council.",
+        "Constrain native defense question IDs and answer count to incoming assignments.",
+        "Validate exact sender/question assignment before accepting or reusing defense; invalid defense no longer counts as complete.",
+        "Reuse five valid nodes and recover only invalid original-provider defense; keep archived checkpoints/ADR."
+      ],
+      "recovery_worker_invocations": 1,
+      "previous_budget_limit": 6,
+      "explicit_recovery_budget_limit": 8,
+      "final_used": 7
+    },
+    "limits": [
+      "Read-only protocol verified on these snapshots/models, not a universal guarantee or permission to implement.",
+      "Both ADRs are needs_evidence; no application or storefront changes approved.",
+      "Real source audit snapshot predates the focused context fix in engine.py. Drift is recorded; it is not approval of all current source.",
+      "Tool QA and actual recovered synthetic defense verify the fix; broader independent implementation review still requires its own evidence.",
+      "No storefront rendering, SEO/performance, Google data, installation or production operations."
+    ]
+  },
+  "historical_limitations": [
+    "No real valid Claude proposal in current runs; no real reciprocal cross-examination/defense completed.",
+    "The dual workflow passes offline tests but is not declared fully operational end to end.",
+    "Historical three-provider ADRs and 19 objections remain unchanged; their coverage does not count as dual acceptance.",
+    "No measured full monetary cost; provider token/cost observations retained per invocation, without fabricated estimates.",
+    "No storefront rendering, SEO, performance, Google or commercial data tests executed for this orchestrator-only configuration."
+  ],
+  "authentication_recovery_before_context_fix": {
+    "at": "2026-11-10T16:21:56.560838+00:00",
+    "state": "real_readonly_verified_synthetic_context_repair_pending",
+    "authentication_verified_by": "Three successful real native-schema Claude invocations per case under the existing isolated engine; no login or secrets inspected.",
+    "cases": [
+      {
+        "case": "real-readonly",
+        "run": "reports/runs/ipanema/20261110T161702-orchestration-da5f9463",
+        "adr": "ADR-2612277f24bd",
+        "adr_status": "needs_evidence",
+        "coverage": {
+          "required_agents": [
+            "claude",
+            "codex"
+          ],
+          "participants": [
+            {
+              "requested_agent": "claude",
+              "effective_agent": "claude",
+              "status": "available"
+            },
+            {
+              "requested_agent": "codex",
+              "effective_agent": "codex",
+              "status": "available"
+            }
+          ],
+          "effective_agents": [
+            "claude",
+            "codex"
+          ],
+          "complete": true,
+          "objections_complete": true,
+          "deliberation_complete": true,
+          "defense_complete": true,
+          "agreement": "disagreement",
+          "consensus": "incomplete_or_disagreement"
+        },
+        "state": "blocked",
+        "implementation_allowed": false,
+        "source_binding": {
+          "project": "ipanema",
+          "run_id": "20261110T161702-orchestration-da5f9463",
+          "source_sha256": "c9b17b364ffc6cbd747f2337f85b326553584cac3f7cea3ec7599098b12ea498",
+          "objective_sha256": "8ec16761a0277e8c11ee5b3405da88389dbee8721c879e494a1e4e3caf590459",
+          "files": {
+            "tools/ipanema/orchestration/models.json": "14fede6b13b294a8e685b8ce1072777959850d8ae05bf3270f5dd9ea527aba39",
+            "tools/ipanema/orchestration/recovery.py": "1d8b3a4d0e22bb0c8507f036ab7ff1b285e6517d8fbe670b70d679a0c317f12c",
+            "tools/ipanema/orchestration/engine.py": "59245c294661b07cf8a319227dcb12022e09e43b55d4eac1e578655a4d370e73"
+          },
+          "required_constraints": [],
+          "instructions_sha256": "d9bc523b0fd41c829b25c0c80964dd88fb4a2b035ed1837d52e1e8e620c2cda8",
+          "require_objections": true,
+          "require_defense": true,
+          "participation_sha256": "9ff597857187450dc19d945e8124e6a50c9a76a12101de1d08f41ada93399d8c"
+        },
+        "phases": [
+          "independent_proposals",
+          "cross_examination",
+          "defense"
+        ],
+        "questions": 5,
+        "answers": 5,
+        "objections": 11,
+        "independent_first_round_verified": true,
+        "valid_nodes": [
+          {
+            "role": "council_proposal",
+            "agent": "codex",
+            "model": {
+              "model": "gpt-6.1-sol",
+              "effort": "medium",
+              "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+              "verified_at": "2026-11-08"
+            },
+            "execution": {
+              "exit_code": 0,
+              "timed_out": false,
+              "output_limited": false,
+              "idle_timed_out": false,
+              "cancelled": false,
+              "process_started": true,
+              "process_reaped": true,
+              "stdin_bytes_written": 77082,
+              "context_complete": true,
+              "duration_s": 42.544,
+              "timing": {
+                "spawn_s": 0.001201,
+                "input_complete_s": 0.121787,
+                "first_stdout_s": 0.762677,
+                "first_stderr_s": null,
+                "timeout_phase": null,
+                "event_counts": {
+                  "thread.started": 1,
+                  "item.completed": 2,
+                  "turn.started": 1,
+                  "turn.completed": 1
+                },
+                "inference_vs_initialization": "not_separable_without_provider_events"
+              },
+              "output_accounting": {
+                "transport_bytes": 8013,
+                "retained_bytes": 8013,
+                "discarded_progress_bytes": 0,
+                "transport_limit_bytes": 20000000,
+                "retained_limit_bytes": 2000000
+              },
+              "isolation": {
+                "backend": "bubblewrap",
+                "snapshot_read_only": true,
+                "host_home_mounted": false,
+                "network": "enabled_no_destination_firewall",
+                "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+              },
+              "started_at": "2026-11-10T16:17:14.349329+00:00",
+              "prompt_bytes": 77082,
+              "prompt_sha256": "a978638f43a3bbce704757c4ef1affa3ba31260078462c89eddfb8addb890c56",
+              "usage": {
+                "provider_reported": {
+                  "input_tokens": 34320,
+                  "cached_input_tokens": 0,
+                  "cache_write_input_tokens": 0,
+                  "output_tokens": 1605,
+                  "reasoning_output_tokens": 159
+                },
+                "measured_cost_available": false,
+                "estimated_cost": null
+              },
+              "limits": {
+                "timeout": 240,
+                "idle_timeout": 90,
+                "startup_timeout": 30,
+                "first_response_timeout": 150
+              },
+              "structured_output": "native_schema",
+              "contract_validation": {
+                "status": "passed",
+                "duration_s": 0.000408
+              }
+            },
+            "response_checkpoint": "reports/runs/ipanema/20261110T161702-orchestration-da5f9463/council/council-proposal-codex.json"
+          },
+          {
+            "role": "council_proposal",
+            "agent": "claude",
+            "model": {
+              "model": "claude-sonnet-5-5",
+              "effort": "medium",
+              "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+              "verified_at": "2026-11-08"
+            },
+            "execution": {
+              "exit_code": 0,
+              "timed_out": false,
+              "output_limited": false,
+              "idle_timed_out": false,
+              "cancelled": false,
+              "process_started": true,
+              "process_reaped": true,
+              "stdin_bytes_written": 77086,
+              "context_complete": true,
+              "duration_s": 80.477,
+              "timing": {
+                "spawn_s": 0.001006,
+                "input_complete_s": 0.79676,
+                "first_stdout_s": 1.480819,
+                "first_stderr_s": null,
+                "timeout_phase": null,
+                "event_counts": {
+                  "system": 22,
+                  "stream_event": 1206,
+                  "event:message_start": 2,
+                  "event:content_block_start": 3,
+                  "event:content_block_delta": 1194,
+                  "assistant": 3,
+                  "event:content_block_stop": 3,
+                  "user": 2,
+                  "event:message_delta": 2,
+                  "event:message_stop": 2,
+                  "rate_limit_event": 2,
+                  "result": 1
+                },
+                "inference_vs_initialization": "not_separable_without_provider_events"
+              },
+              "output_accounting": {
+                "transport_bytes": 456660,
+                "retained_bytes": 456660,
+                "discarded_progress_bytes": 0,
+                "transport_limit_bytes": 20000000,
+                "retained_limit_bytes": 2000000
+              },
+              "isolation": {
+                "backend": "bubblewrap",
+                "snapshot_read_only": true,
+                "host_home_mounted": false,
+                "network": "enabled_no_destination_firewall",
+                "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+              },
+              "started_at": "2026-11-10T16:17:14.387982+00:00",
+              "prompt_bytes": 77086,
+              "prompt_sha256": "3c5356c276435bbd3576013ad7daf6686e716cef78c701d354b65e00d5fd3b6a",
+              "usage": {
+                "provider_reported": {
+                  "total_cost_usd": 0.28797490000000003,
+                  "duration_ms": 78247,
+                  "input_tokens": 4,
+                  "cache_creation_input_tokens": 39982,
+                  "cache_read_input_tokens": 35789,
+                  "output_tokens": 12446
+                },
+                "measured_cost_available": true,
+                "estimated_cost": null
+              },
+              "limits": {
+                "timeout": 240,
+                "idle_timeout": 90,
+                "startup_timeout": 30,
+                "first_response_timeout": 120
+              },
+              "structured_output": "native_schema",
+              "contract_validation": {
+                "status": "passed",
+                "duration_s": 0.256407
+              }
+            },
+            "response_checkpoint": "reports/runs/ipanema/20261110T161702-orchestration-da5f9463/council/council-proposal-claude.json"
+          },
+          {
+            "role": "council_objection",
+            "agent": "claude",
+            "model": {
+              "model": "claude-sonnet-5-5",
+              "effort": "medium",
+              "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+              "verified_at": "2026-11-08"
+            },
+            "execution": {
+              "exit_code": 0,
+              "timed_out": false,
+              "output_limited": false,
+              "idle_timed_out": false,
+              "cancelled": false,
+              "process_started": true,
+              "process_reaped": true,
+              "stdin_bytes_written": 93397,
+              "context_complete": true,
+              "duration_s": 11.911,
+              "timing": {
+                "spawn_s": 0.000599,
+                "input_complete_s": 0.45872,
+                "first_stdout_s": 1.139135,
+                "first_stderr_s": null,
+                "timeout_phase": null,
+                "event_counts": {
+                  "system": 2,
+                  "stream_event": 255,
+                  "event:message_start": 1,
+                  "event:content_block_start": 1,
+                  "event:content_block_delta": 250,
+                  "assistant": 1,
+                  "event:content_block_stop": 1,
+                  "user": 1,
+                  "event:message_delta": 1,
+                  "event:message_stop": 1,
+                  "rate_limit_event": 1,
+                  "result": 1
+                },
+                "inference_vs_initialization": "not_separable_without_provider_events"
+              },
+              "output_accounting": {
+                "transport_bytes": 102449,
+                "retained_bytes": 102449,
+                "discarded_progress_bytes": 0,
+                "transport_limit_bytes": 20000000,
+                "retained_limit_bytes": 2000000
+              },
+              "isolation": {
+                "backend": "bubblewrap",
+                "snapshot_read_only": true,
+                "host_home_mounted": false,
+                "network": "enabled_no_destination_firewall",
+                "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+              },
+              "started_at": "2026-11-10T16:18:36.086150+00:00",
+              "prompt_bytes": 93397,
+              "prompt_sha256": "01f025fc147eb635d2cc936c327881a490d3b2f0dc4b448ce55efba121aa42e4",
+              "usage": {
+                "provider_reported": {
+                  "total_cost_usd": 0.177568,
+                  "duration_ms": 10482,
+                  "input_tokens": 2,
+                  "cache_creation_input_tokens": 40406,
+                  "cache_read_input_tokens": 0,
+                  "output_tokens": 1594
+                },
+                "measured_cost_available": true,
+                "estimated_cost": null
+              },
+              "limits": {
+                "timeout": 240,
+                "idle_timeout": 90,
+                "startup_timeout": 30,
+                "first_response_timeout": 120
+              },
+              "structured_output": "native_schema",
+              "contract_validation": {
+                "status": "passed",
+                "duration_s": 0.002261
+              }
+            },
+            "response_checkpoint": "reports/runs/ipanema/20261110T161702-orchestration-da5f9463/council/council-objection-claude.json"
+          },
+          {
+            "role": "council_objection",
+            "agent": "codex",
+            "model": {
+              "model": "gpt-6.1-sol",
+              "effort": "medium",
+              "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+              "verified_at": "2026-11-08"
+            },
+            "execution": {
+              "exit_code": 0,
+              "timed_out": false,
+              "output_limited": false,
+              "idle_timed_out": false,
+              "cancelled": false,
+              "process_started": true,
+              "process_reaped": true,
+              "stdin_bytes_written": 93393,
+              "context_complete": true,
+              "duration_s": 27.643,
+              "timing": {
+                "spawn_s": 0.00046,
+                "input_complete_s": 0.093475,
+                "first_stdout_s": 0.647671,
+                "first_stderr_s": null,
+                "timeout_phase": null,
+                "event_counts": {
+                  "thread.started": 1,
+                  "item.completed": 2,
+                  "turn.started": 1,
+                  "turn.completed": 1
+                },
+                "inference_vs_initialization": "not_separable_without_provider_events"
+              },
+              "output_accounting": {
+                "transport_bytes": 5169,
+                "retained_bytes": 5169,
+                "discarded_progress_bytes": 0,
+                "transport_limit_bytes": 20000000,
+                "retained_limit_bytes": 2000000
+              },
+              "isolation": {
+                "backend": "bubblewrap",
+                "snapshot_read_only": true,
+                "host_home_mounted": false,
+                "network": "enabled_no_destination_firewall",
+                "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+              },
+              "started_at": "2026-11-10T16:18:36.085463+00:00",
+              "prompt_bytes": 93393,
+              "prompt_sha256": "dfb44a22df974a705104c94d4295c659d253940ba1c73e1f65b51a9cc27ce1d2",
+              "usage": {
+                "provider_reported": {
+                  "input_tokens": 37547,
+                  "cached_input_tokens": 0,
+                  "cache_write_input_tokens": 0,
+                  "output_tokens": 1059,
+                  "reasoning_output_tokens": 44
+                },
+                "measured_cost_available": false,
+                "estimated_cost": null
+              },
+              "limits": {
+                "timeout": 240,
+                "idle_timeout": 90,
+                "startup_timeout": 30,
+                "first_response_timeout": 150
+              },
+              "structured_output": "native_schema",
+              "contract_validation": {
+                "status": "passed",
+                "duration_s": 0.000202
+              }
+            },
+            "response_checkpoint": "reports/runs/ipanema/20261110T161702-orchestration-da5f9463/council/council-objection-codex.json"
+          },
+          {
+            "role": "council_defense",
+            "agent": "claude",
+            "model": {
+              "model": "claude-sonnet-5-5",
+              "effort": "medium",
+              "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+              "verified_at": "2026-11-08"
+            },
+            "execution": {
+              "exit_code": 0,
+              "timed_out": false,
+              "output_limited": false,
+              "idle_timed_out": false,
+              "cancelled": false,
+              "process_started": true,
+              "process_reaped": true,
+              "stdin_bytes_written": 107761,
+              "context_complete": true,
+              "duration_s": 18.934,
+              "timing": {
+                "spawn_s": 0.000477,
+                "input_complete_s": 0.50303,
+                "first_stdout_s": 1.154092,
+                "first_stderr_s": null,
+                "timeout_phase": null,
+                "event_counts": {
+                  "system": 10,
+                  "stream_event": 253,
+                  "event:message_start": 1,
+                  "event:content_block_start": 2,
+                  "event:content_block_delta": 246,
+                  "assistant": 2,
+                  "event:content_block_stop": 2,
+                  "user": 1,
+                  "event:message_delta": 1,
+                  "event:message_stop": 1,
+                  "rate_limit_event": 1,
+                  "result": 1
+                },
+                "inference_vs_initialization": "not_separable_without_provider_events"
+              },
+              "output_accounting": {
+                "transport_bytes": 141367,
+                "retained_bytes": 141367,
+                "discarded_progress_bytes": 0,
+                "transport_limit_bytes": 20000000,
+                "retained_limit_bytes": 2000000
+              },
+              "isolation": {
+                "backend": "bubblewrap",
+                "snapshot_read_only": true,
+                "host_home_mounted": false,
+                "network": "enabled_no_destination_firewall",
+                "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+              },
+              "started_at": "2026-11-10T16:19:04.413655+00:00",
+              "prompt_bytes": 107761,
+              "prompt_sha256": "dec1dd557f3fda824d23295cb00f05230f665867a9c0a94d8b4a68aa53ae35d3",
+              "usage": {
+                "provider_reported": {
+                  "total_cost_usd": 0.2122,
+                  "duration_ms": 17417,
+                  "input_tokens": 2,
+                  "cache_creation_input_tokens": 46614,
+                  "cache_read_input_tokens": 0,
+                  "output_tokens": 2574
+                },
+                "measured_cost_available": true,
+                "estimated_cost": null
+              },
+              "limits": {
+                "timeout": 240,
+                "idle_timeout": 90,
+                "startup_timeout": 30,
+                "first_response_timeout": 120
+              },
+              "structured_output": "native_schema",
+              "contract_validation": {
+                "status": "passed",
+                "duration_s": 0.002535
+              }
+            },
+            "response_checkpoint": "reports/runs/ipanema/20261110T161702-orchestration-da5f9463/council/council-defense-claude.json"
+          },
+          {
+            "role": "council_defense",
+            "agent": "codex",
+            "model": {
+              "model": "gpt-6.1-sol",
+              "effort": "medium",
+              "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+              "verified_at": "2026-11-08"
+            },
+            "execution": {
+              "exit_code": 0,
+              "timed_out": false,
+              "output_limited": false,
+              "idle_timed_out": false,
+              "cancelled": false,
+              "process_started": true,
+              "process_reaped": true,
+              "stdin_bytes_written": 107757,
+              "context_complete": true,
+              "duration_s": 29.268,
+              "timing": {
+                "spawn_s": 0.000684,
+                "input_complete_s": 0.076367,
+                "first_stdout_s": 0.739962,
+                "first_stderr_s": null,
+                "timeout_phase": null,
+                "event_counts": {
+                  "thread.started": 1,
+                  "item.completed": 2,
+                  "turn.started": 1,
+                  "turn.completed": 1
+                },
+                "inference_vs_initialization": "not_separable_without_provider_events"
+              },
+              "output_accounting": {
+                "transport_bytes": 5246,
+                "retained_bytes": 5246,
+                "discarded_progress_bytes": 0,
+                "transport_limit_bytes": 20000000,
+                "retained_limit_bytes": 2000000
+              },
+              "isolation": {
+                "backend": "bubblewrap",
+                "snapshot_read_only": true,
+                "host_home_mounted": false,
+                "network": "enabled_no_destination_firewall",
+                "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+              },
+              "started_at": "2026-11-10T16:19:04.411384+00:00",
+              "prompt_bytes": 107757,
+              "prompt_sha256": "6f9e11323cccce7f5f2a4cbd47cda034ad970185be2ce70febabcae83428e8a3",
+              "usage": {
+                "provider_reported": {
+                  "input_tokens": 41196,
+                  "cached_input_tokens": 0,
+                  "cache_write_input_tokens": 0,
+                  "output_tokens": 1106,
+                  "reasoning_output_tokens": 81
+                },
+                "measured_cost_available": false,
+                "estimated_cost": null
+              },
+              "limits": {
+                "timeout": 240,
+                "idle_timeout": 90,
+                "startup_timeout": 30,
+                "first_response_timeout": 150
+              },
+              "structured_output": "native_schema",
+              "contract_validation": {
+                "status": "passed",
+                "duration_s": 0.000193
+              }
+            },
+            "response_checkpoint": "reports/runs/ipanema/20261110T161702-orchestration-da5f9463/council/council-defense-codex.json"
+          }
+        ],
+        "worker_attempt_budget": {
+          "limit": 6,
+          "used": 6,
+          "includes_retries_and_substitutions": true,
+          "provider_internal_api_call_count": "not_available"
+        },
+        "controller_duration_to_adr_s": 151.844,
+        "original_source_unchanged": true,
+        "patch_empty": true,
+        "production_modified": false
+      },
+      {
+        "case": "synthetic-balanced",
+        "run": "reports/runs/ipanema/20261110T161944-orchestration-35e5e13b",
+        "adr": "ADR-316e5b302ad2",
+        "adr_status": "needs_evidence",
+        "coverage": {
+          "required_agents": [
+            "claude",
+            "codex"
+          ],
+          "participants": [
+            {
+              "requested_agent": "claude",
+              "effective_agent": "claude",
+              "status": "available"
+            },
+            {
+              "requested_agent": "codex",
+              "effective_agent": "codex",
+              "status": "available"
+            }
+          ],
+          "effective_agents": [
+            "claude",
+            "codex"
+          ],
+          "complete": true,
+          "objections_complete": true,
+          "deliberation_complete": true,
+          "defense_complete": true,
+          "agreement": "unanimous_preference",
+          "consensus": "incomplete_or_disagreement"
+        },
+        "state": "blocked",
+        "implementation_allowed": false,
+        "source_binding": {
+          "project": "ipanema",
+          "run_id": "20261110T161944-orchestration-35e5e13b",
+          "source_sha256": "d96a22c1e8e0562447166289d18808a3a42d91b2d1f6303fcb9c4946fbb2c22f",
+          "objective_sha256": "3cc01ef36c0cff75b23e2ba8f355040c98415df44b36c951195f43edb27f2fb2",
+          "files": {
+            "tests/fixtures/council/read-only.txt": "24bd0b2ed0ba0b3779afe4fccab615a849dea6601d7901ae58bd7b0f330b1f36"
+          },
+          "required_constraints": [],
+          "instructions_sha256": "8ca35f90a32acb20ebd96d55f366425c86703249b25cb20e6e0b4edb54d46007",
+          "require_objections": true,
+          "require_defense": true,
+          "participation_sha256": "9ff597857187450dc19d945e8124e6a50c9a76a12101de1d08f41ada93399d8c"
+        },
+        "phases": [
+          "independent_proposals",
+          "cross_examination",
+          "defense"
+        ],
+        "questions": 3,
+        "answers": 2,
+        "objections": 9,
+        "independent_first_round_verified": true,
+        "valid_nodes": [
+          {
+            "role": "council_proposal",
+            "agent": "claude",
+            "model": {
+              "model": "claude-sonnet-5-5",
+              "effort": "medium",
+              "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+              "verified_at": "2026-11-08"
+            },
+            "execution": {
+              "exit_code": 0,
+              "timed_out": false,
+              "output_limited": false,
+              "idle_timed_out": false,
+              "cancelled": false,
+              "process_started": true,
+              "process_reaped": true,
+              "stdin_bytes_written": 19121,
+              "context_complete": true,
+              "duration_s": 11.183,
+              "timing": {
+                "spawn_s": 0.000302,
+                "input_complete_s": 0.000351,
+                "first_stdout_s": 1.181944,
+                "first_stderr_s": null,
+                "timeout_phase": null,
+                "event_counts": {
+                  "system": 4,
+                  "stream_event": 245,
+                  "event:message_start": 1,
+                  "event:content_block_start": 1,
+                  "event:content_block_delta": 240,
+                  "assistant": 1,
+                  "event:content_block_stop": 1,
+                  "user": 1,
+                  "event:message_delta": 1,
+                  "event:message_stop": 1,
+                  "rate_limit_event": 1,
+                  "result": 1
+                },
+                "inference_vs_initialization": "not_separable_without_provider_events"
+              },
+              "output_accounting": {
+                "transport_bytes": 126070,
+                "retained_bytes": 126070,
+                "discarded_progress_bytes": 0,
+                "transport_limit_bytes": 20000000,
+                "retained_limit_bytes": 2000000
+              },
+              "isolation": {
+                "backend": "bubblewrap",
+                "snapshot_read_only": true,
+                "host_home_mounted": false,
+                "network": "enabled_no_destination_firewall",
+                "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+              },
+              "started_at": "2026-11-10T16:19:50.727374+00:00",
+              "prompt_bytes": 19121,
+              "prompt_sha256": "a77380e5c65899d45930d38fd440ad02946c599aa43b20184dc4b449b7581e00",
+              "usage": {
+                "provider_reported": {
+                  "total_cost_usd": 0.0487694,
+                  "duration_ms": 9490,
+                  "input_tokens": 2,
+                  "cache_creation_input_tokens": 8362,
+                  "cache_read_input_tokens": 4774,
+                  "output_tokens": 1484
+                },
+                "measured_cost_available": true,
+                "estimated_cost": null
+              },
+              "limits": {
+                "timeout": 240,
+                "idle_timeout": 90,
+                "startup_timeout": 30,
+                "first_response_timeout": 120
+              },
+              "structured_output": "native_schema",
+              "contract_validation": {
+                "status": "passed",
+                "duration_s": 0.003191
+              }
+            },
+            "response_checkpoint": "reports/runs/ipanema/20261110T161944-orchestration-35e5e13b/council/council-proposal-claude.json"
+          },
+          {
+            "role": "council_proposal",
+            "agent": "codex",
+            "model": {
+              "model": "gpt-6.1-sol",
+              "effort": "medium",
+              "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+              "verified_at": "2026-11-08"
+            },
+            "execution": {
+              "exit_code": 0,
+              "timed_out": false,
+              "output_limited": false,
+              "idle_timed_out": false,
+              "cancelled": false,
+              "process_started": true,
+              "process_reaped": true,
+              "stdin_bytes_written": 19117,
+              "context_complete": true,
+              "duration_s": 29.472,
+              "timing": {
+                "spawn_s": 0.000434,
+                "input_complete_s": 0.000507,
+                "first_stdout_s": 0.947599,
+                "first_stderr_s": null,
+                "timeout_phase": null,
+                "event_counts": {
+                  "thread.started": 1,
+                  "item.completed": 2,
+                  "turn.started": 1,
+                  "turn.completed": 1
+                },
+                "inference_vs_initialization": "not_separable_without_provider_events"
+              },
+              "output_accounting": {
+                "transport_bytes": 5737,
+                "retained_bytes": 5737,
+                "discarded_progress_bytes": 0,
+                "transport_limit_bytes": 20000000,
+                "retained_limit_bytes": 2000000
+              },
+              "isolation": {
+                "backend": "bubblewrap",
+                "snapshot_read_only": true,
+                "host_home_mounted": false,
+                "network": "enabled_no_destination_firewall",
+                "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+              },
+              "started_at": "2026-11-10T16:19:50.696542+00:00",
+              "prompt_bytes": 19117,
+              "prompt_sha256": "a09dfde7e2f3d19a01a0619b99c38f25b6620f986ca7d7d23c91fe2c51f60755",
+              "usage": {
+                "provider_reported": {
+                  "input_tokens": 20073,
+                  "cached_input_tokens": 0,
+                  "cache_write_input_tokens": 0,
+                  "output_tokens": 1064,
+                  "reasoning_output_tokens": 50
+                },
+                "measured_cost_available": false,
+                "estimated_cost": null
+              },
+              "limits": {
+                "timeout": 240,
+                "idle_timeout": 90,
+                "startup_timeout": 30,
+                "first_response_timeout": 150
+              },
+              "structured_output": "native_schema",
+              "contract_validation": {
+                "status": "passed",
+                "duration_s": 0.000309
+              }
+            },
+            "response_checkpoint": "reports/runs/ipanema/20261110T161944-orchestration-35e5e13b/council/council-proposal-codex.json"
+          },
+          {
+            "role": "council_objection",
+            "agent": "claude",
+            "model": {
+              "model": "claude-sonnet-5-5",
+              "effort": "medium",
+              "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+              "verified_at": "2026-11-08"
+            },
+            "execution": {
+              "exit_code": 0,
+              "timed_out": false,
+              "output_limited": false,
+              "idle_timed_out": false,
+              "cancelled": false,
+              "process_started": true,
+              "process_reaped": true,
+              "stdin_bytes_written": 28614,
+              "context_complete": true,
+              "duration_s": 10.948,
+              "timing": {
+                "spawn_s": 0.000651,
+                "input_complete_s": 0.000917,
+                "first_stdout_s": 1.718216,
+                "first_stderr_s": null,
+                "timeout_phase": null,
+                "event_counts": {
+                  "system": 4,
+                  "stream_event": 208,
+                  "event:message_start": 1,
+                  "event:content_block_start": 1,
+                  "event:content_block_delta": 203,
+                  "assistant": 1,
+                  "event:content_block_stop": 1,
+                  "user": 1,
+                  "event:message_delta": 1,
+                  "event:message_stop": 1,
+                  "rate_limit_event": 1,
+                  "result": 1
+                },
+                "inference_vs_initialization": "not_separable_without_provider_events"
+              },
+              "output_accounting": {
+                "transport_bytes": 111769,
+                "retained_bytes": 111769,
+                "discarded_progress_bytes": 0,
+                "transport_limit_bytes": 20000000,
+                "retained_limit_bytes": 2000000
+              },
+              "isolation": {
+                "backend": "bubblewrap",
+                "snapshot_read_only": true,
+                "host_home_mounted": false,
+                "network": "enabled_no_destination_firewall",
+                "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+              },
+              "started_at": "2026-11-10T16:20:20.701178+00:00",
+              "prompt_bytes": 28614,
+              "prompt_sha256": "272f99983729238491650b85b572e1c68d77c3b6f3f4167eaa439c1160271d08",
+              "usage": {
+                "provider_reported": {
+                  "total_cost_usd": 0.0625194,
+                  "duration_ms": 8942,
+                  "input_tokens": 2,
+                  "cache_creation_input_tokens": 12422,
+                  "cache_read_input_tokens": 2674,
+                  "output_tokens": 1256
+                },
+                "measured_cost_available": true,
+                "estimated_cost": null
+              },
+              "limits": {
+                "timeout": 240,
+                "idle_timeout": 90,
+                "startup_timeout": 30,
+                "first_response_timeout": 120
+              },
+              "structured_output": "native_schema",
+              "contract_validation": {
+                "status": "passed",
+                "duration_s": 0.002128
+              }
+            },
+            "response_checkpoint": "reports/runs/ipanema/20261110T161944-orchestration-35e5e13b/council/council-objection-claude.json"
+          },
+          {
+            "role": "council_objection",
+            "agent": "codex",
+            "model": {
+              "model": "gpt-6.1-sol",
+              "effort": "medium",
+              "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+              "verified_at": "2026-11-08"
+            },
+            "execution": {
+              "exit_code": 0,
+              "timed_out": false,
+              "output_limited": false,
+              "idle_timed_out": false,
+              "cancelled": false,
+              "process_started": true,
+              "process_reaped": true,
+              "stdin_bytes_written": 28610,
+              "context_complete": true,
+              "duration_s": 18.973,
+              "timing": {
+                "spawn_s": 0.000375,
+                "input_complete_s": 0.000419,
+                "first_stdout_s": 1.631341,
+                "first_stderr_s": null,
+                "timeout_phase": null,
+                "event_counts": {
+                  "thread.started": 1,
+                  "item.completed": 2,
+                  "turn.started": 1,
+                  "turn.completed": 1
+                },
+                "inference_vs_initialization": "not_separable_without_provider_events"
+              },
+              "output_accounting": {
+                "transport_bytes": 2980,
+                "retained_bytes": 2980,
+                "discarded_progress_bytes": 0,
+                "transport_limit_bytes": 20000000,
+                "retained_limit_bytes": 2000000
+              },
+              "isolation": {
+                "backend": "bubblewrap",
+                "snapshot_read_only": true,
+                "host_home_mounted": false,
+                "network": "enabled_no_destination_firewall",
+                "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+              },
+              "started_at": "2026-11-10T16:20:20.690409+00:00",
+              "prompt_bytes": 28610,
+              "prompt_sha256": "c80e0944e2810dc7a882b87ede3df858b236dd57c9151ef0a329b161f3a6b3e6",
+              "usage": {
+                "provider_reported": {
+                  "input_tokens": 21780,
+                  "cached_input_tokens": 0,
+                  "cache_write_input_tokens": 0,
+                  "output_tokens": 577,
+                  "reasoning_output_tokens": 49
+                },
+                "measured_cost_available": false,
+                "estimated_cost": null
+              },
+              "limits": {
+                "timeout": 240,
+                "idle_timeout": 90,
+                "startup_timeout": 30,
+                "first_response_timeout": 150
+              },
+              "structured_output": "native_schema",
+              "contract_validation": {
+                "status": "passed",
+                "duration_s": 0.000187
+              }
+            },
+            "response_checkpoint": "reports/runs/ipanema/20261110T161944-orchestration-35e5e13b/council/council-objection-codex.json"
+          },
+          {
+            "role": "council_defense",
+            "agent": "claude",
+            "model": {
+              "model": "claude-sonnet-5-5",
+              "effort": "medium",
+              "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+              "verified_at": "2026-11-08"
+            },
+            "execution": {
+              "exit_code": 0,
+              "timed_out": false,
+              "output_limited": false,
+              "idle_timed_out": false,
+              "cancelled": false,
+              "process_started": true,
+              "process_reaped": true,
+              "stdin_bytes_written": 40348,
+              "context_complete": true,
+              "duration_s": 29.452,
+              "timing": {
+                "spawn_s": 0.000467,
+                "input_complete_s": 0.00055,
+                "first_stdout_s": 1.254766,
+                "first_stderr_s": null,
+                "timeout_phase": null,
+                "event_counts": {
+                  "system": 10,
+                  "stream_event": 590,
+                  "event:message_start": 3,
+                  "event:content_block_start": 5,
+                  "event:content_block_delta": 571,
+                  "assistant": 5,
+                  "event:content_block_stop": 5,
+                  "event:message_delta": 3,
+                  "event:message_stop": 3,
+                  "rate_limit_event": 2,
+                  "user": 3,
+                  "result": 1
+                },
+                "inference_vs_initialization": "not_separable_without_provider_events"
+              },
+              "output_accounting": {
+                "transport_bytes": 231594,
+                "retained_bytes": 231594,
+                "discarded_progress_bytes": 0,
+                "transport_limit_bytes": 20000000,
+                "retained_limit_bytes": 2000000
+              },
+              "isolation": {
+                "backend": "bubblewrap",
+                "snapshot_read_only": true,
+                "host_home_mounted": false,
+                "network": "enabled_no_destination_firewall",
+                "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+              },
+              "started_at": "2026-11-10T16:20:40.229039+00:00",
+              "prompt_bytes": 40348,
+              "prompt_sha256": "7d069fe284e9701f82907132af5b3bccd372003a022c4446735ae46f4b80c87b",
+              "usage": {
+                "provider_reported": {
+                  "total_cost_usd": 0.1377477,
+                  "duration_ms": 27917,
+                  "input_tokens": 8,
+                  "cache_creation_input_tokens": 21008,
+                  "cache_read_input_tokens": 45197,
+                  "output_tokens": 4918
+                },
+                "measured_cost_available": true,
+                "estimated_cost": null
+              },
+              "limits": {
+                "timeout": 240,
+                "idle_timeout": 90,
+                "startup_timeout": 30,
+                "first_response_timeout": 120
+              },
+              "structured_output": "native_schema",
+              "contract_validation": {
+                "status": "passed",
+                "duration_s": 0.005387
+              }
+            },
+            "response_checkpoint": "reports/runs/ipanema/20261110T161944-orchestration-35e5e13b/council/council-defense-claude.json"
+          },
+          {
+            "role": "council_defense",
+            "agent": "codex",
+            "model": {
+              "model": "gpt-6.1-sol",
+              "effort": "medium",
+              "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+              "verified_at": "2026-11-08"
+            },
+            "execution": {
+              "exit_code": 0,
+              "timed_out": false,
+              "output_limited": false,
+              "idle_timed_out": false,
+              "cancelled": false,
+              "process_started": true,
+              "process_reaped": true,
+              "stdin_bytes_written": 40344,
+              "context_complete": true,
+              "duration_s": 20.664,
+              "timing": {
+                "spawn_s": 0.000397,
+                "input_complete_s": 0.000461,
+                "first_stdout_s": 0.838436,
+                "first_stderr_s": null,
+                "timeout_phase": null,
+                "event_counts": {
+                  "thread.started": 1,
+                  "item.completed": 2,
+                  "turn.started": 1,
+                  "turn.completed": 1
+                },
+                "inference_vs_initialization": "not_separable_without_provider_events"
+              },
+              "output_accounting": {
+                "transport_bytes": 4047,
+                "retained_bytes": 4047,
+                "discarded_progress_bytes": 0,
+                "transport_limit_bytes": 20000000,
+                "retained_limit_bytes": 2000000
+              },
+              "isolation": {
+                "backend": "bubblewrap",
+                "snapshot_read_only": true,
+                "host_home_mounted": false,
+                "network": "enabled_no_destination_firewall",
+                "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+              },
+              "started_at": "2026-11-10T16:20:40.214282+00:00",
+              "prompt_bytes": 40344,
+              "prompt_sha256": "c736f61a97116c699e5eddfcccd0a70ae1a87697de16b5555bc55818a1c3958a",
+              "usage": {
+                "provider_reported": {
+                  "input_tokens": 24829,
+                  "cached_input_tokens": 0,
+                  "cache_write_input_tokens": 0,
+                  "output_tokens": 779,
+                  "reasoning_output_tokens": 41
+                },
+                "measured_cost_available": false,
+                "estimated_cost": null
+              },
+              "limits": {
+                "timeout": 240,
+                "idle_timeout": 90,
+                "startup_timeout": 30,
+                "first_response_timeout": 150
+              },
+              "structured_output": "native_schema",
+              "contract_validation": {
+                "status": "passed",
+                "duration_s": 0.000213
+              }
+            },
+            "response_checkpoint": "reports/runs/ipanema/20261110T161944-orchestration-35e5e13b/council/council-defense-codex.json"
+          }
+        ],
+        "worker_attempt_budget": {
+          "limit": 6,
+          "used": 6,
+          "includes_retries_and_substitutions": true,
+          "provider_internal_api_call_count": "not_available"
+        },
+        "controller_duration_to_adr_s": 85.325,
+        "original_source_unchanged": true,
+        "patch_empty": true,
+        "production_modified": false,
+        "contextual_validation_passed": false,
+        "coverage_warning": "Legacy coverage counts providers but one defense answered unassigned questions; implementation safely blocked."
+      }
+    ],
+    "real_worker_invocations": 12,
+    "contract_failures": 0,
+    "retries": 0,
+    "commandcode_invocations": 0,
+    "claude_provider_reported_cost_usd": 0.9267794,
+    "codex_cost_usd": null,
+    "combined_cost_usd": null,
+    "themes": {
+      "ipanema": {
+        "before": {
+          "files": 397,
+          "hash": "3fd79c131175f3c4fb7dad98056a4842d93683d187ee6e60e30219b234b0a63b"
+        },
+        "after": {
+          "files": 397,
+          "hash": "3fd79c131175f3c4fb7dad98056a4842d93683d187ee6e60e30219b234b0a63b"
+        },
+        "unchanged": true
+      },
+      "damarbeauty": {
+        "before": {
+          "files": 471,
+          "hash": "bb2df14f6f37d9c6723e284954d4b2f76ce8816cef6fa643fc807a43dcb29fc5"
+        },
+        "after": {
+          "files": 471,
+          "hash": "bb2df14f6f37d9c6723e284954d4b2f76ce8816cef6fa643fc807a43dcb29fc5"
+        },
+        "unchanged": true
+      }
+    },
+    "production_operations": [],
+    "limits": [
+      "Read-only protocol verified for these snapshots, models and accounts; no universal guarantee of model decisions.",
+      "Both ADRs retain their actual needs_evidence or blocked status; protocol completion is not implementation approval.",
+      "No storefront rendering, SEO/performance measurements or Google data queried.",
+      "Static low-priority agent-null prompt attribution observation remains pending a scoped implementation decision; controller participant identity remained validated.",
+      "Current code hashes match the prior passing tool QA; tests were reused rather than unnecessarily rerun."
+    ]
+  },
+  "source_hashes_before_context_fix": {
+    "tools/ipanema/orchestration/models.json": "14fede6b13b294a8e685b8ce1072777959850d8ae05bf3270f5dd9ea527aba39",
+    "tools/ipanema/orchestration/adapters.py": "bae25bee06cf7574ee35f65e9f9055dfa8a495336f80615165ddd5232359d01d",
+    "tools/ipanema/orchestration/planner.py": "b09a3bc644618502680e8804ed7f135eaa074e7b82812d2013c5293ef909117e",
+    "tools/ipanema/orchestration/engine.py": "59245c294661b07cf8a319227dcb12022e09e43b55d4eac1e578655a4d370e73",
+    "tools/ipanema/orchestration/recovery.py": "1d8b3a4d0e22bb0c8507f036ab7ff1b285e6517d8fbe670b70d679a0c317f12c",
+    "tools/ipanema/orchestration/council.py": "2b3ee7bb19bd247e5c3b8596d6e9f22397142b52cc4e56b734ec825d56752310",
+    "tools/ipanema/orchestration/council_runtime.py": "9611180bde280e06f7793d9ea2588bd9bc8811e4e6482b15aca3458c1d25dfc9",
+    "tools/ipanema/orchestration/isolation.py": "0d734fcbf6d10e839d2a7cb46f3416ca60f0751e1491974d73186a8d56408079",
+    "tools/ipanema/orchestration/cli.py": "04e661d92b687da162887aaca8ad5c7905359e7c8376cc0ddec2370d9d58c99b",
+    "tools/ipanema/access/policy.py": "803a4a3e9af209195f44f89beabf03ed9253d9af6e2b55b8f2f3837976df6163",
+    "tools/ipanema/access/agents.py": "8ab4965c594583b0ba40d841a31a9f20e4bf69af69b7f02c260b32ab0a8a9cc3",
+    "tools/ipanema/access/cli.py": "a0abbf194221b683818f81b2e34525a8de9a41354f560b63d91e21877b1db358"
+  },
+  "qa_before_auth_recovery": [
+    {
+      "suite": "quick",
+      "outcome": "passed",
+      "report": "reports/runs/ipanema/20261110T160732-quick-ebd455b4/report.json",
+      "checks": [
+        {
+          "name": "repository",
+          "status": "passed",
+          "tests": null
+        },
+        {
+          "name": "unit-tests",
+          "status": "passed",
+          "tests": 237
+        },
+        {
+          "name": "integration-tests",
+          "status": "passed",
+          "tests": 34
+        },
+        {
+          "name": "coordinator-evals",
+          "status": "passed",
+          "tests": null
+        },
+        {
+          "name": "seo-action-evals",
+          "status": "passed",
+          "tests": null
+        },
+        {
+          "name": "sources-stable-during-qa",
+          "status": "passed",
+          "tests": null
+        }
+      ]
+    },
+    {
+      "suite": "orchestration",
+      "outcome": "passed",
+      "report": "reports/runs/ipanema/20261110T160757-orchestration-78fb71c4/report.json",
+      "checks": [
+        {
+          "name": "orchestration-unit",
+          "status": "passed",
+          "tests": 41
+        },
+        {
+          "name": "council-unit",
+          "status": "passed",
+          "tests": 86
+        },
+        {
+          "name": "orchestration-integration",
+          "status": "passed",
+          "tests": 11
+        },
+        {
+          "name": "council-integration",
+          "status": "passed",
+          "tests": 5
+        },
+        {
+          "name": "sources-stable-during-qa",
+          "status": "passed",
+          "tests": null
+        }
+      ]
+    }
+  ]
+}

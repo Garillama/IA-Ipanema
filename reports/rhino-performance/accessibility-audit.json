@@ -1,0 +1,1485 @@
+{
+  "kind": "read-only-accessibility-audit",
+  "project": "rhino-performance",
+  "at": "2026-11-10T17:40:47.473080+00:00",
+  "url": "https://rhino-performance.com/",
+  "browser": "Chrome/155.0.8059.84",
+  "axe_version": "4.14.0",
+  "lighthouse_version": "13.6.0",
+  "coverage": [
+    {
+      "page": "home",
+      "url": "https://rhino-performance.com/",
+      "width": 390,
+      "status": 200,
+      "theme_observed": "ipanema",
+      "visible_h1": [],
+      "states": [
+        {
+          "name": "initial",
+          "axe_version": "4.14.0",
+          "rules": [
+            {
+              "id": "aria-prohibited-attr",
+              "impact": "serious",
+              "instances": 1
+            },
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "instances": 18
+            },
+            {
+              "id": "label-content-name-mismatch",
+              "impact": "serious",
+              "instances": 2
+            },
+            {
+              "id": "landmark-contentinfo-is-top-level",
+              "impact": "moderate",
+              "instances": 1
+            },
+            {
+              "id": "landmark-no-duplicate-contentinfo",
+              "impact": "moderate",
+              "instances": 1
+            },
+            {
+              "id": "landmark-unique",
+              "impact": "moderate",
+              "instances": 1
+            },
+            {
+              "id": "page-has-heading-one",
+              "impact": "moderate",
+              "instances": 1
+            },
+            {
+              "id": "region",
+              "impact": "moderate",
+              "instances": 1
+            }
+          ],
+          "incomplete": [
+            {
+              "id": "aria-prohibited-attr",
+              "count": 4
+            },
+            {
+              "id": "color-contrast",
+              "count": 57
+            },
+            {
+              "id": "duplicate-id-aria",
+              "count": 1
+            }
+          ]
+        },
+        {
+          "name": "full-page-after-scroll",
+          "axe_version": "4.14.0",
+          "rules": [
+            {
+              "id": "aria-prohibited-attr",
+              "impact": "serious",
+              "instances": 1
+            },
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "instances": 18
+            },
+            {
+              "id": "label-content-name-mismatch",
+              "impact": "serious",
+              "instances": 2
+            },
+            {
+              "id": "landmark-contentinfo-is-top-level",
+              "impact": "moderate",
+              "instances": 1
+            },
+            {
+              "id": "landmark-no-duplicate-contentinfo",
+              "impact": "moderate",
+              "instances": 1
+            },
+            {
+              "id": "landmark-unique",
+              "impact": "moderate",
+              "instances": 1
+            },
+            {
+              "id": "page-has-heading-one",
+              "impact": "moderate",
+              "instances": 1
+            },
+            {
+              "id": "region",
+              "impact": "moderate",
+              "instances": 1
+            },
+            {
+              "id": "target-size",
+              "impact": "serious",
+              "instances": 18
+            }
+          ],
+          "incomplete": [
+            {
+              "id": "aria-prohibited-attr",
+              "count": 4
+            },
+            {
+              "id": "color-contrast",
+              "count": 60
+            },
+            {
+              "id": "duplicate-id-aria",
+              "count": 1
+            },
+            {
+              "id": "frame-tested",
+              "count": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "page": "home",
+      "url": "https://rhino-performance.com/",
+      "width": 1440,
+      "status": 200,
+      "theme_observed": "ipanema",
+      "visible_h1": [],
+      "states": [
+        {
+          "name": "initial",
+          "axe_version": "4.14.0",
+          "rules": [
+            {
+              "id": "aria-prohibited-attr",
+              "impact": "serious",
+              "instances": 1
+            },
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "instances": 32
+            },
+            {
+              "id": "label-content-name-mismatch",
+              "impact": "serious",
+              "instances": 6
+            },
+            {
+              "id": "landmark-contentinfo-is-top-level",
+              "impact": "moderate",
+              "instances": 1
+            },
+            {
+              "id": "landmark-no-duplicate-contentinfo",
+              "impact": "moderate",
+              "instances": 1
+            },
+            {
+              "id": "landmark-unique",
+              "impact": "moderate",
+              "instances": 1
+            },
+            {
+              "id": "page-has-heading-one",
+              "impact": "moderate",
+              "instances": 1
+            },
+            {
+              "id": "region",
+              "impact": "moderate",
+              "instances": 1
+            }
+          ],
+          "incomplete": [
+            {
+              "id": "aria-prohibited-attr",
+              "count": 5
+            },
+            {
+              "id": "color-contrast",
+              "count": 64
+            },
+            {
+              "id": "duplicate-id-aria",
+              "count": 1
+            },
+            {
+              "id": "frame-tested",
+              "count": 2
+            }
+          ]
+        },
+        {
+          "name": "full-page-after-scroll",
+          "axe_version": "4.14.0",
+          "rules": [
+            {
+              "id": "aria-prohibited-attr",
+              "impact": "serious",
+              "instances": 1
+            },
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "instances": 32
+            },
+            {
+              "id": "label-content-name-mismatch",
+              "impact": "serious",
+              "instances": 6
+            },
+            {
+              "id": "landmark-contentinfo-is-top-level",
+              "impact": "moderate",
+              "instances": 1
+            },
+            {
+              "id": "landmark-no-duplicate-contentinfo",
+              "impact": "moderate",
+              "instances": 1
+            },
+            {
+              "id": "landmark-unique",
+              "impact": "moderate",
+              "instances": 1
+            },
+            {
+              "id": "page-has-heading-one",
+              "impact": "moderate",
+              "instances": 1
+            },
+            {
+              "id": "region",
+              "impact": "moderate",
+              "instances": 1
+            },
+            {
+              "id": "target-size",
+              "impact": "serious",
+              "instances": 15
+            }
+          ],
+          "incomplete": [
+            {
+              "id": "aria-prohibited-attr",
+              "count": 5
+            },
+            {
+              "id": "color-contrast",
+              "count": 72
+            },
+            {
+              "id": "duplicate-id-aria",
+              "count": 1
+            },
+            {
+              "id": "frame-tested",
+              "count": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "page": "category",
+      "url": "https://rhino-performance.com/presoterapia/",
+      "width": 390,
+      "status": 200,
+      "theme_observed": "ipanema",
+      "visible_h1": [],
+      "states": [
+        {
+          "name": "category-full-page",
+          "axe_version": "4.14.0",
+          "rules": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "instances": 3
+            },
+            {
+              "id": "label-content-name-mismatch",
+              "impact": "serious",
+              "instances": 3
+            },
+            {
+              "id": "landmark-contentinfo-is-top-level",
+              "impact": "moderate",
+              "instances": 1
+            },
+            {
+              "id": "landmark-no-duplicate-contentinfo",
+              "impact": "moderate",
+              "instances": 1
+            },
+            {
+              "id": "landmark-unique",
+              "impact": "moderate",
+              "instances": 1
+            },
+            {
+              "id": "page-has-heading-one",
+              "impact": "moderate",
+              "instances": 1
+            },
+            {
+              "id": "region",
+              "impact": "moderate",
+              "instances": 1
+            }
+          ],
+          "incomplete": [
+            {
+              "id": "aria-prohibited-attr",
+              "count": 4
+            },
+            {
+              "id": "color-contrast",
+              "count": 1
+            },
+            {
+              "id": "duplicate-id-aria",
+              "count": 1
+            },
+            {
+              "id": "frame-tested",
+              "count": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "page": "product",
+      "url": "https://rhino-performance.com/productos/botas-presoterapia-inalambricas-pro-air/",
+      "width": 390,
+      "status": 200,
+      "theme_observed": "ipanema",
+      "visible_h1": [
+        {
+          "tag": "H1",
+          "text": "Botas de Presoterapia Inalámbricas PRO AIR",
+          "visible": true
+        }
+      ],
+      "states": [
+        {
+          "name": "product-full-page",
+          "axe_version": "4.14.0",
+          "rules": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "instances": 3
+            },
+            {
+              "id": "label-content-name-mismatch",
+              "impact": "serious",
+              "instances": 3
+            },
+            {
+              "id": "landmark-contentinfo-is-top-level",
+              "impact": "moderate",
+              "instances": 1
+            },
+            {
+              "id": "landmark-no-duplicate-contentinfo",
+              "impact": "moderate",
+              "instances": 1
+            },
+            {
+              "id": "landmark-unique",
+              "impact": "moderate",
+              "instances": 1
+            },
+            {
+              "id": "link-name",
+              "impact": "serious",
+              "instances": 1
+            },
+            {
+              "id": "region",
+              "impact": "moderate",
+              "instances": 1
+            },
+            {
+              "id": "target-size",
+              "impact": "serious",
+              "instances": 5
+            }
+          ],
+          "incomplete": [
+            {
+              "id": "aria-prohibited-attr",
+              "count": 1
+            },
+            {
+              "id": "color-contrast",
+              "count": 3
+            },
+            {
+              "id": "frame-tested",
+              "count": 1
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "local_source_candidate": {
+    "root": "/home/alanrichard/Escritorio/Rhino-Ipanema",
+    "theme_runtime_confirmed": "ipanema",
+    "remote_sync_verified": false,
+    "files": [
+      {
+        "path": "sections/google-reviews.tpl",
+        "sha256": "2b1b1bbacbc263950e95840336cc5515867b5529152de28ee47b50f2365e4f61"
+      },
+      {
+        "path": "snippets/footer/footer-rhino.tpl",
+        "sha256": "e3a6d23d94a48ec10803e8c20b01e87ebdbb315d0a97d6367e1d4e3fa46029e3"
+      },
+      {
+        "path": "snippets/product-list/product-item/item.tpl",
+        "sha256": "298ef7cd710e74a51dec64612ffcd5a5fef1fb9f851b858711544be61d357dcc"
+      },
+      {
+        "path": "snippets/product/product-video-item.tpl",
+        "sha256": "16056b2258a469484b34a75312adaaf87766aa403c068b35ccd32a6e3a971520"
+      },
+      {
+        "path": "snippets/logo/logo-img.tpl",
+        "sha256": "0c765d3770c83c14f763bb7f9421c0438e7e155bc86fdd1a7f7156041eaf9d3e"
+      },
+      {
+        "path": "static/css/style-critical.css",
+        "sha256": "c12781b9e40db8ad384565ba9082d2d73ea0e9e5a09e807d37ce23fdb1c22683"
+      },
+      {
+        "path": "static/css/style-async.css",
+        "sha256": "1a9b8b65475a301417a1662ecdc8a5858890c61812f8186926a4427d6dabcdee"
+      }
+    ]
+  },
+  "navigation_scores": {
+    "mobile": {
+      "accessibility": 0.94,
+      "agentic_raw_score": 0.67,
+      "agentic_display_mode": "fraction",
+      "accessibility_failed_weighted": [
+        {
+          "id": "aria-prohibited-attr",
+          "weight": 7
+        },
+        {
+          "id": "color-contrast",
+          "weight": 7
+        }
+      ]
+    },
+    "desktop": {
+      "accessibility": 0.94,
+      "agentic_raw_score": 0.4,
+      "agentic_display_mode": "fraction",
+      "accessibility_failed_weighted": [
+        {
+          "id": "aria-prohibited-attr",
+          "weight": 7
+        },
+        {
+          "id": "color-contrast",
+          "weight": 7
+        }
+      ]
+    }
+  },
+  "desktop_repeat": {
+    "accessibility": 0.94,
+    "agentic_raw_score": 0.4,
+    "cls": 0.4491796690307328
+  },
+  "controlled_snapshot_sequence": [
+    {
+      "action": "Baseline",
+      "name": "Snapshot report (rhino-performance.com/)",
+      "version": "13.6.0",
+      "gatherMode": "snapshot",
+      "categories": {
+        "accessibility": {
+          "score": 0.94
+        },
+        "agentic-browsing": {
+          "score": 0.5,
+          "displayMode": "fraction"
+        }
+      },
+      "audits": {
+        "agent-accessibility-tree": {
+          "score": 0,
+          "mode": "binary"
+        },
+        "aria-prohibited-attr": {
+          "score": 0,
+          "mode": "binary"
+        },
+        "color-contrast": {
+          "score": 0,
+          "mode": "binary"
+        },
+        "target-size": {
+          "score": 1,
+          "mode": "binary"
+        },
+        "label-content-name-mismatch": {
+          "score": 0,
+          "mode": "binary"
+        }
+      },
+      "failed": [
+        "aria-prohibited-attr",
+        "color-contrast",
+        "label-content-name-mismatch",
+        "agent-accessibility-tree"
+      ]
+    },
+    {
+      "action": "Only role=img on Google span",
+      "name": "Snapshot report (rhino-performance.com/)",
+      "version": "13.6.0",
+      "gatherMode": "snapshot",
+      "categories": {
+        "accessibility": {
+          "score": 0.97
+        },
+        "agentic-browsing": {
+          "score": 1,
+          "displayMode": "fraction"
+        }
+      },
+      "audits": {
+        "agent-accessibility-tree": {
+          "score": 1,
+          "mode": "binary"
+        },
+        "aria-prohibited-attr": {
+          "score": 1,
+          "mode": "binary"
+        },
+        "color-contrast": {
+          "score": 0,
+          "mode": "binary"
+        },
+        "target-size": {
+          "score": 1,
+          "mode": "binary"
+        },
+        "label-content-name-mismatch": {
+          "score": 0,
+          "mode": "binary"
+        }
+      },
+      "failed": [
+        "color-contrast",
+        "label-content-name-mismatch"
+      ]
+    },
+    {
+      "action": "Previous role plus proposed contrast colors",
+      "name": "Snapshot report (rhino-performance.com/)",
+      "version": "13.6.0",
+      "gatherMode": "snapshot",
+      "categories": {
+        "accessibility": {
+          "score": 1
+        },
+        "agentic-browsing": {
+          "score": 1,
+          "displayMode": "fraction"
+        }
+      },
+      "audits": {
+        "agent-accessibility-tree": {
+          "score": 1,
+          "mode": "binary"
+        },
+        "aria-prohibited-attr": {
+          "score": 1,
+          "mode": "binary"
+        },
+        "color-contrast": {
+          "score": 1,
+          "mode": "binary"
+        },
+        "target-size": {
+          "score": 1,
+          "mode": "binary"
+        },
+        "label-content-name-mismatch": {
+          "score": 0,
+          "mode": "binary"
+        }
+      },
+      "failed": [
+        "label-content-name-mismatch"
+      ]
+    }
+  ],
+  "recommendations": [
+    {
+      "id": "RHA-001",
+      "priority": "P1",
+      "finding": "El logo Google tiene aria-label en span genérico sin rol válido.",
+      "status": "observed",
+      "evidence": ".hgr-carousel__glogo; one instance at390 and1440; aria-prohibited-attr.",
+      "recommended_correction": "Add role=img to the existing span, retaining aria-label=Google and aria-hidden=true on the inner SVG. Do not add another logo.",
+      "measured_score_relationship": "Lighthouse13.6 weight7, failed; same-page snapshot94→97 and agent-accessibility-tree0→1.",
+      "simulated_correction_tested": true
+    },
+    {
+      "id": "RHA-002",
+      "priority": "P1",
+      "finding": "Contraste insuficiente en precios anteriores, descuentos y fechas/Leer más de reseñas.",
+      "status": "observed",
+      "evidence": "Home18 instances mobile and32 desktop. Foreground#999 white2.84;#888 white3.54;#ff343b white3.61. Small text requires4.5.",
+      "recommended_correction": "Adjust existing tokens/rules at source. Proposed tested colors on white: #6b6b6b for muted text and #c62828 for discounts. Preserve the design hierarchy and real commercial content.",
+      "measured_score_relationship": "Lighthouse13.6 weight7 failed. Same-page role+contrast snapshot reached100; not a published navigation score.",
+      "simulated_correction_tested": true
+    },
+    {
+      "id": "RHA-003",
+      "priority": "P1",
+      "finding": "El enlace de reproducción del video de producto no tiene nombre accesible.",
+      "status": "observed",
+      "evidence": "PDP mobile: #trigger-video-modal-62111, link-name.",
+      "recommended_correction": "Add a descriptive accessible name to the existing media trigger while retaining href, data-fancybox and gallery selectors. Verify mobile and desktop video branches.",
+      "measured_score_relationship": "Lighthouse link-name weight7; failed in axe on sampled PDP. No PDP Lighthouse score or fix result claimed.",
+      "simulated_correction_tested": false
+    },
+    {
+      "id": "RHA-004",
+      "priority": "P2",
+      "finding": "Puntos de carrusel y otros controles tienen áreas táctiles pequeñas.",
+      "status": "observed",
+      "evidence": "After scrolling: target-size18 instances mobile,15 desktop; sampled dots10×10 with16px safe spacing. PDP5 instances.",
+      "recommended_correction": "Increase native hit areas or spacing under WCAG2.5.8, keeping the painted dot small if desired; use shared component rules and preserve active/focus states.",
+      "measured_score_relationship": "Initial navigation Lighthouse passed target-size; after-scroll axe failed. State coverage matters.",
+      "simulated_correction_tested": false
+    },
+    {
+      "id": "RHA-005",
+      "priority": "P2",
+      "finding": "Nombre accesible y texto visible no coinciden en enlaces de tarjetas.",
+      "status": "observed",
+      "evidence": "label-content-name-mismatch: home2 mobile/6 desktop; category3 and PDP3.",
+      "recommended_correction": "Remove overriding aria-label only on text-bearing product-item links where the visible content can provide its own name. Preserve labels on icon/image-only controls. Check all consumers.",
+      "measured_score_relationship": "Weight0 in current Lighthouse13.6 despite failing; important for voice/assistive operation.",
+      "simulated_correction_tested": true
+    },
+    {
+      "id": "RHA-006",
+      "priority": "P2",
+      "finding": "Dos footers globales anidados producen landmarks redundantes.",
+      "status": "observed",
+      "evidence": "#ns-section-footer is FOOTER; .js-footer inside is also FOOTER. Three axe landmark rules failed across sampled pages.",
+      "recommended_correction": "Keep the native outer footer/contentinfo and make the inner wrapper a div, retaining hooks/classes/attributes. Do not merely label both duplicated landmarks.",
+      "measured_score_relationship": "Best-practice findings not included in current weighted Lighthouse score. DOM prototype removed these three rules.",
+      "simulated_correction_tested": true
+    },
+    {
+      "id": "RHA-007",
+      "priority": "P2",
+      "finding": "Inicio y categoría carecen de un H1 accesible de contenido.",
+      "status": "observed",
+      "evidence": "Home has only hidden H1 RHINO Performance; category no H1. PDP has visible product H1.",
+      "recommended_correction": "Use one visible main-content H1 with the established typography/layout; avoid relying on a hidden logo heading. Choose text with the store owner.",
+      "measured_score_relationship": "page-has-heading-one is not in current Lighthouse weighted refs; meaningful semantics rather than guaranteed score points.",
+      "simulated_correction_tested": false
+    },
+    {
+      "id": "RHA-008",
+      "priority": "P3",
+      "finding": "Leer más cambia texto/clase sin exponer estado de expansión.",
+      "status": "observed",
+      "evidence": "Review button changes Leer más→Leer menos and is-open false→true; aria-expanded/aria-controls remain absent.",
+      "recommended_correction": "Expose expanded state and connect to unique review text IDs in both SSR cards and dynamically generated cards. Update the existing handler rather than adding a second interaction engine.",
+      "measured_score_relationship": "Manual pattern improvement; no score gain measured.",
+      "simulated_correction_tested": false
+    },
+    {
+      "id": "RHA-009",
+      "priority": "P3",
+      "finding": "El control de menú móvil no expone expanded/controls.",
+      "status": "observed",
+      "evidence": "Observed opener .menu-utility-button has no aria-expanded or aria-controls before/after; Escape returned focus.",
+      "recommended_correction": "Determine disclosure vs modal pattern, expose its state and validate focus/tab/Escape accordingly. Do not assign dialog semantics blindly. Desktop search observed inline focus; no modal-focus failure asserted.",
+      "measured_score_relationship": "Manual review; not an automatic violation claim for every absent ARIA attribute.",
+      "simulated_correction_tested": false
+    },
+    {
+      "id": "RHA-010",
+      "priority": "P2-investigation",
+      "finding": "La estabilidad visual de escritorio reduce la categoría experimental.",
+      "status": "observed",
+      "evidence": "Two Lighthouse desktop runs: CLS0.449, CLS audit score0.2, agentic score0.4. Mobile CLS0. An independent unthrottled observer shows affected header/main/trust-pill/image nodes but a different total.",
+      "recommended_correction": "Trace the desktop profile and reserve layout space for header/logo/media in the initial CSS. Verify before changing; shifted nodes alone do not establish root cause.",
+      "measured_score_relationship": "Agentic browsing includes CLS. No source fix or causal percentage is demonstrated.",
+      "simulated_correction_tested": false
+    }
+  ],
+  "semantic_probes": {
+    "at": "2026-11-10T17:26:55.938Z",
+    "project": "rhino-performance",
+    "dom_simulation_only": true,
+    "source_files_modified": false,
+    "cases": [
+      {
+        "width": 390,
+        "before": [
+          {
+            "id": "aria-prohibited-attr",
+            "nodes": [
+              [
+                ".hgr-carousel__glogo"
+              ]
+            ]
+          },
+          {
+            "id": "label-content-name-mismatch",
+            "nodes": [
+              [
+                "#featured-collection-featured_collection-panel-0 > .featured-collection-viewport.product-carousel-viewport.js-product-carousel-viewport > .featured-collection-track.product-carousel-container > .featured-collection-slide.product-carousel-slide:nth-child(1) > div[data-product-id=\"355908446\"][data-store=\"product-item-355908446\"][data-quickshop-id=\"quick355908446\"] > .product-item-information.product-item-information-inner[data-store=\"product-item-info-355908446\"] > .product-item-link"
+              ],
+              [
+                "#featured-collection-featured_collection-panel-0 > .featured-collection-viewport.product-carousel-viewport.js-product-carousel-viewport > .featured-collection-track.product-carousel-container > .featured-collection-slide.product-carousel-slide:nth-child(2) > div[data-product-id=\"355908325\"][data-store=\"product-item-355908325\"][data-quickshop-id=\"quick355908325\"] > .product-item-information.product-item-information-inner[data-store=\"product-item-info-355908325\"] > .product-item-link[title=\"Pistola de Masaje GUN PRO\"][aria-label=\"Pistola de Masaje GUN PRO\"]"
+              ]
+            ]
+          },
+          {
+            "id": "landmark-contentinfo-is-top-level",
+            "nodes": [
+              [
+                ".js-footer"
+              ]
+            ]
+          },
+          {
+            "id": "landmark-no-duplicate-contentinfo",
+            "nodes": [
+              [
+                "#ns-section-footer"
+              ]
+            ]
+          },
+          {
+            "id": "landmark-unique",
+            "nodes": [
+              [
+                "#ns-section-footer"
+              ]
+            ]
+          },
+          {
+            "id": "page-has-heading-one",
+            "nodes": [
+              [
+                "html"
+              ]
+            ]
+          }
+        ],
+        "google_ax_before": [
+          {
+            "role": "generic",
+            "name": "Google",
+            "ignored": false
+          }
+        ],
+        "after_google_role": [
+          {
+            "id": "label-content-name-mismatch",
+            "nodes": [
+              [
+                "#featured-collection-featured_collection-panel-0 > .featured-collection-viewport.product-carousel-viewport.js-product-carousel-viewport > .featured-collection-track.product-carousel-container > .featured-collection-slide.product-carousel-slide:nth-child(1) > div[data-product-id=\"355908446\"][data-store=\"product-item-355908446\"][data-quickshop-id=\"quick355908446\"] > .product-item-information.product-item-information-inner[data-store=\"product-item-info-355908446\"] > .product-item-link"
+              ],
+              [
+                "#featured-collection-featured_collection-panel-0 > .featured-collection-viewport.product-carousel-viewport.js-product-carousel-viewport > .featured-collection-track.product-carousel-container > .featured-collection-slide.product-carousel-slide:nth-child(2) > div[data-product-id=\"355908325\"][data-store=\"product-item-355908325\"][data-quickshop-id=\"quick355908325\"] > .product-item-information.product-item-information-inner[data-store=\"product-item-info-355908325\"] > .product-item-link[title=\"Pistola de Masaje GUN PRO\"][aria-label=\"Pistola de Masaje GUN PRO\"]"
+              ]
+            ]
+          },
+          {
+            "id": "landmark-contentinfo-is-top-level",
+            "nodes": [
+              [
+                ".js-footer"
+              ]
+            ]
+          },
+          {
+            "id": "landmark-no-duplicate-contentinfo",
+            "nodes": [
+              [
+                "#ns-section-footer"
+              ]
+            ]
+          },
+          {
+            "id": "landmark-unique",
+            "nodes": [
+              [
+                "#ns-section-footer"
+              ]
+            ]
+          },
+          {
+            "id": "page-has-heading-one",
+            "nodes": [
+              [
+                "html"
+              ]
+            ]
+          }
+        ],
+        "google_ax_after": [
+          {
+            "role": "image",
+            "name": "Google",
+            "ignored": false
+          }
+        ],
+        "other_changes": {
+          "links_changed": 21,
+          "samples": [
+            {
+              "old_label": "Botas de Presoterapia Inalámbricas PRO AIR",
+              "visible_text": "Botas de Presoterapia Inalámbricas PRO AIR\n$10,490.00\n$13,990.00\n25\n% OFF\n12 x $874.17 sin intereses"
+            },
+            {
+              "old_label": "Pistola de Masaje GUN PRO",
+              "visible_text": "Pistola de Masaje GUN PRO\n$3,810.00\n$4,490.00\n15\n% OFF\n12 x $317.50 sin intereses"
+            }
+          ],
+          "footer": {
+            "tag": "FOOTER",
+            "outer": "FOOTER"
+          }
+        },
+        "after_combined_semantic_proposals": [
+          {
+            "id": "page-has-heading-one",
+            "nodes": [
+              [
+                "html"
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "width": 1440,
+        "before": [
+          {
+            "id": "aria-prohibited-attr",
+            "nodes": [
+              [
+                ".hgr-carousel__glogo"
+              ]
+            ]
+          },
+          {
+            "id": "label-content-name-mismatch",
+            "nodes": [
+              [
+                "#featured-collection-featured_collection-panel-0 > .featured-collection-viewport.product-carousel-viewport.js-product-carousel-viewport > .featured-collection-track.product-carousel-container > .featured-collection-slide.product-carousel-slide:nth-child(1) > div[data-product-id=\"355908446\"][data-store=\"product-item-355908446\"][data-quickshop-id=\"quick355908446\"] > .product-item-information.product-item-information-inner[data-store=\"product-item-info-355908446\"] > .product-item-link"
+              ],
+              [
+                "#featured-collection-featured_collection-panel-0 > .featured-collection-viewport.product-carousel-viewport.js-product-carousel-viewport > .featured-collection-track.product-carousel-container > .featured-collection-slide.product-carousel-slide:nth-child(2) > div[data-product-id=\"355908325\"][data-store=\"product-item-355908325\"][data-quickshop-id=\"quick355908325\"] > .product-item-information.product-item-information-inner[data-store=\"product-item-info-355908325\"] > .product-item-link[title=\"Pistola de Masaje GUN PRO\"][aria-label=\"Pistola de Masaje GUN PRO\"]"
+              ],
+              [
+                ".featured-collection-slide.product-carousel-slide:nth-child(3) > div[data-product-id=\"355908537\"][data-store=\"product-item-355908537\"][data-quickshop-id=\"quick355908537\"] > .product-item-information.product-item-information-inner[data-store=\"product-item-info-355908537\"] > .product-item-link"
+              ],
+              [
+                ".featured-collection-slide.product-carousel-slide:nth-child(4) > div[data-product-id=\"355908340\"][data-store=\"product-item-355908340\"][data-quickshop-id=\"quick355908340\"] > .product-item-information.product-item-information-inner[data-store=\"product-item-info-355908340\"] > .product-item-link[title=\"Pistola de Masaje GUN AIR\"][aria-label=\"Pistola de Masaje GUN AIR\"]"
+              ],
+              [
+                ".featured-collection-slide.product-carousel-slide[data-product-carousel-desktop-only=\"\"]:nth-child(5) > div[data-product-id=\"355908349\"][data-store=\"product-item-355908349\"][data-quickshop-id=\"quick355908349\"] > .product-item-information.product-item-information-inner[data-store=\"product-item-info-355908349\"] > .product-item-link[title=\"Tina de Hielo TUB AIR\"][aria-label=\"Tina de Hielo TUB AIR\"]"
+              ],
+              [
+                ".featured-collection-slide.product-carousel-slide[data-product-carousel-desktop-only=\"\"]:nth-child(6) > div[data-product-id=\"355908653\"][data-store=\"product-item-355908653\"][data-quickshop-id=\"quick355908653\"] > .product-item-information.product-item-information-inner[data-store=\"product-item-info-355908653\"] > .product-item-link"
+              ]
+            ]
+          },
+          {
+            "id": "landmark-contentinfo-is-top-level",
+            "nodes": [
+              [
+                ".js-footer"
+              ]
+            ]
+          },
+          {
+            "id": "landmark-no-duplicate-contentinfo",
+            "nodes": [
+              [
+                "#ns-section-footer"
+              ]
+            ]
+          },
+          {
+            "id": "landmark-unique",
+            "nodes": [
+              [
+                "#ns-section-footer"
+              ]
+            ]
+          },
+          {
+            "id": "page-has-heading-one",
+            "nodes": [
+              [
+                "html"
+              ]
+            ]
+          }
+        ],
+        "google_ax_before": [
+          {
+            "role": "generic",
+            "name": "Google",
+            "ignored": false
+          }
+        ],
+        "after_google_role": [
+          {
+            "id": "label-content-name-mismatch",
+            "nodes": [
+              [
+                "#featured-collection-featured_collection-panel-0 > .featured-collection-viewport.product-carousel-viewport.js-product-carousel-viewport > .featured-collection-track.product-carousel-container > .featured-collection-slide.product-carousel-slide:nth-child(1) > div[data-product-id=\"355908446\"][data-store=\"product-item-355908446\"][data-quickshop-id=\"quick355908446\"] > .product-item-information.product-item-information-inner[data-store=\"product-item-info-355908446\"] > .product-item-link"
+              ],
+              [
+                "#featured-collection-featured_collection-panel-0 > .featured-collection-viewport.product-carousel-viewport.js-product-carousel-viewport > .featured-collection-track.product-carousel-container > .featured-collection-slide.product-carousel-slide:nth-child(2) > div[data-product-id=\"355908325\"][data-store=\"product-item-355908325\"][data-quickshop-id=\"quick355908325\"] > .product-item-information.product-item-information-inner[data-store=\"product-item-info-355908325\"] > .product-item-link[title=\"Pistola de Masaje GUN PRO\"][aria-label=\"Pistola de Masaje GUN PRO\"]"
+              ],
+              [
+                ".featured-collection-slide.product-carousel-slide:nth-child(3) > div[data-product-id=\"355908537\"][data-store=\"product-item-355908537\"][data-quickshop-id=\"quick355908537\"] > .product-item-information.product-item-information-inner[data-store=\"product-item-info-355908537\"] > .product-item-link"
+              ],
+              [
+                ".featured-collection-slide.product-carousel-slide:nth-child(4) > div[data-product-id=\"355908340\"][data-store=\"product-item-355908340\"][data-quickshop-id=\"quick355908340\"] > .product-item-information.product-item-information-inner[data-store=\"product-item-info-355908340\"] > .product-item-link[title=\"Pistola de Masaje GUN AIR\"][aria-label=\"Pistola de Masaje GUN AIR\"]"
+              ],
+              [
+                ".featured-collection-slide.product-carousel-slide[data-product-carousel-desktop-only=\"\"]:nth-child(5) > div[data-product-id=\"355908349\"][data-store=\"product-item-355908349\"][data-quickshop-id=\"quick355908349\"] > .product-item-information.product-item-information-inner[data-store=\"product-item-info-355908349\"] > .product-item-link[title=\"Tina de Hielo TUB AIR\"][aria-label=\"Tina de Hielo TUB AIR\"]"
+              ],
+              [
+                ".featured-collection-slide.product-carousel-slide[data-product-carousel-desktop-only=\"\"]:nth-child(6) > div[data-product-id=\"355908653\"][data-store=\"product-item-355908653\"][data-quickshop-id=\"quick355908653\"] > .product-item-information.product-item-information-inner[data-store=\"product-item-info-355908653\"] > .product-item-link"
+              ]
+            ]
+          },
+          {
+            "id": "landmark-contentinfo-is-top-level",
+            "nodes": [
+              [
+                ".js-footer"
+              ]
+            ]
+          },
+          {
+            "id": "landmark-no-duplicate-contentinfo",
+            "nodes": [
+              [
+                "#ns-section-footer"
+              ]
+            ]
+          },
+          {
+            "id": "landmark-unique",
+            "nodes": [
+              [
+                "#ns-section-footer"
+              ]
+            ]
+          },
+          {
+            "id": "page-has-heading-one",
+            "nodes": [
+              [
+                "html"
+              ]
+            ]
+          }
+        ],
+        "google_ax_after": [
+          {
+            "role": "image",
+            "name": "Google",
+            "ignored": false
+          }
+        ],
+        "other_changes": {
+          "links_changed": 21,
+          "samples": [
+            {
+              "old_label": "Botas de Presoterapia Inalámbricas PRO AIR",
+              "visible_text": "Botas de Presoterapia Inalámbricas PRO AIR\n$10,490.00\n$13,990.00\n25\n% OFF\n12 x $874.17 sin intereses"
+            },
+            {
+              "old_label": "Pistola de Masaje GUN PRO",
+              "visible_text": "Pistola de Masaje GUN PRO\n$3,810.00\n$4,490.00\n15\n% OFF\n12 x $317.50 sin intereses"
+            }
+          ],
+          "footer": {
+            "tag": "FOOTER",
+            "outer": "FOOTER"
+          }
+        },
+        "after_combined_semantic_proposals": [
+          {
+            "id": "page-has-heading-one",
+            "nodes": [
+              [
+                "html"
+              ]
+            ]
+          }
+        ]
+      }
+    ],
+    "interactions": [
+      {
+        "label": "mobile-menu",
+        "width": 390,
+        "trigger": {
+          "target": "#nav-hamburger",
+          "controls": null,
+          "expanded": null
+        },
+        "opened": {
+          "target": "#nav-hamburger",
+          "tag": "DIV",
+          "role": null,
+          "modal": null,
+          "hidden": null,
+          "label": null,
+          "labelledby": null,
+          "focus_inside": false,
+          "focus_tag": "BUTTON",
+          "focus_id": "",
+          "visible": true
+        },
+        "dialogRules": [
+          {
+            "id": "aria-prohibited-attr",
+            "nodes": [
+              [
+                ".hgr-carousel__glogo"
+              ]
+            ]
+          }
+        ],
+        "escape": {
+          "focus_returns": true,
+          "expanded": null,
+          "hidden": null
+        }
+      },
+      {
+        "label": "desktop-search",
+        "width": 1440,
+        "trigger": {
+          "target": "#modal-search",
+          "controls": null,
+          "expanded": "false"
+        },
+        "opened": {
+          "target": "#modal-search",
+          "tag": "DIV",
+          "role": null,
+          "modal": null,
+          "hidden": null,
+          "label": null,
+          "labelledby": null,
+          "focus_inside": false,
+          "focus_tag": "INPUT",
+          "focus_id": "",
+          "visible": false
+        },
+        "dialogRules": [
+          {
+            "id": "aria-prohibited-attr",
+            "nodes": [
+              [
+                ".hgr-carousel__glogo"
+              ]
+            ]
+          }
+        ],
+        "escape": {
+          "focus_returns": false,
+          "expanded": "false",
+          "hidden": null
+        }
+      },
+      {
+        "label": "review-read-more",
+        "before": {
+          "text": "Leer más",
+          "expanded": null,
+          "controls": null,
+          "card_open": false
+        },
+        "after": {
+          "text": "Leer menos",
+          "expanded": null,
+          "controls": null,
+          "card_open": true
+        }
+      }
+    ],
+    "limitations": [
+      "Attribute/tag simulations in anonymous browser are not native modified-theme rendering.",
+      "No forms submitted or commercial controls activated.",
+      "Interaction observations require pattern-specific interpretation; focus may validly remain on a nonmodal disclosure trigger."
+    ],
+    "success": true
+  },
+  "layout_probe": {
+    "at": "2026-11-10T17:34:27.277Z",
+    "width": 1350,
+    "height": 940,
+    "limitations": [
+      "Browser layout-shift sources, anonymous unthrottled read-only run; do not assume identical Lighthouse throttling.",
+      "A shifted node is an affected element, not necessarily the root cause."
+    ],
+    "shifts": [
+      {
+        "at": 583.3000000007451,
+        "value": 0.015217508828765724,
+        "hadRecentInput": false,
+        "sources": [
+          {
+            "node": {
+              "tag": "MAIN",
+              "id": "MainContent",
+              "class": "main-content main-container"
+            },
+            "previous": {
+              "x": 0,
+              "y": 98,
+              "width": 1350,
+              "height": 842,
+              "top": 98,
+              "right": 1350,
+              "bottom": 940,
+              "left": 0
+            },
+            "current": {
+              "x": 0,
+              "y": 110,
+              "width": 1350,
+              "height": 830,
+              "top": 110,
+              "right": 1350,
+              "bottom": 940,
+              "left": 0
+            }
+          },
+          {
+            "node": {
+              "tag": "DIV",
+              "id": "ns-block-logo",
+              "class": "logo-container"
+            },
+            "previous": {
+              "x": 121,
+              "y": 59,
+              "width": 804,
+              "height": 16,
+              "top": 59,
+              "right": 925,
+              "bottom": 75,
+              "left": 121
+            },
+            "current": {
+              "x": 121,
+              "y": 48,
+              "width": 804,
+              "height": 50,
+              "top": 48,
+              "right": 925,
+              "bottom": 98,
+              "left": 121
+            }
+          },
+          {
+            "node": {
+              "tag": "DIV",
+              "id": "ns-block-navigation",
+              "class": "nav-desktop-container nav-desktop-mobile-visible mobile-sub-nav mobile-nav-count-3 nav-inside-header-container"
+            },
+            "previous": {
+              "x": 459.4609375,
+              "y": 45,
+              "width": 431.0625,
+              "height": 44,
+              "top": 45,
+              "right": 890.5234375,
+              "bottom": 89,
+              "left": 459.4609375
+            },
+            "current": {
+              "x": 464.1015625,
+              "y": 49.5,
+              "width": 421.796875,
+              "height": 47,
+              "top": 49.5,
+              "right": 885.8984375,
+              "bottom": 96.5,
+              "left": 464.1015625
+            }
+          },
+          {
+            "node": {
+              "tag": "DIV",
+              "id": "",
+              "class": "js-search-container search-container"
+            },
+            "previous": {
+              "x": 925,
+              "y": 48,
+              "width": 188,
+              "height": 38,
+              "top": 48,
+              "right": 1113,
+              "bottom": 86,
+              "left": 925
+            },
+            "current": {
+              "x": 925,
+              "y": 54,
+              "width": 188,
+              "height": 38,
+              "top": 54,
+              "right": 1113,
+              "bottom": 92,
+              "left": 925
+            }
+          },
+          {
+            "node": {
+              "tag": "DIV",
+              "id": "ns-block-announcement_h4uo",
+              "class": "js-adbar-item adbar-item"
+            },
+            "previous": {
+              "x": 906.609375,
+              "y": 8,
+              "width": 373.453125,
+              "height": 20,
+              "top": 8,
+              "right": 1280.0625,
+              "bottom": 28,
+              "left": 906.609375
+            },
+            "current": {
+              "x": 885.015625,
+              "y": 8,
+              "width": 367.828125,
+              "height": 20,
+              "top": 8,
+              "right": 1252.84375,
+              "bottom": 28,
+              "left": 885.015625
+            }
+          }
+        ]
+      },
+      {
+        "at": 812.8000000007451,
+        "value": 8.548463356973996e-05,
+        "hadRecentInput": false,
+        "sources": [
+          {
+            "node": {
+              "tag": "PICTURE",
+              "id": "",
+              "class": ""
+            },
+            "previous": {
+              "x": 222.1875,
+              "y": 905.1875,
+              "width": 5.625,
+              "height": 5.625,
+              "top": 905.1875,
+              "right": 227.8125,
+              "bottom": 910.8125,
+              "left": 222.1875
+            },
+            "current": {
+              "x": 201,
+              "y": 884,
+              "width": 48,
+              "height": 48,
+              "top": 884,
+              "right": 249,
+              "bottom": 932,
+              "left": 201
+            }
+          },
+          {
+            "node": {
+              "tag": "PICTURE",
+              "id": "",
+              "class": ""
+            },
+            "previous": {
+              "x": 672.1875,
+              "y": 905.1875,
+              "width": 5.625,
+              "height": 5.625,
+              "top": 905.1875,
+              "right": 677.8125,
+              "bottom": 910.8125,
+              "left": 672.1875
+            },
+            "current": {
+              "x": 651,
+              "y": 884,
+              "width": 48,
+              "height": 48,
+              "top": 884,
+              "right": 699,
+              "bottom": 932,
+              "left": 651
+            }
+          },
+          {
+            "node": {
+              "tag": "PICTURE",
+              "id": "",
+              "class": ""
+            },
+            "previous": {
+              "x": 1122.1875,
+              "y": 905.1875,
+              "width": 5.625,
+              "height": 5.625,
+              "top": 905.1875,
+              "right": 1127.8125,
+              "bottom": 910.8125,
+              "left": 1122.1875
+            },
+            "current": {
+              "x": 1101,
+              "y": 884,
+              "width": 48,
+              "height": 48,
+              "top": 884,
+              "right": 1149,
+              "bottom": 932,
+              "left": 1101
+            }
+          }
+        ]
+      },
+      {
+        "at": 1377.5,
+        "value": 0.05271552403467297,
+        "hadRecentInput": false,
+        "sources": [
+          {
+            "node": {
+              "tag": "MAIN",
+              "id": "MainContent",
+              "class": "main-content main-container"
+            },
+            "previous": {
+              "x": 0,
+              "y": 110,
+              "width": 1350,
+              "height": 830,
+              "top": 110,
+              "right": 1350,
+              "bottom": 940,
+              "left": 0
+            },
+            "current": {
+              "x": 0,
+              "y": 36,
+              "width": 1350,
+              "height": 904,
+              "top": 36,
+              "right": 1350,
+              "bottom": 940,
+              "left": 0
+            }
+          },
+          {
+            "node": {
+              "tag": "DIV",
+              "id": "",
+              "class": "slider-trust-pill-wrapper slider-trust-align-left slider-trust-valign-bottom"
+            },
+            "previous": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "current": {
+              "x": 0,
+              "y": 713,
+              "width": 1350,
+              "height": 48,
+              "top": 713,
+              "right": 1350,
+              "bottom": 761,
+              "left": 0
+            }
+          }
+        ]
+      }
+    ],
+    "success": true
+  },
+  "references": [
+    {
+      "url": "https://developer.chrome.com/docs/lighthouse/accessibility/scoring",
+      "checked_at": "2026-11-10T17:40:47.473836+00:00"
+    },
+    {
+      "url": "https://developer.chrome.com/docs/lighthouse/agentic-browsing/scoring",
+      "checked_at": "2026-11-10T17:40:47.473841+00:00"
+    },
+    {
+      "url": "https://dequeuniversity.com/rules/axe/4.11/aria-prohibited-attr",
+      "checked_at": "2026-11-10T17:40:47.473843+00:00"
+    },
+    {
+      "url": "https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html",
+      "checked_at": "2026-11-10T17:40:47.473844+00:00"
+    }
+  ],
+  "evidence_run": "reports/runs/rhino-performance/20261110T172010-accessibility-audit-625efeff",
+  "theme_files_modified": false,
+  "production_modified": false,
+  "form_submissions": false,
+  "limits": [
+    "Home inspected at390 and1440, initial and after full-page scroll; one real category and one PDP at390. Not every site URL/product/state.",
+    "Contact page was not discovered in the sampled links; not invented or claimed audited.",
+    "Snapshot97/100 results are temporary DOM/style simulations in a single page, not updated deployed navigation scores.",
+    "No human screen-reader, full keyboard trap/reflow/zoom/media captions or WCAG conformance certification.",
+    "Best-practice axe rules and dynamic after-scroll findings do not necessarily carry score weight in this Lighthouse version.",
+    "Local source candidates contain matching markup; no native API synchronization or install version was checked.",
+    "No changes to DaMar Beauty, remote configuration, commercial data or customer records."
+  ]
+}

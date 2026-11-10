@@ -34,11 +34,11 @@ class Planning(unittest.TestCase):
             self.assertFalse(simple.get('implementation_executed',False))
             self.assertIsNone(simple['knowledge'])
             complex_plan=planner.make_plan(p,'Optimiza carrusel sin afectar SEO',files=['carousel.tpl'],scope='theme')
-            self.assertEqual([t['agent'] for t in complex_plan['tasks']],['claude','codex','commandcode'])
+            self.assertEqual([t['agent'] for t in complex_plan['tasks']],['claude','codex','claude'])
             self.assertEqual(complex_plan['tasks'][1]['dependencies'],['architecture'])
             audit=planner.make_plan(p,'Audita un texto',files=['copy.txt'],scope='workspace',read_only=True)
             self.assertEqual(audit['tasks'][0]['allowed_files'],[])
-            self.assertEqual(audit['tasks'][0]['agent'],'commandcode')
+            self.assertEqual(audit['tasks'][0]['agent'],'codex')
 
     def test_ready_wave_dependencies_and_duplicate_writers(self):
         tasks=[{'id':'a','state':'pending','dependencies':[],'allowed_files':['a.txt']},
@@ -65,7 +65,7 @@ class Planning(unittest.TestCase):
 class AdapterContracts(unittest.TestCase):
     def test_verified_argv_modes_do_not_bypass_permissions(self):
         with patch('ipanema.orchestration.adapters.shutil.which',side_effect=lambda name:'/usr/bin/'+name):
-            for agent in adapters.NAMES:
+            for agent in ('claude','codex'):
                 args=adapters.argv(agent,'explicit-reviewed-model','low')
                 self.assertIn('explicit-reviewed-model',args)
                 self.assertNotIn('--yolo',args)

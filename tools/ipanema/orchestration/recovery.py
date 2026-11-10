@@ -17,6 +17,23 @@ class WorkerFailure(IpanemaError):
         super().__init__('Worker falló: ' + category + '; salida privada no registrada.')
 
 
+def execution_limits(task,settings):
+    """Bounds are proportional; silent reasoning is not proof of a hung process."""
+    tier=task.get('tier','balanced')
+    total={'fast':120,'balanced':240,'strong':360,'critical':600}[tier]
+    provider=task.get('agent')
+    first={'claude':120,'codex':150,'commandcode':180}.get(provider,120)
+    if tier in ('strong','critical'):first=min(total,first*2)
+    cfg=settings.get('time_limits',{}).get(provider,{})
+    values={'timeout':settings.get('timeout_seconds',cfg.get('total',total)),
+            'idle_timeout':settings.get('idle_timeout_seconds',cfg.get('idle',90)),
+            'startup_timeout':cfg.get('startup',30),
+            'first_response_timeout':cfg.get('first_response',first)}
+    if any(type(v) not in (int,float) or not 0<=v<=1800 for v in values.values()) or not values['timeout']:
+        raise IpanemaError('Límites temporales de worker inválidos.')
+    return values
+
+
 def classify_failure(raw):
     """Solo se llama ante fallo; nunca exporta mensajes, URLs o credenciales."""
     text = (raw.get('stderr', '') + '\n' + raw.get('stdout', '')).lower()
@@ -42,6 +59,8 @@ def classify_failure(raw):
 
 def health_check(agent):
     """Local version/help only: installed/authenticated/model-available are distinct."""
+    from .adapters import enabled_agents
+    if agent not in enabled_agents():return {'enabled':False,'installed':shutil.which(agent)is not None,'reason':'disabled_by_policy','inference_tested':False}
     binary = shutil.which(agent)
     if not binary:
         return {'installed': False, 'cli_compatible': False, 'reason': 'runtime_missing', 'inference_tested': False}
@@ -72,8 +91,9 @@ def policy(settings):
 
 def candidates(plan, task):
     """Preserve independent reviewer providers, including pending L4 reviews."""
-    order = {'claude': ['codex', 'commandcode'], 'codex': ['claude', 'commandcode'],
-             'commandcode': ['claude', 'codex']}[task['agent']]
+    from .adapters import enabled_agents,require_agent,required_reviewers
+    require_agent(task['agent'])
+    order=[a for a in enabled_agents() if a!=task['agent']]
     tasks = plan.get('tasks', [])
     if task.get('role') == 'review':
         forbidden = {t['agent'] for t in tasks if t is not task and
@@ -81,9 +101,9 @@ def candidates(plan, task):
                       t.get('role') == 'review' and set(t.get('dependencies', [])) & set(task.get('dependencies', [])))}
         order = [agent for agent in order if agent not in forbidden]
     elif task.get('role') == 'implementation':
-        count = 2 if plan.get('classification', {}).get('level') == 'L4' else 1
+        count = required_reviewers(plan.get('classification',{}).get('level'))
         reviewers = {t['agent'] for t in tasks if t.get('role') == 'review' and task['id'] in t.get('dependencies', [])}
-        if not plan.get('read_only') and int(plan.get('classification', {}).get('level', 'L1')[1]) >= 3:
+        if not plan.get('read_only') and (reviewers or int(plan.get('classification', {}).get('level', 'L1')[1]) >= 3):
             order = [agent for agent in order if len(reviewers - {agent}) >= count]
     return order
 
@@ -110,10 +130,13 @@ class Supervisor:
                 self.open.add(agent)
 
     def run(self, plan, task, invoke, checkpoint=None):
+        from .adapters import require_agent
+        require_agent(task['agent'])
         task.setdefault('assigned_agent', task['agent'])
         attempts = task.setdefault('recovery_attempts', [])
-        providers = [task['agent']] + (candidates(plan, task) if self.policy['fallback'] else [])
+        providers = [task['agent']] + (candidates(plan, task) if self.policy['fallback'] and not task.get('role','').startswith('council_') else [])
         for agent in providers:
+            require_agent(agent)
             with self.lock:
                 if self.cancel_event.is_set():
                     raise IpanemaError('Ejecución cancelada por denegación; no se lanzan más workers.')

@@ -49,12 +49,12 @@ class AccessTests(unittest.TestCase):
 
     def test_each_runtime_gets_separate_project_task_grant(self):
         ids = []
-        for agent in ('claude', 'codex', 'commandcode'):
+        for agent in ('claude', 'codex'):
             grant = self.grant(agent=agent)
             ids.append(grant['id'])
             self.assertEqual(self.policy.load(grant['id'])['agent'], agent)
             self.assertEqual(self.policy.load(grant['id'])['task'], 'seo-123')
-        self.assertEqual(len(set(ids)), 3)
+        self.assertEqual(len(set(ids)), 2)
         wrong_project = Project(self.project.root)
         wrong_project.id = 'other'
         with self.assertRaises(IpanemaError):

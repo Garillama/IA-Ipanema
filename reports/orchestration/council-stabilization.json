@@ -1,0 +1,494 @@
+{
+  "schema_version": 1,
+  "at": "2026-11-10T01:18:24.930621+00:00",
+  "status": "real_deliberation_complete_implementation_deferred",
+  "project": "ipanema",
+  "run": "reports/runs/ipanema/20261110T010139-orchestration-b62831d6",
+  "objective": "Auditar el componente compartido de paginación de Ipanema y determinar la mejor estrategia SEO, accesible y compatible con el diseño actual.",
+  "nodes": [
+    {
+      "phase": "proposal",
+      "provider": "claude",
+      "model": {
+        "model": "claude-sonnet-5-5",
+        "effort": "medium",
+        "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+        "verified_at": "2026-11-08"
+      },
+      "valid": true,
+      "independent_initial_proposal": true,
+      "peer_proposals_supplied": false,
+      "source_binding_sha256": "c100ce2892f5fb8348f6970d02364241981f3e8527d9ebc7cb287c59bafbb182",
+      "duration_s": 39.416,
+      "prompt_bytes": 45397,
+      "prompt_sha256": "b76f0658ae1ccf1a22144f43181d0a815416e98a1d0f0376b273b5b137d277d4",
+      "schema_validation": {
+        "status": "passed",
+        "duration_s": 0.006532
+      },
+      "structured_output": "native_schema",
+      "timing": {
+        "spawn_s": 0.001257,
+        "input_complete_s": 0.001602,
+        "first_stdout_s": 1.667127,
+        "first_stderr_s": null,
+        "timeout_phase": null,
+        "event_counts": {
+          "system": 14,
+          "stream_event": 682,
+          "assistant": 2,
+          "user": 1,
+          "rate_limit_event": 1,
+          "result": 1
+        },
+        "inference_vs_initialization": "not_separable_without_provider_events"
+      },
+      "limits": {
+        "timeout": 240,
+        "idle_timeout": 90,
+        "startup_timeout": 30,
+        "first_response_timeout": 120
+      },
+      "usage": {
+        "provider_reported": {
+          "total_cost_usd": 0.15282400000000002,
+          "duration_ms": 37634,
+          "input_tokens": 2,
+          "cache_creation_input_tokens": 24250,
+          "cache_read_input_tokens": 0,
+          "output_tokens": 5582
+        },
+        "measured_cost_available": true,
+        "estimated_cost": null
+      },
+      "output_accounting": null,
+      "normalization_note": "Legacy controller omitted root evidence; native validation passed. analysis.evidence_refs preserved; omitted value not recreated.",
+      "process_reaped": true
+    },
+    {
+      "phase": "proposal",
+      "provider": "codex",
+      "model": {
+        "model": "gpt-6.1-sol",
+        "effort": "medium",
+        "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+        "verified_at": "2026-11-08"
+      },
+      "valid": true,
+      "independent_initial_proposal": true,
+      "peer_proposals_supplied": false,
+      "source_binding_sha256": "c100ce2892f5fb8348f6970d02364241981f3e8527d9ebc7cb287c59bafbb182",
+      "duration_s": 51.787,
+      "prompt_bytes": 45393,
+      "prompt_sha256": "66ef153fa0ef8f025dbb731f9fcf5062d128fcccf7922ddf87b08e267cab8b7a",
+      "schema_validation": {
+        "status": "passed",
+        "duration_s": 0.00069
+      },
+      "structured_output": "native_schema",
+      "timing": {
+        "spawn_s": 0.001303,
+        "input_complete_s": 0.001738,
+        "first_stdout_s": 0.793116,
+        "first_stderr_s": null,
+        "timeout_phase": null,
+        "event_counts": {
+          "thread.started": 1,
+          "item.completed": 2,
+          "turn.started": 1,
+          "turn.completed": 1
+        },
+        "inference_vs_initialization": "not_separable_without_provider_events"
+      },
+      "limits": {
+        "timeout": 240,
+        "idle_timeout": 90,
+        "startup_timeout": 30,
+        "first_response_timeout": 150
+      },
+      "usage": {
+        "provider_reported": {
+          "input_tokens": 26989,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 2270,
+          "reasoning_output_tokens": 58
+        },
+        "measured_cost_available": false,
+        "estimated_cost": null
+      },
+      "output_accounting": null,
+      "normalization_note": "Legacy controller omitted root evidence; native validation passed. analysis.evidence_refs preserved; omitted value not recreated.",
+      "process_reaped": true
+    },
+    {
+      "phase": "proposal",
+      "provider": "commandcode",
+      "model": {
+        "model": "deepseek/deepseek-v4.1-flash",
+        "effort": null,
+        "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+        "verified_at": "2026-11-08"
+      },
+      "valid": true,
+      "independent_initial_proposal": true,
+      "peer_proposals_supplied": false,
+      "source_binding_sha256": "c100ce2892f5fb8348f6970d02364241981f3e8527d9ebc7cb287c59bafbb182",
+      "duration_s": 59.242,
+      "prompt_bytes": 45409,
+      "prompt_sha256": "8f5c12a258661f3fbe29635299334a9d3fd2abcdd44fef5df1395a74b15c45c2",
+      "schema_validation": {
+        "status": "passed",
+        "duration_s": 0.000553
+      },
+      "structured_output": "local_schema",
+      "timing": {
+        "spawn_s": 0.000812,
+        "input_complete_s": 0.001024,
+        "first_stdout_s": 1.543544,
+        "first_stderr_s": null,
+        "timeout_phase": null,
+        "event_counts": {
+          "event": 505,
+          "event:run_start": 1,
+          "event:turn_start": 1,
+          "event:message_start": 1,
+          "event:model_request_start": 1,
+          "event:model_trace": 1,
+          "event:thinking_start": 1,
+          "event:thinking_delta": 214,
+          "event:thinking_end": 1,
+          "event:text_delta": 140,
+          "event:message_update": 140,
+          "event:model_request_end": 1,
+          "event:message_end": 1,
+          "event:turn_end": 1,
+          "event:run_end": 1,
+          "result": 1
+        },
+        "inference_vs_initialization": "not_separable_without_provider_events"
+      },
+      "limits": {
+        "timeout": 240,
+        "idle_timeout": 90,
+        "startup_timeout": 30,
+        "first_response_timeout": 180
+      },
+      "usage": {
+        "provider_reported": {
+          "durationMs": 57772,
+          "inputTokens": 24656,
+          "outputTokens": 5496,
+          "cacheReadTokens": 0,
+          "cacheWriteTokens": 0
+        },
+        "measured_cost_available": false,
+        "estimated_cost": null
+      },
+      "output_accounting": {
+        "transport_bytes": 2799092,
+        "retained_bytes": 10949,
+        "discarded_progress_bytes": 2788143,
+        "transport_limit_bytes": 20000000,
+        "retained_limit_bytes": 2000000
+      },
+      "normalization_note": null,
+      "process_reaped": true
+    },
+    {
+      "phase": "contrast",
+      "provider": "claude",
+      "model": {
+        "model": "claude-sonnet-5-5",
+        "effort": "medium",
+        "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+        "verified_at": "2026-11-08"
+      },
+      "valid": true,
+      "independent_initial_proposal": null,
+      "peer_proposals_supplied": true,
+      "source_binding_sha256": "c100ce2892f5fb8348f6970d02364241981f3e8527d9ebc7cb287c59bafbb182",
+      "duration_s": 22.099,
+      "prompt_bytes": 78052,
+      "prompt_sha256": "a155677f077c9d29d819436d29ab72c9fc4d60194f80abe08d81378445ea05c2",
+      "schema_validation": {
+        "status": "passed",
+        "duration_s": 0.006844
+      },
+      "structured_output": "native_schema",
+      "timing": {
+        "spawn_s": 0.002444,
+        "input_complete_s": 0.594328,
+        "first_stdout_s": 1.318388,
+        "first_stderr_s": null,
+        "timeout_phase": null,
+        "event_counts": {
+          "system": 5,
+          "stream_event": 503,
+          "event:message_start": 2,
+          "event:content_block_start": 2,
+          "event:content_block_delta": 493,
+          "assistant": 2,
+          "event:content_block_stop": 2,
+          "user": 2,
+          "event:message_delta": 2,
+          "event:message_stop": 2,
+          "rate_limit_event": 2,
+          "result": 1
+        },
+        "inference_vs_initialization": "not_separable_without_provider_events"
+      },
+      "limits": {
+        "timeout": 240,
+        "idle_timeout": 90,
+        "startup_timeout": 30,
+        "first_response_timeout": 120
+      },
+      "usage": {
+        "provider_reported": {
+          "total_cost_usd": 0.1844087,
+          "duration_ms": 20573,
+          "input_tokens": 4,
+          "cache_creation_input_tokens": 36915,
+          "cache_read_input_tokens": 35607,
+          "output_tokens": 3318
+        },
+        "measured_cost_available": true,
+        "estimated_cost": null
+      },
+      "output_accounting": {
+        "transport_bytes": 213945,
+        "retained_bytes": 213945,
+        "discarded_progress_bytes": 0,
+        "transport_limit_bytes": 20000000,
+        "retained_limit_bytes": 2000000
+      },
+      "normalization_note": null,
+      "process_reaped": true
+    },
+    {
+      "phase": "contrast",
+      "provider": "codex",
+      "model": {
+        "model": "gpt-6.1-sol",
+        "effort": "medium",
+        "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+        "verified_at": "2026-11-08"
+      },
+      "valid": true,
+      "independent_initial_proposal": null,
+      "peer_proposals_supplied": true,
+      "source_binding_sha256": "c100ce2892f5fb8348f6970d02364241981f3e8527d9ebc7cb287c59bafbb182",
+      "duration_s": 24.911,
+      "prompt_bytes": 78048,
+      "prompt_sha256": "86ebf05263a345618c1e2def58cac27bbfbc9c83241cfc3a930f4725d3a14063",
+      "schema_validation": {
+        "status": "passed",
+        "duration_s": 0.000418
+      },
+      "structured_output": "native_schema",
+      "timing": {
+        "spawn_s": 0.000686,
+        "input_complete_s": 0.1266,
+        "first_stdout_s": 0.697052,
+        "first_stderr_s": null,
+        "timeout_phase": null,
+        "event_counts": {
+          "thread.started": 1,
+          "item.completed": 2,
+          "turn.started": 1,
+          "turn.completed": 1
+        },
+        "inference_vs_initialization": "not_separable_without_provider_events"
+      },
+      "limits": {
+        "timeout": 240,
+        "idle_timeout": 90,
+        "startup_timeout": 30,
+        "first_response_timeout": 150
+      },
+      "usage": {
+        "provider_reported": {
+          "input_tokens": 33947,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 977,
+          "reasoning_output_tokens": 88
+        },
+        "measured_cost_available": false,
+        "estimated_cost": null
+      },
+      "output_accounting": {
+        "transport_bytes": 4829,
+        "retained_bytes": 4829,
+        "discarded_progress_bytes": 0,
+        "transport_limit_bytes": 20000000,
+        "retained_limit_bytes": 2000000
+      },
+      "normalization_note": null,
+      "process_reaped": true
+    },
+    {
+      "phase": "contrast",
+      "provider": "commandcode",
+      "model": {
+        "model": "deepseek/deepseek-v4.1-flash",
+        "effort": null,
+        "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+        "verified_at": "2026-11-08"
+      },
+      "valid": true,
+      "independent_initial_proposal": null,
+      "peer_proposals_supplied": true,
+      "source_binding_sha256": "c100ce2892f5fb8348f6970d02364241981f3e8527d9ebc7cb287c59bafbb182",
+      "duration_s": 31.811,
+      "prompt_bytes": 78064,
+      "prompt_sha256": "818a263047b4d5a2e2e1478ad6885aa94fd3735730619acaf17a17f08909b452",
+      "schema_validation": {
+        "status": "passed",
+        "duration_s": 0.000453
+      },
+      "structured_output": "local_schema",
+      "timing": {
+        "spawn_s": 0.000615,
+        "input_complete_s": 1.428177,
+        "first_stdout_s": 1.528871,
+        "first_stderr_s": null,
+        "timeout_phase": null,
+        "event_counts": {
+          "event": 2015,
+          "event:run_start": 1,
+          "event:turn_start": 1,
+          "event:message_start": 1,
+          "event:model_request_start": 1,
+          "event:model_trace": 1,
+          "event:thinking_start": 1,
+          "event:thinking_delta": 1168,
+          "event:thinking_end": 1,
+          "event:text_delta": 418,
+          "event:message_update": 418,
+          "event:model_request_end": 1,
+          "event:message_end": 1,
+          "event:turn_end": 1,
+          "event:run_end": 1,
+          "result": 1
+        },
+        "inference_vs_initialization": "not_separable_without_provider_events"
+      },
+      "limits": {
+        "timeout": 240,
+        "idle_timeout": 90,
+        "startup_timeout": 30,
+        "first_response_timeout": 180
+      },
+      "usage": {
+        "provider_reported": {
+          "durationMs": 30373,
+          "inputTokens": 33510,
+          "outputTokens": 4415,
+          "cacheReadTokens": 4480,
+          "cacheWriteTokens": 0
+        },
+        "measured_cost_available": false,
+        "estimated_cost": null
+      },
+      "output_accounting": {
+        "transport_bytes": 6797565,
+        "retained_bytes": 5976,
+        "discarded_progress_bytes": 6791589,
+        "transport_limit_bytes": 20000000,
+        "retained_limit_bytes": 2000000
+      },
+      "normalization_note": null,
+      "process_reaped": true
+    }
+  ],
+  "completed_real_nodes": 6,
+  "worker_attempts": {
+    "limit": 8,
+    "used": 7,
+    "includes_retries_and_substitutions": true,
+    "provider_internal_api_call_count": "not_available"
+  },
+  "failed_attempts": [
+    {
+      "provider": "commandcode",
+      "category": "output_limit",
+      "duration_s": 53.499,
+      "checkpoint": "council/council-proposal-commandcode.json"
+    }
+  ],
+  "rounds_completed": 2,
+  "objections_total": 19,
+  "objections_resolved_by_source_evidence": 1,
+  "source_fact_checks": 4,
+  "adr_id": "ADR-7a95be882add",
+  "adr_status": "needs_evidence",
+  "adr_source_decision": {
+    "decision": "defer_implementation",
+    "scope": "readonly_source_audit",
+    "direction": "Conservar el modo infinite y el motor LS.hybridScroll. Diseñar mejora progresiva en el componente compartido usando next_link/prev_link nativos y nombres traducibles, incluyendo navegación desde páginas intermedias.",
+    "candidate_for_validation": "openai-progresiva-nativa",
+    "basis": "La condición pages.current==1 impide que solo añadir href cubra la cadena. La propuesta progresiva considera ese caso. Configurar classic cambia el diseño/comportamiento y el lote12 a60; no se elige por mayoría.",
+    "rejected_shortcut": "No añadir solo href ni cambiar automáticamente a classic sin comprobar contratos y diseño.",
+    "required_before_implementation": [
+      "Contrato e interceptación de clic de LS.hybridScroll",
+      "Actualización de href tras cargas sucesivas",
+      "Render Twig y URLs reales en páginas2+",
+      "Teclado, foco, accesibilidad calculada",
+      "Responsive y perfiles de red comparables"
+    ],
+    "implementation_authorized": false,
+    "evidence": "council/source-verifications.json",
+    "consensus_claimed": false
+  },
+  "unanimous_consensus": false,
+  "deliberation_complete": true,
+  "implementation_allowed": false,
+  "elapsed_including_controller_repair_s": 472.512,
+  "active_controller_executions_s": 148.352,
+  "observed_cost_usd_subset": 0.3372327,
+  "cost_scope": "Claude successful nodes only; total across providers unavailable",
+  "total_cost_usd": null,
+  "schemas": {
+    "proposal": {
+      "path": "reports/runs/ipanema/20261110T010139-orchestration-b62831d6/council/proposal.schema.json",
+      "sha256": "7f4e76859bc8838a71c5fd79f64179b46e3f8ee2d0dad4c45933b96b445240f9"
+    },
+    "objection": {
+      "path": "reports/runs/ipanema/20261110T010139-orchestration-b62831d6/council/objection.schema.json",
+      "sha256": "bd7be04892aa8907a029b28bc4c7cd6112fa7eaa42d116b93c270f39ef37651c"
+    }
+  },
+  "offline_tests": {
+    "unit": 218,
+    "integration": 34,
+    "council_specific": 72,
+    "quick": "passed",
+    "orchestration": "passed"
+  },
+  "all_theme_files_checked": 397,
+  "theme_tree_sha256": "3fd79c131175f3c4fb7dad98056a4842d93683d187ee6e60e30219b234b0a63b",
+  "all_theme_files_unchanged": true,
+  "production_operations": false,
+  "damarbeauty_modified": false,
+  "code_hashes": {
+    "tools/ipanema/orchestration/adapters.py": "ab071e2d043d091cb3861c7f12a04af1237d113ec911414a0a6edb159822740a",
+    "tools/ipanema/orchestration/engine.py": "17836a26cff4999b56e80a915ad3d08aada4a71785b73cb676c8321a76837933",
+    "tools/ipanema/orchestration/isolation.py": "dacdacb912c0560b6d712075cc9dae11f0eedeb59c0b579505e179757bdf50a8",
+    "tools/ipanema/orchestration/recovery.py": "0af9e3d1295da81475dc2008c82f3113790e6eec5936b172d9a5bffd99f605ad",
+    "tools/ipanema/orchestration/council.py": "4b9ad4fd935cb641c8d00344e90467266326d26a21a5de111c2190bfda261b6d",
+    "tools/ipanema/orchestration/council_runtime.py": "f5e3a8813098a1d60becf5d8954ea52d05714b57c36cc200667ada6a7e89f5db"
+  },
+  "context_representation_comparison": {
+    "same_historical_synthetic_task": true,
+    "old_bytes": 42094,
+    "new_bytes": 16159,
+    "new_inference": false
+  },
+  "limits": [
+    "No live Twig render, browser accessibility, crawling/indexing or comparable performance certification.",
+    "No historical raw rejected outputs were preserved; exact missing fields of historical failures cannot be reconstructed.",
+    "The source recommendation and control-protocol acceptance do not approve a theme implementation or deployment."
+  ]
+}

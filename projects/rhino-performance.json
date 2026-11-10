@@ -1,0 +1,25 @@
+{
+  "schema_version": 2,
+  "id": "rhino-performance",
+  "name": "RHINO Performance",
+  "theme_root": null,
+  "environment": "production-read-only",
+  "public_url": "https://rhino-performance.com/",
+  "discovery_root": "ipanema-discovery",
+  "knowledge_reference_project": "ipanema",
+  "evidence_dir": "reports/runs/rhino-performance",
+  "remote_observation": null,
+  "qa": {
+    "pages": {
+      "home": "/"
+    },
+    "widths": [
+      360,
+      390,
+      768,
+      1024,
+      1440,
+      1920
+    ]
+  }
+}

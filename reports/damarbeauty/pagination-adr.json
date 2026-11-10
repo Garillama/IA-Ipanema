@@ -1,0 +1,1262 @@
+{
+  "kind": "technical-followup-adr",
+  "id": "ADR-DMR-PAG-20261110-01",
+  "at": "2026-11-10T17:03:57.956624+00:00",
+  "project": "damarbeauty",
+  "parent_adr": {
+    "id": "ADR-7a95be882add",
+    "project": "ipanema",
+    "artifact": "reports/runs/ipanema/20261110T010139-orchestration-b62831d6/council/adr.json",
+    "sha256": "273004e50dae6dddcb6f25055a3e4f1698a291ef61dad4f7a0de5aa3b030aa45",
+    "not_reused_as_authorization": "[redacted]"
+  },
+  "objective": "Conservar paginación infinita nativa y resolver rastreabilidad/accesibilidad sin degradar rendimiento.",
+  "risk": "L3 overall; L2 scoped tag-only accessibility fix with independent review.",
+  "status": "needs_evidence",
+  "implementation_allowed_full_seo_solution": false,
+  "production_authorized": false,
+  "decision": "Mantener LS.hybridScroll y configuración infinite. Descartar href-only y enlaces solo JS. Continuar navegación SSR independiente como candidato, sin implementación global mientras falte render/contrato de cursores/UX. Aceptar únicamente corrección local del control de teclado, con pruebas y revisión independientes.",
+  "local_subdecision": {
+    "id": "ADR-DMR-PAG-20261110-BUTTON",
+    "at": "2026-11-10T16:51:04.558485+00:00",
+    "project": "damarbeauty",
+    "status": "approved",
+    "approval_scope": "local_accessibility_button_only",
+    "objective": "Operabilidad nativa de teclado del control infinite sin cambiar paginación ni URLs.",
+    "files": [
+      "snippets/product-list/pagination.tpl"
+    ],
+    "source_before_sha256": "c715cc6c77d07dced5cdad6066785142c307b0f3ca3429cf88f5290cf7f2edc2",
+    "implementation_agent": "codex",
+    "independent_reviewer": "claude",
+    "production_authorized": false,
+    "full_pagination_seo_status": "needs_evidence",
+    "parent_adr": "ADR-7a95be882add",
+    "evidence": [
+      "browser-button-probe/button-probe.json",
+      "browser-behavior/behavior.json",
+      "browser-baseline/observation.json",
+      "agent-deltas/claude.json",
+      "agent-deltas/codex.json"
+    ],
+    "mandatory_constraints_local": {
+      "functional": "Native Enter/Space append +12 with pathname preserved on desktop/mobile.",
+      "compatibility": "Same parent click selector, classes, translation, spinner; no changes to native engine.",
+      "security": "No new request handlers, scripts, links, data or permissions; type=button prevents submission.",
+      "native_reuse": "Existing markup, CSS and LS.hybridScroll reused.",
+      "seo": "No links removed or changed; existing missing pagination links remain unresolved.",
+      "accessibility": "Native button semantics plus actual keyboard probes.",
+      "responsive": "Equal control metrics/styles at 390/1440; baseline six widths recorded, not full changed-theme render.",
+      "performance": "No new JS/CSS/assets/DOM nodes; source delta only paired HTML tags."
+    },
+    "required_post_tests": [
+      "exactly-the-approved-paired-tag-change",
+      "source-audit",
+      "independent-diff-review",
+      "preserve-branch-and-Twig-source"
+    ],
+    "limits": [
+      "Not approval of SSR pagination solution.",
+      "DOM probe is not modified Twig rendering.",
+      "Four duplicate IDs existed before the desktop probe; no extra duplicate introduced, cause unknown."
+    ],
+    "reversal": "Restore only the owned snippet attempt if its after hash still matches.",
+    "post_implementation_status": "accepted_local_scope",
+    "transaction": {
+      "id": "d284e16a7108490ca29b4ac123fabb18",
+      "status": "accepted",
+      "attempts": 1,
+      "max_attempts": 2
+    },
+    "qa": "reports/runs/damarbeauty/20261110T163610-pagination-resolution-925f26ee/button-after-qa.json",
+    "final_provider_decisions": {
+      "claude": "approve",
+      "codex": "approve"
+    },
+    "native_validation_passed": true,
+    "native_render_of_modified_theme": false
+  },
+  "continuity": [
+    {
+      "case": "category",
+      "page1_count": 12,
+      "page2_url": "https://damarbeauty.mx/lo-mas-nuevo-lippies/page/2/",
+      "page2_status": 200,
+      "page2_count": 11,
+      "page2_matches_native_append": true,
+      "page1_page2_disjoint": true,
+      "page2_pagination_links": [],
+      "canonical": "https://damarbeauty.mx/lo-mas-nuevo-lippies/page/2/",
+      "variants_as_products": false
+    },
+    {
+      "case": "catalog",
+      "page1_count": 12,
+      "page2_url": "https://damarbeauty.mx/productos/page/2/",
+      "page2_status": 200,
+      "page2_count": 12,
+      "page2_matches_native_append": true,
+      "page1_page2_disjoint": true,
+      "page2_pagination_links": [],
+      "canonical": "https://damarbeauty.mx/productos/page/2/",
+      "variants_as_products": false
+    }
+  ],
+  "native_helper_unchanged_since_prior_capture": true,
+  "historical_objection_updates": [
+    {
+      "key": "claude:arq-obj-1",
+      "alternative_id": "claude-pag-a-href-load-more",
+      "severity": "high",
+      "evidence_state": "confirmed_reject_href_only",
+      "update": "Actual native helper and href-only experiment reproduce navigation."
+    },
+    {
+      "key": "claude:arq-obj-2",
+      "alternative_id": "claude-pag-a-href-load-more",
+      "severity": "medium",
+      "evidence_state": "confirmed_unresolved_ssr",
+      "update": "Real page2 and page3 have products but no continuation links."
+    },
+    {
+      "key": "claude:arq-obj-3",
+      "alternative_id": "openai-progresiva-nativa",
+      "severity": "low",
+      "evidence_state": "scope_refined",
+      "update": "DaMar category delegates to custom grid; shared snippet also has blog consumer."
+    },
+    {
+      "key": "claude:arq-obj-4",
+      "alternative_id": "cc-pagination-hybrid-fallback",
+      "severity": "medium",
+      "evidence_state": "open_design",
+      "update": "Separate SSR navigation coexistence/UX not implemented or rendered."
+    },
+    {
+      "key": "claude:arq-obj-5",
+      "alternative_id": "claude-pag-b-classic-config",
+      "severity": "medium",
+      "evidence_state": "not_selected_unmeasured",
+      "update": "Classic changes native configuration and paginate12 to60; comparative transfer not measured."
+    },
+    {
+      "key": "claude:arq-obj-6",
+      "alternative_id": "claude-pag-a-href-load-more",
+      "severity": "low",
+      "evidence_state": "open_outside_button_scope",
+      "update": "Classic arrows remain unchanged; no blanket AA certification."
+    },
+    {
+      "key": "codex:openai-obj-integracion",
+      "alternative_id": "openai-progresiva-nativa",
+      "severity": "medium",
+      "evidence_state": "helper_observed_contract_gap_confirmed",
+      "update": "Captured actual helper and verified absent preventDefault; cursor branch remains untested."
+    },
+    {
+      "key": "codex:openai-obj-continuidad",
+      "alternative_id": "claude-pag-a-href-load-more",
+      "severity": "medium",
+      "evidence_state": "confirmed_unresolved_ssr",
+      "update": "Initial and subsequent infinite pages do not emit navigation links."
+    },
+    {
+      "key": "codex:openai-obj-certificacion",
+      "alternative_id": "cc-pagination-hybrid-fallback",
+      "severity": "medium",
+      "evidence_state": "open_full_solution",
+      "update": "Source checks and DOM prototypes do not certify edited-theme render."
+    },
+    {
+      "key": "codex:openai-obj-nombre",
+      "alternative_id": "cc-pagination-hybrid-fallback",
+      "severity": "low",
+      "evidence_state": "claim_narrowed_and_keyboard_locally_fixed",
+      "update": "Translation/text exists; defect was nonfocusable anchor, corrected locally with button."
+    },
+    {
+      "key": "codex:openai-obj-diseno",
+      "alternative_id": "openai-progresiva-nativa",
+      "severity": "low",
+      "evidence_state": "open_full_solution",
+      "update": "Control tag is visually equal in two samples; new SSR navigation has not been rendered."
+    },
+    {
+      "key": "commandcode:cc-obj-1",
+      "alternative_id": "claude-pag-c-custom-js-links",
+      "severity": "high",
+      "evidence_state": "reject_js_only_links",
+      "update": "Does not provide links in initial HTML; Google documented discovery limits."
+    },
+    {
+      "key": "commandcode:cc-obj-2",
+      "alternative_id": "claude-pag-a-href-load-more",
+      "severity": "high",
+      "evidence_state": "confirmed_reject_href_only",
+      "update": "Native handler does not cancel default navigation; actual href-only test fails."
+    },
+    {
+      "key": "commandcode:cc-obj-3",
+      "alternative_id": "claude-pag-a-href-load-more",
+      "severity": "medium",
+      "evidence_state": "confirmed_unresolved_href_lifetime",
+      "update": "Native helper updates history but not href/cursor DOM; not solved by button."
+    },
+    {
+      "key": "commandcode:cc-obj-4",
+      "alternative_id": "openai-clasica-nativa",
+      "severity": "medium",
+      "evidence_state": "not_selected_unmeasured",
+      "update": "No measured comparison for60 initial cards; not presumed faster/slower."
+    },
+    {
+      "key": "commandcode:cc-obj-5",
+      "alternative_id": "cc-pagination-classic-config",
+      "severity": "medium",
+      "evidence_state": "not_selected_preserve_native",
+      "update": "Current category/search configuration is infinite and retained."
+    },
+    {
+      "key": "commandcode:cc-obj-6",
+      "alternative_id": "cc-pagination-hybrid-fallback",
+      "severity": "medium",
+      "evidence_state": "open_design",
+      "update": "Concurrent SSR controls and native appends require explicit behavior decision and real render."
+    },
+    {
+      "key": "commandcode:cc-obj-7",
+      "alternative_id": "cc-pagination-explicit-loadmore",
+      "severity": "medium",
+      "evidence_state": "not_adopted",
+      "update": "Auto scrolling and60-product threshold retained; only existing action control tag changed."
+    },
+    {
+      "key": "commandcode:cc-obj-8",
+      "alternative_id": "openai-progresiva-nativa",
+      "severity": "low",
+      "evidence_state": "partially_evidenced",
+      "update": "Keyboard button scope tested and reviewed; complete SSR/cursor/accessibility remains pending."
+    }
+  ],
+  "current_agents": [
+    "claude",
+    "codex"
+  ],
+  "commandcode_current_invocations": 0,
+  "invocations": [
+    {
+      "phase": "initial-claude",
+      "agent": "claude",
+      "model": {
+        "model": "claude-sonnet-5-5",
+        "effort": "medium",
+        "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+        "verified_at": "2026-11-08"
+      },
+      "execution": {
+        "exit_code": 0,
+        "timed_out": false,
+        "output_limited": false,
+        "idle_timed_out": false,
+        "cancelled": false,
+        "process_started": true,
+        "process_reaped": true,
+        "stdin_bytes_written": 113630,
+        "context_complete": true,
+        "duration_s": 72.61,
+        "timing": {
+          "spawn_s": 0.001963,
+          "input_complete_s": 0.994109,
+          "first_stdout_s": 3.727012,
+          "first_stderr_s": null,
+          "timeout_phase": null,
+          "event_counts": {
+            "system": 31,
+            "stream_event": 925,
+            "event:message_start": 2,
+            "event:content_block_start": 3,
+            "event:content_block_delta": 913,
+            "assistant": 3,
+            "event:content_block_stop": 3,
+            "event:message_delta": 2,
+            "event:message_stop": 2,
+            "rate_limit_event": 2,
+            "user": 2,
+            "result": 1
+          },
+          "inference_vs_initialization": "not_separable_without_provider_events"
+        },
+        "output_accounting": {
+          "transport_bytes": 368121,
+          "retained_bytes": 368121,
+          "discarded_progress_bytes": 0,
+          "transport_limit_bytes": 20000000,
+          "retained_limit_bytes": 2000000
+        },
+        "isolation": {
+          "backend": "bubblewrap",
+          "snapshot_read_only": true,
+          "host_home_mounted": false,
+          "network": "enabled_no_destination_firewall",
+          "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+        },
+        "started_at": "2026-11-10T16:39:23.318841+00:00",
+        "prompt_bytes": 113630,
+        "prompt_sha256": "8b28e3294b03011f6aa4473cb25c85f2dac87023e0ed3b8c7f8d5e476064e12d",
+        "usage": {
+          "provider_reported": {
+            "total_cost_usd": 0.3300062,
+            "duration_ms": 70030,
+            "input_tokens": 6,
+            "cache_creation_input_tokens": 56328,
+            "cache_read_input_tokens": 54622,
+            "output_tokens": 9922
+          },
+          "measured_cost_available": true,
+          "estimated_cost": null
+        },
+        "limits": {
+          "timeout": 240,
+          "idle_timeout": 90,
+          "startup_timeout": 30,
+          "first_response_timeout": 120
+        },
+        "structured_output": "native_schema",
+        "contract_validation": {
+          "status": "passed",
+          "duration_s": 0.007559
+        }
+      },
+      "artifact": "reports/runs/damarbeauty/20261110T163610-pagination-resolution-925f26ee/agent-deltas-independent/claude.json",
+      "decision": "changes_requested"
+    },
+    {
+      "phase": "initial-codex",
+      "agent": "codex",
+      "model": {
+        "model": "gpt-6.1-sol",
+        "effort": "medium",
+        "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+        "verified_at": "2026-11-08"
+      },
+      "execution": {
+        "exit_code": 0,
+        "timed_out": false,
+        "output_limited": false,
+        "idle_timed_out": false,
+        "cancelled": false,
+        "process_started": true,
+        "process_reaped": true,
+        "stdin_bytes_written": 113620,
+        "context_complete": true,
+        "duration_s": 51.002,
+        "timing": {
+          "spawn_s": 0.000695,
+          "input_complete_s": 0.123413,
+          "first_stdout_s": 1.683738,
+          "first_stderr_s": null,
+          "timeout_phase": null,
+          "event_counts": {
+            "thread.started": 1,
+            "item.completed": 2,
+            "turn.started": 1,
+            "turn.completed": 1
+          },
+          "inference_vs_initialization": "not_separable_without_provider_events"
+        },
+        "output_accounting": {
+          "transport_bytes": 8442,
+          "retained_bytes": 8442,
+          "discarded_progress_bytes": 0,
+          "transport_limit_bytes": 20000000,
+          "retained_limit_bytes": 2000000
+        },
+        "isolation": {
+          "backend": "bubblewrap",
+          "snapshot_read_only": true,
+          "host_home_mounted": false,
+          "network": "enabled_no_destination_firewall",
+          "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+        },
+        "started_at": "2026-11-10T16:39:23.320085+00:00",
+        "prompt_bytes": 113620,
+        "prompt_sha256": "4a45aa856f11fe670f130c9f0536edb8cb82a3934b7cd46529dbe95f76702bc6",
+        "usage": {
+          "provider_reported": {
+            "input_tokens": 44661,
+            "cached_input_tokens": 0,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 1869,
+            "reasoning_output_tokens": 144
+          },
+          "measured_cost_available": false,
+          "estimated_cost": null
+        },
+        "limits": {
+          "timeout": 240,
+          "idle_timeout": 90,
+          "startup_timeout": 30,
+          "first_response_timeout": 150
+        },
+        "structured_output": "native_schema",
+        "contract_validation": {
+          "status": "passed",
+          "duration_s": 0.000434
+        }
+      },
+      "artifact": "reports/runs/damarbeauty/20261110T163610-pagination-resolution-925f26ee/agent-deltas-independent/codex.json",
+      "decision": "changes_requested"
+    },
+    {
+      "phase": "contrast-claude",
+      "agent": "claude",
+      "model": {
+        "model": "claude-sonnet-5-5",
+        "effort": "medium",
+        "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+        "verified_at": "2026-11-08"
+      },
+      "execution": {
+        "exit_code": 0,
+        "timed_out": false,
+        "output_limited": false,
+        "idle_timed_out": false,
+        "cancelled": false,
+        "process_started": true,
+        "process_reaped": true,
+        "stdin_bytes_written": 168554,
+        "context_complete": true,
+        "duration_s": 49.048,
+        "timing": {
+          "spawn_s": 0.000602,
+          "input_complete_s": 0.78465,
+          "first_stdout_s": 1.347149,
+          "first_stderr_s": null,
+          "timeout_phase": null,
+          "event_counts": {
+            "system": 10,
+            "stream_event": 1009,
+            "event:message_start": 3,
+            "event:content_block_start": 5,
+            "event:content_block_delta": 990,
+            "assistant": 5,
+            "event:content_block_stop": 5,
+            "user": 3,
+            "event:message_delta": 3,
+            "event:message_stop": 3,
+            "rate_limit_event": 2,
+            "result": 1
+          },
+          "inference_vs_initialization": "not_separable_without_provider_events"
+        },
+        "output_accounting": {
+          "transport_bytes": 366673,
+          "retained_bytes": 366673,
+          "discarded_progress_bytes": 0,
+          "transport_limit_bytes": 20000000,
+          "retained_limit_bytes": 2000000
+        },
+        "isolation": {
+          "backend": "bubblewrap",
+          "snapshot_read_only": true,
+          "host_home_mounted": false,
+          "network": "enabled_no_destination_firewall",
+          "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+        },
+        "started_at": "2026-11-10T16:48:03.592706+00:00",
+        "prompt_bytes": 168554,
+        "prompt_sha256": "cd68856bff7ee52ece4bec20edaecaf34fb35180ecdc5c99aeb4168c0f03c695",
+        "usage": {
+          "provider_reported": {
+            "total_cost_usd": 0.3934202,
+            "duration_ms": 47253,
+            "input_tokens": 6,
+            "cache_creation_input_tokens": 76605,
+            "cache_read_input_tokens": 156382,
+            "output_tokens": 7135
+          },
+          "measured_cost_available": true,
+          "estimated_cost": null
+        },
+        "limits": {
+          "timeout": 240,
+          "idle_timeout": 90,
+          "startup_timeout": 30,
+          "first_response_timeout": 120
+        },
+        "structured_output": "native_schema",
+        "contract_validation": {
+          "status": "passed",
+          "duration_s": 0.008953
+        }
+      },
+      "artifact": "reports/runs/damarbeauty/20261110T163610-pagination-resolution-925f26ee/agent-deltas/claude.json",
+      "decision": "approve"
+    },
+    {
+      "phase": "contrast-codex",
+      "agent": "codex",
+      "model": {
+        "model": "gpt-6.1-sol",
+        "effort": "medium",
+        "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+        "verified_at": "2026-11-08"
+      },
+      "execution": {
+        "exit_code": 0,
+        "timed_out": false,
+        "output_limited": false,
+        "idle_timed_out": false,
+        "cancelled": false,
+        "process_started": true,
+        "process_reaped": true,
+        "stdin_bytes_written": 168544,
+        "context_complete": true,
+        "duration_s": 44.684,
+        "timing": {
+          "spawn_s": 0.000703,
+          "input_complete_s": 0.102166,
+          "first_stdout_s": 0.886913,
+          "first_stderr_s": null,
+          "timeout_phase": null,
+          "event_counts": {
+            "thread.started": 1,
+            "item.completed": 2,
+            "turn.started": 1,
+            "turn.completed": 1
+          },
+          "inference_vs_initialization": "not_separable_without_provider_events"
+        },
+        "output_accounting": {
+          "transport_bytes": 7291,
+          "retained_bytes": 7291,
+          "discarded_progress_bytes": 0,
+          "transport_limit_bytes": 20000000,
+          "retained_limit_bytes": 2000000
+        },
+        "isolation": {
+          "backend": "bubblewrap",
+          "snapshot_read_only": true,
+          "host_home_mounted": false,
+          "network": "enabled_no_destination_firewall",
+          "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+        },
+        "started_at": "2026-11-10T16:48:03.593169+00:00",
+        "prompt_bytes": 168544,
+        "prompt_sha256": "d24eb60b19b90a0fd26bef0ea99b2ab476b21f99f94ee818154e9157a25eeb20",
+        "usage": {
+          "provider_reported": {
+            "input_tokens": 59926,
+            "cached_input_tokens": 0,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 1535,
+            "reasoning_output_tokens": 87
+          },
+          "measured_cost_available": false,
+          "estimated_cost": null
+        },
+        "limits": {
+          "timeout": 240,
+          "idle_timeout": 90,
+          "startup_timeout": 30,
+          "first_response_timeout": 150
+        },
+        "structured_output": "native_schema",
+        "contract_validation": {
+          "status": "passed",
+          "duration_s": 0.000305
+        }
+      },
+      "artifact": "reports/runs/damarbeauty/20261110T163610-pagination-resolution-925f26ee/agent-deltas/codex.json",
+      "decision": "approve"
+    },
+    {
+      "phase": "implementation",
+      "agent": "codex",
+      "model": {
+        "model": "gpt-6.1-sol",
+        "effort": "medium",
+        "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+        "verified_at": "2026-11-08"
+      },
+      "execution": {
+        "exit_code": 0,
+        "timed_out": false,
+        "output_limited": false,
+        "idle_timed_out": false,
+        "cancelled": false,
+        "process_started": true,
+        "process_reaped": true,
+        "stdin_bytes_written": 43215,
+        "context_complete": true,
+        "duration_s": 29.797,
+        "timing": {
+          "spawn_s": 0.000507,
+          "input_complete_s": 0.00067,
+          "first_stdout_s": 1.069416,
+          "first_stderr_s": null,
+          "timeout_phase": null,
+          "event_counts": {
+            "thread.started": 1,
+            "item.completed": 2,
+            "turn.started": 1,
+            "turn.completed": 1
+          },
+          "inference_vs_initialization": "not_separable_without_provider_events"
+        },
+        "output_accounting": {
+          "transport_bytes": 4887,
+          "retained_bytes": 4887,
+          "discarded_progress_bytes": 0,
+          "transport_limit_bytes": 20000000,
+          "retained_limit_bytes": 2000000
+        },
+        "isolation": {
+          "backend": "bubblewrap",
+          "snapshot_read_only": true,
+          "host_home_mounted": false,
+          "network": "enabled_no_destination_firewall",
+          "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+        },
+        "started_at": "2026-11-10T16:51:04.652977+00:00",
+        "prompt_bytes": 43215,
+        "prompt_sha256": "e07377b78739fda07d63cfc944ddce261935aa396c75f3024f69ed0383ef3be0",
+        "usage": {
+          "provider_reported": {
+            "input_tokens": 26007,
+            "cached_input_tokens": 12288,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 1099,
+            "reasoning_output_tokens": 33
+          },
+          "measured_cost_available": false,
+          "estimated_cost": null
+        },
+        "limits": {
+          "timeout": 240,
+          "idle_timeout": 90,
+          "startup_timeout": 30,
+          "first_response_timeout": 150
+        },
+        "structured_output": "legacy_contract",
+        "contract_validation": {
+          "status": "passed",
+          "duration_s": 0.00014
+        }
+      },
+      "artifact": "reports/runs/damarbeauty/20261110T163610-pagination-resolution-925f26ee/button-implementation-proposal.json",
+      "decision": "proposed"
+    },
+    {
+      "phase": "independent-review",
+      "agent": "claude",
+      "model": {
+        "model": "claude-sonnet-5-5",
+        "effort": "medium",
+        "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+        "verified_at": "2026-11-08"
+      },
+      "execution": {
+        "exit_code": 0,
+        "timed_out": false,
+        "output_limited": false,
+        "idle_timed_out": false,
+        "cancelled": false,
+        "process_started": true,
+        "process_reaped": true,
+        "stdin_bytes_written": 262074,
+        "context_complete": true,
+        "duration_s": 22.243,
+        "timing": {
+          "spawn_s": 0.000653,
+          "input_complete_s": 0.544739,
+          "first_stdout_s": 20.875705,
+          "first_stderr_s": null,
+          "timeout_phase": null,
+          "event_counts": {
+            "result": 1
+          },
+          "inference_vs_initialization": "not_separable_without_provider_events"
+        },
+        "output_accounting": {
+          "transport_bytes": 6054,
+          "retained_bytes": 6054,
+          "discarded_progress_bytes": 0,
+          "transport_limit_bytes": 20000000,
+          "retained_limit_bytes": 2000000
+        },
+        "isolation": {
+          "backend": "bubblewrap",
+          "snapshot_read_only": true,
+          "host_home_mounted": false,
+          "network": "enabled_no_destination_firewall",
+          "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+        },
+        "started_at": "2026-11-10T16:52:44.014839+00:00",
+        "prompt_bytes": 262074,
+        "prompt_sha256": "69be1f389417ec07feaf21a5ab9c98bff8d7e07cfa144aaf960527d9eeed5281",
+        "usage": {
+          "provider_reported": {
+            "total_cost_usd": 0.6035109,
+            "duration_ms": 19800,
+            "input_tokens": 2,
+            "cache_creation_input_tokens": 144783,
+            "cache_read_input_tokens": 649,
+            "output_tokens": 2431
+          },
+          "measured_cost_available": true,
+          "estimated_cost": null
+        },
+        "limits": {
+          "timeout": 240,
+          "idle_timeout": 90,
+          "startup_timeout": 30,
+          "first_response_timeout": 120
+        },
+        "structured_output": "legacy_contract",
+        "contract_validation": {
+          "status": "passed",
+          "duration_s": 0.000928
+        }
+      },
+      "artifact": "reports/runs/damarbeauty/20261110T163610-pagination-resolution-925f26ee/button-independent-review.json",
+      "decision": "approve"
+    },
+    {
+      "phase": "final-claude",
+      "agent": "claude",
+      "model": {
+        "model": "claude-sonnet-5-5",
+        "effort": "medium",
+        "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+        "verified_at": "2026-11-08"
+      },
+      "execution": {
+        "exit_code": 0,
+        "timed_out": false,
+        "output_limited": false,
+        "idle_timed_out": false,
+        "cancelled": false,
+        "process_started": true,
+        "process_reaped": true,
+        "stdin_bytes_written": 37280,
+        "context_complete": true,
+        "duration_s": 17.352,
+        "timing": {
+          "spawn_s": 0.000535,
+          "input_complete_s": 0.000651,
+          "first_stdout_s": 16.620298,
+          "first_stderr_s": null,
+          "timeout_phase": null,
+          "event_counts": {
+            "result": 1
+          },
+          "inference_vs_initialization": "not_separable_without_provider_events"
+        },
+        "output_accounting": {
+          "transport_bytes": 5195,
+          "retained_bytes": 5195,
+          "discarded_progress_bytes": 0,
+          "transport_limit_bytes": 20000000,
+          "retained_limit_bytes": 2000000
+        },
+        "isolation": {
+          "backend": "bubblewrap",
+          "snapshot_read_only": true,
+          "host_home_mounted": false,
+          "network": "enabled_no_destination_firewall",
+          "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+        },
+        "started_at": "2026-11-10T16:57:39.142535+00:00",
+        "prompt_bytes": 37280,
+        "prompt_sha256": "6bcfe9dd00e45deee1c9c8a93c7381dc766c78bae57ababd479c9d8168c7929b",
+        "usage": {
+          "provider_reported": {
+            "total_cost_usd": 0.0893369,
+            "duration_ms": 15525,
+            "input_tokens": 2,
+            "cache_creation_input_tokens": 17314,
+            "cache_read_input_tokens": 1369,
+            "output_tokens": 1994
+          },
+          "measured_cost_available": true,
+          "estimated_cost": null
+        },
+        "limits": {
+          "timeout": 240,
+          "idle_timeout": 90,
+          "startup_timeout": 30,
+          "first_response_timeout": 120
+        },
+        "structured_output": "legacy_contract",
+        "contract_validation": {
+          "status": "passed",
+          "duration_s": 6e-05
+        }
+      },
+      "artifact": "reports/runs/damarbeauty/20261110T163610-pagination-resolution-925f26ee/button-final-claude.json",
+      "decision": "approve"
+    },
+    {
+      "phase": "final-codex-blocked-before-baseline",
+      "agent": "codex",
+      "model": {
+        "model": "gpt-6.1-sol",
+        "effort": "medium",
+        "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+        "verified_at": "2026-11-08"
+      },
+      "execution": {
+        "exit_code": 0,
+        "timed_out": false,
+        "output_limited": false,
+        "idle_timed_out": false,
+        "cancelled": false,
+        "process_started": true,
+        "process_reaped": true,
+        "stdin_bytes_written": 26606,
+        "context_complete": true,
+        "duration_s": 26.302,
+        "timing": {
+          "spawn_s": 0.000396,
+          "input_complete_s": 0.000471,
+          "first_stdout_s": 1.984677,
+          "first_stderr_s": null,
+          "timeout_phase": null,
+          "event_counts": {
+            "thread.started": 1,
+            "item.completed": 2,
+            "turn.started": 1,
+            "turn.completed": 1
+          },
+          "inference_vs_initialization": "not_separable_without_provider_events"
+        },
+        "output_accounting": {
+          "transport_bytes": 2879,
+          "retained_bytes": 2879,
+          "discarded_progress_bytes": 0,
+          "transport_limit_bytes": 20000000,
+          "retained_limit_bytes": 2000000
+        },
+        "isolation": {
+          "backend": "bubblewrap",
+          "snapshot_read_only": true,
+          "host_home_mounted": false,
+          "network": "enabled_no_destination_firewall",
+          "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+        },
+        "started_at": "2026-11-10T16:57:39.129361+00:00",
+        "prompt_bytes": 26606,
+        "prompt_sha256": "0df315138a62c36f44d86f8ea5ae537d0cbe8a1a2f42e4a10392ac2eea561fc2",
+        "usage": {
+          "provider_reported": {
+            "input_tokens": 21642,
+            "cached_input_tokens": 12288,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 585,
+            "reasoning_output_tokens": 110
+          },
+          "measured_cost_available": false,
+          "estimated_cost": null
+        },
+        "limits": {
+          "timeout": 240,
+          "idle_timeout": 90,
+          "startup_timeout": 30,
+          "first_response_timeout": 150
+        },
+        "structured_output": "legacy_contract",
+        "contract_validation": {
+          "status": "passed",
+          "duration_s": 7.5e-05
+        }
+      },
+      "artifact": "reports/runs/damarbeauty/20261110T163610-pagination-resolution-925f26ee/button-final-codex-before-baseline.json",
+      "decision": "blocked"
+    },
+    {
+      "phase": "final-codex-with-baseline",
+      "agent": "codex",
+      "model": {
+        "model": "gpt-6.1-sol",
+        "effort": "medium",
+        "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+        "verified_at": "2026-11-08"
+      },
+      "execution": {
+        "exit_code": 0,
+        "timed_out": false,
+        "output_limited": false,
+        "idle_timed_out": false,
+        "cancelled": false,
+        "process_started": true,
+        "process_reaped": true,
+        "stdin_bytes_written": 29914,
+        "context_complete": true,
+        "duration_s": 22.722,
+        "timing": {
+          "spawn_s": 0.000369,
+          "input_complete_s": 0.000462,
+          "first_stdout_s": 1.044319,
+          "first_stderr_s": null,
+          "timeout_phase": null,
+          "event_counts": {
+            "thread.started": 1,
+            "item.completed": 2,
+            "turn.started": 1,
+            "turn.completed": 1
+          },
+          "inference_vs_initialization": "not_separable_without_provider_events"
+        },
+        "output_accounting": {
+          "transport_bytes": 3076,
+          "retained_bytes": 3076,
+          "discarded_progress_bytes": 0,
+          "transport_limit_bytes": 20000000,
+          "retained_limit_bytes": 2000000
+        },
+        "isolation": {
+          "backend": "bubblewrap",
+          "snapshot_read_only": true,
+          "host_home_mounted": false,
+          "network": "enabled_no_destination_firewall",
+          "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+        },
+        "started_at": "2026-11-10T16:59:12.623409+00:00",
+        "prompt_bytes": 29914,
+        "prompt_sha256": "114a2f7aa97852b1214b84f7e7aff36edd0a33beadc0de9d8b9570fe7b9de0cc",
+        "usage": {
+          "provider_reported": {
+            "input_tokens": 22684,
+            "cached_input_tokens": 12288,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 588,
+            "reasoning_output_tokens": 59
+          },
+          "measured_cost_available": false,
+          "estimated_cost": null
+        },
+        "limits": {
+          "timeout": 240,
+          "idle_timeout": 90,
+          "startup_timeout": 30,
+          "first_response_timeout": 150
+        },
+        "structured_output": "legacy_contract",
+        "contract_validation": {
+          "status": "passed",
+          "duration_s": 6.7e-05
+        }
+      },
+      "artifact": "reports/runs/damarbeauty/20261110T163610-pagination-resolution-925f26ee/button-final-codex.json",
+      "decision": "approve"
+    }
+  ],
+  "claude_reported_cost_usd": 1.4162742,
+  "codex_cost_usd": null,
+  "combined_cost_usd": null,
+  "qa": {
+    "source": {
+      "kind": "qa",
+      "suite": "source",
+      "at": "2026-11-10T16:52:08.380461+00:00",
+      "outcome": "passed",
+      "report": "/home/alanrichard/Escritorio/IA inversa/reports/runs/damarbeauty/20261110T165208-source-4362a198/report.json",
+      "limitations": [],
+      "checks": [
+        {
+          "name": "source-schema-inventory",
+          "status": "passed"
+        },
+        {
+          "name": "sources-stable-during-qa",
+          "status": "passed"
+        }
+      ]
+    },
+    "button_local_checks": 17,
+    "button_local_outcome": "passed",
+    "visual": {
+      "1440": {
+        "status": "passed",
+        "changed_pixels": 0,
+        "tested_pixels": 1296000,
+        "changed_ratio": 0.0,
+        "pixel_threshold": 12,
+        "max_changed_ratio": 0.005,
+        "masked_rectangles": [],
+        "interpretation": "Una diferencia excedida requiere revisión; no demuestra por sí sola una regresión."
+      },
+      "390": {
+        "status": "passed",
+        "changed_pixels": 0,
+        "tested_pixels": 351000,
+        "changed_ratio": 0.0,
+        "pixel_threshold": 12,
+        "max_changed_ratio": 0.005,
+        "masked_rectangles": [],
+        "interpretation": "Una diferencia excedida requiere revisión; no demuestra por sí sola una regresión."
+      }
+    },
+    "advanced": [
+      {
+        "name": "category-overflow-360",
+        "status": "passed",
+        "detail": {
+          "width": 360
+        }
+      },
+      {
+        "name": "category-overflow-390",
+        "status": "passed",
+        "detail": {
+          "width": 390
+        }
+      },
+      {
+        "name": "category-overflow-768",
+        "status": "passed",
+        "detail": {
+          "width": 768
+        }
+      },
+      {
+        "name": "category-overflow-1024",
+        "status": "passed",
+        "detail": {
+          "width": 1024
+        }
+      },
+      {
+        "name": "category-overflow-1440",
+        "status": "passed",
+        "detail": {
+          "width": 1440
+        }
+      },
+      {
+        "name": "category-overflow-1920",
+        "status": "passed",
+        "detail": {
+          "width": 1920
+        }
+      },
+      {
+        "name": "page3-nojs-real-render",
+        "status": "passed",
+        "detail": {
+          "url": "https://damarbeauty.mx/productos/page/3/",
+          "cards": 12
+        }
+      },
+      {
+        "name": "native-load-more-keyboard",
+        "status": "failed",
+        "detail": {
+          "reached_load_more": false,
+          "tag": "A"
+        }
+      },
+      {
+        "name": "href-only-preserves-infinite",
+        "status": "failed",
+        "detail": {
+          "actual": "https://damarbeauty.mx/productos/page/2/",
+          "expected_path": "/productos/"
+        }
+      },
+      {
+        "name": "guard-retains-native-path",
+        "status": "passed",
+        "detail": {
+          "actual": "https://damarbeauty.mx/productos/?mpage=12"
+        }
+      },
+      {
+        "name": "guard-no-product-duplicates",
+        "status": "passed",
+        "detail": {
+          "cards": 144,
+          "unique": 144
+        }
+      },
+      {
+        "name": "native-query-preserved",
+        "status": "passed",
+        "detail": {
+          "url": "https://damarbeauty.mx/search/?q=makeup&mpage=2"
+        }
+      }
+    ],
+    "filters": [
+      {
+        "name": "native-brand-param-preserved-in-loads",
+        "status": "passed",
+        "detail": {
+          "parameters": [
+            [
+              "brand",
+              "E.l.f."
+            ]
+          ],
+          "fetch_count": 1
+        }
+      },
+      {
+        "name": "native-filtered-products-unique",
+        "status": "passed",
+        "detail": {
+          "cards": 24,
+          "unique": 24
+        }
+      },
+      {
+        "name": "native-brand-retained-after-sort",
+        "status": "passed",
+        "detail": {
+          "url": "https://damarbeauty.mx/productos/?brand=E.l.f.&sort_by=price-ascending"
+        }
+      },
+      {
+        "name": "native-sort-preserved-in-loads",
+        "status": "passed",
+        "detail": {
+          "urls": [
+            "https://damarbeauty.mx/productos/page/2/?brand=E.l.f.&sort_by=price-ascending&results_only=true&limit=12&theme=ipanema&nube_sdk=1"
+          ]
+        }
+      },
+      {
+        "name": "blush-local-filter-applied",
+        "status": "passed",
+        "detail": {
+          "visible": 7,
+          "url": "https://damarbeauty.mx/blush/?damar_texture=cream&damar_min=320"
+        }
+      },
+      {
+        "name": "blush-filter-reload-preserved",
+        "status": "passed",
+        "detail": {
+          "visible_before": 7,
+          "visible_after": 7
+        }
+      },
+      {
+        "name": "blush-filter-forward-preserved",
+        "status": "passed",
+        "detail": {
+          "url": "https://damarbeauty.mx/blush/?damar_texture=cream&damar_min=320"
+        }
+      },
+      {
+        "name": "blush-filter-escape-focus",
+        "status": "passed",
+        "detail": {
+          "closed": true,
+          "focus_returns": true
+        }
+      }
+    ],
+    "carousel_samples": [
+      {
+        "slides": 2,
+        "before": 0,
+        "after": 1,
+        "changed": true,
+        "product_id": "376349913"
+      },
+      {
+        "slides": 7,
+        "before": 0,
+        "after": 1,
+        "changed": true,
+        "product_id": "376335753"
+      }
+    ],
+    "native_check_exit_code": 0,
+    "native_api_methods": [
+      {
+        "method": "GET",
+        "status": 200,
+        "validation_only": false
+      },
+      {
+        "method": "GET",
+        "status": 200,
+        "validation_only": false
+      },
+      {
+        "method": "POST",
+        "status": 200,
+        "validation_only": true
+      }
+    ]
+  },
+  "performance": {
+    "theme_source_delta_bytes": 24,
+    "new_javascript_css_assets": 0,
+    "dom_replacement_time_ms_samples_before": [
+      0.5,
+      0.40000000037252903
+    ],
+    "dom_replacement_time_ms_samples_after": [
+      0.6000000005587935,
+      0.6000000005587935
+    ],
+    "scope": "Below-fold control; not a measured LCP/INP/CLS or whole-page speed improvement."
+  },
+  "remaining_blockers": [
+    {
+      "id": "SSR-RENDER",
+      "requires": "Authorized isolated Tiendanube rendering of modified pagination, in category/search and intermediate/last pages. Current installation14748767 is published; no write authorized.",
+      "status": "not_executed"
+    },
+    {
+      "id": "CURSOR",
+      "requires": "Real product variant-as-product cursor/page_offset cases; current sampled grid reports vap=false and page_next=null. Do not enable/change catalog to manufacture tests.",
+      "status": "not_available_in_sample"
+    },
+    {
+      "id": "SSR-UX",
+      "requires": "Define nonstale, keyboard-accessible server navigation after native appends, modifier clicks, and no-JS page2+ continuity.",
+      "status": "needs_testable_design"
+    },
+    {
+      "id": "BASELINE-DUPLICATES",
+      "requires": "Investigate occasional four duplicate IDs already present before the button probe; two other catalog samples and the postchange probe had no duplicates. No root cause proven.",
+      "status": "observed_preexisting_in_one_sample"
+    }
+  ],
+  "limitations": [
+    "Browser before/after is an exact DOM tag simulation using native helper, not modified-theme rendering.",
+    "Native check validates files without saving; does not render Twig data/visual behavior.",
+    "No Search Console/indexation, full WCAG, field performance or whole-catalog crawl claims.",
+    "No production push/watch/publish/clone/fork/pull; no commercial writes.",
+    "Parent SEO problem remains unresolved despite the accepted, separate local keyboard correction."
+  ],
+  "evidence_run": "reports/runs/damarbeauty/20261110T163610-pagination-resolution-925f26ee",
+  "theme_changes": {
+    "changed_files": [
+      "snippets/product-list/pagination.tpl"
+    ],
+    "unchanged_files": 470,
+    "files_added": 0,
+    "files_removed": 0,
+    "before_sha256": "c715cc6c77d07dced5cdad6066785142c307b0f3ca3429cf88f5290cf7f2edc2",
+    "after_sha256": "e3bf73e75278b9b024a82092727f586a3e92e4423304fec3d4fb2fe8aa830d2b",
+    "reversal_check_passed": true
+  },
+  "references": [
+    {
+      "url": "https://developers.google.com/search/docs/specialty/ecommerce/pagination-and-incremental-page-loading",
+      "verified_at": "2026-11-10T17:03:57.956948+00:00",
+      "scope": "Sequential crawlable links; no guarantee of indexing."
+    },
+    {
+      "url": "https://tiendanube.dev/themes/classic-themes/theme-features/product-listing",
+      "verified_at": "2026-11-10T17:03:57.956952+00:00",
+      "scope": "Official classic-theme example; not independent certification of Ipanema sectioned runtime."
+    }
+  ]
+}

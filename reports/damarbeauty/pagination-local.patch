@@ -1,0 +1,17 @@
+--- a/snippets/product-list/pagination.tpl
++++ b/snippets/product-list/pagination.tpl
+@@ -10,12 +10,12 @@
+ {% if infinite_scroll %}
+ 	{% if pages.current == 1 and (not pages.is_last or page_next) %}
+ 		<div class="js-load-more pagination-load-more">
+-			<a class="btn btn-primary">
++			<button type="button" class="btn btn-primary">
+ 				{{ 'general.show_more_products' | t }}
+ 				<span class="js-load-more-spinner pagination-load-more-spinner" style="display:none;">
+ 					<svg class="icon-loading icon-inline"><use xlink:href="#spinner-third"/></svg>
+ 				</span>
+-			</a>
++			</button>
+ 		</div>
+ 		<div id="js-infinite-scroll-spinner" class="pagination-spinner" style="display:none">
+ 			<svg class="icon-loading icon-inline"><use xlink:href="#spinner-third"/></svg>

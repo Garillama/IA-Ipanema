@@ -1,8 +1,8 @@
 # IA-Ipanema V2
 
-El [acceso compartido a DevTools y Google](reports/access/README.md) añade permisos por agente, proyecto y tarea para Claude, Codex y CommandCode. Reutiliza QA/SEO existentes, instala solo DevTools MCP fijado y activa las lecturas Google con OAuth autorizado por proyecto.
+El [acceso compartido a DevTools y Google](reports/access/README.md) añade permisos por agente, proyecto y tarea para Claude y Codex; CommandCode conserva historial e integración deshabilitada por política. Reutiliza QA/SEO existentes, instala solo DevTools MCP fijado y activa las lecturas Google con OAuth autorizado por proyecto.
 
-La [orquestación multiagente](reports/orchestration/README.md) coordina Claude Code, Codex y CommandCode con riesgo L1–L4, modelos proporcionales, worktrees y validación central. `python3 tools/ia.py orchestrate doctor` comprueba requisitos. `python3 tools/ia.py orchestrate task "Optimiza el carrusel de categorías en mobile y desktop sin afectar SEO ni rendimiento"` prepara el plan; añade `--execute` para inferencia real y cambios aislados. Entrega diff y evidencia, sin publicar ni escribir en el tema original. [Resultados y límites](reports/orchestration/verification.md).
+La [orquestación multiagente](reports/orchestration/README.md) coordina Claude Code y Codex con riesgo L1–L4, modelos proporcionales, worktrees y validación central. `python3 tools/ia.py orchestrate doctor` comprueba requisitos. `python3 tools/ia.py orchestrate task "Optimiza el carrusel de categorías en mobile y desktop sin afectar SEO ni rendimiento"` prepara el plan; añade `--execute` para inferencia real y cambios aislados. Entrega diff y evidencia, sin publicar ni escribir en el tema original. [Resultados y límites](reports/orchestration/verification.md).
 
 Agente de ingeniería para temas seccionables Ipanema de Tiendanube. Combina instrucciones de trabajo, nueve skills, conocimiento existente y herramientas locales para investigar, preparar cambios, probarlos y registrar evidencia. Necesita el runtime de IA con el que abras esta carpeta; no incluye un modelo ni un servidor de inferencia propio.
 
@@ -135,3 +135,10 @@ La primera ejecución prueba selección, recuperación de referencias y planific
 El CLI no publica ni sincroniza tiendas. watch, push, publish, cambios de catálogo/checkout y operaciones comerciales necesitan autorización específica. Los scripts históricos se conservan, con rutas/runtime portables y destinos nuevos; los renderizadores reconstruyen documentos fechados y no deben usarse como actualización automática del discovery.
 
 La [base original](ipanema-discovery/README.md), sus [hallazgos](ipanema-discovery/11-opportunities/critical-findings.md) y su [cobertura](ipanema-discovery/DISCOVERY-COMPLETENESS-REPORT.md) siguen disponibles. Craft Anything se estudió como metodología en el [análisis original](ipanema-discovery/01-architecture/craft-anything-assessment.md); no se instaló como motor de esta V2.
+
+## Consejo técnico multiagente
+
+El orquestador incorpora deliberación previa para L3/L4 y colaboración total opcional para tareas pequeñas. Consulta [uso, ADR, gates y límites](reports/orchestration/council.md). Reutiliza los mismos proyectos, skills, aislamiento y QA; no publica tiendas.
+El [informe de verificación](reports/orchestration/council-verification.md) separa la estabilización histórica de tres participantes del modo dual actual. El modo dual tiene QA aprobado y dos deliberaciones reales de solo lectura completas, con propuestas, contraste y defensas. Sus ADR permanecen `needs_evidence` y no autorizan implementación. No se publica ni se modifica DaMar Beauty.
+
+El [motor de rendimiento](reports/performance/README.md) incorpora PageSpeed Insights, CrUX y CrUX History mediante el servicio CLI/MCP existente, conserva Lighthouse local y DevTools y separa laboratorio de datos de campo. `python3 tools/ia.py --project damarbeauty performance doctor` comprueba configuración sin red; las consultas exigen permiso de lectura y claves privadas. [ADR y límites](reports/performance/ADR-001.md).

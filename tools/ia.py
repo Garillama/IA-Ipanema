@@ -23,6 +23,8 @@ def cli():
     add_access_parser(sub)
     from ipanema.orchestration.cli import add_parser as add_orchestration_parser
     add_orchestration_parser(sub)
+    from ipanema.performance.cli import add_parser as add_performance_parser
+    add_performance_parser(sub)
     sub.add_parser("doctor")
     projects = sub.add_parser("projects")
     project_sub = projects.add_subparsers(dest="operation", required=True)
@@ -111,6 +113,9 @@ def cli():
         write_json(registry_path, registry, overwrite=True)
         return {"registered": project_id, "remote_connection_checked": False}, 0
     project = Project(project_id=args.project)
+    if args.command == 'performance':
+        from ipanema.performance.cli import execute as performance_execute
+        return performance_execute(project, args)
     if args.command == 'access':
         from ipanema.access.cli import execute as access_execute
         return access_execute(project, args)

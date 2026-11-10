@@ -4,7 +4,7 @@ export function installPerformanceObservers(){
  const clean=value=>{
   if(typeof value!=='string'||!value)return null;
   if(value.startsWith('data:'))return '[inline-resource]';
-  try{const u=new URL(value,location.href);u.username='';u.password='';u.hash='';for(const k of [...u.searchParams.keys()])if(/token|secret|password|auth|session|email|phone|api.?key/i.test(k))u.searchParams.set(k,'[redacted]');return u.href;}catch{return null;}
+  try{const u=new URL(value,location.href);u.username='';u.password='';u.hash='';for(const k of [...u.searchParams.keys()])if(/token|key|secret|password|auth|session|email|phone/i.test(k))u.searchParams.set(k,'[redacted]');return u.href;}catch{return null;}
  };
  const srcset=value=>!value?null:value.split(',').map(part=>{const [url,...descriptor]=part.trim().split(/\s+/);return [clean(url),...descriptor].join(' ');}).join(', ');
  window.__audit={lcp:[],shifts:[],longTasks:[]};
@@ -26,21 +26,25 @@ export function installPerformanceObservers(){
  }
 }
 
+export function sanitizePerformanceValue(value,key=''){
+  const decode=x=>{try{return decodeURIComponent(decodeURIComponent(x));}catch{return x;}};
+  if(/token|api.?key|secret|password|cookie|authorization|session|email|phone|snippet|nodeLabel|headers|postData/i.test(decode(key)))return '[redacted]';
+  if(Array.isArray(value))return value.map(x=>sanitizePerformanceValue(x));
+  if(value&&typeof value==='object')return Object.fromEntries(Object.entries(value).map(([k,v])=>[k,sanitizePerformanceValue(v,k)]));
+  if(typeof value==='string'&&value.startsWith('data:'))return '[inline-resource]';
+  if(typeof value==='string')return value.replace(/https?:\/\/[^\s<>"\]]+/gi,match=>{
+   try{const u=new URL(match);u.username='';u.password='';u.hash='';for(const k of [...u.searchParams.keys()])if(/token|key|secret|password|auth|session|email|phone/i.test(decode(k)))u.searchParams.set(k,'[redacted]');return u.href;}catch{return '[invalid-url]';}
+  });
+  return value;
+
+}
+
 // Do not persist the full LHR: node snippets and URL credentials can contain private data.
 export function lighthouseEvidence(lhr){
  const ids=['lcp-breakdown-insight','lcp-discovery-insight','largest-contentful-paint-element',
   'network-requests','server-response-time','render-blocking-insight','render-blocking-resources',
   'font-display-insight','mainthread-work-breakdown','bootup-time'];
- const sanitize=(value,key='')=>{
-  if(/token|secret|password|cookie|authorization|session|email|phone|snippet|nodeLabel/i.test(key))return '[redacted]';
-  if(Array.isArray(value))return value.map(x=>sanitize(x));
-  if(value&&typeof value==='object')return Object.fromEntries(Object.entries(value).map(([k,v])=>[k,sanitize(v,k)]));
-  if(typeof value==='string'&&/^https?:\/\//i.test(value)){
-   try{const u=new URL(value);u.username='';u.password='';u.hash='';for(const k of [...u.searchParams.keys()])if(/token|secret|password|auth|session|email|phone|api.?key/i.test(k))u.searchParams.set(k,'[redacted]');return u.href;}catch{return '[invalid-url]';}
-  }
-  if(typeof value==='string'&&value.startsWith('data:'))return '[inline-resource]';
-  return value;
- };
+ const sanitize=sanitizePerformanceValue;
  const audits={};const missing=[];
  for(const id of ids){
   const audit=lhr?.audits?.[id];
@@ -93,4 +97,12 @@ export function createNetworkRecorder(cleanUrl=value=>value){
   },
   snapshot(){return records.map(row=>({...row}));}
  };
+}
+
+// Safe observational projection for new repeatable jobs; legacy runner remains compatible.
+export function safeLighthouseReport(lhr){
+ const report={};
+ for(const field of ['requestedUrl','finalUrl','finalDisplayedUrl','fetchTime','lighthouseVersion','configSettings','environment','categories','runWarnings','runtimeError'])report[field]=lhr[field];
+ report.audits=Object.fromEntries(Object.entries(lhr.audits||{}).map(([id,a])=>[id,Object.fromEntries(['id','title','description','score','scoreDisplayMode','numericValue','numericUnit','displayValue','details','errorMessage'].filter(k=>k in a).map(k=>[k,a[k]]))]));
+ return sanitizePerformanceValue(report);
 }

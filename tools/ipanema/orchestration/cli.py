@@ -2,7 +2,7 @@
 from pathlib import Path
 import shutil
 
-from ..core import IpanemaError, Project, now, read_json, write_json
+from ..core import IpanemaError, Project, now, read_json, write_json, reject_secrets
 from .planner import make_plan
 from .engine import execute,worker
 
@@ -14,9 +14,17 @@ def add_parser(sub):
     plan=commands.add_parser('plan');plan.add_argument('request')
     plan.add_argument('--file',action='append');plan.add_argument('--scope',choices=['theme','workspace'],default='theme')
     plan.add_argument('--read-only',action='store_true')
+    plan.add_argument('--implementer',choices=['claude','codex'],default='codex')
+    plan.add_argument('--council',choices=['auto','full','off'],default='auto')
+    plan.add_argument('--council-rounds',type=int,choices=[1,2],default=2)
+    plan.add_argument('--council-checks',type=Path,help='JSON de predicados/QA del controlador; nunca comandos de modelos')
     task=commands.add_parser('task',help='Petición natural: plan y ejecución opcional')
     task.add_argument('request');task.add_argument('--file',action='append');task.add_argument('--scope',choices=['theme','workspace'],default='theme')
     task.add_argument('--read-only',action='store_true');task.add_argument('--execute',action='store_true')
+    task.add_argument('--implementer',choices=['claude','codex'],default='codex')
+    task.add_argument('--council',choices=['auto','full','off'],default='auto')
+    task.add_argument('--council-rounds',type=int,choices=[1,2],default=2)
+    task.add_argument('--council-checks',type=Path)
     run=commands.add_parser('run');run.add_argument('plan',type=Path);run.add_argument('--execute',action='store_true')
     status=commands.add_parser('status');status.add_argument('run',type=Path)
     smoke=commands.add_parser('smoke');smoke.add_argument('--agent',choices=['claude','codex','commandcode'],required=True)
@@ -28,10 +36,20 @@ def main(project,args):
     from .recovery import health_check
     op=args.orchestration_command
     if op=='doctor':
-        return {'project':project.id,'at':now(),'sandbox':probe(),'runtimes':{name:health_check(name) for name in ('claude','codex','commandcode')},
+        from .adapters import agent_policy
+        return {'project':project.id,'at':now(),'sandbox':probe(),'participation':agent_policy(),'runtimes':{name:health_check(name) for name in ('claude','codex','commandcode')},
                 'no_unsafe_fallback':True,'production_executor':False},0
     if op in ('plan','task'):
-        plan=make_plan(project,args.request,files=args.file,scope=args.scope,read_only=args.read_only)
+        plan=make_plan(project,args.request,files=args.file,scope=args.scope,read_only=args.read_only,
+                       council_mode=args.council,council_rounds=args.council_rounds,implementation_agent=args.implementer)
+        if args.council_checks:
+            if args.council_checks.stat().st_size>100_000:raise IpanemaError('Configuración de comprobaciones demasiado grande.')
+            recipes=read_json(args.council_checks);reject_secrets(recipes)
+            if not isinstance(recipes,dict) or set(recipes)-{'before','after','required_constraints'}:
+                raise IpanemaError('Usa before/after/required_constraints en comprobaciones del consejo.')
+            plan['council_checks']=recipes.get('before',[])
+            plan['council_post_checks']=recipes.get('after',[])
+            plan['council_required_constraints']=sorted(set(plan['council_required_constraints'])|set(recipes.get('required_constraints',[])))
         path=project.new_run('orchestration-plan')/'plan.json';write_json(path,plan)
         if op=='task' and args.execute:
             result=execute(project,plan,authorize=True)

@@ -1,0 +1,1375 @@
+{
+  "at": "2026-11-10T18:33:56.241981+00:00",
+  "status": "local_verified_google_live_pending",
+  "scope": "Local adapter implementation; not live Google certification",
+  "council": {
+    "run": "reports/runs/ipanema/20261110T180852-performance-integration-council-c15673d7",
+    "invocations": [
+      {
+        "agent": "claude",
+        "phase": "proposal",
+        "valid": true,
+        "response": {
+          "decision": "proposed",
+          "summary": "Paquete performance/ dedicado, solo stdlib, con transporte de clave API y endpoints oficiales fijos para PSI y CrUX. Reutiliza authorize_url, _NoRedirect, Policy y redact. Conserva Lighthouse y DevTools sin cambios ni temas. Aprobación solo de arquitectura local sujeta al QA del controlador. Nada medido.",
+          "changes": [],
+          "evidence": [
+            "source:integration-context.json",
+            "source:tools/ipanema/seo/adapters.py",
+            "source:tools/ipanema/access/policy.py",
+            "source:tools/ipanema/access/gateway.py",
+            "source:tools/ipanema/compare.py",
+            "source:tools/lighthouse_audit.mjs"
+          ],
+          "analysis": {
+            "problem": "Integrar PageSpeed Insights primero y CrUX después como evidencia de rendimiento, conservando Lighthouse local y DevTools MCP, sin tocar temas ni producción y sin llamadas reales sin clave ni permiso.",
+            "cause": "OfficialREST es específico de OAuth Bearer y de endpoints GSC/GA/Merchant. PSI y CrUX usan clave API, endpoints fijos y semánticas distintas (laboratorio frente a campo, periodos de colección). compare.metrics solo compara JSON de Lighthouse local sin distinguir fuente. Policy y Gateway no definen capacidades de rendimiento.",
+            "recommendation": "claude-dedicated-key-transport",
+            "evidence_refs": [
+              "source:tools/ipanema/seo/adapters.py",
+              "source:tools/ipanema/access/policy.py",
+              "source:tools/ipanema/access/gateway.py",
+              "source:tools/ipanema/compare.py",
+              "source:tools/lighthouse_audit.mjs",
+              "source:tools/performance_evidence.mjs",
+              "source:integration-context.json",
+              "source:tools/ipanema/core.py"
+            ],
+            "hypotheses": [
+              "Un transporte dedicado de clave API con endpoints fijos es más seguro que generalizar OfficialREST y evita mezclar credenciales OAuth y de clave.",
+              "Reutilizar authorize_url, _NoRedirect, el tope de 4 MB, redact y Policy.stop/consume cubre la mayoría de los controles sin duplicar código.",
+              "La viabilidad en vivo (clave, cuota, datos de campo de la tienda) es unknown: no se midió.",
+              "Un loadingExperience nulo o parcial en PSI debe tratarse como datos insuficientes, nunca como cero."
+            ],
+            "native_components": [
+              "authorize_url",
+              "_NoRedirect",
+              "Policy.consume/stop",
+              "redact",
+              "tools/lighthouse_audit.mjs",
+              "DevTools MCP",
+              "compare.metrics"
+            ],
+            "risks": [
+              "La clave API en query string puede filtrarse por logs o excepciones si no se redacta antes de registrar.",
+              "La cuota diaria local no coincide con la cuota real de Google.",
+              "Los periodos de colección de CrUX pueden confundirse con efecto de un despliegue.",
+              "Cambios de contrato de Google no cubiertos por fixtures simuladas.",
+              "Sin clave ni datos de campo, el primer objetivo real queda pendiente."
+            ],
+            "tests": [
+              "Fixtures simuladas PSI y CrUX con etiqueta explícita de simulación",
+              "Verificación de redacción y de ausencia de claves en artefactos",
+              "Comparación solo entre perfiles idénticos",
+              "qa --suite quick del controlador"
+            ],
+            "files": [
+              "tools/ipanema/performance/cli.py",
+              "tools/ipanema/performance/service.py",
+              "tools/ipanema/performance/providers.py",
+              "tools/ipanema/performance/model.py"
+            ],
+            "impacts": {
+              "seo": "Ninguno directo; aporta evidencia CWV sin demostrar indexación ni ranking.",
+              "performance": "Solo mide; PSI es laboratorio más campo opcional, y no se infiere INP a partir de TBT.",
+              "responsive": "Sin cambios; los perfiles móvil y escritorio se comparan por separado.",
+              "accessibility": "Sin cambios; la categoría se informa solo si PSI la devuelve.",
+              "uiux": "Sin cambios en el tema.",
+              "commerce": "Sin impacto; solo lecturas del storefront autorizado."
+            },
+            "confidence": 0.7,
+            "alternatives": [
+              {
+                "id": "claude-dedicated-key-transport",
+                "description": "Paquete tools/ipanema/performance/ (cli, service, providers, model), solo stdlib. providers: transporte de clave API con endpoints oficiales fijos (PSI runPagespeed con category repetido; CrUX queryRecord y queryHistoryRecord), reutilizando _NoRedirect, tope de 4 MB y authorize_url. Clave solo por nombre de variable de entorno en google.performance; sin argumento CLI; sin clave devuelve unavailable sin caer a OAuth ni a anónimo. service: capacidad nueva en Policy, 403/429 detienen y persisten, reintento acotado solo en 5xx/red, cuota diaria local persistente, caché con TTL validando proyecto/permiso/petición antes de leer. model: evidencia saneada inmutable separada de hechos normalizados; URL y origen CrUX por separado; historial con periodos y bins nulos preservados. Comparación por fuente+URL+dispositivo+categorías+locale+versiones. Lighthouse local se mantiene con trabajos repetibles, mediana y rango.",
+                "constraints": {
+                  "functional": {
+                    "status": "pass",
+                    "evidence_refs": [
+                      "source:integration-context.json"
+                    ]
+                  },
+                  "security": {
+                    "status": "pass",
+                    "evidence_refs": [
+                      "source:tools/ipanema/seo/adapters.py",
+                      "source:tools/ipanema/access/policy.py",
+                      "source:tools/ipanema/core.py"
+                    ]
+                  },
+                  "compatibility": {
+                    "status": "pass",
+                    "evidence_refs": [
+                      "source:tools/ipanema/access/gateway.py",
+                      "source:tools/lighthouse_audit.mjs"
+                    ]
+                  },
+                  "native_reuse": {
+                    "status": "pass",
+                    "evidence_refs": [
+                      "source:tools/ipanema/seo/adapters.py",
+                      "source:tools/ipanema/compare.py",
+                      "source:tools/lighthouse_audit.mjs"
+                    ]
+                  },
+                  "seo": {
+                    "status": "unknown",
+                    "evidence_refs": []
+                  },
+                  "performance": {
+                    "status": "unknown",
+                    "evidence_refs": []
+                  },
+                  "accessibility": {
+                    "status": "unknown",
+                    "evidence_refs": []
+                  },
+                  "responsive": {
+                    "status": "unknown",
+                    "evidence_refs": []
+                  },
+                  "maintainability": {
+                    "status": "pass",
+                    "evidence_refs": [
+                      "source:tools/ipanema/seo/adapters.py"
+                    ]
+                  },
+                  "reversibility": {
+                    "status": "pass",
+                    "evidence_refs": [
+                      "source:integration-context.json"
+                    ]
+                  },
+                  "complexity": {
+                    "status": "unknown",
+                    "evidence_refs": []
+                  },
+                  "development_cost": {
+                    "status": "unknown",
+                    "evidence_refs": []
+                  },
+                  "execution_cost": {
+                    "status": "unknown",
+                    "evidence_refs": []
+                  }
+                },
+                "files": [
+                  "tools/ipanema/performance/cli.py",
+                  "tools/ipanema/performance/service.py",
+                  "tools/ipanema/performance/providers.py",
+                  "tools/ipanema/performance/model.py",
+                  "tools/ipanema/access/policy.py",
+                  "tools/ipanema/compare.py"
+                ],
+                "tests": [
+                  "Fixtures simuladas PSI completa/parcial, category repetido, errores y runtimeError",
+                  "CrUX URL y origen separados, datos insuficientes, historial con bins y periodos nulos",
+                  "Clave codificada en query redactada, sin redirecciones con credenciales, 403/429 sin reintentos",
+                  "Sin caché entre proyectos, archivos malformados y límites de tamaño/cuota",
+                  "Sin clave o permiso: unavailable y cero llamadas de red"
+                ]
+              },
+              {
+                "id": "claude-generalize-officialrest",
+                "description": "Extender OfficialREST con un modo de clave API y los endpoints PSI/CrUX, reutilizando la clase existente en lugar de un transporte nuevo.",
+                "constraints": {
+                  "functional": {
+                    "status": "pass",
+                    "evidence_refs": [
+                      "source:tools/ipanema/seo/adapters.py"
+                    ]
+                  },
+                  "security": {
+                    "status": "unknown",
+                    "evidence_refs": [
+                      "source:tools/ipanema/seo/adapters.py"
+                    ]
+                  },
+                  "compatibility": {
+                    "status": "unknown",
+                    "evidence_refs": [
+                      "source:tools/ipanema/seo/adapters.py"
+                    ]
+                  },
+                  "native_reuse": {
+                    "status": "pass",
+                    "evidence_refs": [
+                      "source:tools/ipanema/seo/adapters.py"
+                    ]
+                  },
+                  "seo": {
+                    "status": "unknown",
+                    "evidence_refs": []
+                  },
+                  "performance": {
+                    "status": "unknown",
+                    "evidence_refs": []
+                  },
+                  "accessibility": {
+                    "status": "unknown",
+                    "evidence_refs": []
+                  },
+                  "responsive": {
+                    "status": "unknown",
+                    "evidence_refs": []
+                  },
+                  "maintainability": {
+                    "status": "unknown",
+                    "evidence_refs": []
+                  },
+                  "reversibility": {
+                    "status": "pass",
+                    "evidence_refs": [
+                      "source:integration-context.json"
+                    ]
+                  },
+                  "complexity": {
+                    "status": "unknown",
+                    "evidence_refs": []
+                  },
+                  "development_cost": {
+                    "status": "unknown",
+                    "evidence_refs": []
+                  },
+                  "execution_cost": {
+                    "status": "unknown",
+                    "evidence_refs": []
+                  }
+                },
+                "files": [
+                  "tools/ipanema/seo/adapters.py"
+                ],
+                "tests": [
+                  "Regresión de GSC/GA/Merchant tras extender OfficialREST",
+                  "Clave API nunca enviada como Bearer ni a hosts OAuth"
+                ]
+              }
+            ]
+          }
+        },
+        "model": {
+          "model": "claude-sonnet-5-5",
+          "effort": "medium",
+          "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+          "verified_at": "2026-11-08"
+        },
+        "duration_s": 48.731,
+        "usage": {
+          "provider_reported": {
+            "total_cost_usd": 0.287506,
+            "duration_ms": 46186,
+            "input_tokens": 4,
+            "cache_creation_input_tokens": 52029,
+            "cache_read_input_tokens": 50320,
+            "output_tokens": 7435
+          },
+          "measured_cost_available": true,
+          "estimated_cost": null
+        }
+      },
+      {
+        "agent": "codex",
+        "phase": "proposal",
+        "valid": true,
+        "response": {
+          "decision": "proposed",
+          "summary": "Propongo un servicio compartido con transporte dedicado para claves API: PageSpeed primero, CrUX después. Conserva Lighthouse y DevTools. La propuesta solo define arquitectura local; faltan implementación, QA del controlador y validación real autorizada.",
+          "changes": [],
+          "evidence": [
+            "El contexto suministrado documenta contratos oficiales y exige separar laboratorio, campo e historial.",
+            "OfficialREST incorpora autenticación Bearer OAuth; no representa directamente el contrato de claves API propuesto.",
+            "Policy ya dispone de permisos, cuotas y paradas persistentes, pero enumera capacidades y proveedores sin PSI ni CrUX.",
+            "Gateway permite centralizar acceso MCP, aunque actualmente deriva los proveedores REST hacia credenciales OAuth.",
+            "compare.metrics compara algunos campos que pueden faltar en ambos documentos, sin exigir identidad completa de la fuente.",
+            "lighthouse_audit.mjs guarda LHR completo y utiliza destinos repetibles; requiere adaptación para evidencia saneada e inmutable.",
+            "performance_evidence.mjs ofrece una proyección saneada de Lighthouse reutilizable, pendiente de pruebas específicas para PSI."
+          ],
+          "analysis": {
+            "problem": "Incorporar PageSpeed y posteriormente CrUX al agente sin modificar temas, perder diagnóstico local ni presentar observaciones de laboratorio como experiencia real o causalidad demostrada.",
+            "cause": "No existen los módulos performance suministrados como candidatos. Los adaptadores actuales atienden OAuth y DevTools; permisos, gateway, comparación y persistencia necesitan contratos específicos para las nuevas fuentes.",
+            "recommendation": "codex-performance-service",
+            "evidence_refs": [
+              "source:integration-context.json",
+              "source:tools/ia.py",
+              "source:tools/ipanema/access/policy.py",
+              "source:tools/ipanema/access/gateway.py",
+              "source:tools/ipanema/seo/adapters.py",
+              "source:tools/ipanema/compare.py",
+              "source:tools/lighthouse_audit.mjs",
+              "source:tools/performance_evidence.mjs"
+            ],
+            "hypotheses": [
+              "Un servicio independiente del cliente puede compartir validación, cuotas, caché y normalización entre CLI y MCP; su funcionamiento aún no está probado.",
+              "Un transporte dedicado evita mezclar claves API con OAuth y permite conservar intactos los contratos de GSC.",
+              "Los fixtures pueden validar la arquitectura sin credenciales reales, pero no demostrar conectividad, cobertura CrUX ni costes efectivos."
+            ],
+            "native_components": [
+              "Project: selección, referencias de entorno en google.performance y directorios de ejecución.",
+              "authorize_url: comprobación de origen, complementada con validación específica de destinos y parámetros.",
+              "Policy: permisos ligados a proyecto/tarea/agente, bloqueo, cuotas y paradas persistentes.",
+              "Gateway: fachada MCP del mismo servicio usado por CLI; las claves permanecen en el controlador.",
+              "ProviderError y patrón de transporte inyectable, sin reutilizar autenticación OAuth.",
+              "lighthouseEvidence: proyección saneada, con revisión específica para respuestas PSI.",
+              "Runner Lighthouse existente y DevTools conservados.",
+              "Semántica de comparación existente como referencia, reforzada en performance/model."
+            ],
+            "risks": [
+              "Condición obligatoria: validar proyecto, origen, capacidad y solicitud antes de consultar caché o resolver claves; ausencia de clave produce unavailable sin OAuth ni petición anónima.",
+              "Condición obligatoria: endpoints fijos, sin redirecciones, respuestas acotadas y errores sin cuerpos sensibles. 403/429 persisten parada sin reintentos; otros reintentos son limitados y consumen presupuesto.",
+              "La cuota diaria persistente debe agregarse por proyecto/proveedor y coordinarse bajo bloqueo con cuotas por tarea; cambiar de agente o usar caché no debe eludir permisos.",
+              "La caché debe vincular proyecto, proveedor, contrato, destino y opciones normalizadas; TTL, archivos malformados y permisos inseguros deben tratarse explícitamente.",
+              "Conservar evidencia saneada e inmutable y hechos normalizados con procedencia y hashes. No persistir respuestas originales privadas, claves, snippets ni errores libres del proveedor.",
+              "Comparar laboratorio solo con identidad completa: fuente, URL efectiva, dispositivo, categorías, locale, versiones y condiciones. Campos desconocidos no equivalen a perfiles iguales.",
+              "CrUX debe preservar identidad devuelta, granularidad URL/origen, formulario, periodo, unidades, histogramas y nulos; no aplicar fallback de origen silencioso ni atribuir periodos solapados a un despliegue.",
+              "Faltan recibos de QA, revisión independiente y verificación de consumidores del runner. La reversión prevista retira módulos y registros propios mediante diff revisado; no elimina evidencia histórica."
+            ],
+            "tests": [
+              "Pendiente: fixtures simulados PSI completos/parciales, parámetros repetidos, runtimeError, categorías y métricas ausentes; ningún parcial debe convertirse en éxito completo.",
+              "Pendiente: CrUX URL/origen excluyentes, identidad devuelta, datos insuficientes, form factors y métricas; History con periodos ordenados, nulos y bins incompletos.",
+              "Pendiente: orígenes ajenos, consultas sensibles codificadas, claves ausentes, redacción de artefactos, endpoints fijos y rechazo de redirecciones.",
+              "Pendiente: paradas persistentes 403/429 sin reintento, presupuestos diarios y por tarea, concurrencia y reintentos acotados con transporte simulado.",
+              "Pendiente: caché entre proyectos, cambios de permisos/configuración, TTL, archivos corruptos y validación previa a cualquier hit.",
+              "Pendiente: paridad CLI/MCP y denegación de capacidades no otorgadas; regresión de GSC y DevTools.",
+              "Pendiente: trabajos Lighthouse repetibles con muestras individuales saneadas, mediana/rango e identidad completa; comparación bloqueada ante versiones o condiciones desconocidas.",
+              "Pendiente: QA del repositorio y revisión independiente del diff. Sin llamadas reales durante esta auditoría; validación externa posterior exige autorización, origen y clave disponibles."
+            ],
+            "files": [
+              "tools/ipanema/performance/cli.py",
+              "tools/ipanema/performance/service.py",
+              "tools/ipanema/performance/providers.py",
+              "tools/ipanema/performance/model.py",
+              "tools/ia.py",
+              "tools/ipanema/access/policy.py",
+              "tools/ipanema/access/gateway.py",
+              "tools/lighthouse_audit.mjs"
+            ],
+            "impacts": {
+              "seo": "Añade observaciones técnicas; no demuestra indexación ni mejora de posicionamiento.",
+              "performance": "Separa PSI/Lighthouse de CrUX. No promete mejoras; TBT permanece distinto de INP.",
+              "responsive": "Sin cambios de tema; estrategias y form factors no sustituyen QA responsive.",
+              "accessibility": "Conserva observaciones Lighthouse; no certifica conformidad AA.",
+              "uiux": "La salida debe identificar fuente, fecha, identidad, datos parciales y limitaciones sin convertir hipótesis en hallazgos.",
+              "commerce": "Sin cambios de catálogo, formularios, carrito, checkout ni publicación."
+            },
+            "confidence": 0.8,
+            "alternatives": [
+              {
+                "id": "codex-performance-service",
+                "description": "Crear cli/service/providers/model con stdlib. providers usa endpoints oficiales fijos y claves obtenidas de referencias de entorno; service centraliza permisos, presupuesto, paradas, caché y evidencia para CLI/MCP. Fase 1: PSI y conservación de Lighthouse/DevTools. Fase 2: CrUX actual e histórico, con URL/origen y periodos explícitos. No extender OfficialREST OAuth para estas claves.",
+                "constraints": {
+                  "functional": {
+                    "status": "unknown",
+                    "evidence_refs": [
+                      "source:integration-context.json",
+                      "source:tools/ia.py"
+                    ]
+                  },
+                  "security": {
+                    "status": "unknown",
+                    "evidence_refs": [
+                      "source:tools/ipanema/access/policy.py",
+                      "source:tools/ipanema/access/gateway.py",
+                      "source:tools/ipanema/seo/adapters.py"
+                    ]
+                  },
+                  "compatibility": {
+                    "status": "unknown",
+                    "evidence_refs": [
+                      "source:tools/lighthouse_audit.mjs",
+                      "source:tools/ipanema/access/gateway.py"
+                    ]
+                  },
+                  "native_reuse": {
+                    "status": "pass",
+                    "evidence_refs": [
+                      "source:tools/ipanema/access/policy.py",
+                      "source:tools/ipanema/seo/adapters.py",
+                      "source:tools/performance_evidence.mjs"
+                    ]
+                  },
+                  "seo": {
+                    "status": "unknown",
+                    "evidence_refs": []
+                  },
+                  "performance": {
+                    "status": "unknown",
+                    "evidence_refs": []
+                  },
+                  "accessibility": {
+                    "status": "unknown",
+                    "evidence_refs": []
+                  },
+                  "responsive": {
+                    "status": "unknown",
+                    "evidence_refs": []
+                  },
+                  "maintainability": {
+                    "status": "unknown",
+                    "evidence_refs": []
+                  },
+                  "reversibility": {
+                    "status": "unknown",
+                    "evidence_refs": []
+                  },
+                  "complexity": {
+                    "status": "unknown",
+                    "evidence_refs": []
+                  },
+                  "development_cost": {
+                    "status": "unknown",
+                    "evidence_refs": []
+                  },
+                  "execution_cost": {
+                    "status": "unknown",
+                    "evidence_refs": []
+                  }
+                },
+                "files": [
+                  "tools/ipanema/performance/cli.py",
+                  "tools/ipanema/performance/service.py",
+                  "tools/ipanema/performance/providers.py",
+                  "tools/ipanema/performance/model.py",
+                  "tools/ia.py",
+                  "tools/ipanema/access/policy.py",
+                  "tools/ipanema/access/gateway.py",
+                  "tools/lighthouse_audit.mjs"
+                ],
+                "tests": [
+                  "Pendientes: fixtures PSI completos/parciales, categorías repetidas, estrategias, runtimeError y versiones ausentes.",
+                  "Pendientes: aislamiento CLI/MCP, permisos, secretos, cuotas, caché, paradas y contratos CrUX."
+                ]
+              }
+            ]
+          }
+        },
+        "model": {
+          "model": "gpt-6.1-sol",
+          "effort": "medium",
+          "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+          "verified_at": "2026-11-08"
+        },
+        "duration_s": 65.662,
+        "usage": {
+          "provider_reported": {
+            "input_tokens": 43249,
+            "cached_input_tokens": 0,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 2497,
+            "reasoning_output_tokens": 251
+          },
+          "measured_cost_available": false,
+          "estimated_cost": null
+        }
+      },
+      {
+        "agent": "claude",
+        "phase": "contrast",
+        "valid": true,
+        "response": {
+          "decision": "changes_requested",
+          "summary": "Ambas propuestas coinciden en un servicio performance/ con transporte dedicado de clave API, sin extender OfficialREST. Prefiero codex-performance-service (servicio compartido CLI/MCP, dos fases), con condiciones previas a implementar: capacidades en Policy, redacción de la clave, caché validada e identidad CrUX. Nada medido; solo arquitectura local.",
+          "changes": [],
+          "evidence": [
+            "source:integration-context.json",
+            "source:tools/ipanema/access/policy.py",
+            "source:tools/ipanema/access/gateway.py",
+            "source:tools/ipanema/seo/adapters.py",
+            "source:tools/ipanema/compare.py",
+            "source:tools/lighthouse_audit.mjs",
+            "source:tools/performance_evidence.mjs"
+          ],
+          "objections": [
+            {
+              "id": "claude-obj-1",
+              "alternative_id": "claude-generalize-officialrest",
+              "category": "security",
+              "severity": "high",
+              "claim": "OfficialREST es Bearer OAuth con URLs GSC/GA/Merchant fijas en código. Añadir un modo de clave API arriesga enviar la clave como Bearer, mezclar credenciales y regresionar GSC. Debe descartarse.",
+              "status": "open",
+              "evidence_refs": [
+                "source:tools/ipanema/seo/adapters.py"
+              ],
+              "resolution_evidence_refs": []
+            },
+            {
+              "id": "claude-obj-2",
+              "alternative_id": "codex-performance-service",
+              "category": "security",
+              "severity": "high",
+              "claim": "La clave PSI/CrUX viaja en query string. El transporte debe redactarla, también codificada, antes de cualquier excepción, log o artefacto. safe_url y redact solo cubren parte de estos casos y no hay pruebas definidas.",
+              "status": "open",
+              "evidence_refs": [
+                "source:tools/ipanema/core.py",
+                "source:tools/ipanema/seo/adapters.py"
+              ],
+              "resolution_evidence_refs": []
+            },
+            {
+              "id": "claude-obj-3",
+              "alternative_id": "codex-performance-service",
+              "category": "architecture",
+              "severity": "medium",
+              "claim": "Policy.CAPABILITIES y stop_path solo admiten gsc/analytics/merchant/devtools, y consume deriva el proveedor del prefijo del nombre de herramienta. Hay que definir capacidades psi/crux y su stop sin alterar los permisos existentes. La propuesta no lo especifica.",
+              "status": "open",
+              "evidence_refs": [
+                "source:tools/ipanema/access/policy.py",
+                "source:tools/ipanema/access/gateway.py"
+              ],
+              "resolution_evidence_refs": []
+            },
+            {
+              "id": "claude-obj-4",
+              "alternative_id": "codex-performance-service",
+              "category": "architecture",
+              "severity": "medium",
+              "claim": "compare.metrics solo exige igualdad de profile/page/config/lighthouse_version/network_policy, sin fuente, locale, Chrome ni periodo de colección. Los campos ausentes en ambos lados pasan como iguales (None==None). La comparación debe vivir en performance/model con identidad completa y bloquear ante desconocidos.",
+              "status": "open",
+              "evidence_refs": [
+                "source:tools/ipanema/compare.py"
+              ],
+              "resolution_evidence_refs": []
+            },
+            {
+              "id": "claude-obj-5",
+              "alternative_id": "codex-performance-service",
+              "category": "architecture",
+              "severity": "low",
+              "claim": "lighthouse_audit.mjs persiste el LHR completo con nodos y URLs sin sanear. Los trabajos repetibles deben usar lighthouseEvidence de performance_evidence.mjs para evidencia nueva. La propuesta cita ambos archivos sin decidir cuál prevalece.",
+              "status": "open",
+              "evidence_refs": [
+                "source:tools/lighthouse_audit.mjs",
+                "source:tools/performance_evidence.mjs"
+              ],
+              "resolution_evidence_refs": []
+            }
+          ],
+          "preferred_alternative": "codex-performance-service",
+          "questions": [
+            {
+              "id": "claude-q1",
+              "to_agent": "codex",
+              "alternative_id": "codex-performance-service",
+              "question": "¿Cómo evitas que el servicio compartido entregue la clave al worker vía MCP? Concreta si la clave se resuelve solo en el controlador (gateway) y qué campos de la respuesta saneada se exponen. Cita la fuente que respalda ese límite.",
+              "evidence_refs": [
+                "source:tools/ipanema/access/gateway.py"
+              ]
+            },
+            {
+              "id": "claude-q2",
+              "to_agent": "codex",
+              "alternative_id": "codex-performance-service",
+              "question": "¿Qué capacidades nuevas añadirías a Policy.CAPABILITIES (nombres exactos) y cómo agregarías la cuota diaria por proyecto/proveedor bajo el mismo lock sin romper consume por tarea?",
+              "evidence_refs": [
+                "source:tools/ipanema/access/policy.py"
+              ]
+            },
+            {
+              "id": "claude-q3",
+              "to_agent": "codex",
+              "alternative_id": "codex-performance-service",
+              "question": "Para CrUX, ¿rechazas el fallback silencioso de URL a origen y cómo representas en model la identidad devuelta y los periodos solapados del History API? Indica qué campo del contexto de integración lo respalda.",
+              "evidence_refs": [
+                "source:integration-context.json"
+              ]
+            }
+          ]
+        },
+        "model": {
+          "model": "claude-sonnet-5-5",
+          "effort": "medium",
+          "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+          "verified_at": "2026-11-08"
+        },
+        "duration_s": 30.958,
+        "usage": {
+          "provider_reported": {
+            "total_cost_usd": 0.269715,
+            "duration_ms": 26967,
+            "input_tokens": 4,
+            "cache_creation_input_tokens": 56089,
+            "cache_read_input_tokens": 54810,
+            "output_tokens": 3987
+          },
+          "measured_cost_available": true,
+          "estimated_cost": null
+        }
+      },
+      {
+        "agent": "codex",
+        "phase": "contrast",
+        "valid": true,
+        "response": {
+          "decision": "changes_requested",
+          "summary": "Ambas propuestas coinciden en el transporte dedicado y el servicio compartido. Mantengo codex-performance-service: la alternativa de Claude necesita concretar la integración CLI/MCP y corregir las garantías sobre Lighthouse y comparación. Viabilidad real, seguridad ejecutada y costes: unknown; solo se evalúa arquitectura local.",
+          "changes": [],
+          "evidence": [
+            "source:tools/ia.py",
+            "source:tools/ipanema/access/gateway.py",
+            "source:tools/ipanema/access/policy.py",
+            "source:tools/ipanema/seo/adapters.py",
+            "source:tools/ipanema/compare.py",
+            "source:tools/lighthouse_audit.mjs",
+            "source:tools/performance_evidence.mjs",
+            "source:integration-context.json"
+          ],
+          "objections": [
+            {
+              "id": "codex-obj-integracion",
+              "alternative_id": "claude-dedicated-key-transport",
+              "category": "integración",
+              "severity": "high",
+              "claim": "El alcance de archivos omite tools/ia.py y access/gateway.py. El CLI necesita registrar performance y Gateway actualmente conduce los proveedores distintos de DevTools hacia OAuth. Añadir capacidades a Policy no conecta por sí solo el servicio compartido ni evita esa ruta.",
+              "status": "open",
+              "evidence_refs": [
+                "source:tools/ia.py",
+                "source:tools/ipanema/access/gateway.py",
+                "source:tools/ipanema/access/policy.py"
+              ],
+              "resolution_evidence_refs": []
+            },
+            {
+              "id": "codex-obj-lighthouse",
+              "alternative_id": "claude-dedicated-key-transport",
+              "category": "evidencia",
+              "severity": "high",
+              "claim": "Conservar Lighthouse sin cambios no satisface la evidencia saneada e inmutable ni los trabajos repetibles con mediana/rango: el runner suministrado guarda LHR completo, sobrescribe destinos por prefijo y ejecuta una muestra por dispositivo. Debe concretarse una adaptación o una envoltura que cubra esas diferencias.",
+              "status": "open",
+              "evidence_refs": [
+                "source:tools/lighthouse_audit.mjs",
+                "source:tools/performance_evidence.mjs",
+                "source:integration-context.json"
+              ],
+              "resolution_evidence_refs": []
+            },
+            {
+              "id": "codex-obj-comparacion",
+              "alternative_id": "claude-dedicated-key-transport",
+              "category": "validez de comparación",
+              "severity": "medium",
+              "claim": "La identidad propuesta para comparar omite Chrome y condiciones de caché, red y CPU exigidas por el contexto. compare.metrics permite igualdad entre campos ausentes y carece de identidad de fuente; reutilizarlo exige rechazar comparaciones cuyos campos obligatorios sean unknown.",
+              "status": "open",
+              "evidence_refs": [
+                "source:tools/ipanema/compare.py",
+                "source:integration-context.json"
+              ],
+              "resolution_evidence_refs": []
+            },
+            {
+              "id": "codex-obj-garantias",
+              "alternative_id": "claude-dedicated-key-transport",
+              "category": "calibración de evidencia",
+              "severity": "low",
+              "claim": "Los estados pass de seguridad y compatibilidad exceden lo demostrado por las fuentes: estas describen componentes existentes, pero no prueban los módulos nuevos, la paridad CLI/MCP ni la ausencia de filtraciones. Deben distinguirse reutilización prevista y comportamiento verificado.",
+              "status": "open",
+              "evidence_refs": [
+                "source:tools/ipanema/access/gateway.py",
+                "source:tools/ipanema/seo/adapters.py",
+                "source:integration-context.json"
+              ],
+              "resolution_evidence_refs": []
+            }
+          ],
+          "preferred_alternative": "codex-performance-service",
+          "questions": [
+            {
+              "id": "codex-q-integracion",
+              "to_agent": "claude",
+              "alternative_id": "claude-dedicated-key-transport",
+              "question": "En access/gateway.py, Gateway.call deriva los proveedores no DevTools hacia OAuth. ¿Qué cambio de despacho propones para invocar el mismo servicio desde CLI y MCP, y dónde se comprobarán permisos, paradas y presupuestos antes de consultar caché o claves?",
+              "evidence_refs": [
+                "source:tools/ipanema/access/gateway.py",
+                "source:tools/ipanema/access/policy.py",
+                "source:tools/ia.py"
+              ]
+            },
+            {
+              "id": "codex-q-lighthouse",
+              "to_agent": "claude",
+              "alternative_id": "claude-dedicated-key-transport",
+              "question": "tools/lighthouse_audit.mjs persiste el LHR completo y una muestra por dispositivo. ¿Cómo corriges tu compromiso de conservarlo sin cambios para obtener muestras saneadas e inmutables, mediana/rango y compatibilidad con sus consumidores?",
+              "evidence_refs": [
+                "source:tools/lighthouse_audit.mjs",
+                "source:tools/performance_evidence.mjs"
+              ]
+            },
+            {
+              "id": "codex-q-comparacion",
+              "to_agent": "claude",
+              "alternative_id": "claude-dedicated-key-transport",
+              "question": "Dado que compare.metrics acepta campos ausentes iguales, ¿qué identidad mínima exigirás y qué resultado devolverás cuando PSI no proporcione Chrome o las condiciones necesarias para una comparación válida?",
+              "evidence_refs": [
+                "source:tools/ipanema/compare.py",
+                "source:integration-context.json"
+              ]
+            }
+          ]
+        },
+        "model": {
+          "model": "gpt-6.1-sol",
+          "effort": "medium",
+          "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+          "verified_at": "2026-11-08"
+        },
+        "duration_s": 42.663,
+        "usage": {
+          "provider_reported": {
+            "input_tokens": 46232,
+            "cached_input_tokens": 0,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 1316,
+            "reasoning_output_tokens": 52
+          },
+          "measured_cost_available": false,
+          "estimated_cost": null
+        }
+      },
+      {
+        "agent": "claude",
+        "phase": "defense",
+        "valid": true,
+        "response": {
+          "decision": "changes_requested",
+          "summary": "Acepto las tres objeciones de Codex y reviso mi alternativa. El servicio compartido y el transporte dedicado se mantienen, pero el despacho de Gateway, el runner de Lighthouse y la identidad de comparación pasan a ser requisitos explícitos. Retiro claude-generalize-officialrest. Prefiero codex-performance-service. Nada se ha medido ni ejecutado: solo arquitectura local.",
+          "changes": [],
+          "evidence": [
+            "source:tools/ipanema/access/gateway.py",
+            "source:tools/ipanema/access/policy.py",
+            "source:tools/lighthouse_audit.mjs",
+            "source:tools/performance_evidence.mjs",
+            "source:tools/ipanema/compare.py",
+            "source:integration-context.json",
+            "source:tools/ia.py"
+          ],
+          "objections": [
+            {
+              "id": "claude-obj-1",
+              "alternative_id": "claude-generalize-officialrest",
+              "category": "security",
+              "severity": "high",
+              "claim": "OfficialREST es Bearer OAuth con endpoints fijos de GSC/GA/Merchant. Extenderlo con clave API arriesga mezclar credenciales y regresionar GSC. Retirada.",
+              "status": "resolved",
+              "evidence_refs": [
+                "source:tools/ipanema/seo/adapters.py"
+              ],
+              "resolution_evidence_refs": [
+                "source:tools/ipanema/seo/adapters.py"
+              ]
+            },
+            {
+              "id": "claude-obj-2",
+              "alternative_id": "codex-performance-service",
+              "category": "security",
+              "severity": "high",
+              "claim": "La clave API viaja en la query. El transporte debe redactarla, también codificada, antes de excepciones, logs o artefactos. Faltan pruebas que lo demuestren.",
+              "status": "open",
+              "evidence_refs": [
+                "source:tools/ipanema/core.py",
+                "source:tools/ipanema/seo/adapters.py"
+              ],
+              "resolution_evidence_refs": []
+            },
+            {
+              "id": "claude-obj-3",
+              "alternative_id": "codex-performance-service",
+              "category": "architecture",
+              "severity": "medium",
+              "claim": "Policy.CAPABILITIES y stop_path no incluyen proveedores PSI/CrUX, y Gateway.call envía los proveedores no DevTools a OAuth. Faltan capacidades nuevas y despacho al servicio, sin alterar los permisos existentes.",
+              "status": "open",
+              "evidence_refs": [
+                "source:tools/ipanema/access/policy.py",
+                "source:tools/ipanema/access/gateway.py"
+              ],
+              "resolution_evidence_refs": []
+            },
+            {
+              "id": "claude-obj-4",
+              "alternative_id": "codex-performance-service",
+              "category": "architecture",
+              "severity": "medium",
+              "claim": "compare.metrics no exige identidad de fuente, Chrome ni locale, y trata None==None como igual. La comparación debe vivir en performance/model y devolver not_comparable ante campos desconocidos.",
+              "status": "open",
+              "evidence_refs": [
+                "source:tools/ipanema/compare.py"
+              ],
+              "resolution_evidence_refs": []
+            }
+          ],
+          "preferred_alternative": "codex-performance-service",
+          "answers": [
+            {
+              "question_id": "codex-q-integracion",
+              "from_agent": "codex",
+              "answer": "Acepto la objeción y amplío el alcance a tools/ia.py, access/gateway.py y access/policy.py. En Gateway.call añadiría, antes de la rama OAuth, un despacho para providers psi/crux que delegue en performance.service. El CLI llamaría al mismo servicio. Dentro del servicio, bajo policy.locked, el orden sería: cargar el permiso, comprobar capacidad y parada, validar proyecto, origen y petición, aplicar presupuestos y solo entonces consultar la caché. La clave se resuelve únicamente en el proceso controlador y solo si hay fallo de caché. Ningún worker la recibe. El CLI usa un permiso de operador con --allow-network.",
+              "disposition": "revise",
+              "evidence_refs": [
+                "source:tools/ipanema/access/gateway.py",
+                "source:tools/ipanema/access/policy.py",
+                "source:tools/ia.py"
+              ]
+            },
+            {
+              "question_id": "codex-q-lighthouse",
+              "from_agent": "codex",
+              "answer": "Corrijo: conservarlo sin cambios no cumple lo exigido. Mantengo lighthouse_audit.mjs con su comportamiento actual, porque sus consumidores no se han verificado (unknown). Añado un runner nuevo de trabajos repetibles. Cada ejecución escribe con un id de ejecución único y creación exclusiva, sin sobrescribir. Persiste solo lighthouseEvidence(lhr) más el resumen, sin LHR completo ni HTML. La mediana y el rango se calculan en performance/model a partir de las muestras individuales. Esto no se ha ejecutado.",
+              "disposition": "revise",
+              "evidence_refs": [
+                "source:tools/lighthouse_audit.mjs",
+                "source:tools/performance_evidence.mjs",
+                "source:integration-context.json"
+              ]
+            },
+            {
+              "question_id": "codex-q-comparacion",
+              "from_agent": "codex",
+              "answer": "Identidad mínima obligatoria: fuente, URL solicitada y final, estrategia/dispositivo, categorías, locale, versión de Lighthouse, versión de Chrome, caché, red y CPU, y número de muestras. Si falta cualquiera, por ejemplo Chrome en una respuesta PSI, el resultado es status not_comparable y nunca passed. La comparación se implementa en performance/model. Si se reutiliza compare.metrics, se corrige para rechazar claves obligatorias ausentes en ambos lados. Si PSI expone o no esos campos en su respuesta es unknown y debe verificarse con fixtures.",
+              "disposition": "revise",
+              "evidence_refs": [
+                "source:tools/ipanema/compare.py",
+                "source:integration-context.json"
+              ]
+            }
+          ],
+          "withdrawn_alternatives": [
+            "claude-generalize-officialrest"
+          ],
+          "revision_notes": [
+            "claude-dedicated-key-transport queda alineada con codex-performance-service: servicio compartido CLI/MCP, dos fases (PSI y después CrUX) y transporte dedicado de clave API.",
+            "El alcance de archivos incluye tools/ia.py, access/gateway.py, access/policy.py y un runner nuevo de Lighthouse.",
+            "Los estados pass de seguridad y compatibilidad de mi propuesta inicial reflejaban reutilización prevista, no comportamiento verificado. Quedan como unknown hasta que el QA del controlador los respalde.",
+            "Condición previa a implementar: redactar la clave, también codificada, antes de cualquier excepción, log o artefacto.",
+            "CrUX: sin fallback silencioso de URL a origen, y los periodos solapados de History no se tratan como muestras independientes.",
+            "La aprobación cubre solo la arquitectura local, sujeta al QA del controlador. No cubre API en vivo ni despliegue."
+          ]
+        },
+        "model": {
+          "model": "claude-sonnet-5-5",
+          "effort": "medium",
+          "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+          "verified_at": "2026-11-08"
+        },
+        "duration_s": 44.248,
+        "usage": {
+          "provider_reported": {
+            "total_cost_usd": 0.3258474,
+            "duration_ms": 40626,
+            "input_tokens": 6,
+            "cache_creation_input_tokens": 64219,
+            "cache_read_input_tokens": 60394,
+            "output_tokens": 6292
+          },
+          "measured_cost_available": true,
+          "estimated_cost": null
+        }
+      },
+      {
+        "agent": "codex",
+        "phase": "defense",
+        "valid": true,
+        "response": {
+          "decision": "changes_requested",
+          "summary": "Mantengo codex-performance-service y concreto sus contratos de credenciales, permisos y datos CrUX. La arquitectura sigue propuesta: faltan implementación, revisión independiente y QA del controlador. Conectividad, seguridad ejecutada, cobertura y costes: unknown.",
+          "changes": [],
+          "evidence": [
+            "source:tools/ipanema/access/gateway.py",
+            "source:tools/ipanema/access/policy.py",
+            "source:tools/ipanema/seo/adapters.py",
+            "source:tools/ipanema/core.py",
+            "source:tools/ipanema/compare.py",
+            "source:tools/lighthouse_audit.mjs",
+            "source:tools/performance_evidence.mjs",
+            "source:integration-context.json"
+          ],
+          "objections": [
+            {
+              "id": "codex-obj-integracion",
+              "alternative_id": "claude-dedicated-key-transport",
+              "category": "integración",
+              "severity": "high",
+              "claim": "El alcance declarado omite el registro CLI y el despacho específico de Gateway hacia performance. Añadir capacidades no evita por sí solo la ruta OAuth existente.",
+              "status": "open",
+              "evidence_refs": [
+                "source:tools/ia.py",
+                "source:tools/ipanema/access/gateway.py"
+              ],
+              "resolution_evidence_refs": []
+            },
+            {
+              "id": "codex-obj-lighthouse",
+              "alternative_id": "claude-dedicated-key-transport",
+              "category": "evidencia",
+              "severity": "high",
+              "claim": "Conservar el runner sin cambios deja persistencia del LHR completo, destinos sobrescribibles y una muestra por dispositivo. Faltan adaptación y comprobación de consumidores.",
+              "status": "open",
+              "evidence_refs": [
+                "source:tools/lighthouse_audit.mjs",
+                "source:tools/performance_evidence.mjs"
+              ],
+              "resolution_evidence_refs": []
+            },
+            {
+              "id": "codex-obj-comparacion",
+              "alternative_id": "claude-dedicated-key-transport",
+              "category": "validez de comparación",
+              "severity": "medium",
+              "claim": "La comparación necesita identidad de fuente y condiciones completas; los campos obligatorios desconocidos deben impedirla. compare.metrics permite igualdad entre campos ausentes.",
+              "status": "open",
+              "evidence_refs": [
+                "source:tools/ipanema/compare.py",
+                "source:integration-context.json"
+              ],
+              "resolution_evidence_refs": []
+            },
+            {
+              "id": "codex-obj-garantias",
+              "alternative_id": "claude-dedicated-key-transport",
+              "category": "calibración de evidencia",
+              "severity": "low",
+              "claim": "Seguridad y compatibilidad del servicio nuevo permanecen unknown; las fuentes existentes no justifican estados pass de comportamiento integrado.",
+              "status": "open",
+              "evidence_refs": [
+                "source:tools/ipanema/access/gateway.py",
+                "source:integration-context.json"
+              ],
+              "resolution_evidence_refs": []
+            }
+          ],
+          "preferred_alternative": "codex-performance-service",
+          "answers": [
+            {
+              "question_id": "claude-q1",
+              "from_agent": "claude",
+              "answer": "La clave se resolverá exclusivamente en el proceso confiable del controlador que aloja Gateway o CLI, después de validar permisos y solicitud; el worker no heredará su entorno ni almacén. Gateway muestra el precedente de resolución local de credenciales, pero no prueba este aislamiento nuevo. MCP expondrá únicamente campos permitidos: estado, procedencia, solicitud sin secretos, identidad, fechas/versiones, métricas, categorías, auditorías saneadas, periodos y limitaciones. Excluirá claves, URL de transporte, cabeceras, cuerpos originales, snippets y errores libres. Faltan fixtures de filtración y comprobación del entorno del worker.",
+              "disposition": "revise",
+              "evidence_refs": [
+                "source:tools/ipanema/access/gateway.py",
+                "source:tools/performance_evidence.mjs",
+                "source:integration-context.json"
+              ]
+            },
+            {
+              "question_id": "claude-q2",
+              "from_agent": "claude",
+              "answer": "Propongo psi.read → psi_run_pagespeed y crux.read → crux_query_record/crux_query_history; stop_path admitirá psi y crux. CLI y Gateway delegarán en el servicio con una única contabilización por solicitud. Bajo Policy.locked se validarán grant, capacidad, configuración, parada y presupuesto antes de caché o claves. consume contará la solicitud por tarea, incluso en caché. Antes de cada intento HTTP se reservará y persistirá presupuesto diario por proyecto/proveedor y presupuesto de intentos de la ejecución; cada reintento consumirá ambos. El servicio conservará el bloqueo hasta registrar resultado/parada para evitar llamadas concurrentes posteriores a 403/429. Los grants existentes mantendrán su contrato; falta QA de concurrencia y regresión.",
+              "disposition": "revise",
+              "evidence_refs": [
+                "source:tools/ipanema/access/policy.py",
+                "source:tools/ipanema/access/gateway.py",
+                "source:integration-context.json"
+              ]
+            },
+            {
+              "question_id": "claude-q3",
+              "from_agent": "claude",
+              "answer": "Sí: una consulta URL sin datos devolverá datos insuficientes; consultar origen requerirá otra solicitud explícita. model conservará requested_identity y returned_identity con granularidad url/origin y formFactor, validando su correspondencia antes de normalizar. History conservará collectionPeriods y series alineadas por índice, p75s, densidades, unidades y nulos; no generará muestras diarias independientes ni atribuirá diferencias a despliegues. Lo respaldan verified_contracts sobre exclusión URL/origin e historial, proposed_scope sobre identidad y periodos, y acceptance sobre URL/origen separados y nulos de integration-context.json. La validación aún es unknown.",
+              "disposition": "defend",
+              "evidence_refs": [
+                "source:integration-context.json"
+              ]
+            }
+          ],
+          "withdrawn_alternatives": [],
+          "revision_notes": [
+            "La propuesta inicial ya incluía pruebas de consultas sensibles codificadas; su ejecución sigue pendiente. La redacción genérica no basta: el transporte no registrará URLs autenticadas ni excepciones originales.",
+            "performance/model exigirá identidad completa para comparaciones; un campo obligatorio unknown producirá comparación no válida.",
+            "Para evidencia nueva, Lighthouse usará una proyección saneada revisada, destinos inmutables y muestras individuales con mediana/rango; se comprobarán sus consumidores.",
+            "Estas precisiones no resuelven objeciones mediante pruebas. No hay recibos nuevos del controlador ni autorización de llamadas reales o publicación."
+          ]
+        },
+        "model": {
+          "model": "gpt-6.1-sol",
+          "effort": "medium",
+          "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+          "verified_at": "2026-11-08"
+        },
+        "duration_s": 50.277,
+        "usage": {
+          "provider_reported": {
+            "input_tokens": 49434,
+            "cached_input_tokens": 0,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 1633,
+            "reasoning_output_tokens": 120
+          },
+          "measured_cost_available": false,
+          "estimated_cost": null
+        }
+      }
+    ],
+    "architecture_gate": "approved_with_conditions by controller; original agents retained open implementation QA gates",
+    "original_snapshot_sha256": {
+      "tools/ia.py": "85e955b9dcbffb42a7f97eeeb65d4dc2b82f76f56f14cb72c4c7f28b74ce4b15",
+      "tools/ipanema/core.py": "07731645318b727cefcf80f3f25e977842ab422280ca873a36cef0f4c0aeee25",
+      "tools/ipanema/access/credentials.py": "10e0c0a7dff5f087426668ace5f0d1aab76c504d34ded284ab629ebc2697f6b1",
+      "tools/ipanema/access/policy.py": "803a4a3e9af209195f44f89beabf03ed9253d9af6e2b55b8f2f3837976df6163",
+      "tools/ipanema/access/gateway.py": "c97a5b7444a6772d3c17a2bca5f71b0225738636059ad87725ed9dfb1cf72234",
+      "tools/ipanema/compare.py": "7bf6446f3e54003325dd8d314bae48e2f486b311ece0570cb4d5026ab49cbe78",
+      "tools/lighthouse_audit.mjs": "c0873b5b1dfdf018b9d4d5d37df37ef01f321a1990b4c4e569431dce75e0e80d",
+      "tools/performance_evidence.mjs": "8dacf6eb1348fca7cf3494a89e8e15a21c8b898a46ae3b5d9b0e70da64fe4dc7",
+      "tools/ipanema/seo/adapters.py": "a7919bedc8a48741a09587f95f244e08cd360263a329d88f6052dc58643d02c0",
+      "integration-context.json": "e4e78d40f5dfd75e697919e9e558b13c75acbf4ecb58fd28bae86d38d24fee21"
+    }
+  },
+  "qa": {
+    "summary": {
+      "kind": "qa",
+      "suite": "quick",
+      "at": "2026-11-10T18:29:15.075461+00:00",
+      "outcome": "passed",
+      "report": "reports/runs/ipanema/20261110T182915-quick-dcde08a0/report.json",
+      "limitations": [
+        "Evaluación del coordinador determinista; evaluación externa del modelo no ejecutada.",
+        "Evaluaciones SEO con fixtures, sin conexión real a cuentas Google."
+      ],
+      "checks": [
+        {
+          "name": "repository",
+          "status": "passed"
+        },
+        {
+          "name": "unit-tests",
+          "status": "passed"
+        },
+        {
+          "name": "integration-tests",
+          "status": "passed"
+        },
+        {
+          "name": "coordinator-evals",
+          "status": "passed"
+        },
+        {
+          "name": "seo-action-evals",
+          "status": "passed"
+        },
+        {
+          "name": "sources-stable-during-qa",
+          "status": "passed"
+        }
+      ]
+    },
+    "counts": {
+      "unit-tests": 278,
+      "integration-tests": 40
+    }
+  },
+  "browser_fixture": {
+    "run": "reports/runs/ipanema/20261110T182855-performance-browser-fixture-53ef2841",
+    "simulated_content": true,
+    "actual_browser": true,
+    "remote_requests_authorized": false,
+    "results": [
+      {
+        "device": "mobile",
+        "exit_code": 0,
+        "profile": {
+          "source": "lighthouse_local",
+          "url": "http://127.0.0.1:44269/",
+          "final_url": "http://127.0.0.1:44269/",
+          "device": "mobile",
+          "categories": [
+            "performance",
+            "accessibility",
+            "best-practices",
+            "seo"
+          ],
+          "locale": "es",
+          "lighthouse_version": "13.6.0",
+          "chrome_version": "155.0.8059.84",
+          "screen": {
+            "mobile": true,
+            "width": 412,
+            "height": 823,
+            "deviceScaleFactor": 1.75,
+            "disabled": false
+          },
+          "throttling_method": "simulate",
+          "throttling": {
+            "rttMs": 150,
+            "throughputKbps": 1638.4,
+            "requestLatencyMs": 562.5,
+            "downloadThroughputKbps": 1474.56,
+            "uploadThroughputKbps": 675,
+            "cpuSlowdownMultiplier": 4
+          },
+          "cache": false,
+          "network_policy": "loopback-only-fixture"
+        },
+        "sample_count": 2,
+        "statistics": {
+          "lcp": {
+            "median": 626.1965250000001,
+            "min": 625.65835,
+            "max": 626.7347,
+            "available_samples": 2
+          },
+          "fcp": {
+            "median": 626.1965250000001,
+            "min": 625.65835,
+            "max": 626.7347,
+            "available_samples": 2
+          },
+          "cls": {
+            "median": 0.0,
+            "min": 0.0,
+            "max": 0.0,
+            "available_samples": 2
+          },
+          "tbt": {
+            "median": 5.75,
+            "min": 1.5,
+            "max": 10.0,
+            "available_samples": 2
+          },
+          "speed_index": {
+            "median": 626.1965250000001,
+            "min": 625.65835,
+            "max": 626.7347,
+            "available_samples": 2
+          }
+        }
+      },
+      {
+        "device": "desktop",
+        "exit_code": 0,
+        "profile": {
+          "source": "lighthouse_local",
+          "url": "http://127.0.0.1:44269/",
+          "final_url": "http://127.0.0.1:44269/",
+          "device": "desktop",
+          "categories": [
+            "performance",
+            "accessibility",
+            "best-practices",
+            "seo"
+          ],
+          "locale": "es",
+          "lighthouse_version": "13.6.0",
+          "chrome_version": "155.0.8059.84",
+          "screen": {
+            "mobile": false,
+            "width": 1350,
+            "height": 940,
+            "deviceScaleFactor": 1,
+            "disabled": false
+          },
+          "throttling_method": "simulate",
+          "throttling": {
+            "rttMs": 40,
+            "throughputKbps": 10240,
+            "requestLatencyMs": 0,
+            "downloadThroughputKbps": 0,
+            "uploadThroughputKbps": 0,
+            "cpuSlowdownMultiplier": 1
+          },
+          "cache": false,
+          "network_policy": "loopback-only-fixture"
+        },
+        "sample_count": 1,
+        "statistics": {
+          "lcp": {
+            "median": 170.5745,
+            "min": 170.5745,
+            "max": 170.5745,
+            "available_samples": 1
+          },
+          "fcp": {
+            "median": 170.5745,
+            "min": 170.5745,
+            "max": 170.5745,
+            "available_samples": 1
+          },
+          "cls": {
+            "median": 0.0,
+            "min": 0.0,
+            "max": 0.0,
+            "available_samples": 1
+          },
+          "tbt": {
+            "median": 0.0,
+            "min": 0.0,
+            "max": 0.0,
+            "available_samples": 1
+          },
+          "speed_index": {
+            "median": 170.5745,
+            "min": 170.5745,
+            "max": 170.5745,
+            "available_samples": 1
+          }
+        }
+      }
+    ]
+  },
+  "google_live": {
+    "status": "blocked_credentials_unavailable",
+    "pagespeed_mobile": "credentials_unavailable",
+    "pagespeed_desktop": "credentials_unavailable",
+    "crux_mobile": "credentials_unavailable",
+    "http_attempts": 0
+  },
+  "limitations": [
+    "Fixtures never count as Google connectivity.",
+    "No store/theme optimization or writes.",
+    "PSI cannot measure an unpublished local diff.",
+    "No immediate CrUX causal claims."
+  ],
+  "production_modified": false,
+  "themes_modified": false,
+  "independent_review": {
+    "agent": "claude",
+    "status": "approve_local_scope_only",
+    "attempts": [
+      {
+        "run": "reports/runs/ipanema/20261110T182542-performance-independent-review-9a45cfa3",
+        "decision": "changes_requested",
+        "error": null,
+        "response": {
+          "decision": "changes_requested",
+          "summary": "El diff cumple en lo esencial el objetivo local: servicio compartido CLI/MCP, transporte con endpoints fijos, 403/429 con parada persistente, presupuesto reservado antes de cada intento HTTP, caché privada, identidad CrUX sin fallback y comparación que devuelve not_comparable ante datos desconocidos. No ejecuté pruebas. Me baso en el QA del controlador (quick: passed, 274 unit y 40 integration) y en la lectura del diff. Hay un defecto de privacidad en la evidencia entregada y dos riesgos menores que conviene corregir o documentar antes de aprobar. Esta decisión no certifica producción ni conectividad real con Google.",
+          "evidence": [
+            "DEFECTO (privacidad): reports/performance/verification.json, campo qa.summary.report, contiene la ruta absoluta 'reports/runs/...', que incluye el nombre de usuario del sistema. Las reglas del repositorio reservan las rutas personales para configuración local y prohíben datos privados en evidencias. Sustituir por una ruta relativa al repositorio (reports/runs/ipanema/20261110T182515-quick-cee95919/report.json) y revisar que no queden otras rutas absolutas en el archivo.",
+            "RIESGO (service.py, local()): la validación de origen de url y final_url se hace después de ejecutar Lighthouse y de que el runner escriba sample-N.json y samples.json en run/browser. Si Chrome sigue una redirección a un dominio ajeno, esa evidencia ya queda persistida. Además checked_url lanza IpanemaError sin capturar, lo que aborta el comando y descarta los resultados PSI/CrUX ya obtenidos en 'audit' (persist no se llega a ejecutar). Si final_url es None, authorize_url recibe None y puede fallar con una excepción distinta de IpanemaError. Sugerencia: capturar el error y devolver un estado explícito (p. ej. redirect_not_authorized) sin conservar las muestras, o documentar que el control es posterior al hecho. Esto contradice parcialmente la frase del README 'No se autoriza un dominio alternativo por redirección'.",
+            "RIESGO (model.py, lighthouse()): chrome_version se descarta cuando termina en '.0.0.0'. Los user agents reducidos de Chrome siempre tienen esa forma, así que con respuestas reales de PSI es probable que chrome_version sea None y 'performance compare --source pagespeed' devuelva siempre not_comparable. El comportamiento es conservador y coherente con la política de desconocidos bloqueantes, pero los fixtures sintéticos usan '130.1.2.3', lo que oculta el problema. El README debe decirlo, o debe obtenerse la versión de otro campo verificado.",
+            "RIESGO (service.py, read()): se exige lhr.requestedUrl == opt['url'] sin normalizar. Si PSI devuelve la URL con barra final (public_url sin ella), habría un identity_mismatch falso. El caso solo está cubierto con fixtures, no con la API real. Documentarlo como no verificado o comparar tras normalizar, como ya se hace en CrUX con urlNormalizationDetails.",
+            "VERIFICADO POR LECTURA: gateway.py pasa already_locked=True para no reentrar en el flock; los kwargs duplicados ('authorized', 'already_locked', 'source') provocan TypeError y se convierten en IpanemaError genérico. policy.py admite psi y crux en stop_path y CAPABILITIES. providers.py no incluye el HTTPError original en la excepción (raise ... from None). model.sanitize cubre claves codificadas dos veces y el eco de la clave API en sus tres codificaciones. Los tests offline cubren estos puntos, y el QA del controlador los reporta como pasados.",
+            "NO VERIFICABLE CON LO ENTREGADO: tests/fixtures/performance/*, reports/performance/example-mobile.json y example-desktop.json no están entre los archivos revisables; el README los enlaza. La conectividad real con PSI/CrUX queda bloqueada por credenciales (http_attempts=0, google_live.status=blocked_credentials_unavailable), y verification.json lo declara así sin sobrevalorarlo."
+          ],
+          "changes": []
+        },
+        "duration_s": 54.822,
+        "model": {
+          "model": "claude-sonnet-5-5",
+          "effort": "medium",
+          "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+          "verified_at": "2026-11-08"
+        },
+        "usage": {
+          "provider_reported": {
+            "total_cost_usd": 0.6133589,
+            "duration_ms": 53077,
+            "input_tokens": 2,
+            "cache_creation_input_tokens": 137465,
+            "cache_read_input_tokens": 649,
+            "output_tokens": 6343
+          },
+          "measured_cost_available": true,
+          "estimated_cost": null
+        },
+        "contract_status": "passed",
+        "process_reaped": true
+      },
+      {
+        "run": "reports/runs/ipanema/20261110T182943-performance-independent-review-a54a2e57",
+        "decision": null,
+        "error": "Contrato rechazado: json_syntax en $",
+        "response": null,
+        "duration_s": 56.528,
+        "model": null,
+        "usage": {
+          "provider_reported": {
+            "total_cost_usd": 0.7415048999999999,
+            "duration_ms": 54313,
+            "input_tokens": 2,
+            "cache_creation_input_tokens": 168671,
+            "cache_read_input_tokens": 1369,
+            "output_tokens": 6668
+          },
+          "measured_cost_available": true,
+          "estimated_cost": null
+        },
+        "contract_status": "failed",
+        "process_reaped": true
+      },
+      {
+        "run": "reports/runs/ipanema/20261110T183215-performance-review-native-recovery-77bfd376",
+        "decision": "approve",
+        "error": null,
+        "response": {
+          "decision": "approve",
+          "summary": "Aprobado solo para el alcance local de este fixture. No es una certificación de producción ni de conectividad con Google.\n\nRevisé el diff y la evidencia aportada. No encontré defectos que bloqueen el objetivo.\n\n- **Permisos y red.** `performance` exige `--allow-network` o un grant con capacidades `psi.read`/`crux.read`, y valida la URL contra el origen registrado antes de cualquier solicitud. La URL debe ser HTTPS y pública, sin credenciales ni parámetros sensibles, ni siquiera codificados dos veces.\n- **Credenciales.** Las claves se resuelven solo desde variables de entorno del controlador. Sin clave, el estado es `credentials_unavailable` y no hay solicitudes. El transporte no sigue redirecciones ni expone la clave en los errores HTTP. La sanitización cubre ecos de la clave, incluso codificados.\n- **Cuotas y paradas.** Los 403/429 dejan una parada persistente en `Policy` y no hay reintento. El presupuesto diario y por ejecución se aplica bajo el lock de `Policy`, y un archivo de presupuesto corrupto bloquea la red. La caché es privada (0700/0600), rechaza symlinks, archivos futuros o corruptos, y se invalida si cambia la configuración.\n- **Identidad y comparación.** CrUX valida URL u origen y `formFactor`, sin fallback silencioso de URL a origen. Los datos faltantes o nulos producen `partial`, no ceros. `compare` y `summarize` devuelven `not_comparable` ante cualquier dato desconocido o diferente, incluido un user agent reducido (`.0.0.0`) y una repetición servida desde caché.\n- **Lighthouse local.** El modo `--job` usa una lista blanca de variables de entorno y valida las URLs finales antes de persistir las muestras. Guarda una proyección saneada, sin snippets ni cabeceras. Un fallo local no descarta los resultados PSI/CrUX del mismo informe. El flujo histórico de `lighthouse_audit.mjs` queda intacto, dentro del `else`.\n- **Gateway.** Reutiliza el servicio con `already_locked=True` bajo el lock de `Policy`. El consumo de cuota por llamada también cuenta los aciertos de caché. No se añaden herramientas de escritura, y CommandCode sigue bloqueado.\n- **Pruebas.** Los registros del controlador reportan la suite `quick` aprobada (278 unitarias y 40 de integración) y una ejecución de navegador real sobre un fixture loopback con perfiles mobile/desktop. Las pruebas del diff cubren permisos, identidad, presupuesto, caché, paradas, secretos, historial con nulos, sanitización en Node, MCP real por stdio y rutas con espacios. Yo no ejecuté nada, y lo que cito sale de los recibos.\n\nObservaciones menores, no bloqueantes:\n- Un agente MCP puede pasar `refresh` dentro de `request`. Sigue acotado por el presupuesto y el grant.\n- La sanitización Python redacta cualquier clave que contenga `key`, más amplia que la de JS. Es más conservadora, no menos.\n- El README enlaza `ADR-001.md`, `verification.json` y los ejemplos mobile/desktop, que no estaban entre los archivos revisados. Conviene comprobar que existen.\n\nPendiente, como declara el propio README: conectividad real con PSI/CrUX, cobertura de CrUX, cuota de la cuenta y una comparación real, todo bloqueado por falta de claves.",
+          "evidence": [
+            "review-receipts.json: qa quick passed (repository, unit-tests, integration-tests, coordinator-evals, seo-action-evals, sources-stable-during-qa); 278 unitarias y 40 de integración.",
+            "review-receipts.json: browser_fixture con navegador real sobre un fixture loopback (simulated_content=true, remote_requests_authorized=false), perfiles mobile y desktop con versiones reales de Lighthouse y Chrome.",
+            "review-receipts.json: google_live=blocked_credentials_unavailable con http_attempts=0; no se afirma conectividad con Google.",
+            "tools/ipanema/performance/service.py: `read` exige `authorized`, comprueba la parada persistente, valida la caché y llama a `reserve` (presupuesto bajo lock) antes de cada intento. 403/429 llaman a `policy.stop`. Los reintentos se limitan a red y 5xx.",
+            "tools/ipanema/performance/providers.py: endpoints fijos, `_NoRedirect`, límite de 10 MB. `HTTPError` se convierte en `Failure` con `from None`, sin exponer la URL con clave.",
+            "tools/ipanema/performance/model.py: `compare` y `summarize` rechazan perfiles con datos None, diferentes o `chrome_version` reducido. `crux` valida identidad y `formFactor`, y marca `partial` ante nulos en lugar de ceros.",
+            "tools/ipanema/access/gateway.py: las ramas psi/crux reutilizan `Service` con `already_locked=True`. Las capacidades y la cuota las valida `Policy.consume`. El test de integración confirma 1 llamada de transporte y 2 consumos de grant (el segundo, un acierto de caché).",
+            "tests/unit/test_performance.py, test_performance_js.py y tests/integration/test_performance_cli.py cubren permisos previos a la red, secretos codificados, caché, presupuesto concurrente, identidad CrUX, historial con nulos, fallos locales incompletos, proyección Node saneada y MCP real."
+          ],
+          "changes": []
+        },
+        "duration_s": 34.808,
+        "model": {
+          "model": "claude-sonnet-5-5",
+          "effort": "medium",
+          "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+          "verified_at": "2026-11-08"
+        },
+        "usage": {
+          "provider_reported": {
+            "total_cost_usd": 0.409562,
+            "duration_ms": 33345,
+            "input_tokens": 2,
+            "cache_creation_input_tokens": 91712,
+            "cache_read_input_tokens": 0,
+            "output_tokens": 4271
+          },
+          "measured_cost_available": true,
+          "estimated_cost": null
+        },
+        "contract_status": "passed",
+        "process_reaped": true
+      }
+    ],
+    "source_hashes_match_current": {
+      "tools/lighthouse_audit.mjs": true,
+      "tools/performance_evidence.mjs": true,
+      "tools/ipanema/performance/model.py": true,
+      "tools/ipanema/performance/service.py": true,
+      "tools/ipanema/performance/providers.py": true,
+      "tools/ipanema/performance/cli.py": true,
+      "tools/ipanema/access/gateway.py": true,
+      "tests/unit/test_performance.py": true,
+      "tests/unit/test_performance_js.py": true,
+      "tests/integration/test_performance_cli.py": true,
+      "reports/performance/README.md": true,
+      "tests/fixtures/performance/crux-mobile.json": true,
+      "tests/fixtures/performance/crux-history.json": true,
+      "tests/fixtures/performance/pagespeed-desktop.json": true,
+      "tests/fixtures/performance/pagespeed-mobile.json": true
+    },
+    "latest_run": "reports/runs/ipanema/20261110T183215-performance-review-native-recovery-77bfd376"
+  },
+  "costs": {
+    "claude_reported_subtotal_usd": 2.6474941999999997,
+    "codex_cost_usd": null,
+    "note": "Subtotal declarado por Claude, no factura total. Codex informa tokens, no coste. APIs Google no consultadas."
+  },
+  "changed_files": [
+    "tools/ia.py",
+    "tools/ipanema/access/policy.py",
+    "tools/ipanema/access/gateway.py",
+    "tools/lighthouse_audit.mjs",
+    "tools/performance_evidence.mjs",
+    "tools/ipanema/performance/model.py",
+    "tools/ipanema/performance/service.py",
+    "tools/ipanema/performance/providers.py",
+    "tools/ipanema/performance/cli.py",
+    "tools/ipanema/performance/__init__.py",
+    ".agents/skills/ipanema-performance/SKILL.md",
+    "README.md",
+    "tests/unit/test_performance.py",
+    "tests/unit/test_performance_js.py",
+    "tests/integration/test_performance_cli.py",
+    "tests/fixtures/performance/crux-mobile.json",
+    "tests/fixtures/performance/crux-history.json",
+    "tests/fixtures/performance/pagespeed-desktop.json",
+    "tests/fixtures/performance/pagespeed-mobile.json",
+    "reports/performance/ADR-001.md",
+    "reports/performance/README.md",
+    "reports/performance/example-mobile.json",
+    "reports/performance/example-desktop.json",
+    "reports/performance/verification.json"
+  ]
+}

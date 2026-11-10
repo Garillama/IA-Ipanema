@@ -47,7 +47,8 @@ def add_parser(sub):
 
 
 def doctor(project, *, probe=False):
-    result = {'project': project.id, 'runtimes_installed': {a: bool(shutil.which(a)) for a in AGENTS},
+    from ..orchestration.adapters import agent_policy
+    result = {'project': project.id, 'execution_policy':agent_policy(),'runtimes_installed': {a: bool(shutil.which(a)) for a in AGENTS},
               'repeatable_qa': 'Puppeteer/Lighthouse existentes; no se reemplazan',
               'credentials_written_by_doctor': False, 'providers': {}}
     try:
@@ -131,7 +132,8 @@ def execute(project, args):
         url = urlsplit(args.url)
         if f'{url.scheme}://{url.netloc}' != page_origin(project):
             raise IpanemaError('URL fuera del proyecto.')
-        selected = args.agents or list(AGENTS)
+        from ..orchestration.adapters import enabled_agents
+        selected = args.agents or list(enabled_agents())
         result = probe_agents(project, args.url, profile=args.browser_profile, agents=selected)
         return result, 0 if set(selected) <= {r.get('agent') for r in result['results'] if r['status']=='verified'} else 2
     if args.access_command == 'doctor':

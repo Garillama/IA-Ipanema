@@ -23,6 +23,9 @@ DEFINITIONS = {
     'devtools_console': ('Leer mensajes de consola.', schema()),
     'devtools_trace': ('Traza de carga con recarga y parada automática; CrUX desactivado.', schema()),
     'devtools_insight': ('Analizar insight de una traza de esta sesión.', schema({'insightSetId': {'type': 'string'}, 'insightName': {'type': 'string'}}, ['insightSetId', 'insightName'])),
+    'psi_run_pagespeed': ('Medición PageSpeed del origen registrado; requiere clave privada en controlador.', REQUEST),
+    'crux_query_record': ('CrUX URL u origen explícito; sin fallback silencioso.', REQUEST),
+    'crux_query_history': ('CrUX History; periodos agregados y datos faltantes explícitos.', REQUEST),
     'gsc_search_analytics': ('Consultar Search Analytics en la propiedad registrada; filas parciales.', REQUEST),
     'gsc_inspect_url': ('Consultar estado conocido de indexación; no es inspección en vivo.', REQUEST),
     'gsc_sitemaps': ('Listar metadatos de sitemaps registrados; sin envío ni eliminación.', REQUEST),
@@ -44,11 +47,12 @@ def validate_arguments(name, args):
 
 
 class Gateway:
-    def __init__(self, project, grant_id, *, devtools_factory=DevTools, rest_factory=OfficialREST):
+    def __init__(self, project, grant_id, *, devtools_factory=DevTools, rest_factory=OfficialREST, performance_factory=None):
         self.project, self.grant_id = project, grant_id
         self.policy = Policy(project)
         self.policy.load(grant_id)
         self.devtools_factory, self.rest_factory = devtools_factory, rest_factory
+        self.performance_factory = performance_factory
         self.browser = None
 
     def tools(self):
@@ -67,6 +71,11 @@ class Gateway:
                     if self.browser is None:
                         self.browser = self.devtools_factory(self.project, profile=grant.get('browser_profile', 'security'))
                     result = self.browser.call(name, arguments)
+                elif provider in ('psi','crux'):
+                    from ..performance.service import Service
+                    source = 'pagespeed' if provider == 'psi' else 'crux_history' if operation == 'query_history' else 'crux'
+                    # Policy.consume already checked capability and task quota under this lock.
+                    result = (self.performance_factory or Service)(self.project).read(source, authorized=True, already_locked=True, **arguments['request'])
                 else:
                     cfg = self.project.data.get('google', {}).get(provider, {})
                     env_name = cfg.get('oauth_token_env', '')

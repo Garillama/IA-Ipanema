@@ -1,0 +1,55 @@
+{
+  "_fixture": "SIMULATED; not DaMar field data",
+  "record": {
+    "key": {
+      "url": "https://example.invalid",
+      "formFactor": "PHONE"
+    },
+    "metrics": {
+      "largest_contentful_paint": {
+        "percentilesTimeseries": {
+          "p75s": [
+            2400,
+            null
+          ]
+        },
+        "histogramTimeseries": [
+          {
+            "start": 0,
+            "end": 2500,
+            "densities": [
+              0.8,
+              "NaN"
+            ]
+          }
+        ]
+      }
+    },
+    "collectionPeriods": [
+      {
+        "firstDate": {
+          "year": 2026,
+          "month": 10,
+          "day": 10
+        },
+        "lastDate": {
+          "year": 2026,
+          "month": 11,
+          "day": 6
+        }
+      },
+      {
+        "firstDate": {
+          "year": 2026,
+          "month": 10,
+          "day": 17
+        },
+        "lastDate": {
+          "year": 2026,
+          "month": 11,
+          "day": 13
+        }
+      }
+    ]
+  }
+}

@@ -45,6 +45,8 @@ class Classification(unittest.TestCase):
 
 class Supervision(unittest.TestCase):
     def setUp(self):
+        from tests.support import historical_trio_policy
+        historical_trio_policy(self)
         self.binary=patch('ipanema.orchestration.recovery.shutil.which',side_effect=lambda name:'/bin/'+name)
         self.binary.start();self.addCleanup(self.binary.stop)
 

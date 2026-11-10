@@ -16,6 +16,8 @@ AGENTS = ('claude', 'codex', 'commandcode')
 CAPABILITIES = {
     'devtools.read': ('devtools_open', 'devtools_snapshot', 'devtools_network', 'devtools_console'),
     'devtools.performance': ('devtools_trace', 'devtools_insight'),
+    'psi.read': ('psi_run_pagespeed',),
+    'crux.read': ('crux_query_record', 'crux_query_history'),
     'gsc.read': ('gsc_search_analytics', 'gsc_inspect_url', 'gsc_sitemaps'),
     'analytics.read': ('analytics_run_report',),
     'merchant.read': ('merchant_products',),
@@ -53,6 +55,8 @@ class Policy:
 
     def issue(self, agent, task, capabilities, *, minutes=60, max_calls=30,
               allow_network=False, allow_account_read=False, browser_profile='security'):
+        from ..orchestration.adapters import require_agent
+        require_agent(agent)
         if agent not in AGENTS or not re.fullmatch(r'[a-zA-Z0-9][a-zA-Z0-9_.-]{0,79}', task):
             raise IpanemaError('Agente o identificador de tarea inválido.')
         if not capabilities or set(capabilities) - set(CAPABILITIES):
@@ -79,6 +83,9 @@ class Policy:
         if path.is_symlink() or not path.is_file() or path.stat().st_mode & 0o077:
             raise IpanemaError('Permiso ausente o con permisos de archivo inseguros.')
         grant = read_json(path)
+        if active:
+            from ..orchestration.adapters import require_agent
+            require_agent(grant.get('agent'))
         if grant.get('id') != grant_id or grant.get('project') != self.project.id:
             raise IpanemaError('Permiso de otro proyecto.')
         if active and (grant.get('revoked') or grant.get('expires_at', '') <= now()
@@ -96,7 +103,7 @@ class Policy:
         return {name for cap in grant['capabilities'] for name in CAPABILITIES[cap]}
 
     def stop_path(self, provider):
-        if provider not in ('gsc', 'analytics', 'merchant', 'devtools'):
+        if provider not in ('gsc', 'analytics', 'merchant', 'devtools', 'psi', 'crux'):
             raise IpanemaError('Proveedor inválido.')
         return self.root / (self.project.id + '-' + provider + '-stop.json')
 

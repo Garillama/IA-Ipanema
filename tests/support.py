@@ -27,3 +27,14 @@ def make_project(root: Path, identifier="sample", *, theme=True):
         put(root / "theme/sections/hero.tpl", '<section><h1>Fixture</h1></section>\n{% schema %}{"name":"Hero","settings":[{"id":"title","type":"setting","setting_type":"text","default":"Fixture"}]}{% endschema %}')
         put(root / "theme/manifest.json", {"theme": "fixture", "theme_version": "1", "forked": True})
     return root
+
+
+def historical_trio_policy(test):
+    """Explicit offline v1 replay; never authorizes real CLI/provider execution."""
+    from unittest.mock import patch
+    value={'mode':'multi-agent','enabled':True,'members':['claude','codex','commandcode'],'disabled':[],
+           'require_both_for_major_decisions':True,'independent_proposals':True,'cross_examination':True,
+           'require_defense':False,'evidence_based_decisions':True,'max_deliberation_rounds':2,
+           'production_requires_human_authorization':True}
+    handle=patch('ipanema.orchestration.adapters.agent_policy',return_value=value)
+    handle.start();test.addCleanup(handle.stop)

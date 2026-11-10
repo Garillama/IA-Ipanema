@@ -1,4 +1,14 @@
-# Damar Beauty: auditoría y primera optimización local
+# DaMar Beauty — estado actual de paginación, 10-11-2026
+
+Se investigó el flujo nativo con Claude y Codex y se implementó **solo la corrección local del control de teclado** en `snippets/product-list/pagination.tpl`: ancla sin href → botón type=button. Se conservan scroll infinito, CSS, JS, filtros y contratos nativos. Codex generó el cambio, Claude revisó el diff y ambos evaluaron QA. Validación nativa de Tiendanube y17 checks locales aprobados; sin escrituras remotas ni publicación.
+
+**La solución SEO completa permanece `needs_evidence`**: faltan navegación SSR renderizada, convivencia con appends y cursores reales. No se heredó autorización de ADR anteriores. [Resultado y límites](pagination.md) · [ADR y19 objeciones actualizadas](pagination-adr.json) · [diff local](pagination-local.patch).
+
+Se conserva a continuación la auditoría y el historial anteriores. Sus estados, mediciones y autorizaciones no sustituyen la verificación de esta tarea.
+
+---
+
+# Historial: auditoría y primera optimización local
 
 Verificación: 8–9 de noviembre de 2026. Proyecto `damarbeauty`, dominio `https://damarbeauty.mx/`, copia local externa `~/Escritorio/Damar`. Base Git `22d413e`, fork seccionable Ipanema **1.7.0**. El discovery histórico de otra instalación no demuestra el comportamiento de esta tienda.
 

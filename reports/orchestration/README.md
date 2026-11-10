@@ -1,10 +1,14 @@
 # Orquestador local IA-Ipanema
 
-Este módulo coordina Claude Code, Codex y CommandCode sobre el registro, skills, buscador, contratos y QA existentes. No repite discovery ni incluye un ejecutor de publicación. [Compatibilidad y fuentes](runtime-compatibility.md) · [modelos fechados](../../tools/ipanema/orchestration/models.json) · [verificación](verification.md).
+Este módulo coordina Claude Code y Codex sobre el registro, skills, buscador, contratos y QA existentes. No repite discovery ni incluye un ejecutor de publicación. [Compatibilidad y fuentes](runtime-compatibility.md) · [modelos fechados](../../tools/ipanema/orchestration/models.json) · [verificación](verification.md).
+
+La fase previa para L3/L4 es ahora el [consejo técnico](council.md): dos propuestas independientes, preguntas cruzadas, defensas, matriz de restricciones y ADR. El engine conserva el flujo posterior de implementación/QA/revisión. `--council full` lo activa también en tareas pequeñas; no replica automáticamente tres workers para L1. Un ADR sin evidencia detiene la implementación y nunca autoriza producción.
+
+CommandCode conserva su integración e historial, pero está deshabilitado por `models.json:council`, incluido el fallback y nuevos permisos MCP. La autenticación de Claude y dos recorridos duales reales de solo lectura están verificados. Ambos ADR conservan `needs_evidence`; la deliberación no autoriza implementar. Consulta [resultados y límites comprobados](council-verification.md).
 
 ## Inicio
 
-Se necesitan Python/Git y, para ejecutar workers, Linux con Bubblewrap y namespaces operativos. Las tres CLI deben estar instaladas y autenticadas por sus mecanismos propios. No se inicia login ni se instala nada automáticamente; si falta aislamiento, la ejecución se bloquea. Los comandos de configuración/planificación siguen disponibles sin ejecutar modelos. Las pruebas de rutas con espacios se hacen en esta máquina, no equivalen a pruebas en varios sistemas operativos.
+Se necesitan Python/Git y, para ejecutar workers, Linux con Bubblewrap y namespaces operativos. Las CLI de Claude y Codex deben estar instaladas y autenticadas por sus mecanismos propios. No se inicia login ni se instala nada automáticamente; si falta aislamiento, la ejecución se bloquea. Los comandos de configuración/planificación siguen disponibles sin ejecutar modelos. Las pruebas de rutas con espacios se hacen en esta máquina, no equivalen a pruebas en varios sistemas operativos.
 
 ```bash
 python3 tools/ia.py orchestrate doctor
@@ -42,16 +46,16 @@ Opciones avanzadas en `.local/orchestration.json`, ignorado por Git: `timeout_se
 
 | Nivel | Flujo inicial | Coste/control |
 |---|---|---|
-| L1 | Codex o CommandCode en auditoría | Perfil rápido, un proceso |
-| L2 | Codex y revisión CommandCode | Perfil equilibrado y alcance acotado |
-| L3 | Claude arquitectura → Codex implementación → CommandCode revisión | Fuertes para arquitectura/código; equilibrado para revisión acotada |
-| L4 | Claude arquitectura → Codex → dos revisiones independientes (Claude/CommandCode) | Perfiles críticos/fuertes, sin aprobación por un solo agente |
+| L1 | Codex; consejo compacto opcional con Claude | Perfil rápido, un proceso |
+| L2 | Codex y revisión Claude | Perfil equilibrado y alcance acotado |
+| L3 | Consejo dual → Codex implementación → Claude revisión | Fuertes para arquitectura/código; equilibrado para revisión acotada |
+| L4 | Consejo dual → implementador → otro proveedor como revisor + QA central reforzado | Perfiles críticos/fuertes, sin aprobación por un solo agente |
 
 La regla considera objetivo y nombres de archivos. Precio, stock, carrito, checkout, pagos y credenciales pueden elevar un cambio pequeño a L4. Una solicitud de publicar/watch/sincronizar se bloquea: este ejecutor no hace operaciones de producción. Es un clasificador conservador, no una comprensión infalible; revisa nivel y archivos.
 
-Los modelos y esfuerzos se consultaron mediante catálogos/documentación primaria, con fuente y fecha en el registro. No se estiman costes de un proveedor a partir de los de otro. Cada tarea registra modelo, tier, motivo, duración y contadores/coste cuando la CLI realmente los emite. No hay fallback a modelos más caros ante auth o cuota. Las revisiones acotadas no necesitan siempre el máximo modelo; el perfil fuerte de CommandCode queda disponible para trabajos críticos, con sus límites reales registrados.
+Los modelos y esfuerzos se consultaron mediante catálogos/documentación primaria, con fuente y fecha en el registro. No se estiman costes de un proveedor a partir de los de otro. Cada tarea registra modelo, tier, motivo, duración y contadores/coste cuando la CLI realmente los emite. No hay fallback a modelos más caros ante auth o cuota. Las revisiones acotadas no necesitan siempre el máximo modelo; los perfiles de CommandCode se conservan como historial y no pueden seleccionarse mientras esté deshabilitado.
 
-Puedes modificar la asignación `agent` de un plan revisable después de comparar evidencias. El controlador vuelve a comprobar riesgo e independencia; cambiar un campo no autoriza publicar, editar fuera del alcance o eliminar revisiones obligatorias. No existe todavía un optimizador estadístico que demuestre qué modelo es mejor para todas las tareas. Las pruebas de routing no sustituyen esa evaluación.
+Usa `--implementer claude` para invertir los roles predeterminados, o conserva Codex como implementador y Claude como revisor. La participación se configura solo en `tools/ipanema/orchestration/models.json:council`; el campo local `council` se rechaza. Puedes modificar la asignación `agent` de un plan revisable después de comparar evidencias. El controlador vuelve a comprobar riesgo e independencia; cambiar un campo no autoriza publicar, editar fuera del alcance o eliminar revisiones obligatorias. No existe todavía un optimizador estadístico que demuestre qué modelo es mejor para todas las tareas. Las pruebas de routing no sustituyen esa evaluación.
 
 ## Aislamiento, ejecución y corrección
 
@@ -67,11 +71,11 @@ flowchart LR
   Review --> Diff[Diff y evidencias]
 ```
 
-El controlador crea un repositorio Git privado por ejecución y worktrees por tarea. No usa reset/clean/stash ni cambia ramas del original. Los workers solo ven una vista de lectura con archivos seleccionados; no reciben Git, el HOME original, otras tiendas ni secretos de otros agentes. Claude tiene herramientas deshabilitadas; Codex usa modo read-only y configuración de usuario ignorada; CommandCode usa modo plan/safe/no-skills y solo se acepta su propuesta final JSON. CommandCode no documenta una garantía absoluta de desactivar subagentes internos: no se presenta como tal. El sandbox restringe permisos heredados aunque una CLI invoque herramientas internas.
+El controlador crea un repositorio Git privado por ejecución y worktrees por tarea. No usa reset/clean/stash ni cambia ramas del original. Los workers solo ven una vista de lectura con archivos seleccionados; no reciben Git, el HOME original, otras tiendas ni secretos de otros agentes. Claude tiene herramientas deshabilitadas; Codex usa modo read-only y configuración de usuario ignorada; su configuración histórica de CommandCode se conserva pero no se ejecuta. El sandbox restringe permisos heredados aunque una CLI invoque herramientas internas.
 
 Bubblewrap deja `/tmp` y HOME efímero para funcionamiento de las CLI, monta el snapshot RO y auth del proveedor RO. La red habilitada para inferencia **no es un firewall por dominio**. Los clientes de inferencia son parte confiable del entorno: no conectar CLI/plugins desconocidos. No se heredan variables ni accesos de tienda. QA aislado usa red deshabilitada y ninguna credencial. Estos controles no certifican ausencia universal de vulnerabilidades del proveedor.
 
-El planificador ejecuta tareas listas en paralelo solo cuando no coinciden sus permisos de escritura. El flujo de una misma implementación se mantiene secuencial por dependencias; las dos revisiones de L4 pueden correr a la vez. Un lock por proyecto evita dos controladores simultáneos. Los agentes devuelven propuestas; el controlador comprueba paths relativos, symlinks, hashes y tamaño antes de escribir **en la copia**. Los revisores no escriben ni deciden permisos. La opinión de un revisor no reemplaza QA.
+El planificador ejecuta tareas listas en paralelo solo cuando no coinciden sus permisos de escritura. El flujo de una misma implementación se mantiene secuencial por dependencias; las dos propuestas iniciales independientes pueden correr a la vez; el contraste y la defensa dependen de resultados completos previos. Un lock por proyecto evita dos controladores simultáneos. Los agentes devuelven propuestas; el controlador comprueba paths relativos, symlinks, hashes y tamaño antes de escribir **en la copia**. Los revisores no escriben ni deciden permisos. La opinión de un revisor no reemplaza QA.
 
 Ante un fallo de QA se conserva evidencia, se restaura únicamente el intento propio y se permite un máximo de dos correcciones adicionales. Si hay conflicto o límite se bloquea sin descartar cambios ajenos. Un fallo de proveedor pasa ahora por la supervisión acotada descrita abajo. El diff final se calcula contra el baseline inmutable; si el original cambia durante el run, el estado se bloquea para revisión.
 
@@ -84,7 +88,6 @@ python3 tools/ia.py qa --suite orchestration
 python3 tools/ia.py qa --suite quick
 python3 tools/ia.py orchestrate smoke --agent claude --execute
 python3 tools/ia.py orchestrate smoke --agent codex --execute
-python3 tools/ia.py orchestrate smoke --agent commandcode --execute
 ```
 
 Las pruebas offline de DAG usan workers mock identificados; los tests de Bubblewrap/Git ejecutan esas herramientas reales. Smoke usa datos sintéticos e inferencia real, registra bloqueo si falla y no cambia una tienda. Los runs quedan en `reports/runs/<proyecto>/`, ignorados por Git. No se guardan stdout/stderr crudos de proveedores ni razonamiento interno; solo resultados técnicos propuestos, contadores y estados. Los worktrees se conservan para revisión, sin limpieza destructiva automática.
@@ -117,7 +120,7 @@ Solo red transitoria/timeout/inactividad permiten repetir el mismo proveedor, co
 
 El circuit breaker vive únicamente en la ejecución actual: los fallos permanentes lo abren inmediatamente, los transitorios al umbral configurado (1–3). Tareas posteriores del mismo run no insisten en el proveedor abierto; otro run explícito puede volver a comprobarlo. `recovery_state` y `checkpoint_at` quedan en `run.json`; cada tarea conserva `assigned_agent`, agente efectivo, `recovery_attempts`, modelo, resultados y sustituciones. No existe un servicio persistente que reinicie tareas al abrir el repositorio ni un comando de resume automático entre procesos; los checkpoints permiten inspeccionar/replanificar, y el failover dentro del run reutiliza los mismos archivos, hashes y resultados anteriores.
 
-El fallback no amplía scope, no eleva esfuerzo por encima del tier ni deja dos escritores activos: los workers continúan viendo solo una vista RO y el controlador aplica la propuesta después de recibirla. Se calcula la independencia con **el agente efectivo** que implementó. L3 conserva al menos un proveedor revisor diferente; L4 necesita dos proveedores revisores distintos y diferentes del implementador. Si uno falta y no queda sustituto independiente, el run se bloquea; no se declara integración aprobada. El controlador vuelve a verificarlo al finalizar.
+El fallback no amplía scope, no eleva esfuerzo por encima del tier ni deja dos escritores activos: los workers continúan viendo solo una vista RO y el controlador aplica la propuesta después de recibirla. Se calcula la independencia con **el agente efectivo** que implementó. L2–L4 conservan al menos un proveedor revisor diferente del implementador y QA central; en dual no existen dos proveedores adicionales y no se simulan. Claude y Codex son los únicos candidatos de sustitución y ningún nodo del consejo cambia su identidad original. Si uno falta y no queda sustituto independiente, el run se bloquea; no se declara integración aprobada. El controlador vuelve a verificarlo al finalizar.
 
 Prueba reproducible offline: `python3 -m unittest tests.unit.test_orchestration_recovery -q`. Incluye fallos simulados identificados, límites de reintento, circuit breaker, checkpoints, bloqueo ante 403/429, independencia y watchdog/contexto con procesos Bubblewrap reales cuando está disponible. No equivale a probar todas las cuentas/modelos.
 

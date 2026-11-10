@@ -34,7 +34,7 @@ class AccessCLI(unittest.TestCase):
             self.assertFalse(providers[name]['account_access_tested'])
 
     def test_each_runtime_gets_runnable_config_and_revocation_is_immediate(self):
-        for agent in ('claude', 'codex', 'commandcode'):
+        for agent in ('claude', 'codex'):
             with self.subTest(agent=agent):
                 result = self.cli('grant', '--agent', agent, '--task', 'seo-test', '--capability',
                                   'gsc.read', '--allow-network', '--allow-account-read')

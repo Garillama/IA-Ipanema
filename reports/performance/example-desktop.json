@@ -1,0 +1,300 @@
+{
+  "kind": "performance-intelligence-example",
+  "simulated": true,
+  "project": "synthetic-fixture",
+  "url": "https://example.invalid",
+  "device": "desktop",
+  "sources": {
+    "pagespeed": {
+      "source": "pagespeed",
+      "measurement": "laboratory",
+      "status": "observed",
+      "measured_at": "2026-11-10T00:00:00Z",
+      "metrics": {
+        "lcp": 2400.0,
+        "fcp": 1400.0,
+        "cls": 0.04,
+        "tbt": 120.0,
+        "speed_index": 2500.0
+      },
+      "units": {
+        "lcp": "ms",
+        "fcp": "ms",
+        "cls": "unitless",
+        "tbt": "ms",
+        "speed_index": "ms"
+      },
+      "scores": {
+        "accessibility": 0.9,
+        "best-practices": 0.9,
+        "performance": 0.9,
+        "seo": 0.9
+      },
+      "profile": {
+        "source": "pagespeed",
+        "url": "https://example.invalid",
+        "final_url": "https://example.invalid",
+        "device": "desktop",
+        "categories": [
+          "accessibility",
+          "best-practices",
+          "performance",
+          "seo"
+        ],
+        "locale": "es",
+        "lighthouse_version": "13.0.0",
+        "chrome_version": "130.1.2.3",
+        "screen": {
+          "mobile": false,
+          "width": 1440
+        },
+        "throttling_method": "simulate",
+        "throttling": {
+          "rttMs": 150,
+          "cpuSlowdownMultiplier": 4
+        },
+        "cache": false,
+        "network_policy": "google-managed"
+      },
+      "missing": [],
+      "observations": {
+        "requestedUrl": "https://example.invalid",
+        "finalUrl": "https://example.invalid",
+        "finalDisplayedUrl": null,
+        "fetchTime": "2026-11-10T00:00:00Z",
+        "lighthouseVersion": "13.0.0",
+        "configSettings": {
+          "screenEmulation": {
+            "mobile": false,
+            "width": 1440
+          },
+          "throttlingMethod": "simulate",
+          "throttling": {
+            "rttMs": 150,
+            "cpuSlowdownMultiplier": 4
+          },
+          "disableStorageReset": false
+        },
+        "environment": {
+          "hostUserAgent": "Chrome/130.1.2.3"
+        },
+        "categories": {
+          "performance": {
+            "score": 0.9
+          },
+          "accessibility": {
+            "score": 0.9
+          },
+          "best-practices": {
+            "score": 0.9
+          },
+          "seo": {
+            "score": 0.9
+          }
+        },
+        "runWarnings": [],
+        "runtimeError": null,
+        "audits": {
+          "largest-contentful-paint": {
+            "title": "Synthetic observation",
+            "score": 0.9,
+            "numericValue": 2400
+          },
+          "first-contentful-paint": {
+            "title": "Synthetic observation",
+            "score": 0.9,
+            "numericValue": 1400
+          },
+          "cumulative-layout-shift": {
+            "title": "Synthetic observation",
+            "score": 0.9,
+            "numericValue": 0.04
+          },
+          "total-blocking-time": {
+            "title": "Synthetic observation",
+            "score": 0.9,
+            "numericValue": 120
+          },
+          "speed-index": {
+            "title": "Synthetic observation",
+            "score": 0.9,
+            "numericValue": 2500
+          }
+        }
+      },
+      "warnings": [],
+      "runtime_error": null,
+      "field_inp": null,
+      "limitations": [
+        "Laboratorio; TBT no mide INP. Scores no certifican SEO/WCAG.",
+        "PSI no mide cambios locales sin una URL publicada accesible."
+      ]
+    },
+    "crux": {
+      "source": "crux",
+      "status": "not_measured",
+      "reason": "No fixture desktop de campo; no inventar datos."
+    },
+    "lighthouse_local": {
+      "source": "lighthouse_local",
+      "status": "not_measured",
+      "reason": "Verificación Chrome real separada, no sustituida por este ejemplo."
+    }
+  },
+  "findings": [
+    {
+      "id": "PERF-largest-contentful-paint",
+      "source": "pagespeed",
+      "url": "https://example.invalid",
+      "device": "desktop",
+      "metric_affected": [
+        "lcp"
+      ],
+      "evidence": {
+        "audit": "largest-contentful-paint",
+        "score": 0.9,
+        "details": null
+      },
+      "cause_state": "hypothesis",
+      "severity": "review_required",
+      "potential_impact": "No cuantificado; comprobar recurso, interacción y consumidores.",
+      "candidate_files": [],
+      "consumers": [],
+      "alternatives": [
+        "Inspeccionar motor/componente nativo y confirmar causa antes de cambiar."
+      ],
+      "risks": [
+        "Regresión fuera del alcance de una auditoría automática."
+      ],
+      "estimated_cost": null,
+      "required_tests": [
+        "Perfil comparable antes/después",
+        "QA funcional, SEO, accesibilidad y revisión independiente"
+      ]
+    },
+    {
+      "id": "PERF-first-contentful-paint",
+      "source": "pagespeed",
+      "url": "https://example.invalid",
+      "device": "desktop",
+      "metric_affected": [
+        "fcp"
+      ],
+      "evidence": {
+        "audit": "first-contentful-paint",
+        "score": 0.9,
+        "details": null
+      },
+      "cause_state": "hypothesis",
+      "severity": "review_required",
+      "potential_impact": "No cuantificado; comprobar recurso, interacción y consumidores.",
+      "candidate_files": [],
+      "consumers": [],
+      "alternatives": [
+        "Inspeccionar motor/componente nativo y confirmar causa antes de cambiar."
+      ],
+      "risks": [
+        "Regresión fuera del alcance de una auditoría automática."
+      ],
+      "estimated_cost": null,
+      "required_tests": [
+        "Perfil comparable antes/después",
+        "QA funcional, SEO, accesibilidad y revisión independiente"
+      ]
+    },
+    {
+      "id": "PERF-cumulative-layout-shift",
+      "source": "pagespeed",
+      "url": "https://example.invalid",
+      "device": "desktop",
+      "metric_affected": [
+        "cls"
+      ],
+      "evidence": {
+        "audit": "cumulative-layout-shift",
+        "score": 0.9,
+        "details": null
+      },
+      "cause_state": "hypothesis",
+      "severity": "review_required",
+      "potential_impact": "No cuantificado; comprobar recurso, interacción y consumidores.",
+      "candidate_files": [],
+      "consumers": [],
+      "alternatives": [
+        "Inspeccionar motor/componente nativo y confirmar causa antes de cambiar."
+      ],
+      "risks": [
+        "Regresión fuera del alcance de una auditoría automática."
+      ],
+      "estimated_cost": null,
+      "required_tests": [
+        "Perfil comparable antes/después",
+        "QA funcional, SEO, accesibilidad y revisión independiente"
+      ]
+    },
+    {
+      "id": "PERF-total-blocking-time",
+      "source": "pagespeed",
+      "url": "https://example.invalid",
+      "device": "desktop",
+      "metric_affected": [
+        "tbt"
+      ],
+      "evidence": {
+        "audit": "total-blocking-time",
+        "score": 0.9,
+        "details": null
+      },
+      "cause_state": "hypothesis",
+      "severity": "review_required",
+      "potential_impact": "No cuantificado; comprobar recurso, interacción y consumidores.",
+      "candidate_files": [],
+      "consumers": [],
+      "alternatives": [
+        "Inspeccionar motor/componente nativo y confirmar causa antes de cambiar."
+      ],
+      "risks": [
+        "Regresión fuera del alcance de una auditoría automática."
+      ],
+      "estimated_cost": null,
+      "required_tests": [
+        "Perfil comparable antes/después",
+        "QA funcional, SEO, accesibilidad y revisión independiente"
+      ]
+    },
+    {
+      "id": "PERF-speed-index",
+      "source": "pagespeed",
+      "url": "https://example.invalid",
+      "device": "desktop",
+      "metric_affected": [
+        "speed_index"
+      ],
+      "evidence": {
+        "audit": "speed-index",
+        "score": 0.9,
+        "details": null
+      },
+      "cause_state": "hypothesis",
+      "severity": "review_required",
+      "potential_impact": "No cuantificado; comprobar recurso, interacción y consumidores.",
+      "candidate_files": [],
+      "consumers": [],
+      "alternatives": [
+        "Inspeccionar motor/componente nativo y confirmar causa antes de cambiar."
+      ],
+      "risks": [
+        "Regresión fuera del alcance de una auditoría automática."
+      ],
+      "estimated_cost": null,
+      "required_tests": [
+        "Perfil comparable antes/después",
+        "QA funcional, SEO, accesibilidad y revisión independiente"
+      ]
+    }
+  ],
+  "validation": {
+    "google_called": false,
+    "not_damarbeauty": true
+  }
+}

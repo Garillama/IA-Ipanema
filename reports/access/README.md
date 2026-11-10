@@ -1,6 +1,8 @@
 # Acceso compartido IA-Ipanema
 
-Estado actual: **Claude, Codex y CommandCode invocaron herramientas reales** para DaMar Beauty. Search Console respondió mediante OAuth de solo lectura. El único push de `static/css/damar.css` a 14748767, autorizado expresamente, terminó y su render publicado pasó seis comprobaciones de footer. El QA completo conserva hallazgos previos de SEO/accesibilidad, sin hallazgos nuevos. [Evidencia y límites](verification.md) · [referencia de producción y procedimiento](tiendanube-preview.md).
+Política vigente: solo Claude y Codex pueden recibir o utilizar permisos activos. CommandCode conserva integración y evidencia histórica, pero está deshabilitado por `tools/ipanema/orchestration/models.json:council`; ni planes antiguos ni grants existentes pueden reactivarlo. Esta configuración no inicia MCP, OAuth ni consultas Google.
+
+Verificación histórica: **Claude, Codex y CommandCode invocaron herramientas reales** para DaMar Beauty. Search Console respondió mediante OAuth de solo lectura. El único push de `static/css/damar.css` a 14748767, autorizado expresamente, terminó y su render publicado pasó seis comprobaciones de footer. El QA completo conserva hallazgos previos de SEO/accesibilidad, sin hallazgos nuevos. [Evidencia y límites](verification.md) · [referencia de producción y procedimiento](tiendanube-preview.md).
 
 ## Componentes existentes y acceso por tarea
 

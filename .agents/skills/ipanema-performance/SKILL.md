@@ -18,3 +18,5 @@ Herramientas permitidas: lectura con rg, `tools/ia.py doctor/search/plan`, `tool
 Validación: QA de navegador/red y Lighthouse autorizado con perfil idéntico antes/después; compara métricas, assets y bytes. Reporta número de muestras, caché, red/CPU, posibles regresiones y limitaciones de atribución.
 
 Entrega y cierre: identifica fuente nativa, decisión/alternativas, archivos y consumidores, diff si fue autorizado, pruebas ejecutadas con evidencia y pendientes. Finaliza al comprobar el alcance; si faltan accesos/datos, registra el límite sin declarar aprobación. Hallazgo, propuesta y solución verificada conservan estados distintos.
+
+Para PageSpeed/CrUX o comparar fuentes, consulta el [motor integrado de rendimiento](../../../reports/performance/README.md). Usa `performance doctor` antes de una lectura remota; CLI y MCP comparten permisos, caché y presupuestos. Conserva fuente, granularidad URL/origen, fecha y periodo; `performance compare` bloquea perfiles incompletos o incompatibles. Recupera solo auditorías y recursos relevantes para el consejo; un fallo de contrato o datos de campo insuficientes no autoriza inferir métricas ni optimizar.

@@ -87,8 +87,13 @@ class MockWorkersRealGit(unittest.TestCase):
              'read_files':['alpha.txt'],'allowed_files':['alpha.txt'],'dependencies':[],'tests':['mock-central-qa'],'result':None},
             {'id':'beta','objective':'Synthetic beta edit','agent':'codex','tier':'fast','role':'implementation','state':'pending',
              'read_files':['beta.txt'],'allowed_files':['beta.txt'],'dependencies':[],'tests':['mock-central-qa'],'result':None}]
+        plan['tasks'].append({'id':'review','objective':'Independent fixture review','agent':'claude','tier':'fast','role':'review','state':'pending',
+             'read_files':['alpha.txt','beta.txt'],'allowed_files':[],'dependencies':['alpha','beta'],'tests':['mock-central-qa'],'result':None})
         barrier=threading.Barrier(2);trees=[];guard=threading.Lock()
         def mock_worker(project,plan,task,tree,history,settings):
+            if task['role']=='review':
+                task['execution']={'backend':'mock','inference_executed':False}
+                return {'decision':'approve','summary':'Independent offline fixture review','changes':[]}
             with guard:trees.append(tree)
             self.assertTrue((tree/'.git').is_file())  # Actual Git worktree pointer.
             barrier.wait(timeout=10)
@@ -119,7 +124,9 @@ class MockWorkersRealGit(unittest.TestCase):
     def test_duplicate_writers_never_dispatch_models(self):
         plan=self.plan();first=plan['tasks'][0]
         first['allowed_files']=['alpha.txt'];first['read_files']=['alpha.txt'];first['dependencies']=[]
-        plan['tasks']=[first,{**first,'id':'duplicate'}]
+        reviewer=next(t for t in plan['tasks']if t['role']=='review')
+        reviewer['dependencies']=[first['id'],'duplicate']
+        plan['tasks']=[first,{**first,'id':'duplicate'},reviewer]
         with patch('ipanema.orchestration.engine.worker') as mock,patch('ipanema.orchestration.engine.central_qa',side_effect=self.mock_qa),patch('ipanema.orchestration.isolation.probe',return_value={'available':True}):
             result=engine.execute(self.p,plan,authorize=True)
         self.assertEqual(result['state'],'blocked');mock.assert_not_called()
@@ -221,7 +228,7 @@ class MockWorkersRealGit(unittest.TestCase):
         plan=planner.make_plan(self.p,'Corrige precio',files=['alpha.txt'],scope='workspace')
         self.assertEqual(plan['classification']['level'],'L4')
         plan['classification']={'level':'L1','risk':'normal','production_request':False}
-        plan['tasks']=[task for task in plan['tasks'] if task['id']!='independent-review']
+        plan['tasks']=[task for task in plan['tasks'] if task['role']!='review']
         with patch('ipanema.orchestration.engine.worker') as worker,patch('ipanema.orchestration.engine.central_qa') as qa:
             with self.assertRaisesRegex(IpanemaError,'revisiones independientes'):
                 engine.execute(self.p,plan,authorize=True)

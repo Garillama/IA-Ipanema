@@ -30,7 +30,16 @@ def classify(request,files=()):
             'method':'Reglas conservadoras revisables; la longitud del diff no reduce riesgo comercial.'}
 
 
-def make_plan(project,request,*,files=None,scope='theme',read_only=False):
+def relevant_constraints(request,scope):
+    # Recomputed by the controller; a saved plan cannot silently remove these.
+    if scope=='theme':return ['seo','performance','accessibility','responsive']
+    skills=route(request)['skills']
+    names={'ipanema-seo-expert':'seo','ipanema-performance':'performance',
+           'ipanema-responsive':'responsive','ipanema-visual-qa':'accessibility'}
+    return sorted({criterion for skill,criterion in names.items() if skill in skills})
+
+
+def make_plan(project,request,*,files=None,scope='theme',read_only=False,council_mode='auto',council_rounds=2,implementation_agent='codex'):
     if scope not in ('theme','workspace'):raise IpanemaError('Scope no soportado.')
     selection=route(request);knowledge=None;discovery=None
     try:
@@ -40,19 +49,26 @@ def make_plan(project,request,*,files=None,scope='theme',read_only=False):
     candidates=[x['path'] for x in (knowledge or {}).get('components',[])]
     allowed=list(dict.fromkeys(safe_path(f) for f in (files or (candidates[:1] if scope=='theme' else []))))
     risk=classify(request,allowed);level=int(risk['level'][1]);tasks=[]
+    from .adapters import enabled_agents,require_agent
+    require_agent(implementation_agent)
+    if implementation_agent not in ('claude','codex'):raise IpanemaError('Implementador debe ser Claude o Codex.')
+    dual=len(enabled_agents(project.root))==2
+    review_agent=('claude'if implementation_agent=='codex'else'codex')if dual else'commandcode'
+    from .council import config_policy
+    council_policy=config_policy(risk['level'],mode=council_mode,max_rounds=council_rounds)
     tier='critical' if level==4 else 'strong' if level==3 else 'balanced' if level==2 else 'fast'
     def add(ident,role,agent,dependencies,write=False):
-        task_tier='balanced' if role in ('review','audit') and level<4 else tier
+        task_tier='balanced' if role in ('review','audit') and level<3 else tier
         tasks.append({'id':ident,'objective':request,'role':role,'agent':agent,'tier':task_tier,'allowed_files':allowed if write else [],
                       'read_files':allowed,'dependencies':dependencies,'tests':['central-qa'],'state':'pending','result':None})
     if level>=3:
         add('architecture','architecture','claude',[])
     if read_only:
-        add('audit','audit','commandcode',['architecture'] if level>=3 else [])
+        add('audit','audit','codex' if dual else 'commandcode',['architecture'] if level>=3 else [])
     else:
-        add('implementation','implementation','codex',['architecture'] if level>=3 else [],True)
-        if level>=2:add('review','review','commandcode',['implementation'])
-        if level==4:add('independent-review','review','claude',['implementation'])
+        add('implementation','implementation',implementation_agent,['architecture'] if level>=3 else [],True)
+        if level>=2:add('review','review',review_agent,['implementation'])
+        if level==4 and not dual:add('independent-review','review',next(a for a in enabled_agents()if a not in (implementation_agent,review_agent)),['implementation'])
     return {'kind':'orchestration-plan','id':'orch-'+uuid.uuid4().hex[:12],'project':project.id,'at':now(),'objective':request,
             'scope':scope,'read_only':read_only,'classification':risk,'skills':selection['skills'],
             'knowledge':knowledge,'candidate_files':candidates,'allowed_files':allowed,'tasks':tasks,
@@ -61,6 +77,9 @@ def make_plan(project,request,*,files=None,scope='theme',read_only=False):
             'consumers':discovery['consumers'] if discovery else {},
             'tests':['repo','unit','integration'] if scope=='workspace' else ['source'],
             'integration':'export_diff_only','max_parallel':2,'max_correction_attempts':2,
+            'review_policy':{'independent_provider_required':level>=2,'dual_agent':dual,'critical_controller_qa':level==4},
+            'council':council_policy,'council_checks':[],
+            'council_required_constraints':relevant_constraints(request,scope),
             'limitations':['Candidatos deben comprobarse en fuente actual.','El modelo no eleva permisos ni publica.','Una revisión de IA no sustituye QA ejecutado.']}
 
 

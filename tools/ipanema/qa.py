@@ -112,8 +112,9 @@ def execute(project: Project, suite="quick", *, pages=None, component=None, allo
             result["limitations"].append("Fixtures no ejecutadas por dependencia opcional ausente.")
     if suite == 'orchestration':
         for area in ('unit','integration'):
-            tested=run_command([sys.executable,'-m','unittest','discover','-s','tests/'+area,'-p','test_orchestration*.py','-v'],cwd=project.root,timeout=180)
-            record('orchestration-'+area,tested['exit_code']==0,tested)
+            for pattern,label in [('test_orchestration*.py','orchestration'),('test_council*.py','council')]:
+                tested=run_command([sys.executable,'-m','unittest','discover','-s','tests/'+area,'-p',pattern,'-v'],cwd=project.root,timeout=180)
+                record(label+'-'+area,tested['exit_code']==0,tested)
         result['limitations'].append('Pruebas de DAG/Git usan workers mock etiquetados; inferencia real requiere orchestrate smoke --execute.')
     if suite in ("evals", "quick", "full"):
         evaluation = evaluate(project)
