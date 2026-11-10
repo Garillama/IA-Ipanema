@@ -670,6 +670,102 @@
         "productive": true,
         "must_reverify_before_changes": true
       }
+    },
+    {
+      "id": "rhino-blog-cover-priority-20261110",
+      "problem": "La primera portada del listado se descubría mediante JS, sin prioridad ni visibilidad sin JS.",
+      "context": {
+        "project": "rhino-performance",
+        "url": "https://rhino-performance.com/blog/",
+        "public_asset_installations_observed": [
+          "14828608"
+        ],
+        "validated_views": [
+          "normal blog390/1440",
+          "page2",
+          "view=cards",
+          "tag real",
+          "home/product shared consumers",
+          "no-JS"
+        ]
+      },
+      "component": "snippets/blog-card.tpl → snippets/image.tpl:image_priority_high",
+      "files": [
+        "snippets/blog-card.tpl",
+        "sections/main-blog.tpl",
+        "sections/blog-carousel.tpl",
+        "sections/blog-post-related.tpl",
+        "sections/home-news.tpl"
+      ],
+      "cause": "El consumidor no pasaba prioridad contextual y todas las cards usaban lazy JS.",
+      "solution": "Parámetro defaultfalse, primera card normal con imagen prioritaria; exclusiones de fragmento/tag y false en otros consumidores.",
+      "tests": [
+        "html_priority:blog:390",
+        "render_visible:blog:390",
+        "http:blog:390",
+        "html_priority:blog:1440",
+        "render_visible:blog:1440",
+        "http:blog:1440",
+        "html_priority:page2:390",
+        "render_visible:page2:390",
+        "http:page2:390",
+        "consumer_or_fragment_exclusion:fragment",
+        "http:fragment:390",
+        "consumer_or_fragment_exclusion:home",
+        "http:home:390",
+        "consumer_or_fragment_exclusion:product",
+        "http:product:390",
+        "filtered_priority_exclusion",
+        "http:filtered:None",
+        "no_js_visible",
+        "observed_network_high",
+        "pagination_distinct_article_links",
+        "matching_laboratory_profiles",
+        "local_source_unchanged",
+        "observed_lcp_median_lower_not_statistical_gate"
+      ],
+      "results": {
+        "published_behavior": "passed_in_scoped_views",
+        "mobile_lcp_median_before_ms": 13264.782,
+        "mobile_lcp_median_after_ms": 6194.4915,
+        "mobile_performance_medians": [
+          0.44,
+          0.48
+        ],
+        "performance_still_partial": true
+      },
+      "limitations": [
+        "3 samples/profile; no field or statistical release guarantee.",
+        "Original500KB cover and high mobile TBT unresolved.",
+        "No complete store/WCAG/conversion validation.",
+        "Public behavior and local hashes bound observationally, not full deployment code attestation."
+      ],
+      "risks": [
+        "Changing section order can make priority unnecessary; revalidate."
+      ],
+      "compatibility": "Verified only for RHINO context/recorded source hashes and public asset installation14828608.",
+      "reuse": "A knowledge and C procedure; code redistribution rights not transferred; revalidate all other stores/components.",
+      "scope": "theme",
+      "status": "verified",
+      "agent_version": "2.2.0",
+      "agent_fingerprint": "fdaa96ba2f9bf125d6f045141d849e0326908a6d8d5d8e0d525b1a7e3faa069d",
+      "project": "rhino-performance",
+      "theme_installation_id": null,
+      "at": "2026-11-10T21:56:54.253637+00:00",
+      "source_hashes": {
+        "snippets/blog-card.tpl": "725ce520938a72b21275319deae006104ccbf2f1a91d0f5f0bab33c8de331775",
+        "sections/main-blog.tpl": "cd7688c69a2717c8d92370b0beecce31e8b3d4856fef9e651f8b0974d76acbb0",
+        "sections/blog-carousel.tpl": "92f0242617e2fe586e270842b0abab363de05e3c6693008be9f0fb3b04d87bd8",
+        "sections/blog-post-related.tpl": "a0e5685de3df606f1905cb966447caeafd1d3739cda5bdd3ee3afe499c611f87",
+        "sections/home-news.tpl": "755124eedfa9012684b53392937b6618499c241cbee48d33f1e6ce5642ab484a"
+      },
+      "evidence": [
+        {
+          "path": "reports/runs/rhino-performance/20261110T214551-blog-release-validation-f5d536bf/qa-proof.json",
+          "sha256": "90146d07ccb85962826a9311ee5115a108cf2182c6f098bf78521f9517268ff5"
+        }
+      ],
+      "remote_version_observation": null
     }
   ]
 }

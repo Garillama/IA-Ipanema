@@ -1,0 +1,593 @@
+{
+  "at": "2026-11-10T21:54:52.778474+00:00",
+  "project": "rhino-performance",
+  "url": "https://rhino-performance.com/blog/",
+  "status": "published_behavior_verified_performance_still_partial",
+  "public_asset_installations_observed": [
+    "14828608"
+  ],
+  "before_mobile": {
+    "metrics": {
+      "lcp": 13264.782,
+      "fcp": 1965.9089999999997,
+      "cls": 0.0,
+      "tbt": 1492.5000000000018,
+      "speed_index": 5161.466362895995
+    },
+    "scores": {
+      "performance": 0.44,
+      "accessibility": 0.93,
+      "best-practices": 0.77,
+      "seo": 1.0
+    },
+    "statistics": {
+      "lcp": {
+        "median": 13264.782,
+        "min": 12688.648999999998,
+        "max": 13390.150999999996,
+        "available_samples": 3
+      },
+      "fcp": {
+        "median": 1965.9089999999997,
+        "min": 1808.1130000000003,
+        "max": 2878.2739999999994,
+        "available_samples": 3
+      },
+      "cls": {
+        "median": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "available_samples": 3
+      },
+      "tbt": {
+        "median": 1492.5000000000018,
+        "min": 1200.2932500000006,
+        "max": 1603.1134999999995,
+        "available_samples": 3
+      },
+      "speed_index": {
+        "median": 5161.466362895995,
+        "min": 4263.921872534107,
+        "max": 6341.825259069115,
+        "available_samples": 3
+      }
+    },
+    "evidence": "reports/runs/rhino-performance/20261110T205329-postpush-accessibility-7f9a46ef/blog-mobile-performance.json"
+  },
+  "after": [
+    {
+      "device": "mobile",
+      "metrics": {
+        "lcp": 6194.4915,
+        "fcp": 1799.6259999999997,
+        "cls": 0.0,
+        "tbt": 1238.709750000001,
+        "speed_index": 5121.078964935599
+      },
+      "scores": {
+        "performance": 0.48,
+        "accessibility": 0.93,
+        "best-practices": 0.77,
+        "seo": 1.0
+      },
+      "statistics": {
+        "lcp": {
+          "median": 6194.4915,
+          "min": 6068.5599999999995,
+          "max": 8913.849999999997,
+          "available_samples": 3
+        },
+        "fcp": {
+          "median": 1799.6259999999997,
+          "min": 1734.0165000000002,
+          "max": 2569.554,
+          "available_samples": 3
+        },
+        "cls": {
+          "median": 0.0,
+          "min": 0.0,
+          "max": 0.0,
+          "available_samples": 3
+        },
+        "tbt": {
+          "median": 1238.709750000001,
+          "min": 1108.5000000000036,
+          "max": 1400.4067499999992,
+          "available_samples": 3
+        },
+        "speed_index": {
+          "median": 5121.078964935599,
+          "min": 4497.251893418437,
+          "max": 15099.915857692586,
+          "available_samples": 3
+        }
+      },
+      "profile": {
+        "source": "lighthouse_local",
+        "url": "https://rhino-performance.com/blog/",
+        "final_url": "https://rhino-performance.com/blog/",
+        "device": "mobile",
+        "categories": [
+          "performance",
+          "accessibility",
+          "best-practices",
+          "seo"
+        ],
+        "locale": "es",
+        "lighthouse_version": "13.6.0",
+        "chrome_version": "155.0.8059.84",
+        "screen": {
+          "mobile": true,
+          "width": 412,
+          "height": 823,
+          "deviceScaleFactor": 1.75,
+          "disabled": false
+        },
+        "throttling_method": "simulate",
+        "throttling": {
+          "rttMs": 150,
+          "throughputKbps": 1638.4,
+          "requestLatencyMs": 562.5,
+          "downloadThroughputKbps": 1474.56,
+          "uploadThroughputKbps": 675,
+          "cpuSlowdownMultiplier": 4
+        },
+        "cache": false,
+        "network_policy": "guarded-read-only"
+      },
+      "samples": [
+        {
+          "at": "2026-11-10T21:47:24.169Z",
+          "metrics": {
+            "lcp": 8913.849999999997,
+            "fcp": 2569.554,
+            "cls": 0.0,
+            "tbt": 1108.5000000000036,
+            "speed_index": 15099.915857692586
+          },
+          "scores": {
+            "performance": 0.39,
+            "accessibility": 0.93,
+            "best-practices": 0.77,
+            "seo": 1.0
+          }
+        },
+        {
+          "at": "2026-11-10T21:48:31.861Z",
+          "metrics": {
+            "lcp": 6194.4915,
+            "fcp": 1734.0165000000002,
+            "cls": 0.0,
+            "tbt": 1400.4067499999992,
+            "speed_index": 5121.078964935599
+          },
+          "scores": {
+            "performance": 0.48,
+            "accessibility": 0.93,
+            "best-practices": 0.77,
+            "seo": 1.0
+          }
+        },
+        {
+          "at": "2026-11-10T21:49:21.632Z",
+          "metrics": {
+            "lcp": 6068.5599999999995,
+            "fcp": 1799.6259999999997,
+            "cls": 0.0,
+            "tbt": 1238.709750000001,
+            "speed_index": 4497.251893418437
+          },
+          "scores": {
+            "performance": 0.5,
+            "accessibility": 0.93,
+            "best-practices": 0.77,
+            "seo": 1.0
+          }
+        }
+      ],
+      "lcp_discovery": {
+        "type": "list",
+        "items": [
+          {
+            "type": "checklist",
+            "items": {
+              "priorityHinted": {
+                "label": "fetchpriority=high applied",
+                "value": true
+              },
+              "requestDiscoverable": {
+                "label": "La solicitud es visible en el documento inicial",
+                "value": true
+              },
+              "eagerlyLoaded": {
+                "label": "Los recursos de LCP no deben usar loading=lazy",
+                "value": true
+              }
+            }
+          },
+          {
+            "type": "node",
+            "lhId": "page-0-IMG",
+            "path": "1,HTML,1,BODY,7,MAIN,0,SECTION,1,SECTION,0,DIV,2,DIV,0,ARTICLE,0,DIV,0,IMG",
+            "selector": "div.blog-listing-grid > article.blog-card > div.blog-card-media > img.image-priority-high",
+            "boundingRect": {
+              "top": 428,
+              "bottom": 641,
+              "left": 17,
+              "right": 395,
+              "width": 378,
+              "height": 213
+            },
+            "snippet": "[redacted]",
+            "nodeLabel": "[redacted]"
+          }
+        ]
+      },
+      "evidence": "reports/runs/rhino-performance/20261110T214551-blog-release-validation-f5d536bf/blog-mobile.json"
+    },
+    {
+      "device": "desktop",
+      "metrics": {
+        "lcp": 1835.0044999999996,
+        "fcp": 914.9759999999999,
+        "cls": 0.04158938556168462,
+        "tbt": 43.499999999999545,
+        "speed_index": 1860.1524273465761
+      },
+      "scores": {
+        "performance": 0.88,
+        "accessibility": 0.93,
+        "best-practices": 0.77,
+        "seo": 1.0
+      },
+      "statistics": {
+        "lcp": {
+          "median": 1835.0044999999996,
+          "min": 1759.9865,
+          "max": 1944.2800000000002,
+          "available_samples": 3
+        },
+        "fcp": {
+          "median": 914.9759999999999,
+          "min": 904.4395,
+          "max": 925.9290000000001,
+          "available_samples": 3
+        },
+        "cls": {
+          "median": 0.04158938556168462,
+          "min": 0.04158938556168462,
+          "max": 0.04158938556168462,
+          "available_samples": 3
+        },
+        "tbt": {
+          "median": 43.499999999999545,
+          "min": 22.499999999999545,
+          "max": 52.00000000000023,
+          "available_samples": 3
+        },
+        "speed_index": {
+          "median": 1860.1524273465761,
+          "min": 1773.6952257910984,
+          "max": 2030.7383819027987,
+          "available_samples": 3
+        }
+      },
+      "profile": {
+        "source": "lighthouse_local",
+        "url": "https://rhino-performance.com/blog/",
+        "final_url": "https://rhino-performance.com/blog/",
+        "device": "desktop",
+        "categories": [
+          "performance",
+          "accessibility",
+          "best-practices",
+          "seo"
+        ],
+        "locale": "es",
+        "lighthouse_version": "13.6.0",
+        "chrome_version": "155.0.8059.84",
+        "screen": {
+          "mobile": false,
+          "width": 1350,
+          "height": 940,
+          "deviceScaleFactor": 1,
+          "disabled": false
+        },
+        "throttling_method": "simulate",
+        "throttling": {
+          "rttMs": 40,
+          "throughputKbps": 10240,
+          "requestLatencyMs": 0,
+          "downloadThroughputKbps": 0,
+          "uploadThroughputKbps": 0,
+          "cpuSlowdownMultiplier": 1
+        },
+        "cache": false,
+        "network_policy": "guarded-read-only"
+      },
+      "samples": [
+        {
+          "at": "2026-11-10T21:50:12.806Z",
+          "metrics": {
+            "lcp": 1835.0044999999996,
+            "fcp": 925.9290000000001,
+            "cls": 0.04158938556168462,
+            "tbt": 22.499999999999545,
+            "speed_index": 1773.6952257910984
+          },
+          "scores": {
+            "performance": 0.88,
+            "accessibility": 0.93,
+            "best-practices": 0.77,
+            "seo": 1.0
+          }
+        },
+        {
+          "at": "2026-11-10T21:50:55.750Z",
+          "metrics": {
+            "lcp": 1759.9865,
+            "fcp": 914.9759999999999,
+            "cls": 0.04158938556168462,
+            "tbt": 43.499999999999545,
+            "speed_index": 2030.7383819027987
+          },
+          "scores": {
+            "performance": 0.88,
+            "accessibility": 0.93,
+            "best-practices": 0.77,
+            "seo": 1.0
+          }
+        },
+        {
+          "at": "2026-11-10T21:51:38.296Z",
+          "metrics": {
+            "lcp": 1944.2800000000002,
+            "fcp": 904.4395,
+            "cls": 0.04158938556168462,
+            "tbt": 52.00000000000023,
+            "speed_index": 1860.1524273465761
+          },
+          "scores": {
+            "performance": 0.87,
+            "accessibility": 0.93,
+            "best-practices": 0.77,
+            "seo": 1.0
+          }
+        }
+      ],
+      "lcp_discovery": {
+        "type": "list",
+        "items": [
+          {
+            "type": "checklist",
+            "items": {
+              "priorityHinted": {
+                "label": "fetchpriority=high applied",
+                "value": true
+              },
+              "requestDiscoverable": {
+                "label": "La solicitud es visible en el documento inicial",
+                "value": true
+              },
+              "eagerlyLoaded": {
+                "label": "Los recursos de LCP no deben usar loading=lazy",
+                "value": true
+              }
+            }
+          },
+          {
+            "type": "node",
+            "lhId": "page-0-IMG",
+            "path": "1,HTML,1,BODY,7,MAIN,0,SECTION,1,SECTION,0,DIV,2,DIV,0,ARTICLE,0,DIV,0,IMG",
+            "selector": "div.blog-listing-grid > article.blog-card > div.blog-card-media > img.image-priority-high",
+            "boundingRect": {
+              "top": 350,
+              "bottom": 542,
+              "left": 122,
+              "right": 463,
+              "width": 341,
+              "height": 192
+            },
+            "snippet": "[redacted]",
+            "nodeLabel": "[redacted]"
+          }
+        ]
+      },
+      "evidence": "reports/runs/rhino-performance/20261110T214551-blog-release-validation-f5d536bf/blog-desktop.json"
+    }
+  ],
+  "comparison_mobile": {
+    "status": "compared",
+    "delta_after_minus_before": {
+      "lcp": -7070.290499999999,
+      "fcp": -166.2829999999999,
+      "cls": 0.0,
+      "tbt": -253.79025000000092,
+      "speed_index": -40.3873979603959
+    },
+    "regressions": [],
+    "causality_confirmed": false
+  },
+  "lcp_median_observed_reduction_pct": 53.30121897216252,
+  "observed_trace_parts_mobile": [
+    {
+      "at": "2026-11-10T21:47:24.169Z",
+      "lcp_simulated": 8913.849999999997,
+      "observed_trace_parts": {
+        "timeToFirstByte": 4383.233,
+        "resourceLoadDelay": 58.834,
+        "resourceLoadDuration": 3516.104,
+        "elementRenderDelay": 61.038
+      }
+    },
+    {
+      "at": "2026-11-10T21:48:31.861Z",
+      "lcp_simulated": 6194.4915,
+      "observed_trace_parts": {
+        "timeToFirstByte": 798.134,
+        "resourceLoadDelay": 26.007,
+        "resourceLoadDuration": 230.943,
+        "elementRenderDelay": 102.788
+      }
+    },
+    {
+      "at": "2026-11-10T21:49:21.632Z",
+      "lcp_simulated": 6068.5599999999995,
+      "observed_trace_parts": {
+        "timeToFirstByte": 574.755,
+        "resourceLoadDelay": 43.567,
+        "resourceLoadDuration": 140.362,
+        "elementRenderDelay": 121.606
+      }
+    }
+  ],
+  "checks": [
+    {
+      "name": "html_priority:blog:390",
+      "status": "passed",
+      "details": null
+    },
+    {
+      "name": "render_visible:blog:390",
+      "status": "passed",
+      "details": null
+    },
+    {
+      "name": "http:blog:390",
+      "status": "passed",
+      "details": null
+    },
+    {
+      "name": "html_priority:blog:1440",
+      "status": "passed",
+      "details": null
+    },
+    {
+      "name": "render_visible:blog:1440",
+      "status": "passed",
+      "details": null
+    },
+    {
+      "name": "http:blog:1440",
+      "status": "passed",
+      "details": null
+    },
+    {
+      "name": "html_priority:page2:390",
+      "status": "passed",
+      "details": null
+    },
+    {
+      "name": "render_visible:page2:390",
+      "status": "passed",
+      "details": null
+    },
+    {
+      "name": "http:page2:390",
+      "status": "passed",
+      "details": null
+    },
+    {
+      "name": "consumer_or_fragment_exclusion:fragment",
+      "status": "passed",
+      "details": null
+    },
+    {
+      "name": "http:fragment:390",
+      "status": "passed",
+      "details": null
+    },
+    {
+      "name": "consumer_or_fragment_exclusion:home",
+      "status": "passed",
+      "details": null
+    },
+    {
+      "name": "http:home:390",
+      "status": "passed",
+      "details": null
+    },
+    {
+      "name": "consumer_or_fragment_exclusion:product",
+      "status": "passed",
+      "details": null
+    },
+    {
+      "name": "http:product:390",
+      "status": "passed",
+      "details": null
+    },
+    {
+      "name": "filtered_priority_exclusion",
+      "status": "passed",
+      "details": null
+    },
+    {
+      "name": "http:filtered:None",
+      "status": "passed",
+      "details": null
+    },
+    {
+      "name": "no_js_visible",
+      "status": "passed",
+      "details": {
+        "src": "https://cdn-blog-backend.tiendanube.com/blogs/019/d30/30f/4907008a10032e552aa70a3/covers/01a18ef1-7c5c-7881-a120-b67145c0afb3.jpg",
+        "currentSrc": "https://cdn-blog-backend.tiendanube.com/blogs/019/d30/30f/4907008a10032e552aa70a3/covers/01a18ef1-7c5c-7881-a120-b67145c0afb3.jpg",
+        "high": "high",
+        "opacity": "1",
+        "complete": true,
+        "naturalWidth": 831,
+        "links": 12,
+        "other_high": 0
+      }
+    },
+    {
+      "name": "observed_network_high",
+      "status": "passed",
+      "details": null
+    },
+    {
+      "name": "pagination_distinct_article_links",
+      "status": "passed",
+      "details": null
+    },
+    {
+      "name": "matching_laboratory_profiles",
+      "status": "passed",
+      "details": {
+        "status": "compared",
+        "delta_after_minus_before": {
+          "lcp": -7070.290499999999,
+          "fcp": -166.2829999999999,
+          "cls": 0.0,
+          "tbt": -253.79025000000092,
+          "speed_index": -40.3873979603959
+        },
+        "regressions": [],
+        "causality_confirmed": false
+      }
+    },
+    {
+      "name": "local_source_unchanged",
+      "status": "passed",
+      "details": null
+    },
+    {
+      "name": "observed_lcp_median_lower_not_statistical_gate",
+      "status": "passed",
+      "details": null
+    }
+  ],
+  "qa_evidence": "reports/runs/rhino-performance/20261110T214551-blog-release-validation-f5d536bf/qa-proof.json",
+  "normal_samples_after": 6,
+  "source_files_unchanged": true,
+  "production_operations_by_agent": false,
+  "new_api_requests": false,
+  "field_improvement_confirmed": false,
+  "remaining": [
+    "Original JPG~500KB unchanged",
+    "Mobile TBT~1239ms",
+    "One sample had observed TTFB~4383ms; median observed TTFB~798ms, do not infer persistent origin-server fault.",
+    "GTM/Meta/TikTok and video changes unimplemented, require separate evidence and functional checks."
+  ]
+}

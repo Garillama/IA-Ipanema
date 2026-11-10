@@ -1,0 +1,134 @@
+{
+  "at": "2026-11-10T20:51:11.583048+00:00",
+  "project": "rhino-performance",
+  "theme_folder_name": "~/Escritorio/Cli/Rhino-Ipanema",
+  "status": "local_candidate_applied_partial_qa",
+  "theme_files_changed": [
+    "blocks/product-rating.tpl",
+    "sections/bundle-builder.tpl",
+    "sections/google-reviews.tpl",
+    "sections/category-tabs.tpl",
+    "snippets/bundle/bundle-builder-js.tpl",
+    "snippets/bundle/bundle-builder-styles.tpl",
+    "snippets/modals/modal.tpl",
+    "snippets/footer/footer-rhino.tpl",
+    "snippets/product/product-video-item.tpl",
+    "snippets/product-list/product-item/item.tpl",
+    "static/css/style-critical.css",
+    "static/css/style-async.css"
+  ],
+  "protected_files_changed": false,
+  "production_changed": false,
+  "review": {
+    "agent": "claude",
+    "decision": "approve",
+    "model": {
+      "model": "claude-sonnet-5-5",
+      "effort": "medium",
+      "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+      "verified_at": "2026-11-08"
+    },
+    "scope": "Local candidate only; Tiendanube render and production conformance not approved."
+  },
+  "qa": {
+    "static_checks": 54,
+    "component_checks": 17,
+    "widths": [
+      360,
+      390,
+      768,
+      1024,
+      1440,
+      1920
+    ],
+    "before_rule_count": 8,
+    "after_detected_violations": 0,
+    "incomplete_after": [
+      "color-contrast",
+      "label-content-name-mismatch"
+    ],
+    "network": "blocked",
+    "actual_twig_render": false,
+    "actual_storefront_after": false
+  },
+  "source_integrity": {
+    "project": "rhino-performance",
+    "before_tracked_files": 396,
+    "changed_files": [
+      "blocks/product-rating.tpl",
+      "sections/bundle-builder.tpl",
+      "sections/google-reviews.tpl",
+      "sections/category-tabs.tpl",
+      "snippets/bundle/bundle-builder-js.tpl",
+      "snippets/bundle/bundle-builder-styles.tpl",
+      "snippets/modals/modal.tpl",
+      "snippets/footer/footer-rhino.tpl",
+      "snippets/product/product-video-item.tpl",
+      "snippets/product-list/product-item/item.tpl",
+      "static/css/style-critical.css",
+      "static/css/style-async.css"
+    ],
+    "unexpected_changes": [],
+    "applied_equals_reviewed_candidate": true,
+    "templates_config_translations_unchanged": true,
+    "no_production_operations": true,
+    "wrong_folder_own_edits_reverted": true
+  },
+  "transactions": [
+    {
+      "id": "b2c61e09f82a450eb778b703b2331509",
+      "status": "applied",
+      "attempt": 1,
+      "files": [
+        "sections/google-reviews.tpl",
+        "snippets/modals/modal.tpl",
+        "snippets/product/product-video-item.tpl",
+        "snippets/product-list/product-item/item.tpl",
+        "blocks/product-rating.tpl",
+        "snippets/footer/footer-rhino.tpl",
+        "static/css/style-critical.css",
+        "static/css/style-async.css",
+        "sections/category-tabs.tpl"
+      ]
+    },
+    {
+      "id": "754b0d28bf5d400296d2b36f150ae09e",
+      "status": "applied",
+      "attempt": 1,
+      "files": [
+        "sections/bundle-builder.tpl",
+        "snippets/bundle/bundle-builder-js.tpl",
+        "snippets/bundle/bundle-builder-styles.tpl"
+      ]
+    }
+  ],
+  "evidence": [
+    "reports/runs/rhino-performance/20261110T204833-a11y-correct-theme-root-6d9be679/accessibility.patch",
+    "reports/runs/rhino-performance/20261110T204833-a11y-correct-theme-root-6d9be679/component-qa.json",
+    "reports/runs/rhino-performance/20261110T204833-a11y-correct-theme-root-6d9be679/static-qa.json",
+    "reports/runs/rhino-performance/20261110T204833-a11y-correct-theme-root-6d9be679/independent-review.json",
+    "reports/runs/rhino-performance/20261110T204833-a11y-correct-theme-root-6d9be679/integrity-after.json",
+    "reports/runs/rhino-performance/20261110T204833-a11y-correct-theme-root-6d9be679/transactions.json",
+    "reports/runs/rhino-performance/20261110T204833-a11y-correct-theme-root-6d9be679/old-folder-restored.json"
+  ],
+  "pending": [
+    "Real Tiendanube render on authorized staging and cross-template consumers.",
+    "Human screen-reader/keyboard review of complete site and actual modal/carousel engines.",
+    "CMS article list: no remote content edit authorized.",
+    "Home content heading, native modal focus management, global overflow and carousel interactions remain evidence-dependent, unchanged.",
+    "Category H1 manual owner contract must be respected if page-header is enabled.",
+    "Dark branding surfaces require separate contrast validation."
+  ],
+  "council_real_calls": 6,
+  "independent_review_real_calls": 1,
+  "pre_dispatch_controller_failures": 2,
+  "commandcode_executed": false,
+  "relocation": {
+    "wrong_folder_own_edits_reverted": true,
+    "existing_correct_folder_changes_preserved": true,
+    "independent_rereview": "claude",
+    "real_additional_review_calls": 1,
+    "prior_council_reused": true,
+    "push_performed": false
+  }
+}

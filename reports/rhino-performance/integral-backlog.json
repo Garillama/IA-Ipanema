@@ -1,0 +1,492 @@
+{
+  "project": "rhino-performance",
+  "at": "2026-11-10T20:08:23.510657+00:00",
+  "P0": "No se estableció una regresión entre versiones ni un fallo crítico de transacción; no equivale a certificar ausencia de defectos.",
+  "items": [
+    {
+      "id": "RHI-001",
+      "priority": "P1",
+      "description": "Offer.price principal usa el importe anterior en dos PDP",
+      "affected_urls": [
+        "https://rhino-performance.com/productos/botas-presoterapia-inalambricas-pro-air/",
+        "https://rhino-performance.com/productos/baterias-doble-capacidad-pro-air/"
+      ],
+      "candidate_files": [
+        "snippets/structured-data/structured-data.tpl"
+      ],
+      "component_or_area": "Offer.price principal usa el importe anterior en dos PDP",
+      "evidence": "PRO AIR visible10490/compare13990/schema13990; baterías visible1290/compare1490/schema1490, idéntico en HTML inicial y DOM. reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/commercial-price-consistency.json",
+      "cause": "Discrepancia de representación confirmada. Fuente candidata inicializa structured_data_price desde compare_at_price; sincronización desplegada, variantes y suscripciones aún por comprobar. No se observó un cargo incorrecto.",
+      "confidence": "Alta para discrepancia; causa de fuente candidata pendiente de binding",
+      "expected_impact": {
+        "description": "Consistencia de datos estructurados y presentación comercial; no se promete resultado enriquecido",
+        "estimated": true,
+        "measured_improvement": false
+      },
+      "risk": "Alto si se alterase lógica comercial o se copiase un precio fijo. Cambiar representación, nunca catálogo.",
+      "dependencies": [
+        "Confirmar correspondencia del código local con instalación14828608",
+        "Autorización de implementación posterior al diagnóstico"
+      ],
+      "alternatives": [
+        "Corregir snippet nativo con la fuente comercial de oferta activa tras validación",
+        "Escalar al soporte si la generación corresponde a plataforma/app"
+      ],
+      "before_after_test": [
+        "Comparar Offer principal con datos comerciales autorizados y precio visible, producto normal/en oferta/variantes/suscripciones/agotado",
+        "Validar JSON-LD A–D, sin duplicar entidades, y herramientas externas autorizadas"
+      ],
+      "rollback": "Para una futura corrección: backup y hash de archivos declarados, diff mínimo por transacción; revertir únicamente cambios propios sin reset/clean ni descartar cambios ajenos. No hay parche aplicado ahora.",
+      "status": "confirmed_discrepancy_pending_authorization",
+      "effort": "por estimar tras verificar consumidores"
+    },
+    {
+      "id": "RHI-002",
+      "priority": "P1",
+      "description": "LCP móvil en PDP y blog: separar laboratorio de experiencia real",
+      "affected_urls": [
+        "https://rhino-performance.com/productos/botas-presoterapia-inalambricas-pro-air/",
+        "https://rhino-performance.com/productos/baterias-doble-capacidad-pro-air/",
+        "https://rhino-performance.com/blog/"
+      ],
+      "candidate_files": [
+        "snippets/product/product-image.tpl",
+        "snippets/blog-card.tpl",
+        "snippets/image.tpl"
+      ],
+      "component_or_area": "LCP móvil en PDP y blog: separar laboratorio de experiencia real",
+      "evidence": "PSI móvil LCP11.82/11.46/11.04s; PRO AIR local mediana3.79s; CrUX PRO AIR móvil1.655s, falta INP.",
+      "cause": "Causa completa no demostrada. Entorno/Chrome/CPU/red difieren; no emergencia de campo demostrada para PRO AIR.",
+      "confidence": "Alta observación; baja atribución causal",
+      "expected_impact": {
+        "description": "Reducir espera inicial donde se reproduzca; beneficio por cambio todavía desconocido",
+        "estimated": true,
+        "measured_improvement": false
+      },
+      "risk": "Medio/alto por galería, variantes y carga comercial",
+      "dependencies": [
+        "Confirmar correspondencia del código local con instalación14828608",
+        "Autorización de implementación posterior al diagnóstico"
+      ],
+      "alternatives": [
+        "Diagnóstico focalizado antes de parche",
+        "Ajustes nativos de medios/galería si se prueba el cuello"
+      ],
+      "before_after_test": [
+        "Repetir perfiles equivalentes y trazar LCP/critical chain por plantilla",
+        "Conservar variantes, stock, nombres y enlaces; no añadir prioridades a todos los recursos"
+      ],
+      "rollback": "Para una futura corrección: backup y hash de archivos declarados, diff mínimo por transacción; revertir únicamente cambios propios sin reset/clean ni descartar cambios ajenos. No hay parche aplicado ahora.",
+      "status": "needs_evidence",
+      "effort": "por estimar tras verificar consumidores"
+    },
+    {
+      "id": "RHI-003",
+      "priority": "P1",
+      "description": "Primera imagen visible del blog se descubre tarde",
+      "affected_urls": [
+        "https://rhino-performance.com/blog/"
+      ],
+      "candidate_files": [
+        "snippets/blog-card.tpl",
+        "sections/main-blog.tpl",
+        "snippets/image.tpl"
+      ],
+      "component_or_area": "Primera imagen visible del blog se descubre tarde",
+      "evidence": "PSI LCP11.04s: requestDiscoverable=false y priorityHinted=false; imagen LCP .blog-card-img. Fuente candidata fuerza image_lazy_js para todas las cards.",
+      "cause": "Retraso de descubrimiento observado; correspondencia de la rama local y peso causal dentro del LCP pendiente.",
+      "confidence": "Alta para síntoma; media para fuente candidata",
+      "expected_impact": {
+        "description": "Mejorar descubrimiento del recurso crítico conservando lazy en las demás tarjetas",
+        "estimated": true,
+        "measured_improvement": false
+      },
+      "risk": "Medio: consumidores compartidos y filtro dinámico",
+      "dependencies": [
+        "Confirmar correspondencia del código local con instalación14828608",
+        "Autorización de implementación posterior al diagnóstico"
+      ],
+      "alternatives": [
+        "Parametrizar prioridad del componente existente para la primera imagen crítica",
+        "Configuración nativa de medios, si expone el control"
+      ],
+      "before_after_test": [
+        "Validar primera card real above-fold en mobile/desktop, HTML inicial/currentSrc/requests",
+        "Comparar carga con JS y sin JS; paginación/filtros/blog relacionados"
+      ],
+      "rollback": "Para una futura corrección: backup y hash de archivos declarados, diff mínimo por transacción; revertir únicamente cambios propios sin reset/clean ni descartar cambios ajenos. No hay parche aplicado ahora.",
+      "status": "needs_evidence",
+      "effort": "por estimar tras verificar consumidores"
+    },
+    {
+      "id": "RHI-004",
+      "priority": "P1",
+      "description": "CLS desktop y carga del reproductor de YouTube",
+      "affected_urls": [
+        "https://rhino-performance.com/"
+      ],
+      "candidate_files": [
+        "blocks/video.tpl"
+      ],
+      "component_or_area": "CLS desktop y carga del reproductor de YouTube",
+      "evidence": "Local desktop3 muestras CLS0.449; MCP clúster0.3563 afecta VIDEO; contrafactual3 muestras bloqueando www.youtube.com da0.068.",
+      "cause": "Participación del embed en el escenario controlado respaldada; mecanismo exacto y comportamiento sin política POST bloqueada pendientes.",
+      "confidence": "Alta bajo perfil de lectura; extrapolación a usuarios no demostrada",
+      "expected_impact": {
+        "description": "Estabilidad inicial potencial; no es mejora implementada ni efecto CrUX demostrado",
+        "estimated": true,
+        "measured_improvement": false
+      },
+      "risk": "Alto si se elimina autoplay, video o reproducción accesible",
+      "dependencies": [
+        "Confirmar correspondencia del código local con instalación14828608",
+        "Autorización de implementación posterior al diagnóstico"
+      ],
+      "alternatives": [
+        "Configurar modo manual nativo si negocio lo acepta",
+        "Mantener autoplay y corregir mecanismo/estabilidad únicamente tras prueba"
+      ],
+      "before_after_test": [
+        "Reproducir en entorno permitido con video funcional, filmstrip/CLS y estado de pestaña",
+        "Probar modo manual nativo y geometría antes/después sin perder UX; medir teclado, reduced-motion y LCP"
+      ],
+      "rollback": "Para una futura corrección: backup y hash de archivos declarados, diff mínimo por transacción; revertir únicamente cambios propios sin reset/clean ni descartar cambios ajenos. No hay parche aplicado ahora.",
+      "status": "needs_evidence",
+      "effort": "medio/alto por investigación de iframe y decisión UX"
+    },
+    {
+      "id": "RHI-005",
+      "priority": "P1",
+      "description": "Trabajo JS de terceros y revisiones repetidas",
+      "affected_urls": [
+        "https://rhino-performance.com/",
+        "https://rhino-performance.com/presoterapia/",
+        "https://rhino-performance.com/productos/botas-presoterapia-inalambricas-pro-air/",
+        "https://rhino-performance.com/blog/"
+      ],
+      "candidate_files": [
+        "sections/google-reviews.tpl",
+        "static/js/featured-collection.js"
+      ],
+      "component_or_area": "Trabajo JS de terceros y revisiones repetidas",
+      "evidence": "TBT cambia mucho por perfil; Googrev aparece dos veces, segunda con cache=memory. DevTools observa reflow en featured-collection y funciones de reseñas.",
+      "cause": "Carga y ejecución observadas; doble transferencia de red NO demostrada. Contextos/iniciadores/reinicialización por investigar.",
+      "confidence": "Alta para recursos; baja para duplicación causal",
+      "expected_impact": {
+        "description": "Reducir inicialización ociosa y dependencia de terceros, estimación aún no aislada",
+        "estimated": true,
+        "measured_improvement": false
+      },
+      "risk": "Alto: conversiones, apps, native LS y comercio",
+      "dependencies": [
+        "Confirmar correspondencia del código local con instalación14828608",
+        "Autorización de implementación posterior al diagnóstico"
+      ],
+      "alternatives": [
+        "Configurar aplicación/inicialización nativa existente",
+        "Diferir componentes fuera de necesidad sin crear otro motor"
+      ],
+      "before_after_test": [
+        "Inventario de initiators/frames/eventos y tareas largas con ventana limpia",
+        "No eliminar por Coverage; comprobar carrito/variantes/analytics en alcance autorizado"
+      ],
+      "rollback": "Para una futura corrección: backup y hash de archivos declarados, diff mínimo por transacción; revertir únicamente cambios propios sin reset/clean ni descartar cambios ajenos. No hay parche aplicado ahora.",
+      "status": "needs_evidence",
+      "effort": "por estimar tras verificar consumidores"
+    },
+    {
+      "id": "RHI-006",
+      "priority": "P2",
+      "description": "ARIA, contraste y nombres accesibles compartidos",
+      "affected_urls": [
+        "https://rhino-performance.com/",
+        "https://rhino-performance.com/presoterapia/",
+        "https://rhino-performance.com/productos/botas-presoterapia-inalambricas-pro-air/",
+        "https://rhino-performance.com/blog/"
+      ],
+      "candidate_files": [
+        "sections/google-reviews.tpl",
+        "static/css/style-critical.css",
+        "static/css/style-async.css",
+        "snippets/product-list/product-item/item.tpl",
+        "snippets/product/product-video-item.tpl",
+        "snippets/modals/modal.tpl"
+      ],
+      "component_or_area": "ARIA, contraste y nombres accesibles compartidos",
+      "evidence": "axe/Lighthouse reproducen aria-prohibited-attr en .hgr-carousel__glogo, color-contrast, label-content-name-mismatch; link-name en PDP; close del menú sin nombre tras estado abierto.",
+      "cause": "Atributos/contrastes/nombres observados; no implica que todos los controles estén afectados.",
+      "confidence": "Alta",
+      "expected_impact": {
+        "description": "Mejorar acceso real y árbol; ganancia de score no garantizada",
+        "estimated": true,
+        "measured_improvement": false
+      },
+      "risk": "Medio por contratos compartidos y estados responsive",
+      "dependencies": [
+        "Confirmar correspondencia del código local con instalación14828608",
+        "Autorización de implementación posterior al diagnóstico"
+      ],
+      "alternatives": [
+        "Rol de imagen para logo que requiere nombre; HTML nativo en controles reales",
+        "Ajustar tokens/reglas fuente y relaciones existentes, sin overrides acumulados"
+      ],
+      "before_after_test": [
+        "axe inicial/scroll/menú/galería en seis anchos, AX, Tab/ShiftTab/Escape y foco visible",
+        "Mantener nombres con texto visible; probar lector de pantalla humano"
+      ],
+      "rollback": "Para una futura corrección: backup y hash de archivos declarados, diff mínimo por transacción; revertir únicamente cambios propios sin reset/clean ni descartar cambios ajenos. No hay parche aplicado ahora.",
+      "status": "confirmed_defects_pending_authorization",
+      "effort": "por estimar tras verificar consumidores",
+      "implementation_update": {
+        "at": "2026-11-10T20:40:02.184553+00:00",
+        "status": "local_candidate_applied_partial_qa",
+        "report": "reports/rhino-performance/accessibility-fixes.md",
+        "production_changed": false,
+        "remaining": "CMS, home H1/native focus and full Tiendanube render as applicable; see report."
+      }
+    },
+    {
+      "id": "RHI-007",
+      "priority": "P2",
+      "description": "Headings y landmarks: categorías sin H1 y footer redundante",
+      "affected_urls": [
+        "https://rhino-performance.com/",
+        "https://rhino-performance.com/presoterapia/",
+        "https://rhino-performance.com/accesorios/"
+      ],
+      "candidate_files": [
+        "sections/main-products-grid.tpl",
+        "snippets/footer/footer-rhino.tpl",
+        "snippets/logo/logo-img.tpl"
+      ],
+      "component_or_area": "Headings y landmarks: categorías sin H1 y footer redundante",
+      "evidence": "Ambas categorías tienen0H1; AX home expone2contentinfo; home depende de H1 de logo y no siempre expuesto en desktop.",
+      "cause": "Estructura observada; texto de H1 y composición del wrapper requieren definición con propietario.",
+      "confidence": "Alta",
+      "expected_impact": {
+        "description": "Navegación semántica coherente; sin promesa de ranking",
+        "estimated": true,
+        "measured_improvement": false
+      },
+      "risk": "Medio: componentes globales y selectores de layout",
+      "dependencies": [
+        "Confirmar correspondencia del código local con instalación14828608",
+        "Autorización de implementación posterior al diagnóstico"
+      ],
+      "alternatives": [
+        "Parametrizar heading nativo por contexto",
+        "Mantener footer exterior y ajustar wrapper interior sin perder contratos"
+      ],
+      "before_after_test": [
+        "Comprobar heading visible/accesible único de contenido y jerarquía por plantilla",
+        "Preservar hooks/estilos nativos y ambos tamaños"
+      ],
+      "rollback": "Para una futura corrección: backup y hash de archivos declarados, diff mínimo por transacción; revertir únicamente cambios propios sin reset/clean ni descartar cambios ajenos. No hay parche aplicado ahora.",
+      "status": "confirmed_defects_pending_authorization",
+      "effort": "por estimar tras verificar consumidores",
+      "implementation_update": {
+        "at": "2026-11-10T20:40:02.184559+00:00",
+        "status": "local_candidate_applied_partial_qa",
+        "report": "reports/rhino-performance/accessibility-fixes.md",
+        "production_changed": false,
+        "remaining": "CMS, home H1/native focus and full Tiendanube render as applicable; see report."
+      }
+    },
+    {
+      "id": "RHI-008",
+      "priority": "P2",
+      "description": "Overflow global y foco con geometría cero",
+      "affected_urls": [
+        "https://rhino-performance.com/",
+        "https://rhino-performance.com/presoterapia/",
+        "https://rhino-performance.com/productos/botas-presoterapia-inalambricas-pro-air/",
+        "https://rhino-performance.com/blog/"
+      ],
+      "candidate_files": [
+        "layouts/layout.tpl",
+        "static/css/style-critical.css"
+      ],
+      "component_or_area": "Overflow global y foco con geometría cero",
+      "evidence": "scrollWidth1507 a viewport1440 y1059 a1024; candidatos geométricos no identifican causa. Tab alcanza algunos enlaces con rectángulo cero.",
+      "cause": "Observaciones verificadas, causa pendiente; descendientes absolutos pueden ser visibles. No declarar trampa de teclado sin confirmar patrón y cierre.",
+      "confidence": "Alta medida; baja atribución",
+      "expected_impact": {
+        "description": "Evitar desplazamiento horizontal o foco invisible real",
+        "estimated": true,
+        "measured_improvement": false
+      },
+      "risk": "Alto si se aplica overflow:hidden global y se recorta contenido/foco",
+      "dependencies": [
+        "Confirmar correspondencia del código local con instalación14828608",
+        "Autorización de implementación posterior al diagnóstico"
+      ],
+      "alternatives": [
+        "Corregir el componente causante tras prueba",
+        "Revisar off-canvas, scrollbars e iframes antes de tocar contenedores globales"
+      ],
+      "before_after_test": [
+        "Inspección visual/box model de ancestros y foco, sin ocultar síntomas",
+        "Capturas a1024/1440/1920, zoom/reflow y modales"
+      ],
+      "rollback": "Para una futura corrección: backup y hash de archivos declarados, diff mínimo por transacción; revertir únicamente cambios propios sin reset/clean ni descartar cambios ajenos. No hay parche aplicado ahora.",
+      "status": "needs_evidence",
+      "effort": "por estimar tras verificar consumidores"
+    },
+    {
+      "id": "RHI-009",
+      "priority": "P2",
+      "description": "Semántica e interacción del armado de packs",
+      "affected_urls": [
+        "https://rhino-performance.com/arma-tu-pack-de-recuperacion/"
+      ],
+      "candidate_files": [],
+      "component_or_area": "Semántica e interacción del armado de packs",
+      "evidence": "axe: nested-interactive y select-name en390/1440.",
+      "cause": "Anidación interactiva y selector sin nombre observados; no se ejecutó selección/alta al carrito.",
+      "confidence": "Alta para regla; lógica comercial pendiente",
+      "expected_impact": {
+        "description": "Uso por teclado/lector y preservación de compra de packs",
+        "estimated": true,
+        "measured_improvement": false
+      },
+      "risk": "Alto por lógica comercial especializada",
+      "dependencies": [
+        "Confirmar correspondencia del código local con instalación14828608",
+        "Autorización de implementación posterior al diagnóstico"
+      ],
+      "alternatives": [
+        "Reorganizar controles con HTML nativo conservando handler y datos existentes"
+      ],
+      "before_after_test": [
+        "Revisar contratos de pack y nombres de selectores; prueba aislada sin transacciones",
+        "En staging autorizado comprobar selección/precios/carrito antes de liberar"
+      ],
+      "rollback": "Para una futura corrección: backup y hash de archivos declarados, diff mínimo por transacción; revertir únicamente cambios propios sin reset/clean ni descartar cambios ajenos. No hay parche aplicado ahora.",
+      "status": "confirmed_defects_pending_authorization",
+      "effort": "por estimar tras verificar consumidores",
+      "implementation_update": {
+        "at": "2026-11-10T20:40:02.184562+00:00",
+        "status": "local_candidate_applied_partial_qa",
+        "report": "reports/rhino-performance/accessibility-fixes.md",
+        "production_changed": false,
+        "remaining": "CMS, home H1/native focus and full Tiendanube render as applicable; see report."
+      }
+    },
+    {
+      "id": "RHI-010",
+      "priority": "P2",
+      "description": "SEO de paginación y página404",
+      "affected_urls": [
+        "https://rhino-performance.com/blog/",
+        "https://rhino-performance.com/__ipanema_audit_missing_20261110__/"
+      ],
+      "candidate_files": [
+        "snippets/structured-data/structured-data.tpl",
+        "snippets/blog/blog-pagination.tpl",
+        "layouts/layout.tpl"
+      ],
+      "component_or_area": "SEO de paginación y página404",
+      "evidence": "Blog page2 GET200 sin JS con enlaces reales; canonical=/blog/. 404 devuelve404 real pero title vacío y1JSON-LD inválido.",
+      "cause": "Defectos de salida confirmados. Fuente/control de canonical puede ser plataforma; no duplicar tags ni editar endpoints no soportados.",
+      "confidence": "Alta observación; origen de generación pendiente",
+      "expected_impact": {
+        "description": "Coherencia semántica/rastreo; no se verificó índice Google",
+        "estimated": true,
+        "measured_improvement": false
+      },
+      "risk": "Medio por metadatos/canonical plataforma",
+      "dependencies": [
+        "Confirmar correspondencia del código local con instalación14828608",
+        "Autorización de implementación posterior al diagnóstico"
+      ],
+      "alternatives": [
+        "Reparar serialización nativa en origen",
+        "Consultar soporte si canonical/metadatos pertenecen a plataforma"
+      ],
+      "before_after_test": [
+        "Validar código final por estados con/sin breadcrumbs y varias páginas de blog",
+        "Comprobar canonical soportada sin añadir una segunda; índice requiere GSC"
+      ],
+      "rollback": "Para una futura corrección: backup y hash de archivos declarados, diff mínimo por transacción; revertir únicamente cambios propios sin reset/clean ni descartar cambios ajenos. No hay parche aplicado ahora.",
+      "status": "confirmed_output_issues_pending_authorization",
+      "effort": "por estimar tras verificar consumidores"
+    },
+    {
+      "id": "RHI-011",
+      "priority": "P2",
+      "description": "CSS bloqueante, selección de medios y JavaScript deshabilitado",
+      "affected_urls": [
+        "https://rhino-performance.com/",
+        "https://rhino-performance.com/presoterapia/",
+        "https://rhino-performance.com/productos/botas-presoterapia-inalambricas-pro-air/",
+        "https://rhino-performance.com/blog/"
+      ],
+      "candidate_files": [
+        "snippets/image.tpl",
+        "snippets/blog-card.tpl",
+        "static/css/style-critical.css"
+      ],
+      "component_or_area": "CSS bloqueante, selección de medios y JavaScript deshabilitado",
+      "evidence": "PSI estima bloqueo mobile~0.9–1.1s. Capturas sin JS conservan enlaces/productos, pero algunas imágenes visibles no cargan.",
+      "cause": "No demuestra que todo CSS/JS sea prescindible ni que Google ignore contenido. Falta atribución por recurso y consumidores.",
+      "confidence": "Alta observación; media/baja solución",
+      "expected_impact": {
+        "description": "Carga inicial más estable, payload acorde a ancho/DPR",
+        "estimated": true,
+        "measured_improvement": false
+      },
+      "risk": "Alto si causa FOUC, pierde responsive o rompe galerías",
+      "dependencies": [
+        "Confirmar correspondencia del código local con instalación14828608",
+        "Autorización de implementación posterior al diagnóstico"
+      ],
+      "alternatives": [
+        "Composición y flags del helper nativo",
+        "Carga condicional por plantilla si contratos lo permiten"
+      ],
+      "before_after_test": [
+        "Network/currentSrc/srcset/sizes, CSS usado por estados y fonts; no deducir descarga del DOM",
+        "Validación sin JS y con reduced-motion; no eager para todas las imágenes"
+      ],
+      "rollback": "Para una futura corrección: backup y hash de archivos declarados, diff mínimo por transacción; revertir únicamente cambios propios sin reset/clean ni descartar cambios ajenos. No hay parche aplicado ahora.",
+      "status": "needs_evidence",
+      "effort": "por estimar tras verificar consumidores"
+    },
+    {
+      "id": "RHI-012",
+      "priority": "P3",
+      "description": "Activar gates y vigilancia continua tras aprobar metodología",
+      "affected_urls": [
+        "https://rhino-performance.com/",
+        "https://rhino-performance.com/presoterapia/",
+        "https://rhino-performance.com/productos/botas-presoterapia-inalambricas-pro-air/"
+      ],
+      "candidate_files": [],
+      "component_or_area": "Activar gates y vigilancia continua tras aprobar metodología",
+      "evidence": "Baselines6perfiles Lighthouse n3 y44perfiles browser; política regression-gates.json definida, sin hook activo ni candidato posterior.",
+      "cause": "Falta evidencia para bloqueo estadístico robusto y enlace al controlador/CI. No hay regresión demostrada.",
+      "confidence": "Alta para límite",
+      "expected_impact": {
+        "description": "Prevención de regresiones con perfiles y tolerancias explícitos",
+        "estimated": true,
+        "measured_improvement": false
+      },
+      "risk": "Medio por falsos positivos, cuotas y privacidad",
+      "dependencies": [
+        "Confirmar correspondencia del código local con instalación14828608",
+        "Autorización de implementación posterior al diagnóstico"
+      ],
+      "alternatives": [
+        "Ejecución manual del comparador actual",
+        "Implementar hook offline sobre QA existente en fase autorizada"
+      ],
+      "before_after_test": [
+        "Capturar≥5muestras compatibles y candidato posterior; probar ruido, cambio de perfil, campos ausentes y fallos críticos",
+        "No mezclar fuentes; usar ventana limpia para long tasks y repetir DOM/recursos"
+      ],
+      "rollback": "Para una futura corrección: backup y hash de archivos declarados, diff mínimo por transacción; revertir únicamente cambios propios sin reset/clean ni descartar cambios ajenos. No hay parche aplicado ahora.",
+      "status": "proposed_not_enforced",
+      "effort": "por estimar tras verificar consumidores"
+    }
+  ]
+}

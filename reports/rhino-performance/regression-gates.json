@@ -1,0 +1,58 @@
+{
+  "project": "rhino-performance",
+  "schema_version": 1,
+  "activation": "proposed_not_enforced; no automatic external schedule or quota consumption",
+  "allowed_states": [
+    "passed",
+    "regression_detected",
+    "inconclusive",
+    "insufficient_evidence",
+    "blocked"
+  ],
+  "current_regression_comparison": "insufficient_evidence: no post-change candidate",
+  "field_objectives": {
+    "lcp_p75_ms": 2500,
+    "inp_p75_ms": 200,
+    "cls_p75": 0.1
+  },
+  "eligible_comparison": [
+    "same project/template/URL/source and URL-or-origin scope",
+    "known matching Chrome/Lighthouse, viewport/DPR, CPU/network/cache, consent and resource policy",
+    "normal render and no-js/reduced-motion/counterfactual must never be pooled",
+    "unchanged measurement stage and new timestamps, no reuse of cache as independent sample"
+  ],
+  "statistics": {
+    "minimum_samples_for_automatic_block": 5,
+    "alpha": 0.05,
+    "method_proposed": "one-sided permutation test plus median tolerance; Holm correction across tested metrics, only when sample count permits",
+    "fewer_samples": "insufficient_evidence or inconclusive, never invent confidence",
+    "samples_current_lab": 3
+  },
+  "budgets": "Per-profile prospective tolerances in performance-baseline.json; field objectives separate from regression budgets",
+  "blocking": [
+    "permission/privacy violation, HTTP/access error or incompatible provenance -> blocked",
+    "statistically supported regression beyond budget -> regression_detected and mandatory review",
+    "critical commerce/accessibility/SEO acceptance failure -> blocked; no model override"
+  ],
+  "resources": [
+    "image_bytes",
+    "js_bytes",
+    "css_bytes",
+    "requests",
+    "long_tasks_clean_window",
+    "DOM_nodes",
+    "max_depth"
+  ],
+  "pending": [
+    "Implement enforcement hook using existing QA/controller before relying on it as a deployment gate.",
+    "Capture at least5 comparable baseline samples when enabling statistical blocking.",
+    "Clean-window long-task and repeated DOM/resource samples before automatic budget activation."
+  ],
+  "cadence_proposed": {
+    "before_local_changes": "manual baseline then same-profile QA after changes",
+    "after_authorized_release": "manual PSI representative pages and read-only functional check",
+    "weekly": "CrUX/History review (rolling aggregated periods); only scheduled with explicit authorization",
+    "monthly_or_app_change": "representative full responsive/AX/assets audit"
+  },
+  "external_schedule_created": false
+}

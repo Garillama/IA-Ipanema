@@ -1,0 +1,2622 @@
+{
+  "at": "2026-11-10T20:12:51.581580+00:00",
+  "project": "rhino-performance",
+  "main_council_run": "reports/runs/rhino-performance/20261110T195414-integral-council-2039f6b6",
+  "classification": "L3 diagnosis; read-only",
+  "models": "Provider selections recorded per actual invocation, balanced effort; CommandCode disabled",
+  "proposals": [
+    {
+      "agent": "claude",
+      "phase": "proposal",
+      "at": "2026-11-10T19:54:14.778222+00:00",
+      "requested_agent": "claude",
+      "effective_agent": "claude",
+      "valid": true,
+      "response": {
+        "decision": "proposed",
+        "summary": "Propongo solo el ADR de diagnóstico, sin implementar. Backlog por plantilla con P1 en rendimiento: CLS del video en la home, LCP y prioridad de la primera tarjeta del blog, JS y CSS sin usar. P2 en accesibilidad y overflow. P0 vacío por no haber regresión probada. Antes de implementar hay que verificar que el código local coincida con el despliegue.",
+        "changes": [],
+        "evidence": [
+          "source:audit-evidence.json"
+        ],
+        "analysis": {
+          "problem": "RHINO Performance: home móvil con LCP ~3.7 s y TBT ~1.4 s en Lighthouse local; CLS de escritorio 0.449 local en home asociado al YouTube; PDP/accesorios móvil LCP ~11.5 s en PSI con retraso de render ~2.1 s; blog con LCP no descubrible en el HTML inicial y carga de imágenes de 2 MB en escritorio. Hay fallos de accesibilidad (contraste, label-content-name-mismatch, aria-prohibited-attr, link-name) y desbordamiento horizontal en 1024/1440 px.",
+          "cause": "Probables, sin confirmar: (1) el bloque de video de la home inyecta el iframe de YouTube por JS y desplaza el diseño; (2) hay JS y CSS bloqueantes o sin usar (373-1245 KiB), y los carruseles de featured-collection fuerzan reflows; (3) blog-card fuerza image_lazy_js en todas las tarjetas, incluida la primera; (4) la categoría muestra el LCP en una tarjeta de producto; (5) los enlaces de imagen de producto tienen geometría cero en el teclado. La sincronización con el despliegue no está verificada (deployed_sync_verified=false).",
+          "recommendation": "claude-diagnostico-por-plantilla",
+          "evidence_refs": [
+            "source:audit-evidence.json"
+          ],
+          "hypotheses": [
+            "El CLS 0.449 del home escritorio proviene del iframe de YouTube. El contrafactual con YouTube bloqueado dio ~0.068, pero eso es una prueba diagnóstica y no una mejora entregada.",
+            "La diferencia de LCP en PDP entre PSI (11.8 s) y local (3.8 s) se debe a un perfil de entorno distinto y no a una regresión; no hay antes/después.",
+            "El LCP del blog mejoraría si la primera tarjeta se renderiza sin lazy JS y con fetchpriority; esto requiere confirmar que el origen desplegado coincide con el local.",
+            "El retraso de render de ~2.1 s en el PDP móvil se debe a JS de Swiper o a la hidratación, sin medir.",
+            "Los enlaces de imagen con geometría cero no son necesariamente una trampa de foco real."
+          ],
+          "native_components": [
+            "blocks/video.tpl",
+            "snippets/image.tpl",
+            "snippets/blog-card.tpl",
+            "snippets/product/product-image.tpl",
+            "sections/featured-collection (js-*)",
+            "snippets/modals/modal.tpl"
+          ],
+          "risks": [
+            "Los .tpl locales no están verificados contra el despliegue.",
+            "Los datos de CrUX para el LCP y el INP a nivel de URL no existen.",
+            "PSI usa Chrome 157 y el Lighthouse local Chrome 155, así que no hay comparación causal entre fuentes.",
+            "El contrafactual de YouTube elimina funcionalidad y no es una mejora entregable.",
+            "Sin carrito poblado, checkout, GSC ni lector de pantalla humano quedan puntos sin inspeccionar.",
+            "Hay riesgo de sobreinterpretar la geometría cero del teclado y los errores D010."
+          ],
+          "tests": [
+            "Verificar la sincronización origen/despliegue antes de implementar",
+            "Medición antes/después con perfiles iguales y n>=5",
+            "Revisión independiente de Codex del backlog antes de aprobar la implementación",
+            "axe más prueba manual de teclado en los modales"
+          ],
+          "files": [
+            "blocks/video.tpl",
+            "snippets/image.tpl",
+            "snippets/blog-card.tpl",
+            "snippets/product/product-image.tpl",
+            "static/js/featured-collection.js",
+            "snippets/footer/footer-rhino.tpl"
+          ],
+          "impacts": {
+            "seo": "SEO local 1.0 salvo crawlable-anchors en el PDP; la paginación del blog es descubrible sin JS. D010 es probablemente un falso positivo. El título vacío y el JSON-LD inválido del 404 son hallazgos menores.",
+            "performance": "Candidatos P1: CLS del video en la home, LCP y prioridad de la primera tarjeta del blog, JS sin usar, CSS que bloquea el render, imágenes del blog (hasta 2 MB de ahorro en escritorio). Los beneficios están por medir.",
+            "responsive": "Hay desbordamiento horizontal a 1024 y 1440 px en la mayoría de las plantillas, sin causa identificada.",
+            "accessibility": "Contraste (17-32 nodos en la home), label-content-name-mismatch, aria-prohibited-attr, link-name en el PDP y foco que no vuelve al disparador del modal; sin certificación AA.",
+            "uiux": "Los cambios deben conservar la apariencia actual del poster y de los carruseles.",
+            "commerce": "Sin cambios en precio, stock, variantes, carrito ni checkout; no se tocó ningún dato comercial."
+          },
+          "confidence": 0.7,
+          "alternatives": [
+            {
+              "id": "claude-diagnostico-por-plantilla",
+              "description": "Solo diagnóstico, sin implementación. Backlog por plantilla (home, categoría, PDP, blog, estructura global) con observaciones separadas de hipótesis. Cada hallazgo se asocia al componente nativo existente: video.tpl con cover/poster y reserva de aspect-ratio; image.tpl con prioridad; blog-card con un parámetro de prioridad para la primera tarjeta; product-image.tpl; featured-collection.js. Después de revisar el diagnóstico, se implementan primero P1 y luego P2 con antes/después y perfiles iguales. P0 queda vacío porque no hay regresión probada.",
+              "constraints": {
+                "functional": {
+                  "status": "pass",
+                  "evidence_refs": [
+                    "source:audit-evidence.json"
+                  ]
+                },
+                "security": {
+                  "status": "pass",
+                  "evidence_refs": [
+                    "source:audit-evidence.json"
+                  ]
+                },
+                "compatibility": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "native_reuse": {
+                  "status": "pass",
+                  "evidence_refs": [
+                    "source:audit-evidence.json"
+                  ]
+                },
+                "seo": {
+                  "status": "pass",
+                  "evidence_refs": [
+                    "source:audit-evidence.json"
+                  ]
+                },
+                "performance": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "accessibility": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "responsive": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "maintainability": {
+                  "status": "pass",
+                  "evidence_refs": [
+                    "source:audit-evidence.json"
+                  ]
+                },
+                "reversibility": {
+                  "status": "pass",
+                  "evidence_refs": []
+                },
+                "complexity": {
+                  "status": "pass",
+                  "evidence_refs": []
+                },
+                "development_cost": {
+                  "status": "pass",
+                  "evidence_refs": []
+                },
+                "execution_cost": {
+                  "status": "pass",
+                  "evidence_refs": []
+                }
+              },
+              "files": [
+                "blocks/video.tpl",
+                "snippets/image.tpl",
+                "snippets/blog-card.tpl",
+                "snippets/product/product-image.tpl",
+                "static/js/featured-collection.js",
+                "snippets/footer/footer-rhino.tpl"
+              ],
+              "tests": [
+                "Confirmar que los .tpl locales coinciden con el tema desplegado, antes de cualquier cambio",
+                "Repetir Lighthouse móvil con n>=5 y perfil idéntico antes y después, en home, categoría, PDP y blog",
+                "Medir red y currentSrc del LCP en blog y categoría, sin inferirlo del DOM",
+                "Comprobar CLS del home con y sin iframe, con trace y máscara explícita",
+                "Ejecutar axe sobre contraste y nombres accesibles, más una revisión manual de teclado y lector de pantalla (pendiente: requiere un humano)"
+              ]
+            },
+            {
+              "id": "claude-solo-home-video-cls",
+              "description": "Alcance reducido a home: cover/poster fijo con reserva de proporción y carga diferida del iframe en blocks/video.tpl; no toca las demás plantillas.",
+              "constraints": {
+                "functional": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "security": {
+                  "status": "pass",
+                  "evidence_refs": []
+                },
+                "compatibility": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "native_reuse": {
+                  "status": "pass",
+                  "evidence_refs": [
+                    "source:audit-evidence.json"
+                  ]
+                },
+                "seo": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "performance": {
+                  "status": "unknown",
+                  "evidence_refs": [
+                    "source:audit-evidence.json"
+                  ]
+                },
+                "accessibility": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "responsive": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "maintainability": {
+                  "status": "pass",
+                  "evidence_refs": []
+                },
+                "reversibility": {
+                  "status": "pass",
+                  "evidence_refs": []
+                },
+                "complexity": {
+                  "status": "pass",
+                  "evidence_refs": []
+                },
+                "development_cost": {
+                  "status": "pass",
+                  "evidence_refs": []
+                },
+                "execution_cost": {
+                  "status": "pass",
+                  "evidence_refs": []
+                }
+              },
+              "files": [
+                "blocks/video.tpl"
+              ],
+              "tests": [
+                "CLS del home en escritorio, n>=5, comparado con el valor base de 0.449",
+                "Verificar que el LCP del poster siga descubierto en el HTML inicial"
+              ]
+            }
+          ]
+        }
+      },
+      "model": {
+        "model": "claude-sonnet-5-5",
+        "effort": "medium",
+        "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+        "verified_at": "2026-11-08"
+      },
+      "execution": {
+        "exit_code": 0,
+        "timed_out": false,
+        "output_limited": false,
+        "idle_timed_out": false,
+        "cancelled": false,
+        "process_started": true,
+        "process_reaped": true,
+        "stdin_bytes_written": 311669,
+        "context_complete": true,
+        "duration_s": 25.704,
+        "timing": {
+          "spawn_s": 0.000671,
+          "input_complete_s": 0.916674,
+          "first_stdout_s": 1.747988,
+          "first_stderr_s": null,
+          "timeout_phase": null,
+          "event_counts": {
+            "system": 2,
+            "stream_event": 616,
+            "event:message_start": 1,
+            "event:content_block_start": 1,
+            "event:content_block_delta": 611,
+            "assistant": 1,
+            "event:content_block_stop": 1,
+            "user": 1,
+            "event:message_delta": 1,
+            "event:message_stop": 1,
+            "rate_limit_event": 1,
+            "result": 1
+          },
+          "inference_vs_initialization": "not_separable_without_provider_events"
+        },
+        "output_accounting": {
+          "transport_bytes": 231658,
+          "retained_bytes": 231658,
+          "discarded_progress_bytes": 0,
+          "transport_limit_bytes": 20000000,
+          "retained_limit_bytes": 2000000
+        },
+        "isolation": {
+          "backend": "bubblewrap",
+          "snapshot_read_only": true,
+          "host_home_mounted": false,
+          "network": "enabled_no_destination_firewall",
+          "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+        },
+        "started_at": "2026-11-10T19:54:14.793405+00:00",
+        "prompt_bytes": 311669,
+        "prompt_sha256": "44766aabe4fd6bcf27e4b7b0b9ab330598e83343a603746a529d553d3c7aa41f",
+        "usage": {
+          "provider_reported": {
+            "total_cost_usd": 0.5797274,
+            "duration_ms": 23613,
+            "input_tokens": 2,
+            "cache_creation_input_tokens": 136374,
+            "cache_read_input_tokens": 4774,
+            "output_tokens": 3375
+          },
+          "measured_cost_available": true,
+          "estimated_cost": null
+        },
+        "limits": {
+          "timeout": 240,
+          "idle_timeout": 90,
+          "startup_timeout": 30,
+          "first_response_timeout": 120
+        },
+        "structured_output": "native_schema",
+        "contract_validation": {
+          "status": "passed",
+          "duration_s": 0.006433
+        }
+      }
+    },
+    {
+      "agent": "codex",
+      "phase": "proposal",
+      "at": "2026-11-10T19:54:14.778826+00:00",
+      "requested_agent": "codex",
+      "effective_agent": "codex",
+      "valid": true,
+      "response": {
+        "decision": "proposed",
+        "summary": "Propongo un ADR de diagnóstico por plantillas y componentes compartidos, conservando el diagnóstico de home. Priorizar rendimiento móvil de producto y blog, investigar el desbordamiento transversal y documentar accesibilidad y SEO con sus límites. No hay evidencia suficiente para declarar P0, regresiones ni soluciones verificadas; no se aprueba implementación.",
+        "changes": [],
+        "evidence": [
+          "Producto móvil: PSI registra LCP de 11,82 s; Lighthouse local, mediana de 3,79 s en tres muestras. Los perfiles difieren y no constituyen una comparación antes/después.",
+          "Accesorio móvil: PSI registra LCP de 11,46 s en una muestra. Blog móvil: 11,04 s; su imagen LCP no es descubrible inicialmente y carece de prioridad alta según PSI.",
+          "Home desktop: CLS local de 0,449 en tres muestras. El contrafactual sin www.youtube.com registra aproximadamente 0,068, pero elimina funcionalidad y no demuestra una corrección.",
+          "Las 17 páginas representativas presentan scroll_width de 1507 a viewport de 1440. Home, categoría y producto también desbordan a 1024; el elemento responsable sigue sin identificarse.",
+          "Ambas categorías carecen de h1 en los estados inspeccionados. La página 404 devuelve HTTP 404, título vacío y un JSON-LD inválido.",
+          "Se observan fallos de contraste, nombres y ARIA; bundle añade nested-interactive y select-name. Tras scroll, axe registra un button-name crítico en móvil; esto no establece por sí solo prioridad P0.",
+          "La página 2 del blog devuelve artículos sin JS. D010 puede señalar entidades de productos relacionados; crawlable-anchors en producto requiere distinguir controles de enlaces de navegación.",
+          "CrUX de origen móvil registra LCP p75 de 1908 ms e INP de 112 ms; faltan LCP e INP para la URL home. Los extractos locales tienen hash, pero ninguno acredita sincronización con producción."
+        ],
+        "analysis": {
+          "problem": "La extensión cubre 17 páginas representativas, pero no toda la tienda ni todos sus estados. Hay problemas observados de rendimiento, estructura, accesibilidad y responsive. La viabilidad de cualquier corrección permanece condicionada por la falta de equivalencia local-producción y de atribución causal. Debe entregarse un diagnóstico priorizado, no una autorización de cambios.",
+          "cause": "Las causas definitivas siguen abiertas. En blog coinciden descubrimiento tardío del LCP y un extracto local que fuerza lazy JS; en producto la imagen principal ya tiene prioridad y descubrimiento inicial. El desbordamiento repetido sugiere un consumidor compartido, sin identificarlo. El vídeo aparece afectado en un cluster CLS, pero la traza no identifica causa raíz. Los perfiles PSI y locales explican límites de comparación, no el origen del problema.",
+          "recommendation": "codex-auditoria-por-componentes",
+          "evidence_refs": [
+            "source:audit-evidence.json"
+          ],
+          "hypotheses": [
+            "P1: investigar carga y renderizado de la galería móvil en producto; los LCP elevados de PSI requieren repetición compatible antes de atribuirlos a JS o CSS.",
+            "P1: investigar descubrimiento y tamaño efectivo de imágenes del blog; reutilizar image.tpl podría permitir una política diferenciada para imágenes iniciales, pendiente de equivalencia desplegada.",
+            "P1: investigar estabilidad geométrica y ciclo de reproducción del vídeo de home; el contrafactual respalda una línea diagnóstica, sin cuantificar beneficio de una futura solución.",
+            "P2: localizar el elemento y la regla responsables del desbordamiento común; no atribuirlo todavía al footer, header o modales.",
+            "P2: revisar h1 de categorías, título y JSON-LD de 404, contraste, nombres accesibles y semántica de bundle. El alcance exacto exige nodos y consumidores.",
+            "P2: verificar cierre y restitución de foco en modales; geometría cero y sondas incompletas no demuestran trampas de teclado.",
+            "P3: documentar procedencia de reseñas y fallbacks locales, sincronización de fuentes y presupuestos de QA; vigencia comercial y costes siguen unknown."
+          ],
+          "native_components": [
+            "snippets/image.tpl: candidato común para imágenes responsive y prioridad.",
+            "snippets/blog-card.tpl: conservar cards y sus modos de enlace.",
+            "snippets/product/product-image.tpl: conservar galería, Swiper, Fancybox y slots.",
+            "blocks/video.tpl: evaluar configuración existente antes de extender reproducción.",
+            "snippets/modals/modal.tpl: conservar hooks y revisar todos sus consumidores.",
+            "snippets/product-list/product-item/item.tpl: preservar variantes, precios y contratos comerciales.",
+            "snippets/structured-data/structured-data.tpl: inventariar entidades y procedencia antes de recomendar cambios.",
+            "snippets/blog/blog-pagination.tpl: conservar enlaces GET y revisar equivalencia con la paginación JS."
+          ],
+          "risks": [
+            "needs_evidence: sincronización desplegada de todas las fuentes candidatas; los extractos parciales no bastan para definir un diff.",
+            "needs_evidence: causalidad del LCP móvil de productos y repetibilidad del accesorio/blog; no mezclar perfiles ni sumar ahorros estimados.",
+            "needs_evidence: elemento causante del overflow; ocultarlo globalmente podría recortar contenido y foco.",
+            "needs_evidence: imágenes contabilizadas como visibles sin cargar; inspeccionar pintura, dimensiones, currentSrc y red antes de declarar recursos rotos.",
+            "La política GET y el bloqueo de POST pueden afectar embeds; el contrafactual no demuestra una solución funcional ni impacto CrUX.",
+            "Carrito poblado, checkout y transacciones quedan sin inspeccionar; su comportamiento requiere un alcance autorizado específico.",
+            "Datos de comerciante y procedencia de reseñas no están verificados; GSC es necesario para evaluar indexación y resultados reales de Google.",
+            "Lectura humana con tecnología de asistencia sigue pendiente. Snapshots de heap no prueban fugas y las tareas instrumentadas no sirven para imponer presupuestos de aplicación."
+          ],
+          "tests": [
+            "Evidencia existente: Lighthouse local en tres URLs, dos dispositivos y tres muestras; PSI en cinco URLs y dos dispositivos, una muestra por combinación.",
+            "Evidencia existente: 17 páginas con estados representativos, incluidos no-js y reduced-motion en home, categoría y producto; no implica cobertura exhaustiva.",
+            "Evidencia existente: contrafactual desktop de tres muestras y observaciones MCP; sin exportación de traza cruda ni candidato posterior.",
+            "Pendiente: confirmar nodo y cascada del overflow a 1024/1440 y contrastar con estados sin desbordamiento.",
+            "Pendiente: inspeccionar red/currentSrc y cronología de renderizado de blog y galería con perfiles compatibles; no inferir descarga desde DOM.",
+            "Pendiente: verificar navegación por teclado, cierre, foco visible y retorno al disparador, además de revisión humana con lector de pantalla.",
+            "Pendiente: separar sintaxis JSON-LD, vocabulario/entidades, elegibilidad de Google y evidencia de indexación; conservar HTTP 404 y procedencia comercial.",
+            "No se ejecutaron pruebas nuevas ni cambios. Una futura implementación requerirá autorización, revisión independiente y QA posterior; los gates actuales son propuestas."
+          ],
+          "files": [
+            "audit-evidence.json",
+            "snippets/image.tpl",
+            "snippets/blog-card.tpl",
+            "snippets/product/product-image.tpl",
+            "blocks/video.tpl",
+            "snippets/modals/modal.tpl",
+            "snippets/structured-data/structured-data.tpl",
+            "snippets/product/product-video-item.tpl"
+          ],
+          "impacts": {
+            "seo": "Observados h1 ausentes en categorías y defectos de 404. Indexación, elegibilidad y efecto comercial: unknown. No corregir D010 ni controles de vídeo como si fueran navegación rota sin inspección.",
+            "performance": "Prioridad diagnóstica en producto/blog móvil y CLS de home. Beneficio futuro: unknown; TBT no equivale a INP y CrUX de origen no sustituye datos por URL.",
+            "responsive": "Desbordamiento repetido demostrado en los perfiles indicados. Causa y corrección: unknown; ampliar estados solo donde una dependencia lo justifique.",
+            "accessibility": "Fallos automáticos observados justifican revisión por componente. Conformidad WCAG, foco completo y experiencia con lector de pantalla: unknown.",
+            "uiux": "Posibles mejoras futuras en estabilidad, imágenes iniciales y claridad de controles; todavía sin validación funcional o visual posterior.",
+            "commerce": "Impacto en conversión y compra: unknown. Preservar motores nativos de precio, stock, variantes, carrito y envíos."
+          },
+          "confidence": 0.86,
+          "alternatives": [
+            {
+              "id": "codex-auditoria-por-componentes",
+              "description": "ADR con matriz plantilla × estado × componente, backlog P1–P3 y P0 sin casos demostrados. Cada ficha separa observación, hipótesis, fuente candidata, reutilización, beneficio esperado sin cifra, riesgo y prueba pendiente. Ordenar primero producto/blog móvil y estabilidad de home; después desbordamiento transversal y estructura/accesibilidad. Todos los cambios quedan fuera de esta auditoría.",
+              "constraints": {
+                "functional": {
+                  "status": "unknown",
+                  "evidence_refs": [
+                    "source:audit-evidence.json"
+                  ]
+                },
+                "security": {
+                  "status": "unknown",
+                  "evidence_refs": [
+                    "source:audit-evidence.json"
+                  ]
+                },
+                "compatibility": {
+                  "status": "unknown",
+                  "evidence_refs": [
+                    "source:audit-evidence.json"
+                  ]
+                },
+                "native_reuse": {
+                  "status": "unknown",
+                  "evidence_refs": [
+                    "source:audit-evidence.json"
+                  ]
+                },
+                "seo": {
+                  "status": "unknown",
+                  "evidence_refs": [
+                    "source:audit-evidence.json"
+                  ]
+                },
+                "performance": {
+                  "status": "unknown",
+                  "evidence_refs": [
+                    "source:audit-evidence.json"
+                  ]
+                },
+                "accessibility": {
+                  "status": "unknown",
+                  "evidence_refs": [
+                    "source:audit-evidence.json"
+                  ]
+                },
+                "responsive": {
+                  "status": "unknown",
+                  "evidence_refs": [
+                    "source:audit-evidence.json"
+                  ]
+                },
+                "maintainability": {
+                  "status": "unknown",
+                  "evidence_refs": [
+                    "source:audit-evidence.json"
+                  ]
+                },
+                "reversibility": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "complexity": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "development_cost": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "execution_cost": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                }
+              },
+              "files": [
+                "snippets/image.tpl",
+                "snippets/blog-card.tpl",
+                "snippets/product/product-image.tpl",
+                "blocks/video.tpl",
+                "snippets/modals/modal.tpl",
+                "snippets/structured-data/structured-data.tpl",
+                "snippets/product/product-video-item.tpl",
+                "static/js/featured-collection.js"
+              ],
+              "tests": [
+                "Pendiente: vincular cada hallazgo con nodo, recurso, consumidor y hash; confirmar equivalencia desplegada antes de prescribir un parche.",
+                "Pendiente: repetir rendimiento con perfiles compatibles y localizar overflow mediante geometría y estilos calculados; preservar resultados por URL y dispositivo.",
+                "Pendiente: revisar todos los consumidores de componentes compartidos antes de una futura propuesta de implementación."
+              ]
+            },
+            {
+              "id": "codex-informe-por-url",
+              "description": "Entregar fichas independientes por las 17 páginas, conservando perfiles y límites. Facilita revisar cada URL, pero puede duplicar hallazgos transversales y deja menos clara la integración de futuras correcciones compartidas. Alternativa admisible como presentación, con menor utilidad para identificar consumidores.",
+              "constraints": {
+                "functional": {
+                  "status": "unknown",
+                  "evidence_refs": [
+                    "source:audit-evidence.json"
+                  ]
+                },
+                "security": {
+                  "status": "unknown",
+                  "evidence_refs": [
+                    "source:audit-evidence.json"
+                  ]
+                },
+                "compatibility": {
+                  "status": "unknown",
+                  "evidence_refs": [
+                    "source:audit-evidence.json"
+                  ]
+                },
+                "native_reuse": {
+                  "status": "unknown",
+                  "evidence_refs": [
+                    "source:audit-evidence.json"
+                  ]
+                },
+                "seo": {
+                  "status": "unknown",
+                  "evidence_refs": [
+                    "source:audit-evidence.json"
+                  ]
+                },
+                "performance": {
+                  "status": "unknown",
+                  "evidence_refs": [
+                    "source:audit-evidence.json"
+                  ]
+                },
+                "accessibility": {
+                  "status": "unknown",
+                  "evidence_refs": [
+                    "source:audit-evidence.json"
+                  ]
+                },
+                "responsive": {
+                  "status": "unknown",
+                  "evidence_refs": [
+                    "source:audit-evidence.json"
+                  ]
+                },
+                "maintainability": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "reversibility": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "complexity": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "development_cost": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "execution_cost": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                }
+              },
+              "files": [
+                "audit-evidence.json"
+              ],
+              "tests": [
+                "Pendiente: comprobar que las fichas preservan las 17 páginas y distinguen métricas locales, PSI y CrUX.",
+                "Pendiente: comprobar referencias cruzadas para no contar el mismo fallo compartido como causas independientes."
+              ]
+            }
+          ]
+        }
+      },
+      "model": {
+        "model": "gpt-6.1-sol",
+        "effort": "medium",
+        "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+        "verified_at": "2026-11-08"
+      },
+      "execution": {
+        "exit_code": 0,
+        "timed_out": false,
+        "output_limited": false,
+        "idle_timed_out": false,
+        "cancelled": false,
+        "process_started": true,
+        "process_reaped": true,
+        "stdin_bytes_written": 311664,
+        "context_complete": true,
+        "duration_s": 77.833,
+        "timing": {
+          "spawn_s": 0.001114,
+          "input_complete_s": 0.206088,
+          "first_stdout_s": 0.955314,
+          "first_stderr_s": null,
+          "timeout_phase": null,
+          "event_counts": {
+            "thread.started": 1,
+            "item.completed": 2,
+            "turn.started": 1,
+            "turn.completed": 1
+          },
+          "inference_vs_initialization": "not_separable_without_provider_events"
+        },
+        "output_accounting": {
+          "transport_bytes": 15643,
+          "retained_bytes": 15643,
+          "discarded_progress_bytes": 0,
+          "transport_limit_bytes": 20000000,
+          "retained_limit_bytes": 2000000
+        },
+        "isolation": {
+          "backend": "bubblewrap",
+          "snapshot_read_only": true,
+          "host_home_mounted": false,
+          "network": "enabled_no_destination_firewall",
+          "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+        },
+        "started_at": "2026-11-10T19:54:14.793479+00:00",
+        "prompt_bytes": 311664,
+        "prompt_sha256": "0ead007d268f22b15fbe6ab011a3927e35048b9a6f5f55875795cf6b930c7799",
+        "usage": {
+          "provider_reported": {
+            "input_tokens": 104283,
+            "cached_input_tokens": 0,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 3124,
+            "reasoning_output_tokens": 70
+          },
+          "measured_cost_available": false,
+          "estimated_cost": null
+        },
+        "limits": {
+          "timeout": 240,
+          "idle_timeout": 90,
+          "startup_timeout": 30,
+          "first_response_timeout": 150
+        },
+        "structured_output": "native_schema",
+        "contract_validation": {
+          "status": "passed",
+          "duration_s": 0.000369
+        }
+      }
+    }
+  ],
+  "contrast": [
+    {
+      "agent": "claude",
+      "phase": "contrast",
+      "at": "2026-11-10T19:55:32.650291+00:00",
+      "requested_agent": "claude",
+      "effective_agent": "claude",
+      "valid": true,
+      "response": {
+        "decision": "changes_requested",
+        "summary": "Prefiero codex-auditoria-por-componentes: matriz plantilla×componente, con producto/blog móvil, CLS de home y overflow transversal. Rechazo como alcance único claude-solo-home-video-cls. Pido al otro agente separar observación de hipótesis, marcar unknown donde no hay medición y rebajar el 'pass' de claude-diagnostico-por-plantilla, que no tiene respaldo.",
+        "changes": [],
+        "evidence": [
+          "source:audit-evidence.json: overflow scroll_width 1507 a viewport 1440 en todas las páginas y 1059 a 1024 en home, categoría y producto; causa no identificada.",
+          "source:audit-evidence.json: CLS 0.449 en home escritorio local; contrafactual sin YouTube ≈0.068 (diagnóstico, no mejora entregada).",
+          "source:audit-evidence.json: PSI móvil LCP 11.8 s en PDP, 11.46 s en accesorio y 11.04 s en blog, con una sola muestra cada uno; local PDP 3.79 s con perfil distinto.",
+          "source:audit-evidence.json: blog LCP no descubrible en el HTML inicial y sin fetchpriority; blog-card.tpl local fuerza image_lazy_js, con deployed_sync_verified=false.",
+          "source:audit-evidence.json: categorías sin h1; 404 con título vacío y JSON-LD inválido."
+        ],
+        "objections": [
+          {
+            "id": "claude-obj-1",
+            "alternative_id": "claude-diagnostico-por-plantilla",
+            "category": "evidencia",
+            "severity": "medium",
+            "claim": "Marca varias restricciones como 'pass' (security, seo, native_reuse, maintainability, functional) citando solo audit-evidence.json, que no mide eso. Deben ser unknown hasta tener evidencia.",
+            "status": "open",
+            "evidence_refs": [
+              "source:audit-evidence.json"
+            ],
+            "resolution_evidence_refs": []
+          },
+          {
+            "id": "claude-obj-2",
+            "alternative_id": "claude-diagnostico-por-plantilla",
+            "category": "alcance",
+            "severity": "medium",
+            "claim": "Omite como hallazgos propios el overflow horizontal transversal (1507 px a 1440; 1059 px a 1024) y la ausencia de h1 en categorías. Solo menciona el overflow en responsive, sin causa ni prueba. Estos puntos entran como P2 con tests de localización de nodo.",
+            "status": "open",
+            "evidence_refs": [
+              "source:audit-evidence.json"
+            ],
+            "resolution_evidence_refs": []
+          },
+          {
+            "id": "claude-obj-3",
+            "alternative_id": "claude-solo-home-video-cls",
+            "category": "alcance",
+            "severity": "medium",
+            "claim": "Limita el alcance a home y toma el iframe de YouTube como causa del CLS, aunque la traza no identifica causa raíz y el contrafactual elimina funcionalidad. Ignora PDP/blog móvil, donde está el peor LCP, y no sirve como ADR integral.",
+            "status": "open",
+            "evidence_refs": [
+              "source:audit-evidence.json"
+            ],
+            "resolution_evidence_refs": []
+          },
+          {
+            "id": "claude-obj-4",
+            "alternative_id": "claude-diagnostico-por-plantilla",
+            "category": "hipótesis",
+            "severity": "low",
+            "claim": "Plantea como causa probable 'JS de Swiper o hidratación' para el render delay de ~2.1 s del PDP móvil, y la citada geometría cero del teclado como causa del foco, sin medición. Deben quedar como hipótesis a medir, con un perfil comparable.",
+            "status": "open",
+            "evidence_refs": [
+              "source:audit-evidence.json"
+            ],
+            "resolution_evidence_refs": []
+          },
+          {
+            "id": "claude-obj-5",
+            "alternative_id": "codex-auditoria-por-componentes",
+            "category": "completitud",
+            "severity": "low",
+            "claim": "Todas las restricciones están en unknown. Sin evidencia puede ser honesto, pero conviene marcar pass las que sí son verificables: read-only y sin cambios comerciales. Además, la propuesta carece de pasos de verificación de sincronización con el despliegue como condición previa explícita.",
+            "status": "open",
+            "evidence_refs": [
+              "source:audit-evidence.json"
+            ],
+            "resolution_evidence_refs": []
+          }
+        ],
+        "preferred_alternative": "codex-auditoria-por-componentes",
+        "questions": [
+          {
+            "id": "claude-q-1",
+            "to_agent": "codex",
+            "alternative_id": "codex-auditoria-por-componentes",
+            "question": "El overflow (1507 px a 1440; 1059 px a 1024) aparece en casi todas las plantillas. ¿Qué dato concreto de audit-evidence.json te lleva a pensar en un consumidor compartido, y qué medición (nodo, regla de cascada) lo localizaría antes de proponer arreglo?",
+            "evidence_refs": [
+              "source:audit-evidence.json"
+            ]
+          },
+          {
+            "id": "claude-q-2",
+            "to_agent": "codex",
+            "alternative_id": "codex-auditoria-por-componentes",
+            "question": "Para el LCP móvil de PDP y accesorio (PSI 11.8 s y 11.46 s, render delay ~2.1 s, una sola muestra) frente a 3.79 s local: ¿qué prueba compatible exigirías antes de priorizarlo como P1, y qué fuente concreta del tema (por ejemplo product-image.tpl) podría explicar el render delay?",
+            "evidence_refs": [
+              "source:audit-evidence.json"
+            ]
+          },
+          {
+            "id": "claude-q-3",
+            "to_agent": "codex",
+            "alternative_id": "codex-informe-por-url",
+            "question": "Si codex-informe-por-url se admite solo como presentación, ¿cómo evitarías duplicar hallazgos transversales como el overflow o el contraste en 17 fichas?",
+            "evidence_refs": [
+              "source:audit-evidence.json"
+            ]
+          }
+        ]
+      },
+      "model": {
+        "model": "claude-sonnet-5-5",
+        "effort": "medium",
+        "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+        "verified_at": "2026-11-08"
+      },
+      "execution": {
+        "exit_code": 0,
+        "timed_out": false,
+        "output_limited": false,
+        "idle_timed_out": false,
+        "cancelled": false,
+        "process_started": true,
+        "process_reaped": true,
+        "stdin_bytes_written": 330917,
+        "context_complete": true,
+        "duration_s": 16.632,
+        "timing": {
+          "spawn_s": 0.000932,
+          "input_complete_s": 0.669922,
+          "first_stdout_s": 1.433433,
+          "first_stderr_s": null,
+          "timeout_phase": null,
+          "event_counts": {
+            "system": 2,
+            "stream_event": 358,
+            "event:message_start": 1,
+            "event:content_block_start": 1,
+            "event:content_block_delta": 353,
+            "assistant": 1,
+            "event:content_block_stop": 1,
+            "user": 1,
+            "event:message_delta": 1,
+            "event:message_stop": 1,
+            "rate_limit_event": 1,
+            "result": 1
+          },
+          "inference_vs_initialization": "not_separable_without_provider_events"
+        },
+        "output_accounting": {
+          "transport_bytes": 139125,
+          "retained_bytes": 139125,
+          "discarded_progress_bytes": 0,
+          "transport_limit_bytes": 20000000,
+          "retained_limit_bytes": 2000000
+        },
+        "isolation": {
+          "backend": "bubblewrap",
+          "snapshot_read_only": true,
+          "host_home_mounted": false,
+          "network": "enabled_no_destination_firewall",
+          "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+        },
+        "started_at": "2026-11-10T19:55:32.661599+00:00",
+        "prompt_bytes": 330917,
+        "prompt_sha256": "f76331ef559c1094fb92c520a9efe7f523841b066a76a87c902bd14e1a33c017",
+        "usage": {
+          "provider_reported": {
+            "total_cost_usd": 0.5987654,
+            "duration_ms": 14728,
+            "input_tokens": 2,
+            "cache_creation_input_tokens": 144316,
+            "cache_read_input_tokens": 2674,
+            "output_tokens": 2123
+          },
+          "measured_cost_available": true,
+          "estimated_cost": null
+        },
+        "limits": {
+          "timeout": 240,
+          "idle_timeout": 90,
+          "startup_timeout": 30,
+          "first_response_timeout": 120
+        },
+        "structured_output": "native_schema",
+        "contract_validation": {
+          "status": "passed",
+          "duration_s": 0.003067
+        }
+      }
+    },
+    {
+      "agent": "codex",
+      "phase": "contrast",
+      "at": "2026-11-10T19:55:32.649864+00:00",
+      "requested_agent": "codex",
+      "effective_agent": "codex",
+      "valid": true,
+      "response": {
+        "decision": "changes_requested",
+        "summary": "Mantengo la preferencia por codex-auditoria-por-componentes. La alternativa principal de Claude es compatible con un ADR de diagnóstico, pero necesita completar la cobertura y distinguir viabilidad propuesta de validación demostrada. No se aprueba implementación.",
+        "changes": [],
+        "evidence": [
+          "source:audit-evidence.json"
+        ],
+        "objections": [
+          {
+            "id": "codex-obj-01",
+            "alternative_id": "claude-diagnostico-por-plantilla",
+            "category": "validación",
+            "severity": "medium",
+            "claim": "Los estados pass de funcionalidad, SEO, reutilización y mantenibilidad exceden la evidencia disponible si describen futuras correcciones. Los extractos no acreditan equivalencia desplegada ni existe candidato posterior. Deben delimitarse al diseño documental o quedar unknown.",
+            "status": "open",
+            "evidence_refs": [
+              "source:audit-evidence.json"
+            ],
+            "resolution_evidence_refs": []
+          },
+          {
+            "id": "codex-obj-02",
+            "alternative_id": "claude-diagnostico-por-plantilla",
+            "category": "cobertura",
+            "severity": "medium",
+            "claim": "El backlog necesita incorporar explícitamente categorías sin h1, título vacío y JSON-LD inválido de 404, y nested-interactive/select-name en bundle. La propuesta no detalla estos hallazgos ni sus pruebas por plantilla. Son observaciones existentes, sin necesidad de rehacer discovery.",
+            "status": "open",
+            "evidence_refs": [
+              "source:audit-evidence.json"
+            ],
+            "resolution_evidence_refs": []
+          },
+          {
+            "id": "codex-obj-03",
+            "alternative_id": "claude-diagnostico-por-plantilla",
+            "category": "atribución causal",
+            "severity": "low",
+            "claim": "La asociación del vídeo con CLS respalda investigarlo, pero no demuestra que la inyección del iframe sea la causa raíz. Tampoco los 12 ms de reflow observados permiten priorizar featured-collection como cuello principal. Conservar ambas atribuciones como hipótesis y los ahorros como unknown.",
+            "status": "open",
+            "evidence_refs": [
+              "source:audit-evidence.json"
+            ],
+            "resolution_evidence_refs": []
+          },
+          {
+            "id": "codex-obj-04",
+            "alternative_id": "claude-solo-home-video-cls",
+            "category": "alcance",
+            "severity": "high",
+            "claim": "El alcance exclusivo de home no satisface la extensión por plantillas solicitada. Puede conservarse como futura intervención candidata, pero no como alternativa suficiente para entregar esta auditoría integral.",
+            "status": "open",
+            "evidence_refs": [
+              "source:audit-evidence.json"
+            ],
+            "resolution_evidence_refs": []
+          }
+        ],
+        "preferred_alternative": "codex-auditoria-por-componentes",
+        "questions": [
+          {
+            "id": "codex-q-01",
+            "to_agent": "claude",
+            "alternative_id": "claude-diagnostico-por-plantilla",
+            "question": "En source_excerpts todos los deployed_sync_verified son false y limitations declara ausencia de antes/después. ¿Tus pass califican únicamente el ADR documental? ¿Qué estados retirarías para evitar que se interpreten como validación de futuras correcciones?",
+            "evidence_refs": [
+              "source:audit-evidence.json"
+            ]
+          },
+          {
+            "id": "codex-q-02",
+            "to_agent": "claude",
+            "alternative_id": "claude-diagnostico-por-plantilla",
+            "question": "A partir de coverage.category, category_accessories, not_found y bundle, ¿cómo incorporarías los h1 ausentes, los defectos de 404 y la semántica del pack al backlog, indicando prioridad, fuente candidata y prueba pendiente sin atribuir causas todavía?",
+            "evidence_refs": [
+              "source:audit-evidence.json"
+            ]
+          },
+          {
+            "id": "codex-q-03",
+            "to_agent": "claude",
+            "alternative_id": "claude-solo-home-video-cls",
+            "question": "Dado que el objetivo exige extender el diagnóstico por plantillas y que MCP.CLSCulprits no identifica causa raíz, ¿retiras esta alternativa como entrega suficiente y conservas la reserva geométrica/carga diferida solo como hipótesis de futura intervención?",
+            "evidence_refs": [
+              "source:audit-evidence.json"
+            ]
+          }
+        ]
+      },
+      "model": {
+        "model": "gpt-6.1-sol",
+        "effort": "medium",
+        "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+        "verified_at": "2026-11-08"
+      },
+      "execution": {
+        "exit_code": 0,
+        "timed_out": false,
+        "output_limited": false,
+        "idle_timed_out": false,
+        "cancelled": false,
+        "process_started": true,
+        "process_reaped": true,
+        "stdin_bytes_written": 330912,
+        "context_complete": true,
+        "duration_s": 27.261,
+        "timing": {
+          "spawn_s": 0.000782,
+          "input_complete_s": 0.090521,
+          "first_stdout_s": 0.704263,
+          "first_stderr_s": null,
+          "timeout_phase": null,
+          "event_counts": {
+            "thread.started": 1,
+            "item.completed": 2,
+            "turn.started": 1,
+            "turn.completed": 1
+          },
+          "inference_vs_initialization": "not_separable_without_provider_events"
+        },
+        "output_accounting": {
+          "transport_bytes": 5262,
+          "retained_bytes": 5262,
+          "discarded_progress_bytes": 0,
+          "transport_limit_bytes": 20000000,
+          "retained_limit_bytes": 2000000
+        },
+        "isolation": {
+          "backend": "bubblewrap",
+          "snapshot_read_only": true,
+          "host_home_mounted": false,
+          "network": "enabled_no_destination_firewall",
+          "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+        },
+        "started_at": "2026-11-10T19:55:32.661663+00:00",
+        "prompt_bytes": 330912,
+        "prompt_sha256": "b6aa7c2ba8c4c872bee86074c033cd876e0ddbe2021ec2c1ca6328535b95d054",
+        "usage": {
+          "provider_reported": {
+            "input_tokens": 108055,
+            "cached_input_tokens": 0,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 1068,
+            "reasoning_output_tokens": 32
+          },
+          "measured_cost_available": false,
+          "estimated_cost": null
+        },
+        "limits": {
+          "timeout": 240,
+          "idle_timeout": 90,
+          "startup_timeout": 30,
+          "first_response_timeout": 150
+        },
+        "structured_output": "native_schema",
+        "contract_validation": {
+          "status": "passed",
+          "duration_s": 0.000218
+        }
+      }
+    }
+  ],
+  "defense": [
+    {
+      "agent": "claude",
+      "phase": "defense",
+      "at": "2026-11-10T19:55:59.940568+00:00",
+      "requested_agent": "claude",
+      "effective_agent": "claude",
+      "valid": true,
+      "response": {
+        "decision": "proposed",
+        "summary": "Reviso mi propuesta tras las objeciones. Retiro claude-solo-home-video-cls. Los estados pass de claude-diagnostico-por-plantilla pasan a unknown salvo el diseño documental. Incorporo al backlog los h1 ausentes de las categorías, los defectos del 404 y la semántica de bundle. Prefiero codex-auditoria-por-componentes (matriz plantilla×componente). Sin aprobación de implementación.",
+        "changes": [],
+        "evidence": [
+          "source:audit-evidence.json: deployed_sync_verified=false en todos los source_excerpts; limitations declara que no hay antes/después.",
+          "source:audit-evidence.json: coverage de category y category_accessories con h1 vacío; not_found con HTTP 404, título vacío y JSON-LD inválido; bundle con nested-interactive y select-name.",
+          "source:audit-evidence.json: MCP.CLSCulprits no identifica causa raíz; el contrafactual de YouTube es diagnóstico y no una mejora entregada."
+        ],
+        "objections": [
+          {
+            "id": "claude-obj-5",
+            "alternative_id": "codex-auditoria-por-componentes",
+            "category": "completitud",
+            "severity": "low",
+            "claim": "Todas las restricciones están en unknown. Solo son verificables como pass el modo de solo lectura y la ausencia de cambios comerciales. Falta además la sincronización con el despliegue como condición previa explícita.",
+            "status": "open",
+            "evidence_refs": [
+              "source:audit-evidence.json"
+            ],
+            "resolution_evidence_refs": []
+          }
+        ],
+        "preferred_alternative": "codex-auditoria-por-componentes",
+        "answers": [
+          {
+            "question_id": "codex-q-01",
+            "from_agent": "codex",
+            "answer": "Respondo como el agente claude, destinatario de esta pregunta; from_agent=codex lo impone el esquema. Mis pass solo calificaban el diseño documental del ADR. Retiro como pass: functional, security, seo, native_reuse y maintainability, que pasan a unknown. Tampoco hay medición de reversibilidad, complejidad ni coste. Ningún pass puede leerse como validación de futuras correcciones: deployed_sync_verified es false y no hay candidato posterior.",
+            "disposition": "revise",
+            "evidence_refs": [
+              "source:audit-evidence.json"
+            ]
+          },
+          {
+            "question_id": "codex-q-02",
+            "from_agent": "codex",
+            "answer": "Respondo como el agente claude; from_agent=codex lo impone el esquema. Añado tres fichas P2, sin atribuir causa. (1) Categorías sin h1 (category, category_accessories): la fuente candidata es la plantilla de categoría, aún sin identificar. Prueba: contar h1 en el HTML inicial y en el DOM renderizado, con y sin JS. (2) 404: título vacío y JSON-LD inválido; la fuente candidata es structured-data.tpl o la plantilla 404. Prueba: validar la sintaxis JSON-LD y conservar el HTTP 404. (3) bundle: nested-interactive y select-name; hay que localizar el nodo con axe, y la fuente candidata sigue sin determinar. Prueba: axe por nodo más revisión de teclado.",
+            "disposition": "revise",
+            "evidence_refs": [
+              "source:audit-evidence.json"
+            ]
+          },
+          {
+            "question_id": "codex-q-03",
+            "from_agent": "codex",
+            "answer": "Respondo como el agente claude; from_agent=codex lo impone el esquema. Retiro claude-solo-home-video-cls como entrega suficiente: no cubre la extensión por plantillas y CLSCulprits no identifica la causa raíz. La reserva de proporción y la carga diferida del iframe quedan como hipótesis de una futura intervención, sin beneficio cuantificado.",
+            "disposition": "withdraw",
+            "evidence_refs": [
+              "source:audit-evidence.json"
+            ]
+          }
+        ],
+        "withdrawn_alternatives": [
+          "claude-solo-home-video-cls"
+        ],
+        "revision_notes": [
+          "Las restricciones pass de claude-diagnostico-por-plantilla pasan a unknown; solo el diseño documental del ADR se mantiene.",
+          "Backlog ampliado con el overflow transversal (1507 px a 1440 y 1059 px a 1024), h1 ausentes en categorías, defectos del 404 y semántica de bundle, todos P2.",
+          "Atribuciones de causa (iframe de YouTube, Swiper, reflow de featured-collection, geometría cero del teclado) degradadas a hipótesis; beneficios en unknown.",
+          "Cambio de preferencia hacia codex-auditoria-por-componentes. Verificar la sincronización con el despliegue pasa a condición previa explícita. Las respuestas codex-q-* llevan from_agent=codex por el esquema, aunque las emite el agente claude."
+        ]
+      },
+      "model": {
+        "model": "claude-sonnet-5-5",
+        "effort": "medium",
+        "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+        "verified_at": "2026-11-08"
+      },
+      "execution": {
+        "exit_code": 0,
+        "timed_out": false,
+        "output_limited": false,
+        "idle_timed_out": false,
+        "cancelled": false,
+        "process_started": true,
+        "process_reaped": true,
+        "stdin_bytes_written": 343387,
+        "context_complete": true,
+        "duration_s": 20.884,
+        "timing": {
+          "spawn_s": 0.000798,
+          "input_complete_s": 0.454424,
+          "first_stdout_s": 1.116549,
+          "first_stderr_s": null,
+          "timeout_phase": null,
+          "event_counts": {
+            "system": 8,
+            "stream_event": 283,
+            "event:message_start": 1,
+            "event:content_block_start": 2,
+            "event:content_block_delta": 276,
+            "assistant": 2,
+            "event:content_block_stop": 2,
+            "user": 1,
+            "event:message_delta": 1,
+            "event:message_stop": 1,
+            "rate_limit_event": 1,
+            "result": 1
+          },
+          "inference_vs_initialization": "not_separable_without_provider_events"
+        },
+        "output_accounting": {
+          "transport_bytes": 124568,
+          "retained_bytes": 124568,
+          "discarded_progress_bytes": 0,
+          "transport_limit_bytes": 20000000,
+          "retained_limit_bytes": 2000000
+        },
+        "isolation": {
+          "backend": "bubblewrap",
+          "snapshot_read_only": true,
+          "host_home_mounted": false,
+          "network": "enabled_no_destination_firewall",
+          "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+        },
+        "started_at": "2026-11-10T19:55:59.955554+00:00",
+        "prompt_bytes": 343387,
+        "prompt_sha256": "6fb58b48fa3741d67f2363fb23eefd09a5a516f42f427d31da507f70bd3ceef4",
+        "usage": {
+          "provider_reported": {
+            "total_cost_usd": 0.6266372,
+            "duration_ms": 19327,
+            "input_tokens": 2,
+            "cache_creation_input_tokens": 149560,
+            "cache_read_input_tokens": 2832,
+            "output_tokens": 2811
+          },
+          "measured_cost_available": true,
+          "estimated_cost": null
+        },
+        "limits": {
+          "timeout": 240,
+          "idle_timeout": 90,
+          "startup_timeout": 30,
+          "first_response_timeout": 120
+        },
+        "structured_output": "native_schema",
+        "contract_validation": {
+          "status": "passed",
+          "duration_s": 0.004121
+        }
+      }
+    },
+    {
+      "agent": "codex",
+      "phase": "defense",
+      "at": "2026-11-10T19:55:59.940380+00:00",
+      "requested_agent": "codex",
+      "effective_agent": "codex",
+      "valid": true,
+      "response": {
+        "decision": "proposed",
+        "summary": "Mantengo codex-auditoria-por-componentes como ADR de diagnóstico. Preciso la prioridad investigativa de producto/blog móvil y la condición previa de equivalencia desplegada. No apruebo implementación ni declaro objeciones resueltas mediante esta defensa.",
+        "changes": [],
+        "evidence": [
+          "source:audit-evidence.json"
+        ],
+        "objections": [
+          {
+            "id": "codex-obj-01",
+            "alternative_id": "claude-diagnostico-por-plantilla",
+            "category": "validación",
+            "severity": "medium",
+            "claim": "Los estados pass deben limitarse explícitamente al ADR documental o quedar unknown; no acreditan funcionalidad, SEO ni mantenibilidad de futuras correcciones.",
+            "status": "open",
+            "evidence_refs": [
+              "source:audit-evidence.json"
+            ],
+            "resolution_evidence_refs": []
+          },
+          {
+            "id": "codex-obj-02",
+            "alternative_id": "claude-diagnostico-por-plantilla",
+            "category": "cobertura",
+            "severity": "medium",
+            "claim": "Falta incorporar explícitamente al backlog categorías sin h1, defectos de título/JSON-LD de 404 y nested-interactive/select-name del pack, con pruebas pendientes por plantilla.",
+            "status": "open",
+            "evidence_refs": [
+              "source:audit-evidence.json"
+            ],
+            "resolution_evidence_refs": []
+          },
+          {
+            "id": "codex-obj-03",
+            "alternative_id": "claude-diagnostico-por-plantilla",
+            "category": "atribución causal",
+            "severity": "low",
+            "claim": "La inyección del iframe sigue siendo hipótesis causal del CLS. Los 12 ms de reflow tampoco demuestran que featured-collection sea un cuello principal.",
+            "status": "open",
+            "evidence_refs": [
+              "source:audit-evidence.json"
+            ],
+            "resolution_evidence_refs": []
+          },
+          {
+            "id": "codex-obj-04",
+            "alternative_id": "claude-solo-home-video-cls",
+            "category": "alcance",
+            "severity": "high",
+            "claim": "Una entrega exclusiva de home no satisface la extensión por plantillas. Su retirada corresponde a Claude; todavía no consta una defensa que la retire.",
+            "status": "open",
+            "evidence_refs": [
+              "source:audit-evidence.json"
+            ],
+            "resolution_evidence_refs": []
+          }
+        ],
+        "preferred_alternative": "codex-auditoria-por-componentes",
+        "answers": [
+          {
+            "question_id": "claude-q-1",
+            "from_agent": "claude",
+            "answer": "coverage registra exactamente 1507 px de scroll_width a 1440 en las 17 páginas, además de 1059 a 1024 en home, categoría y producto. Esa repetición sugiere una dependencia compartida; no identifica el consumidor. Exigiría localizar cajas y descendientes que exceden el viewport, incluyendo posicionados y transformados, registrar selector, rectángulos y estilos calculados, y rastrear la declaración ganadora y su media query. Compararía 1024/1440 con 768/1920 donde estén disponibles. Header, footer y modales son candidatos de inspección, sin atribución demostrada.",
+            "disposition": "defend",
+            "evidence_refs": [
+              "source:audit-evidence.json"
+            ]
+          },
+          {
+            "question_id": "claude-q-2",
+            "from_agent": "claude",
+            "answer": "P1 significa prioridad de investigación por severidad observada, no regresión ni causa confirmada. Antes de prescribir corrección exigiría repetir ambas PDP con el mismo navegador, viewport, CPU, red, caché e instrumentación, conservando muestras y dispersión; usaría cinco muestras iniciales y ampliaría si siguen inestables. PSI y local permanecerían separados. Inspeccionaría red/currentSrc y una traza sin instrumentación de auditoría para relacionar fin de descarga, pintura y tareas. product-image.tpl es candidato por Swiper, clases y consumidores CSS/JS; su extracto ya prioriza la primera imagen y no prueba que Swiper cause el retraso. Equivalencia desplegada, causa y beneficio: unknown.",
+            "disposition": "revise",
+            "evidence_refs": [
+              "source:audit-evidence.json"
+            ]
+          },
+          {
+            "question_id": "claude-q-3",
+            "from_agent": "claude",
+            "answer": "Mantendría un registro maestro con ID por hallazgo y una tabla de ocurrencias por URL, estado, nodo y perfil. Cada ficha enlazaría ese ID sin multiplicar causas ni sumar ahorros. El overflow puede agruparse como patrón observado, con causa unknown; contraste solo se consolidaría por componente cuando coincidan nodos y reglas responsables. Las diferencias entre plantillas conservarían ocurrencias propias. codex-informe-por-url seguiría siendo una presentación secundaria del mismo registro.",
+            "disposition": "defend",
+            "evidence_refs": [
+              "source:audit-evidence.json"
+            ]
+          }
+        ],
+        "withdrawn_alternatives": [],
+        "revision_notes": [
+          "Aclaro la condición previa ya incluida en la propuesta: confirmar equivalencia entre fuentes locales y despliegue, con hashes y consumidores, antes de prescribir cualquier parche.",
+          "Acepto separar el cumplimiento documental de lectura y ausencia de cambios comerciales de las restricciones técnicas; estas últimas permanecen unknown.",
+          "La ausencia de antes/después impide declarar regresiones; no impide registrar defectos actuales. P0 permanece vacío porque no se ha demostrado un caso crítico que lo justifique.",
+          "No se ejecutaron pruebas nuevas. Permanecen pendientes carrito poblado, checkout, datos del comerciante, GSC y evaluación humana con lector de pantalla."
+        ]
+      },
+      "model": {
+        "model": "gpt-6.1-sol",
+        "effort": "medium",
+        "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+        "verified_at": "2026-11-08"
+      },
+      "execution": {
+        "exit_code": 0,
+        "timed_out": false,
+        "output_limited": false,
+        "idle_timed_out": false,
+        "cancelled": false,
+        "process_started": true,
+        "process_reaped": true,
+        "stdin_bytes_written": 343382,
+        "context_complete": true,
+        "duration_s": 33.217,
+        "timing": {
+          "spawn_s": 0.000992,
+          "input_complete_s": 0.084241,
+          "first_stdout_s": 0.630194,
+          "first_stderr_s": null,
+          "timeout_phase": null,
+          "event_counts": {
+            "thread.started": 1,
+            "item.completed": 2,
+            "turn.started": 1,
+            "turn.completed": 1
+          },
+          "inference_vs_initialization": "not_separable_without_provider_events"
+        },
+        "output_accounting": {
+          "transport_bytes": 6537,
+          "retained_bytes": 6537,
+          "discarded_progress_bytes": 0,
+          "transport_limit_bytes": 20000000,
+          "retained_limit_bytes": 2000000
+        },
+        "isolation": {
+          "backend": "bubblewrap",
+          "snapshot_read_only": true,
+          "host_home_mounted": false,
+          "network": "enabled_no_destination_firewall",
+          "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+        },
+        "started_at": "2026-11-10T19:55:59.954538+00:00",
+        "prompt_bytes": 343382,
+        "prompt_sha256": "79753bea9c8f08cdf399c220837065855e280367ca56205f23af3dde13e85427",
+        "usage": {
+          "provider_reported": {
+            "input_tokens": 111264,
+            "cached_input_tokens": 0,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 1367,
+            "reasoning_output_tokens": 48
+          },
+          "measured_cost_available": false,
+          "estimated_cost": null
+        },
+        "limits": {
+          "timeout": 240,
+          "idle_timeout": 90,
+          "startup_timeout": 30,
+          "first_response_timeout": 150
+        },
+        "structured_output": "native_schema",
+        "contract_validation": {
+          "status": "passed",
+          "duration_s": 0.000228
+        }
+      }
+    }
+  ],
+  "incremental_field_review": [
+    {
+      "agent": "claude",
+      "at": "2026-11-10T20:00:40.234638+00:00",
+      "phase": "incremental-field-evidence-review",
+      "response": {
+        "decision": "proposed",
+        "summary": "Los datos no justifican una optimización de emergencia ni un cambio nativo ahora. En PRO AIR móvil, LCP, FCP y CLS son buenos en campo, pero eso no es un pase completo de CWV porque falta INP en la URL. Recomiendo seguir con el diagnóstico de solo lectura: conciliar laboratorio y campo y revisar la cola de CLS. No apruebo implementación.",
+        "changes": [],
+        "evidence": [
+          "source:field-update.json"
+        ],
+        "analysis": {
+          "problem": "Los nuevos datos CrUX de campo de la URL PRO AIR móvil (LCP p75 1655 ms, CLS 0.02, FCP 1474 ms, INP ausente) contrastan con el laboratorio de Google (11,82 s) y el local (3,79 s). Hay que decidir si justifican optimización de emergencia, más diagnóstico o un cambio nativo.",
+          "cause": "La divergencia laboratorio/campo es esperable: el laboratorio simula throttling y dispositivo lentos sobre una carga en frío, mientras que el campo agrega visitas reales de 28 días. No hay medición que explique la brecha de 11,82 s frente a 3,79 s, que sigue sin atribuir. Los datos de campo no demuestran defecto en la URL de PRO AIR.",
+          "recommendation": "vendor-claude-diagnostico-campo-lab",
+          "evidence_refs": [
+            "source:field-update.json"
+          ],
+          "hypotheses": [
+            "Hipótesis: el perfil de throttling de Google (11,82 s) es mucho más severo que el local y que el dispositivo real de los visitantes.",
+            "Hipótesis: la URL móvil de PRO AIR tiene tráfico CrUX suficiente y de buena calidad porque recibe visitas reales, pero esto no se ha verificado.",
+            "Hipótesis: el CLS 0.02 de p75 oculta una cola, pues el 19,51 % de las cargas supera 0.25. Habría que revisar qué variante provoca esa cola.",
+            "Hipótesis: la ausencia de INP en la URL se debe a pocas interacciones; no autoriza inferirlo del TBT ni del origen."
+          ],
+          "native_components": [
+            "Galería e imagen nativas de la ficha de producto (sin cambios propuestos)"
+          ],
+          "risks": [
+            "Tratar un solo valor de laboratorio como una emergencia sin regresión de campo medida.",
+            "Declarar que PRO AIR pasa CWV sin INP en la URL.",
+            "Extrapolar a categorías y accesorios: Presoterapia y Baterías devuelven insufficient_field_data; PRO AIR escritorio también.",
+            "La home por URL sólo tiene FCP y CLS parciales; su origen no sustituye a la URL.",
+            "El CLS tiene cola alta (19,5 % >0.25 en PRO AIR móvil, 12,8 % en el origen móvil).",
+            "Se mantienen sin cambios los hallazgos y objeciones previos no relacionados, y los límites de fuente y despliegue.",
+            "Los CrUX cubren 12 oct–8 nov 2026 y pueden no reflejar el despliegue actual."
+          ],
+          "tests": [
+            "Conciliar laboratorio y campo con perfiles iguales.",
+            "Diagnosticar la cola de CLS >0.25 de PRO AIR móvil.",
+            "Reconsultar CrUX por URL para INP, sin sustituirlo por origen ni TBT.",
+            "Verificar que las fuentes locales coincidan con el despliegue antes de prescribir un parche."
+          ],
+          "files": [],
+          "impacts": {
+            "seo": "Sin evidencia de impacto; los CWV de campo observados en la URL son buenos, pero no certifican indexación ni ranking.",
+            "performance": "En PRO AIR móvil, LCP p75 1655 ms, FCP 1474 ms y CLS 0.02 están observados como buenos. No es un pase completo de CWV porque falta INP en esa URL. La brecha del laboratorio sigue sin explicar.",
+            "responsive": "Sólo se midió PRO AIR móvil; escritorio no tiene datos suficientes para esa URL.",
+            "accessibility": "Sin cambios de conclusión; INP no sustituye a la evaluación humana.",
+            "uiux": "Sin evidencia nueva de fricción real salvo la cola de CLS, aún sin atribuir.",
+            "commerce": "Sin impacto medido; no se tocan precio, stock, variantes, carrito ni checkout."
+          },
+          "confidence": 0.8,
+          "alternatives": [
+            {
+              "id": "vendor-claude-diagnostico-campo-lab",
+              "description": "Mantener diagnóstico de solo lectura, sin emergencia ni cambio. LCP 1655 ms y FCP 1474 ms están en rango bueno en esa URL móvil y CLS p75 0.02 también. Eso es 'métricas observadas buenas', no un CWV completo, porque falta INP en la URL. INP origen móvil (112 ms) es contexto y no sustituye a la URL. Antes de cualquier parche, conciliar laboratorio y campo con perfiles iguales y revisar la cola de CLS (19,5 % >0.25) y el 10,9 % de LCP >2,5 s.",
+              "constraints": {
+                "functional": {
+                  "status": "pass",
+                  "evidence_refs": [
+                    "source:field-update.json"
+                  ]
+                },
+                "security": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "compatibility": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "native_reuse": {
+                  "status": "pass",
+                  "evidence_refs": [
+                    "source:field-update.json"
+                  ]
+                },
+                "seo": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "performance": {
+                  "status": "unknown",
+                  "evidence_refs": [
+                    "source:field-update.json"
+                  ]
+                },
+                "accessibility": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "responsive": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "maintainability": {
+                  "status": "pass",
+                  "evidence_refs": []
+                },
+                "reversibility": {
+                  "status": "pass",
+                  "evidence_refs": []
+                },
+                "complexity": {
+                  "status": "pass",
+                  "evidence_refs": []
+                },
+                "development_cost": {
+                  "status": "pass",
+                  "evidence_refs": []
+                },
+                "execution_cost": {
+                  "status": "pass",
+                  "evidence_refs": []
+                }
+              },
+              "files": [],
+              "tests": [
+                "Repetir laboratorio móvil con el mismo perfil de Google y el local, con la red/CPU registradas, para explicar 11,82 s frente a 3,79 s.",
+                "Registrar currentSrc y red del LCP real de PRO AIR en móvil.",
+                "Consultar CrUX por URL en otra fecha para ver si aparece INP; no sustituirlo por origen ni por TBT.",
+                "Localizar con RUM o trazas qué variante provoca la cola CLS >0.25."
+              ]
+            },
+            {
+              "id": "vendor-claude-optimizacion-emergencia",
+              "description": "Optimización de emergencia sobre PRO AIR y el tema, motivada por el 11,82 s de laboratorio.",
+              "constraints": {
+                "functional": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "security": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "compatibility": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "native_reuse": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "seo": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "performance": {
+                  "status": "fail",
+                  "evidence_refs": [
+                    "source:field-update.json"
+                  ]
+                },
+                "accessibility": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "responsive": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "maintainability": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "reversibility": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "complexity": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "development_cost": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "execution_cost": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                }
+              },
+              "files": [],
+              "tests": [
+                "Mostrar primero una regresión de campo en la URL; hoy no la hay en LCP, FCP ni CLS p75."
+              ]
+            },
+            {
+              "id": "vendor-claude-cambio-nativo-pro-air",
+              "description": "Cambio nativo (configuración de imagen/galería de la ficha de producto) tras identificar el LCP real. Condicionado a que el diagnóstico encuentre una causa medida y a que la implementación se autorice por separado.",
+              "constraints": {
+                "functional": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "security": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "compatibility": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "native_reuse": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "seo": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "performance": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "accessibility": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "responsive": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "maintainability": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "reversibility": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "complexity": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "development_cost": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "execution_cost": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                }
+              },
+              "files": [],
+              "tests": [
+                "Tras diagnosticar, comparar antes/después con perfiles iguales y máscaras de contenido dinámico."
+              ]
+            }
+          ]
+        }
+      },
+      "valid": true,
+      "model": {
+        "model": "claude-sonnet-5-5",
+        "effort": "medium",
+        "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+        "verified_at": "2026-11-08"
+      },
+      "execution": {
+        "exit_code": 0,
+        "timed_out": false,
+        "output_limited": false,
+        "idle_timed_out": false,
+        "cancelled": false,
+        "process_started": true,
+        "process_reaped": true,
+        "stdin_bytes_written": 35120,
+        "context_complete": true,
+        "duration_s": 24.792,
+        "timing": {
+          "spawn_s": 0.000381,
+          "input_complete_s": 0.000455,
+          "first_stdout_s": 1.425244,
+          "first_stderr_s": null,
+          "timeout_phase": null,
+          "event_counts": {
+            "system": 2,
+            "stream_event": 600,
+            "event:message_start": 1,
+            "event:content_block_start": 1,
+            "event:content_block_delta": 595,
+            "assistant": 1,
+            "event:content_block_stop": 1,
+            "event:message_delta": 1,
+            "event:message_stop": 1,
+            "user": 1,
+            "rate_limit_event": 1,
+            "result": 1
+          },
+          "inference_vs_initialization": "not_separable_without_provider_events"
+        },
+        "output_accounting": {
+          "transport_bytes": 225283,
+          "retained_bytes": 225283,
+          "discarded_progress_bytes": 0,
+          "transport_limit_bytes": 20000000,
+          "retained_limit_bytes": 2000000
+        },
+        "isolation": {
+          "backend": "bubblewrap",
+          "snapshot_read_only": true,
+          "host_home_mounted": false,
+          "network": "enabled_no_destination_firewall",
+          "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+        },
+        "started_at": "2026-11-10T20:00:40.238056+00:00",
+        "prompt_bytes": 35120,
+        "prompt_sha256": "991e767c3f53b027602d69750a31d77a803b54d47079a933fbcb23ed13004758",
+        "usage": {
+          "provider_reported": {
+            "total_cost_usd": 0.09359139999999999,
+            "duration_ms": 22787,
+            "input_tokens": 2,
+            "cache_creation_input_tokens": 14950,
+            "cache_read_input_tokens": 4774,
+            "output_tokens": 3331
+          },
+          "measured_cost_available": true,
+          "estimated_cost": null
+        },
+        "limits": {
+          "timeout": 240,
+          "idle_timeout": 90,
+          "startup_timeout": 30,
+          "first_response_timeout": 120
+        },
+        "structured_output": "native_schema",
+        "contract_validation": {
+          "status": "passed",
+          "duration_s": 0.006084
+        }
+      }
+    },
+    {
+      "agent": "codex",
+      "at": "2026-11-10T19:58:35.575982+00:00",
+      "phase": "incremental-field-evidence-review",
+      "response": {
+        "decision": "proposed",
+        "summary": "Mantengo codex-auditoria-por-componentes y actualizo únicamente la conclusión de rendimiento de PRO AIR móvil: CrUX muestra LCP, CLS y FCP buenos en la ventana observada, sin INP disponible. No justifica optimización de emergencia ni un cambio nativo concreto; sí diagnóstico acotado de la discrepancia entre laboratorios. No acredita aprobación CWV completa ni autoriza implementación.",
+        "changes": [],
+        "evidence": [
+          "source:field-update.json: PRO AIR móvil, alcance URL, período 2026-10-12 a 2026-11-08: LCP p75=1655 ms, CLS p75=0.02 y FCP p75=1474 ms; INP ausente.",
+          "source:field-update.json: el histograma de PRO AIR móvil registra 19.51% de observaciones de CLS superiores a 0.25, pese al p75 bueno.",
+          "source:field-update.json: se reportan LCP de laboratorio de Google=11.82 s y local=3.79 s; no se aportan aquí trazas ni perfiles que expliquen la diferencia.",
+          "source:field-update.json: categoría presoterapia, accesorio de baterías y PRO AIR escritorio devuelven insufficient_field_data.",
+          "source:field-update.json: las posiciones anteriores mantienen el diagnóstico por componentes, la comprobación de equivalencia entre fuentes y despliegue y las objeciones pendientes."
+        ],
+        "analysis": {
+          "problem": "Recalibrar la prioridad de PRO AIR móvil sin extender sus resultados a otras URL, dispositivos o al despliegue actual. El LCP de laboratorio alto sigue siendo una señal investigable, pero los datos de campo disponibles no sostienen una emergencia generalizada.",
+          "cause": "La causa de la divergencia entre Google, laboratorio local y campo permanece desconocida. Son mediciones con poblaciones, condiciones y ventanas potencialmente distintas; los valores agregados no identifican un componente causal ni prueban equivalencia del código desplegado.",
+          "recommendation": "codex-auditoria-por-componentes",
+          "evidence_refs": [
+            "source:field-update.json"
+          ],
+          "hypotheses": [
+            "Diferencias de dispositivo, red, CPU, caché, ubicación o estado de carga podrían explicar parte de la divergencia; ninguna está confirmada.",
+            "La cola de CLS podría corresponder a estados o sesiones específicos; el agregado no permite atribuirla a un componente."
+          ],
+          "native_components": [],
+          "risks": [
+            "Confundir LCP y CLS buenos con aprobación CWV completa: falta INP y FCP no completa esa evaluación.",
+            "Usar métricas del origen para cubrir ausencias de una URL o extrapolar PRO AIR móvil a escritorio, categoría o accesorio.",
+            "Interpretar insufficient_field_data como resultado bueno o malo; el estado permanece desconocido.",
+            "Ignorar el 19.51% de CLS superior a 0.25 por observar únicamente el p75.",
+            "Prescribir un parche sin causa demostrada ni correspondencia entre fuentes locales y despliegue.",
+            "Permanecen los hallazgos de overflow, h1 de categorías, 404 y semántica de bundle, así como las objeciones previas; esta evidencia no los revalida ni los resuelve.",
+            "Siguen pendientes carrito poblado, checkout, datos del comerciante, GSC y evaluación humana con lector de pantalla. P0 permanece vacío por falta de un caso crítico demostrado."
+          ],
+          "tests": [
+            "No se ejecutaron herramientas, pruebas ni cambios; se interpretó únicamente source:field-update.json.",
+            "Los estados técnicos de la alternativa permanecen unknown: los datos de campo no verifican una solución ni sustituyen QA posterior."
+          ],
+          "files": [
+            "field-update.json"
+          ],
+          "impacts": {
+            "seo": "Sin nueva conclusión sobre indexación ni posicionamiento. No se acredita aprobación CWV completa de PRO AIR.",
+            "performance": "LCP, CLS y FCP observados son buenos para PRO AIR móvil en la ventana indicada. La discrepancia de laboratorio merece diagnóstico acotado; no demuestra urgencia ni beneficio de un parche.",
+            "responsive": "Sin evidencia nueva que modifique los hallazgos anteriores.",
+            "accessibility": "Sin evidencia nueva; permanecen las limitaciones y comprobaciones pendientes.",
+            "uiux": "La cola de CLS merece seguimiento, sin atribución causal ni rediseño prescrito.",
+            "commerce": "Sin cambios de tema ni operaciones comerciales; las validaciones pendientes permanecen abiertas."
+          },
+          "confidence": 0.93,
+          "alternatives": [
+            {
+              "id": "codex-auditoria-por-componentes",
+              "description": "Conservar el ADR de diagnóstico existente. Reducir la urgencia atribuida al LCP de PRO AIR móvil y acotar el seguimiento a comparar los laboratorios y localizar posibles estados problemáticos. Un cambio nativo solo sería evaluable tras demostrar causa, consumidor y equivalencia desplegada; esta actualización no lo prescribe ni lo aprueba.",
+              "constraints": {
+                "functional": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "security": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "compatibility": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "native_reuse": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "seo": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "performance": {
+                  "status": "unknown",
+                  "evidence_refs": [
+                    "source:field-update.json"
+                  ]
+                },
+                "accessibility": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "responsive": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "maintainability": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "reversibility": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "complexity": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "development_cost": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "execution_cost": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                }
+              },
+              "files": [],
+              "tests": [
+                "No se ejecutaron pruebas nuevas; actualización basada exclusivamente en la evidencia suministrada.",
+                "Pendiente para el diagnóstico: contrastar perfiles, trazas y elemento LCP de ambos laboratorios con condiciones comparables y equivalencia del despliegue comprobada.",
+                "INP de la URL sigue desconocido; no sustituirlo por TBT ni por INP del origen."
+              ]
+            }
+          ]
+        }
+      },
+      "valid": true,
+      "model": {
+        "model": "gpt-6.1-sol",
+        "effort": "medium",
+        "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+        "verified_at": "2026-11-08"
+      },
+      "execution": {
+        "exit_code": 0,
+        "timed_out": false,
+        "output_limited": false,
+        "idle_timed_out": false,
+        "cancelled": false,
+        "process_started": true,
+        "process_reaped": true,
+        "stdin_bytes_written": 34623,
+        "context_complete": true,
+        "duration_s": 39.109,
+        "timing": {
+          "spawn_s": 0.000693,
+          "input_complete_s": 0.00084,
+          "first_stdout_s": 0.708212,
+          "first_stderr_s": null,
+          "timeout_phase": null,
+          "event_counts": {
+            "thread.started": 1,
+            "item.completed": 2,
+            "turn.started": 1,
+            "turn.completed": 1
+          },
+          "inference_vs_initialization": "not_separable_without_provider_events"
+        },
+        "output_accounting": {
+          "transport_bytes": 7799,
+          "retained_bytes": 7799,
+          "discarded_progress_bytes": 0,
+          "transport_limit_bytes": 20000000,
+          "retained_limit_bytes": 2000000
+        },
+        "isolation": {
+          "backend": "bubblewrap",
+          "snapshot_read_only": true,
+          "host_home_mounted": false,
+          "network": "enabled_no_destination_firewall",
+          "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+        },
+        "started_at": "2026-11-10T19:58:35.582497+00:00",
+        "prompt_bytes": 34623,
+        "prompt_sha256": "049cc8756e0d214b60e8e4b5456e7711113a181fd260a2ba15f9208f293f0e23",
+        "usage": {
+          "provider_reported": {
+            "input_tokens": 24492,
+            "cached_input_tokens": 0,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 1587,
+            "reasoning_output_tokens": 77
+          },
+          "measured_cost_available": false,
+          "estimated_cost": null
+        },
+        "limits": {
+          "timeout": 240,
+          "idle_timeout": 90,
+          "startup_timeout": 30,
+          "first_response_timeout": 150
+        },
+        "structured_output": "native_schema",
+        "contract_validation": {
+          "status": "passed",
+          "duration_s": 0.000281
+        }
+      }
+    }
+  ],
+  "incremental_price_review": [
+    {
+      "agent": "claude",
+      "at": "2026-11-10T20:09:18.861504+00:00",
+      "phase": "incremental-field-evidence-review",
+      "response": {
+        "decision": "proposed",
+        "summary": "Defecto real y reproducible en la entidad primaria (no un falso positivo de tarjetas D010): Offer.price toma el compare_at (13990 y 1490) en lugar del precio activo (10490 y 1290). Recomiendo prioridad alta en backlog, verificar primero la equivalencia fuente-despliegue y probar variantes y suscripciones. No se afirma ningún error de Merchant Center.",
+        "changes": [],
+        "evidence": [
+          "source:price-update.json"
+        ],
+        "analysis": {
+          "problem": "En dos páginas de producto principal (PRO AIR y Baterías PRO AIR) el Offer.price del schema primario (WebPage.mainEntity.offers) coincide con el precio de comparación tachado (13990, 1490) y no con el precio activo visible (10490, 1290), tanto en HTML inicial como en DOM renderizado. Es una inconsistencia de la entidad primaria, distinta de los falsos positivos de tarjetas relacionadas de D010.",
+          "cause": "Hipótesis apoyada en el fragmento fuente: structured-data.tpl define product_original_price = compare_at_price ? compare_at_price : price y structured_data_price = product_original_price. Sin suscripción solo, el precio del schema queda en el compare_at. No se verificó que ese archivo sea el desplegado (source_deployment_equivalence_verified=false) ni hay export de catálogo.",
+          "recommendation": "fx-verify-source-backlog-high",
+          "evidence_refs": [
+            "source:price-update.json"
+          ],
+          "hypotheses": [
+            "El fragmento de structured-data.tpl produce Offer.price = compare_at_price cuando existe, salvo producto solo-suscripción.",
+            "El tema desplegado puede diferir del archivo local, por lo que la causa aún no está confirmada.",
+            "Si estos productos tienen variantes, el precio podría depender de la variante seleccionada y debe medirse por variante.",
+            "El texto del fragmento no muestra si el bloque Offer usa structured_data_price o product.price; falta leer el resto del tpl."
+          ],
+          "native_components": [
+            "snippets/structured-data/structured-data.tpl",
+            "product.price / product.compare_at_price",
+            "product.isSubscribable() / getSubscriptionData()"
+          ],
+          "risks": [
+            "Posible divergencia entre tpl local y tema desplegado.",
+            "Corregir sin entender variantes o suscripciones podría crear nuevas inconsistencias.",
+            "Sin catálogo exportado no se puede confirmar el valor esperado.",
+            "No se observó ningún error de Merchant Center; no debe afirmarse impacto ahí."
+          ],
+          "tests": [
+            "Verificar equivalencia del tpl con el despliegue.",
+            "Comparar Offer.price vs precio visible en HTML inicial y renderizado en ambos productos.",
+            "Matriz de pruebas: sin compare_at, con compare_at, variantes, suscripción opcional y solo-suscripción.",
+            "Reconfirmar la exclusión de tarjetas relacionadas D010."
+          ],
+          "files": [
+            "snippets/structured-data/structured-data.tpl"
+          ],
+          "impacts": {
+            "seo": "Posible inconsistencia entre datos estructurados y precio visible; impacto en elegibilidad no medido ni confirmado.",
+            "performance": "Ninguno; no se repite el diagnóstico de rendimiento.",
+            "responsive": "Sin impacto.",
+            "accessibility": "Sin impacto.",
+            "uiux": "El usuario ve el precio correcto; el desajuste está solo en el marcado.",
+            "commerce": "Riesgo potencial de precios discrepantes en superficies que consumen el schema; sin evidencia de efecto real."
+          },
+          "confidence": 0.72,
+          "alternatives": [
+            {
+              "id": "fx-verify-source-backlog-high",
+              "description": "Registrar como defecto real de consistencia de entidad primaria con prioridad alta en backlog (no bloqueante de publicación). Antes de cualquier parche: confirmar que el tpl local equivale al desplegado, leer el bloque Offer completo, y definir con la fuente nativa (price vs compare_at_price vs suscripción) el valor esperado. Sin cambiar valores comerciales, sin añadir schemas y sin afirmar errores de Merchant Center.",
+              "constraints": {
+                "functional": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "security": {
+                  "status": "pass",
+                  "evidence_refs": [
+                    "source:price-update.json"
+                  ]
+                },
+                "compatibility": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "native_reuse": {
+                  "status": "pass",
+                  "evidence_refs": [
+                    "source:price-update.json"
+                  ]
+                },
+                "seo": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "performance": {
+                  "status": "pass",
+                  "evidence_refs": []
+                },
+                "accessibility": {
+                  "status": "pass",
+                  "evidence_refs": []
+                },
+                "responsive": {
+                  "status": "pass",
+                  "evidence_refs": []
+                },
+                "maintainability": {
+                  "status": "pass",
+                  "evidence_refs": [
+                    "source:price-update.json"
+                  ]
+                },
+                "reversibility": {
+                  "status": "pass",
+                  "evidence_refs": []
+                },
+                "complexity": {
+                  "status": "pass",
+                  "evidence_refs": []
+                },
+                "development_cost": {
+                  "status": "pass",
+                  "evidence_refs": []
+                },
+                "execution_cost": {
+                  "status": "pass",
+                  "evidence_refs": []
+                }
+              },
+              "files": [
+                "snippets/structured-data/structured-data.tpl"
+              ],
+              "tests": [
+                "Comparar hash del tpl local con el desplegado antes de diagnosticar.",
+                "Para cada producto, comparar Offer.price del mainEntity con el precio activo visible en HTML inicial y DOM renderizado.",
+                "Probar productos con compare_at ausente, compare_at mayor que price, y compare_at igual a price.",
+                "Probar variantes: cambiar variante y verificar price visible y Offer.price por variante.",
+                "Probar producto con suscripción opcional y solo-suscripción, comprobando que el descuento de suscripción no contradiga el precio visible.",
+                "Confirmar que las tarjetas relacionadas se excluyen del conteo de la entidad primaria."
+              ]
+            },
+            {
+              "id": "fx-monitor-only-low",
+              "description": "Dejar como observación de baja prioridad hasta tener causa confirmada y evidencia externa, sin trabajo de backlog inmediato.",
+              "constraints": {
+                "functional": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "security": {
+                  "status": "pass",
+                  "evidence_refs": []
+                },
+                "compatibility": {
+                  "status": "pass",
+                  "evidence_refs": []
+                },
+                "native_reuse": {
+                  "status": "pass",
+                  "evidence_refs": []
+                },
+                "seo": {
+                  "status": "fail",
+                  "evidence_refs": [
+                    "source:price-update.json"
+                  ]
+                },
+                "performance": {
+                  "status": "pass",
+                  "evidence_refs": []
+                },
+                "accessibility": {
+                  "status": "pass",
+                  "evidence_refs": []
+                },
+                "responsive": {
+                  "status": "pass",
+                  "evidence_refs": []
+                },
+                "maintainability": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "reversibility": {
+                  "status": "pass",
+                  "evidence_refs": []
+                },
+                "complexity": {
+                  "status": "pass",
+                  "evidence_refs": []
+                },
+                "development_cost": {
+                  "status": "pass",
+                  "evidence_refs": []
+                },
+                "execution_cost": {
+                  "status": "pass",
+                  "evidence_refs": []
+                }
+              },
+              "files": [],
+              "tests": [
+                "Repetir la observación periódicamente con el mismo perfil y registrar si el desajuste persiste."
+              ]
+            }
+          ]
+        }
+      },
+      "valid": true,
+      "model": {
+        "model": "claude-sonnet-5-5",
+        "effort": "medium",
+        "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+        "verified_at": "2026-11-08"
+      },
+      "execution": {
+        "exit_code": 0,
+        "timed_out": false,
+        "output_limited": false,
+        "idle_timed_out": false,
+        "cancelled": false,
+        "process_started": true,
+        "process_reaped": true,
+        "stdin_bytes_written": 23505,
+        "context_complete": true,
+        "duration_s": 18.693,
+        "timing": {
+          "spawn_s": 0.000657,
+          "input_complete_s": 0.000744,
+          "first_stdout_s": 1.40192,
+          "first_stderr_s": null,
+          "timeout_phase": null,
+          "event_counts": {
+            "system": 4,
+            "stream_event": 447,
+            "event:message_start": 1,
+            "event:content_block_start": 1,
+            "event:content_block_delta": 442,
+            "assistant": 1,
+            "event:content_block_stop": 1,
+            "user": 1,
+            "event:message_delta": 1,
+            "event:message_stop": 1,
+            "rate_limit_event": 1,
+            "result": 1
+          },
+          "inference_vs_initialization": "not_separable_without_provider_events"
+        },
+        "output_accounting": {
+          "transport_bytes": 200804,
+          "retained_bytes": 200804,
+          "discarded_progress_bytes": 0,
+          "transport_limit_bytes": 20000000,
+          "retained_limit_bytes": 2000000
+        },
+        "isolation": {
+          "backend": "bubblewrap",
+          "snapshot_read_only": true,
+          "host_home_mounted": false,
+          "network": "enabled_no_destination_firewall",
+          "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+        },
+        "started_at": "2026-11-10T20:09:18.868239+00:00",
+        "prompt_bytes": 23505,
+        "prompt_sha256": "9a8d96b5e2b4518ad6b28eb547eac74e751056cf6c40c56a0a87d3b1cba8a70e",
+        "usage": {
+          "provider_reported": {
+            "total_cost_usd": 0.0665554,
+            "duration_ms": 17181,
+            "input_tokens": 2,
+            "cache_creation_input_tokens": 10126,
+            "cache_read_input_tokens": 4774,
+            "output_tokens": 2557
+          },
+          "measured_cost_available": true,
+          "estimated_cost": null
+        },
+        "limits": {
+          "timeout": 240,
+          "idle_timeout": 90,
+          "startup_timeout": 30,
+          "first_response_timeout": 120
+        },
+        "structured_output": "native_schema",
+        "contract_validation": {
+          "status": "passed",
+          "duration_s": 0.004724
+        }
+      }
+    },
+    {
+      "agent": "codex",
+      "at": "2026-11-10T20:09:18.861907+00:00",
+      "phase": "incremental-field-evidence-review",
+      "response": {
+        "decision": "proposed",
+        "summary": "Existe una discrepancia observada de precio en la entidad principal de ambos productos, presente en HTML inicial y DOM renderizado. Recomiendo prioridad alta en el próximo ciclo de backlog, con verificación de la fuente nativa antes de plantear una corrección. No hay evidencia de un error en Merchant Center.",
+        "changes": [],
+        "evidence": [
+          "source:price-update.json"
+        ],
+        "analysis": {
+          "problem": "PRO AIR muestra precio activo de 10490 MXN y comparativo de 13990; WebPage.mainEntity.offers.price declara 13990. Baterías muestra 1290 MXN activo y 1490 comparativo; su Offer principal declara 1490. Las discrepancias aparecen tanto en HTML inicial como en DOM renderizado. La vinculación por entidad principal, nombre y URL distingue este hallazgo del patrón de falsos positivos por tarjetas relacionadas atribuido a D010; no se revalida aquí el expediente histórico D010.",
+          "cause": "El fragmento candidato asigna product.compare_at_price, cuando existe, a product_original_price y después a structured_data_price. Esto explica plausiblemente que se publique el precio comparativo. La causa desplegada no está confirmada: falta verificar equivalencia entre fuente y despliegue, consumidores de la variable y estado comercial de cada producto.",
+          "recommendation": "codex-verificar-fuente-nativa",
+          "evidence_refs": [
+            "source:price-update.json"
+          ],
+          "hypotheses": [
+            "La rama ordinaria del generador nativo podría usar el precio comparativo como Offer.price.",
+            "Las ramas de suscripción podrían producir resultados distintos según descuentos y combinabilidad; su comportamiento no está probado.",
+            "La selección de variantes podría afectar la oferta representada; no hay evidencia suficiente para determinarlo."
+          ],
+          "native_components": [
+            "Generador candidato snippets/structured-data/structured-data.tpl; equivalencia desplegada sin verificar.",
+            "product.price y product.compare_at_price.",
+            "product.isSubscribable(), product.isSubscriptionOnly() y product.getSubscriptionData().",
+            "WebPage.mainEntity.offers."
+          ],
+          "risks": [
+            "Aplicar una sustitución global sin revisar suscripciones podría alterar la semántica de descuentos combinados.",
+            "El fragmento candidato también contempla item; una futura corrección podría afectar tarjetas relacionadas.",
+            "No existe exportación de catálogo disponible para confirmar valores y modalidades comerciales.",
+            "La evidencia cubre dos páginas y sus capturas; no demuestra alcance general ni persistencia posterior.",
+            "No se observaron errores de Merchant Center, acciones de Google ni pérdidas comerciales atribuibles."
+          ],
+          "tests": [
+            "Evidencia recibida: comparación del precio visible activo y Offer principal en HTML inicial y DOM renderizado de las dos URLs.",
+            "Pendiente: comprobar fuente desplegada y contrato nativo que determina el precio de la oferta representada.",
+            "Pendiente: cubrir producto sin descuento y con descuento, verificando que el comparativo no sustituya al precio activo.",
+            "Pendiente: cubrir variante inicial y cambios de variante, correlacionando identidad, URL, moneda y precio de cada oferta.",
+            "Pendiente: cubrir compra única, suscripción exclusiva y descuentos de suscripción combinables/no combinables, incluidos casos sin descuento.",
+            "Pendiente: separar aserciones del producto principal y tarjetas relacionadas para evitar repetir falsos positivos del patrón D010.",
+            "Pendiente ante futura corrección autorizada: validar sintaxis, semántica y renderizado por separado; ninguna de estas pruebas demostraría aceptación por Google."
+          ],
+          "files": [
+            "price-update.json",
+            "snippets/structured-data/structured-data.tpl"
+          ],
+          "impacts": {
+            "seo": "Inconsistencia demostrada entre precio visible activo y Offer principal en las capturas. Efectos sobre resultados enriquecidos, indexación o Merchant Center: desconocidos.",
+            "performance": "Sin evaluación adicional ni cambios propuestos de rendimiento.",
+            "responsive": "No medido; la revisión no propone cambios de presentación.",
+            "accessibility": "No medida; la revisión no propone cambios de interacción.",
+            "uiux": "El precio activo visible coincide entre HTML inicial y DOM renderizado; la discrepancia observada está en los datos estructurados.",
+            "commerce": "Prioridad alta de backlog por exactitud del precio declarado. No se demuestra fallo de compra ni se autoriza modificar precios del comercio."
+          },
+          "confidence": 0.9,
+          "alternatives": [
+            {
+              "id": "codex-verificar-fuente-nativa",
+              "description": "Registrar el defecto de consistencia con prioridad alta para el próximo ciclo, sin tratarlo como incidente comercial demostrado. Verificar fuente desplegada, identidad de oferta y contratos nativos de precio, variantes y suscripciones. Preparar después una corrección mínima del generador existente, sujeta a autorización y pruebas; esta propuesta no modifica valores comerciales ni añade schemas.",
+              "constraints": {
+                "functional": {
+                  "status": "unknown",
+                  "evidence_refs": [
+                    "source:price-update.json"
+                  ]
+                },
+                "security": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "compatibility": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "native_reuse": {
+                  "status": "unknown",
+                  "evidence_refs": [
+                    "source:price-update.json"
+                  ]
+                },
+                "seo": {
+                  "status": "unknown",
+                  "evidence_refs": [
+                    "source:price-update.json"
+                  ]
+                },
+                "performance": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "accessibility": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "responsive": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "maintainability": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "reversibility": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "complexity": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "development_cost": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "execution_cost": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                }
+              },
+              "files": [
+                "snippets/structured-data/structured-data.tpl"
+              ],
+              "tests": [
+                "Pendiente: verificar equivalencia de fuente y despliegue mediante versión/hashes, y seguir structured_data_price hasta el Offer principal y sus consumidores.",
+                "Pendiente: contrastar precio activo, comparativo, moneda e identidad de oferta en HTML inicial y DOM renderizado para ambos productos.",
+                "Pendiente: cubrir variantes y modalidades de suscripción contra el contrato comercial nativo, sin asumir que el descuento máximo siempre corresponde a la oferta visible."
+              ]
+            }
+          ]
+        }
+      },
+      "valid": true,
+      "model": {
+        "model": "gpt-6.1-sol",
+        "effort": "medium",
+        "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+        "verified_at": "2026-11-08"
+      },
+      "execution": {
+        "exit_code": 0,
+        "timed_out": false,
+        "output_limited": false,
+        "idle_timed_out": false,
+        "cancelled": false,
+        "process_started": true,
+        "process_reaped": true,
+        "stdin_bytes_written": 23500,
+        "context_complete": true,
+        "duration_s": 39.07,
+        "timing": {
+          "spawn_s": 0.000372,
+          "input_complete_s": 0.00053,
+          "first_stdout_s": 0.69398,
+          "first_stderr_s": null,
+          "timeout_phase": null,
+          "event_counts": {
+            "thread.started": 1,
+            "item.completed": 2,
+            "turn.started": 1,
+            "turn.completed": 1
+          },
+          "inference_vs_initialization": "not_separable_without_provider_events"
+        },
+        "output_accounting": {
+          "transport_bytes": 8476,
+          "retained_bytes": 8476,
+          "discarded_progress_bytes": 0,
+          "transport_limit_bytes": 20000000,
+          "retained_limit_bytes": 2000000
+        },
+        "isolation": {
+          "backend": "bubblewrap",
+          "snapshot_read_only": true,
+          "host_home_mounted": false,
+          "network": "enabled_no_destination_firewall",
+          "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+        },
+        "started_at": "2026-11-10T20:09:18.867823+00:00",
+        "prompt_bytes": 23500,
+        "prompt_sha256": "0deeae4c2fb4d1ebc57a487dee3ab7ef0e347ab9b3b8180466bedaa04fc057d5",
+        "usage": {
+          "provider_reported": {
+            "input_tokens": 21097,
+            "cached_input_tokens": 0,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 1614,
+            "reasoning_output_tokens": 89
+          },
+          "measured_cost_available": false,
+          "estimated_cost": null
+        },
+        "limits": {
+          "timeout": 240,
+          "idle_timeout": 90,
+          "startup_timeout": 30,
+          "first_response_timeout": 150
+        },
+        "structured_output": "native_schema",
+        "contract_validation": {
+          "status": "passed",
+          "duration_s": 0.000306
+        }
+      }
+    }
+  ],
+  "rejected_attempts": [
+    {
+      "agent": "claude",
+      "at": "2026-11-10T19:58:35.575823+00:00",
+      "phase": "incremental-field-evidence-review",
+      "valid": false,
+      "error": "La recomendación debe referir una alternativa incluida.",
+      "model": {
+        "model": "claude-sonnet-5-5",
+        "effort": "medium",
+        "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+        "verified_at": "2026-11-08"
+      },
+      "execution": {
+        "exit_code": 0,
+        "timed_out": false,
+        "output_limited": false,
+        "idle_timed_out": false,
+        "cancelled": false,
+        "process_started": true,
+        "process_reaped": true,
+        "stdin_bytes_written": 34628,
+        "context_complete": true,
+        "duration_s": 20.683,
+        "timing": {
+          "spawn_s": 0.000389,
+          "input_complete_s": 0.000643,
+          "first_stdout_s": 1.116382,
+          "first_stderr_s": null,
+          "timeout_phase": null,
+          "event_counts": {
+            "system": 3,
+            "stream_event": 504,
+            "event:message_start": 1,
+            "event:content_block_start": 1,
+            "event:content_block_delta": 499,
+            "assistant": 1,
+            "event:content_block_stop": 1,
+            "user": 1,
+            "event:message_delta": 1,
+            "event:message_stop": 1,
+            "rate_limit_event": 1,
+            "result": 1
+          },
+          "inference_vs_initialization": "not_separable_without_provider_events"
+        },
+        "output_accounting": {
+          "transport_bytes": 204615,
+          "retained_bytes": 204615,
+          "discarded_progress_bytes": 0,
+          "transport_limit_bytes": 20000000,
+          "retained_limit_bytes": 2000000
+        },
+        "isolation": {
+          "backend": "bubblewrap",
+          "snapshot_read_only": true,
+          "host_home_mounted": false,
+          "network": "enabled_no_destination_firewall",
+          "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+        },
+        "started_at": "2026-11-10T19:58:35.582552+00:00",
+        "prompt_bytes": 34628,
+        "prompt_sha256": "ecdf9ade7e54edde0b3f57052e9c79d92eceb13113888a4c292acce161a714e3",
+        "usage": {
+          "provider_reported": {
+            "total_cost_usd": 0.0873294,
+            "duration_ms": 19219,
+            "input_tokens": 2,
+            "cache_creation_input_tokens": 14812,
+            "cache_read_input_tokens": 4774,
+            "output_tokens": 2760
+          },
+          "measured_cost_available": true,
+          "estimated_cost": null
+        },
+        "limits": {
+          "timeout": 240,
+          "idle_timeout": 90,
+          "startup_timeout": 30,
+          "first_response_timeout": 120
+        },
+        "structured_output": "native_schema",
+        "contract_validation": {
+          "status": "passed",
+          "duration_s": 0.004845
+        }
+      }
+    },
+    {
+      "agent": "claude",
+      "at": "2026-11-10T20:04:39.506485+00:00",
+      "phase": "incremental-field-evidence-review",
+      "valid": false,
+      "error": "La propuesta del consejo excede archivos autorizados.",
+      "model": {
+        "model": "claude-sonnet-5-5",
+        "effort": "medium",
+        "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+        "verified_at": "2026-11-08"
+      },
+      "execution": {
+        "exit_code": 0,
+        "timed_out": false,
+        "output_limited": false,
+        "idle_timed_out": false,
+        "cancelled": false,
+        "process_started": true,
+        "process_reaped": true,
+        "stdin_bytes_written": 23505,
+        "context_complete": true,
+        "duration_s": 36.493,
+        "timing": {
+          "spawn_s": 0.000411,
+          "input_complete_s": 0.000645,
+          "first_stdout_s": 1.355446,
+          "first_stderr_s": null,
+          "timeout_phase": null,
+          "event_counts": {
+            "system": 3,
+            "stream_event": 978,
+            "event:message_start": 2,
+            "event:content_block_start": 2,
+            "event:content_block_delta": 968,
+            "assistant": 2,
+            "event:content_block_stop": 2,
+            "event:message_delta": 2,
+            "event:message_stop": 2,
+            "rate_limit_event": 1,
+            "user": 2,
+            "result": 1
+          },
+          "inference_vs_initialization": "not_separable_without_provider_events"
+        },
+        "output_accounting": {
+          "transport_bytes": 349485,
+          "retained_bytes": 349485,
+          "discarded_progress_bytes": 0,
+          "transport_limit_bytes": 20000000,
+          "retained_limit_bytes": 2000000
+        },
+        "isolation": {
+          "backend": "bubblewrap",
+          "snapshot_read_only": true,
+          "host_home_mounted": false,
+          "network": "enabled_no_destination_firewall",
+          "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+        },
+        "started_at": "2026-11-10T20:04:39.511782+00:00",
+        "prompt_bytes": 23505,
+        "prompt_sha256": "991a630b34656dbb48cc0c1222d1578619f972e452cbc387c7a537316875b9f6",
+        "usage": {
+          "provider_reported": {
+            "total_cost_usd": 0.11581860000000001,
+            "duration_ms": 34635,
+            "input_tokens": 6,
+            "cache_creation_input_tokens": 13447,
+            "cache_read_input_tokens": 19386,
+            "output_tokens": 6008
+          },
+          "measured_cost_available": true,
+          "estimated_cost": null
+        },
+        "limits": {
+          "timeout": 240,
+          "idle_timeout": 90,
+          "startup_timeout": 30,
+          "first_response_timeout": 120
+        },
+        "structured_output": "native_schema",
+        "contract_validation": {
+          "status": "passed",
+          "duration_s": 0.009982
+        }
+      }
+    },
+    {
+      "agent": "codex",
+      "at": "2026-11-10T20:04:39.506889+00:00",
+      "phase": "incremental-field-evidence-review",
+      "valid": false,
+      "error": "La propuesta del consejo excede archivos autorizados.",
+      "model": {
+        "model": "gpt-6.1-sol",
+        "effort": "medium",
+        "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+        "verified_at": "2026-11-08"
+      },
+      "execution": {
+        "exit_code": 0,
+        "timed_out": false,
+        "output_limited": false,
+        "idle_timed_out": false,
+        "cancelled": false,
+        "process_started": true,
+        "process_reaped": true,
+        "stdin_bytes_written": 23500,
+        "context_complete": true,
+        "duration_s": 39.453,
+        "timing": {
+          "spawn_s": 0.000585,
+          "input_complete_s": 0.000803,
+          "first_stdout_s": 0.740408,
+          "first_stderr_s": null,
+          "timeout_phase": null,
+          "event_counts": {
+            "thread.started": 1,
+            "item.completed": 2,
+            "turn.started": 1,
+            "turn.completed": 1
+          },
+          "inference_vs_initialization": "not_separable_without_provider_events"
+        },
+        "output_accounting": {
+          "transport_bytes": 8841,
+          "retained_bytes": 8841,
+          "discarded_progress_bytes": 0,
+          "transport_limit_bytes": 20000000,
+          "retained_limit_bytes": 2000000
+        },
+        "isolation": {
+          "backend": "bubblewrap",
+          "snapshot_read_only": true,
+          "host_home_mounted": false,
+          "network": "enabled_no_destination_firewall",
+          "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+        },
+        "started_at": "2026-11-10T20:04:39.512846+00:00",
+        "prompt_bytes": 23500,
+        "prompt_sha256": "ca1f96cc018ef64e0a2b89dab63d25844da2e6768369ed76b7eced573f1ade2c",
+        "usage": {
+          "provider_reported": {
+            "input_tokens": 21103,
+            "cached_input_tokens": 0,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 1673,
+            "reasoning_output_tokens": 44
+          },
+          "measured_cost_available": false,
+          "estimated_cost": null
+        },
+        "limits": {
+          "timeout": 240,
+          "idle_timeout": 90,
+          "startup_timeout": 30,
+          "first_response_timeout": 150
+        },
+        "structured_output": "native_schema",
+        "contract_validation": {
+          "status": "passed",
+          "duration_s": 0.000268
+        }
+      }
+    }
+  ],
+  "recovery_notes": [
+    "Claude field update had valid native JSON but invalid recommendation ID; one bounded same-provider retry.",
+    "Price updates referenced the actual native snippet absent from the diagnostic allowed-file list. The controller added that verified candidate reference under read-only scope, then retried once per provider. No model was given theme write permissions."
+  ],
+  "actual_cli_invocations": 13,
+  "contrast_objections": 9,
+  "questions": 6,
+  "answers": 6,
+  "claude_reported_cost_subtotal_usd": 2.1684248,
+  "codex_cost_usd": null,
+  "billing_note": "Claude reported cost subtotal includes rejected attempts; Codex exposes token usage but no actual billing amount. No total cost invented.",
+  "implementation_approved": false,
+  "production_approved": false,
+  "decision": "needs_evidence"
+}

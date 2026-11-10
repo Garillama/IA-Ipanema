@@ -1,0 +1,2609 @@
+{
+  "at": "2026-11-10T19:58:35.438155+00:00",
+  "project": "rhino-performance",
+  "lab": [
+    {
+      "project": "rhino-performance",
+      "url": "https://rhino-performance.com/",
+      "template": "home",
+      "device": "mobile",
+      "source": "lighthouse_local",
+      "profile": {
+        "source": "lighthouse_local",
+        "url": "https://rhino-performance.com/",
+        "final_url": "https://rhino-performance.com/",
+        "device": "mobile",
+        "categories": [
+          "performance",
+          "accessibility",
+          "best-practices",
+          "seo"
+        ],
+        "locale": "es",
+        "lighthouse_version": "13.6.0",
+        "chrome_version": "155.0.8059.84",
+        "screen": {
+          "mobile": true,
+          "width": 412,
+          "height": 823,
+          "deviceScaleFactor": 1.75,
+          "disabled": false
+        },
+        "throttling_method": "simulate",
+        "throttling": {
+          "rttMs": 150,
+          "throughputKbps": 1638.4,
+          "requestLatencyMs": 562.5,
+          "downloadThroughputKbps": 1474.56,
+          "uploadThroughputKbps": 675,
+          "cpuSlowdownMultiplier": 4
+        },
+        "cache": false,
+        "network_policy": "guarded-read-only"
+      },
+      "samples": [
+        {
+          "status": "observed",
+          "measured_at": "2026-11-10T19:11:37.794Z",
+          "metrics": {
+            "lcp": 3482.5765,
+            "fcp": 1857.217,
+            "cls": 0.0,
+            "tbt": 1396.0,
+            "speed_index": 4158.34894836121
+          },
+          "scores": {
+            "performance": 0.62,
+            "accessibility": 0.94,
+            "best-practices": 0.77,
+            "seo": 1.0
+          }
+        },
+        {
+          "status": "observed",
+          "measured_at": "2026-11-10T19:11:58.883Z",
+          "metrics": {
+            "lcp": 4075.4305000000013,
+            "fcp": 1809.5969999999998,
+            "cls": 0.0,
+            "tbt": 1331.499999999999,
+            "speed_index": 3584.8183783814284
+          },
+          "scores": {
+            "performance": 0.59,
+            "accessibility": 0.94,
+            "best-practices": 0.77,
+            "seo": 1.0
+          }
+        },
+        {
+          "status": "observed",
+          "measured_at": "2026-11-10T19:12:19.833Z",
+          "metrics": {
+            "lcp": 3672.0655000000006,
+            "fcp": 1780.9859999999999,
+            "cls": 0.0,
+            "tbt": 1851.9999999999973,
+            "speed_index": 3492.2362184470794
+          },
+          "scores": {
+            "performance": 0.6,
+            "accessibility": 0.94,
+            "best-practices": 0.77,
+            "seo": 1.0
+          }
+        }
+      ],
+      "budgets": {
+        "lcp": {
+          "median": 3672.0655000000006,
+          "min": 3482.5765,
+          "max": 4075.4305000000013,
+          "MAD": 189.4890000000005,
+          "proposed_delta_tolerance": 550.809825,
+          "proposed_upper_budget": 4222.875325000001,
+          "activation": "proposed_not_enforced"
+        },
+        "fcp": {
+          "median": 1809.5969999999998,
+          "min": 1780.9859999999999,
+          "max": 1857.217,
+          "MAD": 28.610999999999876,
+          "proposed_delta_tolerance": 271.43954999999994,
+          "proposed_upper_budget": 2081.03655,
+          "activation": "proposed_not_enforced"
+        },
+        "cls": {
+          "median": 0.0,
+          "min": 0.0,
+          "max": 0.0,
+          "MAD": 0.0,
+          "proposed_delta_tolerance": 0.02,
+          "proposed_upper_budget": 0.02,
+          "activation": "proposed_not_enforced"
+        },
+        "tbt": {
+          "median": 1396.0,
+          "min": 1331.499999999999,
+          "max": 1851.9999999999973,
+          "MAD": 64.50000000000091,
+          "proposed_delta_tolerance": 279.2,
+          "proposed_upper_budget": 1675.2,
+          "activation": "proposed_not_enforced"
+        },
+        "speed_index": {
+          "median": 3584.8183783814284,
+          "min": 3492.2362184470794,
+          "max": 4158.34894836121,
+          "MAD": 92.58215993434897,
+          "proposed_delta_tolerance": 537.7227567572143,
+          "proposed_upper_budget": 4122.541135138643,
+          "activation": "proposed_not_enforced"
+        }
+      },
+      "evidence": "reports/runs/rhino-performance/20261110T191235-performance-66de1f7b/performance.json",
+      "sha256": "e42dd82ee10db99bfb9c3e8741f135c997c3ff25cec7fbfe8a7fb3f57dd6dbe4",
+      "measured_at": "2026-11-10T19:11:37.794Z",
+      "consent": "fresh anonymous context; no choice made",
+      "network_policy": "read-only, POST blocked",
+      "theme_version_observation": "public asset installation14828608; local candidate version1.2.2 not a deployment proof"
+    },
+    {
+      "project": "rhino-performance",
+      "url": "https://rhino-performance.com/",
+      "template": "home",
+      "device": "desktop",
+      "source": "lighthouse_local",
+      "profile": {
+        "source": "lighthouse_local",
+        "url": "https://rhino-performance.com/",
+        "final_url": "https://rhino-performance.com/",
+        "device": "desktop",
+        "categories": [
+          "performance",
+          "accessibility",
+          "best-practices",
+          "seo"
+        ],
+        "locale": "es",
+        "lighthouse_version": "13.6.0",
+        "chrome_version": "155.0.8059.84",
+        "screen": {
+          "mobile": false,
+          "width": 1350,
+          "height": 940,
+          "deviceScaleFactor": 1,
+          "disabled": false
+        },
+        "throttling_method": "simulate",
+        "throttling": {
+          "rttMs": 40,
+          "throughputKbps": 10240,
+          "requestLatencyMs": 0,
+          "downloadThroughputKbps": 0,
+          "uploadThroughputKbps": 0,
+          "cpuSlowdownMultiplier": 1
+        },
+        "cache": false,
+        "network_policy": "guarded-read-only"
+      },
+      "samples": [
+        {
+          "status": "observed",
+          "measured_at": "2026-11-10T19:12:49.383Z",
+          "metrics": {
+            "lcp": 1063.173,
+            "fcp": 481.25699999999995,
+            "cls": 0.4491796690307328,
+            "tbt": 176.00000000000023,
+            "speed_index": 1128.5377946977137
+          },
+          "scores": {
+            "performance": 0.73,
+            "accessibility": 0.94,
+            "best-practices": 0.77,
+            "seo": 1.0
+          }
+        },
+        {
+          "status": "observed",
+          "measured_at": "2026-11-10T19:13:16.240Z",
+          "metrics": {
+            "lcp": 1125.488,
+            "fcp": 515.2429999999999,
+            "cls": 0.4491796690307328,
+            "tbt": 229.49999999999977,
+            "speed_index": 1161.6251244925338
+          },
+          "scores": {
+            "performance": 0.69,
+            "accessibility": 0.94,
+            "best-practices": 0.77,
+            "seo": 1.0
+          }
+        },
+        {
+          "status": "observed",
+          "measured_at": "2026-11-10T19:13:49.263Z",
+          "metrics": {
+            "lcp": 1015.9749999999999,
+            "fcp": 427.386,
+            "cls": 0.4491796690307328,
+            "tbt": 112.49999999999994,
+            "speed_index": 1020.6983212381938
+          },
+          "scores": {
+            "performance": 0.77,
+            "accessibility": 0.94,
+            "best-practices": 0.77,
+            "seo": 1.0
+          }
+        }
+      ],
+      "budgets": {
+        "lcp": {
+          "median": 1063.173,
+          "min": 1015.9749999999999,
+          "max": 1125.488,
+          "MAD": 47.19800000000009,
+          "proposed_delta_tolerance": 200,
+          "proposed_upper_budget": 1263.173,
+          "activation": "proposed_not_enforced"
+        },
+        "fcp": {
+          "median": 481.25699999999995,
+          "min": 427.386,
+          "max": 515.2429999999999,
+          "MAD": 33.98599999999999,
+          "proposed_delta_tolerance": 150,
+          "proposed_upper_budget": 631.257,
+          "activation": "proposed_not_enforced"
+        },
+        "cls": {
+          "median": 0.4491796690307328,
+          "min": 0.4491796690307328,
+          "max": 0.4491796690307328,
+          "MAD": 0.0,
+          "proposed_delta_tolerance": 0.02,
+          "proposed_upper_budget": 0.4691796690307328,
+          "activation": "proposed_not_enforced"
+        },
+        "tbt": {
+          "median": 176.00000000000023,
+          "min": 112.49999999999994,
+          "max": 229.49999999999977,
+          "MAD": 53.499999999999545,
+          "proposed_delta_tolerance": 106.99999999999909,
+          "proposed_upper_budget": 282.9999999999993,
+          "activation": "proposed_not_enforced"
+        },
+        "speed_index": {
+          "median": 1128.5377946977137,
+          "min": 1020.6983212381938,
+          "max": 1161.6251244925338,
+          "MAD": 33.08732979482011,
+          "proposed_delta_tolerance": 200,
+          "proposed_upper_budget": 1328.5377946977137,
+          "activation": "proposed_not_enforced"
+        }
+      },
+      "evidence": "reports/runs/rhino-performance/20261110T191406-performance-05085a7e/performance.json",
+      "sha256": "c58dc571ea66604b0d1e470da4a2c04450dc9e5327e08f62f3c1f38ce3b03f47",
+      "measured_at": "2026-11-10T19:12:49.383Z",
+      "consent": "fresh anonymous context; no choice made",
+      "network_policy": "read-only, POST blocked",
+      "theme_version_observation": "public asset installation14828608; local candidate version1.2.2 not a deployment proof"
+    },
+    {
+      "project": "rhino-performance",
+      "url": "https://rhino-performance.com/presoterapia/",
+      "template": "category",
+      "device": "mobile",
+      "source": "lighthouse_local",
+      "profile": {
+        "source": "lighthouse_local",
+        "url": "https://rhino-performance.com/presoterapia/",
+        "final_url": "https://rhino-performance.com/presoterapia/",
+        "device": "mobile",
+        "categories": [
+          "performance",
+          "accessibility",
+          "best-practices",
+          "seo"
+        ],
+        "locale": "es",
+        "lighthouse_version": "13.6.0",
+        "chrome_version": "155.0.8059.84",
+        "screen": {
+          "mobile": true,
+          "width": 412,
+          "height": 823,
+          "deviceScaleFactor": 1.75,
+          "disabled": false
+        },
+        "throttling_method": "simulate",
+        "throttling": {
+          "rttMs": 150,
+          "throughputKbps": 1638.4,
+          "requestLatencyMs": 562.5,
+          "downloadThroughputKbps": 1474.56,
+          "uploadThroughputKbps": 675,
+          "cpuSlowdownMultiplier": 4
+        },
+        "cache": false,
+        "network_policy": "guarded-read-only"
+      },
+      "samples": [
+        {
+          "status": "observed",
+          "measured_at": "2026-11-10T19:38:36.022Z",
+          "metrics": {
+            "lcp": 3131.7289999999994,
+            "fcp": 1292.7350000000001,
+            "cls": 0.001623964547165396,
+            "tbt": 1872.730749999998,
+            "speed_index": 2883.9615320594767
+          },
+          "scores": {
+            "performance": 0.66,
+            "accessibility": 0.96,
+            "best-practices": 0.77,
+            "seo": 1.0
+          }
+        },
+        {
+          "status": "observed",
+          "measured_at": "2026-11-10T19:38:58.948Z",
+          "metrics": {
+            "lcp": 3229.428000000001,
+            "fcp": 1244.732,
+            "cls": 0.02679823734251874,
+            "tbt": 2195.5,
+            "speed_index": 2893.8055257781753
+          },
+          "scores": {
+            "performance": 0.64,
+            "accessibility": 0.96,
+            "best-practices": 0.77,
+            "seo": 1.0
+          }
+        },
+        {
+          "status": "observed",
+          "measured_at": "2026-11-10T19:39:18.756Z",
+          "metrics": {
+            "lcp": 2783.3980000000006,
+            "fcp": 1224.67,
+            "cls": 0.02679823734251874,
+            "tbt": 2097.04375,
+            "speed_index": 3187.1887652963596
+          },
+          "scores": {
+            "performance": 0.67,
+            "accessibility": 0.96,
+            "best-practices": 0.77,
+            "seo": 1.0
+          }
+        }
+      ],
+      "budgets": {
+        "lcp": {
+          "median": 3131.7289999999994,
+          "min": 2783.3980000000006,
+          "max": 3229.428000000001,
+          "MAD": 97.69900000000143,
+          "proposed_delta_tolerance": 469.75934999999987,
+          "proposed_upper_budget": 3601.488349999999,
+          "activation": "proposed_not_enforced"
+        },
+        "fcp": {
+          "median": 1244.732,
+          "min": 1224.67,
+          "max": 1292.7350000000001,
+          "MAD": 20.061999999999898,
+          "proposed_delta_tolerance": 186.7098,
+          "proposed_upper_budget": 1431.4418,
+          "activation": "proposed_not_enforced"
+        },
+        "cls": {
+          "median": 0.02679823734251874,
+          "min": 0.001623964547165396,
+          "max": 0.02679823734251874,
+          "MAD": 0.0,
+          "proposed_delta_tolerance": 0.02,
+          "proposed_upper_budget": 0.04679823734251874,
+          "activation": "proposed_not_enforced"
+        },
+        "tbt": {
+          "median": 2097.04375,
+          "min": 1872.730749999998,
+          "max": 2195.5,
+          "MAD": 98.45625000000018,
+          "proposed_delta_tolerance": 419.40875,
+          "proposed_upper_budget": 2516.4525,
+          "activation": "proposed_not_enforced"
+        },
+        "speed_index": {
+          "median": 2893.8055257781753,
+          "min": 2883.9615320594767,
+          "max": 3187.1887652963596,
+          "MAD": 9.843993718698584,
+          "proposed_delta_tolerance": 434.0708288667263,
+          "proposed_upper_budget": 3327.8763546449018,
+          "activation": "proposed_not_enforced"
+        }
+      },
+      "evidence": "reports/runs/rhino-performance/20261110T193933-performance-ba57f53e/performance.json",
+      "sha256": "22f70a731b4c0664d781aac413c5420787cfca3de97f6786a8189dab643aaca3",
+      "measured_at": "2026-11-10T19:38:36.022Z",
+      "consent": "fresh anonymous context; no choice made",
+      "network_policy": "read-only, POST blocked",
+      "theme_version_observation": "public asset installation14828608; local candidate version1.2.2 not a deployment proof"
+    },
+    {
+      "project": "rhino-performance",
+      "url": "https://rhino-performance.com/presoterapia/",
+      "template": "category",
+      "device": "desktop",
+      "source": "lighthouse_local",
+      "profile": {
+        "source": "lighthouse_local",
+        "url": "https://rhino-performance.com/presoterapia/",
+        "final_url": "https://rhino-performance.com/presoterapia/",
+        "device": "desktop",
+        "categories": [
+          "performance",
+          "accessibility",
+          "best-practices",
+          "seo"
+        ],
+        "locale": "es",
+        "lighthouse_version": "13.6.0",
+        "chrome_version": "155.0.8059.84",
+        "screen": {
+          "mobile": false,
+          "width": 1350,
+          "height": 940,
+          "deviceScaleFactor": 1,
+          "disabled": false
+        },
+        "throttling_method": "simulate",
+        "throttling": {
+          "rttMs": 40,
+          "throughputKbps": 10240,
+          "requestLatencyMs": 0,
+          "downloadThroughputKbps": 0,
+          "uploadThroughputKbps": 0,
+          "cpuSlowdownMultiplier": 1
+        },
+        "cache": false,
+        "network_policy": "guarded-read-only"
+      },
+      "samples": [
+        {
+          "status": "observed",
+          "measured_at": "2026-11-10T19:39:45.421Z",
+          "metrics": {
+            "lcp": 1254.827,
+            "fcp": 372.794,
+            "cls": 0.03051209621165689,
+            "tbt": 109.67325000000028,
+            "speed_index": 1006.5663018183582
+          },
+          "scores": {
+            "performance": 0.96,
+            "accessibility": 0.96,
+            "best-practices": 0.77,
+            "seo": 1.0
+          }
+        },
+        {
+          "status": "observed",
+          "measured_at": "2026-11-10T19:40:05.229Z",
+          "metrics": {
+            "lcp": 1296.8044999999997,
+            "fcp": 406.052,
+            "cls": 0.023321768233955,
+            "tbt": 135.5,
+            "speed_index": 1128.0747540063498
+          },
+          "scores": {
+            "performance": 0.94,
+            "accessibility": 0.96,
+            "best-practices": 0.77,
+            "seo": 1.0
+          }
+        },
+        {
+          "status": "observed",
+          "measured_at": "2026-11-10T19:40:25.857Z",
+          "metrics": {
+            "lcp": 1862.2570000000003,
+            "fcp": 648.3470000000001,
+            "cls": 0.02654854044450282,
+            "tbt": 135.5,
+            "speed_index": 1182.0887982854247
+          },
+          "scores": {
+            "performance": 0.89,
+            "accessibility": 0.96,
+            "best-practices": 0.77,
+            "seo": 1.0
+          }
+        }
+      ],
+      "budgets": {
+        "lcp": {
+          "median": 1296.8044999999997,
+          "min": 1254.827,
+          "max": 1862.2570000000003,
+          "MAD": 41.977499999999736,
+          "proposed_delta_tolerance": 200,
+          "proposed_upper_budget": 1496.8044999999997,
+          "activation": "proposed_not_enforced"
+        },
+        "fcp": {
+          "median": 406.052,
+          "min": 372.794,
+          "max": 648.3470000000001,
+          "MAD": 33.25800000000004,
+          "proposed_delta_tolerance": 150,
+          "proposed_upper_budget": 556.052,
+          "activation": "proposed_not_enforced"
+        },
+        "cls": {
+          "median": 0.02654854044450282,
+          "min": 0.023321768233955,
+          "max": 0.03051209621165689,
+          "MAD": 0.003226772210547818,
+          "proposed_delta_tolerance": 0.02,
+          "proposed_upper_budget": 0.04654854044450282,
+          "activation": "proposed_not_enforced"
+        },
+        "tbt": {
+          "median": 135.5,
+          "min": 109.67325000000028,
+          "max": 135.5,
+          "MAD": 0.0,
+          "proposed_delta_tolerance": 100,
+          "proposed_upper_budget": 235.5,
+          "activation": "proposed_not_enforced"
+        },
+        "speed_index": {
+          "median": 1128.0747540063498,
+          "min": 1006.5663018183582,
+          "max": 1182.0887982854247,
+          "MAD": 54.014044279074824,
+          "proposed_delta_tolerance": 200,
+          "proposed_upper_budget": 1328.0747540063498,
+          "activation": "proposed_not_enforced"
+        }
+      },
+      "evidence": "reports/runs/rhino-performance/20261110T194040-performance-111a9578/performance.json",
+      "sha256": "c9460c11dbed331c6edd9819c456eb85ad5f78ae62c0b202e3558bf076a41cf7",
+      "measured_at": "2026-11-10T19:39:45.421Z",
+      "consent": "fresh anonymous context; no choice made",
+      "network_policy": "read-only, POST blocked",
+      "theme_version_observation": "public asset installation14828608; local candidate version1.2.2 not a deployment proof"
+    },
+    {
+      "project": "rhino-performance",
+      "url": "https://rhino-performance.com/productos/botas-presoterapia-inalambricas-pro-air/",
+      "template": "product",
+      "device": "mobile",
+      "source": "lighthouse_local",
+      "profile": {
+        "source": "lighthouse_local",
+        "url": "https://rhino-performance.com/productos/botas-presoterapia-inalambricas-pro-air/",
+        "final_url": "https://rhino-performance.com/productos/botas-presoterapia-inalambricas-pro-air/",
+        "device": "mobile",
+        "categories": [
+          "performance",
+          "accessibility",
+          "best-practices",
+          "seo"
+        ],
+        "locale": "es",
+        "lighthouse_version": "13.6.0",
+        "chrome_version": "155.0.8059.84",
+        "screen": {
+          "mobile": true,
+          "width": 412,
+          "height": 823,
+          "deviceScaleFactor": 1.75,
+          "disabled": false
+        },
+        "throttling_method": "simulate",
+        "throttling": {
+          "rttMs": 150,
+          "throughputKbps": 1638.4,
+          "requestLatencyMs": 562.5,
+          "downloadThroughputKbps": 1474.56,
+          "uploadThroughputKbps": 675,
+          "cpuSlowdownMultiplier": 4
+        },
+        "cache": false,
+        "network_policy": "guarded-read-only"
+      },
+      "samples": [
+        {
+          "status": "observed",
+          "measured_at": "2026-11-10T19:40:48.449Z",
+          "metrics": {
+            "lcp": 3840.4695,
+            "fcp": 1514.9479999999999,
+            "cls": 0.0,
+            "tbt": 1879.3637500000032,
+            "speed_index": 3690.0812350239385
+          },
+          "scores": {
+            "performance": 0.59,
+            "accessibility": 0.93,
+            "best-practices": 0.77,
+            "seo": 0.92
+          }
+        },
+        {
+          "status": "observed",
+          "measured_at": "2026-11-10T19:41:06.247Z",
+          "metrics": {
+            "lcp": 3786.4580000000005,
+            "fcp": 1625.079,
+            "cls": 0.0,
+            "tbt": 1779.4122499999983,
+            "speed_index": 3588.5816878308274
+          },
+          "scores": {
+            "performance": 0.6,
+            "accessibility": 0.93,
+            "best-practices": 0.77,
+            "seo": 0.92
+          }
+        },
+        {
+          "status": "observed",
+          "measured_at": "2026-11-10T19:41:22.746Z",
+          "metrics": {
+            "lcp": 3282.676,
+            "fcp": 1646.214,
+            "cls": 0.0,
+            "tbt": 1791.5914999999986,
+            "speed_index": 3713.7084174204533
+          },
+          "scores": {
+            "performance": 0.63,
+            "accessibility": 0.93,
+            "best-practices": 0.77,
+            "seo": 0.92
+          }
+        }
+      ],
+      "budgets": {
+        "lcp": {
+          "median": 3786.4580000000005,
+          "min": 3282.676,
+          "max": 3840.4695,
+          "MAD": 54.011499999999614,
+          "proposed_delta_tolerance": 567.9687,
+          "proposed_upper_budget": 4354.426700000001,
+          "activation": "proposed_not_enforced"
+        },
+        "fcp": {
+          "median": 1625.079,
+          "min": 1514.9479999999999,
+          "max": 1646.214,
+          "MAD": 21.13499999999999,
+          "proposed_delta_tolerance": 243.76184999999998,
+          "proposed_upper_budget": 1868.84085,
+          "activation": "proposed_not_enforced"
+        },
+        "cls": {
+          "median": 0.0,
+          "min": 0.0,
+          "max": 0.0,
+          "MAD": 0.0,
+          "proposed_delta_tolerance": 0.02,
+          "proposed_upper_budget": 0.02,
+          "activation": "proposed_not_enforced"
+        },
+        "tbt": {
+          "median": 1791.5914999999986,
+          "min": 1779.4122499999983,
+          "max": 1879.3637500000032,
+          "MAD": 12.179250000000366,
+          "proposed_delta_tolerance": 358.31829999999974,
+          "proposed_upper_budget": 2149.9097999999985,
+          "activation": "proposed_not_enforced"
+        },
+        "speed_index": {
+          "median": 3690.0812350239385,
+          "min": 3588.5816878308274,
+          "max": 3713.7084174204533,
+          "MAD": 23.627182396514854,
+          "proposed_delta_tolerance": 553.5121852535907,
+          "proposed_upper_budget": 4243.593420277529,
+          "activation": "proposed_not_enforced"
+        }
+      },
+      "evidence": "reports/runs/rhino-performance/20261110T194137-performance-e5ae6010/performance.json",
+      "sha256": "6d13789163b64c162940f199c6afda2c90dd7f8c08516a600bfff190e8e81794",
+      "measured_at": "2026-11-10T19:40:48.449Z",
+      "consent": "fresh anonymous context; no choice made",
+      "network_policy": "read-only, POST blocked",
+      "theme_version_observation": "public asset installation14828608; local candidate version1.2.2 not a deployment proof"
+    },
+    {
+      "project": "rhino-performance",
+      "url": "https://rhino-performance.com/productos/botas-presoterapia-inalambricas-pro-air/",
+      "template": "product",
+      "device": "desktop",
+      "source": "lighthouse_local",
+      "profile": {
+        "source": "lighthouse_local",
+        "url": "https://rhino-performance.com/productos/botas-presoterapia-inalambricas-pro-air/",
+        "final_url": "https://rhino-performance.com/productos/botas-presoterapia-inalambricas-pro-air/",
+        "device": "desktop",
+        "categories": [
+          "performance",
+          "accessibility",
+          "best-practices",
+          "seo"
+        ],
+        "locale": "es",
+        "lighthouse_version": "13.6.0",
+        "chrome_version": "155.0.8059.84",
+        "screen": {
+          "mobile": false,
+          "width": 1350,
+          "height": 940,
+          "deviceScaleFactor": 1,
+          "disabled": false
+        },
+        "throttling_method": "simulate",
+        "throttling": {
+          "rttMs": 40,
+          "throughputKbps": 10240,
+          "requestLatencyMs": 0,
+          "downloadThroughputKbps": 0,
+          "uploadThroughputKbps": 0,
+          "cpuSlowdownMultiplier": 1
+        },
+        "cache": false,
+        "network_policy": "guarded-read-only"
+      },
+      "samples": [
+        {
+          "status": "observed",
+          "measured_at": "2026-11-10T19:41:46.949Z",
+          "metrics": {
+            "lcp": 1549.4709999999998,
+            "fcp": 658.9159999999999,
+            "cls": 0.07858942612110731,
+            "tbt": 194.1212499999997,
+            "speed_index": 1527.4150569335397
+          },
+          "scores": {
+            "performance": 0.86,
+            "accessibility": 0.93,
+            "best-practices": 0.77,
+            "seo": 0.92
+          }
+        },
+        {
+          "status": "observed",
+          "measured_at": "2026-11-10T19:42:06.172Z",
+          "metrics": {
+            "lcp": 1477.349,
+            "fcp": 658.296,
+            "cls": 0.05433403911471558,
+            "tbt": 128.0,
+            "speed_index": 1442.9077054321729
+          },
+          "scores": {
+            "performance": 0.91,
+            "accessibility": 0.93,
+            "best-practices": 0.77,
+            "seo": 0.92
+          }
+        },
+        {
+          "status": "observed",
+          "measured_at": "2026-11-10T19:42:25.564Z",
+          "metrics": {
+            "lcp": 948.6595,
+            "fcp": 429.84000000000003,
+            "cls": 0.09889289441233984,
+            "tbt": 111.5,
+            "speed_index": 1038.9445032344204
+          },
+          "scores": {
+            "performance": 0.95,
+            "accessibility": 0.93,
+            "best-practices": 0.77,
+            "seo": 0.92
+          }
+        }
+      ],
+      "budgets": {
+        "lcp": {
+          "median": 1477.349,
+          "min": 948.6595,
+          "max": 1549.4709999999998,
+          "MAD": 72.12199999999984,
+          "proposed_delta_tolerance": 221.60234999999997,
+          "proposed_upper_budget": 1698.9513499999998,
+          "activation": "proposed_not_enforced"
+        },
+        "fcp": {
+          "median": 658.296,
+          "min": 429.84000000000003,
+          "max": 658.9159999999999,
+          "MAD": 0.6199999999998909,
+          "proposed_delta_tolerance": 150,
+          "proposed_upper_budget": 808.296,
+          "activation": "proposed_not_enforced"
+        },
+        "cls": {
+          "median": 0.07858942612110731,
+          "min": 0.05433403911471558,
+          "max": 0.09889289441233984,
+          "MAD": 0.02030346829123253,
+          "proposed_delta_tolerance": 0.04060693658246506,
+          "proposed_upper_budget": 0.11919636270357237,
+          "activation": "proposed_not_enforced"
+        },
+        "tbt": {
+          "median": 128.0,
+          "min": 111.5,
+          "max": 194.1212499999997,
+          "MAD": 16.5,
+          "proposed_delta_tolerance": 100,
+          "proposed_upper_budget": 228.0,
+          "activation": "proposed_not_enforced"
+        },
+        "speed_index": {
+          "median": 1442.9077054321729,
+          "min": 1038.9445032344204,
+          "max": 1527.4150569335397,
+          "MAD": 84.50735150136688,
+          "proposed_delta_tolerance": 216.43615581482592,
+          "proposed_upper_budget": 1659.3438612469988,
+          "activation": "proposed_not_enforced"
+        }
+      },
+      "evidence": "reports/runs/rhino-performance/20261110T194240-performance-825b5b36/performance.json",
+      "sha256": "b18e20eb6d8f0b3d598cf9615290bd7a1313d7dbd0522d20ca2d19f76163663c",
+      "measured_at": "2026-11-10T19:41:46.949Z",
+      "consent": "fresh anonymous context; no choice made",
+      "network_policy": "read-only, POST blocked",
+      "theme_version_observation": "public asset installation14828608; local candidate version1.2.2 not a deployment proof"
+    }
+  ],
+  "browser": [
+    {
+      "project": "rhino-performance",
+      "template": "article_1",
+      "url": "https://rhino-performance.com/blog/posts/pedaleaste-100-km-y-luego-qu-dd31584de196",
+      "source": "browser_qa",
+      "profile": {
+        "width": 390,
+        "mode": "rendered",
+        "cpu_rate": 1,
+        "network": null,
+        "browser": "Chrome/155.0.8059.84",
+        "cache_disabled": true,
+        "device_scale_factor": 1,
+        "consent": "anonymous fresh no choice",
+        "policy": "GET/HEAD/OPTIONS only"
+      },
+      "stage": "navigation before SEO/axe instrumentation",
+      "metrics": {
+        "measurement_method": "cdp-http-hops-v2",
+        "requests": 81,
+        "unmeasured_completed_transfers": 0,
+        "js_bytes": 1089508,
+        "css_bytes": 58315,
+        "image_bytes": 1288085,
+        "font_bytes": 31380,
+        "dom_nodes": 1127
+      },
+      "proposed_budgets": {
+        "requests": 89.1,
+        "js_bytes": 1198458.8,
+        "css_bytes": 91083,
+        "image_bytes": 1416893.5,
+        "font_bytes": 64148,
+        "dom_nodes": 1239.7
+      },
+      "long_tasks_gate": "insufficient_evidence: observer window also includes DOM/SEO instrumentation; use clean trace before budget enforcement",
+      "evidence": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/article_1/article_1-390-rendered.json",
+      "sha256": "80b18245efe955d878940184320863c9dedf86ba9ad75db9b9a973b98f57b401"
+    },
+    {
+      "project": "rhino-performance",
+      "template": "article_1",
+      "url": "https://rhino-performance.com/blog/posts/pedaleaste-100-km-y-luego-qu-dd31584de196",
+      "source": "browser_qa",
+      "profile": {
+        "width": 1440,
+        "mode": "rendered",
+        "cpu_rate": 1,
+        "network": null,
+        "browser": "Chrome/155.0.8059.84",
+        "cache_disabled": true,
+        "device_scale_factor": 1,
+        "consent": "anonymous fresh no choice",
+        "policy": "GET/HEAD/OPTIONS only"
+      },
+      "stage": "navigation before SEO/axe instrumentation",
+      "metrics": {
+        "measurement_method": "cdp-http-hops-v2",
+        "requests": 75,
+        "unmeasured_completed_transfers": 0,
+        "js_bytes": 1089495,
+        "css_bytes": 58312,
+        "image_bytes": 1293512,
+        "font_bytes": 31380,
+        "dom_nodes": 1231
+      },
+      "proposed_budgets": {
+        "requests": 82.5,
+        "js_bytes": 1198444.5,
+        "css_bytes": 91080,
+        "image_bytes": 1422863.2,
+        "font_bytes": 64148,
+        "dom_nodes": 1354.1
+      },
+      "long_tasks_gate": "insufficient_evidence: observer window also includes DOM/SEO instrumentation; use clean trace before budget enforcement",
+      "evidence": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/article_1/article_1-1440-rendered.json",
+      "sha256": "1335e3c858d2d37f54bba3760c4558536a51ca6cc41f66236b2d9e056a0fa7f7"
+    },
+    {
+      "project": "rhino-performance",
+      "template": "article_2",
+      "url": "https://rhino-performance.com/blog/posts/el-wod-termina-en-15-minutos-tu-recuperacin-no-d379eea67569",
+      "source": "browser_qa",
+      "profile": {
+        "width": 390,
+        "mode": "rendered",
+        "cpu_rate": 1,
+        "network": null,
+        "browser": "Chrome/155.0.8059.84",
+        "cache_disabled": true,
+        "device_scale_factor": 1,
+        "consent": "anonymous fresh no choice",
+        "policy": "GET/HEAD/OPTIONS only"
+      },
+      "stage": "navigation before SEO/axe instrumentation",
+      "metrics": {
+        "measurement_method": "cdp-http-hops-v2",
+        "requests": 76,
+        "unmeasured_completed_transfers": 0,
+        "js_bytes": 1089558,
+        "css_bytes": 58313,
+        "image_bytes": 835883,
+        "font_bytes": 31380,
+        "dom_nodes": 1155
+      },
+      "proposed_budgets": {
+        "requests": 83.6,
+        "js_bytes": 1198513.8,
+        "css_bytes": 91081,
+        "image_bytes": 919471.3,
+        "font_bytes": 64148,
+        "dom_nodes": 1270.5
+      },
+      "long_tasks_gate": "insufficient_evidence: observer window also includes DOM/SEO instrumentation; use clean trace before budget enforcement",
+      "evidence": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/article_2/article_2-390-rendered.json",
+      "sha256": "d88975fb8ee4c1bfe1ff75e2553b4d58bf1fb37045384da13a2bbc6074a508e2"
+    },
+    {
+      "project": "rhino-performance",
+      "template": "article_2",
+      "url": "https://rhino-performance.com/blog/posts/el-wod-termina-en-15-minutos-tu-recuperacin-no-d379eea67569",
+      "source": "browser_qa",
+      "profile": {
+        "width": 1440,
+        "mode": "rendered",
+        "cpu_rate": 1,
+        "network": null,
+        "browser": "Chrome/155.0.8059.84",
+        "cache_disabled": true,
+        "device_scale_factor": 1,
+        "consent": "anonymous fresh no choice",
+        "policy": "GET/HEAD/OPTIONS only"
+      },
+      "stage": "navigation before SEO/axe instrumentation",
+      "metrics": {
+        "measurement_method": "cdp-http-hops-v2",
+        "requests": 76,
+        "unmeasured_completed_transfers": 0,
+        "js_bytes": 1089568,
+        "css_bytes": 58313,
+        "image_bytes": 850935,
+        "font_bytes": 31380,
+        "dom_nodes": 1259
+      },
+      "proposed_budgets": {
+        "requests": 83.6,
+        "js_bytes": 1198524.8,
+        "css_bytes": 91081,
+        "image_bytes": 936028.5,
+        "font_bytes": 64148,
+        "dom_nodes": 1384.9
+      },
+      "long_tasks_gate": "insufficient_evidence: observer window also includes DOM/SEO instrumentation; use clean trace before budget enforcement",
+      "evidence": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/article_2/article_2-1440-rendered.json",
+      "sha256": "ae5280f777452d6bebeb592187ec70903b0b00a8ad65e9a806c58ab5b8b6eb90"
+    },
+    {
+      "project": "rhino-performance",
+      "template": "blog",
+      "url": "https://rhino-performance.com/blog/",
+      "source": "browser_qa",
+      "profile": {
+        "width": 390,
+        "mode": "rendered",
+        "cpu_rate": 1,
+        "network": null,
+        "browser": "Chrome/155.0.8059.84",
+        "cache_disabled": true,
+        "device_scale_factor": 1,
+        "consent": "anonymous fresh no choice",
+        "policy": "GET/HEAD/OPTIONS only"
+      },
+      "stage": "navigation before SEO/axe instrumentation",
+      "metrics": {
+        "measurement_method": "cdp-http-hops-v2",
+        "requests": 94,
+        "unmeasured_completed_transfers": 0,
+        "js_bytes": 1090199,
+        "css_bytes": 58312,
+        "image_bytes": 919509,
+        "font_bytes": 23529,
+        "dom_nodes": 1142
+      },
+      "proposed_budgets": {
+        "requests": 103.4,
+        "js_bytes": 1199218.9,
+        "css_bytes": 91080,
+        "image_bytes": 1011459.9,
+        "font_bytes": 56297,
+        "dom_nodes": 1256.2
+      },
+      "long_tasks_gate": "insufficient_evidence: observer window also includes DOM/SEO instrumentation; use clean trace before budget enforcement",
+      "evidence": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/blog/blog-390-rendered.json",
+      "sha256": "7bbcf007578ad8ed174c0399c9c6dce44b97dc7b6e7155354e27bcdd405a0951"
+    },
+    {
+      "project": "rhino-performance",
+      "template": "blog",
+      "url": "https://rhino-performance.com/blog/",
+      "source": "browser_qa",
+      "profile": {
+        "width": 1440,
+        "mode": "rendered",
+        "cpu_rate": 1,
+        "network": null,
+        "browser": "Chrome/155.0.8059.84",
+        "cache_disabled": true,
+        "device_scale_factor": 1,
+        "consent": "anonymous fresh no choice",
+        "policy": "GET/HEAD/OPTIONS only"
+      },
+      "stage": "navigation before SEO/axe instrumentation",
+      "metrics": {
+        "measurement_method": "cdp-http-hops-v2",
+        "requests": 100,
+        "unmeasured_completed_transfers": 0,
+        "js_bytes": 1090405,
+        "css_bytes": 58312,
+        "image_bytes": 1871970,
+        "font_bytes": 23529,
+        "dom_nodes": 1246
+      },
+      "proposed_budgets": {
+        "requests": 110.0,
+        "js_bytes": 1199445.5,
+        "css_bytes": 91080,
+        "image_bytes": 2059167.0,
+        "font_bytes": 56297,
+        "dom_nodes": 1370.6
+      },
+      "long_tasks_gate": "insufficient_evidence: observer window also includes DOM/SEO instrumentation; use clean trace before budget enforcement",
+      "evidence": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/blog/blog-1440-rendered.json",
+      "sha256": "91100f43e7ad24528457e89ffe55c9f7314ba57f5bdbc44be95e8d36acb7d2ac"
+    },
+    {
+      "project": "rhino-performance",
+      "template": "bundle",
+      "url": "https://rhino-performance.com/arma-tu-pack-de-recuperacion/",
+      "source": "browser_qa",
+      "profile": {
+        "width": 390,
+        "mode": "rendered",
+        "cpu_rate": 1,
+        "network": null,
+        "browser": "Chrome/155.0.8059.84",
+        "cache_disabled": true,
+        "device_scale_factor": 1,
+        "consent": "anonymous fresh no choice",
+        "policy": "GET/HEAD/OPTIONS only"
+      },
+      "stage": "navigation before SEO/axe instrumentation",
+      "metrics": {
+        "measurement_method": "cdp-http-hops-v2",
+        "requests": 86,
+        "unmeasured_completed_transfers": 0,
+        "js_bytes": 1074776,
+        "css_bytes": 58314,
+        "image_bytes": 1184259,
+        "font_bytes": 31380,
+        "dom_nodes": 1220
+      },
+      "proposed_budgets": {
+        "requests": 94.6,
+        "js_bytes": 1182253.6,
+        "css_bytes": 91082,
+        "image_bytes": 1302684.9,
+        "font_bytes": 64148,
+        "dom_nodes": 1342.0
+      },
+      "long_tasks_gate": "insufficient_evidence: observer window also includes DOM/SEO instrumentation; use clean trace before budget enforcement",
+      "evidence": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/bundle/bundle-390-rendered.json",
+      "sha256": "77d79716143d98760c49a2bc8ffd4a2e77669fafd6d678b011532e3d91b39ec5"
+    },
+    {
+      "project": "rhino-performance",
+      "template": "bundle",
+      "url": "https://rhino-performance.com/arma-tu-pack-de-recuperacion/",
+      "source": "browser_qa",
+      "profile": {
+        "width": 1440,
+        "mode": "rendered",
+        "cpu_rate": 1,
+        "network": null,
+        "browser": "Chrome/155.0.8059.84",
+        "cache_disabled": true,
+        "device_scale_factor": 1,
+        "consent": "anonymous fresh no choice",
+        "policy": "GET/HEAD/OPTIONS only"
+      },
+      "stage": "navigation before SEO/axe instrumentation",
+      "metrics": {
+        "measurement_method": "cdp-http-hops-v2",
+        "requests": 85,
+        "unmeasured_completed_transfers": 0,
+        "js_bytes": 1074825,
+        "css_bytes": 58311,
+        "image_bytes": 1214157,
+        "font_bytes": 31380,
+        "dom_nodes": 1324
+      },
+      "proposed_budgets": {
+        "requests": 93.5,
+        "js_bytes": 1182307.5,
+        "css_bytes": 91079,
+        "image_bytes": 1335572.7,
+        "font_bytes": 64148,
+        "dom_nodes": 1456.4
+      },
+      "long_tasks_gate": "insufficient_evidence: observer window also includes DOM/SEO instrumentation; use clean trace before budget enforcement",
+      "evidence": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/bundle/bundle-1440-rendered.json",
+      "sha256": "d60a3f89572325b527fa52e9749c8a31c3849bbe924ec94ce8505c8b6e25d22e"
+    },
+    {
+      "project": "rhino-performance",
+      "template": "cart",
+      "url": "https://rhino-performance.com/comprar/",
+      "source": "browser_qa",
+      "profile": {
+        "width": 390,
+        "mode": "rendered",
+        "cpu_rate": 1,
+        "network": null,
+        "browser": "Chrome/155.0.8059.84",
+        "cache_disabled": true,
+        "device_scale_factor": 1,
+        "consent": "anonymous fresh no choice",
+        "policy": "GET/HEAD/OPTIONS only"
+      },
+      "stage": "navigation before SEO/axe instrumentation",
+      "metrics": {
+        "measurement_method": "cdp-http-hops-v2",
+        "requests": 95,
+        "unmeasured_completed_transfers": 0,
+        "js_bytes": 1080908,
+        "css_bytes": 58309,
+        "image_bytes": 58964,
+        "font_bytes": 15754,
+        "dom_nodes": 844
+      },
+      "proposed_budgets": {
+        "requests": 104.5,
+        "js_bytes": 1188998.8,
+        "css_bytes": 91077,
+        "image_bytes": 91732,
+        "font_bytes": 48522,
+        "dom_nodes": 944
+      },
+      "long_tasks_gate": "insufficient_evidence: observer window also includes DOM/SEO instrumentation; use clean trace before budget enforcement",
+      "evidence": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/cart/cart-390-rendered.json",
+      "sha256": "46124dea2282e395a1abaa84c64cb6da5f108498cb6471014f193bf2642abd56"
+    },
+    {
+      "project": "rhino-performance",
+      "template": "cart",
+      "url": "https://rhino-performance.com/comprar/",
+      "source": "browser_qa",
+      "profile": {
+        "width": 1440,
+        "mode": "rendered",
+        "cpu_rate": 1,
+        "network": null,
+        "browser": "Chrome/155.0.8059.84",
+        "cache_disabled": true,
+        "device_scale_factor": 1,
+        "consent": "anonymous fresh no choice",
+        "policy": "GET/HEAD/OPTIONS only"
+      },
+      "stage": "navigation before SEO/axe instrumentation",
+      "metrics": {
+        "measurement_method": "cdp-http-hops-v2",
+        "requests": 91,
+        "unmeasured_completed_transfers": 0,
+        "js_bytes": 1080911,
+        "css_bytes": 58315,
+        "image_bytes": 94669,
+        "font_bytes": 15754,
+        "dom_nodes": 948
+      },
+      "proposed_budgets": {
+        "requests": 100.1,
+        "js_bytes": 1189002.1,
+        "css_bytes": 91083,
+        "image_bytes": 127437,
+        "font_bytes": 48522,
+        "dom_nodes": 1048
+      },
+      "long_tasks_gate": "insufficient_evidence: observer window also includes DOM/SEO instrumentation; use clean trace before budget enforcement",
+      "evidence": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/cart/cart-1440-rendered.json",
+      "sha256": "58549b892db2fe6f690b470169823e8a988f75f799b977417b5226adb082a244"
+    },
+    {
+      "project": "rhino-performance",
+      "template": "category",
+      "url": "https://rhino-performance.com/presoterapia/",
+      "source": "browser_qa",
+      "profile": {
+        "width": 360,
+        "mode": "rendered",
+        "cpu_rate": 1,
+        "network": null,
+        "browser": "Chrome/155.0.8059.84",
+        "cache_disabled": true,
+        "device_scale_factor": 1,
+        "consent": "anonymous fresh no choice",
+        "policy": "GET/HEAD/OPTIONS only"
+      },
+      "stage": "navigation before SEO/axe instrumentation",
+      "metrics": {
+        "measurement_method": "cdp-http-hops-v2",
+        "requests": 92,
+        "unmeasured_completed_transfers": 0,
+        "js_bytes": 1081695,
+        "css_bytes": 58343,
+        "image_bytes": 87208,
+        "font_bytes": 23605,
+        "dom_nodes": 1310
+      },
+      "proposed_budgets": {
+        "requests": 101.2,
+        "js_bytes": 1189864.5,
+        "css_bytes": 91111,
+        "image_bytes": 119976,
+        "font_bytes": 56373,
+        "dom_nodes": 1441.0
+      },
+      "long_tasks_gate": "insufficient_evidence: observer window also includes DOM/SEO instrumentation; use clean trace before budget enforcement",
+      "evidence": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/category/category-360-rendered.json",
+      "sha256": "dbdd2694e9588fa5fd63f8e6d83f03508b811d6d7c38bb813f301894a69279f7"
+    },
+    {
+      "project": "rhino-performance",
+      "template": "category",
+      "url": "https://rhino-performance.com/presoterapia/",
+      "source": "browser_qa",
+      "profile": {
+        "width": 390,
+        "mode": "rendered",
+        "cpu_rate": 1,
+        "network": null,
+        "browser": "Chrome/155.0.8059.84",
+        "cache_disabled": true,
+        "device_scale_factor": 1,
+        "consent": "anonymous fresh no choice",
+        "policy": "GET/HEAD/OPTIONS only"
+      },
+      "stage": "navigation before SEO/axe instrumentation",
+      "metrics": {
+        "measurement_method": "cdp-http-hops-v2",
+        "requests": 91,
+        "unmeasured_completed_transfers": 0,
+        "js_bytes": 1081133,
+        "css_bytes": 58349,
+        "image_bytes": 87004,
+        "font_bytes": 23605,
+        "dom_nodes": 1308
+      },
+      "proposed_budgets": {
+        "requests": 100.1,
+        "js_bytes": 1189246.3,
+        "css_bytes": 91117,
+        "image_bytes": 119772,
+        "font_bytes": 56373,
+        "dom_nodes": 1438.8
+      },
+      "long_tasks_gate": "insufficient_evidence: observer window also includes DOM/SEO instrumentation; use clean trace before budget enforcement",
+      "evidence": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/category/category-390-rendered.json",
+      "sha256": "90e50956eebb4e76ae857e9e49145a5333d076af8bdae1bdf811778f1eaa26ca"
+    },
+    {
+      "project": "rhino-performance",
+      "template": "category",
+      "url": "https://rhino-performance.com/presoterapia/",
+      "source": "browser_qa",
+      "profile": {
+        "width": 768,
+        "mode": "rendered",
+        "cpu_rate": 1,
+        "network": null,
+        "browser": "Chrome/155.0.8059.84",
+        "cache_disabled": true,
+        "device_scale_factor": 1,
+        "consent": "anonymous fresh no choice",
+        "policy": "GET/HEAD/OPTIONS only"
+      },
+      "stage": "navigation before SEO/axe instrumentation",
+      "metrics": {
+        "measurement_method": "cdp-http-hops-v2",
+        "requests": 87,
+        "unmeasured_completed_transfers": 0,
+        "js_bytes": 1081216,
+        "css_bytes": 58350,
+        "image_bytes": 135895,
+        "font_bytes": 23605,
+        "dom_nodes": 1310
+      },
+      "proposed_budgets": {
+        "requests": 95.7,
+        "js_bytes": 1189337.6,
+        "css_bytes": 91118,
+        "image_bytes": 168663,
+        "font_bytes": 56373,
+        "dom_nodes": 1441.0
+      },
+      "long_tasks_gate": "insufficient_evidence: observer window also includes DOM/SEO instrumentation; use clean trace before budget enforcement",
+      "evidence": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/category/category-768-rendered.json",
+      "sha256": "52fab280ff3d9df98398d450f7f30b1b7eb811d91a7bbd0332d8d36152f745e7"
+    },
+    {
+      "project": "rhino-performance",
+      "template": "category",
+      "url": "https://rhino-performance.com/presoterapia/",
+      "source": "browser_qa",
+      "profile": {
+        "width": 1024,
+        "mode": "rendered",
+        "cpu_rate": 1,
+        "network": null,
+        "browser": "Chrome/155.0.8059.84",
+        "cache_disabled": true,
+        "device_scale_factor": 1,
+        "consent": "anonymous fresh no choice",
+        "policy": "GET/HEAD/OPTIONS only"
+      },
+      "stage": "navigation before SEO/axe instrumentation",
+      "metrics": {
+        "measurement_method": "cdp-http-hops-v2",
+        "requests": 88,
+        "unmeasured_completed_transfers": 0,
+        "js_bytes": 1081217,
+        "css_bytes": 58200,
+        "image_bytes": 164225,
+        "font_bytes": 23605,
+        "dom_nodes": 1308
+      },
+      "proposed_budgets": {
+        "requests": 96.8,
+        "js_bytes": 1189338.7,
+        "css_bytes": 90968,
+        "image_bytes": 196993,
+        "font_bytes": 56373,
+        "dom_nodes": 1438.8
+      },
+      "long_tasks_gate": "insufficient_evidence: observer window also includes DOM/SEO instrumentation; use clean trace before budget enforcement",
+      "evidence": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/category/category-1024-rendered.json",
+      "sha256": "0ba97aa805a6c42c2c6b543d2c991302b5c76a9fc15064afbc145ee2b6c2f31b"
+    },
+    {
+      "project": "rhino-performance",
+      "template": "category",
+      "url": "https://rhino-performance.com/presoterapia/",
+      "source": "browser_qa",
+      "profile": {
+        "width": 1440,
+        "mode": "rendered",
+        "cpu_rate": 1,
+        "network": null,
+        "browser": "Chrome/155.0.8059.84",
+        "cache_disabled": true,
+        "device_scale_factor": 1,
+        "consent": "anonymous fresh no choice",
+        "policy": "GET/HEAD/OPTIONS only"
+      },
+      "stage": "navigation before SEO/axe instrumentation",
+      "metrics": {
+        "measurement_method": "cdp-http-hops-v2",
+        "requests": 88,
+        "unmeasured_completed_transfers": 0,
+        "js_bytes": 1081123,
+        "css_bytes": 58370,
+        "image_bytes": 278020,
+        "font_bytes": 23605,
+        "dom_nodes": 1414
+      },
+      "proposed_budgets": {
+        "requests": 96.8,
+        "js_bytes": 1189235.3,
+        "css_bytes": 91138,
+        "image_bytes": 310788,
+        "font_bytes": 56373,
+        "dom_nodes": 1555.4
+      },
+      "long_tasks_gate": "insufficient_evidence: observer window also includes DOM/SEO instrumentation; use clean trace before budget enforcement",
+      "evidence": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/category/category-1440-rendered.json",
+      "sha256": "80bd3ab6daed5c7be6eccc61f655a80a197ffe8c3cb7e59f0052019c2c603991"
+    },
+    {
+      "project": "rhino-performance",
+      "template": "category",
+      "url": "https://rhino-performance.com/presoterapia/",
+      "source": "browser_qa",
+      "profile": {
+        "width": 1920,
+        "mode": "rendered",
+        "cpu_rate": 1,
+        "network": null,
+        "browser": "Chrome/155.0.8059.84",
+        "cache_disabled": true,
+        "device_scale_factor": 1,
+        "consent": "anonymous fresh no choice",
+        "policy": "GET/HEAD/OPTIONS only"
+      },
+      "stage": "navigation before SEO/axe instrumentation",
+      "metrics": {
+        "measurement_method": "cdp-http-hops-v2",
+        "requests": 88,
+        "unmeasured_completed_transfers": 0,
+        "js_bytes": 1081102,
+        "css_bytes": 58341,
+        "image_bytes": 278023,
+        "font_bytes": 23605,
+        "dom_nodes": 1414
+      },
+      "proposed_budgets": {
+        "requests": 96.8,
+        "js_bytes": 1189212.2,
+        "css_bytes": 91109,
+        "image_bytes": 310791,
+        "font_bytes": 56373,
+        "dom_nodes": 1555.4
+      },
+      "long_tasks_gate": "insufficient_evidence: observer window also includes DOM/SEO instrumentation; use clean trace before budget enforcement",
+      "evidence": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/category/category-1920-rendered.json",
+      "sha256": "f700e699778f6312e76cb5fb2d83420c4efa7067b90651fc765ac3a9a60390da"
+    },
+    {
+      "project": "rhino-performance",
+      "template": "category_accessories",
+      "url": "https://rhino-performance.com/accesorios/",
+      "source": "browser_qa",
+      "profile": {
+        "width": 390,
+        "mode": "rendered",
+        "cpu_rate": 1,
+        "network": null,
+        "browser": "Chrome/155.0.8059.84",
+        "cache_disabled": true,
+        "device_scale_factor": 1,
+        "consent": "anonymous fresh no choice",
+        "policy": "GET/HEAD/OPTIONS only"
+      },
+      "stage": "navigation before SEO/axe instrumentation",
+      "metrics": {
+        "measurement_method": "cdp-http-hops-v2",
+        "requests": 83,
+        "unmeasured_completed_transfers": 0,
+        "js_bytes": 1081184,
+        "css_bytes": 58358,
+        "image_bytes": 60852,
+        "font_bytes": 23605,
+        "dom_nodes": 1397
+      },
+      "proposed_budgets": {
+        "requests": 91.3,
+        "js_bytes": 1189302.4,
+        "css_bytes": 91126,
+        "image_bytes": 93620,
+        "font_bytes": 56373,
+        "dom_nodes": 1536.7
+      },
+      "long_tasks_gate": "insufficient_evidence: observer window also includes DOM/SEO instrumentation; use clean trace before budget enforcement",
+      "evidence": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/category_accessories/category_accessories-390-rendered.json",
+      "sha256": "db4afa91d0e953b98a2317879d1c6b3c45129086f28e3d12a6c2136f275a603b"
+    },
+    {
+      "project": "rhino-performance",
+      "template": "category_accessories",
+      "url": "https://rhino-performance.com/accesorios/",
+      "source": "browser_qa",
+      "profile": {
+        "width": 1440,
+        "mode": "rendered",
+        "cpu_rate": 1,
+        "network": null,
+        "browser": "Chrome/155.0.8059.84",
+        "cache_disabled": true,
+        "device_scale_factor": 1,
+        "consent": "anonymous fresh no choice",
+        "policy": "GET/HEAD/OPTIONS only"
+      },
+      "stage": "navigation before SEO/axe instrumentation",
+      "metrics": {
+        "measurement_method": "cdp-http-hops-v2",
+        "requests": 89,
+        "unmeasured_completed_transfers": 0,
+        "js_bytes": 1081170,
+        "css_bytes": 58157,
+        "image_bytes": 200768,
+        "font_bytes": 23605,
+        "dom_nodes": 1499
+      },
+      "proposed_budgets": {
+        "requests": 97.9,
+        "js_bytes": 1189287.0,
+        "css_bytes": 90925,
+        "image_bytes": 233536,
+        "font_bytes": 56373,
+        "dom_nodes": 1648.9
+      },
+      "long_tasks_gate": "insufficient_evidence: observer window also includes DOM/SEO instrumentation; use clean trace before budget enforcement",
+      "evidence": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/category_accessories/category_accessories-1440-rendered.json",
+      "sha256": "5141b1d872a6b56263a304f3673d7e27a9ff97041311c9bb9b3e68eb915e493a"
+    },
+    {
+      "project": "rhino-performance",
+      "template": "home",
+      "url": "https://rhino-performance.com/",
+      "source": "browser_qa",
+      "profile": {
+        "width": 360,
+        "mode": "rendered",
+        "cpu_rate": 1,
+        "network": null,
+        "browser": "Chrome/155.0.8059.84",
+        "cache_disabled": true,
+        "device_scale_factor": 1,
+        "consent": "anonymous fresh no choice",
+        "policy": "GET/HEAD/OPTIONS only"
+      },
+      "stage": "navigation before SEO/axe instrumentation",
+      "metrics": {
+        "measurement_method": "cdp-http-hops-v2",
+        "requests": 112,
+        "unmeasured_completed_transfers": 0,
+        "js_bytes": 1120820,
+        "css_bytes": 58311,
+        "image_bytes": 362375,
+        "font_bytes": 31380,
+        "dom_nodes": 3677
+      },
+      "proposed_budgets": {
+        "requests": 123.2,
+        "js_bytes": 1232902.0,
+        "css_bytes": 91079,
+        "image_bytes": 398612.5,
+        "font_bytes": 64148,
+        "dom_nodes": 4044.7
+      },
+      "long_tasks_gate": "insufficient_evidence: observer window also includes DOM/SEO instrumentation; use clean trace before budget enforcement",
+      "evidence": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/home/home-360-rendered.json",
+      "sha256": "b41a3417781ad4b738edf08c00c11b215ed11a5031cde1ba73a53115e1e093eb"
+    },
+    {
+      "project": "rhino-performance",
+      "template": "home",
+      "url": "https://rhino-performance.com/",
+      "source": "browser_qa",
+      "profile": {
+        "width": 390,
+        "mode": "rendered",
+        "cpu_rate": 1,
+        "network": null,
+        "browser": "Chrome/155.0.8059.84",
+        "cache_disabled": true,
+        "device_scale_factor": 1,
+        "consent": "anonymous fresh no choice",
+        "policy": "GET/HEAD/OPTIONS only"
+      },
+      "stage": "navigation before SEO/axe instrumentation",
+      "metrics": {
+        "measurement_method": "cdp-http-hops-v2",
+        "requests": 104,
+        "unmeasured_completed_transfers": 0,
+        "js_bytes": 1117043,
+        "css_bytes": 58311,
+        "image_bytes": 362238,
+        "font_bytes": 31380,
+        "dom_nodes": 3677
+      },
+      "proposed_budgets": {
+        "requests": 114.4,
+        "js_bytes": 1228747.3,
+        "css_bytes": 91079,
+        "image_bytes": 398461.8,
+        "font_bytes": 64148,
+        "dom_nodes": 4044.7
+      },
+      "long_tasks_gate": "insufficient_evidence: observer window also includes DOM/SEO instrumentation; use clean trace before budget enforcement",
+      "evidence": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/home/home-390-rendered.json",
+      "sha256": "d2c67a603d22aa8f0934c736ad6fdbe568492e58d004d8b5ee70af7549ef0d40"
+    },
+    {
+      "project": "rhino-performance",
+      "template": "home",
+      "url": "https://rhino-performance.com/",
+      "source": "browser_qa",
+      "profile": {
+        "width": 768,
+        "mode": "rendered",
+        "cpu_rate": 1,
+        "network": null,
+        "browser": "Chrome/155.0.8059.84",
+        "cache_disabled": true,
+        "device_scale_factor": 1,
+        "consent": "anonymous fresh no choice",
+        "policy": "GET/HEAD/OPTIONS only"
+      },
+      "stage": "navigation before SEO/axe instrumentation",
+      "metrics": {
+        "measurement_method": "cdp-http-hops-v2",
+        "requests": 105,
+        "unmeasured_completed_transfers": 0,
+        "js_bytes": 1139378,
+        "css_bytes": 58316,
+        "image_bytes": 317198,
+        "font_bytes": 31380,
+        "dom_nodes": 3682
+      },
+      "proposed_budgets": {
+        "requests": 115.5,
+        "js_bytes": 1253315.8,
+        "css_bytes": 91084,
+        "image_bytes": 349966,
+        "font_bytes": 64148,
+        "dom_nodes": 4050.2
+      },
+      "long_tasks_gate": "insufficient_evidence: observer window also includes DOM/SEO instrumentation; use clean trace before budget enforcement",
+      "evidence": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/home/home-768-rendered.json",
+      "sha256": "c46856907ec9007f11811b83d912d3776768b26042224e8680215d44e5348c10"
+    },
+    {
+      "project": "rhino-performance",
+      "template": "home",
+      "url": "https://rhino-performance.com/",
+      "source": "browser_qa",
+      "profile": {
+        "width": 1024,
+        "mode": "rendered",
+        "cpu_rate": 1,
+        "network": null,
+        "browser": "Chrome/155.0.8059.84",
+        "cache_disabled": true,
+        "device_scale_factor": 1,
+        "consent": "anonymous fresh no choice",
+        "policy": "GET/HEAD/OPTIONS only"
+      },
+      "stage": "navigation before SEO/axe instrumentation",
+      "metrics": {
+        "measurement_method": "cdp-http-hops-v2",
+        "requests": 105,
+        "unmeasured_completed_transfers": 0,
+        "js_bytes": 1139376,
+        "css_bytes": 58315,
+        "image_bytes": 216647,
+        "font_bytes": 31380,
+        "dom_nodes": 3680
+      },
+      "proposed_budgets": {
+        "requests": 115.5,
+        "js_bytes": 1253313.6,
+        "css_bytes": 91083,
+        "image_bytes": 249415,
+        "font_bytes": 64148,
+        "dom_nodes": 4048.0
+      },
+      "long_tasks_gate": "insufficient_evidence: observer window also includes DOM/SEO instrumentation; use clean trace before budget enforcement",
+      "evidence": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/home/home-1024-rendered.json",
+      "sha256": "3221122526296c16a9db46b088cd68e69002d3faaea6ad118d3de97b01139ba6"
+    },
+    {
+      "project": "rhino-performance",
+      "template": "home",
+      "url": "https://rhino-performance.com/",
+      "source": "browser_qa",
+      "profile": {
+        "width": 1440,
+        "mode": "rendered",
+        "cpu_rate": 1,
+        "network": null,
+        "browser": "Chrome/155.0.8059.84",
+        "cache_disabled": true,
+        "device_scale_factor": 1,
+        "consent": "anonymous fresh no choice",
+        "policy": "GET/HEAD/OPTIONS only"
+      },
+      "stage": "navigation before SEO/axe instrumentation",
+      "metrics": {
+        "measurement_method": "cdp-http-hops-v2",
+        "requests": 97,
+        "unmeasured_completed_transfers": 0,
+        "js_bytes": 1126449,
+        "css_bytes": 58318,
+        "image_bytes": 217353,
+        "font_bytes": 31380,
+        "dom_nodes": 3782
+      },
+      "proposed_budgets": {
+        "requests": 106.7,
+        "js_bytes": 1239093.9,
+        "css_bytes": 91086,
+        "image_bytes": 250121,
+        "font_bytes": 64148,
+        "dom_nodes": 4160.2
+      },
+      "long_tasks_gate": "insufficient_evidence: observer window also includes DOM/SEO instrumentation; use clean trace before budget enforcement",
+      "evidence": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/home/home-1440-rendered.json",
+      "sha256": "8a450f1da5c272bc0dc5094f9ce14fff5f5edab7965cab827cfba854ea65a330"
+    },
+    {
+      "project": "rhino-performance",
+      "template": "home",
+      "url": "https://rhino-performance.com/",
+      "source": "browser_qa",
+      "profile": {
+        "width": 1920,
+        "mode": "rendered",
+        "cpu_rate": 1,
+        "network": null,
+        "browser": "Chrome/155.0.8059.84",
+        "cache_disabled": true,
+        "device_scale_factor": 1,
+        "consent": "anonymous fresh no choice",
+        "policy": "GET/HEAD/OPTIONS only"
+      },
+      "stage": "navigation before SEO/axe instrumentation",
+      "metrics": {
+        "measurement_method": "cdp-http-hops-v2",
+        "requests": 97,
+        "unmeasured_completed_transfers": 0,
+        "js_bytes": 1126505,
+        "css_bytes": 58311,
+        "image_bytes": 217364,
+        "font_bytes": 31380,
+        "dom_nodes": 3782
+      },
+      "proposed_budgets": {
+        "requests": 106.7,
+        "js_bytes": 1239155.5,
+        "css_bytes": 91079,
+        "image_bytes": 250132,
+        "font_bytes": 64148,
+        "dom_nodes": 4160.2
+      },
+      "long_tasks_gate": "insufficient_evidence: observer window also includes DOM/SEO instrumentation; use clean trace before budget enforcement",
+      "evidence": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/home/home-1920-rendered.json",
+      "sha256": "f394f66394979938808940c204ec55b193825f841dc36fd63518f9ef03096439"
+    },
+    {
+      "project": "rhino-performance",
+      "template": "login",
+      "url": "https://rhino-performance.com/account/login/",
+      "source": "browser_qa",
+      "profile": {
+        "width": 390,
+        "mode": "rendered",
+        "cpu_rate": 1,
+        "network": null,
+        "browser": "Chrome/155.0.8059.84",
+        "cache_disabled": true,
+        "device_scale_factor": 1,
+        "consent": "anonymous fresh no choice",
+        "policy": "GET/HEAD/OPTIONS only"
+      },
+      "stage": "navigation before SEO/axe instrumentation",
+      "metrics": {
+        "measurement_method": "cdp-http-hops-v2",
+        "requests": 79,
+        "unmeasured_completed_transfers": 0,
+        "js_bytes": 1074689,
+        "css_bytes": 61290,
+        "image_bytes": 63699,
+        "font_bytes": 23529,
+        "dom_nodes": 996
+      },
+      "proposed_budgets": {
+        "requests": 86.9,
+        "js_bytes": 1182157.9,
+        "css_bytes": 94058,
+        "image_bytes": 96467,
+        "font_bytes": 56297,
+        "dom_nodes": 1096
+      },
+      "long_tasks_gate": "insufficient_evidence: observer window also includes DOM/SEO instrumentation; use clean trace before budget enforcement",
+      "evidence": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/login/login-390-rendered.json",
+      "sha256": "08abd3e92d0efddbf9d4b5d6a1a7c13c69766a2e233fabbdb7922336042afa02"
+    },
+    {
+      "project": "rhino-performance",
+      "template": "login",
+      "url": "https://rhino-performance.com/account/login/",
+      "source": "browser_qa",
+      "profile": {
+        "width": 1440,
+        "mode": "rendered",
+        "cpu_rate": 1,
+        "network": null,
+        "browser": "Chrome/155.0.8059.84",
+        "cache_disabled": true,
+        "device_scale_factor": 1,
+        "consent": "anonymous fresh no choice",
+        "policy": "GET/HEAD/OPTIONS only"
+      },
+      "stage": "navigation before SEO/axe instrumentation",
+      "metrics": {
+        "measurement_method": "cdp-http-hops-v2",
+        "requests": 77,
+        "unmeasured_completed_transfers": 0,
+        "js_bytes": 1074747,
+        "css_bytes": 61288,
+        "image_bytes": 93996,
+        "font_bytes": 23529,
+        "dom_nodes": 1100
+      },
+      "proposed_budgets": {
+        "requests": 84.7,
+        "js_bytes": 1182221.7,
+        "css_bytes": 94056,
+        "image_bytes": 126764,
+        "font_bytes": 56297,
+        "dom_nodes": 1210.0
+      },
+      "long_tasks_gate": "insufficient_evidence: observer window also includes DOM/SEO instrumentation; use clean trace before budget enforcement",
+      "evidence": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/login/login-1440-rendered.json",
+      "sha256": "d3a3c68ab3927cfc225f43c205b7034ae2fcc5453439dc2edf4b7154db2dd550"
+    },
+    {
+      "project": "rhino-performance",
+      "template": "not_found",
+      "url": "https://rhino-performance.com/__ipanema_audit_missing_20261110__/",
+      "source": "browser_qa",
+      "profile": {
+        "width": 390,
+        "mode": "rendered",
+        "cpu_rate": 1,
+        "network": null,
+        "browser": "Chrome/155.0.8059.84",
+        "cache_disabled": true,
+        "device_scale_factor": 1,
+        "consent": "anonymous fresh no choice",
+        "policy": "GET/HEAD/OPTIONS only"
+      },
+      "stage": "navigation before SEO/axe instrumentation",
+      "metrics": {
+        "measurement_method": "cdp-http-hops-v2",
+        "requests": 74,
+        "unmeasured_completed_transfers": 0,
+        "js_bytes": 1074581,
+        "css_bytes": 58355,
+        "image_bytes": 58006,
+        "font_bytes": 15754,
+        "dom_nodes": 966
+      },
+      "proposed_budgets": {
+        "requests": 81.4,
+        "js_bytes": 1182039.1,
+        "css_bytes": 91123,
+        "image_bytes": 90774,
+        "font_bytes": 48522,
+        "dom_nodes": 1066
+      },
+      "long_tasks_gate": "insufficient_evidence: observer window also includes DOM/SEO instrumentation; use clean trace before budget enforcement",
+      "evidence": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/not_found/not_found-390-rendered.json",
+      "sha256": "99b5c63c8baa29f0a2d352d93e84fc59a77e0bff121f85333c18ac86835addf2"
+    },
+    {
+      "project": "rhino-performance",
+      "template": "not_found",
+      "url": "https://rhino-performance.com/__ipanema_audit_missing_20261110__/",
+      "source": "browser_qa",
+      "profile": {
+        "width": 1440,
+        "mode": "rendered",
+        "cpu_rate": 1,
+        "network": null,
+        "browser": "Chrome/155.0.8059.84",
+        "cache_disabled": true,
+        "device_scale_factor": 1,
+        "consent": "anonymous fresh no choice",
+        "policy": "GET/HEAD/OPTIONS only"
+      },
+      "stage": "navigation before SEO/axe instrumentation",
+      "metrics": {
+        "measurement_method": "cdp-http-hops-v2",
+        "requests": 75,
+        "unmeasured_completed_transfers": 0,
+        "js_bytes": 1074626,
+        "css_bytes": 58313,
+        "image_bytes": 93776,
+        "font_bytes": 15754,
+        "dom_nodes": 1070
+      },
+      "proposed_budgets": {
+        "requests": 82.5,
+        "js_bytes": 1182088.6,
+        "css_bytes": 91081,
+        "image_bytes": 126544,
+        "font_bytes": 48522,
+        "dom_nodes": 1177.0
+      },
+      "long_tasks_gate": "insufficient_evidence: observer window also includes DOM/SEO instrumentation; use clean trace before budget enforcement",
+      "evidence": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/not_found/not_found-1440-rendered.json",
+      "sha256": "881e9c606c4439dd54445b1751f2a0bc6a4b5e4aec14722b3159656b7d62c815"
+    },
+    {
+      "project": "rhino-performance",
+      "template": "policy",
+      "url": "https://rhino-performance.com/politica-de-devolucion/",
+      "source": "browser_qa",
+      "profile": {
+        "width": 390,
+        "mode": "rendered",
+        "cpu_rate": 1,
+        "network": null,
+        "browser": "Chrome/155.0.8059.84",
+        "cache_disabled": true,
+        "device_scale_factor": 1,
+        "consent": "anonymous fresh no choice",
+        "policy": "GET/HEAD/OPTIONS only"
+      },
+      "stage": "navigation before SEO/axe instrumentation",
+      "metrics": {
+        "measurement_method": "cdp-http-hops-v2",
+        "requests": 76,
+        "unmeasured_completed_transfers": 0,
+        "js_bytes": 1074534,
+        "css_bytes": 58312,
+        "image_bytes": 58837,
+        "font_bytes": 15754,
+        "dom_nodes": 973
+      },
+      "proposed_budgets": {
+        "requests": 83.6,
+        "js_bytes": 1181987.4,
+        "css_bytes": 91080,
+        "image_bytes": 91605,
+        "font_bytes": 48522,
+        "dom_nodes": 1073
+      },
+      "long_tasks_gate": "insufficient_evidence: observer window also includes DOM/SEO instrumentation; use clean trace before budget enforcement",
+      "evidence": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/policy/policy-390-rendered.json",
+      "sha256": "2be7f4e3a4ab586dfbdc58defe9a935d105433aad6e2acfb76b01f8698b25390"
+    },
+    {
+      "project": "rhino-performance",
+      "template": "policy",
+      "url": "https://rhino-performance.com/politica-de-devolucion/",
+      "source": "browser_qa",
+      "profile": {
+        "width": 1440,
+        "mode": "rendered",
+        "cpu_rate": 1,
+        "network": null,
+        "browser": "Chrome/155.0.8059.84",
+        "cache_disabled": true,
+        "device_scale_factor": 1,
+        "consent": "anonymous fresh no choice",
+        "policy": "GET/HEAD/OPTIONS only"
+      },
+      "stage": "navigation before SEO/axe instrumentation",
+      "metrics": {
+        "measurement_method": "cdp-http-hops-v2",
+        "requests": 75,
+        "unmeasured_completed_transfers": 0,
+        "js_bytes": 1074605,
+        "css_bytes": 58310,
+        "image_bytes": 94093,
+        "font_bytes": 15754,
+        "dom_nodes": 1077
+      },
+      "proposed_budgets": {
+        "requests": 82.5,
+        "js_bytes": 1182065.5,
+        "css_bytes": 91078,
+        "image_bytes": 126861,
+        "font_bytes": 48522,
+        "dom_nodes": 1184.7
+      },
+      "long_tasks_gate": "insufficient_evidence: observer window also includes DOM/SEO instrumentation; use clean trace before budget enforcement",
+      "evidence": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/policy/policy-1440-rendered.json",
+      "sha256": "ae7a1859864dc7f57aba1a383a8b64a7b186438b80104557f8b3e24fc029788c"
+    },
+    {
+      "project": "rhino-performance",
+      "template": "product",
+      "url": "https://rhino-performance.com/productos/botas-presoterapia-inalambricas-pro-air/",
+      "source": "browser_qa",
+      "profile": {
+        "width": 360,
+        "mode": "rendered",
+        "cpu_rate": 1,
+        "network": null,
+        "browser": "Chrome/155.0.8059.84",
+        "cache_disabled": true,
+        "device_scale_factor": 1,
+        "consent": "anonymous fresh no choice",
+        "policy": "GET/HEAD/OPTIONS only"
+      },
+      "stage": "navigation before SEO/axe instrumentation",
+      "metrics": {
+        "measurement_method": "cdp-http-hops-v2",
+        "requests": 95,
+        "unmeasured_completed_transfers": 0,
+        "js_bytes": 1126482,
+        "css_bytes": 58495,
+        "image_bytes": 32204,
+        "font_bytes": 31380,
+        "dom_nodes": 2221
+      },
+      "proposed_budgets": {
+        "requests": 104.5,
+        "js_bytes": 1239130.2,
+        "css_bytes": 91263,
+        "image_bytes": 64972,
+        "font_bytes": 64148,
+        "dom_nodes": 2443.1
+      },
+      "long_tasks_gate": "insufficient_evidence: observer window also includes DOM/SEO instrumentation; use clean trace before budget enforcement",
+      "evidence": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/product/product-360-rendered.json",
+      "sha256": "d56fa7cd7848800c6da0b86ca1cce18405342fdbc4f718072e869d3bb65ee545"
+    },
+    {
+      "project": "rhino-performance",
+      "template": "product",
+      "url": "https://rhino-performance.com/productos/botas-presoterapia-inalambricas-pro-air/",
+      "source": "browser_qa",
+      "profile": {
+        "width": 390,
+        "mode": "rendered",
+        "cpu_rate": 1,
+        "network": null,
+        "browser": "Chrome/155.0.8059.84",
+        "cache_disabled": true,
+        "device_scale_factor": 1,
+        "consent": "anonymous fresh no choice",
+        "policy": "GET/HEAD/OPTIONS only"
+      },
+      "stage": "navigation before SEO/axe instrumentation",
+      "metrics": {
+        "measurement_method": "cdp-http-hops-v2",
+        "requests": 94,
+        "unmeasured_completed_transfers": 0,
+        "js_bytes": 1126311,
+        "css_bytes": 58246,
+        "image_bytes": 38508,
+        "font_bytes": 31380,
+        "dom_nodes": 2221
+      },
+      "proposed_budgets": {
+        "requests": 103.4,
+        "js_bytes": 1238942.1,
+        "css_bytes": 91014,
+        "image_bytes": 71276,
+        "font_bytes": 64148,
+        "dom_nodes": 2443.1
+      },
+      "long_tasks_gate": "insufficient_evidence: observer window also includes DOM/SEO instrumentation; use clean trace before budget enforcement",
+      "evidence": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/product/product-390-rendered.json",
+      "sha256": "490357aec49732ae5506594fed777c62525d74103ca313ca72e893a86fde4c11"
+    },
+    {
+      "project": "rhino-performance",
+      "template": "product",
+      "url": "https://rhino-performance.com/productos/botas-presoterapia-inalambricas-pro-air/",
+      "source": "browser_qa",
+      "profile": {
+        "width": 768,
+        "mode": "rendered",
+        "cpu_rate": 1,
+        "network": null,
+        "browser": "Chrome/155.0.8059.84",
+        "cache_disabled": true,
+        "device_scale_factor": 1,
+        "consent": "anonymous fresh no choice",
+        "policy": "GET/HEAD/OPTIONS only"
+      },
+      "stage": "navigation before SEO/axe instrumentation",
+      "metrics": {
+        "measurement_method": "cdp-http-hops-v2",
+        "requests": 103,
+        "unmeasured_completed_transfers": 0,
+        "js_bytes": 1126590,
+        "css_bytes": 58312,
+        "image_bytes": 203447,
+        "font_bytes": 31380,
+        "dom_nodes": 2221
+      },
+      "proposed_budgets": {
+        "requests": 113.3,
+        "js_bytes": 1239249.0,
+        "css_bytes": 91080,
+        "image_bytes": 236215,
+        "font_bytes": 64148,
+        "dom_nodes": 2443.1
+      },
+      "long_tasks_gate": "insufficient_evidence: observer window also includes DOM/SEO instrumentation; use clean trace before budget enforcement",
+      "evidence": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/product/product-768-rendered.json",
+      "sha256": "886cf6890e98fcea44ce8239013d3707632a9b1ad913e27e0a17cea6d0587042"
+    },
+    {
+      "project": "rhino-performance",
+      "template": "product",
+      "url": "https://rhino-performance.com/productos/botas-presoterapia-inalambricas-pro-air/",
+      "source": "browser_qa",
+      "profile": {
+        "width": 1024,
+        "mode": "rendered",
+        "cpu_rate": 1,
+        "network": null,
+        "browser": "Chrome/155.0.8059.84",
+        "cache_disabled": true,
+        "device_scale_factor": 1,
+        "consent": "anonymous fresh no choice",
+        "policy": "GET/HEAD/OPTIONS only"
+      },
+      "stage": "navigation before SEO/axe instrumentation",
+      "metrics": {
+        "measurement_method": "cdp-http-hops-v2",
+        "requests": 113,
+        "unmeasured_completed_transfers": 0,
+        "js_bytes": 1126243,
+        "css_bytes": 58474,
+        "image_bytes": 206987,
+        "font_bytes": 31380,
+        "dom_nodes": 2221
+      },
+      "proposed_budgets": {
+        "requests": 124.3,
+        "js_bytes": 1238867.3,
+        "css_bytes": 91242,
+        "image_bytes": 239755,
+        "font_bytes": 64148,
+        "dom_nodes": 2443.1
+      },
+      "long_tasks_gate": "insufficient_evidence: observer window also includes DOM/SEO instrumentation; use clean trace before budget enforcement",
+      "evidence": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/product/product-1024-rendered.json",
+      "sha256": "d0c6d05e8f081f4ce769267980258fc9d4437a4ba1abe3f556ee50a4cab0cd06"
+    },
+    {
+      "project": "rhino-performance",
+      "template": "product",
+      "url": "https://rhino-performance.com/productos/botas-presoterapia-inalambricas-pro-air/",
+      "source": "browser_qa",
+      "profile": {
+        "width": 1440,
+        "mode": "rendered",
+        "cpu_rate": 1,
+        "network": null,
+        "browser": "Chrome/155.0.8059.84",
+        "cache_disabled": true,
+        "device_scale_factor": 1,
+        "consent": "anonymous fresh no choice",
+        "policy": "GET/HEAD/OPTIONS only"
+      },
+      "stage": "navigation before SEO/axe instrumentation",
+      "metrics": {
+        "measurement_method": "cdp-http-hops-v2",
+        "requests": 109,
+        "unmeasured_completed_transfers": 0,
+        "js_bytes": 1126257,
+        "css_bytes": 58601,
+        "image_bytes": 314521,
+        "font_bytes": 31380,
+        "dom_nodes": 2325
+      },
+      "proposed_budgets": {
+        "requests": 119.9,
+        "js_bytes": 1238882.7,
+        "css_bytes": 91369,
+        "image_bytes": 347289,
+        "font_bytes": 64148,
+        "dom_nodes": 2557.5
+      },
+      "long_tasks_gate": "insufficient_evidence: observer window also includes DOM/SEO instrumentation; use clean trace before budget enforcement",
+      "evidence": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/product/product-1440-rendered.json",
+      "sha256": "9dfe6ceb41af24106e1732da0998cad12bc07cc7b4b55c19caec86961b2f2cbf"
+    },
+    {
+      "project": "rhino-performance",
+      "template": "product",
+      "url": "https://rhino-performance.com/productos/botas-presoterapia-inalambricas-pro-air/",
+      "source": "browser_qa",
+      "profile": {
+        "width": 1920,
+        "mode": "rendered",
+        "cpu_rate": 1,
+        "network": null,
+        "browser": "Chrome/155.0.8059.84",
+        "cache_disabled": true,
+        "device_scale_factor": 1,
+        "consent": "anonymous fresh no choice",
+        "policy": "GET/HEAD/OPTIONS only"
+      },
+      "stage": "navigation before SEO/axe instrumentation",
+      "metrics": {
+        "measurement_method": "cdp-http-hops-v2",
+        "requests": 109,
+        "unmeasured_completed_transfers": 0,
+        "js_bytes": 1126114,
+        "css_bytes": 58197,
+        "image_bytes": 314883,
+        "font_bytes": 31380,
+        "dom_nodes": 2327
+      },
+      "proposed_budgets": {
+        "requests": 119.9,
+        "js_bytes": 1238725.4,
+        "css_bytes": 90965,
+        "image_bytes": 347651,
+        "font_bytes": 64148,
+        "dom_nodes": 2559.7
+      },
+      "long_tasks_gate": "insufficient_evidence: observer window also includes DOM/SEO instrumentation; use clean trace before budget enforcement",
+      "evidence": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/product/product-1920-rendered.json",
+      "sha256": "f4c574e71c0fd091dbb2cab3fd0f13d997078ca24f446b7d76ecec7d6e08471e"
+    },
+    {
+      "project": "rhino-performance",
+      "template": "product_accessory",
+      "url": "https://rhino-performance.com/productos/baterias-doble-capacidad-pro-air/",
+      "source": "browser_qa",
+      "profile": {
+        "width": 390,
+        "mode": "rendered",
+        "cpu_rate": 1,
+        "network": null,
+        "browser": "Chrome/155.0.8059.84",
+        "cache_disabled": true,
+        "device_scale_factor": 1,
+        "consent": "anonymous fresh no choice",
+        "policy": "GET/HEAD/OPTIONS only"
+      },
+      "stage": "navigation before SEO/axe instrumentation",
+      "metrics": {
+        "measurement_method": "cdp-http-hops-v2",
+        "requests": 97,
+        "unmeasured_completed_transfers": 0,
+        "js_bytes": 1123398,
+        "css_bytes": 58463,
+        "image_bytes": 31020,
+        "font_bytes": 31380,
+        "dom_nodes": 2225
+      },
+      "proposed_budgets": {
+        "requests": 106.7,
+        "js_bytes": 1235737.8,
+        "css_bytes": 91231,
+        "image_bytes": 63788,
+        "font_bytes": 64148,
+        "dom_nodes": 2447.5
+      },
+      "long_tasks_gate": "insufficient_evidence: observer window also includes DOM/SEO instrumentation; use clean trace before budget enforcement",
+      "evidence": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/product_accessory/product_accessory-390-rendered.json",
+      "sha256": "7b682c14f2e8d619f3004d96b08fa0708fc8a1685a0508c3dee826bc697d7695"
+    },
+    {
+      "project": "rhino-performance",
+      "template": "product_accessory",
+      "url": "https://rhino-performance.com/productos/baterias-doble-capacidad-pro-air/",
+      "source": "browser_qa",
+      "profile": {
+        "width": 1440,
+        "mode": "rendered",
+        "cpu_rate": 1,
+        "network": null,
+        "browser": "Chrome/155.0.8059.84",
+        "cache_disabled": true,
+        "device_scale_factor": 1,
+        "consent": "anonymous fresh no choice",
+        "policy": "GET/HEAD/OPTIONS only"
+      },
+      "stage": "navigation before SEO/axe instrumentation",
+      "metrics": {
+        "measurement_method": "cdp-http-hops-v2",
+        "requests": 101,
+        "unmeasured_completed_transfers": 0,
+        "js_bytes": 1119629,
+        "css_bytes": 58459,
+        "image_bytes": 375264,
+        "font_bytes": 31380,
+        "dom_nodes": 2329
+      },
+      "proposed_budgets": {
+        "requests": 111.1,
+        "js_bytes": 1231591.9,
+        "css_bytes": 91227,
+        "image_bytes": 412790.4,
+        "font_bytes": 64148,
+        "dom_nodes": 2561.9
+      },
+      "long_tasks_gate": "insufficient_evidence: observer window also includes DOM/SEO instrumentation; use clean trace before budget enforcement",
+      "evidence": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/product_accessory/product_accessory-1440-rendered.json",
+      "sha256": "b70d76eef29fbdb39a534231a617ef76d21434526888163e338804de83b9303b"
+    },
+    {
+      "project": "rhino-performance",
+      "template": "register",
+      "url": "https://rhino-performance.com/account/register",
+      "source": "browser_qa",
+      "profile": {
+        "width": 390,
+        "mode": "rendered",
+        "cpu_rate": 1,
+        "network": null,
+        "browser": "Chrome/155.0.8059.84",
+        "cache_disabled": true,
+        "device_scale_factor": 1,
+        "consent": "anonymous fresh no choice",
+        "policy": "GET/HEAD/OPTIONS only"
+      },
+      "stage": "navigation before SEO/axe instrumentation",
+      "metrics": {
+        "measurement_method": "cdp-http-hops-v2",
+        "requests": 83,
+        "unmeasured_completed_transfers": 0,
+        "js_bytes": 1437872,
+        "css_bytes": 61308,
+        "image_bytes": 58265,
+        "font_bytes": 23529,
+        "dom_nodes": 1033
+      },
+      "proposed_budgets": {
+        "requests": 91.3,
+        "js_bytes": 1581659.2,
+        "css_bytes": 94076,
+        "image_bytes": 91033,
+        "font_bytes": 56297,
+        "dom_nodes": 1136.3
+      },
+      "long_tasks_gate": "insufficient_evidence: observer window also includes DOM/SEO instrumentation; use clean trace before budget enforcement",
+      "evidence": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/register/register-390-rendered.json",
+      "sha256": "1a09c177028b45d4889199a55d81f077cb46d1921ac72f8f6553398982a01b81"
+    },
+    {
+      "project": "rhino-performance",
+      "template": "register",
+      "url": "https://rhino-performance.com/account/register",
+      "source": "browser_qa",
+      "profile": {
+        "width": 1440,
+        "mode": "rendered",
+        "cpu_rate": 1,
+        "network": null,
+        "browser": "Chrome/155.0.8059.84",
+        "cache_disabled": true,
+        "device_scale_factor": 1,
+        "consent": "anonymous fresh no choice",
+        "policy": "GET/HEAD/OPTIONS only"
+      },
+      "stage": "navigation before SEO/axe instrumentation",
+      "metrics": {
+        "measurement_method": "cdp-http-hops-v2",
+        "requests": 84,
+        "unmeasured_completed_transfers": 0,
+        "js_bytes": 1437733,
+        "css_bytes": 61304,
+        "image_bytes": 93996,
+        "font_bytes": 23529,
+        "dom_nodes": 1137
+      },
+      "proposed_budgets": {
+        "requests": 92.4,
+        "js_bytes": 1581506.3,
+        "css_bytes": 94072,
+        "image_bytes": 126764,
+        "font_bytes": 56297,
+        "dom_nodes": 1250.7
+      },
+      "long_tasks_gate": "insufficient_evidence: observer window also includes DOM/SEO instrumentation; use clean trace before budget enforcement",
+      "evidence": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/register/register-1440-rendered.json",
+      "sha256": "b9f77602280bb44f3ffec1b4608ba98710a6390d1117593429154babd8633b8f"
+    },
+    {
+      "project": "rhino-performance",
+      "template": "search",
+      "url": "https://rhino-performance.com/search/?q=presoterapia",
+      "source": "browser_qa",
+      "profile": {
+        "width": 390,
+        "mode": "rendered",
+        "cpu_rate": 1,
+        "network": null,
+        "browser": "Chrome/155.0.8059.84",
+        "cache_disabled": true,
+        "device_scale_factor": 1,
+        "consent": "anonymous fresh no choice",
+        "policy": "GET/HEAD/OPTIONS only"
+      },
+      "stage": "navigation before SEO/axe instrumentation",
+      "metrics": {
+        "measurement_method": "cdp-http-hops-v2",
+        "requests": 93,
+        "unmeasured_completed_transfers": 0,
+        "js_bytes": 1080529,
+        "css_bytes": 58337,
+        "image_bytes": 75725,
+        "font_bytes": 23605,
+        "dom_nodes": 1673
+      },
+      "proposed_budgets": {
+        "requests": 102.3,
+        "js_bytes": 1188581.9,
+        "css_bytes": 91105,
+        "image_bytes": 108493,
+        "font_bytes": 56373,
+        "dom_nodes": 1840.3
+      },
+      "long_tasks_gate": "insufficient_evidence: observer window also includes DOM/SEO instrumentation; use clean trace before budget enforcement",
+      "evidence": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/search/search-390-rendered.json",
+      "sha256": "7076b94a28a1a7f1ba8d46941a0865592c827fb4c4e6a5040aeb86c4dbdfc2db"
+    },
+    {
+      "project": "rhino-performance",
+      "template": "search",
+      "url": "https://rhino-performance.com/search/?q=presoterapia",
+      "source": "browser_qa",
+      "profile": {
+        "width": 1440,
+        "mode": "rendered",
+        "cpu_rate": 1,
+        "network": null,
+        "browser": "Chrome/155.0.8059.84",
+        "cache_disabled": true,
+        "device_scale_factor": 1,
+        "consent": "anonymous fresh no choice",
+        "policy": "GET/HEAD/OPTIONS only"
+      },
+      "stage": "navigation before SEO/axe instrumentation",
+      "metrics": {
+        "measurement_method": "cdp-http-hops-v2",
+        "requests": 93,
+        "unmeasured_completed_transfers": 0,
+        "js_bytes": 1080513,
+        "css_bytes": 58348,
+        "image_bytes": 356575,
+        "font_bytes": 23605,
+        "dom_nodes": 1777
+      },
+      "proposed_budgets": {
+        "requests": 102.3,
+        "js_bytes": 1188564.3,
+        "css_bytes": 91116,
+        "image_bytes": 392232.5,
+        "font_bytes": 56373,
+        "dom_nodes": 1954.7
+      },
+      "long_tasks_gate": "insufficient_evidence: observer window also includes DOM/SEO instrumentation; use clean trace before budget enforcement",
+      "evidence": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/search/search-1440-rendered.json",
+      "sha256": "d05e1288a93a7797a48eb6966109498802bb000a054b5d0a3581fe5c4651192e"
+    },
+    {
+      "project": "rhino-performance",
+      "template": "search_empty",
+      "url": "https://rhino-performance.com/search/?q=ipanema_audit_no_result_179433",
+      "source": "browser_qa",
+      "profile": {
+        "width": 390,
+        "mode": "rendered",
+        "cpu_rate": 1,
+        "network": null,
+        "browser": "Chrome/155.0.8059.84",
+        "cache_disabled": true,
+        "device_scale_factor": 1,
+        "consent": "anonymous fresh no choice",
+        "policy": "GET/HEAD/OPTIONS only"
+      },
+      "stage": "navigation before SEO/axe instrumentation",
+      "metrics": {
+        "measurement_method": "cdp-http-hops-v2",
+        "requests": 89,
+        "unmeasured_completed_transfers": 0,
+        "js_bytes": 1077728,
+        "css_bytes": 58310,
+        "image_bytes": 76498,
+        "font_bytes": 23605,
+        "dom_nodes": 1208
+      },
+      "proposed_budgets": {
+        "requests": 97.9,
+        "js_bytes": 1185500.8,
+        "css_bytes": 91078,
+        "image_bytes": 109266,
+        "font_bytes": 56373,
+        "dom_nodes": 1328.8
+      },
+      "long_tasks_gate": "insufficient_evidence: observer window also includes DOM/SEO instrumentation; use clean trace before budget enforcement",
+      "evidence": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/search_empty/search_empty-390-rendered.json",
+      "sha256": "d26f7be437598f3bac157913c52dad27f8dc14770b07f36e67ff8729f2e5677c"
+    },
+    {
+      "project": "rhino-performance",
+      "template": "search_empty",
+      "url": "https://rhino-performance.com/search/?q=ipanema_audit_no_result_179433",
+      "source": "browser_qa",
+      "profile": {
+        "width": 1440,
+        "mode": "rendered",
+        "cpu_rate": 1,
+        "network": null,
+        "browser": "Chrome/155.0.8059.84",
+        "cache_disabled": true,
+        "device_scale_factor": 1,
+        "consent": "anonymous fresh no choice",
+        "policy": "GET/HEAD/OPTIONS only"
+      },
+      "stage": "navigation before SEO/axe instrumentation",
+      "metrics": {
+        "measurement_method": "cdp-http-hops-v2",
+        "requests": 90,
+        "unmeasured_completed_transfers": 0,
+        "js_bytes": 1077744,
+        "css_bytes": 58311,
+        "image_bytes": 203375,
+        "font_bytes": 23605,
+        "dom_nodes": 1312
+      },
+      "proposed_budgets": {
+        "requests": 99.0,
+        "js_bytes": 1185518.4,
+        "css_bytes": 91079,
+        "image_bytes": 236143,
+        "font_bytes": 56373,
+        "dom_nodes": 1443.2
+      },
+      "long_tasks_gate": "insufficient_evidence: observer window also includes DOM/SEO instrumentation; use clean trace before budget enforcement",
+      "evidence": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/search_empty/search_empty-1440-rendered.json",
+      "sha256": "c234ad6f1bf7638cd7f59967c4fd74516bbb4434eed89cdec5a8e928e9db86b0"
+    }
+  ],
+  "baseline_status": "captured; preliminary for statistical blocking",
+  "source_hashes": {
+    "reports/runs/rhino-performance/20261110T191235-performance-66de1f7b/performance.json": "e42dd82ee10db99bfb9c3e8741f135c997c3ff25cec7fbfe8a7fb3f57dd6dbe4",
+    "reports/runs/rhino-performance/20261110T191406-performance-05085a7e/performance.json": "c58dc571ea66604b0d1e470da4a2c04450dc9e5327e08f62f3c1f38ce3b03f47",
+    "reports/runs/rhino-performance/20261110T193933-performance-ba57f53e/performance.json": "22f70a731b4c0664d781aac413c5420787cfca3de97f6786a8189dab643aaca3",
+    "reports/runs/rhino-performance/20261110T194040-performance-111a9578/performance.json": "c9460c11dbed331c6edd9819c456eb85ad5f78ae62c0b202e3558bf076a41cf7",
+    "reports/runs/rhino-performance/20261110T194137-performance-e5ae6010/performance.json": "6d13789163b64c162940f199c6afda2c90dd7f8c08516a600bfff190e8e81794",
+    "reports/runs/rhino-performance/20261110T194240-performance-825b5b36/performance.json": "b18e20eb6d8f0b3d598cf9615290bd7a1313d7dbd0522d20ca2d19f76163663c"
+  }
+}

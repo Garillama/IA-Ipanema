@@ -1,0 +1,2967 @@
+{
+  "project": "rhino-performance",
+  "at": "2026-11-10T21:16:22.544754+00:00",
+  "url": "https://rhino-performance.com/",
+  "public_installation_asset_reference": "14828608",
+  "read_only": true,
+  "baseline_scope": "Public same-domain lab before current user deployment; deployed checkout includes other preexisting changes, not only accessibility patch. n3 allows descriptive comparison, not statistical release gating. Raw comparator labels every positive delta regression; those are NOT statistically established regressions.",
+  "normal_profiles": [
+    {
+      "page": "home",
+      "device": "mobile",
+      "url": "https://rhino-performance.com/",
+      "profile": {
+        "source": "lighthouse_local",
+        "url": "https://rhino-performance.com/",
+        "final_url": "https://rhino-performance.com/",
+        "device": "mobile",
+        "categories": [
+          "performance",
+          "accessibility",
+          "best-practices",
+          "seo"
+        ],
+        "locale": "es",
+        "lighthouse_version": "13.6.0",
+        "chrome_version": "155.0.8059.84",
+        "screen": {
+          "mobile": true,
+          "width": 412,
+          "height": 823,
+          "deviceScaleFactor": 1.75,
+          "disabled": false
+        },
+        "throttling_method": "simulate",
+        "throttling": {
+          "rttMs": 150,
+          "throughputKbps": 1638.4,
+          "requestLatencyMs": 562.5,
+          "downloadThroughputKbps": 1474.56,
+          "uploadThroughputKbps": 675,
+          "cpuSlowdownMultiplier": 4
+        },
+        "cache": false,
+        "network_policy": "guarded-read-only"
+      },
+      "sample_count": 3,
+      "score_medians": {
+        "performance": 0.65,
+        "accessibility": 0.97,
+        "best-practices": 0.77,
+        "seo": 1.0
+      },
+      "metrics": {
+        "lcp": 3170.8005,
+        "fcp": 1750.8200000000002,
+        "cls": 0.0,
+        "tbt": 1583.9999999999995,
+        "speed_index": 3332.868058539195
+      },
+      "statistics": {
+        "lcp": {
+          "median": 3170.8005,
+          "min": 3124.3859999999995,
+          "max": 3179.625,
+          "available_samples": 3
+        },
+        "fcp": {
+          "median": 1750.8200000000002,
+          "min": 1694.4579999999999,
+          "max": 1765.897,
+          "available_samples": 3
+        },
+        "cls": {
+          "median": 0.0,
+          "min": 0.0,
+          "max": 0.04305862614670328,
+          "available_samples": 3
+        },
+        "tbt": {
+          "median": 1583.9999999999995,
+          "min": 1547.0000000000018,
+          "max": 1610.999999999999,
+          "available_samples": 3
+        },
+        "speed_index": {
+          "median": 3332.868058539195,
+          "min": 3269.058706289814,
+          "max": 3536.023008445275,
+          "available_samples": 3
+        }
+      },
+      "samples": [
+        {
+          "at": "2026-11-10T20:58:56.143Z",
+          "metrics": {
+            "lcp": 3124.3859999999995,
+            "fcp": 1694.4579999999999,
+            "cls": 0.04305862614670328,
+            "tbt": 1547.0000000000018,
+            "speed_index": 3269.058706289814
+          },
+          "scores": {
+            "performance": 0.65,
+            "accessibility": 0.97,
+            "best-practices": 0.77,
+            "seo": 1.0
+          }
+        },
+        {
+          "at": "2026-11-10T20:59:21.021Z",
+          "metrics": {
+            "lcp": 3179.625,
+            "fcp": 1765.897,
+            "cls": 0.0,
+            "tbt": 1610.999999999999,
+            "speed_index": 3536.023008445275
+          },
+          "scores": {
+            "performance": 0.65,
+            "accessibility": 0.97,
+            "best-practices": 0.77,
+            "seo": 1.0
+          }
+        },
+        {
+          "at": "2026-11-10T20:59:39.909Z",
+          "metrics": {
+            "lcp": 3170.8005,
+            "fcp": 1750.8200000000002,
+            "cls": 0.0,
+            "tbt": 1583.9999999999995,
+            "speed_index": 3332.868058539195
+          },
+          "scores": {
+            "performance": 0.65,
+            "accessibility": 0.97,
+            "best-practices": 0.77,
+            "seo": 1.0
+          }
+        }
+      ],
+      "before_metrics": {
+        "lcp": 3672.0655000000006,
+        "fcp": 1809.5969999999998,
+        "cls": 0.0,
+        "tbt": 1396.0,
+        "speed_index": 3584.8183783814284
+      },
+      "before_evidence": "reports/runs/rhino-performance/20261110T191235-performance-66de1f7b/performance.json",
+      "comparison": {
+        "status": "compared",
+        "delta_after_minus_before": {
+          "lcp": -501.2650000000008,
+          "fcp": -58.77699999999959,
+          "cls": 0.0,
+          "tbt": 187.99999999999955,
+          "speed_index": -251.9503198422335
+        },
+        "regressions": [
+          "tbt"
+        ],
+        "causality_confirmed": false
+      },
+      "diagnostics_sample1": {
+        "render-blocking-insight": {
+          "displayValue": "Ahorro estimado de 960 ms",
+          "numericValue": 962
+        },
+        "image-delivery-insight": {
+          "displayValue": "Ahorro estimado de 60 KiB",
+          "numericValue": 61086
+        },
+        "unused-javascript": {
+          "displayValue": "Ahorro estimado de 420 KiB",
+          "numericValue": 0
+        },
+        "unused-css-rules": {
+          "displayValue": "Ahorro estimado de 12 KiB",
+          "numericValue": 0
+        },
+        "mainthread-work-breakdown": {
+          "displayValue": "7,4 s",
+          "numericValue": 7368.475999999671
+        },
+        "total-byte-weight": {
+          "displayValue": "Tamaño total: 2279 KiB",
+          "numericValue": 2333796
+        }
+      },
+      "lcp_selector": [
+        "div.js-video-block > div.embed-responsive > div.js-video-thumbnail > img.image-priority-high"
+      ],
+      "lcp_discovery_sample1": {
+        "type": "list",
+        "items": [
+          {
+            "type": "checklist",
+            "items": {
+              "priorityHinted": {
+                "label": "fetchpriority=high applied",
+                "value": true
+              },
+              "requestDiscoverable": {
+                "label": "La solicitud es visible en el documento inicial",
+                "value": true
+              },
+              "eagerlyLoaded": {
+                "label": "Los recursos de LCP no deben usar loading=lazy",
+                "value": true
+              }
+            }
+          },
+          {
+            "type": "node",
+            "lhId": "page-0-IMG",
+            "path": "1,HTML,1,BODY,7,MAIN,0,SECTION,1,DIV,0,DIV,0,DIV,0,DIV,0,DIV,0,IMG",
+            "selector": "div.js-video-block > div.embed-responsive > div.js-video-thumbnail > img.image-priority-high",
+            "boundingRect": {
+              "top": 138,
+              "bottom": 518,
+              "left": 0,
+              "right": 412,
+              "width": 412,
+              "height": 380
+            },
+            "snippet": "[redacted]",
+            "nodeLabel": "[redacted]"
+          }
+        ]
+      },
+      "render_blocking_sample1": {
+        "type": "table",
+        "headings": [
+          {
+            "key": "url",
+            "valueType": "url",
+            "label": "URL"
+          },
+          {
+            "key": "totalBytes",
+            "valueType": "bytes",
+            "label": "Tamaño de la transferencia"
+          },
+          {
+            "key": "wastedMs",
+            "valueType": "timespanMs",
+            "label": "Duración"
+          }
+        ],
+        "items": [
+          {
+            "url": "https://fonts.googleapis.com/css?family=Poppins%3A400%2C500%2C700%2C800&display=swap",
+            "totalBytes": 1031,
+            "wastedMs": 832
+          },
+          {
+            "url": "https://ftp-cdn.mitiendanube.com/forked-files/007/400/935/installations/14828608/static/js/libraries-standalone-59fa5e7833de73d735795f6c8e66eede.js",
+            "totalBytes": 28315
+          },
+          {
+            "url": "https://acdn-us.mitiendanube.com/stores/007/400/935/themes/ipanema/style-critical-c044f4eba86f218b2550935ace3f4999.min.css",
+            "totalBytes": 27791,
+            "wastedMs": 966
+          },
+          {
+            "url": "https://acdn-us.mitiendanube.com/stores/007/400/935/themes/ipanema/style-utilities-c0aecd622274e18a4457353665418961.min.css",
+            "totalBytes": 3951,
+            "wastedMs": 165
+          }
+        ]
+      },
+      "image_delivery_sample1": {
+        "type": "table",
+        "headings": [
+          {
+            "key": "node",
+            "valueType": "node",
+            "label": ""
+          },
+          {
+            "key": "url",
+            "valueType": "url",
+            "label": "URL",
+            "subItemsHeading": {
+              "key": "reason",
+              "valueType": "text"
+            }
+          },
+          {
+            "key": "totalBytes",
+            "valueType": "bytes",
+            "label": "Tamaño del recurso"
+          },
+          {
+            "key": "wastedBytes",
+            "valueType": "bytes",
+            "label": "Ahorro estimado",
+            "subItemsHeading": {
+              "key": "wastedBytes",
+              "valueType": "bytes"
+            }
+          }
+        ],
+        "items": [
+          {
+            "node": {
+              "type": "node",
+              "lhId": "page-11-IMG",
+              "path": "1,HTML,1,BODY,7,MAIN,3,SECTION,1,SECTION,0,DIV,1,DIV,0,DIV,0,DIV,0,DIV,1,DIV,0,DIV,0,DIV,0,A,0,IMG",
+              "selector": "div.main-product-mobile-media > div.js-sectionfy-description-card-body > a.main-product-mobile-media-link > img.main-product-mobile-img",
+              "boundingRect": {
+                "top": 1578,
+                "bottom": 1833,
+                "left": 17,
+                "right": 395,
+                "width": 378,
+                "height": 255
+              },
+              "snippet": "[redacted]",
+              "nodeLabel": "[redacted]"
+            },
+            "url": "https://pub-ddef691408694c12881f433a7ae94d95.r2.dev/stores/cmqfmfvoe0010srt5j2d6otew/media/f7666559-7e32-4c62-822e-0678f949b7c4/103ca7c1-19ca-4379-85ee-42089bbf8a88.webp",
+            "totalBytes": 54166,
+            "wastedBytes": 39236,
+            "subItems": {
+              "type": "subitems",
+              "items": [
+                {
+                  "reason": "Este archivo de imagen es más grande de lo necesario (1260x850) para las dimensiones mostradas (662x446). Usa imágenes adaptables para reducir el tamaño de descarga de la imagen.",
+                  "wastedBytes": 39236
+                }
+              ]
+            }
+          },
+          {
+            "node": {
+              "type": "node",
+              "lhId": "page-12-IMG",
+              "path": "1,HTML,1,BODY,7,MAIN,4,SECTION,1,SECTION,0,DIV,0,DIV,0,DIV,1,DIV,1,DIV,0,DIV,6,ARTICLE,1,DIV,0,IMG",
+              "selector": "div.hgr-carousel__track > article.hgr-carousel__card > div.hgr-carousel__card-head > img.hgr-carousel__avatar",
+              "boundingRect": {
+                "top": 2610,
+                "bottom": 2650,
+                "left": 1869,
+                "right": 1909,
+                "width": 40,
+                "height": 40
+              },
+              "snippet": "[redacted]",
+              "nodeLabel": "[redacted]"
+            },
+            "url": "https://lh3.googleusercontent.com/a-/ALV-UjX-cDeGIJdtUL9xD_J_73rTRg3ch9uoWE5oK0A78NYUoQD3Q8na=s64-c-rp-mo-br100",
+            "totalBytes": 10234,
+            "wastedBytes": 9551,
+            "subItems": {
+              "type": "subitems",
+              "items": [
+                {
+                  "reason": "Usar un formato de imagen moderno (WebP, AVIF) o aumentar la compresión de la imagen podría mejorar el tamaño de descarga de esta imagen",
+                  "wastedBytes": 9551
+                }
+              ]
+            }
+          },
+          {
+            "node": {
+              "type": "node",
+              "lhId": "page-13-IMG",
+              "path": "1,HTML,1,BODY,7,MAIN,4,SECTION,1,SECTION,0,DIV,0,DIV,0,DIV,1,DIV,1,DIV,0,DIV,3,ARTICLE,1,DIV,0,IMG",
+              "selector": "div.hgr-carousel__track > article.hgr-carousel__card > div.hgr-carousel__card-head > img.hgr-carousel__avatar",
+              "boundingRect": {
+                "top": 2617,
+                "bottom": 2657,
+                "left": 963,
+                "right": 1003,
+                "width": 40,
+                "height": 40
+              },
+              "snippet": "[redacted]",
+              "nodeLabel": "[redacted]"
+            },
+            "url": "https://lh3.googleusercontent.com/a-/ALV-UjUaiAQ_8wH3gO7qTWaT8eovQlyc9qOIBdTjyZmmnQNkciMOLWHCmw=s64-c-rp-mo-br100",
+            "totalBytes": 7173,
+            "wastedBytes": 6490,
+            "subItems": {
+              "type": "subitems",
+              "items": [
+                {
+                  "reason": "Usar un formato de imagen moderno (WebP, AVIF) o aumentar la compresión de la imagen podría mejorar el tamaño de descarga de esta imagen",
+                  "wastedBytes": 6490
+                }
+              ]
+            }
+          },
+          {
+            "node": {
+              "type": "node",
+              "lhId": "page-14-IMG",
+              "path": "1,HTML,1,BODY,7,MAIN,4,SECTION,1,SECTION,0,DIV,0,DIV,0,DIV,1,DIV,1,DIV,0,DIV,0,ARTICLE,1,DIV,0,IMG",
+              "selector": "div.hgr-carousel__track > article.hgr-carousel__card > div.hgr-carousel__card-head > img.hgr-carousel__avatar",
+              "boundingRect": {
+                "top": 2610,
+                "bottom": 2650,
+                "left": 57,
+                "right": 97,
+                "width": 40,
+                "height": 40
+              },
+              "snippet": "[redacted]",
+              "nodeLabel": "[redacted]"
+            },
+            "url": "https://lh3.googleusercontent.com/a-/ALV-UjVV_-bEWzBoomZL3HLILLc0p4CvcsqBq6aGCg8qGerVKOWafKwF=s64-c-rp-mo-br100",
+            "totalBytes": 6492,
+            "wastedBytes": 5809,
+            "subItems": {
+              "type": "subitems",
+              "items": [
+                {
+                  "reason": "Usar un formato de imagen moderno (WebP, AVIF) o aumentar la compresión de la imagen podría mejorar el tamaño de descarga de esta imagen",
+                  "wastedBytes": 5809
+                }
+              ]
+            }
+          }
+        ],
+        "debugData": {
+          "type": "debugdata",
+          "wastedBytes": 61086
+        }
+      },
+      "third_parties_sample1": [
+        {
+          "entity": "Google Tag Manager",
+          "transfer_bytes": 321900,
+          "main_thread_ms": 203.66399999707937
+        },
+        {
+          "entity": "Facebook",
+          "transfer_bytes": 216691,
+          "main_thread_ms": 143.33700000494719
+        },
+        {
+          "entity": "mitiendanube.com",
+          "transfer_bytes": 344873,
+          "main_thread_ms": 133.11499999463558
+        },
+        {
+          "entity": "TikTok",
+          "transfer_bytes": 172840,
+          "main_thread_ms": 128.19900000467896
+        },
+        {
+          "entity": "tiendanube.com",
+          "transfer_bytes": 129833,
+          "main_thread_ms": 93.11299998685718
+        },
+        {
+          "entity": "Clarity",
+          "transfer_bytes": 27739,
+          "main_thread_ms": 57.993000000715256
+        },
+        {
+          "entity": "openai.com",
+          "transfer_bytes": 37217,
+          "main_thread_ms": 45.37599999457598
+        },
+        {
+          "entity": "Cloudflare",
+          "transfer_bytes": 10479,
+          "main_thread_ms": 6.597000002861023
+        },
+        {
+          "entity": "Google/Doubleclick Ads",
+          "transfer_bytes": 6264,
+          "main_thread_ms": 2.427999995648861
+        },
+        {
+          "entity": "Google Fonts",
+          "transfer_bytes": 32443,
+          "main_thread_ms": 0.12099999934434891
+        },
+        {
+          "entity": "YouTube",
+          "transfer_bytes": 30969,
+          "main_thread_ms": 0
+        },
+        {
+          "entity": "Other Google APIs/SDKs",
+          "transfer_bytes": 44386,
+          "main_thread_ms": 0
+        },
+        {
+          "entity": "bbeboy.store",
+          "transfer_bytes": 10137,
+          "main_thread_ms": 0
+        },
+        {
+          "entity": "abejita.co",
+          "transfer_bytes": 4174,
+          "main_thread_ms": 0
+        },
+        {
+          "entity": "r2.dev",
+          "transfer_bytes": 282441,
+          "main_thread_ms": 0
+        },
+        {
+          "entity": "google.com.mx",
+          "transfer_bytes": 689,
+          "main_thread_ms": 0
+        }
+      ],
+      "evidence": "reports/runs/rhino-performance/20261110T205955-performance-f4873b78/performance.json"
+    },
+    {
+      "page": "home",
+      "device": "desktop",
+      "url": "https://rhino-performance.com/",
+      "profile": {
+        "source": "lighthouse_local",
+        "url": "https://rhino-performance.com/",
+        "final_url": "https://rhino-performance.com/",
+        "device": "desktop",
+        "categories": [
+          "performance",
+          "accessibility",
+          "best-practices",
+          "seo"
+        ],
+        "locale": "es",
+        "lighthouse_version": "13.6.0",
+        "chrome_version": "155.0.8059.84",
+        "screen": {
+          "mobile": false,
+          "width": 1350,
+          "height": 940,
+          "deviceScaleFactor": 1,
+          "disabled": false
+        },
+        "throttling_method": "simulate",
+        "throttling": {
+          "rttMs": 40,
+          "throughputKbps": 10240,
+          "requestLatencyMs": 0,
+          "downloadThroughputKbps": 0,
+          "uploadThroughputKbps": 0,
+          "cpuSlowdownMultiplier": 1
+        },
+        "cache": false,
+        "network_policy": "guarded-read-only"
+      },
+      "sample_count": 3,
+      "score_medians": {
+        "performance": 0.74,
+        "accessibility": 0.97,
+        "best-practices": 0.77,
+        "seo": 1.0
+      },
+      "metrics": {
+        "lcp": 968.9830000000002,
+        "fcp": 441.488,
+        "cls": 0.4491796690307328,
+        "tbt": 164.50000000000028,
+        "speed_index": 1118.8790216475172
+      },
+      "statistics": {
+        "lcp": {
+          "median": 968.9830000000002,
+          "min": 947.249,
+          "max": 1053.7815,
+          "available_samples": 3
+        },
+        "fcp": {
+          "median": 441.488,
+          "min": 419.499,
+          "max": 457.544,
+          "available_samples": 3
+        },
+        "cls": {
+          "median": 0.4491796690307328,
+          "min": 0.4491796690307328,
+          "max": 0.4491796690307328,
+          "available_samples": 3
+        },
+        "tbt": {
+          "median": 164.50000000000028,
+          "min": 148.50000000000045,
+          "max": 170.00000000000023,
+          "available_samples": 3
+        },
+        "speed_index": {
+          "median": 1118.8790216475172,
+          "min": 1070.776311551233,
+          "max": 1165.0710962688263,
+          "available_samples": 3
+        }
+      },
+      "samples": [
+        {
+          "at": "2026-11-10T21:00:06.816Z",
+          "metrics": {
+            "lcp": 947.249,
+            "fcp": 419.499,
+            "cls": 0.4491796690307328,
+            "tbt": 148.50000000000045,
+            "speed_index": 1070.776311551233
+          },
+          "scores": {
+            "performance": 0.76,
+            "accessibility": 0.97,
+            "best-practices": 0.77,
+            "seo": 1.0
+          }
+        },
+        {
+          "at": "2026-11-10T21:00:27.376Z",
+          "metrics": {
+            "lcp": 1053.7815,
+            "fcp": 457.544,
+            "cls": 0.4491796690307328,
+            "tbt": 170.00000000000023,
+            "speed_index": 1165.0710962688263
+          },
+          "scores": {
+            "performance": 0.73,
+            "accessibility": 0.97,
+            "best-practices": 0.77,
+            "seo": 1.0
+          }
+        },
+        {
+          "at": "2026-11-10T21:00:49.434Z",
+          "metrics": {
+            "lcp": 968.9830000000002,
+            "fcp": 441.488,
+            "cls": 0.4491796690307328,
+            "tbt": 164.50000000000028,
+            "speed_index": 1118.8790216475172
+          },
+          "scores": {
+            "performance": 0.74,
+            "accessibility": 0.97,
+            "best-practices": 0.77,
+            "seo": 1.0
+          }
+        }
+      ],
+      "before_metrics": {
+        "lcp": 1063.173,
+        "fcp": 481.25699999999995,
+        "cls": 0.4491796690307328,
+        "tbt": 176.00000000000023,
+        "speed_index": 1128.5377946977137
+      },
+      "before_evidence": "reports/runs/rhino-performance/20261110T191406-performance-05085a7e/performance.json",
+      "comparison": {
+        "status": "compared",
+        "delta_after_minus_before": {
+          "lcp": -94.18999999999983,
+          "fcp": -39.76899999999995,
+          "cls": 0.0,
+          "tbt": -11.499999999999943,
+          "speed_index": -9.658773050196487
+        },
+        "regressions": [],
+        "causality_confirmed": false
+      },
+      "diagnostics_sample1": {
+        "render-blocking-insight": {
+          "displayValue": "Ahorro estimado de 270 ms",
+          "numericValue": 273
+        },
+        "image-delivery-insight": {
+          "displayValue": "Ahorro estimado de 363 KiB",
+          "numericValue": 372056
+        },
+        "unused-javascript": {
+          "displayValue": "Ahorro estimado de 432 KiB",
+          "numericValue": 0
+        },
+        "unused-css-rules": {
+          "displayValue": "Ahorro estimado de 22 KiB",
+          "numericValue": 0
+        },
+        "mainthread-work-breakdown": {
+          "displayValue": "2,1 s",
+          "numericValue": 2116.3699999999226
+        },
+        "total-byte-weight": {
+          "displayValue": "Tamaño total: 3534 KiB",
+          "numericValue": 3618651
+        }
+      },
+      "lcp_selector": [
+        "div.js-video-block > div.embed-responsive > div.js-video-thumbnail > img.image-priority-high"
+      ],
+      "lcp_discovery_sample1": {
+        "type": "list",
+        "items": [
+          {
+            "type": "checklist",
+            "items": {
+              "priorityHinted": {
+                "label": "fetchpriority=high applied",
+                "value": true
+              },
+              "requestDiscoverable": {
+                "label": "La solicitud es visible en el documento inicial",
+                "value": true
+              },
+              "eagerlyLoaded": {
+                "label": "Los recursos de LCP no deben usar loading=lazy",
+                "value": true
+              }
+            }
+          },
+          {
+            "type": "node",
+            "lhId": "page-0-IMG",
+            "path": "1,HTML,1,BODY,7,MAIN,0,SECTION,1,DIV,0,DIV,0,DIV,0,DIV,0,DIV,0,IMG",
+            "selector": "div.js-video-block > div.embed-responsive > div.js-video-thumbnail > img.image-priority-high",
+            "boundingRect": {
+              "top": 36,
+              "bottom": 786,
+              "left": 0,
+              "right": 1350,
+              "width": 1350,
+              "height": 750
+            },
+            "snippet": "[redacted]",
+            "nodeLabel": "[redacted]"
+          }
+        ]
+      },
+      "render_blocking_sample1": {
+        "type": "table",
+        "headings": [
+          {
+            "key": "url",
+            "valueType": "url",
+            "label": "URL"
+          },
+          {
+            "key": "totalBytes",
+            "valueType": "bytes",
+            "label": "Tamaño de la transferencia"
+          },
+          {
+            "key": "wastedMs",
+            "valueType": "timespanMs",
+            "label": "Duración"
+          }
+        ],
+        "items": [
+          {
+            "url": "https://fonts.googleapis.com/css?family=Poppins%3A400%2C500%2C700%2C800&display=swap",
+            "totalBytes": 1140,
+            "wastedMs": 268
+          },
+          {
+            "url": "https://ftp-cdn.mitiendanube.com/forked-files/007/400/935/installations/14828608/static/js/libraries-standalone-59fa5e7833de73d735795f6c8e66eede.js",
+            "totalBytes": 28314
+          },
+          {
+            "url": "https://acdn-us.mitiendanube.com/stores/007/400/935/themes/ipanema/style-critical-c044f4eba86f218b2550935ace3f4999.min.css",
+            "totalBytes": 27791,
+            "wastedMs": 279
+          },
+          {
+            "url": "https://acdn-us.mitiendanube.com/stores/007/400/935/themes/ipanema/style-utilities-c0aecd622274e18a4457353665418961.min.css",
+            "totalBytes": 3948
+          }
+        ]
+      },
+      "image_delivery_sample1": {
+        "type": "table",
+        "headings": [
+          {
+            "key": "node",
+            "valueType": "node",
+            "label": ""
+          },
+          {
+            "key": "url",
+            "valueType": "url",
+            "label": "URL",
+            "subItemsHeading": {
+              "key": "reason",
+              "valueType": "text"
+            }
+          },
+          {
+            "key": "totalBytes",
+            "valueType": "bytes",
+            "label": "Tamaño del recurso"
+          },
+          {
+            "key": "wastedBytes",
+            "valueType": "bytes",
+            "label": "Ahorro estimado",
+            "subItemsHeading": {
+              "key": "wastedBytes",
+              "valueType": "bytes"
+            }
+          }
+        ],
+        "items": [
+          {
+            "node": {
+              "type": "node",
+              "lhId": "page-20-IMG",
+              "path": "1,HTML,1,BODY,7,MAIN,2,SECTION,1,DIV,0,DIV,1,DIV,0,DIV,0,DIV,0,DIV,4,DIV,0,DIV,0,DIV,9,DIV,0,A,0,IMG",
+              "selector": "div.js-product-item-image-container-private > div > a.js-product-item-image-link-private > img.js-product-item-image-private",
+              "boundingRect": {
+                "top": 1563,
+                "bottom": 1910,
+                "left": 501,
+                "right": 849,
+                "width": 347,
+                "height": 347
+              },
+              "snippet": "[redacted]",
+              "nodeLabel": "[redacted]"
+            },
+            "url": "https://acdn-us.mitiendanube.com/stores/007/400/935/products/rhino-tina-tub-air-carrusel-b09ece51431a13db8617887512365509-1024-1024.webp",
+            "totalBytes": 85876,
+            "wastedBytes": 75996,
+            "subItems": {
+              "type": "subitems",
+              "items": [
+                {
+                  "reason": "Este archivo de imagen es más grande de lo necesario (1024x1024) para las dimensiones mostradas (347x347). Usa imágenes adaptables para reducir el tamaño de descarga de la imagen.",
+                  "wastedBytes": 75996
+                }
+              ]
+            }
+          },
+          {
+            "node": {
+              "type": "node",
+              "lhId": "page-21-IMG",
+              "path": "1,HTML,1,BODY,7,MAIN,2,SECTION,1,DIV,0,DIV,1,DIV,0,DIV,0,DIV,0,DIV,0,DIV,0,DIV,0,DIV,9,DIV,0,A,0,IMG",
+              "selector": "div.js-product-item-image-container-private > div > a.js-product-item-image-link-private > img.js-product-item-image-private",
+              "boundingRect": {
+                "top": 1060,
+                "bottom": 1407,
+                "left": 122,
+                "right": 469,
+                "width": 347,
+                "height": 347
+              },
+              "snippet": "[redacted]",
+              "nodeLabel": "[redacted]"
+            },
+            "url": "https://acdn-us.mitiendanube.com/stores/007/400/935/products/kit-botas-de-presoterapia-pro-air-1-2-aefbc830fbd8eb0aca17852047770296-1024-1024.webp",
+            "totalBytes": 66334,
+            "wastedBytes": 58702,
+            "subItems": {
+              "type": "subitems",
+              "items": [
+                {
+                  "reason": "Este archivo de imagen es más grande de lo necesario (1024x1024) para las dimensiones mostradas (347x347). Usa imágenes adaptables para reducir el tamaño de descarga de la imagen.",
+                  "wastedBytes": 58702
+                }
+              ]
+            }
+          },
+          {
+            "node": {
+              "type": "node",
+              "lhId": "page-22-IMG",
+              "path": "1,HTML,1,BODY,7,MAIN,2,SECTION,1,DIV,0,DIV,1,DIV,0,DIV,0,DIV,0,DIV,5,DIV,0,DIV,0,DIV,9,DIV,0,A,0,IMG",
+              "selector": "div.js-product-item-image-container-private > div > a.js-product-item-image-link-private > img.js-product-item-image-private",
+              "boundingRect": {
+                "top": 1563,
+                "bottom": 1910,
+                "left": 881,
+                "right": 1228,
+                "width": 347,
+                "height": 347
+              },
+              "snippet": "[redacted]",
+              "nodeLabel": "[redacted]"
+            },
+            "url": "https://acdn-us.mitiendanube.com/stores/007/400/935/products/kit-botas-presoterapia-pro3-590f8aca4c051d7fa417885600852030-1024-1024.webp",
+            "totalBytes": 59124,
+            "wastedBytes": 52321,
+            "subItems": {
+              "type": "subitems",
+              "items": [
+                {
+                  "reason": "Este archivo de imagen es más grande de lo necesario (1024x1024) para las dimensiones mostradas (347x347). Usa imágenes adaptables para reducir el tamaño de descarga de la imagen.",
+                  "wastedBytes": 52321
+                }
+              ]
+            }
+          },
+          {
+            "node": {
+              "type": "node",
+              "lhId": "page-23-IMG",
+              "path": "1,HTML,1,BODY,7,MAIN,2,SECTION,1,DIV,0,DIV,1,DIV,0,DIV,0,DIV,0,DIV,2,DIV,0,DIV,0,DIV,9,DIV,0,A,0,IMG",
+              "selector": "div.js-product-item-image-container-private > div > a.js-product-item-image-link-private > img.js-product-item-image-private",
+              "boundingRect": {
+                "top": 1060,
+                "bottom": 1407,
+                "left": 881,
+                "right": 1228,
+                "width": 347,
+                "height": 347
+              },
+              "snippet": "[redacted]",
+              "nodeLabel": "[redacted]"
+            },
+            "url": "https://acdn-us.mitiendanube.com/stores/007/400/935/products/kit-botas-brazos-presoterapia-pro3-a3d13e4ef14f06367c17885602094186-1024-1024.webp",
+            "totalBytes": 56800,
+            "wastedBytes": 50265,
+            "subItems": {
+              "type": "subitems",
+              "items": [
+                {
+                  "reason": "Este archivo de imagen es más grande de lo necesario (1024x1024) para las dimensiones mostradas (347x347). Usa imágenes adaptables para reducir el tamaño de descarga de la imagen.",
+                  "wastedBytes": 50265
+                }
+              ]
+            }
+          },
+          {
+            "node": {
+              "type": "node",
+              "lhId": "page-24-IMG",
+              "path": "1,HTML,1,BODY,7,MAIN,3,SECTION,1,SECTION,0,DIV,1,DIV,0,DIV,0,DIV,0,DIV,0,DIV,1,DIV,0,DIV,0,DIV,0,A,0,IMG",
+              "selector": "div.main-product-right-top > div.js-sectionfy-description-card-body > a.main-product-image-link > img.main-product-boots-img",
+              "boundingRect": {
+                "top": 2357,
+                "bottom": 2730,
+                "left": 676,
+                "right": 1228,
+                "width": 552,
+                "height": 372
+              },
+              "snippet": "[redacted]",
+              "nodeLabel": "[redacted]"
+            },
+            "url": "https://pub-ddef691408694c12881f433a7ae94d95.r2.dev/stores/cmqfmfvoe0010srt5j2d6otew/media/f7666559-7e32-4c62-822e-0678f949b7c4/103ca7c1-19ca-4379-85ee-42089bbf8a88.webp",
+            "totalBytes": 54166,
+            "wastedBytes": 43770,
+            "subItems": {
+              "type": "subitems",
+              "items": [
+                {
+                  "reason": "Este archivo de imagen es más grande de lo necesario (1260x850) para las dimensiones mostradas (552x372). Usa imágenes adaptables para reducir el tamaño de descarga de la imagen.",
+                  "wastedBytes": 43770
+                }
+              ]
+            }
+          },
+          {
+            "node": {
+              "type": "node",
+              "lhId": "page-25-IMG",
+              "path": "1,HTML,1,BODY,7,MAIN,2,SECTION,1,DIV,0,DIV,1,DIV,0,DIV,0,DIV,0,DIV,1,DIV,0,DIV,0,DIV,9,DIV,0,A,0,IMG",
+              "selector": "div.js-product-item-image-container-private > div > a.js-product-item-image-link-private > img.js-product-item-image-private",
+              "boundingRect": {
+                "top": 1060,
+                "bottom": 1407,
+                "left": 501,
+                "right": 849,
+                "width": 347,
+                "height": 347
+              },
+              "snippet": "[redacted]",
+              "nodeLabel": "[redacted]"
+            },
+            "url": "https://acdn-us.mitiendanube.com/stores/007/400/935/products/rhino-gun-pro-carrusel-8194d1019bbddb842517887497698642-1024-1024.webp",
+            "totalBytes": 21578,
+            "wastedBytes": 19095,
+            "subItems": {
+              "type": "subitems",
+              "items": [
+                {
+                  "reason": "Este archivo de imagen es más grande de lo necesario (1024x1024) para las dimensiones mostradas (347x347). Usa imágenes adaptables para reducir el tamaño de descarga de la imagen.",
+                  "wastedBytes": 19095
+                }
+              ]
+            }
+          },
+          {
+            "node": {
+              "type": "node",
+              "lhId": "page-15-IMG",
+              "path": "1,HTML,1,BODY,7,MAIN,2,SECTION,1,DIV,0,DIV,1,DIV,0,DIV,0,DIV,0,DIV,3,DIV,0,DIV,0,DIV,9,DIV,0,A,0,IMG",
+              "selector": "div.js-product-item-image-container-private > div > a.js-product-item-image-link-private > img.js-product-item-image-private",
+              "boundingRect": {
+                "top": 1563,
+                "bottom": 1910,
+                "left": 122,
+                "right": 469,
+                "width": 347,
+                "height": 347
+              },
+              "snippet": "[redacted]",
+              "nodeLabel": "[redacted]"
+            },
+            "url": "https://acdn-us.mitiendanube.com/stores/007/400/935/products/rhino-gun-air-carrusel-706469bdc49690a1f417887432053357-1024-1024.webp",
+            "totalBytes": 20224,
+            "wastedBytes": 17897,
+            "subItems": {
+              "type": "subitems",
+              "items": [
+                {
+                  "reason": "Este archivo de imagen es más grande de lo necesario (1024x1024) para las dimensiones mostradas (347x347). Usa imágenes adaptables para reducir el tamaño de descarga de la imagen.",
+                  "wastedBytes": 17897
+                }
+              ]
+            }
+          },
+          {
+            "node": {
+              "type": "node",
+              "lhId": "page-26-IMG",
+              "path": "1,HTML,1,BODY,4,HEADER,2,SECTION,0,DIV,0,DIV,0,DIV,0,DIV,0,A,1,PICTURE,2,IMG",
+              "selector": "div#logo > a > picture > img.logo-img",
+              "boundingRect": {
+                "top": 48,
+                "bottom": 98,
+                "left": 121,
+                "right": 281,
+                "width": 160,
+                "height": 50
+              },
+              "snippet": "[redacted]",
+              "nodeLabel": "[redacted]"
+            },
+            "url": "https://acdn-us.mitiendanube.com/stores/007/400/935/media/ab2bae28-logo-907077932689793243-1776182785-34dcf83471458f3155c38cfd64058ea61776182785/avif/1400.avif",
+            "totalBytes": 13337,
+            "wastedBytes": 13162,
+            "subItems": {
+              "type": "subitems",
+              "items": [
+                {
+                  "reason": "Este archivo de imagen es más grande de lo necesario (1400x436) para las dimensiones mostradas (160x50). Usa imágenes adaptables para reducir el tamaño de descarga de la imagen.",
+                  "wastedBytes": 13162
+                }
+              ]
+            }
+          },
+          {
+            "node": {
+              "type": "node",
+              "lhId": "page-27-IMG",
+              "path": "1,HTML,1,BODY,7,MAIN,4,SECTION,1,SECTION,0,DIV,0,DIV,0,DIV,1,DIV,1,DIV,0,DIV,6,ARTICLE,1,DIV,0,IMG",
+              "selector": "div.hgr-carousel__track > article.hgr-carousel__card > div.hgr-carousel__card-head > img.hgr-carousel__avatar",
+              "boundingRect": {
+                "top": 3100,
+                "bottom": 3140,
+                "left": 2014,
+                "right": 2054,
+                "width": 40,
+                "height": 40
+              },
+              "snippet": "[redacted]",
+              "nodeLabel": "[redacted]"
+            },
+            "url": "https://lh3.googleusercontent.com/a-/ALV-UjX-cDeGIJdtUL9xD_J_73rTRg3ch9uoWE5oK0A78NYUoQD3Q8na=s64-c-rp-mo-br100",
+            "totalBytes": 10234,
+            "wastedBytes": 9967,
+            "subItems": {
+              "type": "subitems",
+              "items": [
+                {
+                  "reason": "Usar un formato de imagen moderno (WebP, AVIF) o aumentar la compresión de la imagen podría mejorar el tamaño de descarga de esta imagen",
+                  "wastedBytes": 9551
+                },
+                {
+                  "reason": "Este archivo de imagen es más grande de lo necesario (64x64) para las dimensiones mostradas (40x40). Usa imágenes adaptables para reducir el tamaño de descarga de la imagen.",
+                  "wastedBytes": 6236
+                }
+              ]
+            }
+          },
+          {
+            "node": {
+              "type": "node",
+              "lhId": "page-28-IMG",
+              "path": "1,HTML,1,BODY,7,MAIN,4,SECTION,1,SECTION,0,DIV,0,DIV,0,DIV,1,DIV,1,DIV,0,DIV,9,ARTICLE,1,DIV,0,IMG",
+              "selector": "div.hgr-carousel__track > article.hgr-carousel__card > div.hgr-carousel__card-head > img.hgr-carousel__avatar",
+              "boundingRect": {
+                "top": 3100,
+                "bottom": 3140,
+                "left": 2805,
+                "right": 2845,
+                "width": 40,
+                "height": 40
+              },
+              "snippet": "[redacted]",
+              "nodeLabel": "[redacted]"
+            },
+            "url": "https://lh3.googleusercontent.com/a-/ALV-UjWJcNuU0WUpXzDUBtlP0M5d60BrEwUjGhiyLBjzSRyXfK9vk63X=s64-c-rp-mo-br100",
+            "totalBytes": 9711,
+            "wastedBytes": 9444,
+            "subItems": {
+              "type": "subitems",
+              "items": [
+                {
+                  "reason": "Usar un formato de imagen moderno (WebP, AVIF) o aumentar la compresión de la imagen podría mejorar el tamaño de descarga de esta imagen",
+                  "wastedBytes": 9028
+                },
+                {
+                  "reason": "Este archivo de imagen es más grande de lo necesario (64x64) para las dimensiones mostradas (40x40). Usa imágenes adaptables para reducir el tamaño de descarga de la imagen.",
+                  "wastedBytes": 5918
+                }
+              ]
+            }
+          },
+          {
+            "node": {
+              "type": "node",
+              "lhId": "page-29-IMG",
+              "path": "1,HTML,1,BODY,7,MAIN,4,SECTION,1,SECTION,0,DIV,0,DIV,0,DIV,1,DIV,1,DIV,0,DIV,7,ARTICLE,1,DIV,0,IMG",
+              "selector": "div.hgr-carousel__track > article.hgr-carousel__card > div.hgr-carousel__card-head > img.hgr-carousel__avatar",
+              "boundingRect": {
+                "top": 3106,
+                "bottom": 3146,
+                "left": 2278,
+                "right": 2318,
+                "width": 40,
+                "height": 40
+              },
+              "snippet": "[redacted]",
+              "nodeLabel": "[redacted]"
+            },
+            "url": "https://lh3.googleusercontent.com/a-/ALV-UjXmmzLsAEyu_6YDd9upWUE0SHOcd9yx1gZKdzUQmqaw3oZ2k00=s64-c-rp-mo-br100",
+            "totalBytes": 8573,
+            "wastedBytes": 8306,
+            "subItems": {
+              "type": "subitems",
+              "items": [
+                {
+                  "reason": "Usar un formato de imagen moderno (WebP, AVIF) o aumentar la compresión de la imagen podría mejorar el tamaño de descarga de esta imagen",
+                  "wastedBytes": 7890
+                },
+                {
+                  "reason": "Este archivo de imagen es más grande de lo necesario (64x64) para las dimensiones mostradas (40x40). Usa imágenes adaptables para reducir el tamaño de descarga de la imagen.",
+                  "wastedBytes": 5224
+                }
+              ]
+            }
+          },
+          {
+            "node": {
+              "type": "node",
+              "lhId": "page-30-IMG",
+              "path": "1,HTML,1,BODY,7,MAIN,4,SECTION,1,SECTION,0,DIV,0,DIV,0,DIV,1,DIV,1,DIV,0,DIV,3,ARTICLE,1,DIV,0,IMG",
+              "selector": "div.hgr-carousel__track > article.hgr-carousel__card > div.hgr-carousel__card-head > img.hgr-carousel__avatar",
+              "boundingRect": {
+                "top": 3106,
+                "bottom": 3146,
+                "left": 1223,
+                "right": 1263,
+                "width": 40,
+                "height": 40
+              },
+              "snippet": "[redacted]",
+              "nodeLabel": "[redacted]"
+            },
+            "url": "https://lh3.googleusercontent.com/a-/ALV-UjUaiAQ_8wH3gO7qTWaT8eovQlyc9qOIBdTjyZmmnQNkciMOLWHCmw=s64-c-rp-mo-br100",
+            "totalBytes": 7173,
+            "wastedBytes": 6906,
+            "subItems": {
+              "type": "subitems",
+              "items": [
+                {
+                  "reason": "Usar un formato de imagen moderno (WebP, AVIF) o aumentar la compresión de la imagen podría mejorar el tamaño de descarga de esta imagen",
+                  "wastedBytes": 6490
+                },
+                {
+                  "reason": "Este archivo de imagen es más grande de lo necesario (64x64) para las dimensiones mostradas (40x40). Usa imágenes adaptables para reducir el tamaño de descarga de la imagen.",
+                  "wastedBytes": 4371
+                }
+              ]
+            }
+          },
+          {
+            "node": {
+              "type": "node",
+              "lhId": "page-31-IMG",
+              "path": "1,HTML,1,BODY,7,MAIN,4,SECTION,1,SECTION,0,DIV,0,DIV,0,DIV,1,DIV,1,DIV,0,DIV,0,ARTICLE,1,DIV,0,IMG",
+              "selector": "div.hgr-carousel__track > article.hgr-carousel__card > div.hgr-carousel__card-head > img.hgr-carousel__avatar",
+              "boundingRect": {
+                "top": 3106,
+                "bottom": 3146,
+                "left": 432,
+                "right": 472,
+                "width": 40,
+                "height": 40
+              },
+              "snippet": "[redacted]",
+              "nodeLabel": "[redacted]"
+            },
+            "url": "https://lh3.googleusercontent.com/a-/ALV-UjVV_-bEWzBoomZL3HLILLc0p4CvcsqBq6aGCg8qGerVKOWafKwF=s64-c-rp-mo-br100",
+            "totalBytes": 6492,
+            "wastedBytes": 6225,
+            "subItems": {
+              "type": "subitems",
+              "items": [
+                {
+                  "reason": "Usar un formato de imagen moderno (WebP, AVIF) o aumentar la compresión de la imagen podría mejorar el tamaño de descarga de esta imagen",
+                  "wastedBytes": 5809
+                }
+              ]
+            }
+          }
+        ],
+        "debugData": {
+          "type": "debugdata",
+          "wastedBytes": 372056
+        }
+      },
+      "third_parties_sample1": [
+        {
+          "entity": "Google Tag Manager",
+          "transfer_bytes": 321879,
+          "main_thread_ms": 237.50099999830127
+        },
+        {
+          "entity": "Facebook",
+          "transfer_bytes": 216742,
+          "main_thread_ms": 178.39800000563264
+        },
+        {
+          "entity": "mitiendanube.com",
+          "transfer_bytes": 611339,
+          "main_thread_ms": 152.63799998536706
+        },
+        {
+          "entity": "TikTok",
+          "transfer_bytes": 173352,
+          "main_thread_ms": 101.96400000154972
+        },
+        {
+          "entity": "tiendanube.com",
+          "transfer_bytes": 129835,
+          "main_thread_ms": 98.47999999672174
+        },
+        {
+          "entity": "Clarity",
+          "transfer_bytes": 27736,
+          "main_thread_ms": 56.95899999886751
+        },
+        {
+          "entity": "openai.com",
+          "transfer_bytes": 37241,
+          "main_thread_ms": 51.71500000357628
+        },
+        {
+          "entity": "YouTube",
+          "transfer_bytes": 40430,
+          "main_thread_ms": 23.702000003308058
+        },
+        {
+          "entity": "Cloudflare",
+          "transfer_bytes": 10478,
+          "main_thread_ms": 10.407000035047531
+        },
+        {
+          "entity": "Google/Doubleclick Ads",
+          "transfer_bytes": 6239,
+          "main_thread_ms": 2.321000002324581
+        },
+        {
+          "entity": "Google Fonts",
+          "transfer_bytes": 32552,
+          "main_thread_ms": 0.1469999998807907
+        },
+        {
+          "entity": "Other Google APIs/SDKs",
+          "transfer_bytes": 56035,
+          "main_thread_ms": 0
+        },
+        {
+          "entity": "abejita.co",
+          "transfer_bytes": 4092,
+          "main_thread_ms": 0
+        },
+        {
+          "entity": "bbeboy.store",
+          "transfer_bytes": 10131,
+          "main_thread_ms": 0
+        },
+        {
+          "entity": "r2.dev",
+          "transfer_bytes": 208208,
+          "main_thread_ms": 0
+        },
+        {
+          "entity": "google.com.mx",
+          "transfer_bytes": 689,
+          "main_thread_ms": 0
+        }
+      ],
+      "evidence": "reports/runs/rhino-performance/20261110T210107-performance-5cb77e07/performance.json"
+    },
+    {
+      "page": "category",
+      "device": "mobile",
+      "url": "https://rhino-performance.com/presoterapia/",
+      "profile": {
+        "source": "lighthouse_local",
+        "url": "https://rhino-performance.com/presoterapia/",
+        "final_url": "https://rhino-performance.com/presoterapia/",
+        "device": "mobile",
+        "categories": [
+          "performance",
+          "accessibility",
+          "best-practices",
+          "seo"
+        ],
+        "locale": "es",
+        "lighthouse_version": "13.6.0",
+        "chrome_version": "155.0.8059.84",
+        "screen": {
+          "mobile": true,
+          "width": 412,
+          "height": 823,
+          "deviceScaleFactor": 1.75,
+          "disabled": false
+        },
+        "throttling_method": "simulate",
+        "throttling": {
+          "rttMs": 150,
+          "throughputKbps": 1638.4,
+          "requestLatencyMs": 562.5,
+          "downloadThroughputKbps": 1474.56,
+          "uploadThroughputKbps": 675,
+          "cpuSlowdownMultiplier": 4
+        },
+        "cache": false,
+        "network_policy": "guarded-read-only"
+      },
+      "sample_count": 3,
+      "score_medians": {
+        "performance": 0.67,
+        "accessibility": 1.0,
+        "best-practices": 0.77,
+        "seo": 1.0
+      },
+      "metrics": {
+        "lcp": 3073.6360000000004,
+        "fcp": 1271.799,
+        "cls": 0.027016537524098626,
+        "tbt": 1543.724000000001,
+        "speed_index": 3074.875975961576
+      },
+      "statistics": {
+        "lcp": {
+          "median": 3073.6360000000004,
+          "min": 2579.2249999999995,
+          "max": 3228.8530000000005,
+          "available_samples": 3
+        },
+        "fcp": {
+          "median": 1271.799,
+          "min": 1244.583,
+          "max": 1282.9449999999997,
+          "available_samples": 3
+        },
+        "cls": {
+          "median": 0.027016537524098626,
+          "min": 0.02679823734251874,
+          "max": 0.027016537524098626,
+          "available_samples": 3
+        },
+        "tbt": {
+          "median": 1543.724000000001,
+          "min": 1153.0,
+          "max": 1682.8745000000008,
+          "available_samples": 3
+        },
+        "speed_index": {
+          "median": 3074.875975961576,
+          "min": 3048.4605708278104,
+          "max": 3106.3198100991317,
+          "available_samples": 3
+        }
+      },
+      "samples": [
+        {
+          "at": "2026-11-10T21:01:21.057Z",
+          "metrics": {
+            "lcp": 3073.6360000000004,
+            "fcp": 1271.799,
+            "cls": 0.027016537524098626,
+            "tbt": 1543.724000000001,
+            "speed_index": 3074.875975961576
+          },
+          "scores": {
+            "performance": 0.67,
+            "accessibility": 1.0,
+            "best-practices": 0.77,
+            "seo": 1.0
+          }
+        },
+        {
+          "at": "2026-11-10T21:01:35.295Z",
+          "metrics": {
+            "lcp": 2579.2249999999995,
+            "fcp": 1282.9449999999997,
+            "cls": 0.02679823734251874,
+            "tbt": 1153.0,
+            "speed_index": 3106.3198100991317
+          },
+          "scores": {
+            "performance": 0.73,
+            "accessibility": 1.0,
+            "best-practices": 0.77,
+            "seo": 1.0
+          }
+        },
+        {
+          "at": "2026-11-10T21:01:49.902Z",
+          "metrics": {
+            "lcp": 3228.8530000000005,
+            "fcp": 1244.583,
+            "cls": 0.027016537524098626,
+            "tbt": 1682.8745000000008,
+            "speed_index": 3048.4605708278104
+          },
+          "scores": {
+            "performance": 0.66,
+            "accessibility": 1.0,
+            "best-practices": 0.77,
+            "seo": 1.0
+          }
+        }
+      ],
+      "before_metrics": {
+        "lcp": 3131.7289999999994,
+        "fcp": 1244.732,
+        "cls": 0.02679823734251874,
+        "tbt": 2097.04375,
+        "speed_index": 2893.8055257781753
+      },
+      "before_evidence": "reports/runs/rhino-performance/20261110T193933-performance-ba57f53e/performance.json",
+      "comparison": {
+        "status": "compared",
+        "delta_after_minus_before": {
+          "lcp": -58.09299999999894,
+          "fcp": 27.067000000000007,
+          "cls": 0.0002183001815798842,
+          "tbt": -553.3197499999987,
+          "speed_index": 181.07045018340068
+        },
+        "regressions": [
+          "fcp",
+          "cls",
+          "speed_index"
+        ],
+        "causality_confirmed": false
+      },
+      "diagnostics_sample1": {
+        "render-blocking-insight": {
+          "displayValue": "Ahorro estimado de 1020 ms",
+          "numericValue": 1020
+        },
+        "image-delivery-insight": {
+          "displayValue": "Ahorro estimado de 22 KiB",
+          "numericValue": 22066
+        },
+        "unused-javascript": {
+          "displayValue": "Ahorro estimado de 407 KiB",
+          "numericValue": 0
+        },
+        "unused-css-rules": {
+          "displayValue": "Ahorro estimado de 18 KiB",
+          "numericValue": 0
+        },
+        "mainthread-work-breakdown": {
+          "displayValue": "5,2 s",
+          "numericValue": 5243.211999999724
+        },
+        "total-byte-weight": {
+          "displayValue": "Tamaño total: 1865 KiB",
+          "numericValue": 1910080
+        }
+      },
+      "lcp_selector": [
+        "div.js-product-item-image-container-private > div > a.js-product-item-image-link-private > img.image-priority-high"
+      ],
+      "lcp_discovery_sample1": {
+        "type": "list",
+        "items": [
+          {
+            "type": "checklist",
+            "items": {
+              "priorityHinted": {
+                "label": "fetchpriority=high applied",
+                "value": true
+              },
+              "requestDiscoverable": {
+                "label": "La solicitud es visible en el documento inicial",
+                "value": true
+              },
+              "eagerlyLoaded": {
+                "label": "Los recursos de LCP no deben usar loading=lazy",
+                "value": true
+              }
+            }
+          },
+          {
+            "type": "node",
+            "lhId": "page-0-IMG",
+            "path": "1,HTML,1,BODY,7,MAIN,2,SECTION,1,DIV,0,DIV,0,DIV,0,DIV,0,DIV,0,DIV,0,DIV,9,DIV,0,A,0,IMG",
+            "selector": "div.js-product-item-image-container-private > div > a.js-product-item-image-link-private > img.image-priority-high",
+            "boundingRect": {
+              "top": 293,
+              "bottom": 475,
+              "left": 17,
+              "right": 199,
+              "width": 182,
+              "height": 182
+            },
+            "snippet": "[redacted]",
+            "nodeLabel": "[redacted]"
+          }
+        ]
+      },
+      "render_blocking_sample1": {
+        "type": "table",
+        "headings": [
+          {
+            "key": "url",
+            "valueType": "url",
+            "label": "URL"
+          },
+          {
+            "key": "totalBytes",
+            "valueType": "bytes",
+            "label": "Tamaño de la transferencia"
+          },
+          {
+            "key": "wastedMs",
+            "valueType": "timespanMs",
+            "label": "Duración"
+          }
+        ],
+        "items": [
+          {
+            "url": "https://fonts.googleapis.com/css?family=Poppins%3A400%2C500%2C700%2C800&display=swap",
+            "totalBytes": 1031,
+            "wastedMs": 832
+          },
+          {
+            "url": "https://ftp-cdn.mitiendanube.com/forked-files/007/400/935/installations/14828608/static/js/libraries-standalone-59fa5e7833de73d735795f6c8e66eede.js",
+            "totalBytes": 28314
+          },
+          {
+            "url": "https://acdn-us.mitiendanube.com/stores/007/400/935/themes/ipanema/style-utilities-c0aecd622274e18a4457353665418961.min.css",
+            "totalBytes": 3721,
+            "wastedMs": 163
+          },
+          {
+            "url": "https://acdn-us.mitiendanube.com/stores/007/400/935/themes/ipanema/style-critical-c044f4eba86f218b2550935ace3f4999.min.css",
+            "totalBytes": 28017,
+            "wastedMs": 967
+          }
+        ]
+      },
+      "image_delivery_sample1": {
+        "type": "table",
+        "headings": [
+          {
+            "key": "node",
+            "valueType": "node",
+            "label": ""
+          },
+          {
+            "key": "url",
+            "valueType": "url",
+            "label": "URL",
+            "subItemsHeading": {
+              "key": "reason",
+              "valueType": "text"
+            }
+          },
+          {
+            "key": "totalBytes",
+            "valueType": "bytes",
+            "label": "Tamaño del recurso"
+          },
+          {
+            "key": "wastedBytes",
+            "valueType": "bytes",
+            "label": "Ahorro estimado",
+            "subItemsHeading": {
+              "key": "wastedBytes",
+              "valueType": "bytes"
+            }
+          }
+        ],
+        "items": [
+          {
+            "node": {
+              "type": "node",
+              "lhId": "page-13-IMG",
+              "path": "1,HTML,1,BODY,8,FOOTER,2,DIV,1,DIV,0,DIV,3,SECTION,3,DIV,1,DIV,2,IMG",
+              "selector": "section.footer-rhino-column > div.footer-rhino-payments > div.footer-rhino-payment-logos > img.icon-logo",
+              "boundingRect": {
+                "top": 1310,
+                "bottom": 1335,
+                "left": 186,
+                "right": 226,
+                "width": 40,
+                "height": 25
+              },
+              "snippet": "[redacted]",
+              "nodeLabel": "[redacted]"
+            },
+            "url": "https://d26lpennugtm8s.cloudfront.net/assets/common/img/logos/payment/new_logos_payment/amex@2x.png",
+            "totalBytes": 9620,
+            "wastedBytes": 9114,
+            "subItems": {
+              "type": "subitems",
+              "items": [
+                {
+                  "reason": "Usar un formato de imagen moderno (WebP, AVIF) o aumentar la compresión de la imagen podría mejorar el tamaño de descarga de esta imagen",
+                  "wastedBytes": 7295
+                },
+                {
+                  "reason": "Este archivo de imagen es más grande de lo necesario (150x93) para las dimensiones mostradas (70x43). Usa imágenes adaptables para reducir el tamaño de descarga de la imagen.",
+                  "wastedBytes": 7525
+                }
+              ]
+            }
+          },
+          {
+            "node": {
+              "type": "node",
+              "lhId": "page-14-IMG",
+              "path": "1,HTML,1,BODY,8,FOOTER,2,DIV,1,DIV,0,DIV,3,SECTION,3,DIV,1,DIV,3,IMG",
+              "selector": "section.footer-rhino-column > div.footer-rhino-payments > div.footer-rhino-payment-logos > img.icon-logo",
+              "boundingRect": {
+                "top": 1310,
+                "bottom": 1335,
+                "left": 233,
+                "right": 273,
+                "width": 40,
+                "height": 25
+              },
+              "snippet": "[redacted]",
+              "nodeLabel": "[redacted]"
+            },
+            "url": "https://d26lpennugtm8s.cloudfront.net/assets/common/img/logos/payment/new_logos_payment/mx/oxxo@2x.png",
+            "totalBytes": 7666,
+            "wastedBytes": 7160,
+            "subItems": {
+              "type": "subitems",
+              "items": [
+                {
+                  "reason": "Usar un formato de imagen moderno (WebP, AVIF) o aumentar la compresión de la imagen podría mejorar el tamaño de descarga de esta imagen",
+                  "wastedBytes": 5341
+                },
+                {
+                  "reason": "Este archivo de imagen es más grande de lo necesario (150x93) para las dimensiones mostradas (70x43). Usa imágenes adaptables para reducir el tamaño de descarga de la imagen.",
+                  "wastedBytes": 5997
+                }
+              ]
+            }
+          },
+          {
+            "node": {
+              "type": "node",
+              "lhId": "page-15-IMG",
+              "path": "1,HTML,1,BODY,8,FOOTER,2,DIV,1,DIV,0,DIV,3,SECTION,3,DIV,1,DIV,5,IMG",
+              "selector": "section.footer-rhino-column > div.footer-rhino-payments > div.footer-rhino-payment-logos > img.icon-logo",
+              "boundingRect": {
+                "top": 1342,
+                "bottom": 1367,
+                "left": 92,
+                "right": 132,
+                "width": 40,
+                "height": 25
+              },
+              "snippet": "[redacted]",
+              "nodeLabel": "[redacted]"
+            },
+            "url": "https://d26lpennugtm8s.cloudfront.net/assets/common/img/logos/payment/new_logos_payment/visadebit@2x.png",
+            "totalBytes": 6298,
+            "wastedBytes": 5792,
+            "subItems": {
+              "type": "subitems",
+              "items": [
+                {
+                  "reason": "Este archivo de imagen es más grande de lo necesario (150x93) para las dimensiones mostradas (70x43). Usa imágenes adaptables para reducir el tamaño de descarga de la imagen.",
+                  "wastedBytes": 4927
+                }
+              ]
+            }
+          }
+        ],
+        "debugData": {
+          "type": "debugdata",
+          "wastedBytes": 22066
+        }
+      },
+      "third_parties_sample1": [
+        {
+          "entity": "Google Tag Manager",
+          "transfer_bytes": 321866,
+          "main_thread_ms": 160.50400001183152
+        },
+        {
+          "entity": "Facebook",
+          "transfer_bytes": 216710,
+          "main_thread_ms": 122.71800001338124
+        },
+        {
+          "entity": "mitiendanube.com",
+          "transfer_bytes": 312104,
+          "main_thread_ms": 97.06000005453825
+        },
+        {
+          "entity": "TikTok",
+          "transfer_bytes": 172794,
+          "main_thread_ms": 96.74399999529123
+        },
+        {
+          "entity": "tiendanube.com",
+          "transfer_bytes": 129837,
+          "main_thread_ms": 56.77499998360872
+        },
+        {
+          "entity": "Clarity",
+          "transfer_bytes": 27736,
+          "main_thread_ms": 56.07900000363588
+        },
+        {
+          "entity": "openai.com",
+          "transfer_bytes": 37243,
+          "main_thread_ms": 23.001000002026558
+        },
+        {
+          "entity": "Cloudflare",
+          "transfer_bytes": 10478,
+          "main_thread_ms": 6.591000024229288
+        },
+        {
+          "entity": "Google/Doubleclick Ads",
+          "transfer_bytes": 6346,
+          "main_thread_ms": 2.848000008612871
+        },
+        {
+          "entity": "Google Fonts",
+          "transfer_bytes": 24676,
+          "main_thread_ms": 0.19500000029802322
+        },
+        {
+          "entity": "cloudfront.net",
+          "transfer_bytes": 42364,
+          "main_thread_ms": 0
+        },
+        {
+          "entity": "Other Google APIs/SDKs",
+          "transfer_bytes": 382,
+          "main_thread_ms": 0
+        },
+        {
+          "entity": "google.com.mx",
+          "transfer_bytes": 689,
+          "main_thread_ms": 0
+        }
+      ],
+      "evidence": "reports/runs/rhino-performance/20261110T210203-performance-ae5d6c14/performance.json"
+    },
+    {
+      "page": "product",
+      "device": "mobile",
+      "url": "https://rhino-performance.com/productos/botas-presoterapia-inalambricas-pro-air/",
+      "profile": {
+        "source": "lighthouse_local",
+        "url": "https://rhino-performance.com/productos/botas-presoterapia-inalambricas-pro-air/",
+        "final_url": "https://rhino-performance.com/productos/botas-presoterapia-inalambricas-pro-air/",
+        "device": "mobile",
+        "categories": [
+          "performance",
+          "accessibility",
+          "best-practices",
+          "seo"
+        ],
+        "locale": "es",
+        "lighthouse_version": "13.6.0",
+        "chrome_version": "155.0.8059.84",
+        "screen": {
+          "mobile": true,
+          "width": 412,
+          "height": 823,
+          "deviceScaleFactor": 1.75,
+          "disabled": false
+        },
+        "throttling_method": "simulate",
+        "throttling": {
+          "rttMs": 150,
+          "throughputKbps": 1638.4,
+          "requestLatencyMs": 562.5,
+          "downloadThroughputKbps": 1474.56,
+          "uploadThroughputKbps": 675,
+          "cpuSlowdownMultiplier": 4
+        },
+        "cache": false,
+        "network_policy": "guarded-read-only"
+      },
+      "sample_count": 3,
+      "score_medians": {
+        "performance": 0.63,
+        "accessibility": 1.0,
+        "best-practices": 0.77,
+        "seo": 0.92
+      },
+      "metrics": {
+        "lcp": 3562.693,
+        "fcp": 1532.4210000000003,
+        "cls": 0.0,
+        "tbt": 2016.9224999999997,
+        "speed_index": 3510.2153467393805
+      },
+      "statistics": {
+        "lcp": {
+          "median": 3562.693,
+          "min": 3247.8999999999996,
+          "max": 3591.274,
+          "available_samples": 3
+        },
+        "fcp": {
+          "median": 1532.4210000000003,
+          "min": 1495.291,
+          "max": 1628.6970000000001,
+          "available_samples": 3
+        },
+        "cls": {
+          "median": 0.0,
+          "min": 0.0,
+          "max": 0.02304121394907441,
+          "available_samples": 3
+        },
+        "tbt": {
+          "median": 2016.9224999999997,
+          "min": 1538.0805,
+          "max": 2081.1897500000023,
+          "available_samples": 3
+        },
+        "speed_index": {
+          "median": 3510.2153467393805,
+          "min": 3211.873225720803,
+          "max": 3531.770150794834,
+          "available_samples": 3
+        }
+      },
+      "samples": [
+        {
+          "at": "2026-11-10T21:02:15.798Z",
+          "metrics": {
+            "lcp": 3562.693,
+            "fcp": 1628.6970000000001,
+            "cls": 0.0,
+            "tbt": 1538.0805,
+            "speed_index": 3531.770150794834
+          },
+          "scores": {
+            "performance": 0.63,
+            "accessibility": 1.0,
+            "best-practices": 0.77,
+            "seo": 0.92
+          }
+        },
+        {
+          "at": "2026-11-10T21:02:31.439Z",
+          "metrics": {
+            "lcp": 3591.274,
+            "fcp": 1495.291,
+            "cls": 0.02304121394907441,
+            "tbt": 2081.1897500000023,
+            "speed_index": 3510.2153467393805
+          },
+          "scores": {
+            "performance": 0.61,
+            "accessibility": 1.0,
+            "best-practices": 0.77,
+            "seo": 0.92
+          }
+        },
+        {
+          "at": "2026-11-10T21:02:52.459Z",
+          "metrics": {
+            "lcp": 3247.8999999999996,
+            "fcp": 1532.4210000000003,
+            "cls": 0.0,
+            "tbt": 2016.9224999999997,
+            "speed_index": 3211.873225720803
+          },
+          "scores": {
+            "performance": 0.64,
+            "accessibility": 1.0,
+            "best-practices": 0.77,
+            "seo": 0.92
+          }
+        }
+      ],
+      "before_metrics": {
+        "lcp": 3786.4580000000005,
+        "fcp": 1625.079,
+        "cls": 0.0,
+        "tbt": 1791.5914999999986,
+        "speed_index": 3690.0812350239385
+      },
+      "before_evidence": "reports/runs/rhino-performance/20261110T194137-performance-e5ae6010/performance.json",
+      "comparison": {
+        "status": "compared",
+        "delta_after_minus_before": {
+          "lcp": -223.76500000000033,
+          "fcp": -92.65799999999967,
+          "cls": 0.0,
+          "tbt": 225.33100000000104,
+          "speed_index": -179.86588828455797
+        },
+        "regressions": [
+          "tbt"
+        ],
+        "causality_confirmed": false
+      },
+      "diagnostics_sample1": {
+        "render-blocking-insight": {
+          "displayValue": "Ahorro estimado de 920 ms",
+          "numericValue": 917
+        },
+        "image-delivery-insight": {
+          "displayValue": "Ahorro estimado de 39 KiB",
+          "numericValue": 39524
+        },
+        "unused-javascript": {
+          "displayValue": "Ahorro estimado de 381 KiB",
+          "numericValue": 160
+        },
+        "unused-css-rules": {
+          "displayValue": "",
+          "numericValue": 0
+        },
+        "mainthread-work-breakdown": {
+          "displayValue": "6,5 s",
+          "numericValue": 6468.615999999703
+        },
+        "total-byte-weight": {
+          "displayValue": "Tamaño total: 1956 KiB",
+          "numericValue": 2002551
+        }
+      },
+      "lcp_selector": [
+        "div.swiper-wrapper > div.js-product-slide > a.js-product-slide-link > img.image-priority-high"
+      ],
+      "lcp_discovery_sample1": {
+        "type": "list",
+        "items": [
+          {
+            "type": "checklist",
+            "items": {
+              "priorityHinted": {
+                "label": "fetchpriority=high applied",
+                "value": true
+              },
+              "requestDiscoverable": {
+                "label": "La solicitud es visible en el documento inicial",
+                "value": true
+              },
+              "eagerlyLoaded": {
+                "label": "Los recursos de LCP no deben usar loading=lazy",
+                "value": true
+              }
+            }
+          },
+          {
+            "type": "node",
+            "lhId": "page-0-IMG",
+            "path": "1,HTML,1,BODY,7,MAIN,0,SECTION,1,SECTION,0,DIV,0,DIV,0,DIV,0,DIV,12,DIV,0,DIV,0,DIV,0,A,0,IMG",
+            "selector": "div.swiper-wrapper > div.js-product-slide > a.js-product-slide-link > img.image-priority-high",
+            "boundingRect": {
+              "top": 162,
+              "bottom": 534,
+              "left": 20,
+              "right": 392,
+              "width": 372,
+              "height": 372
+            },
+            "snippet": "[redacted]",
+            "nodeLabel": "[redacted]"
+          }
+        ]
+      },
+      "render_blocking_sample1": {
+        "type": "table",
+        "headings": [
+          {
+            "key": "url",
+            "valueType": "url",
+            "label": "URL"
+          },
+          {
+            "key": "totalBytes",
+            "valueType": "bytes",
+            "label": "Tamaño de la transferencia"
+          },
+          {
+            "key": "wastedMs",
+            "valueType": "timespanMs",
+            "label": "Duración"
+          }
+        ],
+        "items": [
+          {
+            "url": "https://fonts.googleapis.com/css?family=Poppins%3A400%2C500%2C700%2C800&display=swap",
+            "totalBytes": 1031,
+            "wastedMs": 826
+          },
+          {
+            "url": "https://ftp-cdn.mitiendanube.com/forked-files/007/400/935/installations/14828608/static/js/libraries-standalone-59fa5e7833de73d735795f6c8e66eede.js",
+            "totalBytes": 28315
+          },
+          {
+            "url": "https://acdn-us.mitiendanube.com/stores/007/400/935/themes/ipanema/style-utilities-c0aecd622274e18a4457353665418961.min.css",
+            "totalBytes": 3721,
+            "wastedMs": 150
+          },
+          {
+            "url": "https://acdn-us.mitiendanube.com/stores/007/400/935/themes/ipanema/style-critical-c044f4eba86f218b2550935ace3f4999.min.css",
+            "totalBytes": 28018,
+            "wastedMs": 921
+          }
+        ]
+      },
+      "image_delivery_sample1": {
+        "type": "table",
+        "headings": [
+          {
+            "key": "node",
+            "valueType": "node",
+            "label": ""
+          },
+          {
+            "key": "url",
+            "valueType": "url",
+            "label": "URL",
+            "subItemsHeading": {
+              "key": "reason",
+              "valueType": "text"
+            }
+          },
+          {
+            "key": "totalBytes",
+            "valueType": "bytes",
+            "label": "Tamaño del recurso"
+          },
+          {
+            "key": "wastedBytes",
+            "valueType": "bytes",
+            "label": "Ahorro estimado",
+            "subItemsHeading": {
+              "key": "wastedBytes",
+              "valueType": "bytes"
+            }
+          }
+        ],
+        "items": [
+          {
+            "node": {
+              "type": "node",
+              "lhId": "page-0-IMG",
+              "path": "1,HTML,1,BODY,7,MAIN,0,SECTION,1,SECTION,0,DIV,0,DIV,0,DIV,0,DIV,12,DIV,0,DIV,0,DIV,0,A,0,IMG",
+              "selector": "div.swiper-wrapper > div.js-product-slide > a.js-product-slide-link > img.image-priority-high",
+              "boundingRect": {
+                "top": 162,
+                "bottom": 534,
+                "left": 20,
+                "right": 392,
+                "width": 372,
+                "height": 372
+              },
+              "snippet": "[redacted]",
+              "nodeLabel": "[redacted]"
+            },
+            "url": "https://acdn-us.mitiendanube.com/stores/007/400/935/products/kit-botas-de-presoterapia-pro-air-1-2-aefbc830fbd8eb0aca17852047770296-1024-1024.webp",
+            "totalBytes": 66334,
+            "wastedBytes": 39524,
+            "subItems": {
+              "type": "subitems",
+              "items": [
+                {
+                  "reason": "Este archivo de imagen es más grande de lo necesario (1024x1024) para las dimensiones mostradas (651x651). Usa imágenes adaptables para reducir el tamaño de descarga de la imagen.",
+                  "wastedBytes": 39524
+                }
+              ]
+            }
+          }
+        ],
+        "debugData": {
+          "type": "debugdata",
+          "wastedBytes": 39524
+        }
+      },
+      "third_parties_sample1": [
+        {
+          "entity": "Google Tag Manager",
+          "transfer_bytes": 321879,
+          "main_thread_ms": 178.90800001472235
+        },
+        {
+          "entity": "Facebook",
+          "transfer_bytes": 216687,
+          "main_thread_ms": 139.52599999308586
+        },
+        {
+          "entity": "TikTok",
+          "transfer_bytes": 173316,
+          "main_thread_ms": 137.9780000001192
+        },
+        {
+          "entity": "mitiendanube.com",
+          "transfer_bytes": 357156,
+          "main_thread_ms": 122.60500000789762
+        },
+        {
+          "entity": "tiendanube.com",
+          "transfer_bytes": 129834,
+          "main_thread_ms": 54.05799999833107
+        },
+        {
+          "entity": "Clarity",
+          "transfer_bytes": 27736,
+          "main_thread_ms": 50.342000011354685
+        },
+        {
+          "entity": "openai.com",
+          "transfer_bytes": 37220,
+          "main_thread_ms": 38.01000000163913
+        },
+        {
+          "entity": "Cloudflare",
+          "transfer_bytes": 10478,
+          "main_thread_ms": 7.728999994695187
+        },
+        {
+          "entity": "cloudflarestream.com",
+          "transfer_bytes": 6813,
+          "main_thread_ms": 7.280000001192093
+        },
+        {
+          "entity": "Google/Doubleclick Ads",
+          "transfer_bytes": 6437,
+          "main_thread_ms": 2.1960000060498714
+        },
+        {
+          "entity": "Google Fonts",
+          "transfer_bytes": 32443,
+          "main_thread_ms": 0.12299999967217445
+        },
+        {
+          "entity": "bbeboy.store",
+          "transfer_bytes": 3537,
+          "main_thread_ms": 0
+        },
+        {
+          "entity": "Other Google APIs/SDKs",
+          "transfer_bytes": 382,
+          "main_thread_ms": 0
+        },
+        {
+          "entity": "google.com.mx",
+          "transfer_bytes": 689,
+          "main_thread_ms": 0
+        },
+        {
+          "entity": "r2.dev",
+          "transfer_bytes": 8711,
+          "main_thread_ms": 0
+        }
+      ],
+      "evidence": "reports/runs/rhino-performance/20261110T210307-performance-233caab3/performance.json"
+    },
+    {
+      "page": "blog",
+      "device": "mobile",
+      "url": "https://rhino-performance.com/blog/",
+      "profile": {
+        "source": "lighthouse_local",
+        "url": "https://rhino-performance.com/blog/",
+        "final_url": "https://rhino-performance.com/blog/",
+        "device": "mobile",
+        "categories": [
+          "performance",
+          "accessibility",
+          "best-practices",
+          "seo"
+        ],
+        "locale": "es",
+        "lighthouse_version": "13.6.0",
+        "chrome_version": "155.0.8059.84",
+        "screen": {
+          "mobile": true,
+          "width": 412,
+          "height": 823,
+          "deviceScaleFactor": 1.75,
+          "disabled": false
+        },
+        "throttling_method": "simulate",
+        "throttling": {
+          "rttMs": 150,
+          "throughputKbps": 1638.4,
+          "requestLatencyMs": 562.5,
+          "downloadThroughputKbps": 1474.56,
+          "uploadThroughputKbps": 675,
+          "cpuSlowdownMultiplier": 4
+        },
+        "cache": false,
+        "network_policy": "guarded-read-only"
+      },
+      "sample_count": 3,
+      "score_medians": {
+        "performance": 0.44,
+        "accessibility": 0.93,
+        "best-practices": 0.77,
+        "seo": 1.0
+      },
+      "metrics": {
+        "lcp": 13264.782,
+        "fcp": 1965.9089999999997,
+        "cls": 0.0,
+        "tbt": 1492.5000000000018,
+        "speed_index": 5161.466362895995
+      },
+      "statistics": {
+        "lcp": {
+          "median": 13264.782,
+          "min": 12688.648999999998,
+          "max": 13390.150999999996,
+          "available_samples": 3
+        },
+        "fcp": {
+          "median": 1965.9089999999997,
+          "min": 1808.1130000000003,
+          "max": 2878.2739999999994,
+          "available_samples": 3
+        },
+        "cls": {
+          "median": 0.0,
+          "min": 0.0,
+          "max": 0.0,
+          "available_samples": 3
+        },
+        "tbt": {
+          "median": 1492.5000000000018,
+          "min": 1200.2932500000006,
+          "max": 1603.1134999999995,
+          "available_samples": 3
+        },
+        "speed_index": {
+          "median": 5161.466362895995,
+          "min": 4263.921872534107,
+          "max": 6341.825259069115,
+          "available_samples": 3
+        }
+      },
+      "samples": [
+        {
+          "at": "2026-11-10T21:03:21.121Z",
+          "metrics": {
+            "lcp": 12688.648999999998,
+            "fcp": 2878.2739999999994,
+            "cls": 0.0,
+            "tbt": 1200.2932500000006,
+            "speed_index": 4263.921872534107
+          },
+          "scores": {
+            "performance": 0.44,
+            "accessibility": 0.93,
+            "best-practices": 0.77,
+            "seo": 1.0
+          }
+        },
+        {
+          "at": "2026-11-10T21:03:38.963Z",
+          "metrics": {
+            "lcp": 13390.150999999996,
+            "fcp": 1965.9089999999997,
+            "cls": 0.0,
+            "tbt": 1492.5000000000018,
+            "speed_index": 6341.825259069115
+          },
+          "scores": {
+            "performance": 0.42,
+            "accessibility": 0.93,
+            "best-practices": 0.77,
+            "seo": 1.0
+          }
+        },
+        {
+          "at": "2026-11-10T21:04:24.450Z",
+          "metrics": {
+            "lcp": 13264.782,
+            "fcp": 1808.1130000000003,
+            "cls": 0.0,
+            "tbt": 1603.1134999999995,
+            "speed_index": 5161.466362895995
+          },
+          "scores": {
+            "performance": 0.44,
+            "accessibility": 0.93,
+            "best-practices": 0.77,
+            "seo": 1.0
+          }
+        }
+      ],
+      "before_metrics": null,
+      "before_evidence": null,
+      "comparison": null,
+      "diagnostics_sample1": {
+        "render-blocking-insight": {
+          "displayValue": "Ahorro estimado de 1100 ms",
+          "numericValue": 1103
+        },
+        "image-delivery-insight": {
+          "displayValue": "Ahorro estimado de 685 KiB",
+          "numericValue": 701916
+        },
+        "unused-javascript": {
+          "displayValue": "Ahorro estimado de 360 KiB",
+          "numericValue": 1450
+        },
+        "unused-css-rules": {
+          "displayValue": "Ahorro estimado de 24 KiB",
+          "numericValue": 160
+        },
+        "mainthread-work-breakdown": {
+          "displayValue": "6,1 s",
+          "numericValue": 6136.191999999833
+        },
+        "total-byte-weight": {
+          "displayValue": "Tamaño total: 2708 KiB",
+          "numericValue": 2773343
+        }
+      },
+      "lcp_selector": [
+        "div.blog-listing-grid > article.blog-card > div.blog-card-media > img.blog-card-img"
+      ],
+      "lcp_discovery_sample1": {
+        "type": "list",
+        "items": [
+          {
+            "type": "checklist",
+            "items": {
+              "priorityHinted": {
+                "label": "Se debe aplicar fetchpriority=high",
+                "value": false
+              },
+              "requestDiscoverable": {
+                "label": "La solicitud es visible en el documento inicial",
+                "value": false
+              },
+              "eagerlyLoaded": {
+                "label": "Los recursos de LCP no deben usar loading=lazy",
+                "value": true
+              }
+            }
+          },
+          {
+            "type": "node",
+            "lhId": "page-0-IMG",
+            "path": "1,HTML,1,BODY,7,MAIN,0,SECTION,1,SECTION,0,DIV,2,DIV,0,ARTICLE,0,DIV,0,IMG",
+            "selector": "div.blog-listing-grid > article.blog-card > div.blog-card-media > img.blog-card-img",
+            "boundingRect": {
+              "top": 428,
+              "bottom": 641,
+              "left": 17,
+              "right": 395,
+              "width": 378,
+              "height": 213
+            },
+            "snippet": "[redacted]",
+            "nodeLabel": "[redacted]"
+          }
+        ]
+      },
+      "render_blocking_sample1": {
+        "type": "table",
+        "headings": [
+          {
+            "key": "url",
+            "valueType": "url",
+            "label": "URL"
+          },
+          {
+            "key": "totalBytes",
+            "valueType": "bytes",
+            "label": "Tamaño de la transferencia"
+          },
+          {
+            "key": "wastedMs",
+            "valueType": "timespanMs",
+            "label": "Duración"
+          }
+        ],
+        "items": [
+          {
+            "url": "https://fonts.googleapis.com/css?family=Poppins%3A400%2C500%2C700%2C800&display=swap",
+            "totalBytes": 1031,
+            "wastedMs": 830
+          },
+          {
+            "url": "https://ftp-cdn.mitiendanube.com/forked-files/007/400/935/installations/14828608/static/js/libraries-standalone-59fa5e7833de73d735795f6c8e66eede.js",
+            "totalBytes": 28316,
+            "wastedMs": 1160
+          },
+          {
+            "url": "https://acdn-us.mitiendanube.com/stores/007/400/935/themes/ipanema/style-utilities-c0aecd622274e18a4457353665418961.min.css",
+            "totalBytes": 3722
+          },
+          {
+            "url": "https://acdn-us.mitiendanube.com/stores/007/400/935/themes/ipanema/style-critical-c044f4eba86f218b2550935ace3f4999.min.css",
+            "totalBytes": 28018,
+            "wastedMs": 1093
+          },
+          {
+            "url": "https://rhino-performance.com/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js",
+            "totalBytes": 741
+          }
+        ]
+      },
+      "image_delivery_sample1": {
+        "type": "table",
+        "headings": [
+          {
+            "key": "node",
+            "valueType": "node",
+            "label": ""
+          },
+          {
+            "key": "url",
+            "valueType": "url",
+            "label": "URL",
+            "subItemsHeading": {
+              "key": "reason",
+              "valueType": "text"
+            }
+          },
+          {
+            "key": "totalBytes",
+            "valueType": "bytes",
+            "label": "Tamaño del recurso"
+          },
+          {
+            "key": "wastedBytes",
+            "valueType": "bytes",
+            "label": "Ahorro estimado",
+            "subItemsHeading": {
+              "key": "wastedBytes",
+              "valueType": "bytes"
+            }
+          }
+        ],
+        "items": [
+          {
+            "node": {
+              "type": "node",
+              "lhId": "page-0-IMG",
+              "path": "1,HTML,1,BODY,7,MAIN,0,SECTION,1,SECTION,0,DIV,2,DIV,0,ARTICLE,0,DIV,0,IMG",
+              "selector": "div.blog-listing-grid > article.blog-card > div.blog-card-media > img.blog-card-img",
+              "boundingRect": {
+                "top": 428,
+                "bottom": 641,
+                "left": 17,
+                "right": 395,
+                "width": 378,
+                "height": 213
+              },
+              "snippet": "[redacted]",
+              "nodeLabel": "[redacted]"
+            },
+            "url": "https://cdn-blog-backend.tiendanube.com/blogs/019/d30/30f/4907008a10032e552aa70a3/covers/01a18ef1-7c5c-7881-a120-b67145c0afb3.jpg",
+            "totalBytes": 500545,
+            "wastedBytes": 402068,
+            "subItems": {
+              "type": "subitems",
+              "items": [
+                {
+                  "reason": "Usar un formato de imagen moderno (WebP, AVIF) o aumentar la compresión de la imagen podría mejorar el tamaño de descarga de esta imagen",
+                  "wastedBytes": 402068
+                }
+              ]
+            }
+          },
+          {
+            "node": {
+              "type": "node",
+              "lhId": "page-1-IMG",
+              "path": "1,HTML,1,BODY,7,MAIN,0,SECTION,1,SECTION,0,DIV,2,DIV,1,ARTICLE,0,DIV,0,IMG",
+              "selector": "div.blog-listing-grid > article.blog-card > div.blog-card-media > img.blog-card-img",
+              "boundingRect": {
+                "top": 822,
+                "bottom": 1034,
+                "left": 17,
+                "right": 395,
+                "width": 378,
+                "height": 213
+              },
+              "snippet": "[redacted]",
+              "nodeLabel": "[redacted]"
+            },
+            "url": "https://cdn-blog-backend.tiendanube.com/blogs/019/d30/30f/4907008a10032e552aa70a3/covers/01a15675-73eb-7113-bb2f-1906e2901ffb.jpg",
+            "totalBytes": 314207,
+            "wastedBytes": 254098,
+            "subItems": {
+              "type": "subitems",
+              "items": [
+                {
+                  "reason": "Usar un formato de imagen moderno (WebP, AVIF) o aumentar la compresión de la imagen podría mejorar el tamaño de descarga de esta imagen",
+                  "wastedBytes": 216332
+                },
+                {
+                  "reason": "Este archivo de imagen es más grande de lo necesario (1024x573) para las dimensiones mostradas (662x545). Usa imágenes adaptables para reducir el tamaño de descarga de la imagen.",
+                  "wastedBytes": 121240
+                }
+              ]
+            }
+          },
+          {
+            "node": {
+              "type": "node",
+              "lhId": "page-2-IMG",
+              "path": "1,HTML,1,BODY,7,MAIN,0,SECTION,1,SECTION,0,DIV,2,DIV,2,ARTICLE,0,DIV,0,IMG",
+              "selector": "div.blog-listing-grid > article.blog-card > div.blog-card-media > img.blog-card-img",
+              "boundingRect": {
+                "top": 1232,
+                "bottom": 1445,
+                "left": 17,
+                "right": 395,
+                "width": 378,
+                "height": 213
+              },
+              "snippet": "[redacted]",
+              "nodeLabel": "[redacted]"
+            },
+            "url": "https://cdn-blog-backend.tiendanube.com/blogs/019/d30/30f/4907008a10032e552aa70a3/covers/01a1a326-fdd4-7881-a160-746c7969b43f.jpg",
+            "totalBytes": 86675,
+            "wastedBytes": 45750,
+            "subItems": {
+              "type": "subitems",
+              "items": [
+                {
+                  "reason": "Este archivo de imagen es más grande de lo necesario (1024x577) para las dimensiones mostradas (662x422). Usa imágenes adaptables para reducir el tamaño de descarga de la imagen.",
+                  "wastedBytes": 45750
+                }
+              ]
+            }
+          }
+        ],
+        "debugData": {
+          "type": "debugdata",
+          "wastedBytes": 701916
+        }
+      },
+      "third_parties_sample1": [
+        {
+          "entity": "Google Tag Manager",
+          "transfer_bytes": 321879,
+          "main_thread_ms": 151.98700000345707
+        },
+        {
+          "entity": "Facebook",
+          "transfer_bytes": 216707,
+          "main_thread_ms": 114.0329999923706
+        },
+        {
+          "entity": "mitiendanube.com",
+          "transfer_bytes": 263731,
+          "main_thread_ms": 103.47600001841784
+        },
+        {
+          "entity": "TikTok",
+          "transfer_bytes": 173334,
+          "main_thread_ms": 98.46600001305342
+        },
+        {
+          "entity": "Clarity",
+          "transfer_bytes": 27738,
+          "main_thread_ms": 51.840999994426966
+        },
+        {
+          "entity": "tiendanube.com",
+          "transfer_bytes": 1033318,
+          "main_thread_ms": 43.02699999883771
+        },
+        {
+          "entity": "openai.com",
+          "transfer_bytes": 37242,
+          "main_thread_ms": 20.190000005066395
+        },
+        {
+          "entity": "Cloudflare",
+          "transfer_bytes": 10478,
+          "main_thread_ms": 8.840999994426966
+        },
+        {
+          "entity": "Google/Doubleclick Ads",
+          "transfer_bytes": 3111,
+          "main_thread_ms": 1.2579999975860119
+        },
+        {
+          "entity": "Google Fonts",
+          "transfer_bytes": 24600,
+          "main_thread_ms": 0.17899999767541885
+        },
+        {
+          "entity": "Other Google APIs/SDKs",
+          "transfer_bytes": 191,
+          "main_thread_ms": 0
+        },
+        {
+          "entity": "google.com.mx",
+          "transfer_bytes": 581,
+          "main_thread_ms": 0
+        }
+      ],
+      "evidence": "reports/runs/rhino-performance/20261110T210505-performance-a772d303/performance.json"
+    }
+  ],
+  "counterfactual": {
+    "project": "rhino-performance",
+    "source": "lighthouse_local_counterfactual",
+    "device": "mobile",
+    "url": "https://rhino-performance.com/",
+    "blockedUrlPatterns": [
+      "*://www.googletagmanager.com/*",
+      "*://analytics.tiktok.com/*",
+      "*://connect.facebook.net/*"
+    ],
+    "not_a_release_candidate": true,
+    "limitations": [
+      "Removes measurement/advertising behavior in this diagnostic browser. Not authorization or recommendation to disable these services.",
+      "Cannot be pooled with normal results or treated as an implemented improvement.",
+      "No real-user INP or field improvement inferred."
+    ],
+    "samples": [
+      {
+        "at": "2026-11-10T21:06:02.029Z",
+        "LH": "13.6.0",
+        "chrome": "Chrome/155.0.8059.84",
+        "performance": 0.69,
+        "metrics": {
+          "largest-contentful-paint": 3985.5760000000005,
+          "first-contentful-paint": 1767.048,
+          "total-blocking-time": 660.5000000000014,
+          "cumulative-layout-shift": 0,
+          "speed-index": 3107.868781491744
+        }
+      },
+      {
+        "at": "2026-11-10T21:07:21.412Z",
+        "LH": "13.6.0",
+        "chrome": "Chrome/155.0.8059.84",
+        "performance": 0.74,
+        "metrics": {
+          "largest-contentful-paint": 3746.6645000000003,
+          "first-contentful-paint": 1731.955,
+          "total-blocking-time": 545,
+          "cumulative-layout-shift": 0,
+          "speed-index": 3219.260409081725
+        }
+      },
+      {
+        "at": "2026-11-10T21:07:35.585Z",
+        "LH": "13.6.0",
+        "chrome": "Chrome/155.0.8059.84",
+        "performance": 0.72,
+        "metrics": {
+          "largest-contentful-paint": 3530.4030000000002,
+          "first-contentful-paint": 1734.7130000000002,
+          "total-blocking-time": 669,
+          "cumulative-layout-shift": 0,
+          "speed-index": 3125.2938076614596
+        }
+      }
+    ],
+    "recovery": "First real sample retained. Local evidence-directory guard stopped before second browser; remaining two samples use fresh output directory and buffered writes.",
+    "median_metrics": {
+      "lcp": 3746.6645000000003,
+      "fcp": 1734.7130000000002,
+      "cls": 0,
+      "tbt": 660.5000000000014,
+      "speed_index": 3125.2938076614596
+    },
+    "score_median": 0.72,
+    "delta_from_normal": {
+      "lcp": 575.8640000000005,
+      "fcp": -16.10699999999997,
+      "cls": 0.0,
+      "tbt": -923.4999999999982,
+      "speed_index": -207.57425087773527
+    },
+    "metric_pct_change": {
+      "lcp": 18.161470581324828,
+      "fcp": -0.9199689288447681,
+      "tbt": -58.30176767676758,
+      "speed_index": -6.22809685927728
+    }
+  },
+  "network": {
+    "profile": {
+      "width": 390,
+      "mode": "rendered",
+      "cpu_rate": 1,
+      "network": null
+    },
+    "method": {
+      "measurement_method": "cdp-http-hops-v2",
+      "requests": 104,
+      "unmeasured_completed_transfers": 0,
+      "js_bytes": 1117137,
+      "css_bytes": 58327,
+      "image_bytes": 362232,
+      "font_bytes": 31380
+    },
+    "js_bytes_by_host": {
+      "www.googletagmanager.com": 321903,
+      "connect.facebook.net": 216742,
+      "analytics.tiktok.com": 173341,
+      "nsk-cdn-static.tiendanube.com": 116844,
+      "ftp-cdn.mitiendanube.com": 106092,
+      "acdn-us.mitiendanube.com": 101384,
+      "bzrcdn.openai.com": 36360,
+      "scripts.clarity.ms": 25867,
+      "static.cloudflareinsights.com": 10478,
+      "googleads.g.doubleclick.net": 6233,
+      "www.clarity.ms": 1152,
+      "rhino-performance.com": 741,
+      "": 0
+    },
+    "evidence": "reports/runs/rhino-performance/20261110T205329-postpush-accessibility-7f9a46ef/home/home-390-rendered.json",
+    "note": "Single CDP navigation window at390px; do not pool with Lighthouse412px simulated transfer totals."
+  },
+  "google_api_status": {
+    "fresh_pagespeed": false,
+    "fresh_crux": false,
+    "reason": "Configured key names exist; values are absent from this process environment. No key values retrieved or logged. Earlier direct Google reports remain dated historical context."
+  },
+  "historical_crux": {
+    "collection_period": "2026-10-12/2026-11-08",
+    "origin_mobile": {
+      "lcp": 1908,
+      "inp": 112,
+      "cls": 0.01
+    },
+    "origin_desktop": {
+      "lcp": 1742,
+      "inp": 65,
+      "cls": 0.06
+    },
+    "home_url_missing": [
+      "lcp",
+      "inp"
+    ],
+    "pro_air_mobile": {
+      "lcp": 1655,
+      "cls": 0.02,
+      "missing": [
+        "inp"
+      ]
+    },
+    "post_deployment_improvement_confirmed": false
+  },
+  "css_verification": {
+    "at": "2026-11-10T21:08:31.590830+00:00",
+    "url": "https://rhino-performance.com/",
+    "http": 403,
+    "stopped": true
+  },
+  "limitations": [
+    "No field INP inferred from laboratory TBT.",
+    "POST blocked; third-party/video behavior can differ from unrestricted sessions.",
+    "LCP insight subparts are observed trace durations, while final LCP may be simulated: no invented percentages.",
+    "No production/theme edits or scheduling.",
+    "Final Python HTTP source probe returned403 and stopped; no retries/evasion. Previous authorized Chrome measurements succeeded; CSS delivery duplicate hypothesis remains unconfirmed."
+  ],
+  "findings": [
+    {
+      "id": "RHP-01",
+      "priority": "P1",
+      "subject": "Imagen LCP del blog: pesada y descubrimiento tardío",
+      "state": "confirmed_observation_solution_proposed",
+      "evidence": "3 muestras LCP12.69–13.39s; imagen JPG500545B; requestDiscoverable=false y priorityHinted=false.",
+      "cause": "Contribuciones verificadas de peso/descubrimiento; porcentaje causal total no medido.",
+      "files": [
+        "snippets/blog-card.tpl",
+        "sections/main-blog.tpl",
+        "snippets/image.tpl"
+      ],
+      "proposal": "Parametrizar el helper existente para la primera tarjeta visible y optimizar la portada real mediante mecanismo soportado; conservar lazy en las demás. No inventar parámetros de transformación CDN.",
+      "risk": "Medio: consumidores en carruseles/artículos/filtros y compatibilidad del CDN/CMS.",
+      "required_tests": [
+        "HTML inicial/src/currentSrc/prioridad de primera tarjeta real en cada breakpoint",
+        "Peso/formato y calidad visual con fuente autorizada",
+        "3–5 muestras comparables, navegación sin JS, filtros/paginación y regresión visual"
+      ],
+      "measured_deployment_benefit": null
+    },
+    {
+      "id": "RHP-02",
+      "priority": "P1",
+      "subject": "JavaScript de marketing e inicialización compartida",
+      "state": "controlled_counterfactual_only",
+      "evidence": "Home CDP1117137B JS; TBT normal mediana1584ms, bloquear3hosts mediana660.5ms. LCP empeora3170.8→3746.7ms.",
+      "cause": "Contribución de los tres hosts al bloqueo en este perfil respaldada por experimento; no prueba duplicación de eventos ni cómo diferirlos de forma segura.",
+      "files": [
+        "layouts/layout.tpl",
+        "static/js/store.js"
+      ],
+      "ownership_note": "Confirmar fuente real: configuración plataforma, GTM o aplicación; archivos listados son candidatos de investigación, no causa atribuida.",
+      "proposal": "Inventariar etiquetas/eventos y consumidores; ensayar carga por necesidad/consentimiento y retirar solo duplicación demostrada. Preservar LS, checkout, stock y analítica comercial.",
+      "risk": "Alto: atribución, conversiones, campañas y consentimiento. No desactivar trackers a ciegas.",
+      "required_tests": [
+        "Traza limpia y comparación con/sin cada grupo por separado",
+        "QA de eventos autorizado en staging, sin compras reales",
+        "Comparar LCP/TBT/CLS y funcionalidad, no solo score"
+      ],
+      "measured_deployment_benefit": null
+    },
+    {
+      "id": "RHP-03",
+      "priority": "P1",
+      "subject": "CLS de escritorio repetible y reproductor",
+      "state": "persistent_lab_issue_needs_mechanism",
+      "evidence": "Home desktop3/3 CLS0.449179669; insight del documento superior muestra subtotal~0.068. Evidencia previa MCP de iframe YouTube y contrafactual anterior sinYouTube~0.068.",
+      "cause": "Ámbito/frame y mecanismo exacto pendientes; la política POST bloqueado puede influir. No atribuir todo al layout principal.",
+      "files": [
+        "blocks/video.tpl",
+        "sections/video.tpl",
+        "layouts/resources/style-tokens.tpl"
+      ],
+      "proposal": "Separar estabilidad de iframe, documento y fuentes; comparar modos nativos de video manteniendo funcionalidad antes de alterar autoplay/medios.",
+      "risk": "Alto si se elimina contenido o cambia experiencia sin acuerdo.",
+      "required_tests": [
+        "Traza/filmstrip con video funcional en entorno autorizado",
+        "Geometría reservada y momento de fuentes",
+        "Perfil normal equivalente, UX de reproducción/teclado/reduced-motion"
+      ],
+      "measured_deployment_benefit": null
+    },
+    {
+      "id": "RHP-04",
+      "priority": "P2",
+      "subject": "Cadena crítica de CSS/fuentes/librerías",
+      "state": "audit_estimate_not_measured_fix",
+      "evidence": "LH home estima~960ms de ahorro bloqueante; lista fuente Poppins, CSS critical/utilities y libraries-standalone.",
+      "cause": "Recursos señalados medidos; ahorro final de una modificación no comprobado. Duplicación inline/preload no confirmada: la prueba HTTP final dio403 y se detuvo.",
+      "files": [
+        "layouts/layout.tpl",
+        "layouts/resources/style-tokens.tpl",
+        "static/css/style-critical.css",
+        "static/css/style-async.css"
+      ],
+      "proposal": "Revisar descubrimiento/orden de fuentes y carga condicional con contratos nativos. No eliminar CSS ni dependencias por Coverage, ni reintroducir cambios de diseño tardíos.",
+      "risk": "Medio/alto: FOUC, responsive, hooks y compatibilidad.",
+      "required_tests": [
+        "Render inicial y cascada en6anchos/estados",
+        "Network waterfall y traza",
+        "No duplicación de solicitudes/estilos confirmada antes de retirar preload"
+      ],
+      "measured_deployment_benefit": null
+    }
+  ],
+  "claude_review": {
+    "valid": false,
+    "response": null,
+    "model": {
+      "model": "claude-sonnet-5-5",
+      "effort": "medium",
+      "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+      "verified_at": "2026-11-08"
+    },
+    "execution": {
+      "exit_code": 0,
+      "timed_out": false,
+      "output_limited": false,
+      "idle_timed_out": false,
+      "cancelled": false,
+      "process_started": true,
+      "process_reaped": true,
+      "stdin_bytes_written": 55200,
+      "context_complete": true,
+      "duration_s": 26.959,
+      "timing": {
+        "spawn_s": 0.000514,
+        "input_complete_s": 0.000627,
+        "first_stdout_s": 1.073657,
+        "first_stderr_s": null,
+        "timeout_phase": null,
+        "event_counts": {
+          "system": 2,
+          "stream_event": 713,
+          "event:message_start": 1,
+          "event:content_block_start": 1,
+          "event:content_block_delta": 708,
+          "assistant": 1,
+          "event:content_block_stop": 1,
+          "user": 1,
+          "event:message_delta": 1,
+          "event:message_stop": 1,
+          "rate_limit_event": 1,
+          "result": 1
+        },
+        "inference_vs_initialization": "not_separable_without_provider_events"
+      },
+      "output_accounting": {
+        "transport_bytes": 264693,
+        "retained_bytes": 264693,
+        "discarded_progress_bytes": 0,
+        "transport_limit_bytes": 20000000,
+        "retained_limit_bytes": 2000000
+      },
+      "isolation": {
+        "backend": "bubblewrap",
+        "snapshot_read_only": true,
+        "host_home_mounted": false,
+        "network": "enabled_no_destination_firewall",
+        "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+      },
+      "started_at": "2026-11-10T21:14:22.985358+00:00",
+      "prompt_bytes": 55200,
+      "prompt_sha256": "a253b915d1c91da637fc662a5dd4ea05dd19bed5adf3e140680581b4dbdc9fb3",
+      "usage": {
+        "provider_reported": {
+          "total_cost_usd": 0.04098079999999999,
+          "duration_ms": 25603,
+          "input_tokens": 2,
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 29168,
+          "output_tokens": 3806
+        },
+        "measured_cost_available": true,
+        "estimated_cost": null
+      },
+      "limits": {
+        "timeout": 240,
+        "idle_timeout": 90,
+        "startup_timeout": 30,
+        "first_response_timeout": 120
+      },
+      "structured_output": "native_schema",
+      "contract_validation": {
+        "status": "passed",
+        "duration_s": 0.007733
+      }
+    },
+    "error": "La propuesta del consejo excede archivos autorizados."
+  },
+  "normal_sample_count": 15,
+  "counterfactual_sample_count": 3,
+  "google_requests_this_audit": 0,
+  "production_operations": false,
+  "theme_changes": false,
+  "audited_12_files_unchanged": true
+}

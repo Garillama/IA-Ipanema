@@ -1,0 +1,116 @@
+{
+  "at": "2026-11-10T21:38:30.704231+00:00",
+  "project": "rhino-performance",
+  "status": "partial_performance_implementation_local",
+  "theme_folder": "~/Escritorio/Cli/Rhino-Ipanema",
+  "files": [
+    "snippets/blog-card.tpl",
+    "sections/main-blog.tpl",
+    "sections/blog-carousel.tpl",
+    "sections/blog-post-related.tpl",
+    "sections/home-news.tpl"
+  ],
+  "transaction": {
+    "id": "b9df038077aa45b8b4e45474eff5592c",
+    "status": "applied",
+    "attempt": 1,
+    "files": [
+      "snippets/blog-card.tpl",
+      "sections/main-blog.tpl",
+      "sections/blog-carousel.tpl",
+      "sections/blog-post-related.tpl",
+      "sections/home-news.tpl"
+    ]
+  },
+  "implementation_scope": "Initial discovery/priority of first visible blog cover; defaultfalse/native helper and explicit consumer context.",
+  "native_reuse": [
+    "snippets/image.tpl:image_priority_high",
+    "native CSS fade-in.image-priority-high",
+    "existing blog-card and four current callers"
+  ],
+  "qa": {
+    "static": 35,
+    "browser_checks": 138,
+    "browser_cases": 29,
+    "widths": [
+      360,
+      390,
+      768,
+      1024,
+      1440,
+      1920
+    ],
+    "projected_no_js_discovery_before": 0,
+    "projected_no_js_discovery_after": 1,
+    "projected_network_priority": "High",
+    "full_platform_Twig_render": false,
+    "published_after_LCP": null,
+    "outcome": "passed_in_scoped_projection_only"
+  },
+  "integrity": {
+    "at": "2026-11-10T21:35:27.552924+00:00",
+    "before_file_count": 396,
+    "changed_files": [
+      "sections/blog-post-related.tpl",
+      "sections/main-blog.tpl",
+      "sections/home-news.tpl",
+      "sections/blog-carousel.tpl",
+      "snippets/blog-card.tpl"
+    ],
+    "unexpected_changes": [],
+    "applied_equals_reviewed_candidate": true,
+    "previous_accessibility_files_preserved": true,
+    "protected_and_commercial_files_unchanged": true,
+    "production_operations": false
+  },
+  "review": {
+    "provider": "claude",
+    "approved_for_local_candidate": true,
+    "not_production": true,
+    "contract": "existing native proposal schema used for independent post-diff review; controller review decision guard enforced"
+  },
+  "providers": {
+    "actual_calls": 8,
+    "claude_reported_cost_subtotal_usd": 2.0379641,
+    "codex_billing_cost": null,
+    "commandcode_executed": false
+  },
+  "pending": [
+    {
+      "area": "blog_cover_bytes",
+      "state": "needs_CMS_asset_work",
+      "detail": "Same500KB original URL; no unsupported CDN transform or hardcoded replacement introduced."
+    },
+    {
+      "area": "marketing_JS",
+      "state": "needs_functional_evidence",
+      "detail": "Blocking improves TBT but worsens LCP; preserve conversion events and native commerce before any change."
+    },
+    {
+      "area": "desktop_CLS",
+      "state": "needs_causal_evidence",
+      "detail": "Internal player/frame vs main-document/fontrender mechanism unresolved; no unproven autoplay change."
+    },
+    {
+      "area": "fonts_CSS",
+      "state": "deferred_no_verified_incremental_benefit",
+      "detail": "Both proposals withdrew font rewrite because equivalent preload already exists."
+    },
+    {
+      "area": "verification",
+      "state": "needs_staging",
+      "detail": "Full Tiendanube render, network/currentSrc and repeated comparable after-measurements before release approval."
+    }
+  ],
+  "production_operations": false,
+  "remote_requests_this_implementation": false,
+  "published_validation": {
+    "at": "2026-11-10T21:54:52.781172+00:00",
+    "report": "reports/rhino-performance/blog-release-validation.md",
+    "behavior": "verified_in_scoped_views",
+    "mobile_LCP_ms": 6194.4915,
+    "broader_performance": "partial",
+    "push_by": "owner",
+    "agent_published": false
+  }
+}
