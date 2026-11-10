@@ -52,6 +52,8 @@ function protectPage(page,browser){
  await page.setRequestInterception(true);
  page.on('request',request=>{
   let permitted=['GET','HEAD','OPTIONS'].includes(request.method());
+  const resources=(process.env.IPANEMA_RESOURCE_ORIGINS||'').split(',').filter(Boolean);
+  if(resources.length){try{const u=new URL(request.url());if(['http:','https:'].includes(u.protocol)&&!resources.includes(u.origin))permitted=false;}catch{permitted=false;}}
   if(!permitted&&authPages.has(page)&&request.method()==='POST'){
    try{const u=new URL(request.url());permitted=u.origin===new URL(projectUrl()).origin&&/^\/password\/?$/.test(u.pathname);}catch{}
   }

@@ -1,5 +1,9 @@
 # IA-Ipanema V2
 
+El [acceso compartido a DevTools y Google](reports/access/README.md) añade permisos por agente, proyecto y tarea para Claude, Codex y CommandCode. Reutiliza QA/SEO existentes, instala solo DevTools MCP fijado y activa las lecturas Google con OAuth autorizado por proyecto.
+
+La [orquestación multiagente](reports/orchestration/README.md) coordina Claude Code, Codex y CommandCode con riesgo L1–L4, modelos proporcionales, worktrees y validación central. `python3 tools/ia.py orchestrate doctor` comprueba requisitos. `python3 tools/ia.py orchestrate task "Optimiza el carrusel de categorías en mobile y desktop sin afectar SEO ni rendimiento"` prepara el plan; añade `--execute` para inferencia real y cambios aislados. Entrega diff y evidencia, sin publicar ni escribir en el tema original. [Resultados y límites](reports/orchestration/verification.md).
+
 Agente de ingeniería para temas seccionables Ipanema de Tiendanube. Combina instrucciones de trabajo, nueve skills, conocimiento existente y herramientas locales para investigar, preparar cambios, probarlos y registrar evidencia. Necesita el runtime de IA con el que abras esta carpeta; no incluye un modelo ni un servidor de inferencia propio.
 
 La V2 conserva el discovery original. **El tema y las tiendas remotas no se modifican al instalar o ejecutar las pruebas offline.** [Evolución y cobertura V2](reports/v2/evolution-report.md), [arquitectura](reports/v2/architecture.md), [auditoría inicial](reports/v2/initial-audit.md). La extensión **V2.1 SEO** añade auditorías por página, grafo/validación de schemas, propuestas con procedencia y adaptadores Google opcionales: [resultado y límites](reports/seo/evolution-report.md).

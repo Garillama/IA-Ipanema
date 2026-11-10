@@ -1,0 +1,26 @@
+diff --git a/layouts/layout.tpl b/layouts/layout.tpl
+index 522a97f..f36cf23 100644
+--- a/layouts/layout.tpl
++++ b/layouts/layout.tpl
+@@ -32,7 +32,9 @@
+     {# Damar Beauty design system overrides #}
+     <link rel="stylesheet" href="{{ 'css/damar.css' | static_url }}">
+     <link rel="stylesheet" href="{{ 'css/damar-home-shell.css' | static_url }}">
++    {% if template == 'home' %}
+     <link rel="stylesheet" href="{{ 'css/damar-home-content.css' | static_url }}">
++    {% endif %}
+     <link rel="stylesheet" href="{{ 'css/damar-home-commerce.css' | static_url }}">
+     <link rel="stylesheet" href="{{ 'css/damar-image-carousel.css' | static_url }}">
+     <link rel="stylesheet" href="{{ 'css/damar-navigation-desktop.css' | static_url }}">
+diff --git a/snippets/logo/logo-img.tpl b/snippets/logo/logo-img.tpl
+index 8ddb8d3..f988e65 100644
+--- a/snippets/logo/logo-img.tpl
++++ b/snippets/logo/logo-img.tpl
+@@ -17,7 +17,4 @@
+             image_thumbs: ['medium', 'large', 'huge'],
+         } %}
+     </a>
+-    {% if template == 'home' %}
+-        <h1 style="display: none;">{{ store.name }}</h1>
+-    {% endif %}
+ </div>

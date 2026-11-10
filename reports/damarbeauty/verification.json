@@ -1,0 +1,363 @@
+{
+  "at": "2026-11-09T16:05:29.685418+00:00",
+  "project": "damarbeauty",
+  "status": "local_changes_verified_statically_browser_comparison_partial",
+  "classification": "L3",
+  "source_version": "fork Ipanema 1.7.0",
+  "remote_modified": false,
+  "files_changed": [
+    "layouts/layout.tpl",
+    "snippets/logo/logo-img.tpl"
+  ],
+  "checks": [
+    {
+      "name": "home-content scoped by Twig home condition",
+      "passed": true
+    },
+    {
+      "name": "brand hidden H1 removed; logo native include preserved",
+      "passed": true
+    },
+    {
+      "name": "hero H1 remains",
+      "passed": true
+    },
+    {
+      "name": "git diff --check",
+      "passed": true
+    }
+  ],
+  "after_hashes": {
+    "layouts/layout.tpl": "ce5d9a952cbad2630fe298210780b4362f6573d7c3436c4b2670fc0ede8a2d5f",
+    "snippets/logo/logo-img.tpl": "1861ac4523ba1851c0ddf989091ce3d5dc0aef58605179519d77065e5c0568b7"
+  },
+  "orchestration": [
+    {
+      "id": "architecture",
+      "agent": "codex",
+      "model": {
+        "model": "gpt-6.1-sol",
+        "effort": "high",
+        "reason": "strong según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+        "verified_at": "2026-11-08"
+      },
+      "state": "completed",
+      "decision": "proposed",
+      "execution": {
+        "exit_code": 0,
+        "timed_out": false,
+        "output_limited": false,
+        "duration_s": 89.537,
+        "isolation": {
+          "backend": "bubblewrap",
+          "snapshot_read_only": true,
+          "host_home_mounted": false,
+          "network": "enabled_no_destination_firewall",
+          "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+        },
+        "started_at": "2026-11-09T15:58:20.214193+00:00",
+        "prompt_bytes": 116837,
+        "usage": {
+          "provider_reported": {
+            "input_tokens": 46578,
+            "cached_input_tokens": 12288,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 1502,
+            "reasoning_output_tokens": 446
+          },
+          "measured_cost_available": false,
+          "estimated_cost": null
+        }
+      }
+    },
+    {
+      "id": "implementation",
+      "agent": "codex",
+      "model": {
+        "model": "gpt-6.1-sol",
+        "effort": "high",
+        "reason": "strong según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+        "verified_at": "2026-11-08"
+      },
+      "state": "completed",
+      "decision": "proposed",
+      "execution": {
+        "exit_code": 0,
+        "timed_out": false,
+        "output_limited": false,
+        "duration_s": 144.136,
+        "isolation": {
+          "backend": "bubblewrap",
+          "snapshot_read_only": true,
+          "host_home_mounted": false,
+          "network": "enabled_no_destination_firewall",
+          "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+        },
+        "started_at": "2026-11-09T15:59:49.985452+00:00",
+        "prompt_bytes": 121207,
+        "usage": {
+          "provider_reported": {
+            "input_tokens": 47669,
+            "cached_input_tokens": 12288,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 4945,
+            "reasoning_output_tokens": 213
+          },
+          "measured_cost_available": false,
+          "estimated_cost": null
+        }
+      }
+    },
+    {
+      "id": "review",
+      "agent": "commandcode",
+      "model": {
+        "model": "deepseek/deepseek-v4.1-flash",
+        "effort": null,
+        "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+        "verified_at": "2026-11-08"
+      },
+      "state": "completed",
+      "decision": "approve",
+      "execution": {
+        "exit_code": 0,
+        "timed_out": false,
+        "output_limited": false,
+        "duration_s": 63.818,
+        "isolation": {
+          "backend": "bubblewrap",
+          "snapshot_read_only": true,
+          "host_home_mounted": false,
+          "network": "enabled_no_destination_firewall",
+          "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+        },
+        "started_at": "2026-11-09T16:02:14.684128+00:00",
+        "prompt_bytes": 140645,
+        "usage": {
+          "provider_reported": {},
+          "measured_cost_available": false,
+          "estimated_cost": null
+        }
+      }
+    }
+  ],
+  "responsive_baseline": [
+    {
+      "file": "category-1024-rendered.json",
+      "viewport": 1024,
+      "scroll_width": 1024,
+      "axe_rules": [
+        "aria-hidden-focus",
+        "label-content-name-mismatch"
+      ],
+      "js_errors": []
+    },
+    {
+      "file": "category-1440-rendered.json",
+      "viewport": 1440,
+      "scroll_width": 1440,
+      "axe_rules": [
+        "aria-hidden-focus",
+        "label-content-name-mismatch"
+      ],
+      "js_errors": []
+    },
+    {
+      "file": "category-1920-rendered.json",
+      "viewport": 1920,
+      "scroll_width": 1920,
+      "axe_rules": [
+        "aria-hidden-focus",
+        "label-content-name-mismatch"
+      ],
+      "js_errors": []
+    },
+    {
+      "file": "category-360-rendered.json",
+      "viewport": 360,
+      "scroll_width": 360,
+      "axe_rules": [
+        "label-content-name-mismatch",
+        "target-size"
+      ],
+      "js_errors": []
+    },
+    {
+      "file": "category-390-rendered.json",
+      "viewport": 390,
+      "scroll_width": 390,
+      "axe_rules": [
+        "label-content-name-mismatch",
+        "target-size"
+      ],
+      "js_errors": []
+    },
+    {
+      "file": "category-768-rendered.json",
+      "viewport": 768,
+      "scroll_width": 768,
+      "axe_rules": [
+        "aria-hidden-focus",
+        "label-content-name-mismatch",
+        "target-size"
+      ],
+      "js_errors": []
+    },
+    {
+      "file": "home-1024-rendered.json",
+      "viewport": 1024,
+      "scroll_width": 1024,
+      "axe_rules": [
+        "aria-hidden-focus",
+        "aria-prohibited-attr",
+        "label-content-name-mismatch",
+        "target-size"
+      ],
+      "js_errors": []
+    },
+    {
+      "file": "home-1440-rendered.json",
+      "viewport": 1440,
+      "scroll_width": 1440,
+      "axe_rules": [
+        "aria-hidden-focus",
+        "aria-prohibited-attr",
+        "label-content-name-mismatch",
+        "target-size"
+      ],
+      "js_errors": []
+    },
+    {
+      "file": "home-1920-rendered.json",
+      "viewport": 1920,
+      "scroll_width": 1920,
+      "axe_rules": [
+        "aria-hidden-focus",
+        "aria-prohibited-attr",
+        "label-content-name-mismatch",
+        "target-size"
+      ],
+      "js_errors": []
+    },
+    {
+      "file": "home-360-rendered.json",
+      "viewport": 360,
+      "scroll_width": 360,
+      "axe_rules": [
+        "aria-prohibited-attr",
+        "label-content-name-mismatch",
+        "target-size"
+      ],
+      "js_errors": []
+    },
+    {
+      "file": "home-390-rendered.json",
+      "viewport": 390,
+      "scroll_width": 390,
+      "axe_rules": [
+        "aria-prohibited-attr",
+        "label-content-name-mismatch",
+        "target-size"
+      ],
+      "js_errors": []
+    },
+    {
+      "file": "home-768-rendered.json",
+      "viewport": 768,
+      "scroll_width": 768,
+      "axe_rules": [
+        "aria-hidden-focus",
+        "aria-prohibited-attr",
+        "label-content-name-mismatch",
+        "target-size"
+      ],
+      "js_errors": []
+    },
+    {
+      "file": "pdp-1024-rendered.json",
+      "viewport": 1024,
+      "scroll_width": 1024,
+      "axe_rules": [
+        "aria-hidden-focus",
+        "color-contrast",
+        "label-content-name-mismatch",
+        "target-size"
+      ],
+      "js_errors": []
+    },
+    {
+      "file": "pdp-1440-rendered.json",
+      "viewport": 1440,
+      "scroll_width": 1440,
+      "axe_rules": [
+        "aria-hidden-focus",
+        "color-contrast",
+        "label-content-name-mismatch",
+        "target-size"
+      ],
+      "js_errors": []
+    },
+    {
+      "file": "pdp-1920-rendered.json",
+      "viewport": 1920,
+      "scroll_width": 1920,
+      "axe_rules": [
+        "aria-hidden-focus",
+        "color-contrast",
+        "label-content-name-mismatch",
+        "target-size"
+      ],
+      "js_errors": []
+    },
+    {
+      "file": "pdp-360-rendered.json",
+      "viewport": 360,
+      "scroll_width": 360,
+      "axe_rules": [
+        "color-contrast",
+        "label-content-name-mismatch",
+        "target-size"
+      ],
+      "js_errors": []
+    },
+    {
+      "file": "pdp-390-rendered.json",
+      "viewport": 390,
+      "scroll_width": 390,
+      "axe_rules": [
+        "color-contrast",
+        "label-content-name-mismatch",
+        "target-size"
+      ],
+      "js_errors": []
+    },
+    {
+      "file": "pdp-768-rendered.json",
+      "viewport": 768,
+      "scroll_width": 768,
+      "axe_rules": [
+        "aria-hidden-focus",
+        "color-contrast",
+        "label-content-name-mismatch",
+        "target-size"
+      ],
+      "js_errors": []
+    }
+  ],
+  "limitations": [
+    "No render Twig local/plataforma del parche.",
+    "Comparación DOM/CSS parcial; no es despliegue.",
+    "No catálogo independiente ni Search Console.",
+    "403 en robots.txt; exploración detenida, sitemap no consultado.",
+    "INP de campo no disponible."
+  ],
+  "source_comparison": {
+    "baseline_files": 469,
+    "modified": [
+      "layouts/layout.tpl",
+      "snippets/logo/logo-img.tpl"
+    ],
+    "missing": [],
+    "unchanged": 467
+  }
+}

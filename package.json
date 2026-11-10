@@ -1,6 +1,6 @@
 {
   "name": "ia-ipanema",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "private": true,
   "description": "Herramientas opcionales de QA; Python básico no requiere npm.",
   "engines": {
@@ -8,7 +8,8 @@
   },
   "scripts": {
     "qa": "python3 tools/ia.py qa --suite quick",
-    "qa:seo": "python3 tools/ia.py qa --suite seo"
+    "qa:seo": "python3 tools/ia.py qa --suite seo",
+    "qa:orchestration": "python3 tools/ia.py qa --suite orchestration"
   },
   "devDependencies": {
     "axe-core": "4.14.0",

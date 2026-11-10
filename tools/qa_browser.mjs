@@ -4,6 +4,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import {puppeteer,authenticate,cliRequire,cleanUrl,loadDependency} from './browser_runtime.mjs';
 import {collectRendered,collectSEOProjection} from './page_collectors.mjs';
+import {installPerformanceObservers,lighthouseEvidence,createNetworkRecorder} from './performance_evidence.mjs';
 
 const job=JSON.parse(await fs.readFile(process.argv[2],'utf8'));
 const linkContracts=JSON.parse(await fs.readFile(new URL('./ipanema/seo/link_contracts.json',import.meta.url),'utf8'));
@@ -33,16 +34,13 @@ try{
     const client=await page.createCDPSession();await client.send('Network.enable');await client.send('Network.setCacheDisabled',{cacheDisabled:true});
     if(job.cpu_rate)await client.send('Emulation.setCPUThrottlingRate',{rate:job.cpu_rate});
     if(job.network)await client.send('Network.emulateNetworkConditions',{offline:false,...job.network});
-    const network=new Map();const errors=[];let phase='navigation';
-    client.on('Network.requestWillBeSent',e=>network.set(e.requestId,{url:cleanUrl(e.request.url),method:e.request.method,type:e.type,requested:true,phase}));
-    client.on('Network.responseReceived',e=>Object.assign(network.get(e.requestId)||{},{status:e.response.status,mime:e.response.mimeType}));
-    client.on('Network.loadingFinished',e=>Object.assign(network.get(e.requestId)||{},{completed:true,encoded_bytes:e.encodedDataLength}));
-    client.on('Network.loadingFailed',e=>Object.assign(network.get(e.requestId)||{},{completed:false,error:e.errorText}));
+    const network=createNetworkRecorder(cleanUrl);const errors=[];let phase='navigation';
+    client.on('Network.requestWillBeSent',e=>network.requestWillBeSent(e,phase));
+    client.on('Network.responseReceived',e=>network.responseReceived(e));
+    client.on('Network.loadingFinished',e=>network.loadingFinished(e));
+    client.on('Network.loadingFailed',e=>network.loadingFailed(e));
     page.on('pageerror',()=>errors.push('Error JavaScript en la página; inspeccionar localmente sin volcar datos.'));
-    await page.evaluateOnNewDocument(()=>{
-     window.__audit={lcp:[],shifts:[],longTasks:[]};
-     for(const [type,key] of [['largest-contentful-paint','lcp'],['layout-shift','shifts'],['longtask','longTasks']])try{new PerformanceObserver(list=>window.__audit[key].push(...list.getEntries().map(e=>({startTime:e.startTime,duration:e.duration,value:e.value,hadRecentInput:e.hadRecentInput,size:e.size})))).observe({type,buffered:true});}catch{}
-    });
+    await page.evaluateOnNewDocument(installPerformanceObservers);
     if(job.coverage&&mode!=='no-js'){await page.coverage.startJSCoverage();await page.coverage.startCSSCoverage();}
     const response=await page.goto(spec.url,{waitUntil:'domcontentloaded',timeout:30000});
     if(new URL(page.url()).pathname.startsWith('/password'))throw Error('La página final es una barrera de acceso, no el storefront.');
@@ -60,8 +58,8 @@ try{
     },initialHTML,linkContracts);
     await page.waitForNetworkIdle({idleTime:400,timeout:5000}).catch(()=>{});
     await page.evaluate(()=>document.fonts.ready);
-    const navigationNetwork=[...network.values()].map(entry=>({...entry}));
-    const networkMetrics={requests:navigationNetwork.length};
+    const navigationNetwork=network.snapshot();
+    const networkMetrics={measurement_method:'cdp-http-hops-v2',requests:navigationNetwork.length,unmeasured_completed_transfers:navigationNetwork.filter(e=>e.completed&&e.encoded_bytes==null).length};
     for(const [name,type] of [['js_bytes','Script'],['css_bytes','Stylesheet'],['image_bytes','Image'],['font_bytes','Font']])networkMetrics[name]=navigationNetwork.filter(e=>e.type===type&&e.completed).reduce((n,e)=>n+(e.encoded_bytes||0),0);
     for(const [name,value] of Object.entries(networkMetrics))if(job.budgets?.[name]!=null)check(`${spec.name}-${width}-${mode}:budget:${name}`,value<=job.budgets[name],{value,budget:job.budgets[name],method:'CDP solicitudes y encodedDataLength de navegación, antes de axe/interacciones'});
     phase='dom-inspection';
@@ -151,7 +149,7 @@ try{
      const summarize=entries=>entries.map(e=>({url:cleanUrl(e.url),source_bytes:Buffer.byteLength(e.text),used_source_units:e.ranges.reduce((n,r)=>n+r.end-r.start,0),source_units:e.text.length}));
      coverage={js:summarize(js),css:summarize(css),limitations:'Coverage de esta navegación, no prueba código prescindible en otros estados; unidades UTF-16 y bytes distintos.'};
     }
-    const record={page:spec.name,profile:{width,mode,cpu_rate:job.cpu_rate||1,network:job.network||null},at:new Date().toISOString(),status:response.status(),final_url:cleanUrl(page.url()),initial,sample,geometry,axe,interactions:interactionResults,network_metrics:networkMetrics,navigation_network:navigationNetwork,network:[...network.values()],errors,coverage};
+    const record={page:spec.name,profile:{width,mode,cpu_rate:job.cpu_rate||1,network:job.network||null},at:new Date().toISOString(),status:response.status(),final_url:cleanUrl(page.url()),initial,sample,geometry,axe,interactions:interactionResults,network_metrics:networkMetrics,navigation_network:navigationNetwork,network:network.snapshot(),network_limitations:'CDP encodedDataLength por salto; incluye redirects observados. Transferencias sin longitud se cuentan como no medidas, no como cero bytes. No equivale a bytes decodificados.',errors,coverage};
     await fs.writeFile(path.join(out,label+'.json'),JSON.stringify(record,null,2));
     result.records.push({page:spec.name,width,mode,file:label+'.json',screenshot:label+'.png'});
    }finally{await context.close();}
@@ -168,7 +166,7 @@ try{
    if(browser.__protectionError)throw Error('No se pudo proteger una pestaña; auditoría detenida.');
    if(lhr.runtimeError||new URL(lhr.finalDisplayedUrl).pathname.startsWith('/password'))throw Error('Lighthouse no midió la página requerida.');
    const metrics={lcp_ms:lhr.audits['largest-contentful-paint'].numericValue,cls:lhr.audits['cumulative-layout-shift'].numericValue,tbt_ms:lhr.audits['total-blocking-time'].numericValue};
-   const artifact={page:spec.name,profile,at:lhr.fetchTime,lighthouse_version:lhr.lighthouseVersion,config:lhr.configSettings,network_policy:'read-only-all-tabs-v1',environment:result.environment,metrics,field_inp:null,warnings:lhr.runWarnings};
+   const artifact={page:spec.name,profile,at:lhr.fetchTime,lighthouse_version:lhr.lighthouseVersion,config:lhr.configSettings,network_policy:'read-only-all-tabs-v1',environment:result.environment,metrics,field_inp:null,warnings:lhr.runWarnings,evidence:lighthouseEvidence(lhr)};
    await fs.writeFile(path.join(out,`${spec.name}-${profile}-metrics.json`),JSON.stringify(artifact,null,2));
    for(const [name,value] of Object.entries(metrics))if(job.budgets?.[name]!=null)check(`${spec.name}:${profile}:${name}`,value<=job.budgets[name],{value,budget:job.budgets[name],type:'proposed_budget'});
   }

@@ -12,7 +12,9 @@ return await page.evaluate(()=>({
       navigation:performance.getEntriesByType('navigation').map(e=>e.toJSON()),
       paint:performance.getEntriesByType('paint').map(e=>e.toJSON()),
       performance:window.__audit||null,
-      resources:performance.getEntriesByType('resource').map(e=>({name:e.name,initiatorType:e.initiatorType,transferSize:e.transferSize,encodedBodySize:e.encodedBodySize,decodedBodySize:e.decodedBodySize,duration:e.duration})),
+      resources:performance.getEntriesByType('resource').map(e=>({name:e.name,initiatorType:e.initiatorType,transferSize:e.transferSize,encodedBodySize:e.encodedBodySize,decodedBodySize:e.decodedBodySize,duration:e.duration,
+       startTime:e.startTime,fetchStart:e.fetchStart,requestStart:e.requestStart,responseStart:e.responseStart,responseEnd:e.responseEnd,
+       timing_detail_available:e.requestStart>0&&e.responseStart>0})),
       domNodes:document.getElementsByTagName('*').length,
       forms:[...document.forms].map(e=>({action:e.action,method:e.method,inputs:[...e.elements].map(x=>({tag:x.tagName,type:x.type,name:x.name,hasLabel:!!(x.labels&&x.labels.length),ariaLabel:x.getAttribute('aria-label')}))}))
     }));

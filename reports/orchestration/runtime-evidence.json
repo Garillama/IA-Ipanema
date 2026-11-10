@@ -1,0 +1,128 @@
+{
+  "verified_at": "2026-11-08T20:27:37.124319+00:00",
+  "runtimes": {
+    "claude": {
+      "available": true,
+      "version_output": "2.1.319 (Claude Code)",
+      "version_exit": 0,
+      "authentication_tested": false,
+      "inference_executed": false
+    },
+    "codex": {
+      "available": true,
+      "version_output": "codex-cli 0.167.0",
+      "version_exit": 0,
+      "authentication_tested": false,
+      "inference_executed": false
+    },
+    "commandcode": {
+      "available": true,
+      "version_output": "1.88.5",
+      "version_exit": 0,
+      "authentication_tested": false,
+      "inference_executed": false
+    }
+  },
+  "codex_selected_model_metadata": [
+    {
+      "id": "gpt-6.1-sol",
+      "efforts": [
+        "low",
+        "medium",
+        "high",
+        "xhigh",
+        "max",
+        "ultra"
+      ],
+      "evidence": "local CLI model metadata; not account probe"
+    },
+    {
+      "id": "gpt-6-astra",
+      "efforts": [
+        "low",
+        "medium",
+        "high",
+        "xhigh",
+        "max",
+        "ultra"
+      ],
+      "evidence": "local CLI model metadata; not account probe"
+    },
+    {
+      "id": "gpt-6-luna",
+      "efforts": [
+        "low",
+        "medium",
+        "high",
+        "xhigh",
+        "max"
+      ],
+      "evidence": "local CLI model metadata; not account probe"
+    }
+  ],
+  "commandcode_catalog": {
+    "method": "commandcode --list-models",
+    "model_count_reported": 96,
+    "selected_ids": [
+      "deepseek/deepseek-v4.1-flash",
+      "moonshotai/kimi-k3.1-pro"
+    ],
+    "effort_override_verified_for_selected_models": false
+  },
+  "claude_model_source": "https://code.claude.com/docs/en/model-config",
+  "codex_model_source": "https://learn.chatgpt.com/docs/models",
+  "commandcode_model_source": "https://commandcode.ai/docs/reference/cli/models",
+  "limits": [
+    "Installed CLI and catalog do not prove authentication, credit, account permission or successful inference.",
+    "No credential files examined; no installs or inference performed.",
+    "CommandCode model list was queried; no model request was sent."
+  ],
+  "native_auth_candidates": {
+    "claude": {
+      "home_relative": ".claude/.credentials.json",
+      "exists": true,
+      "contents_read": false
+    },
+    "codex": {
+      "home_relative": ".codex/auth.json",
+      "exists": true,
+      "contents_read": false
+    },
+    "commandcode": {
+      "home_relative": ".commandcode/auth.json",
+      "exists": true,
+      "contents_read": false
+    }
+  },
+  "runtime_assets_observed": {
+    "claude": {
+      "kind": "standalone native executable",
+      "home_relative": ".local/share/claude/versions/2.1.319"
+    },
+    "codex": {
+      "kind": "standalone native executable",
+      "home_relative": ".codex/packages/standalone/releases/0.167.0-x86_64-unknown-linux-musl/bin/codex"
+    },
+    "commandcode": {
+      "kind": "Node package entrypoint; needs package and Node",
+      "home_relative": ".local/lib/node_modules/command-code/dist/index.mjs"
+    }
+  },
+  "commandcode_final_result_contract": {
+    "type": "result",
+    "subtype_values": [
+      "success",
+      "error",
+      "max_turns"
+    ],
+    "text_key": "finalText",
+    "usage_key": "usage",
+    "duration_key": "durationMs",
+    "optional_keys": [
+      "sessionId",
+      "stopReason",
+      "error"
+    ],
+    "source": "https://commandcode.ai/docs/headless"
+  }
+}

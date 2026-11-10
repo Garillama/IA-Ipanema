@@ -1,0 +1,71 @@
+{
+  "verified_at": "2026-11-08",
+  "sources": {
+    "claude": "https://code.claude.com/docs/en/model-config",
+    "codex": "https://learn.chatgpt.com/docs/models",
+    "commandcode": "https://commandcode.ai/docs/reference/cli/models"
+  },
+  "profiles": {
+    "claude": {
+      "fast": {
+        "model": "claude-haiku-5-5",
+        "effort": "low"
+      },
+      "balanced": {
+        "model": "claude-sonnet-5-5",
+        "effort": "medium"
+      },
+      "strong": {
+        "model": "claude-opus-5-5",
+        "effort": "high"
+      },
+      "critical": {
+        "model": "claude-fable-5-1",
+        "effort": "high"
+      }
+    },
+    "codex": {
+      "fast": {
+        "model": "gpt-6-luna",
+        "effort": "low"
+      },
+      "balanced": {
+        "model": "gpt-6.1-sol",
+        "effort": "medium"
+      },
+      "strong": {
+        "model": "gpt-6.1-sol",
+        "effort": "high"
+      },
+      "critical": {
+        "model": "gpt-6-astra",
+        "effort": "high"
+      }
+    },
+    "commandcode": {
+      "fast": {
+        "model": "deepseek/deepseek-v4.1-flash",
+        "effort": null
+      },
+      "balanced": {
+        "model": "deepseek/deepseek-v4.1-flash",
+        "effort": null
+      },
+      "strong": {
+        "model": "moonshotai/kimi-k3.1-pro",
+        "effort": null
+      },
+      "critical": {
+        "model": "moonshotai/kimi-k3.1-pro",
+        "effort": null
+      }
+    }
+  },
+  "limitations": [
+    "Catalogs and documented aliases are not successful model/account probes.",
+    "Effort omitted for CommandCode because selected model-specific effort contract was not verified.",
+    "CommandCode critical reuses strong: review independence, not maximum provider capacity.",
+    "Claude Fable critical can require additional credits and is never a silent automatic fallback.",
+    "No ultra effort: automatic provider delegation would conflict with central scheduling."
+  ]
+}

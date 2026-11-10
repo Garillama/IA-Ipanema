@@ -1,0 +1,61 @@
+{
+  "at": "2026-11-09T16:21:09.598255+00:00",
+  "project": "damarbeauty",
+  "previous_changes_preserved": {
+    "layouts/layout.tpl": true,
+    "snippets/logo/logo-img.tpl": true
+  },
+  "risk": "L3",
+  "access": {
+    "home": 403,
+    "provided_preview": 403,
+    "retried_after_403": false,
+    "remote_mutations": false
+  },
+  "lcp": {
+    "historical_mobile_lighthouse_ms": 23123.374,
+    "sample_count": 1,
+    "identity_recorded": false,
+    "decomposition_percentages": null,
+    "new_comparable_samples": 0,
+    "blocked": "HTTP403; no fresh remote measurements"
+  },
+  "images": {
+    "carousel_mobile_png_bytes": [
+      1143230,
+      1612749
+    ],
+    "carousel_mobile_natural_size": [
+      1122,
+      1402
+    ],
+    "visible_in_390_capture": false,
+    "loading": "lazy",
+    "desktop_natural_size": [
+      3780,
+      1890
+    ],
+    "hero_mobile": {
+      "natural_size": [
+        2752,
+        1536
+      ],
+      "rendered_size": [
+        350,
+        246
+      ],
+      "bytes": 507914,
+      "priority": "high"
+    },
+    "candidate_identity": "Hero area matches old unthrottled LCP size; inference only"
+  },
+  "source": {
+    "carousel_block": "blocks/damar-image-carousel-slide.tpl",
+    "consumer": "sections/damar-image-carousel.tpl",
+    "native_helper": "snippets/image.tpl",
+    "helper_art_direction_supported": false,
+    "twig_runtime_available": false,
+    "media_srcSets_response_available": false
+  },
+  "decision": "Preserve prior local theme changes. Do not blindly nest native helper pictures or fabricate sizes/URLs. Implement runtime recovery and performance evidence preservation; image changes require media response and compatible rendering QA."
+}

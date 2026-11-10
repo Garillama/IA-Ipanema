@@ -1,0 +1,40 @@
+{
+  "schema_version": 2,
+  "id": "damarbeauty",
+  "name": "Damar Beauty",
+  "theme_root": null,
+  "environment": "production-read-only",
+  "public_url": "https://damarbeauty.mx",
+  "discovery_root": "ipanema-discovery",
+  "knowledge_reference_project": "ipanema",
+  "evidence_dir": "reports/runs/damarbeauty",
+  "remote_observation": {
+    "observed_at": "2026-11-09T19:38:27.091286+00:00",
+    "theme": "ipanema",
+    "variant": "Clothing-2",
+    "version": "1.7.0",
+    "forked": true,
+    "productive": true,
+    "installation_id": 14748767,
+    "verified_by": "native_cli_theme_list",
+    "source_evidence": "reports/runs/damarbeauty/20261109T192635-preview-discovery-2c5db1d7/discovery.json"
+  },
+  "qa": {
+    "pages": {
+      "home": "/",
+      "category": "/lo-mas-nuevo-lippies/",
+      "pdp": "/productos/r-h-o-d-e-peptide-lip-tint/"
+    },
+    "widths": [
+      360,
+      390,
+      768,
+      1024,
+      1440,
+      1920
+    ]
+  },
+  "store_id": 8408995,
+  "theme_installation_id": 14748767,
+  "theme_reference": "production-read-only"
+}

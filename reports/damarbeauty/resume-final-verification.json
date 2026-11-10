@@ -1,0 +1,69 @@
+{
+  "at": "2026-11-09T16:37:13.861831+00:00",
+  "project": "damarbeauty",
+  "state": "partial_remote_access_and_independent_review_blocked",
+  "previous_theme_changes_preserved": {
+    "layouts/layout.tpl": true,
+    "snippets/logo/logo-img.tpl": true
+  },
+  "theme_modified_files": [
+    "layouts/layout.tpl",
+    "snippets/logo/logo-img.tpl"
+  ],
+  "new_theme_changes": false,
+  "production_changed": false,
+  "tool_hashes": {
+    "tools/ipanema/orchestration/recovery.py": "046fa0586a89cbba6a6604aefb1c4a8f18ac336fb8a1cd3793ca6882669f92a3",
+    "tools/ipanema/orchestration/engine.py": "01ea314b75710dbc78a461437d07478a6bffe5da726bf0e34968be35af70a860",
+    "tools/ipanema/orchestration/isolation.py": "1937862def1ee079f225016e192a69ac2917d4ea15fdc4ae3340a8b7a89c9bea",
+    "tools/ipanema/orchestration/cli.py": "e9abde40bb5331e6ef2124b029e03617d9fb24964fca15c5877505c4c098723b",
+    "tools/performance_evidence.mjs": "8dacf6eb1348fca7cf3494a89e8e15a21c8b898a46ae3b5d9b0e70da64fe4dc7",
+    "tools/qa_browser.mjs": "b895dd9a1722f4158f74f02892c9ac40e929e98adf695b80cf2d084b954be5bc",
+    "tools/page_collectors.mjs": "7edbfcfb9ec354eef5298b924d35703fc444e999917eb2c3554c20682944c75e",
+    "tests/unit/test_orchestration_recovery.py": "b798b90ebdded421953e74df3e6b14c21b5b307b829ea7fde7eb6b0d9320cd48",
+    "tests/unit/test_performance_evidence.py": "bcc60af9faa3ee1680182e3862761f2b2f7ff3e7946df9341889f1b652273b59",
+    "reports/damarbeauty/measure-lab.mjs": "9d118ef34f9ef5f980ff49cac08f162fad0caf0095e54512ab6c2bf22e1db65e"
+  },
+  "agent_fingerprint": "0b3d38692f9cf095ea1a59d207319f114c3b868fec212f16ca6d18d572b28a29",
+  "qa": {
+    "quick_report": "reports/runs/damarbeauty/20261109T163431-quick-6f85c3bd/report.json",
+    "quick_outcome": "passed",
+    "browser_fixture_tests": 8,
+    "browser_fixture_outcome": "passed",
+    "performance_evidence_tests": 7,
+    "performance_evidence_outcome": "passed",
+    "orchestration_regression_tests": 52,
+    "orchestration_regression_outcome": "passed",
+    "isolated_qa_total": 136,
+    "isolated_qa_skipped": 9,
+    "isolated_qa_outcome": "passed_with_explicit_skips",
+    "theme_diff_check_passed": true,
+    "agent_diff_check_passed": true
+  },
+  "independent_review": {
+    "run": "reports/runs/damarbeauty/20261109T163424-orchestration-9721f07a",
+    "state": "blocked",
+    "agent": "commandcode",
+    "model": {
+      "model": "deepseek/deepseek-v4.1-flash",
+      "effort": null,
+      "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+      "verified_at": "2026-11-08"
+    },
+    "category": "timeout",
+    "context_complete": true,
+    "process_reaped": true,
+    "approval": false
+  },
+  "remote": {
+    "home_http": 403,
+    "owner_provided_preview_http": 403,
+    "new_lighthouse_samples": 0,
+    "lcp_improvement": "not_verified",
+    "lcp_percent_attribution": "not_available",
+    "twig_platform_render": "blocked",
+    "visual_regression_damar": "incomplete"
+  },
+  "resume_across_controller_processes": false,
+  "temporary_runtime_config_removed": true
+}

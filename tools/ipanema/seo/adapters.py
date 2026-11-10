@@ -159,7 +159,9 @@ class OfficialREST:
         body = None; method = 'GET'
         if provider == 'gsc':
             site = quote(req['siteUrl'], safe='')
-            if operation == 'inspect_url':
+            if operation == 'site_info':
+                url = f'https://www.googleapis.com/webmasters/v3/sites/{site}'
+            elif operation == 'inspect_url':
                 url = 'https://searchconsole.googleapis.com/v1/urlInspection/index:inspect'
                 body = req
             else:

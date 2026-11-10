@@ -17,6 +17,8 @@ Herramientas permitidas: lectura con rg, `tools/ia.py doctor/search/plan`, `tool
 
 ## Recuperación y herramientas SEO
 
+Para acceso compartido de Claude/Codex/CommandCode consulta [la puerta de herramientas](../../../reports/access/README.md): `access doctor --probe-devtools` verifica el MCP real; los permisos se emiten por agente/proyecto/tarea fuera del worker. Reutiliza REST para GSC y Puppeteer/Lighthouse para QA repetible. No instalar otros MCP, conceder permisos ni iniciar OAuth por activar esta skill.
+
 Para operar el motor carga [seo-engine](../../../ipanema-discovery/04-seo/seo-engine.md); para tipos y requisitos, [structured-data](../../../ipanema-discovery/04-seo/structured-data.md). Solo si hay datos de cuentas o MCP carga [google-integrations](../../../ipanema-discovery/04-seo/google-integrations.md). Home, categorías, PDP y blog tienen sus documentos enlazados desde esos índices. No cargues todo el discovery.
 
 1. Selecciona proyecto y comprueba evidencia/fecha, archivos actuales y consumidores. `seo source` audita los snippets disponibles y prepara un diff; nunca lo aplica. El modelo de ramas no es Twig real.

@@ -1,0 +1,40 @@
+{
+  "at": "2026-11-08T21:00:08.326866+00:00",
+  "agent_version": "2.2.0",
+  "state": "passed_local_scope",
+  "quick": {
+    "report": "reports/runs/ipanema/20261108T205826-quick-383f59e3/report.json",
+    "sha256": "9c69a1e2e3d0937b264f9f74ffdd91c1f398ac7b234fdf3d156dc8971a8c5a07",
+    "outcome": "passed",
+    "counts": {
+      "unit-tests": 109,
+      "integration-tests": 25
+    }
+  },
+  "orchestration_tests": {
+    "total": 34,
+    "report": "reports/runs/ipanema/20261108T205714-orchestration-8053fec5/report.json",
+    "outcome": "passed",
+    "includes": "real Git/Bubblewrap and explicitly mocked DAG workers"
+  },
+  "coordinator_evaluations": 10,
+  "seo_action_evaluations": 8,
+  "repository_errors": [],
+  "markdown_links_checked": 4476,
+  "theme_files_checked": 330,
+  "theme_files_unchanged": 330,
+  "real_inference_evidence": "reports/orchestration/live-verification.json",
+  "models_quality_ranking": "not_executed",
+  "production_modified": false,
+  "credential_scan": {
+    "high_confidence_alerts": [],
+    "scope": "Git candidate files, key/token patterns; not universal privacy certification"
+  },
+  "skill_validation": "quick_validate ipanema-storefront passed",
+  "diff_whitespace": "git diff --check passed",
+  "limits": [
+    "No storefront visual/performance regression with modified production code",
+    "No real commercial L4 operation",
+    "Provider account/model availability is dated evidence, not permanent truth"
+  ]
+}

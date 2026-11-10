@@ -125,6 +125,551 @@
         "productive": true,
         "must_reverify_before_changes": true
       }
+    },
+    {
+      "id": "shared-access-mcp-rest-v1",
+      "problem": "Acceso común a herramientas de diagnóstico sin duplicar QA ni transportar credenciales a workers.",
+      "context": "Claude, Codex y CommandCode; protocolo MCP stdio probado con configuraciones por tarea.",
+      "component": "shared-access-gateway",
+      "files": [
+        "tools/ipanema/access/devtools.py",
+        "tools/ipanema/access/cli.py",
+        "tools/ipanema/access/mcp.py",
+        "tools/ipanema/access/__init__.py",
+        "tools/ipanema/access/gateway.py",
+        "tools/ipanema/access/policy.py",
+        "tools/access_mcp.py",
+        "tools/ia.py",
+        "tests/unit/test_access.py",
+        "tests/integration/test_access_cli.py",
+        "tests/browser/test_access_browser.py",
+        ".agents/skills/ipanema-seo-expert/SKILL.md",
+        "README.md"
+      ],
+      "cause": "Existían contratos y REST SEO, pero faltaba una puerta común que aplicara permisos persistentes y lanzara DevTools aislado.",
+      "solution": "Gateway con permisos locales por agente/proyecto/tarea y DevTools 1.12.0; GSC/GA/Merchant reutilizan OfficialREST.",
+      "tests": [
+        "143 unitarias",
+        "28 integración",
+        "10 navegador; Chrome y DevTools reales en loopback",
+        "Descubrimiento real de 7 herramientas upstream"
+      ],
+      "results": "QA quick y fixtures passed. Permisos, cuotas, caducidad, revocación y detención 403/429 verificados.",
+      "limitations": [
+        "Sin lectura real de cuentas Google: falta OAuth.",
+        "Configuraciones y protocolo probados; sin inferencia de modelos ni registro en configuraciones personales.",
+        "Perfil limitado al origen: bloquea CDN y terceros.",
+        "La política del gateway no aísla procesos del mismo usuario con escritura en el controlador.",
+        "Pin/integridad npm comprobados por separado; no auditoría exhaustiva de dependencias."
+      ],
+      "risks": [
+        "No usar las métricas del perfil restringido como equivalentes a carga completa.",
+        "No conceder a workers montajes de política/credenciales."
+      ],
+      "compatibility": "Python estándar Linux con flock, Node compatible y Chrome >=149; selección Project V2.",
+      "reuse": "Reutiliza Puppeteer/Lighthouse, QA, Project y adaptadores SEO.",
+      "scope": "workspace",
+      "status": "verified",
+      "agent_version": "2.2.0",
+      "agent_fingerprint": "3cb4f9cf8bd2bea46d526665269af96101bc5d72a9a2f75f0ccce07b8cf7f455",
+      "project": "ipanema",
+      "theme_installation_id": 14837617,
+      "at": "2026-11-09T19:02:38.602021+00:00",
+      "source_hashes": {
+        "tools/ipanema/access/devtools.py": "db094509eabfd3aedc85c5f8b3f2851c7e83aff6547e2e12f04d8668ed4485b7",
+        "tools/ipanema/access/cli.py": "96d9efdbc38ceb843cff8aa1271336aa877d5c2d6223be32b08ed49a6f64e71f",
+        "tools/ipanema/access/mcp.py": "47294d328b69eb1b2227b2e661828ceae25cfb850635aeb92b6ed4d4bbdaac9d",
+        "tools/ipanema/access/__init__.py": "6a3ed319e9dd104badfc1d3884a51025bcd056362ac7072eb6be7d41ba48eb29",
+        "tools/ipanema/access/gateway.py": "6d151bf289d32293ce1c0c6543ae7d7982a691c78f29bf56af1be5e7af7fea35",
+        "tools/ipanema/access/policy.py": "2198fc4ca5920ae27f80ffbcfa97b833015c49ab93fd1da29d1f33d74298a166",
+        "tools/access_mcp.py": "89631609d932cfa9cc991752c341db87d63d133bef94d0bb7966559ad63bf520",
+        "tools/ia.py": "85e955b9dcbffb42a7f97eeeb65d4dc2b82f76f56f14cb72c4c7f28b74ce4b15",
+        "tests/unit/test_access.py": "c31b5f054fe7c688740bdbeb37d9881edfe972c697239830a6da3120aaa30224",
+        "tests/integration/test_access_cli.py": "62e526a5d14910ac37e81358f75c5f0d7fa03bd83a954a43b46e3bd24842106e",
+        "tests/browser/test_access_browser.py": "2d0776ff218b2cdc48b47230b97d822a47c2358082ec5c1dac0517caf20b8015",
+        ".agents/skills/ipanema-seo-expert/SKILL.md": "6547ece2abf9e02dd28caa9a4d98dcae1f94bd2f7c01e81481ce5c537a38fc05",
+        "README.md": "9f2f68acc7c837a0e8d75d32c16953f34c82763eb82ffcb876dcbf8a6bf0f694"
+      },
+      "evidence": [
+        {
+          "path": "reports/runs/ipanema/20261109T190123-quick-e572af49/report.json",
+          "sha256": "7fff48554d7d8a090cf87d225f01e4925eb3c37a9a594d065a94edcfeae5ca67"
+        },
+        {
+          "path": "reports/runs/ipanema/20261109T185930-fixtures-e5bed2c6/report.json",
+          "sha256": "3fee5373f242913ad518d15277fcce5fddb5398ec30438e1bdfb4a5ef14fa1c5"
+        }
+      ],
+      "remote_version_observation": {
+        "observed_at": "2026-11-08",
+        "theme": "ipanema",
+        "variant": "Deco",
+        "version": "1.8.0",
+        "forked": true,
+        "productive": true,
+        "must_reverify_before_changes": true
+      }
+    },
+    {
+      "id": "damar-footer-target-size-v1",
+      "problem": "Enlaces de WhatsApp/email del footer con altura de 16px y hallazgos target-size observados.",
+      "context": "DaMar Beauty, instalación publicada 14748767, único push de CSS condicionado autorizado.",
+      "component": ".section-footer .damar-footer-support__column a",
+      "files": [
+        "static/css/damar.css"
+      ],
+      "cause": "La regla existente solo definía text-decoration; enlaces sin altura mínima.",
+      "solution": "Añadir inline-flex, align-items:center y min-height:24px en la regla existente.",
+      "tests": [
+        "QA fuente",
+        "Seis casos publicados: home/categoría/PDP a 390 y 1440",
+        "Axe completo antes/después y auditoría SEO de capturas reales",
+        "Diff nativo posterior:469 iguales"
+      ],
+      "results": "Footer >=24px, sin overflow ni axe de footer; cero targets axe nuevos y cero hallazgos SEO nuevos. Footer móvil +16/+20px esperado, desktop sin aumento.",
+      "limitations": [
+        "No acredita AA ni corrige los hallazgos previos de página completa.",
+        "Sin mejora de velocidad/indexación atribuida.",
+        "Una captura por caso; sin diff por píxel de contenido dinámico."
+      ],
+      "risks": [
+        "Cambios posteriores de estilos/componentes requieren revalidación."
+      ],
+      "compatibility": {
+        "theme": "ipanema",
+        "variant": "Clothing-2",
+        "version": "1.7.0",
+        "installation_id": 14748767
+      },
+      "reuse": "Revalidar cascada y consumidores en cada tienda; no transfiere código ni autorización de publicación.",
+      "scope": "theme",
+      "status": "verified",
+      "agent_version": "2.2.0",
+      "agent_fingerprint": "c2ba87c4d6583c21d3ebb1eb98857a88cda658b4866b9e68ef9c2567e983127a",
+      "project": "damarbeauty",
+      "theme_installation_id": 14748767,
+      "at": "2026-11-09T20:19:10.881124+00:00",
+      "source_hashes": {
+        "static/css/damar.css": "aad247fbfa8160beaf4efda3d01c470d46eb4b53f08a37bb1152b018192916d5"
+      },
+      "evidence": [
+        {
+          "path": "reports/runs/damarbeauty/20261109T201036-published-footer-qa-56b0b215/after-qa.json",
+          "sha256": "17bfdc6956b302ab6dd121d587c48e1d79bd9b7f5e6cab07f9b16beee7e71f27"
+        }
+      ],
+      "remote_version_observation": {
+        "observed_at": "2026-11-09T19:38:27.091286+00:00",
+        "theme": "ipanema",
+        "variant": "Clothing-2",
+        "version": "1.7.0",
+        "forked": true,
+        "productive": true,
+        "installation_id": 14748767,
+        "verified_by": "native_cli_theme_list",
+        "source_evidence": "reports/runs/damarbeauty/20261109T192635-preview-discovery-2c5db1d7/discovery.json"
+      }
+    },
+    {
+      "id": "rhino-mobile-css-hidden-embla-20261109",
+      "problem": "CLS móvil por estilos de colección diferidos y construcción inicial de cinco carruseles ocultos.",
+      "context": "RHINO en carpeta local autorizada Rhino-Ipanema; evidencia de replay controlado, HTML capturado desde rhino-performance.com. El registro histórico ipanema conserva otra installation ID; esta solución no acredita versión remota sincronizada.",
+      "component": "CSS crítico de colección y product-carousel.js",
+      "files": [
+        "static/css/style-critical.css",
+        "static/css/style-async.css",
+        "static/js/product-carousel.js"
+      ],
+      "cause": "Las reglas de estructura estaban en media print hasta onload; build() inicializaba paneles hidden.",
+      "solution": [
+        "Mover 15.441 bytes de reglas existentes de controles de categoría y Colección Rhino desde style-async.css a style-critical.css; conservar valores, sin duplicarlas.",
+        "Aparcar los paneles hidden mediante park(state) antes de construir Embla; reutilizar product-carousel:refresh al seleccionar una pestaña."
+      ],
+      "tests": [
+        "home-initial-cls",
+        "css-identical-rules-moved",
+        "hidden-embla-panels-deferred",
+        "responsive-tabs",
+        "keyboard-home-end-dom-handlers",
+        "carousel-breakpoint-rebuild",
+        "collection-visual-six-widths",
+        "final-home-geometry",
+        "no-new-overflow",
+        "lab-regression-threshold",
+        "theme-source-schema",
+        "javascript-syntax",
+        "workspace-quick",
+        "source-hashes-stable"
+      ],
+      "results": {
+        "method": {
+          "width": 390,
+          "height": 844,
+          "dpr": 1.75,
+          "cpu": 4,
+          "latency_ms": 150,
+          "download_kbps": 1600,
+          "cold_cache": true,
+          "samples": 3
+        },
+        "medians_and_samples": {
+          "before": {
+            "fcp_ms": {
+              "median": 1228,
+              "samples": [
+                1292,
+                1228,
+                1044
+              ]
+            },
+            "lcp_ms": {
+              "median": 1476,
+              "samples": [
+                1476,
+                1380,
+                2224
+              ]
+            },
+            "cls": {
+              "median": 0.20922741272269094,
+              "samples": [
+                0.20922741272269094,
+                0.20922741272269094,
+                0.20922741272269096
+              ]
+            },
+            "long_task_excess_ms": {
+              "median": 2449,
+              "samples": [
+                2327,
+                2462,
+                2449
+              ]
+            },
+            "initial_embla_instances": [
+              6,
+              6,
+              6
+            ]
+          },
+          "after": {
+            "fcp_ms": {
+              "median": 1288,
+              "samples": [
+                1288,
+                1284,
+                1296
+              ]
+            },
+            "lcp_ms": {
+              "median": 1432,
+              "samples": [
+                1432,
+                1432,
+                1464
+              ]
+            },
+            "cls": {
+              "median": 0.0003315203024329055,
+              "samples": [
+                0.0003315203024329055,
+                0.0003315203024329055,
+                0.0003315203024329055
+              ]
+            },
+            "long_task_excess_ms": {
+              "median": 2643,
+              "samples": [
+                2643,
+                2393,
+                2701
+              ]
+            },
+            "initial_embla_instances": [
+              1,
+              1,
+              1
+            ]
+          }
+        },
+        "interpretation": "CLS mejoró de forma consistente; LCP bajó 44 ms, diferencia pequeña frente a variabilidad. FCP subió 60 ms y long-task excess subió 194 ms; no se demostró mejora en ellos. No atribuir a esta optimización una reducción de INP o TBT.",
+        "html_ttfb": "No comparable: HTML servido por loopback."
+      },
+      "limitations": [
+        "Validar render de plataforma y mediciones remotas tras una futura publicación autorizada; no se ejecutó watch/push/publish/pull.",
+        "Sin INP de campo y sin TTFB posterior de producción. Tres muestras no prueban significancia de pequeñas diferencias de LCP/FCP/CPU.",
+        "Las etiquetas/apps de plataforma siguen dominando transferencia y CPU. Para optimizarlas se requiere revisar su configuración nativa y dependencias comerciales con acceso específico.",
+        "Se conservan los desbordamientos previos de escritorio y alertas de accesibilidad ajenos al cambio.",
+        "El CSS crítico gzip del fixture pasó de 37.964 a 41.176 bytes; el async bajó de 44.968 a 42.190. El total gzip subió 434 bytes, con mayor parte disponible antes del primer paint. El CDN puede minificar de otra forma.",
+        "Los cambios previos del usuario permanecen; rhino-performance.patch contiene exclusivamente este intento."
+      ],
+      "risks": [
+        "Aumento de bytes críticos antes de paint.",
+        "El motor previamente visitado puede seguir activo al ocultarse; no se modifica ese ciclo de vida.",
+        "Revalidar cambios de tema, HTML, proyecto, CSS, motores y apps."
+      ],
+      "compatibility": "Verificado exclusivamente sobre hashes locales y replay de RHINO; no certifica otra tienda, versión, render Twig, producción ni AA.",
+      "reuse": "Reutilizar el patrón y verificar consumidores; no transferir código de cliente ni asumir derechos sobre el tema.",
+      "scope": "theme",
+      "status": "verified",
+      "agent_version": "2.2.0",
+      "agent_fingerprint": "c2ba87c4d6583c21d3ebb1eb98857a88cda658b4866b9e68ef9c2567e983127a",
+      "project": "ipanema",
+      "theme_installation_id": 14837617,
+      "at": "2026-11-09T21:00:49.351835+00:00",
+      "source_hashes": {
+        "static/css/style-critical.css": "90c086e38d872c9503dfee77a858be29f99780404b26b4140893da0b33820781",
+        "static/css/style-async.css": "7f49b513cd0e4fb1a10ba7b88a69bd8ab9ebd9906e7196f3d708b71aaff9d31c",
+        "static/js/product-carousel.js": "2f443fadc2c4ccd90f41270dbf13272e12a61b75e036da7df2f4bba022668077"
+      },
+      "evidence": [
+        {
+          "path": "reports/runs/ipanema/rhino-local-changes-20261109/scoped-qa.json",
+          "sha256": "59df79d9b2e4f60ef98a7d730bf9cbc55cadbd6588e38cf1fecac692dd28bc17"
+        }
+      ],
+      "remote_version_observation": {
+        "observed_at": "2026-11-08",
+        "theme": "ipanema",
+        "variant": "Deco",
+        "version": "1.8.0",
+        "forked": true,
+        "productive": true,
+        "must_reverify_before_changes": true
+      }
+    },
+    {
+      "id": "rhino-mobile-viewport-native-assets-20261109-v2",
+      "problem": "Medios y carruseles activos fuera de pantalla; scripts de componentes ausentes; Contacto sin estructura antes del CSS asíncrono y galería móvil sobredimensionada.",
+      "context": "RHINO, instalación publicada 14828608, copia Rhino-Ipanema. El ID del registro histórico ipanema no acredita esta instalación; usar evidencia nativa de esta ejecución.",
+      "component": "Medios, carruseles, recursos condicionales, CSS de formularios y galería PDP",
+      "files": [
+        "sections/video.tpl",
+        "layouts/layout.tpl",
+        "snippets/product/product-image.tpl",
+        "static/css/style-critical.css",
+        "static/css/style-forms.css",
+        "static/css/style-async.css",
+        "static/js/blog-carousel.js",
+        "static/js/sectionfy-faq-section.js",
+        "static/js/media-visibility.js",
+        "static/js/store.js",
+        "static/js/featured-collection.js",
+        "static/js/product-carousel.js",
+        "static/js/athletes-carousel.js",
+        "static/js/libraries-standalone.js",
+        "static/js/product-video.js"
+      ],
+      "cause": "Autoplay sin ciclo persistente de visibilidad y assets incondicionales; reglas de formulario asíncronas y sizes ausente.",
+      "solution": [
+        "Videos use viewport/document visibility and preserve explicit user pause. YouTube/Vimeo are created once on demand with native autoplay=0; API-ready controls reconcile late loads. Reduced motion/saveData keep the poster unless explicitly requested.",
+        "Embla product/blog/athletes initialize on visibility and pause autoplay offscreen, in hidden tabs, in background documents and under reduced motion. Old product tabs are parked immediately. Existing engines/controls/drag/loop reused.",
+        "Native Swiper theme bootstrap respects visibility/reduced motion; vendored library bytes before the bootstrap stayed identical. Header marquee and video trust-pill timers pause when irrelevant.",
+        "Conditional deferred scripts follow actual rendered components, including editor preview exceptions. The server-rendered FAQ binder works independently of the Sectionfy API client.",
+        "Contact/account CSS moved intact into a conditional critical stylesheet; hidden page-header geometry remains critical.",
+        "PDP sizes reflects mobile gutter; browser selected the existing 640px native source instead of 1024px at 390px DPR1.75."
+      ],
+      "tests": [
+        "media-viewport-policy",
+        "live-video-play-pause-resume-manual",
+        "contact-final-design",
+        "contact-critical-style-availability",
+        "pdp-native-responsive-source",
+        "live-page-javascript",
+        "native-platform-validation",
+        "native-push-and-synchronization",
+        "workspace-quick",
+        "javascript-syntax",
+        "source-hashes-stable"
+      ],
+      "results": {
+        "native_push": {
+          "created": 2,
+          "updated": 13,
+          "deleted": 0,
+          "unchanged": 381,
+          "postdiff_unchanged": 396
+        },
+        "video_states": [
+          1,
+          2,
+          1,
+          2
+        ],
+        "live_speed_result": "mixed; no universal speed approval",
+        "comparison": "reports/runs/ipanema/rhino-v2-local-20261109/live-comparison.json"
+      },
+      "limitations": [
+        "No universal LCP/FCP/TTFB improvement demonstrated. Homepage/category and other pages had slower samples after publication; CDN/cache/server and live third parties varied.",
+        "Marketing/platform JavaScript still dominates transfer/CPU. No analytics tags, checkout or transaction behavior were disabled.",
+        "Contact CLS remains borderline; font, header and third-party injection need further controlled attribution.",
+        "Blog cover uses a large original JPEG from the blog CDN. No unsupported resize URL or invented media variant was introduced.",
+        "Five discovered 404 links and E-E-A-T PDF remain next-phase work.",
+        "No claim of field INP, guaranteed Google ranking, indexation or AA compliance."
+      ],
+      "risks": [
+        "Depende del helper y contratos de APIs nativas. Revalidar consumidores/preview tras cambiar composiciones.",
+        "Las medidas de velocidad incluyen variación CDN/terceros; no hay INP de campo."
+      ],
+      "compatibility": "Probado en Chrome móvil con los hashes indicados, escenas de fallback y seis anchos para equivalencia de CSS de Contacto. No extrapolar a otra tienda, versión ni navegador físico.",
+      "reuse": "Reutilizar patrones de observación y motores existentes; comprobar identidad, consumidores y derechos sobre el código.",
+      "scope": "theme",
+      "status": "verified",
+      "agent_version": "2.2.0",
+      "agent_fingerprint": "c2ba87c4d6583c21d3ebb1eb98857a88cda658b4866b9e68ef9c2567e983127a",
+      "project": "ipanema",
+      "theme_installation_id": 14837617,
+      "at": "2026-11-09T22:10:45.834936+00:00",
+      "source_hashes": {
+        "sections/video.tpl": "30491075cb86bcd01f78dd1ee7d120362f2a06f1d1c1486a65a9a25cf7a32c95",
+        "layouts/layout.tpl": "3c0771c6deadaa03fc1a61dab5462cc023bb9e2823b122c43b39d9bd3a9f601c",
+        "snippets/product/product-image.tpl": "68f6f3efcb495b88651a3d5330db42f0ccbf4207ed9cbaa25b2a1d00b6b3b715",
+        "static/css/style-critical.css": "74542a240bf1ef250243bd00448a5397f73b62bba7666431df3db9fd52dbb261",
+        "static/css/style-forms.css": "2af5a73029c74b571377bdc8c67d2a87941a8f20b41809f9a69f3b253714050b",
+        "static/css/style-async.css": "6e9d6c238cea7f51246b12b3ad245ff233c8785e23f52fb64b5d964b9d92b533",
+        "static/js/blog-carousel.js": "bfe1bcf4daa1d43e1b1674cf03a1bc89085725b7b1470cd9ce584d7453c77be2",
+        "static/js/sectionfy-faq-section.js": "c61a71120a4a18e874e83f69d3b44703b78aa0391c2118d5760f8790afd6bfdc",
+        "static/js/media-visibility.js": "93dc9242fcd029907f3fdb704d12d03c214349004fe8cc7ba852587b98d9db83",
+        "static/js/store.js": "598b7a4fc91160434d13db563166b5a8ff770dfc9cbdb11baa259711f56810a0",
+        "static/js/featured-collection.js": "b38ab728dfcab5311f938065655aa25a60279be900e05e592cd7bb4d6627b058",
+        "static/js/product-carousel.js": "9e0aac61812501fed93b0347da48e3fabcbed34f921073ce6794273b9ad1b7de",
+        "static/js/athletes-carousel.js": "98e38513ae19e34c1c6778f52c0b9b04756ef36475aca2b8f97e3969e0238830",
+        "static/js/libraries-standalone.js": "da2638c043034114cb004b2fd99cd4d54ee69c7d569bd2c96cca8e586d2e0d34",
+        "static/js/product-video.js": "651744685d76994aaaae931301e80e81b3466b5fd24281d6a074e333823bb897"
+      },
+      "evidence": [
+        {
+          "path": "reports/runs/ipanema/rhino-v2-local-20261109/scoped-qa.json",
+          "sha256": "3a8c8aa7c05006f1f67d421eb3ba484f96333f9f8194e8a846ffd40c48f1c00d"
+        }
+      ],
+      "remote_version_observation": {
+        "observed_at": "2026-11-08",
+        "theme": "ipanema",
+        "variant": "Deco",
+        "version": "1.8.0",
+        "forked": true,
+        "productive": true,
+        "must_reverify_before_changes": true
+      }
+    },
+    {
+      "id": "rhino-head-literal-patch-prefix-fix-20261109",
+      "problem": "Signos + visibles antes de la barra de anuncios y stylesheet de formularios interpretado fuera de HEAD",
+      "context": "Corrección de una regresión de la segunda ronda de rendimiento RHINO, tema real14828608 tienda7400935",
+      "component": "layouts/layout.tpl; consumidores de páginas completas",
+      "files": [
+        "layouts/layout.tpl"
+      ],
+      "cause": "Cuatro prefijos literales + de un parche quedaron como texto dentro de HEAD; el parser creó BODY antes del cierre previsto",
+      "solution": "Quitar exclusivamente los cuatro caracteres; conservar condicionales, estilos y JavaScript anteriores",
+      "tests": [
+        "HTML público con/sin JavaScript en Inicio/Contacto a390/1904",
+        "Validación nativa de un archivo",
+        "Diff remoto posterior",
+        "Preservación de hashes de los otros14 archivos de rendimiento"
+      ],
+      "results": {
+        "gap_before_px": 21,
+        "gap_after_px": 0,
+        "patch_prefixes_after": 0,
+        "forms_stylesheet_parent_after": "HEAD"
+      },
+      "limitations": [
+        "QA de estructura y barra; no certifica mejora de puntaje PageSpeed, LCP o INP",
+        "Comparaciones de velocidad previas corresponden a una versión que contenía esta regresión y requieren nueva medición"
+      ],
+      "risks": [
+        "Plantilla global; comprobar ramas con y sin stylesheet de formularios"
+      ],
+      "compatibility": "Solo RHINO publicado14828608, Chrome automatizado y anchos390/1904; sin extrapolación a otra tienda",
+      "reuse": "Prevenir texto ajeno al marcado dentro de HEAD y verificar DOM real, además de sintaxis nativa",
+      "scope": "theme",
+      "status": "verified",
+      "agent_version": "2.2.0",
+      "agent_fingerprint": "c2ba87c4d6583c21d3ebb1eb98857a88cda658b4866b9e68ef9c2567e983127a",
+      "project": "ipanema",
+      "theme_installation_id": 14837617,
+      "at": "2026-11-09T22:32:25.516645+00:00",
+      "source_hashes": {
+        "layouts/layout.tpl": "a941460509ed2dc83c91217d2dee8e733a4cd4f35ace34addeed7b2d65c85f69"
+      },
+      "evidence": [
+        {
+          "path": "reports/runs/ipanema/rhino-head-plus-fix-20261109/scoped-qa.json",
+          "sha256": "8b7c4b20764e92150d1b0a27337d86e96b3c4104f0f20962f7e113b6859588b0"
+        }
+      ],
+      "remote_version_observation": {
+        "observed_at": "2026-11-08",
+        "theme": "ipanema",
+        "variant": "Deco",
+        "version": "1.8.0",
+        "forked": true,
+        "productive": true,
+        "must_reverify_before_changes": true
+      }
+    },
+    {
+      "id": "rhino-home-mobile-explicit-video-play-20261109",
+      "problem": "Un toque ajeno al video habilitaba carga automatica del hero en telefono",
+      "context": "RHINO14828608/7400935; usuario solicito portada movil solo desde boton y confirmo uso de todas las integraciones de seguimiento",
+      "component": "initVideoBlocks, video-section-background prioritario de template-home, helper nativo de visibilidad",
+      "files": [
+        "static/js/store.js"
+      ],
+      "cause": "mobileInteracted era compartido con toda la pagina y habilitaba automatic aunque el toque fuese del menu",
+      "solution": "Rama automatica del hero prioritario bloqueada en telefono; manualRequested nativo habilita Play; escritorio/editor y otros videos conservan condicion anterior",
+      "tests": [
+        "home-hero-unrelated-tap-does-not-load-player",
+        "video-carousels-faq-behavior",
+        "javascript-syntax",
+        "native-check",
+        "native-push",
+        "native-postdiff"
+      ],
+      "results": {
+        "behavior_cases": 17,
+        "unrelated_tap_players": 0,
+        "play_control_players": 1,
+        "native_updated_files": 1
+      },
+      "limitations": [
+        "YouTube de fixture es adaptador determinista, no reproductor real",
+        "Lectura adicional del storefront por urllib recibio403: detenida sin reintentos ni cambio de cliente para evadirla. Prueba final de navegador/reproductor real de esta version pendiente.",
+        "Publicidad sigue activa. Las mediciones con mascara de etiquetas son solo diagnosticas; no son el resultado de la tienda publicada.",
+        "No se midio INP de campo."
+      ],
+      "risks": [
+        "Revalidar integracion real y listeners si cambian initVideoBlocks o composicion del hero. No se demuestra mejora de LCP de carga inicial."
+      ],
+      "compatibility": "Fuente exacta validada en Chrome fixtures movil y escritorio; proveedor determinista. Envio nativo validado; reproductor real posterior pendiente por403.",
+      "reuse": "Conservar controles y politica de visibilidad existentes; no reutilizar cifras ni supuestos comerciales entre tiendas",
+      "scope": "theme",
+      "status": "verified",
+      "agent_version": "2.2.0",
+      "agent_fingerprint": "c2ba87c4d6583c21d3ebb1eb98857a88cda658b4866b9e68ef9c2567e983127a",
+      "project": "ipanema",
+      "theme_installation_id": 14837617,
+      "at": "2026-11-09T22:58:14.115729+00:00",
+      "source_hashes": {
+        "static/js/store.js": "13b446667201830cfb8a4234e3529d533338770fd4c8ccc1d7a07a0379b5d411"
+      },
+      "evidence": [
+        {
+          "path": "reports/runs/ipanema/rhino-v3-home-20261109/scoped-qa.json",
+          "sha256": "7511d8db43727b2f977136f250a4a385a7ae0ca9922d8c36b7ecbaaee186814c"
+        }
+      ],
+      "remote_version_observation": {
+        "observed_at": "2026-11-08",
+        "theme": "ipanema",
+        "variant": "Deco",
+        "version": "1.8.0",
+        "forked": true,
+        "productive": true,
+        "must_reverify_before_changes": true
+      }
     }
   ]
 }

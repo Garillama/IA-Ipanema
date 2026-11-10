@@ -1,5 +1,8 @@
 {
   "schema_version": 2,
   "default": "ipanema",
-  "projects": {"ipanema": "projects/ipanema.json"}
+  "projects": {
+    "ipanema": "projects/ipanema.json",
+    "damarbeauty": "projects/damarbeauty.json"
+  }
 }

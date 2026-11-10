@@ -37,9 +37,12 @@ def instances(obj, location, results):
     if not isinstance(obj, dict):
         return
     for group, kind in [('sections', 'section'), ('blocks', 'block')]:
-        for key, val in obj.get(group, {}).items():
+        values = obj.get(group, {})
+        entries = values.items() if isinstance(values, dict) else enumerate(values) if isinstance(values, list) else []
+        for key, val in entries:
             if not isinstance(val, dict):
                 continue
+            key = str(key)
             entry = dict(file=location.split('#')[0], location=location + '/' + key,
                          kind=kind, type=val.get('type'), disabled=val.get('disabled', False),
                          settings=val.get('settings', {}), order=obj.get('order', obj.get('block_order', [])))

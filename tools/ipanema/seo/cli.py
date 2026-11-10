@@ -78,7 +78,8 @@ def execute(project, args):
         inputs = args.audit + ([args.sitemap_urls] if args.sitemap_urls else [])
     elif command == 'connections':
         return {'project': project.id, 'providers': [ReadOnlyAdapter(project, p).capabilities() for p in OPERATIONS],
-                'runtime_discovery': 'El CLI no inicia MCP. Un host puede inyectar list_tools/call_tool; no confundir configuración con conexión.',
+                'runtime_discovery': 'Estos adaptadores no inician MCP. access doctor --probe-devtools comprueba el servidor compartido; un host también puede inyectar list_tools/call_tool. Configuración no equivale a conexión.',
+                'shared_access': 'access grant/config: permisos por agente, proyecto y tarea; GSC reutiliza REST sin otro MCP.',
                 'fallback': 'seo source/audit/corpus/evals continúan offline.'}, 0
     elif command == 'google-import':
         result = {'kind': 'google-observation', **import_observation(project, read_json(args.path))}

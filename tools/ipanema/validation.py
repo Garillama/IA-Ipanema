@@ -48,6 +48,7 @@ def validate(project: Project, *, strict_source=False):
     managed_json = [*doc.rglob("*.json"), *(root / "projects").glob("*.json"),
                     *(root / "reusable").rglob("*.json"), *(root / "tests/agent-evals").glob("*.json"),
                     *(root / "tools/ipanema/seo").glob("*.json")]
+    managed_json += list((root/'tools/ipanema/orchestration').glob('*.json'))
     for path in managed_json:
         try:
             value = read_json(path)
@@ -61,6 +62,7 @@ def validate(project: Project, *, strict_source=False):
     managed_md = [root / "README.md", root / "AGENTS.md", *doc.rglob("*.md"),
                   *(root / ".agents/skills").rglob("*.md"), *(root / "projects").glob("*.md"),
                   *(root / "reusable").rglob("*.md"), *(root / "reports/v2").glob("*.md"), *(root / "reports/seo").rglob("*.md")]
+    managed_md += list((root/'reports/orchestration').glob('*.md'))
     for path in managed_md:
         text = path.read_text(encoding="utf-8")
         if not text.strip():
