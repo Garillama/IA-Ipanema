@@ -27,3 +27,7 @@ No se modificaron archivos del tema ni producción. La implementación queda pen
 ## Validación tras el push del propietario
 
 [Prueba publicada del parche del blog](blog-release-validation.md) — LCP móvil13.26→6.19s en muestras locales comparables; rendimiento móvil aún pendiente de más mejoras.
+
+- [Home: rendimiento y estabilidad, diagnóstico actual](home-performance-strategy.md) · [ADR-RHINO-006](ADR-RHINO-006.md) · [Backlog Home](home-performance-backlog.json).
+
+- [Primer lote JS de Home: pruebas completas, aplicación pendiente](home-js-first-batch.md) · [ADR-RHINO-007](ADR-RHINO-007.md).

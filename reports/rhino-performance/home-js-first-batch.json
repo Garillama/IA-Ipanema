@@ -1,0 +1,320 @@
+{
+  "at": "2026-11-11T00:34:12.840497+00:00",
+  "project": "rhino-performance",
+  "status": "tests_completed_application_pending",
+  "owner_instruction": "Continue tests only; leave application pending. Received during task.",
+  "candidate_file": "sections/google-reviews.tpl",
+  "candidate_scope": "setupMore only; reads then writes; skip unchanged class",
+  "theme_changes": false,
+  "theme_files_modified": [],
+  "code_hashes_unchanged": true,
+  "source_hashes": {
+    "static/js/store.js": "13b446667201830cfb8a4234e3529d533338770fd4c8ccc1d7a07a0379b5d411",
+    "layouts/layout.tpl": "a941460509ed2dc83c91217d2dee8e733a4cd4f35ace34addeed7b2d65c85f69",
+    "static/js/product-carousel.js": "9e0aac61812501fed93b0347da48e3fabcbed34f921073ce6794273b9ad1b7de",
+    "static/js/blog-carousel.js": "bfe1bcf4daa1d43e1b1674cf03a1bc89085725b7b1470cd9ce584d7453c77be2",
+    "static/js/featured-collection.js": "b38ab728dfcab5311f938065655aa25a60279be900e05e592cd7bb4d6627b058",
+    "static/js/blog-tags.js": "c46c62adb03a2053d516b3e2dc22581e4b05cef61fb43b3ec12f892dab140605",
+    "static/js/media-visibility.js": "93dc9242fcd029907f3fdb704d12d03c214349004fe8cc7ba852587b98d9db83",
+    "sections/google-reviews.tpl": "10e64ea2fb128479636297cdbd543f45b4fdbfdbae99fd53b0e578785367e67b",
+    "sections/main-products.tpl": "a7a925709f172806c27b82ffe6cae8b7f28b60839a840516c21641dd2d0d8442"
+  },
+  "candidate_hash": "75a487600c5d71001fa2e0970dad1cb943f80d399f1af89db559bffc3253fd30",
+  "source_bindings": {
+    "original_matches_published_function": true,
+    "function_only_change": true,
+    "source_snapshot": "reports/runs/rhino-performance/20261111T001413-home-js-first-batch-516bcda9/council-source/sections/google-reviews.tpl"
+  },
+  "CPU_profiling": {
+    "samples": 2,
+    "CPU_factor": 4,
+    "setupMore_self_ms": [
+      [
+        155.688
+      ],
+      [
+        44.984
+      ]
+    ],
+    "not_explanation_of_entire_TBT": true
+  },
+  "component_QA": {
+    "status": "passed",
+    "checks": 13,
+    "widths": [
+      360,
+      390,
+      768,
+      1024,
+      1440,
+      1920
+    ],
+    "measurements": [
+      {
+        "width": 360,
+        "baseline": {
+          "function_and_final_layout_ms": 6.900000002235174,
+          "LayoutCount": 3,
+          "LayoutDuration_ms": 4.784999999999999,
+          "RecalcStyleCount": 3,
+          "samples": 5
+        },
+        "candidate": {
+          "function_and_final_layout_ms": 4.099999997764826,
+          "LayoutCount": 1,
+          "LayoutDuration_ms": 2.407999999999997,
+          "RecalcStyleCount": 1,
+          "samples": 5
+        }
+      },
+      {
+        "width": 390,
+        "baseline": {
+          "function_and_final_layout_ms": 5.799999997019768,
+          "LayoutCount": 3,
+          "LayoutDuration_ms": 4.042000000000001,
+          "RecalcStyleCount": 3,
+          "samples": 5
+        },
+        "candidate": {
+          "function_and_final_layout_ms": 3.800000000745058,
+          "LayoutCount": 1,
+          "LayoutDuration_ms": 2.5669999999999997,
+          "RecalcStyleCount": 1,
+          "samples": 5
+        }
+      },
+      {
+        "width": 768,
+        "baseline": {
+          "function_and_final_layout_ms": 5.100000001490116,
+          "LayoutCount": 4,
+          "LayoutDuration_ms": 2.5620000000000016,
+          "RecalcStyleCount": 4,
+          "samples": 5
+        },
+        "candidate": {
+          "function_and_final_layout_ms": 3.399999998509884,
+          "LayoutCount": 1,
+          "LayoutDuration_ms": 2.309000000000002,
+          "RecalcStyleCount": 1,
+          "samples": 5
+        }
+      },
+      {
+        "width": 1024,
+        "baseline": {
+          "function_and_final_layout_ms": 5.400000002235174,
+          "LayoutCount": 3,
+          "LayoutDuration_ms": 3.9189999999999987,
+          "RecalcStyleCount": 3,
+          "samples": 5
+        },
+        "candidate": {
+          "function_and_final_layout_ms": 3.800000000745058,
+          "LayoutCount": 1,
+          "LayoutDuration_ms": 2.128999999999999,
+          "RecalcStyleCount": 1,
+          "samples": 5
+        }
+      },
+      {
+        "width": 1440,
+        "baseline": {
+          "function_and_final_layout_ms": 7.5,
+          "LayoutCount": 3,
+          "LayoutDuration_ms": 5.035000000000001,
+          "RecalcStyleCount": 3,
+          "samples": 5
+        },
+        "candidate": {
+          "function_and_final_layout_ms": 5.699999999254942,
+          "LayoutCount": 1,
+          "LayoutDuration_ms": 3.4399999999999986,
+          "RecalcStyleCount": 1,
+          "samples": 5
+        }
+      },
+      {
+        "width": 1920,
+        "baseline": {
+          "function_and_final_layout_ms": 7.899999998509884,
+          "LayoutCount": 3,
+          "LayoutDuration_ms": 4.052999999999999,
+          "RecalcStyleCount": 4,
+          "samples": 5
+        },
+        "candidate": {
+          "function_and_final_layout_ms": 6.399999998509884,
+          "LayoutCount": 1,
+          "LayoutDuration_ms": 4.29,
+          "RecalcStyleCount": 2,
+          "samples": 5
+        }
+      }
+    ],
+    "visual_masks": [
+      {
+        "width": 360,
+        "variant": "baseline",
+        "incomplete_avatar_sources_removed": 10,
+        "geometry_preserved": true
+      },
+      {
+        "width": 360,
+        "variant": "candidate",
+        "incomplete_avatar_sources_removed": 10,
+        "geometry_preserved": true
+      },
+      {
+        "width": 390,
+        "variant": "baseline",
+        "incomplete_avatar_sources_removed": 10,
+        "geometry_preserved": true
+      },
+      {
+        "width": 390,
+        "variant": "candidate",
+        "incomplete_avatar_sources_removed": 10,
+        "geometry_preserved": true
+      },
+      {
+        "width": 768,
+        "variant": "baseline",
+        "incomplete_avatar_sources_removed": 10,
+        "geometry_preserved": true
+      },
+      {
+        "width": 768,
+        "variant": "candidate",
+        "incomplete_avatar_sources_removed": 10,
+        "geometry_preserved": true
+      },
+      {
+        "width": 1024,
+        "variant": "baseline",
+        "incomplete_avatar_sources_removed": 10,
+        "geometry_preserved": true
+      },
+      {
+        "width": 1024,
+        "variant": "candidate",
+        "incomplete_avatar_sources_removed": 10,
+        "geometry_preserved": true
+      },
+      {
+        "width": 1440,
+        "variant": "baseline",
+        "incomplete_avatar_sources_removed": 10,
+        "geometry_preserved": true
+      },
+      {
+        "width": 1440,
+        "variant": "candidate",
+        "incomplete_avatar_sources_removed": 10,
+        "geometry_preserved": true
+      },
+      {
+        "width": 1920,
+        "variant": "baseline",
+        "incomplete_avatar_sources_removed": 10,
+        "geometry_preserved": true
+      },
+      {
+        "width": 1920,
+        "variant": "candidate",
+        "incomplete_avatar_sources_removed": 10,
+        "geometry_preserved": true
+      }
+    ],
+    "method": "Recorded source functions with public live-review markup/CSS in isolated component; fixtures test short/long/open/missing-text; not a full Twig render."
+  },
+  "page_QA": {
+    "status": "inconclusive_for_global_performance",
+    "samples": 12,
+    "results": [
+      {
+        "device": "mobile",
+        "baseline": {
+          "samples": 3,
+          "score_median": 0.29,
+          "metrics": {
+            "first-contentful-paint": 7244.314787499995,
+            "largest-contentful-paint": 9510.652812499999,
+            "total-blocking-time": 3309.999999999999,
+            "cumulative-layout-shift": 0.0003292308063223839,
+            "speed-index": 7244.314787499995
+          }
+        },
+        "candidate": {
+          "samples": 3,
+          "score_median": 0.28,
+          "metrics": {
+            "first-contentful-paint": 7483.073820000005,
+            "largest-contentful-paint": 9562.725547500006,
+            "total-blocking-time": 3127.0000000000036,
+            "cumulative-layout-shift": 0.0004762961918077786,
+            "speed-index": 7483.073820000005
+          }
+        }
+      },
+      {
+        "device": "desktop",
+        "baseline": {
+          "samples": 3,
+          "score_median": 0.47,
+          "metrics": {
+            "first-contentful-paint": 1313.9463125,
+            "largest-contentful-paint": 1940.6455625000008,
+            "total-blocking-time": 408.49999999999955,
+            "cumulative-layout-shift": 0.4491796690307328,
+            "speed-index": 1780.3268405883246
+          }
+        },
+        "candidate": {
+          "samples": 3,
+          "score_median": 0.51,
+          "metrics": {
+            "first-contentful-paint": 1318.6373700000006,
+            "largest-contentful-paint": 1930.2907499999997,
+            "total-blocking-time": 331.9999999999998,
+            "cumulative-layout-shift": 0.4491796690307328,
+            "speed-index": 1782.2675752994626
+          }
+        }
+      }
+    ],
+    "method": "Read-only browser response interception, identical intervention in control and candidate. Decoded uncompressed document changes transfer modeling; compare internally only, not production score.",
+    "limitations": [
+      "3samples/variant/device; no statistical causal performance conclusion.",
+      "Mobile experimental score29→28; desktop47→51. Not public RHINO scores, not score90 attainment.",
+      "Mobile experimental FCP/LCP did not improve; no validated overall speed gain.",
+      "DesktopCLS0.449 persists in both.",
+      "Live third-party behavior varies and POSTs were blocked."
+    ]
+  },
+  "invalid_experiments": {
+    "encoded_response_prototype": "Discarded: compressed bytes were rendered as text, title failed, DOM57 and only2requests. High91–96scores invalid and never accepted.",
+    "initial_exactly_one_interception_assertion": "Too strict: Lighthouse made2matching root document interceptions; preserved discarded receipt.",
+    "normal_response_override": "Produces real storefront DOM/title/requests but artificial transfer profile; only internal diagnostic use."
+  },
+  "council": {
+    "status": "incomplete",
+    "codex_proposal_valid": true,
+    "claude_proposal_valid": false,
+    "claude_attempts": 2,
+    "error_category": "authentication",
+    "host_auth_status_loggedIn": true,
+    "exact_underlying_cause": "not_determined",
+    "both_processes_reaped": true,
+    "Claude_cost_usd": 0,
+    "CommandCode_invoked": false,
+    "independent_review": "not_executed",
+    "no_consensus_claimed": true
+  },
+  "authorization": "[redacted]",
+  "files_added": [
+    "tests/browser/rhino_review_layout.mjs"
+  ],
+  "evidence_run": "reports/runs/rhino-performance/20261111T001413-home-js-first-batch-516bcda9"
+}

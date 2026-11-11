@@ -6,7 +6,7 @@ import hashlib
 import json
 import re
 from urllib.parse import urljoin, urlsplit, urlunsplit
-from urllib.robotparser import RobotFileParser
+from .robots import Robots, google_directives
 
 from ..core import now
 from .extractor import extract
@@ -49,7 +49,7 @@ def audit_snapshot(project,snap,page_type='page',*,facts=None,rendered=None,no_j
     result=validate(snap,page_type,facts)
     findings=list(result['findings']);metadata=snap.get('meta',{})
     canonical=snap.get('canonical',[])
-    robots=','.join(metadata.get('robots',[])+metadata.get('googlebot',[])+[snap.get('headers',{}).get('x-robots-tag','')]).lower()
+    robots=google_directives(metadata,snap.get('headers',{}).get('x-robots-tag',''))
     noindex=bool(re.search(r'\b(?:noindex|none)\b',robots))
     status=snap.get('status')
     if not snap.get('title'):findings.append(F('SEO001','D','warning','Title ausente; comprobar head-tags de plataforma.'))
@@ -76,7 +76,7 @@ def audit_snapshot(project,snap,page_type='page',*,facts=None,rendered=None,no_j
         if not link.get('href'):findings.append(F('SEO013','D','warning','hreflang sin URL real.',evidence=link))
     permission='not_checked_robots_txt'
     if robots_text is not None:
-        parser=RobotFileParser();parser.parse(robots_text.splitlines());permission='allowed' if parser.can_fetch('Googlebot',snap['url']) else 'disallowed'
+        parser=Robots();parser.parse(robots_text.splitlines());permission='unknown_rules' if parser.errors else 'allowed' if parser.can_fetch('Googlebot',snap['url']) else 'disallowed'
     signals='http_unknown' if status is None else 'non_200' if status!=200 else 'noindex_observed' if noindex else 'no_observable_noindex_not_index_proof'
     delta=snapshot_delta(snap,rendered) if rendered is not None else None
     if delta and delta['links_only_after_js']:

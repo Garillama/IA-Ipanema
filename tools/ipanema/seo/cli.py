@@ -16,6 +16,8 @@ from .page_audit import PAGE_SCHEMAS
 def add_parser(sub):
     seo = sub.add_parser('seo', help='SEO offline, schemas y adaptadores opcionales de lectura')
     commands = seo.add_subparsers(dest='seo_command', required=True)
+    from .engineering import add_parser as add_engineering_parser
+    add_engineering_parser(commands)
     commands.add_parser('source', help='Auditar snippets actuales y producir diff propuesto sin aplicarlo')
     audit = commands.add_parser('audit')
     entry = audit.add_mutually_exclusive_group(required=True)
@@ -50,6 +52,9 @@ def add_parser(sub):
 
 def execute(project, args):
     command = args.seo_command
+    from .engineering import COMMANDS, execute as execute_engineering
+    if command in COMMANDS:
+        return execute_engineering(project, args)
     inputs = []
     if command == 'source':
         result = reports.source_report(project)

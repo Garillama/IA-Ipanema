@@ -1,0 +1,1502 @@
+{
+  "project": "rhino-performance",
+  "at": "2026-11-11T00:04:35.828205+00:00",
+  "objective": "HOME first, target PSI90+ both devices; diagnosis before implementation",
+  "status": "diagnosis_complete_with_limits; candidate_implementation_needs_evidence",
+  "public_url": "https://rhino-performance.com/",
+  "public_asset_installation_reference": "14828608",
+  "source_reference": {
+    "git_head": "2e8c13aefd7b346943e928aee8e598f69dd47374",
+    "git_status_at_start": "",
+    "hashed_files": 342,
+    "verifiable_source_hashes_unchanged": true,
+    "verifiable_hashes": 339,
+    "unverifiable_baseline_hashes": [
+      "sections/password-logo.tpl",
+      "sections/main-password.tpl",
+      "templates/pages/password.json"
+    ],
+    "unverifiable_reason": "Baseline serializer redacted3password-path hashes; not evidence of file modifications. Git HEAD/status unchanged.",
+    "public_asset_fingerprints": [
+      {
+        "width": 390,
+        "file": "static/js/media-visibility.js",
+        "local_sha256": "93dc9242fcd029907f3fdb704d12d03c214349004fe8cc7ba852587b98d9db83",
+        "public_url": "https://ftp-cdn.mitiendanube.com/forked-files/007/400/935/installations/14828608/static/js/media-visibility-358cdafd4e5fe38c3cf4151aae590426.js",
+        "url_fingerprint_matches_local_md5": true,
+        "method": "Comparison of CDN content fingerprint in filename, not full response byte attestation."
+      },
+      {
+        "width": 390,
+        "file": "static/js/blog-carousel.js",
+        "local_sha256": "bfe1bcf4daa1d43e1b1674cf03a1bc89085725b7b1470cd9ce584d7453c77be2",
+        "public_url": "https://ftp-cdn.mitiendanube.com/forked-files/007/400/935/installations/14828608/static/js/blog-carousel-15864d41d8673760e7ef5fd1be0b197b.js",
+        "url_fingerprint_matches_local_md5": true,
+        "method": "Comparison of CDN content fingerprint in filename, not full response byte attestation."
+      },
+      {
+        "width": 390,
+        "file": "static/js/product-carousel.js",
+        "local_sha256": "9e0aac61812501fed93b0347da48e3fabcbed34f921073ce6794273b9ad1b7de",
+        "public_url": "https://ftp-cdn.mitiendanube.com/forked-files/007/400/935/installations/14828608/static/js/product-carousel-c3aa62133bf9feccd3ec3097f985d282.js",
+        "url_fingerprint_matches_local_md5": true,
+        "method": "Comparison of CDN content fingerprint in filename, not full response byte attestation."
+      },
+      {
+        "width": 390,
+        "file": "static/js/featured-collection.js",
+        "local_sha256": "b38ab728dfcab5311f938065655aa25a60279be900e05e592cd7bb4d6627b058",
+        "public_url": "https://ftp-cdn.mitiendanube.com/forked-files/007/400/935/installations/14828608/static/js/featured-collection-a3c03f55d53014612d213148512387d2.js",
+        "url_fingerprint_matches_local_md5": true,
+        "method": "Comparison of CDN content fingerprint in filename, not full response byte attestation."
+      },
+      {
+        "width": 390,
+        "file": "static/js/store.js",
+        "local_sha256": "13b446667201830cfb8a4234e3529d533338770fd4c8ccc1d7a07a0379b5d411",
+        "public_url": "https://ftp-cdn.mitiendanube.com/forked-files/007/400/935/installations/14828608/static/js/store-416396fb91d42923cbf36d905b06c2f2.js",
+        "url_fingerprint_matches_local_md5": true,
+        "method": "Comparison of CDN content fingerprint in filename, not full response byte attestation."
+      },
+      {
+        "width": 1440,
+        "file": "static/js/media-visibility.js",
+        "local_sha256": "93dc9242fcd029907f3fdb704d12d03c214349004fe8cc7ba852587b98d9db83",
+        "public_url": "https://ftp-cdn.mitiendanube.com/forked-files/007/400/935/installations/14828608/static/js/media-visibility-358cdafd4e5fe38c3cf4151aae590426.js",
+        "url_fingerprint_matches_local_md5": true,
+        "method": "Comparison of CDN content fingerprint in filename, not full response byte attestation."
+      },
+      {
+        "width": 1440,
+        "file": "static/js/blog-carousel.js",
+        "local_sha256": "bfe1bcf4daa1d43e1b1674cf03a1bc89085725b7b1470cd9ce584d7453c77be2",
+        "public_url": "https://ftp-cdn.mitiendanube.com/forked-files/007/400/935/installations/14828608/static/js/blog-carousel-15864d41d8673760e7ef5fd1be0b197b.js",
+        "url_fingerprint_matches_local_md5": true,
+        "method": "Comparison of CDN content fingerprint in filename, not full response byte attestation."
+      },
+      {
+        "width": 1440,
+        "file": "static/js/product-carousel.js",
+        "local_sha256": "9e0aac61812501fed93b0347da48e3fabcbed34f921073ce6794273b9ad1b7de",
+        "public_url": "https://ftp-cdn.mitiendanube.com/forked-files/007/400/935/installations/14828608/static/js/product-carousel-c3aa62133bf9feccd3ec3097f985d282.js",
+        "url_fingerprint_matches_local_md5": true,
+        "method": "Comparison of CDN content fingerprint in filename, not full response byte attestation."
+      },
+      {
+        "width": 1440,
+        "file": "static/js/featured-collection.js",
+        "local_sha256": "b38ab728dfcab5311f938065655aa25a60279be900e05e592cd7bb4d6627b058",
+        "public_url": "https://ftp-cdn.mitiendanube.com/forked-files/007/400/935/installations/14828608/static/js/featured-collection-a3c03f55d53014612d213148512387d2.js",
+        "url_fingerprint_matches_local_md5": true,
+        "method": "Comparison of CDN content fingerprint in filename, not full response byte attestation."
+      },
+      {
+        "width": 1440,
+        "file": "static/js/store.js",
+        "local_sha256": "13b446667201830cfb8a4234e3529d533338770fd4c8ccc1d7a07a0379b5d411",
+        "public_url": "https://ftp-cdn.mitiendanube.com/forked-files/007/400/935/installations/14828608/static/js/store-416396fb91d42923cbf36d905b06c2f2.js",
+        "url_fingerprint_matches_local_md5": true,
+        "method": "Comparison of CDN content fingerprint in filename, not full response byte attestation."
+      }
+    ],
+    "limitation": "No full Twig/deployment attestation; current content/apps can change independently of Git."
+  },
+  "new_home_profiles": [
+    {
+      "device": "mobile",
+      "source": "lighthouse_local",
+      "at": "2026-11-10T23:51:13.578Z",
+      "sample_count": 3,
+      "profile": {
+        "source": "lighthouse_local",
+        "url": "https://rhino-performance.com/",
+        "final_url": "https://rhino-performance.com/",
+        "device": "mobile",
+        "categories": [
+          "performance",
+          "accessibility",
+          "best-practices",
+          "seo"
+        ],
+        "locale": "es",
+        "lighthouse_version": "13.6.0",
+        "chrome_version": "155.0.8059.84",
+        "screen": {
+          "mobile": true,
+          "width": 412,
+          "height": 823,
+          "deviceScaleFactor": 1.75,
+          "disabled": false
+        },
+        "throttling_method": "simulate",
+        "throttling": {
+          "rttMs": 150,
+          "throughputKbps": 1638.4,
+          "requestLatencyMs": 562.5,
+          "downloadThroughputKbps": 1474.56,
+          "uploadThroughputKbps": 675,
+          "cpuSlowdownMultiplier": 4
+        },
+        "cache": false,
+        "network_policy": "guarded-read-only"
+      },
+      "scores_median": {
+        "performance": 0.53,
+        "accessibility": 0.97,
+        "best-practices": 0.77,
+        "seo": 1.0
+      },
+      "metrics": {
+        "lcp": 4252.337500000001,
+        "fcp": 1913.5895,
+        "cls": 0.0003292308063223839,
+        "tbt": 3104.703499999998,
+        "speed_index": 3841.6408741705013
+      },
+      "statistics": {
+        "lcp": {
+          "median": 4252.337500000001,
+          "min": 3236.0804999999996,
+          "max": 4322.6735,
+          "available_samples": 3
+        },
+        "fcp": {
+          "median": 1913.5895,
+          "min": 1587.055,
+          "max": 2067.197,
+          "available_samples": 3
+        },
+        "cls": {
+          "median": 0.0003292308063223839,
+          "min": 0.0003292308063223839,
+          "max": 0.0003354122826859878,
+          "available_samples": 3
+        },
+        "tbt": {
+          "median": 3104.703499999998,
+          "min": 2711.500000000002,
+          "max": 3105.6767500000014,
+          "available_samples": 3
+        },
+        "speed_index": {
+          "median": 3841.6408741705013,
+          "min": 3801.124150818978,
+          "max": 4033.3247997622084,
+          "available_samples": 3
+        }
+      },
+      "all_samples": [
+        {
+          "at": "2026-11-10T23:51:13.578Z",
+          "scores": {
+            "performance": 0.61,
+            "accessibility": 0.97,
+            "best-practices": 0.77,
+            "seo": 1.0
+          },
+          "metrics": {
+            "lcp": 3236.0804999999996,
+            "fcp": 1587.055,
+            "cls": 0.0003292308063223839,
+            "tbt": 3105.6767500000014,
+            "speed_index": 3801.124150818978
+          },
+          "missing": []
+        },
+        {
+          "at": "2026-11-10T23:51:43.871Z",
+          "scores": {
+            "performance": 0.53,
+            "accessibility": 0.97,
+            "best-practices": 0.77,
+            "seo": 1.0
+          },
+          "metrics": {
+            "lcp": 4252.337500000001,
+            "fcp": 1913.5895,
+            "cls": 0.0003292308063223839,
+            "tbt": 3104.703499999998,
+            "speed_index": 3841.6408741705013
+          },
+          "missing": []
+        },
+        {
+          "at": "2026-11-10T23:52:11.896Z",
+          "scores": {
+            "performance": 0.52,
+            "accessibility": 0.97,
+            "best-practices": 0.77,
+            "seo": 1.0
+          },
+          "metrics": {
+            "lcp": 4322.6735,
+            "fcp": 2067.197,
+            "cls": 0.0003354122826859878,
+            "tbt": 2711.500000000002,
+            "speed_index": 4033.3247997622084
+          },
+          "missing": []
+        }
+      ],
+      "evidence": "reports/runs/rhino-performance/20261110T235229-performance-4e0d9a9f/performance.json",
+      "previous_same_profile_comparison": {
+        "status": "compared",
+        "delta_after_minus_before": {
+          "lcp": 1081.5370000000007,
+          "fcp": 162.76949999999988,
+          "cls": 0.0003292308063223839,
+          "tbt": 1520.7034999999983,
+          "speed_index": 508.77281563130646
+        },
+        "regressions": [
+          "lcp",
+          "fcp",
+          "cls",
+          "tbt",
+          "speed_index"
+        ],
+        "causality_confirmed": false
+      },
+      "causal_code_regression_demonstrated": false,
+      "extraction_check": {
+        "lcp": true,
+        "fcp": true,
+        "cls": true,
+        "tbt": true,
+        "speed_index": true
+      },
+      "sample1_total_bytes": 2338451
+    },
+    {
+      "device": "desktop",
+      "source": "lighthouse_local",
+      "at": "2026-11-10T23:52:54.201Z",
+      "sample_count": 3,
+      "profile": {
+        "source": "lighthouse_local",
+        "url": "https://rhino-performance.com/",
+        "final_url": "https://rhino-performance.com/",
+        "device": "desktop",
+        "categories": [
+          "performance",
+          "accessibility",
+          "best-practices",
+          "seo"
+        ],
+        "locale": "es",
+        "lighthouse_version": "13.6.0",
+        "chrome_version": "155.0.8059.84",
+        "screen": {
+          "mobile": false,
+          "width": 1350,
+          "height": 940,
+          "deviceScaleFactor": 1,
+          "disabled": false
+        },
+        "throttling_method": "simulate",
+        "throttling": {
+          "rttMs": 40,
+          "throughputKbps": 10240,
+          "requestLatencyMs": 0,
+          "downloadThroughputKbps": 0,
+          "uploadThroughputKbps": 0,
+          "cpuSlowdownMultiplier": 1
+        },
+        "cache": false,
+        "network_policy": "guarded-read-only"
+      },
+      "scores_median": {
+        "performance": 0.64,
+        "accessibility": 0.97,
+        "best-practices": 0.77,
+        "seo": 1.0
+      },
+      "metrics": {
+        "lcp": 1219.9909999999998,
+        "fcp": 609.279,
+        "cls": 0.4491796690307328,
+        "tbt": 281.9999999999998,
+        "speed_index": 1411.0998897544578
+      },
+      "statistics": {
+        "lcp": {
+          "median": 1219.9909999999998,
+          "min": 1157.9664999999998,
+          "max": 1268.2550000000003,
+          "available_samples": 3
+        },
+        "fcp": {
+          "median": 609.279,
+          "min": 556.871,
+          "max": 627.6669999999999,
+          "available_samples": 3
+        },
+        "cls": {
+          "median": 0.4491796690307328,
+          "min": 0.4491796690307328,
+          "max": 0.4491796690307328,
+          "available_samples": 3
+        },
+        "tbt": {
+          "median": 281.9999999999998,
+          "min": 237.0550000000003,
+          "max": 382.43039999999974,
+          "available_samples": 3
+        },
+        "speed_index": {
+          "median": 1411.0998897544578,
+          "min": 1324.454032758517,
+          "max": 1511.7343042314374,
+          "available_samples": 3
+        }
+      },
+      "all_samples": [
+        {
+          "at": "2026-11-10T23:52:54.201Z",
+          "scores": {
+            "performance": 0.67,
+            "accessibility": 0.97,
+            "best-practices": 0.77,
+            "seo": 1.0
+          },
+          "metrics": {
+            "lcp": 1268.2550000000003,
+            "fcp": 609.279,
+            "cls": 0.4491796690307328,
+            "tbt": 237.0550000000003,
+            "speed_index": 1411.0998897544578
+          },
+          "missing": []
+        },
+        {
+          "at": "2026-11-10T23:53:28.551Z",
+          "scores": {
+            "performance": 0.64,
+            "accessibility": 0.97,
+            "best-practices": 0.77,
+            "seo": 1.0
+          },
+          "metrics": {
+            "lcp": 1219.9909999999998,
+            "fcp": 627.6669999999999,
+            "cls": 0.4491796690307328,
+            "tbt": 281.9999999999998,
+            "speed_index": 1511.7343042314374
+          },
+          "missing": []
+        },
+        {
+          "at": "2026-11-10T23:54:01.653Z",
+          "scores": {
+            "performance": 0.6,
+            "accessibility": 0.97,
+            "best-practices": 0.77,
+            "seo": 1.0
+          },
+          "metrics": {
+            "lcp": 1157.9664999999998,
+            "fcp": 556.871,
+            "cls": 0.4491796690307328,
+            "tbt": 382.43039999999974,
+            "speed_index": 1324.454032758517
+          },
+          "missing": []
+        }
+      ],
+      "evidence": "reports/runs/rhino-performance/20261110T235429-performance-f65e7364/performance.json",
+      "previous_same_profile_comparison": {
+        "status": "compared",
+        "delta_after_minus_before": {
+          "lcp": 251.00799999999958,
+          "fcp": 167.791,
+          "cls": 0.0,
+          "tbt": 117.49999999999949,
+          "speed_index": 292.22086810694054
+        },
+        "regressions": [
+          "lcp",
+          "fcp",
+          "tbt",
+          "speed_index"
+        ],
+        "causality_confirmed": false
+      },
+      "causal_code_regression_demonstrated": false,
+      "extraction_check": {
+        "lcp": true,
+        "fcp": true,
+        "cls": true,
+        "tbt": true,
+        "speed_index": true
+      },
+      "sample1_total_bytes": 3617777
+    }
+  ],
+  "dated_pagespeed_and_crux": [
+    {
+      "source": "pagespeed",
+      "url": "https://rhino-performance.com/",
+      "device": "mobile",
+      "scope": "url",
+      "status": "observed",
+      "measured_at": "2026-11-10T19:13:46.348Z",
+      "collection_period": null,
+      "metrics": {
+        "lcp": 3738.002798033808,
+        "fcp": 1358.0016169863723,
+        "cls": 0.04504852244833421,
+        "tbt": 190.5,
+        "speed_index": 3796.7864324385073
+      },
+      "score_medians": {
+        "performance": 0.85,
+        "accessibility": 0.94,
+        "best-practices": 0.96,
+        "seo": 1.0
+      },
+      "missing": [],
+      "evidence": "reports/runs/rhino-performance/20261110T191402-performance-67873e2c/performance.json"
+    },
+    {
+      "source": "pagespeed",
+      "url": "https://rhino-performance.com/",
+      "device": "desktop",
+      "scope": "url",
+      "status": "observed",
+      "measured_at": "2026-11-10T19:14:07.503Z",
+      "collection_period": null,
+      "metrics": {
+        "lcp": 884.5066746939466,
+        "fcp": 329.00320991460103,
+        "cls": 0.05330783329348952,
+        "tbt": 828.4999999999994,
+        "speed_index": 1487.0282560338046
+      },
+      "score_medians": {
+        "performance": 0.7,
+        "accessibility": 0.94,
+        "best-practices": 0.77,
+        "seo": 1.0
+      },
+      "missing": [],
+      "evidence": "reports/runs/rhino-performance/20261110T191439-performance-0fd78c7c/performance.json"
+    },
+    {
+      "source": "crux",
+      "url": "https://rhino-performance.com/",
+      "device": "mobile",
+      "scope": "url",
+      "status": "partial",
+      "measured_at": null,
+      "collection_period": {
+        "firstDate": {
+          "year": 2026,
+          "month": 10,
+          "day": 12
+        },
+        "lastDate": {
+          "year": 2026,
+          "month": 11,
+          "day": 8
+        }
+      },
+      "metrics": {
+        "cls": {
+          "p75": 0.0,
+          "unit": "unitless"
+        },
+        "fcp": {
+          "p75": 1525.0,
+          "unit": "ms"
+        }
+      },
+      "score_medians": {},
+      "missing": [
+        "inp",
+        "lcp"
+      ],
+      "evidence": "reports/runs/rhino-performance/20261110T191441-performance-0677a30a/performance.json"
+    },
+    {
+      "source": "crux",
+      "url": "https://rhino-performance.com/",
+      "device": "desktop",
+      "scope": "url",
+      "status": "partial",
+      "measured_at": null,
+      "collection_period": {
+        "firstDate": {
+          "year": 2026,
+          "month": 10,
+          "day": 12
+        },
+        "lastDate": {
+          "year": 2026,
+          "month": 11,
+          "day": 8
+        }
+      },
+      "metrics": {
+        "cls": {
+          "p75": 0.05,
+          "unit": "unitless"
+        },
+        "fcp": {
+          "p75": 1159.0,
+          "unit": "ms"
+        }
+      },
+      "score_medians": {},
+      "missing": [
+        "inp",
+        "lcp"
+      ],
+      "evidence": "reports/runs/rhino-performance/20261110T191441-performance-b27d6fba/performance.json"
+    },
+    {
+      "source": "crux",
+      "url": "https://rhino-performance.com/",
+      "device": "mobile",
+      "scope": "origin",
+      "status": "observed",
+      "measured_at": null,
+      "collection_period": {
+        "firstDate": {
+          "year": 2026,
+          "month": 10,
+          "day": 12
+        },
+        "lastDate": {
+          "year": 2026,
+          "month": 11,
+          "day": 8
+        }
+      },
+      "metrics": {
+        "lcp": {
+          "p75": 1908.0,
+          "unit": "ms"
+        },
+        "inp": {
+          "p75": 112.0,
+          "unit": "ms"
+        },
+        "cls": {
+          "p75": 0.01,
+          "unit": "unitless"
+        },
+        "fcp": {
+          "p75": 1518.0,
+          "unit": "ms"
+        }
+      },
+      "score_medians": {},
+      "missing": [],
+      "evidence": "reports/runs/rhino-performance/20261110T191442-performance-ff40ec1c/performance.json"
+    },
+    {
+      "source": "crux",
+      "url": "https://rhino-performance.com/",
+      "device": "desktop",
+      "scope": "origin",
+      "status": "observed",
+      "measured_at": null,
+      "collection_period": {
+        "firstDate": {
+          "year": 2026,
+          "month": 10,
+          "day": 12
+        },
+        "lastDate": {
+          "year": 2026,
+          "month": 11,
+          "day": 8
+        }
+      },
+      "metrics": {
+        "lcp": {
+          "p75": 1742.0,
+          "unit": "ms"
+        },
+        "inp": {
+          "p75": 65.0,
+          "unit": "ms"
+        },
+        "cls": {
+          "p75": 0.06,
+          "unit": "unitless"
+        },
+        "fcp": {
+          "p75": 1138.0,
+          "unit": "ms"
+        }
+      },
+      "score_medians": {},
+      "missing": [],
+      "evidence": "reports/runs/rhino-performance/20261110T191443-performance-5351fb67/performance.json"
+    },
+    {
+      "source": "pagespeed",
+      "url": "https://rhino-performance.com/presoterapia/",
+      "device": "mobile",
+      "scope": "url",
+      "status": "observed",
+      "measured_at": "2026-11-10T19:28:51.812Z",
+      "collection_period": null,
+      "metrics": {
+        "lcp": 3303.0119909088726,
+        "fcp": 1057.0012662561987,
+        "cls": 0.04471929164201183,
+        "tbt": 770.5,
+        "speed_index": 3740.3846311610137
+      },
+      "score_medians": {
+        "performance": 0.72,
+        "accessibility": 0.96,
+        "best-practices": 0.96,
+        "seo": 1.0
+      },
+      "missing": [],
+      "evidence": "reports/runs/rhino-performance/20261110T192912-performance-3a6146f8/performance.json"
+    },
+    {
+      "source": "pagespeed",
+      "url": "https://rhino-performance.com/presoterapia/",
+      "device": "desktop",
+      "scope": "url",
+      "status": "observed",
+      "measured_at": "2026-11-10T19:29:14.799Z",
+      "collection_period": null,
+      "metrics": {
+        "lcp": 963.0129823433658,
+        "fcp": 284.5039114167315,
+        "cls": 0.012857709874669573,
+        "tbt": 345.0000000000002,
+        "speed_index": 1048.7473470442649
+      },
+      "score_medians": {
+        "performance": 0.83,
+        "accessibility": 0.96,
+        "best-practices": 0.96,
+        "seo": 1.0
+      },
+      "missing": [],
+      "evidence": "reports/runs/rhino-performance/20261110T192931-performance-1151c4f6/performance.json"
+    },
+    {
+      "source": "pagespeed",
+      "url": "https://rhino-performance.com/productos/botas-presoterapia-inalambricas-pro-air/",
+      "device": "mobile",
+      "scope": "url",
+      "status": "observed",
+      "measured_at": "2026-11-10T19:29:34.710Z",
+      "collection_period": null,
+      "metrics": {
+        "lcp": 11816.313387002905,
+        "fcp": 4135.51689136825,
+        "cls": 0.021307102660038713,
+        "tbt": 606.0,
+        "speed_index": 5766.109131624869
+      },
+      "score_medians": {
+        "performance": 0.47,
+        "accessibility": 0.93,
+        "best-practices": 0.96,
+        "seo": 0.92
+      },
+      "missing": [],
+      "evidence": "reports/runs/rhino-performance/20261110T192958-performance-a1b38be5/performance.json"
+    },
+    {
+      "source": "pagespeed",
+      "url": "https://rhino-performance.com/productos/botas-presoterapia-inalambricas-pro-air/",
+      "device": "desktop",
+      "scope": "url",
+      "status": "observed",
+      "measured_at": "2026-11-10T19:30:01.230Z",
+      "collection_period": null,
+      "metrics": {
+        "lcp": 803.0269505121291,
+        "fcp": 324.0026263132964,
+        "cls": 0.1067831015900815,
+        "tbt": 303.1989321370063,
+        "speed_index": 1052.701154341982
+      },
+      "score_medians": {
+        "performance": 0.84,
+        "accessibility": 0.93,
+        "best-practices": 0.96,
+        "seo": 0.92
+      },
+      "missing": [],
+      "evidence": "reports/runs/rhino-performance/20261110T193029-performance-621e1d9c/performance.json"
+    },
+    {
+      "source": "pagespeed",
+      "url": "https://rhino-performance.com/productos/baterias-doble-capacidad-pro-air/",
+      "device": "mobile",
+      "scope": "url",
+      "status": "observed",
+      "measured_at": "2026-11-10T19:30:32.375Z",
+      "collection_period": null,
+      "metrics": {
+        "lcp": 11461.642011008968,
+        "fcp": 3829.0146842935346,
+        "cls": 0.02128825923562379,
+        "tbt": 465.5,
+        "speed_index": 6326.578207678953
+      },
+      "score_medians": {
+        "performance": 0.5,
+        "accessibility": 0.97,
+        "best-practices": 0.96,
+        "seo": 1.0
+      },
+      "missing": [],
+      "evidence": "reports/runs/rhino-performance/20261110T193050-performance-46dab9ed/performance.json"
+    },
+    {
+      "source": "pagespeed",
+      "url": "https://rhino-performance.com/productos/baterias-doble-capacidad-pro-air/",
+      "device": "desktop",
+      "scope": "url",
+      "status": "observed",
+      "measured_at": "2026-11-10T19:30:52.408Z",
+      "collection_period": null,
+      "metrics": {
+        "lcp": 895.0078901087782,
+        "fcp": 335.5052130891773,
+        "cls": 0.15500819588710382,
+        "tbt": 259.5533183222053,
+        "speed_index": 1021.0015210529655
+      },
+      "score_medians": {
+        "performance": 0.82,
+        "accessibility": 0.97,
+        "best-practices": 0.96,
+        "seo": 1.0
+      },
+      "missing": [],
+      "evidence": "reports/runs/rhino-performance/20261110T193112-performance-fc6e9586/performance.json"
+    },
+    {
+      "source": "pagespeed",
+      "url": "https://rhino-performance.com/blog/",
+      "device": "mobile",
+      "scope": "url",
+      "status": "observed",
+      "measured_at": "2026-11-10T19:31:15.029Z",
+      "collection_period": null,
+      "metrics": {
+        "lcp": 11042.17168031812,
+        "fcp": 1097.0057760856855,
+        "cls": 0.04482563520815278,
+        "tbt": 248.0,
+        "speed_index": 4920.52292441502
+      },
+      "score_medians": {
+        "performance": 0.66,
+        "accessibility": 0.93,
+        "best-practices": 0.96,
+        "seo": 1.0
+      },
+      "missing": [],
+      "evidence": "reports/runs/rhino-performance/20261110T193136-performance-a0796728/performance.json"
+    },
+    {
+      "source": "pagespeed",
+      "url": "https://rhino-performance.com/blog/",
+      "device": "desktop",
+      "scope": "url",
+      "status": "observed",
+      "measured_at": "2026-11-10T19:31:40.234Z",
+      "collection_period": null,
+      "metrics": {
+        "lcp": 2409.3487728341274,
+        "fcp": 491.70098857398904,
+        "cls": 0.03575501248588678,
+        "tbt": 1174.499999999999,
+        "speed_index": 2474.7957673001993
+      },
+      "score_medians": {
+        "performance": 0.52,
+        "accessibility": 0.93,
+        "best-practices": 0.96,
+        "seo": 1.0
+      },
+      "missing": [],
+      "evidence": "reports/runs/rhino-performance/20261110T193214-performance-bff36f22/performance.json"
+    },
+    {
+      "source": "crux",
+      "url": "https://rhino-performance.com/presoterapia/",
+      "device": "mobile",
+      "scope": "url",
+      "status": "insufficient_field_data",
+      "measured_at": null,
+      "collection_period": null,
+      "metrics": null,
+      "score_medians": {},
+      "missing": null,
+      "evidence": "reports/runs/rhino-performance/20261110T195716-performance-f860e7fa/performance.json"
+    },
+    {
+      "source": "crux",
+      "url": "https://rhino-performance.com/presoterapia/",
+      "device": "desktop",
+      "scope": "url",
+      "status": "insufficient_field_data",
+      "measured_at": null,
+      "collection_period": null,
+      "metrics": null,
+      "score_medians": {},
+      "missing": null,
+      "evidence": "reports/runs/rhino-performance/20261110T195716-performance-cd0c09b6/performance.json"
+    },
+    {
+      "source": "crux",
+      "url": "https://rhino-performance.com/productos/botas-presoterapia-inalambricas-pro-air/",
+      "device": "mobile",
+      "scope": "url",
+      "status": "partial",
+      "measured_at": null,
+      "collection_period": {
+        "firstDate": {
+          "year": 2026,
+          "month": 10,
+          "day": 12
+        },
+        "lastDate": {
+          "year": 2026,
+          "month": 11,
+          "day": 8
+        }
+      },
+      "metrics": {
+        "lcp": {
+          "p75": 1655.0,
+          "unit": "ms"
+        },
+        "cls": {
+          "p75": 0.02,
+          "unit": "unitless"
+        },
+        "fcp": {
+          "p75": 1474.0,
+          "unit": "ms"
+        }
+      },
+      "score_medians": {},
+      "missing": [
+        "inp"
+      ],
+      "evidence": "reports/runs/rhino-performance/20261110T195717-performance-fda58afe/performance.json"
+    },
+    {
+      "source": "crux",
+      "url": "https://rhino-performance.com/productos/botas-presoterapia-inalambricas-pro-air/",
+      "device": "desktop",
+      "scope": "url",
+      "status": "insufficient_field_data",
+      "measured_at": null,
+      "collection_period": null,
+      "metrics": null,
+      "score_medians": {},
+      "missing": null,
+      "evidence": "reports/runs/rhino-performance/20261110T195717-performance-2c55313e/performance.json"
+    },
+    {
+      "source": "crux",
+      "url": "https://rhino-performance.com/productos/baterias-doble-capacidad-pro-air/",
+      "device": "mobile",
+      "scope": "url",
+      "status": "insufficient_field_data",
+      "measured_at": null,
+      "collection_period": null,
+      "metrics": null,
+      "score_medians": {},
+      "missing": null,
+      "evidence": "reports/runs/rhino-performance/20261110T195718-performance-061d3cfa/performance.json"
+    },
+    {
+      "source": "crux",
+      "url": "https://rhino-performance.com/productos/baterias-doble-capacidad-pro-air/",
+      "device": "desktop",
+      "scope": "url",
+      "status": "insufficient_field_data",
+      "measured_at": null,
+      "collection_period": null,
+      "metrics": null,
+      "score_medians": {},
+      "missing": null,
+      "evidence": "reports/runs/rhino-performance/20261110T195718-performance-a21fc498/performance.json"
+    }
+  ],
+  "google_new_queries": 0,
+  "google_new_queries_blocker": "Credentials absent in current controller environment; historical successful API reports reused explicitly.",
+  "browser_diagnostics": [
+    {
+      "width": 390,
+      "http": 200,
+      "initial_observation_end_ms": 8710.699999999255,
+      "request_events": 107,
+      "transfer_bytes_by_type": {
+        "Document": 118052,
+        "Stylesheet": 58312,
+        "Script": 1119557,
+        "Image": 366940,
+        "Font": 31380,
+        "Fetch": 28166,
+        "Ping": 0,
+        "XHR": 0,
+        "Other": 9195
+      },
+      "script_bytes_by_host": {
+        "ftp-cdn.mitiendanube.com": 105999,
+        "nsk-cdn-static.tiendanube.com": 116844,
+        "acdn-us.mitiendanube.com": 101375,
+        "www.googletagmanager.com": 321890,
+        "rhino-performance.com": 742,
+        "static.cloudflareinsights.com": 10478,
+        "connect.facebook.net": 219641,
+        "analytics.tiktok.com": 172943,
+        "bzrcdn.openai.com": 36360,
+        "www.clarity.ms": 1152,
+        "scripts.clarity.ms": 25867,
+        "googleads.g.doubleclick.net": 6266
+      },
+      "DOM_nodes": 3679,
+      "max_depth": 21,
+      "scroll_width": 390,
+      "AX": {
+        "nodes": 1835,
+        "exposed": 1136,
+        "unnamed": []
+      },
+      "axe": {
+        "violations": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "nodes": [
+              {
+                "target": [
+                  ".main-product-slide[data-block-id=\"main-product-item_3k1e\"][data-block-type=\"main-product-item\"]:nth-child(1) > .main-product-mobile-card > .main-product-mobile-content > .main-product-mobile-footer > .main-product-mobile-price-col > .main-product-mobile-old-price-row > .main-product-mobile-old-price"
+                ],
+                "summary": "Fix any of the following:\n  Element has insufficient color contrast of 2.84 (foreground color: #999999, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+              }
+            ]
+          }
+        ],
+        "incomplete": [
+          {
+            "id": "aria-prohibited-attr",
+            "count": 4
+          },
+          {
+            "id": "color-contrast",
+            "count": 57
+          },
+          {
+            "id": "duplicate-id-aria",
+            "count": 1
+          }
+        ]
+      },
+      "initial_long_tasks_count": 9,
+      "initial_long_tasks_ms": 959,
+      "css_request_events": {
+        "https://acdn-us.mitiendanube.com/stores/007/400/935/themes/ipanema/style-critical-c044f4eba86f218b2550935ace3f4999.min.css": 1,
+        "https://acdn-us.mitiendanube.com/stores/007/400/935/themes/ipanema/style-utilities-c0aecd622274e18a4457353665418961.min.css": 1
+      },
+      "source": "home-browser.json; not the Lighthouse throttled/subframe collection window"
+    },
+    {
+      "width": 1440,
+      "http": 200,
+      "initial_observation_end_ms": 7666.699999999255,
+      "request_events": 104,
+      "transfer_bytes_by_type": {
+        "Document": 118056,
+        "Stylesheet": 58313,
+        "Script": 1126374,
+        "Image": 216172,
+        "Font": 31380,
+        "Fetch": 28266,
+        "Ping": 0,
+        "XHR": 0,
+        "Other": 9266
+      },
+      "script_bytes_by_host": {
+        "ftp-cdn.mitiendanube.com": 105942,
+        "nsk-cdn-static.tiendanube.com": 116846,
+        "acdn-us.mitiendanube.com": 101366,
+        "www.googletagmanager.com": 322297,
+        "rhino-performance.com": 742,
+        "static.cloudflareinsights.com": 10457,
+        "connect.facebook.net": 216792,
+        "analytics.tiktok.com": 172985,
+        "bzrcdn.openai.com": 36211,
+        "www.clarity.ms": 1152,
+        "scripts.clarity.ms": 25868,
+        "googleads.g.doubleclick.net": 6258,
+        "www.youtube.com": 9458
+      },
+      "DOM_nodes": 3784,
+      "max_depth": 21,
+      "scroll_width": 1507,
+      "AX": {
+        "nodes": 2016,
+        "exposed": 1251,
+        "unnamed": []
+      },
+      "axe": {
+        "violations": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "nodes": [
+              {
+                "target": [
+                  ".main-product-slide[data-block-id=\"main-product-item_3k1e\"][data-block-type=\"main-product-item\"]:nth-child(1) > .main-product-wrapper.main-product-desktop-card > .main-product-col-right > .main-product-right-bottom > .main-product-bottom-info > .main-product-bottom-price-col > .main-product-bottom-old-price"
+                ],
+                "summary": "Fix any of the following:\n  Element has insufficient color contrast of 2.84 (foreground color: #999999, background color: #ffffff, font size: 9.8pt (13px), font weight: normal). Expected contrast ratio of 4.5:1"
+              }
+            ]
+          }
+        ],
+        "incomplete": [
+          {
+            "id": "aria-prohibited-attr",
+            "count": 5
+          },
+          {
+            "id": "color-contrast",
+            "count": 64
+          },
+          {
+            "id": "duplicate-id-aria",
+            "count": 1
+          }
+        ]
+      },
+      "initial_long_tasks_count": 9,
+      "initial_long_tasks_ms": 860,
+      "css_request_events": {
+        "https://acdn-us.mitiendanube.com/stores/007/400/935/themes/ipanema/style-critical-c044f4eba86f218b2550935ace3f4999.min.css": 1,
+        "https://acdn-us.mitiendanube.com/stores/007/400/935/themes/ipanema/style-utilities-c0aecd622274e18a4457353665418961.min.css": 1
+      },
+      "source": "home-browser.json; not the Lighthouse throttled/subframe collection window"
+    }
+  ],
+  "new_devtools_mcp": {
+    "file": "reports/runs/rhino-performance/20261110T235059-home-priority-diagnosis-2f04055a/devtools-mcp-insights.json",
+    "calls": 7,
+    "raw_trace_exported": false,
+    "CLS_impacted": "VIDEO class=video-stream html5-main-video, cluster0.3563, no potential root cause identified",
+    "forced_reflow": "Featured collection check13ms, not explanation of3.1s TBT; avoid summing nested stacks",
+    "LCP": "Separate unthrottled DevTools trace410ms; posterWebP High, not comparable to LH simulatedLCP"
+  },
+  "media_keyboard_evidence": "reports/runs/rhino-performance/20261110T235059-home-priority-diagnosis-2f04055a/media-keyboard.json",
+  "other_templates_reused": [
+    {
+      "page": "category",
+      "device": "mobile",
+      "url": "https://rhino-performance.com/presoterapia/",
+      "score_medians": {
+        "performance": 0.67,
+        "accessibility": 1.0,
+        "best-practices": 0.77,
+        "seo": 1.0
+      },
+      "metrics": {
+        "lcp": 3073.6360000000004,
+        "fcp": 1271.799,
+        "cls": 0.027016537524098626,
+        "tbt": 1543.724000000001,
+        "speed_index": 3074.875975961576
+      },
+      "evidence": "reports/runs/rhino-performance/20261110T210203-performance-ae5d6c14/performance.json"
+    },
+    {
+      "page": "product",
+      "device": "mobile",
+      "url": "https://rhino-performance.com/productos/botas-presoterapia-inalambricas-pro-air/",
+      "score_medians": {
+        "performance": 0.63,
+        "accessibility": 1.0,
+        "best-practices": 0.77,
+        "seo": 0.92
+      },
+      "metrics": {
+        "lcp": 3562.693,
+        "fcp": 1532.4210000000003,
+        "cls": 0.0,
+        "tbt": 2016.9224999999997,
+        "speed_index": 3510.2153467393805
+      },
+      "evidence": "reports/runs/rhino-performance/20261110T210307-performance-233caab3/performance.json"
+    }
+  ],
+  "blog_latest_release_report": "reports/rhino-performance/blog-release-validation.json",
+  "council": {
+    "file": "reports/runs/rhino-performance/20261110T235059-home-priority-diagnosis-2f04055a/council.json",
+    "real_invocations": 8,
+    "valid_proposals": 2,
+    "valid_contrasts": 2,
+    "valid_defenses": 2,
+    "initial_scope_rejections": 2,
+    "deliberation_complete": true,
+    "models": {
+      "claude": {
+        "model": "claude-sonnet-5-5",
+        "effort": "medium",
+        "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+        "verified_at": "2026-11-08"
+      },
+      "codex": {
+        "model": "gpt-6.1-sol",
+        "effort": "medium",
+        "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+        "verified_at": "2026-11-08"
+      }
+    },
+    "selected_strategy": "codex-native-sequenced",
+    "objections": [
+      {
+        "id": "claude-obj-01",
+        "alternative_id": "claude-lote-secuencial-seguro",
+        "category": "causa no probada",
+        "severity": "high",
+        "claim": "Mi propuesta asume que dimensionar las cards elimina el CLS desktop. La atribución actual es 'head > link', y un MCP previo lo atribuyó al VIDEO de YouTube. Sin reconciliar ambas, el lote 1 podría no mover el CLS.",
+        "status": "open",
+        "evidence_refs": [
+          "source:facts.json"
+        ],
+        "resolution_evidence_refs": [],
+        "author": "claude",
+        "phase": "contrast"
+      },
+      {
+        "id": "claude-obj-02",
+        "alternative_id": "claude-lote-secuencial-seguro",
+        "category": "riesgo de terceros",
+        "severity": "medium",
+        "claim": "El lote 3 difiere terceros aunque el experimento previo empeoró LCP un 18%. Hace falta ensayo aislado por integración y verificar eventos de conversión antes de proponerlo como ruta a 90+.",
+        "status": "open",
+        "evidence_refs": [
+          "source:facts.json"
+        ],
+        "resolution_evidence_refs": [],
+        "author": "claude",
+        "phase": "contrast"
+      },
+      {
+        "id": "claude-obj-03",
+        "alternative_id": "claude-lote-secuencial-seguro",
+        "category": "alcance",
+        "severity": "low",
+        "claim": "Mi lote 4 pospone el embed de YouTube en desktop, pero el autoplay desktop forma parte del diseño. Puede cambiar el comportamiento visible, así que necesita comparación visual y de la transición.",
+        "status": "open",
+        "evidence_refs": [
+          "source:facts.json"
+        ],
+        "resolution_evidence_refs": [],
+        "author": "claude",
+        "phase": "contrast"
+      },
+      {
+        "id": "claude-obj-04",
+        "alternative_id": "codex-native-sequenced",
+        "category": "completitud",
+        "severity": "low",
+        "claim": "El lote 0 no fija criterios de salida ni orden entre lotes. Tampoco cubre el scrollWidth de 1507 ni el menú mobile con una acción concreta. Sus restricciones aparecen casi todas como unknown.",
+        "status": "open",
+        "evidence_refs": [
+          "source:facts.json"
+        ],
+        "resolution_evidence_refs": [],
+        "author": "claude",
+        "phase": "contrast"
+      },
+      {
+        "id": "claude-obj-05",
+        "alternative_id": "codex-third-party-first",
+        "category": "suficiencia",
+        "severity": "medium",
+        "claim": "Empezar por terceros no tiene respaldo suficiente. El TBT bajó en el experimento previo, pero el LCP empeoró. Además, parte del JS (linkedstore, vanilla-adapter) no es editable desde el tema.",
+        "status": "open",
+        "evidence_refs": [
+          "source:facts.json"
+        ],
+        "resolution_evidence_refs": [],
+        "author": "claude",
+        "phase": "contrast"
+      },
+      {
+        "id": "codex-obj-cls-causalidad",
+        "alternative_id": "claude-lote-secuencial-seguro",
+        "category": "atribución",
+        "severity": "high",
+        "claim": "Presentar la imagen de card sin tamaño como causa confirmada del CLS 0,449 excede la evidencia. Es una atribución diagnóstica que debe reconciliarse con el iframe y la aplicación tardía de estilos antes de seleccionar la corrección.",
+        "status": "open",
+        "evidence_refs": [
+          "source:facts.json"
+        ],
+        "resolution_evidence_refs": [],
+        "author": "codex",
+        "phase": "contrast"
+      },
+      {
+        "id": "codex-obj-video-comportamiento",
+        "alternative_id": "claude-lote-secuencial-seguro",
+        "category": "integración",
+        "severity": "high",
+        "claim": "El hero desktop ya está visible inicialmente y dispone de control por visibilidad. Esperar interacción cambiaría el autoplay existente; esperar visibilidad puede no diferir nada. Falta precisar una opción que conserve el comportamiento y aporte una mejora medible.",
+        "status": "open",
+        "evidence_refs": [
+          "source:facts.json"
+        ],
+        "resolution_evidence_refs": [],
+        "author": "codex",
+        "phase": "contrast"
+      },
+      {
+        "id": "codex-obj-conformidad",
+        "alternative_id": "claude-lote-secuencial-seguro",
+        "category": "validación",
+        "severity": "medium",
+        "claim": "Los estados pass de SEO, accesibilidad, reversibilidad y costes no están acreditados para un candidato inexistente. Deben permanecer unknown. El 97 de Lighthouse tampoco permite afirmar que la accesibilidad se mantiene tras cambios futuros.",
+        "status": "open",
+        "evidence_refs": [
+          "source:facts.json"
+        ],
+        "resolution_evidence_refs": [],
+        "author": "codex",
+        "phase": "contrast"
+      },
+      {
+        "id": "codex-obj-lcp-recurso",
+        "alternative_id": "claude-lote-secuencial-seguro",
+        "category": "precisión",
+        "severity": "medium",
+        "claim": "La hipótesis identifica el póster LCP como una imagen r2.dev de 144 KB, pero los registros de LCP señalan la miniatura de YouTube. También debe describirse el ahorro de render-blocking como estimación, sin garantizar reducir el LCP simulado en un segundo.",
+        "status": "open",
+        "evidence_refs": [
+          "source:facts.json"
+        ],
+        "resolution_evidence_refs": [],
+        "author": "codex",
+        "phase": "contrast"
+      },
+      {
+        "id": "claude-obj-cls-condicionado",
+        "alternative_id": "claude-lote-secuencial-seguro",
+        "category": "causa no probada",
+        "severity": "high",
+        "claim": "Dimensionar cards como corrección del CLS desktop 0,449 queda condicionado a atribución temporal por frame. Si el desplazamiento dominante está en el reproductor, ese lote no lo moverá.",
+        "status": "open",
+        "evidence_refs": [
+          "source:facts.json"
+        ],
+        "resolution_evidence_refs": [],
+        "author": "claude",
+        "phase": "defense"
+      },
+      {
+        "id": "claude-obj-video-autoplay",
+        "alternative_id": "claude-lote-secuencial-seguro",
+        "category": "integración",
+        "severity": "high",
+        "claim": "El lote 4 (aplazar el embed de YouTube en desktop) cambiaría el autoplay existente o no aplazaría nada, porque el hero ya es visible. Se retira hasta proponer una opción medible que conserve el comportamiento.",
+        "status": "open",
+        "evidence_refs": [
+          "source:facts.json"
+        ],
+        "resolution_evidence_refs": [],
+        "author": "claude",
+        "phase": "defense"
+      },
+      {
+        "id": "claude-obj-pass-sin-medir",
+        "alternative_id": "claude-lote-secuencial-seguro",
+        "category": "validación",
+        "severity": "medium",
+        "claim": "Los pass de SEO, accesibilidad, reversibilidad y costes no están acreditados para un candidato inexistente y deben ser unknown. Además, la hipótesis del LCP citaba la imagen r2.dev en lugar de la miniatura de YouTube.",
+        "status": "open",
+        "evidence_refs": [
+          "source:facts.json"
+        ],
+        "resolution_evidence_refs": [],
+        "author": "claude",
+        "phase": "defense"
+      },
+      {
+        "id": "codex-obj-salida-diagnostico",
+        "alternative_id": "codex-native-sequenced",
+        "category": "atribución pendiente",
+        "severity": "medium",
+        "claim": "Falta correlación temporal del CLS entre documento, estilos y reproductor, y atribución de tareas largas mobile. Los criterios propuestos delimitan el diagnóstico, pero todavía no se han satisfecho.",
+        "status": "open",
+        "evidence_refs": [
+          "source:facts.json"
+        ],
+        "resolution_evidence_refs": [],
+        "author": "codex",
+        "phase": "defense"
+      },
+      {
+        "id": "codex-obj-validacion-candidato",
+        "alternative_id": "codex-native-sequenced",
+        "category": "validación",
+        "severity": "medium",
+        "claim": "No existe candidato posterior medido. Rendimiento, compatibilidad, accesibilidad y preservación visual siguen unknown; describir verificaciones futuras no acredita su cumplimiento.",
+        "status": "open",
+        "evidence_refs": [
+          "source:facts.json"
+        ],
+        "resolution_evidence_refs": [],
+        "author": "codex",
+        "phase": "defense"
+      }
+    ],
+    "questions": 6,
+    "answers": 6,
+    "sequential_worker_duration_sum_s": 324.84499999999997,
+    "observed_claude_cost_subtotal_usd": 2.0380749,
+    "cost_complete": false,
+    "cost_note": "Provider-reported Claude subtotal across initial failures and successful calls; Codex cost not exposed. Do not represent sum of worker durations as wall-clock time."
+  },
+  "regression_gates": {
+    "state": "proposed_not_enforced",
+    "existing_policy": "reports/rhino-performance/regression-gates.json",
+    "this_comparison_state": "inconclusive",
+    "reason": "n3/profile; no controlled candidate; source and dynamic app/network variability not causally isolated.",
+    "no_scheduling": true
+  },
+  "qa": {
+    "existing_unit_tests": 40,
+    "tests_file": "reports/runs/rhino-performance/20261110T235059-home-priority-diagnosis-2f04055a/existing-performance-tests.json",
+    "live_profile_samples": 6,
+    "browser_views": 2,
+    "extra_media_keyboard_views": 2,
+    "theme_source_unchanged": true
+  },
+  "permissions": {
+    "theme_changes": false,
+    "production_changes": false,
+    "commercial_forms_submitted": false,
+    "external_schedules": false,
+    "CommandCode_invoked": false
+  },
+  "limitations": [
+    "No new Google API results; latest PSI home85mobile/70desktop are dated2026-11-10T19:13/14Z before current validation.",
+    "No field INP for home; originp75not URL data.",
+    "POST guard affects third-party media and analytics.",
+    "Video remained paused/time0/readyState0 before and after hiding: playback-to-pause not verified.",
+    "No actual candidate tested for90+; no guaranteed score or benefit.",
+    "No full WCAG/indexation/conversion certification."
+  ],
+  "mobile_bootup_by_host_median3": {
+    "connect.facebook.net": {
+      "cpu_total_ms": 1016.6760000000022,
+      "scripting_ms": 845.0920000000021,
+      "parse_compile_ms": 107.548
+    },
+    "www.googletagmanager.com": {
+      "cpu_total_ms": 916.7719999999952,
+      "scripting_ms": 808.9519999999952,
+      "parse_compile_ms": 97.23999999999998
+    },
+    "nsk-cdn-static.tiendanube.com": {
+      "cpu_total_ms": 871.5960000000005,
+      "scripting_ms": 653.7880000000005,
+      "parse_compile_ms": 69.196
+    },
+    "analytics.tiktok.com": {
+      "cpu_total_ms": 616.2040000000004,
+      "scripting_ms": 476.2360000000084,
+      "parse_compile_ms": 92.532
+    },
+    "scripts.clarity.ms": {
+      "cpu_total_ms": 434.5440000000002,
+      "scripting_ms": 409.08400000000023,
+      "parse_compile_ms": 9.54
+    },
+    "ftp-cdn.mitiendanube.com": {
+      "cpu_total_ms": 836.1440000000007,
+      "scripting_ms": 380.0680000000004,
+      "parse_compile_ms": 43.032000000000004
+    },
+    "Unattributable": {
+      "cpu_total_ms": 1724.747999999984,
+      "scripting_ms": 320.5160000000002,
+      "parse_compile_ms": 0
+    },
+    "bzrcdn.openai.com": {
+      "cpu_total_ms": 266.68800000000005,
+      "scripting_ms": 249.62000000000006,
+      "parse_compile_ms": 18.451999999999998
+    },
+    "acdn-us.mitiendanube.com": {
+      "cpu_total_ms": 310.7200000000001,
+      "scripting_ms": 220.5440000000001,
+      "parse_compile_ms": 51.556000000000004
+    },
+    "rhino-performance.com": {
+      "cpu_total_ms": 2855.652000000001,
+      "scripting_ms": 166.55200000000005,
+      "parse_compile_ms": 84.18800000000005
+    },
+    "googleads.g.doubleclick.net": {
+      "cpu_total_ms": 115.272,
+      "scripting_ms": 93.44000000000001,
+      "parse_compile_ms": 1.232
+    },
+    "static.cloudflareinsights.com": {
+      "cpu_total_ms": 55.787999999999975,
+      "scripting_ms": 44.95999999999998,
+      "parse_compile_ms": 0.224
+    },
+    "chromewebdata": {
+      "cpu_total_ms": 81.01999999999997,
+      "scripting_ms": 20.89199999999998,
+      "parse_compile_ms": 27.188
+    }
+  },
+  "bootup_attribution_limit": "CPU grouped by host from audit; not causal attribution of the simulated TBT, not a mandate to remove native integrations.",
+  "other_templates_reused_are_historical": true,
+  "blog_latest_release_summary": {
+    "at": "2026-11-10T21:54:52.778474+00:00",
+    "url": "https://rhino-performance.com/blog/",
+    "after": [
+      {
+        "device": "mobile",
+        "scores_median": null,
+        "score_medians": null,
+        "metrics": {
+          "lcp": 6194.4915,
+          "fcp": 1799.6259999999997,
+          "cls": 0.0,
+          "tbt": 1238.709750000001,
+          "speed_index": 5121.078964935599
+        },
+        "sample_count": null
+      },
+      {
+        "device": "desktop",
+        "scores_median": null,
+        "score_medians": null,
+        "metrics": {
+          "lcp": 1835.0044999999996,
+          "fcp": 914.9759999999999,
+          "cls": 0.04158938556168462,
+          "tbt": 43.499999999999545,
+          "speed_index": 1860.1524273465761
+        },
+        "sample_count": null
+      }
+    ],
+    "evidence": "reports/rhino-performance/blog-release-validation.json"
+  }
+}

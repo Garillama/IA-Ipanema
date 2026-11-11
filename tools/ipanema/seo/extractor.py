@@ -81,7 +81,7 @@ class _Collector(HTMLParser):
         self.stack = []
         self.snap = {"title": None, "lang": None, "meta": {}, "links_rel": [], "headings": [], "links": [], "images": [],
                      "json_ld": [], "microdata": [], "rdfa": {"typeof": 0, "property": 0, "vocab": 0},
-                     "noscript": 0, "scripts_external": 0, "inline_script_ld_count": 0}
+                     "noscript": 0, "scripts_external": 0, "inline_script_ld_count": 0, "pagination_buttons": []}
         self._title = False
         self._script = None
         self._heading = None
@@ -106,6 +106,9 @@ class _Collector(HTMLParser):
         entry['user_content'] = 'user-content' in cls.split() or 'elementor' in cls
         entry['carousel'] = entry['carousel'] or 'data-qa-carousel' in a
         entry['pagination'] = bool(re.search(r'pagination|js-load-more|infinite-scroll',marker,re.I))
+        if tag == 'button' and re.search(r'load.more|infinite.scroll', marker, re.I):
+            self.snap['pagination_buttons'].append({'class': cls, 'disabled': 'disabled' in a or a.get('aria-disabled') == 'true',
+                                                    'context': self._ctx(), 'line': pos[0]})
         if tag == "html":
             self.snap["lang"] = a.get("lang")
         elif tag == "title":
