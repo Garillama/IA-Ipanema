@@ -1,0 +1,44 @@
+--- a/snippets/product-list/pagination.tpl
++++ b/snippets/product-list/pagination.tpl
+@@ -10,16 +10,27 @@
+ {% if infinite_scroll %}
+ 	{% if pages.current == 1 and (not pages.is_last or page_next) %}
+ 		<div class="js-load-more pagination-load-more">
+-			<a class="btn btn-primary">
++			<button type="button" class="btn btn-primary" disabled>
+ 				{{ 'general.show_more_products' | t }}
+ 				<span class="js-load-more-spinner pagination-load-more-spinner" style="display:none;">
+ 					<svg class="icon-loading icon-inline"><use xlink:href="#spinner-third"/></svg>
+ 				</span>
+-			</a>
++			</button>
+ 		</div>
+ 		<div id="js-infinite-scroll-spinner" class="pagination-spinner" style="display:none">
+ 			<svg class="icon-loading icon-inline"><use xlink:href="#spinner-third"/></svg>
+ 		</div>
++	{% endif %}
++	{# Native page destinations stay useful after append and without JavaScript. #}
++	{% if prev_link or next_link %}
++		<nav class="pagination-nav" aria-label="{{ 'general.show_more_products' | t }}">
++			{% if prev_link %}
++				<a class="pagination-counter" href="{{ prev_link }}">{{ 'bundle.page_x' | t }} {{ pages.current - 1 }}</a>
++			{% endif %}
++			{% if next_link %}
++				<a class="pagination-counter" href="{{ next_link }}">{{ 'bundle.page_x' | t }} {{ pages.current + 1 }}</a>
++			{% endif %}
++		</nav>
+ 	{% endif %}
+ {% else %}
+ 	{% if pages.numbers or next_href or prev_href %}
+--- a/static/js/store.js
++++ b/static/js/store.js
+@@ -1756,6 +1756,9 @@
+         LS.productItemSlider({ pagination_type: 'fraction' });
+       }
+     });
++
++    const loadMoreButton = loadMoreBtn.querySelector('button');
++    if (loadMoreButton) loadMoreButton.disabled = false;
+   }
+ 
+   /**

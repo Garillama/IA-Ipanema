@@ -1,0 +1,73 @@
+{
+  "exit_code": 1,
+  "timed_out": false,
+  "output_limited": false,
+  "idle_timed_out": false,
+  "cancelled": false,
+  "process_started": true,
+  "process_reaped": true,
+  "stdin_bytes_written": 198,
+  "context_complete": true,
+  "duration_s": 0.006,
+  "timing": {
+    "spawn_s": 0.000442,
+    "input_complete_s": 0.0005,
+    "first_stdout_s": null,
+    "first_stderr_s": 0.005621,
+    "timeout_phase": null,
+    "event_counts": {},
+    "inference_vs_initialization": "not_separable_without_provider_events"
+  },
+  "output_accounting": {
+    "transport_bytes": 76,
+    "retained_bytes": 76,
+    "discarded_progress_bytes": 0,
+    "transport_limit_bytes": 655360,
+    "retained_limit_bytes": 65536
+  },
+  "isolation": {
+    "backend": "bubblewrap",
+    "snapshot_read_only": true,
+    "host_home_mounted": false,
+    "network": "enabled_no_destination_firewall",
+    "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+  },
+  "events": [],
+  "stderr_bytes": 76,
+  "usage": {
+    "provider_reported": {},
+    "measured_cost_available": false,
+    "estimated_cost": null
+  },
+  "prompt_bytes": 198,
+  "prompt_sha256": "ec6bee4ca75ddb36079d7680287bb088aeac4156a8757986a42362dde268cd27",
+  "model": "gpt-6.1-sol",
+  "effort": "high",
+  "scope": "Transport/native schema probe only, NOT council vote",
+  "argv_safe": [
+    "/home/alanrichard/.local/bin/codex",
+    "-a",
+    "never",
+    "exec",
+    "-",
+    "--model",
+    "gpt-6.1-sol",
+    "--json",
+    "--ephemeral",
+    "--ignore-user-config",
+    "--ignore-rules",
+    "--sandbox",
+    "read-only",
+    "--skip-git-repo-check",
+    "-c",
+    "model_reasoning_effort=\"high\"",
+    "--output-schema",
+    "/workspace/council-response.schema.json"
+  ],
+  "contract": "failed",
+  "contract_error": {
+    "category": "adapter_envelope",
+    "path": "$"
+  },
+  "error_category": "unknown_provider_error"
+}

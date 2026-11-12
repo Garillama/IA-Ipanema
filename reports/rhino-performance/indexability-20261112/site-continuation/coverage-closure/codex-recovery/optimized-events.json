@@ -1,0 +1,29 @@
+{
+  "events": [
+    {
+      "type": "thread.started",
+      "item_type": null,
+      "status": null,
+      "text_bytes": 0,
+      "tool_signal": false
+    },
+    {
+      "type": "item.completed",
+      "item_type": "error",
+      "status": null,
+      "text_bytes": 0,
+      "tool_signal": false,
+      "error_message": "Code Mode is unavailable because failed to spawn code-mode host /home/alanrichard/.codex/packages/standalone/releases/0.167.1-x86_64-unknown-linux-musl/bin/codex-code-mode-host: host executable was not found. Code mode will fail closed; enable `features.code_mode_host` and install `codex-code-mode-host`."
+    },
+    {
+      "type": "turn.started",
+      "item_type": null,
+      "status": null,
+      "text_bytes": 0,
+      "tool_signal": false
+    }
+  ],
+  "stderr_bytes": 0,
+  "raw_reasoning_not_retained": true,
+  "pending_tools_observed": false
+}

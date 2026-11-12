@@ -1,0 +1,32 @@
+{
+  "authorized_patch_sha256": "611a5dac1e2767c0d331e42b06c60834e8a427c8bbc41671b9a81a8c977f3e2c",
+  "base_hashes": {
+    "tests/unit/test_seo_final_conditions_v4.py": null,
+    "tests/unit/test_seo_regression_v4.py": "5abcd7a00b7c92bd692313980e19a4b8ca69b99e55bd2a2fd9cedc9a1dc7c04b",
+    "tests/unit/test_seo_review_additional_v4.py": null,
+    "tests/unit/test_seo_robots_sources_v4.py": null,
+    "tests/unit/test_seo_robots_values_v4.py": null,
+    "tools/ipanema/seo/crawl_policy.py": "0f62445b9e0fb07bce6c55c59f60b107b52a460b343ea073bb0bee5e8a6009ff",
+    "tools/ipanema/seo/crawler.py": "0cebeb3685255ac5104ce676ade56fdb071d32b00a28f8a3829a1000f2f73f4e",
+    "tools/ipanema/seo/indexability.py": "c379c404241180894d7a0b25f91f357a56173a059f461532ec1f78fb7650b0e8",
+    "tools/ipanema/seo/page_audit.py": "e60c8b928d8e2fd62e2034a247d407f2e52bd62cddcad5b398713a561c5d140b",
+    "tools/ipanema/seo/regression.py": "17de56d903987bd89786abeb4320498fe6cdb2dca9b89d9ab70803a9d73f4d91",
+    "tools/ipanema/seo/robots.py": "7a83bdac275ac8783b7b85841f14d80da0157b9044b1556989a226c1000c8f2b"
+  },
+  "post_hashes": {
+    "tests/unit/test_seo_final_conditions_v4.py": "524eaee578333857c3d6c88a48180b7e65f5df6719e17009140a25a7c319fcbf",
+    "tests/unit/test_seo_regression_v4.py": "82647acd866d7a286238b39f1771be6c848ad9fe671a541d3833a924d2f7bbe0",
+    "tests/unit/test_seo_review_additional_v4.py": "f803cc48ddd33e34184e10b62d3ade078975d51b16f2ba81ba630b7317af647e",
+    "tests/unit/test_seo_robots_sources_v4.py": "7a85a2ff7e7de2daa8725dcf97f7384dc6cda4903aa6659cde70ccd3a10b690b",
+    "tests/unit/test_seo_robots_values_v4.py": "6dd1dac3206bf5113f437e69209dbaf5c32a5b6015158e90d5cd8fb4bfdee1cb",
+    "tools/ipanema/seo/crawl_policy.py": "c719ba73adb1e54141cbb04dbbc0b0a6b56407fbb1459d6f4814b23718e526c1",
+    "tools/ipanema/seo/crawler.py": "29b42a929132bd5bb5ec07770a247dbd5b42a35747874f711617f5ff204d2e5b",
+    "tools/ipanema/seo/indexability.py": "6f4f34d2ded8af574b3822e74e9b795a5a74b41a3f7bfd16f4b6009c981cddd1",
+    "tools/ipanema/seo/page_audit.py": "a6b10451443aac8ea222eb0fcf8cdae673e21014b31d7431452b8fe669db6f34",
+    "tools/ipanema/seo/regression.py": "0bf7eca8c50b906fa083f4422af7863f6a37bad7519e1dbd8349cac3a07b257e",
+    "tools/ipanema/seo/robots.py": "57d01f9086dffa7f25f26b59976098770d585731eca3d758ee9235000399a3df"
+  },
+  "all_post_hashes_match": true,
+  "backups_verified": true,
+  "backup_directory": "reports/runs/rhino-performance/20261112T-v4-authorized-integration-211547447426/backups"
+}

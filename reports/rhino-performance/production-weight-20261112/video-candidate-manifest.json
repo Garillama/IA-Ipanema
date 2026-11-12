@@ -1,0 +1,62 @@
+{
+  "production_modified": false,
+  "deployment_authorized": false,
+  "original": {
+    "bytes": 7688530,
+    "sha256": "bc74de8cab81ec38082114630db340326a86ed4a48ca070252b8d051248997e2",
+    "duration": "20.416667",
+    "bit_rate": "3012648",
+    "streams": [
+      {
+        "codec_type": "video",
+        "codec_name": "h264",
+        "width": 1920,
+        "height": 1080,
+        "avg_frame_rate": "24/1",
+        "duration": "20.416667",
+        "pix_fmt": "yuv420p"
+      }
+    ]
+  },
+  "observed_public_source": "https://pub-ddef691408694c12881f433a7ae94d95.r2.dev/stores/cmqfmfvoe0010srt5j2d6otew/media/83b9f5a1-2b47-4908-8d50-281f76fb4d29/16b36c22-86c0-4b52-bb7d-5da85723a842.mp4",
+  "candidates": [
+    {
+      "file": "candidate-crf26.mp4",
+      "bytes": 5868674,
+      "sha256": "fa84049b4437042ff6e4872627d0094076af3280209aaa40d7f102abbb4b1468",
+      "crf": 26,
+      "ssim_all": 0.992423,
+      "byte_reduction_percent": 23.669752215312943,
+      "verified_stream": {
+        "codec_name": "h264",
+        "profile": "High",
+        "level": 40,
+        "width": 1920,
+        "height": 1080,
+        "avg_frame_rate": "24/1",
+        "pix_fmt": "yuv420p"
+      },
+      "duration": "20.416667"
+    },
+    {
+      "file": "candidate-crf30.mp4",
+      "bytes": 3865883,
+      "sha256": "5dd35b3acdb7fe8c958816c46b2e86075c18ccdb890ae1a1bfd9b69631329a08",
+      "crf": 30,
+      "ssim_all": 0.98941,
+      "byte_reduction_percent": 49.71882791638974,
+      "verified_stream": {
+        "codec_name": "h264",
+        "profile": "High",
+        "level": 40,
+        "width": 1920,
+        "height": 1080,
+        "avg_frame_rate": "24/1",
+        "pix_fmt": "yuv420p"
+      },
+      "duration": "20.416667"
+    }
+  ],
+  "private_artifacts": "reports/runs/rhino-performance/20261112T032758-production-weight-analysis-8a197fd8/video-candidate",
+  "quality_human_review_pending": true
+}

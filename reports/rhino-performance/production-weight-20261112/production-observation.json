@@ -1,0 +1,453 @@
+{
+  "at": "2026-11-12T03:30:23.638Z",
+  "status": "observed",
+  "chrome": "Chrome/155.0.8059.84",
+  "policy": "guarded read-only; canonical registered origin; cache cold per context; no forms/cart/consent actions; initial idle observation then scroll only",
+  "instrumentation": "CDP/Puppeteer on live production, not Chrome DevTools MCP (no connected tool exposed); not a Lighthouse score or real-user INP",
+  "rows": [
+    {
+      "device": "mobile",
+      "viewport": {
+        "width": 390,
+        "height": 844,
+        "isMobile": true,
+        "hasTouch": true,
+        "deviceScaleFactor": 1
+      },
+      "http": 200,
+      "final_url": "https://rhino-performance.com/",
+      "document_sha256": "aac409b238491cc0ec926d4f01c7ca97f9fae3d3798494d918b9d694f6d35cd4",
+      "css": {
+        "source_sha256": "844d4e0f4ba7af3d1d9f9f05296959e273103720c1aa1c56f44f14b19fabf952",
+        "initial_flow_guard_present": true,
+        "decoded_bytes": 159795
+      },
+      "source_assets": [
+        {
+          "url": "https://acdn-us.mitiendanube.com/stores/007/400/935/themes/ipanema/style-critical-b19bfb04f3e9e6967602722bb5a95c2e.min.css",
+          "sha256": "844d4e0f4ba7af3d1d9f9f05296959e273103720c1aa1c56f44f14b19fabf952",
+          "decoded_bytes": 159795
+        },
+        {
+          "url": "https://acdn-us.mitiendanube.com/stores/007/400/935/themes/ipanema/style-utilities-c0aecd622274e18a4457353665418961.min.css",
+          "sha256": "4970afcdc7374ebe463c20ef6a17d12d97b176287d1818dab43d9bfa2abefe56",
+          "decoded_bytes": 23598
+        },
+        {
+          "url": "https://acdn-us.mitiendanube.com/stores/007/400/935/themes/ipanema/sectionfy-video-slide-c0cc8b0e0f8d64b293bb9406539cfefb.min.css",
+          "sha256": "a441e2e18f7b4a3abf0b504c7598bcb8ff7486ef0f8c5aa6b0ce4e8afdd632c3",
+          "decoded_bytes": 1135
+        },
+        {
+          "url": "https://ftp-cdn.mitiendanube.com/forked-files/007/400/935/installations/14828608/static/js/libraries-standalone-59fa5e7833de73d735795f6c8e66eede.js",
+          "sha256": "da2638c043034114cb004b2fd99cd4d54ee69c7d569bd2c96cca8e586d2e0d34",
+          "decoded_bytes": 97574
+        },
+        {
+          "url": "https://acdn-us.mitiendanube.com/stores/007/400/935/themes/ipanema/style-async-caea70828498143dfd29618ea0e1d396.min.css",
+          "sha256": "9775b0b93bccd35a875026f40ec16049435cee2bc3a55ee954e247895078611d",
+          "decoded_bytes": 142206
+        },
+        {
+          "url": "https://ftp-cdn.mitiendanube.com/forked-files/007/400/935/installations/14828608/static/js/blog-tags-07ec37f7ddabfc990bd0f50ca7245098.js",
+          "sha256": "c46c62adb03a2053d516b3e2dc22581e4b05cef61fb43b3ec12f892dab140605",
+          "decoded_bytes": 18260
+        },
+        {
+          "url": "https://ftp-cdn.mitiendanube.com/forked-files/007/400/935/installations/14828608/static/js/media-visibility-358cdafd4e5fe38c3cf4151aae590426.js",
+          "sha256": "93dc9242fcd029907f3fdb704d12d03c214349004fe8cc7ba852587b98d9db83",
+          "decoded_bytes": 6962
+        },
+        {
+          "url": "https://ftp-cdn.mitiendanube.com/forked-files/007/400/935/installations/14828608/static/js/embla-carousel-d613f8e646d4783b06ee7c98dde3c6b2.js",
+          "sha256": "35fc6711c94c14c92f8e65a163f7188e9ac06824a7c16fd5c5bb0e059146a131",
+          "decoded_bytes": 21258
+        },
+        {
+          "url": "https://ftp-cdn.mitiendanube.com/forked-files/007/400/935/installations/14828608/static/js/featured-collection-a3c03f55d53014612d213148512387d2.js",
+          "sha256": "b38ab728dfcab5311f938065655aa25a60279be900e05e592cd7bb4d6627b058",
+          "decoded_bytes": 7845
+        },
+        {
+          "url": "https://ftp-cdn.mitiendanube.com/forked-files/007/400/935/installations/14828608/static/js/sectionfy-description-card-section-eda1f3bc7cf09598bae8f4b2347edf35.js",
+          "sha256": "cc08cfd157e6c5193ee79fbd4479c5b1d7d95502c3042de27f31bccdf5d93a57",
+          "decoded_bytes": 13637
+        },
+        {
+          "url": "https://ftp-cdn.mitiendanube.com/forked-files/007/400/935/installations/14828608/static/js/product-carousel-c3aa62133bf9feccd3ec3097f985d282.js",
+          "sha256": "9e0aac61812501fed93b0347da48e3fabcbed34f921073ce6794273b9ad1b7de",
+          "decoded_bytes": 16545
+        },
+        {
+          "url": "https://ftp-cdn.mitiendanube.com/forked-files/007/400/935/installations/14828608/static/js/sectionfy-video-slide-83c50d8e50220d958d9951ef4d6c368b.js",
+          "sha256": "3165f743b357b088b2d91533a712938dd9224e1b9a9e111f095775fbc908199b",
+          "decoded_bytes": 8496
+        },
+        {
+          "url": "https://ftp-cdn.mitiendanube.com/forked-files/007/400/935/installations/14828608/static/js/athletes-carousel-3cd1f98ecdd6e23b49b787304a1a62a9.js",
+          "sha256": "98e38513ae19e34c1c6778f52c0b9b04756ef36475aca2b8f97e3969e0238830",
+          "decoded_bytes": 8968
+        },
+        {
+          "url": "https://ftp-cdn.mitiendanube.com/forked-files/007/400/935/installations/14828608/static/js/sectionfy-client-0ea4e8acc6c7e99a53eb083827a777e1.js",
+          "sha256": "a7fb2a7e432c84df62cf6100f7349ec895e28f88eb2027b3819f76aef40a150c",
+          "decoded_bytes": 13070
+        },
+        {
+          "url": "https://ftp-cdn.mitiendanube.com/forked-files/007/400/935/installations/14828608/static/js/blog-carousel-15864d41d8673760e7ef5fd1be0b197b.js",
+          "sha256": "bfe1bcf4daa1d43e1b1674cf03a1bc89085725b7b1470cd9ce584d7453c77be2",
+          "decoded_bytes": 15421
+        },
+        {
+          "url": "https://ftp-cdn.mitiendanube.com/forked-files/007/400/935/installations/14828608/static/js/store-7211188f004ce2a5ec055d1f39a66a5c.js",
+          "sha256": "29dea94e46cc1bb423ddde71a42d807f22c944f09465d70400728d7ae95b4718",
+          "decoded_bytes": 161529
+        },
+        {
+          "url": "https://analytics.tiktok.com/i18n/pixel/static/main.MTkyOWEyMGMwOQ.js",
+          "sha256": "dc2efc645408bf69018ac6fd33b17f49f76519d1607dd421e4e765745c03acda",
+          "decoded_bytes": 542441
+        },
+        {
+          "url": "https://analytics.tiktok.com/i18n/pixel/static/identify_9caef9b0.js",
+          "sha256": "df73673aac9de2cb9eca534b720ce3df2f8191043369f33f68745f705d29248b",
+          "decoded_bytes": 139650
+        },
+        {
+          "url": "https://apps-resources.b-cdn.net/user-scripts/nuvemshop/googrev/js/googrev-7400935.js",
+          "sha256": "e8fb6e9dd2f006a27e5408fff595942f0073eb17193f1b2c12611c0f00f9fb3e",
+          "decoded_bytes": 931287
+        },
+        {
+          "url": "https://apps-resources.b-cdn.net/user-scripts/nuvemshop/googrev/js/googrev-7400935.js",
+          "sha256": "e8fb6e9dd2f006a27e5408fff595942f0073eb17193f1b2c12611c0f00f9fb3e",
+          "decoded_bytes": 931287
+        }
+      ],
+      "video": [
+        {
+          "src": "",
+          "preload": "none",
+          "autoplay": false,
+          "muted": true,
+          "paused": true,
+          "readyState": 0,
+          "videoWidth": 0,
+          "videoHeight": 0,
+          "duration": null,
+          "currentTime": 0,
+          "rect": {
+            "x": 0,
+            "y": 138,
+            "w": 390,
+            "h": 380
+          },
+          "poster": "",
+          "section": "ns-section section section-video"
+        }
+      ],
+      "video_after_scroll": [
+        {
+          "paused": true,
+          "time": 0,
+          "src": ""
+        }
+      ],
+      "initial_lcp_observed_not_lighthouse": [
+        {
+          "at": 1092,
+          "duration": 0,
+          "url": "https://acdn-us.mitiendanube.com/stores/007/400/935/media/9caac2fb-logorhinoperformancesobrefondoverde/avif/480.avif",
+          "tag": "IMG",
+          "classes": ""
+        }
+      ],
+      "review_sdk_responses": [
+        {
+          "url": "https://apps-resources.b-cdn.net/user-scripts/nuvemshop/googrev/js/googrev-7400935.js",
+          "identity_sha256": "f2c54b1f7ddefa15ed87f5206a19beec0d6c7e4345a41a54911e219523422b8e",
+          "type": "script",
+          "status": 200,
+          "fromCache": false,
+          "frame": "https://googrev.abejita.co/api/googrev/nuvemshop/storefront/script",
+          "at_ms": 1794454230222
+        },
+        {
+          "url": "https://apps-resources.b-cdn.net/user-scripts/nuvemshop/googrev/js/googrev-7400935.js",
+          "identity_sha256": "f2c54b1f7ddefa15ed87f5206a19beec0d6c7e4345a41a54911e219523422b8e",
+          "type": "script",
+          "status": 200,
+          "fromCache": true,
+          "frame": "https://googrev.abejita.co/api/googrev/nuvemshop/storefront/script",
+          "at_ms": 1794454231539
+        }
+      ]
+    },
+    {
+      "device": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 940,
+        "isMobile": false,
+        "hasTouch": false,
+        "deviceScaleFactor": 1
+      },
+      "http": 200,
+      "final_url": "https://rhino-performance.com/",
+      "document_sha256": "9335d0e5f98ca738f87f48b497c8ee046bf4bfbf9084f52fbed51040956811e7",
+      "css": {
+        "source_sha256": "844d4e0f4ba7af3d1d9f9f05296959e273103720c1aa1c56f44f14b19fabf952",
+        "initial_flow_guard_present": true,
+        "decoded_bytes": 159795
+      },
+      "source_assets": [
+        {
+          "url": "https://acdn-us.mitiendanube.com/stores/007/400/935/themes/ipanema/style-utilities-c0aecd622274e18a4457353665418961.min.css",
+          "sha256": "4970afcdc7374ebe463c20ef6a17d12d97b176287d1818dab43d9bfa2abefe56",
+          "decoded_bytes": 23598
+        },
+        {
+          "url": "https://acdn-us.mitiendanube.com/stores/007/400/935/themes/ipanema/style-critical-b19bfb04f3e9e6967602722bb5a95c2e.min.css",
+          "sha256": "844d4e0f4ba7af3d1d9f9f05296959e273103720c1aa1c56f44f14b19fabf952",
+          "decoded_bytes": 159795
+        },
+        {
+          "url": "https://acdn-us.mitiendanube.com/stores/007/400/935/themes/ipanema/sectionfy-video-slide-c0cc8b0e0f8d64b293bb9406539cfefb.min.css",
+          "sha256": "a441e2e18f7b4a3abf0b504c7598bcb8ff7486ef0f8c5aa6b0ce4e8afdd632c3",
+          "decoded_bytes": 1135
+        },
+        {
+          "url": "https://ftp-cdn.mitiendanube.com/forked-files/007/400/935/installations/14828608/static/js/libraries-standalone-59fa5e7833de73d735795f6c8e66eede.js",
+          "sha256": "da2638c043034114cb004b2fd99cd4d54ee69c7d569bd2c96cca8e586d2e0d34",
+          "decoded_bytes": 97574
+        },
+        {
+          "url": "https://acdn-us.mitiendanube.com/stores/007/400/935/themes/ipanema/style-async-caea70828498143dfd29618ea0e1d396.min.css",
+          "sha256": "9775b0b93bccd35a875026f40ec16049435cee2bc3a55ee954e247895078611d",
+          "decoded_bytes": 142206
+        },
+        {
+          "url": "https://ftp-cdn.mitiendanube.com/forked-files/007/400/935/installations/14828608/static/js/media-visibility-358cdafd4e5fe38c3cf4151aae590426.js",
+          "sha256": "93dc9242fcd029907f3fdb704d12d03c214349004fe8cc7ba852587b98d9db83",
+          "decoded_bytes": 6962
+        },
+        {
+          "url": "https://ftp-cdn.mitiendanube.com/forked-files/007/400/935/installations/14828608/static/js/featured-collection-a3c03f55d53014612d213148512387d2.js",
+          "sha256": "b38ab728dfcab5311f938065655aa25a60279be900e05e592cd7bb4d6627b058",
+          "decoded_bytes": 7845
+        },
+        {
+          "url": "https://ftp-cdn.mitiendanube.com/forked-files/007/400/935/installations/14828608/static/js/athletes-carousel-3cd1f98ecdd6e23b49b787304a1a62a9.js",
+          "sha256": "98e38513ae19e34c1c6778f52c0b9b04756ef36475aca2b8f97e3969e0238830",
+          "decoded_bytes": 8968
+        },
+        {
+          "url": "https://ftp-cdn.mitiendanube.com/forked-files/007/400/935/installations/14828608/static/js/sectionfy-video-slide-83c50d8e50220d958d9951ef4d6c368b.js",
+          "sha256": "3165f743b357b088b2d91533a712938dd9224e1b9a9e111f095775fbc908199b",
+          "decoded_bytes": 8496
+        },
+        {
+          "url": "https://ftp-cdn.mitiendanube.com/forked-files/007/400/935/installations/14828608/static/js/sectionfy-client-0ea4e8acc6c7e99a53eb083827a777e1.js",
+          "sha256": "a7fb2a7e432c84df62cf6100f7349ec895e28f88eb2027b3819f76aef40a150c",
+          "decoded_bytes": 13070
+        },
+        {
+          "url": "https://ftp-cdn.mitiendanube.com/forked-files/007/400/935/installations/14828608/static/js/blog-tags-07ec37f7ddabfc990bd0f50ca7245098.js",
+          "sha256": "c46c62adb03a2053d516b3e2dc22581e4b05cef61fb43b3ec12f892dab140605",
+          "decoded_bytes": 18260
+        },
+        {
+          "url": "https://ftp-cdn.mitiendanube.com/forked-files/007/400/935/installations/14828608/static/js/blog-carousel-15864d41d8673760e7ef5fd1be0b197b.js",
+          "sha256": "bfe1bcf4daa1d43e1b1674cf03a1bc89085725b7b1470cd9ce584d7453c77be2",
+          "decoded_bytes": 15421
+        },
+        {
+          "url": "https://ftp-cdn.mitiendanube.com/forked-files/007/400/935/installations/14828608/static/js/product-carousel-c3aa62133bf9feccd3ec3097f985d282.js",
+          "sha256": "9e0aac61812501fed93b0347da48e3fabcbed34f921073ce6794273b9ad1b7de",
+          "decoded_bytes": 16545
+        },
+        {
+          "url": "https://ftp-cdn.mitiendanube.com/forked-files/007/400/935/installations/14828608/static/js/sectionfy-description-card-section-eda1f3bc7cf09598bae8f4b2347edf35.js",
+          "sha256": "cc08cfd157e6c5193ee79fbd4479c5b1d7d95502c3042de27f31bccdf5d93a57",
+          "decoded_bytes": 13637
+        },
+        {
+          "url": "https://ftp-cdn.mitiendanube.com/forked-files/007/400/935/installations/14828608/static/js/embla-carousel-d613f8e646d4783b06ee7c98dde3c6b2.js",
+          "sha256": "35fc6711c94c14c92f8e65a163f7188e9ac06824a7c16fd5c5bb0e059146a131",
+          "decoded_bytes": 21258
+        },
+        {
+          "url": "https://ftp-cdn.mitiendanube.com/forked-files/007/400/935/installations/14828608/static/js/store-7211188f004ce2a5ec055d1f39a66a5c.js",
+          "sha256": "29dea94e46cc1bb423ddde71a42d807f22c944f09465d70400728d7ae95b4718",
+          "decoded_bytes": 161529
+        },
+        {
+          "url": "https://analytics.tiktok.com/i18n/pixel/static/main.MTkyOWEyMGMwOQ.js",
+          "sha256": "dc2efc645408bf69018ac6fd33b17f49f76519d1607dd421e4e765745c03acda",
+          "decoded_bytes": 542441
+        },
+        {
+          "url": "https://analytics.tiktok.com/i18n/pixel/static/identify_9caef9b0.js",
+          "sha256": "df73673aac9de2cb9eca534b720ce3df2f8191043369f33f68745f705d29248b",
+          "decoded_bytes": 139650
+        },
+        {
+          "url": "https://apps-resources.b-cdn.net/user-scripts/nuvemshop/googrev/js/googrev-7400935.js",
+          "sha256": "e8fb6e9dd2f006a27e5408fff595942f0073eb17193f1b2c12611c0f00f9fb3e",
+          "decoded_bytes": 931287
+        },
+        {
+          "url": "https://apps-resources.b-cdn.net/user-scripts/nuvemshop/googrev/js/googrev-7400935.js",
+          "sha256": "e8fb6e9dd2f006a27e5408fff595942f0073eb17193f1b2c12611c0f00f9fb3e",
+          "decoded_bytes": 931287
+        }
+      ],
+      "video": [
+        {
+          "src": "https://pub-ddef691408694c12881f433a7ae94d95.r2.dev/stores/cmqfmfvoe0010srt5j2d6otew/media/83b9f5a1-2b47-4908-8d50-281f76fb4d29/16b36c22-86c0-4b52-bb7d-5da85723a842.mp4",
+          "preload": "none",
+          "autoplay": false,
+          "muted": true,
+          "paused": false,
+          "readyState": 4,
+          "videoWidth": 1920,
+          "videoHeight": 1080,
+          "duration": 20.416667,
+          "currentTime": 15.325705,
+          "rect": {
+            "x": 0,
+            "y": 36,
+            "w": 1440,
+            "h": 750
+          },
+          "poster": "",
+          "section": "ns-section section section-video"
+        }
+      ],
+      "video_after_scroll": [
+        {
+          "paused": true,
+          "time": 15.717785,
+          "src": "https://pub-ddef691408694c12881f433a7ae94d95.r2.dev/stores/cmqfmfvoe0010srt5j2d6otew/media/83b9f5a1-2b47-4908-8d50-281f76fb4d29/16b36c22-86c0-4b52-bb7d-5da85723a842.mp4"
+        }
+      ],
+      "initial_lcp_observed_not_lighthouse": [
+        {
+          "at": 536,
+          "duration": 0,
+          "url": "https://acdn-us.mitiendanube.com/stores/007/400/935/media/9caac2fb-logorhinoperformancesobrefondoverde/avif/1672.avif",
+          "tag": "IMG",
+          "classes": ""
+        }
+      ],
+      "review_sdk_responses": [
+        {
+          "url": "https://apps-resources.b-cdn.net/user-scripts/nuvemshop/googrev/js/googrev-7400935.js",
+          "identity_sha256": "f2c54b1f7ddefa15ed87f5206a19beec0d6c7e4345a41a54911e219523422b8e",
+          "type": "script",
+          "status": 200,
+          "fromCache": false,
+          "frame": "https://googrev.abejita.co/api/googrev/nuvemshop/storefront/script",
+          "at_ms": 1794454251555
+        },
+        {
+          "url": "https://apps-resources.b-cdn.net/user-scripts/nuvemshop/googrev/js/googrev-7400935.js",
+          "identity_sha256": "f2c54b1f7ddefa15ed87f5206a19beec0d6c7e4345a41a54911e219523422b8e",
+          "type": "script",
+          "status": 200,
+          "fromCache": true,
+          "frame": "https://googrev.abejita.co/api/googrev/nuvemshop/storefront/script",
+          "at_ms": 1794454252854
+        }
+      ]
+    }
+  ],
+  "new_psi_requests": 0,
+  "production_modified": false,
+  "cache_accounting": {
+    "home_mobile": [
+      {
+        "sample": 1,
+        "reported_bytes": 2803498,
+        "memory_cache_rows_bytes": 442604,
+        "arithmetic_excluding_memory_rows": 2360894,
+        "memory_rows": 9,
+        "not_direct_wire_measurement": true
+      },
+      {
+        "sample": 2,
+        "reported_bytes": 2804280,
+        "memory_cache_rows_bytes": 442589,
+        "arithmetic_excluding_memory_rows": 2361691,
+        "memory_rows": 9,
+        "not_direct_wire_measurement": true
+      },
+      {
+        "sample": 3,
+        "reported_bytes": 2802659,
+        "memory_cache_rows_bytes": 442574,
+        "arithmetic_excluding_memory_rows": 2360085,
+        "memory_rows": 9,
+        "not_direct_wire_measurement": true
+      },
+      {
+        "sample": 4,
+        "reported_bytes": 2803343,
+        "memory_cache_rows_bytes": 442579,
+        "arithmetic_excluding_memory_rows": 2360764,
+        "memory_rows": 9,
+        "not_direct_wire_measurement": true
+      },
+      {
+        "sample": 5,
+        "reported_bytes": 2803328,
+        "memory_cache_rows_bytes": 442390,
+        "arithmetic_excluding_memory_rows": 2360938,
+        "memory_rows": 9,
+        "not_direct_wire_measurement": true
+      }
+    ],
+    "home_desktop": [
+      {
+        "sample": 1,
+        "reported_bytes": 10704846,
+        "memory_cache_rows_bytes": 442585,
+        "arithmetic_excluding_memory_rows": 10262261,
+        "memory_rows": 9,
+        "not_direct_wire_measurement": true
+      },
+      {
+        "sample": 2,
+        "reported_bytes": 10715323,
+        "memory_cache_rows_bytes": 442325,
+        "arithmetic_excluding_memory_rows": 10272998,
+        "memory_rows": 9,
+        "not_direct_wire_measurement": true
+      },
+      {
+        "sample": 3,
+        "reported_bytes": 10715323,
+        "memory_cache_rows_bytes": 442325,
+        "arithmetic_excluding_memory_rows": 10272998,
+        "memory_rows": 9,
+        "not_direct_wire_measurement": true
+      },
+      {
+        "sample": 4,
+        "reported_bytes": 10716270,
+        "memory_cache_rows_bytes": 442410,
+        "arithmetic_excluding_memory_rows": 10273860,
+        "memory_rows": 9,
+        "not_direct_wire_measurement": true
+      },
+      {
+        "sample": 5,
+        "reported_bytes": 10719448,
+        "memory_cache_rows_bytes": 442425,
+        "arithmetic_excluding_memory_rows": 10277023,
+        "memory_rows": 9,
+        "not_direct_wire_measurement": true
+      }
+    ]
+  }
+}

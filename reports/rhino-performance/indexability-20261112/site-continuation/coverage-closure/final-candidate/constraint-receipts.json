@@ -1,0 +1,91 @@
+{
+  "kind": "controller-incremental-constraint-receipts",
+  "at": "2026-11-12T21:06:14.352325+00:00",
+  "patch_sha256": "611a5dac1e2767c0d331e42b06c60834e8a427c8bbc41671b9a81a8c977f3e2c",
+  "candidate_hashes": {
+    "tests/unit/test_seo_final_conditions_v4.py": "524eaee578333857c3d6c88a48180b7e65f5df6719e17009140a25a7c319fcbf",
+    "tests/unit/test_seo_regression_v4.py": "82647acd866d7a286238b39f1771be6c848ad9fe671a541d3833a924d2f7bbe0",
+    "tests/unit/test_seo_review_additional_v4.py": "f803cc48ddd33e34184e10b62d3ade078975d51b16f2ba81ba630b7317af647e",
+    "tests/unit/test_seo_robots_sources_v4.py": "7a85a2ff7e7de2daa8725dcf97f7384dc6cda4903aa6659cde70ccd3a10b690b",
+    "tests/unit/test_seo_robots_values_v4.py": "6dd1dac3206bf5113f437e69209dbaf5c32a5b6015158e90d5cd8fb4bfdee1cb",
+    "tools/ipanema/seo/crawl_policy.py": "c719ba73adb1e54141cbb04dbbc0b0a6b56407fbb1459d6f4814b23718e526c1",
+    "tools/ipanema/seo/crawler.py": "29b42a929132bd5bb5ec07770a247dbd5b42a35747874f711617f5ff204d2e5b",
+    "tools/ipanema/seo/indexability.py": "6f4f34d2ded8af574b3822e74e9b795a5a74b41a3f7bfd16f4b6009c981cddd1",
+    "tools/ipanema/seo/page_audit.py": "a6b10451443aac8ea222eb0fcf8cdae673e21014b31d7431452b8fe669db6f34",
+    "tools/ipanema/seo/regression.py": "0bf7eca8c50b906fa083f4422af7863f6a37bad7519e1dbd8349cac3a07b257e",
+    "tools/ipanema/seo/robots.py": "57d01f9086dffa7f25f26b59976098770d585731eca3d758ee9235000399a3df"
+  },
+  "constraints": {
+    "functional": {
+      "status": "passed",
+      "scope": "typed robots-only regression check; malformed/legacy/incomplete unknown; real new restriction fails",
+      "evidence": [
+        "controller-qa.json",
+        "tests/unit/test_seo_final_conditions_v4.py"
+      ]
+    },
+    "security": {
+      "status": "passed",
+      "scope": "safe failure on parser budgets, semantic retention; unchanged reviewed DNS/TLS/redirect/private-path transport with its SEO tests. No security certification",
+      "evidence": [
+        "controller-qa.json",
+        "manifest.json",
+        "claude-final-review.json",
+        "codex-final-review.json"
+      ]
+    },
+    "compatibility": {
+      "status": "passed",
+      "scope": "historical helper AST body identical; fixtures, known decision consumers static + runtime; external/dynamic consumers not certified",
+      "evidence": [
+        "compatibility-controller.json",
+        "runtime-consumers-controller.json",
+        "compatibility.md"
+      ]
+    },
+    "native_reuse": {
+      "status": "passed",
+      "scope": "existing parser, audit and regression modules; no dependencies, engines or orchestrator additions",
+      "evidence": [
+        "delta-from-7a5a7066.patch",
+        "manifest.json"
+      ]
+    },
+    "seo": {
+      "status": "passed",
+      "scope": "fixture-based technical observations only; noindex cannot be neutralized; no inference of Google indexation",
+      "evidence": [
+        "controller-qa.json",
+        "runtime-consumers-controller.json"
+      ]
+    },
+    "performance": {
+      "status": "passed",
+      "scope": "bounded retained evidence and explicit processing budgets. One synthetic sample, not latency/worst-case/production guarantee",
+      "evidence": [
+        "controller-qa.json",
+        "evidence-final.json"
+      ]
+    }
+  },
+  "assertions": {
+    "base_unchanged": true,
+    "old_patch_unchanged": true,
+    "fresh_apply_matches_11_hashes": true,
+    "both_original_providers_reviewed_exact_inputs": true,
+    "all_reviewed_inputs_still_match": true,
+    "no_critical_or_high_open_objections": true,
+    "workspace_not_integrated": true,
+    "production_not_modified": true
+  },
+  "receipt_hashes": {
+    "controller-qa.json": "4372effa9d1322897b172169fdf7434b6eb1eb23f5b0c968d954230b97068a51",
+    "manifest.json": "78ff5e8188a98495fc5517cbbbe63d7f69cf0986457190b44375226a4bbe18b7",
+    "claude-final-review.json": "dcee9024d663faef49fe40e1aa9f295d77d06c1e1047194b643a668bfc25240c",
+    "codex-final-review.json": "7d2bcf96dc8110710e7b5eb17c80af4713c81cece836bc5ba5c34bd61478d96c",
+    "compatibility-controller.json": "ce774107a5eb0ee99a535c18d03f1b819088efed01a246eab5d90ddbd87fcd45",
+    "runtime-consumers-controller.json": "4cd66c585b5891a23cde1e80c540b73a6f97b5471a8df882b87887aca0158d1f",
+    "evidence-final.json": "d9dda87a2ce95e669832e158a6aa1357b2465542f761120e556853b540a8ca44"
+  },
+  "scope": "candidate prepared for specific local integration authorization; not engine auto-execution approval or network permission"
+}

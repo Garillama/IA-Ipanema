@@ -9,7 +9,7 @@ from urllib.parse import urlsplit
 from .crawl_policy import normalize
 from .extractor import VOID
 from .page_audit import crawlable, snapshot_delta
-from .robots import google_directives
+from .robots import google_directive_evidence
 
 
 class Content(HTMLParser):
@@ -79,6 +79,7 @@ def classify(snapshot, *, googlebot_allowed=None, robots_known=False, content=No
     status = snapshot.get('status')
     canonical = snapshot.get('canonical', [])
     reasons = []
+    robots_evidence = None
     if status in (301, 302, 303, 307, 308):
         state = 'redirected'
     elif status in (404, 410):
@@ -91,9 +92,12 @@ def classify(snapshot, *, googlebot_allowed=None, robots_known=False, content=No
         state = 'insufficient_evidence'
     else:
         meta = snapshot.get('meta', {})
-        directives = google_directives(meta, snapshot.get('headers', {}).get('x-robots-tag', ''))
-        if re.search(r'\b(noindex|none)\b', directives, re.I):
+        robots_evidence = google_directive_evidence(meta, snapshot.get('headers', {}).get('x-robots-tag', ''))
+        if robots_evidence['noindex']:
             state = 'noindex'
+        elif robots_evidence['relevant_errors']:
+            state = 'insufficient_evidence'
+            reasons.append('malformed_robots_directives')
         elif len(canonical) > 1:
             state = 'insufficient_evidence'
             reasons.append('ambiguous_canonical')
@@ -112,7 +116,7 @@ def classify(snapshot, *, googlebot_allowed=None, robots_known=False, content=No
             if content.get('soft_404_candidate') or not content.get('main_text_characters'):
                 state = 'insufficient_evidence'
                 reasons.append('soft404_or_content_needs_evidence')
-    return {'state': state, 'reasons': reasons, 'indexation_observed': False,
+    return {'state': state, 'reasons': reasons, 'robots_evidence': robots_evidence, 'indexation_observed': False,
             'google_selected_canonical': None, 'evidence_scope': 'technical_observation_not_google_index'}
 
 

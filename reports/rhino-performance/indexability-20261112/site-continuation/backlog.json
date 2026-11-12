@@ -1,0 +1,156 @@
+{
+  "findings": [
+    {
+      "id": "RHINO-DISC-001",
+      "priority": "P1",
+      "url": "https://rhino-performance.com/contacto/",
+      "status": "needs_evidence",
+      "evidence": "Sitemap presente, HTTP200, canonical propio, GSC descubierta sin indexar; sin camino HTML en el corpus observado.",
+      "cause": "No se observó enlace entrante en el corpus; no prueba de orfandad absoluta ni causa de no indexación.",
+      "component_candidates": [
+        "snippets/footer/footer-rhino.tpl (lectura)",
+        "menus native configuration (no modifications)"
+      ],
+      "alternatives": [
+        "Completar grafo con transporte aprobado.",
+        "Evaluar rutas contextuales existentes en una fase futura autorizada; no tocar menús ahora."
+      ],
+      "recommendation": "Mantener página y sitemap; investigar descubrimiento real sin añadir menús.",
+      "risk": "Prometer indexación o atribuir exclusión a falta de enlaces sin prueba.",
+      "tests": [
+        "Enlace real en HTML cuando exista evidencia",
+        "Inspección GSC previa reutilizada; no repetir sin cambio justificable"
+      ],
+      "rollback": "No hay cambio que revertir.",
+      "authorization": "analysis_only_no_changes"
+    },
+    {
+      "id": "RHINO-COVER-002",
+      "priority": "P1",
+      "urls": "11 productos y64artículos listados individualmente en la matriz",
+      "status": "evidence_gap_NOT_site_defect",
+      "evidence": "75URLsHTML sin respuesta propia observada; todos tienen caminos HTML conocidos.",
+      "cause": "Cobertura de transporte/QA incompleta, no fallo demostrado del sitio. Crawler V4 no integrado y revisión/recibo controlador pendientes.",
+      "component_candidates": [
+        "tools/ipanema/seo/crawler.py",
+        "reports/seo/v4-source-review/delivery.json"
+      ],
+      "alternatives": [
+        "Cerrar revisión y QA del candidato V4 en trabajo explícito posterior.",
+        "Reutilizar exportaciones oficiales y evidencia vigente; no reemplazar el crawler para eludir protecciones."
+      ],
+      "recommendation": "No certificar indexabilidad completa; resolver aprobaciones del crawler antes de ampliación controlada.",
+      "risk": "Rastreo masivo sin controles o interpretar HTTP desconocido como200/404.",
+      "tests": [
+        "Recepción QA controlador sobre hashes exactos",
+        "Revisión válida de seguridad",
+        "Lote inicial aprobado y presupuesto de red"
+      ],
+      "rollback": "No se aplicó infraestructura ni tema.",
+      "authorization": "crawler_execution_blocked"
+    },
+    {
+      "id": "RHINO-BLOG-003",
+      "priority": "P2",
+      "urls": [
+        "https://rhino-performance.com/blog/?page=2",
+        "https://rhino-performance.com/blog/?page=3",
+        "https://rhino-performance.com/blog/?page=4",
+        "https://rhino-performance.com/blog/?page=5",
+        "https://rhino-performance.com/blog/?page=6",
+        "https://rhino-performance.com/blog/?page=7",
+        "https://rhino-performance.com/blog/?page=8"
+      ],
+      "status": "confirmed_canonical_behavior_cause_of_exclusion_unproven",
+      "evidence": "7páginas posteriores HTTP200, contenidos distintos; canonical/blog/. Conjunto1..8 enlaza86artículos únicos del sitemap.",
+      "cause": "Metadatos publicados de plataforma mediante head-tags; mecanismo soportado de cambio aún sin confirmar.",
+      "component_candidates": [
+        "layouts/layout.tpl head-tags",
+        "sections/main-blog.tpl",
+        "snippets/blog/blog-pagination.tpl"
+      ],
+      "alternatives": [
+        "Conservar y consultar soporte oficial.",
+        "Usar mecanismo soportado si la plataforma lo confirma, con propuesta/revisión separadas."
+      ],
+      "recommendation": "No modificar ni duplicar canonicals, no JS canonical; mantener ruta HTML hacia artículos.",
+      "risk": "Cambiar señales de identidad sin contrato oficial o atribuir no indexación sin evidencia.",
+      "tests": [
+        "Confirmación oficial",
+        "Canonical único SSR tras eventual cambio autorizado",
+        "Continuidad de artículos y enlazado"
+      ],
+      "rollback": "No cambio nuevo; cualquier futuro cambio requiere respaldo/hash propios.",
+      "authorization": "not_authorized_pending_official_mechanism"
+    },
+    {
+      "id": "RHINO-GSC-004",
+      "priority": "P2",
+      "urls": [
+        "https://rhino-performance.com/pistolas-de-masaje/",
+        "https://rhino-performance.com/terapia-fria/",
+        "https://rhino-performance.com/compresion-frio-y-calor/",
+        "https://rhino-performance.com/productos/page/2/"
+      ],
+      "status": "Google_evidence_missing",
+      "evidence": "15inspecciones anteriores reutilizadas,10PASS;170filas históricas no son total indexado. Credencial no disponible en sesión.",
+      "cause": "No hay inspección previa de estas URLs ni acceso actual para consultarlas.",
+      "recommendation": "Cuando se restablezca acceso autorizado, lote inicial de4inspecciones nuevas; no repetir home/categorías ya inspeccionadas. Informe completo requiere exportación oficial de Páginas.",
+      "risk": "Inferir indexación actual de impresiones históricas o inventar datos ausentes.",
+      "tests": [
+        "Propiedad/scope correctos",
+        "Registrar at/lastCrawl/canonical Google",
+        "No index request ni sitemap submission"
+      ],
+      "rollback": "Solo lectura.",
+      "authorization": "new_reads_justified_but_credentials_unavailable"
+    },
+    {
+      "id": "RHINO-CONTENT-005",
+      "priority": "P3",
+      "url": "https://rhino-performance.com/sobre-rhino-performance/",
+      "status": "owner_content_deferred",
+      "evidence": "ExisteHTTP200/sitemap/canonical propio; propietario confirma contenido sin desarrollar. GSCURLdesconocida.",
+      "cause": "Estado editorial declarado, no bloqueo técnico demostrado.",
+      "recommendation": "Registrar pendiente; no promocionar, no menú, noindex, redirección ni eliminación.",
+      "risk": "Forzar descubrimiento/indexación de una página incompleta contra la instrucción.",
+      "tests": [
+        "Revisión editorial futura solo si se autoriza"
+      ],
+      "rollback": "No cambios.",
+      "authorization": "no_modification_no_promotion"
+    },
+    {
+      "id": "RHINO-META-006",
+      "priority": "P2",
+      "url": "https://rhino-performance.com/contacto/",
+      "status": "description_empty_observed",
+      "evidence": "Meta description vacía en respuesta guardada.",
+      "cause": "Valor publicado vacío; no prueba de exclusión por Google.",
+      "recommendation": "Documentar mejora editorial futura; no redactar/aplicar ahora.",
+      "risk": "Prometer indexación por agregar descripción.",
+      "tests": [
+        "Revisión CMS y HTML SSR si luego se autoriza"
+      ],
+      "rollback": "No cambios.",
+      "authorization": "not_authorized"
+    },
+    {
+      "id": "RHINO-TAXONOMY-007",
+      "priority": "P1",
+      "urls": "Taxonomía completa administrativa, aún no disponible",
+      "status": "inventory_completeness_unknown_NOT_hidden_categories_proven",
+      "evidence": "Cinco rutas de categoría reales conocidas por sitemap/HTML; ninguna subcategoría adicional confirmada.",
+      "cause": "No existe inventario administrativo autorizado para comparar categorías públicas no enlazadas/no incluidas.",
+      "recommendation": "Contrastar catálogo administrativo cuando esté disponible, distinguiendo categorías privadas/ocultas de públicas; no crear enlaces ni categorías nuevas.",
+      "risk": "Inventar subcategorías por encabezados o afirmar que todas las existentes están incluidas.",
+      "tests": [
+        "Cruce autorizado de IDs/URLs/visibilidad con inventario público"
+      ],
+      "rollback": "No cambios.",
+      "authorization": "analysis_only_no_admin_connection"
+    }
+  ],
+  "P0_confirmed": [],
+  "restrictions": "No theme/menu/design/editorial/catalog/canonical modification; no remote writes"
+}

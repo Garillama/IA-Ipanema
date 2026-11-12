@@ -1,0 +1,216 @@
+{
+  "exit_code": 0,
+  "timed_out": false,
+  "output_limited": false,
+  "idle_timed_out": false,
+  "cancelled": false,
+  "process_started": true,
+  "process_reaped": true,
+  "stdin_bytes_written": 475,
+  "context_complete": true,
+  "duration_s": 25.15,
+  "timing": {
+    "spawn_s": 0.000319,
+    "input_complete_s": 0.000369,
+    "first_stdout_s": 0.821326,
+    "first_stderr_s": null,
+    "timeout_phase": null,
+    "event_counts": {
+      "thread.started": 1,
+      "item.completed": 2,
+      "turn.started": 1,
+      "turn.completed": 1
+    },
+    "inference_vs_initialization": "not_separable_without_provider_events"
+  },
+  "output_accounting": {
+    "transport_bytes": 2710,
+    "retained_bytes": 2710,
+    "discarded_progress_bytes": 0,
+    "transport_limit_bytes": 655360,
+    "retained_limit_bytes": 65536
+  },
+  "isolation": {
+    "backend": "bubblewrap",
+    "snapshot_read_only": true,
+    "host_home_mounted": false,
+    "network": "enabled_no_destination_firewall",
+    "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+  },
+  "item_error": {
+    "message": "Code Mode is unavailable because failed to spawn code-mode host /home/alanrichard/.codex/packages/standalone/releases/0.167.1-x86_64-unknown-linux-musl/bin/codex-code-mode-host: host executable was not found. Code mode will fail closed; enable `features.code_mode_host` and install `codex-code-mode-host`.",
+    "sha256": "b316d182bea87a6b2658af69c652da8ac5eb6ceb568c0d1ad0cff2aaa990b94c"
+  },
+  "events": [
+    {
+      "type": "thread.started",
+      "item_type": null,
+      "status": null,
+      "text_bytes": 0,
+      "tool_pending": false,
+      "error_present": false
+    },
+    {
+      "type": "item.completed",
+      "item_type": "error",
+      "status": null,
+      "text_bytes": 0,
+      "tool_pending": false,
+      "error_present": false
+    },
+    {
+      "type": "turn.started",
+      "item_type": null,
+      "status": null,
+      "text_bytes": 0,
+      "tool_pending": false,
+      "error_present": false
+    },
+    {
+      "type": "item.completed",
+      "item_type": "agent_message",
+      "status": null,
+      "text_bytes": 1747,
+      "tool_pending": false,
+      "error_present": false
+    },
+    {
+      "type": "turn.completed",
+      "item_type": null,
+      "status": null,
+      "text_bytes": 0,
+      "tool_pending": false,
+      "error_present": false
+    }
+  ],
+  "stderr_bytes": 0,
+  "usage": {
+    "provider_reported": {
+      "input_tokens": 15586,
+      "cached_input_tokens": 0,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 799,
+      "reasoning_output_tokens": 328
+    },
+    "measured_cost_available": false,
+    "estimated_cost": null
+  },
+  "prompt_bytes": 475,
+  "prompt_sha256": "883dca274d9e008ca6bf211f66a6205a6a6b6da7fc7dc7d6b3ea6847405eb536",
+  "model": "gpt-6.1-sol",
+  "effort": "high",
+  "scope": "Transport/native schema probe only, NOT council vote",
+  "argv_safe": [
+    "/home/alanrichard/.codex/packages/standalone/releases/0.167.1-x86_64-unknown-linux-musl/bin/codex",
+    "-a",
+    "never",
+    "exec",
+    "-",
+    "--model",
+    "gpt-6.1-sol",
+    "--json",
+    "--ephemeral",
+    "--ignore-user-config",
+    "--ignore-rules",
+    "--sandbox",
+    "read-only",
+    "--skip-git-repo-check",
+    "-c",
+    "model_reasoning_effort=\"high\"",
+    "--output-schema",
+    "/workspace/council-response.schema.json"
+  ],
+  "contract": "passed",
+  "response": {
+    "decision": "blocked",
+    "summary": "probe_only",
+    "evidence": [],
+    "changes": [],
+    "analysis": {
+      "problem": "Diagnóstico sintético del contrato.",
+      "cause": "Sin revisión real ni voto V4.",
+      "evidence_refs": [],
+      "hypotheses": [],
+      "recommendation": "codex-probe",
+      "alternatives": [
+        {
+          "id": "codex-probe",
+          "description": "Sonda del schema.",
+          "constraints": {
+            "functional": {
+              "status": "unknown",
+              "evidence_refs": []
+            },
+            "security": {
+              "status": "unknown",
+              "evidence_refs": []
+            },
+            "compatibility": {
+              "status": "unknown",
+              "evidence_refs": []
+            },
+            "native_reuse": {
+              "status": "unknown",
+              "evidence_refs": []
+            },
+            "seo": {
+              "status": "unknown",
+              "evidence_refs": []
+            },
+            "performance": {
+              "status": "unknown",
+              "evidence_refs": []
+            },
+            "accessibility": {
+              "status": "unknown",
+              "evidence_refs": []
+            },
+            "responsive": {
+              "status": "unknown",
+              "evidence_refs": []
+            },
+            "maintainability": {
+              "status": "unknown",
+              "evidence_refs": []
+            },
+            "reversibility": {
+              "status": "unknown",
+              "evidence_refs": []
+            },
+            "complexity": {
+              "status": "unknown",
+              "evidence_refs": []
+            },
+            "development_cost": {
+              "status": "unknown",
+              "evidence_refs": []
+            },
+            "execution_cost": {
+              "status": "unknown",
+              "evidence_refs": []
+            }
+          },
+          "files": [],
+          "tests": [
+            "schema-only"
+          ]
+        }
+      ],
+      "native_components": [],
+      "files": [],
+      "risks": [],
+      "impacts": {
+        "seo": "Sin evaluar.",
+        "performance": "Sin evaluar.",
+        "responsive": "Sin evaluar.",
+        "accessibility": "Sin evaluar.",
+        "uiux": "Sin evaluar.",
+        "commerce": "Sin evaluar."
+      },
+      "tests": [
+        "schema-only"
+      ],
+      "confidence": 0
+    }
+  }
+}

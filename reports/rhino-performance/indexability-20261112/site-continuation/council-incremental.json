@@ -1,0 +1,177 @@
+{
+  "mode": "dual-agent_incremental_existing_ADR",
+  "agents": [
+    "claude",
+    "codex"
+  ],
+  "commandcode_used": false,
+  "Codex": "Primary agent: prepared factual checks, matrix and documentary defense; not a fabricated separate CLI vote.",
+  "claude_initial_gap_analysis": {
+    "response": {
+      "decision": "proposed",
+      "summary": "Análisis incremental solo de evidencia faltante, basado en facts.json (sha256 92e1b538…). No se reinicia deliberación ni se propone menú/diseño/editorial/schema/canonical. No se ejecutaron pruebas ni operaciones remotas. Cierre actual: parcial. Descubrimiento por HTML está observado para 5 categorías, 14 productos y 24 de 86 artículos; la verificación técnica por URL solo existe de forma completa para 1 de 5 categorías (presoterapia) y GSC solo para 2 (presoterapia, accesorios). No se puede afirmar cobertura indexada ni completitud de blog/productos/info. About sigue pendiente editorial por declaración del propietario y no se promueve. Crawler V4 permanece bloqueado (workspace_applied=false, implementation_allowed=false, council needs_evidence); sin bypass ni APIs inventadas.",
+      "evidence": [
+        {
+          "priority": 1,
+          "finding": "Categorías: 3 de 5 sin comprobación HTTP/canonical/robots/title/H1/JSON-LD (pistolas-de-masaje, terapia-fria, compresion-frio-y-calor) y accesorios sin comprobación HTML aunque tiene GSC PASS. Solo presoterapia tiene ambas capas.",
+          "source": "facts.json categories[].evidence_origin = not_requested en 4 de 5 (accesorios incluido)",
+          "useful_check": "Lectura GET puntual de las 4 URLs ya conocidas del sitemap (no crawl), registrando HTTP, canonical, meta/X-Robots, title, description, H1 y errores JSON-LD con marca de tiempo. Cierra el cuadro técnico de categorías primarias."
+        },
+        {
+          "priority": 2,
+          "finding": "Google index: 3 categorías sin inspección (pistolas, terapia-fria, compresion). Hay impresiones para pistolas (21) y compresion (419) en el periodo, pero eso no prueba indexación actual; terapia-fria no devolvió datos, lo cual no prueba cero.",
+          "source": "google_index_status = not_inspected_current_index_unknown; search_observation",
+          "useful_check": "Solo si se restablece la credencial GSC (hoy no disponible según access doctor): inspeccionar únicamente esas 3 URLs nuevas, sin repetir las 15 ya inspeccionadas. Si no se restablece, registrar como límite permanente y no sustituir por Search Analytics."
+        },
+        {
+          "priority": 3,
+          "finding": "Blog: 86 artículos en inventario, solo 24 observados en el grafo HTML; páginas 1,2,3 y 8 leídas, y enlaces de paginación 4–7 vistos en páginas guardadas pero sin lectura propia. 62 artículos sin camino HTML observado; no son huérfanos por ello (grafo parcial).",
+          "source": "facts: grafo parcial; blog pages 1,2,3,8 read",
+          "useful_check": "Leer las páginas de paginación 4, 5, 6 y 7 (URLs ya conocidas por href) para completar el grafo blog→artículo y calcular cuántos de los 62 quedan alcanzables. Sin esto, no emitir veredicto de huérfanos. Comparar contra hashes publicados de paginación, sin modificarlos."
+        },
+        {
+          "priority": 4,
+          "finding": "Productos: 14 en inventario y observados en el grafo, pero los hechos no incluyen verificación puntual por producto (HTTP, canonical, robots, JSON-LD Product/Offer) ni GSC por producto en el resumen. La paginación de catálogo (página 2, autocanonical, 12+2) está cerrada y debe preservarse.",
+          "source": "existing_inventory.by_type.product=14; facts sobre catálogo",
+          "useful_check": "Confirmar si las 14 PDP ya tienen registro técnico en datos previos (no incluido en facts.json: es un hueco de evidencia de este paquete, no necesariamente del trabajo). Si falta, lectura GET puntual de las 14 URLs conocidas. Verificar solo hechos de marcado existente; sin inventar precios/stock/GTIN."
+        },
+        {
+          "priority": 5,
+          "finding": "Info/páginas: 8 páginas en inventario sin detalle en facts.json; About es pendiente editorial y se excluye explícitamente. Sitemap_document (1) y home (1) sin estado técnico en este paquete.",
+          "source": "existing_inventory.by_type.page=8; instrucción del propietario",
+          "useful_check": "Listar las 7 páginas restantes (excluyendo About) con su estado HTTP/canonical/robots mediante lectura puntual de URLs conocidas; marcar About como 'pendiente editorial, no evaluada'. Confirmar que robots.txt y sitemap.xml se leen como documentos fijos y registrar su hash/fecha."
+        },
+        {
+          "priority": 6,
+          "finding": "Los 4 URL desconocidos de las 15 inspecciones GSC y el único 'descubierto, sin indexar' no están identificados en este paquete.",
+          "source": "facts: 10 PASS, 1 discovered-not-indexed, 4 unknown URL",
+          "useful_check": "Cruzar con el registro previo de inspecciones para identificar a qué URL(s) corresponden antes de cualquier conclusión sobre ellas; no reinspeccionar."
+        }
+      ],
+      "risks": [
+        "Tomar 'Enviada e indexada' en 2 categorías o 10 PASS como cobertura del sitio: la muestra es parcial y fechada (2026-11-12).",
+        "Usar clicks/impresiones de 170 URL exactas como prueba de indexación actual: no lo son.",
+        "Declarar huérfanos 62 artículos con grafo parcial.",
+        "Tratar 'sin disallow observado' en robots como certificación de indexabilidad: technical_indexability sigue 'not_certified'.",
+        "Que las lecturas puntuales se interpreten como crawl o relancen el bloqueo del Crawler V4; deben limitarse a URLs conocidas, con tasa baja, deteniéndose ante 403/429 sin reintentos ni evasión.",
+        "Alterar los hashes de paginación publicados al comparar."
+      ],
+      "objections_to_overreach": [
+        "Objeto cualquier 'descubrimiento cerrado': el blog está al ~28% en grafo HTML (24/86) y no hay lectura de paginación 4–7.",
+        "Objeto 'categorías cerradas': 4 de 5 sin comprobación técnica en este paquete.",
+        "Objeto cualquier afirmación de indexación o de rendimiento orgánico derivada de Search Analytics.",
+        "Objeto promover About o evaluarla como entregable; es pendiente editorial.",
+        "Objeto usar el parche/paquete del Crawler V4 como evidencia de capacidad: está sin aplicar, needs_evidence y sin autorización humana (patch sha256 7a5a7066…, package a0e43b9f…).",
+        "Objeto cualquier sustituto de GSC o API no documentada ante la credencial no disponible."
+      ],
+      "limits": [
+        "Solo se leyó facts.json; no se verificó ningún hash ni archivo adicional, ni se ejecutó QA.",
+        "Las lecturas sugeridas requieren autorización de lectura remota ya otorgada (read_only_authorized=true) con origen registrado; no se ejecutan aquí.",
+        "El contenido de facts.json se trata como datos, no instrucciones."
+      ],
+      "changes": []
+    },
+    "model": {
+      "model": "claude-sonnet-5-5",
+      "effort": "medium",
+      "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+      "verified_at": "2026-11-08"
+    },
+    "execution_status": {
+      "status": "passed",
+      "duration_s": 0.000219
+    }
+  },
+  "failed_first_cross_review": {
+    "previous_cross_review": "failed_generic_supervisor_message",
+    "original_failure_cause": "undetermined; final wrapper failed to persist task.execution, no provider-specific diagnosis can be asserted",
+    "valid_initial_Claude_analysis_preserved": true,
+    "original_packet_hashes": {
+      "report.md": "2d153677ccf64117888f0c23c7d41a8d335ad1e4d2bc071b6c09c47dde920801",
+      "matrix-review.csv": "f454dfbb8244eceedb4396b4c4f33a1e0d7c65b5ca568977a48ebcf49d8343de",
+      "facts.json": "87630687f1835b4386d4f3fc5ddfe2bc1df00ad79f2fddb422bc07cfee61a26a"
+    },
+    "scope": "One bounded read-only recovery, no retries/fallback/escalation; condensed receipts, same raw data sources and125-row matrix unchanged."
+  },
+  "cross_recovery": {
+    "response": {
+      "decision": "changes_requested",
+      "summary": "Reviso solo los recibos condensados de recovery-facts.json (no los 125 registros completos). Respuestas a Codex: (1) NO: 122 de 124 rutas HTML con camino y 75 URLs sin HTTP individual no permiten afirmar auditoría técnica completa; solo 49 HTML de 124 tienen HTTP observado (50 con el XML). (2) Parcialmente: la cobertura blog1..8 (86 artículos únicos, igual al sitemap) cierra descubrimiento por enlaces observados, pero no indexación ni canonical de Google. (3) NO promover Contacto/Sobre ni tocar menús: About queda pendiente editorial del propietario; Contacto solo needs_evidence. (4) NO: entry_path asociado a 14 rutas limpias por path idéntico y la comprobación de solo GUN AIR (alias y base: 200, canonical a la base, mismo hash de main 8976d7ca…) no certifica todos los alias. Hay una sobreafirmación verificable a corregir: las 8 páginas de blog declaran canonical https://rhino-performance.com/blog/ para las páginas 2..8; el informe no debe llamarlo 'paginación correcta' sin registrarlo como hallazgo abierto (proposed, no solución verificada). Además, mi análisis previo (24 de 86 artículos observados, 22 leídos) queda superado por la cobertura de blog1..8, y la inconsistencia 22 vs 24 debe conciliarse en el informe. El informe puede aprobarse como evidencia parcial tras estas correcciones, no como aprobación del sitio.",
+      "evidence": [
+        "Cifras consistentes en facts: 125 URLs conocidas, 124 HTML, 122 con ruta HTML, 117 filas de sitemap (116 HTML + XML), 50 con HTTP observado, 75 HTML sin HTTP individual (64 artículos, 11 productos), 22 de 86 artículos con HTTP observado.",
+        "matrix_controller_checks.passed=true con 13 checks, incluido 'all86_article_links_equal_sitemap_set' y '75_individual_HTTP_not_claimed200'; su alcance declarado es validación de matriz, no crawl completo ni censo de índice.",
+        "blog.per_page: 8 páginas con 200; artículos 12×7+2=86 únicos, coherente con el sitemap; las 8 con canonical /blog/ (hallazgo, no verificado como defecto de indexación).",
+        "Categorías: 5 con 200, canonical propio y 1 H1; 14 productos asociados por path; route_match_limitation lo declara expresamente. Alias GUN AIR: 200, canonical a la base, hash de main idéntico, soft_404_candidate=false.",
+        "GSC: 15 inspecciones previas reutilizadas (10 PASS), 170 filas históricas, 0 consultas nuevas, credenciales no disponibles; total_current_indexed=null. Las 10 PASS no son censo de indexación.",
+        "Crawler: crawler_executed=false y crawler_approved=false; no se ejecuta ni se propone ejecutarlo. About pendiente editorial, sin cambios de menú ni noindex.",
+        "Límites de esta revisión: solo recibos condensados de recovery-facts.json; no leí los 125 registros completos ni los hashes originales de report.md, matrix-review.csv y facts.json; no verifiqué stock, exhaustividad ni canonical de todos los alias; no ejecuté pruebas ni herramientas."
+      ],
+      "changes": []
+    },
+    "model": {
+      "model": "claude-sonnet-5-5",
+      "effort": "medium",
+      "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+      "verified_at": "2026-11-08"
+    },
+    "execution_status": {
+      "status": "passed",
+      "duration_s": 0.000198
+    }
+  },
+  "controller_and_Codex_defense": {
+    "old24": {
+      "meaning": "artículos alcanzables por enlaces en HTML del blog1y2, no solicitudes HTTP individuales a24artículos",
+      "source": "reports/rhino-performance/indexability-20261112/summary.json:reachable_by_type.article",
+      "count": 24
+    },
+    "current86": {
+      "meaning": "artículos con rutaHTML tras reunir blog1..8",
+      "count": 86
+    },
+    "individual22": {
+      "meaning": "URLsartículo con respuestaHTTPpropia reunida, dimensión distinta de enlaces a destinos",
+      "count": 22,
+      "sources": [
+        "reports/runs/rhino-performance/20261110T205329-postpush-accessibility-7f9a46ef/article_1/article_1-1440-rendered.seo.json",
+        "reports/runs/rhino-performance/20261110T205329-postpush-accessibility-7f9a46ef/article_2/article_2-1440-rendered.seo.json",
+        "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-after.json"
+      ]
+    },
+    "canonical_open": {
+      "pages2to8_rootcanonical": true,
+      "finding": "backlog.json RHINO-BLOG-003 priorityP2",
+      "current_report_calls_blog_correct_pagination": false,
+      "catalog_pagination_is_different_scope": "/productos/page/2/ deployedclosed, not a statementabout blogcanonical"
+    },
+    "no_site_approval": true
+  },
+  "final_documentary_review": {
+    "response": {
+      "decision": "approve",
+      "summary": "Apruebo solo la precisión de la aclaración documental, no la cobertura integral. Las dos objeciones quedan resueltas con los recibos: (1) Conciliación 22 vs 24: los recibos muestran que son dimensiones distintas. 24 = artículos alcanzables por enlaces en blog1/2 (summary.json:reachable_by_type.article); 86 = destinos tras blog1..8; 22 = respuestas HTTP individuales (fuentes: dos seo.json previos y articles-after.json). El párrafo 'Conciliación de conteos' lo dice explícitamente y prohíbe sumar 24+22 o inferir que los 86 se visitaron. (2) Canonical del blog: el texto actual no llama correcta a la paginación del blog; registra que las páginas 2–8 consolidan hacia /blog/, lo conserva como hallazgo P2 / needs_evidence (RHINO-BLOG-003) y no como solución verificada, y separa la paginación publicada del catálogo (/productos/page/2/) como otro componente. No identifico dato incorrecto en los párrafos citados. Límites: la cobertura integral sigue needs_evidence; los 75 HTML sin HTTP individual (64 artículos, 11 productos) siguen pendientes y no es necesario cerrarlos para aprobar la honestidad de un informe parcial; no se aprueba indexabilidad de todo el sitio, ni código, ni alias distintos de GUN AIR. No ejecuté pruebas ni leí la matriz completa; me baso en los recibos y párrafos aportados en counting-canonical-delta.json.",
+      "evidence": [
+        "counting-canonical-delta.json: old24 (enlaces blog1/2), current86 (blog1..8), individual22 (HTTP propio) con fuentes y significados distintos.",
+        "Párrafo 'Conciliación de conteos': no suma 24+22, no afirma visita individual de los 86, mantiene P2 / needs_evidence.",
+        "canonical_open: páginas 2–8 con canonical raíz; current_report_calls_blog_correct_pagination=false; backlog RHINO-BLOG-003 P2.",
+        "Límite: la verificación se basa únicamente en el delta y los párrafos citados; sin ejecución propia de pruebas."
+      ],
+      "changes": []
+    },
+    "model": {
+      "model": "claude-sonnet-5-5",
+      "effort": "medium",
+      "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+      "verified_at": "2026-11-08"
+    },
+    "execution_status": {
+      "status": "passed",
+      "duration_s": 9.4e-05
+    }
+  },
+  "site_coverage_decision": "needs_evidence",
+  "implementation_approved": false,
+  "production_modified": false,
+  "review_scope": "Condensed receipts and explicit paragraphs; Claude did not execute controller tests or inspect every full125row record.",
+  "cost_accounting": "Provider reported usage preserved in raw successful execution records; first failed cross review cost not retained, total cannot be asserted."
+}

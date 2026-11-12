@@ -1,0 +1,65 @@
+{
+  "project": "rhino-performance",
+  "store": 7400935,
+  "published_installation": 14828608,
+  "files": [
+    {
+      "path": "snippets/product-list/pagination.tpl",
+      "before_sha256": "c715cc6c77d07dced5cdad6066785142c307b0f3ca3429cf88f5290cf7f2edc2",
+      "after_sha256": "0958c668ee40bf0d16c76db4d6493bf6387d17e3ec7ff8f66aaffcce564d463c"
+    },
+    {
+      "path": "static/js/store.js",
+      "before_sha256": "29dea94e46cc1bb423ddde71a42d807f22c944f09465d70400728d7ae95b4718",
+      "after_sha256": "f97557494e017eba623ba2dd7e568789f8d9035d467f0b03f71bc0b3b8393be9"
+    }
+  ],
+  "patch_sha256": "1ef6c047b222962f3138cbaa3aba760b16d9569b5e597ad04cfa053df714eb49",
+  "backups": "reports/runs/rhino-performance/20261112T182131-pagination-release-preflight-a1c49c03/remote-before",
+  "candidate_source": "reports/runs/rhino-performance/20261112T165212-indexation-three-issues-035d5efe/candidate-v2-final",
+  "fresh_preflight": {
+    "remote_hashes_match": {
+      "snippets/product-list/pagination.tpl": true,
+      "static/js/store.js": true
+    },
+    "in_sync": true,
+    "production_modified": false,
+    "at": "2026-11-12T18:21:32.299Z",
+    "only_candidate_files": [
+      "snippets/product-list/pagination.tpl",
+      "static/js/store.js"
+    ]
+  },
+  "published_identity": {
+    "published": [
+      {
+        "theme_id": 14828608,
+        "store_id": 7400935,
+        "is_productive": true,
+        "base_theme": "ipanema",
+        "theme_version": "1.8.0",
+        "forked": true,
+        "updated_at": "2026-11-12T04:33:40+00:00"
+      }
+    ],
+    "read_only": true
+  },
+  "production_authorized": false,
+  "applied": false,
+  "final_review": {
+    "reviewer": "claude",
+    "model": {
+      "model": "claude-sonnet-5-5",
+      "effort": "medium",
+      "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+      "verified_at": "2026-11-08"
+    },
+    "decision": "approve",
+    "scope": "Source and readiness to request specific authorization ONLY; post QA pending",
+    "receipt": "reports/runs/rhino-performance/20261112T182131-pagination-release-preflight-a1c49c03/final-claude-review.json"
+  },
+  "status": "ready_to_request_specific_push_authorization",
+  "approval_state": "approved_with_conditions",
+  "baseline": "reports/runs/rhino-performance/20261112T182131-pagination-release-preflight-a1c49c03/baseline-summary.json",
+  "scope_transport_test": "reports/runs/rhino-performance/20261112T182131-pagination-release-preflight-a1c49c03/transport-scope-fixtures.json"
+}

@@ -1,0 +1,53 @@
+{
+  "operation": "append_two_entries_to_existing_native_footer_menu",
+  "menu_handle": "footer",
+  "visible_column": "Más información",
+  "scope": "Native Tiendanube navigation, not theme source",
+  "expected_before_public_projection": [
+    {
+      "name": "Aviso de privacidad",
+      "url": "https://rhino-performance.com/aviso-de-privacidad/"
+    },
+    {
+      "name": "Cambios y garantía",
+      "url": "https://rhino-performance.com/politica-de-reembolso-y-cambios/"
+    },
+    {
+      "name": "Política de cookies",
+      "url": "https://rhino-performance.com/politica-de-cookies/"
+    },
+    {
+      "name": "Políticas de envíos",
+      "url": "https://rhino-performance.com/politica-de-envios/"
+    }
+  ],
+  "append": [
+    {
+      "name": "Contacto",
+      "url": "https://rhino-performance.com/contacto/"
+    },
+    {
+      "name": "Sobre Rhino Performance",
+      "url": "https://rhino-performance.com/sobre-rhino-performance/"
+    }
+  ],
+  "preserve_existing_entries": true,
+  "theme_files_to_modify": [],
+  "production_authorized": false,
+  "status": "proposal_pending_native_menu_export_and_owner_authorization",
+  "backup_available": "Public HTML projection in footer-current.json; not a complete native admin export",
+  "required_before": [
+    "Export/snapshot full native menu including IDs and verify same four existing entries",
+    "Independent approval of this exact menu operation",
+    "Owner authorization",
+    "Confirm supported execution mechanism; theme CLI is not a navigation-menu editor"
+  ],
+  "qa_after": [
+    "Both hrefs in home initial HTML and noJS",
+    "Both destinations200/self canonical",
+    "Six widths and footer accordion keyboard/focus",
+    "No missing existing links or duplicate entries",
+    "No added requests/JS; measure if unexpected layout shift"
+  ],
+  "rollback": "Remove only the two new entry IDs if their URLs/values still match deployed values; preserve subsequent unrelated changes."
+}

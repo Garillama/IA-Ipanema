@@ -1,0 +1,22 @@
+{
+  "run": "reports/runs/rhino-performance/20261112T202906-v4-codex-operational-diagnosis-c30968c2",
+  "original_adr": "ADR-1136231f425a",
+  "incremental_adr": "ADR-0895add40c30",
+  "operational_recovery": "completed",
+  "root_cause": "not_determined; probable high-effort silent execution exceeding controller idle budget, single exact-input A/B supports existing balanced profile recovery",
+  "confirmed_controller_failure_category": "inactivity",
+  "native_contract_valid": true,
+  "council_protocol_complete": true,
+  "technical_approval": "needs_evidence",
+  "implementation_allowed": false,
+  "same_prompt_sha256": "7a39f93ef23ba63024868ea901c67ca70d64d316aab7843f015481af80fccd06",
+  "helper_missing_nonfatal": true,
+  "new_defects_reproduced": [
+    "clean robots evidence maps to insufficient_evidence in page-audit gate",
+    "synthetic directive evidence expands on serialization"
+  ],
+  "source_changes": false,
+  "production_changes": false,
+  "requests_to_site": 0,
+  "requests_to_GSC": 0
+}

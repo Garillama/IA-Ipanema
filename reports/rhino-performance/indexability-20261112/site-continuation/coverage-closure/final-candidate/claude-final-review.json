@@ -1,0 +1,180 @@
+{
+  "requested_agent": "claude",
+  "effective_agent": "claude",
+  "phase": "incremental-final-review",
+  "patch_sha256": "611a5dac1e2767c0d331e42b06c60834e8a427c8bbc41671b9a81a8c977f3e2c",
+  "input_hashes": {
+    "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/final-candidate/candidate-v4-final.patch": "611a5dac1e2767c0d331e42b06c60834e8a427c8bbc41671b9a81a8c977f3e2c",
+    "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/final-candidate/delta-from-7a5a7066.patch": "a8c1b6fc07d30e9d77ed177c15e08915552c248ffba607528c754591402372c6",
+    "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/final-candidate/manifest.json": "78ff5e8188a98495fc5517cbbbe63d7f69cf0986457190b44375226a4bbe18b7",
+    "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/final-candidate/controller-qa.json": "4372effa9d1322897b172169fdf7434b6eb1eb23f5b0c968d954230b97068a51",
+    "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/final-candidate/compatibility.md": "a1a4daba903f23715dfe1551135a5e0dd494f4f09cf33cd8cbc903ab557f0f3f",
+    "tools/ipanema/seo/robots.py": "57d01f9086dffa7f25f26b59976098770d585731eca3d758ee9235000399a3df",
+    "tools/ipanema/seo/regression.py": "0bf7eca8c50b906fa083f4422af7863f6a37bad7519e1dbd8349cac3a07b257e",
+    "tests/unit/test_seo_final_conditions_v4.py": "524eaee578333857c3d6c88a48180b7e65f5df6719e17009140a25a7c319fcbf"
+  },
+  "response": {
+    "decision": "approve",
+    "summary": "Los tres problemas quedan resueltos para solicitar integración LOCAL del diff 611a5dac (11 archivos). El gate lee solo evidencia tipada, el procesamiento de robots es completo dentro de presupuestos con muestras acotadas, y google_directives conserva su contrato histórico como adaptador de visualización. No hay condición obligatoria pendiente; quedan dos observaciones bajas de seguimiento. No autoriza integración, red ni publicación, ni certifica indexación real.",
+    "changes": [],
+    "evidence": [
+      "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/final-candidate/controller-qa.json",
+      "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/final-candidate/manifest.json",
+      "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/final-candidate/compatibility.md",
+      "tools/ipanema/seo/regression.py",
+      "tools/ipanema/seo/robots.py",
+      "tests/unit/test_seo_final_conditions_v4.py"
+    ],
+    "objections": [
+      {
+        "id": "codex-obj-final-decision-consumer-test",
+        "alternative_id": "codex-gate-tipado-listas-acotadas-adaptador",
+        "category": "compatibilidad",
+        "severity": "low",
+        "claim": "El test que parchea google_directives para que falle cubre classify y _robots_state, pero no audit_snapshot ni compare de extremo a extremo. Por inspección, page_audit.py solo importa Robots y google_directive_evidence. Seguimiento: ampliar el test; no bloquea.",
+        "status": "open",
+        "evidence_refs": [
+          "tests/unit/test_seo_final_conditions_v4.py",
+          "tools/ipanema/seo/page_audit.py"
+        ],
+        "resolution_evidence_refs": []
+      },
+      {
+        "id": "codex-obj-final-evidence-duplication",
+        "alternative_id": "codex-gate-tipado-listas-acotadas-adaptador",
+        "category": "rendimiento",
+        "severity": "low",
+        "claim": "La evidencia (hasta 64 KiB) se duplica en indexability y template_audit por URL, y el parseo medido de 1,6 MB tarda ~3,5 s en una muestra sintética. No es un bloqueo para este parser offline; conviene medir el tamaño del informe en un crawl grande y valorar deduplicar después.",
+        "status": "open",
+        "evidence_refs": [
+          "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/final-candidate/controller-qa.json",
+          "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/final-candidate/compatibility.md"
+        ],
+        "resolution_evidence_refs": []
+      }
+    ],
+    "preferred_alternative": "codex-gate-tipado-listas-acotadas-adaptador",
+    "answers": [
+      {
+        "question_id": "codex-q-gate",
+        "from_agent": "codex",
+        "answer": "Resuelto. regression.py separa :noindex del estado global mediante _robots_state, que valida el contrato tipado: legacy, ausente o malformado da unknown. Una restricción nueva válida da failed aunque el baseline sea unknown o processing_complete sea false. Con noindex válido en ambos lados el resultado es passed, porque no es regresión nueva. Robots limpio solo aprueba :noindex y no indica indexación. Cubierto por test_seo_final_conditions_v4.py (FinalGate), 191 unit y 13 integration OK.",
+        "disposition": "defend",
+        "evidence_refs": [
+          "tools/ipanema/seo/regression.py",
+          "tests/unit/test_seo_final_conditions_v4.py",
+          "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/final-candidate/controller-qa.json"
+        ]
+      },
+      {
+        "question_id": "codex-q-presupuesto",
+        "from_agent": "codex",
+        "answer": "Resuelto. _Samples cuenta todos los átomos y retiene solo 8 muestras; flags, noindex, errores y contadores se agregan sobre todo lo procesado. Los presupuestos son 2.000.000 bytes UTF-8 por fuente, 4.000.000 en total y 128 fuentes; el JSON retenido tiene tope de 65.536 bytes. Si se excede un presupuesto, processing_complete=false y state=insufficient_evidence, salvo noindex ya observado; unvisited_sources_count queda None. Los tests cubren cola tras 200.000 parámetros, error tras el tope, límites exactos, UTF-8 y hash estable. La duplicación entre indexability y template_audit queda como observación baja.",
+        "disposition": "defend",
+        "evidence_refs": [
+          "tools/ipanema/seo/robots.py",
+          "tests/unit/test_seo_final_conditions_v4.py",
+          "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/final-candidate/compatibility.md"
+        ]
+      },
+      {
+        "question_id": "codex-q-adaptador",
+        "from_agent": "codex",
+        "answer": "Resuelto. google_directives recupera el cuerpo histórico (parámetros, múltiples cabeceras, scopes, wildcard, comas finales) y test_exact_historical_fixtures fija 5 salidas exactas. Ninguna decisión lo usa: indexability, page_audit y regression usan google_directive_evidence, y test_decision_consumers_do_not_call_display lo parchea para que falle. No es serializador acotado y no puebla informes del crawler; consumidores externos no inventariados deben migrar. Seguimiento bajo: cubrir audit_snapshot y compare en ese test.",
+        "disposition": "defend",
+        "evidence_refs": [
+          "tools/ipanema/seo/robots.py",
+          "tests/unit/test_seo_final_conditions_v4.py",
+          "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/final-candidate/compatibility.md"
+        ]
+      }
+    ],
+    "withdrawn_alternatives": [],
+    "revision_notes": [
+      "Aprobación solo para solicitar integración LOCAL del diff 611a5dac; el recibo controller-qa corresponde a los 11 hashes del candidato.",
+      "Condiciones: no publicar ni usar red; QA posterior a la integración y revisión independiente siguen obligatorias.",
+      "Seguimiento: ampliar el test de consumidores de decisión a audit_snapshot y compare; medir tamaño del informe por duplicación de evidencia.",
+      "Alcance: parser offline; no prueba indexación real ni seguridad universal. El TLS local previo se reutiliza por igualdad de hash, no se reejecutó."
+    ]
+  },
+  "model": {
+    "model": "claude-sonnet-5-5",
+    "effort": "medium",
+    "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+    "verified_at": "2026-11-08"
+  },
+  "execution": {
+    "exit_code": 0,
+    "timed_out": false,
+    "output_limited": false,
+    "idle_timed_out": false,
+    "cancelled": false,
+    "process_started": true,
+    "process_reaped": true,
+    "stdin_bytes_written": 193432,
+    "context_complete": true,
+    "duration_s": 43.628,
+    "timing": {
+      "spawn_s": 0.001537,
+      "input_complete_s": 0.510672,
+      "first_stdout_s": 1.149849,
+      "first_stderr_s": null,
+      "timeout_phase": null,
+      "event_counts": {
+        "system": 14,
+        "stream_event": 757,
+        "event:message_start": 2,
+        "event:content_block_start": 3,
+        "event:content_block_delta": 745,
+        "assistant": 3,
+        "event:content_block_stop": 3,
+        "user": 2,
+        "event:message_delta": 2,
+        "event:message_stop": 2,
+        "rate_limit_event": 2,
+        "result": 1
+      },
+      "inference_vs_initialization": "not_separable_without_provider_events"
+    },
+    "output_accounting": {
+      "transport_bytes": 291013,
+      "retained_bytes": 291013,
+      "discarded_progress_bytes": 0,
+      "transport_limit_bytes": 20000000,
+      "retained_limit_bytes": 2000000
+    },
+    "isolation": {
+      "backend": "bubblewrap",
+      "snapshot_read_only": true,
+      "host_home_mounted": false,
+      "network": "enabled_no_destination_firewall",
+      "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+    },
+    "started_at": "2026-11-12T21:02:22.302162+00:00",
+    "prompt_bytes": 193432,
+    "prompt_sha256": "20f76734f35fc9dc82ed8cf51dfdf59511f51608491bcb78c0ffb793a1be49dc",
+    "usage": {
+      "provider_reported": {
+        "total_cost_usd": 0.42461360000000004,
+        "duration_ms": 42138,
+        "input_tokens": 4,
+        "cache_creation_input_tokens": 87829,
+        "cache_read_input_tokens": 84996,
+        "output_tokens": 6479
+      },
+      "measured_cost_available": true,
+      "estimated_cost": null
+    },
+    "limits": {
+      "timeout": 240,
+      "idle_timeout": 90,
+      "startup_timeout": 30,
+      "first_response_timeout": 120
+    },
+    "structured_output": "native_schema",
+    "contract_validation": {
+      "status": "passed",
+      "duration_s": 0.012939
+    }
+  }
+}

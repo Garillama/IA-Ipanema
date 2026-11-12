@@ -1,0 +1,27 @@
+{
+  "kind": "integrated-v4-controller-checks",
+  "source": "integrated workspace",
+  "robots_gate": {
+    "clean_clean": "passed",
+    "absent_absent": "unknown",
+    "malformed_malformed": "unknown",
+    "unknown_to_noindex": "failed",
+    "incomplete_incomplete": "unknown"
+  },
+  "evidence": {
+    "parameters_processed": 200000,
+    "noindex_tail_preserved": true,
+    "processing_complete": true,
+    "truncated": true,
+    "serialized_bytes": 1588,
+    "oversized_input_processing_complete": false
+  },
+  "compatibility": {
+    "historical_helper_AST_equal_excluding_docstring": true,
+    "audit_snapshot_and_compare_called": true,
+    "legacy_adapter_calls": 0,
+    "scope": "known consumers only; not external/dynamic guarantee"
+  },
+  "network_requests": 0,
+  "production_operations": false
+}

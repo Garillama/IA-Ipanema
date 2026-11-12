@@ -1,0 +1,1305 @@
+{
+  "project": "rhino-performance",
+  "installation": 14828608,
+  "store": 7400935,
+  "deployment": "executed_once_authorized",
+  "files": [
+    {
+      "path": "snippets/product-list/pagination.tpl",
+      "before_sha256": "c715cc6c77d07dced5cdad6066785142c307b0f3ca3429cf88f5290cf7f2edc2",
+      "after_sha256": "0958c668ee40bf0d16c76db4d6493bf6387d17e3ec7ff8f66aaffcce564d463c"
+    },
+    {
+      "path": "static/js/store.js",
+      "before_sha256": "29dea94e46cc1bb423ddde71a42d807f22c944f09465d70400728d7ae95b4718",
+      "after_sha256": "f97557494e017eba623ba2dd7e568789f8d9035d467f0b03f71bc0b3b8393be9"
+    }
+  ],
+  "patch_sha256": "1ef6c047b222962f3138cbaa3aba760b16d9569b5e597ad04cfa053df714eb49",
+  "source_run": "reports/runs/rhino-performance/20261112T183218-pagination-authorized-deployment-b354454c",
+  "preflight_verified": true,
+  "published_hashes": {
+    "files": [
+      {
+        "path": "snippets/product-list/pagination.tpl",
+        "sha256": "0958c668ee40bf0d16c76db4d6493bf6387d17e3ec7ff8f66aaffcce564d463c",
+        "source": "official_files_batch_get",
+        "local_synced": true
+      },
+      {
+        "path": "static/js/store.js",
+        "sha256": "f97557494e017eba623ba2dd7e568789f8d9035d467f0b03f71bc0b3b8393be9",
+        "source": "official_files_batch_get",
+        "local_synced": true
+      }
+    ],
+    "all_match": true,
+    "individual_JS_endpoint_disagrees": true,
+    "individual_JS_returned_original": true,
+    "batch_GET_contains_exact_approved_after_bytes": true,
+    "cause_of_read_disagreement": "undetermined; do not assert cache as proven",
+    "production_patch_count": 1,
+    "published_CDN_JS_sha256": "f97557494e017eba623ba2dd7e568789f8d9035d467f0b03f71bc0b3b8393be9",
+    "published_CDN_JS_matches_approved_after": true,
+    "API_single_file_disagreement_does_not_change_CDN_or_batch_evidence": true
+  },
+  "controller": {
+    "checks": {
+      "before_hashes_verified": true,
+      "one_scoped_patch_http200": true,
+      "both_batch_after_hashes_match": true,
+      "CDN_JS_exact_after_hash": true,
+      "initial_HTML_routes_200_selfcanonical": true,
+      "initial_HTML_native_links": true,
+      "six_widths_unique14": true,
+      "button_enabled_real_JS": true,
+      "no_new_catalog_pageerrors": true,
+      "keyboard_link_focus": true,
+      "no_JS_actual_navigation": true,
+      "scoped_axe_no_violations": true,
+      "consumer_smoke_no_pageerrors": true,
+      "keyboard_Enter_page2_actual": true,
+      "five_equivalent_LH_samples_each": true,
+      "predeclared_metric_thresholds_passed": true,
+      "local_files_only_approved_two": true,
+      "native_final_sync398": true,
+      "catalog_after_append_no_horizontal_overflow": true
+    },
+    "outcome": "passed_scoped_checks",
+    "production_deployed": true,
+    "rollback_executed": false,
+    "no_critical_attributable_regression_detected": true,
+    "limitations": [
+      "Manual button threshold60 cannot be exercised with14 real products; recorded enabled/autoappend and retained fixture focus tests, not fabricated production manual load.",
+      "No actual error injected into production; fixture error tests retained.",
+      "Filters/order absent; future enablement revalidation required.",
+      "Smoke not exhaustive commerce/checkout/tracking certification; no transactions submitted.",
+      "Local LH does not measure field INP or prove causal performance improvement.",
+      "Mobile LCP median+9.5%, CLS max0.0268; warning retained, no critical attribution.",
+      "Single-file JS API returned original whereas batch API and actual public CDN both contain exact approved after hash; cause undetermined.",
+      "Absolute-only href regex falsely returnedfalse; actual raw relative hrefs verified by parser and working navigation."
+    ],
+    "supersedes_scope_wording": "controller-QA.json:no_horizontal_overflow meant catalog after append ONLY; raw before/noJS/consumer observations show overflow, so no global no-overflow claim.",
+    "overflow_observations": [
+      {
+        "scope": "catalog",
+        "width": 1024,
+        "mode": "JS",
+        "state": "initial"
+      },
+      {
+        "scope": "catalog",
+        "width": 1024,
+        "mode": "JS",
+        "state": "before"
+      },
+      {
+        "scope": "catalog",
+        "width": 1440,
+        "mode": "JS",
+        "state": "initial"
+      },
+      {
+        "scope": "catalog",
+        "width": 1440,
+        "mode": "JS",
+        "state": "before"
+      },
+      {
+        "scope": "catalog",
+        "width": 1440,
+        "mode": "no-js",
+        "state": "before"
+      },
+      {
+        "scope": "catalog",
+        "width": 1440,
+        "mode": "no-js",
+        "state": "after"
+      },
+      {
+        "scope": "home",
+        "width": 1440,
+        "state": "smoke"
+      },
+      {
+        "scope": "pdp",
+        "width": 1440,
+        "state": "smoke"
+      },
+      {
+        "scope": "blog",
+        "width": 1440,
+        "state": "smoke"
+      }
+    ],
+    "overflow_attribution": "Undetermined; no prior equivalent geometric baseline, no authorization to modify other components. Do not claim no overflow or pre-existing proof.",
+    "independent_post_review": {
+      "source": "post-QA-claude-review.json",
+      "decision": "approve",
+      "scope": "Actual evidence only; all limits retained; no critical attributable regression"
+    }
+  },
+  "independent_post_review": {
+    "response": {
+      "decision": "approve",
+      "summary": "Apruebo solo el alcance realmente probado: dos archivos exactos publicados en la instalación 14828608, con enlaces de paginación nativos en el HTML inicial, carga híbrida de 12 a 14 productos, navegación sin JS y por teclado, axe acotado, smoke sin errores de página y cinco muestras de Lighthouse por dispositivo. No apruebo certificación de producción, 90+, WCAG AA completo, INP, causalidad de rendimiento ni estados no ejercitables con 14 productos. No ejecuté pruebas: reviso los recibos del controlador. Respuesta a Codex: con esta evidencia no hay una regresión crítica atribuible que justifique rollback. La aceptación debe seguir acotada y con las advertencias documentadas. Hay una inconsistencia que no bloquea pero debe corregirse en el informe: el check 'no_horizontal_overflow: true' contradice los datos crudos (ver evidencia).",
+      "evidence": [
+        "Integridad: los hashes before/after autorizados coinciden con los del lote oficial y con el JS decodificado del CDN público (f9755749…e93be9). El push fue un solo PATCH con exactamente dos archivos, cero eliminaciones, HTTP 200 y sin reintentos. La discrepancia del endpoint individual de store.js queda como causa indeterminada; no la trato como caché demostrada. No invalida el CDN ni el lote, que son la evidencia que vale.",
+        "HTML inicial: /productos/ y /productos/page/2/ responden 200 con canonical autorreferente, un solo H1 y sin errores JSON. Los enlaces son relativos reales (/productos/page/2/ y /productos/). La corrección sobre el regex solo-absoluto es razonable, porque el parser y la navegación real lo confirman.",
+        "Seis anchos (360 a 1920): carga de 12 a 14 IDs únicos, orden de los 12 primeros preservado, botón habilitado con JS real, sin pageerrors en catálogo, enlace de paginación enfocable por teclado y árbol AX con navegación 'Página: productos' y enlace 'Página 2'. Esto cierra el pendiente anterior sobre la resolución de claves de traducción: el texto renderizado es correcto.",
+        "Sin JS (390 y 1440): el botón aparece deshabilitado y visible, y el enlace lleva a /productos/page/2/ con canonical propio y 2 productos (355908314, 355908372). El enlace de vuelta a la página 1 existe. Enter por teclado llega a la página 2 en 390 y 1440.",
+        "axe: 0 violaciones, pero solo se ejecutó en 390 y 1440 (7 reglas pasadas, 0 incompletas). No se extiende a los otros cuatro anchos ni a otras páginas. Es una comprobación acotada, no una auditoría AA.",
+        "Consumidores: home, PDP y blog en 390 y 1440 dan 200 sin pageerrors, con LS disponible y canonical propio. Es una lectura de carga/contenido, no certifica comercio, checkout ni tracking. No se enviaron formularios.",
+        "OBJECIÓN (no crítica, a corregir en el informe): 'no_horizontal_overflow: true' no se sostiene con los datos crudos. horizontal_overflow es true en 1024 y 1440 antes de la carga, en 1440 sin JS (before y after), y en home, PDP y blog a 1440. Tras la carga híbrida es false. Como home, PDP y blog no usan el snippet modificado y también lo muestran, no se puede atribuir al cambio. Pero no existe baseline previo al despliegue que lo demuestre como preexistente. Debe reportarse como 'overflow observado a 1440 en páginas ajenas al cambio, sin baseline previo', no como 'sin overflow'.",
+        "Rendimiento: mediana móvil de LCP +270 ms (+9,5 %) con rangos y MAD solapados. La herramienta de comparación marca 'lcp' como regresión, mientras que la compuerta predeclarada marca 'passed'. Ambas lecturas deben constar. CLS móvil máximo 0,0268 después frente a 0 antes, lejos del umbral de 0,1. FCP, TBT y SpeedIndex móviles bajan, y el escritorio no registra regresiones. Con n=5 y causality_confirmed=false no atribuyo mejoras ni empeoramientos al cambio. Se mantiene la advertencia de LCP móvil sin causa atribuida. El TBT de laboratorio no es INP.",
+        "Límites no ejercitables con 14 productos, que no deben tratarse como probados en producción: el botón manual (umbral 60) nunca se hace visible, ni la carga manual, ni el foco al primer producto nuevo, ni la ruta de error de carga. Solo cuentan los fixtures nativos retenidos. No hay filtros ni orden, por lo que habrá que revalidar si se activan.",
+        "Preferencia visual ya señalada y vigente: tras anexar, la fila 'Página 2' sigue apuntando a una página independiente cuyos productos ya están en el listado acumulado. La URL pasa a ?mpage=2 con canonical de /productos/ intacto.",
+        "Rollback: no corresponde. Solo estaba autorizado ante una regresión crítica atribuible, y la evidencia no la muestra. rollback_executed=false es coherente."
+      ],
+      "changes": []
+    },
+    "model": {
+      "model": "claude-sonnet-5-5",
+      "effort": "medium",
+      "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+      "verified_at": "2026-11-08"
+    },
+    "duration_s": 29.153,
+    "contract": {
+      "status": "passed",
+      "duration_s": 0.000126
+    }
+  },
+  "performance": {
+    "before_source": "reports/runs/rhino-performance/20261112T182131-pagination-release-preflight-a1c49c03/baseline-summary.json",
+    "after": {
+      "mobile": {
+        "sample_count": 5,
+        "score": {
+          "median": 65,
+          "min": 60,
+          "max": 67,
+          "mean": 63.8
+        },
+        "statistics": {
+          "lcp": {
+            "median": 3125.1309999999994,
+            "min": 2781.2160000000003,
+            "max": 3918.468999999999,
+            "available_samples": 5
+          },
+          "fcp": {
+            "median": 1385.9679999999998,
+            "min": 1353.828,
+            "max": 1434.572,
+            "available_samples": 5
+          },
+          "cls": {
+            "median": 0.0,
+            "min": 0.0,
+            "max": 0.02679823734251874,
+            "available_samples": 5
+          },
+          "tbt": {
+            "median": 1960.050000000002,
+            "min": 1768.7304999999988,
+            "max": 2512.2075000000013,
+            "available_samples": 5
+          },
+          "speed_index": {
+            "median": 3164.831714283027,
+            "min": 2887.29036466094,
+            "max": 3912.209887320808,
+            "available_samples": 5
+          }
+        },
+        "profile": {
+          "source": "lighthouse_local",
+          "url": "https://rhino-performance.com/productos/",
+          "final_url": "https://rhino-performance.com/productos/",
+          "device": "mobile",
+          "categories": [
+            "performance",
+            "accessibility",
+            "best-practices",
+            "seo"
+          ],
+          "locale": "es",
+          "lighthouse_version": "13.6.0",
+          "chrome_version": "155.0.8059.84",
+          "screen": {
+            "mobile": true,
+            "width": 412,
+            "height": 823,
+            "deviceScaleFactor": 1.75,
+            "disabled": false
+          },
+          "throttling_method": "simulate",
+          "throttling": {
+            "rttMs": 150,
+            "throughputKbps": 1638.4,
+            "requestLatencyMs": 562.5,
+            "downloadThroughputKbps": 1474.56,
+            "uploadThroughputKbps": 675,
+            "cpuSlowdownMultiplier": 4
+          },
+          "cache": false,
+          "network_policy": "existing browser_runtime read-only guard; GET/HEAD/OPTIONS; POST including marketing blocked; no media/JS overrides; service worker bypass"
+        },
+        "comparison": {
+          "status": "compared",
+          "delta_after_minus_before": {
+            "lcp": 270.22649999999976,
+            "fcp": -203.6310000000003,
+            "cls": 0.0,
+            "tbt": -303.9499999999989,
+            "speed_index": -284.60302283005876
+          },
+          "regressions": [
+            "lcp"
+          ],
+          "causality_confirmed": false
+        },
+        "runs": [
+          {
+            "sample": 1,
+            "score": 67,
+            "metrics": {
+              "lcp": 2781.2160000000003,
+              "fcp": 1353.828,
+              "cls": 0.0,
+              "tbt": 2006.0,
+              "speed_index": 3164.831714283027
+            },
+            "at": "2026-11-12T18:37:38.949Z",
+            "resources": [
+              {
+                "resourceType": "total",
+                "label": "Total",
+                "requestCount": 93,
+                "transferSize": 1952049
+              },
+              {
+                "resourceType": "script",
+                "label": "Script",
+                "requestCount": 26,
+                "transferSize": 1389968
+              },
+              {
+                "resourceType": "image",
+                "label": "Imagen",
+                "requestCount": 24,
+                "transferSize": 273263
+              },
+              {
+                "resourceType": "stylesheet",
+                "label": "Hoja de estilo",
+                "requestCount": 6,
+                "transferSize": 140477
+              },
+              {
+                "resourceType": "document",
+                "label": "Documento",
+                "requestCount": 5,
+                "transferSize": 84531
+              },
+              {
+                "resourceType": "other",
+                "label": "Otros",
+                "requestCount": 29,
+                "transferSize": 40165
+              },
+              {
+                "resourceType": "font",
+                "label": "Fuente",
+                "requestCount": 3,
+                "transferSize": 23645
+              },
+              {
+                "resourceType": "media",
+                "label": "Contenido multimedia",
+                "requestCount": 0,
+                "transferSize": 0
+              },
+              {
+                "resourceType": "third-party",
+                "label": "Recursos externos",
+                "requestCount": 89,
+                "transferSize": 1868721
+              }
+            ]
+          },
+          {
+            "sample": 2,
+            "score": 62,
+            "metrics": {
+              "lcp": 3616.1220000000003,
+              "fcp": 1387.7939999999999,
+              "cls": 0.0,
+              "tbt": 1858.0,
+              "speed_index": 3016.968276653451
+            },
+            "at": "2026-11-12T18:38:19.099Z",
+            "resources": [
+              {
+                "resourceType": "total",
+                "label": "Total",
+                "requestCount": 98,
+                "transferSize": 1939947
+              },
+              {
+                "resourceType": "script",
+                "label": "Script",
+                "requestCount": 26,
+                "transferSize": 1377986
+              },
+              {
+                "resourceType": "image",
+                "label": "Imagen",
+                "requestCount": 24,
+                "transferSize": 273303
+              },
+              {
+                "resourceType": "stylesheet",
+                "label": "Hoja de estilo",
+                "requestCount": 6,
+                "transferSize": 140479
+              },
+              {
+                "resourceType": "document",
+                "label": "Documento",
+                "requestCount": 5,
+                "transferSize": 84520
+              },
+              {
+                "resourceType": "other",
+                "label": "Otros",
+                "requestCount": 34,
+                "transferSize": 40014
+              },
+              {
+                "resourceType": "font",
+                "label": "Fuente",
+                "requestCount": 3,
+                "transferSize": 23645
+              },
+              {
+                "resourceType": "media",
+                "label": "Contenido multimedia",
+                "requestCount": 0,
+                "transferSize": 0
+              },
+              {
+                "resourceType": "third-party",
+                "label": "Recursos externos",
+                "requestCount": 94,
+                "transferSize": 1856627
+              }
+            ]
+          },
+          {
+            "sample": 3,
+            "score": 65,
+            "metrics": {
+              "lcp": 3125.1309999999994,
+              "fcp": 1376.0,
+              "cls": 0.02679823734251874,
+              "tbt": 1960.050000000002,
+              "speed_index": 2887.29036466094
+            },
+            "at": "2026-11-12T18:38:48.626Z",
+            "resources": [
+              {
+                "resourceType": "total",
+                "label": "Total",
+                "requestCount": 93,
+                "transferSize": 1967576
+              },
+              {
+                "resourceType": "script",
+                "label": "Script",
+                "requestCount": 26,
+                "transferSize": 1405540
+              },
+              {
+                "resourceType": "image",
+                "label": "Imagen",
+                "requestCount": 24,
+                "transferSize": 273299
+              },
+              {
+                "resourceType": "stylesheet",
+                "label": "Hoja de estilo",
+                "requestCount": 6,
+                "transferSize": 140418
+              },
+              {
+                "resourceType": "document",
+                "label": "Documento",
+                "requestCount": 5,
+                "transferSize": 84521
+              },
+              {
+                "resourceType": "other",
+                "label": "Otros",
+                "requestCount": 29,
+                "transferSize": 40153
+              },
+              {
+                "resourceType": "font",
+                "label": "Fuente",
+                "requestCount": 3,
+                "transferSize": 23645
+              },
+              {
+                "resourceType": "media",
+                "label": "Contenido multimedia",
+                "requestCount": 0,
+                "transferSize": 0
+              },
+              {
+                "resourceType": "third-party",
+                "label": "Recursos externos",
+                "requestCount": 89,
+                "transferSize": 1884257
+              }
+            ]
+          },
+          {
+            "sample": 4,
+            "score": 60,
+            "metrics": {
+              "lcp": 3918.468999999999,
+              "fcp": 1385.9679999999998,
+              "cls": 0.02679823734251874,
+              "tbt": 1768.7304999999988,
+              "speed_index": 3347.067485963077
+            },
+            "at": "2026-11-12T18:39:25.187Z",
+            "resources": [
+              {
+                "resourceType": "total",
+                "label": "Total",
+                "requestCount": 94,
+                "transferSize": 1968043
+              },
+              {
+                "resourceType": "script",
+                "label": "Script",
+                "requestCount": 26,
+                "transferSize": 1404966
+              },
+              {
+                "resourceType": "image",
+                "label": "Imagen",
+                "requestCount": 24,
+                "transferSize": 274167
+              },
+              {
+                "resourceType": "stylesheet",
+                "label": "Hoja de estilo",
+                "requestCount": 6,
+                "transferSize": 140291
+              },
+              {
+                "resourceType": "document",
+                "label": "Documento",
+                "requestCount": 5,
+                "transferSize": 84520
+              },
+              {
+                "resourceType": "other",
+                "label": "Otros",
+                "requestCount": 30,
+                "transferSize": 40454
+              },
+              {
+                "resourceType": "font",
+                "label": "Fuente",
+                "requestCount": 3,
+                "transferSize": 23645
+              },
+              {
+                "resourceType": "media",
+                "label": "Contenido multimedia",
+                "requestCount": 0,
+                "transferSize": 0
+              },
+              {
+                "resourceType": "third-party",
+                "label": "Recursos externos",
+                "requestCount": 90,
+                "transferSize": 1884726
+              }
+            ]
+          },
+          {
+            "sample": 5,
+            "score": 65,
+            "metrics": {
+              "lcp": 2821.0609999999997,
+              "fcp": 1434.572,
+              "cls": 0.0,
+              "tbt": 2512.2075000000013,
+              "speed_index": 3912.209887320808
+            },
+            "at": "2026-11-12T18:40:03.598Z",
+            "resources": [
+              {
+                "resourceType": "total",
+                "label": "Total",
+                "requestCount": 95,
+                "transferSize": 1952982
+              },
+              {
+                "resourceType": "script",
+                "label": "Script",
+                "requestCount": 26,
+                "transferSize": 1389395
+              },
+              {
+                "resourceType": "image",
+                "label": "Imagen",
+                "requestCount": 24,
+                "transferSize": 274003
+              },
+              {
+                "resourceType": "stylesheet",
+                "label": "Hoja de estilo",
+                "requestCount": 6,
+                "transferSize": 140493
+              },
+              {
+                "resourceType": "document",
+                "label": "Documento",
+                "requestCount": 5,
+                "transferSize": 84512
+              },
+              {
+                "resourceType": "other",
+                "label": "Otros",
+                "requestCount": 31,
+                "transferSize": 40934
+              },
+              {
+                "resourceType": "font",
+                "label": "Fuente",
+                "requestCount": 3,
+                "transferSize": 23645
+              },
+              {
+                "resourceType": "media",
+                "label": "Contenido multimedia",
+                "requestCount": 0,
+                "transferSize": 0
+              },
+              {
+                "resourceType": "third-party",
+                "label": "Recursos externos",
+                "requestCount": 91,
+                "transferSize": 1869668
+              }
+            ]
+          }
+        ]
+      },
+      "desktop": {
+        "sample_count": 5,
+        "score": {
+          "median": 88,
+          "min": 85,
+          "max": 94,
+          "mean": 89.2
+        },
+        "statistics": {
+          "lcp": {
+            "median": 1392.359,
+            "min": 1239.8699999999997,
+            "max": 1443.67,
+            "available_samples": 5
+          },
+          "fcp": {
+            "median": 387.472,
+            "min": 375.6909999999999,
+            "max": 461.523,
+            "available_samples": 5
+          },
+          "cls": {
+            "median": 0.01564694648746461,
+            "min": 0.01521750882876572,
+            "max": 0.021281995702361143,
+            "available_samples": 5
+          },
+          "tbt": {
+            "median": 178.0,
+            "min": 117.00000000000045,
+            "max": 267.9999999999998,
+            "available_samples": 5
+          },
+          "speed_index": {
+            "median": 1001.3589675264788,
+            "min": 958.5958572692715,
+            "max": 2002.9354128919877,
+            "available_samples": 5
+          }
+        },
+        "profile": {
+          "source": "lighthouse_local",
+          "url": "https://rhino-performance.com/productos/",
+          "final_url": "https://rhino-performance.com/productos/",
+          "device": "desktop",
+          "categories": [
+            "performance",
+            "accessibility",
+            "best-practices",
+            "seo"
+          ],
+          "locale": "es",
+          "lighthouse_version": "13.6.0",
+          "chrome_version": "155.0.8059.84",
+          "screen": {
+            "mobile": false,
+            "width": 1350,
+            "height": 940,
+            "deviceScaleFactor": 1,
+            "disabled": false
+          },
+          "throttling_method": "simulate",
+          "throttling": {
+            "rttMs": 40,
+            "throughputKbps": 10240,
+            "requestLatencyMs": 0,
+            "downloadThroughputKbps": 0,
+            "uploadThroughputKbps": 0,
+            "cpuSlowdownMultiplier": 1
+          },
+          "cache": false,
+          "network_policy": "existing browser_runtime read-only guard; GET/HEAD/OPTIONS; POST including marketing blocked; no media/JS overrides; service worker bypass"
+        },
+        "comparison": {
+          "status": "compared",
+          "delta_after_minus_before": {
+            "lcp": -122.40550000000007,
+            "fcp": -45.27900000000005,
+            "cls": -7.567113212503251e-05,
+            "tbt": -27.00000000000051,
+            "speed_index": -165.0735390673068
+          },
+          "regressions": [],
+          "causality_confirmed": false
+        },
+        "runs": [
+          {
+            "sample": 1,
+            "score": 88,
+            "metrics": {
+              "lcp": 1239.8699999999997,
+              "fcp": 375.6909999999999,
+              "cls": 0.01564694648746461,
+              "tbt": 242.5,
+              "speed_index": 1004.9546642551157
+            },
+            "at": "2026-11-12T18:37:58.749Z",
+            "resources": [
+              {
+                "resourceType": "total",
+                "label": "Total",
+                "requestCount": 95,
+                "transferSize": 2333504
+              },
+              {
+                "resourceType": "script",
+                "label": "Script",
+                "requestCount": 26,
+                "transferSize": 1393846
+              },
+              {
+                "resourceType": "image",
+                "label": "Imagen",
+                "requestCount": 26,
+                "transferSize": 650814
+              },
+              {
+                "resourceType": "stylesheet",
+                "label": "Hoja de estilo",
+                "requestCount": 6,
+                "transferSize": 140498
+              },
+              {
+                "resourceType": "document",
+                "label": "Documento",
+                "requestCount": 5,
+                "transferSize": 84521
+              },
+              {
+                "resourceType": "other",
+                "label": "Otros",
+                "requestCount": 29,
+                "transferSize": 40180
+              },
+              {
+                "resourceType": "font",
+                "label": "Fuente",
+                "requestCount": 3,
+                "transferSize": 23645
+              },
+              {
+                "resourceType": "media",
+                "label": "Contenido multimedia",
+                "requestCount": 0,
+                "transferSize": 0
+              },
+              {
+                "resourceType": "third-party",
+                "label": "Recursos externos",
+                "requestCount": 91,
+                "transferSize": 2250164
+              }
+            ]
+          },
+          {
+            "sample": 2,
+            "score": 87,
+            "metrics": {
+              "lcp": 1443.67,
+              "fcp": 461.523,
+              "cls": 0.01521750882876572,
+              "tbt": 178.0,
+              "speed_index": 2002.9354128919877
+            },
+            "at": "2026-11-12T18:38:32.900Z",
+            "resources": [
+              {
+                "resourceType": "total",
+                "label": "Total",
+                "requestCount": 95,
+                "transferSize": 2333569
+              },
+              {
+                "resourceType": "script",
+                "label": "Script",
+                "requestCount": 26,
+                "transferSize": 1393880
+              },
+              {
+                "resourceType": "image",
+                "label": "Imagen",
+                "requestCount": 26,
+                "transferSize": 650861
+              },
+              {
+                "resourceType": "stylesheet",
+                "label": "Hoja de estilo",
+                "requestCount": 6,
+                "transferSize": 140493
+              },
+              {
+                "resourceType": "document",
+                "label": "Documento",
+                "requestCount": 5,
+                "transferSize": 84516
+              },
+              {
+                "resourceType": "other",
+                "label": "Otros",
+                "requestCount": 29,
+                "transferSize": 40174
+              },
+              {
+                "resourceType": "font",
+                "label": "Fuente",
+                "requestCount": 3,
+                "transferSize": 23645
+              },
+              {
+                "resourceType": "media",
+                "label": "Contenido multimedia",
+                "requestCount": 0,
+                "transferSize": 0
+              },
+              {
+                "resourceType": "third-party",
+                "label": "Recursos externos",
+                "requestCount": 91,
+                "transferSize": 2250251
+              }
+            ]
+          },
+          {
+            "sample": 3,
+            "score": 94,
+            "metrics": {
+              "lcp": 1392.359,
+              "fcp": 387.472,
+              "cls": 0.01564694648746461,
+              "tbt": 117.00000000000045,
+              "speed_index": 958.5958572692715
+            },
+            "at": "2026-11-12T18:39:07.771Z",
+            "resources": [
+              {
+                "resourceType": "total",
+                "label": "Total",
+                "requestCount": 84,
+                "transferSize": 2277332
+              },
+              {
+                "resourceType": "script",
+                "label": "Script",
+                "requestCount": 24,
+                "transferSize": 1376928
+              },
+              {
+                "resourceType": "image",
+                "label": "Imagen",
+                "requestCount": 23,
+                "transferSize": 612107
+              },
+              {
+                "resourceType": "stylesheet",
+                "label": "Hoja de estilo",
+                "requestCount": 5,
+                "transferSize": 140426
+              },
+              {
+                "resourceType": "document",
+                "label": "Documento",
+                "requestCount": 4,
+                "transferSize": 84521
+              },
+              {
+                "resourceType": "other",
+                "label": "Otros",
+                "requestCount": 25,
+                "transferSize": 39705
+              },
+              {
+                "resourceType": "font",
+                "label": "Fuente",
+                "requestCount": 3,
+                "transferSize": 23645
+              },
+              {
+                "resourceType": "media",
+                "label": "Contenido multimedia",
+                "requestCount": 0,
+                "transferSize": 0
+              },
+              {
+                "resourceType": "third-party",
+                "label": "Recursos externos",
+                "requestCount": 80,
+                "transferSize": 2193994
+              }
+            ]
+          },
+          {
+            "sample": 4,
+            "score": 85,
+            "metrics": {
+              "lcp": 1399.4469999999997,
+              "fcp": 435.01599999999996,
+              "cls": 0.015652895762192448,
+              "tbt": 267.9999999999998,
+              "speed_index": 1001.3589675264788
+            },
+            "at": "2026-11-12T18:39:48.549Z",
+            "resources": [
+              {
+                "resourceType": "total",
+                "label": "Total",
+                "requestCount": 97,
+                "transferSize": 2318895
+              },
+              {
+                "resourceType": "script",
+                "label": "Script",
+                "requestCount": 26,
+                "transferSize": 1377775
+              },
+              {
+                "resourceType": "image",
+                "label": "Imagen",
+                "requestCount": 26,
+                "transferSize": 651562
+              },
+              {
+                "resourceType": "stylesheet",
+                "label": "Hoja de estilo",
+                "requestCount": 6,
+                "transferSize": 140439
+              },
+              {
+                "resourceType": "document",
+                "label": "Documento",
+                "requestCount": 5,
+                "transferSize": 84524
+              },
+              {
+                "resourceType": "other",
+                "label": "Otros",
+                "requestCount": 31,
+                "transferSize": 40950
+              },
+              {
+                "resourceType": "font",
+                "label": "Fuente",
+                "requestCount": 3,
+                "transferSize": 23645
+              },
+              {
+                "resourceType": "media",
+                "label": "Contenido multimedia",
+                "requestCount": 0,
+                "transferSize": 0
+              },
+              {
+                "resourceType": "third-party",
+                "label": "Recursos externos",
+                "requestCount": 93,
+                "transferSize": 2235576
+              }
+            ]
+          },
+          {
+            "sample": 5,
+            "score": 92,
+            "metrics": {
+              "lcp": 1371.2669999999998,
+              "fcp": 382.199,
+              "cls": 0.021281995702361143,
+              "tbt": 157.50000000000023,
+              "speed_index": 979.2634027409863
+            },
+            "at": "2026-11-12T18:40:18.962Z",
+            "resources": [
+              {
+                "resourceType": "total",
+                "label": "Total",
+                "requestCount": 101,
+                "transferSize": 2344975
+              },
+              {
+                "resourceType": "script",
+                "label": "Script",
+                "requestCount": 26,
+                "transferSize": 1405362
+              },
+              {
+                "resourceType": "image",
+                "label": "Imagen",
+                "requestCount": 26,
+                "transferSize": 650790
+              },
+              {
+                "resourceType": "stylesheet",
+                "label": "Hoja de estilo",
+                "requestCount": 6,
+                "transferSize": 140490
+              },
+              {
+                "resourceType": "document",
+                "label": "Documento",
+                "requestCount": 5,
+                "transferSize": 84511
+              },
+              {
+                "resourceType": "other",
+                "label": "Otros",
+                "requestCount": 35,
+                "transferSize": 40177
+              },
+              {
+                "resourceType": "font",
+                "label": "Fuente",
+                "requestCount": 3,
+                "transferSize": 23645
+              },
+              {
+                "resourceType": "media",
+                "label": "Contenido multimedia",
+                "requestCount": 0,
+                "transferSize": 0
+              },
+              {
+                "resourceType": "third-party",
+                "label": "Recursos externos",
+                "requestCount": 97,
+                "transferSize": 2261668
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "gates": {
+      "mobile": {
+        "status": "passed",
+        "predeclared_alerts": [],
+        "matched_profiles": true,
+        "metrics": {
+          "lcp": {
+            "before_median": 2854.9044999999996,
+            "after_median": 3125.1309999999994,
+            "delta": 270.22649999999976,
+            "relative_change_pct": 9.465342886250653,
+            "before_MAD": 242.95349999999917,
+            "after_MAD": 343.91499999999905
+          },
+          "fcp": {
+            "before_median": 1589.5990000000002,
+            "after_median": 1385.9679999999998,
+            "delta": -203.6310000000003,
+            "relative_change_pct": -12.810211883626014,
+            "before_MAD": 59.45999999999981,
+            "after_MAD": 9.967999999999847
+          },
+          "speed_index": {
+            "before_median": 3449.4347371130857,
+            "after_median": 3164.831714283027,
+            "delta": -284.60302283005876,
+            "relative_change_pct": -8.250714813298652,
+            "before_MAD": 125.05237321523691,
+            "after_MAD": 182.23577168005022
+          },
+          "tbt": {
+            "before_median": 2264.000000000001,
+            "after_median": 1960.050000000002,
+            "delta": -303.9499999999989,
+            "relative_change_pct": -13.425353356890406,
+            "before_MAD": 171.0,
+            "after_MAD": 102.050000000002
+          },
+          "cls": {
+            "before_median": 0.0,
+            "after_median": 0.0,
+            "delta": 0.0,
+            "relative_change_pct": null,
+            "before_MAD": 0.0,
+            "after_MAD": 0.0
+          }
+        },
+        "resources": {
+          "total": {
+            "before_transfer_median": 1951692,
+            "after_transfer_median": 1952982,
+            "before_range": [
+              1939474,
+              1963734
+            ],
+            "after_range": [
+              1939947,
+              1968043
+            ]
+          },
+          "script": {
+            "before_transfer_median": 1388982,
+            "after_transfer_median": 1389968,
+            "before_range": [
+              1377353,
+              1393392
+            ],
+            "after_range": [
+              1377986,
+              1405540
+            ]
+          },
+          "stylesheet": {
+            "before_transfer_median": 140501,
+            "after_transfer_median": 140477,
+            "before_range": [
+              140483,
+              140521
+            ],
+            "after_range": [
+              140291,
+              140493
+            ]
+          },
+          "image": {
+            "before_transfer_median": 273267,
+            "after_transfer_median": 273303,
+            "before_range": [
+              273220,
+              284782
+            ],
+            "after_range": [
+              273263,
+              274167
+            ]
+          },
+          "font": {
+            "before_transfer_median": 23645,
+            "after_transfer_median": 23645,
+            "before_range": [
+              23645,
+              23645
+            ],
+            "after_range": [
+              23645,
+              23645
+            ]
+          },
+          "media": {
+            "before_transfer_median": 0,
+            "after_transfer_median": 0,
+            "before_range": [
+              0,
+              0
+            ],
+            "after_range": [
+              0,
+              0
+            ]
+          }
+        },
+        "caution": "Five samples; not a causal or statistical equivalence proof. Mobile LCP increased descriptively, overlapping ranges/MAD and below predeclared relative alert; retain warning.",
+        "CLS_max_before": 0.0,
+        "CLS_max_after": 0.02679823734251874
+      },
+      "desktop": {
+        "status": "passed",
+        "predeclared_alerts": [],
+        "matched_profiles": true,
+        "metrics": {
+          "lcp": {
+            "before_median": 1514.7645,
+            "after_median": 1392.359,
+            "delta": -122.40550000000007,
+            "relative_change_pct": -8.080827085662495,
+            "before_MAD": 87.45050000000037,
+            "after_MAD": 21.0920000000001
+          },
+          "fcp": {
+            "before_median": 432.75100000000003,
+            "after_median": 387.472,
+            "delta": -45.27900000000005,
+            "relative_change_pct": -10.463060743938211,
+            "before_MAD": 23.859000000000037,
+            "after_MAD": 11.781000000000063
+          },
+          "speed_index": {
+            "before_median": 1166.4325065937855,
+            "after_median": 1001.3589675264788,
+            "delta": -165.0735390673068,
+            "relative_change_pct": -14.15200092025507,
+            "before_MAD": 75.07636786148305,
+            "after_MAD": 22.095564785492456
+          },
+          "tbt": {
+            "before_median": 205.0000000000005,
+            "after_median": 178.0,
+            "delta": -27.00000000000051,
+            "relative_change_pct": -13.17073170731729,
+            "before_MAD": 36.499999999999716,
+            "after_MAD": 60.999999999999545
+          },
+          "cls": {
+            "before_median": 0.01572261761958964,
+            "after_median": 0.01564694648746461,
+            "delta": -7.567113212503251e-05,
+            "relative_change_pct": -0.48128838311726063,
+            "before_MAD": 7.567113212503251e-05,
+            "after_MAD": 5.949274727839321e-06
+          }
+        },
+        "resources": {
+          "total": {
+            "before_transfer_median": 2344487,
+            "after_transfer_median": 2333504,
+            "before_range": [
+              2328924,
+              2345303
+            ],
+            "after_range": [
+              2277332,
+              2344975
+            ]
+          },
+          "script": {
+            "before_transfer_median": 1404765,
+            "after_transfer_median": 1393846,
+            "before_range": [
+              1389175,
+              1405269
+            ],
+            "after_range": [
+              1376928,
+              1405362
+            ]
+          },
+          "stylesheet": {
+            "before_transfer_median": 140485,
+            "after_transfer_median": 140490,
+            "before_range": [
+              140310,
+              140545
+            ],
+            "after_range": [
+              140426,
+              140498
+            ]
+          },
+          "image": {
+            "before_transfer_median": 650849,
+            "after_transfer_median": 650814,
+            "before_range": [
+              650798,
+              650991
+            ],
+            "after_range": [
+              612107,
+              651562
+            ]
+          },
+          "font": {
+            "before_transfer_median": 23645,
+            "after_transfer_median": 23645,
+            "before_range": [
+              23645,
+              23645
+            ],
+            "after_range": [
+              23645,
+              23645
+            ]
+          },
+          "media": {
+            "before_transfer_median": 0,
+            "after_transfer_median": 0,
+            "before_range": [
+              0,
+              0
+            ],
+            "after_range": [
+              0,
+              0
+            ]
+          }
+        },
+        "caution": "Five samples; not a causal or statistical equivalence proof. Mobile LCP increased descriptively, overlapping ranges/MAD and below predeclared relative alert; retain warning.",
+        "CLS_max_before": 0.01997590708271313,
+        "CLS_max_after": 0.021281995702361143
+      }
+    }
+  },
+  "rollback": {
+    "executed": false,
+    "reason": "No critical regression attributable to this exact change demonstrated; scoped conditional permission not activated."
+  },
+  "other_operations": {
+    "menu": "not_modified_pending_owner_backup",
+    "blog_canonical": "not_modified_consultation_not_sent"
+  },
+  "limitations": [
+    "Manual button threshold60 cannot be exercised with14 real products; recorded enabled/autoappend and retained fixture focus tests, not fabricated production manual load.",
+    "No actual error injected into production; fixture error tests retained.",
+    "Filters/order absent; future enablement revalidation required.",
+    "Smoke not exhaustive commerce/checkout/tracking certification; no transactions submitted.",
+    "Local LH does not measure field INP or prove causal performance improvement.",
+    "Mobile LCP median+9.5%, CLS max0.0268; warning retained, no critical attribution.",
+    "Single-file JS API returned original whereas batch API and actual public CDN both contain exact approved after hash; cause undetermined.",
+    "Absolute-only href regex falsely returnedfalse; actual raw relative hrefs verified by parser and working navigation."
+  ]
+}

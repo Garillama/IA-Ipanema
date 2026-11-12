@@ -1,0 +1,27 @@
+{
+  "status": "not_executed_credentials_unavailable",
+  "project": "rhino-performance",
+  "property": "sc-domain:rhino-performance.com",
+  "permission": "read_only",
+  "maximum_new_inspections_initial_batch": 4,
+  "urls": [
+    "https://rhino-performance.com/pistolas-de-masaje/",
+    "https://rhino-performance.com/terapia-fria/",
+    "https://rhino-performance.com/compresion-frio-y-calor/",
+    "https://rhino-performance.com/productos/page/2/"
+  ],
+  "justification": "First three categories have no prior inspection; catalogpage2 gained actual HTML navigation in authorized deployment. Do not repeat15priorinspections.",
+  "reuse": {
+    "initial_inspections": 13,
+    "later_blog_inspections": 2,
+    "Search_Analytics_exact_rows": 170,
+    "period": "2026-10-12..2026-11-08 PT"
+  },
+  "complete_index_coverage": "Official Pages report exports needed; API sample/searchrows do not provide fullcoverage census.",
+  "not_authorized": [
+    "indexing_request",
+    "sitemap_submission",
+    "remote_settings_change",
+    "credentials_in_reports"
+  ]
+}

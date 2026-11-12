@@ -1,0 +1,315 @@
+{
+  "at": "2026-11-12T04:46:52.976400+00:00",
+  "scope": "audit_only",
+  "confirmed_site_P0": [],
+  "items": [
+    {
+      "id": "RH-INDEX-001",
+      "priority": "P1",
+      "url": "https://rhino-performance.com/productos/",
+      "demonstrated_cause": "Published load-more anchor has no href; native infinite branch omits computed next_link. All 14 sitemap products have alternate home HTML paths.",
+      "evidence": [
+        "known-documents.json: catalog",
+        "sections/main-products-grid.tpl: paginate12/60",
+        "snippets/product-list/pagination.tpl: infinite branch"
+      ],
+      "candidate_files_or_owner": [
+        "snippets/product-list/pagination.tpl",
+        "sections/main-products-grid.tpl",
+        "static/js/store.js:initInfiniteScroll",
+        "templates/pages/category.json"
+      ],
+      "alternatives": [
+        "Native classic setting, but increases batch size to60",
+        "Progressive href navigation preserving infinite and native next cursor"
+      ],
+      "recommendation": "Preserve LS.hybridScroll; prepare progressive native-link alternative only after checking next_link and remaining contracts. Do not replace with classic60 by default.",
+      "risks": [
+        "Static next href can become stale after append",
+        "Lost filter/order parameters",
+        "Duplicate product cards",
+        "Keyboard control not focusable without href",
+        "Classic option may increase DOM/images"
+      ],
+      "required_tests": [
+        "Published native next URL identity",
+        "Initial HTML vs rendered vs true no-JS",
+        "No product overlap/loss across pages",
+        "Filters/order preservation",
+        "Keyboard and six widths",
+        "Comparable LCP/TBT/CLS/resource budgets",
+        "Mandatory review of exact candidate"
+      ],
+      "rollback": "Keep exact remote file backup/hash; authorize only scoped patch; revert only if expected posthash still matches, preserving subsequent edits.",
+      "status": "needs_evidence",
+      "authorization": "[redacted]",
+      "expected_performance_impact": "not_measured; preserve existing baseline",
+      "google_indexation_effect": "not_confirmed",
+      "claude_proposal": "Propuesta de revisión read-only: no implementar cambios ni operaciones remotas. Investigar primero rutas de catálogo, comportamiento sin JS y canonical de /blog/?page=2 con evidencia vigente; cualquier cambio de paginación o canonical queda pendiente de evidencia y aprobación separada.",
+      "codex_proposal": "Propongo limitar el trabajo a investigación y capturas de solo lectura. La evidencia de GSC registra canonical propio para home, catálogo y categoría inspeccionados; para /blog/?page=2 no aporta canonical elegido ni estado de indexación concluyente. Contacto figura descubierta sin indexar y Sobre Rhino no reconocida. Nada de esto aprueba un cambio ni acredita cobertura completa.",
+      "council_proposal_scope": "General read-only recommendation; no approved issue-specific patch",
+      "objections_reference": "council ADR-79345cdd49e2:10 objections,4 questions,2 Claude answers; Codex defense not executed",
+      "cross_review_approved": false,
+      "new_controller_evidence": [
+        "native-runtime/observation.json: control lacks href/role/tabindex,focus unsuccessful",
+        "native-scroll/observation.json: actual /productos/page/2/ GET200,12->14 unique grid IDs",
+        "catalog-page2-live.json: full HTML200,self canonical and two product links"
+      ],
+      "remaining_tests": [
+        "Native next_link value in authorized real render",
+        "Filters/order and future multi-page behavior",
+        "Keyboard traversal and six widths",
+        "Exact diff independent review",
+        "Comparable performance QA before any deploy"
+      ]
+    },
+    {
+      "id": "RH-INDEX-002",
+      "priority": "P2",
+      "url": "https://rhino-performance.com/blog/?page=2",
+      "demonstrated_cause": "Distinct page2 articles but canonical to blog root. Google selected canonical not known.",
+      "evidence": [
+        "known-documents.json: blog/blog_page2",
+        "pagination-observations.json"
+      ],
+      "candidate_files_or_owner": [
+        "Native component(head-tags)/Tiendanube",
+        "layouts/layout.tpl only if supported metadata override confirmed",
+        "snippets/blog/blog-pagination.tpl and static/js/blog-listing.js as consumers"
+      ],
+      "alternatives": [
+        "Supported native canonical configuration",
+        "Single supported canonical override for public blog pagination"
+      ],
+      "recommendation": "Verify platform-supported override before preparing code; self-canonical for actual public paginated URL if eligible.",
+      "risks": [
+        "Duplicate canonical if appended blindly",
+        "Accidental indexation of view=cards auxiliary endpoint",
+        "Filtered routes/canonical ambiguity"
+      ],
+      "required_tests": [
+        "GSC declared/Google canonical sample",
+        "Only one canonical in head",
+        "Page2/page3 real URLs, distinct articles and content",
+        "NoJS and filtered UI",
+        "No change to noindex auxiliary endpoints",
+        "Performance/SEO regression QA"
+      ],
+      "rollback": "Backup/hash exact affected file; revert only approved owned diff under explicit deployment authorization.",
+      "status": "needs_evidence",
+      "authorization": "[redacted]",
+      "expected_performance_impact": "not_measured; preserve existing baseline",
+      "google_indexation_effect": "not_confirmed",
+      "claude_proposal": "Propuesta de revisión read-only: no implementar cambios ni operaciones remotas. Investigar primero rutas de catálogo, comportamiento sin JS y canonical de /blog/?page=2 con evidencia vigente; cualquier cambio de paginación o canonical queda pendiente de evidencia y aprobación separada.",
+      "codex_proposal": "Propongo limitar el trabajo a investigación y capturas de solo lectura. La evidencia de GSC registra canonical propio para home, catálogo y categoría inspeccionados; para /blog/?page=2 no aporta canonical elegido ni estado de indexación concluyente. Contacto figura descubierta sin indexar y Sobre Rhino no reconocida. Nada de esto aprueba un cambio ni acredita cobertura completa.",
+      "council_proposal_scope": "General read-only recommendation; no approved issue-specific patch",
+      "objections_reference": "council ADR-79345cdd49e2:10 objections,4 questions,2 Claude answers; Codex defense not executed",
+      "cross_review_approved": false,
+      "new_controller_evidence": [
+        "Official Tiendanube SEO docs confirm platform ownership of head-tags/canonical; no supported override verified",
+        "GSC page2 unknown, not evidence of Google-selected root canonical"
+      ]
+    },
+    {
+      "id": "RH-INDEX-003",
+      "priority": "P1",
+      "url": "https://rhino-performance.com/blog/",
+      "demonstrated_cause": "62 of86 sitemap articles not covered by the two-page link sample; no confirmed orphan.",
+      "evidence": [
+        "url-matrix.csv",
+        "internal-link-graph.json"
+      ],
+      "candidate_files_or_owner": [
+        "sections/main-blog.tpl",
+        "snippets/blog/blog-pagination.tpl",
+        "static/js/blog-listing.js"
+      ],
+      "alternatives": [
+        "Keep existing native pagination if complete chain passes",
+        "Correct only broken links proven by bounded crawl"
+      ],
+      "recommendation": "After crawler approval, inspect pagination chain with capped requests; do not add redundant links based on sample absence.",
+      "risks": [
+        "Unnecessary DOM expansion",
+        "Treating disabled previous arrow as crawl defect",
+        "Changing ordering or tag filter"
+      ],
+      "required_tests": [
+        "Every inspected next href resolves correctly",
+        "Distinct cumulative article identities",
+        "Terminal page behavior",
+        "Initial HTML links and true noJS",
+        "Compare sitemap articles vs observed paths, with sample limits"
+      ],
+      "rollback": "No patch yet; preserve original components; rollback procedure required for eventual exact diff.",
+      "status": "needs_evidence",
+      "authorization": "[redacted]",
+      "expected_performance_impact": "not_measured; preserve existing baseline",
+      "google_indexation_effect": "not_confirmed",
+      "claude_proposal": "Propuesta de revisión read-only: no implementar cambios ni operaciones remotas. Investigar primero rutas de catálogo, comportamiento sin JS y canonical de /blog/?page=2 con evidencia vigente; cualquier cambio de paginación o canonical queda pendiente de evidencia y aprobación separada.",
+      "codex_proposal": "Propongo limitar el trabajo a investigación y capturas de solo lectura. La evidencia de GSC registra canonical propio para home, catálogo y categoría inspeccionados; para /blog/?page=2 no aporta canonical elegido ni estado de indexación concluyente. Contacto figura descubierta sin indexar y Sobre Rhino no reconocida. Nada de esto aprueba un cambio ni acredita cobertura completa.",
+      "council_proposal_scope": "General read-only recommendation; no approved issue-specific patch",
+      "objections_reference": "council ADR-79345cdd49e2:10 objections,4 questions,2 Claude answers; Codex defense not executed",
+      "cross_review_approved": false
+    },
+    {
+      "id": "RH-INDEX-004",
+      "priority": "P2",
+      "url": "sc-domain:rhino-performance.com",
+      "demonstrated_cause": "Access restored.13 actual URL inspections:10PASS,1discovered-not-indexed,2unknown. Full Page Indexing report still unavailable.",
+      "evidence": [
+        "access doctor output",
+        "Existing GSC adapter contract"
+      ],
+      "candidate_files_or_owner": [
+        "Google Search Console account / existing access gateway"
+      ],
+      "alternatives": [
+        "Complete already-authorized read-only OAuth",
+        "Use official owner export of Page Indexing with date/limits"
+      ],
+      "recommendation": "Read registered sitemaps, explicit-period Search Analytics and selected URL Inspection after consent. No invented full-index endpoint.",
+      "risks": [
+        "Confusing impressions with complete coverage",
+        "Confusing stored index status with live check",
+        "Leaking tokens"
+      ],
+      "required_tests": [
+        "Verify correct property",
+        "Read-only scope",
+        "Record response timestamp, URL and report bounds",
+        "Stop403/429",
+        "No credentials in report"
+      ],
+      "rollback": "Revoke task permission / disconnect read-only session; no storefront change.",
+      "status": "verified_read_only_sample",
+      "authorization": "[redacted]",
+      "expected_performance_impact": "not_measured; preserve existing baseline",
+      "google_indexation_effect": "not_confirmed",
+      "claude_proposal": "Propuesta de revisión read-only: no implementar cambios ni operaciones remotas. Investigar primero rutas de catálogo, comportamiento sin JS y canonical de /blog/?page=2 con evidencia vigente; cualquier cambio de paginación o canonical queda pendiente de evidencia y aprobación separada.",
+      "codex_proposal": "Propongo limitar el trabajo a investigación y capturas de solo lectura. La evidencia de GSC registra canonical propio para home, catálogo y categoría inspeccionados; para /blog/?page=2 no aporta canonical elegido ni estado de indexación concluyente. Contacto figura descubierta sin indexar y Sobre Rhino no reconocida. Nada de esto aprueba un cambio ni acredita cobertura completa.",
+      "council_proposal_scope": "General read-only recommendation; no approved issue-specific patch",
+      "objections_reference": "council ADR-79345cdd49e2:10 objections,4 questions,2 Claude answers; Codex defense not executed",
+      "cross_review_approved": false
+    },
+    {
+      "id": "RH-INDEX-005",
+      "priority": "P2",
+      "url": "https://rhino-performance.com/",
+      "demonstrated_cause": "V4 candidate is not integrated/approved; prior mandatory controller QA/review remain open.",
+      "evidence": [
+        "reports/seo/v4-source-review/delivery.json",
+        "reports/seo/v4-source-review/review-result.json"
+      ],
+      "candidate_files_or_owner": [
+        "tools/ipanema/seo/ existing modules; no changes in this phase"
+      ],
+      "alternatives": [
+        "Complete exact reviewed candidate acceptance when review available",
+        "Continue offline inventory and authorized official exports"
+      ],
+      "recommendation": "Do not run network crawler or integrate blocked hash. Close its existing acceptance conditions before initial bounded production crawl.",
+      "risks": [
+        "False indexability classification from unapproved parser",
+        "Bypassing mandated review with replacement transport"
+      ],
+      "required_tests": [
+        "Exact candidate/base hashes",
+        "Existing mandatory controller QA receipt",
+        "Independent review per AGENTS",
+        "403/429/redirect/private-route safety",
+        "Initial bounded result reviewed before expansion"
+      ],
+      "rollback": "Candidate remains unapplied; no source rollback needed.",
+      "status": "needs_evidence",
+      "authorization": "[redacted]",
+      "expected_performance_impact": "not_measured; preserve existing baseline",
+      "google_indexation_effect": "not_confirmed",
+      "claude_proposal": "Propuesta de revisión read-only: no implementar cambios ni operaciones remotas. Investigar primero rutas de catálogo, comportamiento sin JS y canonical de /blog/?page=2 con evidencia vigente; cualquier cambio de paginación o canonical queda pendiente de evidencia y aprobación separada.",
+      "codex_proposal": "Propongo limitar el trabajo a investigación y capturas de solo lectura. La evidencia de GSC registra canonical propio para home, catálogo y categoría inspeccionados; para /blog/?page=2 no aporta canonical elegido ni estado de indexación concluyente. Contacto figura descubierta sin indexar y Sobre Rhino no reconocida. Nada de esto aprueba un cambio ni acredita cobertura completa.",
+      "council_proposal_scope": "General read-only recommendation; no approved issue-specific patch",
+      "objections_reference": "council ADR-79345cdd49e2:10 objections,4 questions,2 Claude answers; Codex defense not executed",
+      "cross_review_approved": false
+    },
+    {
+      "id": "RH-INDEX-006",
+      "priority": "P3",
+      "url": [
+        "https://rhino-performance.com/contacto/",
+        "https://rhino-performance.com/sobre-rhino-performance/"
+      ],
+      "demonstrated_cause": "No incoming path observed in seven-document sample, not proof of global orphanhood.",
+      "evidence": [
+        "url-matrix.csv"
+      ],
+      "candidate_files_or_owner": [
+        "Existing header/footer/navigation settings and actual content pages"
+      ],
+      "alternatives": [
+        "Reuse relevant existing navigation destination",
+        "Add contextual link only after complete evidence"
+      ],
+      "recommendation": "Verify current content and remaining link sources before suggesting visible contextual navigation.",
+      "risks": [
+        "Inventing destinations",
+        "Unnecessary menu expansion",
+        "Misclassifying partial sample"
+      ],
+      "required_tests": [
+        "Current status/content/canonical after access permission",
+        "Existing menu/footer traversal",
+        "Mobile keyboard accessibility",
+        "SEO/performance budgets"
+      ],
+      "rollback": "Restore only exact authorized navigation setting/template edit.",
+      "status": "needs_evidence",
+      "authorization": "[redacted]",
+      "expected_performance_impact": "not_measured; preserve existing baseline",
+      "google_indexation_effect": "not_confirmed",
+      "claude_proposal": "Propuesta de revisión read-only: no implementar cambios ni operaciones remotas. Investigar primero rutas de catálogo, comportamiento sin JS y canonical de /blog/?page=2 con evidencia vigente; cualquier cambio de paginación o canonical queda pendiente de evidencia y aprobación separada.",
+      "codex_proposal": "Propongo limitar el trabajo a investigación y capturas de solo lectura. La evidencia de GSC registra canonical propio para home, catálogo y categoría inspeccionados; para /blog/?page=2 no aporta canonical elegido ni estado de indexación concluyente. Contacto figura descubierta sin indexar y Sobre Rhino no reconocida. Nada de esto aprueba un cambio ni acredita cobertura completa.",
+      "council_proposal_scope": "General read-only recommendation; no approved issue-specific patch",
+      "objections_reference": "council ADR-79345cdd49e2:10 objections,4 questions,2 Claude answers; Codex defense not executed",
+      "cross_review_approved": false,
+      "new_controller_evidence": [
+        "Both institutional pages HTTP200 with own text/canonical",
+        "Contacto discovered-not-indexed; Sobre unknown in GSC; no proved exclusion cause"
+      ]
+    },
+    {
+      "id": "RH-INDEX-007",
+      "priority": "P3",
+      "url": "https://rhino-performance.com/sitemap_blog.xml/",
+      "demonstrated_cause": "Main urlset includes an XML sitemap document as loc; fetched valid XML, not editorial HTML.",
+      "evidence": [
+        "inventory.json and known-documents.json"
+      ],
+      "candidate_files_or_owner": [
+        "Native Tiendanube sitemap generator"
+      ],
+      "alternatives": [
+        "Leave native XML intact",
+        "Ask platform whether document entry is intentional"
+      ],
+      "recommendation": "Do not replace sitemap or add noindex globally; clarify platform-generated entry if GSC reports an actual issue.",
+      "risks": [
+        "Breaking native discovery",
+        "Treating harmless XML entry as sitewide indexing blocker"
+      ],
+      "required_tests": [
+        "GSC sitemap errors/processing",
+        "Confirm publisher ownership of generator behavior"
+      ],
+      "rollback": "No theme patch recommended.",
+      "status": "needs_evidence",
+      "authorization": "[redacted]",
+      "expected_performance_impact": "not_measured; preserve existing baseline",
+      "google_indexation_effect": "not_confirmed",
+      "claude_proposal": "Propuesta de revisión read-only: no implementar cambios ni operaciones remotas. Investigar primero rutas de catálogo, comportamiento sin JS y canonical de /blog/?page=2 con evidencia vigente; cualquier cambio de paginación o canonical queda pendiente de evidencia y aprobación separada.",
+      "codex_proposal": "Propongo limitar el trabajo a investigación y capturas de solo lectura. La evidencia de GSC registra canonical propio para home, catálogo y categoría inspeccionados; para /blog/?page=2 no aporta canonical elegido ni estado de indexación concluyente. Contacto figura descubierta sin indexar y Sobre Rhino no reconocida. Nada de esto aprueba un cambio ni acredita cobertura completa.",
+      "council_proposal_scope": "General read-only recommendation; no approved issue-specific patch",
+      "objections_reference": "council ADR-79345cdd49e2:10 objections,4 questions,2 Claude answers; Codex defense not executed",
+      "cross_review_approved": false
+    }
+  ]
+}

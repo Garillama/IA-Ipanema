@@ -1,0 +1,71 @@
+{
+  "kind": "template_not_actual_admin_backup",
+  "menu_theme_reference": "footer",
+  "visible_heading": "Más información",
+  "backup_completed": false,
+  "observed_at": null,
+  "administrative_menu_name": null,
+  "administrative_menu_id": null,
+  "ids_not_exposed": null,
+  "local_evidence_file": null,
+  "local_evidence_sha256": null,
+  "entries_to_confirm": [
+    {
+      "order": 1,
+      "name": "Aviso de privacidad",
+      "url": "https://rhino-performance.com/aviso-de-privacidad/",
+      "admin_item_id": null,
+      "parent": null,
+      "link_type": null,
+      "target": null,
+      "other_visible_fields": null,
+      "confirmed_from_admin": false
+    },
+    {
+      "order": 2,
+      "name": "Cambios y garantía",
+      "url": "https://rhino-performance.com/politica-de-reembolso-y-cambios/",
+      "admin_item_id": null,
+      "parent": null,
+      "link_type": null,
+      "target": null,
+      "other_visible_fields": null,
+      "confirmed_from_admin": false
+    },
+    {
+      "order": 3,
+      "name": "Política de cookies",
+      "url": "https://rhino-performance.com/politica-de-cookies/",
+      "admin_item_id": null,
+      "parent": null,
+      "link_type": null,
+      "target": null,
+      "other_visible_fields": null,
+      "confirmed_from_admin": false
+    },
+    {
+      "order": 4,
+      "name": "Políticas de envíos",
+      "url": "https://rhino-performance.com/politica-de-envios/",
+      "admin_item_id": null,
+      "parent": null,
+      "link_type": null,
+      "target": null,
+      "other_visible_fields": null,
+      "confirmed_from_admin": false
+    }
+  ],
+  "new_entries_only": [
+    {
+      "order": 5,
+      "name": "Contacto",
+      "url": "https://rhino-performance.com/contacto/"
+    },
+    {
+      "order": 6,
+      "name": "Sobre Rhino Performance",
+      "url": "https://rhino-performance.com/sobre-rhino-performance/"
+    }
+  ],
+  "warning": "No IDs invented. If not exposed, record limitation. This template is not a backup and authorizes no edit."
+}

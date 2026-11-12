@@ -1,0 +1,98 @@
+{
+  "at": "2026-11-12T19:19:12.581432+00:00",
+  "inventory_rows": 125,
+  "sitemap_rows": 117,
+  "HTML_urls_in_inventory": 124,
+  "owner_deferred_content_urls": 1,
+  "by_type": {
+    "home": {
+      "inventory": 1,
+      "HTML_path": 1,
+      "HTTP_observed": 1,
+      "known_GSC_PASS": 1
+    },
+    "page": {
+      "inventory": 8,
+      "HTML_path": 6,
+      "HTTP_observed": 8,
+      "known_GSC_PASS": 1
+    },
+    "catalog": {
+      "inventory": 1,
+      "HTML_path": 1,
+      "HTTP_observed": 1,
+      "known_GSC_PASS": 1
+    },
+    "sitemap_document": {
+      "inventory": 1,
+      "HTML_path": 0,
+      "HTTP_observed": 1,
+      "known_GSC_PASS": 0
+    },
+    "product": {
+      "inventory": 14,
+      "HTML_path": 14,
+      "HTTP_observed": 3,
+      "known_GSC_PASS": 2
+    },
+    "category": {
+      "inventory": 5,
+      "HTML_path": 5,
+      "HTTP_observed": 5,
+      "known_GSC_PASS": 2
+    },
+    "blog": {
+      "inventory": 1,
+      "HTML_path": 1,
+      "HTTP_observed": 1,
+      "known_GSC_PASS": 1
+    },
+    "article": {
+      "inventory": 86,
+      "HTML_path": 86,
+      "HTTP_observed": 22,
+      "known_GSC_PASS": 2
+    },
+    "blog_pagination": {
+      "inventory": 7,
+      "HTML_path": 7,
+      "HTTP_observed": 7,
+      "known_GSC_PASS": 0
+    },
+    "catalog_pagination": {
+      "inventory": 1,
+      "HTML_path": 1,
+      "HTTP_observed": 1,
+      "known_GSC_PASS": 0
+    }
+  },
+  "HTML_paths": 122,
+  "HTTP_observed": 50,
+  "individual_GSC_inspections_reused": 15,
+  "known_GSC_PASS": 10,
+  "historical_GSC_page_rows": 170,
+  "total_current_indexed": null,
+  "crawler_executed": false,
+  "crawler_approved": false,
+  "new_GSC_queries": 0,
+  "new_fixed_GETs": 14,
+  "production_modified": false,
+  "scope": "All known relevantURLs in matrix, not exhaustive verified coverage of every existing route or private admin catalog",
+  "new_browser_no_JS_documents": 5,
+  "new_primary_documents_requested": 19,
+  "individual_HTML_HTTP_unknown": 75,
+  "article_individual_HTTP_unknown": 64,
+  "product_individual_HTTP_unknown": 11,
+  "inventory_scope": "Known sitemap snapshot reused +8 confirmed pagination URLs; not proof of exhaustive administrative taxonomy or all extant public routes",
+  "new_GSC_status": "credential_unavailable_no_connection_attempt",
+  "sitemap_HTML_urls": 116,
+  "coverage_closure": {
+    "status": "needs_evidence",
+    "new_HTTP_observations": 0,
+    "new_GSC_inspections": 0,
+    "pending_HTTP": 75,
+    "controller_candidate_QA": "passed_isolated_exact_hash",
+    "runtime_Codex_recovery": "inactivity90_and180_processes_reaped",
+    "report": "coverage-closure/README.md"
+  }
+}

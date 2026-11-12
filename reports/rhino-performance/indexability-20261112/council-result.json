@@ -1,0 +1,39 @@
+{
+  "run": "reports/runs/rhino-performance/20261112T161634-orchestration-d54ada0f",
+  "adr": "reports/runs/rhino-performance/20261112T161634-orchestration-d54ada0f/council/adr.json",
+  "coverage": {
+    "required_agents": [
+      "claude",
+      "codex"
+    ],
+    "participants": [
+      {
+        "requested_agent": "claude",
+        "effective_agent": "claude",
+        "status": "available"
+      },
+      {
+        "requested_agent": "codex",
+        "effective_agent": "codex",
+        "status": "available"
+      }
+    ],
+    "effective_agents": [
+      "claude",
+      "codex"
+    ],
+    "complete": true,
+    "objections_complete": true,
+    "deliberation_complete": false,
+    "defense_complete": false,
+    "agreement": "incomplete",
+    "consensus": "incomplete_or_disagreement"
+  },
+  "status": "needs_evidence",
+  "reasons": [
+    "Respuesta requiere evidencia: codex:codex-q-1",
+    "Defensa ausente/duplicada/no independiente",
+    "Falta defensa de ambos participantes originales"
+  ],
+  "approval_claimed": false
+}

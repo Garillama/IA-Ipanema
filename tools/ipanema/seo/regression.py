@@ -6,6 +6,32 @@ from .adapters import authorize_url
 from .crawl_policy import normalize
 
 
+def _robots_state(node):
+    """State of directives only, never a claim about Google's index."""
+    indexability = node.get('indexability', {})
+    audit = node.get('template_audit', {})
+    evidence = indexability.get('robots_evidence') if isinstance(indexability, dict) else None
+    if evidence is None and isinstance(audit, dict):
+        evidence = audit.get('robots_evidence')
+    if not isinstance(evidence, dict):
+        return 'unknown'
+    flags = evidence.get('flags')
+    if (not isinstance(flags, list) or not all(isinstance(v, str) for v in flags)
+            or type(evidence.get('noindex')) is not bool
+            or not isinstance(evidence.get('relevant_errors'), list)
+            or not isinstance(evidence.get('sources'), list)):
+        return 'unknown'
+    restrictive = bool(set(flags) & {'noindex', 'none'})
+    if evidence['noindex'] is not restrictive:
+        return 'unknown'
+    if restrictive:
+        return 'noindex'
+    if (evidence.get('processing_complete') is not True
+            or evidence['relevant_errors'] or evidence.get('state') != 'no_restrictive_flag_observed'):
+        return 'unknown'
+    return 'no_restrictive_flag_observed'
+
+
 def _nodes(report):
     if report.get('kind') == 'seo-readiness-v4':
         return {report['node']['url']: report['node']}
@@ -15,7 +41,8 @@ def _nodes(report):
         return {report['url']: {'url': report['url'], 'status': report.get('http_status'),
             'canonical': report.get('canonical'), 'template_audit': report,
             'outgoing_links': [l['absolute'] for l in report.get('crawl', {}).get('links', [])],
-            'indexability': {'state': 'noindex' if 'noindex' in report.get('robots_directives', '') else 'insufficient_evidence'},
+            'indexability': {'state': 'insufficient_evidence', 'indexation_observed': False,
+                             'robots_evidence': report.get('robots_evidence')},
             'pagination': {'active_controls_without_href': sum(not l.get('href') for l in report.get('crawl', {}).get('pagination_controls', []))}}}
     raise IpanemaError('Gate necesita auditorías SEO o crawler V4.')
 
@@ -46,7 +73,11 @@ def compare(project, before, after, *, important_urls=None, allow_removed=None):
         check(url + ':http', not (old.get('status') == 200 and new.get('status') != 200), {'before': old.get('status'), 'after': new.get('status')})
         check(url + ':canonical', old.get('canonical') == new.get('canonical'), {'before': old.get('canonical'), 'after': new.get('canonical')})
         before_state, after_state = old.get('indexability', {}).get('state'), new.get('indexability', {}).get('state')
-        check(url + ':noindex', not (before_state != 'noindex' and after_state == 'noindex'), after_state)
+        before_robots, after_robots = _robots_state(old), _robots_state(new)
+        restrictive_change = after_robots == 'noindex' and before_robots != 'noindex'
+        check(url + ':noindex', not restrictive_change,
+              {'before': before_robots, 'after': after_robots, 'scope': 'directives_not_google_index'},
+              unknown=not restrictive_change and 'unknown' in (before_robots, after_robots))
         check(url + ':robots', not (before_state != 'blocked_by_robots' and after_state == 'blocked_by_robots'), after_state)
         lost = set(old.get('outgoing_links', [])) - set(new.get('outgoing_links', [])) - allowed
         check(url + ':links', not lost, {'removed': sorted(lost), 'approved_removals': sorted(allowed)})

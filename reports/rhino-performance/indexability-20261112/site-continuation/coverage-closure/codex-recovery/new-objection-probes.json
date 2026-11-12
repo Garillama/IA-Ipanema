@@ -1,0 +1,83 @@
+{
+  "kind": "new-council-objection-probes",
+  "patch_sha256": "7a5a7066bb22d2f87c18286100a9fba0ce76e50e53a8cf9b211821d0eba8b4a0",
+  "original_test_suites_not_repeated": true,
+  "network_requests": 0,
+  "workspace_source_changed": false,
+  "gate_clean_input": {
+    "evidence_state": "no_restrictive_flag_observed",
+    "noindex": false,
+    "relevant_errors": [],
+    "mapped_indexability": {
+      "state": "insufficient_evidence"
+    }
+  },
+  "evidence_growth_samples": [
+    {
+      "atoms": 100,
+      "input_bytes": 799,
+      "parse_s": 0.003982239002652932,
+      "serialization_s": 0.0009604990009393077,
+      "twice_serialized_bytes": 16954,
+      "peak_traced_python_bytes": 43956,
+      "noindex": false,
+      "state": "no_restrictive_flag_observed"
+    },
+    {
+      "atoms": 1000,
+      "input_bytes": 7999,
+      "parse_s": 0.04094769599760184,
+      "serialization_s": 0.009969623999495525,
+      "twice_serialized_bytes": 160956,
+      "peak_traced_python_bytes": 423211,
+      "noindex": false,
+      "state": "no_restrictive_flag_observed"
+    },
+    {
+      "atoms": 10000,
+      "input_bytes": 79999,
+      "parse_s": 0.40822213199862745,
+      "serialization_s": 0.09845377999954508,
+      "twice_serialized_bytes": 1600958,
+      "peak_traced_python_bytes": 4192069,
+      "noindex": false,
+      "state": "no_restrictive_flag_observed"
+    },
+    {
+      "atoms": 200000,
+      "input_bytes": 1599999,
+      "parse_s": 8.740560530000948,
+      "serialization_s": 1.9939759829976538,
+      "twice_serialized_bytes": 32000962,
+      "peak_traced_python_bytes": 80713291,
+      "noindex": false,
+      "state": "no_restrictive_flag_observed"
+    }
+  ],
+  "performance_scope": "synthetic source parsing and double JSON serialization; one sample per size, not production or comparative benchmark",
+  "consumer_search": {
+    "command": [
+      "rg",
+      "-n",
+      "--glob",
+      "*.py",
+      "google_directives|has_noindex",
+      "tools",
+      "tests"
+    ],
+    "exit_code": 0,
+    "matches": [
+      "tests/unit/test_seo_crawler_v4.py:13:from ipanema.seo.robots import Robots, google_directives",
+      "tests/unit/test_seo_crawler_v4.py:100:        self.assertNotIn('noindex', google_directives({}, 'otherbot: noindex, nofollow, googlebot: index'))",
+      "tests/unit/test_seo_crawler_v4.py:101:        self.assertIn('noindex', google_directives({}, 'googlebot: noindex, nofollow'))",
+      "tests/unit/test_seo_crawler_v4.py:102:        self.assertIn('noindex', google_directives({}, ['otherbot: noindex', 'noindex']))",
+      "tools/ipanema/seo/indexability.py:12:from .robots import google_directives",
+      "tools/ipanema/seo/indexability.py:94:        directives = google_directives(meta, snapshot.get('headers', {}).get('x-robots-tag', ''))",
+      "tools/ipanema/seo/robots.py:115:def google_directives(meta, header):",
+      "tools/ipanema/seo/robots.py:118:        return ','.join([google_directives(meta, ''), *(google_directives({}, h) for h in header)])",
+      "tools/ipanema/seo/page_audit.py:9:from .robots import Robots, google_directives",
+      "tools/ipanema/seo/page_audit.py:52:    robots=google_directives(metadata,snap.get('headers',{}).get('x-robots-tag',''))"
+    ],
+    "scope": "current workspace tools/tests Python, not external plugins/dynamic consumers; candidate migrates known decision consumers"
+  }
+}

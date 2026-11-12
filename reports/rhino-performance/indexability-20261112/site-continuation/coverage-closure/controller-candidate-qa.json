@@ -1,0 +1,52 @@
+{
+  "kind": "qa",
+  "project": "rhino-performance",
+  "at": "2026-11-12T19:44:44.018471+00:00",
+  "outcome": "passed",
+  "checks": [
+    {
+      "name": "exact-candidate-hashes",
+      "status": "passed"
+    },
+    {
+      "name": "seo-unit",
+      "status": "passed"
+    },
+    {
+      "name": "seo-integration",
+      "status": "passed"
+    },
+    {
+      "name": "local-tls",
+      "status": "passed"
+    }
+  ],
+  "verification_state": {
+    "workspace": {
+      "tests/unit/test_seo_review_additional_v4.py": "f803cc48ddd33e34184e10b62d3ade078975d51b16f2ba81ba630b7317af647e",
+      "tests/unit/test_seo_robots_sources_v4.py": "7a85a2ff7e7de2daa8725dcf97f7384dc6cda4903aa6659cde70ccd3a10b690b",
+      "tests/unit/test_seo_robots_values_v4.py": "6dd1dac3206bf5113f437e69209dbaf5c32a5b6015158e90d5cd8fb4bfdee1cb",
+      "tools/ipanema/seo/crawl_policy.py": "c719ba73adb1e54141cbb04dbbc0b0a6b56407fbb1459d6f4814b23718e526c1",
+      "tools/ipanema/seo/crawler.py": "29b42a929132bd5bb5ec07770a247dbd5b42a35747874f711617f5ff204d2e5b",
+      "tools/ipanema/seo/indexability.py": "6f4f34d2ded8af574b3822e74e9b795a5a74b41a3f7bfd16f4b6009c981cddd1",
+      "tools/ipanema/seo/page_audit.py": "a6b10451443aac8ea222eb0fcf8cdae673e21014b31d7431452b8fe669db6f34",
+      "tools/ipanema/seo/regression.py": "7e2dda4914557b3017d114b1441cca8eac4c5d32eec9328086ff11f5ad332026",
+      "tools/ipanema/seo/robots.py": "768e23461f75497826333ae48609cae996338c93bffab07cf7de25f9953d672a"
+    }
+  },
+  "patch_sha256": "7a5a7066bb22d2f87c18286100a9fba0ce76e50e53a8cf9b211821d0eba8b4a0",
+  "candidate_hashes": {
+    "tests/unit/test_seo_review_additional_v4.py": "f803cc48ddd33e34184e10b62d3ade078975d51b16f2ba81ba630b7317af647e",
+    "tests/unit/test_seo_robots_sources_v4.py": "7a85a2ff7e7de2daa8725dcf97f7384dc6cda4903aa6659cde70ccd3a10b690b",
+    "tests/unit/test_seo_robots_values_v4.py": "6dd1dac3206bf5113f437e69209dbaf5c32a5b6015158e90d5cd8fb4bfdee1cb",
+    "tools/ipanema/seo/crawl_policy.py": "c719ba73adb1e54141cbb04dbbc0b0a6b56407fbb1459d6f4814b23718e526c1",
+    "tools/ipanema/seo/crawler.py": "29b42a929132bd5bb5ec07770a247dbd5b42a35747874f711617f5ff204d2e5b",
+    "tools/ipanema/seo/indexability.py": "6f4f34d2ded8af574b3822e74e9b795a5a74b41a3f7bfd16f4b6009c981cddd1",
+    "tools/ipanema/seo/page_audit.py": "a6b10451443aac8ea222eb0fcf8cdae673e21014b31d7431452b8fe669db6f34",
+    "tools/ipanema/seo/regression.py": "7e2dda4914557b3017d114b1441cca8eac4c5d32eec9328086ff11f5ad332026",
+    "tools/ipanema/seo/robots.py": "768e23461f75497826333ae48609cae996338c93bffab07cf7de25f9953d672a"
+  },
+  "scope": "Controller executed exact isolated candidate tests, NOT workspace integration QA or production crawl",
+  "workspace_applied": false,
+  "remote_requests": 0
+}

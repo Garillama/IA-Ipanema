@@ -1,0 +1,73 @@
+{
+  "rows": [
+    {
+      "width": 360,
+      "initial_button_disabled": true,
+      "nojs_tab_reaches_link": true,
+      "button_enabled_after_initialization": true,
+      "enter_and_space_produce_button_clicks": true,
+      "native_mock_once": true,
+      "ctrl_navigation_not_cancelled": true,
+      "nav_does_not_trigger_loadmore": true,
+      "error_keeps_button_disabled_and_link": true
+    },
+    {
+      "width": 390,
+      "initial_button_disabled": true,
+      "nojs_tab_reaches_link": true,
+      "button_enabled_after_initialization": true,
+      "enter_and_space_produce_button_clicks": true,
+      "native_mock_once": true,
+      "ctrl_navigation_not_cancelled": true,
+      "nav_does_not_trigger_loadmore": true,
+      "error_keeps_button_disabled_and_link": true
+    },
+    {
+      "width": 768,
+      "initial_button_disabled": true,
+      "nojs_tab_reaches_link": true,
+      "button_enabled_after_initialization": true,
+      "enter_and_space_produce_button_clicks": true,
+      "native_mock_once": true,
+      "ctrl_navigation_not_cancelled": true,
+      "nav_does_not_trigger_loadmore": true,
+      "error_keeps_button_disabled_and_link": true
+    },
+    {
+      "width": 1024,
+      "initial_button_disabled": true,
+      "nojs_tab_reaches_link": true,
+      "button_enabled_after_initialization": true,
+      "enter_and_space_produce_button_clicks": true,
+      "native_mock_once": true,
+      "ctrl_navigation_not_cancelled": true,
+      "nav_does_not_trigger_loadmore": true,
+      "error_keeps_button_disabled_and_link": true
+    },
+    {
+      "width": 1440,
+      "initial_button_disabled": true,
+      "nojs_tab_reaches_link": true,
+      "button_enabled_after_initialization": true,
+      "enter_and_space_produce_button_clicks": true,
+      "native_mock_once": true,
+      "ctrl_navigation_not_cancelled": true,
+      "nav_does_not_trigger_loadmore": true,
+      "error_keeps_button_disabled_and_link": true
+    },
+    {
+      "width": 1920,
+      "initial_button_disabled": true,
+      "nojs_tab_reaches_link": true,
+      "button_enabled_after_initialization": true,
+      "enter_and_space_produce_button_clicks": true,
+      "native_mock_once": true,
+      "ctrl_navigation_not_cancelled": true,
+      "nav_does_not_trigger_loadmore": true,
+      "error_keeps_button_disabled_and_link": true
+    }
+  ],
+  "mock": true,
+  "production_test": false,
+  "scope": "Real Chrome isolated DOM/keyboard; LS mocked; no Twig, storefront responsive/design or performance certification"
+}

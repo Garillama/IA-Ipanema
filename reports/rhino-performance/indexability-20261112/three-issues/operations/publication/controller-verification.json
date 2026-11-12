@@ -1,0 +1,24 @@
+{
+  "checks": {
+    "published_identity_verified": true,
+    "fresh_two_before_hashes_match": true,
+    "two_files_only": true,
+    "source_six_hashes_preserved": true,
+    "patch_sha_matches": true,
+    "patch_reproduces_after_hashes": true,
+    "native_validation_reused_same_hashes": true,
+    "claude_real_contract_valid": true,
+    "claude_source_review_approved": true,
+    "five_baselines_each": true,
+    "offline_transport_scope_cases_passed": true,
+    "authorization_not_assumed": true,
+    "credential_pattern_scan_clear": true
+  },
+  "ready_to_request_authorization": true,
+  "production_authorized": false,
+  "production_modified": false,
+  "post_publication_QA": "not_run_pending_authorization",
+  "menu": "pending_owner_admin_backup",
+  "blog": "draft_not_sent_pending_official_confirmation",
+  "theme_git_status": ""
+}

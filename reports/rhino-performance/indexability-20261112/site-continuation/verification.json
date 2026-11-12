@@ -1,0 +1,35 @@
+{
+  "checks": {
+    "125_known_URLs_without_duplicates": true,
+    "117_sitemap_rows_116_HTML_plus_XML": true,
+    "five_categories_200_selfcanonical_oneH1": true,
+    "five_category_noJS_card_links": true,
+    "eight_blog_pages_200": true,
+    "all86_article_links_equal_sitemap_set": true,
+    "blog_page_article_lists_disjoint": true,
+    "fourteen_product_routes_associated_from_categories": true,
+    "ten_GSC_PASS_reused_not_totalindex_claim": true,
+    "About_explicitly_deferred_no_promotion": true,
+    "75_individual_HTTP_not_claimed200": true,
+    "source_hashes_preserved": true,
+    "crawler_still_blocked": true
+  },
+  "passed": true,
+  "scope": "Evidence/matrix validation; not complete live crawl, Google index census or storefront certification",
+  "production_modified": false,
+  "matrix_csv_sha256": "034fec47dc6a04e7c3842ddd678af304671924fd4b7c21f58e503215e4481aa3",
+  "source_files_changed_by_task": [],
+  "new_remote_mutations": 0,
+  "Google_account_reads_new": 0,
+  "council_documentary_clarification": "approved_scoped",
+  "whole_site_acceptance": "needs_evidence",
+  "final_report_sha256": "0b5c571ab49b7fcccbe134c4786fe685518382ad45ea9999dcc2e5f6006c76e0",
+  "coverage_closure": {
+    "HTTP_values_unchanged": true,
+    "pending75_retained": true,
+    "new_storefront_requests": 0,
+    "new_GSC_requests": 0,
+    "V4_workspace_applied": false,
+    "verification": "coverage-closure/verification.json"
+  }
+}

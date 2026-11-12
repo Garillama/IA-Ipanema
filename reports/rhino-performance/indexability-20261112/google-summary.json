@@ -1,0 +1,294 @@
+{
+  "at": "2026-11-12T16:24:17.246467+00:00",
+  "project": "rhino-performance",
+  "google_property": "sc-domain:rhino-performance.com",
+  "inspection_count": 13,
+  "coverage_counts": {
+    "Enviada e indexada": 10,
+    "Google no reconoce esta URL": 2,
+    "Descubierta: actualmente sin indexar": 1
+  },
+  "inspection_verdicts": {
+    "PASS": 10,
+    "NEUTRAL": 3
+  },
+  "sitemap_inventory_urls_inspected": 12,
+  "sitemap_urls_known_indexed_in_sample": 10,
+  "total_google_indexed": null,
+  "total_google_indexed_state": "not_available_from_this_sample",
+  "search_rows": 170,
+  "search_request": {
+    "startDate": "2026-10-12",
+    "endDate": "2026-11-08",
+    "dimensions": [
+      "page"
+    ],
+    "rowLimit": 1000,
+    "startRow": 0,
+    "type": "web",
+    "dataState": "final",
+    "dimensionFilterGroups": [
+      {
+        "filters": [
+          {
+            "dimension": "page",
+            "operator": "includingRegex",
+            "expression": "^https://rhino-performance\\.com/"
+          }
+        ]
+      }
+    ],
+    "siteUrl": "sc-domain:rhino-performance.com"
+  },
+  "search_exact_urls_matching_sitemap": 104,
+  "search_distinct_sitemap_routes_matching_after_trailing_slash_normalization": 104,
+  "search_rows_matching_sitemap": 108,
+  "search_clicks_sum": 1543,
+  "search_impressions_sum": 66373,
+  "registered_sitemaps": [
+    {
+      "path": "https://rhino-performance.com/sitemap.xml",
+      "lastSubmitted": "2026-09-07T20:23:56.859Z",
+      "lastDownloaded": "2026-11-11T21:15:12.583Z",
+      "isPending": false,
+      "isSitemapsIndex": false,
+      "type": "sitemap",
+      "warnings": "0",
+      "errors": "0",
+      "contents": [
+        {
+          "type": "web",
+          "submitted": "30",
+          "indexed": "0"
+        },
+        {
+          "type": "image",
+          "submitted": "104",
+          "indexed": "0"
+        }
+      ]
+    }
+  ],
+  "council": {
+    "run": "reports/runs/rhino-performance/20261112T161634-orchestration-d54ada0f",
+    "adr_id": "ADR-79345cdd49e2",
+    "status": "needs_evidence",
+    "coverage": {
+      "required_agents": [
+        "claude",
+        "codex"
+      ],
+      "participants": [
+        {
+          "requested_agent": "claude",
+          "effective_agent": "claude",
+          "status": "available"
+        },
+        {
+          "requested_agent": "codex",
+          "effective_agent": "codex",
+          "status": "available"
+        }
+      ],
+      "effective_agents": [
+        "claude",
+        "codex"
+      ],
+      "complete": true,
+      "objections_complete": true,
+      "deliberation_complete": false,
+      "defense_complete": false,
+      "agreement": "incomplete",
+      "consensus": "incomplete_or_disagreement"
+    },
+    "reasons": [
+      "Respuesta requiere evidencia: codex:codex-q-1",
+      "Defensa ausente/duplicada/no independiente",
+      "Falta defensa de ambos participantes originales"
+    ],
+    "questions": 4,
+    "answers": 2,
+    "objections": 10,
+    "worker_attempt_budget": {
+      "limit": 6,
+      "used": 6,
+      "includes_retries_and_substitutions": true,
+      "provider_internal_api_call_count": "not_available"
+    },
+    "actual_inference_calls": 6,
+    "metrics": [
+      {
+        "file": "council-defense-claude.json",
+        "agent": "claude",
+        "model": {
+          "model": "claude-haiku-5-5",
+          "effort": "low",
+          "reason": "fast según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+          "verified_at": "2026-11-08"
+        },
+        "started": true,
+        "seconds": 21.477,
+        "error": null,
+        "usage": {
+          "provider_reported": {
+            "total_cost_usd": 0.0103084,
+            "duration_ms": 19032,
+            "input_tokens": 2,
+            "cache_creation_input_tokens": 41481,
+            "cache_read_input_tokens": 0,
+            "output_tokens": 4024
+          },
+          "measured_cost_available": true,
+          "estimated_cost": null
+        }
+      },
+      {
+        "file": "council-defense-codex.json",
+        "agent": "codex",
+        "model": {
+          "model": "gpt-6-luna",
+          "effort": "low",
+          "reason": "fast según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+          "verified_at": "2026-11-08"
+        },
+        "started": false,
+        "seconds": null,
+        "error": {
+          "category": "council_budget_exhausted",
+          "summary": "No se recibió una propuesta válida; no cuenta como participación completa."
+        },
+        "usage": null
+      },
+      {
+        "file": "council-objection-claude.json",
+        "agent": "claude",
+        "model": {
+          "model": "claude-haiku-5-5",
+          "effort": "low",
+          "reason": "fast según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+          "verified_at": "2026-11-08"
+        },
+        "started": true,
+        "seconds": 22.964,
+        "error": null,
+        "usage": {
+          "provider_reported": {
+            "total_cost_usd": 0.0094347,
+            "duration_ms": 20545,
+            "input_tokens": 2,
+            "cache_creation_input_tokens": 35810,
+            "cache_read_input_tokens": 0,
+            "output_tokens": 4545
+          },
+          "measured_cost_available": true,
+          "estimated_cost": null
+        }
+      },
+      {
+        "file": "council-objection-codex.json",
+        "agent": "codex",
+        "model": {
+          "model": "gpt-6-luna",
+          "effort": "low",
+          "reason": "fast según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+          "verified_at": "2026-11-08"
+        },
+        "started": true,
+        "seconds": 21.905,
+        "error": null,
+        "usage": {
+          "provider_reported": {
+            "input_tokens": 32411,
+            "cached_input_tokens": 0,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 660,
+            "reasoning_output_tokens": 0
+          },
+          "measured_cost_available": false,
+          "estimated_cost": null
+        }
+      },
+      {
+        "file": "council-proposal-claude-retry-1.json",
+        "agent": "claude",
+        "model": {
+          "model": "claude-haiku-5-5",
+          "effort": "low",
+          "reason": "fast según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+          "verified_at": "2026-11-08"
+        },
+        "started": true,
+        "seconds": 30.515,
+        "error": null,
+        "usage": {
+          "provider_reported": {
+            "total_cost_usd": 0.00832707,
+            "duration_ms": 28227,
+            "input_tokens": 2,
+            "cache_creation_input_tokens": 24178,
+            "cache_read_input_tokens": 5577,
+            "output_tokens": 6871
+          },
+          "measured_cost_available": true,
+          "estimated_cost": null
+        }
+      },
+      {
+        "file": "council-proposal-claude.json",
+        "agent": "claude",
+        "model": {
+          "model": "claude-haiku-5-5",
+          "effort": "low",
+          "reason": "fast según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+          "verified_at": "2026-11-08"
+        },
+        "started": true,
+        "seconds": 24.776,
+        "error": {
+          "category": "invalid_council_contract",
+          "summary": "No se recibió una propuesta válida; no cuenta como participación completa.",
+          "semantic_rule": "La propuesta del consejo excede archivos autorizados."
+        },
+        "usage": {
+          "provider_reported": {
+            "total_cost_usd": 0.0084242,
+            "duration_ms": 22023,
+            "input_tokens": 2,
+            "cache_creation_input_tokens": 29675,
+            "cache_read_input_tokens": 0,
+            "output_tokens": 4978
+          },
+          "measured_cost_available": true,
+          "estimated_cost": null
+        }
+      },
+      {
+        "file": "council-proposal-codex.json",
+        "agent": "codex",
+        "model": {
+          "model": "gpt-6-luna",
+          "effort": "low",
+          "reason": "fast según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+          "verified_at": "2026-11-08"
+        },
+        "started": true,
+        "seconds": 38.028,
+        "error": null,
+        "usage": {
+          "provider_reported": {
+            "input_tokens": 28209,
+            "cached_input_tokens": 0,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 1560,
+            "reasoning_output_tokens": 0
+          },
+          "measured_cost_available": false,
+          "estimated_cost": null
+        }
+      }
+    ]
+  },
+  "raw_observations": "reports/runs/rhino-performance/20261112T161136-indexation-gsc-sample-031e80d5/observations.json",
+  "network_changes": false,
+  "theme_modified": false
+}

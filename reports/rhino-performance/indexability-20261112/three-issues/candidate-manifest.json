@@ -1,0 +1,19 @@
+{
+  "files": [
+    {
+      "path": "snippets/product-list/pagination.tpl",
+      "before_sha256": "c715cc6c77d07dced5cdad6066785142c307b0f3ca3429cf88f5290cf7f2edc2",
+      "after_sha256": "87b37e38a12c2de2c33263a229aa3011048563d410c0de69511ee209ec55ea34"
+    },
+    {
+      "path": "static/js/store.js",
+      "before_sha256": "29dea94e46cc1bb423ddde71a42d807f22c944f09465d70400728d7ae95b4718",
+      "after_sha256": "29c28ea5b74068d099f489bf35a8d15a42f01a4850e9a4e09c2d787f5a6d98bc"
+    }
+  ],
+  "applied": false,
+  "production_authorized": false,
+  "status": "pending_exact_review_and_Twig_render",
+  "visual_change": "Visible native-style numbered page links; button replaces inert anchor; owner approval required",
+  "JS_change": "Enable native button after LS initialization; no interception, URL generation or handlers"
+}

@@ -1,0 +1,28 @@
+{
+  "files": [
+    {
+      "path": "snippets/product-list/pagination.tpl",
+      "before_sha256": "c715cc6c77d07dced5cdad6066785142c307b0f3ca3429cf88f5290cf7f2edc2",
+      "after_sha256": "0958c668ee40bf0d16c76db4d6493bf6387d17e3ec7ff8f66aaffcce564d463c"
+    },
+    {
+      "path": "static/js/store.js",
+      "before_sha256": "29dea94e46cc1bb423ddde71a42d807f22c944f09465d70400728d7ae95b4718",
+      "after_sha256": "f97557494e017eba623ba2dd7e568789f8d9035d467f0b03f71bc0b3b8393be9"
+    }
+  ],
+  "applied": false,
+  "production_authorized": false,
+  "status": "reviewed_candidate_not_applied",
+  "preserved_candidates": [
+    "v2",
+    "v2-focus"
+  ],
+  "delta_from_focus": "Template only: guard numbered labels for cursor mode/missing page; distinct nav accessible label using existing translations",
+  "review_update": {
+    "no_demonstrated_source_defect_in_final_independent_review": true,
+    "native_save_time_validation": "passed",
+    "application_approval": "blocked",
+    "ready_for_owner_review_only": true
+  }
+}

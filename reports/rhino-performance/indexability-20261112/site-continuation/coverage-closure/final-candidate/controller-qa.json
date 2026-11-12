@@ -1,0 +1,76 @@
+{
+  "kind": "controller-v4-final-isolated-QA",
+  "patch_sha256": "611a5dac1e2767c0d331e42b06c60834e8a427c8bbc41671b9a81a8c977f3e2c",
+  "candidate_hashes": {
+    "tests/unit/test_seo_final_conditions_v4.py": "524eaee578333857c3d6c88a48180b7e65f5df6719e17009140a25a7c319fcbf",
+    "tests/unit/test_seo_regression_v4.py": "82647acd866d7a286238b39f1771be6c848ad9fe671a541d3833a924d2f7bbe0",
+    "tests/unit/test_seo_review_additional_v4.py": "f803cc48ddd33e34184e10b62d3ade078975d51b16f2ba81ba630b7317af647e",
+    "tests/unit/test_seo_robots_sources_v4.py": "7a85a2ff7e7de2daa8725dcf97f7384dc6cda4903aa6659cde70ccd3a10b690b",
+    "tests/unit/test_seo_robots_values_v4.py": "6dd1dac3206bf5113f437e69209dbaf5c32a5b6015158e90d5cd8fb4bfdee1cb",
+    "tools/ipanema/seo/crawl_policy.py": "c719ba73adb1e54141cbb04dbbc0b0a6b56407fbb1459d6f4814b23718e526c1",
+    "tools/ipanema/seo/crawler.py": "29b42a929132bd5bb5ec07770a247dbd5b42a35747874f711617f5ff204d2e5b",
+    "tools/ipanema/seo/indexability.py": "6f4f34d2ded8af574b3822e74e9b795a5a74b41a3f7bfd16f4b6009c981cddd1",
+    "tools/ipanema/seo/page_audit.py": "a6b10451443aac8ea222eb0fcf8cdae673e21014b31d7431452b8fe669db6f34",
+    "tools/ipanema/seo/regression.py": "0bf7eca8c50b906fa083f4422af7863f6a37bad7519e1dbd8349cac3a07b257e",
+    "tools/ipanema/seo/robots.py": "57d01f9086dffa7f25f26b59976098770d585731eca3d758ee9235000399a3df"
+  },
+  "checks": [
+    {
+      "name": "191 SEO unit tests including 22 new",
+      "status": "passed"
+    },
+    {
+      "name": "13 SEO integration tests",
+      "status": "passed"
+    },
+    {
+      "name": "fresh patch application zero fuzz; 11 hashes identical",
+      "status": "passed"
+    },
+    {
+      "name": "unchanged DNS/TLS/redirects/policy transport from reviewed candidate",
+      "status": "passed",
+      "scope": "hash identity and SEO transport tests; previous local TLS evidence reused, not reexecuted"
+    }
+  ],
+  "test_results": [
+    {
+      "name": "unit",
+      "exit_code": 0,
+      "elapsed_s": 1.3826319580002746,
+      "output": "...............................................................................................................................................................................................\n----------------------------------------------------------------------\nRan 191 tests in 1.205s\n\nOK\n"
+    },
+    {
+      "name": "integration",
+      "exit_code": 0,
+      "elapsed_s": 4.7211096419996466,
+      "output": ".............\n----------------------------------------------------------------------\nRan 13 tests in 4.658s\n\nOK\n"
+    }
+  ],
+  "evidence_benchmark": {
+    "atoms": 200000,
+    "input_bytes": 1599999,
+    "parse_s": 3.490597615000297,
+    "serialization_s": 0.0003142889981972985,
+    "twice_serialized_bytes": 3266,
+    "peak_traced_python_bytes": 1650392,
+    "counts": {
+      "sources_seen": 1,
+      "sources_processed": 1,
+      "input_bytes_processed": 1599999,
+      "parameters": 200000,
+      "unknown": 0,
+      "errors": 0,
+      "sources_retained": 1
+    },
+    "processing_complete": true,
+    "truncated": true,
+    "state": "no_restrictive_flag_observed",
+    "scope": "one synthetic sample with tracemalloc; not storefront performance"
+  },
+  "scope": "isolated tools/tests only; not integration or production evidence",
+  "network_requests_to_production": 0,
+  "original_patch_preserved": true,
+  "workspace_engine_modified": false,
+  "production_modified": false
+}

@@ -1,0 +1,47 @@
+{
+  "at": "2026-11-12T04:44:10.121450+00:00",
+  "checks": [
+    {
+      "name": "unique_inventory_117",
+      "passed": true
+    },
+    {
+      "name": "native_main_equals_cdn",
+      "passed": true
+    },
+    {
+      "name": "blog_native_equals_cdn",
+      "passed": true
+    },
+    {
+      "name": "seven_known_documents_200",
+      "passed": true
+    },
+    {
+      "name": "all_14_sitemap_products_have_html_path",
+      "passed": true
+    },
+    {
+      "name": "blog_two_pages_24_distinct",
+      "passed": true
+    },
+    {
+      "name": "page2_canonical_conflict_reproduced",
+      "passed": true
+    },
+    {
+      "name": "catalog_loadmore_missing_href_reproduced",
+      "passed": true
+    },
+    {
+      "name": "current_seven_documents_no_json_syntax_error",
+      "passed": true
+    },
+    {
+      "name": "all_google_states_unknown_not_fabricated",
+      "passed": true
+    }
+  ],
+  "passed": 10,
+  "scope": "offline verification of observations; not semantic/Google/WCAG/full storefront QA"
+}

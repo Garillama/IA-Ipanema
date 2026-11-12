@@ -1,0 +1,47 @@
+{
+  "response": {
+    "decision": "approve",
+    "summary": "Apruebo solo el alcance de revisión de fuente y preparación para solicitar al propietario una autorización específica y condicionada. No apruebo publicación, permiso remoto, aceptación final ni certificación de producción. Respuesta a Codex: no veo ninguna objeción crítica concreta sin resolver antes de publicar. Leí los dos archivos completos y el diff, y son coherentes con candidate.patch. El diff afecta únicamente a pagination.tpl y a initInfiniteScroll en store.js, sin tocar menú ni blog. En pagination.tpl, el botón sustituye al <a> sin href y arranca deshabilitado. Los enlaces prev/next son destinos reales (page_next/pages.next) y están fuera del bloque load-more, de modo que persisten tras el anexado y sin JS. La numeración se desactiva con variantes como productos. En store.js, el botón se habilita solo tras LS.hybridScroll. El click delega en el controlador nativo mediante burbujeo y no se replica carga, precio ni stock. El foco solo se mueve con teclado (event.detail===0). Pasa al primer producto nuevo únicamente si el usuario no movió el foco. Si falla la carga queda en un enlace estable. Los hashes del manifest, los de review_context y la validación nativa (valid=true, errors=[]) coinciden. No ejecuté pruebas; revisé fuente, parche y recibos del controlador.",
+    "evidence": [
+      "Hashes after coinciden entre release-evidence.json y review_context: pagination.tpl 0958c668…d463c; store.js f9755749…e93be9; candidate.patch 1ef6c047…eb49. Los before coinciden con la preflight fresca (remote_hashes_match true en ambos, in_sync true, production_modified false).",
+      "Lectura del diff contra los archivos completos: el parche coincide línea a línea. El único cambio funcional en store.js está en initInfiniteScroll; el resto del archivo compartido queda intacto.",
+      "pagination.tpl: <a class=btn> sin href cambia a <button type=button disabled>. Mantiene las clases js-load-more y js-load-more-spinner y el spinner con ID, de modo que los selectores de LS.hybridScroll siguen válidos. La nav añadida usa hrefs reales y no fabrica enlaces.",
+      "store.js: loadMoreButton se habilita después de LS.hybridScroll. La carga sigue a cargo del controlador nativo. El keyboardLoad se limpia en cada click y el foco solo se reasigna si document.activeElement === request.fallback. El puntero no recibe foco forzado.",
+      "Validación nativa de guardado (no persistente) con valid=true y errors=[] sobre exactamente los dos hashes after; es prueba de sintaxis/esquema, no de renderizado. component_proof (LS publicado real con fixtures interceptados, seis anchos) se declara explícitamente como no producción.",
+      "Baseline de cinco muestras por dispositivo con perfil registrado (móvil mediana 65, escritorio 87); no se usa para afirmar mejora. operation.md predeclara umbrales y reversión limitada a los dos archivos, con relectura de hashes y detención ante cambios ajenos.",
+      "Objeciones críticas previas: (1) menú sin respaldo con IDs: fuera del alcance por instrucción de la tarea, no bloquea este paquete; (2) render Twig real y QA publicado: no pueden existir antes de publicar y se mantienen como pendientes posteriores, no como passed; (3) validación nativa: cerrada por el recibo. No quedan objeciones críticas de fuente demostradas.",
+      "Preferencias visuales que el propietario debe aceptar: fila numerada visible de enlaces 'Página N' que reutiliza la clase pagination-counter sin garantía de apariencia idéntica; botón visible pero deshabilitado sin JavaScript; la fila persiste tras anexar y apunta a una página independiente, no a la siguiente tanda acumulada; en página 2 en adelante aparece ahora una navegación que antes no existía en modo carga infinita; nombre accesible 'Página: productos'.",
+      "Pruebas posteriores pendientes tras autorización y despliegue: integridad por hashes; HTML inicial de /productos/ y /productos/page/2/ (canonical, title, H1, JSON-LD, hrefs); resolución real de las claves de traducción bundle.page_x, general.products_label, general.previous y general.next (no verificable por validación nativa; comprobar que 'bundle.page_x' + número no genere texto mal formado o un placeholder visible); carga nativa de 12 a 14 productos con IDs únicos y contabilidad de [data-product-id] sobre tarjetas reales (si una tarjeta contiene varios elementos con ese atributo, el índice del foco al primer producto nuevo podría desplazarse); sin JS; teclado/AX; seis anchos con capturas; smoke de home, PDP y blog por ser store.js compartido; cinco muestras de rendimiento con el mismo protocolo.",
+      "Condición de ejecución a conservar: la CLI no ofrece --file en theme push. Si el guard de transporte no demuestra exactamente dos modificaciones y cero eliminaciones, debe detenerse y no subir el árbol completo."
+    ],
+    "changes": []
+  },
+  "model": {
+    "model": "claude-sonnet-5-5",
+    "effort": "medium",
+    "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+    "verified_at": "2026-11-08"
+  },
+  "execution": {
+    "exit_code": 0,
+    "duration_s": 31.164,
+    "context_complete": true,
+    "contract_validation": {
+      "status": "passed",
+      "duration_s": 6.7e-05
+    },
+    "usage": {
+      "provider_reported": {
+        "total_cost_usd": 0.3937549,
+        "duration_ms": 29400,
+        "input_tokens": 2,
+        "cache_creation_input_tokens": 89341,
+        "cache_read_input_tokens": 1369,
+        "output_tokens": 3625
+      },
+      "measured_cost_available": true,
+      "estimated_cost": null
+    }
+  },
+  "scope": "Source/readiness only; not remote permission"
+}

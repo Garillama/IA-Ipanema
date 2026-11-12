@@ -1,0 +1,123 @@
+{
+  "error_type": "IpanemaError",
+  "diagnostic": null,
+  "execution": {
+    "exit_code": -9,
+    "timed_out": false,
+    "output_limited": false,
+    "idle_timed_out": true,
+    "cancelled": false,
+    "process_started": true,
+    "process_reaped": true,
+    "stdin_bytes_written": 172061,
+    "context_complete": true,
+    "duration_s": 91.606,
+    "timing": {
+      "spawn_s": 0.000528,
+      "input_complete_s": 0.073926,
+      "first_stdout_s": 1.490682,
+      "first_stderr_s": null,
+      "timeout_phase": null,
+      "event_counts": {
+        "thread.started": 1,
+        "item.completed": 1,
+        "turn.started": 1
+      },
+      "inference_vs_initialization": "not_separable_without_provider_events"
+    },
+    "output_accounting": {
+      "transport_bytes": 483,
+      "retained_bytes": 483,
+      "discarded_progress_bytes": 0,
+      "transport_limit_bytes": 20000000,
+      "retained_limit_bytes": 2000000
+    },
+    "isolation": {
+      "backend": "bubblewrap",
+      "snapshot_read_only": true,
+      "host_home_mounted": false,
+      "network": "enabled_no_destination_firewall",
+      "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+    },
+    "started_at": "2026-11-12T20:37:39.014123+00:00",
+    "prompt_bytes": 172061,
+    "prompt_sha256": "7a39f93ef23ba63024868ea901c67ca70d64d316aab7843f015481af80fccd06",
+    "usage": {
+      "provider_reported": {},
+      "measured_cost_available": false,
+      "estimated_cost": null
+    },
+    "limits": {
+      "timeout": 360,
+      "idle_timeout": 90,
+      "startup_timeout": 30,
+      "first_response_timeout": 300
+    },
+    "structured_output": "native_schema",
+    "error_category": "inactivity"
+  },
+  "recovery_attempts": [
+    {
+      "agent": "codex",
+      "retry": 0,
+      "status": "failed",
+      "category": "inactivity",
+      "process_reaped": true,
+      "execution": {
+        "exit_code": -9,
+        "timed_out": false,
+        "output_limited": false,
+        "idle_timed_out": true,
+        "cancelled": false,
+        "process_started": true,
+        "process_reaped": true,
+        "stdin_bytes_written": 172061,
+        "context_complete": true,
+        "duration_s": 91.606,
+        "timing": {
+          "spawn_s": 0.000528,
+          "input_complete_s": 0.073926,
+          "first_stdout_s": 1.490682,
+          "first_stderr_s": null,
+          "timeout_phase": null,
+          "event_counts": {
+            "thread.started": 1,
+            "item.completed": 1,
+            "turn.started": 1
+          },
+          "inference_vs_initialization": "not_separable_without_provider_events"
+        },
+        "output_accounting": {
+          "transport_bytes": 483,
+          "retained_bytes": 483,
+          "discarded_progress_bytes": 0,
+          "transport_limit_bytes": 20000000,
+          "retained_limit_bytes": 2000000
+        },
+        "isolation": {
+          "backend": "bubblewrap",
+          "snapshot_read_only": true,
+          "host_home_mounted": false,
+          "network": "enabled_no_destination_firewall",
+          "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+        },
+        "started_at": "2026-11-12T20:37:39.014123+00:00",
+        "prompt_bytes": 172061,
+        "prompt_sha256": "7a39f93ef23ba63024868ea901c67ca70d64d316aab7843f015481af80fccd06",
+        "usage": {
+          "provider_reported": {},
+          "measured_cost_available": false,
+          "estimated_cost": null
+        },
+        "limits": {
+          "timeout": 360,
+          "idle_timeout": 90,
+          "startup_timeout": 30,
+          "first_response_timeout": 300
+        },
+        "structured_output": "native_schema",
+        "error_category": "inactivity"
+      }
+    }
+  ]
+}

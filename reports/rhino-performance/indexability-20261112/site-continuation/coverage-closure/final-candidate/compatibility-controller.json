@@ -1,0 +1,21 @@
+{
+  "patch_sha256": "611a5dac1e2767c0d331e42b06c60834e8a427c8bbc41671b9a81a8c977f3e2c",
+  "legacy_function_AST_identical_excluding_docstring": true,
+  "known_decision_consumers": {
+    "tools/ipanema/seo/indexability.py": {
+      "legacy_name_references": [],
+      "legacy_imports": []
+    },
+    "tools/ipanema/seo/page_audit.py": {
+      "legacy_name_references": [],
+      "legacy_imports": []
+    },
+    "tools/ipanema/seo/regression.py": {
+      "legacy_name_references": [],
+      "legacy_imports": []
+    }
+  },
+  "scope": "static known modules only; external/dynamic callers not certified",
+  "old_adapter_output_bounded": false,
+  "bounded_in_crawler_reports": true
+}

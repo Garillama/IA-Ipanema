@@ -1,0 +1,18 @@
+{
+  "kind": "controller-followup-runtime-consumer-probe",
+  "audit_snapshot_executed": true,
+  "compare_executed": true,
+  "legacy_adapter_call_count": 0,
+  "noindex_check": {
+    "name": "https://example.invalid/:noindex",
+    "status": "passed",
+    "details": {
+      "before": "no_restrictive_flag_observed",
+      "after": "no_restrictive_flag_observed",
+      "scope": "directives_not_google_index"
+    }
+  },
+  "network_requests": 0,
+  "candidate_changed": false,
+  "scope": "known consumers runtime fixture; dynamic external callers not certified"
+}

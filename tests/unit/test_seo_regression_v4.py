@@ -6,13 +6,14 @@ import unittest
 from tests.support import make_project
 from ipanema.core import Project, IpanemaError
 from ipanema.seo.regression import compare
+from ipanema.seo.robots import google_directive_evidence
 
 
 class RegressionV4(unittest.TestCase):
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory(); self.project = Project(make_project(Path(self.tmp.name), theme=False))
         self.url = 'https://example.invalid/'
-        node = {'url': self.url, 'status': 200, 'canonical': [self.url], 'indexability': {'state': 'indexable_candidate'},
+        node = {'url': self.url, 'status': 200, 'canonical': [self.url], 'indexability': {'state': 'indexable_candidate', 'robots_evidence': google_directive_evidence({}, '')},
                 'outgoing_links': [self.url + 'product'], 'pagination': {'active_controls_without_href': 0},
                 'template_audit': {'content': {'headings': [{'level': 1, 'text': 'Home'}]}, 'findings': [],
                                    'structured_data': {'states': {'syntax_valid': True}}},
@@ -38,7 +39,7 @@ class RegressionV4(unittest.TestCase):
 
     def test_independent_critical_changes_block(self):
         for key, value in [('canonical', ['https://example.invalid/other']), ('status', 500), ('outgoing_links', []),
-                           ('indexability', {'state': 'noindex'}), ('pagination', {'active_controls_without_href': 1})]:
+                           ('indexability', {'state': 'noindex', 'robots_evidence': google_directive_evidence({'robots': ['noindex']}, '')}), ('pagination', {'active_controls_without_href': 1})]:
             with self.subTest(key=key):
                 after = copy.deepcopy(self.before); after['urls'][0][key] = value
                 self.assertEqual(compare(self.project, self.before, after)['outcome'], 'blocked')

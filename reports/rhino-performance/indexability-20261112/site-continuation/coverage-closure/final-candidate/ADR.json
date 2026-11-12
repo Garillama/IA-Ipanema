@@ -1,0 +1,134 @@
+{
+  "id": "ADR-RHINO-011-V4-final-delta",
+  "continued_from": [
+    "ADR-RHINO-011",
+    "ADR-1136231f425a",
+    "ADR-0895add40c30"
+  ],
+  "status": "approved_with_conditions",
+  "project": "rhino-performance",
+  "objective": "Close only gate precision, bounded evidence and legacy helper compatibility before requesting integration",
+  "previous_patch_sha256": "7a5a7066bb22d2f87c18286100a9fba0ce76e50e53a8cf9b211821d0eba8b4a0",
+  "patch_sha256": "611a5dac1e2767c0d331e42b06c60834e8a427c8bbc41671b9a81a8c977f3e2c",
+  "files": [
+    "tests/unit/test_seo_final_conditions_v4.py",
+    "tests/unit/test_seo_regression_v4.py",
+    "tests/unit/test_seo_review_additional_v4.py",
+    "tests/unit/test_seo_robots_sources_v4.py",
+    "tests/unit/test_seo_robots_values_v4.py",
+    "tools/ipanema/seo/crawl_policy.py",
+    "tools/ipanema/seo/crawler.py",
+    "tools/ipanema/seo/indexability.py",
+    "tools/ipanema/seo/page_audit.py",
+    "tools/ipanema/seo/regression.py",
+    "tools/ipanema/seo/robots.py"
+  ],
+  "original_council_preserved": true,
+  "incremental_review_complete": true,
+  "technical_conditions_closed": true,
+  "mandatory_constraints": {
+    "functional": {
+      "status": "passed",
+      "scope": "typed robots-only regression check; malformed/legacy/incomplete unknown; real new restriction fails",
+      "evidence": [
+        "controller-qa.json",
+        "tests/unit/test_seo_final_conditions_v4.py"
+      ]
+    },
+    "security": {
+      "status": "passed",
+      "scope": "safe failure on parser budgets, semantic retention; unchanged reviewed DNS/TLS/redirect/private-path transport with its SEO tests. No security certification",
+      "evidence": [
+        "controller-qa.json",
+        "manifest.json",
+        "claude-final-review.json",
+        "codex-final-review.json"
+      ]
+    },
+    "compatibility": {
+      "status": "passed",
+      "scope": "historical helper AST body identical; fixtures, known decision consumers static + runtime; external/dynamic consumers not certified",
+      "evidence": [
+        "compatibility-controller.json",
+        "runtime-consumers-controller.json",
+        "compatibility.md"
+      ]
+    },
+    "native_reuse": {
+      "status": "passed",
+      "scope": "existing parser, audit and regression modules; no dependencies, engines or orchestrator additions",
+      "evidence": [
+        "delta-from-7a5a7066.patch",
+        "manifest.json"
+      ]
+    },
+    "seo": {
+      "status": "passed",
+      "scope": "fixture-based technical observations only; noindex cannot be neutralized; no inference of Google indexation",
+      "evidence": [
+        "controller-qa.json",
+        "runtime-consumers-controller.json"
+      ]
+    },
+    "performance": {
+      "status": "passed",
+      "scope": "bounded retained evidence and explicit processing budgets. One synthetic sample, not latency/worst-case/production guarantee",
+      "evidence": [
+        "controller-qa.json",
+        "evidence-final.json"
+      ]
+    }
+  },
+  "blocking_technical_conditions": [],
+  "ready_to_request_integration": true,
+  "implementation_allowed": false,
+  "implementation_allowed_reason": "Specific owner approval for integrating this NEW 11-file hash has not been granted. Technical review permits requesting it, not applying it. Historical engine checkpoint for old hash remains unchanged.",
+  "production_authorized": false,
+  "crawl_authorized": false,
+  "required_before_apply": [
+    "Specific owner authorization for exact new patch/hash and 11 files",
+    "Recheck all seven existing base hashes and absence of four additions",
+    "Verify preintegration backups",
+    "Apply only approved patch, no global sync",
+    "Post-integration QA and candidate hash confirmation"
+  ],
+  "reviews": [
+    {
+      "requested_agent": "claude",
+      "effective_agent": "claude",
+      "model": {
+        "model": "claude-sonnet-5-5",
+        "effort": "medium",
+        "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+        "verified_at": "2026-11-08"
+      },
+      "patch_sha256": "611a5dac1e2767c0d331e42b06c60834e8a427c8bbc41671b9a81a8c977f3e2c",
+      "decision": "approve",
+      "receipt": "claude-final-review.json",
+      "duration_s": 43.628
+    },
+    {
+      "requested_agent": "codex",
+      "effective_agent": "codex",
+      "model": {
+        "model": "gpt-6.1-sol",
+        "effort": "medium",
+        "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+        "verified_at": "2026-11-08"
+      },
+      "patch_sha256": "611a5dac1e2767c0d331e42b06c60834e8a427c8bbc41671b9a81a8c977f3e2c",
+      "decision": "approve",
+      "receipt": "codex-final-review.json",
+      "duration_s": 38.625
+    }
+  ],
+  "accepted_limitations": [
+    "External/dynamic consumers are not exhaustively inventoried; historical public helper preserved",
+    "Bounded evidence remains duplicated for report compatibility, at most 64KiB per evidence object",
+    "Synthetic memory/serialization sample is not production performance or a worst-case bound",
+    "Historical local TLS test reused for identical transport; not rerun and not production validation"
+  ],
+  "post_review_controller_probe": "runtime-consumers-controller.json verifies audit_snapshot and compare with display adapter set to raise; agents did not separately review this additional receipt",
+  "next_network_step": "Only after integration approval and post-integration QA: separately review/authorize five-URL pilot; no75 expansion implied",
+  "workspace_applied": false
+}

@@ -1,0 +1,144 @@
+[
+  {
+    "artifact": "recovered-Codex-balanced-proposal.json",
+    "agent": "codex",
+    "model": {
+      "model": "gpt-6.1-sol",
+      "effort": "medium",
+      "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+      "verified_at": "2026-11-08"
+    },
+    "duration_s": 70.765,
+    "prompt_bytes": 172061,
+    "contract_validation": {
+      "status": "passed",
+      "duration_s": 0.000397
+    },
+    "usage": {
+      "provider_reported": {
+        "input_tokens": 60364,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 2483,
+        "reasoning_output_tokens": 718
+      },
+      "measured_cost_available": false,
+      "estimated_cost": null
+    },
+    "process_reaped": true
+  },
+  {
+    "artifact": "council_defense-claude-continued-1794516304403048101.json",
+    "agent": "claude",
+    "model": {
+      "model": "claude-sonnet-5-5",
+      "effort": "medium",
+      "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+      "verified_at": "2026-11-08"
+    },
+    "duration_s": 21.532,
+    "prompt_bytes": 213815,
+    "contract_validation": {
+      "status": "passed",
+      "duration_s": 0.003509
+    },
+    "usage": {
+      "provider_reported": {
+        "total_cost_usd": 0.39984000000000003,
+        "duration_ms": 20140,
+        "input_tokens": 2,
+        "cache_creation_input_tokens": 92434,
+        "cache_read_input_tokens": 0,
+        "output_tokens": 3010
+      },
+      "measured_cost_available": true,
+      "estimated_cost": null
+    },
+    "process_reaped": true
+  },
+  {
+    "artifact": "council_defense-codex-continued-1794516304403963802.json",
+    "agent": "codex",
+    "model": {
+      "model": "gpt-6.1-sol",
+      "effort": "medium",
+      "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+      "verified_at": "2026-11-08"
+    },
+    "duration_s": 31.363,
+    "prompt_bytes": 213810,
+    "contract_validation": {
+      "status": "passed",
+      "duration_s": 0.000236
+    },
+    "usage": {
+      "provider_reported": {
+        "input_tokens": 71013,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1238,
+        "reasoning_output_tokens": 72
+      },
+      "measured_cost_available": false,
+      "estimated_cost": null
+    },
+    "process_reaped": true
+  },
+  {
+    "artifact": "council_objection-claude-continued-1794516266092331870.json",
+    "agent": "claude",
+    "model": {
+      "model": "claude-sonnet-5-5",
+      "effort": "medium",
+      "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+      "verified_at": "2026-11-08"
+    },
+    "duration_s": 37.785,
+    "prompt_bytes": 200884,
+    "contract_validation": {
+      "status": "passed",
+      "duration_s": 0.005627
+    },
+    "usage": {
+      "provider_reported": {
+        "total_cost_usd": 0.42646259999999997,
+        "duration_ms": 35084,
+        "input_tokens": 6,
+        "cache_creation_input_tokens": 90361,
+        "cache_read_input_tokens": 86866,
+        "output_tokens": 5632
+      },
+      "measured_cost_available": true,
+      "estimated_cost": null
+    },
+    "process_reaped": true
+  },
+  {
+    "artifact": "council_objection-codex-continued-1794516266094271346.json",
+    "agent": "codex",
+    "model": {
+      "model": "gpt-6.1-sol",
+      "effort": "medium",
+      "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+      "verified_at": "2026-11-08"
+    },
+    "duration_s": 36.785,
+    "prompt_bytes": 200879,
+    "contract_validation": {
+      "status": "passed",
+      "duration_s": 0.00037
+    },
+    "usage": {
+      "provider_reported": {
+        "input_tokens": 67793,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1266,
+        "reasoning_output_tokens": 156
+      },
+      "measured_cost_available": false,
+      "estimated_cost": null
+    },
+    "process_reaped": true
+  }
+]

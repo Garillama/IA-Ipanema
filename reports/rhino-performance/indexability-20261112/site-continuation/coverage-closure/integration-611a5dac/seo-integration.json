@@ -1,0 +1,19 @@
+{
+  "name": "seo-integration",
+  "command": [
+    "python3",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests/integration",
+    "-p",
+    "test_seo*.py",
+    "-v"
+  ],
+  "exit_code": 0,
+  "elapsed_s": 4.626987222000025,
+  "stdout": "",
+  "stderr": "test_generate_requires_real_evidence_and_checks_existing (test_seo_cli.SEOCLI.test_generate_requires_real_evidence_and_checks_existing) ... ok\ntest_invalid_jsonld_yields_error_report_not_pass (test_seo_cli.SEOCLI.test_invalid_jsonld_yields_error_report_not_pass) ... ok\ntest_no_connection_fallback_and_source_block (test_seo_cli.SEOCLI.test_no_connection_fallback_and_source_block) ... ok\ntest_offline_audit_runs_relocated_without_theme (test_seo_cli.SEOCLI.test_offline_audit_runs_relocated_without_theme) ... ok\ntest_projection_initial_rendered_nojs (test_seo_cli.SEOCLI.test_projection_initial_rendered_nojs) ... ok\ntest_seo_evals_are_actions_not_model_approval (test_seo_cli.SEOCLI.test_seo_evals_are_actions_not_model_approval) ... ok\ntest_unauthorized_google_read_never_needs_credentials (test_seo_cli.SEOCLI.test_unauthorized_google_read_never_needs_credentials) ... ok\ntest_enrich_dom_and_nojs_keep_observation_provenance (test_seo_engineering_v4_cli.EngineeringCLI.test_enrich_dom_and_nojs_keep_observation_provenance) ... ok\ntest_explicit_network_permission_and_limits_required (test_seo_engineering_v4_cli.EngineeringCLI.test_explicit_network_permission_and_limits_required) ... ok\ntest_foreign_captures_and_google_exports_rejected (test_seo_engineering_v4_cli.EngineeringCLI.test_foreign_captures_and_google_exports_rejected) ... ok\ntest_offline_crawl_json_csv_relocated_and_no_network (test_seo_engineering_v4_cli.EngineeringCLI.test_offline_crawl_json_csv_relocated_and_no_network) ... ok\ntest_readiness_and_regression_noindex_href_h1 (test_seo_engineering_v4_cli.EngineeringCLI.test_readiness_and_regression_noindex_href_h1) ... ok\ntest_sitemap_command_preserves_native_urlset (test_seo_engineering_v4_cli.EngineeringCLI.test_sitemap_command_preserves_native_urlset) ... ok\n\n----------------------------------------------------------------------\nRan 13 tests in 4.557s\n\nOK\n",
+  "scope": "integrated workspace; fixtures only, no storefront or Google requests"
+}

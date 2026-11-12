@@ -1,0 +1,137 @@
+{
+  "requested_agent": "codex",
+  "effective_agent": "codex",
+  "phase": "incremental-final-review",
+  "patch_sha256": "611a5dac1e2767c0d331e42b06c60834e8a427c8bbc41671b9a81a8c977f3e2c",
+  "input_hashes": {
+    "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/final-candidate/candidate-v4-final.patch": "611a5dac1e2767c0d331e42b06c60834e8a427c8bbc41671b9a81a8c977f3e2c",
+    "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/final-candidate/delta-from-7a5a7066.patch": "a8c1b6fc07d30e9d77ed177c15e08915552c248ffba607528c754591402372c6",
+    "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/final-candidate/manifest.json": "78ff5e8188a98495fc5517cbbbe63d7f69cf0986457190b44375226a4bbe18b7",
+    "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/final-candidate/controller-qa.json": "4372effa9d1322897b172169fdf7434b6eb1eb23f5b0c968d954230b97068a51",
+    "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/final-candidate/compatibility.md": "a1a4daba903f23715dfe1551135a5e0dd494f4f09cf33cd8cbc903ab557f0f3f",
+    "tools/ipanema/seo/robots.py": "57d01f9086dffa7f25f26b59976098770d585731eca3d758ee9235000399a3df",
+    "tools/ipanema/seo/regression.py": "0bf7eca8c50b906fa083f4422af7863f6a37bad7519e1dbd8349cac3a07b257e",
+    "tests/unit/test_seo_final_conditions_v4.py": "524eaee578333857c3d6c88a48180b7e65f5df6719e17009140a25a7c319fcbf"
+  },
+  "response": {
+    "decision": "approve",
+    "summary": "Las tres correcciones quedan suficientemente respaldadas para solicitar integración LOCAL del parche 611a5dac1e2767c0d331e42b06c60834e8a427c8bbc41671b9a81a8c977f3e2c. Esta aprobación técnica no autoriza integrar, acceder a red ni publicar. No identifico condiciones obligatorias pendientes dentro del alcance incremental. El recibo aportado cubre los 11 hashes; no ejecuté verificaciones propias.",
+    "changes": [],
+    "evidence": [
+      "functional: regression.py separa :noindex del estado global. FinalGate cubre evidencia limpia, ausente, heredada, malformada e incompleta, restricciones nuevas y noindex preexistente.",
+      "security: los presupuestos explícitos impiden presentar entradas no procesadas como evidencia completa. El transporte permanece idéntico al candidato anterior según el recibo actual; TLS local es evidencia reutilizada, no una ejecución nueva ni garantía universal.",
+      "compatibility: google_directives conserva el cuerpo histórico y LegacyDisplay verifica cinco salidas exactas, incluidos parámetros, cabeceras múltiples, scopes y wildcard.",
+      "native_reuse: se reutilizan robots.py y los consumidores existentes classify, audit_snapshot y compare, sin nuevas dependencias ni motores paralelos.",
+      "seo: _nodes mantiene insufficient_evidence e indexation_observed=false. Aprobar :noindex solo significa ausencia de nueva restricción según evidencia tipada; no acredita indexación.",
+      "performance: las muestras se acotan durante el análisis; flags, restricciones y contadores continúan agregándose. EvidenceBudgets cubre errores y restricciones tardías, límites exactos, UTF-8 y retención.",
+      "controller-qa.json declara 191 pruebas unitarias y 13 de integración aprobadas, aplicación sin fuzz e identidad de los 11 hashes del candidato actual.",
+      "El benchmark del recibo mide una muestra sintética: 200000 parámetros, 3.4906 segundos de análisis y 1650392 bytes de pico trazado. Rendimiento de storefront y peor caso: unknown. controller_evidence está vacío; por ello evidence_refs permanece vacío."
+    ],
+    "objections": [
+      {
+        "id": "codex-obs-adaptador-cobertura",
+        "alternative_id": "claude-refinar-gate-y-topes",
+        "category": "compatibilidad",
+        "severity": "low",
+        "claim": "La prueba test_decision_consumers_do_not_call_display ejercita classify y _robots_state, pero no invoca audit_snapshot ni compare completos. La inspección del diff sí muestra su separación del adaptador. Seguimiento no bloqueante: reforzar esa cobertura; los consumidores externos o dinámicos siguen sin inventario demostrado.",
+        "status": "open",
+        "evidence_refs": [],
+        "resolution_evidence_refs": []
+      }
+    ],
+    "preferred_alternative": "claude-refinar-gate-y-topes",
+    "answers": [
+      {
+        "question_id": "claude-q1-limite-sin-noindex",
+        "from_agent": "claude",
+        "answer": "Sí. En robots.py, add rechaza íntegramente una fuente que exceda MAX_SOURCE_BYTES: processing_complete=false, counts.errors aumenta y relevant_errors registra directive_processing_byte_budget. No se analiza su prefijo. Sin restricción válida observada, regression.py devuelve unknown. Si otra fuente admitida aportó noindex válido, se conserva; compare falla ante su aparición respecto de baseline limpio o desconocido. Si ambos lados ya tienen noindex, no es nueva regresión. EvidenceBudgets y FinalGate prueban estos casos, incluidos en el recibo actual.",
+        "disposition": "defend",
+        "evidence_refs": []
+      },
+      {
+        "question_id": "claude-q2-consumidores-adaptador",
+        "from_agent": "claude",
+        "answer": "LegacyDisplay.test_decision_consumers_do_not_call_display parchea google_directives para lanzar AssertionError y ejercita classify y _robots_state. No garantiza por sí sola audit_snapshot ni compare completos, y parchear el módulo original tampoco detectaría todos los alias importados previamente. El diff actual muestra que indexability.py y page_audit.py importan google_directive_evidence, y regression.py lee evidencia tipada. No conozco consumidores externos concretos demostrados. El recibo acredita las pruebas aportadas, sin convertir esa cobertura en garantía universal.",
+        "disposition": "revise",
+        "evidence_refs": []
+      }
+    ],
+    "withdrawn_alternatives": [],
+    "revision_notes": [
+      "La reserva histórica por ausencia de candidato y QA queda superada por el parche y recibo actuales aportados; no por esta defensa.",
+      "La preferencia se mantiene y la aprobación se limita a solicitar integración local del hash exacto.",
+      "Las tres correcciones cuentan con implementación y pruebas pertinentes; la observación de cobertura adicional es de seguimiento y no bloquea este alcance."
+    ]
+  },
+  "model": {
+    "model": "gpt-6.1-sol",
+    "effort": "medium",
+    "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+    "verified_at": "2026-11-08"
+  },
+  "execution": {
+    "exit_code": 0,
+    "timed_out": false,
+    "output_limited": false,
+    "idle_timed_out": false,
+    "cancelled": false,
+    "process_started": true,
+    "process_reaped": true,
+    "stdin_bytes_written": 193427,
+    "context_complete": true,
+    "duration_s": 38.625,
+    "timing": {
+      "spawn_s": 0.000778,
+      "input_complete_s": 0.091195,
+      "first_stdout_s": 0.701568,
+      "first_stderr_s": null,
+      "timeout_phase": null,
+      "event_counts": {
+        "thread.started": 1,
+        "item.completed": 2,
+        "turn.started": 1,
+        "turn.completed": 1
+      },
+      "inference_vs_initialization": "not_separable_without_provider_events"
+    },
+    "output_accounting": {
+      "transport_bytes": 5686,
+      "retained_bytes": 5686,
+      "discarded_progress_bytes": 0,
+      "transport_limit_bytes": 20000000,
+      "retained_limit_bytes": 2000000
+    },
+    "isolation": {
+      "backend": "bubblewrap",
+      "snapshot_read_only": true,
+      "host_home_mounted": false,
+      "network": "enabled_no_destination_firewall",
+      "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+    },
+    "started_at": "2026-11-12T21:02:22.292601+00:00",
+    "prompt_bytes": 193427,
+    "prompt_sha256": "043d51e87d96e11338326942646b60ec04b3bc37e97835d10e42d6d981f17e79",
+    "usage": {
+      "provider_reported": {
+        "input_tokens": 66150,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1242,
+        "reasoning_output_tokens": 162
+      },
+      "measured_cost_available": false,
+      "estimated_cost": null
+    },
+    "limits": {
+      "timeout": 240,
+      "idle_timeout": 90,
+      "startup_timeout": 30,
+      "first_response_timeout": 150
+    },
+    "structured_output": "native_schema",
+    "contract_validation": {
+      "status": "passed",
+      "duration_s": 0.000233
+    }
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "at": "2026-11-12T17:46:54.930227+00:00",
+  "manifest": {
+    "files": [
+      {
+        "path": "snippets/product-list/pagination.tpl",
+        "before_sha256": "c715cc6c77d07dced5cdad6066785142c307b0f3ca3429cf88f5290cf7f2edc2",
+        "after_sha256": "0958c668ee40bf0d16c76db4d6493bf6387d17e3ec7ff8f66aaffcce564d463c"
+      },
+      {
+        "path": "static/js/store.js",
+        "before_sha256": "29dea94e46cc1bb423ddde71a42d807f22c944f09465d70400728d7ae95b4718",
+        "after_sha256": "f97557494e017eba623ba2dd7e568789f8d9035d467f0b03f71bc0b3b8393be9"
+      }
+    ],
+    "applied": false,
+    "production_authorized": false,
+    "status": "pending_independent_review",
+    "preserved_candidates": [
+      "v2",
+      "v2-focus"
+    ],
+    "delta_from_focus": "Template only: guard numbered labels for cursor mode/missing page; distinct nav accessible label using existing translations"
+  },
+  "outside_initInfiniteScroll_unchanged": true,
+  "current_theme_files_untouched": true,
+  "size_analysis": [
+    {
+      "path": "snippets/product-list/pagination.tpl",
+      "before_bytes": 1939,
+      "candidate_bytes": 2825,
+      "delta_uncompressed": 886,
+      "delta_gzip_estimate_not_wire_measurement": 219
+    },
+    {
+      "path": "static/js/store.js",
+      "before_bytes": 161529,
+      "candidate_bytes": 162703,
+      "delta_uncompressed": 1174,
+      "delta_gzip_estimate_not_wire_measurement": 287
+    }
+  ]
+}

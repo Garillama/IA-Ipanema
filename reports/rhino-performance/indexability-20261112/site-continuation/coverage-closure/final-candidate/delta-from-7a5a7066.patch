@@ -1,0 +1,503 @@
+--- /dev/null
++++ b/tests/unit/test_seo_final_conditions_v4.py
+@@ -0,0 +1,169 @@
++import copy
++import json
++from pathlib import Path
++import tempfile
++import unittest
++from unittest.mock import patch
++from tests.support import make_project
++from ipanema.core import Project
++from ipanema.seo import robots
++from ipanema.seo.regression import compare, _nodes
++from ipanema.seo.indexability import classify
++from ipanema.seo.page_audit import audit_snapshot
++
++
++class FinalGate(unittest.TestCase):
++    def setUp(self):
++        self.tmp = tempfile.TemporaryDirectory()
++        self.project = Project(make_project(Path(self.tmp.name), theme=False))
++        self.url = 'https://example.invalid/'
++
++    def tearDown(self):
++        self.tmp.cleanup()
++
++    def report(self, evidence):
++        return {'kind': 'seo-page-audit', 'project': self.project.id, 'url': self.url,
++                'http_status': 200, 'canonical': [self.url], 'robots_evidence': evidence}
++
++    def check(self, before, after):
++        gate = compare(self.project, self.report(before), self.report(after))
++        return next(c for c in gate['checks'] if c['name'].endswith(':noindex'))
++
++    def test_clean_directives_pass_only_scoped_check(self):
++        e = robots.google_directive_evidence({}, '')
++        self.assertEqual(self.check(e, e)['status'], 'passed')
++        n = _nodes(self.report(e))[self.url]
++        self.assertFalse(n['indexability']['indexation_observed'])
++        self.assertEqual(n['indexability']['state'], 'insufficient_evidence')
++
++    def test_legacy_and_absent_remain_unknown(self):
++        for e in (None, {}, {'noindex': False}, 'index,follow'):
++            with self.subTest(e=e): self.assertEqual(self.check(e, e)['status'], 'unknown')
++
++    def test_malformed_remains_unknown(self):
++        e = robots.google_directive_evidence({'robots': ['foo="open']}, '')
++        self.assertEqual(self.check(e, e)['status'], 'unknown')
++
++    def test_invalid_structure_never_passes(self):
++        e = robots.google_directive_evidence({}, '')
++        for k, v in [('noindex', 'false'), ('flags', 'index'), ('sources', None), ('relevant_errors', 'none'), ('processing_complete', 1)]:
++            bad = copy.deepcopy(e);bad[k] = v
++            with self.subTest(k=k): self.assertEqual(self.check(bad, bad)['status'], 'unknown')
++
++    def test_new_noindex_fails_from_unknown(self):
++        e = robots.google_directive_evidence({'robots': ['noindex']}, '')
++        self.assertEqual(self.check(None, e)['status'], 'failed')
++
++    def test_noindex_survives_incomplete_other_source(self):
++        e = robots.google_directive_evidence({'robots': ['noindex', 'x' * (robots.MAX_SOURCE_BYTES + 1)]}, '')
++        self.assertFalse(e['processing_complete']);self.assertTrue(e['noindex'])
++        self.assertEqual(self.check(None, e)['status'], 'failed')
++
++    def test_existing_noindex_both_sides_not_new_regression(self):
++        e = robots.google_directive_evidence({'robots': ['noindex']}, '')
++        self.assertEqual(self.check(e, e)['status'], 'passed')
++
++    def test_clean_does_not_override_content_uncertainty(self):
++        e = robots.google_directive_evidence({}, '')
++        n = {'url': self.url, 'status': 200, 'canonical': [self.url],
++             'indexability': {'state': 'insufficient_evidence', 'robots_evidence': e}}
++        crawl = {'kind': 'seo-crawl-v4', 'project': self.project.id, 'urls': [n]}
++        gate = compare(self.project, crawl, copy.deepcopy(crawl))
++        self.assertEqual(next(c for c in gate['checks'] if c['name'].endswith(':noindex'))['status'], 'passed')
++        self.assertEqual(n['indexability']['state'], 'insufficient_evidence')
++
++
++class EvidenceBudgets(unittest.TestCase):
++    def test_tail_restriction_after_two_hundred_thousand_parameters(self):
++        e = robots.google_directive_evidence({'robots': ['foo:bar,' * 200000 + 'noindex']}, '')
++        self.assertTrue(e['noindex']);self.assertTrue(e['processing_complete'])
++        self.assertEqual(e['counts']['parameters'], 200000)
++        self.assertLessEqual(len(e['sources'][0]['parameters']), robots.MAX_SAMPLES)
++        self.assertTrue(e['truncated'])
++        self.assertLessEqual(len(json.dumps(e, ensure_ascii=False).encode()), robots.MAX_EVIDENCE_BYTES)
++
++    def test_error_after_sample_cap_cannot_be_lost(self):
++        e = robots.google_directive_evidence({'robots': ['foo:bar,' * 100 + 'noindex=bad']}, '')
++        self.assertEqual(e['state'], 'insufficient_evidence')
++        self.assertGreater(e['counts']['errors'], 0)
++
++    def test_unknown_quoted_parameter_after_cap_stays_uncertain(self):
++        e = robots.google_directive_evidence({'robots': ['foo:bar,' * 100 + 'foo="x; noindex"']}, '')
++        self.assertFalse(e['noindex']);self.assertEqual(e['state'], 'insufficient_evidence')
++
++    def test_late_raw_header_quote_error_survives_sample_cap(self):
++        value = 'otherbot: ' + 'bad/,' * 20 + 'foo="open'
++        e = robots.google_directive_evidence({}, value)
++        self.assertFalse(e['noindex'])
++        self.assertEqual(e['state'], 'insufficient_evidence')
++        self.assertTrue(e['relevant_errors'])
++
++    def test_source_oversize_explicit_incomplete(self):
++        with patch.object(robots, 'MAX_SOURCE_BYTES', 64):
++            e = robots.google_directive_evidence({'robots': ['x' * 65 + ',noindex']}, '')
++        self.assertFalse(e['processing_complete'])
++        self.assertEqual(e['state'], 'insufficient_evidence')
++
++    def test_source_budget_exact_boundary(self):
++        with patch.object(robots, 'MAX_SOURCE_BYTES', 5):
++            e = robots.google_directive_evidence({'robots': ['index']}, '')
++            self.assertTrue(e['processing_complete'])
++            e = robots.google_directive_evidence({'robots': ['index ']}, '')
++            self.assertFalse(e['processing_complete'])
++
++    def test_utf8_bytes_not_characters(self):
++        with patch.object(robots, 'MAX_SOURCE_BYTES', 5):
++            e = robots.google_directive_evidence({'robots': ['ééé']}, '')
++        self.assertFalse(e['processing_complete'])
++
++    def test_total_budget_preserves_prior_noindex(self):
++        with patch.object(robots, 'MAX_TOTAL_BYTES', 12):
++            e = robots.google_directive_evidence({'robots': ['noindex', 'index,index']}, '')
++        self.assertTrue(e['noindex']);self.assertFalse(e['processing_complete'])
++
++    def test_source_limit_does_not_claim_complete_counts(self):
++        with patch.object(robots, 'MAX_PROCESS_SOURCES', 2):
++            e = robots.google_directive_evidence({'robots': ['index'] * 3}, '')
++        self.assertFalse(e['processing_complete']);self.assertIsNone(e['unvisited_sources_count'])
++        self.assertEqual(e['counts']['sources_seen'], 2)
++
++    def test_omitted_source_restriction_and_errors_still_aggregate(self):
++        e = robots.google_directive_evidence({'robots': ['index'] * 20 + ['noindex', 'foo="open']}, '')
++        self.assertTrue(e['noindex']);self.assertTrue(e['relevant_errors'])
++        self.assertEqual(e['counts']['sources_processed'], 22)
++        self.assertLessEqual(len(e['sources']), robots.MAX_RETAINED_SOURCES)
++
++    def test_whole_result_cap_with_long_names(self):
++        value = ','.join(('f' + 'x' * 500 + str(i) + ':bar') for i in range(20))
++        e = robots.google_directive_evidence({'robots': [value] * 30}, '')
++        self.assertTrue(e['processing_complete']);self.assertTrue(e['truncated'])
++        self.assertLessEqual(len(json.dumps(e, ensure_ascii=False).encode()), robots.MAX_EVIDENCE_BYTES)
++
++    def test_source_hash_stable_across_retention(self):
++        e = robots.google_directive_evidence({'robots': ['index'] * 20}, '')
++        with patch.object(robots, 'MAX_RETAINED_SOURCES', 1):
++            f = robots.google_directive_evidence({'robots': ['index'] * 20}, '')
++        self.assertEqual(e['processed_collection_sha256'], f['processed_collection_sha256'])
++
++
++class LegacyDisplay(unittest.TestCase):
++    def test_exact_historical_fixtures(self):
++        cases = [({'robots': ['max-snippet:50'], 'googlebot': ['index']}, '', 'max-snippet:50,index,'),
++                 ({}, 'otherbot: noindex, nofollow, googlebot: index', 'index'),
++                 ({}, 'googlebot: max-snippet:50, nofollow', 'max-snippet:50, nofollow'),
++                 ({}, '*: noindex', '*: noindex'),
++                 ({'robots': ['index']}, ['otherbot: noindex', 'max-snippet:50'], 'index,,,max-snippet:50')]
++        for meta, header, expected in cases:
++            with self.subTest(header=header):self.assertEqual(robots.google_directives(meta, header), expected)
++
++    def test_decision_consumers_do_not_call_display(self):
++        snap = {'url': 'https://example.invalid/', 'status': 200, 'canonical': [],
++                'meta': {'robots': ['noindex']}, 'headers': {}, 'headings': [], 'images': [],
++                'links': [], 'jsonld': [], 'html': '<html><main>Example content</main></html>'}
++        with patch.object(robots, 'google_directives', side_effect=AssertionError('display called')):
++            self.assertEqual(classify(snap, googlebot_allowed=True, robots_known=True)['state'], 'noindex')
++            from ipanema.seo.regression import _robots_state
++            self.assertEqual(_robots_state({'indexability': {'robots_evidence': robots.google_directive_evidence({'robots': ['noindex']}, '')}}), 'noindex')
++
++
++if __name__ == '__main__': unittest.main()
+--- a/tests/unit/test_seo_regression_v4.py
++++ b/tests/unit/test_seo_regression_v4.py
+@@ -6,13 +6,14 @@
+ from tests.support import make_project
+ from ipanema.core import Project, IpanemaError
+ from ipanema.seo.regression import compare
++from ipanema.seo.robots import google_directive_evidence
+ 
+ 
+ class RegressionV4(unittest.TestCase):
+     def setUp(self):
+         self.tmp = tempfile.TemporaryDirectory(); self.project = Project(make_project(Path(self.tmp.name), theme=False))
+         self.url = 'https://example.invalid/'
+-        node = {'url': self.url, 'status': 200, 'canonical': [self.url], 'indexability': {'state': 'indexable_candidate'},
++        node = {'url': self.url, 'status': 200, 'canonical': [self.url], 'indexability': {'state': 'indexable_candidate', 'robots_evidence': google_directive_evidence({}, '')},
+                 'outgoing_links': [self.url + 'product'], 'pagination': {'active_controls_without_href': 0},
+                 'template_audit': {'content': {'headings': [{'level': 1, 'text': 'Home'}]}, 'findings': [],
+                                    'structured_data': {'states': {'syntax_valid': True}}},
+@@ -38,7 +39,7 @@
+ 
+     def test_independent_critical_changes_block(self):
+         for key, value in [('canonical', ['https://example.invalid/other']), ('status', 500), ('outgoing_links', []),
+-                           ('indexability', {'state': 'noindex'}), ('pagination', {'active_controls_without_href': 1})]:
++                           ('indexability', {'state': 'noindex', 'robots_evidence': google_directive_evidence({'robots': ['noindex']}, '')}), ('pagination', {'active_controls_without_href': 1})]:
+             with self.subTest(key=key):
+                 after = copy.deepcopy(self.before); after['urls'][0][key] = value
+                 self.assertEqual(compare(self.project, self.before, after)['outcome'], 'blocked')
+--- a/tools/ipanema/seo/regression.py
++++ b/tools/ipanema/seo/regression.py
+@@ -4,6 +4,32 @@
+ from ..core import IpanemaError, now
+ from .adapters import authorize_url
+ from .crawl_policy import normalize
++
++
++def _robots_state(node):
++    """State of directives only, never a claim about Google's index."""
++    indexability = node.get('indexability', {})
++    audit = node.get('template_audit', {})
++    evidence = indexability.get('robots_evidence') if isinstance(indexability, dict) else None
++    if evidence is None and isinstance(audit, dict):
++        evidence = audit.get('robots_evidence')
++    if not isinstance(evidence, dict):
++        return 'unknown'
++    flags = evidence.get('flags')
++    if (not isinstance(flags, list) or not all(isinstance(v, str) for v in flags)
++            or type(evidence.get('noindex')) is not bool
++            or not isinstance(evidence.get('relevant_errors'), list)
++            or not isinstance(evidence.get('sources'), list)):
++        return 'unknown'
++    restrictive = bool(set(flags) & {'noindex', 'none'})
++    if evidence['noindex'] is not restrictive:
++        return 'unknown'
++    if restrictive:
++        return 'noindex'
++    if (evidence.get('processing_complete') is not True
++            or evidence['relevant_errors'] or evidence.get('state') != 'no_restrictive_flag_observed'):
++        return 'unknown'
++    return 'no_restrictive_flag_observed'
+ 
+ 
+ def _nodes(report):
+@@ -15,7 +41,8 @@
+         return {report['url']: {'url': report['url'], 'status': report.get('http_status'),
+             'canonical': report.get('canonical'), 'template_audit': report,
+             'outgoing_links': [l['absolute'] for l in report.get('crawl', {}).get('links', [])],
+-            'indexability': {'state': 'noindex' if report.get('robots_evidence', {}).get('noindex') else 'insufficient_evidence'},
++            'indexability': {'state': 'insufficient_evidence', 'indexation_observed': False,
++                             'robots_evidence': report.get('robots_evidence')},
+             'pagination': {'active_controls_without_href': sum(not l.get('href') for l in report.get('crawl', {}).get('pagination_controls', []))}}}
+     raise IpanemaError('Gate necesita auditorías SEO o crawler V4.')
+ 
+@@ -46,9 +73,11 @@
+         check(url + ':http', not (old.get('status') == 200 and new.get('status') != 200), {'before': old.get('status'), 'after': new.get('status')})
+         check(url + ':canonical', old.get('canonical') == new.get('canonical'), {'before': old.get('canonical'), 'after': new.get('canonical')})
+         before_state, after_state = old.get('indexability', {}).get('state'), new.get('indexability', {}).get('state')
+-        check(url + ':noindex', not (before_state != 'noindex' and after_state == 'noindex'), after_state,
+-              unknown=(before_state in (None, 'insufficient_evidence') or after_state in (None, 'insufficient_evidence'))
+-              and not (after_state == 'noindex' and before_state != 'noindex'))
++        before_robots, after_robots = _robots_state(old), _robots_state(new)
++        restrictive_change = after_robots == 'noindex' and before_robots != 'noindex'
++        check(url + ':noindex', not restrictive_change,
++              {'before': before_robots, 'after': after_robots, 'scope': 'directives_not_google_index'},
++              unknown=not restrictive_change and 'unknown' in (before_robots, after_robots))
+         check(url + ':robots', not (before_state != 'blocked_by_robots' and after_state == 'blocked_by_robots'), after_state)
+         lost = set(old.get('outgoing_links', [])) - set(new.get('outgoing_links', [])) - allowed
+         check(url + ':links', not lost, {'removed': sorted(lost), 'approved_removals': sorted(allowed)})
+--- a/tools/ipanema/seo/robots.py
++++ b/tools/ipanema/seo/robots.py
+@@ -148,9 +148,40 @@
+     'indexifembedded', 'notranslate', 'noimageindex', 'noarchive', 'nocache', 'nositelinkssearchbox'))
+ 
+ 
++# Retention limits do not stop semantic evaluation of permitted input.
++MAX_SOURCE_BYTES = 2_000_000
++MAX_TOTAL_BYTES = 4_000_000
++MAX_PROCESS_SOURCES = 128
++MAX_RETAINED_SOURCES = 16
++MAX_SAMPLES = 8
++MAX_EVIDENCE_BYTES = 65_536
++
++
++class _Samples(list):
++    def __init__(self):
++        super().__init__()
++        self.count = 0
++        self.reasons = {}
++
++    def append(self, value):
++        self.count += 1
++        if isinstance(value, dict):
++            value = {k: v[:96] if isinstance(v, str) else v for k, v in value.items()}
++            if 'reason' in value:
++                self.reasons.setdefault(value['reason'], value)
++        if len(self) < MAX_SAMPLES:
++            super().append(value)
++
++    def __iadd__(self, values):
++        for value in values:
++            self.append(value)
++        return self
++
++
+ def _parse_directive_source(text):
+     """One physical source only. Quote state can never escape this call."""
+-    flags, parameters, errors, unknown = set(), [], [], []
++    flags, parameters, errors, unknown = set(), _Samples(), _Samples(), _Samples()
++    ambiguous_parameter = False
+     delimiters = ',; \t\r\n'
+     names = re.compile(r'[A-Za-z][A-Za-z0-9_-]*')
+     length, cursor = len(text), 0
+@@ -187,8 +218,10 @@
+             while probe < length and text[probe].isspace():
+                 probe += 1
+             finish = atom_end(probe)
++            quoted_separators = any(q in text[probe:finish] for q in ('\"', "'")) and any(c.isspace() or c in ',;' for c in text[probe:finish])
++            ambiguous_parameter |= key not in _VALUE_RULES and quoted_separators
+             parameters.append({'name': key, 'has_value': finish > probe, 'known': key in _VALUE_RULES,
+-                               'quoted_separators': any(q in text[probe:finish] for q in ('\"', "'")) and any(c.isspace() or c in ',;' for c in text[probe:finish])})
++                               'quoted_separators': quoted_separators})
+             if finish == probe:
+                 errors.append({'reason': 'missing_value', 'directive': key, 'selected_offset': cursor})
+             if key in ('noindex', 'none', 'index', 'all'):
+@@ -207,12 +240,15 @@
+             errors.append({'reason': 'invalid_directive_token', 'selected_offset': cursor})
+             cursor = finish
+     return {'flags': sorted(flags), 'parameters': parameters, 'errors': errors, 'unknown': unknown,
+-            'noindex': bool(flags & {'noindex', 'none'})}
++            'noindex': bool(flags & {'noindex', 'none'}), 'ambiguous_parameter': ambiguous_parameter,
++            'grammar_errors': list(errors.reasons.values()),
++            'counts': {k: v.count for k, v in [('parameters', parameters), ('errors', errors), ('unknown', unknown)]},
++            'truncated': any(v.count > len(v) for v in (parameters, errors, unknown))}
+ 
+ 
+ def _google_header_source(value):
+     """Apply agent scopes within one header field; reset for the next field."""
+-    active, selected, scopes, errors = True, [], set(), []
++    active, selected, scopes, errors = True, [], set(), _Samples()
+     for part in _header_parts(value):
+         match = re.match(r'\s*([a-zA-Z][\w-]*)\s*:\s*(.*)', part)
+         if match and match[1].lower() not in (_VALUE_RULES | _FLAG_RULES):
+@@ -232,10 +268,10 @@
+     # physical field boundary even when comparing comma/quote interpretations.
+     errors = []
+     if header_field:
+-        for error in _parse_directive_source(value)['errors']:
++        for error in _parse_directive_source(value)['grammar_errors']:
+             if error['reason'] in ('unclosed_quote', 'incomplete_escape'):
+                 errors.append({**error, 'reason': 'ambiguous_header_scope'})
+-    if any(not p['known'] and p.get('quoted_separators') for p in parsed['parameters']):
++    if parsed['ambiguous_parameter']:
+         errors.append({'reason': 'unsupported_quoted_separator_grammar'})
+     # A syntactically recognized scoped rule list stays scoped across commas.
+     # Do not turn a valid otherbot: nofollow, noindex list into global restrictions.
+@@ -247,8 +283,12 @@
+             first = _parse_directive_source(next(iter(_header_parts(rest)), ''))
+             scoped_list = (prefix.strip().lower() in scopes and not first['errors'] and not first['unknown'] and
+                            (bool(first['flags']) or bool(first['parameters']) and all(p['known'] for p in first['parameters'])))
+-    if ',' in value and not parsed['noindex'] and not scoped_list:
+-        for part in value.split(','):
++    # No alternative can contain a restrictive token if neither word occurs.
++    # Avoid reparsing every comma atom in large parameter-only fields.
++    if (',' in value and not parsed['noindex'] and not scoped_list
++            and re.search(r'\b(?:noindex|none)\b', value, re.I)):
++        for match in re.finditer(r'[^,]+', value):
++            part = match[0]
+             alternative = part.strip().strip('"' + "'")
+             if header_field:
+                 alternative, _, _ = _google_header_source(alternative)
+@@ -259,41 +299,115 @@
+ 
+ 
+ def google_directive_evidence(meta, header):
+-    """Preserve physical boundaries, then aggregate restrictions, never raw text."""
++    """Bounded samples; complete semantic processing within explicit input budgets.
++
++    Physical source hashes and offsets locate retained samples in the original
++    capture. Missing raw captures cannot be reconstructed from a hash alone.
++    Retention truncation is independent of processing incompleteness.
++    """
+     import hashlib
+-    sources = []
+-    def add(kind, name, index, value, *, header_field=False):
++    import json
++    sources, flags, errors = [], set(), _Samples()
++    counts = {'sources_seen': 0, 'sources_processed': 0, 'input_bytes_processed': 0,
++              'parameters': 0, 'unknown': 0, 'errors': 0}
++    noindex, complete, truncated = False, True, False
++    collection = hashlib.sha256()
++
++    def add(kind, name, index, value):
++        nonlocal noindex, complete, truncated
++        counts['sources_seen'] += 1
+         identity = {'kind': kind, 'name': name, 'index': index}
+         if not isinstance(value, str):
+-            sources.append({**identity, 'input_sha256': None, 'scopes': [], 'flags': [], 'parameters': [],
+-                            'unknown': [], 'errors': [{'reason': 'invalid_source_type'}], 'noindex': False})
++            complete = False
++            errors.append({'source': identity, 'reason': 'invalid_source_type'})
++            counts['errors'] += 1
+             return
+-        selected, scopes, selection_errors = _google_header_source(value) if header_field else (value, [name], [])
++        # Character guard prevents encoding arbitrarily large strings first.
++        size = len(value.encode('utf-8')) if len(value) <= MAX_SOURCE_BYTES else MAX_SOURCE_BYTES + 1
++        if size > MAX_SOURCE_BYTES or counts['input_bytes_processed'] + size > MAX_TOTAL_BYTES:
++            complete = False
++            errors.append({'source': identity, 'reason': 'directive_processing_byte_budget'})
++            counts['errors'] += 1
++            return
++        counts['input_bytes_processed'] += size
++        counts['sources_processed'] += 1
++        digest = hashlib.sha256(value.encode()).hexdigest()
++        collection.update(json.dumps([kind, name, index, digest]).encode())
++        selected, scopes, selection_errors = _google_header_source(value) if kind == 'header' else (value, [name], [])
+         parsed = _parse_directive_source(selected)
++        ambiguity_errors = _ambiguity_errors(value, parsed, header_field=kind == 'header')
+         parsed['errors'] += selection_errors
+-        parsed['errors'] += _ambiguity_errors(value, parsed, header_field=header_field)
+-        sources.append({**identity, 'input_sha256': hashlib.sha256(value.encode()).hexdigest(),
+-                        'input_characters': len(value), 'scopes': scopes, **parsed})
+-    for name in ('robots', 'googlebot'):
+-        values = meta.get(name, [])
+-        for index, value in enumerate(values if isinstance(values, list) else [values]):
+-            add('meta', name, index, value)
+-    headers = header if isinstance(header, list) else [] if header in ('', None) else [header]
+-    for index, value in enumerate(headers):
+-        add('header', 'x-robots-tag', index, value, header_field=True)
+-    flags = sorted({flag for source in sources for flag in source['flags']})
+-    errors = [{'source': {k: source[k] for k in ('kind', 'name', 'index')}, **error}
+-              for source in sources for error in source['errors']]
+-    noindex = any(source['noindex'] for source in sources)
+-    return {'sources': sources, 'flags': flags, 'noindex': noindex, 'relevant_errors': errors,
+-            'state': 'noindex' if noindex else 'insufficient_evidence' if errors else 'no_restrictive_flag_observed',
+-            'scope': 'Googlebot text results; not Google rendering/index inspection'}
++        parsed['errors'] += ambiguity_errors
++        parsed['counts']['errors'] += (selection_errors.count if isinstance(selection_errors, _Samples) else len(selection_errors)) + len(ambiguity_errors)
++        parsed['truncated'] |= parsed['counts']['errors'] > len(parsed['errors'])
++        noindex |= parsed['noindex']
++        flags.update(parsed['flags'])
++        for key in ('parameters', 'unknown', 'errors'):
++            counts[key] += parsed['counts'][key]
++        for error in parsed['errors']:
++            errors.append({'source': identity, **error})
++        retained_scopes = [v[:96] for v in scopes[:MAX_SAMPLES]]
++        record = {**identity, 'input_sha256': digest, 'input_characters': len(value), 'input_bytes': size,
++                  'scopes': retained_scopes, 'scope_count': len(scopes), **parsed}
++        record['truncated'] |= len(scopes) > MAX_SAMPLES or any(len(v) > 96 for v in scopes)
++        if len(sources) < MAX_RETAINED_SOURCES:
++            sources.append(record)
++        else:
++            truncated = True
++        truncated |= record['truncated']
++
++    # No unbounded source collection is constructed. If too many physical fields
++    # exist, stop with explicit incomplete status; unvisited counts/hashes unknown.
++    def fields():
++        for name in ('robots', 'googlebot'):
++            values = meta.get(name, [])
++            for index, value in enumerate(values if isinstance(values, list) else [values]):
++                yield 'meta', name, index, value
++        values = header if isinstance(header, list) else [] if header in ('', None) else [header]
++        for index, value in enumerate(values):
++            yield 'header', 'x-robots-tag', index, value
++    for ordinal, row in enumerate(fields()):
++        if ordinal >= MAX_PROCESS_SOURCES:
++            complete = False
++            errors.append({'reason': 'directive_source_budget'})
++            counts['errors'] += 1
++            break
++        add(*row)
++    result = {'sources': sources, 'flags': sorted(flags), 'noindex': noindex,
++              'relevant_errors': errors, 'processing_complete': complete,
++              'counts': counts, 'unvisited_sources_count': 0 if complete else None,
++              'processed_collection_sha256': collection.hexdigest(), 'truncated': truncated,
++              'state': 'noindex' if noindex else 'insufficient_evidence' if counts['errors'] or not complete else 'no_restrictive_flag_observed',
++              'scope': 'Googlebot text results; not Google rendering/index inspection'}
++    # Bound the whole serialized result as well as each source. Decisions and
++    # exact processed counters survive omitted samples.
++    result['counts']['sources_retained'] = len(sources)
++    while len(json.dumps(result, ensure_ascii=False).encode()) > MAX_EVIDENCE_BYTES and sources:
++        sources.pop()
++        result['counts']['sources_retained'] = len(sources)
++        result['truncated'] = True
++    result['counts']['sources_retained'] = len(sources)
++    return result
+ 
+ 
+ def google_directives(meta, header):
+-    """Legacy display only. Decisions use google_directive_evidence, never this string."""
+-    return ','.join(google_directive_evidence(meta, header)['flags'])
+-
++    """Legacy display adapter, exact historical string contract; NEVER for decisions.
++
++    Intentionally retains parameters/scopes/wildcard formatting. External callers
++    must migrate decisions to google_directive_evidence. This public adapter does
++    not populate crawler reports and is not a bounded evidence serializer.
++    """
++    if isinstance(header, list):
++        return ','.join([google_directives(meta, ''), *(google_directives({}, h) for h in header)])
++    active, result = True, list(meta.get('robots', [])) + list(meta.get('googlebot', []))
++    for part in header.split(','):
++        match = re.match(r'\s*([a-zA-Z][\w-]*)\s*:\s*(.*)', part)
++        if match and match[1].lower() not in ('unavailable_after', 'max-snippet', 'max-image-preview', 'max-video-preview'):
++            active = match[1].lower() in ('googlebot', '*')
++            part = match[2]
++        if active:
++            result.append(part)
++    return ','.join(result).lower()
+ 
+ def has_noindex(directives):
+     """Single-source compatibility helper; not for combining independent inputs."""

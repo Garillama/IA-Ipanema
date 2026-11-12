@@ -1,0 +1,64 @@
+{
+  "scope": "evidence integrity checks, not indexation/WCAG/full QA approval",
+  "checks": [
+    {
+      "name": "13_real_inspections",
+      "passed": true
+    },
+    {
+      "name": "10_PASS_not_claimed_as_total",
+      "passed": true
+    },
+    {
+      "name": "117_matrix_urls",
+      "passed": true
+    },
+    {
+      "name": "104_exact_search_matches",
+      "passed": true
+    },
+    {
+      "name": "both_proposals_original_agents",
+      "passed": true
+    },
+    {
+      "name": "incomplete_council_not_approved",
+      "passed": true
+    },
+    {
+      "name": "actual_native_page2_request",
+      "passed": true
+    },
+    {
+      "name": "12_to14_without_duplicate_ID",
+      "passed": true
+    },
+    {
+      "name": "original_IDs_preserved",
+      "passed": true
+    },
+    {
+      "name": "4_browser_captures_completed",
+      "passed": true
+    },
+    {
+      "name": "browser_failures_not_hidden",
+      "passed": true
+    },
+    {
+      "name": "6_theme_hashes_preserved",
+      "passed": true
+    }
+  ],
+  "passed": 12,
+  "theme_hashes": {
+    "layouts/layout.tpl": true,
+    "snippets/product-list/pagination.tpl": true,
+    "static/js/store.js": true,
+    "sections/main-products-grid.tpl": true,
+    "snippets/blog/blog-pagination.tpl": true,
+    "templates/pages/category.json": true
+  },
+  "theme_changed": false,
+  "production_modified": false
+}

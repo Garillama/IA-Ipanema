@@ -1,0 +1,46 @@
+{
+  "authorized_patch_sha256": "611a5dac1e2767c0d331e42b06c60834e8a427c8bbc41671b9a81a8c977f3e2c",
+  "manifest_sha256": "78ff5e8188a98495fc5517cbbbe63d7f69cf0986457190b44375226a4bbe18b7",
+  "preflight": "passed",
+  "base_hashes": {
+    "tests/unit/test_seo_final_conditions_v4.py": null,
+    "tests/unit/test_seo_regression_v4.py": "5abcd7a00b7c92bd692313980e19a4b8ca69b99e55bd2a2fd9cedc9a1dc7c04b",
+    "tests/unit/test_seo_review_additional_v4.py": null,
+    "tests/unit/test_seo_robots_sources_v4.py": null,
+    "tests/unit/test_seo_robots_values_v4.py": null,
+    "tools/ipanema/seo/crawl_policy.py": "0f62445b9e0fb07bce6c55c59f60b107b52a460b343ea073bb0bee5e8a6009ff",
+    "tools/ipanema/seo/crawler.py": "0cebeb3685255ac5104ce676ade56fdb071d32b00a28f8a3829a1000f2f73f4e",
+    "tools/ipanema/seo/indexability.py": "c379c404241180894d7a0b25f91f357a56173a059f461532ec1f78fb7650b0e8",
+    "tools/ipanema/seo/page_audit.py": "e60c8b928d8e2fd62e2034a247d407f2e52bd62cddcad5b398713a561c5d140b",
+    "tools/ipanema/seo/regression.py": "17de56d903987bd89786abeb4320498fe6cdb2dca9b89d9ab70803a9d73f4d91",
+    "tools/ipanema/seo/robots.py": "7a83bdac275ac8783b7b85841f14d80da0157b9044b1556989a226c1000c8f2b"
+  },
+  "backup_hashes": {
+    "tests/unit/test_seo_regression_v4.py": "5abcd7a00b7c92bd692313980e19a4b8ca69b99e55bd2a2fd9cedc9a1dc7c04b",
+    "tools/ipanema/seo/crawl_policy.py": "0f62445b9e0fb07bce6c55c59f60b107b52a460b343ea073bb0bee5e8a6009ff",
+    "tools/ipanema/seo/crawler.py": "0cebeb3685255ac5104ce676ade56fdb071d32b00a28f8a3829a1000f2f73f4e",
+    "tools/ipanema/seo/indexability.py": "c379c404241180894d7a0b25f91f357a56173a059f461532ec1f78fb7650b0e8",
+    "tools/ipanema/seo/page_audit.py": "e60c8b928d8e2fd62e2034a247d407f2e52bd62cddcad5b398713a561c5d140b",
+    "tools/ipanema/seo/regression.py": "17de56d903987bd89786abeb4320498fe6cdb2dca9b89d9ab70803a9d73f4d91",
+    "tools/ipanema/seo/robots.py": "7a83bdac275ac8783b7b85841f14d80da0157b9044b1556989a226c1000c8f2b"
+  },
+  "approved_backup_valid": true,
+  "foreign_changes_in_scope": false,
+  "payload_files": [
+    "tests/unit/test_seo_final_conditions_v4.py",
+    "tests/unit/test_seo_regression_v4.py",
+    "tests/unit/test_seo_review_additional_v4.py",
+    "tests/unit/test_seo_robots_sources_v4.py",
+    "tests/unit/test_seo_robots_values_v4.py",
+    "tools/ipanema/seo/crawl_policy.py",
+    "tools/ipanema/seo/crawler.py",
+    "tools/ipanema/seo/indexability.py",
+    "tools/ipanema/seo/page_audit.py",
+    "tools/ipanema/seo/regression.py",
+    "tools/ipanema/seo/robots.py"
+  ],
+  "deletions": 0,
+  "remote_authorized": false,
+  "crawl_authorized": false,
+  "outside_tracked_unchanged_after_QA": true
+}

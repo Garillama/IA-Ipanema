@@ -1,0 +1,50 @@
+{
+  "input": "otherbot: bad/,bad/,bad/,bad/,bad/,bad/,bad/,bad/,bad/,bad/,bad/,bad/,bad/,bad/,bad/,bad/,bad/,bad/,bad/,bad/,foo=\"open",
+  "actual": {
+    "sources": [
+      {
+        "kind": "header",
+        "name": "x-robots-tag",
+        "index": 0,
+        "input_sha256": "aa5ea2741a9c38e79c37642e089194dcea82d98b270da2d5a04e909ca718698e",
+        "input_characters": 119,
+        "input_bytes": 119,
+        "scopes": [
+          "otherbot"
+        ],
+        "scope_count": 1,
+        "flags": [],
+        "parameters": [],
+        "errors": [],
+        "unknown": [],
+        "noindex": false,
+        "ambiguous_parameter": false,
+        "counts": {
+          "parameters": 0,
+          "errors": 0,
+          "unknown": 0
+        },
+        "truncated": false
+      }
+    ],
+    "flags": [],
+    "noindex": false,
+    "relevant_errors": [],
+    "processing_complete": true,
+    "counts": {
+      "sources_seen": 1,
+      "sources_processed": 1,
+      "input_bytes_processed": 119,
+      "parameters": 0,
+      "unknown": 0,
+      "errors": 0,
+      "sources_retained": 1
+    },
+    "unvisited_sources_count": 0,
+    "processed_collection_sha256": "6b58fffbd87db37006f4843c1fc234bf83eb653f11dda368a0b71b7b7f34208a",
+    "truncated": false,
+    "state": "no_restrictive_flag_observed",
+    "scope": "Googlebot text results; not Google rendering/index inspection"
+  },
+  "expected_state": "insufficient_evidence"
+}

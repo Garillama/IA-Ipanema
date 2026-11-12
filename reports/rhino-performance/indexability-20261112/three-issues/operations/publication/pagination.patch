@@ -1,0 +1,78 @@
+--- a/snippets/product-list/pagination.tpl
++++ b/snippets/product-list/pagination.tpl
+@@ -10,16 +10,28 @@
+ {% if infinite_scroll %}
+ 	{% if pages.current == 1 and (not pages.is_last or page_next) %}
+ 		<div class="js-load-more pagination-load-more">
+-			<a class="btn btn-primary">
++			<button type="button" class="btn btn-primary" disabled>
+ 				{{ 'general.show_more_products' | t }}
+ 				<span class="js-load-more-spinner pagination-load-more-spinner" style="display:none;">
+ 					<svg class="icon-loading icon-inline"><use xlink:href="#spinner-third"/></svg>
+ 				</span>
+-			</a>
++			</button>
+ 		</div>
+ 		<div id="js-infinite-scroll-spinner" class="pagination-spinner" style="display:none">
+ 			<svg class="icon-loading icon-inline"><use xlink:href="#spinner-third"/></svg>
+ 		</div>
++	{% endif %}
++	{# Native page destinations stay useful after append and without JavaScript. #}
++	{% set numbered_pages = pages.current and pages.current > 0 and not (product_listing and store.has_variants_as_products) %}
++	{% if prev_link or next_link %}
++		<nav class="pagination-nav" data-rhino-pagination-links aria-label="{{ 'bundle.page_x' | t }}: {{ 'general.products_label' | t }}">
++			{% if prev_link %}
++				<a class="pagination-counter" href="{{ prev_link }}">{% if numbered_pages and pages.current > 1 %}{{ 'bundle.page_x' | t }} {{ pages.current - 1 }}{% else %}{{ 'general.previous' | t }}{% endif %}</a>
++			{% endif %}
++			{% if next_link %}
++				<a class="pagination-counter" href="{{ next_link }}">{% if numbered_pages %}{{ 'bundle.page_x' | t }} {{ pages.current + 1 }}{% else %}{{ 'general.next' | t }}{% endif %}</a>
++			{% endif %}
++		</nav>
+ 	{% endif %}
+ {% else %}
+ 	{% if pages.numbers or next_href or prev_href %}
+--- a/static/js/store.js
++++ b/static/js/store.js
+@@ -1744,6 +1744,8 @@
+   function initInfiniteScroll() {
+     const loadMoreBtn = document.querySelector('.js-load-more');
+     if (!loadMoreBtn) return;
++    const loadMoreButton = loadMoreBtn.querySelector('button');
++    let keyboardLoad = null;
+ 
+     LS.hybridScroll({
+       productGridSelector: '.js-product-table',
+@@ -1754,8 +1756,31 @@
+       productsPerPage: 12,
+       afterLoaded: function() {
+         LS.productItemSlider({ pagination_type: 'fraction' });
+-      }
+-    });
++        if (keyboardLoad) {
++          const request = keyboardLoad;
++          keyboardLoad = null;
++          const grid = document.querySelector('.js-product-table');
++          const item = grid && grid.querySelectorAll('[data-product-id]')[request.count];
++          const link = item && item.querySelector('a[href]:not([href="#"])');
++          if (link && document.activeElement === request.fallback) link.focus();
++        }
++      }
++    });
++
++    if (loadMoreButton) {
++      loadMoreButton.disabled = false;
++      loadMoreButton.addEventListener('click', function(event) {
++        keyboardLoad = null;
++        if (event.detail !== 0) return;
++        const grid = document.querySelector('.js-product-table');
++        if (!grid) return;
++        const fallback = loadMoreBtn.parentElement.querySelector('[data-rhino-pagination-links] a[href]') ||
++          (grid.lastElementChild && grid.lastElementChild.querySelector('a[href]'));
++        if (!fallback) return;
++        keyboardLoad = { count: grid.querySelectorAll('[data-product-id]').length, fallback };
++        fallback.focus();
++      });
++    }
+   }
+ 
+   /**

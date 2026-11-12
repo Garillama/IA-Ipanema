@@ -1,0 +1,17 @@
+# Contrato y límites del candidato incremental
+
+El diff nuevo cambia solo robots.py, regression.py, una fixture de regresión existente y añade un archivo de 22 pruebas respecto a 7a5a7066. El parche completo desde el workspace contiene 11 archivos: los nueve anteriores y esos dos archivos de pruebas adicionales. No se integra.
+
+`google_directives(meta, header)` conserva exactamente el cuerpo histórico, salvo el docstring: texto lower-case, parámetros, orden/comas, prefijos de agentes, wildcard y múltiples cabeceras. Incluso conserva detalles peculiares de formato como comas finales. Es un adaptador de visualización; no es un parser seguro de decisiones. `classify`, `audit_snapshot` y `compare` no lo importan ni usan para decidir. No pasa por el serializador de evidencia ni se copia su salida al informe del crawler. La compatibilidad de este adaptador público no impone una salida acotada universal; se mantiene el contrato anterior. Consumidores externos/dinámicos no inventariados pueden existir y deben migrar decisiones a evidencia tipada.
+
+El gate aprueba únicamente el control `:noindex` cuando ambas evidencias tipadas son completas y limpias. No convierte el estado global en indexada ni indexable. Ausente, heredada o malformada permanece unknown. Una nueva restricción tipada válida falla aunque el baseline o el resto del análisis sean desconocidos. Noindex en ambos lados no es una nueva regresión.
+
+Presupuestos de procesamiento: 2.000.000 bytes UTF-8 por fuente, 4.000.000 bytes procesados sumados y 128 fuentes físicas. Si se supera un presupuesto, no se interpreta un prefijo como resultado completo: processing_complete=false, error explícito y estado insuficiente salvo noindex válido observado en otra fuente. El contenido fuera del presupuesto no ha sido evaluado y no se afirma que carezca de restricciones.
+
+Retención: hasta 8 muestras por lista interna, 96 caracteres por campo textual de muestra, 16 fuentes completas retenidas y 65.536 bytes para el resultado JSON. Se continúa evaluando todos los átomos dentro de los presupuestos; flags/noindex, errores de gramática y contadores no dependen de las muestras. `truncated` significa retención resumida; no implica análisis incompleto. `processing_complete=false` sí impide un aprobado de ausencia de restricción. El recuento de fuentes no visitadas se declara desconocido si no se recorrió todo.
+
+Hashes físicos y offsets permiten asociar las muestras con la captura original; un hash no reconstruye el contenido original. El hash de colección procesada y los contadores se mantienen aunque se omitan muestras. Las reproducciones nuevas preservan sus semillas/entrada, sin contenidos privados ni cookies.
+
+Se conserva la estructura duplicada de indexability/template_audit por compatibilidad del informe, pero ambas copias contienen evidencia acotada. No se modifican DNS, TLS, redirecciones, exclusiones privadas, budgets del transporte ni criterios de completitud del crawler. El TLS local anterior se reutiliza por igualdad exacta del transporte, no se presenta como prueba nueva ni de producción.
+
+Alternativas descartadas: recortar las listas después de construirlas (no limita memoria transitoria), usar solo el estado global en el gate (mezcla incertidumbres), romper/eliminar el adaptador sin migración y leer cadenas heredadas como prueba de noindex (contrato ambiguo). No se cambia el orquestador o sus políticas.

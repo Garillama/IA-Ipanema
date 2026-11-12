@@ -1,0 +1,44 @@
+{
+  "source": "reports/runs/rhino-performance/20261112T175313-candidate-native-check-5ee38fe1/result.json",
+  "result": {
+    "native_check_exit": 0,
+    "exact_two_file_validation_observed": true,
+    "published_still_in_sync": true,
+    "theme_files_unchanged": true,
+    "no_persisting_write_allowed": true,
+    "scope": "Official save-time validation; not rendered page proof",
+    "production_modified": false
+  },
+  "server_response": {
+    "valid": true,
+    "errors": []
+  },
+  "transport": [
+    {
+      "method": "GET",
+      "path": "/v1/7400935/theme-installations/14828608",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/v1/7400935/theme-installations/14828608/file-hashes",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/v1/7400935/theme-installations/14828608/files/validate",
+      "status": 200,
+      "operation": "non-persisting-native-validation",
+      "files": [
+        {
+          "path": "static/js/store.js",
+          "sha256": "f97557494e017eba623ba2dd7e568789f8d9035d467f0b03f71bc0b3b8393be9"
+        },
+        {
+          "path": "snippets/product-list/pagination.tpl",
+          "sha256": "0958c668ee40bf0d16c76db4d6493bf6387d17e3ec7ff8f66aaffcce564d463c"
+        }
+      ]
+    }
+  ]
+}

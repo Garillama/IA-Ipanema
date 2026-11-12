@@ -1,0 +1,54 @@
+{
+  "project": "rhino-performance",
+  "at": "2026-11-12T04:44:09.690759+00:00",
+  "status": "partial_blocked_required_reviews_and_gsc",
+  "sitemap_unique_urls": 117,
+  "sitemap_counts": {
+    "home": 1,
+    "page": 8,
+    "catalog": 1,
+    "sitemap_document": 1,
+    "product": 14,
+    "category": 5,
+    "blog": 1,
+    "article": 86
+  },
+  "reachable_from_home_in_partial_html_graph": 52,
+  "reachable_by_type": {
+    "home": 1,
+    "catalog": 1,
+    "page": 6,
+    "product": 14,
+    "category": 5,
+    "blog": 1,
+    "article": 24
+  },
+  "not_observed_in_partial_graph": 65,
+  "live_known_html_documents": 7,
+  "previous_article_postchecks_reused": 20,
+  "sitemap_urls_with_http_observation": 26,
+  "google_indexed_count": null,
+  "google_indexation_state": "unknown_not_zero",
+  "crawler_executed": false,
+  "crawler_blocker": "reports/seo/v4-source-review/delivery.json: workspace_applied=false; implementation_allowed=false",
+  "network_scope": "2 initial documents + 10 fixed document reads, no crawl, no expansion",
+  "blog_continuity": {
+    "page1_articles": 12,
+    "page2_articles": 12,
+    "overlap": 0,
+    "page2_canonical": [
+      "https://rhino-performance.com/blog/"
+    ],
+    "pagination_urls_observed": [
+      "https://rhino-performance.com/blog/?page=1",
+      "https://rhino-performance.com/blog/?page=2",
+      "https://rhino-performance.com/blog/?page=3",
+      "https://rhino-performance.com/blog/?page=4",
+      "https://rhino-performance.com/blog/?page=8"
+    ]
+  },
+  "remote_mutations": false,
+  "theme_changes": false,
+  "nojs_scope": "HTML initial current; actual browser no-JS only historical selected captures",
+  "performance_claim": "not_measured_no_optimization_in_this_phase"
+}

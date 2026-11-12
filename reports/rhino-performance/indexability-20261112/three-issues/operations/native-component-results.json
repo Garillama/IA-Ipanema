@@ -1,0 +1,495 @@
+{
+  "source": "reports/runs/rhino-performance/20261112T172701-native-pagination-focus-proof-996c3494/browser/result.json",
+  "rows": [
+    {
+      "width": 360,
+      "status": "completed",
+      "native_source_sha256": "9dc0e47a547cf88dc0a2f11f416f7338b594a91a7bd2021b775a36b131ccf4a3",
+      "keyboard": "Space",
+      "before": {
+        "count": 72,
+        "enabled": true,
+        "nav": "https://rhino-performance.com/productos/page/2/",
+        "overflow": false
+      },
+      "loading": {
+        "button_hidden": true,
+        "spinner_visible": true
+      },
+      "after_count": 84,
+      "unique_ids": 84,
+      "after_focus": "A",
+      "after_focus_href": "#fixture-7-0",
+      "error_fixture": false,
+      "spinner_hidden": true,
+      "nav_destination_preserved": true,
+      "fixture_requests": [
+        {
+          "page": 2,
+          "served_locally": true,
+          "sent_to_production": false
+        },
+        {
+          "page": 3,
+          "served_locally": true,
+          "sent_to_production": false
+        },
+        {
+          "page": 4,
+          "served_locally": true,
+          "sent_to_production": false
+        },
+        {
+          "page": 5,
+          "served_locally": true,
+          "sent_to_production": false
+        },
+        {
+          "page": 6,
+          "served_locally": true,
+          "sent_to_production": false
+        },
+        {
+          "page": 7,
+          "served_locally": true,
+          "sent_to_production": false
+        }
+      ],
+      "page_error_count": 0,
+      "scope": "Actual published LS + candidate init function + published CSS. DOM and pagination responses are explicit fixtures. No real page3+ requests; not Twig or whole storefront validation."
+    },
+    {
+      "width": 390,
+      "status": "completed",
+      "native_source_sha256": "9dc0e47a547cf88dc0a2f11f416f7338b594a91a7bd2021b775a36b131ccf4a3",
+      "keyboard": "Space",
+      "before": {
+        "count": 72,
+        "enabled": true,
+        "nav": "https://rhino-performance.com/productos/page/2/",
+        "overflow": false
+      },
+      "loading": {
+        "button_hidden": true,
+        "spinner_visible": true
+      },
+      "after_count": 72,
+      "unique_ids": 72,
+      "after_focus": "A",
+      "after_focus_href": "https://rhino-performance.com/productos/page/2/",
+      "error_fixture": true,
+      "spinner_hidden": true,
+      "nav_destination_preserved": true,
+      "fixture_requests": [
+        {
+          "page": 2,
+          "served_locally": true,
+          "sent_to_production": false
+        },
+        {
+          "page": 3,
+          "served_locally": true,
+          "sent_to_production": false
+        },
+        {
+          "page": 4,
+          "served_locally": true,
+          "sent_to_production": false
+        },
+        {
+          "page": 5,
+          "served_locally": true,
+          "sent_to_production": false
+        },
+        {
+          "page": 6,
+          "served_locally": true,
+          "sent_to_production": false
+        },
+        {
+          "page": 7,
+          "served_locally": true,
+          "sent_to_production": false
+        }
+      ],
+      "page_error_count": 0,
+      "scope": "Actual published LS + candidate init function + published CSS. DOM and pagination responses are explicit fixtures. No real page3+ requests; not Twig or whole storefront validation."
+    },
+    {
+      "width": 768,
+      "status": "completed",
+      "native_source_sha256": "9dc0e47a547cf88dc0a2f11f416f7338b594a91a7bd2021b775a36b131ccf4a3",
+      "keyboard": "Enter",
+      "before": {
+        "count": 72,
+        "enabled": true,
+        "nav": "https://rhino-performance.com/productos/page/2/",
+        "overflow": false
+      },
+      "loading": {
+        "button_hidden": true,
+        "spinner_visible": true
+      },
+      "after_count": 84,
+      "unique_ids": 84,
+      "after_focus": "A",
+      "after_focus_href": "#fixture-7-0",
+      "error_fixture": false,
+      "spinner_hidden": true,
+      "nav_destination_preserved": true,
+      "fixture_requests": [
+        {
+          "page": 2,
+          "served_locally": true,
+          "sent_to_production": false
+        },
+        {
+          "page": 3,
+          "served_locally": true,
+          "sent_to_production": false
+        },
+        {
+          "page": 4,
+          "served_locally": true,
+          "sent_to_production": false
+        },
+        {
+          "page": 5,
+          "served_locally": true,
+          "sent_to_production": false
+        },
+        {
+          "page": 6,
+          "served_locally": true,
+          "sent_to_production": false
+        },
+        {
+          "page": 7,
+          "served_locally": true,
+          "sent_to_production": false
+        }
+      ],
+      "page_error_count": 0,
+      "scope": "Actual published LS + candidate init function + published CSS. DOM and pagination responses are explicit fixtures. No real page3+ requests; not Twig or whole storefront validation."
+    },
+    {
+      "width": 1024,
+      "status": "completed",
+      "native_source_sha256": "9dc0e47a547cf88dc0a2f11f416f7338b594a91a7bd2021b775a36b131ccf4a3",
+      "keyboard": "Enter",
+      "before": {
+        "count": 72,
+        "enabled": true,
+        "nav": "https://rhino-performance.com/productos/page/2/",
+        "overflow": false
+      },
+      "loading": {
+        "button_hidden": true,
+        "spinner_visible": true
+      },
+      "after_count": 84,
+      "unique_ids": 84,
+      "after_focus": "A",
+      "after_focus_href": "#fixture-7-0",
+      "error_fixture": false,
+      "spinner_hidden": true,
+      "nav_destination_preserved": true,
+      "fixture_requests": [
+        {
+          "page": 2,
+          "served_locally": true,
+          "sent_to_production": false
+        },
+        {
+          "page": 3,
+          "served_locally": true,
+          "sent_to_production": false
+        },
+        {
+          "page": 4,
+          "served_locally": true,
+          "sent_to_production": false
+        },
+        {
+          "page": 5,
+          "served_locally": true,
+          "sent_to_production": false
+        },
+        {
+          "page": 6,
+          "served_locally": true,
+          "sent_to_production": false
+        },
+        {
+          "page": 7,
+          "served_locally": true,
+          "sent_to_production": false
+        }
+      ],
+      "page_error_count": 0,
+      "scope": "Actual published LS + candidate init function + published CSS. DOM and pagination responses are explicit fixtures. No real page3+ requests; not Twig or whole storefront validation."
+    },
+    {
+      "width": 1440,
+      "status": "completed",
+      "native_source_sha256": "9dc0e47a547cf88dc0a2f11f416f7338b594a91a7bd2021b775a36b131ccf4a3",
+      "keyboard": "Enter",
+      "before": {
+        "count": 72,
+        "enabled": true,
+        "nav": "https://rhino-performance.com/productos/page/2/",
+        "overflow": false
+      },
+      "loading": {
+        "button_hidden": true,
+        "spinner_visible": true
+      },
+      "after_count": 84,
+      "unique_ids": 84,
+      "after_focus": "A",
+      "after_focus_href": "#fixture-7-0",
+      "error_fixture": false,
+      "spinner_hidden": true,
+      "nav_destination_preserved": true,
+      "fixture_requests": [
+        {
+          "page": 2,
+          "served_locally": true,
+          "sent_to_production": false
+        },
+        {
+          "page": 3,
+          "served_locally": true,
+          "sent_to_production": false
+        },
+        {
+          "page": 4,
+          "served_locally": true,
+          "sent_to_production": false
+        },
+        {
+          "page": 5,
+          "served_locally": true,
+          "sent_to_production": false
+        },
+        {
+          "page": 6,
+          "served_locally": true,
+          "sent_to_production": false
+        },
+        {
+          "page": 7,
+          "served_locally": true,
+          "sent_to_production": false
+        }
+      ],
+      "page_error_count": 0,
+      "scope": "Actual published LS + candidate init function + published CSS. DOM and pagination responses are explicit fixtures. No real page3+ requests; not Twig or whole storefront validation."
+    },
+    {
+      "width": 1920,
+      "status": "completed",
+      "native_source_sha256": "9dc0e47a547cf88dc0a2f11f416f7338b594a91a7bd2021b775a36b131ccf4a3",
+      "keyboard": "Enter",
+      "before": {
+        "count": 72,
+        "enabled": true,
+        "nav": "https://rhino-performance.com/productos/page/2/",
+        "overflow": false
+      },
+      "loading": {
+        "button_hidden": true,
+        "spinner_visible": true
+      },
+      "after_count": 84,
+      "unique_ids": 84,
+      "after_focus": "A",
+      "after_focus_href": "#fixture-7-0",
+      "error_fixture": false,
+      "spinner_hidden": true,
+      "nav_destination_preserved": true,
+      "fixture_requests": [
+        {
+          "page": 2,
+          "served_locally": true,
+          "sent_to_production": false
+        },
+        {
+          "page": 3,
+          "served_locally": true,
+          "sent_to_production": false
+        },
+        {
+          "page": 4,
+          "served_locally": true,
+          "sent_to_production": false
+        },
+        {
+          "page": 5,
+          "served_locally": true,
+          "sent_to_production": false
+        },
+        {
+          "page": 6,
+          "served_locally": true,
+          "sent_to_production": false
+        },
+        {
+          "page": 7,
+          "served_locally": true,
+          "sent_to_production": false
+        }
+      ],
+      "page_error_count": 0,
+      "scope": "Actual published LS + candidate init function + published CSS. DOM and pagination responses are explicit fixtures. No real page3+ requests; not Twig or whole storefront validation."
+    }
+  ],
+  "production_modified": false,
+  "storefront_validation": false,
+  "candidate": "v2-focus",
+  "user_move": {
+    "rows": [
+      {
+        "width": 1024,
+        "status": "completed",
+        "native_source_sha256": "9dc0e47a547cf88dc0a2f11f416f7338b594a91a7bd2021b775a36b131ccf4a3",
+        "keyboard": "Enter",
+        "before": {
+          "count": 72,
+          "enabled": true,
+          "nav": "https://rhino-performance.com/productos/page/2/",
+          "overflow": false
+        },
+        "loading": {
+          "button_hidden": true,
+          "spinner_visible": true
+        },
+        "after_count": 84,
+        "unique_ids": 84,
+        "after_focus": "A",
+        "after_focus_href": "#fixture-1-0",
+        "error_fixture": false,
+        "spinner_hidden": true,
+        "nav_destination_preserved": true,
+        "fixture_requests": [
+          {
+            "page": 2,
+            "served_locally": true,
+            "sent_to_production": false
+          },
+          {
+            "page": 3,
+            "served_locally": true,
+            "sent_to_production": false
+          },
+          {
+            "page": 4,
+            "served_locally": true,
+            "sent_to_production": false
+          },
+          {
+            "page": 5,
+            "served_locally": true,
+            "sent_to_production": false
+          },
+          {
+            "page": 6,
+            "served_locally": true,
+            "sent_to_production": false
+          },
+          {
+            "page": 7,
+            "served_locally": true,
+            "sent_to_production": false
+          }
+        ],
+        "page_error_count": 0,
+        "scope": "Actual published LS + candidate init function + published CSS. DOM and pagination responses are explicit fixtures. No real page3+ requests; not Twig or whole storefront validation."
+      }
+    ],
+    "production_modified": false,
+    "storefront_validation": false,
+    "candidate": "v2-focus"
+  },
+  "pointer_AX": {
+    "rows": [
+      {
+        "width": 1440,
+        "status": "completed",
+        "native_source_sha256": "9dc0e47a547cf88dc0a2f11f416f7338b594a91a7bd2021b775a36b131ccf4a3",
+        "keyboard": "pointer",
+        "accessibility": [
+          {
+            "role": "navigation",
+            "name": "Mostrar más productos",
+            "ignored": false
+          },
+          {
+            "role": "button",
+            "name": "Mostrar más productos",
+            "ignored": false
+          },
+          {
+            "role": "link",
+            "name": "Página 2",
+            "ignored": false
+          }
+        ],
+        "before": {
+          "count": 72,
+          "enabled": true,
+          "nav": "https://rhino-performance.com/productos/page/2/",
+          "overflow": false
+        },
+        "loading": {
+          "button_hidden": true,
+          "spinner_visible": true
+        },
+        "after_count": 84,
+        "unique_ids": 84,
+        "after_focus": "BODY",
+        "after_focus_href": null,
+        "error_fixture": false,
+        "spinner_hidden": true,
+        "nav_destination_preserved": true,
+        "fixture_requests": [
+          {
+            "page": 2,
+            "served_locally": true,
+            "sent_to_production": false
+          },
+          {
+            "page": 3,
+            "served_locally": true,
+            "sent_to_production": false
+          },
+          {
+            "page": 4,
+            "served_locally": true,
+            "sent_to_production": false
+          },
+          {
+            "page": 5,
+            "served_locally": true,
+            "sent_to_production": false
+          },
+          {
+            "page": 6,
+            "served_locally": true,
+            "sent_to_production": false
+          },
+          {
+            "page": 7,
+            "served_locally": true,
+            "sent_to_production": false
+          }
+        ],
+        "page_error_count": 0,
+        "scope": "Actual published LS + candidate init function + published CSS. DOM and pagination responses are explicit fixtures. No real page3+ requests; not Twig or whole storefront validation."
+      }
+    ],
+    "production_modified": false,
+    "storefront_validation": false,
+    "candidate": "v2-focus"
+  }
+}

@@ -1,0 +1,206 @@
+{
+  "continued_adr": {
+    "id": "ADR-e3cbd32041d8",
+    "status": "needs_evidence",
+    "implementation_allowed": false,
+    "coverage": {
+      "required_agents": [
+        "claude",
+        "codex"
+      ],
+      "participants": [
+        {
+          "requested_agent": "claude",
+          "effective_agent": "claude",
+          "status": "available"
+        },
+        {
+          "requested_agent": "codex",
+          "effective_agent": "codex",
+          "status": "unavailable",
+          "error": {
+            "category": "inactivity",
+            "error_type": "IpanemaError"
+          }
+        }
+      ],
+      "effective_agents": [
+        "claude"
+      ],
+      "complete": false,
+      "objections_complete": false,
+      "deliberation_complete": false,
+      "defense_complete": false,
+      "agreement": "incomplete",
+      "consensus": "incomplete_or_disagreement"
+    },
+    "conditions": [
+      {
+        "id": "claude-aceptar-con-qa-controlador-evidence-0",
+        "required": true,
+        "status": "pending",
+        "detail": "restricción sin comprobar: functional"
+      },
+      {
+        "id": "claude-aceptar-con-qa-controlador-evidence-1",
+        "required": true,
+        "status": "pending",
+        "detail": "restricción sin comprobar: security"
+      },
+      {
+        "id": "claude-aceptar-con-qa-controlador-evidence-2",
+        "required": true,
+        "status": "pending",
+        "detail": "restricción sin comprobar: compatibility"
+      },
+      {
+        "id": "claude-aceptar-con-qa-controlador-evidence-3",
+        "required": true,
+        "status": "pending",
+        "detail": "restricción sin comprobar: native_reuse"
+      },
+      {
+        "id": "claude-aceptar-con-qa-controlador-evidence-4",
+        "required": true,
+        "status": "pending",
+        "detail": "restricción sin comprobar: seo"
+      },
+      {
+        "id": "claude-aceptar-con-qa-controlador-evidence-5",
+        "required": true,
+        "status": "pending",
+        "detail": "restricción sin comprobar: performance"
+      },
+      {
+        "id": "claude-rechazar-mantener-base-evidence-0",
+        "required": true,
+        "status": "pending",
+        "detail": "restricción sin comprobar: functional"
+      },
+      {
+        "id": "claude-rechazar-mantener-base-evidence-1",
+        "required": true,
+        "status": "pending",
+        "detail": "restricción sin comprobar: security"
+      },
+      {
+        "id": "claude-rechazar-mantener-base-evidence-2",
+        "required": true,
+        "status": "pending",
+        "detail": "restricción sin comprobar: compatibility"
+      },
+      {
+        "id": "claude-rechazar-mantener-base-evidence-3",
+        "required": true,
+        "status": "pending",
+        "detail": "restricción sin comprobar: native_reuse"
+      },
+      {
+        "id": "claude-rechazar-mantener-base-evidence-4",
+        "required": true,
+        "status": "pending",
+        "detail": "restricción sin comprobar: seo"
+      },
+      {
+        "id": "claude-rechazar-mantener-base-evidence-5",
+        "required": true,
+        "status": "pending",
+        "detail": "restricción sin comprobar: performance"
+      },
+      {
+        "id": "claude-refinar-gate-y-topes-evidence-0",
+        "required": true,
+        "status": "pending",
+        "detail": "restricción sin comprobar: functional"
+      },
+      {
+        "id": "claude-refinar-gate-y-topes-evidence-1",
+        "required": true,
+        "status": "pending",
+        "detail": "restricción sin comprobar: security"
+      },
+      {
+        "id": "claude-refinar-gate-y-topes-evidence-2",
+        "required": true,
+        "status": "pending",
+        "detail": "restricción sin comprobar: compatibility"
+      },
+      {
+        "id": "claude-refinar-gate-y-topes-evidence-3",
+        "required": true,
+        "status": "pending",
+        "detail": "restricción sin comprobar: native_reuse"
+      },
+      {
+        "id": "claude-refinar-gate-y-topes-evidence-4",
+        "required": true,
+        "status": "pending",
+        "detail": "restricción sin comprobar: seo"
+      },
+      {
+        "id": "claude-refinar-gate-y-topes-evidence-5",
+        "required": true,
+        "status": "pending",
+        "detail": "restricción sin comprobar: performance"
+      }
+    ],
+    "continued_from_adr": "ADR-1136231f425a",
+    "worker_lifetime_calls": 6,
+    "lifetime_limit": 10
+  },
+  "Claude_delta": {
+    "response": {
+      "decision": "blocked",
+      "summary": "Las cuatro respuestas: (1) El recibo del controlador cierra solo la condición técnica de QA aislado sobre los 9 hashes exactos; no es QA posintegración ni producción. (2) Siguen bloqueando: participación original de Codex, contraste/defensa, recibos de restricciones y autorización local. (3) Sí: conservar 75 URLs HTTP pendientes y el diff existente sin aplicar ni pedir excepción. (4) No hay defecto nuevo demostrado en el candidato; solo faltan condiciones. No se aprueba integración.",
+      "evidence": [
+        "P1 — qa-delta.json: el recibo kind=qa, outcome=passed, con checks exact-candidate-hashes, seo-unit, seo-integration y local-tls en passed. Los hashes de verification_state.workspace coinciden con candidate_hashes, y patch_sha256 es 7a5a7066…. Su propio scope dice 'exact isolated candidate tests, NOT workspace integration QA or production crawl', con workspace_applied=false y remote_requests=0. Esto cierra la objeción de que no había QA del candidato (qa:baseline medía la base). Los conteos 169 unitarias + 13 integración vienen de las preguntas del principal; en el JSON solo consta el estado passed por check, no los números, así que debe verificarse que el recibo los registre. No sustituye QA posintegración, render/SEO/performance ni revisión de producción.",
+        "P2 — Condiciones pendientes según el JSON: (a) participación original: Codex status=unavailable (inactivity), effective_agents=[claude], complete=false; la autorrevisión raíz de Codex no sustituye al CLI original, y la política dual exige ambos; (b) contraste/defensa: objections_complete, deliberation_complete y defense_complete en false, agreement=incomplete; (c) recibos de restricciones: no hay recibo del controlador que resuelva las objeciones medias (granularidad del gate, listas de evidencia sin tope, cambio semántico de google_directives); (d) autorización local: no consta autorización para aplicar al workspace (workspace_applied=false). Ante ausencia de uno de los dos participantes la política obliga a bloquear aprobación.",
+        "P3 — Correcto: los 75 URLs HTTP pendientes no tienen autorización ni recibo de lectura remota (remote_requests=0). Conservarlos como pendientes y mantener el diff existente sin aplicar respeta nivel 3 y la regla de no pedir excepciones ni evadir. No hay base para pedir excepción.",
+        "P4 — Versión correcta de defectos: los contraejemplos reproducidos pertenecen a la BASE actual (hashes base): preview_none (max-image-preview:none clasificado como noindex, esperado indexable_candidate) y product_token_bot_not_Googlebot (coincidencia por subcadena). Los dos fallos de enmascaramiento de fuentes físicas pertenecen al candidato rechazado 4369d84d, no a la base ni al candidato vigente; no deben mezclarse. Contra el candidato vigente (hashes 9 candidatos) no hay fallo reproducido: el recibo passed lo respalda. Las tres observaciones medias (granularidad del gate, performance/listas sin tope, semántica legacy de google_directives) son observaciones de revisión por inspección, no fallos reproducidos; solo condicionan documentación o seguimiento, no exigen cambiar el candidato salvo que una prueba posterior las demuestre.",
+        "Límites: solo he leído qa-delta.json; no he ejecutado pruebas ni inspeccionado el código, y no hay acceso al diff. No declaro consejo completado ni apruebo integración. Sin reintentos, cambios a AGENTS, nuevos crawlers ni modelos más caros."
+      ],
+      "changes": []
+    },
+    "model": {
+      "model": "claude-sonnet-5-5",
+      "effort": "medium",
+      "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+      "verified_at": "2026-11-08"
+    },
+    "execution": {
+      "duration_s": 12.594,
+      "contract_validation": {
+        "status": "passed",
+        "duration_s": 0.000133
+      },
+      "context_complete": true
+    }
+  },
+  "principal_current_base_counterexamples": [
+    {
+      "case": "meta_open_header_noindex",
+      "state": "noindex",
+      "expected": "noindex",
+      "matches": true
+    },
+    {
+      "case": "header_open_then_noindex",
+      "state": "noindex",
+      "expected": "noindex",
+      "matches": true
+    },
+    {
+      "case": "preview_none",
+      "state": "noindex",
+      "expected": "indexable_candidate",
+      "matches": false
+    },
+    {
+      "case": "product_token_bot_not_Googlebot",
+      "state": false,
+      "expected": true,
+      "matches": false
+    }
+  ],
+  "scope": "No consensus complete, isolated QA closed only; no engine/site approval"
+}

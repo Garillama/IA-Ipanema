@@ -1,0 +1,3130 @@
+{
+  "kind": "engineering-council-adr",
+  "version": 1,
+  "id": "ADR-0895add40c30",
+  "at": "2026-11-12T20:45:36.293546+00:00",
+  "project": "rhino-performance",
+  "objective": "Revisión independiente final de solo lectura del parche completo de fuentes robots V4, hash 7a5a7066bb22d2f87c18286100a9fba0ce76e50e53a8cf9b211821d0eba8b4a0. Claude revisar el diff entero y Codex realizar su intervención original; no contar auto-revisión del principal como quorum. Verificar límites físicos de meta/cabeceras, noindex monotónico, unknown conservador, ámbitos válidos de otros agentes, gate legado, warnings de agentes inválidos ajenos y errores conservados para Googlebot/agente propio. Mantener toda objeción crítica pendiente y no aprobar si falta participante o evidencia. Sin edición de archivos ni reutilización de aprobaciones.",
+  "problem": [
+    "En la base, google_directives une meta y cabeceras en una sola cadena: una comilla abierta en una fuente puede ocultar el noindex de otra, y \\bnone\\b toma max-image-preview:none como noindex. Además, _selected usa coincidencia por subcadena (el token 'bot' captura a Googlebot). El gate legado busca 'noindex' como subcadena y crawl_policy deja pasar rutas de acción con separadores o sufijos.",
+    "Determinar la admisibilidad técnica del candidato exacto sin convertir QA aislado ni esta intervención original de Codex en aprobación conjunta."
+  ],
+  "context": {
+    "project": "rhino-performance",
+    "run_id": "20261111T184755-orchestration-66d74a17",
+    "source_sha256": "d229328968f7a85cf1722bd2d6019b79cdb4446ef3bbba221ef207302f317e57",
+    "objective_sha256": "d75ec302c61f1593ec4cf3d0b2296b8dc01f21d1a7f1a2a97bf68b2cf2f027e0",
+    "files": {
+      "reports/seo/v4-robots-sources-final.patch": "7a5a7066bb22d2f87c18286100a9fba0ce76e50e53a8cf9b211821d0eba8b4a0",
+      "reports/seo/v4-source-review/revision3/validation.json": "10bf719a774bdad0203082593403da4592a2b0307a3445580eadbfbab43c3ae8",
+      "reports/seo/v4-source-review/revision3/ADR-addendum.md": "f116e9d3e5354b24113a0861b37b010a1a42701561e6148b3c565af668f574ba",
+      "reports/seo/v4-source-review/revision3/after-final-specific.json": "137e06d19b29960b60dcec0b1799019be4c94a676a7f8c8c9901b3941a96ba27",
+      "reports/seo/v4-source-review/revision3/candidate-qa-report.json": "6cf565a79e8b16664c70f1af0baba37cfcc8a905f1091c805c00f73571a7e973",
+      "tools/ipanema/seo/robots.py": "7a83bdac275ac8783b7b85841f14d80da0157b9044b1556989a226c1000c8f2b",
+      "tools/ipanema/seo/indexability.py": "c379c404241180894d7a0b25f91f357a56173a059f461532ec1f78fb7650b0e8",
+      "tools/ipanema/seo/page_audit.py": "e60c8b928d8e2fd62e2034a247d407f2e52bd62cddcad5b398713a561c5d140b",
+      "tools/ipanema/seo/regression.py": "17de56d903987bd89786abeb4320498fe6cdb2dca9b89d9ab70803a9d73f4d91",
+      "tools/ipanema/seo/crawl_policy.py": "0f62445b9e0fb07bce6c55c59f60b107b52a460b343ea073bb0bee5e8a6009ff",
+      "tools/ipanema/seo/crawler.py": "0cebeb3685255ac5104ce676ade56fdb071d32b00a28f8a3829a1000f2f73f4e"
+    },
+    "required_constraints": [
+      "performance",
+      "seo"
+    ],
+    "instructions_sha256": "435483bf81b10bbc2bc2b41ce12a6e35d914da8f6ab2eb98b8be8799f0f9932e",
+    "require_objections": true,
+    "require_defense": true,
+    "participation_sha256": "9ff597857187450dc19d945e8124e6a50c9a76a12101de1d08f41ada93399d8c"
+  },
+  "status": "needs_evidence",
+  "implementation_allowed": false,
+  "production_authorized": false,
+  "approval_scope": "local_implementation_only",
+  "coverage": {
+    "required_agents": [
+      "claude",
+      "codex"
+    ],
+    "participants": [
+      {
+        "requested_agent": "claude",
+        "effective_agent": "claude",
+        "status": "available"
+      },
+      {
+        "requested_agent": "codex",
+        "effective_agent": "codex",
+        "status": "available"
+      }
+    ],
+    "effective_agents": [
+      "claude",
+      "codex"
+    ],
+    "complete": true,
+    "objections_complete": true,
+    "deliberation_complete": true,
+    "defense_complete": true,
+    "agreement": "disagreement",
+    "consensus": "incomplete_or_disagreement"
+  },
+  "proposals": [
+    {
+      "requested_agent": "claude",
+      "effective_agent": "claude",
+      "status": "available",
+      "proposal": {
+        "decision": "proposed",
+        "summary": "Revisé de forma independiente y solo lectura todo el diff 7a5a7066…, comparándolo con los seis archivos base. Por inspección del código no encontré falsos negativos críticos: cada meta y cada cabecera física se analiza por separado; un noindex o none válido sigue siendo restrictivo aunque haya otras fuentes (monotónico); las fuentes malformadas y los ámbitos ambiguos quedan como evidencia insuficiente; los ámbitos válidos de otros agentes se respetan; se corrige la coincidencia por subcadena del User-agent; y Googlebot o el agente propio con token inválido sigue bloqueando. No apruebo: el controlador no tiene QA del candidato con este hash (qa:baseline mide la base), Codex no ha intervenido y quedan tres objeciones medias no críticas (granularidad del gate, listas de evidencia sin tope y cambio semántico de google_directives).",
+        "changes": [],
+        "evidence": [
+          "source:reports/seo/v4-robots-sources-final.patch",
+          "source:tools/ipanema/seo/robots.py",
+          "source:tools/ipanema/seo/indexability.py",
+          "source:tools/ipanema/seo/page_audit.py",
+          "source:tools/ipanema/seo/regression.py",
+          "source:tools/ipanema/seo/crawl_policy.py",
+          "source:tools/ipanema/seo/crawler.py",
+          "qa:baseline"
+        ],
+        "analysis": {
+          "problem": "En la base, google_directives une meta y cabeceras en una sola cadena: una comilla abierta en una fuente puede ocultar el noindex de otra, y \\bnone\\b toma max-image-preview:none como noindex. Además, _selected usa coincidencia por subcadena (el token 'bot' captura a Googlebot). El gate legado busca 'noindex' como subcadena y crawl_policy deja pasar rutas de acción con separadores o sufijos.",
+          "cause": "El análisis trata el texto unido y no respeta los límites físicos; no hay tipos para flags, parámetros y errores; el User-agent se empareja por subcadena y las expresiones de rutas privadas y acciones son demasiado laxas. Los encontré en la fuente base de robots.py, indexability.py, page_audit.py, regression.py y crawl_policy.py.",
+          "recommendation": "claude-aceptar-con-qa-controlador",
+          "evidence_refs": [
+            "source:tools/ipanema/seo/robots.py",
+            "source:tools/ipanema/seo/indexability.py",
+            "source:tools/ipanema/seo/page_audit.py",
+            "source:tools/ipanema/seo/regression.py",
+            "source:tools/ipanema/seo/crawl_policy.py",
+            "source:reports/seo/v4-robots-sources-final.patch"
+          ],
+          "hypotheses": [
+            "H1 (confirmada por inspección): noindex = any(source.noindex) y los errores nunca borran flags; el estado de una comilla no cruza de una fuente a otra porque _parse_directive_source se llama por cada fuente.",
+            "H2 (confirmada por inspección): una cabecera 'otherbot: foo=\"x, googlebot: noindex' produce el error ambiguous_header_scope y queda como insufficient_evidence, no como candidato.",
+            "H3 (objeción media): en el gate, la comprobación :noindex queda unknown siempre que el estado global sea insufficient_evidence, aunque el motivo no tenga que ver con robots (soft404, contenido). Las auditorías de página que no tienen noindex se mapean siempre a insufficient_evidence, así que ese gate ya no puede llegar a passed_scoped_checks.",
+            "H4 (objeción media): robots_evidence guarda listas parameters/unknown/errors sin tope para cada fuente; se persiste en indexability y también en template_audit de cada nodo. Una meta de 2 MB con muchos átomos inflaría el informe.",
+            "H5 (objeción media): google_directives pasa a devolver solo flags. Posibles consumidores fuera de los archivos autorizados que busquen parámetros (max-snippet, unavailable_after) perderían datos; no está verificado.",
+            "H6 (baja): en una meta, 'googlebot: noindex' o 'foo: noindex' quedan como parámetro desconocido y se clasifican indexable_candidate, no unknown. Es coherente con la documentación de Google, pero menos conservador que 'foo=\"googlebot: noindex\"'.",
+            "H7 (baja): PRIVATE con (?![a-z]) admite formas plurales como /carritos o /carts. La exclusión NAT64 rechaza también IPv4 públicas traducidas, lo que puede impedir el rastreo en redes que solo tienen IPv6 con DNS64.",
+            "H8 (proceso, crítica para aprobar): validation.json y candidate-qa-report son artefactos del autor; el controlador no tiene un recibo de QA del árbol candidato con este hash."
+          ],
+          "native_components": [
+            "Robots.parse/_selected (robots.py)",
+            "google_directive_evidence/_parse_directive_source (robots.py)",
+            "classify (indexability.py)",
+            "audit_snapshot (page_audit.py)",
+            "compare/_nodes (regression.py)",
+            "Policy/Fetcher/public_addresses (crawl_policy.py)",
+            "crawl/verification_coverage (crawler.py)"
+          ],
+          "risks": [
+            "Crítico de proceso: no existe un recibo de QA del controlador para el árbol candidato. Los resultados de 85, 169 y 396 tests son del autor y no cuentan como evidencia independiente.",
+            "Medio: el gate :noindex queda unknown por motivos ajenos a robots, y los gates de auditoría de página ya no pueden aprobar (conservador, pero reduce la utilidad del gate).",
+            "Medio: las listas de evidencia sin tope se duplican en indexability y template_audit; con contenido extremo, el JSON y el CSV exportados pueden crecer mucho.",
+            "Medio: google_directives ahora devuelve solo flags; posibles consumidores fuera de los archivos autorizados no verificados.",
+            "Bajo: meta 'googlebot: noindex' clasificada como candidato; rutas plurales /carritos y /carts no excluidas; NAT64 rechazado aunque traduzca a IPv4 pública.",
+            "Bajo: Googlebot-Image/1.0 u otras variantes con versión bloquean todo el rastreo (límite documentado en el ADR)."
+          ],
+          "tests": [
+            "QA del controlador sobre el árbol con el parche 7a5a7066… aplicado en una copia aislada: discover tests/unit -p 'test_seo*.py', integración SEO, qa --suite seo y unidades generales, comprobando los hashes candidate_hashes.",
+            "Comprobar test_valid_restriction_is_monotonic_across_sources y test_peer_C1/C2/C3 en la ejecución del controlador, no en el informe del autor.",
+            "Caso adicional: gate de crawl con nodo soft404 antes y después sin noindex; documentar si :noindex debe quedar unknown o passed.",
+            "Caso adicional: meta robots con 200000 átomos desconocidos; medir el tamaño de robots_evidence serializado y el tiempo de classify.",
+            "Caso adicional: meta robots 'googlebot: noindex' y header 'Googlebot-Image/1.0' en robots.txt; registrar el estado esperado.",
+            "Buscar consumidores de google_directives y has_noindex fuera de los archivos autorizados antes de aplicar el parche al workspace.",
+            "Revisión independiente de Codex sobre el mismo hash; sin ella la aprobación sigue bloqueada."
+          ],
+          "files": [
+            "reports/seo/v4-robots-sources-final.patch",
+            "tools/ipanema/seo/robots.py",
+            "tools/ipanema/seo/indexability.py",
+            "tools/ipanema/seo/page_audit.py",
+            "tools/ipanema/seo/regression.py",
+            "tools/ipanema/seo/crawl_policy.py",
+            "tools/ipanema/seo/crawler.py",
+            "reports/seo/v4-source-review/revision3/validation.json"
+          ],
+          "impacts": {
+            "seo": "Mejora la exactitud de la indexabilidad observable: preview:none deja de ser noindex, desaparece el enmascaramiento entre fuentes y los ámbitos de agente se respetan. Las extensiones no soportadas pasan a insufficient_evidence. No es prueba de indexación en Google.",
+            "performance": "Solo afecta a herramientas offline y al crawler. El análisis es lineal por fuente, con un coste extra pequeño por la detección de ambigüedad. El tamaño de los informes puede crecer sin tope (H4). No afecta al storefront.",
+            "responsive": "Sin impacto: no toca el tema ni la plantilla.",
+            "accessibility": "Sin impacto: no toca el tema ni la interfaz.",
+            "uiux": "Los informes muestran más estados unknown e incluyen la procedencia por fuente (hash, índice, errores); conviene explicar en la documentación por qué un gate queda insufficient_evidence.",
+            "commerce": "Exclusión más estricta de carrito, checkout y acciones de compra en el crawler; no hay mutaciones ni formularios comerciales."
+          },
+          "confidence": 0.72,
+          "alternatives": [
+            {
+              "id": "claude-aceptar-con-qa-controlador",
+              "description": "Mantener el parche 7a5a7066… sin cambios. Aprobarlo solo cuando haya un recibo de QA del controlador sobre el árbol candidato (unidades SEO, integración, suite seo y unidades generales) y la intervención independiente de Codex. H3, H4 y H5 quedan registradas como seguimiento no bloqueante en una revisión posterior con hash nuevo.",
+              "constraints": {
+                "functional": {
+                  "status": "unknown",
+                  "evidence_refs": [
+                    "source:reports/seo/v4-robots-sources-final.patch",
+                    "source:reports/seo/v4-source-review/revision3/after-final-specific.json"
+                  ]
+                },
+                "security": {
+                  "status": "pass",
+                  "evidence_refs": [
+                    "source:reports/seo/v4-robots-sources-final.patch",
+                    "source:tools/ipanema/seo/crawl_policy.py"
+                  ]
+                },
+                "compatibility": {
+                  "status": "unknown",
+                  "evidence_refs": [
+                    "source:tools/ipanema/seo/robots.py",
+                    "source:tools/ipanema/seo/regression.py"
+                  ]
+                },
+                "native_reuse": {
+                  "status": "pass",
+                  "evidence_refs": [
+                    "source:reports/seo/v4-robots-sources-final.patch"
+                  ]
+                },
+                "seo": {
+                  "status": "unknown",
+                  "evidence_refs": [
+                    "source:reports/seo/v4-robots-sources-final.patch",
+                    "source:tools/ipanema/seo/indexability.py"
+                  ]
+                },
+                "performance": {
+                  "status": "unknown",
+                  "evidence_refs": [
+                    "source:reports/seo/v4-robots-sources-final.patch"
+                  ]
+                },
+                "accessibility": {
+                  "status": "pass",
+                  "evidence_refs": [
+                    "source:reports/seo/v4-robots-sources-final.patch"
+                  ]
+                },
+                "responsive": {
+                  "status": "pass",
+                  "evidence_refs": [
+                    "source:reports/seo/v4-robots-sources-final.patch"
+                  ]
+                },
+                "maintainability": {
+                  "status": "pass",
+                  "evidence_refs": [
+                    "source:reports/seo/v4-robots-sources-final.patch",
+                    "source:reports/seo/v4-source-review/revision3/ADR-addendum.md"
+                  ]
+                },
+                "reversibility": {
+                  "status": "pass",
+                  "evidence_refs": [
+                    "source:reports/seo/v4-source-review/revision3/validation.json"
+                  ]
+                },
+                "complexity": {
+                  "status": "pass",
+                  "evidence_refs": [
+                    "source:reports/seo/v4-robots-sources-final.patch"
+                  ]
+                },
+                "development_cost": {
+                  "status": "pass",
+                  "evidence_refs": [
+                    "source:reports/seo/v4-robots-sources-final.patch"
+                  ]
+                },
+                "execution_cost": {
+                  "status": "unknown",
+                  "evidence_refs": [
+                    "source:reports/seo/v4-robots-sources-final.patch"
+                  ]
+                }
+              },
+              "files": [
+                "reports/seo/v4-robots-sources-final.patch",
+                "tools/ipanema/seo/robots.py",
+                "tools/ipanema/seo/indexability.py",
+                "tools/ipanema/seo/page_audit.py",
+                "tools/ipanema/seo/regression.py",
+                "tools/ipanema/seo/crawl_policy.py",
+                "tools/ipanema/seo/crawler.py",
+                "reports/seo/v4-source-review/revision3/validation.json"
+              ],
+              "tests": [
+                "QA del controlador sobre el árbol candidato aislado: unidades SEO, integración SEO, qa --suite seo y unidades generales, con los hashes candidate_hashes verificados.",
+                "Revisión independiente de Codex sobre el hash exacto 7a5a7066…."
+              ]
+            },
+            {
+              "id": "claude-refinar-gate-y-topes",
+              "description": "Revisión menor antes de aprobar: (1) en el gate, :noindex se decide con robots_evidence (noindex o relevant_errors) y no con el estado global de indexabilidad; (2) se mapea no_restrictive_flag_observed en auditorías de página; (3) se limitan parameters/unknown/errors por fuente, guardando un recuento y truncated=true; (4) se documenta el cambio de google_directives. Genera un hash nuevo y exige revisión completa otra vez.",
+              "constraints": {
+                "functional": {
+                  "status": "unknown",
+                  "evidence_refs": [
+                    "source:tools/ipanema/seo/regression.py",
+                    "source:reports/seo/v4-robots-sources-final.patch"
+                  ]
+                },
+                "security": {
+                  "status": "pass",
+                  "evidence_refs": [
+                    "source:reports/seo/v4-robots-sources-final.patch"
+                  ]
+                },
+                "compatibility": {
+                  "status": "unknown",
+                  "evidence_refs": [
+                    "source:tools/ipanema/seo/regression.py",
+                    "source:tools/ipanema/seo/page_audit.py"
+                  ]
+                },
+                "native_reuse": {
+                  "status": "pass",
+                  "evidence_refs": [
+                    "source:reports/seo/v4-robots-sources-final.patch"
+                  ]
+                },
+                "seo": {
+                  "status": "unknown",
+                  "evidence_refs": [
+                    "source:tools/ipanema/seo/regression.py"
+                  ]
+                },
+                "performance": {
+                  "status": "unknown",
+                  "evidence_refs": [
+                    "source:tools/ipanema/seo/crawler.py"
+                  ]
+                },
+                "accessibility": {
+                  "status": "pass",
+                  "evidence_refs": [
+                    "source:reports/seo/v4-robots-sources-final.patch"
+                  ]
+                },
+                "responsive": {
+                  "status": "pass",
+                  "evidence_refs": [
+                    "source:reports/seo/v4-robots-sources-final.patch"
+                  ]
+                },
+                "maintainability": {
+                  "status": "pass",
+                  "evidence_refs": [
+                    "source:reports/seo/v4-robots-sources-final.patch"
+                  ]
+                },
+                "reversibility": {
+                  "status": "pass",
+                  "evidence_refs": [
+                    "source:reports/seo/v4-source-review/revision3/validation.json"
+                  ]
+                },
+                "complexity": {
+                  "status": "pass",
+                  "evidence_refs": [
+                    "source:tools/ipanema/seo/regression.py"
+                  ]
+                },
+                "development_cost": {
+                  "status": "unknown",
+                  "evidence_refs": [
+                    "source:reports/seo/v4-robots-sources-final.patch"
+                  ]
+                },
+                "execution_cost": {
+                  "status": "unknown",
+                  "evidence_refs": [
+                    "source:tools/ipanema/seo/crawler.py"
+                  ]
+                }
+              },
+              "files": [
+                "tools/ipanema/seo/robots.py",
+                "tools/ipanema/seo/regression.py",
+                "tools/ipanema/seo/page_audit.py",
+                "tools/ipanema/seo/indexability.py",
+                "tools/ipanema/seo/crawler.py",
+                "reports/seo/v4-robots-sources-final.patch"
+              ],
+              "tests": [
+                "Gate con nodo soft404 sin noindex antes y después: :noindex debe resultar passed si robots_evidence no tiene errores.",
+                "Meta con 200000 átomos desconocidos: robots_evidence acotado con truncated=true y noindex conservado.",
+                "Repetir toda la QA del controlador con el hash nuevo."
+              ]
+            },
+            {
+              "id": "claude-rechazar-mantener-base",
+              "description": "Rechazar el parche y conservar la base. No es admisible: la base marca max-image-preview:none como noindex, deja que una comilla oculte el noindex de otra fuente y empareja el User-agent por subcadena.",
+              "constraints": {
+                "functional": {
+                  "status": "fail",
+                  "evidence_refs": [
+                    "source:tools/ipanema/seo/robots.py",
+                    "source:tools/ipanema/seo/indexability.py"
+                  ]
+                },
+                "security": {
+                  "status": "fail",
+                  "evidence_refs": [
+                    "source:tools/ipanema/seo/crawl_policy.py"
+                  ]
+                },
+                "compatibility": {
+                  "status": "pass",
+                  "evidence_refs": [
+                    "qa:baseline"
+                  ]
+                },
+                "native_reuse": {
+                  "status": "pass",
+                  "evidence_refs": [
+                    "source:tools/ipanema/seo/robots.py"
+                  ]
+                },
+                "seo": {
+                  "status": "fail",
+                  "evidence_refs": [
+                    "source:tools/ipanema/seo/robots.py",
+                    "source:tools/ipanema/seo/page_audit.py"
+                  ]
+                },
+                "performance": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "accessibility": {
+                  "status": "pass",
+                  "evidence_refs": [
+                    "source:tools/ipanema/seo/robots.py"
+                  ]
+                },
+                "responsive": {
+                  "status": "pass",
+                  "evidence_refs": [
+                    "source:tools/ipanema/seo/robots.py"
+                  ]
+                },
+                "maintainability": {
+                  "status": "fail",
+                  "evidence_refs": [
+                    "source:tools/ipanema/seo/regression.py"
+                  ]
+                },
+                "reversibility": {
+                  "status": "pass",
+                  "evidence_refs": [
+                    "qa:baseline"
+                  ]
+                },
+                "complexity": {
+                  "status": "pass",
+                  "evidence_refs": [
+                    "source:tools/ipanema/seo/robots.py"
+                  ]
+                },
+                "development_cost": {
+                  "status": "pass",
+                  "evidence_refs": [
+                    "qa:baseline"
+                  ]
+                },
+                "execution_cost": {
+                  "status": "pass",
+                  "evidence_refs": [
+                    "qa:baseline"
+                  ]
+                }
+              },
+              "files": [
+                "tools/ipanema/seo/robots.py",
+                "tools/ipanema/seo/indexability.py",
+                "tools/ipanema/seo/crawl_policy.py"
+              ],
+              "tests": [
+                "Reproducir sobre la base: meta max-image-preview:none resulta noindex (defecto) y 'User-agent: bot' captura a Googlebot (defecto)."
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "requested_agent": "codex",
+      "effective_agent": "codex",
+      "status": "available",
+      "proposal": {
+        "decision": "blocked",
+        "summary": "El diff completo de nueve archivos conserva los límites físicos, el noindex monotónico y el unknown conservador. El recibo nuevo acredita QA del candidato exacto aislado. No identifico una objeción crítica nueva por lectura estática, pero falta en lo aportado la intervención independiente final de Claude y no constan cerradas todas las condiciones obligatorias.",
+        "changes": [],
+        "evidence": [
+          "Revisados el diff íntegro y los seis originales completos suministrados; sin herramientas, ejecución ni edición.",
+          "google_directive_evidence procesa cada meta y campo de cabecera por separado; agrega flags y errores, sin concatenar fuentes para decidir.",
+          "classify y audit_snapshot priorizan restricciones válidas sobre errores; index no neutraliza noindex.",
+          "Los ámbitos válidos de otros agentes persisten entre comas; las interpretaciones alternativas solo generan incertidumbre.",
+          "El gate deja unknown sin evidencia tipada y marca failed ante noindex posterior aunque el baseline sea desconocido.",
+          "Los agentes inválidos ajenos generan warnings; Googlebot, el agente propio y wildcard conservan errores bloqueantes.",
+          "acceptance exact-patched-controller-QA acredita hashes, unitarias SEO, integración SEO y TLS local del hash 7a5a7066bb22d2f87c18286100a9fba0ce76e50e53a8cf9b211821d0eba8b4a0.",
+          "Los informes QA omitidos solo tienen referencias y hashes; no afirmo haber leído su contenido."
+        ],
+        "analysis": {
+          "problem": "Determinar la admisibilidad técnica del candidato exacto sin convertir QA aislado ni esta intervención original de Codex en aprobación conjunta.",
+          "cause": "El código original mezclaba fuentes robots y decidía mediante coincidencias textuales. El parche introduce evidencia tipada e integra consumidores, pero la aprobación exige revisión independiente y cierre explícito de condiciones pendientes.",
+          "recommendation": "codex-conservar-candidato",
+          "evidence_refs": [
+            "source:reports/seo/v4-robots-sources-final.patch",
+            "source:tools/ipanema/seo/robots.py",
+            "source:tools/ipanema/seo/indexability.py",
+            "source:tools/ipanema/seo/page_audit.py",
+            "source:tools/ipanema/seo/regression.py",
+            "source:tools/ipanema/seo/crawl_policy.py",
+            "source:tools/ipanema/seo/crawler.py",
+            "qa:baseline"
+          ],
+          "hypotheses": [
+            "La separación por fuente evita que una comilla abierta o un ámbito ajeno oculte restricciones válidas de otra fuente.",
+            "La incertidumbre deliberada puede reducir candidatos ante extensiones no soportadas; no describe una recuperación observada de Google."
+          ],
+          "native_components": [
+            "Robots",
+            "extract",
+            "classify",
+            "audit_snapshot",
+            "compare",
+            "Policy",
+            "Fetcher",
+            "crawl"
+          ],
+          "risks": [
+            "Bloqueante: no se aporta aquí la intervención final independiente de Claude sobre este hash; esta revisión de Codex no completa el quorum.",
+            "Las objeciones críticas previas no aportadas conservan su estado pendiente; el recibo solo cierra lo que acredita expresamente.",
+            "Observación baja: _nodes mantiene insufficient_evidence también para auditorías nuevas sin noindex, aunque incluyan evidencia tipada limpia; el gate queda conservador y pierde precisión.",
+            "Googlebot/2.1 permanece bloqueante por diseño; es un límite de compatibilidad explícito.",
+            "Rendimiento y costes no medidos; las comprobaciones funcionales no los sustituyen."
+          ],
+          "tests": [
+            "Recibo exact-patched-controller-QA: exact-candidate-hashes, seo-unit, seo-integration y local-tls aprobados para el candidato aislado.",
+            "Los tests incluidos cubren fuentes independientes, monotonía, ámbitos ajenos, gramática ambigua, gate legado y warnings frente a errores relevantes.",
+            "El diff añade cobertura de DNS, presupuestos, redirecciones y completitud; su presencia no demuestra cobertura exhaustiva.",
+            "No se ejecutaron pruebas durante esta intervención y no se inspeccionaron informes omitidos."
+          ],
+          "files": [
+            "reports/seo/v4-robots-sources-final.patch",
+            "tools/ipanema/seo/robots.py",
+            "tools/ipanema/seo/indexability.py",
+            "tools/ipanema/seo/page_audit.py",
+            "tools/ipanema/seo/regression.py",
+            "tools/ipanema/seo/crawl_policy.py",
+            "tools/ipanema/seo/crawler.py"
+          ],
+          "impacts": {
+            "seo": "Validación técnica acotada respaldada por el controlador; sin prueba de indexación ni del comportamiento de recuperación de Google.",
+            "performance": "unknown: no se aportan mediciones de tiempo, memoria o carga.",
+            "responsive": "unknown: sin cambios de interfaz en el diff ni mediciones responsive.",
+            "accessibility": "unknown: sin evaluación de accesibilidad aportada.",
+            "uiux": "Sin cambios de interfaz en el diff; la incertidumbre se hace explícita en informes.",
+            "commerce": "Se refuerzan exclusiones de acciones y rutas privadas; no se acredita ninguna operación comercial."
+          },
+          "confidence": 0.86,
+          "alternatives": [
+            {
+              "id": "codex-conservar-candidato",
+              "description": "Conservar el candidato exacto sin aplicarlo y mantener bloqueada la aprobación hasta recibir la revisión final independiente de Claude y resolver mediante evidencia las condiciones obligatorias pendientes.",
+              "constraints": {
+                "functional": {
+                  "status": "pass",
+                  "evidence_refs": [
+                    "qa:baseline",
+                    "source:reports/seo/v4-robots-sources-final.patch"
+                  ]
+                },
+                "security": {
+                  "status": "pass",
+                  "evidence_refs": [
+                    "source:reports/seo/v4-robots-sources-final.patch",
+                    "qa:baseline"
+                  ]
+                },
+                "compatibility": {
+                  "status": "unknown",
+                  "evidence_refs": [
+                    "qa:baseline"
+                  ]
+                },
+                "native_reuse": {
+                  "status": "pass",
+                  "evidence_refs": [
+                    "source:reports/seo/v4-robots-sources-final.patch"
+                  ]
+                },
+                "seo": {
+                  "status": "pass",
+                  "evidence_refs": [
+                    "source:reports/seo/v4-robots-sources-final.patch",
+                    "qa:baseline"
+                  ]
+                },
+                "performance": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "accessibility": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "responsive": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "maintainability": {
+                  "status": "pass",
+                  "evidence_refs": [
+                    "source:reports/seo/v4-robots-sources-final.patch"
+                  ]
+                },
+                "reversibility": {
+                  "status": "pass",
+                  "evidence_refs": [
+                    "source:reports/seo/v4-robots-sources-final.patch"
+                  ]
+                },
+                "complexity": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "development_cost": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "execution_cost": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                }
+              },
+              "files": [
+                "reports/seo/v4-robots-sources-final.patch"
+              ],
+              "tests": [
+                "El controlador acredita hashes exactos, unitarias SEO, integración SEO y TLS local aprobados en una copia aislada.",
+                "El recibo excluye integración del workspace y rastreo de producción; no acredita rendimiento.",
+                "Esta revisión no ejecuta pruebas ni cierra por sí sola objeciones críticas."
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "objections": [
+    {
+      "id": "claude-obj-gate-granularidad",
+      "alternative_id": "codex-conservar-candidato",
+      "category": "compatibilidad/seo",
+      "severity": "medium",
+      "claim": "En regression.py, la comprobación :noindex queda unknown siempre que el estado global sea insufficient_evidence, aunque la causa no sea robots (soft404, canonical ambiguo). Además, _nodes asigna insufficient_evidence a toda auditoría de página sin noindex, aunque su robots_evidence esté limpia. El gate no llega a passed_scoped_checks y pierde precisión. Debería decidir con robots_evidence.noindex y relevant_errors.",
+      "status": "open",
+      "evidence_refs": [
+        "source:tools/ipanema/seo/regression.py",
+        "source:tools/ipanema/seo/indexability.py"
+      ],
+      "resolution_evidence_refs": [],
+      "participant": "claude",
+      "effective_agent": "claude",
+      "key": "claude:claude-obj-gate-granularidad",
+      "resolved_by_controller": false,
+      "resolution_receipts": []
+    },
+    {
+      "id": "claude-obj-evidencia-sin-tope",
+      "alternative_id": "codex-conservar-candidato",
+      "category": "rendimiento",
+      "severity": "medium",
+      "claim": "google_directive_evidence guarda parameters, unknown y errors sin tope por fuente. robots_evidence se persiste en indexability y también en template_audit de cada nodo. Una meta con muchos átomos infla JSON y exportaciones. Las listas deberían llevar un tope con recuento y un indicador truncated. El tamaño y el tiempo de esa evidencia no están medidos.",
+      "status": "open",
+      "evidence_refs": [
+        "source:tools/ipanema/seo/robots.py",
+        "source:tools/ipanema/seo/page_audit.py",
+        "source:tools/ipanema/seo/crawler.py"
+      ],
+      "resolution_evidence_refs": [],
+      "participant": "claude",
+      "effective_agent": "claude",
+      "key": "claude:claude-obj-evidencia-sin-tope",
+      "resolved_by_controller": false,
+      "resolution_receipts": []
+    },
+    {
+      "id": "claude-obj-google-directives-semantica",
+      "alternative_id": "codex-conservar-candidato",
+      "category": "compatibilidad",
+      "severity": "medium",
+      "claim": "google_directives pasa a devolver solo flags: pierde max-snippet y unavailable_after, y ya no incluye 'googlebot:' ni '*' en la cabecera. No se verificó que no haya consumidores fuera de los archivos autorizados, y el cambio de semántica no está documentado. Falta buscar consumidores de google_directives y has_noindex antes de aplicar el parche al workspace.",
+      "status": "open",
+      "evidence_refs": [
+        "source:tools/ipanema/seo/robots.py",
+        "source:reports/seo/v4-source-review/revision3/ADR-addendum.md"
+      ],
+      "resolution_evidence_refs": [],
+      "participant": "claude",
+      "effective_agent": "claude",
+      "key": "claude:claude-obj-google-directives-semantica",
+      "resolved_by_controller": false,
+      "resolution_receipts": []
+    },
+    {
+      "id": "claude-obj-limites-bajos",
+      "alternative_id": "codex-conservar-candidato",
+      "category": "seo/red",
+      "severity": "low",
+      "claim": "Cuatro límites quedan registrados sin cerrar. (1) PRIVATE con (?![a-z]) deja pasar /carritos y /carts. (2) La exclusión de NAT64 rechaza también IPv4 públicas traducidas, lo que afecta a redes solo-IPv6 con DNS64. (3) Googlebot-Image/1.0 y otras variantes con versión bloquean todo el rastreo. (4) Una meta 'googlebot: noindex' queda como parámetro desconocido y se clasifica como candidato.",
+      "status": "open",
+      "evidence_refs": [
+        "source:tools/ipanema/seo/crawl_policy.py",
+        "source:tools/ipanema/seo/robots.py"
+      ],
+      "resolution_evidence_refs": [],
+      "participant": "claude",
+      "effective_agent": "claude",
+      "key": "claude:claude-obj-limites-bajos",
+      "resolved_by_controller": false,
+      "resolution_receipts": []
+    },
+    {
+      "id": "codex-O1",
+      "alternative_id": "claude-aceptar-con-qa-controlador",
+      "category": "performance",
+      "severity": "medium",
+      "claim": "parameters, unknown y errors crecen por átomo y la evidencia se incorpora tanto a indexability como a template_audit. El límite de bytes de entrada no demuestra un coste aceptable de memoria o serialización. No está respaldado calificar el coste extra como pequeño ni convertirlo automáticamente en seguimiento no bloqueante.",
+      "status": "open",
+      "evidence_refs": [
+        "source:reports/seo/v4-robots-sources-final.patch",
+        "qa:baseline"
+      ],
+      "resolution_evidence_refs": [],
+      "participant": "codex",
+      "effective_agent": "codex",
+      "key": "codex:codex-O1",
+      "resolved_by_controller": false,
+      "resolution_receipts": []
+    },
+    {
+      "id": "codex-O2",
+      "alternative_id": "claude-aceptar-con-qa-controlador",
+      "category": "compatibility",
+      "severity": "medium",
+      "claim": "google_directives cambia de devolver texto con parámetros a devolver únicamente flags. Los consumidores modificados usan evidencia tipada, pero las fuentes aportadas no acreditan el inventario completo de consumidores del helper. La compatibilidad fuera de esos consumidores sigue unknown.",
+      "status": "open",
+      "evidence_refs": [
+        "source:tools/ipanema/seo/robots.py",
+        "source:reports/seo/v4-robots-sources-final.patch"
+      ],
+      "resolution_evidence_refs": [],
+      "participant": "codex",
+      "effective_agent": "codex",
+      "key": "codex:codex-O2",
+      "resolved_by_controller": false,
+      "resolution_receipts": []
+    },
+    {
+      "id": "codex-O3",
+      "alternative_id": "claude-aceptar-con-qa-controlador",
+      "category": "integration",
+      "severity": "low",
+      "claim": "En _nodes, una auditoría nueva con robots_evidence limpio y sin noindex también se transforma en insufficient_evidence. Por ello :noindex permanece unknown incluso cuando la incertidumbre sobre las directivas está resuelta. Es conservador, pero reduce la precisión del gate.",
+      "status": "open",
+      "evidence_refs": [
+        "source:reports/seo/v4-robots-sources-final.patch"
+      ],
+      "resolution_evidence_refs": [],
+      "participant": "codex",
+      "effective_agent": "codex",
+      "key": "codex:codex-O3",
+      "resolved_by_controller": false,
+      "resolution_receipts": []
+    },
+    {
+      "id": "claude-obj-gate-granularidad",
+      "alternative_id": "codex-conservar-candidato",
+      "category": "compatibilidad/seo",
+      "severity": "medium",
+      "claim": "En regression.py, :noindex queda unknown por el estado global insufficient_evidence aunque la causa no sea robots. _nodes mapea toda auditoría de página sin noindex a insufficient_evidence aunque robots_evidence esté limpio. Debería decidir con robots_evidence.noindex y relevant_errors. Es conservador, pero reduce la precisión del gate.",
+      "status": "open",
+      "evidence_refs": [
+        "source:tools/ipanema/seo/regression.py",
+        "source:tools/ipanema/seo/indexability.py"
+      ],
+      "resolution_evidence_refs": [],
+      "participant": "claude",
+      "effective_agent": "claude",
+      "key": "claude:defense:claude-obj-gate-granularidad",
+      "resolved_by_controller": false,
+      "resolution_receipts": [],
+      "phase": "defense"
+    },
+    {
+      "id": "claude-obj-evidencia-sin-tope",
+      "alternative_id": "codex-conservar-candidato",
+      "category": "rendimiento",
+      "severity": "medium",
+      "claim": "parameters, unknown y errors crecen por átomo y se persisten en indexability y en template_audit. No hay tope ni indicador truncated, y el coste de memoria y serialización no está medido.",
+      "status": "open",
+      "evidence_refs": [
+        "source:tools/ipanema/seo/robots.py",
+        "source:tools/ipanema/seo/page_audit.py"
+      ],
+      "resolution_evidence_refs": [],
+      "participant": "claude",
+      "effective_agent": "claude",
+      "key": "claude:defense:claude-obj-evidencia-sin-tope",
+      "resolved_by_controller": false,
+      "resolution_receipts": [],
+      "phase": "defense"
+    },
+    {
+      "id": "claude-obj-google-directives-semantica",
+      "alternative_id": "codex-conservar-candidato",
+      "category": "compatibilidad",
+      "severity": "medium",
+      "claim": "google_directives pasa a devolver solo flags y ya no incluye parámetros. Ninguna fuente aportada inventaría todos sus consumidores ni has_noindex. Compatibilidad fuera de los archivos autorizados: unknown.",
+      "status": "open",
+      "evidence_refs": [
+        "source:tools/ipanema/seo/robots.py",
+        "source:reports/seo/v4-source-review/revision3/ADR-addendum.md"
+      ],
+      "resolution_evidence_refs": [],
+      "participant": "claude",
+      "effective_agent": "claude",
+      "key": "claude:defense:claude-obj-google-directives-semantica",
+      "resolved_by_controller": false,
+      "resolution_receipts": [],
+      "phase": "defense"
+    },
+    {
+      "id": "claude-obj-limites-bajos",
+      "alternative_id": "codex-conservar-candidato",
+      "category": "seo/red",
+      "severity": "low",
+      "claim": "Límites sin cerrar. PRIVATE admite /carritos y /carts. NAT64 rechaza IPv4 públicas traducidas. Variantes con versión como Googlebot-Image/1.0 bloquean todo el rastreo. Una meta 'googlebot: noindex' queda como parámetro desconocido y se clasifica como candidato.",
+      "status": "open",
+      "evidence_refs": [
+        "source:tools/ipanema/seo/crawl_policy.py",
+        "source:tools/ipanema/seo/robots.py"
+      ],
+      "resolution_evidence_refs": [],
+      "participant": "claude",
+      "effective_agent": "claude",
+      "key": "claude:defense:claude-obj-limites-bajos",
+      "resolved_by_controller": false,
+      "resolution_receipts": [],
+      "phase": "defense"
+    },
+    {
+      "id": "codex-O1",
+      "alternative_id": "claude-aceptar-con-qa-controlador",
+      "category": "performance",
+      "severity": "medium",
+      "claim": "Las listas de parámetros, desconocidos y errores crecen por átomo y se serializan en indexability y template_audit. El límite de entrada no acredita un coste aceptable. Rendimiento y coste de ejecución: unknown.",
+      "status": "open",
+      "evidence_refs": [
+        "source:reports/seo/v4-robots-sources-final.patch",
+        "qa:baseline"
+      ],
+      "resolution_evidence_refs": [],
+      "participant": "codex",
+      "effective_agent": "codex",
+      "key": "codex:defense:codex-O1",
+      "resolved_by_controller": false,
+      "resolution_receipts": [],
+      "phase": "defense"
+    },
+    {
+      "id": "codex-O2",
+      "alternative_id": "claude-aceptar-con-qa-controlador",
+      "category": "compatibility",
+      "severity": "medium",
+      "claim": "google_directives pasa a devolver solo flags. No se aporta un inventario completo de consumidores que permita descartar dependencias de parámetros como max-snippet o unavailable_after. Compatibilidad general: unknown.",
+      "status": "open",
+      "evidence_refs": [
+        "source:tools/ipanema/seo/robots.py",
+        "source:reports/seo/v4-robots-sources-final.patch"
+      ],
+      "resolution_evidence_refs": [],
+      "participant": "codex",
+      "effective_agent": "codex",
+      "key": "codex:defense:codex-O2",
+      "resolved_by_controller": false,
+      "resolution_receipts": [],
+      "phase": "defense"
+    },
+    {
+      "id": "codex-O3",
+      "alternative_id": "claude-aceptar-con-qa-controlador",
+      "category": "integration",
+      "severity": "medium",
+      "claim": "_nodes transforma también auditorías nuevas con evidencia robots limpia y sin noindex en insufficient_evidence. Además, :noindex hereda incertidumbre del estado global por causas ajenas a robots. Es conservador, pero impide distinguir ausencia observada de restricción y evidencia desconocida.",
+      "status": "open",
+      "evidence_refs": [
+        "source:reports/seo/v4-robots-sources-final.patch",
+        "source:tools/ipanema/seo/regression.py"
+      ],
+      "resolution_evidence_refs": [],
+      "participant": "codex",
+      "effective_agent": "codex",
+      "key": "codex:defense:codex-O3",
+      "resolved_by_controller": false,
+      "resolution_receipts": [],
+      "phase": "defense"
+    }
+  ],
+  "matrix": [
+    {
+      "alternative_id": "claude-aceptar-con-qa-controlador",
+      "fingerprint": "36c5252a0a4760c9fe106b23627843b977989fc1d738750aa49897c5a4cbae0c",
+      "identity_ambiguous": false,
+      "descriptions": [
+        "Mantener el parche 7a5a7066… sin cambios. Aprobarlo solo cuando haya un recibo de QA del controlador sobre el árbol candidato (unidades SEO, integración, suite seo y unidades generales) y la intervención independiente de Codex. H3, H4 y H5 quedan registradas como seguimiento no bloqueante en una revisión posterior con hash nuevo."
+      ],
+      "proposed_by": [
+        "claude"
+      ],
+      "criteria": {
+        "functional": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "unknown"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "security": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "compatibility": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "unknown"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "native_reuse": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "seo": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "unknown"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "performance": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "unknown"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "accessibility": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "responsive": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "maintainability": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "reversibility": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "complexity": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "development_cost": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "execution_cost": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "unknown"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        }
+      },
+      "blocked_by": [
+        "Alternativa retirada por su autor"
+      ],
+      "needs_evidence": [
+        "restricción sin comprobar: functional",
+        "restricción sin comprobar: security",
+        "restricción sin comprobar: compatibility",
+        "restricción sin comprobar: native_reuse",
+        "restricción sin comprobar: seo",
+        "restricción sin comprobar: performance"
+      ],
+      "eligible": false,
+      "files": [
+        "reports/seo/v4-robots-sources-final.patch",
+        "reports/seo/v4-source-review/revision3/validation.json",
+        "tools/ipanema/seo/crawl_policy.py",
+        "tools/ipanema/seo/crawler.py",
+        "tools/ipanema/seo/indexability.py",
+        "tools/ipanema/seo/page_audit.py",
+        "tools/ipanema/seo/regression.py",
+        "tools/ipanema/seo/robots.py"
+      ],
+      "tests": [
+        "QA del controlador sobre el árbol candidato aislado: unidades SEO, integración SEO, qa --suite seo y unidades generales, con los hashes candidate_hashes verificados.",
+        "Revisión independiente de Codex sobre el hash exacto 7a5a7066…."
+      ]
+    },
+    {
+      "alternative_id": "claude-rechazar-mantener-base",
+      "fingerprint": "255ee20b5a29eb33e3e9713f987354315e58c652ca7920b36d944663ef88193d",
+      "identity_ambiguous": false,
+      "descriptions": [
+        "Rechazar el parche y conservar la base. No es admisible: la base marca max-image-preview:none como noindex, deja que una comilla oculte el noindex de otra fuente y empareja el User-agent por subcadena."
+      ],
+      "proposed_by": [
+        "claude"
+      ],
+      "criteria": {
+        "functional": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "fail"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "security": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "fail"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "compatibility": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "native_reuse": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "seo": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "fail"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "performance": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "unknown"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "accessibility": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "responsive": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "maintainability": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "fail"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "reversibility": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "complexity": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "development_cost": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "execution_cost": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        }
+      },
+      "blocked_by": [
+        "incumplimiento declarado pendiente: functional, security, seo"
+      ],
+      "needs_evidence": [
+        "restricción sin comprobar: functional",
+        "restricción sin comprobar: security",
+        "restricción sin comprobar: compatibility",
+        "restricción sin comprobar: native_reuse",
+        "restricción sin comprobar: seo",
+        "restricción sin comprobar: performance"
+      ],
+      "eligible": false,
+      "files": [
+        "tools/ipanema/seo/crawl_policy.py",
+        "tools/ipanema/seo/indexability.py",
+        "tools/ipanema/seo/robots.py"
+      ],
+      "tests": [
+        "Reproducir sobre la base: meta max-image-preview:none resulta noindex (defecto) y 'User-agent: bot' captura a Googlebot (defecto)."
+      ]
+    },
+    {
+      "alternative_id": "claude-refinar-gate-y-topes",
+      "fingerprint": "1da2cca8437abdeaac7859e64411ee4bc4a549013ec35d45c7bdbd29ba7ef3df",
+      "identity_ambiguous": false,
+      "descriptions": [
+        "Revisión menor antes de aprobar: (1) en el gate, :noindex se decide con robots_evidence (noindex o relevant_errors) y no con el estado global de indexabilidad; (2) se mapea no_restrictive_flag_observed en auditorías de página; (3) se limitan parameters/unknown/errors por fuente, guardando un recuento y truncated=true; (4) se documenta el cambio de google_directives. Genera un hash nuevo y exige revisión completa otra vez."
+      ],
+      "proposed_by": [
+        "claude"
+      ],
+      "criteria": {
+        "functional": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "unknown"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "security": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "compatibility": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "unknown"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "native_reuse": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "seo": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "unknown"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "performance": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "unknown"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "accessibility": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "responsive": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "maintainability": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "reversibility": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "complexity": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "development_cost": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "unknown"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "execution_cost": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "unknown"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        }
+      },
+      "blocked_by": [],
+      "needs_evidence": [
+        "restricción sin comprobar: functional",
+        "restricción sin comprobar: security",
+        "restricción sin comprobar: compatibility",
+        "restricción sin comprobar: native_reuse",
+        "restricción sin comprobar: seo",
+        "restricción sin comprobar: performance"
+      ],
+      "eligible": false,
+      "files": [
+        "reports/seo/v4-robots-sources-final.patch",
+        "tools/ipanema/seo/crawler.py",
+        "tools/ipanema/seo/indexability.py",
+        "tools/ipanema/seo/page_audit.py",
+        "tools/ipanema/seo/regression.py",
+        "tools/ipanema/seo/robots.py"
+      ],
+      "tests": [
+        "Gate con nodo soft404 sin noindex antes y después: :noindex debe resultar passed si robots_evidence no tiene errores.",
+        "Meta con 200000 átomos desconocidos: robots_evidence acotado con truncated=true y noindex conservado.",
+        "Repetir toda la QA del controlador con el hash nuevo."
+      ]
+    },
+    {
+      "alternative_id": "codex-conservar-candidato",
+      "fingerprint": "78e18bd3c7becea94035110da20cf4ca7f6e10bd8f38bb38358e6120bc0335dd",
+      "identity_ambiguous": false,
+      "descriptions": [
+        "Conservar el candidato exacto sin aplicarlo y mantener bloqueada la aprobación hasta recibir la revisión final independiente de Claude y resolver mediante evidencia las condiciones obligatorias pendientes."
+      ],
+      "proposed_by": [
+        "codex"
+      ],
+      "criteria": {
+        "functional": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "security": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "compatibility": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "unknown"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "native_reuse": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "seo": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "performance": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "unknown"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "accessibility": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "unknown"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "responsive": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "unknown"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "maintainability": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "reversibility": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "complexity": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "unknown"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "development_cost": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "unknown"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "execution_cost": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "unknown"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        }
+      },
+      "blocked_by": [],
+      "needs_evidence": [
+        "restricción sin comprobar: functional",
+        "restricción sin comprobar: security",
+        "restricción sin comprobar: compatibility",
+        "restricción sin comprobar: native_reuse",
+        "restricción sin comprobar: seo",
+        "restricción sin comprobar: performance"
+      ],
+      "eligible": false,
+      "files": [
+        "reports/seo/v4-robots-sources-final.patch"
+      ],
+      "tests": [
+        "El controlador acredita hashes exactos, unitarias SEO, integración SEO y TLS local aprobados en una copia aislada.",
+        "El recibo excluye integración del workspace y rastreo de producción; no acredita rendimiento.",
+        "Esta revisión no ejecuta pruebas ni cierra por sí sola objeciones críticas."
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "claude-q-codex-gate",
+      "to_agent": "codex",
+      "alternative_id": "codex-conservar-candidato",
+      "question": "Tu alternativa admite como observación baja que _nodes mantiene insufficient_evidence en auditorías sin noindex. ¿Por qué esa pérdida de precisión del gate no justifica un hash nuevo antes de aprobar? Indica el archivo y la línea de regression.py que la acota.",
+      "evidence_refs": [
+        "source:tools/ipanema/seo/regression.py"
+      ],
+      "from_agent": "claude",
+      "key": "claude:claude-q-codex-gate"
+    },
+    {
+      "id": "claude-q-codex-consumidores",
+      "to_agent": "codex",
+      "alternative_id": "codex-conservar-candidato",
+      "question": "¿Qué fuente concreta acredita que ningún consumidor fuera de los archivos autorizados depende de google_directives devolviendo max-snippet o unavailable_after? ¿Existe un recibo del controlador que cubra el workspace y no solo la copia aislada?",
+      "evidence_refs": [
+        "source:tools/ipanema/seo/robots.py",
+        "qa:baseline"
+      ],
+      "from_agent": "claude",
+      "key": "claude:claude-q-codex-consumidores"
+    },
+    {
+      "id": "codex-Q1",
+      "to_agent": "claude",
+      "alternative_id": "claude-aceptar-con-qa-controlador",
+      "question": "¿Corriges la afirmación de que falta QA del candidato, dado que qa:baseline identifica expresamente el candidato aislado 7a5a7066…? Indica qué condiciones de tu alternativa siguen pendientes sin ampliar el alcance del recibo.",
+      "evidence_refs": [
+        "qa:baseline"
+      ],
+      "from_agent": "codex",
+      "key": "codex:codex-Q1"
+    },
+    {
+      "id": "codex-Q2",
+      "to_agent": "claude",
+      "alternative_id": "claude-aceptar-con-qa-controlador",
+      "question": "En google_directive_evidence y sus consumidores del diff, ¿qué evidencia concreta permite considerar no bloqueante la expansión de listas y afirmar un coste extra pequeño? Si no hay medición, ¿mantienes performance y execution_cost como unknown?",
+      "evidence_refs": [
+        "source:reports/seo/v4-robots-sources-final.patch",
+        "qa:baseline"
+      ],
+      "from_agent": "codex",
+      "key": "codex:codex-Q2"
+    },
+    {
+      "id": "codex-Q3",
+      "to_agent": "claude",
+      "alternative_id": "claude-aceptar-con-qa-controlador",
+      "question": "Ante el cambio de contrato de google_directives visible entre robots.py y el parche, ¿qué fuente aportada acredita todos sus consumidores? Si ninguna lo acredita, ¿qué fundamento permite aceptar ese riesgo como seguimiento sin dar por comprobada la compatibilidad?",
+      "evidence_refs": [
+        "source:tools/ipanema/seo/robots.py",
+        "source:reports/seo/v4-robots-sources-final.patch"
+      ],
+      "from_agent": "codex",
+      "key": "codex:codex-Q3"
+    }
+  ],
+  "answers": [
+    {
+      "question_id": "codex-Q1",
+      "from_agent": "codex",
+      "answer": "Corrijo: qa:baseline y acceptance[exact-patched-controller-QA] identifican el candidato aislado 7a5a7066…, no la base. Retiro la objeción de proceso H8. Pendientes sin ampliar el alcance del recibo: (1) este cruce final y que se conserve la intervención de Codex; (2) las tres objeciones medias abiertas; (3) integración en el workspace, rendimiento y compatibilidad general, todavía unknown.",
+      "disposition": "revise",
+      "evidence_refs": [
+        "qa:baseline"
+      ],
+      "by_agent": "claude",
+      "question_key": "codex:codex-Q1"
+    },
+    {
+      "question_id": "codex-Q2",
+      "from_agent": "codex",
+      "answer": "No hay medición. Retiro la afirmación de coste extra pequeño y que sea seguimiento no bloqueante. Mantengo performance y execution_cost como unknown. La evidencia por átomo, duplicada en indexability y template_audit, necesita un tope con recuento y truncated, o una medición aceptada antes de aprobar.",
+      "disposition": "revise",
+      "evidence_refs": [
+        "source:reports/seo/v4-robots-sources-final.patch",
+        "qa:baseline"
+      ],
+      "by_agent": "claude",
+      "question_key": "codex:codex-Q2"
+    },
+    {
+      "question_id": "codex-Q3",
+      "from_agent": "codex",
+      "answer": "Ninguna fuente aportada acredita todos los consumidores de google_directives ni de has_noindex. No hay fundamento para aceptar el riesgo como seguimiento ni para dar por comprobada la compatibilidad. Queda unknown y bloqueante hasta contar con un inventario de consumidores en el workspace o un recibo del controlador que lo cubra. Retiro mi alternativa de aceptar con seguimiento posterior.",
+      "disposition": "withdraw",
+      "evidence_refs": [
+        "source:tools/ipanema/seo/robots.py",
+        "source:reports/seo/v4-robots-sources-final.patch"
+      ],
+      "by_agent": "claude",
+      "question_key": "codex:codex-Q3"
+    },
+    {
+      "question_id": "claude-q-codex-gate",
+      "from_agent": "claude",
+      "answer": "Mi alternativa conserva el artefacto bloqueado; no propone aprobar esa pérdida de precisión. En regression.py, el hunk @@ -15,7 +15,7 de _nodes asigna insufficient_evidence a toda auditoría sin noindex; el hunk @@ -46,7 +46,9 propaga ese estado a unknown y conserva failed ante noindex posterior. Esto acota el problema como conservador, pero confirma la pérdida funcional. Elevo la observación a media. Una corrección produciría otro hash que necesitaría revisión; esta auditoría no la ejecuta ni la autoriza.",
+      "disposition": "revise",
+      "evidence_refs": [
+        "source:reports/seo/v4-robots-sources-final.patch",
+        "source:tools/ipanema/seo/regression.py"
+      ],
+      "by_agent": "codex",
+      "question_key": "claude:claude-q-codex-gate"
+    },
+    {
+      "question_id": "claude-q-codex-consumidores",
+      "from_agent": "claude",
+      "answer": "Ninguna fuente aportada acredita todos los consumidores externos de google_directives. Tampoco existe aquí un recibo de integración del workspace: qa:baseline corresponde expresamente al candidato exacto aislado y acceptance excluye esa integración. Defiendo conservarlo bloqueado; compatibilidad general permanece unknown. El recibo sí acredita hashes exactos, unitarias SEO, integración SEO y TLS local dentro de su alcance.",
+      "disposition": "needs_evidence",
+      "evidence_refs": [
+        "source:tools/ipanema/seo/robots.py",
+        "source:reports/seo/v4-robots-sources-final.patch",
+        "qa:baseline"
+      ],
+      "by_agent": "codex",
+      "question_key": "claude:claude-q-codex-consumidores"
+    }
+  ],
+  "defenses": [
+    {
+      "requested_agent": "claude",
+      "effective_agent": "claude",
+      "round": 1,
+      "response": {
+        "decision": "changes_requested",
+        "summary": "Reviso mi postura tras la pregunta de Codex. Corrijo que faltara QA del candidato: qa:baseline y acceptance identifican el hash 7a5a7066… aislado. Retiro también tratar como seguimiento no bloqueante el tamaño de la evidencia y el contrato de google_directives. No hay objeción crítica por lectura estática. No apruebo: quedan tres objeciones medias abiertas, y rendimiento, compatibilidad e integración del workspace siguen sin medirse. El QA aislado no los acredita.",
+        "changes": [],
+        "evidence": [
+          "source:reports/seo/v4-robots-sources-final.patch",
+          "source:tools/ipanema/seo/robots.py",
+          "source:tools/ipanema/seo/regression.py",
+          "source:tools/ipanema/seo/page_audit.py",
+          "source:tools/ipanema/seo/indexability.py",
+          "qa:baseline"
+        ],
+        "objections": [
+          {
+            "id": "claude-obj-gate-granularidad",
+            "alternative_id": "codex-conservar-candidato",
+            "category": "compatibilidad/seo",
+            "severity": "medium",
+            "claim": "En regression.py, :noindex queda unknown por el estado global insufficient_evidence aunque la causa no sea robots. _nodes mapea toda auditoría de página sin noindex a insufficient_evidence aunque robots_evidence esté limpio. Debería decidir con robots_evidence.noindex y relevant_errors. Es conservador, pero reduce la precisión del gate.",
+            "status": "open",
+            "evidence_refs": [
+              "source:tools/ipanema/seo/regression.py",
+              "source:tools/ipanema/seo/indexability.py"
+            ],
+            "resolution_evidence_refs": []
+          },
+          {
+            "id": "claude-obj-evidencia-sin-tope",
+            "alternative_id": "codex-conservar-candidato",
+            "category": "rendimiento",
+            "severity": "medium",
+            "claim": "parameters, unknown y errors crecen por átomo y se persisten en indexability y en template_audit. No hay tope ni indicador truncated, y el coste de memoria y serialización no está medido.",
+            "status": "open",
+            "evidence_refs": [
+              "source:tools/ipanema/seo/robots.py",
+              "source:tools/ipanema/seo/page_audit.py"
+            ],
+            "resolution_evidence_refs": []
+          },
+          {
+            "id": "claude-obj-google-directives-semantica",
+            "alternative_id": "codex-conservar-candidato",
+            "category": "compatibilidad",
+            "severity": "medium",
+            "claim": "google_directives pasa a devolver solo flags y ya no incluye parámetros. Ninguna fuente aportada inventaría todos sus consumidores ni has_noindex. Compatibilidad fuera de los archivos autorizados: unknown.",
+            "status": "open",
+            "evidence_refs": [
+              "source:tools/ipanema/seo/robots.py",
+              "source:reports/seo/v4-source-review/revision3/ADR-addendum.md"
+            ],
+            "resolution_evidence_refs": []
+          },
+          {
+            "id": "claude-obj-limites-bajos",
+            "alternative_id": "codex-conservar-candidato",
+            "category": "seo/red",
+            "severity": "low",
+            "claim": "Límites sin cerrar. PRIVATE admite /carritos y /carts. NAT64 rechaza IPv4 públicas traducidas. Variantes con versión como Googlebot-Image/1.0 bloquean todo el rastreo. Una meta 'googlebot: noindex' queda como parámetro desconocido y se clasifica como candidato.",
+            "status": "open",
+            "evidence_refs": [
+              "source:tools/ipanema/seo/crawl_policy.py",
+              "source:tools/ipanema/seo/robots.py"
+            ],
+            "resolution_evidence_refs": []
+          }
+        ],
+        "preferred_alternative": "claude-refinar-gate-y-topes",
+        "answers": [
+          {
+            "question_id": "codex-Q1",
+            "from_agent": "codex",
+            "answer": "Corrijo: qa:baseline y acceptance[exact-patched-controller-QA] identifican el candidato aislado 7a5a7066…, no la base. Retiro la objeción de proceso H8. Pendientes sin ampliar el alcance del recibo: (1) este cruce final y que se conserve la intervención de Codex; (2) las tres objeciones medias abiertas; (3) integración en el workspace, rendimiento y compatibilidad general, todavía unknown.",
+            "disposition": "revise",
+            "evidence_refs": [
+              "qa:baseline"
+            ]
+          },
+          {
+            "question_id": "codex-Q2",
+            "from_agent": "codex",
+            "answer": "No hay medición. Retiro la afirmación de coste extra pequeño y que sea seguimiento no bloqueante. Mantengo performance y execution_cost como unknown. La evidencia por átomo, duplicada en indexability y template_audit, necesita un tope con recuento y truncated, o una medición aceptada antes de aprobar.",
+            "disposition": "revise",
+            "evidence_refs": [
+              "source:reports/seo/v4-robots-sources-final.patch",
+              "qa:baseline"
+            ]
+          },
+          {
+            "question_id": "codex-Q3",
+            "from_agent": "codex",
+            "answer": "Ninguna fuente aportada acredita todos los consumidores de google_directives ni de has_noindex. No hay fundamento para aceptar el riesgo como seguimiento ni para dar por comprobada la compatibilidad. Queda unknown y bloqueante hasta contar con un inventario de consumidores en el workspace o un recibo del controlador que lo cubra. Retiro mi alternativa de aceptar con seguimiento posterior.",
+            "disposition": "withdraw",
+            "evidence_refs": [
+              "source:tools/ipanema/seo/robots.py",
+              "source:reports/seo/v4-robots-sources-final.patch"
+            ]
+          }
+        ],
+        "withdrawn_alternatives": [
+          "claude-aceptar-con-qa-controlador"
+        ],
+        "revision_notes": [
+          "Corregida la premisa sobre QA: el recibo del controlador cubre el candidato exacto aislado.",
+          "Retirado el tratamiento no bloqueante de la evidencia sin tope y del cambio de contrato de google_directives.",
+          "Sin objeciones críticas por lectura estática; las medias siguen abiertas y no se resuelven por defensa.",
+          "Rendimiento, compatibilidad e integración del workspace siguen unknown; el QA aislado no los aprueba."
+        ]
+      },
+      "model": {
+        "model": "claude-sonnet-5-5",
+        "effort": "medium",
+        "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+        "verified_at": "2026-11-08"
+      },
+      "execution": {
+        "exit_code": 0,
+        "timed_out": false,
+        "output_limited": false,
+        "idle_timed_out": false,
+        "cancelled": false,
+        "process_started": true,
+        "process_reaped": true,
+        "stdin_bytes_written": 213815,
+        "context_complete": true,
+        "duration_s": 21.532,
+        "timing": {
+          "spawn_s": 0.000592,
+          "input_complete_s": 0.471801,
+          "first_stdout_s": 1.24044,
+          "first_stderr_s": null,
+          "timeout_phase": null,
+          "event_counts": {
+            "system": 7,
+            "stream_event": 355,
+            "event:message_start": 1,
+            "event:content_block_start": 2,
+            "event:content_block_delta": 348,
+            "assistant": 2,
+            "event:content_block_stop": 2,
+            "user": 1,
+            "event:message_delta": 1,
+            "event:message_stop": 1,
+            "rate_limit_event": 1,
+            "result": 1
+          },
+          "inference_vs_initialization": "not_separable_without_provider_events"
+        },
+        "output_accounting": {
+          "transport_bytes": 149031,
+          "retained_bytes": 149031,
+          "discarded_progress_bytes": 0,
+          "transport_limit_bytes": 20000000,
+          "retained_limit_bytes": 2000000
+        },
+        "isolation": {
+          "backend": "bubblewrap",
+          "snapshot_read_only": true,
+          "host_home_mounted": false,
+          "network": "enabled_no_destination_firewall",
+          "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+        },
+        "started_at": "2026-11-12T20:45:04.919786+00:00",
+        "prompt_bytes": 213815,
+        "prompt_sha256": "660106e88c39ea2001f95a71712cd74770dd698b3f8bd80081fce0d3437ec244",
+        "usage": {
+          "provider_reported": {
+            "total_cost_usd": 0.39984000000000003,
+            "duration_ms": 20140,
+            "input_tokens": 2,
+            "cache_creation_input_tokens": 92434,
+            "cache_read_input_tokens": 0,
+            "output_tokens": 3010
+          },
+          "measured_cost_available": true,
+          "estimated_cost": null
+        },
+        "limits": {
+          "timeout": 240,
+          "idle_timeout": 90,
+          "startup_timeout": 30,
+          "first_response_timeout": 120
+        },
+        "structured_output": "native_schema",
+        "contract_validation": {
+          "status": "passed",
+          "duration_s": 0.003509
+        }
+      }
+    },
+    {
+      "requested_agent": "codex",
+      "effective_agent": "codex",
+      "round": 1,
+      "response": {
+        "decision": "blocked",
+        "summary": "Mantengo el candidato exacto sin aplicarlo. Ambas intervenciones originales están aportadas y el controlador acredita QA aislado del hash 7a5a7066…. Persisten objeciones sobre rendimiento, compatibilidad y precisión del gate. Esta defensa no ejecuta pruebas ni cierra objeciones críticas pendientes.",
+        "changes": [],
+        "evidence": [
+          "source:reports/seo/v4-robots-sources-final.patch",
+          "source:tools/ipanema/seo/robots.py",
+          "source:tools/ipanema/seo/regression.py",
+          "source:reports/seo/v4-source-review/revision3/ADR-addendum.md",
+          "qa:baseline"
+        ],
+        "objections": [
+          {
+            "id": "codex-O1",
+            "alternative_id": "claude-aceptar-con-qa-controlador",
+            "category": "performance",
+            "severity": "medium",
+            "claim": "Las listas de parámetros, desconocidos y errores crecen por átomo y se serializan en indexability y template_audit. El límite de entrada no acredita un coste aceptable. Rendimiento y coste de ejecución: unknown.",
+            "status": "open",
+            "evidence_refs": [
+              "source:reports/seo/v4-robots-sources-final.patch",
+              "qa:baseline"
+            ],
+            "resolution_evidence_refs": []
+          },
+          {
+            "id": "codex-O2",
+            "alternative_id": "claude-aceptar-con-qa-controlador",
+            "category": "compatibility",
+            "severity": "medium",
+            "claim": "google_directives pasa a devolver solo flags. No se aporta un inventario completo de consumidores que permita descartar dependencias de parámetros como max-snippet o unavailable_after. Compatibilidad general: unknown.",
+            "status": "open",
+            "evidence_refs": [
+              "source:tools/ipanema/seo/robots.py",
+              "source:reports/seo/v4-robots-sources-final.patch"
+            ],
+            "resolution_evidence_refs": []
+          },
+          {
+            "id": "codex-O3",
+            "alternative_id": "claude-aceptar-con-qa-controlador",
+            "category": "integration",
+            "severity": "medium",
+            "claim": "_nodes transforma también auditorías nuevas con evidencia robots limpia y sin noindex en insufficient_evidence. Además, :noindex hereda incertidumbre del estado global por causas ajenas a robots. Es conservador, pero impide distinguir ausencia observada de restricción y evidencia desconocida.",
+            "status": "open",
+            "evidence_refs": [
+              "source:reports/seo/v4-robots-sources-final.patch",
+              "source:tools/ipanema/seo/regression.py"
+            ],
+            "resolution_evidence_refs": []
+          }
+        ],
+        "preferred_alternative": "codex-conservar-candidato",
+        "answers": [
+          {
+            "question_id": "claude-q-codex-gate",
+            "from_agent": "claude",
+            "answer": "Mi alternativa conserva el artefacto bloqueado; no propone aprobar esa pérdida de precisión. En regression.py, el hunk @@ -15,7 +15,7 de _nodes asigna insufficient_evidence a toda auditoría sin noindex; el hunk @@ -46,7 +46,9 propaga ese estado a unknown y conserva failed ante noindex posterior. Esto acota el problema como conservador, pero confirma la pérdida funcional. Elevo la observación a media. Una corrección produciría otro hash que necesitaría revisión; esta auditoría no la ejecuta ni la autoriza.",
+            "disposition": "revise",
+            "evidence_refs": [
+              "source:reports/seo/v4-robots-sources-final.patch",
+              "source:tools/ipanema/seo/regression.py"
+            ]
+          },
+          {
+            "question_id": "claude-q-codex-consumidores",
+            "from_agent": "claude",
+            "answer": "Ninguna fuente aportada acredita todos los consumidores externos de google_directives. Tampoco existe aquí un recibo de integración del workspace: qa:baseline corresponde expresamente al candidato exacto aislado y acceptance excluye esa integración. Defiendo conservarlo bloqueado; compatibilidad general permanece unknown. El recibo sí acredita hashes exactos, unitarias SEO, integración SEO y TLS local dentro de su alcance.",
+            "disposition": "needs_evidence",
+            "evidence_refs": [
+              "source:tools/ipanema/seo/robots.py",
+              "source:reports/seo/v4-robots-sources-final.patch",
+              "qa:baseline"
+            ]
+          }
+        ],
+        "withdrawn_alternatives": [],
+        "revision_notes": [
+          "Retiro la afirmación previa de que falta la intervención original de Claude: ahora está aportada sobre el mismo hash.",
+          "Corrijo mi valoración inicial de security=pass: el QA aislado no certifica seguridad general; permanece unknown fuera de las comprobaciones acreditadas.",
+          "La lectura respalda límites físicos, monotonía de restricciones, incertidumbre conservadora, ámbitos ajenos válidos y separación entre warnings ajenos y errores relevantes.",
+          "No cierro objeciones críticas previas cuyo estado y resolución no estén acreditados; ninguna aprobación anterior se transfiere."
+        ]
+      },
+      "model": {
+        "model": "gpt-6.1-sol",
+        "effort": "medium",
+        "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+        "verified_at": "2026-11-08"
+      },
+      "execution": {
+        "exit_code": 0,
+        "timed_out": false,
+        "output_limited": false,
+        "idle_timed_out": false,
+        "cancelled": false,
+        "process_started": true,
+        "process_reaped": true,
+        "stdin_bytes_written": 213810,
+        "context_complete": true,
+        "duration_s": 31.363,
+        "timing": {
+          "spawn_s": 0.001006,
+          "input_complete_s": 0.098259,
+          "first_stdout_s": 0.816237,
+          "first_stderr_s": null,
+          "timeout_phase": null,
+          "event_counts": {
+            "thread.started": 1,
+            "item.completed": 2,
+            "turn.started": 1,
+            "turn.completed": 1
+          },
+          "inference_vs_initialization": "not_separable_without_provider_events"
+        },
+        "output_accounting": {
+          "transport_bytes": 5771,
+          "retained_bytes": 5771,
+          "discarded_progress_bytes": 0,
+          "transport_limit_bytes": 20000000,
+          "retained_limit_bytes": 2000000
+        },
+        "isolation": {
+          "backend": "bubblewrap",
+          "snapshot_read_only": true,
+          "host_home_mounted": false,
+          "network": "enabled_no_destination_firewall",
+          "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+        },
+        "started_at": "2026-11-12T20:45:04.901014+00:00",
+        "prompt_bytes": 213810,
+        "prompt_sha256": "863ec63a6ef05354c5069007f19b0d3eb978f0c60477c071175238a772b9eec9",
+        "usage": {
+          "provider_reported": {
+            "input_tokens": 71013,
+            "cached_input_tokens": 0,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 1238,
+            "reasoning_output_tokens": 72
+          },
+          "measured_cost_available": false,
+          "estimated_cost": null
+        },
+        "limits": {
+          "timeout": 240,
+          "idle_timeout": 90,
+          "startup_timeout": 30,
+          "first_response_timeout": 150
+        },
+        "structured_output": "native_schema",
+        "contract_validation": {
+          "status": "passed",
+          "duration_s": 0.000236
+        }
+      }
+    }
+  ],
+  "withdrawn_alternatives": [
+    "claude-aceptar-con-qa-controlador"
+  ],
+  "contradictions": [],
+  "final_preferences": {
+    "claude": "claude-refinar-gate-y-topes",
+    "codex": "codex-conservar-candidato"
+  },
+  "preference_source": "final_defense",
+  "mandatory_constraints": [
+    "functional",
+    "security",
+    "compatibility",
+    "native_reuse",
+    "performance",
+    "seo"
+  ],
+  "selected_alternative": null,
+  "files": [],
+  "required_tests": [],
+  "post_implementation_requirements": [],
+  "discarded_alternatives": [
+    {
+      "alternative_id": "claude-aceptar-con-qa-controlador",
+      "fingerprint": "36c5252a0a4760c9fe106b23627843b977989fc1d738750aa49897c5a4cbae0c",
+      "identity_ambiguous": false,
+      "descriptions": [
+        "Mantener el parche 7a5a7066… sin cambios. Aprobarlo solo cuando haya un recibo de QA del controlador sobre el árbol candidato (unidades SEO, integración, suite seo y unidades generales) y la intervención independiente de Codex. H3, H4 y H5 quedan registradas como seguimiento no bloqueante en una revisión posterior con hash nuevo."
+      ],
+      "proposed_by": [
+        "claude"
+      ],
+      "criteria": {
+        "functional": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "unknown"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "security": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "compatibility": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "unknown"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "native_reuse": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "seo": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "unknown"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "performance": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "unknown"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "accessibility": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "responsive": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "maintainability": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "reversibility": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "complexity": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "development_cost": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "execution_cost": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "unknown"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        }
+      },
+      "blocked_by": [
+        "Alternativa retirada por su autor"
+      ],
+      "needs_evidence": [
+        "restricción sin comprobar: functional",
+        "restricción sin comprobar: security",
+        "restricción sin comprobar: compatibility",
+        "restricción sin comprobar: native_reuse",
+        "restricción sin comprobar: seo",
+        "restricción sin comprobar: performance"
+      ],
+      "eligible": false,
+      "files": [
+        "reports/seo/v4-robots-sources-final.patch",
+        "reports/seo/v4-source-review/revision3/validation.json",
+        "tools/ipanema/seo/crawl_policy.py",
+        "tools/ipanema/seo/crawler.py",
+        "tools/ipanema/seo/indexability.py",
+        "tools/ipanema/seo/page_audit.py",
+        "tools/ipanema/seo/regression.py",
+        "tools/ipanema/seo/robots.py"
+      ],
+      "tests": [
+        "QA del controlador sobre el árbol candidato aislado: unidades SEO, integración SEO, qa --suite seo y unidades generales, con los hashes candidate_hashes verificados.",
+        "Revisión independiente de Codex sobre el hash exacto 7a5a7066…."
+      ]
+    },
+    {
+      "alternative_id": "claude-rechazar-mantener-base",
+      "fingerprint": "255ee20b5a29eb33e3e9713f987354315e58c652ca7920b36d944663ef88193d",
+      "identity_ambiguous": false,
+      "descriptions": [
+        "Rechazar el parche y conservar la base. No es admisible: la base marca max-image-preview:none como noindex, deja que una comilla oculte el noindex de otra fuente y empareja el User-agent por subcadena."
+      ],
+      "proposed_by": [
+        "claude"
+      ],
+      "criteria": {
+        "functional": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "fail"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "security": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "fail"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "compatibility": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "native_reuse": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "seo": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "fail"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "performance": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "unknown"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "accessibility": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "responsive": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "maintainability": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "fail"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "reversibility": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "complexity": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "development_cost": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "execution_cost": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        }
+      },
+      "blocked_by": [
+        "incumplimiento declarado pendiente: functional, security, seo"
+      ],
+      "needs_evidence": [
+        "restricción sin comprobar: functional",
+        "restricción sin comprobar: security",
+        "restricción sin comprobar: compatibility",
+        "restricción sin comprobar: native_reuse",
+        "restricción sin comprobar: seo",
+        "restricción sin comprobar: performance"
+      ],
+      "eligible": false,
+      "files": [
+        "tools/ipanema/seo/crawl_policy.py",
+        "tools/ipanema/seo/indexability.py",
+        "tools/ipanema/seo/robots.py"
+      ],
+      "tests": [
+        "Reproducir sobre la base: meta max-image-preview:none resulta noindex (defecto) y 'User-agent: bot' captura a Googlebot (defecto)."
+      ]
+    },
+    {
+      "alternative_id": "claude-refinar-gate-y-topes",
+      "fingerprint": "1da2cca8437abdeaac7859e64411ee4bc4a549013ec35d45c7bdbd29ba7ef3df",
+      "identity_ambiguous": false,
+      "descriptions": [
+        "Revisión menor antes de aprobar: (1) en el gate, :noindex se decide con robots_evidence (noindex o relevant_errors) y no con el estado global de indexabilidad; (2) se mapea no_restrictive_flag_observed en auditorías de página; (3) se limitan parameters/unknown/errors por fuente, guardando un recuento y truncated=true; (4) se documenta el cambio de google_directives. Genera un hash nuevo y exige revisión completa otra vez."
+      ],
+      "proposed_by": [
+        "claude"
+      ],
+      "criteria": {
+        "functional": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "unknown"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "security": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "compatibility": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "unknown"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "native_reuse": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "seo": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "unknown"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "performance": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "unknown"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "accessibility": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "responsive": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "maintainability": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "reversibility": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "complexity": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "development_cost": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "unknown"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "execution_cost": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "unknown"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        }
+      },
+      "blocked_by": [],
+      "needs_evidence": [
+        "restricción sin comprobar: functional",
+        "restricción sin comprobar: security",
+        "restricción sin comprobar: compatibility",
+        "restricción sin comprobar: native_reuse",
+        "restricción sin comprobar: seo",
+        "restricción sin comprobar: performance"
+      ],
+      "eligible": false,
+      "files": [
+        "reports/seo/v4-robots-sources-final.patch",
+        "tools/ipanema/seo/crawler.py",
+        "tools/ipanema/seo/indexability.py",
+        "tools/ipanema/seo/page_audit.py",
+        "tools/ipanema/seo/regression.py",
+        "tools/ipanema/seo/robots.py"
+      ],
+      "tests": [
+        "Gate con nodo soft404 sin noindex antes y después: :noindex debe resultar passed si robots_evidence no tiene errores.",
+        "Meta con 200000 átomos desconocidos: robots_evidence acotado con truncated=true y noindex conservado.",
+        "Repetir toda la QA del controlador con el hash nuevo."
+      ]
+    },
+    {
+      "alternative_id": "codex-conservar-candidato",
+      "fingerprint": "78e18bd3c7becea94035110da20cf4ca7f6e10bd8f38bb38358e6120bc0335dd",
+      "identity_ambiguous": false,
+      "descriptions": [
+        "Conservar el candidato exacto sin aplicarlo y mantener bloqueada la aprobación hasta recibir la revisión final independiente de Claude y resolver mediante evidencia las condiciones obligatorias pendientes."
+      ],
+      "proposed_by": [
+        "codex"
+      ],
+      "criteria": {
+        "functional": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "security": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "compatibility": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "unknown"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "native_reuse": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "seo": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "performance": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "unknown"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "accessibility": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "unknown"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "responsive": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "unknown"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "maintainability": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "reversibility": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "complexity": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "unknown"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "development_cost": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "unknown"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "execution_cost": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "unknown"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        }
+      },
+      "blocked_by": [],
+      "needs_evidence": [
+        "restricción sin comprobar: functional",
+        "restricción sin comprobar: security",
+        "restricción sin comprobar: compatibility",
+        "restricción sin comprobar: native_reuse",
+        "restricción sin comprobar: seo",
+        "restricción sin comprobar: performance"
+      ],
+      "eligible": false,
+      "files": [
+        "reports/seo/v4-robots-sources-final.patch"
+      ],
+      "tests": [
+        "El controlador acredita hashes exactos, unitarias SEO, integración SEO y TLS local aprobados en una copia aislada.",
+        "El recibo excluye integración del workspace y rastreo de producción; no acredita rendimiento.",
+        "Esta revisión no ejecuta pruebas ni cierra por sí sola objeciones críticas."
+      ]
+    }
+  ],
+  "justification": "Deliberación independiente completa; implementación detenida por restricciones sin comprobar u objeciones abiertas.",
+  "conditions": [
+    {
+      "id": "claude-aceptar-con-qa-controlador-evidence-0",
+      "required": true,
+      "status": "pending",
+      "detail": "restricción sin comprobar: functional"
+    },
+    {
+      "id": "claude-aceptar-con-qa-controlador-evidence-1",
+      "required": true,
+      "status": "pending",
+      "detail": "restricción sin comprobar: security"
+    },
+    {
+      "id": "claude-aceptar-con-qa-controlador-evidence-2",
+      "required": true,
+      "status": "pending",
+      "detail": "restricción sin comprobar: compatibility"
+    },
+    {
+      "id": "claude-aceptar-con-qa-controlador-evidence-3",
+      "required": true,
+      "status": "pending",
+      "detail": "restricción sin comprobar: native_reuse"
+    },
+    {
+      "id": "claude-aceptar-con-qa-controlador-evidence-4",
+      "required": true,
+      "status": "pending",
+      "detail": "restricción sin comprobar: seo"
+    },
+    {
+      "id": "claude-aceptar-con-qa-controlador-evidence-5",
+      "required": true,
+      "status": "pending",
+      "detail": "restricción sin comprobar: performance"
+    },
+    {
+      "id": "claude-rechazar-mantener-base-evidence-0",
+      "required": true,
+      "status": "pending",
+      "detail": "restricción sin comprobar: functional"
+    },
+    {
+      "id": "claude-rechazar-mantener-base-evidence-1",
+      "required": true,
+      "status": "pending",
+      "detail": "restricción sin comprobar: security"
+    },
+    {
+      "id": "claude-rechazar-mantener-base-evidence-2",
+      "required": true,
+      "status": "pending",
+      "detail": "restricción sin comprobar: compatibility"
+    },
+    {
+      "id": "claude-rechazar-mantener-base-evidence-3",
+      "required": true,
+      "status": "pending",
+      "detail": "restricción sin comprobar: native_reuse"
+    },
+    {
+      "id": "claude-rechazar-mantener-base-evidence-4",
+      "required": true,
+      "status": "pending",
+      "detail": "restricción sin comprobar: seo"
+    },
+    {
+      "id": "claude-rechazar-mantener-base-evidence-5",
+      "required": true,
+      "status": "pending",
+      "detail": "restricción sin comprobar: performance"
+    },
+    {
+      "id": "claude-refinar-gate-y-topes-evidence-0",
+      "required": true,
+      "status": "pending",
+      "detail": "restricción sin comprobar: functional"
+    },
+    {
+      "id": "claude-refinar-gate-y-topes-evidence-1",
+      "required": true,
+      "status": "pending",
+      "detail": "restricción sin comprobar: security"
+    },
+    {
+      "id": "claude-refinar-gate-y-topes-evidence-2",
+      "required": true,
+      "status": "pending",
+      "detail": "restricción sin comprobar: compatibility"
+    },
+    {
+      "id": "claude-refinar-gate-y-topes-evidence-3",
+      "required": true,
+      "status": "pending",
+      "detail": "restricción sin comprobar: native_reuse"
+    },
+    {
+      "id": "claude-refinar-gate-y-topes-evidence-4",
+      "required": true,
+      "status": "pending",
+      "detail": "restricción sin comprobar: seo"
+    },
+    {
+      "id": "claude-refinar-gate-y-topes-evidence-5",
+      "required": true,
+      "status": "pending",
+      "detail": "restricción sin comprobar: performance"
+    },
+    {
+      "id": "codex-conservar-candidato-evidence-0",
+      "required": true,
+      "status": "pending",
+      "detail": "restricción sin comprobar: functional"
+    },
+    {
+      "id": "codex-conservar-candidato-evidence-1",
+      "required": true,
+      "status": "pending",
+      "detail": "restricción sin comprobar: security"
+    },
+    {
+      "id": "codex-conservar-candidato-evidence-2",
+      "required": true,
+      "status": "pending",
+      "detail": "restricción sin comprobar: compatibility"
+    },
+    {
+      "id": "codex-conservar-candidato-evidence-3",
+      "required": true,
+      "status": "pending",
+      "detail": "restricción sin comprobar: native_reuse"
+    },
+    {
+      "id": "codex-conservar-candidato-evidence-4",
+      "required": true,
+      "status": "pending",
+      "detail": "restricción sin comprobar: seo"
+    },
+    {
+      "id": "codex-conservar-candidato-evidence-5",
+      "required": true,
+      "status": "pending",
+      "detail": "restricción sin comprobar: performance"
+    }
+  ],
+  "reasons": [
+    "Participante no recomienda implementar: codex",
+    "Contraste bloqueado: codex",
+    "Respuesta requiere evidencia: claude:claude-q-codex-consumidores",
+    "Defensa bloqueada: codex"
+  ],
+  "accepted_risks": [],
+  "evidence_receipts": [
+    {
+      "id": "source:reports/seo/v4-robots-sources-final.patch",
+      "kind": "source",
+      "subject": "reports/seo/v4-robots-sources-final.patch",
+      "executed": true,
+      "passed": true,
+      "sha256": "7a5a7066bb22d2f87c18286100a9fba0ce76e50e53a8cf9b211821d0eba8b4a0",
+      "context": {
+        "project": "rhino-performance",
+        "run_id": "20261111T184755-orchestration-66d74a17",
+        "source_sha256": "d229328968f7a85cf1722bd2d6019b79cdb4446ef3bbba221ef207302f317e57",
+        "objective_sha256": "d75ec302c61f1593ec4cf3d0b2296b8dc01f21d1a7f1a2a97bf68b2cf2f027e0",
+        "files": {
+          "reports/seo/v4-robots-sources-final.patch": "7a5a7066bb22d2f87c18286100a9fba0ce76e50e53a8cf9b211821d0eba8b4a0",
+          "reports/seo/v4-source-review/revision3/validation.json": "10bf719a774bdad0203082593403da4592a2b0307a3445580eadbfbab43c3ae8",
+          "reports/seo/v4-source-review/revision3/ADR-addendum.md": "f116e9d3e5354b24113a0861b37b010a1a42701561e6148b3c565af668f574ba",
+          "reports/seo/v4-source-review/revision3/after-final-specific.json": "137e06d19b29960b60dcec0b1799019be4c94a676a7f8c8c9901b3941a96ba27",
+          "reports/seo/v4-source-review/revision3/candidate-qa-report.json": "6cf565a79e8b16664c70f1af0baba37cfcc8a905f1091c805c00f73571a7e973",
+          "tools/ipanema/seo/robots.py": "7a83bdac275ac8783b7b85841f14d80da0157b9044b1556989a226c1000c8f2b",
+          "tools/ipanema/seo/indexability.py": "c379c404241180894d7a0b25f91f357a56173a059f461532ec1f78fb7650b0e8",
+          "tools/ipanema/seo/page_audit.py": "e60c8b928d8e2fd62e2034a247d407f2e52bd62cddcad5b398713a561c5d140b",
+          "tools/ipanema/seo/regression.py": "17de56d903987bd89786abeb4320498fe6cdb2dca9b89d9ab70803a9d73f4d91",
+          "tools/ipanema/seo/crawl_policy.py": "0f62445b9e0fb07bce6c55c59f60b107b52a460b343ea073bb0bee5e8a6009ff",
+          "tools/ipanema/seo/crawler.py": "0cebeb3685255ac5104ce676ade56fdb071d32b00a28f8a3829a1000f2f73f4e"
+        },
+        "required_constraints": [
+          "performance",
+          "seo"
+        ],
+        "instructions_sha256": "435483bf81b10bbc2bc2b41ce12a6e35d914da8f6ab2eb98b8be8799f0f9932e",
+        "require_objections": true,
+        "require_defense": true,
+        "participation_sha256": "9ff597857187450dc19d945e8124e6a50c9a76a12101de1d08f41ada93399d8c"
+      },
+      "measurement_scope": "Source existence/hash only, not execution or correctness"
+    },
+    {
+      "id": "source:reports/seo/v4-source-review/revision3/validation.json",
+      "kind": "source",
+      "subject": "reports/seo/v4-source-review/revision3/validation.json",
+      "executed": true,
+      "passed": true,
+      "sha256": "10bf719a774bdad0203082593403da4592a2b0307a3445580eadbfbab43c3ae8",
+      "context": {
+        "project": "rhino-performance",
+        "run_id": "20261111T184755-orchestration-66d74a17",
+        "source_sha256": "d229328968f7a85cf1722bd2d6019b79cdb4446ef3bbba221ef207302f317e57",
+        "objective_sha256": "d75ec302c61f1593ec4cf3d0b2296b8dc01f21d1a7f1a2a97bf68b2cf2f027e0",
+        "files": {
+          "reports/seo/v4-robots-sources-final.patch": "7a5a7066bb22d2f87c18286100a9fba0ce76e50e53a8cf9b211821d0eba8b4a0",
+          "reports/seo/v4-source-review/revision3/validation.json": "10bf719a774bdad0203082593403da4592a2b0307a3445580eadbfbab43c3ae8",
+          "reports/seo/v4-source-review/revision3/ADR-addendum.md": "f116e9d3e5354b24113a0861b37b010a1a42701561e6148b3c565af668f574ba",
+          "reports/seo/v4-source-review/revision3/after-final-specific.json": "137e06d19b29960b60dcec0b1799019be4c94a676a7f8c8c9901b3941a96ba27",
+          "reports/seo/v4-source-review/revision3/candidate-qa-report.json": "6cf565a79e8b16664c70f1af0baba37cfcc8a905f1091c805c00f73571a7e973",
+          "tools/ipanema/seo/robots.py": "7a83bdac275ac8783b7b85841f14d80da0157b9044b1556989a226c1000c8f2b",
+          "tools/ipanema/seo/indexability.py": "c379c404241180894d7a0b25f91f357a56173a059f461532ec1f78fb7650b0e8",
+          "tools/ipanema/seo/page_audit.py": "e60c8b928d8e2fd62e2034a247d407f2e52bd62cddcad5b398713a561c5d140b",
+          "tools/ipanema/seo/regression.py": "17de56d903987bd89786abeb4320498fe6cdb2dca9b89d9ab70803a9d73f4d91",
+          "tools/ipanema/seo/crawl_policy.py": "0f62445b9e0fb07bce6c55c59f60b107b52a460b343ea073bb0bee5e8a6009ff",
+          "tools/ipanema/seo/crawler.py": "0cebeb3685255ac5104ce676ade56fdb071d32b00a28f8a3829a1000f2f73f4e"
+        },
+        "required_constraints": [
+          "performance",
+          "seo"
+        ],
+        "instructions_sha256": "435483bf81b10bbc2bc2b41ce12a6e35d914da8f6ab2eb98b8be8799f0f9932e",
+        "require_objections": true,
+        "require_defense": true,
+        "participation_sha256": "9ff597857187450dc19d945e8124e6a50c9a76a12101de1d08f41ada93399d8c"
+      },
+      "measurement_scope": "Source existence/hash only, not execution or correctness"
+    },
+    {
+      "id": "source:reports/seo/v4-source-review/revision3/ADR-addendum.md",
+      "kind": "source",
+      "subject": "reports/seo/v4-source-review/revision3/ADR-addendum.md",
+      "executed": true,
+      "passed": true,
+      "sha256": "f116e9d3e5354b24113a0861b37b010a1a42701561e6148b3c565af668f574ba",
+      "context": {
+        "project": "rhino-performance",
+        "run_id": "20261111T184755-orchestration-66d74a17",
+        "source_sha256": "d229328968f7a85cf1722bd2d6019b79cdb4446ef3bbba221ef207302f317e57",
+        "objective_sha256": "d75ec302c61f1593ec4cf3d0b2296b8dc01f21d1a7f1a2a97bf68b2cf2f027e0",
+        "files": {
+          "reports/seo/v4-robots-sources-final.patch": "7a5a7066bb22d2f87c18286100a9fba0ce76e50e53a8cf9b211821d0eba8b4a0",
+          "reports/seo/v4-source-review/revision3/validation.json": "10bf719a774bdad0203082593403da4592a2b0307a3445580eadbfbab43c3ae8",
+          "reports/seo/v4-source-review/revision3/ADR-addendum.md": "f116e9d3e5354b24113a0861b37b010a1a42701561e6148b3c565af668f574ba",
+          "reports/seo/v4-source-review/revision3/after-final-specific.json": "137e06d19b29960b60dcec0b1799019be4c94a676a7f8c8c9901b3941a96ba27",
+          "reports/seo/v4-source-review/revision3/candidate-qa-report.json": "6cf565a79e8b16664c70f1af0baba37cfcc8a905f1091c805c00f73571a7e973",
+          "tools/ipanema/seo/robots.py": "7a83bdac275ac8783b7b85841f14d80da0157b9044b1556989a226c1000c8f2b",
+          "tools/ipanema/seo/indexability.py": "c379c404241180894d7a0b25f91f357a56173a059f461532ec1f78fb7650b0e8",
+          "tools/ipanema/seo/page_audit.py": "e60c8b928d8e2fd62e2034a247d407f2e52bd62cddcad5b398713a561c5d140b",
+          "tools/ipanema/seo/regression.py": "17de56d903987bd89786abeb4320498fe6cdb2dca9b89d9ab70803a9d73f4d91",
+          "tools/ipanema/seo/crawl_policy.py": "0f62445b9e0fb07bce6c55c59f60b107b52a460b343ea073bb0bee5e8a6009ff",
+          "tools/ipanema/seo/crawler.py": "0cebeb3685255ac5104ce676ade56fdb071d32b00a28f8a3829a1000f2f73f4e"
+        },
+        "required_constraints": [
+          "performance",
+          "seo"
+        ],
+        "instructions_sha256": "435483bf81b10bbc2bc2b41ce12a6e35d914da8f6ab2eb98b8be8799f0f9932e",
+        "require_objections": true,
+        "require_defense": true,
+        "participation_sha256": "9ff597857187450dc19d945e8124e6a50c9a76a12101de1d08f41ada93399d8c"
+      },
+      "measurement_scope": "Source existence/hash only, not execution or correctness"
+    },
+    {
+      "id": "source:reports/seo/v4-source-review/revision3/after-final-specific.json",
+      "kind": "source",
+      "subject": "reports/seo/v4-source-review/revision3/after-final-specific.json",
+      "executed": true,
+      "passed": true,
+      "sha256": "137e06d19b29960b60dcec0b1799019be4c94a676a7f8c8c9901b3941a96ba27",
+      "context": {
+        "project": "rhino-performance",
+        "run_id": "20261111T184755-orchestration-66d74a17",
+        "source_sha256": "d229328968f7a85cf1722bd2d6019b79cdb4446ef3bbba221ef207302f317e57",
+        "objective_sha256": "d75ec302c61f1593ec4cf3d0b2296b8dc01f21d1a7f1a2a97bf68b2cf2f027e0",
+        "files": {
+          "reports/seo/v4-robots-sources-final.patch": "7a5a7066bb22d2f87c18286100a9fba0ce76e50e53a8cf9b211821d0eba8b4a0",
+          "reports/seo/v4-source-review/revision3/validation.json": "10bf719a774bdad0203082593403da4592a2b0307a3445580eadbfbab43c3ae8",
+          "reports/seo/v4-source-review/revision3/ADR-addendum.md": "f116e9d3e5354b24113a0861b37b010a1a42701561e6148b3c565af668f574ba",
+          "reports/seo/v4-source-review/revision3/after-final-specific.json": "137e06d19b29960b60dcec0b1799019be4c94a676a7f8c8c9901b3941a96ba27",
+          "reports/seo/v4-source-review/revision3/candidate-qa-report.json": "6cf565a79e8b16664c70f1af0baba37cfcc8a905f1091c805c00f73571a7e973",
+          "tools/ipanema/seo/robots.py": "7a83bdac275ac8783b7b85841f14d80da0157b9044b1556989a226c1000c8f2b",
+          "tools/ipanema/seo/indexability.py": "c379c404241180894d7a0b25f91f357a56173a059f461532ec1f78fb7650b0e8",
+          "tools/ipanema/seo/page_audit.py": "e60c8b928d8e2fd62e2034a247d407f2e52bd62cddcad5b398713a561c5d140b",
+          "tools/ipanema/seo/regression.py": "17de56d903987bd89786abeb4320498fe6cdb2dca9b89d9ab70803a9d73f4d91",
+          "tools/ipanema/seo/crawl_policy.py": "0f62445b9e0fb07bce6c55c59f60b107b52a460b343ea073bb0bee5e8a6009ff",
+          "tools/ipanema/seo/crawler.py": "0cebeb3685255ac5104ce676ade56fdb071d32b00a28f8a3829a1000f2f73f4e"
+        },
+        "required_constraints": [
+          "performance",
+          "seo"
+        ],
+        "instructions_sha256": "435483bf81b10bbc2bc2b41ce12a6e35d914da8f6ab2eb98b8be8799f0f9932e",
+        "require_objections": true,
+        "require_defense": true,
+        "participation_sha256": "9ff597857187450dc19d945e8124e6a50c9a76a12101de1d08f41ada93399d8c"
+      },
+      "measurement_scope": "Source existence/hash only, not execution or correctness"
+    },
+    {
+      "id": "source:reports/seo/v4-source-review/revision3/candidate-qa-report.json",
+      "kind": "source",
+      "subject": "reports/seo/v4-source-review/revision3/candidate-qa-report.json",
+      "executed": true,
+      "passed": true,
+      "sha256": "6cf565a79e8b16664c70f1af0baba37cfcc8a905f1091c805c00f73571a7e973",
+      "context": {
+        "project": "rhino-performance",
+        "run_id": "20261111T184755-orchestration-66d74a17",
+        "source_sha256": "d229328968f7a85cf1722bd2d6019b79cdb4446ef3bbba221ef207302f317e57",
+        "objective_sha256": "d75ec302c61f1593ec4cf3d0b2296b8dc01f21d1a7f1a2a97bf68b2cf2f027e0",
+        "files": {
+          "reports/seo/v4-robots-sources-final.patch": "7a5a7066bb22d2f87c18286100a9fba0ce76e50e53a8cf9b211821d0eba8b4a0",
+          "reports/seo/v4-source-review/revision3/validation.json": "10bf719a774bdad0203082593403da4592a2b0307a3445580eadbfbab43c3ae8",
+          "reports/seo/v4-source-review/revision3/ADR-addendum.md": "f116e9d3e5354b24113a0861b37b010a1a42701561e6148b3c565af668f574ba",
+          "reports/seo/v4-source-review/revision3/after-final-specific.json": "137e06d19b29960b60dcec0b1799019be4c94a676a7f8c8c9901b3941a96ba27",
+          "reports/seo/v4-source-review/revision3/candidate-qa-report.json": "6cf565a79e8b16664c70f1af0baba37cfcc8a905f1091c805c00f73571a7e973",
+          "tools/ipanema/seo/robots.py": "7a83bdac275ac8783b7b85841f14d80da0157b9044b1556989a226c1000c8f2b",
+          "tools/ipanema/seo/indexability.py": "c379c404241180894d7a0b25f91f357a56173a059f461532ec1f78fb7650b0e8",
+          "tools/ipanema/seo/page_audit.py": "e60c8b928d8e2fd62e2034a247d407f2e52bd62cddcad5b398713a561c5d140b",
+          "tools/ipanema/seo/regression.py": "17de56d903987bd89786abeb4320498fe6cdb2dca9b89d9ab70803a9d73f4d91",
+          "tools/ipanema/seo/crawl_policy.py": "0f62445b9e0fb07bce6c55c59f60b107b52a460b343ea073bb0bee5e8a6009ff",
+          "tools/ipanema/seo/crawler.py": "0cebeb3685255ac5104ce676ade56fdb071d32b00a28f8a3829a1000f2f73f4e"
+        },
+        "required_constraints": [
+          "performance",
+          "seo"
+        ],
+        "instructions_sha256": "435483bf81b10bbc2bc2b41ce12a6e35d914da8f6ab2eb98b8be8799f0f9932e",
+        "require_objections": true,
+        "require_defense": true,
+        "participation_sha256": "9ff597857187450dc19d945e8124e6a50c9a76a12101de1d08f41ada93399d8c"
+      },
+      "measurement_scope": "Source existence/hash only, not execution or correctness"
+    },
+    {
+      "id": "source:tools/ipanema/seo/robots.py",
+      "kind": "source",
+      "subject": "tools/ipanema/seo/robots.py",
+      "executed": true,
+      "passed": true,
+      "sha256": "7a83bdac275ac8783b7b85841f14d80da0157b9044b1556989a226c1000c8f2b",
+      "context": {
+        "project": "rhino-performance",
+        "run_id": "20261111T184755-orchestration-66d74a17",
+        "source_sha256": "d229328968f7a85cf1722bd2d6019b79cdb4446ef3bbba221ef207302f317e57",
+        "objective_sha256": "d75ec302c61f1593ec4cf3d0b2296b8dc01f21d1a7f1a2a97bf68b2cf2f027e0",
+        "files": {
+          "reports/seo/v4-robots-sources-final.patch": "7a5a7066bb22d2f87c18286100a9fba0ce76e50e53a8cf9b211821d0eba8b4a0",
+          "reports/seo/v4-source-review/revision3/validation.json": "10bf719a774bdad0203082593403da4592a2b0307a3445580eadbfbab43c3ae8",
+          "reports/seo/v4-source-review/revision3/ADR-addendum.md": "f116e9d3e5354b24113a0861b37b010a1a42701561e6148b3c565af668f574ba",
+          "reports/seo/v4-source-review/revision3/after-final-specific.json": "137e06d19b29960b60dcec0b1799019be4c94a676a7f8c8c9901b3941a96ba27",
+          "reports/seo/v4-source-review/revision3/candidate-qa-report.json": "6cf565a79e8b16664c70f1af0baba37cfcc8a905f1091c805c00f73571a7e973",
+          "tools/ipanema/seo/robots.py": "7a83bdac275ac8783b7b85841f14d80da0157b9044b1556989a226c1000c8f2b",
+          "tools/ipanema/seo/indexability.py": "c379c404241180894d7a0b25f91f357a56173a059f461532ec1f78fb7650b0e8",
+          "tools/ipanema/seo/page_audit.py": "e60c8b928d8e2fd62e2034a247d407f2e52bd62cddcad5b398713a561c5d140b",
+          "tools/ipanema/seo/regression.py": "17de56d903987bd89786abeb4320498fe6cdb2dca9b89d9ab70803a9d73f4d91",
+          "tools/ipanema/seo/crawl_policy.py": "0f62445b9e0fb07bce6c55c59f60b107b52a460b343ea073bb0bee5e8a6009ff",
+          "tools/ipanema/seo/crawler.py": "0cebeb3685255ac5104ce676ade56fdb071d32b00a28f8a3829a1000f2f73f4e"
+        },
+        "required_constraints": [
+          "performance",
+          "seo"
+        ],
+        "instructions_sha256": "435483bf81b10bbc2bc2b41ce12a6e35d914da8f6ab2eb98b8be8799f0f9932e",
+        "require_objections": true,
+        "require_defense": true,
+        "participation_sha256": "9ff597857187450dc19d945e8124e6a50c9a76a12101de1d08f41ada93399d8c"
+      },
+      "measurement_scope": "Source existence/hash only, not execution or correctness"
+    },
+    {
+      "id": "source:tools/ipanema/seo/indexability.py",
+      "kind": "source",
+      "subject": "tools/ipanema/seo/indexability.py",
+      "executed": true,
+      "passed": true,
+      "sha256": "c379c404241180894d7a0b25f91f357a56173a059f461532ec1f78fb7650b0e8",
+      "context": {
+        "project": "rhino-performance",
+        "run_id": "20261111T184755-orchestration-66d74a17",
+        "source_sha256": "d229328968f7a85cf1722bd2d6019b79cdb4446ef3bbba221ef207302f317e57",
+        "objective_sha256": "d75ec302c61f1593ec4cf3d0b2296b8dc01f21d1a7f1a2a97bf68b2cf2f027e0",
+        "files": {
+          "reports/seo/v4-robots-sources-final.patch": "7a5a7066bb22d2f87c18286100a9fba0ce76e50e53a8cf9b211821d0eba8b4a0",
+          "reports/seo/v4-source-review/revision3/validation.json": "10bf719a774bdad0203082593403da4592a2b0307a3445580eadbfbab43c3ae8",
+          "reports/seo/v4-source-review/revision3/ADR-addendum.md": "f116e9d3e5354b24113a0861b37b010a1a42701561e6148b3c565af668f574ba",
+          "reports/seo/v4-source-review/revision3/after-final-specific.json": "137e06d19b29960b60dcec0b1799019be4c94a676a7f8c8c9901b3941a96ba27",
+          "reports/seo/v4-source-review/revision3/candidate-qa-report.json": "6cf565a79e8b16664c70f1af0baba37cfcc8a905f1091c805c00f73571a7e973",
+          "tools/ipanema/seo/robots.py": "7a83bdac275ac8783b7b85841f14d80da0157b9044b1556989a226c1000c8f2b",
+          "tools/ipanema/seo/indexability.py": "c379c404241180894d7a0b25f91f357a56173a059f461532ec1f78fb7650b0e8",
+          "tools/ipanema/seo/page_audit.py": "e60c8b928d8e2fd62e2034a247d407f2e52bd62cddcad5b398713a561c5d140b",
+          "tools/ipanema/seo/regression.py": "17de56d903987bd89786abeb4320498fe6cdb2dca9b89d9ab70803a9d73f4d91",
+          "tools/ipanema/seo/crawl_policy.py": "0f62445b9e0fb07bce6c55c59f60b107b52a460b343ea073bb0bee5e8a6009ff",
+          "tools/ipanema/seo/crawler.py": "0cebeb3685255ac5104ce676ade56fdb071d32b00a28f8a3829a1000f2f73f4e"
+        },
+        "required_constraints": [
+          "performance",
+          "seo"
+        ],
+        "instructions_sha256": "435483bf81b10bbc2bc2b41ce12a6e35d914da8f6ab2eb98b8be8799f0f9932e",
+        "require_objections": true,
+        "require_defense": true,
+        "participation_sha256": "9ff597857187450dc19d945e8124e6a50c9a76a12101de1d08f41ada93399d8c"
+      },
+      "measurement_scope": "Source existence/hash only, not execution or correctness"
+    },
+    {
+      "id": "source:tools/ipanema/seo/page_audit.py",
+      "kind": "source",
+      "subject": "tools/ipanema/seo/page_audit.py",
+      "executed": true,
+      "passed": true,
+      "sha256": "e60c8b928d8e2fd62e2034a247d407f2e52bd62cddcad5b398713a561c5d140b",
+      "context": {
+        "project": "rhino-performance",
+        "run_id": "20261111T184755-orchestration-66d74a17",
+        "source_sha256": "d229328968f7a85cf1722bd2d6019b79cdb4446ef3bbba221ef207302f317e57",
+        "objective_sha256": "d75ec302c61f1593ec4cf3d0b2296b8dc01f21d1a7f1a2a97bf68b2cf2f027e0",
+        "files": {
+          "reports/seo/v4-robots-sources-final.patch": "7a5a7066bb22d2f87c18286100a9fba0ce76e50e53a8cf9b211821d0eba8b4a0",
+          "reports/seo/v4-source-review/revision3/validation.json": "10bf719a774bdad0203082593403da4592a2b0307a3445580eadbfbab43c3ae8",
+          "reports/seo/v4-source-review/revision3/ADR-addendum.md": "f116e9d3e5354b24113a0861b37b010a1a42701561e6148b3c565af668f574ba",
+          "reports/seo/v4-source-review/revision3/after-final-specific.json": "137e06d19b29960b60dcec0b1799019be4c94a676a7f8c8c9901b3941a96ba27",
+          "reports/seo/v4-source-review/revision3/candidate-qa-report.json": "6cf565a79e8b16664c70f1af0baba37cfcc8a905f1091c805c00f73571a7e973",
+          "tools/ipanema/seo/robots.py": "7a83bdac275ac8783b7b85841f14d80da0157b9044b1556989a226c1000c8f2b",
+          "tools/ipanema/seo/indexability.py": "c379c404241180894d7a0b25f91f357a56173a059f461532ec1f78fb7650b0e8",
+          "tools/ipanema/seo/page_audit.py": "e60c8b928d8e2fd62e2034a247d407f2e52bd62cddcad5b398713a561c5d140b",
+          "tools/ipanema/seo/regression.py": "17de56d903987bd89786abeb4320498fe6cdb2dca9b89d9ab70803a9d73f4d91",
+          "tools/ipanema/seo/crawl_policy.py": "0f62445b9e0fb07bce6c55c59f60b107b52a460b343ea073bb0bee5e8a6009ff",
+          "tools/ipanema/seo/crawler.py": "0cebeb3685255ac5104ce676ade56fdb071d32b00a28f8a3829a1000f2f73f4e"
+        },
+        "required_constraints": [
+          "performance",
+          "seo"
+        ],
+        "instructions_sha256": "435483bf81b10bbc2bc2b41ce12a6e35d914da8f6ab2eb98b8be8799f0f9932e",
+        "require_objections": true,
+        "require_defense": true,
+        "participation_sha256": "9ff597857187450dc19d945e8124e6a50c9a76a12101de1d08f41ada93399d8c"
+      },
+      "measurement_scope": "Source existence/hash only, not execution or correctness"
+    },
+    {
+      "id": "source:tools/ipanema/seo/regression.py",
+      "kind": "source",
+      "subject": "tools/ipanema/seo/regression.py",
+      "executed": true,
+      "passed": true,
+      "sha256": "17de56d903987bd89786abeb4320498fe6cdb2dca9b89d9ab70803a9d73f4d91",
+      "context": {
+        "project": "rhino-performance",
+        "run_id": "20261111T184755-orchestration-66d74a17",
+        "source_sha256": "d229328968f7a85cf1722bd2d6019b79cdb4446ef3bbba221ef207302f317e57",
+        "objective_sha256": "d75ec302c61f1593ec4cf3d0b2296b8dc01f21d1a7f1a2a97bf68b2cf2f027e0",
+        "files": {
+          "reports/seo/v4-robots-sources-final.patch": "7a5a7066bb22d2f87c18286100a9fba0ce76e50e53a8cf9b211821d0eba8b4a0",
+          "reports/seo/v4-source-review/revision3/validation.json": "10bf719a774bdad0203082593403da4592a2b0307a3445580eadbfbab43c3ae8",
+          "reports/seo/v4-source-review/revision3/ADR-addendum.md": "f116e9d3e5354b24113a0861b37b010a1a42701561e6148b3c565af668f574ba",
+          "reports/seo/v4-source-review/revision3/after-final-specific.json": "137e06d19b29960b60dcec0b1799019be4c94a676a7f8c8c9901b3941a96ba27",
+          "reports/seo/v4-source-review/revision3/candidate-qa-report.json": "6cf565a79e8b16664c70f1af0baba37cfcc8a905f1091c805c00f73571a7e973",
+          "tools/ipanema/seo/robots.py": "7a83bdac275ac8783b7b85841f14d80da0157b9044b1556989a226c1000c8f2b",
+          "tools/ipanema/seo/indexability.py": "c379c404241180894d7a0b25f91f357a56173a059f461532ec1f78fb7650b0e8",
+          "tools/ipanema/seo/page_audit.py": "e60c8b928d8e2fd62e2034a247d407f2e52bd62cddcad5b398713a561c5d140b",
+          "tools/ipanema/seo/regression.py": "17de56d903987bd89786abeb4320498fe6cdb2dca9b89d9ab70803a9d73f4d91",
+          "tools/ipanema/seo/crawl_policy.py": "0f62445b9e0fb07bce6c55c59f60b107b52a460b343ea073bb0bee5e8a6009ff",
+          "tools/ipanema/seo/crawler.py": "0cebeb3685255ac5104ce676ade56fdb071d32b00a28f8a3829a1000f2f73f4e"
+        },
+        "required_constraints": [
+          "performance",
+          "seo"
+        ],
+        "instructions_sha256": "435483bf81b10bbc2bc2b41ce12a6e35d914da8f6ab2eb98b8be8799f0f9932e",
+        "require_objections": true,
+        "require_defense": true,
+        "participation_sha256": "9ff597857187450dc19d945e8124e6a50c9a76a12101de1d08f41ada93399d8c"
+      },
+      "measurement_scope": "Source existence/hash only, not execution or correctness"
+    },
+    {
+      "id": "source:tools/ipanema/seo/crawl_policy.py",
+      "kind": "source",
+      "subject": "tools/ipanema/seo/crawl_policy.py",
+      "executed": true,
+      "passed": true,
+      "sha256": "0f62445b9e0fb07bce6c55c59f60b107b52a460b343ea073bb0bee5e8a6009ff",
+      "context": {
+        "project": "rhino-performance",
+        "run_id": "20261111T184755-orchestration-66d74a17",
+        "source_sha256": "d229328968f7a85cf1722bd2d6019b79cdb4446ef3bbba221ef207302f317e57",
+        "objective_sha256": "d75ec302c61f1593ec4cf3d0b2296b8dc01f21d1a7f1a2a97bf68b2cf2f027e0",
+        "files": {
+          "reports/seo/v4-robots-sources-final.patch": "7a5a7066bb22d2f87c18286100a9fba0ce76e50e53a8cf9b211821d0eba8b4a0",
+          "reports/seo/v4-source-review/revision3/validation.json": "10bf719a774bdad0203082593403da4592a2b0307a3445580eadbfbab43c3ae8",
+          "reports/seo/v4-source-review/revision3/ADR-addendum.md": "f116e9d3e5354b24113a0861b37b010a1a42701561e6148b3c565af668f574ba",
+          "reports/seo/v4-source-review/revision3/after-final-specific.json": "137e06d19b29960b60dcec0b1799019be4c94a676a7f8c8c9901b3941a96ba27",
+          "reports/seo/v4-source-review/revision3/candidate-qa-report.json": "6cf565a79e8b16664c70f1af0baba37cfcc8a905f1091c805c00f73571a7e973",
+          "tools/ipanema/seo/robots.py": "7a83bdac275ac8783b7b85841f14d80da0157b9044b1556989a226c1000c8f2b",
+          "tools/ipanema/seo/indexability.py": "c379c404241180894d7a0b25f91f357a56173a059f461532ec1f78fb7650b0e8",
+          "tools/ipanema/seo/page_audit.py": "e60c8b928d8e2fd62e2034a247d407f2e52bd62cddcad5b398713a561c5d140b",
+          "tools/ipanema/seo/regression.py": "17de56d903987bd89786abeb4320498fe6cdb2dca9b89d9ab70803a9d73f4d91",
+          "tools/ipanema/seo/crawl_policy.py": "0f62445b9e0fb07bce6c55c59f60b107b52a460b343ea073bb0bee5e8a6009ff",
+          "tools/ipanema/seo/crawler.py": "0cebeb3685255ac5104ce676ade56fdb071d32b00a28f8a3829a1000f2f73f4e"
+        },
+        "required_constraints": [
+          "performance",
+          "seo"
+        ],
+        "instructions_sha256": "435483bf81b10bbc2bc2b41ce12a6e35d914da8f6ab2eb98b8be8799f0f9932e",
+        "require_objections": true,
+        "require_defense": true,
+        "participation_sha256": "9ff597857187450dc19d945e8124e6a50c9a76a12101de1d08f41ada93399d8c"
+      },
+      "measurement_scope": "Source existence/hash only, not execution or correctness"
+    },
+    {
+      "id": "source:tools/ipanema/seo/crawler.py",
+      "kind": "source",
+      "subject": "tools/ipanema/seo/crawler.py",
+      "executed": true,
+      "passed": true,
+      "sha256": "0cebeb3685255ac5104ce676ade56fdb071d32b00a28f8a3829a1000f2f73f4e",
+      "context": {
+        "project": "rhino-performance",
+        "run_id": "20261111T184755-orchestration-66d74a17",
+        "source_sha256": "d229328968f7a85cf1722bd2d6019b79cdb4446ef3bbba221ef207302f317e57",
+        "objective_sha256": "d75ec302c61f1593ec4cf3d0b2296b8dc01f21d1a7f1a2a97bf68b2cf2f027e0",
+        "files": {
+          "reports/seo/v4-robots-sources-final.patch": "7a5a7066bb22d2f87c18286100a9fba0ce76e50e53a8cf9b211821d0eba8b4a0",
+          "reports/seo/v4-source-review/revision3/validation.json": "10bf719a774bdad0203082593403da4592a2b0307a3445580eadbfbab43c3ae8",
+          "reports/seo/v4-source-review/revision3/ADR-addendum.md": "f116e9d3e5354b24113a0861b37b010a1a42701561e6148b3c565af668f574ba",
+          "reports/seo/v4-source-review/revision3/after-final-specific.json": "137e06d19b29960b60dcec0b1799019be4c94a676a7f8c8c9901b3941a96ba27",
+          "reports/seo/v4-source-review/revision3/candidate-qa-report.json": "6cf565a79e8b16664c70f1af0baba37cfcc8a905f1091c805c00f73571a7e973",
+          "tools/ipanema/seo/robots.py": "7a83bdac275ac8783b7b85841f14d80da0157b9044b1556989a226c1000c8f2b",
+          "tools/ipanema/seo/indexability.py": "c379c404241180894d7a0b25f91f357a56173a059f461532ec1f78fb7650b0e8",
+          "tools/ipanema/seo/page_audit.py": "e60c8b928d8e2fd62e2034a247d407f2e52bd62cddcad5b398713a561c5d140b",
+          "tools/ipanema/seo/regression.py": "17de56d903987bd89786abeb4320498fe6cdb2dca9b89d9ab70803a9d73f4d91",
+          "tools/ipanema/seo/crawl_policy.py": "0f62445b9e0fb07bce6c55c59f60b107b52a460b343ea073bb0bee5e8a6009ff",
+          "tools/ipanema/seo/crawler.py": "0cebeb3685255ac5104ce676ade56fdb071d32b00a28f8a3829a1000f2f73f4e"
+        },
+        "required_constraints": [
+          "performance",
+          "seo"
+        ],
+        "instructions_sha256": "435483bf81b10bbc2bc2b41ce12a6e35d914da8f6ab2eb98b8be8799f0f9932e",
+        "require_objections": true,
+        "require_defense": true,
+        "participation_sha256": "9ff597857187450dc19d945e8124e6a50c9a76a12101de1d08f41ada93399d8c"
+      },
+      "measurement_scope": "Source existence/hash only, not execution or correctness"
+    },
+    {
+      "id": "qa:baseline",
+      "kind": "qa",
+      "subject": "baseline",
+      "executed": true,
+      "passed": true,
+      "sha256": "eb37d90a5a68f4b81949474c175b59219ba12f8e76b2345c2a05a439b51d93f0",
+      "context": {
+        "project": "rhino-performance",
+        "run_id": "20261111T184755-orchestration-66d74a17",
+        "source_sha256": "d229328968f7a85cf1722bd2d6019b79cdb4446ef3bbba221ef207302f317e57",
+        "objective_sha256": "d75ec302c61f1593ec4cf3d0b2296b8dc01f21d1a7f1a2a97bf68b2cf2f027e0",
+        "files": {
+          "reports/seo/v4-robots-sources-final.patch": "7a5a7066bb22d2f87c18286100a9fba0ce76e50e53a8cf9b211821d0eba8b4a0",
+          "reports/seo/v4-source-review/revision3/validation.json": "10bf719a774bdad0203082593403da4592a2b0307a3445580eadbfbab43c3ae8",
+          "reports/seo/v4-source-review/revision3/ADR-addendum.md": "f116e9d3e5354b24113a0861b37b010a1a42701561e6148b3c565af668f574ba",
+          "reports/seo/v4-source-review/revision3/after-final-specific.json": "137e06d19b29960b60dcec0b1799019be4c94a676a7f8c8c9901b3941a96ba27",
+          "reports/seo/v4-source-review/revision3/candidate-qa-report.json": "6cf565a79e8b16664c70f1af0baba37cfcc8a905f1091c805c00f73571a7e973",
+          "tools/ipanema/seo/robots.py": "7a83bdac275ac8783b7b85841f14d80da0157b9044b1556989a226c1000c8f2b",
+          "tools/ipanema/seo/indexability.py": "c379c404241180894d7a0b25f91f357a56173a059f461532ec1f78fb7650b0e8",
+          "tools/ipanema/seo/page_audit.py": "e60c8b928d8e2fd62e2034a247d407f2e52bd62cddcad5b398713a561c5d140b",
+          "tools/ipanema/seo/regression.py": "17de56d903987bd89786abeb4320498fe6cdb2dca9b89d9ab70803a9d73f4d91",
+          "tools/ipanema/seo/crawl_policy.py": "0f62445b9e0fb07bce6c55c59f60b107b52a460b343ea073bb0bee5e8a6009ff",
+          "tools/ipanema/seo/crawler.py": "0cebeb3685255ac5104ce676ade56fdb071d32b00a28f8a3829a1000f2f73f4e"
+        },
+        "required_constraints": [
+          "performance",
+          "seo"
+        ],
+        "instructions_sha256": "435483bf81b10bbc2bc2b41ce12a6e35d914da8f6ab2eb98b8be8799f0f9932e",
+        "require_objections": true,
+        "require_defense": true,
+        "participation_sha256": "9ff597857187450dc19d945e8124e6a50c9a76a12101de1d08f41ada93399d8c"
+      },
+      "measurement_scope": "Controller QA of exact isolated patched candidate7a5a7066; NOT workspace/base validation or production"
+    }
+  ],
+  "limits": [
+    "Los hashes de fuente no prueban ejecución ni corrección.",
+    "La aprobación del consejo no sustituye QA posterior ni autoriza producción.",
+    "Las opiniones y confidence del modelo no son mediciones."
+  ],
+  "continued_from_adr": "ADR-1136231f425a",
+  "source_binding": {
+    "project": "rhino-performance",
+    "run_id": "20261111T184755-orchestration-66d74a17",
+    "source_sha256": "d229328968f7a85cf1722bd2d6019b79cdb4446ef3bbba221ef207302f317e57",
+    "objective_sha256": "d75ec302c61f1593ec4cf3d0b2296b8dc01f21d1a7f1a2a97bf68b2cf2f027e0",
+    "files": {
+      "reports/seo/v4-robots-sources-final.patch": "7a5a7066bb22d2f87c18286100a9fba0ce76e50e53a8cf9b211821d0eba8b4a0",
+      "reports/seo/v4-source-review/revision3/validation.json": "10bf719a774bdad0203082593403da4592a2b0307a3445580eadbfbab43c3ae8",
+      "reports/seo/v4-source-review/revision3/ADR-addendum.md": "f116e9d3e5354b24113a0861b37b010a1a42701561e6148b3c565af668f574ba",
+      "reports/seo/v4-source-review/revision3/after-final-specific.json": "137e06d19b29960b60dcec0b1799019be4c94a676a7f8c8c9901b3941a96ba27",
+      "reports/seo/v4-source-review/revision3/candidate-qa-report.json": "6cf565a79e8b16664c70f1af0baba37cfcc8a905f1091c805c00f73571a7e973",
+      "tools/ipanema/seo/robots.py": "7a83bdac275ac8783b7b85841f14d80da0157b9044b1556989a226c1000c8f2b",
+      "tools/ipanema/seo/indexability.py": "c379c404241180894d7a0b25f91f357a56173a059f461532ec1f78fb7650b0e8",
+      "tools/ipanema/seo/page_audit.py": "e60c8b928d8e2fd62e2034a247d407f2e52bd62cddcad5b398713a561c5d140b",
+      "tools/ipanema/seo/regression.py": "17de56d903987bd89786abeb4320498fe6cdb2dca9b89d9ab70803a9d73f4d91",
+      "tools/ipanema/seo/crawl_policy.py": "0f62445b9e0fb07bce6c55c59f60b107b52a460b343ea073bb0bee5e8a6009ff",
+      "tools/ipanema/seo/crawler.py": "0cebeb3685255ac5104ce676ade56fdb071d32b00a28f8a3829a1000f2f73f4e"
+    },
+    "required_constraints": [
+      "performance",
+      "seo"
+    ],
+    "instructions_sha256": "435483bf81b10bbc2bc2b41ce12a6e35d914da8f6ab2eb98b8be8799f0f9932e",
+    "require_objections": true,
+    "require_defense": true,
+    "participation_sha256": "9ff597857187450dc19d945e8124e6a50c9a76a12101de1d08f41ada93399d8c"
+  },
+  "worker_lifetime_calls": 4,
+  "lifetime_limit": 4,
+  "old_artifacts_preserved": true,
+  "workspace_applied": false,
+  "recovery_call_accounting": {
+    "historical_council_calls": 6,
+    "current_proposal_attempts": 2,
+    "current_cross_examination_calls": 2,
+    "current_defense_calls": 2,
+    "lifetime_observed_council_calls": 12,
+    "separate_diagnostic_fixtures": 3,
+    "note": "worker_lifetime_calls/lifetime_limit from aggregate script describe only the four continuation calls, not historical lifetime; no automatic retry/failover"
+  },
+  "operational_recovery_complete": true
+}

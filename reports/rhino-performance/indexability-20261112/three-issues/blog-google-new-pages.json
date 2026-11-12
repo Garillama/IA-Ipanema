@@ -1,0 +1,62 @@
+[
+  {
+    "provider": "gsc",
+    "operation": "inspect_url",
+    "project": "rhino-performance",
+    "domain": "rhino-performance.com",
+    "at": "2026-11-12T16:52:12.066592+00:00",
+    "untrusted_external_data": true,
+    "transport": "official_rest",
+    "status": "observed",
+    "request": {
+      "inspectionUrl": "https://rhino-performance.com/blog/?page=3",
+      "languageCode": "es-MX",
+      "siteUrl": "sc-domain:rhino-performance.com"
+    },
+    "data": {
+      "url": "https://rhino-performance.com/blog/?page=3",
+      "index_status": {
+        "verdict": "NEUTRAL",
+        "coverageState": "Google no reconoce esta URL",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+      },
+      "rich_results": null,
+      "live_inspection": false,
+      "limitations": [
+        "Estado conocido del índice; no es inspección en vivo ni todos los informes de la interfaz."
+      ]
+    }
+  },
+  {
+    "provider": "gsc",
+    "operation": "inspect_url",
+    "project": "rhino-performance",
+    "domain": "rhino-performance.com",
+    "at": "2026-11-12T16:52:19.139002+00:00",
+    "untrusted_external_data": true,
+    "transport": "official_rest",
+    "status": "observed",
+    "request": {
+      "inspectionUrl": "https://rhino-performance.com/blog/?page=8",
+      "languageCode": "es-MX",
+      "siteUrl": "sc-domain:rhino-performance.com"
+    },
+    "data": {
+      "url": "https://rhino-performance.com/blog/?page=8",
+      "index_status": {
+        "verdict": "NEUTRAL",
+        "coverageState": "Google no reconoce esta URL",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+      },
+      "rich_results": null,
+      "live_inspection": false,
+      "limitations": [
+        "Estado conocido del índice; no es inspección en vivo ni todos los informes de la interfaz."
+      ]
+    }
+  }
+]

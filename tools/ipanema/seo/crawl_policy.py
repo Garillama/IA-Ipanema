@@ -19,8 +19,8 @@ import zlib
 from ..core import IpanemaError, safe_url
 
 AGENT = 'IAIpanemaAudit/4.0'
-PRIVATE = re.compile(r'/(?:account|accounts|customer|customers|cuenta|mi-cuenta|cart|carrito|checkout|checkouts|admin|login|logout|password|register|orders|pedidos|subscriptions|suscripciones)(?:/|$)', re.I)
-ACTIONS = re.compile(r'(?:add.to.cart|cart/add|cart/update|cart/remove|agregar.al.carrito|comprar|add_to_cart)', re.I)
+PRIVATE = re.compile(r'/(?:account|accounts|customer|customers|cuenta|mi-cuenta|cart|carrito|checkout|checkouts|admin|login|logout|password|register|orders|pedidos|subscriptions|suscripciones)(?![a-z])', re.I)
+ACTIONS = re.compile(r'(?:add[^a-z0-9]?to[^a-z0-9]?cart|agregar[^a-z0-9]?al[^a-z0-9]?carrito)|/comprar', re.I)
 ASSET = re.compile(r'\.(?:jpg|jpeg|png|webp|avif|gif|svg|ico|mp4|webm|mp3|pdf|zip|css|js|woff2?|ttf)(?:$|/)', re.I)
 
 
@@ -124,12 +124,25 @@ class Policy:
         return value
 
 
+def _public_address(value):
+    address = ipaddress.ip_address(value)
+    if not address.is_global or address.is_multicast:
+        return False
+    if isinstance(address, ipaddress.IPv6Address):
+        # Conservative: no translated/tunnel IPv4, even with globally classified IPv6 prefixes.
+        if address.ipv4_mapped or address.sixtofour or address.teredo:
+            return False
+        if address in ipaddress.ip_network('64:ff9b::/96') or address in ipaddress.ip_network('64:ff9b:1::/48'):
+            return False
+    return True
+
+
 def public_addresses(host):
     try:
         addresses = sorted({row[4][0] for row in socket.getaddrinfo(host, 443, type=socket.SOCK_STREAM)})
     except OSError:
         raise IpanemaError('No se pudo resolver el host autorizado.') from None
-    if not addresses or any(not ipaddress.ip_address(ip).is_global or ipaddress.ip_address(ip).is_multicast for ip in addresses):
+    if not addresses or any(not _public_address(ip) for ip in addresses):
         raise IpanemaError('IP privada, reservada o no global: red bloqueada.')
     return addresses
 
@@ -233,9 +246,13 @@ class Fetcher:
             self.stop_reason = 'time_budget'
             raise IpanemaError('Presupuesto de tiempo agotado.')
         self.sleep(delay)
+        remaining = limits.max_seconds - (self.clock() - self.started)
+        if remaining <= 0:
+            self.stop_reason = 'time_budget'
+            raise IpanemaError('Presupuesto agotado durante la espera; no se inicia otra solicitud.')
         self.last, self.calls = self.clock(), self.calls + 1
         try:
-            row = self.transport(url, timeout=min(limits.timeout, limits.max_seconds - (self.clock() - self.started)), max_bytes=limits.max_bytes)
+            row = self.transport(url, timeout=min(limits.timeout, remaining), max_bytes=limits.max_bytes)
             status, body = row['status'], row.get('body', b'')
             if status in (403, 429):
                 self.stop_reason = 'http_' + str(status)

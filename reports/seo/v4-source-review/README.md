@@ -1,5 +1,7 @@
 # Parser robots V4 — candidato final de fuentes independientes
 
+**Continuación del 12 noviembre:** el controlador ya ejecutó y vinculó al parche `7a5a7066…` las 169 unitarias SEO, 13 de integración y TLS local sobre los nueve hashes exactos. Claude aceptó ese recibo solo como QA aislado. La integración sigue bloqueada: Codex no completó su propuesta en los intentos de 90/180 segundos, y contraste/defensa y recibos de restricciones siguen pendientes. No aplicar ni ejecutar el crawler. [Cierre incremental y evidencias](../../rhino-performance/indexability-20261112/site-continuation/coverage-closure/README.md). El texto siguiente conserva la entrega anterior; su condición «falta QA del controlador» queda actualizada únicamente por este recibo.
+
 **Estado: probado en aislamiento; sin aplicar; integración bloqueada por el consejo.**
 
 Parche único: [v4-robots-sources-final.patch](../v4-robots-sources-final.patch), 58469 bytes.
@@ -137,3 +139,13 @@ Respaldo privado del alcance: `.local/backups/seo-v4-sources-final-20261111T1848
 Preservación: 1062 archivos ajenos comprobados, cero diferencias. No se ejecutó crawler externo, no se conectaron cuentas y no se tocaron RHINO, DaMar ni producción.
 
 Para continuar: completar intervención original de Codex y el QA formal del controlador para este hash; cerrar condiciones/observaciones obligatorias del consejo. Solo entonces solicitar autorización nueva del hash y aplicar mediante attempt/backup con QA posterior. No se cambia la política para conseguir aprobación.
+
+
+## Continuación del 12 noviembre — Codex recuperado, V4 aún pendiente
+
+Se recuperó únicamente la propuesta faltante de Codex y se completaron contraste y defensas con Claude. El ADR conserva needs_evidence y implementation_allowed=false; no se integra el parche 7a5a7066. El controlador reprodujo reservas sobre precisión del gate y expansión de evidencia. [Diagnóstico, respuestas y condiciones](../../rhino-performance/indexability-20261112/site-continuation/coverage-closure/codex-recovery/README.md). No hubo cambios al motor, tema ni producción.
+
+
+## Candidato incremental final — 12 noviembre
+
+Los tres problemas técnicos de gate/evidencia/contrato están corregidos en aislamiento. Claude y Codex aprobaron el nuevo hash `611a5dac1e2767c0d331e42b06c60834e8a427c8bbc41671b9a81a8c977f3e2c`,11 archivos;191 unitarias SEO y13 integraciones aprobadas. El parche anterior se conserva intacto. Listo para solicitar autorización específica de integración LOCAL; no integrado ni autorizado para red. [Diff, recibos, riesgos y ADR](../../rhino-performance/indexability-20261112/site-continuation/coverage-closure/final-candidate/README.md).

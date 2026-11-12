@@ -1,0 +1,19 @@
+{
+  "checks": {
+    "matrix125sameURLs": true,
+    "all_prior_fields_preserved": true,
+    "pending75_not_changed_to_HTTP200": true,
+    "six_core_modules_unchanged": true,
+    "three_new_tests_not_integrated": true,
+    "exact_candidate_QA_passed_isolated": true,
+    "ADR_kept_blocked": true,
+    "published_pagination_local_hashes_preserved": true,
+    "exact_patch_preserved": true
+  },
+  "scope": "Evidence/state preservation, not fullsite acceptance",
+  "new_production_requests": 0,
+  "new_GSC_requests": 0,
+  "workspace_applied": false,
+  "production_modified": false,
+  "matrix_sha256": "034fec47dc6a04e7c3842ddd678af304671924fd4b7c21f58e503215e4481aa3"
+}

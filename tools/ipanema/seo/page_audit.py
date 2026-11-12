@@ -6,7 +6,7 @@ import hashlib
 import json
 import re
 from urllib.parse import urljoin, urlsplit, urlunsplit
-from .robots import Robots, google_directives
+from .robots import Robots, google_directive_evidence
 
 from ..core import now
 from .extractor import extract
@@ -49,8 +49,11 @@ def audit_snapshot(project,snap,page_type='page',*,facts=None,rendered=None,no_j
     result=validate(snap,page_type,facts)
     findings=list(result['findings']);metadata=snap.get('meta',{})
     canonical=snap.get('canonical',[])
-    robots=google_directives(metadata,snap.get('headers',{}).get('x-robots-tag',''))
-    noindex=bool(re.search(r'\b(?:noindex|none)\b',robots))
+    robots_evidence=google_directive_evidence(metadata,snap.get('headers',{}).get('x-robots-tag',''))
+    robots=','.join(robots_evidence['flags'])
+    noindex=robots_evidence['noindex']
+    if robots_evidence['relevant_errors']:
+        findings.append(F('SEO023','D','warning','Directivas robots malformadas: conservar fuentes y evidencia insuficiente sin ignorar restricciones válidas.',evidence=robots_evidence['relevant_errors']))
     status=snap.get('status')
     if not snap.get('title'):findings.append(F('SEO001','D','warning','Title ausente; comprobar head-tags de plataforma.'))
     if not metadata.get('description'):findings.append(F('SEO002','D','recommendation','Meta description ausente; usar contenido útil y específico.'))
@@ -77,7 +80,7 @@ def audit_snapshot(project,snap,page_type='page',*,facts=None,rendered=None,no_j
     permission='not_checked_robots_txt'
     if robots_text is not None:
         parser=Robots();parser.parse(robots_text.splitlines());permission='unknown_rules' if parser.errors else 'allowed' if parser.can_fetch('Googlebot',snap['url']) else 'disallowed'
-    signals='http_unknown' if status is None else 'non_200' if status!=200 else 'noindex_observed' if noindex else 'no_observable_noindex_not_index_proof'
+    signals='http_unknown' if status is None else 'non_200' if status!=200 else 'noindex_observed' if noindex else 'insufficient_evidence' if robots_evidence['relevant_errors'] else 'no_observable_noindex_not_index_proof'
     delta=snapshot_delta(snap,rendered) if rendered is not None else None
     if delta and delta['links_only_after_js']:
         findings.append(F('SEO020','D','warning','Hay enlaces presentes solo tras JavaScript; comprobar navegación/fallback y descubrimiento.',evidence=delta['links_only_after_js']))
@@ -95,7 +98,7 @@ def audit_snapshot(project,snap,page_type='page',*,facts=None,rendered=None,no_j
     return {'kind':'seo-page-audit','project':project.id,'domain':urlsplit(snap['url']).hostname,'url':snap['url'],
             'page_type':page_type,'at':now(),'theme_observation':project.data.get('remote_observation'),
             'http_status':status,'canonical':canonical,'indexability_observable':signals,'indexation_verified':False,
-            'crawl_permission_observed':permission,'robots_directives':robots,'schema_matrix':PAGE_SCHEMAS[page_type],
+            'crawl_permission_observed':permission,'robots_directives':robots,'robots_evidence':robots_evidence,'schema_matrix':PAGE_SCHEMAS[page_type],
             'structured_data':result,'schema_sources':components,'findings':findings,
             'content':{k:snap.get(k) for k in ('title','meta','headings','lang','images')},
             'crawl':{'links':links,'carousel_links':carousels,'pagination_controls':more,'hreflang':hreflang,

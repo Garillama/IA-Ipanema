@@ -1,0 +1,15 @@
+{
+  "command": [
+    "python3",
+    "tools/ia.py",
+    "--project",
+    "rhino-performance",
+    "qa",
+    "--suite",
+    "quick"
+  ],
+  "exit_code": 0,
+  "elapsed_s": 39.02762074199927,
+  "stdout": "{\n  \"kind\": \"qa\",\n  \"suite\": \"quick\",\n  \"at\": \"2026-11-12T21:16:07.936259+00:00\",\n  \"outcome\": \"passed\",\n  \"report\": \"/home/alanrichard/Escritorio/IA inversa/reports/runs/rhino-performance/20261112T211607-quick-ae729e17/report.json\",\n  \"limitations\": [\n    \"Evaluaci\u00f3n del coordinador determinista; evaluaci\u00f3n externa del modelo no ejecutada.\",\n    \"Evaluaciones SEO con fixtures, sin conexi\u00f3n real a cuentas Google.\"\n  ],\n  \"checks\": [\n    {\n      \"name\": \"repository\",\n      \"status\": \"passed\"\n    },\n    {\n      \"name\": \"unit-tests\",\n      \"status\": \"passed\"\n    },\n    {\n      \"name\": \"integration-tests\",\n      \"status\": \"passed\"\n    },\n    {\n      \"name\": \"coordinator-evals\",\n      \"status\": \"passed\"\n    },\n    {\n      \"name\": \"seo-action-evals\",\n      \"status\": \"passed\"\n    },\n    {\n      \"name\": \"sources-stable-during-qa\",\n      \"status\": \"passed\"\n    }\n  ]\n}\n",
+  "stderr": ""
+}

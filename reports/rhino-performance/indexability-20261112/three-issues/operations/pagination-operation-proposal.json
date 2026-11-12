@@ -1,0 +1,38 @@
+{
+  "scope": "Exact pagination candidate for owner review only; not authorization to execute",
+  "store": 7400935,
+  "published_installation": 14828608,
+  "files": [
+    {
+      "path": "snippets/product-list/pagination.tpl",
+      "before_sha256": "c715cc6c77d07dced5cdad6066785142c307b0f3ca3429cf88f5290cf7f2edc2",
+      "after_sha256": "0958c668ee40bf0d16c76db4d6493bf6387d17e3ec7ff8f66aaffcce564d463c"
+    },
+    {
+      "path": "static/js/store.js",
+      "before_sha256": "29dea94e46cc1bb423ddde71a42d807f22c944f09465d70400728d7ae95b4718",
+      "after_sha256": "f97557494e017eba623ba2dd7e568789f8d9035d467f0b03f71bc0b3b8393be9"
+    }
+  ],
+  "patch_sha256": "1ef6c047b222962f3138cbaa3aba760b16d9569b5e597ad04cfa053df714eb49",
+  "backups": "reports/runs/rhino-performance/20261112T165212-indexation-three-issues-035d5efe/remote-before",
+  "native_save_time_validation": "passed for these exact two hashes; no persisted write",
+  "production_authorized": false,
+  "ready_for_owner_review": true,
+  "approved_for_execution": false,
+  "required_pre_application": [
+    "Owner reviews visible numbered-link row and disabled no-JS button",
+    "Fresh before-state HTML/performance measurement with planned post profiles before any authorized application",
+    "Recheck remote before hashes and no unrelated diff",
+    "Independent approval applicable to application phase; current review remains blocked for final acceptance",
+    "Owner specific authorization including scoped rollback"
+  ],
+  "required_post_application": [
+    "Published after hashes match",
+    "Initial HTML links and native values resolve correctly, own canonicals unchanged",
+    "Real JS/no-JS, AX and keyboard/focus,no-focus-steal; six widths",
+    "Native 12+2 products unique and correct order; no fabricated page3",
+    "Same-profile mobile/desktop performance and resource regression check"
+  ],
+  "rollback": "Restore only backed-up bytes of the two files if current remote hashes still equal approved after hashes; then verify before hashes and QA. Stop for concurrent changes. Requires explicit rollback authorization."
+}

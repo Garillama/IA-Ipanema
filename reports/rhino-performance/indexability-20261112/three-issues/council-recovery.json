@@ -1,0 +1,51 @@
+{
+  "authorization": "[redacted]",
+  "adr": "reports/runs/rhino-performance/20261112T164912-council-single-defense-bbbf47b3/adr.json",
+  "result": {
+    "at": "2026-11-12T16:49:38.529607+00:00",
+    "state": "defense_completed",
+    "coverage": {
+      "required_agents": [
+        "claude",
+        "codex"
+      ],
+      "participants": [
+        {
+          "requested_agent": "claude",
+          "effective_agent": "claude",
+          "status": "available"
+        },
+        {
+          "requested_agent": "codex",
+          "effective_agent": "codex",
+          "status": "available"
+        }
+      ],
+      "effective_agents": [
+        "claude",
+        "codex"
+      ],
+      "complete": true,
+      "objections_complete": true,
+      "deliberation_complete": true,
+      "defense_complete": true,
+      "agreement": "disagreement",
+      "consensus": "incomplete_or_disagreement"
+    },
+    "status": "needs_evidence",
+    "implementation_allowed": false,
+    "original_artifacts_preserved": true,
+    "source_binding_unchanged": true,
+    "production_modified": false
+  },
+  "reasons": [
+    "Respuesta requiere evidencia: codex:codex-q-1",
+    "Respuesta requiere evidencia: claude:q-claude-canonical-override",
+    "Respuesta requiere evidencia: claude:q-claude-infinite-href",
+    "No puede retirar alternativas ajenas: codex"
+  ],
+  "original_hashes_preserved": true,
+  "prior_calls": 6,
+  "new_authorized_calls": 1,
+  "original_prompts_repeated": 0
+}
