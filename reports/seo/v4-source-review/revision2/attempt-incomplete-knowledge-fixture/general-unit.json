@@ -1,0 +1,5 @@
+{
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "======================================================================\nERROR: setUpClass (test_knowledge.KnowledgeTests)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/home/alanrichard/Escritorio/IA inversa/.local/seo-v4-source-revised-qbbipt9z/tests/unit/test_knowledge.py\", line 13, in setUpClass\n    cls.k = Knowledge(Project(ROOT, \"ipanema\"))\n                      ^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/alanrichard/Escritorio/IA inversa/.local/seo-v4-source-revised-qbbipt9z/tools/ipanema/core.py\", line 142, in __init__\n    raise IpanemaError(f\"Proyecto no registrado: {self.id}.\")\nipanema.core.IpanemaError: Proyecto no registrado: ipanema.\n\n----------------------------------------------------------------------\nRan 386 tests in 10.395s\n\nFAILED (errors=1)\n"
+}

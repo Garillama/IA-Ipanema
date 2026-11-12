@@ -1,0 +1,174 @@
+{
+  "kind": "seo-v4-final-objections",
+  "patch_sha256": "4369d84d3a84bd99808d92eb12ad13bcf185f300615817bb6eedd517412acc6f",
+  "rows": [
+    {
+      "id": "O1",
+      "objection": "max-image-preview:none produce falso noindex",
+      "evidence": "test_O1_preview_none_is_not_noindex; test_headers_multiple_and_scope",
+      "technical_state": "prueba/control aprobado en candidato final aislado",
+      "acceptance": "pendiente aprobación humana; no aplicado"
+    },
+    {
+      "id": "O2",
+      "objection": "Selección de robots por subcadena en vez de product token",
+      "evidence": "test_O2_robot_product_token_not_substring; test_robots_merge_exact_groups_case_and_fallback",
+      "technical_state": "prueba/control aprobado en candidato final aislado",
+      "acceptance": "pendiente aprobación humana; no aplicado"
+    },
+    {
+      "id": "O3",
+      "objection": "Exclusiones críticas perdidas tras truncar 2000 filas",
+      "evidence": "test_O3_late_exclusion_partial",
+      "technical_state": "prueba/control aprobado en candidato final aislado",
+      "acceptance": "pendiente aprobación humana; no aplicado"
+    },
+    {
+      "id": "O4",
+      "objection": "max_urls puede ocultar URLs del sitemap sin verificar",
+      "evidence": "test_O4_unchecked_sitemap_partial",
+      "technical_state": "prueba/control aprobado en candidato final aislado",
+      "acceptance": "pendiente aprobación humana; no aplicado"
+    },
+    {
+      "id": "O5",
+      "objection": "Palabra comprar en contenido editorial tratada como acción",
+      "evidence": "test_O5_editorial_action_word_allowed",
+      "technical_state": "prueba/control aprobado en candidato final aislado",
+      "acceptance": "pendiente aprobación humana; no aplicado"
+    },
+    {
+      "id": "A1",
+      "objection": "Ciclo de redirects del sitemap descartado sin error",
+      "evidence": "test_sitemap_redirect_cycle_not_complete",
+      "technical_state": "prueba/control aprobado en candidato final aislado",
+      "acceptance": "pendiente aprobación humana; no aplicado"
+    },
+    {
+      "id": "A2",
+      "objection": "Límite de redirects del sitemap descarta destino sin marcar parcial",
+      "evidence": "test_sitemap_redirect_limit_not_complete",
+      "technical_state": "prueba/control aprobado en candidato final aislado",
+      "acceptance": "pendiente aprobación humana; no aplicado"
+    },
+    {
+      "id": "A3",
+      "objection": "Enlaces de página sitemap-only quedan sin HTTP pero complete=True",
+      "evidence": "test_disconnected_sitemap_outgoing_required_unchecked",
+      "technical_state": "prueba/control aprobado en candidato final aislado",
+      "acceptance": "pendiente aprobación humana; no aplicado"
+    },
+    {
+      "id": "A4",
+      "objection": "NAT64 global puede incorporar IPv4 privada",
+      "evidence": "test_dns_transition_prefix_private_not_accepted",
+      "technical_state": "prueba/control aprobado en candidato final aislado",
+      "acceptance": "pendiente aprobación humana; no aplicado"
+    },
+    {
+      "id": "A5",
+      "objection": "Sufijos y parámetros de ruta comerciales pasan el filtro",
+      "evidence": "test_commercial_suffix_and_matrix_routes_excluded",
+      "technical_state": "prueba/control aprobado en candidato final aislado",
+      "acceptance": "pendiente aprobación humana; no aplicado"
+    },
+    {
+      "id": "A6",
+      "objection": "Espera del scheduler agota deadline antes de iniciar request",
+      "evidence": "test_deadline_rechecked_after_scheduler_delay",
+      "technical_state": "prueba/control aprobado en candidato final aislado",
+      "acceptance": "pendiente aprobación humana; no aplicado"
+    },
+    {
+      "id": "S1",
+      "objection": "HTTP GET, certificado/SNI y ausencia de Cookie/Authorization",
+      "evidence": "tls_fixture.LocalTLS; TransportV4",
+      "technical_state": "prueba/control aprobado en candidato final aislado",
+      "acceptance": "pendiente aprobación humana; no aplicado"
+    },
+    {
+      "id": "S2",
+      "objection": "Mismo origen HTTPS y rutas privadas tras decodificación",
+      "evidence": "test_domain_schemes_and_actions_in_query; test_actions_private_multiencoded_and_ambiguous; test_redirect_to_private_external_never_requested",
+      "technical_state": "prueba/control aprobado en candidato final aislado",
+      "acceptance": "pendiente aprobación humana; no aplicado"
+    },
+    {
+      "id": "S3",
+      "objection": "403/429/challenge y robots desconocido detienen operaciones",
+      "evidence": "test_403_429_stop_from_sitemap_no_home; test_robots_unreachable_and_challenge_no_crawl",
+      "technical_state": "prueba/control aprobado en candidato final aislado",
+      "acceptance": "pendiente aprobación humana; no aplicado"
+    },
+    {
+      "id": "S4",
+      "objection": "Transferencia, gzip, presupuesto y DNS fijado",
+      "evidence": "tests/unit/test_seo_transport_v4.py; PolicyV4.test_permissions_limits_stop_and_rate",
+      "technical_state": "prueba/control aprobado en candidato final aislado",
+      "acceptance": "pendiente aprobación humana; no aplicado"
+    },
+    {
+      "id": "A7",
+      "objection": "Regresión v2: acciones con sufijos admitidas (/add-to-cart-123, /comprar-ahora)",
+      "evidence": "test_action_prefix_suffix_regression",
+      "technical_state": "prueba/control aprobado en candidato final aislado",
+      "acceptance": "pendiente aprobación humana; no aplicado"
+    },
+    {
+      "id": "A8",
+      "objection": "PRIVATE deja pasar delimitadores como checkout-step y cart,1; acción addtocart compacta",
+      "evidence": "test_private_prefix_delimiters_and_action_compact",
+      "technical_state": "prueba/control aprobado en candidato final aislado",
+      "acceptance": "pendiente aprobación humana; no aplicado"
+    },
+    {
+      "id": "A9",
+      "objection": "Location ausente debe producir error explícito en home, sitemap y robots",
+      "evidence": "test_missing_location_is_explicit_error",
+      "technical_state": "prueba/control aprobado en candidato final aislado",
+      "acceptance": "pendiente aprobación humana; no aplicado"
+    },
+    {
+      "id": "A10",
+      "objection": "Registro de parser sin source no debe lanzar KeyError ni completar inventario",
+      "evidence": "test_malformed_sitemap_parser_record_fails_closed",
+      "technical_state": "prueba/control aprobado en candidato final aislado",
+      "acceptance": "pendiente aprobación humana; no aplicado"
+    },
+    {
+      "id": "A11",
+      "objection": "User-agent con versión en robots no debe quedar silenciosamente permitido",
+      "evidence": "test_invalid_robots_agent_with_version_fails_closed",
+      "technical_state": "prueba/control aprobado en candidato final aislado",
+      "acceptance": "pendiente aprobación humana; no aplicado"
+    },
+    {
+      "id": "H1",
+      "objection": "foo=\"noindex\" interpretado como directiva",
+      "evidence": "before-parser-on-exact-v3.json: 22 fallos de subcaso; after-final-specific.json: pasa",
+      "technical_state": "corregido en candidato; tests de =, :, comillas, escapes, flags y agentes",
+      "acceptance": "pendiente revisión humana final"
+    },
+    {
+      "id": "H2",
+      "objection": "Identidad del texto exportado distinta de v3",
+      "evidence": "identity-v3.json; manifiesto original; copia nueva aplicada y hashes del candidato iguales",
+      "technical_state": "v3 original acreditada; copia exportada excluida como artefacto aplicable",
+      "acceptance": "original sin modificar; causa de diferencia de copia no determinada"
+    },
+    {
+      "id": "H3",
+      "objection": "El artefacto final debe coincidir con código realmente probado",
+      "evidence": "final-artifact-dry-run.json; final-artifact-apply-isolated.json; validation.json",
+      "technical_state": "parche único aplicado a base nueva; todos los hashes iguales al árbol probado",
+      "acceptance": "no aplicado en workspace"
+    },
+    {
+      "id": "R1",
+      "objection": "Revisión y aprobación correspondientes antes de aplicar",
+      "evidence": "Petición actual punto 6: revisión independiente o aprobación humana explícita; AGENTS.md sin cambios",
+      "technical_state": "se elige solicitar aprobación humana explícita del hash final; no se afirma aprobación dual",
+      "acceptance": "pendiente; no aplicar"
+    }
+  ]
+}

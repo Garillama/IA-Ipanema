@@ -1,0 +1,376 @@
+{
+  "patch_sha256": "7a5a7066bb22d2f87c18286100a9fba0ce76e50e53a8cf9b211821d0eba8b4a0",
+  "rows": [
+    {
+      "id": "prior-O1",
+      "objection": "max-image-preview:none produce falso noindex",
+      "test": "test_O1_preview_none_is_not_noindex; test_headers_multiple_and_scope",
+      "technical_state": "regresión previa conservada y comprobada en suite actual; aceptación sujeta a revisión nueva",
+      "acceptance": "local evidence only; council acceptance blocked"
+    },
+    {
+      "id": "prior-O2",
+      "objection": "Selección de robots por subcadena en vez de product token",
+      "test": "test_O2_robot_product_token_not_substring; test_robots_merge_exact_groups_case_and_fallback",
+      "technical_state": "regresión previa conservada y comprobada en suite actual; aceptación sujeta a revisión nueva",
+      "acceptance": "local evidence only; council acceptance blocked"
+    },
+    {
+      "id": "prior-O3",
+      "objection": "Exclusiones críticas perdidas tras truncar 2000 filas",
+      "test": "test_O3_late_exclusion_partial",
+      "technical_state": "regresión previa conservada y comprobada en suite actual; aceptación sujeta a revisión nueva",
+      "acceptance": "local evidence only; council acceptance blocked"
+    },
+    {
+      "id": "prior-O4",
+      "objection": "max_urls puede ocultar URLs del sitemap sin verificar",
+      "test": "test_O4_unchecked_sitemap_partial",
+      "technical_state": "regresión previa conservada y comprobada en suite actual; aceptación sujeta a revisión nueva",
+      "acceptance": "local evidence only; council acceptance blocked"
+    },
+    {
+      "id": "prior-O5",
+      "objection": "Palabra comprar en contenido editorial tratada como acción",
+      "test": "test_O5_editorial_action_word_allowed",
+      "technical_state": "regresión previa conservada y comprobada en suite actual; aceptación sujeta a revisión nueva",
+      "acceptance": "local evidence only; council acceptance blocked"
+    },
+    {
+      "id": "prior-A1",
+      "objection": "Ciclo de redirects del sitemap descartado sin error",
+      "test": "test_sitemap_redirect_cycle_not_complete",
+      "technical_state": "regresión previa conservada y comprobada en suite actual; aceptación sujeta a revisión nueva",
+      "acceptance": "local evidence only; council acceptance blocked"
+    },
+    {
+      "id": "prior-A2",
+      "objection": "Límite de redirects del sitemap descarta destino sin marcar parcial",
+      "test": "test_sitemap_redirect_limit_not_complete",
+      "technical_state": "regresión previa conservada y comprobada en suite actual; aceptación sujeta a revisión nueva",
+      "acceptance": "local evidence only; council acceptance blocked"
+    },
+    {
+      "id": "prior-A3",
+      "objection": "Enlaces de página sitemap-only quedan sin HTTP pero complete=True",
+      "test": "test_disconnected_sitemap_outgoing_required_unchecked",
+      "technical_state": "regresión previa conservada y comprobada en suite actual; aceptación sujeta a revisión nueva",
+      "acceptance": "local evidence only; council acceptance blocked"
+    },
+    {
+      "id": "prior-A4",
+      "objection": "NAT64 global puede incorporar IPv4 privada",
+      "test": "test_dns_transition_prefix_private_not_accepted",
+      "technical_state": "regresión previa conservada y comprobada en suite actual; aceptación sujeta a revisión nueva",
+      "acceptance": "local evidence only; council acceptance blocked"
+    },
+    {
+      "id": "prior-A5",
+      "objection": "Sufijos y parámetros de ruta comerciales pasan el filtro",
+      "test": "test_commercial_suffix_and_matrix_routes_excluded",
+      "technical_state": "regresión previa conservada y comprobada en suite actual; aceptación sujeta a revisión nueva",
+      "acceptance": "local evidence only; council acceptance blocked"
+    },
+    {
+      "id": "prior-A6",
+      "objection": "Espera del scheduler agota deadline antes de iniciar request",
+      "test": "test_deadline_rechecked_after_scheduler_delay",
+      "technical_state": "regresión previa conservada y comprobada en suite actual; aceptación sujeta a revisión nueva",
+      "acceptance": "local evidence only; council acceptance blocked"
+    },
+    {
+      "id": "prior-S1",
+      "objection": "HTTP GET, certificado/SNI y ausencia de Cookie/Authorization",
+      "test": "tls_fixture.LocalTLS; TransportV4",
+      "technical_state": "regresión previa conservada y comprobada en suite actual; aceptación sujeta a revisión nueva",
+      "acceptance": "local evidence only; council acceptance blocked"
+    },
+    {
+      "id": "prior-S2",
+      "objection": "Mismo origen HTTPS y rutas privadas tras decodificación",
+      "test": "test_domain_schemes_and_actions_in_query; test_actions_private_multiencoded_and_ambiguous; test_redirect_to_private_external_never_requested",
+      "technical_state": "regresión previa conservada y comprobada en suite actual; aceptación sujeta a revisión nueva",
+      "acceptance": "local evidence only; council acceptance blocked"
+    },
+    {
+      "id": "prior-S3",
+      "objection": "403/429/challenge y robots desconocido detienen operaciones",
+      "test": "test_403_429_stop_from_sitemap_no_home; test_robots_unreachable_and_challenge_no_crawl",
+      "technical_state": "regresión previa conservada y comprobada en suite actual; aceptación sujeta a revisión nueva",
+      "acceptance": "local evidence only; council acceptance blocked"
+    },
+    {
+      "id": "prior-S4",
+      "objection": "Transferencia, gzip, presupuesto y DNS fijado",
+      "test": "tests/unit/test_seo_transport_v4.py; PolicyV4.test_permissions_limits_stop_and_rate",
+      "technical_state": "regresión previa conservada y comprobada en suite actual; aceptación sujeta a revisión nueva",
+      "acceptance": "local evidence only; council acceptance blocked"
+    },
+    {
+      "id": "prior-A7",
+      "objection": "Regresión v2: acciones con sufijos admitidas (/add-to-cart-123, /comprar-ahora)",
+      "test": "test_action_prefix_suffix_regression",
+      "technical_state": "regresión previa conservada y comprobada en suite actual; aceptación sujeta a revisión nueva",
+      "acceptance": "local evidence only; council acceptance blocked"
+    },
+    {
+      "id": "prior-A8",
+      "objection": "PRIVATE deja pasar delimitadores como checkout-step y cart,1; acción addtocart compacta",
+      "test": "test_private_prefix_delimiters_and_action_compact",
+      "technical_state": "regresión previa conservada y comprobada en suite actual; aceptación sujeta a revisión nueva",
+      "acceptance": "local evidence only; council acceptance blocked"
+    },
+    {
+      "id": "prior-A9",
+      "objection": "Location ausente debe producir error explícito en home, sitemap y robots",
+      "test": "test_missing_location_is_explicit_error",
+      "technical_state": "regresión previa conservada y comprobada en suite actual; aceptación sujeta a revisión nueva",
+      "acceptance": "local evidence only; council acceptance blocked"
+    },
+    {
+      "id": "prior-A10",
+      "objection": "Registro de parser sin source no debe lanzar KeyError ni completar inventario",
+      "test": "test_malformed_sitemap_parser_record_fails_closed",
+      "technical_state": "regresión previa conservada y comprobada en suite actual; aceptación sujeta a revisión nueva",
+      "acceptance": "local evidence only; council acceptance blocked"
+    },
+    {
+      "id": "prior-A11",
+      "objection": "User-agent con versión en robots no debe quedar silenciosamente permitido",
+      "test": "test_invalid_robots_agent_with_version_fails_closed",
+      "technical_state": "regresión previa conservada y comprobada en suite actual; aceptación sujeta a revisión nueva",
+      "acceptance": "local evidence only; council acceptance blocked"
+    },
+    {
+      "id": "S01",
+      "objection": "Meta robots válido",
+      "test": "test_01_valid_meta_robots",
+      "technical_state": "corregido en candidato; no aplicado",
+      "acceptance": "local evidence only; council acceptance blocked"
+    },
+    {
+      "id": "S02",
+      "objection": "X-Robots-Tag válido",
+      "test": "test_02_valid_header",
+      "technical_state": "corregido en candidato; no aplicado",
+      "acceptance": "local evidence only; council acceptance blocked"
+    },
+    {
+      "id": "S03",
+      "objection": "Fuentes independientes robots/googlebot/meta duplicados",
+      "test": "test_03_independent_meta_sources",
+      "technical_state": "corregido en candidato; no aplicado",
+      "acceptance": "local evidence only; council acceptance blocked"
+    },
+    {
+      "id": "S04",
+      "objection": "Comilla abierta en meta: unknown si no hay restricción válida",
+      "test": "test_04_open_meta_without_valid_restriction_unknown",
+      "technical_state": "corregido en candidato; no aplicado",
+      "acceptance": "local evidence only; council acceptance blocked"
+    },
+    {
+      "id": "S05",
+      "objection": "Comilla abierta en cualquier ámbito del header: unknown sin restricción válida",
+      "test": "test_05_open_header_without_valid_restriction_unknown",
+      "technical_state": "corregido en candidato; no aplicado",
+      "acceptance": "local evidence only; council acceptance blocked"
+    },
+    {
+      "id": "S06",
+      "objection": "Noindex válido después de fuente malformada",
+      "test": "test_06_valid_restriction_after_malformed_source",
+      "technical_state": "corregido en candidato; no aplicado",
+      "acceptance": "local evidence only; council acceptance blocked"
+    },
+    {
+      "id": "S07",
+      "objection": "max-image-preview:none no es noindex",
+      "test": "test_07_preview_none_not_restriction",
+      "technical_state": "corregido en candidato; no aplicado",
+      "acceptance": "local evidence only; council acceptance blocked"
+    },
+    {
+      "id": "S08",
+      "objection": "Valores con noindex no son directivas",
+      "test": "test_08_quoted_values_not_flags",
+      "technical_state": "corregido en candidato; no aplicado",
+      "acceptance": "local evidence only; council acceptance blocked"
+    },
+    {
+      "id": "S09",
+      "objection": "Agente y comillas reiniciados por cabecera",
+      "test": "test_09_header_scope_resets_for_each_field",
+      "technical_state": "corregido en candidato; no aplicado",
+      "acceptance": "local evidence only; council acceptance blocked"
+    },
+    {
+      "id": "S10",
+      "objection": "Prefijos de agente y nombres dentro de valores",
+      "test": "test_10_agents_and_quoted_agent_names",
+      "technical_state": "corregido en candidato; no aplicado",
+      "acceptance": "local evidence only; council acceptance blocked"
+    },
+    {
+      "id": "S11",
+      "objection": "Index no neutraliza restricción",
+      "test": "test_11_index_never_neutralizes_noindex",
+      "technical_state": "corregido en candidato; no aplicado",
+      "acceptance": "local evidence only; council acceptance blocked"
+    },
+    {
+      "id": "S12",
+      "objection": "Desconocidas completas vs incompletas",
+      "test": "test_12_unknown_complete_and_incomplete",
+      "technical_state": "corregido en candidato; no aplicado",
+      "acceptance": "local evidence only; council acceptance blocked"
+    },
+    {
+      "id": "S13",
+      "objection": "Defecto original: meta abierto oculta header",
+      "test": "test_original_meta_quote_cannot_mask_header_noindex",
+      "technical_state": "corregido en candidato; no aplicado",
+      "acceptance": "local evidence only; council acceptance blocked"
+    },
+    {
+      "id": "S14",
+      "objection": "Defecto original: header abierto oculta siguiente",
+      "test": "test_original_repeated_header_quote_cannot_mask_next",
+      "technical_state": "corregido en candidato; no aplicado",
+      "acceptance": "local evidence only; council acceptance blocked"
+    },
+    {
+      "id": "S15",
+      "objection": "Evidencia conserva fuentes, hash, errores y ordinal",
+      "test": "test_independent_errors_and_provenance_retained",
+      "technical_state": "corregido en candidato; no aplicado",
+      "acceptance": "local evidence only; council acceptance blocked"
+    },
+    {
+      "id": "S16",
+      "objection": "Consumidores no usan texto unido para decisiones",
+      "test": "test_never_uses_legacy_joined_string_for_decision; test_legacy_page_audit_gate_does_not_parse_display_substring",
+      "technical_state": "corregido en candidato; no aplicado",
+      "acceptance": "local evidence only; council acceptance blocked"
+    },
+    {
+      "id": "S17",
+      "objection": "Noindex monotónico ante permutación de fuentes",
+      "test": "test_valid_restriction_is_monotonic_across_sources",
+      "technical_state": "corregido en candidato; no aplicado",
+      "acceptance": "local evidence only; council acceptance blocked"
+    },
+    {
+      "id": "S18",
+      "objection": "Acciones incrustadas mantienen exclusión de base",
+      "test": "test_prior_embedded_action_objection_closed",
+      "technical_state": "corregido en candidato; no aplicado",
+      "acceptance": "local evidence only; council acceptance blocked"
+    },
+    {
+      "id": "R01",
+      "objection": "Política conservadora ante agente inválido en robots.txt",
+      "test": "test_unrelated_invalid_robots_agents_are_warned_not_global_abort; test_invalid_robots_agent_with_version_fails_closed",
+      "technical_state": "corregido para agentes inválidos ajenos: warnings; errores relevantes para Googlebot/IA/wildcard se conservan",
+      "acceptance": "local evidence only; council acceptance blocked"
+    },
+    {
+      "id": "R02",
+      "objection": "Aprobación/revisión independiente del hash actual",
+      "test": "nuevo consejo Claude/Codex",
+      "technical_state": "Claude completó revisión sin hallar falsos negativos críticos; Codex no completó; falta recibo QA del controlador",
+      "acceptance": "bloqueante: no aplicar ni solicitar integración todavía"
+    },
+    {
+      "id": "C1",
+      "objection": "Ámbito malformado de otro bot no puede aprobar Googlebot",
+      "test": "test_peer_C1_malformed_other_agent_scope_unknown",
+      "technical_state": "contraejemplo reproducido antes; pasa en revisión 2 aislada",
+      "acceptance": "local evidence only; council acceptance blocked"
+    },
+    {
+      "id": "C2",
+      "objection": "Namespace/parametro ambiguo no aprueba si puede ocultar noindex",
+      "test": "test_peer_C2_ambiguous_namespace_unknown",
+      "technical_state": "contraejemplo reproducido antes; pasa en revisión 2 aislada",
+      "acceptance": "local evidence only; council acceptance blocked"
+    },
+    {
+      "id": "C3",
+      "objection": "Lecturas por coma/comillas discrepantes: desconocido, no flag",
+      "test": "test_peer_C3_quoted_comma_restriction_is_unknown_not_flag",
+      "technical_state": "contraejemplo reproducido antes; pasa en revisión 2 aislada",
+      "acceptance": "local evidence only; council acceptance blocked"
+    },
+    {
+      "id": "C4",
+      "objection": "Separadores de acciones %20, + y ~ conservan bloqueo de base",
+      "test": "test_peer_action_separator_regressions",
+      "technical_state": "contraejemplo reproducido antes; pasa en revisión 2 aislada",
+      "acceptance": "local evidence only; council acceptance blocked"
+    },
+    {
+      "id": "C5",
+      "objection": "Reportes heredados sin procedencia tipada dan unknown explícito en gate",
+      "test": "test_legacy_gate_marks_unknown_explicitly",
+      "technical_state": "unknown explícito legado; restricción posterior bloquea sin que unknown oculte el fallo",
+      "acceptance": "local evidence only; council acceptance blocked"
+    },
+    {
+      "id": "D1",
+      "objection": "Gate noindex posterior prevalece sobre unknown del baseline",
+      "test": "test_peer_gate_restrictive_after_cannot_be_only_unknown",
+      "technical_state": "contraejemplo reproducido antes; pasa con candidato final aislado",
+      "acceptance": "local evidence only; council acceptance blocked"
+    },
+    {
+      "id": "D2",
+      "objection": "Lista válida de otro agente no pierde su alcance entre comas",
+      "test": "test_peer_valid_other_agent_list_is_not_uncertain",
+      "technical_state": "contraejemplo reproducido antes; pasa con candidato final aislado",
+      "acceptance": "local evidence only; council acceptance blocked"
+    },
+    {
+      "id": "D3",
+      "objection": "Comillas con espacios y punto y coma sin gramática reconocida quedan inciertas",
+      "test": "test_peer_quoted_separator_grammar_unknown",
+      "technical_state": "contraejemplo reproducido antes; pasa con candidato final aislado",
+      "acceptance": "local evidence only; council acceptance blocked"
+    },
+    {
+      "id": "D4",
+      "objection": "Agentes inválidos ajenos no impiden reglas válidas de Googlebot/IA",
+      "test": "test_unrelated_invalid_robots_agents_are_warned_not_global_abort",
+      "technical_state": "contraejemplo reproducido antes; pasa con candidato final aislado",
+      "acceptance": "local evidence only; council acceptance blocked"
+    },
+    {
+      "id": "P1",
+      "objection": "Recibo QA del árbol candidato vinculado al controlador/consejo",
+      "test": "ADR independiente final y diagnósticos documentados",
+      "technical_state": "pendiente bloqueante; no reemplazar por reporte del autor",
+      "acceptance": "pendiente; no se convierte en aprobación por promedio"
+    },
+    {
+      "id": "M1",
+      "objection": "Granularidad de gate noindex frente a estados globales desconocidos",
+      "test": "ADR independiente final y diagnósticos documentados",
+      "technical_state": "observación media abierta; comportamiento conservador",
+      "acceptance": "pendiente; no se convierte en aprobación por promedio"
+    },
+    {
+      "id": "M2",
+      "objection": "Volumen de parámetros/desconocidos/errores sin tope específico",
+      "test": "ADR independiente final y diagnósticos documentados",
+      "technical_state": "observación media abierta y medida; metadata sintética de 800000 caracteres produce 14572662 bytes JSON",
+      "acceptance": "pendiente; no se convierte en aprobación por promedio"
+    },
+    {
+      "id": "M3",
+      "objection": "Cambio semántico de vista legacy google_directives a flags",
+      "test": "ADR independiente final y diagnósticos documentados",
+      "technical_state": "consumidores de tools/tests inspeccionados; consumidores externos no certificados",
+      "acceptance": "pendiente; no se convierte en aprobación por promedio"
+    }
+  ]
+}

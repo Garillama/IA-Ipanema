@@ -1,0 +1,28 @@
+{
+  "run": "reports/runs/rhino-performance/20261111T184755-orchestration-66d74a17",
+  "adr": "reports/runs/rhino-performance/20261111T184755-orchestration-66d74a17/council/adr.json",
+  "status": "needs_evidence",
+  "implementation_allowed": false,
+  "participants": [
+    {
+      "requested_agent": "claude",
+      "effective_agent": "claude",
+      "status": "available"
+    },
+    {
+      "requested_agent": "codex",
+      "effective_agent": "codex",
+      "status": "unavailable",
+      "error": {
+        "category": "inactivity",
+        "summary": "No se recibió una propuesta válida; no cuenta como participación completa."
+      }
+    }
+  ],
+  "coverage_complete": false,
+  "objections_complete": false,
+  "defense_complete": false,
+  "consensus_claimed": false,
+  "claude_summary": "Revisé de forma independiente y solo lectura todo el diff 7a5a7066…, comparándolo con los seis archivos base. Por inspección del código no encontré falsos negativos críticos: cada meta y cada cabecera física se analiza por separado; un noindex o none válido sigue siendo restrictivo aunque haya otras fuentes (monotónico); las fuentes malformadas y los ámbitos ambiguos quedan como evidencia insuficiente; los ámbitos válidos de otros agentes se respetan; se corrige la coincidencia por subcadena del User-agent; y Googlebot o el agente propio con token inválido sigue bloqueando. No apruebo: el controlador no tiene QA del candidato con este hash (qa:baseline mide la base), Codex no ha intervenido y quedan tres objeciones medias no críticas (granularidad del gate, listas de evidencia sin tope y cambio semántico de google_directives).",
+  "qa_scope": "Real author-side tests on isolated candidate; not yet a controller-bound QA receipt for this council source tree"
+}

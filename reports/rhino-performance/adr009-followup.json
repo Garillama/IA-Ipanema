@@ -1,0 +1,20 @@
+{
+  "project": "rhino-performance",
+  "date": "2026-11-11",
+  "header": {
+    "status": "accepted_local",
+    "transaction": "81a54d213d92470783a55a5eb2f55689",
+    "hashes": {
+      "before": "84f23b725aca4ab2c9470243154e52a3f26fa586c0c3842b3122636ae4779cc6",
+      "after": "25194781ceb4181689a88d76c0d9ab5ca35614d6cc97902ecf1af568a389c845",
+      "delta": "97ed24ed6cf396a5e6cbc60865c58c890c80bb34860a0945f9390fb5c51a1f2c",
+      "patch": "e0dfc73f1465d7c0eb0823bb49f560aabdc92d3aa6a734f90e38aa59e48db783"
+    },
+    "file": "static/css/style-critical.css"
+  },
+  "production_modified": false,
+  "marketing_modified": false,
+  "goal_90_demonstrated": false,
+  "evidence_directory": "reports/runs/rhino-performance/20261111T211930-adr009-followup",
+  "report": "adr009-followup.md"
+}

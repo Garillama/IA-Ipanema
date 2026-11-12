@@ -1,0 +1,25 @@
+// Real HTML5 decode from a locally generated video; Sectionfy API is mocked.
+// node ... CANDIDATE NEW_OUTPUT LOCAL_FIXTURE_DIR THEME_ASSETS
+import fs from 'node:fs/promises';import path from 'node:path';import https from 'node:https';
+const [sourceArg,outArg,fixtureArg,themeArg]=process.argv.slice(2);if(!themeArg)throw Error('Indicar candidato, salida nueva, fixture TLS/video y assets.');
+const root=path.resolve(sourceArg),out=path.resolve(outArg),fixture=path.resolve(fixtureArg),theme=path.resolve(themeArg);await fs.mkdir(out,{recursive:true});
+const bytes=await fs.readFile(path.join(fixture,'fixture.mp4'));let mediaRequests=0;
+const server=https.createServer({key:await fs.readFile(path.join(fixture,'key.pem')),cert:await fs.readFile(path.join(fixture,'cert.pem'))},(req,res)=>{if(req.method!=='GET'||req.url!=='/fixture.mp4'){res.writeHead(404);res.end();return;}mediaRequests++;res.writeHead(200,{'Content-Type':'video/mp4','Content-Length':bytes.length,'Cache-Control':'no-store'});res.end(bytes);});
+await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));const origin='https://127.0.0.1:'+server.address().port;
+Object.assign(process.env,{IPANEMA_EVIDENCE_DIR:path.join(out,'browser'),IPANEMA_ALLOW_NETWORK:'0',IPANEMA_RESOURCE_ORIGINS:origin});
+const{puppeteer}=await import('../../tools/browser_runtime.mjs');let browser;const result={at:new Date().toISOString(),scope:'Actual Chromium HTML5 decode, generated 1864-byte fixture over local TLS; API mocked, not customer upload',checks:[],production_network:false};
+function check(id,passed){result.checks.push({id,passed:!!passed});if(!passed)throw Error(id);}
+try{
+ browser=await puppeteer.launch({args:['--disable-dev-shm-usage','--allow-insecure-localhost']});const p=await browser.newPage();await p.setViewport({width:390,height:900,isMobile:true,deviceScaleFactor:1});
+ const css=await fs.readFile(path.join(root,'static/css/sectionfy-video-slide.css'),'utf8');
+ await p.setContent('<!doctype html><html lang="es"><head><meta name="viewport" content="width=device-width,initial-scale=1"><title>Local video</title><style>body{margin:0}.media{position:relative;height:400px}.media-visual{position:absolute;inset:0;background:#555}'+css+'</style></head><body><main><div class="media" data-sectionfy-kind="video_banner" data-sectionfy-video-slide data-sectionfy-video-endpoint="https://api.bbeboy.store/api/public/video-banner/TEST?placement=product&amp;target_id=fixture" data-sectionfy-token="TEST"><div class="media-visual"></div><button type="button" class="sectionfy-video-toggle" data-sectionfy-video-toggle data-label-play="Reproducir video" data-label-pause="Pausar video" aria-label="Reproducir video" hidden><span data-sectionfy-video-play>▶</span><span data-sectionfy-video-pause hidden>Ⅱ</span></button></div><div style="height:1800px"></div></main></body></html>');
+ await p.evaluate(origin=>{window.fetch=()=>Promise.resolve({ok:true,status:200,json:()=>Promise.resolve({sections:{'video_banner-product-fixture-one':{estado:{lifecycle:'active',storefrontVisible:true},campos:{videoUrl:origin+'/fixture.mp4',videoMimeType:'video/mp4'}}}})});},origin);
+ for(const file of[path.join(theme,'static/js/media-visibility.js'),path.join(root,'static/js/sectionfy-client.js'),path.join(root,'static/js/sectionfy-video-slide.js')])await p.addScriptTag({path:file});
+ await p.waitForSelector('video');await new Promise(resolve=>setTimeout(resolve,150));check('no_file_before_mobile_play',mediaRequests===0&&await p.$eval('video',v=>!v.hasAttribute('src')));
+ await p.focus('[data-sectionfy-video-toggle]');await p.keyboard.press('Enter');await p.waitForFunction(()=>{const v=document.querySelector('video');return v.readyState>=2&&!v.paused&&v.currentTime>.05;},{timeout:6000});
+ check('real_media_received',mediaRequests>0);check('actual_video_decoded',await p.$eval('video',v=>v.videoWidth===128&&v.videoHeight===72));check('label_tracks_playing',await p.$eval('button',b=>b.getAttribute('aria-label')==='Pausar video'));
+ await p.keyboard.press('Space');check('real_keyboard_pause',await p.$eval('video',v=>v.paused));await p.keyboard.press('Enter');await p.waitForFunction(()=>!document.querySelector('video').paused);check('real_resume',await p.$eval('video',v=>!v.paused));
+ await p.evaluate(()=>scrollTo(0,1200));await p.waitForFunction(()=>document.querySelector('video').paused,{timeout:2000});check('offscreen_paused',await p.$eval('video',v=>v.paused));
+ await p.evaluate(()=>scrollTo(0,0));await p.waitForFunction(()=>!document.querySelector('video').paused,{timeout:2000});check('visible_resume_after_intent',await p.$eval('video',v=>!v.paused));
+ await p.screenshot({path:path.join(out,'real-video.png')});result.media_requests=mediaRequests;result.status='passed';
+}catch(error){result.status='failed';result.error=error.message;}finally{if(browser)await browser.close();await new Promise(resolve=>server.close(resolve));await fs.writeFile(path.join(out,'qa.json'),JSON.stringify(result,null,2));console.log(JSON.stringify({status:result.status,checks:result.checks.length,error:result.error}));}

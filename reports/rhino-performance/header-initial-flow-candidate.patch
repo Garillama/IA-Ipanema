@@ -1,0 +1,19 @@
+--- a/static/css/style-critical.css
++++ b/static/css/style-critical.css
+@@ -9313,3 +9313,16 @@
+ .section-page-header:has(> .page-header[hidden]) {
+   display: none;
+ }
++
++/* Keep the configured Home media header out of flow before its native JS initializes. */
++@supports selector(body:has(main)) {
++  @media (min-width: 1024px) {
++    body.template-home:has(#MainContent > .section-video:first-child .video-section-background)
++      .head-main.head-transparent-enabled:not([data-transparent-runtime]) {
++      position: absolute;
++      top: 0;
++      right: 0;
++      left: 0;
++    }
++  }
++}

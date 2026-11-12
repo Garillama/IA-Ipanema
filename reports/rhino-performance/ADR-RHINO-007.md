@@ -1,29 +1,37 @@
-# ADR-RHINO-007 — batching de medición de reseñas de Home
+# ADR-RHINO-007 — setupMore aceptado localmente
 
-Estado: **blocked para aplicación; candidato probado en sandbox**. Fecha:2026-11-11T00:34:12.858365+00:00. Seguimiento acotado de [ADR-RHINO-006](ADR-RHINO-006.md). Proyecto:rhino-performance.
+Estado actual: **approved_with_conditions**, aplicado y aceptado **solo localmente**. Fecha:2026-11-11 T 17:16:58.158291+00:00. Seguimiento de[ADR-RHINO-006](ADR-RHINO-006.md). El propietario autorizó reanudar el consejo y aplicar el candidato únicamente tras revisión/QA; la antigua restricción de“solo pruebas” quedó sustituida por esta instrucción actual. No autoriza producción.
 
-## Objetivo y alcance
+## Decisión
 
-Reducir lecturas/escrituras intercaladas en `setupMore`, sin cambios de apariencia, contenido, API, eventos, ARIA o comercio. Único archivo candidato del tema: `sections/google-reviews.tpl`. El padre es una tarea L3; este lote localizado esL2 con contraste solicitado de los dos proveedores.
+Conservar exactamente el candidato original de Codex en `sections/google-reviews.tpl:setupMore`: calcular los estados antes de cambiar clases y evitar escrituras redundantes. Único archivo del tema modificado. No se cambió CSS, tipografía, HTML, API, ARIA, LS ni comercio ni se añadió infraestructura del orquestador.
 
-El usuario autorizó iniciar el lote local y, tras el fallo de Claude, eligió continuar **solo pruebas y dejar la aplicación pendiente**. Esa es la autorización vigente. No producción ni edición del tema en este cierre.
+Original:10 e 64 ea 2 fb 128479636297 cdbd 543 f 45 b 4 fdbfdbae 99 fd 53 b 0 e 578785367 e 67 b. Aplicado:75 a 487600 c 5 d 71001 fa 2 e 0970 dad 1 cb 943 f 80 d 399 f 1 af 89 db 559 bffc 3253 fd 30. Base Git:2 e 8 c 13 aefd 7 b 346943 e 928 aee 8 e 598 f 69 dd 47374. Transacción privada:69974 a 0971 f 74 e 9 a 90 d 168 d 0 c 316 c 575, intento 1,aceptada con respaldo y hashes comprobados. No hubo commit/push del agente.
 
-## Evidencia y propuestas
+## Propuestas, contraste y objeciones
 
-Dos perfiles CPU×4 observaron setupMore~156/45ms. La fuente contiene lecturas geométricas seguidas de cambio de clase para cada tarjeta. Codex propone separar lecturas/escrituras y evitar cambios de clase redundantes; también reconoce que mostrar botones puede afectar geometría compartida, por lo que exige pruebas.
+Claude revisó independientemente el diff y exigió cubrir cantidades, repetición y render. Codex cuestionó que el flex-basis demostrase toda equivalencia y que el coste O(n)fuera despreciable sin medirlo. Ambos conservaron el candidato y limitaron sus afirmaciones;5 preguntas recibieron 5 respuestas. La objeción de cobertura fue resuelta por QA fuente/controlador; GC y compatibilidad fuera del entorno probado permanecen límites, no pases inventados.
 
-Claude no produjo propuesta:2intentos reales con error de autenticación, procesos finalizados, sin timeout ni análisis generado. No hay opinión, voto, contraste o revisión de Claude en este lote. No se heredan aprobaciones anteriores ni se activa CommandCode.
+Se consideró mantener el original. Crear observadores, retrasar la API o introducir otro motor ampliaría el alcance sin necesidad. El candidato reutiliza función, selectores, estilos, controles y llamadas existentes. La elección del ID`claude-candidate-narrow-local`representa esa implementación compartida, no autoridad superior de un proveedor.
 
-## Candidato, alternativas y pruebas
+## Evidencia final y corrección de pruebas
 
-Candidato: array de estados en primera pasada y aplicación condicional de `has-more` en segunda. Alternativa segura: conservar lo actual. Aplazar fetch de reseñas/introducir observers cambiaría más contratos y no forma parte del lote.
+61 checks del componente en 6 anchos, capturas iguales con máscara de avatares, fuentePoppins/ancho CSS comprobados;556 checks offline de cantidades, repetición, API simulada y teclado/foco/ARIA;48 observaciones en un microensayo de pares alternados. Reducción de layouts observada, sin prometer tiempos globales,INP o 90+.
 
-13checks fuente-componente pasan en6anchos; estados y capturas equivalentes con máscaras explícitas de avatares incompletos.5mediciones por variante/ancho reducen3–4layouts a1. Los12ensayos de página completa usan un perfil intervenido que altera transferenciaHTML; no pueden demostrar el score de producción ni una mejora global. Los prototipos sin DOMfiel se descartaron.
+El QA inicial tenía defectos de clonación de scripts/API, viewport y resoluciónCSS. La evidencia UIantigua fue sustituida por la corregida; fallos y outlier temporal se conservaron. El primer campo discrepante 1920 no puede reconstruirse; no se inventa su causa. El outlier 1440 no se reprodujo en alternancia del mismo DOM. Ambas incidencias se entregaron a los revisores, que aprobaron conservar el código exacto después del QA corregido.
 
-## Decisión y condiciones pendientes
+## Aplicación y revisión
 
-Conservar el candidato y evidencia, **sin aplicar al tema**. Hay mejora localizada, pero no evidencia de90+ o beneficio global suficiente para afirmarlo. Continúan desconocidas la aprobación de Claude, compatibilidad completaTwig/plataforma y mejora global bajo condiciones reales de publicación.
+9 invocaciones reales entre propuestas, contraste, defensa y revisiones previas/posteriores. Claude y Codex aprobaron la conservación local tras revisar la evidencia final. El controlador revalidó restricciones, hashes y diff mediante el agregador existente. No se contaron respuestas como pruebas y no se activó CommandCode.
 
-Para reabrir: usuario habilita la siguiente fase; validar fuente/hashes; recuperar Claude; completar deliberación acotada y revisión independiente del diff; resolver cualquier objeción con pruebas del controlador. Si se acepta localmente, usar transacción sobre ese archivo y verificar hashes, diff y QA. Medir entorno de prueba compatible y validación publicada únicamente tras push del propietario/autorización específica. No repetir discovery ni reconstruir el orquestador.
+Transacción aceptada con evidencia offline previa válida de escrituras redundantes y QA posterior vinculado al hash aplicado. Esa proyección conserva el timestamp de medición original y distingue su fecha de ensamblado; no inventa una prueba ejecutada antes. El antiguo baseline/recibos permanecen archivados.
 
-Reversión actual: no necesaria porque el tema no fue modificado. El borrador está aislado. No se garantizan puntos, CWV o indexación. [Informe y evidencia](home-js-first-batch.md).
+## Condiciones y pendientes
+
+- Revalidar tras cambios de CSS, fuente, markup, versión o contexto.
+- GC/asignaciones y matriz completa de navegadores no medidos.
+- No hay render Twig completo ni prueba de publicación; ninguna conformidadWCAG/indexación/score 90+certificada.
+- El defecto de doble inicialización es previo y se mantiene en backlog separado.
+- Los grandes problemas deJS móvil yCLS desktop requieren sus propios lotes, sin sacrificar diseño, SEO o comercio.
+
+[Informe actual](home-js-first-batch.md) · [ADR bruto y recibos](../runs/rhino-performance/20261111T163507-reviews-candidate-council-resume-2451ba30/council/ADR.md) · [Revisiones posteriores](../runs/rhino-performance/20261111T163507-reviews-candidate-council-resume-2451ba30/post-review.json) · [Estado anterior conservado](../runs/rhino-performance/20261111T163507-reviews-candidate-council-resume-2451ba30/ADR-RHINO-007-before-resume.md).

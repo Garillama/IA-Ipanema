@@ -69,6 +69,10 @@ def compare(project, before, after, *, important_urls=None, allow_removed=None):
             check(url + ':no_js_links', not no_js['links_removed_after_js'], no_js['links_removed_after_js'])
         else:
             check(url + ':no_js_links', False, 'Sin captura no-JS; no se considera aprobado', unknown=True)
+        main_layers = new_layer.get('main_content', {})
+        no_js_main = main_layers.get('no_js')
+        check(url + ':no_js_main_content', bool((no_js_main or {}).get('main_text_characters')),
+              main_layers, unknown=no_js_main is None)
         check(url + ':href', new.get('navigation_without_href', 0) <= old.get('navigation_without_href', 0), new.get('navigation_without_href', 0))
     failed = [c for c in checks if c['status'] == 'failed']
     unknown = [c for c in checks if c['status'] == 'unknown']

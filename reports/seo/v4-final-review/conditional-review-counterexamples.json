@@ -1,0 +1,68 @@
+{
+  "kind": "seo-v4-final-independent-counterexamples",
+  "patch_sha256": "4369d84d3a84bd99808d92eb12ad13bcf185f300615817bb6eedd517412acc6f",
+  "candidate_hashes_match": true,
+  "workspace_base_hashes_match": true,
+  "applied_to_workspace": false,
+  "network_requests": 0,
+  "critical_noindex_failures_reproduced": 2,
+  "findings": [
+    {
+      "id": "meta_open_quote_masks_header",
+      "expected": "noindex",
+      "actual": "indexable_candidate",
+      "passed": false,
+      "meta": "foo=\"x",
+      "header": "noindex"
+    },
+    {
+      "id": "repeated_header_open_quote_masks_next",
+      "expected": "noindex",
+      "actual": "indexable_candidate",
+      "passed": false,
+      "meta": "",
+      "header": [
+        "foo=\"x",
+        "noindex"
+      ]
+    },
+    {
+      "id": "independent_noindex_control",
+      "expected": "noindex",
+      "actual": "noindex",
+      "passed": true,
+      "meta": "",
+      "header": "noindex"
+    },
+    {
+      "id": "action_mid_segment",
+      "path": "/producto-add-to-cart",
+      "candidate_allows": true,
+      "scope": "policy-only fixture, not proof of a real commercial endpoint"
+    },
+    {
+      "id": "action_mid_segment",
+      "path": "/prefix_add_to_cart123",
+      "candidate_allows": true,
+      "scope": "policy-only fixture, not proof of a real commercial endpoint"
+    },
+    {
+      "id": "action_mid_segment",
+      "path": "/blog/posts/como-comprar-x",
+      "candidate_allows": true,
+      "scope": "policy-only fixture, not proof of a real commercial endpoint"
+    },
+    {
+      "id": "unrelated_invalid_agent_failclosed",
+      "robot_errors": [
+        {
+          "line": 1,
+          "reason": "invalid_product_token"
+        }
+      ],
+      "audit_agent_allowed": false,
+      "scope": "conservative compatibility behavior, not a network observation"
+    }
+  ],
+  "decision": "Do not apply exact authorized artifact; no patch modification authorized by this conditional application"
+}

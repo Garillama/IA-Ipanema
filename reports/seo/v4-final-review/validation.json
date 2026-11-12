@@ -1,0 +1,53 @@
+{
+  "kind": "seo-v4-final-isolated-validation",
+  "patch": "reports/seo/v4-review-corrections-final.patch",
+  "patch_bytes": 32393,
+  "patch_sha256": "4369d84d3a84bd99808d92eb12ad13bcf185f300615817bb6eedd517412acc6f",
+  "v3_reference_sha256": "384deeb0673e607712f734130a0895a6fb3129d6c61564ffd93c219378c9eb19",
+  "base_hashes": {
+    "tools/ipanema/seo/robots.py": "7a83bdac275ac8783b7b85841f14d80da0157b9044b1556989a226c1000c8f2b",
+    "tools/ipanema/seo/indexability.py": "c379c404241180894d7a0b25f91f357a56173a059f461532ec1f78fb7650b0e8",
+    "tools/ipanema/seo/page_audit.py": "e60c8b928d8e2fd62e2034a247d407f2e52bd62cddcad5b398713a561c5d140b",
+    "tools/ipanema/seo/crawl_policy.py": "0f62445b9e0fb07bce6c55c59f60b107b52a460b343ea073bb0bee5e8a6009ff",
+    "tools/ipanema/seo/crawler.py": "0cebeb3685255ac5104ce676ade56fdb071d32b00a28f8a3829a1000f2f73f4e"
+  },
+  "new_files_expected_absent": [
+    "tests/unit/test_seo_review_additional_v4.py",
+    "tests/unit/test_seo_robots_values_v4.py"
+  ],
+  "candidate_hashes": {
+    "tests/unit/test_seo_review_additional_v4.py": "f803cc48ddd33e34184e10b62d3ade078975d51b16f2ba81ba630b7317af647e",
+    "tests/unit/test_seo_robots_values_v4.py": "c7b1c771b6a15580959ac0d881f5218dffa15a79b591ccc984621689bc7d4e3f",
+    "tools/ipanema/seo/crawl_policy.py": "7dbd88d522d4000a8903a6c6cf2fbff3034d4bba386719582e7f0d29bcfbcf78",
+    "tools/ipanema/seo/crawler.py": "c431ddf2c191cb209d4127f6961eb8da78116b225917b101b18b0cef926b27b9",
+    "tools/ipanema/seo/indexability.py": "4ec692ed1cd8e9a5d953e99978e2a80fff2f4cc704a2b66f4ac34ffae2c5d4ff",
+    "tools/ipanema/seo/page_audit.py": "51889e4e2f521272bd98b130c6bc406855978389c18e3f1bfca0269187fa6785",
+    "tools/ipanema/seo/robots.py": "9419f489af1c02abb690b4fb055bfe1c795f717a3c06b305a492c38038eeffa3"
+  },
+  "identity_v3_verified": true,
+  "single_patch_applies_to_fresh_base": true,
+  "artifact_matches_tested_tree": true,
+  "parser_defect_reproduced_before": true,
+  "specific_exit": 0,
+  "unit_exit": 0,
+  "integration_exit": 0,
+  "local_tls_exit": 0,
+  "seo_suite_outcome": "passed",
+  "workspace_declared_source_unchanged": true,
+  "original_v3_unchanged": true,
+  "patch_applied_to_workspace": false,
+  "theme_modified": false,
+  "production_modified": false,
+  "storefront_network_requests": 0,
+  "external_crawl_authorized": false,
+  "review": "explicit human approval pending; no independent approval claimed",
+  "reproducibility": {
+    "runner": "reports/seo/v4-final-review/validate_final.py",
+    "runner_sha256": "867a850db92d712fa8a98471944a301b207cbdf37b027ab73df325dbe2e167c2",
+    "inputs": {
+      "reports/seo/v4-final-review/value_cases.py": "c7b1c771b6a15580959ac0d881f5218dffa15a79b591ccc984621689bc7d4e3f",
+      "reports/seo/v4-final-review/parser_candidate.py.txt": "7ef8cff06e2ae3bdd6be8d135b1ac19418bc42122b2944d22a82fffe151a461a"
+    },
+    "candidate_directory": ".local/seo-v4-final-candidate-xkdsxgab"
+  }
+}

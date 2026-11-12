@@ -9,7 +9,7 @@
     "insufficient_evidence",
     "blocked"
   ],
-  "current_regression_comparison": "insufficient_evidence: no post-change candidate",
+  "current_regression_comparison": "insufficient_evidence: no applied candidate; historical comparison rejected for sample_count3vs5",
   "field_objectives": {
     "lcp_p75_ms": 2500,
     "inp_p75_ms": 200,
@@ -26,7 +26,13 @@
     "alpha": 0.05,
     "method_proposed": "one-sided permutation test plus median tolerance; Holm correction across tested metrics, only when sample count permits",
     "fewer_samples": "insufficient_evidence or inconclusive, never invent confidence",
-    "samples_current_lab": 3
+    "samples_current_lab": 5,
+    "samples_by_template": {
+      "home": 5,
+      "category": 5,
+      "product": 5,
+      "blog": 1
+    }
   },
   "budgets": "Per-profile prospective tolerances in performance-baseline.json; field objectives separate from regression budgets",
   "blocking": [
@@ -45,8 +51,8 @@
   ],
   "pending": [
     "Implement enforcement hook using existing QA/controller before relying on it as a deployment gate.",
-    "Capture at least5 comparable baseline samples when enabling statistical blocking.",
-    "Clean-window long-task and repeated DOM/resource samples before automatic budget activation."
+    "Clean-window long-task and repeated DOM/resource samples before automatic budget activation.",
+    "Fresh5-sample baselines captured for Home/category/PRO AIR; blog still1. Need compatible candidate samples and validated enforcement before automatic blocking."
   ],
   "cadence_proposed": {
     "before_local_changes": "manual baseline then same-profile QA after changes",
@@ -54,5 +60,7 @@
     "weekly": "CrUX/History review (rolling aggregated periods); only scheduled with explicit authorization",
     "monthly_or_app_change": "representative full responsive/AX/assets audit"
   },
-  "external_schedule_created": false
+  "external_schedule_created": false,
+  "last_baseline_ref": "performance-baseline-20261111.json",
+  "last_observation_at": "2026-11-11T21:09:01.222559+00:00"
 }

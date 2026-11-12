@@ -1,0 +1,16 @@
+{
+  "patch_original_sha256": "bb126cbf3300208673443de8eca360a4e797c49e91866c99413f2c434f29d093",
+  "patch_v2_sha256": "6e506fdbd159ef15e45de35ac7d831c71b4ee723e4f576f6af8d65550905b6fd",
+  "patch_v3_sha256": "384deeb0673e607712f734130a0895a6fb3129d6c61564ffd93c219378c9eb19",
+  "agents_sha256": "0d26605296d0107c59dd498689e79e08f91d2fc2941bf82ab16593708c576f27",
+  "source_hashes": {
+    "tools/ipanema/seo/robots.py": "7a83bdac275ac8783b7b85841f14d80da0157b9044b1556989a226c1000c8f2b",
+    "tools/ipanema/seo/indexability.py": "c379c404241180894d7a0b25f91f357a56173a059f461532ec1f78fb7650b0e8",
+    "tools/ipanema/seo/page_audit.py": "e60c8b928d8e2fd62e2034a247d407f2e52bd62cddcad5b398713a561c5d140b",
+    "tools/ipanema/seo/crawl_policy.py": "0f62445b9e0fb07bce6c55c59f60b107b52a460b343ea073bb0bee5e8a6009ff",
+    "tools/ipanema/seo/crawler.py": "0cebeb3685255ac5104ce676ade56fdb071d32b00a28f8a3829a1000f2f73f4e"
+  },
+  "workspace_unchanged": true,
+  "applied": false,
+  "external_crawl_authorized": false
+}

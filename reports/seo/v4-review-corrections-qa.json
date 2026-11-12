@@ -1,0 +1,26 @@
+{
+  "kind": "seo-v4-isolated-review-candidate",
+  "candidate_applied_to_workspace": false,
+  "live_network_executed": false,
+  "council_status": "needs_evidence",
+  "source_hashes": {
+    "tools/ipanema/seo/robots.py": "7a83bdac275ac8783b7b85841f14d80da0157b9044b1556989a226c1000c8f2b",
+    "tools/ipanema/seo/indexability.py": "c379c404241180894d7a0b25f91f357a56173a059f461532ec1f78fb7650b0e8",
+    "tools/ipanema/seo/page_audit.py": "e60c8b928d8e2fd62e2034a247d407f2e52bd62cddcad5b398713a561c5d140b",
+    "tools/ipanema/seo/crawl_policy.py": "0f62445b9e0fb07bce6c55c59f60b107b52a460b343ea073bb0bee5e8a6009ff",
+    "tools/ipanema/seo/crawler.py": "0cebeb3685255ac5104ce676ade56fdb071d32b00a28f8a3829a1000f2f73f4e"
+  },
+  "before": {
+    "exit_code": 1,
+    "output": "======================================================================\nERROR: test_content_route_containing_action_word (tests.unit.test_seo_review_findings_v4.ReviewRegressions.test_content_route_containing_action_word)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/home/alanrichard/Escritorio/IA inversa/.local/seo-v4-review-hb1nexxk/tests/unit/test_seo_review_findings_v4.py\", line 32, in test_content_route_containing_action_word\n    self.assertEqual(Policy(HOME).check('/blog/posts/como-comprar-x'),HOME+'blog/posts/como-comprar-x')\n                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/alanrichard/Escritorio/IA inversa/.local/seo-v4-review-hb1nexxk/tools/ipanema/seo/crawl_policy.py\", line 113, in check\n    raise IpanemaError('Área privada o acción excluida.')\nipanema.core.IpanemaError: Área privada o acción excluida.\n\n======================================================================\nFAIL: test_late_exclusion_still_partial (tests.unit.test_seo_review_findings_v4.ReviewRegressions.test_late_exclusion_still_partial)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/home/alanrichard/Escritorio/IA inversa/.local/seo-v4-review-hb1nexxk/tests/unit/test_seo_review_findings_v4.py\", line 26, in test_late_exclusion_still_partial\n    self.assertEqual(result['state'],'partial')\nAssertionError: 'complete_for_policy' != 'partial'\n- complete_for_policy\n+ partial\n\n\n======================================================================\nFAIL: test_preview_none_is_not_noindex (tests.unit.test_seo_review_findings_v4.ReviewRegressions.test_preview_none_is_not_noindex)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/home/alanrichard/Escritorio/IA inversa/.local/seo-v4-review-hb1nexxk/tests/unit/test_seo_review_findings_v4.py\", line 13, in test_preview_none_is_not_noindex\n    self.assertEqual(classify(snapshot,googlebot_allowed=True,robots_known=True)['state'],'indexable_candidate')\nAssertionError: 'noindex' != 'indexable_candidate'\n- noindex\n+ indexable_candidate\n\n\n======================================================================\nFAIL: test_robots_product_token (tests.unit.test_seo_review_findings_v4.ReviewRegressions.test_robots_product_token)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/home/alanrichard/Escritorio/IA inversa/.local/seo-v4-review-hb1nexxk/tests/unit/test_seo_review_findings_v4.py\", line 19, in test_robots_product_token\n    self.assertTrue(robots.can_fetch('Googlebot',HOME))\nAssertionError: False is not true\n\n======================================================================\nFAIL: test_unchecked_sitemap_never_complete (tests.unit.test_seo_review_findings_v4.ReviewRegressions.test_unchecked_sitemap_never_complete)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/home/alanrichard/Escritorio/IA inversa/.local/seo-v4-review-hb1nexxk/tests/unit/test_seo_review_findings_v4.py\", line 30, in test_unchecked_sitemap_never_complete\n    self.assertEqual(result['state'],'partial')\nAssertionError: 'complete_for_policy' != 'partial'\n- complete_for_policy\n+ partial\n\n\n----------------------------------------------------------------------\nRan 23 tests in 0.245s\n\nFAILED (failures=4, errors=1)\n"
+  },
+  "after": {
+    "exit_code": 0,
+    "output": "----------------------------------------------------------------------\nRan 23 tests in 0.249s\n\nOK\n"
+  },
+  "candidate_seo_units": {
+    "exit_code": 0,
+    "output": "----------------------------------------------------------------------\nRan 111 tests in 0.483s\n\nOK\n"
+  },
+  "mandatory_review": "Human or complete independent review required before applying patch; no consensus claimed."
+}

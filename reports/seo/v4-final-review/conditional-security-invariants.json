@@ -1,0 +1,24 @@
+{
+  "kind": "seo-v4-static-security-invariants",
+  "scope": "unchanged AST of named security boundaries; not blanket proof of security",
+  "base_file": "tools/ipanema/seo/crawl_policy.py",
+  "base_sha256": "0f62445b9e0fb07bce6c55c59f60b107b52a460b343ea073bb0bee5e8a6009ff",
+  "candidate_sha256": "7dbd88d522d4000a8903a6c6cf2fbff3034d4bba386719582e7f0d29bcfbcf78",
+  "unchanged_symbols": {
+    "normalize": true,
+    "Limits": true,
+    "Policy": true,
+    "_PinnedTLS": true,
+    "_https_get_once": true,
+    "https_get": true,
+    "Fetcher.__init__": true,
+    "Fetcher.provenance": true
+  },
+  "intentional_changes": [
+    "PRIVATE/ACTIONS route matching",
+    "public_addresses plus translated-address guard",
+    "Fetcher.get deadline recheck after wait"
+  ],
+  "runtime_evidence": "reports/seo/v4-final-review/after-final-specific.json and after-final-local-tls.json",
+  "workspace_applied": false
+}

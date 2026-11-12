@@ -13,7 +13,7 @@ import subprocess
 import sys
 import time
 from pathlib import Path
-from urllib.parse import parse_qsl, unquote, urlencode, urljoin, urlsplit, urlunsplit
+from urllib.parse import parse_qsl, quote, unquote, urlencode, urljoin, urlsplit, urlunsplit
 import zlib
 
 from ..core import IpanemaError, safe_url
@@ -22,6 +22,16 @@ AGENT = 'IAIpanemaAudit/4.0'
 PRIVATE = re.compile(r'/(?:account|accounts|customer|customers|cuenta|mi-cuenta|cart|carrito|checkout|checkouts|admin|login|logout|password|register|orders|pedidos|subscriptions|suscripciones)(?:/|$)', re.I)
 ACTIONS = re.compile(r'(?:add.to.cart|cart/add|cart/update|cart/remove|agregar.al.carrito|comprar|add_to_cart)', re.I)
 ASSET = re.compile(r'\.(?:jpg|jpeg|png|webp|avif|gif|svg|ico|mp4|webm|mp3|pdf|zip|css|js|woff2?|ttf)(?:$|/)', re.I)
+
+
+def decoded_path(path):
+    """Inspección conservadora de rutas escapadas, con profundidad finita."""
+    for _ in range(8):
+        decoded = unquote(path, errors='strict')
+        if decoded == path:
+            return path
+        path = decoded
+    raise IpanemaError('Ruta con demasiadas capas de escape.')
 
 
 def normalize(url, base=None):
@@ -41,7 +51,11 @@ def normalize(url, base=None):
     query = parse_qsl(u.query, keep_blank_values=True, max_num_fields=12)
     if len({k for k, _ in query}) != len(query):
         raise IpanemaError('Parámetros repetidos no permitidos.')
-    return urlunsplit(('https', host, u.path or '/', urlencode(sorted(query)), ''))
+    if re.search(r'%(?![0-9a-fA-F]{2})', u.path):
+        raise IpanemaError('Escape de ruta inválido.')
+    path = quote(u.path or '/', safe="/%:@!$&'()*+,;=-._~")
+    path = re.sub(r'%[0-9a-fA-F]{2}', lambda m: m[0].upper(), path)
+    return urlunsplit(('https', host, path, urlencode(sorted(query)), ''))
 
 
 @dataclass(frozen=True)
@@ -94,9 +108,7 @@ class Policy:
         u = urlsplit(value)
         if urlunsplit((u.scheme, u.netloc, '', '', '')) != self.origin:
             raise IpanemaError('Origen externo no autorizado.')
-        path = u.path
-        for _ in range(3):
-            path = unquote(path)
+        path = decoded_path(u.path)
         if '\\' in path or re.search(r'[\x00-\x1f\x7f]', path) or PRIVATE.search(path) or ACTIONS.search(path):
             raise IpanemaError('Área privada o acción excluida.')
         if any(part in ('.', '..') for part in path.split('/')) or '//' in path:

@@ -17,7 +17,13 @@
       "dependencies": "No retirar GTM/Meta/TikTok por tamaño; comprobar atribución y propietarios.",
       "before_after_test": "Trazas de tareas por integración/función y ensayo de una inicialización propia; comparar LCP/TBT/CLS y eventos.",
       "rollback": "En fase futura, transacción attempt sobre archivos propios declarados y hashes; revertir solo el lote propio sin conflictos, nunca reset/clean.",
-      "status": "needs_evidence"
+      "status": "needs_evidence",
+      "partial_local_resolution": {
+        "component": "google-reviews:setupMore",
+        "status": "accepted_local_unpublished",
+        "evidence": "home-js-first-batch.md",
+        "global_TBT_resolved": false
+      }
     },
     {
       "id": "RH-HOME-02",
@@ -138,6 +144,18 @@
       "before_after_test": "Implementar hook posterior con>=5muestras compatibles, tolerancias prospectivas, test simulado/noisy/real; bloquear solo regresión respaldada.",
       "rollback": "En fase futura, transacción attempt sobre archivos propios declarados y hashes; revertir solo el lote propio sin conflictos, nunca reset/clean.",
       "status": "proposed_not_implemented"
+    },
+    {
+      "id": "RH-HOME-INIT-01",
+      "priority": "P2",
+      "description": "Caracterizar y corregir en lote separado la doble inicialización completa de reseñas.",
+      "url": "https://rhino-performance.com/",
+      "candidate_source": "sections/google-reviews.tpl:init",
+      "evidence": "reports/runs/rhino-performance/20261111T163507-reviews-candidate-council-resume-2451ba30/post-apply-edge/edge-qa.json",
+      "cause_state": "Pre-existing issue confirmed in synthetic repeated-init case; current configuredHomehas1instance.",
+      "expected_impact": "Evitar doble listener/fetch/toggle al reinitializar; no estimación de puntos.",
+      "risk": "medio",
+      "status": "not_fixed_separate_scope"
     }
   ],
   "theme_changes_authorized_by_this_report": false

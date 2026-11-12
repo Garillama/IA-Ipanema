@@ -1,0 +1,2228 @@
+{
+  "at": "2026-11-11T21:09:01.222559+00:00",
+  "project": "rhino-performance",
+  "status": "partial_needs_evidence",
+  "run": "reports/runs/rhino-performance/20261111T203215-renewed-performance",
+  "measurements": [
+    {
+      "page": "home",
+      "url": "https://rhino-performance.com/",
+      "device": "mobile",
+      "n": 5,
+      "scores": {
+        "performance": {
+          "median": 64.0,
+          "minimum": 57.99999999999999,
+          "maximum": 67.0,
+          "stdev": 3.53553390593274
+        },
+        "accessibility": {
+          "median": 97.0,
+          "minimum": 97.0,
+          "maximum": 97.0,
+          "stdev": 0.0
+        },
+        "best-practices": {
+          "median": 77.0,
+          "minimum": 77.0,
+          "maximum": 77.0,
+          "stdev": 0.0
+        },
+        "seo": {
+          "median": 100.0,
+          "minimum": 100.0,
+          "maximum": 100.0,
+          "stdev": 0.0
+        }
+      },
+      "metrics": {
+        "lcp": 3260.7775,
+        "fcp": 1701.87,
+        "cls": 0.0004495097942321615,
+        "tbt": 1693.500000000001,
+        "speed_index": 3427.1921615002934
+      },
+      "variability": null,
+      "profile": {
+        "source": "lighthouse_local",
+        "url": "https://rhino-performance.com/",
+        "final_url": "https://rhino-performance.com/",
+        "device": "mobile",
+        "categories": [
+          "performance",
+          "accessibility",
+          "best-practices",
+          "seo"
+        ],
+        "locale": "es",
+        "lighthouse_version": "13.6.0",
+        "chrome_version": "155.0.8059.84",
+        "screen": {
+          "mobile": true,
+          "width": 412,
+          "height": 823,
+          "deviceScaleFactor": 1.75,
+          "disabled": false
+        },
+        "throttling_method": "simulate",
+        "throttling": {
+          "rttMs": 150,
+          "throughputKbps": 1638.4,
+          "requestLatencyMs": 562.5,
+          "downloadThroughputKbps": 1474.56,
+          "uploadThroughputKbps": 675,
+          "cpuSlowdownMultiplier": 4
+        },
+        "cache": false,
+        "network_policy": "guarded-read-only"
+      }
+    },
+    {
+      "page": "home",
+      "url": "https://rhino-performance.com/",
+      "device": "desktop",
+      "n": 5,
+      "scores": {
+        "performance": {
+          "median": 87.0,
+          "minimum": 65.0,
+          "maximum": 89.0,
+          "stdev": 10.198039027185569
+        },
+        "accessibility": {
+          "median": 97.0,
+          "minimum": 97.0,
+          "maximum": 97.0,
+          "stdev": 0.0
+        },
+        "best-practices": {
+          "median": 77.0,
+          "minimum": 77.0,
+          "maximum": 77.0,
+          "stdev": 0.0
+        },
+        "seo": {
+          "median": 100.0,
+          "minimum": 100.0,
+          "maximum": 100.0,
+          "stdev": 0.0
+        }
+      },
+      "metrics": {
+        "lcp": 986.2475,
+        "fcp": 415.052,
+        "cls": 0.06816233677728162,
+        "tbt": 163.5,
+        "speed_index": 2438.140023309416
+      },
+      "variability": null,
+      "profile": {
+        "source": "lighthouse_local",
+        "url": "https://rhino-performance.com/",
+        "final_url": "https://rhino-performance.com/",
+        "device": "desktop",
+        "categories": [
+          "performance",
+          "accessibility",
+          "best-practices",
+          "seo"
+        ],
+        "locale": "es",
+        "lighthouse_version": "13.6.0",
+        "chrome_version": "155.0.8059.84",
+        "screen": {
+          "mobile": false,
+          "width": 1350,
+          "height": 940,
+          "deviceScaleFactor": 1,
+          "disabled": false
+        },
+        "throttling_method": "simulate",
+        "throttling": {
+          "rttMs": 40,
+          "throughputKbps": 10240,
+          "requestLatencyMs": 0,
+          "downloadThroughputKbps": 0,
+          "uploadThroughputKbps": 0,
+          "cpuSlowdownMultiplier": 1
+        },
+        "cache": false,
+        "network_policy": "guarded-read-only"
+      }
+    },
+    {
+      "page": "category",
+      "url": "https://rhino-performance.com/presoterapia/",
+      "device": "mobile",
+      "n": 5,
+      "scores": {
+        "performance": {
+          "median": 61.0,
+          "minimum": 59.0,
+          "maximum": 74.0,
+          "stdev": 5.9833101206606365
+        },
+        "accessibility": {
+          "median": 100.0,
+          "minimum": 100.0,
+          "maximum": 100.0,
+          "stdev": 0.0
+        },
+        "best-practices": {
+          "median": 77.0,
+          "minimum": 77.0,
+          "maximum": 77.0,
+          "stdev": 0.0
+        },
+        "seo": {
+          "median": 100.0,
+          "minimum": 100.0,
+          "maximum": 100.0,
+          "stdev": 0.0
+        }
+      },
+      "metrics": {
+        "lcp": 3687.0964999999997,
+        "fcp": 1325.243,
+        "cls": 0.0,
+        "tbt": 1721.0,
+        "speed_index": 3138.233296418777
+      },
+      "variability": null,
+      "profile": {
+        "source": "lighthouse_local",
+        "url": "https://rhino-performance.com/presoterapia/",
+        "final_url": "https://rhino-performance.com/presoterapia/",
+        "device": "mobile",
+        "categories": [
+          "performance",
+          "accessibility",
+          "best-practices",
+          "seo"
+        ],
+        "locale": "es",
+        "lighthouse_version": "13.6.0",
+        "chrome_version": "155.0.8059.84",
+        "screen": {
+          "mobile": true,
+          "width": 412,
+          "height": 823,
+          "deviceScaleFactor": 1.75,
+          "disabled": false
+        },
+        "throttling_method": "simulate",
+        "throttling": {
+          "rttMs": 150,
+          "throughputKbps": 1638.4,
+          "requestLatencyMs": 562.5,
+          "downloadThroughputKbps": 1474.56,
+          "uploadThroughputKbps": 675,
+          "cpuSlowdownMultiplier": 4
+        },
+        "cache": false,
+        "network_policy": "guarded-read-only"
+      }
+    },
+    {
+      "page": "category",
+      "url": "https://rhino-performance.com/presoterapia/",
+      "device": "desktop",
+      "n": 5,
+      "scores": {
+        "performance": {
+          "median": 94.0,
+          "minimum": 89.0,
+          "maximum": 96.0,
+          "stdev": 2.7748873851023217
+        },
+        "accessibility": {
+          "median": 100.0,
+          "minimum": 100.0,
+          "maximum": 100.0,
+          "stdev": 0.0
+        },
+        "best-practices": {
+          "median": 77.0,
+          "minimum": 77.0,
+          "maximum": 77.0,
+          "stdev": 0.0
+        },
+        "seo": {
+          "median": 100.0,
+          "minimum": 100.0,
+          "maximum": 100.0,
+          "stdev": 0.0
+        }
+      },
+      "metrics": {
+        "lcp": 1258.7195,
+        "fcp": 367.36400000000003,
+        "cls": 0.03051209621165689,
+        "tbt": 132.7040000000004,
+        "speed_index": 954.525104402843
+      },
+      "variability": null,
+      "profile": {
+        "source": "lighthouse_local",
+        "url": "https://rhino-performance.com/presoterapia/",
+        "final_url": "https://rhino-performance.com/presoterapia/",
+        "device": "desktop",
+        "categories": [
+          "performance",
+          "accessibility",
+          "best-practices",
+          "seo"
+        ],
+        "locale": "es",
+        "lighthouse_version": "13.6.0",
+        "chrome_version": "155.0.8059.84",
+        "screen": {
+          "mobile": false,
+          "width": 1350,
+          "height": 940,
+          "deviceScaleFactor": 1,
+          "disabled": false
+        },
+        "throttling_method": "simulate",
+        "throttling": {
+          "rttMs": 40,
+          "throughputKbps": 10240,
+          "requestLatencyMs": 0,
+          "downloadThroughputKbps": 0,
+          "uploadThroughputKbps": 0,
+          "cpuSlowdownMultiplier": 1
+        },
+        "cache": false,
+        "network_policy": "guarded-read-only"
+      }
+    },
+    {
+      "page": "product",
+      "url": "https://rhino-performance.com/productos/botas-presoterapia-inalambricas-pro-air/",
+      "device": "mobile",
+      "n": 5,
+      "scores": {
+        "performance": {
+          "median": 60.0,
+          "minimum": 57.99999999999999,
+          "maximum": 64.0,
+          "stdev": 2.44948974278318
+        },
+        "accessibility": {
+          "median": 100.0,
+          "minimum": 100.0,
+          "maximum": 100.0,
+          "stdev": 0.0
+        },
+        "best-practices": {
+          "median": 77.0,
+          "minimum": 77.0,
+          "maximum": 77.0,
+          "stdev": 0.0
+        },
+        "seo": {
+          "median": 92.0,
+          "minimum": 92.0,
+          "maximum": 92.0,
+          "stdev": 0.0
+        }
+      },
+      "metrics": {
+        "lcp": 3541.81,
+        "fcp": 1642.0079999999998,
+        "cls": 0.0,
+        "tbt": 1990.9999999999982,
+        "speed_index": 3732.039333282173
+      },
+      "variability": null,
+      "profile": {
+        "source": "lighthouse_local",
+        "url": "https://rhino-performance.com/productos/botas-presoterapia-inalambricas-pro-air/",
+        "final_url": "https://rhino-performance.com/productos/botas-presoterapia-inalambricas-pro-air/",
+        "device": "mobile",
+        "categories": [
+          "performance",
+          "accessibility",
+          "best-practices",
+          "seo"
+        ],
+        "locale": "es",
+        "lighthouse_version": "13.6.0",
+        "chrome_version": "155.0.8059.84",
+        "screen": {
+          "mobile": true,
+          "width": 412,
+          "height": 823,
+          "deviceScaleFactor": 1.75,
+          "disabled": false
+        },
+        "throttling_method": "simulate",
+        "throttling": {
+          "rttMs": 150,
+          "throughputKbps": 1638.4,
+          "requestLatencyMs": 562.5,
+          "downloadThroughputKbps": 1474.56,
+          "uploadThroughputKbps": 675,
+          "cpuSlowdownMultiplier": 4
+        },
+        "cache": false,
+        "network_policy": "guarded-read-only"
+      }
+    },
+    {
+      "page": "product",
+      "url": "https://rhino-performance.com/productos/botas-presoterapia-inalambricas-pro-air/",
+      "device": "desktop",
+      "n": 5,
+      "scores": {
+        "performance": {
+          "median": 94.0,
+          "minimum": 91.0,
+          "maximum": 95.0,
+          "stdev": 1.51657508881031
+        },
+        "accessibility": {
+          "median": 100.0,
+          "minimum": 100.0,
+          "maximum": 100.0,
+          "stdev": 0.0
+        },
+        "best-practices": {
+          "median": 77.0,
+          "minimum": 77.0,
+          "maximum": 77.0,
+          "stdev": 0.0
+        },
+        "seo": {
+          "median": 92.0,
+          "minimum": 92.0,
+          "maximum": 92.0,
+          "stdev": 0.0
+        }
+      },
+      "metrics": {
+        "lcp": 1084.9885,
+        "fcp": 498.146,
+        "cls": 0.07506457424006947,
+        "tbt": 141.5,
+        "speed_index": 1148.4149083362536
+      },
+      "variability": null,
+      "profile": {
+        "source": "lighthouse_local",
+        "url": "https://rhino-performance.com/productos/botas-presoterapia-inalambricas-pro-air/",
+        "final_url": "https://rhino-performance.com/productos/botas-presoterapia-inalambricas-pro-air/",
+        "device": "desktop",
+        "categories": [
+          "performance",
+          "accessibility",
+          "best-practices",
+          "seo"
+        ],
+        "locale": "es",
+        "lighthouse_version": "13.6.0",
+        "chrome_version": "155.0.8059.84",
+        "screen": {
+          "mobile": false,
+          "width": 1350,
+          "height": 940,
+          "deviceScaleFactor": 1,
+          "disabled": false
+        },
+        "throttling_method": "simulate",
+        "throttling": {
+          "rttMs": 40,
+          "throughputKbps": 10240,
+          "requestLatencyMs": 0,
+          "downloadThroughputKbps": 0,
+          "uploadThroughputKbps": 0,
+          "cpuSlowdownMultiplier": 1
+        },
+        "cache": false,
+        "network_policy": "guarded-read-only"
+      }
+    },
+    {
+      "page": "blog",
+      "url": "https://rhino-performance.com/blog/",
+      "device": "mobile",
+      "n": 1,
+      "scores": {
+        "performance": {
+          "median": 47.0,
+          "minimum": 47.0,
+          "maximum": 47.0,
+          "stdev": null
+        },
+        "accessibility": {
+          "median": 93.0,
+          "minimum": 93.0,
+          "maximum": 93.0,
+          "stdev": null
+        },
+        "best-practices": {
+          "median": 77.0,
+          "minimum": 77.0,
+          "maximum": 77.0,
+          "stdev": null
+        },
+        "seo": {
+          "median": 100.0,
+          "minimum": 100.0,
+          "maximum": 100.0,
+          "stdev": null
+        }
+      },
+      "metrics": {
+        "lcp": 6561.566500000001,
+        "fcp": 1711.989,
+        "cls": 0.0,
+        "tbt": 1491.0,
+        "speed_index": 4770.6784556255
+      },
+      "variability": null,
+      "profile": {
+        "source": "lighthouse_local",
+        "url": "https://rhino-performance.com/blog/",
+        "final_url": "https://rhino-performance.com/blog/",
+        "device": "mobile",
+        "categories": [
+          "performance",
+          "accessibility",
+          "best-practices",
+          "seo"
+        ],
+        "locale": "es",
+        "lighthouse_version": "13.6.0",
+        "chrome_version": "155.0.8059.84",
+        "screen": {
+          "mobile": true,
+          "width": 412,
+          "height": 823,
+          "deviceScaleFactor": 1.75,
+          "disabled": false
+        },
+        "throttling_method": "simulate",
+        "throttling": {
+          "rttMs": 150,
+          "throughputKbps": 1638.4,
+          "requestLatencyMs": 562.5,
+          "downloadThroughputKbps": 1474.56,
+          "uploadThroughputKbps": 675,
+          "cpuSlowdownMultiplier": 4
+        },
+        "cache": false,
+        "network_policy": "guarded-read-only"
+      }
+    },
+    {
+      "page": "blog",
+      "url": "https://rhino-performance.com/blog/",
+      "device": "desktop",
+      "n": 1,
+      "scores": {
+        "performance": {
+          "median": 84.0,
+          "minimum": 84.0,
+          "maximum": 84.0,
+          "stdev": null
+        },
+        "accessibility": {
+          "median": 93.0,
+          "minimum": 93.0,
+          "maximum": 93.0,
+          "stdev": null
+        },
+        "best-practices": {
+          "median": 77.0,
+          "minimum": 77.0,
+          "maximum": 77.0,
+          "stdev": null
+        },
+        "seo": {
+          "median": 100.0,
+          "minimum": 100.0,
+          "maximum": 100.0,
+          "stdev": null
+        }
+      },
+      "metrics": {
+        "lcp": 2211.3579999999993,
+        "fcp": 978.9975,
+        "cls": 0.04162631752911304,
+        "tbt": 90.0,
+        "speed_index": 1882.091023593341
+      },
+      "variability": null,
+      "profile": {
+        "source": "lighthouse_local",
+        "url": "https://rhino-performance.com/blog/",
+        "final_url": "https://rhino-performance.com/blog/",
+        "device": "desktop",
+        "categories": [
+          "performance",
+          "accessibility",
+          "best-practices",
+          "seo"
+        ],
+        "locale": "es",
+        "lighthouse_version": "13.6.0",
+        "chrome_version": "155.0.8059.84",
+        "screen": {
+          "mobile": false,
+          "width": 1350,
+          "height": 940,
+          "deviceScaleFactor": 1,
+          "disabled": false
+        },
+        "throttling_method": "simulate",
+        "throttling": {
+          "rttMs": 40,
+          "throughputKbps": 10240,
+          "requestLatencyMs": 0,
+          "downloadThroughputKbps": 0,
+          "uploadThroughputKbps": 0,
+          "cpuSlowdownMultiplier": 1
+        },
+        "cache": false,
+        "network_policy": "guarded-read-only"
+      }
+    }
+  ],
+  "historical_comparisons": [
+    {
+      "device": "desktop",
+      "formal_comparison": {
+        "status": "not_comparable",
+        "fields": [
+          "sample_count"
+        ]
+      },
+      "historical_n": 3,
+      "new_n": 5,
+      "historical_median_score": 71.0,
+      "new_median_score": 87.0,
+      "historical_metrics": {
+        "lcp": 1087.857,
+        "fcp": 552.3639999999999,
+        "cls": 0.4491796690307328,
+        "tbt": 113.0,
+        "speed_index": 1223.5584246459757
+      },
+      "new_metrics": {
+        "lcp": 986.2475,
+        "fcp": 415.052,
+        "cls": 0.06816233677728162,
+        "tbt": 163.5,
+        "speed_index": 2438.140023309416
+      },
+      "causality_confirmed": false
+    },
+    {
+      "device": "mobile",
+      "formal_comparison": {
+        "status": "not_comparable",
+        "fields": [
+          "sample_count"
+        ]
+      },
+      "historical_n": 3,
+      "new_n": 5,
+      "historical_median_score": 30.0,
+      "new_median_score": 64.0,
+      "historical_metrics": {
+        "lcp": 15733.681999999999,
+        "fcp": 4964.452000000001,
+        "cls": 0.006560547786739767,
+        "tbt": 1586.5,
+        "speed_index": 16571.082982242115
+      },
+      "new_metrics": {
+        "lcp": 3260.7775,
+        "fcp": 1701.87,
+        "cls": 0.0004495097942321615,
+        "tbt": 1693.500000000001,
+        "speed_index": 3427.1921615002934
+      },
+      "causality_confirmed": false
+    }
+  ],
+  "controller_status": "needs_evidence",
+  "implementation_allowed": false,
+  "theme_files_modified": [],
+  "source_integrity": {
+    "sections/video.tpl": true,
+    "static/js/sectionfy-client.js": true,
+    "static/js/sectionfy-video-slide.js": true,
+    "static/js/store.js": true,
+    "templates/pages/home.json": true,
+    "sections/google-reviews.tpl": true
+  },
+  "CPU": {
+    "profile": {
+      "width": 412,
+      "height": 823,
+      "DPR": 1.75,
+      "cpu_rate": 4,
+      "network_latency_ms": 562.5,
+      "download_kbps": 1474.56,
+      "upload_kbps": 675,
+      "cache": false,
+      "consent": "no choice submitted, fresh anonymous",
+      "network_policy": "guarded-read-only"
+    },
+    "observation_end_ms": 18692.89999999851,
+    "total_long_task_excess_ms": 1566,
+    "clock_validation": {
+      "profile_start_us": 52297099213,
+      "profile_end_us": 52314699908,
+      "nav_ms": 52296491.023,
+      "samples": 17210,
+      "time_deltas": 17210
+    }
+  },
+  "attribution": [
+    {
+      "url": "https://www.googletagmanager.com/gtag/js",
+      "sampled_self_ms": 519.3409999999998,
+      "sampled_self_in_task_tail_ms": 404.7560000000001,
+      "samples": 501
+    },
+    {
+      "url": "https://connect.facebook.net/en_US/fbevents.js",
+      "sampled_self_ms": 352.86600000000004,
+      "sampled_self_in_task_tail_ms": 280.88899999999995,
+      "samples": 350
+    },
+    {
+      "url": "https://analytics.tiktok.com/i18n/pixel/static/main.MTkyOWEyMGMwOQ.js",
+      "sampled_self_ms": 263.076,
+      "sampled_self_in_task_tail_ms": 154.7450000000001,
+      "samples": 248
+    },
+    {
+      "url": "[(program)]",
+      "sampled_self_ms": 2801.0669999999946,
+      "sampled_self_in_task_tail_ms": 127.28200000000002,
+      "samples": 3209
+    },
+    {
+      "url": "https://connect.facebook.net/signals/config/393081466010695",
+      "sampled_self_ms": 112.30199999999998,
+      "sampled_self_in_task_tail_ms": 93.98499999999999,
+      "samples": 106
+    },
+    {
+      "url": "https://acdn-us.mitiendanube.com/assets/stores/js/linkedstore-v2-93b237c91dfc82174c2a43732194b84c30.js",
+      "sampled_self_ms": 143.82200000000003,
+      "sampled_self_in_task_tail_ms": 91.788,
+      "samples": 139
+    },
+    {
+      "url": "https://rhino-performance.com/",
+      "sampled_self_ms": 153.88599999999997,
+      "sampled_self_in_task_tail_ms": 79.513,
+      "samples": 147
+    },
+    {
+      "url": "[querySelectorAll]",
+      "sampled_self_ms": 158.02000000000007,
+      "sampled_self_in_task_tail_ms": 76.381,
+      "samples": 157
+    },
+    {
+      "url": "https://nsk-cdn-static.tiendanube.com/vanilla-adapter-0.40.0.min.js",
+      "sampled_self_ms": 229.9770000000001,
+      "sampled_self_in_task_tail_ms": 65.539,
+      "samples": 230
+    },
+    {
+      "url": "https://scripts.clarity.ms/0.8.73-beta/clarity.js",
+      "sampled_self_ms": 167.43300000000005,
+      "sampled_self_in_task_tail_ms": 55.803999999999995,
+      "samples": 168
+    },
+    {
+      "url": "https://bzrcdn.openai.com/sdk/oaiq.min.js",
+      "sampled_self_ms": 171.26099999999994,
+      "sampled_self_in_task_tail_ms": 36.17400000000001,
+      "samples": 163
+    },
+    {
+      "url": "[(garbage collector)]",
+      "sampled_self_ms": 109.621,
+      "sampled_self_in_task_tail_ms": 31.429,
+      "samples": 81
+    },
+    {
+      "url": "[appendChild]",
+      "sampled_self_ms": 21.104000000000006,
+      "sampled_self_in_task_tail_ms": 17.005000000000003,
+      "samples": 21
+    },
+    {
+      "url": "[fetch]",
+      "sampled_self_ms": 18.414,
+      "sampled_self_in_task_tail_ms": 10.334999999999999,
+      "samples": 23
+    },
+    {
+      "url": "https://ftp-cdn.mitiendanube.com/forked-files/007/400/935/installations/14828608/static/js/embla-carousel-d613f8e646d4783b06ee7c98dde3c6b2.js",
+      "sampled_self_ms": 33.575,
+      "sampled_self_in_task_tail_ms": 9.674999999999999,
+      "samples": 33
+    },
+    {
+      "url": "[insertBefore]",
+      "sampled_self_ms": 29.657999999999998,
+      "sampled_self_in_task_tail_ms": 8.303,
+      "samples": 30
+    },
+    {
+      "url": "[querySelector]",
+      "sampled_self_ms": 9.621999999999998,
+      "sampled_self_in_task_tail_ms": 7.873999999999999,
+      "samples": 9
+    },
+    {
+      "url": "https://nsk-cdn-static.tiendanube.com/nube-sdk-0.61.0.min.js",
+      "sampled_self_ms": 91.34500000000004,
+      "sampled_self_in_task_tail_ms": 2.064,
+      "samples": 90
+    },
+    {
+      "url": "[addEventListener]",
+      "sampled_self_ms": 7.023000000000001,
+      "sampled_self_in_task_tail_ms": 1.9899999999999998,
+      "samples": 7
+    },
+    {
+      "url": "[RegExp: [A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}]",
+      "sampled_self_ms": 1.9209999999999998,
+      "sampled_self_in_task_tail_ms": 1.9209999999999998,
+      "samples": 2
+    },
+    {
+      "url": "[setTimeout]",
+      "sampled_self_ms": 6.580000000000001,
+      "sampled_self_in_task_tail_ms": 1.678,
+      "samples": 9
+    },
+    {
+      "url": "[sdk.<computed>]",
+      "sampled_self_ms": 1.249,
+      "sampled_self_in_task_tail_ms": 1.249,
+      "samples": 1
+    },
+    {
+      "url": "[]",
+      "sampled_self_ms": 3.8659999999999997,
+      "sampled_self_in_task_tail_ms": 1.076,
+      "samples": 4
+    },
+    {
+      "url": "[getComputedStyle]",
+      "sampled_self_ms": 0.971,
+      "sampled_self_in_task_tail_ms": 0.971,
+      "samples": 1
+    },
+    {
+      "url": "https://www.googletagmanager.com/gtm.js",
+      "sampled_self_ms": 65.058,
+      "sampled_self_in_task_tail_ms": 0.948,
+      "samples": 60
+    },
+    {
+      "url": "[caretPositionFromPoint]",
+      "sampled_self_ms": 0.936,
+      "sampled_self_in_task_tail_ms": 0.936,
+      "samples": 1
+    },
+    {
+      "url": "[removeEventListener]",
+      "sampled_self_ms": 0.875,
+      "sampled_self_in_task_tail_ms": 0.875,
+      "samples": 1
+    },
+    {
+      "url": "[RegExp: ([a-z0-9])([A-Z])]",
+      "sampled_self_ms": 0.844,
+      "sampled_self_in_task_tail_ms": 0.844,
+      "samples": 1
+    },
+    {
+      "url": "https://ftp-cdn.mitiendanube.com/forked-files/007/400/935/installations/14828608/static/js/blog-tags-07ec37f7ddabfc990bd0f50ca7245098.js",
+      "sampled_self_ms": 3.759,
+      "sampled_self_in_task_tail_ms": 0.658,
+      "samples": 5
+    },
+    {
+      "url": "[RegExp: \\[object (Boolean|Number|String|Function|Array|Date|RegExp)\\]]",
+      "sampled_self_ms": 0.656,
+      "sampled_self_in_task_tail_ms": 0.656,
+      "samples": 1
+    },
+    {
+      "url": "[RegExp: [\\n\\r\\t]+]",
+      "sampled_self_ms": 0.639,
+      "sampled_self_in_task_tail_ms": 0.639,
+      "samples": 1
+    },
+    {
+      "url": "[(idle)]",
+      "sampled_self_ms": 11729.435999999961,
+      "sampled_self_in_task_tail_ms": 0,
+      "samples": 11004
+    },
+    {
+      "url": "https://rhino-performance.com/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js",
+      "sampled_self_ms": 7.011,
+      "sampled_self_in_task_tail_ms": 0,
+      "samples": 7
+    },
+    {
+      "url": "https://ftp-cdn.mitiendanube.com/forked-files/007/400/935/installations/14828608/static/js/libraries-standalone-59fa5e7833de73d735795f6c8e66eede.js",
+      "sampled_self_ms": 75.642,
+      "sampled_self_in_task_tail_ms": 0,
+      "samples": 88
+    },
+    {
+      "url": "[matchMedia]",
+      "sampled_self_ms": 1.353,
+      "sampled_self_in_task_tail_ms": 0,
+      "samples": 2
+    },
+    {
+      "url": "https://www.clarity.ms/tag/z9hv5475vm",
+      "sampled_self_ms": 1.265,
+      "sampled_self_in_task_tail_ms": 0,
+      "samples": 1
+    },
+    {
+      "url": "https://analytics.tiktok.com/i18n/pixel/events.js",
+      "sampled_self_ms": 4.02,
+      "sampled_self_in_task_tail_ms": 0,
+      "samples": 4
+    },
+    {
+      "url": "https://ftp-cdn.mitiendanube.com/forked-files/007/400/935/installations/14828608/static/js/athletes-carousel-3cd1f98ecdd6e23b49b787304a1a62a9.js",
+      "sampled_self_ms": 2.395,
+      "sampled_self_in_task_tail_ms": 0,
+      "samples": 3
+    },
+    {
+      "url": "https://ftp-cdn.mitiendanube.com/forked-files/007/400/935/installations/14828608/static/js/media-visibility-358cdafd4e5fe38c3cf4151aae590426.js",
+      "sampled_self_ms": 21.827,
+      "sampled_self_in_task_tail_ms": 0,
+      "samples": 20
+    },
+    {
+      "url": "https://ftp-cdn.mitiendanube.com/forked-files/007/400/935/installations/14828608/static/js/blog-carousel-15864d41d8673760e7ef5fd1be0b197b.js",
+      "sampled_self_ms": 1.419,
+      "sampled_self_in_task_tail_ms": 0,
+      "samples": 1
+    },
+    {
+      "url": "https://ftp-cdn.mitiendanube.com/forked-files/007/400/935/installations/14828608/static/js/product-carousel-c3aa62133bf9feccd3ec3097f985d282.js",
+      "sampled_self_ms": 9.114,
+      "sampled_self_in_task_tail_ms": 0,
+      "samples": 10
+    },
+    {
+      "url": "https://ftp-cdn.mitiendanube.com/forked-files/007/400/935/installations/14828608/static/js/featured-collection-a3c03f55d53014612d213148512387d2.js",
+      "sampled_self_ms": 33.238,
+      "sampled_self_in_task_tail_ms": 0,
+      "samples": 32
+    },
+    {
+      "url": "https://ftp-cdn.mitiendanube.com/forked-files/007/400/935/installations/14828608/static/js/sectionfy-client-0ea4e8acc6c7e99a53eb083827a777e1.js",
+      "sampled_self_ms": 12.283999999999999,
+      "sampled_self_in_task_tail_ms": 0,
+      "samples": 11
+    },
+    {
+      "url": "https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092",
+      "sampled_self_ms": 35.658999999999985,
+      "sampled_self_in_task_tail_ms": 0,
+      "samples": 47
+    },
+    {
+      "url": "[createElementNS]",
+      "sampled_self_ms": 1.065,
+      "sampled_self_in_task_tail_ms": 0,
+      "samples": 1
+    },
+    {
+      "url": "[createElement]",
+      "sampled_self_ms": 1.009,
+      "sampled_self_in_task_tail_ms": 0,
+      "samples": 1
+    },
+    {
+      "url": "https://ftp-cdn.mitiendanube.com/forked-files/007/400/935/installations/14828608/static/js/sectionfy-video-slide-83c50d8e50220d958d9951ef4d6c368b.js",
+      "sampled_self_ms": 3.7540000000000004,
+      "sampled_self_in_task_tail_ms": 0,
+      "samples": 4
+    },
+    {
+      "url": "https://ftp-cdn.mitiendanube.com/forked-files/007/400/935/installations/14828608/static/js/sectionfy-description-card-section-eda1f3bc7cf09598bae8f4b2347edf35.js",
+      "sampled_self_ms": 2.181,
+      "sampled_self_in_task_tail_ms": 0,
+      "samples": 4
+    },
+    {
+      "url": "[cloneNode]",
+      "sampled_self_ms": -0.841,
+      "sampled_self_in_task_tail_ms": 0,
+      "samples": 1
+    },
+    {
+      "url": "[queueMicrotask]",
+      "sampled_self_ms": 0.835,
+      "sampled_self_in_task_tail_ms": 0,
+      "samples": 2
+    },
+    {
+      "url": "https://nsk-cdn-static.tiendanube.com/register-0.61.0.min.js",
+      "sampled_self_ms": 108.81899999999995,
+      "sampled_self_in_task_tail_ms": 0,
+      "samples": 99
+    },
+    {
+      "url": "[RegExp: (",
+      "sampled_self_ms": 0.9,
+      "sampled_self_in_task_tail_ms": 0,
+      "samples": 1
+    },
+    {
+      "url": "[RegExp: (",
+      "sampled_self_ms": 2.479,
+      "sampled_self_in_task_tail_ms": 0,
+      "samples": 2
+    },
+    {
+      "url": "[RegExp: (",
+      "sampled_self_ms": 2.779,
+      "sampled_self_in_task_tail_ms": 0,
+      "samples": 3
+    },
+    {
+      "url": "https://ftp-cdn.mitiendanube.com/forked-files/007/400/935/installations/14828608/static/js/store-7211188f004ce2a5ec055d1f39a66a5c.js",
+      "sampled_self_ms": 24.967,
+      "sampled_self_in_task_tail_ms": 0,
+      "samples": 24
+    },
+    {
+      "url": "https://analytics.tiktok.com/i18n/pixel/static/identify_9caef9b0.js",
+      "sampled_self_ms": 16.175,
+      "sampled_self_in_task_tail_ms": 0,
+      "samples": 15
+    },
+    {
+      "url": "chrome-error://chromewebdata/",
+      "sampled_self_ms": 10.713,
+      "sampled_self_in_task_tail_ms": 0,
+      "samples": 12
+    },
+    {
+      "url": "https://googleads.g.doubleclick.net/pagead/viewthroughconversion/10883106378/",
+      "sampled_self_ms": 2.4299999999999997,
+      "sampled_self_in_task_tail_ms": 0,
+      "samples": 2
+    },
+    {
+      "url": "[RegExp: <(",
+      "sampled_self_ms": 0.977,
+      "sampled_self_in_task_tail_ms": 0,
+      "samples": 1
+    },
+    {
+      "url": "[removeChild]",
+      "sampled_self_ms": 2.6499999999999995,
+      "sampled_self_in_task_tail_ms": 0,
+      "samples": 4
+    },
+    {
+      "url": "https://googleads.g.doubleclick.net/pagead/viewthroughconversion/10883106378/",
+      "sampled_self_ms": 2.0220000000000002,
+      "sampled_self_in_task_tail_ms": 0,
+      "samples": 2
+    },
+    {
+      "url": "[RegExp: (",
+      "sampled_self_ms": 0.431,
+      "sampled_self_in_task_tail_ms": 0,
+      "samples": 1
+    },
+    {
+      "url": "[RegExp: phone|mobile|contact[\\s_-]*number|(",
+      "sampled_self_ms": 0.898,
+      "sampled_self_in_task_tail_ms": 0,
+      "samples": 1
+    },
+    {
+      "url": "[requestAnimationFrame]",
+      "sampled_self_ms": -0.2,
+      "sampled_self_in_task_tail_ms": 0,
+      "samples": 1
+    }
+  ],
+  "responsive": [
+    {
+      "width": 360,
+      "overflow": false,
+      "AX": {
+        "nodes": 1911,
+        "unnamed": []
+      }
+    },
+    {
+      "width": 390,
+      "overflow": false,
+      "AX": {
+        "nodes": 1866,
+        "unnamed": []
+      }
+    },
+    {
+      "width": 768,
+      "overflow": false,
+      "AX": {
+        "nodes": 1901,
+        "unnamed": []
+      }
+    },
+    {
+      "width": 1024,
+      "overflow": true,
+      "AX": {
+        "nodes": 2124,
+        "unnamed": []
+      }
+    },
+    {
+      "width": 1440,
+      "overflow": true,
+      "AX": {
+        "nodes": 2046,
+        "unnamed": []
+      }
+    },
+    {
+      "width": 1920,
+      "overflow": false,
+      "AX": {
+        "nodes": 2046,
+        "unnamed": []
+      }
+    }
+  ],
+  "candidate_header_ab": {
+    "status": "observed",
+    "rows": [
+      {
+        "width": 360,
+        "variant": "baseline",
+        "geometry": [
+          {
+            "at": 429.19999999552965,
+            "mainY": 114,
+            "position": "static",
+            "runtime": null
+          },
+          {
+            "at": 464.69999999552965,
+            "mainY": 138,
+            "position": "static",
+            "runtime": null
+          },
+          {
+            "at": 1263.2999999970198,
+            "mainY": 138,
+            "position": "static",
+            "runtime": "false"
+          }
+        ],
+        "final": {
+          "header": {
+            "x": 0,
+            "y": 36,
+            "width": 360,
+            "height": 102
+          },
+          "main": {
+            "x": 0,
+            "y": 138,
+            "width": 360,
+            "height": 3722.46875
+          },
+          "hero": {
+            "x": 0,
+            "y": 138,
+            "width": 360,
+            "height": 380
+          },
+          "font": "Poppins, sans-serif",
+          "eligible": true,
+          "h1": [
+            "RHINO Performance"
+          ],
+          "canonical": "https://rhino-performance.com/",
+          "overflow": false
+        }
+      },
+      {
+        "width": 360,
+        "variant": "candidate",
+        "geometry": [
+          {
+            "at": 328.1000000014901,
+            "mainY": 114,
+            "position": "static",
+            "runtime": null
+          },
+          {
+            "at": 377,
+            "mainY": 138,
+            "position": "static",
+            "runtime": null
+          },
+          {
+            "at": 1024.5,
+            "mainY": 138,
+            "position": "static",
+            "runtime": "false"
+          }
+        ],
+        "final": {
+          "header": {
+            "x": 0,
+            "y": 36,
+            "width": 360,
+            "height": 102
+          },
+          "main": {
+            "x": 0,
+            "y": 138,
+            "width": 360,
+            "height": 3722.46875
+          },
+          "hero": {
+            "x": 0,
+            "y": 138,
+            "width": 360,
+            "height": 380
+          },
+          "font": "Poppins, sans-serif",
+          "eligible": true,
+          "h1": [
+            "RHINO Performance"
+          ],
+          "canonical": "https://rhino-performance.com/",
+          "overflow": false
+        }
+      },
+      {
+        "width": 390,
+        "variant": "baseline",
+        "geometry": [
+          {
+            "at": 331.8999999985099,
+            "mainY": 114,
+            "position": "static",
+            "runtime": null
+          },
+          {
+            "at": 375.5,
+            "mainY": 138,
+            "position": "static",
+            "runtime": null
+          },
+          {
+            "at": 1016.3999999985099,
+            "mainY": 138,
+            "position": "static",
+            "runtime": "false"
+          }
+        ],
+        "final": {
+          "header": {
+            "x": 0,
+            "y": 36,
+            "width": 390,
+            "height": 102
+          },
+          "main": {
+            "x": 0,
+            "y": 138,
+            "width": 390,
+            "height": 3751.875
+          },
+          "hero": {
+            "x": 0,
+            "y": 138,
+            "width": 390,
+            "height": 380
+          },
+          "font": "Poppins, sans-serif",
+          "eligible": true,
+          "h1": [
+            "RHINO Performance"
+          ],
+          "canonical": "https://rhino-performance.com/",
+          "overflow": false
+        }
+      },
+      {
+        "width": 390,
+        "variant": "candidate",
+        "geometry": [
+          {
+            "at": 446.8999999985099,
+            "mainY": 114,
+            "position": "static",
+            "runtime": null
+          },
+          {
+            "at": 573.0999999940395,
+            "mainY": 138,
+            "position": "static",
+            "runtime": null
+          },
+          {
+            "at": 1236.5,
+            "mainY": 138,
+            "position": "static",
+            "runtime": "false"
+          }
+        ],
+        "final": {
+          "header": {
+            "x": 0,
+            "y": 36,
+            "width": 390,
+            "height": 102
+          },
+          "main": {
+            "x": 0,
+            "y": 138,
+            "width": 390,
+            "height": 3751.875
+          },
+          "hero": {
+            "x": 0,
+            "y": 138,
+            "width": 390,
+            "height": 380
+          },
+          "font": "Poppins, sans-serif",
+          "eligible": true,
+          "h1": [
+            "RHINO Performance"
+          ],
+          "canonical": "https://rhino-performance.com/",
+          "overflow": false
+        }
+      },
+      {
+        "width": 768,
+        "variant": "baseline",
+        "geometry": [
+          {
+            "at": 394,
+            "mainY": 114,
+            "position": "static",
+            "runtime": null
+          },
+          {
+            "at": 484.79999999701977,
+            "mainY": 138,
+            "position": "static",
+            "runtime": null
+          },
+          {
+            "at": 1460.6000000014901,
+            "mainY": 138,
+            "position": "static",
+            "runtime": "false"
+          }
+        ],
+        "final": {
+          "header": {
+            "x": 0,
+            "y": 36,
+            "width": 768,
+            "height": 102
+          },
+          "main": {
+            "x": 0,
+            "y": 138,
+            "width": 768,
+            "height": 4166.46875
+          },
+          "hero": {
+            "x": 0,
+            "y": 138,
+            "width": 768,
+            "height": 380
+          },
+          "font": "Poppins, sans-serif",
+          "eligible": true,
+          "h1": [
+            "RHINO Performance"
+          ],
+          "canonical": "https://rhino-performance.com/",
+          "overflow": false
+        }
+      },
+      {
+        "width": 768,
+        "variant": "candidate",
+        "geometry": [
+          {
+            "at": 338.70000000298023,
+            "mainY": 114,
+            "position": "static",
+            "runtime": null
+          },
+          {
+            "at": 362.6000000014901,
+            "mainY": 138,
+            "position": "static",
+            "runtime": null
+          },
+          {
+            "at": 1021.7999999970198,
+            "mainY": 138,
+            "position": "static",
+            "runtime": "false"
+          }
+        ],
+        "final": {
+          "header": {
+            "x": 0,
+            "y": 36,
+            "width": 768,
+            "height": 102
+          },
+          "main": {
+            "x": 0,
+            "y": 138,
+            "width": 768,
+            "height": 4166.46875
+          },
+          "hero": {
+            "x": 0,
+            "y": 138,
+            "width": 768,
+            "height": 380
+          },
+          "font": "Poppins, sans-serif",
+          "eligible": true,
+          "h1": [
+            "RHINO Performance"
+          ],
+          "canonical": "https://rhino-performance.com/",
+          "overflow": false
+        }
+      },
+      {
+        "width": 1024,
+        "variant": "baseline",
+        "geometry": [
+          {
+            "at": 324.29999999701977,
+            "mainY": 98,
+            "position": "static",
+            "runtime": null
+          },
+          {
+            "at": 389.69999999552965,
+            "mainY": 110,
+            "position": "static",
+            "runtime": null
+          },
+          {
+            "at": 1117.7999999970198,
+            "mainY": 36,
+            "position": "absolute",
+            "runtime": "true"
+          }
+        ],
+        "final": {
+          "header": {
+            "x": 0,
+            "y": 36,
+            "width": 1024,
+            "height": 74
+          },
+          "main": {
+            "x": 0,
+            "y": 36,
+            "width": 1024,
+            "height": 4536.84375
+          },
+          "hero": {
+            "x": 0,
+            "y": 36,
+            "width": 1024,
+            "height": 750
+          },
+          "font": "Poppins, sans-serif",
+          "eligible": true,
+          "h1": [
+            "RHINO Performance"
+          ],
+          "canonical": "https://rhino-performance.com/",
+          "overflow": true
+        }
+      },
+      {
+        "width": 1024,
+        "variant": "candidate",
+        "geometry": [
+          {
+            "at": 271.80000000447035,
+            "mainY": 36,
+            "position": "absolute",
+            "runtime": null
+          },
+          {
+            "at": 1042.3000000044703,
+            "mainY": 36,
+            "position": "absolute",
+            "runtime": "true"
+          }
+        ],
+        "final": {
+          "header": {
+            "x": 0,
+            "y": 36,
+            "width": 1024,
+            "height": 74
+          },
+          "main": {
+            "x": 0,
+            "y": 36,
+            "width": 1024,
+            "height": 4536.84375
+          },
+          "hero": {
+            "x": 0,
+            "y": 36,
+            "width": 1024,
+            "height": 750
+          },
+          "font": "Poppins, sans-serif",
+          "eligible": true,
+          "h1": [
+            "RHINO Performance"
+          ],
+          "canonical": "https://rhino-performance.com/",
+          "overflow": true
+        }
+      },
+      {
+        "width": 1440,
+        "variant": "baseline",
+        "geometry": [
+          {
+            "at": 267.69999999552965,
+            "mainY": 98,
+            "position": "static",
+            "runtime": null
+          },
+          {
+            "at": 385.3999999985099,
+            "mainY": 110,
+            "position": "static",
+            "runtime": null
+          },
+          {
+            "at": 1029.1999999955297,
+            "mainY": 36,
+            "position": "absolute",
+            "runtime": "true"
+          }
+        ],
+        "final": {
+          "header": {
+            "x": 0,
+            "y": 36,
+            "width": 1440,
+            "height": 74
+          },
+          "main": {
+            "x": 0,
+            "y": 36,
+            "width": 1440,
+            "height": 5265.609375
+          },
+          "hero": {
+            "x": 0,
+            "y": 36,
+            "width": 1440,
+            "height": 750
+          },
+          "font": "Poppins, sans-serif",
+          "eligible": true,
+          "h1": [
+            "RHINO Performance"
+          ],
+          "canonical": "https://rhino-performance.com/",
+          "overflow": true
+        }
+      },
+      {
+        "width": 1440,
+        "variant": "candidate",
+        "geometry": [
+          {
+            "at": 297.20000000298023,
+            "mainY": 36,
+            "position": "absolute",
+            "runtime": null
+          },
+          {
+            "at": 1053.8000000044703,
+            "mainY": 36,
+            "position": "absolute",
+            "runtime": "true"
+          }
+        ],
+        "final": {
+          "header": {
+            "x": 0,
+            "y": 36,
+            "width": 1440,
+            "height": 74
+          },
+          "main": {
+            "x": 0,
+            "y": 36,
+            "width": 1440,
+            "height": 5265.609375
+          },
+          "hero": {
+            "x": 0,
+            "y": 36,
+            "width": 1440,
+            "height": 750
+          },
+          "font": "Poppins, sans-serif",
+          "eligible": true,
+          "h1": [
+            "RHINO Performance"
+          ],
+          "canonical": "https://rhino-performance.com/",
+          "overflow": true
+        }
+      },
+      {
+        "width": 1920,
+        "variant": "baseline",
+        "geometry": [
+          {
+            "at": 322.70000000298023,
+            "mainY": 98,
+            "position": "static",
+            "runtime": null
+          },
+          {
+            "at": 431.5,
+            "mainY": 110,
+            "position": "static",
+            "runtime": null
+          },
+          {
+            "at": 1225.3000000044703,
+            "mainY": 36,
+            "position": "absolute",
+            "runtime": "true"
+          }
+        ],
+        "final": {
+          "header": {
+            "x": 0,
+            "y": 36,
+            "width": 1920,
+            "height": 74
+          },
+          "main": {
+            "x": 0,
+            "y": 36,
+            "width": 1920,
+            "height": 5265.609375
+          },
+          "hero": {
+            "x": 0,
+            "y": 36,
+            "width": 1920,
+            "height": 750
+          },
+          "font": "Poppins, sans-serif",
+          "eligible": true,
+          "h1": [
+            "RHINO Performance"
+          ],
+          "canonical": "https://rhino-performance.com/",
+          "overflow": false
+        }
+      },
+      {
+        "width": 1920,
+        "variant": "candidate",
+        "geometry": [
+          {
+            "at": 311.29999999701977,
+            "mainY": 36,
+            "position": "absolute",
+            "runtime": null
+          },
+          {
+            "at": 1069.0999999940395,
+            "mainY": 36,
+            "position": "absolute",
+            "runtime": "true"
+          }
+        ],
+        "final": {
+          "header": {
+            "x": 0,
+            "y": 36,
+            "width": 1920,
+            "height": 74
+          },
+          "main": {
+            "x": 0,
+            "y": 36,
+            "width": 1920,
+            "height": 5265.609375
+          },
+          "hero": {
+            "x": 0,
+            "y": 36,
+            "width": 1920,
+            "height": 750
+          },
+          "font": "Poppins, sans-serif",
+          "eligible": true,
+          "h1": [
+            "RHINO Performance"
+          ],
+          "canonical": "https://rhino-performance.com/",
+          "overflow": false
+        }
+      }
+    ]
+  },
+  "candidate_extra_QA": {
+    "fixture_status": "passed",
+    "fixtures": [
+      {
+        "width": 390,
+        "state": "eligible",
+        "position": "static",
+        "expected": "static",
+        "passed": true
+      },
+      {
+        "width": 390,
+        "state": "disabled",
+        "position": "static",
+        "expected": "static",
+        "passed": true
+      },
+      {
+        "width": 390,
+        "state": "runtime-set",
+        "position": "static",
+        "expected": "static",
+        "passed": true
+      },
+      {
+        "width": 390,
+        "state": "not-home",
+        "position": "static",
+        "expected": "static",
+        "passed": true
+      },
+      {
+        "width": 390,
+        "state": "not-first",
+        "position": "static",
+        "expected": "static",
+        "passed": true
+      },
+      {
+        "width": 390,
+        "state": "not-video",
+        "position": "static",
+        "expected": "static",
+        "passed": true
+      },
+      {
+        "width": 1440,
+        "state": "eligible",
+        "position": "absolute",
+        "expected": "absolute",
+        "passed": true
+      },
+      {
+        "width": 1440,
+        "state": "disabled",
+        "position": "static",
+        "expected": "static",
+        "passed": true
+      },
+      {
+        "width": 1440,
+        "state": "runtime-set",
+        "position": "static",
+        "expected": "static",
+        "passed": true
+      },
+      {
+        "width": 1440,
+        "state": "not-home",
+        "position": "static",
+        "expected": "static",
+        "passed": true
+      },
+      {
+        "width": 1440,
+        "state": "not-first",
+        "position": "static",
+        "expected": "static",
+        "passed": true
+      },
+      {
+        "width": 1440,
+        "state": "not-video",
+        "position": "static",
+        "expected": "static",
+        "passed": true
+      }
+    ],
+    "live_states": 4,
+    "keyboard_steps": 80,
+    "limitations": "Live keyboard observations include zero-geometry focus candidates requiring inspection; fixture pass is not a blanket accessibility approval. Keyboard may scroll viewport; those final y values are not initial layout measurements."
+  },
+  "execution_summary": [
+    {
+      "agent": "claude",
+      "phase": "proposal",
+      "valid": true,
+      "model": "claude-sonnet-5-5",
+      "effort": "medium",
+      "started_at": "2026-11-11T20:50:49.707267+00:00",
+      "duration_s": 38.072,
+      "prompt_bytes": 312217,
+      "native_contract": {
+        "status": "passed",
+        "duration_s": 0.006078
+      },
+      "provider_usage": {
+        "total_cost_usd": 0.5045054,
+        "duration_ms": 36012,
+        "input_tokens": 2,
+        "cache_creation_input_tokens": 113816,
+        "cache_read_input_tokens": 4774,
+        "output_tokens": 4876
+      },
+      "original_controller_error": "La propuesta del consejo excede archivos autorizados."
+    },
+    {
+      "agent": "codex",
+      "phase": "proposal",
+      "valid": true,
+      "model": "gpt-6.1-sol",
+      "effort": "medium",
+      "started_at": "2026-11-11T20:50:49.707660+00:00",
+      "duration_s": 57.399,
+      "prompt_bytes": 312212,
+      "native_contract": {
+        "status": "passed",
+        "duration_s": 0.000358
+      },
+      "provider_usage": {
+        "input_tokens": 88139,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 2522,
+        "reasoning_output_tokens": 127
+      },
+      "original_controller_error": "La propuesta del consejo excede archivos autorizados."
+    },
+    {
+      "agent": "claude",
+      "phase": "contrast",
+      "valid": true,
+      "model": "claude-sonnet-5-5",
+      "effort": "medium",
+      "started_at": "2026-11-11T20:53:33.391282+00:00",
+      "duration_s": 17.406,
+      "prompt_bytes": 274540,
+      "native_contract": {
+        "status": "passed",
+        "duration_s": 0.003528
+      },
+      "provider_usage": {
+        "total_cost_usd": 0.444248,
+        "duration_ms": 15972,
+        "input_tokens": 2,
+        "cache_creation_input_tokens": 105321,
+        "cache_read_input_tokens": 0,
+        "output_tokens": 2296
+      },
+      "original_controller_error": null
+    },
+    {
+      "agent": "codex",
+      "phase": "contrast",
+      "valid": true,
+      "model": "gpt-6.1-sol",
+      "effort": "medium",
+      "started_at": "2026-11-11T20:53:33.390751+00:00",
+      "duration_s": 28.091,
+      "prompt_bytes": 274535,
+      "native_contract": {
+        "status": "passed",
+        "duration_s": 0.0002
+      },
+      "provider_usage": {
+        "input_tokens": 79887,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 898,
+        "reasoning_output_tokens": 78
+      },
+      "original_controller_error": null
+    },
+    {
+      "agent": "claude",
+      "phase": "defense",
+      "valid": true,
+      "model": "claude-sonnet-5-5",
+      "effort": "medium",
+      "started_at": "2026-11-11T20:54:01.549242+00:00",
+      "duration_s": 35.633,
+      "prompt_bytes": 287781,
+      "native_contract": {
+        "status": "passed",
+        "duration_s": 0.024281
+      },
+      "provider_usage": {
+        "total_cost_usd": 0.499302,
+        "duration_ms": 34307,
+        "input_tokens": 2,
+        "cache_creation_input_tokens": 110957,
+        "cache_read_input_tokens": 0,
+        "output_tokens": 5547
+      },
+      "original_controller_error": null
+    },
+    {
+      "agent": "codex",
+      "phase": "defense",
+      "valid": true,
+      "model": "gpt-6.1-sol",
+      "effort": "medium",
+      "started_at": "2026-11-11T20:54:01.549323+00:00",
+      "duration_s": 29.219,
+      "prompt_bytes": 287776,
+      "native_contract": {
+        "status": "passed",
+        "duration_s": 0.00022
+      },
+      "provider_usage": {
+        "input_tokens": 83193,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1061,
+        "reasoning_output_tokens": 63
+      },
+      "original_controller_error": null
+    },
+    {
+      "agent": "claude",
+      "phase": "final-review",
+      "valid": true,
+      "model": "claude-sonnet-5-5",
+      "effort": "medium",
+      "started_at": "2026-11-11T20:59:57.581897+00:00",
+      "duration_s": 37.338,
+      "prompt_bytes": 75397,
+      "native_contract": {
+        "status": "passed",
+        "duration_s": 0.008041
+      },
+      "provider_usage": {
+        "total_cost_usd": 0.18361139999999998,
+        "duration_ms": 35924,
+        "input_tokens": 2,
+        "cache_creation_input_tokens": 33400,
+        "cache_read_input_tokens": 4774,
+        "output_tokens": 4953
+      },
+      "original_controller_error": "La propuesta del consejo excede archivos autorizados."
+    },
+    {
+      "agent": "codex",
+      "phase": "final-review",
+      "valid": true,
+      "model": "gpt-6.1-sol",
+      "effort": "medium",
+      "started_at": "2026-11-11T20:59:57.582240+00:00",
+      "duration_s": 50.926,
+      "prompt_bytes": 75392,
+      "native_contract": {
+        "status": "passed",
+        "duration_s": 0.000318
+      },
+      "provider_usage": {
+        "input_tokens": 36456,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1849,
+        "reasoning_output_tokens": 176
+      },
+      "original_controller_error": null
+    }
+  ],
+  "production_operations": false,
+  "PageSpeed90_reached": false,
+  "cpu_counterfactual": {
+    "order": [
+      "baseline-1",
+      "blocked-1",
+      "blocked-2",
+      "baseline-2",
+      "baseline-3",
+      "blocked-3"
+    ],
+    "scope": "Diagnostic local request-blocking intervention, same physical4x/network/cache and20s analysis window; not a shipped optimization, field result, INP, Lighthouse TBT or official score. Tracking is intentionally unavailable in blocked cases, which cannot be used as a production solution.",
+    "rows": [
+      {
+        "case": "baseline-1",
+        "status": "observed",
+        "excess_ms": 2022,
+        "observed_window_ms": 20553.5,
+        "google_sampled_self_ms": 700.3530000000007
+      },
+      {
+        "case": "blocked-1",
+        "status": "observed",
+        "excess_ms": 1356,
+        "observed_window_ms": 20497.20000000298,
+        "google_sampled_self_ms": 0
+      },
+      {
+        "case": "blocked-2",
+        "status": "observed",
+        "excess_ms": 1341,
+        "observed_window_ms": 20690.39999999851,
+        "google_sampled_self_ms": 0
+      },
+      {
+        "case": "baseline-2",
+        "status": "observed",
+        "excess_ms": 1914,
+        "observed_window_ms": 20637.20000000298,
+        "google_sampled_self_ms": 691.1000000000007
+      },
+      {
+        "case": "baseline-3",
+        "status": "observed",
+        "excess_ms": 2027,
+        "observed_window_ms": 20873.59999999404,
+        "google_sampled_self_ms": 742.3599999999997
+      },
+      {
+        "case": "blocked-3",
+        "status": "observed",
+        "excess_ms": 1478,
+        "observed_window_ms": 20763.10000000149,
+        "google_sampled_self_ms": 0
+      }
+    ],
+    "theme_changes": false,
+    "production_operations": false,
+    "baseline": {
+      "n": 3,
+      "median": 2022,
+      "minimum": 1914,
+      "maximum": 2027,
+      "stdev": 63.846169292552965
+    },
+    "blocked": {
+      "n": 3,
+      "median": 1356,
+      "minimum": 1341,
+      "maximum": 1478,
+      "stdev": 75.14208762959234
+    }
+  },
+  "tools_QA": {
+    "command": "python3 -m unittest discover -s tests/unit -p 'test_performance*.py'",
+    "tests": 47,
+    "status": "passed",
+    "scope": "offline tool extraction/guard tests; not API connectivity, theme render or WCAG"
+  },
+  "findings": [
+    {
+      "id": "RHINO-NOV11-01",
+      "priority": "P1",
+      "status": "needs_evidence_for_implementation",
+      "url": "https://rhino-performance.com/",
+      "cause": "Marketing scripts contribute sampled CPU in long-task tails; repeated local Google blocking reduces diagnostic excess. This does not approve removing tracking.",
+      "evidence": [
+        "mobile-cpu-summary.json",
+        "cpu-counterfactual-summary.json"
+      ],
+      "candidates": {
+        "external": [
+          "GTM/Google Tag",
+          "Meta",
+          "TikTok"
+        ],
+        "local": [
+          "layouts/layout.tpl",
+          "snippets/analytics/clarity.tpl"
+        ]
+      },
+      "consumers": "Cross-template measurement and commercial events; establish tag owner before changes.",
+      "alternatives": [
+        "Audit trigger/consent policy without removing measurement",
+        "Test precise tag individually",
+        "Leave existing measurement until event contracts are proven"
+      ],
+      "impact": "Measured diagnostic20s-window median2022→1356ms without Google; NOT official TBT, INP or predicted score.",
+      "risk": "Lost attribution, consent or commerce events; source may be platform/app rather than local.",
+      "dependencies": [
+        "Owner-authorized tag access for remote changes",
+        "Events/consent QA in prepared environment"
+      ],
+      "tests": [
+        "Repeated equivalent local diagnostic",
+        "Independent source review",
+        "Event integrity and consent",
+        "Comparable Lighthouse before/after5 perdevice"
+      ],
+      "rollback": "No implementation; future local attempt hashes/backups, separate owner-approved remote version rollback."
+    },
+    {
+      "id": "RHINO-NOV11-02",
+      "priority": "P1",
+      "status": "needs_evidence",
+      "url": "https://rhino-performance.com/",
+      "cause": "Header becomes absolute after initial paint and MAIN moves74px. PeakCLS1.0045 still unexplained.",
+      "files": [
+        "static/css/style-critical.css",
+        "sections/header.tpl",
+        "static/js/store.js"
+      ],
+      "evidence": [
+        "header-ab.json",
+        "diagnostic.json",
+        "header-extra.json"
+      ],
+      "native_reuse": "Existing transparent header flags, states, containers, JS. No new component or library.",
+      "alternative": "Initial CSS eligibility matching actual first media; keep current code until complete acceptance.",
+      "impact": "Prototype removes observed74px movement at1024/1440/1920; no mobile benefit or site score claimed.",
+      "risk": "No-JS/eligibility/focus and source-provenance acceptance incomplete; requires equivalent5-sample before/after.",
+      "rollback": "Candidate diff unapplied; any future edit requires original SHA and native transaction."
+    },
+    {
+      "id": "RHINO-NOV11-03",
+      "priority": "P1",
+      "status": "needs_evidence",
+      "url": "https://rhino-performance.com/blog/",
+      "cause": "LCP6.56s in one current mobile sample; not a demonstrated regression.",
+      "files": [],
+      "evidence": [
+        "blog-mobile-1.json"
+      ],
+      "alternatives": [
+        "Extend to5 samples and correlate actual LCP source with existing blog patch"
+      ],
+      "impact": "Not quantified",
+      "risk": "Undoing existing native image optimization without causal evidence",
+      "tests": [
+        "Five equivalent samples",
+        "CurrentSrc/network",
+        "First card/hero initial HTML and CSS/render attribution"
+      ],
+      "rollback": "No change applied"
+    },
+    {
+      "id": "RHINO-NOV11-04",
+      "priority": "P2",
+      "status": "confirmed_observation_not_fixed",
+      "url": "https://rhino-performance.com/",
+      "cause": "Old-price color contrast2.84:1 on white",
+      "files": [
+        "sections/main-products.tpl",
+        "snippets/main-product-card.tpl",
+        "blocks/featured-product-slide.tpl"
+      ],
+      "evidence": [
+        "home-browser.json"
+      ],
+      "impact": "Accessibility; no performance benefit claimed",
+      "risk": "Determine token/consumer cascade before global color change; preserve typography",
+      "alternatives": [
+        "Adjust existing source token when identified"
+      ],
+      "tests": [
+        "Contrast",
+        "Visual screenshots",
+        "Six widths",
+        "Independent diff review"
+      ],
+      "rollback": "No change applied"
+    },
+    {
+      "id": "RHINO-NOV11-05",
+      "priority": "P2",
+      "status": "needs_evidence",
+      "url": "https://rhino-performance.com/",
+      "cause": "Horizontal overflow at1024/1440; responsible element not identified. H1 also hidden with display:none.",
+      "files": [
+        "snippets/logo/logo-img.tpl"
+      ],
+      "evidence": [
+        "diagnostic.json"
+      ],
+      "impact": "Responsive and semantic accessibility",
+      "risk": "Do not hide overflow globally or invent headings to improve score",
+      "tests": [
+        "Identify overflow subtree",
+        "Accessible heading tree",
+        "Focus/keyboard/visual review"
+      ],
+      "rollback": "No change applied"
+    },
+    {
+      "id": "RHINO-NOV11-06",
+      "priority": "P3",
+      "status": "not_enforced",
+      "cause": "Regression gate policy exists but has no validated automatic enforcement hook. New baseline5/device available for three templates.",
+      "files": [],
+      "evidence": [
+        "regression-gates.json",
+        "performance-baseline-20261111.json"
+      ],
+      "impact": "Future regression prevention not currently guaranteed",
+      "risk": "False positives from noise, incompatible profiles or overclaiming a JSON policy",
+      "tests": [
+        "Compatible before/after5",
+        "Explicit tolerances",
+        "Statistical method validation",
+        "Resource and accessibility checks",
+        "Mandatory controller rejection test"
+      ],
+      "rollback": "No automated scheduling or enforcement activated"
+    }
+  ]
+}

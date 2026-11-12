@@ -16,7 +16,8 @@ class RegressionV4(unittest.TestCase):
                 'outgoing_links': [self.url + 'product'], 'pagination': {'active_controls_without_href': 0},
                 'template_audit': {'content': {'headings': [{'level': 1, 'text': 'Home'}]}, 'findings': [],
                                    'structured_data': {'states': {'syntax_valid': True}}},
-                'layers': {'initial_to_no_js': {'links_removed_after_js': []}}}
+                'layers': {'initial_to_no_js': {'links_removed_after_js': []},
+                           'main_content': {'no_js': {'main_text_characters': 100}}}}
         self.before = {'kind': 'seo-crawl-v4', 'project': 'sample', 'urls': [node]}
 
     def tearDown(self): self.tmp.cleanup()
@@ -27,6 +28,13 @@ class RegressionV4(unittest.TestCase):
     def test_missing_after_partial_never_passes(self):
         after = copy.deepcopy(self.before); after['urls'] = []
         self.assertEqual(compare(self.project, self.before, after)['outcome'], 'insufficient_evidence')
+
+    def test_main_disappears_without_javascript(self):
+        after = copy.deepcopy(self.before)
+        after['urls'][0]['layers']['main_content']['no_js']['main_text_characters'] = 0
+        result = compare(self.project, self.before, after)
+        self.assertEqual(result['outcome'], 'blocked')
+        self.assertTrue(any(c['name'].endswith(':no_js_main_content') and c['status'] == 'failed' for c in result['checks']))
 
     def test_independent_critical_changes_block(self):
         for key, value in [('canonical', ['https://example.invalid/other']), ('status', 500), ('outgoing_links', []),

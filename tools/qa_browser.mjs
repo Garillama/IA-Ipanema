@@ -7,6 +7,7 @@ import {collectRendered,collectSEOProjection} from './page_collectors.mjs';
 import {installPerformanceObservers,lighthouseEvidence,createNetworkRecorder} from './performance_evidence.mjs';
 
 const job=JSON.parse(await fs.readFile(process.argv[2],'utf8'));
+if(job.modes&&(!Array.isArray(job.modes)||!job.modes.length||job.modes.length>3||new Set(job.modes).size!==job.modes.length||job.modes.some(m=>!['rendered','no-js','reduced-motion'].includes(m))))throw Error('Modos de captura inválidos.');
 const linkContracts=JSON.parse(await fs.readFile(new URL('./ipanema/seo/link_contracts.json',import.meta.url),'utf8'));
 const out=path.resolve(job.output);
 await fs.mkdir(out,{recursive:true});
@@ -24,7 +25,7 @@ try{
  result.environment={browser:await browser.version(),node:process.versions.node,os:process.platform};
  const cookies=await authenticate(browser,job.pages[0].url);
  for(const spec of job.pages){
-  const modes=job.mode==='full'?['rendered','no-js','reduced-motion']:['rendered'];
+  const modes=job.modes||(job.mode==='full'?['rendered','no-js','reduced-motion']:['rendered']);
   for(const mode of modes)for(const width of (mode==='rendered'?job.widths:[job.widths[0]])){
    const context=await browser.createBrowserContext();if(cookies.length)await context.setCookie(...cookies);
    try{

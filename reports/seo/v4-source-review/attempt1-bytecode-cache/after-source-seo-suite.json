@@ -1,0 +1,5 @@
+{
+  "exit_code": 1,
+  "stdout": "{\n  \"kind\": \"qa\",\n  \"suite\": \"seo\",\n  \"at\": \"2026-11-11T18:05:40.714251+00:00\",\n  \"outcome\": \"failed\",\n  \"report\": \"/home/alanrichard/Escritorio/IA inversa/.local/seo-v4-source-candidate-2mmuhiff/reports/runs/fixture/20261111T180540-seo-f8096033/report.json\",\n  \"limitations\": [\n    \"Evaluaciones SEO con fixtures, sin conexión real a cuentas Google.\"\n  ],\n  \"checks\": [\n    {\n      \"name\": \"seo-unit\",\n      \"status\": \"failed\"\n    },\n    {\n      \"name\": \"seo-integration\",\n      \"status\": \"passed\"\n    },\n    {\n      \"name\": \"seo-action-evals\",\n      \"status\": \"passed\"\n    },\n    {\n      \"name\": \"sources-stable-during-qa\",\n      \"status\": \"passed\"\n    }\n  ]\n}\n",
+  "stderr": ""
+}

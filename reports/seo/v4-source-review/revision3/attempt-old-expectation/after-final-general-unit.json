@@ -1,0 +1,5 @@
+{
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "======================================================================\nFAIL: test_08_quoted_values_not_flags (test_seo_robots_sources_v4.SourceBoundaries.test_08_quoted_values_not_flags) (value='foo=\"googlebot: noindex\"')\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/home/alanrichard/Escritorio/IA inversa/.local/seo-v4-source-final3-5ybm3zwq/tests/unit/test_seo_robots_sources_v4.py\", line 46, in test_08_quoted_values_not_flags\n    with self.subTest(value=value):self.assertEqual(self.state({'robots':[value]}),'indexable_candidate')\n                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'insufficient_evidence' != 'indexable_candidate'\n- insufficient_evidence\n+ indexable_candidate\n\n\n----------------------------------------------------------------------\nRan 396 tests in 11.014s\n\nFAILED (failures=1)\n"
+}

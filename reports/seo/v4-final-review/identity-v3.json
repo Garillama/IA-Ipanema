@@ -1,0 +1,23 @@
+{
+  "v3_original": {
+    "path": "reports/seo/v4-review-corrections-v3.patch",
+    "bytes": 25729,
+    "sha256": "384deeb0673e607712f734130a0895a6fb3129d6c61564ffd93c219378c9eb19"
+  },
+  "manifest_matches": true,
+  "approval_manifest_matches": true,
+  "fresh_patch_candidate_hashes_match": true,
+  "existing_exact_candidates": [
+    ".local/seo-v4-v3-fresh-dp_c7ekf",
+    ".local/seo-v4-v3-n6065g7l"
+  ],
+  "reported_export": {
+    "path": "/mnt/data/Texto pegado (2).txt",
+    "sha256": "7fe10ce79ab0de98a078a4fe422ee277c6cfff599aa4e95606cd039dad92340d",
+    "bytes": 25728,
+    "accessible_here": false,
+    "authority": "user-supplied description; not a trusted application artifact",
+    "byte_difference_cause": "not_determined; not equal merely by removal of final LF"
+  },
+  "decision": "Use immutable original v3 and manifest only; never equate exported text by normalization."
+}

@@ -1,0 +1,149 @@
+{
+  "kind": "seo-v4-conditional-application-preflight",
+  "at": "20261111T174750Z",
+  "status": "not_applied_conditions_failed",
+  "patch": "reports/seo/v4-review-corrections-final.patch",
+  "patch_sha256": "4369d84d3a84bd99808d92eb12ad13bcf185f300615817bb6eedd517412acc6f",
+  "patch_bytes": 32393,
+  "base_hashes": {
+    "tools/ipanema/seo/robots.py": "7a83bdac275ac8783b7b85841f14d80da0157b9044b1556989a226c1000c8f2b",
+    "tools/ipanema/seo/indexability.py": "c379c404241180894d7a0b25f91f357a56173a059f461532ec1f78fb7650b0e8",
+    "tools/ipanema/seo/page_audit.py": "e60c8b928d8e2fd62e2034a247d407f2e52bd62cddcad5b398713a561c5d140b",
+    "tools/ipanema/seo/crawl_policy.py": "0f62445b9e0fb07bce6c55c59f60b107b52a460b343ea073bb0bee5e8a6009ff",
+    "tools/ipanema/seo/crawler.py": "0cebeb3685255ac5104ce676ade56fdb071d32b00a28f8a3829a1000f2f73f4e"
+  },
+  "candidate_hashes_verified_in_copy": {
+    "tests/unit/test_seo_review_additional_v4.py": "f803cc48ddd33e34184e10b62d3ade078975d51b16f2ba81ba630b7317af647e",
+    "tests/unit/test_seo_robots_values_v4.py": "c7b1c771b6a15580959ac0d881f5218dffa15a79b591ccc984621689bc7d4e3f",
+    "tools/ipanema/seo/crawl_policy.py": "7dbd88d522d4000a8903a6c6cf2fbff3034d4bba386719582e7f0d29bcfbcf78",
+    "tools/ipanema/seo/crawler.py": "c431ddf2c191cb209d4127f6961eb8da78116b225917b101b18b0cef926b27b9",
+    "tools/ipanema/seo/indexability.py": "4ec692ed1cd8e9a5d953e99978e2a80fff2f4cc704a2b66f4ac34ffae2c5d4ff",
+    "tools/ipanema/seo/page_audit.py": "51889e4e2f521272bd98b130c6bc406855978389c18e3f1bfca0269187fa6785",
+    "tools/ipanema/seo/robots.py": "9419f489af1c02abb690b4fb055bfe1c795f717a3c06b305a492c38038eeffa3"
+  },
+  "patch_targets": [
+    "tests/unit/test_seo_review_additional_v4.py",
+    "tests/unit/test_seo_robots_values_v4.py",
+    "tools/ipanema/seo/crawl_policy.py",
+    "tools/ipanema/seo/crawler.py",
+    "tools/ipanema/seo/indexability.py",
+    "tools/ipanema/seo/page_audit.py",
+    "tools/ipanema/seo/robots.py"
+  ],
+  "agents_sha256": "0d26605296d0107c59dd498689e79e08f91d2fc2941bf82ab16593708c576f27",
+  "backup": {
+    "path": ".local/backups/seo-v4-final-preflight-20261111T174750Z.tar.gz",
+    "sha256": "00d7772e52701aa840534a779e61bfcba2226f6629f3f89d3371a9345b501e5b",
+    "scope": "five complete source files and their modes; two new tests recorded absent; exact patch/manifest/policy included",
+    "verified": true,
+    "git_ignored": true
+  },
+  "foreign_snapshot": {
+    "path": ".local/seo-v4-final-foreign-before-20261111T174750Z.json",
+    "sha256": "272f016ed6134f8ac235073546df25b1284b0ff1ff3b9694b38278e206c07cc3",
+    "files": 1058
+  },
+  "checks": [
+    {
+      "name": "exact_authorized_patch",
+      "state": "passed"
+    },
+    {
+      "name": "five_base_hashes_and_two_absent_files",
+      "state": "passed"
+    },
+    {
+      "name": "full_diff_seven_files_only",
+      "state": "passed"
+    },
+    {
+      "name": "agents_unchanged_and_not_in_patch",
+      "state": "passed"
+    },
+    {
+      "name": "security_guards_preserved_static_review_and_prior_isolated_QA",
+      "state": "insufficient_for_acceptance",
+      "evidence": "unchanged boundary AST does not exclude newly reproduced logical regressions"
+    },
+    {
+      "name": "whole_scope_backup_verified",
+      "state": "passed"
+    },
+    {
+      "name": "independent_final_review_required_by_policy",
+      "state": "failed_blocking",
+      "evidence": "reports/runs/rhino-performance/20261111T174614-orchestration-f2e607f8/council/adr.json"
+    },
+    {
+      "name": "critical_objections_resolved",
+      "state": "failed_blocking",
+      "evidence": "two cross-source noindex false negatives reproduced on hash-matched candidate"
+    },
+    {
+      "name": "no_weakening_action_route_exclusions",
+      "state": "failed_blocking",
+      "evidence": "candidate permits embedded add-to-cart tokens; native endpoint behavior not probed"
+    }
+  ],
+  "policy_basis": [
+    {
+      "file": "AGENTS.md",
+      "quote": "El QA posterior y la revisión independiente siguen siendo obligatorios"
+    },
+    {
+      "file": "AGENTS.md",
+      "quote": "Ante empate sin evidencia, ausencia de uno de los dos o revisión insuficiente, bloquear aprobación."
+    }
+  ],
+  "human_authorization": "received but conditional; explicitly does not substitute outstanding independent review",
+  "human_exception_permitted_by_current_policy": false,
+  "applied_to_workspace": false,
+  "application_attempts": 0,
+  "rollback_required": false,
+  "post_application_tests": "not_executed_because_not_applied",
+  "previous_isolated_QA": "reports/seo/v4-final-review/validation.json",
+  "read_only_commands": [
+    {
+      "kind": "dry-run",
+      "exit_code": 0,
+      "stdout": "checking file tests/unit/test_seo_review_additional_v4.py\nchecking file tests/unit/test_seo_robots_values_v4.py\nchecking file tools/ipanema/seo/crawl_policy.py\nchecking file tools/ipanema/seo/crawler.py\nchecking file tools/ipanema/seo/indexability.py\nchecking file tools/ipanema/seo/page_audit.py\nchecking file tools/ipanema/seo/robots.py\n",
+      "stderr": ""
+    },
+    {
+      "kind": "apply-in-isolated-copy",
+      "exit_code": 0,
+      "stdout": "patching file tests/unit/test_seo_review_additional_v4.py\npatching file tests/unit/test_seo_robots_values_v4.py\npatching file tools/ipanema/seo/crawl_policy.py\npatching file tools/ipanema/seo/crawler.py\npatching file tools/ipanema/seo/indexability.py\npatching file tools/ipanema/seo/page_audit.py\npatching file tools/ipanema/seo/robots.py\n",
+      "stderr": ""
+    }
+  ],
+  "theme_modified": false,
+  "production_modified": false,
+  "external_crawl_executed": false,
+  "errors": [],
+  "independent_review": {
+    "run": "reports/runs/rhino-performance/20261111T174614-orchestration-f2e607f8",
+    "adr": "reports/runs/rhino-performance/20261111T174614-orchestration-f2e607f8/council/adr.json",
+    "status": "needs_evidence",
+    "implementation_allowed": false,
+    "claude": "available; changes_requested, does not approve exact final artifact",
+    "codex": "unavailable/inactivity; two failures, circuit open",
+    "consensus_claimed": false
+  },
+  "critical_counterexamples": "reports/seo/v4-final-review/conditional-review-counterexamples.json",
+  "critical_noindex_failures_reproduced": 2,
+  "foreign_preservation": {
+    "files_checked": 1058,
+    "differences": [],
+    "changed_by_this_task": []
+  },
+  "final_base_hashes": {
+    "tools/ipanema/seo/robots.py": "7a83bdac275ac8783b7b85841f14d80da0157b9044b1556989a226c1000c8f2b",
+    "tools/ipanema/seo/indexability.py": "c379c404241180894d7a0b25f91f357a56173a059f461532ec1f78fb7650b0e8",
+    "tools/ipanema/seo/page_audit.py": "e60c8b928d8e2fd62e2034a247d407f2e52bd62cddcad5b398713a561c5d140b",
+    "tools/ipanema/seo/crawl_policy.py": "0f62445b9e0fb07bce6c55c59f60b107b52a460b343ea073bb0bee5e8a6009ff",
+    "tools/ipanema/seo/crawler.py": "0cebeb3685255ac5104ce676ade56fdb071d32b00a28f8a3829a1000f2f73f4e"
+  },
+  "new_tests_still_absent": true,
+  "policy_exception_used": false,
+  "final_decision": "Do not apply; user authorization explicitly conditional on all mandatory checks and does not replace independent review"
+}

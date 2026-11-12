@@ -1,0 +1,1924 @@
+{
+  "at": "2026-11-11T21:09:01.222559+00:00",
+  "project": "rhino-performance",
+  "url": "https://rhino-performance.com/",
+  "theme_checkpoint": {
+    "at": "2026-11-11T20:32:15.480845+00:00",
+    "theme_head": "3cf3ae8ae9d88318261d04da0798edbf09a59d09",
+    "theme_status": "M  blocks/slide.tpl\nM  layouts/layout.tpl\nM  manifest.json\nM  sections/slideshow.tpl\nM  sections/video.tpl\nA  static/css/sectionfy-video-slide.css\nM  static/js/sectionfy-client.js\nA  static/js/sectionfy-video-slide.js\nM  static/js/store.js\nM  templates/pages/home.json\n",
+    "hashes": {
+      "sections/video.tpl": "617c7ee2fba5c7fc9dd34368920d1789e4277d7cf0c28ec1466660b9f3eca8cb",
+      "static/js/sectionfy-client.js": "a7fb2a7e432c84df62cf6100f7349ec895e28f88eb2027b3819f76aef40a150c",
+      "static/js/sectionfy-video-slide.js": "3165f743b357b088b2d91533a712938dd9224e1b9a9e111f095775fbc908199b",
+      "static/js/store.js": "29dea94e46cc1bb423ddde71a42d807f22c944f09465d70400728d7ae95b4718",
+      "templates/pages/home.json": "cfa29739befaa0a6d4d1c3bc78da0cf7294257bdee43599978bd4f2cf5c80379",
+      "sections/google-reviews.tpl": "75a487600c5d71001fa2e0970dad1cb943f80d399f1af89db559bffc3253fd30"
+    },
+    "theme_modified_by_audit": false,
+    "production_operations": false
+  },
+  "lab": [
+    {
+      "page": "home",
+      "url": "https://rhino-performance.com/",
+      "device": "mobile",
+      "n": 5,
+      "scores": {
+        "performance": {
+          "median": 64.0,
+          "minimum": 57.99999999999999,
+          "maximum": 67.0,
+          "stdev": 3.53553390593274
+        },
+        "accessibility": {
+          "median": 97.0,
+          "minimum": 97.0,
+          "maximum": 97.0,
+          "stdev": 0.0
+        },
+        "best-practices": {
+          "median": 77.0,
+          "minimum": 77.0,
+          "maximum": 77.0,
+          "stdev": 0.0
+        },
+        "seo": {
+          "median": 100.0,
+          "minimum": 100.0,
+          "maximum": 100.0,
+          "stdev": 0.0
+        }
+      },
+      "metrics": {
+        "lcp": 3260.7775,
+        "fcp": 1701.87,
+        "cls": 0.0004495097942321615,
+        "tbt": 1693.500000000001,
+        "speed_index": 3427.1921615002934
+      },
+      "variability": null,
+      "profile": {
+        "source": "lighthouse_local",
+        "url": "https://rhino-performance.com/",
+        "final_url": "https://rhino-performance.com/",
+        "device": "mobile",
+        "categories": [
+          "performance",
+          "accessibility",
+          "best-practices",
+          "seo"
+        ],
+        "locale": "es",
+        "lighthouse_version": "13.6.0",
+        "chrome_version": "155.0.8059.84",
+        "screen": {
+          "mobile": true,
+          "width": 412,
+          "height": 823,
+          "deviceScaleFactor": 1.75,
+          "disabled": false
+        },
+        "throttling_method": "simulate",
+        "throttling": {
+          "rttMs": 150,
+          "throughputKbps": 1638.4,
+          "requestLatencyMs": 562.5,
+          "downloadThroughputKbps": 1474.56,
+          "uploadThroughputKbps": 675,
+          "cpuSlowdownMultiplier": 4
+        },
+        "cache": false,
+        "network_policy": "guarded-read-only"
+      },
+      "statistics": {
+        "lcp": {
+          "median": 3260.7775,
+          "min": 2857.0295,
+          "max": 3986.3889999999997,
+          "available_samples": 5
+        },
+        "fcp": {
+          "median": 1701.87,
+          "min": 1527.4330000000002,
+          "max": 1787.8519999999999,
+          "available_samples": 5
+        },
+        "cls": {
+          "median": 0.0004495097942321615,
+          "min": 0.0004495097942321615,
+          "max": 0.04350813594093544,
+          "available_samples": 5
+        },
+        "tbt": {
+          "median": 1693.500000000001,
+          "min": 1675.4999999999982,
+          "max": 1988.5230000000047,
+          "available_samples": 5
+        },
+        "speed_index": {
+          "median": 3427.1921615002934,
+          "min": 3256.035057091497,
+          "max": 3593.6702921322667,
+          "available_samples": 5
+        }
+      },
+      "samples": [
+        {
+          "measured_at": "2026-11-11T20:33:05.200Z",
+          "metrics": {
+            "lcp": 2857.0295,
+            "fcp": 1711.2150000000001,
+            "cls": 0.04350813594093544,
+            "tbt": 1685.5845999999974,
+            "speed_index": 3521.0006915444906
+          },
+          "scores": {
+            "performance": 0.67,
+            "accessibility": 0.97,
+            "best-practices": 0.77,
+            "seo": 1.0
+          },
+          "warnings": [],
+          "environment": {
+            "networkUserAgent": "Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Mobile Safari/537.36",
+            "hostUserAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36",
+            "benchmarkIndex": 2206.5,
+            "credits": {
+              "axe-core": "4.14.0"
+            },
+            "actualBrowserVersion": "Chrome/155.0.8059.84"
+          }
+        },
+        {
+          "measured_at": "2026-11-11T20:33:32.583Z",
+          "metrics": {
+            "lcp": 3260.7775,
+            "fcp": 1533.3890000000001,
+            "cls": 0.0004495097942321615,
+            "tbt": 1675.4999999999982,
+            "speed_index": 3427.1921615002934
+          },
+          "scores": {
+            "performance": 0.64,
+            "accessibility": 0.97,
+            "best-practices": 0.77,
+            "seo": 1.0
+          },
+          "warnings": [],
+          "environment": {
+            "networkUserAgent": "Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Mobile Safari/537.36",
+            "hostUserAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36",
+            "benchmarkIndex": 2133.5,
+            "credits": {
+              "axe-core": "4.14.0"
+            },
+            "actualBrowserVersion": "Chrome/155.0.8059.84"
+          }
+        },
+        {
+          "measured_at": "2026-11-11T20:33:59.404Z",
+          "metrics": {
+            "lcp": 3195.2194999999992,
+            "fcp": 1701.87,
+            "cls": 0.0004495097942321615,
+            "tbt": 1693.500000000001,
+            "speed_index": 3256.035057091497
+          },
+          "scores": {
+            "performance": 0.65,
+            "accessibility": 0.97,
+            "best-practices": 0.77,
+            "seo": 1.0
+          },
+          "warnings": [],
+          "environment": {
+            "networkUserAgent": "Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Mobile Safari/537.36",
+            "hostUserAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36",
+            "benchmarkIndex": 2136,
+            "credits": {
+              "axe-core": "4.14.0"
+            },
+            "actualBrowserVersion": "Chrome/155.0.8059.84"
+          }
+        },
+        {
+          "measured_at": "2026-11-11T20:34:26.776Z",
+          "metrics": {
+            "lcp": 3986.3889999999997,
+            "fcp": 1787.8519999999999,
+            "cls": 0.0004495097942321615,
+            "tbt": 1756.999999999999,
+            "speed_index": 3593.6702921322667
+          },
+          "scores": {
+            "performance": 0.58,
+            "accessibility": 0.97,
+            "best-practices": 0.77,
+            "seo": 1.0
+          },
+          "warnings": [],
+          "environment": {
+            "networkUserAgent": "Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Mobile Safari/537.36",
+            "hostUserAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36",
+            "benchmarkIndex": 1985,
+            "credits": {
+              "axe-core": "4.14.0"
+            },
+            "actualBrowserVersion": "Chrome/155.0.8059.84"
+          }
+        },
+        {
+          "measured_at": "2026-11-11T20:34:53.599Z",
+          "metrics": {
+            "lcp": 3645.9525000000003,
+            "fcp": 1527.4330000000002,
+            "cls": 0.0004495097942321615,
+            "tbt": 1988.5230000000047,
+            "speed_index": 3289.842519854727
+          },
+          "scores": {
+            "performance": 0.61,
+            "accessibility": 0.97,
+            "best-practices": 0.77,
+            "seo": 1.0
+          },
+          "warnings": [],
+          "environment": {
+            "networkUserAgent": "Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Mobile Safari/537.36",
+            "hostUserAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36",
+            "benchmarkIndex": 2397.5,
+            "credits": {
+              "axe-core": "4.14.0"
+            },
+            "actualBrowserVersion": "Chrome/155.0.8059.84"
+          }
+        }
+      ],
+      "scope": "published baseline; NOT an unpublished patch result"
+    },
+    {
+      "page": "home",
+      "url": "https://rhino-performance.com/",
+      "device": "desktop",
+      "n": 5,
+      "scores": {
+        "performance": {
+          "median": 87.0,
+          "minimum": 65.0,
+          "maximum": 89.0,
+          "stdev": 10.198039027185569
+        },
+        "accessibility": {
+          "median": 97.0,
+          "minimum": 97.0,
+          "maximum": 97.0,
+          "stdev": 0.0
+        },
+        "best-practices": {
+          "median": 77.0,
+          "minimum": 77.0,
+          "maximum": 77.0,
+          "stdev": 0.0
+        },
+        "seo": {
+          "median": 100.0,
+          "minimum": 100.0,
+          "maximum": 100.0,
+          "stdev": 0.0
+        }
+      },
+      "metrics": {
+        "lcp": 986.2475,
+        "fcp": 415.052,
+        "cls": 0.06816233677728162,
+        "tbt": 163.5,
+        "speed_index": 2438.140023309416
+      },
+      "variability": null,
+      "profile": {
+        "source": "lighthouse_local",
+        "url": "https://rhino-performance.com/",
+        "final_url": "https://rhino-performance.com/",
+        "device": "desktop",
+        "categories": [
+          "performance",
+          "accessibility",
+          "best-practices",
+          "seo"
+        ],
+        "locale": "es",
+        "lighthouse_version": "13.6.0",
+        "chrome_version": "155.0.8059.84",
+        "screen": {
+          "mobile": false,
+          "width": 1350,
+          "height": 940,
+          "deviceScaleFactor": 1,
+          "disabled": false
+        },
+        "throttling_method": "simulate",
+        "throttling": {
+          "rttMs": 40,
+          "throughputKbps": 10240,
+          "requestLatencyMs": 0,
+          "downloadThroughputKbps": 0,
+          "uploadThroughputKbps": 0,
+          "cpuSlowdownMultiplier": 1
+        },
+        "cache": false,
+        "network_policy": "guarded-read-only"
+      },
+      "statistics": {
+        "lcp": {
+          "median": 986.2475,
+          "min": 913.9755000000001,
+          "max": 1100.043,
+          "available_samples": 5
+        },
+        "fcp": {
+          "median": 415.052,
+          "min": 397.80500000000006,
+          "max": 472.603,
+          "available_samples": 5
+        },
+        "cls": {
+          "median": 0.06816233677728162,
+          "min": 0.06815300659603654,
+          "max": 1.0045161439453638,
+          "available_samples": 5
+        },
+        "tbt": {
+          "median": 163.5,
+          "min": 131.0,
+          "max": 205.49999999999955,
+          "available_samples": 5
+        },
+        "speed_index": {
+          "median": 2438.140023309416,
+          "min": 2392.6002267090016,
+          "max": 2880.5769563775684,
+          "available_samples": 5
+        }
+      },
+      "samples": [
+        {
+          "measured_at": "2026-11-11T20:35:23.318Z",
+          "metrics": {
+            "lcp": 941.0300000000001,
+            "fcp": 415.052,
+            "cls": 1.0045161439453638,
+            "tbt": 165.49999999999955,
+            "speed_index": 2438.140023309416
+          },
+          "scores": {
+            "performance": 0.65,
+            "accessibility": 0.97,
+            "best-practices": 0.77,
+            "seo": 1.0
+          },
+          "warnings": [],
+          "environment": {
+            "networkUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+            "hostUserAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36",
+            "benchmarkIndex": 2170,
+            "credits": {
+              "axe-core": "4.14.0"
+            },
+            "actualBrowserVersion": "Chrome/155.0.8059.84"
+          }
+        },
+        {
+          "measured_at": "2026-11-11T20:35:56.341Z",
+          "metrics": {
+            "lcp": 913.9755000000001,
+            "fcp": 402.5930000000001,
+            "cls": 0.06815300659603654,
+            "tbt": 163.5,
+            "speed_index": 2406.8263275637137
+          },
+          "scores": {
+            "performance": 0.89,
+            "accessibility": 0.97,
+            "best-practices": 0.77,
+            "seo": 1.0
+          },
+          "warnings": [],
+          "environment": {
+            "networkUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+            "hostUserAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36",
+            "benchmarkIndex": 2062.5,
+            "credits": {
+              "axe-core": "4.14.0"
+            },
+            "actualBrowserVersion": "Chrome/155.0.8059.84"
+          }
+        },
+        {
+          "measured_at": "2026-11-11T20:36:31.238Z",
+          "metrics": {
+            "lcp": 986.2475,
+            "fcp": 397.80500000000006,
+            "cls": 0.06816233677728162,
+            "tbt": 131.0,
+            "speed_index": 2880.5769563775684
+          },
+          "scores": {
+            "performance": 0.89,
+            "accessibility": 0.97,
+            "best-practices": 0.77,
+            "seo": 1.0
+          },
+          "warnings": [],
+          "environment": {
+            "networkUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+            "hostUserAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36",
+            "benchmarkIndex": 2089.5,
+            "credits": {
+              "axe-core": "4.14.0"
+            },
+            "actualBrowserVersion": "Chrome/155.0.8059.84"
+          }
+        },
+        {
+          "measured_at": "2026-11-11T20:37:06.070Z",
+          "metrics": {
+            "lcp": 1100.043,
+            "fcp": 472.603,
+            "cls": 0.06816233677728162,
+            "tbt": 205.49999999999955,
+            "speed_index": 2392.6002267090016
+          },
+          "scores": {
+            "performance": 0.85,
+            "accessibility": 0.97,
+            "best-practices": 0.77,
+            "seo": 1.0
+          },
+          "warnings": [],
+          "environment": {
+            "networkUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+            "hostUserAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36",
+            "benchmarkIndex": 2055.5,
+            "credits": {
+              "axe-core": "4.14.0"
+            },
+            "actualBrowserVersion": "Chrome/155.0.8059.84"
+          }
+        },
+        {
+          "measured_at": "2026-11-11T20:37:40.494Z",
+          "metrics": {
+            "lcp": 1019.897,
+            "fcp": 434.06499999999994,
+            "cls": 0.06816233677728162,
+            "tbt": 154.50000000000023,
+            "speed_index": 2858.311758607596
+          },
+          "scores": {
+            "performance": 0.87,
+            "accessibility": 0.97,
+            "best-practices": 0.77,
+            "seo": 1.0
+          },
+          "warnings": [],
+          "environment": {
+            "networkUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+            "hostUserAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36",
+            "benchmarkIndex": 2124.5,
+            "credits": {
+              "axe-core": "4.14.0"
+            },
+            "actualBrowserVersion": "Chrome/155.0.8059.84"
+          }
+        }
+      ],
+      "scope": "published baseline; NOT an unpublished patch result"
+    },
+    {
+      "page": "category",
+      "url": "https://rhino-performance.com/presoterapia/",
+      "device": "mobile",
+      "n": 5,
+      "scores": {
+        "performance": {
+          "median": 61.0,
+          "minimum": 59.0,
+          "maximum": 74.0,
+          "stdev": 5.9833101206606365
+        },
+        "accessibility": {
+          "median": 100.0,
+          "minimum": 100.0,
+          "maximum": 100.0,
+          "stdev": 0.0
+        },
+        "best-practices": {
+          "median": 77.0,
+          "minimum": 77.0,
+          "maximum": 77.0,
+          "stdev": 0.0
+        },
+        "seo": {
+          "median": 100.0,
+          "minimum": 100.0,
+          "maximum": 100.0,
+          "stdev": 0.0
+        }
+      },
+      "metrics": {
+        "lcp": 3687.0964999999997,
+        "fcp": 1325.243,
+        "cls": 0.0,
+        "tbt": 1721.0,
+        "speed_index": 3138.233296418777
+      },
+      "variability": null,
+      "profile": {
+        "source": "lighthouse_local",
+        "url": "https://rhino-performance.com/presoterapia/",
+        "final_url": "https://rhino-performance.com/presoterapia/",
+        "device": "mobile",
+        "categories": [
+          "performance",
+          "accessibility",
+          "best-practices",
+          "seo"
+        ],
+        "locale": "es",
+        "lighthouse_version": "13.6.0",
+        "chrome_version": "155.0.8059.84",
+        "screen": {
+          "mobile": true,
+          "width": 412,
+          "height": 823,
+          "deviceScaleFactor": 1.75,
+          "disabled": false
+        },
+        "throttling_method": "simulate",
+        "throttling": {
+          "rttMs": 150,
+          "throughputKbps": 1638.4,
+          "requestLatencyMs": 562.5,
+          "downloadThroughputKbps": 1474.56,
+          "uploadThroughputKbps": 675,
+          "cpuSlowdownMultiplier": 4
+        },
+        "cache": false,
+        "network_policy": "guarded-read-only"
+      },
+      "statistics": {
+        "lcp": {
+          "median": 3687.0964999999997,
+          "min": 2720.2569999999996,
+          "max": 3929.5670000000005,
+          "available_samples": 5
+        },
+        "fcp": {
+          "median": 1325.243,
+          "min": 1175.421,
+          "max": 1382.8890000000001,
+          "available_samples": 5
+        },
+        "cls": {
+          "median": 0.0,
+          "min": 0.0,
+          "max": 0.02679823734251874,
+          "available_samples": 5
+        },
+        "tbt": {
+          "median": 1721.0,
+          "min": 960.0000000000009,
+          "max": 2020.1232499999996,
+          "available_samples": 5
+        },
+        "speed_index": {
+          "median": 3138.233296418777,
+          "min": 2970.2209232661917,
+          "max": 4230.544625749921,
+          "available_samples": 5
+        }
+      },
+      "samples": [
+        {
+          "measured_at": "2026-11-11T20:38:45.290Z",
+          "metrics": {
+            "lcp": 3313.4889999999996,
+            "fcp": 1325.243,
+            "cls": 0.0,
+            "tbt": 1721.0,
+            "speed_index": 4230.544625749921
+          },
+          "scores": {
+            "performance": 0.63,
+            "accessibility": 1.0,
+            "best-practices": 0.77,
+            "seo": 1.0
+          },
+          "warnings": [],
+          "environment": {
+            "networkUserAgent": "Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Mobile Safari/537.36",
+            "hostUserAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36",
+            "benchmarkIndex": 2089.5,
+            "credits": {
+              "axe-core": "4.14.0"
+            },
+            "actualBrowserVersion": "Chrome/155.0.8059.84"
+          }
+        },
+        {
+          "measured_at": "2026-11-11T20:39:09.250Z",
+          "metrics": {
+            "lcp": 3929.5670000000005,
+            "fcp": 1308.241,
+            "cls": 0.0,
+            "tbt": 2020.1232499999996,
+            "speed_index": 3138.233296418777
+          },
+          "scores": {
+            "performance": 0.59,
+            "accessibility": 1.0,
+            "best-practices": 0.77,
+            "seo": 1.0
+          },
+          "warnings": [],
+          "environment": {
+            "networkUserAgent": "Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Mobile Safari/537.36",
+            "hostUserAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36",
+            "benchmarkIndex": 2175.5,
+            "credits": {
+              "axe-core": "4.14.0"
+            },
+            "actualBrowserVersion": "Chrome/155.0.8059.84"
+          }
+        },
+        {
+          "measured_at": "2026-11-11T20:39:38.522Z",
+          "metrics": {
+            "lcp": 2720.2569999999996,
+            "fcp": 1346.87,
+            "cls": 0.02679823734251874,
+            "tbt": 960.0000000000009,
+            "speed_index": 2970.2209232661917
+          },
+          "scores": {
+            "performance": 0.74,
+            "accessibility": 1.0,
+            "best-practices": 0.77,
+            "seo": 1.0
+          },
+          "warnings": [],
+          "environment": {
+            "networkUserAgent": "Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Mobile Safari/537.36",
+            "hostUserAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36",
+            "benchmarkIndex": 2354.5,
+            "credits": {
+              "axe-core": "4.14.0"
+            },
+            "actualBrowserVersion": "Chrome/155.0.8059.84"
+          }
+        },
+        {
+          "measured_at": "2026-11-11T20:40:02.150Z",
+          "metrics": {
+            "lcp": 3687.0964999999997,
+            "fcp": 1175.421,
+            "cls": 0.002987061385192238,
+            "tbt": 1812.3409999999992,
+            "speed_index": 3191.403634895569
+          },
+          "scores": {
+            "performance": 0.61,
+            "accessibility": 1.0,
+            "best-practices": 0.77,
+            "seo": 1.0
+          },
+          "warnings": [],
+          "environment": {
+            "networkUserAgent": "Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Mobile Safari/537.36",
+            "hostUserAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36",
+            "benchmarkIndex": 2127,
+            "credits": {
+              "axe-core": "4.14.0"
+            },
+            "actualBrowserVersion": "Chrome/155.0.8059.84"
+          }
+        },
+        {
+          "measured_at": "2026-11-11T20:40:26.409Z",
+          "metrics": {
+            "lcp": 3844.3305000000005,
+            "fcp": 1382.8890000000001,
+            "cls": 0.0,
+            "tbt": 1712.46025,
+            "speed_index": 3126.3737831422613
+          },
+          "scores": {
+            "performance": 0.61,
+            "accessibility": 1.0,
+            "best-practices": 0.77,
+            "seo": 1.0
+          },
+          "warnings": [],
+          "environment": {
+            "networkUserAgent": "Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Mobile Safari/537.36",
+            "hostUserAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36",
+            "benchmarkIndex": 2183.5,
+            "credits": {
+              "axe-core": "4.14.0"
+            },
+            "actualBrowserVersion": "Chrome/155.0.8059.84"
+          }
+        }
+      ],
+      "scope": "published baseline; NOT an unpublished patch result"
+    },
+    {
+      "page": "category",
+      "url": "https://rhino-performance.com/presoterapia/",
+      "device": "desktop",
+      "n": 5,
+      "scores": {
+        "performance": {
+          "median": 94.0,
+          "minimum": 89.0,
+          "maximum": 96.0,
+          "stdev": 2.7748873851023217
+        },
+        "accessibility": {
+          "median": 100.0,
+          "minimum": 100.0,
+          "maximum": 100.0,
+          "stdev": 0.0
+        },
+        "best-practices": {
+          "median": 77.0,
+          "minimum": 77.0,
+          "maximum": 77.0,
+          "stdev": 0.0
+        },
+        "seo": {
+          "median": 100.0,
+          "minimum": 100.0,
+          "maximum": 100.0,
+          "stdev": 0.0
+        }
+      },
+      "metrics": {
+        "lcp": 1258.7195,
+        "fcp": 367.36400000000003,
+        "cls": 0.03051209621165689,
+        "tbt": 132.7040000000004,
+        "speed_index": 954.525104402843
+      },
+      "variability": null,
+      "profile": {
+        "source": "lighthouse_local",
+        "url": "https://rhino-performance.com/presoterapia/",
+        "final_url": "https://rhino-performance.com/presoterapia/",
+        "device": "desktop",
+        "categories": [
+          "performance",
+          "accessibility",
+          "best-practices",
+          "seo"
+        ],
+        "locale": "es",
+        "lighthouse_version": "13.6.0",
+        "chrome_version": "155.0.8059.84",
+        "screen": {
+          "mobile": false,
+          "width": 1350,
+          "height": 940,
+          "deviceScaleFactor": 1,
+          "disabled": false
+        },
+        "throttling_method": "simulate",
+        "throttling": {
+          "rttMs": 40,
+          "throughputKbps": 10240,
+          "requestLatencyMs": 0,
+          "downloadThroughputKbps": 0,
+          "uploadThroughputKbps": 0,
+          "cpuSlowdownMultiplier": 1
+        },
+        "cache": false,
+        "network_policy": "guarded-read-only"
+      },
+      "statistics": {
+        "lcp": {
+          "median": 1258.7195,
+          "min": 1180.64,
+          "max": 1395.3974999999998,
+          "available_samples": 5
+        },
+        "fcp": {
+          "median": 367.36400000000003,
+          "min": 350.928,
+          "max": 464.27299999999997,
+          "available_samples": 5
+        },
+        "cls": {
+          "median": 0.03051209621165689,
+          "min": 0.02705340139144266,
+          "max": 0.03051209621165689,
+          "available_samples": 5
+        },
+        "tbt": {
+          "median": 132.7040000000004,
+          "min": 101.08325000000036,
+          "max": 233.00000000000045,
+          "available_samples": 5
+        },
+        "speed_index": {
+          "median": 954.525104402843,
+          "min": 913.254740877424,
+          "max": 1106.2773458512434,
+          "available_samples": 5
+        }
+      },
+      "samples": [
+        {
+          "measured_at": "2026-11-11T20:40:53.717Z",
+          "metrics": {
+            "lcp": 1372.1860000000001,
+            "fcp": 464.27299999999997,
+            "cls": 0.03051209621165689,
+            "tbt": 132.7040000000004,
+            "speed_index": 921.5922138522911
+          },
+          "scores": {
+            "performance": 0.94,
+            "accessibility": 1.0,
+            "best-practices": 0.77,
+            "seo": 1.0
+          },
+          "warnings": [],
+          "environment": {
+            "networkUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+            "hostUserAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36",
+            "benchmarkIndex": 2069,
+            "credits": {
+              "axe-core": "4.14.0"
+            },
+            "actualBrowserVersion": "Chrome/155.0.8059.84"
+          }
+        },
+        {
+          "measured_at": "2026-11-11T20:41:26.654Z",
+          "metrics": {
+            "lcp": 1395.3974999999998,
+            "fcp": 367.36400000000003,
+            "cls": 0.029380809875083916,
+            "tbt": 160.99999999999977,
+            "speed_index": 1106.2773458512434
+          },
+          "scores": {
+            "performance": 0.92,
+            "accessibility": 1.0,
+            "best-practices": 0.77,
+            "seo": 1.0
+          },
+          "warnings": [],
+          "environment": {
+            "networkUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+            "hostUserAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36",
+            "benchmarkIndex": 1964,
+            "credits": {
+              "axe-core": "4.14.0"
+            },
+            "actualBrowserVersion": "Chrome/155.0.8059.84"
+          }
+        },
+        {
+          "measured_at": "2026-11-11T20:41:52.208Z",
+          "metrics": {
+            "lcp": 1201.8639999999998,
+            "fcp": 350.928,
+            "cls": 0.03051209621165689,
+            "tbt": 233.00000000000045,
+            "speed_index": 1013.0724076840982
+          },
+          "scores": {
+            "performance": 0.89,
+            "accessibility": 1.0,
+            "best-practices": 0.77,
+            "seo": 1.0
+          },
+          "warnings": [],
+          "environment": {
+            "networkUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+            "hostUserAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36",
+            "benchmarkIndex": 2144,
+            "credits": {
+              "axe-core": "4.14.0"
+            },
+            "actualBrowserVersion": "Chrome/155.0.8059.84"
+          }
+        },
+        {
+          "measured_at": "2026-11-11T20:42:17.757Z",
+          "metrics": {
+            "lcp": 1258.7195,
+            "fcp": 360.024,
+            "cls": 0.02705340139144266,
+            "tbt": 126.5,
+            "speed_index": 954.525104402843
+          },
+          "scores": {
+            "performance": 0.95,
+            "accessibility": 1.0,
+            "best-practices": 0.77,
+            "seo": 1.0
+          },
+          "warnings": [],
+          "environment": {
+            "networkUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+            "hostUserAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36",
+            "benchmarkIndex": 1889.5,
+            "credits": {
+              "axe-core": "4.14.0"
+            },
+            "actualBrowserVersion": "Chrome/155.0.8059.84"
+          }
+        },
+        {
+          "measured_at": "2026-11-11T20:42:46.228Z",
+          "metrics": {
+            "lcp": 1180.64,
+            "fcp": 427.246,
+            "cls": 0.03051209621165689,
+            "tbt": 101.08325000000036,
+            "speed_index": 913.254740877424
+          },
+          "scores": {
+            "performance": 0.96,
+            "accessibility": 1.0,
+            "best-practices": 0.77,
+            "seo": 1.0
+          },
+          "warnings": [],
+          "environment": {
+            "networkUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+            "hostUserAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36",
+            "benchmarkIndex": 2046.5,
+            "credits": {
+              "axe-core": "4.14.0"
+            },
+            "actualBrowserVersion": "Chrome/155.0.8059.84"
+          }
+        }
+      ],
+      "scope": "published baseline; NOT an unpublished patch result"
+    },
+    {
+      "page": "product",
+      "url": "https://rhino-performance.com/productos/botas-presoterapia-inalambricas-pro-air/",
+      "device": "mobile",
+      "n": 5,
+      "scores": {
+        "performance": {
+          "median": 60.0,
+          "minimum": 57.99999999999999,
+          "maximum": 64.0,
+          "stdev": 2.44948974278318
+        },
+        "accessibility": {
+          "median": 100.0,
+          "minimum": 100.0,
+          "maximum": 100.0,
+          "stdev": 0.0
+        },
+        "best-practices": {
+          "median": 77.0,
+          "minimum": 77.0,
+          "maximum": 77.0,
+          "stdev": 0.0
+        },
+        "seo": {
+          "median": 92.0,
+          "minimum": 92.0,
+          "maximum": 92.0,
+          "stdev": 0.0
+        }
+      },
+      "metrics": {
+        "lcp": 3541.81,
+        "fcp": 1642.0079999999998,
+        "cls": 0.0,
+        "tbt": 1990.9999999999982,
+        "speed_index": 3732.039333282173
+      },
+      "variability": null,
+      "profile": {
+        "source": "lighthouse_local",
+        "url": "https://rhino-performance.com/productos/botas-presoterapia-inalambricas-pro-air/",
+        "final_url": "https://rhino-performance.com/productos/botas-presoterapia-inalambricas-pro-air/",
+        "device": "mobile",
+        "categories": [
+          "performance",
+          "accessibility",
+          "best-practices",
+          "seo"
+        ],
+        "locale": "es",
+        "lighthouse_version": "13.6.0",
+        "chrome_version": "155.0.8059.84",
+        "screen": {
+          "mobile": true,
+          "width": 412,
+          "height": 823,
+          "deviceScaleFactor": 1.75,
+          "disabled": false
+        },
+        "throttling_method": "simulate",
+        "throttling": {
+          "rttMs": 150,
+          "throughputKbps": 1638.4,
+          "requestLatencyMs": 562.5,
+          "downloadThroughputKbps": 1474.56,
+          "uploadThroughputKbps": 675,
+          "cpuSlowdownMultiplier": 4
+        },
+        "cache": false,
+        "network_policy": "guarded-read-only"
+      },
+      "statistics": {
+        "lcp": {
+          "median": 3541.81,
+          "min": 3289.1800000000003,
+          "max": 3680.9719999999993,
+          "available_samples": 5
+        },
+        "fcp": {
+          "median": 1642.0079999999998,
+          "min": 1518.901,
+          "max": 1713.042,
+          "available_samples": 5
+        },
+        "cls": {
+          "median": 0.0,
+          "min": 0.0,
+          "max": 0.0,
+          "available_samples": 5
+        },
+        "tbt": {
+          "median": 1990.9999999999982,
+          "min": 1678.0,
+          "max": 2239.323000000002,
+          "available_samples": 5
+        },
+        "speed_index": {
+          "median": 3732.039333282173,
+          "min": 3164.51251842928,
+          "max": 4644.117368749299,
+          "available_samples": 5
+        }
+      },
+      "samples": [
+        {
+          "measured_at": "2026-11-11T20:43:17.705Z",
+          "metrics": {
+            "lcp": 3680.9719999999993,
+            "fcp": 1630.1149999999998,
+            "cls": 0.0,
+            "tbt": 1990.9999999999982,
+            "speed_index": 4644.117368749299
+          },
+          "scores": {
+            "performance": 0.58,
+            "accessibility": 1.0,
+            "best-practices": 0.77,
+            "seo": 0.92
+          },
+          "warnings": [],
+          "environment": {
+            "networkUserAgent": "Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Mobile Safari/537.36",
+            "hostUserAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36",
+            "benchmarkIndex": 1842.5,
+            "credits": {
+              "axe-core": "4.14.0"
+            },
+            "actualBrowserVersion": "Chrome/155.0.8059.84"
+          }
+        },
+        {
+          "measured_at": "2026-11-11T20:43:44.844Z",
+          "metrics": {
+            "lcp": 3289.1800000000003,
+            "fcp": 1643.446,
+            "cls": 0.0,
+            "tbt": 1678.0,
+            "speed_index": 3732.039333282173
+          },
+          "scores": {
+            "performance": 0.64,
+            "accessibility": 1.0,
+            "best-practices": 0.77,
+            "seo": 0.92
+          },
+          "warnings": [],
+          "environment": {
+            "networkUserAgent": "Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Mobile Safari/537.36",
+            "hostUserAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36",
+            "benchmarkIndex": 2434,
+            "credits": {
+              "axe-core": "4.14.0"
+            },
+            "actualBrowserVersion": "Chrome/155.0.8059.84"
+          }
+        },
+        {
+          "measured_at": "2026-11-11T20:44:19.229Z",
+          "metrics": {
+            "lcp": 3541.81,
+            "fcp": 1642.0079999999998,
+            "cls": 0.0,
+            "tbt": 2177.854500000003,
+            "speed_index": 3855.4959759926537
+          },
+          "scores": {
+            "performance": 0.6,
+            "accessibility": 1.0,
+            "best-practices": 0.77,
+            "seo": 0.92
+          },
+          "warnings": [],
+          "environment": {
+            "networkUserAgent": "Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Mobile Safari/537.36",
+            "hostUserAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36",
+            "benchmarkIndex": 2114.5,
+            "credits": {
+              "axe-core": "4.14.0"
+            },
+            "actualBrowserVersion": "Chrome/155.0.8059.84"
+          }
+        },
+        {
+          "measured_at": "2026-11-11T20:44:45.477Z",
+          "metrics": {
+            "lcp": 3301.277,
+            "fcp": 1518.901,
+            "cls": 0.0,
+            "tbt": 2239.323000000002,
+            "speed_index": 3164.51251842928
+          },
+          "scores": {
+            "performance": 0.63,
+            "accessibility": 1.0,
+            "best-practices": 0.77,
+            "seo": 0.92
+          },
+          "warnings": [],
+          "environment": {
+            "networkUserAgent": "Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Mobile Safari/537.36",
+            "hostUserAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36",
+            "benchmarkIndex": 1967,
+            "credits": {
+              "axe-core": "4.14.0"
+            },
+            "actualBrowserVersion": "Chrome/155.0.8059.84"
+          }
+        },
+        {
+          "measured_at": "2026-11-11T20:45:12.191Z",
+          "metrics": {
+            "lcp": 3678.2070000000003,
+            "fcp": 1713.042,
+            "cls": 0.0,
+            "tbt": 1948.3360000000039,
+            "speed_index": 3519.1199403626056
+          },
+          "scores": {
+            "performance": 0.6,
+            "accessibility": 1.0,
+            "best-practices": 0.77,
+            "seo": 0.92
+          },
+          "warnings": [],
+          "environment": {
+            "networkUserAgent": "Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Mobile Safari/537.36",
+            "hostUserAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36",
+            "benchmarkIndex": 2042,
+            "credits": {
+              "axe-core": "4.14.0"
+            },
+            "actualBrowserVersion": "Chrome/155.0.8059.84"
+          }
+        }
+      ],
+      "scope": "published baseline; NOT an unpublished patch result"
+    },
+    {
+      "page": "product",
+      "url": "https://rhino-performance.com/productos/botas-presoterapia-inalambricas-pro-air/",
+      "device": "desktop",
+      "n": 5,
+      "scores": {
+        "performance": {
+          "median": 94.0,
+          "minimum": 91.0,
+          "maximum": 95.0,
+          "stdev": 1.51657508881031
+        },
+        "accessibility": {
+          "median": 100.0,
+          "minimum": 100.0,
+          "maximum": 100.0,
+          "stdev": 0.0
+        },
+        "best-practices": {
+          "median": 77.0,
+          "minimum": 77.0,
+          "maximum": 77.0,
+          "stdev": 0.0
+        },
+        "seo": {
+          "median": 92.0,
+          "minimum": 92.0,
+          "maximum": 92.0,
+          "stdev": 0.0
+        }
+      },
+      "metrics": {
+        "lcp": 1084.9885,
+        "fcp": 498.146,
+        "cls": 0.07506457424006947,
+        "tbt": 141.5,
+        "speed_index": 1148.4149083362536
+      },
+      "variability": null,
+      "profile": {
+        "source": "lighthouse_local",
+        "url": "https://rhino-performance.com/productos/botas-presoterapia-inalambricas-pro-air/",
+        "final_url": "https://rhino-performance.com/productos/botas-presoterapia-inalambricas-pro-air/",
+        "device": "desktop",
+        "categories": [
+          "performance",
+          "accessibility",
+          "best-practices",
+          "seo"
+        ],
+        "locale": "es",
+        "lighthouse_version": "13.6.0",
+        "chrome_version": "155.0.8059.84",
+        "screen": {
+          "mobile": false,
+          "width": 1350,
+          "height": 940,
+          "deviceScaleFactor": 1,
+          "disabled": false
+        },
+        "throttling_method": "simulate",
+        "throttling": {
+          "rttMs": 40,
+          "throughputKbps": 10240,
+          "requestLatencyMs": 0,
+          "downloadThroughputKbps": 0,
+          "uploadThroughputKbps": 0,
+          "cpuSlowdownMultiplier": 1
+        },
+        "cache": false,
+        "network_policy": "guarded-read-only"
+      },
+      "statistics": {
+        "lcp": {
+          "median": 1084.9885,
+          "min": 934.0605000000002,
+          "max": 1112.5139999999997,
+          "available_samples": 5
+        },
+        "fcp": {
+          "median": 498.146,
+          "min": 412.444,
+          "max": 516.123,
+          "available_samples": 5
+        },
+        "cls": {
+          "median": 0.07506457424006947,
+          "min": 0.05062340622537432,
+          "max": 0.09893357305986049,
+          "available_samples": 5
+        },
+        "tbt": {
+          "median": 141.5,
+          "min": 124.99999999999977,
+          "max": 143.5,
+          "available_samples": 5
+        },
+        "speed_index": {
+          "median": 1148.4149083362536,
+          "min": 1144.9447997135317,
+          "max": 1743.1331297119307,
+          "available_samples": 5
+        }
+      },
+      "samples": [
+        {
+          "measured_at": "2026-11-11T20:45:39.257Z",
+          "metrics": {
+            "lcp": 1112.5139999999997,
+            "fcp": 516.123,
+            "cls": 0.05433403911471558,
+            "tbt": 141.99999999999977,
+            "speed_index": 1148.4149083362536
+          },
+          "scores": {
+            "performance": 0.94,
+            "accessibility": 1.0,
+            "best-practices": 0.77,
+            "seo": 0.92
+          },
+          "warnings": [],
+          "environment": {
+            "networkUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+            "hostUserAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36",
+            "benchmarkIndex": 1747,
+            "credits": {
+              "axe-core": "4.14.0"
+            },
+            "actualBrowserVersion": "Chrome/155.0.8059.84"
+          }
+        },
+        {
+          "measured_at": "2026-11-11T20:46:05.123Z",
+          "metrics": {
+            "lcp": 1106.8424999999997,
+            "fcp": 507.674,
+            "cls": 0.07506457424006947,
+            "tbt": 141.5,
+            "speed_index": 1743.1331297119307
+          },
+          "scores": {
+            "performance": 0.91,
+            "accessibility": 1.0,
+            "best-practices": 0.77,
+            "seo": 0.92
+          },
+          "warnings": [],
+          "environment": {
+            "networkUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+            "hostUserAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36",
+            "benchmarkIndex": 2182,
+            "credits": {
+              "axe-core": "4.14.0"
+            },
+            "actualBrowserVersion": "Chrome/155.0.8059.84"
+          }
+        },
+        {
+          "measured_at": "2026-11-11T20:46:36.727Z",
+          "metrics": {
+            "lcp": 934.0605000000002,
+            "fcp": 412.444,
+            "cls": 0.09885092778653358,
+            "tbt": 124.99999999999977,
+            "speed_index": 1317.9228667914297
+          },
+          "scores": {
+            "performance": 0.94,
+            "accessibility": 1.0,
+            "best-practices": 0.77,
+            "seo": 0.92
+          },
+          "warnings": [],
+          "environment": {
+            "networkUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+            "hostUserAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36",
+            "benchmarkIndex": 1959,
+            "credits": {
+              "axe-core": "4.14.0"
+            },
+            "actualBrowserVersion": "Chrome/155.0.8059.84"
+          }
+        },
+        {
+          "measured_at": "2026-11-11T20:47:02.425Z",
+          "metrics": {
+            "lcp": 967.7635,
+            "fcp": 498.146,
+            "cls": 0.05062340622537432,
+            "tbt": 143.5,
+            "speed_index": 1144.9447997135317
+          },
+          "scores": {
+            "performance": 0.95,
+            "accessibility": 1.0,
+            "best-practices": 0.77,
+            "seo": 0.92
+          },
+          "warnings": [],
+          "environment": {
+            "networkUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+            "hostUserAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36",
+            "benchmarkIndex": 1976,
+            "credits": {
+              "axe-core": "4.14.0"
+            },
+            "actualBrowserVersion": "Chrome/155.0.8059.84"
+          }
+        },
+        {
+          "measured_at": "2026-11-11T20:47:28.350Z",
+          "metrics": {
+            "lcp": 1084.9885,
+            "fcp": 461.422,
+            "cls": 0.09893357305986049,
+            "tbt": 137.5,
+            "speed_index": 1147.788286673091
+          },
+          "scores": {
+            "performance": 0.93,
+            "accessibility": 1.0,
+            "best-practices": 0.77,
+            "seo": 0.92
+          },
+          "warnings": [],
+          "environment": {
+            "networkUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+            "hostUserAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36",
+            "benchmarkIndex": 2002,
+            "credits": {
+              "axe-core": "4.14.0"
+            },
+            "actualBrowserVersion": "Chrome/155.0.8059.84"
+          }
+        }
+      ],
+      "scope": "published baseline; NOT an unpublished patch result"
+    },
+    {
+      "page": "blog",
+      "url": "https://rhino-performance.com/blog/",
+      "device": "mobile",
+      "n": 1,
+      "scores": {
+        "performance": {
+          "median": 47.0,
+          "minimum": 47.0,
+          "maximum": 47.0,
+          "stdev": null
+        },
+        "accessibility": {
+          "median": 93.0,
+          "minimum": 93.0,
+          "maximum": 93.0,
+          "stdev": null
+        },
+        "best-practices": {
+          "median": 77.0,
+          "minimum": 77.0,
+          "maximum": 77.0,
+          "stdev": null
+        },
+        "seo": {
+          "median": 100.0,
+          "minimum": 100.0,
+          "maximum": 100.0,
+          "stdev": null
+        }
+      },
+      "metrics": {
+        "lcp": 6561.566500000001,
+        "fcp": 1711.989,
+        "cls": 0.0,
+        "tbt": 1491.0,
+        "speed_index": 4770.6784556255
+      },
+      "variability": null,
+      "profile": {
+        "source": "lighthouse_local",
+        "url": "https://rhino-performance.com/blog/",
+        "final_url": "https://rhino-performance.com/blog/",
+        "device": "mobile",
+        "categories": [
+          "performance",
+          "accessibility",
+          "best-practices",
+          "seo"
+        ],
+        "locale": "es",
+        "lighthouse_version": "13.6.0",
+        "chrome_version": "155.0.8059.84",
+        "screen": {
+          "mobile": true,
+          "width": 412,
+          "height": 823,
+          "deviceScaleFactor": 1.75,
+          "disabled": false
+        },
+        "throttling_method": "simulate",
+        "throttling": {
+          "rttMs": 150,
+          "throughputKbps": 1638.4,
+          "requestLatencyMs": 562.5,
+          "downloadThroughputKbps": 1474.56,
+          "uploadThroughputKbps": 675,
+          "cpuSlowdownMultiplier": 4
+        },
+        "cache": false,
+        "network_policy": "guarded-read-only"
+      },
+      "statistics": {
+        "lcp": {
+          "median": 6561.566500000001,
+          "min": 6561.566500000001,
+          "max": 6561.566500000001,
+          "available_samples": 1
+        },
+        "fcp": {
+          "median": 1711.989,
+          "min": 1711.989,
+          "max": 1711.989,
+          "available_samples": 1
+        },
+        "cls": {
+          "median": 0.0,
+          "min": 0.0,
+          "max": 0.0,
+          "available_samples": 1
+        },
+        "tbt": {
+          "median": 1491.0,
+          "min": 1491.0,
+          "max": 1491.0,
+          "available_samples": 1
+        },
+        "speed_index": {
+          "median": 4770.6784556255,
+          "min": 4770.6784556255,
+          "max": 4770.6784556255,
+          "available_samples": 1
+        }
+      },
+      "samples": [
+        {
+          "measured_at": "2026-11-11T20:47:56.737Z",
+          "metrics": {
+            "lcp": 6561.566500000001,
+            "fcp": 1711.989,
+            "cls": 0.0,
+            "tbt": 1491.0,
+            "speed_index": 4770.6784556255
+          },
+          "scores": {
+            "performance": 0.47,
+            "accessibility": 0.93,
+            "best-practices": 0.77,
+            "seo": 1.0
+          },
+          "warnings": [],
+          "environment": {
+            "networkUserAgent": "Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Mobile Safari/537.36",
+            "hostUserAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36",
+            "benchmarkIndex": 1966.5,
+            "credits": {
+              "axe-core": "4.14.0"
+            },
+            "actualBrowserVersion": "Chrome/155.0.8059.84"
+          }
+        }
+      ],
+      "scope": "published baseline; NOT an unpublished patch result"
+    },
+    {
+      "page": "blog",
+      "url": "https://rhino-performance.com/blog/",
+      "device": "desktop",
+      "n": 1,
+      "scores": {
+        "performance": {
+          "median": 84.0,
+          "minimum": 84.0,
+          "maximum": 84.0,
+          "stdev": null
+        },
+        "accessibility": {
+          "median": 93.0,
+          "minimum": 93.0,
+          "maximum": 93.0,
+          "stdev": null
+        },
+        "best-practices": {
+          "median": 77.0,
+          "minimum": 77.0,
+          "maximum": 77.0,
+          "stdev": null
+        },
+        "seo": {
+          "median": 100.0,
+          "minimum": 100.0,
+          "maximum": 100.0,
+          "stdev": null
+        }
+      },
+      "metrics": {
+        "lcp": 2211.3579999999993,
+        "fcp": 978.9975,
+        "cls": 0.04162631752911304,
+        "tbt": 90.0,
+        "speed_index": 1882.091023593341
+      },
+      "variability": null,
+      "profile": {
+        "source": "lighthouse_local",
+        "url": "https://rhino-performance.com/blog/",
+        "final_url": "https://rhino-performance.com/blog/",
+        "device": "desktop",
+        "categories": [
+          "performance",
+          "accessibility",
+          "best-practices",
+          "seo"
+        ],
+        "locale": "es",
+        "lighthouse_version": "13.6.0",
+        "chrome_version": "155.0.8059.84",
+        "screen": {
+          "mobile": false,
+          "width": 1350,
+          "height": 940,
+          "deviceScaleFactor": 1,
+          "disabled": false
+        },
+        "throttling_method": "simulate",
+        "throttling": {
+          "rttMs": 40,
+          "throughputKbps": 10240,
+          "requestLatencyMs": 0,
+          "downloadThroughputKbps": 0,
+          "uploadThroughputKbps": 0,
+          "cpuSlowdownMultiplier": 1
+        },
+        "cache": false,
+        "network_policy": "guarded-read-only"
+      },
+      "statistics": {
+        "lcp": {
+          "median": 2211.3579999999993,
+          "min": 2211.3579999999993,
+          "max": 2211.3579999999993,
+          "available_samples": 1
+        },
+        "fcp": {
+          "median": 978.9975,
+          "min": 978.9975,
+          "max": 978.9975,
+          "available_samples": 1
+        },
+        "cls": {
+          "median": 0.04162631752911304,
+          "min": 0.04162631752911304,
+          "max": 0.04162631752911304,
+          "available_samples": 1
+        },
+        "tbt": {
+          "median": 90.0,
+          "min": 90.0,
+          "max": 90.0,
+          "available_samples": 1
+        },
+        "speed_index": {
+          "median": 1882.091023593341,
+          "min": 1882.091023593341,
+          "max": 1882.091023593341,
+          "available_samples": 1
+        }
+      },
+      "samples": [
+        {
+          "measured_at": "2026-11-11T20:48:49.824Z",
+          "metrics": {
+            "lcp": 2211.3579999999993,
+            "fcp": 978.9975,
+            "cls": 0.04162631752911304,
+            "tbt": 90.0,
+            "speed_index": 1882.091023593341
+          },
+          "scores": {
+            "performance": 0.84,
+            "accessibility": 0.93,
+            "best-practices": 0.77,
+            "seo": 1.0
+          },
+          "warnings": [],
+          "environment": {
+            "networkUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+            "hostUserAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36",
+            "benchmarkIndex": 2230.5,
+            "credits": {
+              "axe-core": "4.14.0"
+            },
+            "actualBrowserVersion": "Chrome/155.0.8059.84"
+          }
+        }
+      ],
+      "scope": "published baseline; NOT an unpublished patch result"
+    }
+  ],
+  "google_sources": {
+    "results": [
+      {
+        "status": "credentials_unavailable",
+        "network_attempts": 0,
+        "project": "rhino-performance",
+        "source": "pagespeed",
+        "request": {
+          "source": "pagespeed",
+          "url": "https://rhino-performance.com/",
+          "origin": "https://rhino-performance.com",
+          "device": "mobile",
+          "categories": [
+            "accessibility",
+            "best-practices",
+            "performance",
+            "seo"
+          ],
+          "locale": "es",
+          "scope": "url",
+          "form_factor": "PHONE",
+          "period_count": 25,
+          "metrics": [
+            "largest_contentful_paint",
+            "interaction_to_next_paint",
+            "cumulative_layout_shift",
+            "first_contentful_paint"
+          ],
+          "contract": "2026-11-10-v1"
+        },
+        "retrieved_at": "2026-11-11T20:38:02.708571+00:00",
+        "cache_hit": false,
+        "untrusted_external_data": true
+      },
+      {
+        "status": "credentials_unavailable",
+        "network_attempts": 0,
+        "project": "rhino-performance",
+        "source": "crux",
+        "request": {
+          "source": "crux",
+          "url": "https://rhino-performance.com/",
+          "origin": "https://rhino-performance.com",
+          "device": "mobile",
+          "categories": [
+            "accessibility",
+            "best-practices",
+            "performance",
+            "seo"
+          ],
+          "locale": "es",
+          "scope": "url",
+          "form_factor": "PHONE",
+          "period_count": 25,
+          "metrics": [
+            "largest_contentful_paint",
+            "interaction_to_next_paint",
+            "cumulative_layout_shift",
+            "first_contentful_paint"
+          ],
+          "contract": "2026-11-10-v1"
+        },
+        "retrieved_at": "2026-11-11T20:38:02.711593+00:00",
+        "cache_hit": false,
+        "untrusted_external_data": true
+      },
+      {
+        "status": "credentials_unavailable",
+        "network_attempts": 0,
+        "project": "rhino-performance",
+        "source": "crux",
+        "request": {
+          "source": "crux",
+          "url": "https://rhino-performance.com/",
+          "origin": "https://rhino-performance.com",
+          "device": "mobile",
+          "categories": [
+            "accessibility",
+            "best-practices",
+            "performance",
+            "seo"
+          ],
+          "locale": "es",
+          "scope": "origin",
+          "form_factor": "PHONE",
+          "period_count": 25,
+          "metrics": [
+            "largest_contentful_paint",
+            "interaction_to_next_paint",
+            "cumulative_layout_shift",
+            "first_contentful_paint"
+          ],
+          "contract": "2026-11-10-v1"
+        },
+        "retrieved_at": "2026-11-11T20:38:02.712331+00:00",
+        "cache_hit": false,
+        "untrusted_external_data": true
+      },
+      {
+        "status": "credentials_unavailable",
+        "network_attempts": 0,
+        "project": "rhino-performance",
+        "source": "pagespeed",
+        "request": {
+          "source": "pagespeed",
+          "url": "https://rhino-performance.com/",
+          "origin": "https://rhino-performance.com",
+          "device": "desktop",
+          "categories": [
+            "accessibility",
+            "best-practices",
+            "performance",
+            "seo"
+          ],
+          "locale": "es",
+          "scope": "url",
+          "form_factor": "DESKTOP",
+          "period_count": 25,
+          "metrics": [
+            "largest_contentful_paint",
+            "interaction_to_next_paint",
+            "cumulative_layout_shift",
+            "first_contentful_paint"
+          ],
+          "contract": "2026-11-10-v1"
+        },
+        "retrieved_at": "2026-11-11T20:38:02.723519+00:00",
+        "cache_hit": false,
+        "untrusted_external_data": true
+      },
+      {
+        "status": "credentials_unavailable",
+        "network_attempts": 0,
+        "project": "rhino-performance",
+        "source": "crux",
+        "request": {
+          "source": "crux",
+          "url": "https://rhino-performance.com/",
+          "origin": "https://rhino-performance.com",
+          "device": "desktop",
+          "categories": [
+            "accessibility",
+            "best-practices",
+            "performance",
+            "seo"
+          ],
+          "locale": "es",
+          "scope": "url",
+          "form_factor": "DESKTOP",
+          "period_count": 25,
+          "metrics": [
+            "largest_contentful_paint",
+            "interaction_to_next_paint",
+            "cumulative_layout_shift",
+            "first_contentful_paint"
+          ],
+          "contract": "2026-11-10-v1"
+        },
+        "retrieved_at": "2026-11-11T20:38:02.724805+00:00",
+        "cache_hit": false,
+        "untrusted_external_data": true
+      },
+      {
+        "status": "credentials_unavailable",
+        "network_attempts": 0,
+        "project": "rhino-performance",
+        "source": "crux",
+        "request": {
+          "source": "crux",
+          "url": "https://rhino-performance.com/",
+          "origin": "https://rhino-performance.com",
+          "device": "desktop",
+          "categories": [
+            "accessibility",
+            "best-practices",
+            "performance",
+            "seo"
+          ],
+          "locale": "es",
+          "scope": "origin",
+          "form_factor": "DESKTOP",
+          "period_count": 25,
+          "metrics": [
+            "largest_contentful_paint",
+            "interaction_to_next_paint",
+            "cumulative_layout_shift",
+            "first_contentful_paint"
+          ],
+          "contract": "2026-11-10-v1"
+        },
+        "retrieved_at": "2026-11-11T20:38:02.725429+00:00",
+        "cache_hit": false,
+        "untrusted_external_data": true
+      }
+    ],
+    "network_attempts": 0,
+    "current_keys_available": false
+  },
+  "production_operations": false,
+  "baseline_only": true,
+  "api_queries_made": 0,
+  "field_objectives": {
+    "lcp_p75_ms": 2500,
+    "inp_p75_ms": 200,
+    "cls_p75": 0.1
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "kind": "seo-v4-v3-isolated-review-candidate",
+  "patch": "reports/seo/v4-review-corrections-v3.patch",
+  "patch_sha256": "384deeb0673e607712f734130a0895a6fb3129d6c61564ffd93c219378c9eb19",
+  "parent_patch_sha256": "6e506fdbd159ef15e45de35ac7d831c71b4ee723e4f576f6af8d65550905b6fd",
+  "source_hashes": {
+    "tools/ipanema/seo/robots.py": "7a83bdac275ac8783b7b85841f14d80da0157b9044b1556989a226c1000c8f2b",
+    "tools/ipanema/seo/indexability.py": "c379c404241180894d7a0b25f91f357a56173a059f461532ec1f78fb7650b0e8",
+    "tools/ipanema/seo/page_audit.py": "e60c8b928d8e2fd62e2034a247d407f2e52bd62cddcad5b398713a561c5d140b",
+    "tools/ipanema/seo/crawl_policy.py": "0f62445b9e0fb07bce6c55c59f60b107b52a460b343ea073bb0bee5e8a6009ff",
+    "tools/ipanema/seo/crawler.py": "0cebeb3685255ac5104ce676ade56fdb071d32b00a28f8a3829a1000f2f73f4e"
+  },
+  "candidate_hashes": {
+    "tests/unit/test_seo_review_additional_v4.py": "cd894c87246c786521e37dc6c21132192ec7a03749aa6432d952f1a6829153a1",
+    "tools/ipanema/seo/crawl_policy.py": "7dbd88d522d4000a8903a6c6cf2fbff3034d4bba386719582e7f0d29bcfbcf78",
+    "tools/ipanema/seo/crawler.py": "c431ddf2c191cb209d4127f6961eb8da78116b225917b101b18b0cef926b27b9",
+    "tools/ipanema/seo/indexability.py": "4ec692ed1cd8e9a5d953e99978e2a80fff2f4cc704a2b66f4ac34ffae2c5d4ff",
+    "tools/ipanema/seo/page_audit.py": "51889e4e2f521272bd98b130c6bc406855978389c18e3f1bfca0269187fa6785",
+    "tools/ipanema/seo/robots.py": "92a4360edace9a223f54ac098fa4f9f896eb64629247a6667743db04f7dabbf1"
+  },
+  "new_claude_objection_reproduced_on_v2": true,
+  "extended_exit": 0,
+  "seo_unit_exit": 0,
+  "seo_integration_exit": 0,
+  "local_tls_exit": 0,
+  "fresh_patch_applies_and_matches_tested_tree": true,
+  "workspace_source_unchanged": true,
+  "patch_applied_to_workspace": false,
+  "theme_modified": false,
+  "production_modified": false,
+  "external_crawl_authorized": false,
+  "storefront_network_requests": 0,
+  "independent_review": "v2: Claude changes_requested, Codex unavailable/inactivity; v3 delta pending review",
+  "human_approval": "pending"
+}

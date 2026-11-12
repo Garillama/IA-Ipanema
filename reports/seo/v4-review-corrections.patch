@@ -1,0 +1,130 @@
+--- a/tools/ipanema/seo/robots.py
++++ b/tools/ipanema/seo/robots.py
+@@ -90,7 +90,7 @@
+ 
+     def _selected(self, agent):
+         product = agent.lower().split('/')[0]
+-        ranked = [(max((len(a) for a in g['agents'] if a != '*' and a in product), default=0), g) for g in self.groups]
++        ranked = [(max((len(a) for a in g['agents'] if a != '*' and a == product), default=0), g) for g in self.groups]
+         maximum = max((n for n, _ in ranked), default=0)
+         return [g for n, g in ranked if n == maximum and (maximum or '*' in g['agents'])]
+ 
+@@ -125,3 +125,9 @@
+         if active:
+             result.append(part)
+     return ','.join(result).lower()
++
++
++def has_noindex(directives):
++    # Consume known key:value directives as a single item; preview:none is not none.
++    pattern = r"([a-z][a-z0-9_-]*)(?:\s*:\s*(?:\"[^\"]*\"|'[^']*'|[^,;\s]+))?"
++    return any(m[1] in ('none', 'noindex') for m in re.finditer(pattern, directives.lower()))
+--- a/tools/ipanema/seo/indexability.py
++++ b/tools/ipanema/seo/indexability.py
+@@ -9,7 +9,7 @@
+ from .crawl_policy import normalize
+ from .extractor import VOID
+ from .page_audit import crawlable, snapshot_delta
+-from .robots import google_directives
++from .robots import google_directives, has_noindex
+ 
+ 
+ class Content(HTMLParser):
+@@ -92,7 +92,7 @@
+     else:
+         meta = snapshot.get('meta', {})
+         directives = google_directives(meta, snapshot.get('headers', {}).get('x-robots-tag', ''))
+-        if re.search(r'\b(noindex|none)\b', directives, re.I):
++        if has_noindex(directives):
+             state = 'noindex'
+         elif len(canonical) > 1:
+             state = 'insufficient_evidence'
+--- a/tools/ipanema/seo/page_audit.py
++++ b/tools/ipanema/seo/page_audit.py
+@@ -6,7 +6,7 @@
+ import json
+ import re
+ from urllib.parse import urljoin, urlsplit, urlunsplit
+-from .robots import Robots, google_directives
++from .robots import Robots, google_directives, has_noindex
+ 
+ from ..core import now
+ from .extractor import extract
+@@ -50,7 +50,7 @@
+     findings=list(result['findings']);metadata=snap.get('meta',{})
+     canonical=snap.get('canonical',[])
+     robots=google_directives(metadata,snap.get('headers',{}).get('x-robots-tag',''))
+-    noindex=bool(re.search(r'\b(?:noindex|none)\b',robots))
++    noindex=has_noindex(robots)
+     status=snap.get('status')
+     if not snap.get('title'):findings.append(F('SEO001','D','warning','Title ausente; comprobar head-tags de plataforma.'))
+     if not metadata.get('description'):findings.append(F('SEO002','D','recommendation','Meta description ausente; usar contenido útil y específico.'))
+--- a/tools/ipanema/seo/crawl_policy.py
++++ b/tools/ipanema/seo/crawl_policy.py
+@@ -20,7 +20,7 @@
+ 
+ AGENT = 'IAIpanemaAudit/4.0'
+ PRIVATE = re.compile(r'/(?:account|accounts|customer|customers|cuenta|mi-cuenta|cart|carrito|checkout|checkouts|admin|login|logout|password|register|orders|pedidos|subscriptions|suscripciones)(?:/|$)', re.I)
+-ACTIONS = re.compile(r'(?:add.to.cart|cart/add|cart/update|cart/remove|agregar.al.carrito|comprar|add_to_cart)', re.I)
++ACTIONS = re.compile(r'/(?:add[-_.]to[-_.]cart|agregar[-_.]al[-_.]carrito|comprar)(?:/|$)', re.I)
+ ASSET = re.compile(r'\.(?:jpg|jpeg|png|webp|avif|gif|svg|ico|mp4|webm|mp3|pdf|zip|css|js|woff2?|ttf)(?:$|/)', re.I)
+ 
+ 
+--- a/tools/ipanema/seo/crawler.py
++++ b/tools/ipanema/seo/crawler.py
+@@ -103,6 +103,8 @@
+     robots_text, robots_known = None, False
+     def excluded(reason, source=None):
+         result['excluded_total'] = result.get('excluded_total', 0) + 1
++        counts = result.setdefault('excluded_by_reason', {})
++        counts[reason] = counts.get(reason, 0) + 1
+         if len(result['excluded']) < 2000:
+             result['excluded'].append({'reason': reason, 'source': source})
+     def allowed(url):
+@@ -323,7 +325,8 @@
+     complete = bool(robots_known and not fetcher.stop_reason and not result['errors'] and
+                     not any(n.get('error') or n.get('redirect_limit_or_cycle') for n in result['urls']) and
+                     not result.get('navigation_queue_remaining') and
+-                    not any(x['reason'] in ('depth_limit', 'query_variants_limit', 'discovery_budget', 'edge_budget') for x in result['excluded']))
++                    not any(result.get('excluded_by_reason', {}).get(reason, 0) for reason in ('depth_limit', 'query_variants_limit', 'discovery_budget', 'edge_budget')) and
++                    set(result['sitemap_urls']).issubset({n['url'] for n in result['urls']}))
+     result['graph'] = graph(result['urls'], result['edges'], policy.home, result['sitemap_urls'], complete=complete)
+     result['coverage_by_type'] = dict(Counter(n.get('page_type', 'unknown') for n in result['urls']))
+     result['indexability_counts'] = dict(Counter(n.get('indexability', {}).get('state', 'insufficient_evidence') for n in result['urls']))
+--- /dev/null
++++ b/tests/unit/test_seo_review_findings_v4.py
+@@ -0,0 +1,34 @@
++import copy
++import unittest
++from tests.unit.test_seo_crawler_v4 import CrawlerV4, HOME, doc
++from ipanema.seo.extractor import extract
++from ipanema.seo.indexability import classify
++from ipanema.seo.crawl_policy import Policy
++from ipanema.seo.robots import Robots
++
++class ReviewRegressions(CrawlerV4):
++    def test_preview_none_is_not_noindex(self):
++        for value in ('max-image-preview:none', 'max-image-preview: none', 'max-snippet:-1, max-image-preview:none'):
++            snapshot=extract(doc(extra='<meta name="robots" content="'+value+'">'), HOME,status=200)
++            self.assertEqual(classify(snapshot,googlebot_allowed=True,robots_known=True)['state'],'indexable_candidate')
++        for value in ('none','noindex, nofollow','max-image-preview:none, noindex'):
++            snapshot=extract(doc(extra='<meta name="robots" content="'+value+'">'),HOME,status=200)
++            self.assertEqual(classify(snapshot,googlebot_allowed=True,robots_known=True)['state'],'noindex')
++    def test_robots_product_token(self):
++        robots=Robots();robots.parse(['User-agent: bot','Disallow: /','User-agent: *','Allow: /'])
++        self.assertTrue(robots.can_fetch('Googlebot',HOME))
++        robots=Robots();robots.parse(['User-agent: GoogleBot','Disallow: /','User-agent: *','Allow: /'])
++        self.assertFalse(robots.can_fetch('Googlebot',HOME))
++    def test_late_exclusion_still_partial(self):
++        links='<a href="https://other.invalid/">External</a>'*2001+'<a href="/deep">Deep</a>'
++        xml='<urlset><url><loc>'+HOME+'</loc></url></urlset>'
++        result=self.run_crawl({HOME:{'status':200,'body':doc(links=links)},HOME+'sitemap.xml':{'status':200,'body':xml}},max_depth=0)
++        self.assertEqual(result['state'],'partial')
++    def test_unchecked_sitemap_never_complete(self):
++        xml='<urlset><url><loc>'+HOME+'unlinked</loc></url></urlset>'
++        result=self.run_crawl({HOME:{'status':200,'body':doc()},HOME+'sitemap.xml':{'status':200,'body':xml}},max_urls=1)
++        self.assertEqual(result['state'],'partial')
++    def test_content_route_containing_action_word(self):
++        self.assertEqual(Policy(HOME).check('/blog/posts/como-comprar-x'),HOME+'blog/posts/como-comprar-x')
++        for path in ('/comprar/','/cart/add','/add_to_cart','/%2561ccount'):
++            with self.assertRaises(ValueError):Policy(HOME).check(path)

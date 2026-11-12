@@ -1,0 +1,41 @@
+id,objection,test,technical_state,acceptance
+prior-O1,max-image-preview:none produce falso noindex,test_O1_preview_none_is_not_noindex; test_headers_multiple_and_scope,regresión previa conservada y comprobada en suite actual; aceptación sujeta a revisión nueva,no hereda aprobación anterior
+prior-O2,Selección de robots por subcadena en vez de product token,test_O2_robot_product_token_not_substring; test_robots_merge_exact_groups_case_and_fallback,regresión previa conservada y comprobada en suite actual; aceptación sujeta a revisión nueva,no hereda aprobación anterior
+prior-O3,Exclusiones críticas perdidas tras truncar 2000 filas,test_O3_late_exclusion_partial,regresión previa conservada y comprobada en suite actual; aceptación sujeta a revisión nueva,no hereda aprobación anterior
+prior-O4,max_urls puede ocultar URLs del sitemap sin verificar,test_O4_unchecked_sitemap_partial,regresión previa conservada y comprobada en suite actual; aceptación sujeta a revisión nueva,no hereda aprobación anterior
+prior-O5,Palabra comprar en contenido editorial tratada como acción,test_O5_editorial_action_word_allowed,regresión previa conservada y comprobada en suite actual; aceptación sujeta a revisión nueva,no hereda aprobación anterior
+prior-A1,Ciclo de redirects del sitemap descartado sin error,test_sitemap_redirect_cycle_not_complete,regresión previa conservada y comprobada en suite actual; aceptación sujeta a revisión nueva,no hereda aprobación anterior
+prior-A2,Límite de redirects del sitemap descarta destino sin marcar parcial,test_sitemap_redirect_limit_not_complete,regresión previa conservada y comprobada en suite actual; aceptación sujeta a revisión nueva,no hereda aprobación anterior
+prior-A3,Enlaces de página sitemap-only quedan sin HTTP pero complete=True,test_disconnected_sitemap_outgoing_required_unchecked,regresión previa conservada y comprobada en suite actual; aceptación sujeta a revisión nueva,no hereda aprobación anterior
+prior-A4,NAT64 global puede incorporar IPv4 privada,test_dns_transition_prefix_private_not_accepted,regresión previa conservada y comprobada en suite actual; aceptación sujeta a revisión nueva,no hereda aprobación anterior
+prior-A5,Sufijos y parámetros de ruta comerciales pasan el filtro,test_commercial_suffix_and_matrix_routes_excluded,regresión previa conservada y comprobada en suite actual; aceptación sujeta a revisión nueva,no hereda aprobación anterior
+prior-A6,Espera del scheduler agota deadline antes de iniciar request,test_deadline_rechecked_after_scheduler_delay,regresión previa conservada y comprobada en suite actual; aceptación sujeta a revisión nueva,no hereda aprobación anterior
+prior-S1,"HTTP GET, certificado/SNI y ausencia de Cookie/Authorization",tls_fixture.LocalTLS; TransportV4,regresión previa conservada y comprobada en suite actual; aceptación sujeta a revisión nueva,no hereda aprobación anterior
+prior-S2,Mismo origen HTTPS y rutas privadas tras decodificación,test_domain_schemes_and_actions_in_query; test_actions_private_multiencoded_and_ambiguous; test_redirect_to_private_external_never_requested,regresión previa conservada y comprobada en suite actual; aceptación sujeta a revisión nueva,no hereda aprobación anterior
+prior-S3,403/429/challenge y robots desconocido detienen operaciones,test_403_429_stop_from_sitemap_no_home; test_robots_unreachable_and_challenge_no_crawl,regresión previa conservada y comprobada en suite actual; aceptación sujeta a revisión nueva,no hereda aprobación anterior
+prior-S4,"Transferencia, gzip, presupuesto y DNS fijado",tests/unit/test_seo_transport_v4.py; PolicyV4.test_permissions_limits_stop_and_rate,regresión previa conservada y comprobada en suite actual; aceptación sujeta a revisión nueva,no hereda aprobación anterior
+prior-A7,"Regresión v2: acciones con sufijos admitidas (/add-to-cart-123, /comprar-ahora)",test_action_prefix_suffix_regression,regresión previa conservada y comprobada en suite actual; aceptación sujeta a revisión nueva,no hereda aprobación anterior
+prior-A8,"PRIVATE deja pasar delimitadores como checkout-step y cart,1; acción addtocart compacta",test_private_prefix_delimiters_and_action_compact,regresión previa conservada y comprobada en suite actual; aceptación sujeta a revisión nueva,no hereda aprobación anterior
+prior-A9,"Location ausente debe producir error explícito en home, sitemap y robots",test_missing_location_is_explicit_error,regresión previa conservada y comprobada en suite actual; aceptación sujeta a revisión nueva,no hereda aprobación anterior
+prior-A10,Registro de parser sin source no debe lanzar KeyError ni completar inventario,test_malformed_sitemap_parser_record_fails_closed,regresión previa conservada y comprobada en suite actual; aceptación sujeta a revisión nueva,no hereda aprobación anterior
+prior-A11,User-agent con versión en robots no debe quedar silenciosamente permitido,test_invalid_robots_agent_with_version_fails_closed,regresión previa conservada y comprobada en suite actual; aceptación sujeta a revisión nueva,no hereda aprobación anterior
+S01,Meta robots válido,test_01_valid_meta_robots,corregido en candidato; no aplicado,revisión nueva pendiente
+S02,X-Robots-Tag válido,test_02_valid_header,corregido en candidato; no aplicado,revisión nueva pendiente
+S03,Fuentes independientes robots/googlebot/meta duplicados,test_03_independent_meta_sources,corregido en candidato; no aplicado,revisión nueva pendiente
+S04,Comilla abierta en meta: unknown si no hay restricción válida,test_04_open_meta_without_valid_restriction_unknown,corregido en candidato; no aplicado,revisión nueva pendiente
+S05,Comilla abierta en cabecera: unknown si no hay restricción válida,test_05_open_header_without_valid_restriction_unknown,corregido en candidato; no aplicado,revisión nueva pendiente
+S06,Noindex válido después de fuente malformada,test_06_valid_restriction_after_malformed_source,corregido en candidato; no aplicado,revisión nueva pendiente
+S07,max-image-preview:none no es noindex,test_07_preview_none_not_restriction,corregido en candidato; no aplicado,revisión nueva pendiente
+S08,Valores con noindex no son directivas,test_08_quoted_values_not_flags,corregido en candidato; no aplicado,revisión nueva pendiente
+S09,Agente y comillas reiniciados por cabecera,test_09_header_scope_resets_for_each_field,corregido en candidato; no aplicado,revisión nueva pendiente
+S10,Prefijos de agente y nombres dentro de valores,test_10_agents_and_quoted_agent_names,corregido en candidato; no aplicado,revisión nueva pendiente
+S11,Index no neutraliza restricción,test_11_index_never_neutralizes_noindex,corregido en candidato; no aplicado,revisión nueva pendiente
+S12,Desconocidas completas vs incompletas,test_12_unknown_complete_and_incomplete,corregido en candidato; no aplicado,revisión nueva pendiente
+S13,Defecto original: meta abierto oculta header,test_original_meta_quote_cannot_mask_header_noindex,corregido en candidato; no aplicado,revisión nueva pendiente
+S14,Defecto original: header abierto oculta siguiente,test_original_repeated_header_quote_cannot_mask_next,corregido en candidato; no aplicado,revisión nueva pendiente
+S15,"Evidencia conserva fuentes, hash, errores y ordinal",test_independent_errors_and_provenance_retained,corregido en candidato; no aplicado,revisión nueva pendiente
+S16,Consumidores no usan texto unido para decisiones,test_never_uses_legacy_joined_string_for_decision; test_legacy_page_audit_gate_does_not_parse_display_substring,corregido en candidato; no aplicado,revisión nueva pendiente
+S17,Noindex monotónico ante permutación de fuentes,test_valid_restriction_is_monotonic_across_sources,corregido en candidato; no aplicado,revisión nueva pendiente
+S18,Acciones incrustadas mantienen exclusión de base,test_prior_embedded_action_objection_closed,corregido en candidato; no aplicado,revisión nueva pendiente
+R01,Política conservadora ante agente inválido en robots.txt,test_invalid_robots_agent_with_version_fails_closed,riesgo de compatibilidad conservado; no se relaja para aprobar,revisión nueva pendiente
+R02,Aprobación/revisión independiente del hash actual,nuevo consejo Claude/Codex,pendiente; no hereda aprobaciones,revisión nueva pendiente

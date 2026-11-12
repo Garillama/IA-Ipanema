@@ -37,10 +37,12 @@ class PolicyV4(unittest.TestCase):
     def test_normalization_preserves_real_parameters(self):
         self.assertEqual(normalize('/blog?page=2#x', HOME), HOME + 'blog?page=2')
         self.assertEqual(normalize(HOME + 'x?b=2&a=1'), HOME + 'x?a=1&b=2')
+        self.assertEqual(normalize(HOME + 'café'), HOME + 'caf%C3%A9')
+        with self.assertRaises(ValueError): normalize(HOME + 'bad%escape')
 
     def test_policy_private_external_actions_filters_and_secrets(self):
         policy = Policy(HOME)
-        for url in ['http://example.invalid/', 'file:///etc/passwd', 'https://other.invalid/', '/account', '/%2561ccount', '/cart/add', '/checkout/', '/admin', '/x?token=abc', '/x?sort_by=price', '/search?q=x', '/x?page=0', '/x?page=2&page=3', 'https://user:pass@example.invalid/']:
+        for url in ['http://example.invalid/', 'file:///etc/passwd', 'https://other.invalid/', '/account', '/%2561ccount', '/%2525252561ccount', '/cart/add', '/checkout/', '/admin', '/x?token=abc', '/x?sort_by=price', '/search?q=x', '/x?page=0', '/x?page=2&page=3', 'https://user:pass@example.invalid/']:
             with self.subTest(url=url), self.assertRaises((IpanemaError, ValueError)):
                 policy.check(url)
         self.assertEqual(policy.check('/blog?page=2'), HOME + 'blog?page=2')
@@ -194,3 +196,23 @@ class CrawlerV4(unittest.TestCase):
         result = self.run_crawl({HOME: {'status': 200, 'body': doc(links='<a href="/a">=1+1</a>')}})
         export(Path(self.tmp.name), result)
         self.assertIn("'=1+1", (Path(self.tmp.name) / 'edges.csv').read_text())
+
+    def test_invalid_sitemap_never_complete(self):
+        for row in [{'status': 500}, {'status': 200, 'body': '<urlset><url/></urlset>'}]:
+            with self.subTest(row=row):
+                self.clock = FakeClock()
+                result = self.run_crawl({HOME: {'status': 200, 'body': doc()}, HOME + 'sitemap.xml': row})
+                self.assertEqual(result['state'], 'partial')
+                self.assertTrue(result['errors'])
+
+    def test_sitemap_child_429_stops_before_home(self):
+        result = self.run_crawl({HOME + 'sitemap.xml': {'status': 200, 'body': '<sitemapindex><sitemap><loc>' + HOME + 'child.xml</loc></sitemap></sitemapindex>'}, HOME + 'child.xml': {'status': 429}})
+        self.assertEqual(result['state'], 'stopped')
+        self.assertNotIn(HOME, self.transport.calls)
+
+    def test_sitemap_checks_respect_discovery_and_variant_limits(self):
+        xml = '<urlset>' + ''.join('<url><loc>' + HOME + 'cat?page=' + str(i) + '</loc></url>' for i in range(1, 7)) + '</urlset>'
+        result = self.run_crawl({HOME: {'status': 200, 'body': doc()}, HOME + 'sitemap.xml': {'status': 200, 'body': xml}}, max_discovered_urls=3, max_variants_per_path=1)
+        self.assertLessEqual(len(result['sitemap_urls']), 3)
+        self.assertLessEqual(sum('/cat?' in u for u in self.transport.calls), 1)
+        self.assertEqual(result['state'], 'partial')

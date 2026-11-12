@@ -1,0 +1,762 @@
+--- /dev/null
++++ b/tests/unit/test_seo_review_additional_v4.py
+@@ -0,0 +1,161 @@
++from html import escape
++"""Casos adicionales offline: no hacen solicitudes a tiendas ni a Google."""
++import tempfile
++from pathlib import Path
++import unittest
++from unittest.mock import patch
++from tests.support import make_project
++from tests.unit import test_seo_crawler_v4 as fixtures
++from ipanema.core import Project, IpanemaError
++from ipanema.seo.crawl_policy import Limits, Policy, public_addresses, Fetcher
++from ipanema.seo.crawler import crawl
++from ipanema.seo.extractor import extract
++from ipanema.seo.indexability import classify
++from ipanema.seo.robots import Robots, google_directives
++HOME = fixtures.HOME
++
++class PatchReview(unittest.TestCase):
++    def setUp(self):
++        self.tmp = tempfile.TemporaryDirectory()
++        self.project = Project(make_project(Path(self.tmp.name), theme=False))
++        self.clock = fixtures.FakeClock()
++    def tearDown(self): self.tmp.cleanup()
++    def run_crawl(self, pages=None, robots='User-agent: *\nAllow: /', **limits):
++        pages = {HOME+'robots.txt': {'status':200,'body':robots},
++                 HOME+'sitemap.xml': {'status':200,'body':'<urlset><url><loc>'+HOME+'</loc></url></urlset>'},
++                 HOME:{'status':200,'body':fixtures.doc()}, **(pages or {})}
++        self.transport=fixtures.FixtureTransport(pages)
++        return crawl(self.project,limits=Limits(**limits),transport=self.transport,clock=self.clock,sleep=self.clock.sleep)
++    def state(self, meta='', header=None, name='robots'):
++        snap=extract(fixtures.doc(extra=f'<meta name="{name}" content="{escape(meta,quote=True)}">'),HOME,status=200,headers={'x-robots-tag':header or ''})
++        return classify(snap,googlebot_allowed=True,robots_known=True)['state']
++    def test_O1_preview_none_is_not_noindex(self):
++        for value in ('max-image-preview:none','max-image-preview: none','max-image-preview: "none"','max-snippet:-1, max-image-preview:none'):
++            with self.subTest(value=value): self.assertEqual(self.state(value),'indexable_candidate')
++    def test_O2_robot_product_token_not_substring(self):
++        r=Robots();r.parse(['User-agent: bot','Disallow: /','User-agent: *','Allow: /'])
++        self.assertTrue(r.can_fetch('Googlebot',HOME))
++    def test_O3_late_exclusion_partial(self):
++        links='<a href="https://other.invalid/">External</a>'*2001+'<a href="/deep">Deep</a>'
++        self.assertEqual(self.run_crawl({HOME:{'status':200,'body':fixtures.doc(links=links)}},max_depth=0)['state'],'partial')
++    def test_O4_unchecked_sitemap_partial(self):
++        xml='<urlset><url><loc>'+HOME+'unlinked</loc></url></urlset>'
++        self.assertEqual(self.run_crawl({HOME+'sitemap.xml':{'status':200,'body':xml}},max_urls=1)['state'],'partial')
++    def test_O5_editorial_action_word_allowed(self):
++        self.assertEqual(Policy(HOME).check('/blog/posts/como-comprar-x'),HOME+'blog/posts/como-comprar-x')
++    def test_meta_and_specific_agents(self):
++        for name,value,expected in [('robots','none','noindex'),('robots','NOINDEX, INDEX','noindex'),('googlebot','none','noindex'),('otherbot','noindex','indexable_candidate'),('robots','nofollow','indexable_candidate')]:
++            with self.subTest(name=name,value=value): self.assertEqual(self.state(value,name=name),expected)
++    def test_headers_multiple_and_scope(self):
++        for header,expected in [(['otherbot: noindex','index'],'indexable_candidate'),(['otherbot: noindex','noindex'],'noindex'),('otherbot: none, nofollow, googlebot: index','indexable_candidate'),('googlebot: none, otherbot: index','noindex'),(['googlebot: noindex','index'],'noindex'),('max-image-preview: none, max-snippet: -1','indexable_candidate'),('googlebot: max-image-preview:none, noindex','noindex')]:
++            with self.subTest(header=header): self.assertEqual(self.state(header=header),expected)
++    def test_header_preview_does_not_mask_meta_noindex(self):
++        self.assertEqual(self.state('noindex',header='max-image-preview:none'),'noindex')
++    def test_robots_merge_exact_groups_case_and_fallback(self):
++        r=Robots();r.parse(['User-agent: GoOgLeBoT','Disallow: /one','User-agent: Googlebot','Disallow: /two','User-agent: *','Disallow: /'])
++        for path in ('one','two'): self.assertFalse(r.can_fetch('Googlebot',HOME+path))
++        self.assertTrue(r.can_fetch('Googlebot',HOME+'other'))
++        self.assertFalse(r.can_fetch('IAIpanemaAudit/4.0',HOME))
++    def test_audit_agent_separate_from_google(self):
++        r=Robots();r.parse(['User-agent: audit','Disallow: /','User-agent: IAIpanemaAudit','Disallow: /private','User-agent: Googlebot','Disallow: /google','User-agent: *','Allow: /'])
++        self.assertTrue(r.can_fetch('IAIpanemaAudit/4.0',HOME+'google'))
++        self.assertFalse(r.can_fetch('IAIpanemaAudit/4.0',HOME+'private'))
++        self.assertFalse(r.can_fetch('Googlebot',HOME+'google'))
++    def test_wildcard_anchor_percent_reserved_and_case(self):
++        r=Robots();r.parse(['User-agent: *','Disallow: /private/*$','Allow: /private/public$','Disallow: /caf%C3%A9$','Disallow: /%61bc$','Disallow: /a%2Fb$'])
++        for path in ('private/x','caf%C3%A9','café','abc','a%2Fb'): self.assertFalse(r.can_fetch('Googlebot',HOME+path))
++        for path in ('private/public','Private/x','abc/more','a/b'): self.assertTrue(r.can_fetch('Googlebot',HOME+path))
++    def test_actions_private_multiencoded_and_ambiguous(self):
++        p=Policy(HOME)
++        for path in ('/comprar/','/COMPRAR','/cart/add','/cart/update','/carrito','/checkout','/add-to-cart','/add_to_cart','/add.to.cart','/agregar.al.carrito','/%2561ccount','/%252563omprar','/%2e%2e/checkout','/%2fcheckout','/%5ccheckout','/checkout?token=private'):
++            with self.subTest(path=path),self.assertRaises((ValueError,UnicodeError)):p.check(path)
++    def test_public_unicode_and_legitimate_pagination(self):
++        p=Policy(HOME)
++        for path in ('/blog/posts/compra-segura','/compradores','/productos/café','/cat?page=2','/cat?page_part=cursor123'):
++            with self.subTest(path=path): self.assertTrue(p.check(path).startswith(HOME))
++    def test_domain_schemes_and_actions_in_query(self):
++        p=Policy(HOME)
++        for path in ('http://example.invalid/','https://other.invalid/','https://example.invalid.evil/','https://example.invalid:444/','https://user:pass@example.invalid/','//other.invalid/','/?add_to_cart=1','/?sort=price','/?page=2&page=3','/?page=0'):
++            with self.subTest(path=path),self.assertRaises(ValueError):p.check(path)
++    def test_all_sitemap_urls_verified_when_complete(self):
++        xml='<urlset>'+''.join('<url><loc>'+HOME+u+'</loc></url>' for u in ('','a','b'))+'</urlset>'
++        r=self.run_crawl({HOME+'sitemap.xml':{'status':200,'body':xml},HOME+'a':{'status':200,'body':fixtures.doc('/a')},HOME+'b':{'status':404}})
++        self.assertEqual(r['state'],'complete_for_policy')
++        self.assertTrue(all(n.get('status') is not None for n in r['urls']))
++    def test_blocked_required_sitemap_is_partial(self):
++        xml='<urlset><url><loc>'+HOME+'a</loc></url></urlset>'
++        r=self.run_crawl({HOME+'sitemap.xml':{'status':200,'body':xml}},robots='User-agent: *\nDisallow: /a')
++        self.assertEqual(r['state'],'partial');self.assertNotIn(HOME+'a',self.transport.calls)
++    def test_sitemap_redirect_cycle_not_complete(self):
++        r=self.run_crawl({HOME+'sitemap.xml':{'status':302,'headers':{'location':'/child.xml'}},HOME+'child.xml':{'status':301,'headers':{'location':'/sitemap.xml'}}})
++        self.assertNotEqual(r['state'],'complete_for_policy')
++    def test_sitemap_redirect_limit_not_complete(self):
++        r=self.run_crawl({HOME+'sitemap.xml':{'status':302,'headers':{'location':'/child.xml'}}},max_redirects=0)
++        self.assertNotEqual(r['state'],'complete_for_policy')
++    def test_required_redirect_not_fetched_partial(self):
++        r=self.run_crawl({HOME:{'status':302,'headers':{'location':'/target'}}},max_urls=1)
++        self.assertNotEqual(r['state'],'complete_for_policy');self.assertNotIn(HOME+'target',self.transport.calls)
++    def test_disconnected_sitemap_outgoing_required_unchecked(self):
++        xml='<urlset><url><loc>'+HOME+'a</loc></url></urlset>'
++        r=self.run_crawl({HOME+'sitemap.xml':{'status':200,'body':xml},HOME+'a':{'status':200,'body':fixtures.doc('/a','<a href="/b">B</a>')}})
++        # A known permitted internal target without HTTP evidence must not support completeness.
++        self.assertNotEqual(r['state'],'complete_for_policy')
++    def test_sitemap_child_budget_and_malformed_partial(self):
++        xml='<sitemapindex><sitemap><loc>'+HOME+'child.xml</loc></sitemap></sitemapindex>'
++        for pages,limits in [({HOME+'sitemap.xml':{'status':200,'body':xml}},{'max_sitemaps':1}),({HOME+'sitemap.xml':{'status':200,'body':'<urlset><url/></urlset>'}},{}),({HOME+'sitemap.xml':{'status':500}}, {})]:
++            with self.subTest(pages=pages):self.assertNotEqual(self.run_crawl(pages,**limits)['state'],'complete_for_policy')
++    def test_403_429_stop_from_sitemap_no_home(self):
++        for code in (403,429):
++            with self.subTest(code=code):
++                self.clock=fixtures.FakeClock();r=self.run_crawl({HOME+'sitemap.xml':{'status':code}})
++                self.assertEqual(r['state'],'stopped');self.assertNotIn(HOME,self.transport.calls)
++    def test_redirect_to_private_external_never_requested(self):
++        for target in ('/checkout','/%2561ccount','https://other.invalid/'):
++            with self.subTest(target=target):
++                self.clock=fixtures.FakeClock();self.run_crawl({HOME:{'status':302,'headers':{'location':target}}})
++                self.assertEqual(len(self.transport.calls),3)
++    def test_robots_unreachable_and_challenge_no_crawl(self):
++        for row in ({'status':500},{'status':200,'body':'<title>CAPTCHA</title>'}):
++            with self.subTest(row=row):
++                self.clock=fixtures.FakeClock();r=self.run_crawl({HOME+'robots.txt':row})
++                self.assertNotIn(HOME,self.transport.calls);self.assertNotEqual(r['state'],'complete_for_policy')
++    def test_public_dns_rejects_mapped_private(self):
++        for address in ('127.0.0.1','::1','::ffff:127.0.0.1','169.254.169.254'):
++            with patch('socket.getaddrinfo',return_value=[(2,1,6,'',(address,443))]),self.assertRaises(ValueError):public_addresses('example.invalid')
++    def test_dns_transition_prefix_private_not_accepted(self):
++        # No NAT64 network is contacted. Test only resolver output policy.
++        for address in ('64:ff9b::7f00:1','64:ff9b::a00:1'):
++            with patch('socket.getaddrinfo',return_value=[(10,1,6,'',(address,443))]),self.assertRaises(ValueError):public_addresses('example.invalid')
++    def test_commercial_suffix_and_matrix_routes_excluded(self):
++        for path in ('/cart.json','/checkout;step=1','/cart%3Bfoo/add','/comprar.json'):
++            with self.subTest(path=path),self.assertRaises(ValueError):Policy(HOME).check(path)
++    def test_deadline_rechecked_after_scheduler_delay(self):
++        clock=fixtures.FakeClock();calls=[]
++        def delayed_sleep(seconds): clock.value += seconds+2
++        f=Fetcher(Policy(HOME,Limits(max_seconds=1)),transport=lambda *a,**k: calls.append(a) or {'status':200},clock=clock,sleep=delayed_sleep)
++        with self.assertRaises(ValueError):f.get(HOME)
++        self.assertEqual(calls,[])
++    def test_missing_redirect_location_not_complete(self):
++        r=self.run_crawl({HOME:{'status':302,'headers':{}}})
++        self.assertNotEqual(r['state'],'complete_for_policy')
++    def test_action_prefix_suffix_regression(self):
++        for path in ('/add-to-cart-123','/add_to_cart123','/comprar-ahora','/%2561dd-to-cart-123','/comprar123','/ADD.TO.CART123'):
++            with self.subTest(path=path),self.assertRaises(ValueError):Policy(HOME).check(path)
++        self.assertEqual(Policy(HOME).check('/blog/posts/como-comprar-x'),HOME+'blog/posts/como-comprar-x')
++    def test_private_prefix_delimiters_and_action_compact(self):
++        for path in ('/checkout-step','/cart,1','/checkout123','/addtocart','/%2563art,1'):
++            with self.subTest(path=path),self.assertRaises(ValueError):Policy(HOME).check(path)
++        self.assertEqual(Policy(HOME).check('/cartografia'),HOME+'cartografia')
++    def test_missing_location_is_explicit_error(self):
++        for url in (HOME,HOME+'sitemap.xml',HOME+'robots.txt'):
++            with self.subTest(url=url):
++                self.clock=fixtures.FakeClock();r=self.run_crawl({url:{'status':302,'headers':{}}})
++                reasons=[e.get('reason','') for e in r['errors']]+[n.get('error','') for n in r['urls']]
++                self.assertTrue(any('Location' in e for e in reasons));self.assertNotEqual(r['state'],'complete_for_policy')
++    def test_malformed_sitemap_parser_record_fails_closed(self):
++        record={'kind':'urlset','entries':[],'errors':[],'duplicates':[]}
++        with patch('ipanema.seo.crawler.parse_sitemap',return_value=record):
++            r=self.run_crawl();self.assertEqual(r['state'],'partial')
++    def test_invalid_robots_agent_with_version_fails_closed(self):
++        r=Robots();r.parse(['User-agent: Googlebot/2.1','Disallow: /x'])
++        self.assertTrue(r.errors);self.assertFalse(r.can_fetch('Googlebot',HOME+'x'))
+--- /dev/null
++++ b/tests/unit/test_seo_robots_sources_v4.py
+@@ -0,0 +1,118 @@
++"""Source-boundary regressions: purely local, no storefront or Google requests."""
++from html import escape
++import hashlib
++from pathlib import Path
++import tempfile
++import unittest
++from tests.support import make_project
++from tests.unit import test_seo_crawler_v4 as fixtures
++from ipanema.core import Project
++from ipanema.seo import robots
++from ipanema.seo.extractor import extract
++from ipanema.seo.indexability import classify
++from ipanema.seo.page_audit import audit_snapshot
++from ipanema.seo.regression import compare
++HOME=fixtures.HOME
++
++class SourceBoundaries(unittest.TestCase):
++    def snapshot(self, meta=None, headers=''):
++        tags=''.join(f'<meta name="{name}" content="{escape(value,quote=True)}">' for name,values in (meta or {}).items() for value in values)
++        html=fixtures.doc(extra=tags)
++        return extract(html,HOME,status=200,headers={'x-robots-tag':headers})
++    def state(self,meta=None,headers=''):
++        return classify(self.snapshot(meta,headers),googlebot_allowed=True,robots_known=True)['state']
++    def test_original_meta_quote_cannot_mask_header_noindex(self):
++        self.assertEqual(self.state({'robots':['foo="x']},'noindex'),'noindex')
++    def test_original_repeated_header_quote_cannot_mask_next(self):
++        self.assertEqual(self.state(headers=['foo="x','noindex']),'noindex')
++    def test_01_valid_meta_robots(self):
++        self.assertEqual(self.state({'robots':['noindex']}),'noindex')
++    def test_02_valid_header(self):
++        self.assertEqual(self.state(headers='none'),'noindex')
++    def test_03_independent_meta_sources(self):
++        for meta in ({'robots':['foo="x','noindex']},{'robots':['foo="x'],'googlebot':['noindex']},{'robots':['noindex'],'googlebot':['foo="x']}):
++            with self.subTest(meta=meta):self.assertEqual(self.state(meta),'noindex')
++    def test_04_open_meta_without_valid_restriction_unknown(self):
++        self.assertEqual(self.state({'robots':['foo="x']}),'insufficient_evidence')
++    def test_05_open_header_without_valid_restriction_unknown(self):
++        self.assertEqual(self.state(headers='foo="x'),'insufficient_evidence')
++    def test_06_valid_restriction_after_malformed_source(self):
++        for headers in (['foo="x','none'],['foo="x','index','noindex'],['otherbot: foo="x','noindex']):
++            with self.subTest(headers=headers):self.assertEqual(self.state(headers=headers),'noindex')
++    def test_07_preview_none_not_restriction(self):
++        self.assertEqual(self.state({'robots':['max-image-preview:none']}),'indexable_candidate')
++    def test_08_quoted_values_not_flags(self):
++        for value in ('foo="noindex"','foo="none"','foo=noindex','foo: noindex','foo="googlebot: noindex"'):
++            with self.subTest(value=value):self.assertEqual(self.state({'robots':[value]}),'indexable_candidate')
++    def test_09_header_scope_resets_for_each_field(self):
++        self.assertEqual(self.state(headers=['otherbot: noindex','index']),'indexable_candidate')
++        self.assertEqual(self.state(headers=['otherbot: index','noindex']),'noindex')
++    def test_10_agents_and_quoted_agent_names(self):
++        self.assertEqual(self.state(headers='otherbot: noindex'),'indexable_candidate')
++        self.assertEqual(self.state(headers='GoogleBot: none'),'noindex')
++        self.assertEqual(self.state(headers='otherbot: foo="googlebot: noindex"'),'indexable_candidate')
++        self.assertEqual(self.state(headers='foo="otherbot: none", noindex'),'noindex')
++    def test_11_index_never_neutralizes_noindex(self):
++        for meta,headers in [({'robots':['noindex']},'index'),({'robots':['index']},'noindex'),({'googlebot':['index'],'robots':['none']},'index')]:
++            with self.subTest(meta=meta,headers=headers):self.assertEqual(self.state(meta,headers),'noindex')
++    def test_12_unknown_complete_and_incomplete(self):
++        self.assertEqual(self.state({'robots':['unknownrule, foo="noindex"']}),'indexable_candidate')
++        for value in ('foo=','max-image-preview:','noindex=foo','googlebot:'):
++            with self.subTest(value=value):
++                if value=='googlebot:':self.assertEqual(self.state(headers=value),'insufficient_evidence')
++                else:self.assertEqual(self.state({'robots':[value]}),'insufficient_evidence')
++    def test_unrelated_agent_malformed_field_not_relevant(self):
++        self.assertEqual(self.state(headers='otherbot: foo="x'),'indexable_candidate')
++    def test_malformed_robots_and_unrelated_noindex_is_unknown(self):
++        self.assertEqual(self.state({'robots':['foo="x']},'otherbot: noindex'),'insufficient_evidence')
++    def test_googlebot_news_not_text_googlebot(self):
++        self.assertEqual(self.state({'googlebot-news':['noindex']}),'indexable_candidate')
++        self.assertEqual(self.state(headers='googlebot-news: noindex'),'indexable_candidate')
++    def test_independent_errors_and_provenance_retained(self):
++        e=robots.google_directive_evidence({'robots':['foo="x'],'googlebot':['index']},['noindex','otherbot: noindex'])
++        self.assertEqual(len(e['sources']),4);self.assertTrue(e['noindex']);self.assertTrue(e['relevant_errors'])
++        self.assertEqual(e['sources'][0]['input_sha256'],hashlib.sha256(b'foo="x').hexdigest())
++        self.assertEqual(e['sources'][2]['index'],0);self.assertEqual(e['sources'][3]['index'],1)
++        self.assertEqual(e['sources'][3]['flags'],[])
++    def test_never_uses_legacy_joined_string_for_decision(self):
++        from unittest.mock import patch
++        with patch.object(robots,'google_directives',side_effect=AssertionError('legacy display must not decide')):
++            self.assertEqual(self.state({'robots':['foo="x']},'noindex'),'noindex')
++    def test_evidence_stays_on_classification(self):
++        e=classify(self.snapshot({'robots':['foo="x']},'index'),googlebot_allowed=True,robots_known=True)
++        self.assertEqual(e['state'],'insufficient_evidence');self.assertIn('malformed_robots_directives',e['reasons'])
++        self.assertTrue(e['robots_evidence']['relevant_errors'])
++    def test_noindex_before_malformed_tail_stays_restrictive(self):
++        self.assertEqual(self.state({'robots':['noindex, foo="x']}),'noindex')
++    def test_malformed_does_not_get_approved_by_nonself_canonical(self):
++        snap=self.snapshot({'robots':['foo="x']});snap['canonical']=[HOME+'other']
++        self.assertEqual(classify(snap,googlebot_allowed=True,robots_known=True)['state'],'insufficient_evidence')
++    def test_audit_consumer_marks_unknown_and_keeps_sources(self):
++        with tempfile.TemporaryDirectory() as folder:
++            project=Project(make_project(Path(folder),theme=False))
++            report=audit_snapshot(project,self.snapshot({'robots':['foo="x']},'index'),'home')
++            self.assertEqual(report['indexability_observable'],'insufficient_evidence')
++            self.assertTrue(report['robots_evidence']['relevant_errors'])
++    def test_legacy_page_audit_gate_does_not_parse_display_substring(self):
++        with tempfile.TemporaryDirectory() as folder:
++            project=Project(make_project(Path(folder),theme=False))
++            report=audit_snapshot(project,self.snapshot({'robots':['foo="noindex"']}),'home')
++            report['robots_directives']='foo="noindex"'
++            gate=compare(project,report,report)
++            checks=[c for c in gate['checks'] if c['name'].endswith(':noindex')]
++            self.assertNotEqual(checks[0]['details'],'noindex')
++
++    def test_valid_restriction_is_monotonic_across_sources(self):
++        from itertools import permutations
++        for fields in permutations(['foo="open','noindex','index']):
++            with self.subTest(fields=fields):
++                self.assertEqual(self.state(headers=list(fields)),'noindex')
++                self.assertEqual(self.state({'robots':list(fields)}),'noindex')
++                self.assertEqual(self.state({'googlebot':list(fields)}),'noindex')
++
++    def test_prior_embedded_action_objection_closed(self):
++        from ipanema.seo.crawl_policy import Policy
++        policy=Policy(HOME)
++        for path in ('/producto-add-to-cart','/prefix_add_to_cart123','/%2570roducto-add-to-cart'):
++            with self.subTest(path=path),self.assertRaises(ValueError):policy.check(path)
++        self.assertEqual(policy.check('/blog/posts/como-comprar-x'),HOME+'blog/posts/como-comprar-x')
+--- /dev/null
++++ b/tests/unit/test_seo_robots_values_v4.py
+@@ -0,0 +1,51 @@
++"""Directivas independientes frente a valores; casos offline de la observación humana."""
++from html import escape
++import unittest
++from tests.unit import test_seo_crawler_v4 as fixtures
++from ipanema.seo.robots import has_noindex, google_directives
++from ipanema.seo.extractor import extract
++from ipanema.seo.indexability import classify
++
++class DirectiveValues(unittest.TestCase):
++    def state(self, value='', header='', name='robots'):
++        html=fixtures.doc(extra=f'<meta name="{name}" content="{escape(value,quote=True)}">')
++        snapshot=extract(html,fixtures.HOME,status=200,headers={'x-robots-tag':header})
++        return classify(snapshot,googlebot_allowed=True,robots_known=True)['state']
++    def test_assignment_values_are_not_directives(self):
++        for value in ('foo="noindex"',"foo='noindex'",'foo=noindex','foo = noindex','foo = "noindex"','foo: noindex','foo: "none"','foo=none','foo="x, noindex"','foo="x; none"'):
++            with self.subTest(value=value):self.assertFalse(has_noindex(value))
++    def test_standalone_restrictive_flags(self):
++        for value in ('noindex','none','NOINDEX','index, noindex','nofollow; none','foo="noindex", noindex','foo=bar noindex','max-image-preview:none, noindex'):
++            with self.subTest(value=value):self.assertTrue(has_noindex(value))
++    def test_values_with_escaped_quotes(self):
++        for value in ('foo="abc\\\" noindex"',"foo='abc\\' none'",'foo="a, otherbot: noindex"'):
++            with self.subTest(value=value):self.assertFalse(has_noindex(value))
++    def test_quoted_standalone_words_are_not_flags(self):
++        for value in ('"noindex"',"'none'",'"x, noindex"','foo/noindex','x-noindex','noindexable'):
++            with self.subTest(value=value):self.assertFalse(has_noindex(value))
++    def test_colon_preview_and_other_values(self):
++        for value in ('max-image-preview:none','max-image-preview: none','max-image-preview: "none"','unavailable_after: Wed, 25 Jun 2030 15:00:00 GMT','foo="none", max-snippet:-1'):
++            with self.subTest(value=value):self.assertFalse(has_noindex(value))
++    def test_meta_assignment_and_flag(self):
++        self.assertEqual(self.state('foo="noindex"'),'indexable_candidate')
++        self.assertEqual(self.state('foo="none", noindex'),'noindex')
++        self.assertEqual(self.state('foo="noindex", nofollow'),'indexable_candidate')
++    def test_header_assignment_and_flag(self):
++        self.assertEqual(self.state(header='foo="noindex"'),'indexable_candidate')
++        self.assertEqual(self.state(header='foo="none", noindex'),'noindex')
++    def test_header_quoted_agent_name_does_not_change_scope(self):
++        self.assertEqual(self.state(header='foo="x, otherbot: none", noindex'),'noindex')
++        self.assertEqual(self.state(header='otherbot: foo="x, googlebot: none", noindex'),'indexable_candidate')
++    def test_repeated_headers_keep_agent_scope(self):
++        for headers,expected in [(['otherbot: noindex','foo="noindex"'],'indexable_candidate'),(['otherbot: noindex','googlebot: noindex'],'noindex'),(['googlebot: foo="noindex"','index'],'indexable_candidate'),(['otherbot: foo="googlebot: noindex"','none'],'noindex')]:
++            with self.subTest(headers=headers):self.assertEqual(self.state(header=headers),expected)
++    def test_specific_meta_robots_rules(self):
++        self.assertEqual(self.state('foo="noindex"',name='googlebot'),'indexable_candidate')
++        self.assertEqual(self.state('foo="noindex", none',name='googlebot'),'noindex')
++        self.assertEqual(self.state('noindex',name='otherbot'),'indexable_candidate')
++    def test_global_meta_restriction_cannot_be_relaxed_by_header(self):
++        self.assertEqual(self.state('noindex',header='foo="noindex", index'),'noindex')
++    def test_many_values_and_unclosed_quote_do_not_leak_flags(self):
++        self.assertFalse(has_noindex(('foo="noindex, none" '*2000)))
++        self.assertFalse(has_noindex('foo="open noindex, none'))
++        self.assertTrue(has_noindex('noindex, foo="open none'))
+--- a/tools/ipanema/seo/crawl_policy.py
++++ b/tools/ipanema/seo/crawl_policy.py
+@@ -19,8 +19,8 @@
+ from ..core import IpanemaError, safe_url
+ 
+ AGENT = 'IAIpanemaAudit/4.0'
+-PRIVATE = re.compile(r'/(?:account|accounts|customer|customers|cuenta|mi-cuenta|cart|carrito|checkout|checkouts|admin|login|logout|password|register|orders|pedidos|subscriptions|suscripciones)(?:/|$)', re.I)
+-ACTIONS = re.compile(r'(?:add.to.cart|cart/add|cart/update|cart/remove|agregar.al.carrito|comprar|add_to_cart)', re.I)
++PRIVATE = re.compile(r'/(?:account|accounts|customer|customers|cuenta|mi-cuenta|cart|carrito|checkout|checkouts|admin|login|logout|password|register|orders|pedidos|subscriptions|suscripciones)(?![a-z])', re.I)
++ACTIONS = re.compile(r'(?:add[-_.]?to[-_.]?cart|agregar[-_.]?al[-_.]?carrito)|/comprar', re.I)
+ ASSET = re.compile(r'\.(?:jpg|jpeg|png|webp|avif|gif|svg|ico|mp4|webm|mp3|pdf|zip|css|js|woff2?|ttf)(?:$|/)', re.I)
+ 
+ 
+@@ -124,12 +124,25 @@
+         return value
+ 
+ 
++def _public_address(value):
++    address = ipaddress.ip_address(value)
++    if not address.is_global or address.is_multicast:
++        return False
++    if isinstance(address, ipaddress.IPv6Address):
++        # Conservative: no translated/tunnel IPv4, even with globally classified IPv6 prefixes.
++        if address.ipv4_mapped or address.sixtofour or address.teredo:
++            return False
++        if address in ipaddress.ip_network('64:ff9b::/96') or address in ipaddress.ip_network('64:ff9b:1::/48'):
++            return False
++    return True
++
++
+ def public_addresses(host):
+     try:
+         addresses = sorted({row[4][0] for row in socket.getaddrinfo(host, 443, type=socket.SOCK_STREAM)})
+     except OSError:
+         raise IpanemaError('No se pudo resolver el host autorizado.') from None
+-    if not addresses or any(not ipaddress.ip_address(ip).is_global or ipaddress.ip_address(ip).is_multicast for ip in addresses):
++    if not addresses or any(not _public_address(ip) for ip in addresses):
+         raise IpanemaError('IP privada, reservada o no global: red bloqueada.')
+     return addresses
+ 
+@@ -233,9 +246,13 @@
+             self.stop_reason = 'time_budget'
+             raise IpanemaError('Presupuesto de tiempo agotado.')
+         self.sleep(delay)
++        remaining = limits.max_seconds - (self.clock() - self.started)
++        if remaining <= 0:
++            self.stop_reason = 'time_budget'
++            raise IpanemaError('Presupuesto agotado durante la espera; no se inicia otra solicitud.')
+         self.last, self.calls = self.clock(), self.calls + 1
+         try:
+-            row = self.transport(url, timeout=min(limits.timeout, limits.max_seconds - (self.clock() - self.started)), max_bytes=limits.max_bytes)
++            row = self.transport(url, timeout=min(limits.timeout, remaining), max_bytes=limits.max_bytes)
+             status, body = row['status'], row.get('body', b'')
+             if status in (403, 429):
+                 self.stop_reason = 'http_' + str(status)
+--- a/tools/ipanema/seo/crawler.py
++++ b/tools/ipanema/seo/crawler.py
+@@ -103,6 +103,8 @@
+     robots_text, robots_known = None, False
+     def excluded(reason, source=None):
+         result['excluded_total'] = result.get('excluded_total', 0) + 1
++        counts = result.setdefault('excluded_by_reason', {})
++        counts[reason] = counts.get(reason, 0) + 1
+         if len(result['excluded']) < 2000:
+             result['excluded'].append({'reason': reason, 'source': source})
+     def allowed(url):
+@@ -119,6 +121,8 @@
+             if fetcher.stop_reason:
+                 break
+             if response['status'] in (301, 302, 303, 307, 308):
++                if not response['headers'].get('location'):
++                    raise IpanemaError('Redirección sin Location.')
+                 robots_url = policy.check(urljoin(robots_url, response['headers'].get('location', '')), document=True)
+                 continue
+             robots_text = response['body'].decode('utf-8', 'replace') if response['status'] == 200 else '' if response['status'] in (404, 410) else None
+@@ -138,6 +142,7 @@
+         # Solo metadata; jamás usa sitemap como semillas de navegación.
+         sitemap_queue = deque((url, 0) for url in ((robot.site_maps() or [urljoin(policy.home, 'sitemap.xml')]) if robots_known else []))
+         sitemap_seen, sitemap_urls, normalized_sitemap = set(), [], set()
++        sitemap_redirect_targets = {}
+         while sitemap_queue and len(sitemap_seen) < policy.limits.max_sitemaps and not fetcher.stop_reason:
+             raw_url, depth = sitemap_queue.popleft()
+             try:
+@@ -153,8 +158,11 @@
+                     result['sitemaps'].append({'url': url, 'status': response['status']})
+                     break
+                 if response['status'] in (301, 302, 303, 307, 308):
++                    if not response['headers'].get('location'):
++                        raise IpanemaError('Redirección sin Location.')
+                     target = policy.check(urljoin(url, response['headers'].get('location', '')), document=True)
+                     result['sitemaps'].append({'url': url, 'status': response['status'], 'redirect': target})
++                    sitemap_redirect_targets[url] = target
+                     if depth < policy.limits.max_redirects:
+                         sitemap_queue.append((target, depth + 1))
+                     continue
+@@ -188,6 +196,18 @@
+                             sitemap_urls.append(target)
+             except IpanemaError as exc:
+                 result['errors'].append({'operation': 'sitemap', 'reason': str(exc)})
++        resolved_documents = {s.get('source') for s in result['sitemaps'] if s.get('source') and s.get('kind') and not s.get('errors')}
++        unresolved_documents = []
++        for document in sorted(sitemap_seen):
++            cursor, chain = document, set()
++            while cursor in sitemap_redirect_targets and cursor not in chain:
++                chain.add(cursor)
++                cursor = sitemap_redirect_targets[cursor]
++            if cursor not in resolved_documents:
++                unresolved_documents.append(document)
++        result['sitemap_documents_unverified'] = unresolved_documents
++        if unresolved_documents:
++            result['errors'].append({'operation': 'sitemap', 'reason': 'unresolved_sitemap_documents'})
+         if sitemap_queue:
+             result['errors'].append({'operation': 'sitemap', 'reason': 'sitemap_document_limit'})
+         queue, queued, seen, path_variants = deque([(policy.home, 0, 'home', 0)]), {policy.home}, set(), defaultdict(set)
+@@ -235,6 +255,8 @@
+                 node['headers'] = {k: v for k, v in response['headers'].items() if k in ('content-type', 'x-robots-tag')}
+                 node['html_sha256'] = hashlib.sha256(response['body']).hexdigest()
+                 if response['status'] in (301, 302, 303, 307, 308):
++                    if not response['headers'].get('location'):
++                        raise IpanemaError('Redirección sin Location.')
+                     target = policy.check(urljoin(url, response['headers'].get('location', '')))
+                     node['redirect'] = target
+                     if len(result['edges']) < policy.limits.max_edges:
+@@ -320,10 +342,15 @@
+         result['errors'].append({'operation': 'crawl', 'reason': str(exc)})
+     result['provenance'] = fetcher.provenance()
+     result['sitemap_urls'] = result.get('sitemap_urls', [])
+-    complete = bool(robots_known and not fetcher.stop_reason and not result['errors'] and
++    verified_urls = {n['url'] for n in result['urls'] if n.get('status') is not None and not n.get('error')}
++    required_urls = {policy.home, *result['sitemap_urls'], *(e['target'] for e in result['edges'])}
++    result['verification_coverage'] = {'required_count': len(required_urls), 'verified_count': len(required_urls & verified_urls),
++                                       'unverified_required_urls': sorted(required_urls - verified_urls),
++                                       'meaning': 'home, accepted sitemap URLs and observed permitted internal/redirect targets; HTTP 404 is checked, not healthy'}
++    complete = bool(not result['verification_coverage']['unverified_required_urls'] and robots_known and not fetcher.stop_reason and not result['errors'] and
+                     not any(n.get('error') or n.get('redirect_limit_or_cycle') for n in result['urls']) and
+                     not result.get('navigation_queue_remaining') and
+-                    not any(x['reason'] in ('depth_limit', 'query_variants_limit', 'discovery_budget', 'edge_budget') for x in result['excluded']))
++                    not any(result.get('excluded_by_reason', {}).get(reason, 0) for reason in ('depth_limit', 'query_variants_limit', 'discovery_budget', 'edge_budget')))
+     result['graph'] = graph(result['urls'], result['edges'], policy.home, result['sitemap_urls'], complete=complete)
+     result['coverage_by_type'] = dict(Counter(n.get('page_type', 'unknown') for n in result['urls']))
+     result['indexability_counts'] = dict(Counter(n.get('indexability', {}).get('state', 'insufficient_evidence') for n in result['urls']))
+--- a/tools/ipanema/seo/indexability.py
++++ b/tools/ipanema/seo/indexability.py
+@@ -9,7 +9,7 @@
+ from .crawl_policy import normalize
+ from .extractor import VOID
+ from .page_audit import crawlable, snapshot_delta
+-from .robots import google_directives
++from .robots import google_directive_evidence
+ 
+ 
+ class Content(HTMLParser):
+@@ -79,6 +79,7 @@
+     status = snapshot.get('status')
+     canonical = snapshot.get('canonical', [])
+     reasons = []
++    robots_evidence = None
+     if status in (301, 302, 303, 307, 308):
+         state = 'redirected'
+     elif status in (404, 410):
+@@ -91,9 +92,12 @@
+         state = 'insufficient_evidence'
+     else:
+         meta = snapshot.get('meta', {})
+-        directives = google_directives(meta, snapshot.get('headers', {}).get('x-robots-tag', ''))
+-        if re.search(r'\b(noindex|none)\b', directives, re.I):
++        robots_evidence = google_directive_evidence(meta, snapshot.get('headers', {}).get('x-robots-tag', ''))
++        if robots_evidence['noindex']:
+             state = 'noindex'
++        elif robots_evidence['relevant_errors']:
++            state = 'insufficient_evidence'
++            reasons.append('malformed_robots_directives')
+         elif len(canonical) > 1:
+             state = 'insufficient_evidence'
+             reasons.append('ambiguous_canonical')
+@@ -112,7 +116,7 @@
+             if content.get('soft_404_candidate') or not content.get('main_text_characters'):
+                 state = 'insufficient_evidence'
+                 reasons.append('soft404_or_content_needs_evidence')
+-    return {'state': state, 'reasons': reasons, 'indexation_observed': False,
++    return {'state': state, 'reasons': reasons, 'robots_evidence': robots_evidence, 'indexation_observed': False,
+             'google_selected_canonical': None, 'evidence_scope': 'technical_observation_not_google_index'}
+ 
+ 
+--- a/tools/ipanema/seo/page_audit.py
++++ b/tools/ipanema/seo/page_audit.py
+@@ -6,7 +6,7 @@
+ import json
+ import re
+ from urllib.parse import urljoin, urlsplit, urlunsplit
+-from .robots import Robots, google_directives
++from .robots import Robots, google_directive_evidence
+ 
+ from ..core import now
+ from .extractor import extract
+@@ -49,8 +49,11 @@
+     result=validate(snap,page_type,facts)
+     findings=list(result['findings']);metadata=snap.get('meta',{})
+     canonical=snap.get('canonical',[])
+-    robots=google_directives(metadata,snap.get('headers',{}).get('x-robots-tag',''))
+-    noindex=bool(re.search(r'\b(?:noindex|none)\b',robots))
++    robots_evidence=google_directive_evidence(metadata,snap.get('headers',{}).get('x-robots-tag',''))
++    robots=','.join(robots_evidence['flags'])
++    noindex=robots_evidence['noindex']
++    if robots_evidence['relevant_errors']:
++        findings.append(F('SEO023','D','warning','Directivas robots malformadas: conservar fuentes y evidencia insuficiente sin ignorar restricciones válidas.',evidence=robots_evidence['relevant_errors']))
+     status=snap.get('status')
+     if not snap.get('title'):findings.append(F('SEO001','D','warning','Title ausente; comprobar head-tags de plataforma.'))
+     if not metadata.get('description'):findings.append(F('SEO002','D','recommendation','Meta description ausente; usar contenido útil y específico.'))
+@@ -77,7 +80,7 @@
+     permission='not_checked_robots_txt'
+     if robots_text is not None:
+         parser=Robots();parser.parse(robots_text.splitlines());permission='unknown_rules' if parser.errors else 'allowed' if parser.can_fetch('Googlebot',snap['url']) else 'disallowed'
+-    signals='http_unknown' if status is None else 'non_200' if status!=200 else 'noindex_observed' if noindex else 'no_observable_noindex_not_index_proof'
++    signals='http_unknown' if status is None else 'non_200' if status!=200 else 'noindex_observed' if noindex else 'insufficient_evidence' if robots_evidence['relevant_errors'] else 'no_observable_noindex_not_index_proof'
+     delta=snapshot_delta(snap,rendered) if rendered is not None else None
+     if delta and delta['links_only_after_js']:
+         findings.append(F('SEO020','D','warning','Hay enlaces presentes solo tras JavaScript; comprobar navegación/fallback y descubrimiento.',evidence=delta['links_only_after_js']))
+@@ -95,7 +98,7 @@
+     return {'kind':'seo-page-audit','project':project.id,'domain':urlsplit(snap['url']).hostname,'url':snap['url'],
+             'page_type':page_type,'at':now(),'theme_observation':project.data.get('remote_observation'),
+             'http_status':status,'canonical':canonical,'indexability_observable':signals,'indexation_verified':False,
+-            'crawl_permission_observed':permission,'robots_directives':robots,'schema_matrix':PAGE_SCHEMAS[page_type],
++            'crawl_permission_observed':permission,'robots_directives':robots,'robots_evidence':robots_evidence,'schema_matrix':PAGE_SCHEMAS[page_type],
+             'structured_data':result,'schema_sources':components,'findings':findings,
+             'content':{k:snap.get(k) for k in ('title','meta','headings','lang','images')},
+             'crawl':{'links':links,'carousel_links':carousels,'pagination_controls':more,'hreflang':hreflang,
+--- a/tools/ipanema/seo/regression.py
++++ b/tools/ipanema/seo/regression.py
+@@ -15,7 +15,7 @@
+         return {report['url']: {'url': report['url'], 'status': report.get('http_status'),
+             'canonical': report.get('canonical'), 'template_audit': report,
+             'outgoing_links': [l['absolute'] for l in report.get('crawl', {}).get('links', [])],
+-            'indexability': {'state': 'noindex' if 'noindex' in report.get('robots_directives', '') else 'insufficient_evidence'},
++            'indexability': {'state': 'noindex' if report.get('robots_evidence', {}).get('noindex') else 'insufficient_evidence'},
+             'pagination': {'active_controls_without_href': sum(not l.get('href') for l in report.get('crawl', {}).get('pagination_controls', []))}}}
+     raise IpanemaError('Gate necesita auditorías SEO o crawler V4.')
+ 
+--- a/tools/ipanema/seo/robots.py
++++ b/tools/ipanema/seo/robots.py
+@@ -55,6 +55,9 @@
+                     flush()
+                     agents, rules, delay, rate = [], [], None, None
+                 if value:
++                    if not re.fullmatch(r'[A-Za-z_-]+|\*', value):
++                        self.errors.append({'line': number + 1, 'reason': 'invalid_product_token'})
++                        continue
+                     agents.append(value.lower())
+             elif key in ('allow', 'disallow') and agents:
+                 if not value:
+@@ -90,7 +93,7 @@
+ 
+     def _selected(self, agent):
+         product = agent.lower().split('/')[0]
+-        ranked = [(max((len(a) for a in g['agents'] if a != '*' and a in product), default=0), g) for g in self.groups]
++        ranked = [(max((len(a) for a in g['agents'] if a != '*' and a == product), default=0), g) for g in self.groups]
+         maximum = max((n for n, _ in ranked), default=0)
+         return [g for n, g in ranked if n == maximum and (maximum or '*' in g['agents'])]
+ 
+@@ -112,16 +115,151 @@
+         return max((g['rate'] or 0 for g in self._selected(agent)), default=0)
+ 
+ 
++def _quoted_end(text, start):
++    quote, cursor = text[start], start + 1
++    while cursor < len(text):
++        if text[cursor] == '\\':
++            cursor += 2
++        elif text[cursor] == quote:
++            return cursor + 1, True
++        else:
++            cursor += 1
++    return len(text), False
++
++
++def _header_parts(text):
++    start = cursor = 0
++    while cursor < len(text):
++        if text[cursor] in ('"', "'"):
++            cursor, _ = _quoted_end(text, cursor)
++        elif text[cursor] == ',':
++            yield text[start:cursor]
++            cursor += 1
++            start = cursor
++        else:
++            cursor += 1
++    yield text[start:]
++
++
++_VALUE_RULES = frozenset(('unavailable_after', 'max-snippet', 'max-image-preview', 'max-video-preview'))
++_FLAG_RULES = frozenset(('all', 'index', 'follow', 'noindex', 'none', 'nofollow', 'nosnippet',
++    'indexifembedded', 'notranslate', 'noimageindex', 'noarchive', 'nocache', 'nositelinkssearchbox'))
++
++
++def _parse_directive_source(text):
++    """One physical source only. Quote state can never escape this call."""
++    flags, parameters, errors, unknown = set(), [], [], []
++    delimiters = ',; \t\r\n'
++    names = re.compile(r'[A-Za-z][A-Za-z0-9_-]*')
++    length, cursor = len(text), 0
++    def atom_end(start):
++        while start < length and text[start] not in delimiters:
++            if text[start] in ('"', "'"):
++                position = start
++                start, closed = _quoted_end(text, start)
++                if not closed:
++                    errors.append({'reason': 'unclosed_quote', 'selected_offset': position})
++            elif text[start] == '\\':
++                if start + 1 == length:
++                    errors.append({'reason': 'incomplete_escape', 'selected_offset': start})
++                start = min(length, start + 2)
++            else:
++                start += 1
++        return start
++    while cursor < length:
++        if text[cursor] in delimiters:
++            cursor += 1
++            continue
++        match = names.match(text, cursor)
++        if match is None:
++            end = atom_end(cursor)
++            unknown.append({'kind': 'unrecognized_atom', 'selected_offset': cursor})
++            cursor = end
++            continue
++        key, end = match[0].lower(), match.end()
++        probe = end
++        while probe < length and text[probe].isspace():
++            probe += 1
++        if probe < length and text[probe] in ':=':
++            probe += 1
++            while probe < length and text[probe].isspace():
++                probe += 1
++            finish = atom_end(probe)
++            parameters.append({'name': key, 'has_value': finish > probe, 'known': key in _VALUE_RULES})
++            if finish == probe:
++                errors.append({'reason': 'missing_value', 'directive': key, 'selected_offset': cursor})
++            if key in ('noindex', 'none', 'index', 'all'):
++                errors.append({'reason': 'flag_has_value', 'directive': key, 'selected_offset': cursor})
++            cursor = finish
++        elif end == length or text[end] in delimiters:
++            if key in _FLAG_RULES:
++                flags.add(key)
++            elif key in _VALUE_RULES:
++                errors.append({'reason': 'missing_value', 'directive': key, 'selected_offset': cursor})
++            else:
++                unknown.append({'kind': 'unknown_directive', 'name': key, 'selected_offset': cursor})
++            cursor = end
++        else:
++            finish = atom_end(end)
++            errors.append({'reason': 'invalid_directive_token', 'selected_offset': cursor})
++            cursor = finish
++    return {'flags': sorted(flags), 'parameters': parameters, 'errors': errors, 'unknown': unknown,
++            'noindex': bool(flags & {'noindex', 'none'})}
++
++
++def _google_header_source(value):
++    """Apply agent scopes within one header field; reset for the next field."""
++    active, selected, scopes, errors = True, [], set(), []
++    for part in _header_parts(value):
++        match = re.match(r'\s*([a-zA-Z][\w-]*)\s*:\s*(.*)', part)
++        if match and match[1].lower() not in (_VALUE_RULES | _FLAG_RULES):
++            scope = match[1].lower()
++            scopes.add(scope)
++            active = scope == 'googlebot'
++            part = match[2]
++            if active and not part.strip():
++                errors.append({'reason': 'missing_agent_directive'})
++        if active:
++            selected.append(part)
++    return ','.join(selected), sorted(scopes), errors
++
++
++def google_directive_evidence(meta, header):
++    """Preserve physical boundaries, then aggregate restrictions, never raw text."""
++    import hashlib
++    sources = []
++    def add(kind, name, index, value, *, header_field=False):
++        identity = {'kind': kind, 'name': name, 'index': index}
++        if not isinstance(value, str):
++            sources.append({**identity, 'input_sha256': None, 'scopes': [], 'flags': [], 'parameters': [],
++                            'unknown': [], 'errors': [{'reason': 'invalid_source_type'}], 'noindex': False})
++            return
++        selected, scopes, selection_errors = _google_header_source(value) if header_field else (value, [name], [])
++        parsed = _parse_directive_source(selected)
++        parsed['errors'] += selection_errors
++        sources.append({**identity, 'input_sha256': hashlib.sha256(value.encode()).hexdigest(),
++                        'input_characters': len(value), 'scopes': scopes, **parsed})
++    for name in ('robots', 'googlebot'):
++        values = meta.get(name, [])
++        for index, value in enumerate(values if isinstance(values, list) else [values]):
++            add('meta', name, index, value)
++    headers = header if isinstance(header, list) else [] if header in ('', None) else [header]
++    for index, value in enumerate(headers):
++        add('header', 'x-robots-tag', index, value, header_field=True)
++    flags = sorted({flag for source in sources for flag in source['flags']})
++    errors = [{'source': {k: source[k] for k in ('kind', 'name', 'index')}, **error}
++              for source in sources for error in source['errors']]
++    noindex = any(source['noindex'] for source in sources)
++    return {'sources': sources, 'flags': flags, 'noindex': noindex, 'relevant_errors': errors,
++            'state': 'noindex' if noindex else 'insufficient_evidence' if errors else 'no_restrictive_flag_observed',
++            'scope': 'Googlebot text results; not Google rendering/index inspection'}
++
++
+ def google_directives(meta, header):
+-    """X-Robots-Tag multivalor: los prefijos de otros bots no se heredan."""
+-    if isinstance(header, list):
+-        return ','.join([google_directives(meta, ''), *(google_directives({}, h) for h in header)])
+-    active, result = True, list(meta.get('robots', [])) + list(meta.get('googlebot', []))
+-    for part in header.split(','):
+-        match = re.match(r'\s*([a-zA-Z][\w-]*)\s*:\s*(.*)', part)
+-        if match and match[1].lower() not in ('unavailable_after', 'max-snippet', 'max-image-preview', 'max-video-preview'):
+-            active = match[1].lower() in ('googlebot', '*')
+-            part = match[2]
+-        if active:
+-            result.append(part)
+-    return ','.join(result).lower()
++    """Legacy display only. Decisions use google_directive_evidence, never this string."""
++    return ','.join(google_directive_evidence(meta, header)['flags'])
++
++
++def has_noindex(directives):
++    """Single-source compatibility helper; not for combining independent inputs."""
++    return _parse_directive_source(directives)['noindex']

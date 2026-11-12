@@ -1,0 +1,163 @@
+{
+  "kind": "seo-v4-validation-manifest",
+  "at": "2026-11-11T16:48:28.990742+00:00",
+  "project": "rhino-performance",
+  "remote_mutations": false,
+  "theme_modified_by_this_task": false,
+  "outcome": "review_changes_requested_network_blocked",
+  "checks": [
+    {
+      "check": "seo_unit",
+      "state": "passed",
+      "count": 88,
+      "scope": "offline fixtures"
+    },
+    {
+      "check": "seo_integration",
+      "state": "passed",
+      "count": 13,
+      "scope": "offline CLI, accounts not connected"
+    },
+    {
+      "check": "browser_fixture",
+      "state": "passed",
+      "count": 1,
+      "scope": "Chrome local, initial/rendered/no-JS, commercial POST blocked"
+    },
+    {
+      "check": "quick",
+      "state": "passed",
+      "count": 6,
+      "scope": "reports/runs/rhino-performance/20261111T164917-quick-c5cf0bd0/report.json"
+    },
+    {
+      "check": "rhino_home_browser",
+      "state": "failed",
+      "count": 2,
+      "scope": "Home 390px: contrast and essential images no-JS"
+    },
+    {
+      "check": "rhino_indexability",
+      "state": "insufficient_evidence",
+      "count": 1,
+      "scope": "robots not supplied; not Google indexing"
+    },
+    {
+      "check": "network_independent_review",
+      "state": "needs_evidence",
+      "count": 0,
+      "scope": "Claude changes_requested; Codex worker inactivity; no approval"
+    },
+    {
+      "check": "rhino_full_inventory",
+      "state": "not_executed",
+      "count": 0,
+      "scope": "blocked operation only, pending transport review"
+    },
+    {
+      "check": "review_new_regressions_workspace",
+      "state": "failed_reproduced",
+      "count": 5,
+      "scope": "known defects not covered by prior passing QA; see v4-review-corrections-qa.json"
+    },
+    {
+      "check": "isolated_correction_candidate",
+      "state": "passed_not_applied",
+      "count": 5,
+      "scope": "five new cases passed; whole SEO suite 111 executions including inherited repeats; mandatory review pending"
+    }
+  ],
+  "source_files": [
+    {
+      "file": "tools/ipanema/seo/cli.py",
+      "sha256": "1167dba05704569d77b076f3f32a63e30e27598ef9411e9dc8e4f87fcae62410"
+    },
+    {
+      "file": "tools/ipanema/seo/extractor.py",
+      "sha256": "8bffda623a4d416c2536b689e58e71306ce0a1e45aaf613bdd470065040705cc"
+    },
+    {
+      "file": "tools/ipanema/seo/page_audit.py",
+      "sha256": "e60c8b928d8e2fd62e2034a247d407f2e52bd62cddcad5b398713a561c5d140b"
+    },
+    {
+      "file": "tools/ipanema/seo/sitemaps.py",
+      "sha256": "8b3a0d0740e76fd21cf0bf9c1c5f467bb74374b5a1264bc8d570a72878c60f44"
+    },
+    {
+      "file": "tools/ipanema/seo/crawl_policy.py",
+      "sha256": "0f62445b9e0fb07bce6c55c59f60b107b52a460b343ea073bb0bee5e8a6009ff"
+    },
+    {
+      "file": "tools/ipanema/seo/robots.py",
+      "sha256": "7a83bdac275ac8783b7b85841f14d80da0157b9044b1556989a226c1000c8f2b"
+    },
+    {
+      "file": "tools/ipanema/seo/crawler.py",
+      "sha256": "0cebeb3685255ac5104ce676ade56fdb071d32b00a28f8a3829a1000f2f73f4e"
+    },
+    {
+      "file": "tools/ipanema/seo/indexability.py",
+      "sha256": "c379c404241180894d7a0b25f91f357a56173a059f461532ec1f78fb7650b0e8"
+    },
+    {
+      "file": "tools/ipanema/seo/regression.py",
+      "sha256": "17de56d903987bd89786abeb4320498fe6cdb2dca9b89d9ab70803a9d73f4d91"
+    },
+    {
+      "file": "tools/ipanema/seo/engineering.py",
+      "sha256": "85a0729730f61efc24be661679276c9f3e005682db10db392a11db110ba9f5f1"
+    },
+    {
+      "file": "tools/ipanema/seo/coverage_import.py",
+      "sha256": "6ce90c8248565d551c1a71bcfaac98a6637e28552590cd6ea14974aacc535877"
+    },
+    {
+      "file": "tools/qa_browser.mjs",
+      "sha256": "bd62ea403036a57ffec5cbd6f1064816d112813115abef6fa24aad15af88bc27"
+    },
+    {
+      "file": "tests/unit/test_seo_sitemaps_v4.py",
+      "sha256": "63bac7f1eb02653298b866ecc172589a71c3db112e9cf4af44d456d937f76c06"
+    },
+    {
+      "file": "tests/unit/test_seo_crawler_v4.py",
+      "sha256": "8d9e6096c5860dcf8bea30e912cbfc90345bc874a4474ce80dfde414428e85c2"
+    },
+    {
+      "file": "tests/unit/test_seo_transport_v4.py",
+      "sha256": "d3a571dee6b7d79e95e56919d2ec77f6a67ff06d83faca5aaffd872f4f7874e2"
+    },
+    {
+      "file": "tests/unit/test_seo_regression_v4.py",
+      "sha256": "5abcd7a00b7c92bd692313980e19a4b8ca69b99e55bd2a2fd9cedc9a1dc7c04b"
+    },
+    {
+      "file": "tests/unit/test_seo_coverage_v4.py",
+      "sha256": "c4642adca65d29eb84fbfacd39a0bece93267ee2a16fc4aaa004eb361a82ec72"
+    },
+    {
+      "file": "tests/integration/test_seo_engineering_v4_cli.py",
+      "sha256": "fd2454e82cf3eb14a54d2a4898240e4890ea61f5288b6dcfe6a17748db4fef80"
+    },
+    {
+      "file": "tests/browser/test_seo_engineering_v4.py",
+      "sha256": "46e697646ed2d9dc92da6718460f79678bc2326aac468d1ac31aaa78c35bccb6"
+    }
+  ],
+  "evidence": {
+    "readiness": "reports/runs/rhino-performance/20261111T164716-seo-v4-readiness-47b2e02b/report.json",
+    "browser": "reports/runs/rhino-performance/20261111T163623-seo-v4-home-browser-5567f98d/browser/browser-report.json",
+    "initial_council": "reports/runs/rhino-performance/20261111T155340-orchestration-3e864e6d/council/adr.json",
+    "concrete_code_review": "reports/runs/rhino-performance/20261111T164534-orchestration-aa9b603e/run.json",
+    "quick": "reports/runs/rhino-performance/20261111T164917-quick-c5cf0bd0/report.json",
+    "review_patch": "reports/seo/v4-review-corrections.patch",
+    "review_patch_qa": "reports/seo/v4-review-corrections-qa.json"
+  },
+  "limitations": [
+    "No full-store crawl or live Search Console.",
+    "No theme change; no before/after site performance improvement claimed.",
+    "No proof of Google indexing, or full orphan-page inventory.",
+    "A pending mandatory review is not independent approval."
+  ]
+}

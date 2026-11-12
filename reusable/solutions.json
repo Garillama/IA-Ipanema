@@ -766,6 +766,206 @@
         }
       ],
       "remote_version_observation": null
+    },
+    {
+      "id": "rhino-reviews-setupmore-batching-20261111",
+      "problem": "setupMore alternaba lecturas geométricas y cambios de clase por tarjeta, y escribía clases incluso sin cambio de estado.",
+      "context": {
+        "project": "rhino-performance",
+        "state": "accepted_local_unpublished",
+        "at": "2026-11-11T17:11:51.018080+00:00",
+        "git_base": "2e8c13aefd7b346943e928aee8e598f69dd47374",
+        "fixture": "viewport y Poppins reales comprobados; scripts clonados/API desactivados antes del parse; avatar paint mask explícito"
+      },
+      "component": "sections/google-reviews.tpl:setupMore",
+      "files": [
+        "sections/google-reviews.tpl",
+        "static/css/style-critical.css",
+        "static/css/style-async.css",
+        "layouts/resources/style-tokens.tpl",
+        "layouts/layout.tpl"
+      ],
+      "cause": "Intercalación de lecturas scrollHeight/clientHeight y escrituras has-more; llamadas repetidas generaban mutaciones redundantes.",
+      "solution": "Calcular estados en primera pasada; aplicar has-more en segunda solo si difiere. Reutiliza función, HTML/CSS, eventos, API y ARIA existentes.",
+      "tests": [
+        "61checks de componente con script fuente exacto,6anchos, capturas iguales con máscara de avatares, viewport/fuentes y apertura/cierre explícitos.",
+        "556checks offline de cantidades0/1/3/5/24/100, API mock vacío/válido/sin textos, repetición, teclado/foco/ARIA.",
+        "8pares alternados por ancho390/768/1440 sobre mismoDOM; diagnóstico micro, no prueba de mejora global.",
+        "Revisión independienteClaude y revisiónCodex posteriores; hashes/backup/transacción verificados."
+      ],
+      "results": {
+        "component_checks": 617,
+        "scope": "local only",
+        "faithful_fixture_layout_medians": "Original3–6 frente a candidato1; n5/variant/width.",
+        "same_page_paired_layout_medians": "390:3→1;768:7→1;1440:4→2; no garantía de exactamente1layout en cada contexto.",
+        "redundant_class_writes_after20calls": "Antes20por tarjeta; candidato0 en fixtures comprobados.",
+        "global_speed_improvement": "not_demonstrated"
+      },
+      "limitations": [
+        "No publicación, PageSpeed nuevo, INP o90+ demostrado.",
+        "El fixture inicial tenía defectos; su evidencia visual/funcional fue sustituida por pruebas corregidas, manteniendo fallos archivados.",
+        "Primera discrepancia1920sin estado bruto conservado: campo exacto no determinado.",
+        "Outlier temporal1440del ensayo agrupado no se reprodujo en el ensayo alternado; causa exacta desconocida.",
+        "GC/asignaciones, Safari y renderTwig completo no certificados.",
+        "La reinicialización completa conserva un defecto previo de doble listener, fuera del parche."
+      ],
+      "risks": [
+        "Revalidar si cambia CSS, tipografía, markup o versión del componente.",
+        "Más reseñas implican memoria temporal O(n); rango configurado3–24, estrés100soloenfixture."
+      ],
+      "compatibility": "Comprobado en Chrome de evidencia; classList.toggle(force) ya se utiliza en el tema. No equivale a una matriz completa de navegadores ni aWCAG.",
+      "reuse": "Conocimiento A y procedimiento C. No transfiere derechos para copiar código del cliente entre tiendas; adaptar y revalidar cada contexto.",
+      "scope": "theme",
+      "status": "verified",
+      "agent_version": "2.2.0",
+      "agent_fingerprint": "7c816a72609a5d55ae8d8d8ddb573330d0ebc9f4c2f05719eb79fae4c858a674",
+      "project": "rhino-performance",
+      "theme_installation_id": null,
+      "at": "2026-11-11T17:11:51.301654+00:00",
+      "source_hashes": {
+        "sections/google-reviews.tpl": "75a487600c5d71001fa2e0970dad1cb943f80d399f1af89db559bffc3253fd30",
+        "static/css/style-critical.css": "84f23b725aca4ab2c9470243154e52a3f26fa586c0c3842b3122636ae4779cc6",
+        "static/css/style-async.css": "ba154a756420386c2e25562add3e95c49ce3b8c7012068f9c0d03505cbda2323",
+        "layouts/resources/style-tokens.tpl": "2f847b31dc0a9d1d04bd7c511e432ada04dfe823ae6f6e8fa8ea9456881f9874",
+        "layouts/layout.tpl": "a941460509ed2dc83c91217d2dee8e733a4cd4f35ace34addeed7b2d65c85f69"
+      },
+      "evidence": [
+        {
+          "path": "reports/runs/rhino-performance/20261111T163507-reviews-candidate-council-resume-2451ba30/solution-QA.json",
+          "sha256": "ffa62ecd3e51fd7d9f19e36fd81933bdaf2f7bd6245fcab44b32ff7f71d52413"
+        }
+      ],
+      "remote_version_observation": null
+    },
+    {
+      "id": "rhino-sectionfy-local-media-capability-v1",
+      "problem": "Native carousel accepted photos, native hero only YouTube/Vimeo; no opt-in Sectionfy file-video consumer.",
+      "context": "RHINO exact local source, native defaults retained, no migration/configuration of Home.",
+      "component": "Native slideshow slide and native video banner, shared Sectionfy HTML5 consumer",
+      "files": [
+        "blocks/slide.tpl",
+        "sections/slideshow.tpl",
+        "sections/video.tpl",
+        "layouts/layout.tpl",
+        "static/css/sectionfy-video-slide.css",
+        "static/js/sectionfy-video-slide.js",
+        "static/js/sectionfy-client.js",
+        "static/js/store.js",
+        "static/js/media-visibility.js",
+        "static/js/libraries-standalone.js",
+        "snippets/image.tpl",
+        "static/css/style-critical.css"
+      ],
+      "cause": "Missing file-video source loader and player lifecycle integration; not a measured production performance defect.",
+      "solution": "Opt-in image/Sectionfy modes, strict bounded shared API loader with exact section selection, single active HTML5 video and existing visibility/native Swiper integration.",
+      "tests": [
+        "153 offline browser assertions with real native Swiper and API/media mocks",
+        "37 client contract tests with mocked fetch",
+        "8 actual local generated-MP4 decode assertions",
+        "Post-application source/protected-file hash checks"
+      ],
+      "results": "Local configured-input capability passed source-bound tests; existing modes stay defaults. No real API or user media validation.",
+      "limitations": [
+        "API read probe403, Home query/real media not verified",
+        "Full Tiendanube Twig/editor rendering and published visual/performance not verified",
+        "Chrome tested; no full cross-browser/WCAG claim",
+        "One-time real endpoint and possibly exact key configuration required; no backend capability inferred"
+      ],
+      "risks": [
+        "Remote contract/file codec changes need revalidation",
+        "Source modes are opt-in and live activation requires render/configuration validation"
+      ],
+      "compatibility": "Only recorded RHINO source hashes and tested fixture inputs; no guarantee for other themes/stores",
+      "reuse": "Knowledge/procedure reusable; client/theme code remains subject to its own rights (E/G), no redistribution authorized",
+      "scope": "theme",
+      "status": "verified",
+      "agent_version": "2.2.0",
+      "agent_fingerprint": "7c816a72609a5d55ae8d8d8ddb573330d0ebc9f4c2f05719eb79fae4c858a674",
+      "project": "rhino-performance",
+      "theme_installation_id": null,
+      "at": "2026-11-11T19:38:05.024504+00:00",
+      "source_hashes": {
+        "blocks/slide.tpl": "5a3107594101421b560b68ff18711ef6f72359dda647a1b3fc6ec2ab969dd482",
+        "sections/slideshow.tpl": "14e08e6f0e388e14064c12d66b5d6c41926526c823d283461556cf26b6fe9e46",
+        "sections/video.tpl": "35928c9c28bf21dbc102b65c30a91c02a9af1a2d2e592119694f257451dc23cf",
+        "layouts/layout.tpl": "d1214c8137054f5bef67159db317cb146132b7920afbb9a72686f40fc1b8150b",
+        "static/css/sectionfy-video-slide.css": "523ba17d02b34476575c37a5d21984bb08fe1a09249ece046fc21d1aa6c56ba3",
+        "static/js/sectionfy-video-slide.js": "3165f743b357b088b2d91533a712938dd9224e1b9a9e111f095775fbc908199b",
+        "static/js/sectionfy-client.js": "0d0c410a84573189284bd08c6dce1c1b60bc0ec338f3b580749434c25f36a370",
+        "static/js/store.js": "29dea94e46cc1bb423ddde71a42d807f22c944f09465d70400728d7ae95b4718",
+        "static/js/media-visibility.js": "93dc9242fcd029907f3fdb704d12d03c214349004fe8cc7ba852587b98d9db83",
+        "static/js/libraries-standalone.js": "da2638c043034114cb004b2fd99cd4d54ee69c7d569bd2c96cca8e586d2e0d34",
+        "snippets/image.tpl": "9e6b1624ee75d6d0a9899d7af25cd799b1e59bde31962c98e4fea3aca404ed3b",
+        "static/css/style-critical.css": "84f23b725aca4ab2c9470243154e52a3f26fa586c0c3842b3122636ae4779cc6"
+      },
+      "evidence": [
+        {
+          "path": "reports/runs/rhino-performance/20261111T184050-sectionfy-hero-media-70f3f556/accepted-local-QA.json",
+          "sha256": "909a9cbb362954809bc2de19ede109e1b659357421e73ebb530842dce06db4cd"
+        }
+      ],
+      "remote_version_observation": null
+    },
+    {
+      "id": "rhino-sectionfy-automatic-home-v2",
+      "problem": "Home media consumer required a manual endpoint and rejected the newly documented provider host.",
+      "context": "Exact Rhino local source. Owner supplied actual Home endpoint, verified HTTP200 and actual ready MP4 playback in read-only Home-origin frame. Not a deployed-page validation.",
+      "component": "Automatic Sectionfy Home video source",
+      "files": [
+        "static/js/sectionfy-client.js",
+        "sections/video.tpl",
+        "blocks/slide.tpl",
+        "sections/slideshow.tpl",
+        "templates/pages/home.json",
+        "static/js/sectionfy-video-slide.js",
+        "static/css/sectionfy-video-slide.css",
+        "static/js/store.js"
+      ],
+      "cause": "Only old provider host permitted and no default route for Home.",
+      "solution": "Resolve verified Home route from page marker, reuse existing public content settings, allow exact new provider hostname, set only local primary hero source mode.",
+      "tests": [
+        "155 offline browser assertions",
+        "38 offline client tests",
+        "6 real API/media checks from Home origin",
+        "Applied hashes and protected files checks"
+      ],
+      "results": "Automatic source works without manual URL in tested context. Actual1920x1080 MP4 decoded; zero audited component media responses before mobile Play.",
+      "limitations": [
+        "No deployed Twig/full-page performance or90+ validation",
+        "Backend cache can delay content refresh",
+        "Current media totals7.69MB; optimization deferred",
+        "Activation in production remains owner-controlled"
+      ],
+      "risks": [
+        "Backend or source updates require revalidation",
+        "Do not copy project media/config to other stores"
+      ],
+      "compatibility": "Only recorded Rhino hashes and supplied public Home API contract",
+      "reuse": "Knowledge and procedure reusable; client-specific code/media rights not transferred",
+      "scope": "theme",
+      "status": "verified",
+      "agent_version": "2.2.0",
+      "agent_fingerprint": "7c816a72609a5d55ae8d8d8ddb573330d0ebc9f4c2f05719eb79fae4c858a674",
+      "project": "rhino-performance",
+      "theme_installation_id": null,
+      "at": "2026-11-11T20:21:19.231367+00:00",
+      "source_hashes": {
+        "static/js/sectionfy-client.js": "a7fb2a7e432c84df62cf6100f7349ec895e28f88eb2027b3819f76aef40a150c",
+        "sections/video.tpl": "617c7ee2fba5c7fc9dd34368920d1789e4277d7cf0c28ec1466660b9f3eca8cb",
+        "blocks/slide.tpl": "ab5e8d97095b36101fe5d4b66b7facbcdfdd87ab03458da5d909b00f9c868a64",
+        "sections/slideshow.tpl": "a7c2b664e37a6e9c307970c111e552379bd7984a51c28c4c8ca7b192959cbb5f",
+        "templates/pages/home.json": "cfa29739befaa0a6d4d1c3bc78da0cf7294257bdee43599978bd4f2cf5c80379",
+        "static/js/sectionfy-video-slide.js": "3165f743b357b088b2d91533a712938dd9224e1b9a9e111f095775fbc908199b",
+        "static/css/sectionfy-video-slide.css": "523ba17d02b34476575c37a5d21984bb08fe1a09249ece046fc21d1aa6c56ba3",
+        "static/js/store.js": "29dea94e46cc1bb423ddde71a42d807f22c944f09465d70400728d7ae95b4718"
+      },
+      "evidence": [
+        {
+          "path": "reports/runs/rhino-performance/20261111T195618-sectionfy-home-page-source-8ab8e843/accepted-local-QA.json",
+          "sha256": "db132d9a0149851926406556190ac42d4a2ab55ec5bb81fc7a3702b10c783c49"
+        }
+      ],
+      "remote_version_observation": null
     }
   ]
 }

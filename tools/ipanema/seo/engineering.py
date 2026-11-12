@@ -17,7 +17,7 @@ from .regression import compare
 from .robots import Robots
 from .sitemaps import parse_sitemap
 
-COMMANDS = {'sitemap', 'crawl', 'readiness', 'enrich', 'gate'}
+COMMANDS = {'sitemap', 'crawl', 'readiness', 'enrich', 'gate', 'coverage-import'}
 
 
 def add_parser(commands):
@@ -42,6 +42,13 @@ def add_parser(commands):
     enrich.add_argument('--capture', type=Path, action='append', default=[])
     enrich.add_argument('--no-js', type=Path, action='append', default=[])
     enrich.add_argument('--google-observation', type=Path, action='append', default=[])
+    enrich.add_argument('--coverage-export', type=Path, action='append', default=[])
+    coverage = commands.add_parser('coverage-import', help='CSV exportado con mapping, propiedad y fecha explícitos; no conecta Google')
+    coverage.add_argument('--csv', type=Path, required=True)
+    coverage.add_argument('--mapping', type=Path, required=True)
+    coverage.add_argument('--site-url', required=True)
+    coverage.add_argument('--observed-at', required=True)
+    coverage.add_argument('--max-rows', type=int, default=10000)
     gate = commands.add_parser('gate', help='SEO regression gate offline; no inicia crawls en CI')
     gate.add_argument('--before', type=Path, required=True)
     gate.add_argument('--after', type=Path, required=True)
@@ -98,6 +105,8 @@ def captured_readiness(project, capture_path, no_js_path=None, robots_path=None,
     without = _capture(project, no_js_path, no_js=True) if no_js_path else None
     if without and without['url'] != captured['url']:
         raise IpanemaError('Capturas no corresponden a la misma URL.')
+    if without and without.get('width') != captured.get('width'):
+        raise IpanemaError('Capturas de anchos diferentes; perfiles no comparables.')
     url = captured['url']
     initial_html, rendered_html = captured['initial']['html'], captured['rendered']['html']
     snap = extract(initial_html, url, status=captured.get('status'), headers=captured.get('headers'))
@@ -112,6 +121,7 @@ def captured_readiness(project, capture_path, no_js_path=None, robots_path=None,
             'canonical': snap['canonical'], 'content': content, 'outgoing_links': [l['absolute'] for l in audit['crawl']['links']],
             'pagination': pagination(snap), 'indexability': classify(snap, googlebot_allowed=google_allowed,
                 robots_known=bool(robots_path and not robot.errors), content=content), 'template_audit': audit}
+    node['navigation_without_href'] = sum(not l.get('href') and not l.get('action_hint') and not l.get('disabled') for l in snap['links'])
     rendered, no_js_snap = extract(rendered_html, url), extract(without['rendered']['html'], url) if without else None
     node['layers'] = layers(snap, rendered, no_js_snap)
     node['layers']['main_content'] = {'initial': content, 'rendered': Content(rendered_html).evidence(),
@@ -126,7 +136,7 @@ def captured_readiness(project, capture_path, no_js_path=None, robots_path=None,
             'limitations': audit['limitations'] + ['Esta comparación no es una ejecución de Googlebot.']}
 
 
-def enrich_report(project, report, capture_paths, no_js_paths, observations):
+def enrich_report(project, report, capture_paths, no_js_paths, observations, coverage_exports=()):
     if report.get('kind') != 'seo-crawl-v4' or report.get('project') != project.id:
         raise IpanemaError('Crawl de otro proyecto o formato.')
     captures = {_capture(project, p)['url']: p for p in capture_paths}
@@ -153,9 +163,20 @@ def enrich_report(project, report, capture_paths, no_js_paths, observations):
                 if normalize(node['url']) == normalize(data['url']):
                     node['google_known_index'] = {'observed_at': observation['observed_at'], **data}
                     node['indexability']['google_selected_canonical'] = data.get('index_status', {}).get('googleCanonical')
+    from .coverage_import import validate_export
+    report['google']['coverage_exports'] = []
+    by_normalized_url = {normalize(n['url']): n for n in report['urls']}
+    for path in coverage_exports:
+        document = validate_export(project, read_json(path))
+        report['google']['coverage_exports'].append({'observed_at': document['observed_at'], 'sha256': digest(path), 'rows': len(document['rows']), 'exhaustive': False})
+        for row in document['rows']:
+            node = by_normalized_url.get(normalize(row['url']))
+            if node is not None:
+                node['google_coverage_export'] = {'observed_at': document['observed_at'], **row, 'live_query': False}
     by = {n['url']: n for n in report['urls']}
     for node in report['graph']['nodes']:
-        node.update(by[node['url']])
+        if node['url'] in by:
+            node.update(by[node['url']])
     report['enriched_at'] = now()
     return report
 
@@ -182,8 +203,13 @@ def execute(project, args):
         result = captured_readiness(project, args.capture, args.no_js, args.robots, args.facts)
         inputs = [p for p in [args.capture, args.no_js, args.robots, args.facts] if p]
     elif command == 'enrich':
-        result = enrich_report(project, read_json(args.crawl), args.capture, args.no_js, args.google_observation)
-        inputs = [args.crawl, *args.capture, *args.no_js, *args.google_observation]
+        result = enrich_report(project, read_json(args.crawl), args.capture, args.no_js, args.google_observation, args.coverage_export)
+        inputs = [args.crawl, *args.capture, *args.no_js, *args.google_observation, *args.coverage_export]
+    elif command == 'coverage-import':
+        from .coverage_import import import_csv
+        result = import_csv(project, reports.read_text(args.csv), site_url=args.site_url,
+            observed_at=args.observed_at, mapping=read_json(args.mapping), max_rows=args.max_rows)
+        inputs = [args.csv, args.mapping]
     elif command == 'gate':
         result = compare(project, read_json(args.before), read_json(args.after),
                          important_urls=args.important_url, allow_removed=args.allow_removed_url)
@@ -193,11 +219,43 @@ def execute(project, args):
     result = clean(result)
     saved = reports.save_report(project, result, 'seo-v4-' + command, inputs)
     run = Path(saved['report']).parent
+    (run / 'report.md').write_text(summary_markdown(result), encoding='utf-8')
     if result['kind'] == 'seo-crawl-v4':
         export(run, result)
     elif command == 'sitemap':
         save_csv(run / 'sitemap.csv', result['entries'], ['url', 'source_sitemap', 'lastmod', 'lastmod_state'])
     write_json(run / 'phase-status.json', {'phase': command, 'state': result.get('state') or result.get('outcome') or 'observed',
                'remote_mutations': False, 'google_indexation_not_inferred': True})
-    code = 1 if result.get('outcome') == 'blocked' else 2 if result.get('outcome') == 'insufficient_evidence' or result.get('state') == 'stopped' else 0
+    code = 1 if result.get('outcome') == 'blocked' else 2 if result.get('outcome') == 'insufficient_evidence' or result.get('state') in ('stopped', 'partial') or result.get('errors') else 0
     return {**saved, 'state': result.get('state') or result.get('outcome'), 'csv_directory': str(run)}, code
+
+
+def summary_markdown(result):
+    """Resumen legible; el JSON conserva la evidencia completa y su procedencia."""
+    safe = lambda text: str(text).replace('\n', ' ').replace('`', "'")
+    lines = ['# Auditoría técnica SEO V4', '',
+        f"Proyecto: `{safe(result['project'])}`. Fecha: {safe(result.get('at') or result.get('observed_at'))}.", '',
+        f"Estado: **{safe(result.get('outcome') or result.get('state') or 'observed')}**.", '',
+        'Una página accesible puede ser candidata a indexación. Este informe no demuestra que Google la haya indexado.', '']
+    if result['kind'] == 'seo-crawl-v4':
+        lines += [f"URLs comprobadas: {len(result['urls'])}. URLs del sitemap: {len(result['sitemap_urls'])}. Enlaces observados: {len(result['edges'])}.",
+            f"Enlaces rotos comprobados: {len(result['graph']['broken_internal_links'])}. Candidatos sin ruta desde Inicio: {len(result['graph']['potential_orphans'])}.",
+            'Los candidatos no son páginas huérfanas confirmadas: el rastreo puede ser parcial.', '',
+            'Clasificación técnica: `' + safe(result['indexability_counts']) + '`.', '',
+            'Límites y solicitudes: `' + safe(result['provenance']) + '`.', '',
+            f"Errores registrados: {len(result['errors'])}. Acciones priorizadas: {len(result['backlog'])}.", '',
+            'Consultar urls.csv, sitemap.csv, edges.csv y backlog.csv junto al JSON.']
+    elif result['kind'] == 'seo-readiness-v4':
+        node = result['node']
+        lines += [f"URL: {safe(node['url'])}.", '',
+            'Clasificación: `' + safe(node['indexability']['state']) + '`.',
+            'Bloqueos críticos: `' + safe(node['readiness']['critical_blockers']) + '`.',
+            'Evidencia necesaria pendiente: `' + safe(node['readiness']['required_evidence_missing']) + '`.']
+    elif result['kind'] == 'seo-regression-gate-v4':
+        lines += [f"Comprobaciones: {len(result['checks'])}. Solicitudes de red: 0.", '']
+        lines += ['- ' + safe(c['name']) + ': ' + c['status'] for c in result['checks'] if c['status'] != 'passed']
+    elif result['kind'] == 'seo-sitemap-v4':
+        lines += [f"Formato nativo: {result['xml_kind']}. Entradas: {len(result['entries'])}. Duplicados: {len(result['duplicates'])}. Errores: {len(result['errors'])}."]
+    lines += ['', '## Límites', ''] + ['- ' + safe(x) for x in result.get('limitations', [])]
+    lines += ['', 'Sin escrituras remotas. No se sustituyó el sitemap nativo.', '']
+    return '\n'.join(lines)

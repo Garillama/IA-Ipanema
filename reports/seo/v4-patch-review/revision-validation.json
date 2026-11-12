@@ -1,0 +1,36 @@
+{
+  "kind": "seo-v4-revised-isolated-candidate",
+  "patch": "reports/seo/v4-review-corrections-v2.patch",
+  "patch_sha256": "6e506fdbd159ef15e45de35ac7d831c71b4ee723e4f576f6af8d65550905b6fd",
+  "base_source_hashes": {
+    "tools/ipanema/seo/robots.py": "7a83bdac275ac8783b7b85841f14d80da0157b9044b1556989a226c1000c8f2b",
+    "tools/ipanema/seo/indexability.py": "c379c404241180894d7a0b25f91f357a56173a059f461532ec1f78fb7650b0e8",
+    "tools/ipanema/seo/page_audit.py": "e60c8b928d8e2fd62e2034a247d407f2e52bd62cddcad5b398713a561c5d140b",
+    "tools/ipanema/seo/crawl_policy.py": "0f62445b9e0fb07bce6c55c59f60b107b52a460b343ea073bb0bee5e8a6009ff",
+    "tools/ipanema/seo/crawler.py": "0cebeb3685255ac5104ce676ade56fdb071d32b00a28f8a3829a1000f2f73f4e"
+  },
+  "candidate_source_hashes": {
+    "tests/unit/test_seo_review_additional_v4.py": "1dbde12b6690aeb70d67a0eabc86d5986d89846e8f80d18205b6f996d9265f1e",
+    "tools/ipanema/seo/crawl_policy.py": "72ddee62c9bc7abb07c9bfcd0078faab19ea66e6ff299eb5a5ab8bb61b0a550a",
+    "tools/ipanema/seo/crawler.py": "8a120d0043d14909caac8cf292486ca5b630a1dd38f04b8a0228071b5e9c449c",
+    "tools/ipanema/seo/indexability.py": "4ec692ed1cd8e9a5d953e99978e2a80fff2f4cc704a2b66f4ac34ffae2c5d4ff",
+    "tools/ipanema/seo/page_audit.py": "51889e4e2f521272bd98b130c6bc406855978389c18e3f1bfca0269187fa6785",
+    "tools/ipanema/seo/robots.py": "dd1f0988404d963113563f8660a7c68e44059149c971dd1c2b391f66437506eb"
+  },
+  "workspace_source_unchanged": true,
+  "patch_applied_to_workspace": false,
+  "external_crawl_authorized": false,
+  "storefront_network_requests": 0,
+  "extended_exit": 0,
+  "seo_unit_exit": 0,
+  "seo_integration_exit": 0,
+  "independent_review": "pending; original patch review does not approve this revised diff",
+  "human_approval": "pending",
+  "fresh_artifact_verified": true,
+  "fresh_source_hashes_match": true,
+  "fresh_extended_exit": 0,
+  "fresh_seo_unit_exit": 0,
+  "fresh_seo_integration_exit": 0,
+  "fresh_local_tls_exit": 0,
+  "fixture_network": "TLS test uses only 127.0.0.1 with test socket routing; extended fixtures forbid sockets"
+}

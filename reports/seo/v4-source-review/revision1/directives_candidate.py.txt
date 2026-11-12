@@ -1,0 +1,148 @@
+def _quoted_end(text, start):
+    quote, cursor = text[start], start + 1
+    while cursor < len(text):
+        if text[cursor] == '\\':
+            cursor += 2
+        elif text[cursor] == quote:
+            return cursor + 1, True
+        else:
+            cursor += 1
+    return len(text), False
+
+
+def _header_parts(text):
+    start = cursor = 0
+    while cursor < len(text):
+        if text[cursor] in ('"', "'"):
+            cursor, _ = _quoted_end(text, cursor)
+        elif text[cursor] == ',':
+            yield text[start:cursor]
+            cursor += 1
+            start = cursor
+        else:
+            cursor += 1
+    yield text[start:]
+
+
+_VALUE_RULES = frozenset(('unavailable_after', 'max-snippet', 'max-image-preview', 'max-video-preview'))
+_FLAG_RULES = frozenset(('all', 'index', 'follow', 'noindex', 'none', 'nofollow', 'nosnippet',
+    'indexifembedded', 'notranslate', 'noimageindex', 'noarchive', 'nocache', 'nositelinkssearchbox'))
+
+
+def _parse_directive_source(text):
+    """One physical source only. Quote state can never escape this call."""
+    flags, parameters, errors, unknown = set(), [], [], []
+    delimiters = ',; \t\r\n'
+    names = re.compile(r'[A-Za-z][A-Za-z0-9_-]*')
+    length, cursor = len(text), 0
+    def atom_end(start):
+        while start < length and text[start] not in delimiters:
+            if text[start] in ('"', "'"):
+                position = start
+                start, closed = _quoted_end(text, start)
+                if not closed:
+                    errors.append({'reason': 'unclosed_quote', 'selected_offset': position})
+            elif text[start] == '\\':
+                if start + 1 == length:
+                    errors.append({'reason': 'incomplete_escape', 'selected_offset': start})
+                start = min(length, start + 2)
+            else:
+                start += 1
+        return start
+    while cursor < length:
+        if text[cursor] in delimiters:
+            cursor += 1
+            continue
+        match = names.match(text, cursor)
+        if match is None:
+            end = atom_end(cursor)
+            unknown.append({'kind': 'unrecognized_atom', 'selected_offset': cursor})
+            cursor = end
+            continue
+        key, end = match[0].lower(), match.end()
+        probe = end
+        while probe < length and text[probe].isspace():
+            probe += 1
+        if probe < length and text[probe] in ':=':
+            probe += 1
+            while probe < length and text[probe].isspace():
+                probe += 1
+            finish = atom_end(probe)
+            parameters.append({'name': key, 'has_value': finish > probe, 'known': key in _VALUE_RULES})
+            if finish == probe:
+                errors.append({'reason': 'missing_value', 'directive': key, 'selected_offset': cursor})
+            if key in ('noindex', 'none', 'index', 'all'):
+                errors.append({'reason': 'flag_has_value', 'directive': key, 'selected_offset': cursor})
+            cursor = finish
+        elif end == length or text[end] in delimiters:
+            if key in _FLAG_RULES:
+                flags.add(key)
+            elif key in _VALUE_RULES:
+                errors.append({'reason': 'missing_value', 'directive': key, 'selected_offset': cursor})
+            else:
+                unknown.append({'kind': 'unknown_directive', 'name': key, 'selected_offset': cursor})
+            cursor = end
+        else:
+            finish = atom_end(end)
+            errors.append({'reason': 'invalid_directive_token', 'selected_offset': cursor})
+            cursor = finish
+    return {'flags': sorted(flags), 'parameters': parameters, 'errors': errors, 'unknown': unknown,
+            'noindex': bool(flags & {'noindex', 'none'})}
+
+
+def _google_header_source(value):
+    """Apply agent scopes within one header field; reset for the next field."""
+    active, selected, scopes, errors = True, [], set(), []
+    for part in _header_parts(value):
+        match = re.match(r'\s*([a-zA-Z][\w-]*)\s*:\s*(.*)', part)
+        if match and match[1].lower() not in (_VALUE_RULES | _FLAG_RULES):
+            scope = match[1].lower()
+            scopes.add(scope)
+            active = scope == 'googlebot'
+            part = match[2]
+            if active and not part.strip():
+                errors.append({'reason': 'missing_agent_directive'})
+        if active:
+            selected.append(part)
+    return ','.join(selected), sorted(scopes), errors
+
+
+def google_directive_evidence(meta, header):
+    """Preserve physical boundaries, then aggregate restrictions, never raw text."""
+    import hashlib
+    sources = []
+    def add(kind, name, index, value, *, header_field=False):
+        identity = {'kind': kind, 'name': name, 'index': index}
+        if not isinstance(value, str):
+            sources.append({**identity, 'input_sha256': None, 'scopes': [], 'flags': [], 'parameters': [],
+                            'unknown': [], 'errors': [{'reason': 'invalid_source_type'}], 'noindex': False})
+            return
+        selected, scopes, selection_errors = _google_header_source(value) if header_field else (value, [name], [])
+        parsed = _parse_directive_source(selected)
+        parsed['errors'] += selection_errors
+        sources.append({**identity, 'input_sha256': hashlib.sha256(value.encode()).hexdigest(),
+                        'input_characters': len(value), 'scopes': scopes, **parsed})
+    for name in ('robots', 'googlebot'):
+        values = meta.get(name, [])
+        for index, value in enumerate(values if isinstance(values, list) else [values]):
+            add('meta', name, index, value)
+    headers = header if isinstance(header, list) else [] if header in ('', None) else [header]
+    for index, value in enumerate(headers):
+        add('header', 'x-robots-tag', index, value, header_field=True)
+    flags = sorted({flag for source in sources for flag in source['flags']})
+    errors = [{'source': {k: source[k] for k in ('kind', 'name', 'index')}, **error}
+              for source in sources for error in source['errors']]
+    noindex = any(source['noindex'] for source in sources)
+    return {'sources': sources, 'flags': flags, 'noindex': noindex, 'relevant_errors': errors,
+            'state': 'noindex' if noindex else 'insufficient_evidence' if errors else 'no_restrictive_flag_observed',
+            'scope': 'Googlebot text results; not Google rendering/index inspection'}
+
+
+def google_directives(meta, header):
+    """Legacy display only. Decisions use google_directive_evidence, never this string."""
+    return ','.join(google_directive_evidence(meta, header)['flags'])
+
+
+def has_noindex(directives):
+    """Single-source compatibility helper; not for combining independent inputs."""
+    return _parse_directive_source(directives)['noindex']

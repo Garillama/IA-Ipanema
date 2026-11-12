@@ -25,7 +25,7 @@ class EngineeringBrowserV4(unittest.TestCase):
             data = json.loads(cfg.read_text()); data['public_url'] = base + '/'; put(cfg, data)
             out = root / 'browser'
             job = {'project': 'fixture', 'output': str(out), 'pages': [{'name': 'home', 'page_type': 'home', 'url': base + '/?probe=seo&extra_probe=post'}],
-                   'widths': [390], 'mode': 'full', 'axe': True, 'capture_seo': True, 'interactions': []}
+                   'widths': [390], 'mode': 'full', 'modes': ['rendered', 'no-js'], 'axe': True, 'capture_seo': True, 'interactions': []}
             put(root / 'job.json', job)
             env = {k: v for k, v in os.environ.items() if not k.startswith('IPANEMA_') or k in ('IPANEMA_NODE_MODULE_ROOT', 'IPANEMA_CHROME_PATH')}
             env.update({'IPANEMA_PUBLIC_URL': base, 'IPANEMA_EVIDENCE_DIR': str(out), 'IPANEMA_ALLOW_NETWORK': '0'})

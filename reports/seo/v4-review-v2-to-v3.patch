@@ -1,0 +1,100 @@
+--- a/tests/unit/test_seo_review_additional_v4.py
++++ b/tests/unit/test_seo_review_additional_v4.py
+@@ -137,3 +137,24 @@
+     def test_missing_redirect_location_not_complete(self):
+         r=self.run_crawl({HOME:{'status':302,'headers':{}}})
+         self.assertNotEqual(r['state'],'complete_for_policy')
++    def test_action_prefix_suffix_regression(self):
++        for path in ('/add-to-cart-123','/add_to_cart123','/comprar-ahora','/%2561dd-to-cart-123','/comprar123','/ADD.TO.CART123'):
++            with self.subTest(path=path),self.assertRaises(ValueError):Policy(HOME).check(path)
++        self.assertEqual(Policy(HOME).check('/blog/posts/como-comprar-x'),HOME+'blog/posts/como-comprar-x')
++    def test_private_prefix_delimiters_and_action_compact(self):
++        for path in ('/checkout-step','/cart,1','/checkout123','/addtocart','/%2563art,1'):
++            with self.subTest(path=path),self.assertRaises(ValueError):Policy(HOME).check(path)
++        self.assertEqual(Policy(HOME).check('/cartografia'),HOME+'cartografia')
++    def test_missing_location_is_explicit_error(self):
++        for url in (HOME,HOME+'sitemap.xml',HOME+'robots.txt'):
++            with self.subTest(url=url):
++                self.clock=fixtures.FakeClock();r=self.run_crawl({url:{'status':302,'headers':{}}})
++                reasons=[e.get('reason','') for e in r['errors']]+[n.get('error','') for n in r['urls']]
++                self.assertTrue(any('Location' in e for e in reasons));self.assertNotEqual(r['state'],'complete_for_policy')
++    def test_malformed_sitemap_parser_record_fails_closed(self):
++        record={'kind':'urlset','entries':[],'errors':[],'duplicates':[]}
++        with patch('ipanema.seo.crawler.parse_sitemap',return_value=record):
++            r=self.run_crawl();self.assertEqual(r['state'],'partial')
++    def test_invalid_robots_agent_with_version_fails_closed(self):
++        r=Robots();r.parse(['User-agent: Googlebot/2.1','Disallow: /x'])
++        self.assertTrue(r.errors);self.assertFalse(r.can_fetch('Googlebot',HOME+'x'))
+--- a/tools/ipanema/seo/crawl_policy.py
++++ b/tools/ipanema/seo/crawl_policy.py
+@@ -19,8 +19,8 @@
+ from ..core import IpanemaError, safe_url
+ 
+ AGENT = 'IAIpanemaAudit/4.0'
+-PRIVATE = re.compile(r'/(?:account|accounts|customer|customers|cuenta|mi-cuenta|cart|carrito|checkout|checkouts|admin|login|logout|password|register|orders|pedidos|subscriptions|suscripciones)(?:/|$|[.;])', re.I)
+-ACTIONS = re.compile(r'/(?:add[-_.]to[-_.]cart|agregar[-_.]al[-_.]carrito|comprar)(?:/|$|[.;])', re.I)
++PRIVATE = re.compile(r'/(?:account|accounts|customer|customers|cuenta|mi-cuenta|cart|carrito|checkout|checkouts|admin|login|logout|password|register|orders|pedidos|subscriptions|suscripciones)(?![a-z])', re.I)
++ACTIONS = re.compile(r'/(?:add[-_.]?to[-_.]?cart|agregar[-_.]?al[-_.]?carrito|comprar)', re.I)
+ ASSET = re.compile(r'\.(?:jpg|jpeg|png|webp|avif|gif|svg|ico|mp4|webm|mp3|pdf|zip|css|js|woff2?|ttf)(?:$|/)', re.I)
+ 
+ 
+--- a/tools/ipanema/seo/crawler.py
++++ b/tools/ipanema/seo/crawler.py
+@@ -121,6 +121,8 @@
+             if fetcher.stop_reason:
+                 break
+             if response['status'] in (301, 302, 303, 307, 308):
++                if not response['headers'].get('location'):
++                    raise IpanemaError('Redirección sin Location.')
+                 robots_url = policy.check(urljoin(robots_url, response['headers'].get('location', '')), document=True)
+                 continue
+             robots_text = response['body'].decode('utf-8', 'replace') if response['status'] == 200 else '' if response['status'] in (404, 410) else None
+@@ -156,6 +158,8 @@
+                     result['sitemaps'].append({'url': url, 'status': response['status']})
+                     break
+                 if response['status'] in (301, 302, 303, 307, 308):
++                    if not response['headers'].get('location'):
++                        raise IpanemaError('Redirección sin Location.')
+                     target = policy.check(urljoin(url, response['headers'].get('location', '')), document=True)
+                     result['sitemaps'].append({'url': url, 'status': response['status'], 'redirect': target})
+                     sitemap_redirect_targets[url] = target
+@@ -192,7 +196,7 @@
+                             sitemap_urls.append(target)
+             except IpanemaError as exc:
+                 result['errors'].append({'operation': 'sitemap', 'reason': str(exc)})
+-        resolved_documents = {s['source'] for s in result['sitemaps'] if s.get('kind') and not s.get('errors')}
++        resolved_documents = {s.get('source') for s in result['sitemaps'] if s.get('source') and s.get('kind') and not s.get('errors')}
+         unresolved_documents = []
+         for document in sorted(sitemap_seen):
+             cursor, chain = document, set()
+@@ -251,6 +255,8 @@
+                 node['headers'] = {k: v for k, v in response['headers'].items() if k in ('content-type', 'x-robots-tag')}
+                 node['html_sha256'] = hashlib.sha256(response['body']).hexdigest()
+                 if response['status'] in (301, 302, 303, 307, 308):
++                    if not response['headers'].get('location'):
++                        raise IpanemaError('Redirección sin Location.')
+                     target = policy.check(urljoin(url, response['headers'].get('location', '')))
+                     node['redirect'] = target
+                     if len(result['edges']) < policy.limits.max_edges:
+@@ -344,8 +350,7 @@
+     complete = bool(not result['verification_coverage']['unverified_required_urls'] and robots_known and not fetcher.stop_reason and not result['errors'] and
+                     not any(n.get('error') or n.get('redirect_limit_or_cycle') for n in result['urls']) and
+                     not result.get('navigation_queue_remaining') and
+-                    not any(result.get('excluded_by_reason', {}).get(reason, 0) for reason in ('depth_limit', 'query_variants_limit', 'discovery_budget', 'edge_budget')) and
+-                    set(result['sitemap_urls']).issubset({n['url'] for n in result['urls']}))
++                    not any(result.get('excluded_by_reason', {}).get(reason, 0) for reason in ('depth_limit', 'query_variants_limit', 'discovery_budget', 'edge_budget')))
+     result['graph'] = graph(result['urls'], result['edges'], policy.home, result['sitemap_urls'], complete=complete)
+     result['coverage_by_type'] = dict(Counter(n.get('page_type', 'unknown') for n in result['urls']))
+     result['indexability_counts'] = dict(Counter(n.get('indexability', {}).get('state', 'insufficient_evidence') for n in result['urls']))
+--- a/tools/ipanema/seo/robots.py
++++ b/tools/ipanema/seo/robots.py
+@@ -55,6 +55,9 @@
+                     flush()
+                     agents, rules, delay, rate = [], [], None, None
+                 if value:
++                    if not re.fullmatch(r'[A-Za-z_-]+|\*', value):
++                        self.errors.append({'line': number + 1, 'reason': 'invalid_product_token'})
++                        continue
+                     agents.append(value.lower())
+             elif key in ('allow', 'disallow') and agents:
+                 if not value:

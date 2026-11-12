@@ -1,0 +1,266 @@
+{
+  "kind": "seo-v4-objection-matrix",
+  "patch_original_sha256": "bb126cbf3300208673443de8eca360a4e797c49e91866c99413f2c434f29d093",
+  "proposed_patch": "reports/seo/v4-review-corrections-v3.patch",
+  "proposed_patch_sha256": "384deeb0673e607712f734130a0895a6fb3129d6c61564ffd93c219378c9eb19",
+  "workspace_source_unchanged": true,
+  "theme_modified": false,
+  "production_modified": false,
+  "external_crawl_authorized": false,
+  "rows": [
+    {
+      "id": "O1",
+      "severity": "alta",
+      "objection": "max-image-preview:none produce falso noindex",
+      "evidence": "indexability.classify y page_audit; meta/cabeceras",
+      "test": "test_O1_preview_none_is_not_noindex; test_headers_multiple_and_scope",
+      "original_patch": "falla antes; pasa después",
+      "applied": "no",
+      "approval": "pendiente",
+      "revision_v3": "corregido/control probado en candidato aislado; no aplicado"
+    },
+    {
+      "id": "O2",
+      "severity": "alta",
+      "objection": "Selección de robots por subcadena en vez de product token",
+      "evidence": "Robots._selected; Googlebot frente a bot",
+      "test": "test_O2_robot_product_token_not_substring; test_robots_merge_exact_groups_case_and_fallback",
+      "original_patch": "falla antes; pasa después",
+      "applied": "no",
+      "approval": "pendiente",
+      "revision_v3": "corregido/control probado en candidato aislado; no aplicado"
+    },
+    {
+      "id": "O3",
+      "severity": "alta",
+      "objection": "Exclusiones críticas perdidas tras truncar 2000 filas",
+      "evidence": "excluded_total/log frente a excluded_by_reason",
+      "test": "test_O3_late_exclusion_partial",
+      "original_patch": "falla antes; pasa después",
+      "applied": "no",
+      "approval": "pendiente",
+      "revision_v3": "corregido/control probado en candidato aislado; no aplicado"
+    },
+    {
+      "id": "O4",
+      "severity": "alta",
+      "objection": "max_urls puede ocultar URLs del sitemap sin verificar",
+      "evidence": "set sitemap frente a URLs comprobadas",
+      "test": "test_O4_unchecked_sitemap_partial",
+      "original_patch": "falla antes; pasa después",
+      "applied": "no",
+      "approval": "pendiente",
+      "revision_v3": "corregido/control probado en candidato aislado; no aplicado"
+    },
+    {
+      "id": "O5",
+      "severity": "alta",
+      "objection": "Palabra comprar en contenido editorial tratada como acción",
+      "evidence": "Policy.check sobre /blog/posts/como-comprar-x",
+      "test": "test_O5_editorial_action_word_allowed",
+      "original_patch": "falla antes; pasa después",
+      "applied": "no",
+      "approval": "pendiente",
+      "revision_v3": "corregido/control probado en candidato aislado; no aplicado"
+    },
+    {
+      "id": "A1",
+      "severity": "alta",
+      "objection": "Ciclo de redirects del sitemap descartado sin error",
+      "evidence": "sitemap_seen y cadenas sin documento final",
+      "test": "test_sitemap_redirect_cycle_not_complete",
+      "original_patch": "falla antes y con parche original",
+      "applied": "no",
+      "approval": "pendiente",
+      "revision_v3": "corregido/control probado en candidato aislado; no aplicado"
+    },
+    {
+      "id": "A2",
+      "severity": "alta",
+      "objection": "Límite de redirects del sitemap descarta destino sin marcar parcial",
+      "evidence": "max_redirects=0 con Location pendiente",
+      "test": "test_sitemap_redirect_limit_not_complete",
+      "original_patch": "falla antes y con parche original",
+      "applied": "no",
+      "approval": "pendiente",
+      "revision_v3": "corregido/control probado en candidato aislado; no aplicado"
+    },
+    {
+      "id": "A3",
+      "severity": "alta",
+      "objection": "Enlaces de página sitemap-only quedan sin HTTP pero complete=True",
+      "evidence": "depth=None añade arista sin comprobar destino",
+      "test": "test_disconnected_sitemap_outgoing_required_unchecked",
+      "original_patch": "falla antes y con parche original",
+      "applied": "no",
+      "approval": "pendiente",
+      "revision_v3": "corregido/control probado en candidato aislado; no aplicado"
+    },
+    {
+      "id": "A4",
+      "severity": "alta",
+      "objection": "NAT64 global puede incorporar IPv4 privada",
+      "evidence": "Python 3.12 is_global=True para 64:ff9b::7f00:1; sin conexión real",
+      "test": "test_dns_transition_prefix_private_not_accepted",
+      "original_patch": "falla antes y con parche original",
+      "applied": "no",
+      "approval": "pendiente",
+      "revision_v3": "corregido/control probado en candidato aislado; no aplicado"
+    },
+    {
+      "id": "A5",
+      "severity": "alta",
+      "objection": "Sufijos y parámetros de ruta comerciales pasan el filtro",
+      "evidence": "/cart.json; /checkout;step=1; /cart%3Bfoo/add",
+      "test": "test_commercial_suffix_and_matrix_routes_excluded",
+      "original_patch": "falla antes y con parche original",
+      "applied": "no",
+      "approval": "pendiente",
+      "revision_v3": "corregido/control probado en candidato aislado; no aplicado"
+    },
+    {
+      "id": "A6",
+      "severity": "alta",
+      "objection": "Espera del scheduler agota deadline antes de iniciar request",
+      "evidence": "Clock inyectado excede max_seconds durante sleep",
+      "test": "test_deadline_rechecked_after_scheduler_delay",
+      "original_patch": "falla antes y con parche original",
+      "applied": "no",
+      "approval": "pendiente",
+      "revision_v3": "corregido/control probado en candidato aislado; no aplicado"
+    },
+    {
+      "id": "S1",
+      "severity": "control obligatorio",
+      "objection": "HTTP GET, certificado/SNI y ausencia de Cookie/Authorization",
+      "evidence": "Servidor TLS real 127.0.0.1; certificado de fixture; host incorrecto rechazado",
+      "test": "tls_fixture.LocalTLS; TransportV4",
+      "original_patch": "prueba de control existente aprobada",
+      "applied": "no",
+      "approval": "pendiente",
+      "revision_v3": "corregido/control probado en candidato aislado; no aplicado"
+    },
+    {
+      "id": "S2",
+      "severity": "control obligatorio",
+      "objection": "Mismo origen HTTPS y rutas privadas tras decodificación",
+      "evidence": "Sin red de storefront; fixtures verifican destinos nunca solicitados",
+      "test": "test_domain_schemes_and_actions_in_query; test_actions_private_multiencoded_and_ambiguous; test_redirect_to_private_external_never_requested",
+      "original_patch": "prueba de control existente aprobada",
+      "applied": "no",
+      "approval": "pendiente",
+      "revision_v3": "corregido/control probado en candidato aislado; no aplicado"
+    },
+    {
+      "id": "S3",
+      "severity": "control obligatorio",
+      "objection": "403/429/challenge y robots desconocido detienen operaciones",
+      "evidence": "Contador real de llamadas de transporte inyectado",
+      "test": "test_403_429_stop_from_sitemap_no_home; test_robots_unreachable_and_challenge_no_crawl",
+      "original_patch": "prueba de control existente aprobada",
+      "applied": "no",
+      "approval": "pendiente",
+      "revision_v3": "corregido/control probado en candidato aislado; no aplicado"
+    },
+    {
+      "id": "S4",
+      "severity": "control obligatorio",
+      "objection": "Transferencia, gzip, presupuesto y DNS fijado",
+      "evidence": "Pruebas del transporte actual reutilizadas; no benchmark remoto",
+      "test": "tests/unit/test_seo_transport_v4.py; PolicyV4.test_permissions_limits_stop_and_rate",
+      "original_patch": "prueba de control existente aprobada",
+      "applied": "no",
+      "approval": "pendiente",
+      "revision_v3": "corregido/control probado en candidato aislado; no aplicado"
+    },
+    {
+      "id": "A7",
+      "severity": "alta",
+      "objection": "Regresión v2: acciones con sufijos admitidas (/add-to-cart-123, /comprar-ahora)",
+      "evidence": "Claude v2 + contraejemplo reproducido en copia aislada",
+      "test": "test_action_prefix_suffix_regression",
+      "original_patch": "contraejemplo no cubierto/corregido",
+      "revision_v3": "pasa en propuesta v3; no aplicado ni aprobado",
+      "applied": "no",
+      "approval": "pendiente"
+    },
+    {
+      "id": "A8",
+      "severity": "media",
+      "objection": "PRIVATE deja pasar delimitadores como checkout-step y cart,1; acción addtocart compacta",
+      "evidence": "Claude v2 + contraejemplo reproducido en copia aislada",
+      "test": "test_private_prefix_delimiters_and_action_compact",
+      "original_patch": "contraejemplo no cubierto/corregido",
+      "revision_v3": "pasa en propuesta v3; no aplicado ni aprobado",
+      "applied": "no",
+      "approval": "pendiente"
+    },
+    {
+      "id": "A9",
+      "severity": "media",
+      "objection": "Location ausente debe producir error explícito en home, sitemap y robots",
+      "evidence": "Claude v2 + contraejemplo reproducido en copia aislada",
+      "test": "test_missing_location_is_explicit_error",
+      "original_patch": "contraejemplo no cubierto/corregido",
+      "revision_v3": "pasa en propuesta v3; no aplicado ni aprobado",
+      "applied": "no",
+      "approval": "pendiente"
+    },
+    {
+      "id": "A10",
+      "severity": "baja",
+      "objection": "Registro de parser sin source no debe lanzar KeyError ni completar inventario",
+      "evidence": "Claude v2 + contraejemplo reproducido en copia aislada",
+      "test": "test_malformed_sitemap_parser_record_fails_closed",
+      "original_patch": "contraejemplo no cubierto/corregido",
+      "revision_v3": "pasa en propuesta v3; no aplicado ni aprobado",
+      "applied": "no",
+      "approval": "pendiente"
+    },
+    {
+      "id": "A11",
+      "severity": "media",
+      "objection": "User-agent con versión en robots no debe quedar silenciosamente permitido",
+      "evidence": "Claude v2 + contraejemplo reproducido en copia aislada",
+      "test": "test_invalid_robots_agent_with_version_fails_closed",
+      "original_patch": "contraejemplo no cubierto/corregido",
+      "revision_v3": "pasa en propuesta v3; no aplicado ni aprobado",
+      "applied": "no",
+      "approval": "pendiente"
+    },
+    {
+      "id": "R1",
+      "severity": "bloqueante",
+      "objection": "Revisión independiente y aprobación correspondientes",
+      "evidence": "Orquestador dual; no mayoría ni aprobación por pasar tests",
+      "test": "ADR y recibos del consejo",
+      "original_patch": "Claude/Codex solicitan cambios",
+      "applied": "no",
+      "approval": "pendiente",
+      "revision_v3": "v2: Claude cambios solicitados; Codex inactividad; v3 pendiente de revisión y aprobación"
+    }
+  ],
+  "evidence": {
+    "baseline": "before-extended.json",
+    "exact_original": "after-exact-patch-extended.json",
+    "revision": "v3-validation.json",
+    "unit": "after-v3-seo-unit.json",
+    "integration": "after-v3-seo-integration.json",
+    "local_tls": "after-v3-local-tls.json",
+    "claude_regression": "before-v3-on-v2-extended.json"
+  },
+  "source_hashes": {
+    "tools/ipanema/seo/robots.py": "7a83bdac275ac8783b7b85841f14d80da0157b9044b1556989a226c1000c8f2b",
+    "tools/ipanema/seo/indexability.py": "c379c404241180894d7a0b25f91f357a56173a059f461532ec1f78fb7650b0e8",
+    "tools/ipanema/seo/page_audit.py": "e60c8b928d8e2fd62e2034a247d407f2e52bd62cddcad5b398713a561c5d140b",
+    "tools/ipanema/seo/crawl_policy.py": "0f62445b9e0fb07bce6c55c59f60b107b52a460b343ea073bb0bee5e8a6009ff",
+    "tools/ipanema/seo/crawler.py": "0cebeb3685255ac5104ce676ade56fdb071d32b00a28f8a3829a1000f2f73f4e"
+  },
+  "approval": "needs_evidence; no modificar AGENTS ni aplicar hasta condiciones/aprobación correspondientes",
+  "independent_review": {
+    "original": "Claude y Codex disponibles, cambios solicitados",
+    "v2": "Claude disponible/cambios solicitados; Codex no completó por inactivity",
+    "v3": "sin aprobación independiente; revisión humana y condiciones obligatorias pendientes",
+    "v2_adr": "reports/runs/rhino-performance/20261111T170754-orchestration-7dc13cbb/council/adr.json"
+  }
+}

@@ -1,0 +1,11 @@
+check,state,count,scope
+seo_unit,passed,88,offline fixtures
+seo_integration,passed,13,"offline CLI, accounts not connected"
+browser_fixture,passed,1,"Chrome local, initial/rendered/no-JS, commercial POST blocked"
+quick,passed,6,reports/runs/rhino-performance/20261111T164917-quick-c5cf0bd0/report.json
+rhino_home_browser,failed,2,Home 390px: contrast and essential images no-JS
+rhino_indexability,insufficient_evidence,1,robots not supplied; not Google indexing
+network_independent_review,needs_evidence,0,Claude changes_requested; Codex worker inactivity; no approval
+rhino_full_inventory,not_executed,0,"blocked operation only, pending transport review"
+review_new_regressions_workspace,failed_reproduced,5,known defects not covered by prior passing QA; see v4-review-corrections-qa.json
+isolated_correction_candidate,passed_not_applied,5,five new cases passed; whole SEO suite 111 executions including inherited repeats; mandatory review pending

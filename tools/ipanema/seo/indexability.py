@@ -189,6 +189,10 @@ def readiness(record, audit=None, *, rendered=None, no_js=None):
     add('pagination', False if paginated and record.get('pagination', {}).get('state') == 'missing_crawlable_links' else None if paginated else True, paginated, record.get('pagination'))
     add('render_comparison', True if rendered is not None else None, False, 'capture supplied, not Googlebot')
     add('no_js_navigation', not no_js.get('links_removed', []) if no_js is not None else None, True, 'no-JS capture required')
+    main_layers = record.get('layers', {}).get('main_content', {})
+    no_js_main = main_layers.get('no_js')
+    add('no_js_main_content', bool(no_js_main.get('main_text_characters')) if no_js_main is not None else None,
+        True, 'extracted main text in no-JS DOM; hidden/visual state requires browser QA')
     failed = [c['name'] for c in checks if c['critical'] and c['status'] == 'failed']
     unknown = [c['name'] for c in checks if c['critical'] and c['status'] == 'unknown']
     known = [c for c in checks if c['status'] != 'unknown']

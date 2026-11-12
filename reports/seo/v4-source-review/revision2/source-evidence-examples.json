@@ -1,0 +1,379 @@
+{
+  "physical_meta_to_header": {
+    "sources": [
+      {
+        "kind": "meta",
+        "name": "robots",
+        "index": 0,
+        "input_sha256": "266a02e0cad00214e1484bcc24793559d3ed8f7847977c56f1c76502852f19cc",
+        "input_characters": 6,
+        "scopes": [
+          "robots"
+        ],
+        "flags": [],
+        "parameters": [
+          {
+            "name": "foo",
+            "has_value": true,
+            "known": false
+          }
+        ],
+        "errors": [
+          {
+            "reason": "unclosed_quote",
+            "selected_offset": 4
+          }
+        ],
+        "unknown": [],
+        "noindex": false
+      },
+      {
+        "kind": "header",
+        "name": "x-robots-tag",
+        "index": 0,
+        "input_sha256": "31245ad9975018e24bd892d88966a201594ca274df6da368d644372b536b02e6",
+        "input_characters": 7,
+        "scopes": [],
+        "flags": [
+          "noindex"
+        ],
+        "parameters": [],
+        "errors": [],
+        "unknown": [],
+        "noindex": true
+      }
+    ],
+    "flags": [
+      "noindex"
+    ],
+    "noindex": true,
+    "relevant_errors": [
+      {
+        "source": {
+          "kind": "meta",
+          "name": "robots",
+          "index": 0
+        },
+        "reason": "unclosed_quote",
+        "selected_offset": 4
+      }
+    ],
+    "state": "noindex",
+    "scope": "Googlebot text results; not Google rendering/index inspection"
+  },
+  "physical_header_to_header": {
+    "sources": [
+      {
+        "kind": "header",
+        "name": "x-robots-tag",
+        "index": 0,
+        "input_sha256": "266a02e0cad00214e1484bcc24793559d3ed8f7847977c56f1c76502852f19cc",
+        "input_characters": 6,
+        "scopes": [],
+        "flags": [],
+        "parameters": [
+          {
+            "name": "foo",
+            "has_value": true,
+            "known": false
+          }
+        ],
+        "errors": [
+          {
+            "reason": "unclosed_quote",
+            "selected_offset": 4
+          },
+          {
+            "reason": "ambiguous_header_scope",
+            "selected_offset": 4
+          }
+        ],
+        "unknown": [],
+        "noindex": false
+      },
+      {
+        "kind": "header",
+        "name": "x-robots-tag",
+        "index": 1,
+        "input_sha256": "31245ad9975018e24bd892d88966a201594ca274df6da368d644372b536b02e6",
+        "input_characters": 7,
+        "scopes": [],
+        "flags": [
+          "noindex"
+        ],
+        "parameters": [],
+        "errors": [],
+        "unknown": [],
+        "noindex": true
+      }
+    ],
+    "flags": [
+      "noindex"
+    ],
+    "noindex": true,
+    "relevant_errors": [
+      {
+        "source": {
+          "kind": "header",
+          "name": "x-robots-tag",
+          "index": 0
+        },
+        "reason": "unclosed_quote",
+        "selected_offset": 4
+      },
+      {
+        "source": {
+          "kind": "header",
+          "name": "x-robots-tag",
+          "index": 0
+        },
+        "reason": "ambiguous_header_scope",
+        "selected_offset": 4
+      }
+    ],
+    "state": "noindex",
+    "scope": "Googlebot text results; not Google rendering/index inspection"
+  },
+  "C1_bad_other_scope": {
+    "sources": [
+      {
+        "kind": "header",
+        "name": "x-robots-tag",
+        "index": 0,
+        "input_sha256": "73c013449ce5584e24a6a61ee6b9596d7c5d3c6edc83c04a427430a176f9f281",
+        "input_characters": 36,
+        "scopes": [
+          "otherbot"
+        ],
+        "flags": [],
+        "parameters": [],
+        "errors": [
+          {
+            "reason": "ambiguous_header_scope",
+            "selected_offset": 14
+          },
+          {
+            "reason": "ambiguous_comma_interpretation"
+          }
+        ],
+        "unknown": [],
+        "noindex": false
+      }
+    ],
+    "flags": [],
+    "noindex": false,
+    "relevant_errors": [
+      {
+        "source": {
+          "kind": "header",
+          "name": "x-robots-tag",
+          "index": 0
+        },
+        "reason": "ambiguous_header_scope",
+        "selected_offset": 14
+      },
+      {
+        "source": {
+          "kind": "header",
+          "name": "x-robots-tag",
+          "index": 0
+        },
+        "reason": "ambiguous_comma_interpretation"
+      }
+    ],
+    "state": "insufficient_evidence",
+    "scope": "Googlebot text results; not Google rendering/index inspection"
+  },
+  "C2_uncertain_namespace": {
+    "sources": [
+      {
+        "kind": "header",
+        "name": "x-robots-tag",
+        "index": 0,
+        "input_sha256": "c424949d9a932fc44609274191a89c6d37195d48151a731e731a61f1571df858",
+        "input_characters": 24,
+        "scopes": [
+          "max_snippet"
+        ],
+        "flags": [],
+        "parameters": [],
+        "errors": [
+          {
+            "reason": "ambiguous_comma_interpretation"
+          }
+        ],
+        "unknown": [],
+        "noindex": false
+      }
+    ],
+    "flags": [],
+    "noindex": false,
+    "relevant_errors": [
+      {
+        "source": {
+          "kind": "header",
+          "name": "x-robots-tag",
+          "index": 0
+        },
+        "reason": "ambiguous_comma_interpretation"
+      }
+    ],
+    "state": "insufficient_evidence",
+    "scope": "Googlebot text results; not Google rendering/index inspection"
+  },
+  "C3_quoted_comma": {
+    "sources": [
+      {
+        "kind": "meta",
+        "name": "robots",
+        "index": 0,
+        "input_sha256": "66306c0336ee907491e646e1494a8c4c135ab772f5f3e38158cbd51f995ee277",
+        "input_characters": 19,
+        "scopes": [
+          "robots"
+        ],
+        "flags": [],
+        "parameters": [
+          {
+            "name": "foo",
+            "has_value": true,
+            "known": false
+          }
+        ],
+        "errors": [
+          {
+            "reason": "ambiguous_comma_interpretation"
+          }
+        ],
+        "unknown": [],
+        "noindex": false
+      }
+    ],
+    "flags": [],
+    "noindex": false,
+    "relevant_errors": [
+      {
+        "source": {
+          "kind": "meta",
+          "name": "robots",
+          "index": 0
+        },
+        "reason": "ambiguous_comma_interpretation"
+      }
+    ],
+    "state": "insufficient_evidence",
+    "scope": "Googlebot text results; not Google rendering/index inspection"
+  },
+  "literal_value_only": {
+    "sources": [
+      {
+        "kind": "meta",
+        "name": "robots",
+        "index": 0,
+        "input_sha256": "e46cad8db2b396dd6fd132672af7367be7b6322a3e9e5c71325f213467655b53",
+        "input_characters": 13,
+        "scopes": [
+          "robots"
+        ],
+        "flags": [],
+        "parameters": [
+          {
+            "name": "foo",
+            "has_value": true,
+            "known": false
+          }
+        ],
+        "errors": [],
+        "unknown": [],
+        "noindex": false
+      },
+      {
+        "kind": "meta",
+        "name": "robots",
+        "index": 1,
+        "input_sha256": "473f28e7cdfcd880d4f241bc9e949a625bab58f3128b9d148621b505ba46b5c2",
+        "input_characters": 22,
+        "scopes": [
+          "robots"
+        ],
+        "flags": [],
+        "parameters": [
+          {
+            "name": "max-image-preview",
+            "has_value": true,
+            "known": true
+          }
+        ],
+        "errors": [],
+        "unknown": [],
+        "noindex": false
+      }
+    ],
+    "flags": [],
+    "noindex": false,
+    "relevant_errors": [],
+    "state": "no_restrictive_flag_observed",
+    "scope": "Googlebot text results; not Google rendering/index inspection"
+  },
+  "index_conflict": {
+    "sources": [
+      {
+        "kind": "meta",
+        "name": "robots",
+        "index": 0,
+        "input_sha256": "31245ad9975018e24bd892d88966a201594ca274df6da368d644372b536b02e6",
+        "input_characters": 7,
+        "scopes": [
+          "robots"
+        ],
+        "flags": [
+          "noindex"
+        ],
+        "parameters": [],
+        "errors": [],
+        "unknown": [],
+        "noindex": true
+      },
+      {
+        "kind": "meta",
+        "name": "googlebot",
+        "index": 0,
+        "input_sha256": "1bc04b5291c26a46d918139138b992d2de976d6851d0893b0476b85bfbdfc6e6",
+        "input_characters": 5,
+        "scopes": [
+          "googlebot"
+        ],
+        "flags": [
+          "index"
+        ],
+        "parameters": [],
+        "errors": [],
+        "unknown": [],
+        "noindex": false
+      },
+      {
+        "kind": "header",
+        "name": "x-robots-tag",
+        "index": 0,
+        "input_sha256": "1bc04b5291c26a46d918139138b992d2de976d6851d0893b0476b85bfbdfc6e6",
+        "input_characters": 5,
+        "scopes": [],
+        "flags": [
+          "index"
+        ],
+        "parameters": [],
+        "errors": [],
+        "unknown": [],
+        "noindex": false
+      }
+    ],
+    "flags": [
+      "index",
+      "noindex"
+    ],
+    "noindex": true,
+    "relevant_errors": [],
+    "state": "noindex",
+    "scope": "Googlebot text results; not Google rendering/index inspection"
+  }
+}

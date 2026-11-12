@@ -1,6 +1,6 @@
 # ADR SEO V4 001 — Rastreo y evidencia de indexabilidad
 
-Estado: propuesta de arquitectura; ejecución local autorizada por el propietario. No es aprobación de producción ni de Google.
+Estado: candidato local con QA offline; revisión independiente obligatoria pendiente. Ejecución local autorizada por el propietario. No es aprobación de producción ni de Google.
 
 ## Objetivo y fuentes
 
@@ -37,3 +37,31 @@ Contratos reales de LS.hybridScroll/cursor/filtros y continuidad de páginas: ne
 ## Reversión
 
 Cambios solo de workspace y archivos declarados. Preservar diffs ajenos existentes. Nuevos módulos aislados y extensiones CLI compatibles; rollback del intento propio por hashes, nunca reset/clean/stash. Producción, catálogo y configuración de cuentas quedan fuera del alcance.
+
+## Evidencia posterior y objeciones recibidas
+
+Consejo real inicial: `reports/runs/rhino-performance/20261111T155340-orchestration-3e864e6d/council/adr.json`. Claude entregó propuesta; worker Codex agotó inactividad. Estado `needs_evidence`, sin consenso ni autorización independiente del transporte. No se sustituyó un participante por una revisión simulada. El candidato se preparó y probó offline; el nuevo cliente HTTP no se ejecutó contra RHINO.
+
+Objeciones de Claude incorporadas al candidato, aún sujetas a revisión posterior:
+
+- La biblioteca robotparser no basta para reglas wildcard/$/precedencia: parser específico acotado, agentes separados y desconocidos fail-closed, con fixtures.
+- Proxies de entorno y redirects automáticos amplían el límite de confianza: cliente GET sin ambos; validación de cada destino.
+- DNS público sin fijar la conexión permite rebinding: IP pública validada y fijada a socket; TLS/SNI conserva el hostname.
+- URLs confidenciales pueden filtrarse en reportes: filtrado antes de persistir, rutas privadas decodificadas y exportación redactada.
+- X-Robots-Tag repetido y directivas por agente no deben aplanarse: lista de cabeceras con alcance conservado; `otherbot: noindex` no bloquea Googlebot.
+
+QA final del candidato: 88 unitarias SEO, 13 integración SEO y una prueba Chrome real local pasadas. QA quick: `reports/runs/rhino-performance/20261111T164613-quick-0c345fd0/report.json`, seis controles aprobados. No se interpreta como revisión independiente ni certificación de la tienda.
+
+Observación real separada mediante navegador existente: Home 390 px rendered/no-JS, 156 solicitudes bajo límite 180 y 90 s, sin 403/429 ni errores JavaScript. QA con dos fallos de storefront: contraste de precio anterior y cuatro imágenes sin carga útil sin JS. Readiness actualizado: `reports/runs/rhino-performance/20261111T164716-seo-v4-readiness-47b2e02b/report.json`, `insufficient_evidence` por robots no aportado. Fuente de paginación inspeccionada, pero continuidad/filtros/cursor reales `needs_evidence`; sin parche del tema.
+
+Implementación, límites por fase y comandos: [v4-engineering.md](v4-engineering.md). Fuentes: [robots Google](https://developers.google.com/crawling/docs/robots-txt/robots-txt-spec), [sitemap](https://www.sitemaps.org/protocol.html), [URL Inspection](https://developers.google.com/webmaster-tools/v1/urlInspection.index/inspect).
+
+## Revisión concreta del código: cambios solicitados
+
+`reports/runs/rhino-performance/20261111T164534-orchestration-aa9b603e/council/adr.json`: Claude `changes_requested`, Codex worker `unavailable/inactivity`; sin defensa ni acuerdo completo. `implementation_allowed: false`. No se sigue intentando al worker ni se rebajan controles.
+
+Se reprodujeron cinco defectos en pruebas adicionales: `max-image-preview:none` como falso noindex; matching de grupos robots por subcadena; motivos críticos perdidos al truncar el log; URLs de sitemap sin verificar al alcanzar max_urls; regex de acciones que excluye contenido editorial con comprar. No se acepta el subsistema basándose en los tests anteriores.
+
+Alternativa elegida para revisión humana: mantener arquitectura y proponer corrección acotada de tokenización de directivas, igualdad del product token robots, contadores por motivo independientes del log, completitud con sitemap pendiente y rutas de acción ancladas. Alternativa rechazada: aprobar el transporte porque los tests anteriores pasan, o relajar las exclusiones para conseguir mayor cobertura sin fixtures negativos.
+
+Se entrega `v4-review-corrections.patch`, probado en copia temporal aislada: cinco casos nuevos fallan en la fuente actual y pasan con el parche; suite SEO de la copia aprobada. No se aplicó el parche al workspace ni se ejecutó el nuevo crawler remoto. Evidencia con hashes y salidas: `v4-review-corrections-qa.json`. Revisión humana/independiente pendiente de este resultado concreto; la prohibición de implementar con objeciones críticas pendientes se conserva. Gate sin máscaras dinámicas sigue conservador y requiere allowlist explícita de eliminaciones; no se autoaprueba rotación de productos.

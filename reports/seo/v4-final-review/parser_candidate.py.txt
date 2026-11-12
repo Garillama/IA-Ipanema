@@ -1,0 +1,65 @@
+def _quoted_end(text, start):
+    quote, cursor = text[start], start + 1
+    while cursor < len(text):
+        if text[cursor] == '\\':
+            cursor += 2
+        elif text[cursor] == quote:
+            return cursor + 1
+        else:
+            cursor += 1
+    return len(text)
+
+
+def _header_parts(text):
+    """Split only on commas outside quoted values; never inherit a quoted bot scope."""
+    start = cursor = 0
+    while cursor < len(text):
+        if text[cursor] in ('"', "'"):
+            cursor = _quoted_end(text, cursor)
+        elif text[cursor] == ',':
+            yield text[start:cursor]
+            cursor += 1
+            start = cursor
+        else:
+            cursor += 1
+    yield text[start:]
+
+
+def has_noindex(directives):
+    """Recognize standalone flags, consuming assignment values as opaque atoms."""
+    delimiters = ',; \t\r\n'
+    names = re.compile(r'[A-Za-z][A-Za-z0-9_-]*')
+    cursor, length = 0, len(directives)
+    def atom_end(start):
+        while start < length and directives[start] not in delimiters:
+            if directives[start] in ('"', "'"):
+                start = _quoted_end(directives, start)
+            elif directives[start] == '\\':
+                start = min(length, start + 2)
+            else:
+                start += 1
+        return start
+    while cursor < length:
+        if directives[cursor] in delimiters:
+            cursor += 1
+            continue
+        match = names.match(directives, cursor)
+        if match is None:
+            cursor = atom_end(cursor)
+            continue
+        end = match.end()
+        probe = end
+        while probe < length and directives[probe].isspace():
+            probe += 1
+        if probe < length and directives[probe] in ':=':
+            probe += 1
+            while probe < length and directives[probe].isspace():
+                probe += 1
+            cursor = atom_end(probe)
+        elif end == length or directives[end] in delimiters:
+            if match[0].lower() in ('none', 'noindex'):
+                return True
+            cursor = end
+        else:
+            cursor = atom_end(end)
+    return False

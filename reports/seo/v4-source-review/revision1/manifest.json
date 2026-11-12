@@ -1,0 +1,333 @@
+{
+  "kind": "seo-v4-source-objection-matrix",
+  "patch": "reports/seo/v4-robots-sources-final.patch",
+  "patch_sha256": "a92a800a51b6611b4362d67012adaad97f9dd50964200ec17102ac510d453bfc",
+  "base_hashes": {
+    "tools/ipanema/seo/robots.py": "7a83bdac275ac8783b7b85841f14d80da0157b9044b1556989a226c1000c8f2b",
+    "tools/ipanema/seo/indexability.py": "c379c404241180894d7a0b25f91f357a56173a059f461532ec1f78fb7650b0e8",
+    "tools/ipanema/seo/page_audit.py": "e60c8b928d8e2fd62e2034a247d407f2e52bd62cddcad5b398713a561c5d140b",
+    "tools/ipanema/seo/crawl_policy.py": "0f62445b9e0fb07bce6c55c59f60b107b52a460b343ea073bb0bee5e8a6009ff",
+    "tools/ipanema/seo/crawler.py": "0cebeb3685255ac5104ce676ade56fdb071d32b00a28f8a3829a1000f2f73f4e",
+    "tools/ipanema/seo/regression.py": "17de56d903987bd89786abeb4320498fe6cdb2dca9b89d9ab70803a9d73f4d91"
+  },
+  "candidate_hashes": {
+    "tests/unit/test_seo_review_additional_v4.py": "f803cc48ddd33e34184e10b62d3ade078975d51b16f2ba81ba630b7317af647e",
+    "tests/unit/test_seo_robots_sources_v4.py": "fe399a809a1713eee80a133d0fbcfd799d039a6acb621a4ec450994ce403886a",
+    "tests/unit/test_seo_robots_values_v4.py": "c7b1c771b6a15580959ac0d881f5218dffa15a79b591ccc984621689bc7d4e3f",
+    "tools/ipanema/seo/crawl_policy.py": "b585e84df2eaffe03e12613f185a4483d242f4cefc51e4696ca44d7e6448d42b",
+    "tools/ipanema/seo/crawler.py": "c431ddf2c191cb209d4127f6961eb8da78116b225917b101b18b0cef926b27b9",
+    "tools/ipanema/seo/indexability.py": "6f4f34d2ded8af574b3822e74e9b795a5a74b41a3f7bfd16f4b6009c981cddd1",
+    "tools/ipanema/seo/page_audit.py": "a6b10451443aac8ea222eb0fcf8cdae673e21014b31d7431452b8fe669db6f34",
+    "tools/ipanema/seo/regression.py": "78d00a793f229b66d498876c833ae30d04d9d1050f5ab2fe96166faaa6b41676",
+    "tools/ipanema/seo/robots.py": "ad2671a4bcede6e2dab96fb728782a552824656688373b54a1b9ac94ba4022da"
+  },
+  "new_files_expected_absent": [
+    "tests/unit/test_seo_review_additional_v4.py",
+    "tests/unit/test_seo_robots_sources_v4.py",
+    "tests/unit/test_seo_robots_values_v4.py"
+  ],
+  "backup": {
+    "path": ".local/backups/seo-v4-robots-sources-20261111T181212Z.tar.gz",
+    "sha256": "3e50773043d6791fce3d82f758b8779cf305c5a11fb658733d8191e308339e60",
+    "verified": true,
+    "git_ignored": true
+  },
+  "foreign_snapshot": {
+    "path": ".local/seo-v4-source-foreign-20261111T181212Z.json",
+    "files": 1062,
+    "sha256": "eeb82238293c02424a592e4c6eeb8f0abbae87051903a06eb8ddafc324dbf665"
+  },
+  "agents_sha256": "0d26605296d0107c59dd498689e79e08f91d2fc2941bf82ab16593708c576f27",
+  "rows": [
+    {
+      "id": "prior-O1",
+      "objection": "max-image-preview:none produce falso noindex",
+      "test": "test_O1_preview_none_is_not_noindex; test_headers_multiple_and_scope",
+      "technical_state": "regresión previa conservada y comprobada en suite actual; aceptación sujeta a revisión nueva",
+      "acceptance": "no hereda aprobación anterior"
+    },
+    {
+      "id": "prior-O2",
+      "objection": "Selección de robots por subcadena en vez de product token",
+      "test": "test_O2_robot_product_token_not_substring; test_robots_merge_exact_groups_case_and_fallback",
+      "technical_state": "regresión previa conservada y comprobada en suite actual; aceptación sujeta a revisión nueva",
+      "acceptance": "no hereda aprobación anterior"
+    },
+    {
+      "id": "prior-O3",
+      "objection": "Exclusiones críticas perdidas tras truncar 2000 filas",
+      "test": "test_O3_late_exclusion_partial",
+      "technical_state": "regresión previa conservada y comprobada en suite actual; aceptación sujeta a revisión nueva",
+      "acceptance": "no hereda aprobación anterior"
+    },
+    {
+      "id": "prior-O4",
+      "objection": "max_urls puede ocultar URLs del sitemap sin verificar",
+      "test": "test_O4_unchecked_sitemap_partial",
+      "technical_state": "regresión previa conservada y comprobada en suite actual; aceptación sujeta a revisión nueva",
+      "acceptance": "no hereda aprobación anterior"
+    },
+    {
+      "id": "prior-O5",
+      "objection": "Palabra comprar en contenido editorial tratada como acción",
+      "test": "test_O5_editorial_action_word_allowed",
+      "technical_state": "regresión previa conservada y comprobada en suite actual; aceptación sujeta a revisión nueva",
+      "acceptance": "no hereda aprobación anterior"
+    },
+    {
+      "id": "prior-A1",
+      "objection": "Ciclo de redirects del sitemap descartado sin error",
+      "test": "test_sitemap_redirect_cycle_not_complete",
+      "technical_state": "regresión previa conservada y comprobada en suite actual; aceptación sujeta a revisión nueva",
+      "acceptance": "no hereda aprobación anterior"
+    },
+    {
+      "id": "prior-A2",
+      "objection": "Límite de redirects del sitemap descarta destino sin marcar parcial",
+      "test": "test_sitemap_redirect_limit_not_complete",
+      "technical_state": "regresión previa conservada y comprobada en suite actual; aceptación sujeta a revisión nueva",
+      "acceptance": "no hereda aprobación anterior"
+    },
+    {
+      "id": "prior-A3",
+      "objection": "Enlaces de página sitemap-only quedan sin HTTP pero complete=True",
+      "test": "test_disconnected_sitemap_outgoing_required_unchecked",
+      "technical_state": "regresión previa conservada y comprobada en suite actual; aceptación sujeta a revisión nueva",
+      "acceptance": "no hereda aprobación anterior"
+    },
+    {
+      "id": "prior-A4",
+      "objection": "NAT64 global puede incorporar IPv4 privada",
+      "test": "test_dns_transition_prefix_private_not_accepted",
+      "technical_state": "regresión previa conservada y comprobada en suite actual; aceptación sujeta a revisión nueva",
+      "acceptance": "no hereda aprobación anterior"
+    },
+    {
+      "id": "prior-A5",
+      "objection": "Sufijos y parámetros de ruta comerciales pasan el filtro",
+      "test": "test_commercial_suffix_and_matrix_routes_excluded",
+      "technical_state": "regresión previa conservada y comprobada en suite actual; aceptación sujeta a revisión nueva",
+      "acceptance": "no hereda aprobación anterior"
+    },
+    {
+      "id": "prior-A6",
+      "objection": "Espera del scheduler agota deadline antes de iniciar request",
+      "test": "test_deadline_rechecked_after_scheduler_delay",
+      "technical_state": "regresión previa conservada y comprobada en suite actual; aceptación sujeta a revisión nueva",
+      "acceptance": "no hereda aprobación anterior"
+    },
+    {
+      "id": "prior-S1",
+      "objection": "HTTP GET, certificado/SNI y ausencia de Cookie/Authorization",
+      "test": "tls_fixture.LocalTLS; TransportV4",
+      "technical_state": "regresión previa conservada y comprobada en suite actual; aceptación sujeta a revisión nueva",
+      "acceptance": "no hereda aprobación anterior"
+    },
+    {
+      "id": "prior-S2",
+      "objection": "Mismo origen HTTPS y rutas privadas tras decodificación",
+      "test": "test_domain_schemes_and_actions_in_query; test_actions_private_multiencoded_and_ambiguous; test_redirect_to_private_external_never_requested",
+      "technical_state": "regresión previa conservada y comprobada en suite actual; aceptación sujeta a revisión nueva",
+      "acceptance": "no hereda aprobación anterior"
+    },
+    {
+      "id": "prior-S3",
+      "objection": "403/429/challenge y robots desconocido detienen operaciones",
+      "test": "test_403_429_stop_from_sitemap_no_home; test_robots_unreachable_and_challenge_no_crawl",
+      "technical_state": "regresión previa conservada y comprobada en suite actual; aceptación sujeta a revisión nueva",
+      "acceptance": "no hereda aprobación anterior"
+    },
+    {
+      "id": "prior-S4",
+      "objection": "Transferencia, gzip, presupuesto y DNS fijado",
+      "test": "tests/unit/test_seo_transport_v4.py; PolicyV4.test_permissions_limits_stop_and_rate",
+      "technical_state": "regresión previa conservada y comprobada en suite actual; aceptación sujeta a revisión nueva",
+      "acceptance": "no hereda aprobación anterior"
+    },
+    {
+      "id": "prior-A7",
+      "objection": "Regresión v2: acciones con sufijos admitidas (/add-to-cart-123, /comprar-ahora)",
+      "test": "test_action_prefix_suffix_regression",
+      "technical_state": "regresión previa conservada y comprobada en suite actual; aceptación sujeta a revisión nueva",
+      "acceptance": "no hereda aprobación anterior"
+    },
+    {
+      "id": "prior-A8",
+      "objection": "PRIVATE deja pasar delimitadores como checkout-step y cart,1; acción addtocart compacta",
+      "test": "test_private_prefix_delimiters_and_action_compact",
+      "technical_state": "regresión previa conservada y comprobada en suite actual; aceptación sujeta a revisión nueva",
+      "acceptance": "no hereda aprobación anterior"
+    },
+    {
+      "id": "prior-A9",
+      "objection": "Location ausente debe producir error explícito en home, sitemap y robots",
+      "test": "test_missing_location_is_explicit_error",
+      "technical_state": "regresión previa conservada y comprobada en suite actual; aceptación sujeta a revisión nueva",
+      "acceptance": "no hereda aprobación anterior"
+    },
+    {
+      "id": "prior-A10",
+      "objection": "Registro de parser sin source no debe lanzar KeyError ni completar inventario",
+      "test": "test_malformed_sitemap_parser_record_fails_closed",
+      "technical_state": "regresión previa conservada y comprobada en suite actual; aceptación sujeta a revisión nueva",
+      "acceptance": "no hereda aprobación anterior"
+    },
+    {
+      "id": "prior-A11",
+      "objection": "User-agent con versión en robots no debe quedar silenciosamente permitido",
+      "test": "test_invalid_robots_agent_with_version_fails_closed",
+      "technical_state": "regresión previa conservada y comprobada en suite actual; aceptación sujeta a revisión nueva",
+      "acceptance": "no hereda aprobación anterior"
+    },
+    {
+      "id": "S01",
+      "objection": "Meta robots válido",
+      "test": "test_01_valid_meta_robots",
+      "technical_state": "corregido en candidato; no aplicado",
+      "acceptance": "revisión nueva pendiente"
+    },
+    {
+      "id": "S02",
+      "objection": "X-Robots-Tag válido",
+      "test": "test_02_valid_header",
+      "technical_state": "corregido en candidato; no aplicado",
+      "acceptance": "revisión nueva pendiente"
+    },
+    {
+      "id": "S03",
+      "objection": "Fuentes independientes robots/googlebot/meta duplicados",
+      "test": "test_03_independent_meta_sources",
+      "technical_state": "corregido en candidato; no aplicado",
+      "acceptance": "revisión nueva pendiente"
+    },
+    {
+      "id": "S04",
+      "objection": "Comilla abierta en meta: unknown si no hay restricción válida",
+      "test": "test_04_open_meta_without_valid_restriction_unknown",
+      "technical_state": "corregido en candidato; no aplicado",
+      "acceptance": "revisión nueva pendiente"
+    },
+    {
+      "id": "S05",
+      "objection": "Comilla abierta en cabecera: unknown si no hay restricción válida",
+      "test": "test_05_open_header_without_valid_restriction_unknown",
+      "technical_state": "corregido en candidato; no aplicado",
+      "acceptance": "revisión nueva pendiente"
+    },
+    {
+      "id": "S06",
+      "objection": "Noindex válido después de fuente malformada",
+      "test": "test_06_valid_restriction_after_malformed_source",
+      "technical_state": "corregido en candidato; no aplicado",
+      "acceptance": "revisión nueva pendiente"
+    },
+    {
+      "id": "S07",
+      "objection": "max-image-preview:none no es noindex",
+      "test": "test_07_preview_none_not_restriction",
+      "technical_state": "corregido en candidato; no aplicado",
+      "acceptance": "revisión nueva pendiente"
+    },
+    {
+      "id": "S08",
+      "objection": "Valores con noindex no son directivas",
+      "test": "test_08_quoted_values_not_flags",
+      "technical_state": "corregido en candidato; no aplicado",
+      "acceptance": "revisión nueva pendiente"
+    },
+    {
+      "id": "S09",
+      "objection": "Agente y comillas reiniciados por cabecera",
+      "test": "test_09_header_scope_resets_for_each_field",
+      "technical_state": "corregido en candidato; no aplicado",
+      "acceptance": "revisión nueva pendiente"
+    },
+    {
+      "id": "S10",
+      "objection": "Prefijos de agente y nombres dentro de valores",
+      "test": "test_10_agents_and_quoted_agent_names",
+      "technical_state": "corregido en candidato; no aplicado",
+      "acceptance": "revisión nueva pendiente"
+    },
+    {
+      "id": "S11",
+      "objection": "Index no neutraliza restricción",
+      "test": "test_11_index_never_neutralizes_noindex",
+      "technical_state": "corregido en candidato; no aplicado",
+      "acceptance": "revisión nueva pendiente"
+    },
+    {
+      "id": "S12",
+      "objection": "Desconocidas completas vs incompletas",
+      "test": "test_12_unknown_complete_and_incomplete",
+      "technical_state": "corregido en candidato; no aplicado",
+      "acceptance": "revisión nueva pendiente"
+    },
+    {
+      "id": "S13",
+      "objection": "Defecto original: meta abierto oculta header",
+      "test": "test_original_meta_quote_cannot_mask_header_noindex",
+      "technical_state": "corregido en candidato; no aplicado",
+      "acceptance": "revisión nueva pendiente"
+    },
+    {
+      "id": "S14",
+      "objection": "Defecto original: header abierto oculta siguiente",
+      "test": "test_original_repeated_header_quote_cannot_mask_next",
+      "technical_state": "corregido en candidato; no aplicado",
+      "acceptance": "revisión nueva pendiente"
+    },
+    {
+      "id": "S15",
+      "objection": "Evidencia conserva fuentes, hash, errores y ordinal",
+      "test": "test_independent_errors_and_provenance_retained",
+      "technical_state": "corregido en candidato; no aplicado",
+      "acceptance": "revisión nueva pendiente"
+    },
+    {
+      "id": "S16",
+      "objection": "Consumidores no usan texto unido para decisiones",
+      "test": "test_never_uses_legacy_joined_string_for_decision; test_legacy_page_audit_gate_does_not_parse_display_substring",
+      "technical_state": "corregido en candidato; no aplicado",
+      "acceptance": "revisión nueva pendiente"
+    },
+    {
+      "id": "S17",
+      "objection": "Noindex monotónico ante permutación de fuentes",
+      "test": "test_valid_restriction_is_monotonic_across_sources",
+      "technical_state": "corregido en candidato; no aplicado",
+      "acceptance": "revisión nueva pendiente"
+    },
+    {
+      "id": "S18",
+      "objection": "Acciones incrustadas mantienen exclusión de base",
+      "test": "test_prior_embedded_action_objection_closed",
+      "technical_state": "corregido en candidato; no aplicado",
+      "acceptance": "revisión nueva pendiente"
+    },
+    {
+      "id": "R01",
+      "objection": "Política conservadora ante agente inválido en robots.txt",
+      "test": "test_invalid_robots_agent_with_version_fails_closed",
+      "technical_state": "riesgo de compatibilidad conservado; no se relaja para aprobar",
+      "acceptance": "revisión nueva pendiente"
+    },
+    {
+      "id": "R02",
+      "objection": "Aprobación/revisión independiente del hash actual",
+      "test": "nuevo consejo Claude/Codex",
+      "technical_state": "pendiente; no hereda aprobaciones",
+      "acceptance": "revisión nueva pendiente"
+    }
+  ],
+  "applied": false,
+  "review": "pending",
+  "root_review": "Codex principal implementation/self-review; not an independent vote or replacement of council member",
+  "limits": [
+    "No storefront crawl or Google account queried",
+    "Malformed-input unknown state is conservative IA policy, not Google live validation",
+    "Six prior modules reused; no engine reconstruction",
+    "Full previous patch retained as history; new artifact applies directly to base"
+  ],
+  "prior_matrix": "reports/seo/v4-final-review/objections.json"
+}

@@ -1,0 +1,546 @@
+{
+  "project": "rhino-performance",
+  "url": "https://rhino-performance.com/",
+  "batch": "reports/runs/rhino-performance/20261112T014013-pagespeed-ten-a208cc96",
+  "complete": true,
+  "independent_measurement_target_met": false,
+  "valid_responses": 10,
+  "unique_measurements": 9,
+  "duplicate_responses": 1,
+  "statistics": {
+    "mobile": {
+      "n": 5,
+      "max": 86.0,
+      "min": 49.0,
+      "median": 71.0,
+      "pstdev": 14.92648652563623,
+      "best_report": "reports/runs/rhino-performance/20261112T014032-performance-ff40bf36/performance.json",
+      "metrics_median": {
+        "lcp": 3698.006273672772,
+        "fcp": 1368.003083297829,
+        "cls": 0.04498738742313164,
+        "tbt": 658.0,
+        "speed_index": 3737.831587800904
+      }
+    },
+    "desktop": {
+      "n": 4,
+      "max": 96.0,
+      "min": 66.0,
+      "median": 77.0,
+      "pstdev": 10.88577052853862,
+      "best_report": "reports/runs/rhino-performance/20261112T014419-performance-0c6b9596/performance.json",
+      "metrics_median": {
+        "lcp": 922.5028738991296,
+        "fcp": 328.253419704576,
+        "cls": 0.002056275150473813,
+        "tbt": 515.9289816339499,
+        "speed_index": 998.8044999396338
+      }
+    }
+  },
+  "samples": [
+    {
+      "device": "mobile",
+      "sample": 1,
+      "measured_at": "2026-11-12T01:40:15.527Z",
+      "profile": {
+        "source": "pagespeed",
+        "url": "https://rhino-performance.com/",
+        "final_url": "https://rhino-performance.com/",
+        "device": "mobile",
+        "categories": [
+          "accessibility",
+          "best-practices",
+          "performance",
+          "seo"
+        ],
+        "locale": "es",
+        "lighthouse_version": "13.6.0",
+        "chrome_version": "157.0.8103.38",
+        "screen": null,
+        "throttling_method": null,
+        "throttling": null,
+        "cache": null,
+        "network_policy": "google-managed"
+      },
+      "environment_observed": {
+        "networkUserAgent": "Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Mobile Safari/537.36",
+        "hostUserAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/157.0.8103.38 Safari/537.36",
+        "benchmarkIndex": 1094.5,
+        "credits": {
+          "axe-core": "4.14.0"
+        }
+      },
+      "response_sha256": "69ee15ce9d7029639eaeb9c8fe1c28067fde11a61be4adff93b5c00c2ac35d6a",
+      "scores": {
+        "accessibility": 0.97,
+        "best-practices": 0.96,
+        "performance": 0.86,
+        "seo": 1.0
+      },
+      "metrics": {
+        "lcp": 3218.202151974061,
+        "fcp": 1384.0035929992953,
+        "cls": 0.04549803224256637,
+        "tbt": 276.5,
+        "speed_index": 3471.938774712715
+      },
+      "warnings": [],
+      "duplicate_of": null,
+      "report": "reports/runs/rhino-performance/20261112T014032-performance-ff40bf36/performance.json"
+    },
+    {
+      "device": "desktop",
+      "sample": 1,
+      "measured_at": "2026-11-12T01:40:36.699Z",
+      "profile": {
+        "source": "pagespeed",
+        "url": "https://rhino-performance.com/",
+        "final_url": "https://rhino-performance.com/",
+        "device": "desktop",
+        "categories": [
+          "accessibility",
+          "best-practices",
+          "performance",
+          "seo"
+        ],
+        "locale": "es",
+        "lighthouse_version": "13.6.0",
+        "chrome_version": "157.0.8103.38",
+        "screen": null,
+        "throttling_method": null,
+        "throttling": null,
+        "cache": null,
+        "network_policy": "google-managed"
+      },
+      "environment_observed": {
+        "networkUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36",
+        "hostUserAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/157.0.8103.38 Safari/537.36",
+        "benchmarkIndex": 435.5,
+        "credits": {
+          "axe-core": "4.14.0"
+        }
+      },
+      "response_sha256": "618660e869883fdefbf4906517038cc7a881fbb9a84eb458703cfc9cbf09dc4e",
+      "scores": {
+        "accessibility": 0.97,
+        "best-practices": 0.96,
+        "performance": 0.66,
+        "seo": 1.0
+      },
+      "metrics": {
+        "lcp": 926.500842572847,
+        "fcp": 561.697919630715,
+        "cls": 0.0025280917529874655,
+        "tbt": 2433.5,
+        "speed_index": 1892.6258756001666
+      },
+      "warnings": [],
+      "duplicate_of": null,
+      "report": "reports/runs/rhino-performance/20261112T014119-performance-f48afbc0/performance.json"
+    },
+    {
+      "device": "mobile",
+      "sample": 2,
+      "measured_at": "2026-11-12T01:41:21.811Z",
+      "profile": {
+        "source": "pagespeed",
+        "url": "https://rhino-performance.com/",
+        "final_url": "https://rhino-performance.com/",
+        "device": "mobile",
+        "categories": [
+          "accessibility",
+          "best-practices",
+          "performance",
+          "seo"
+        ],
+        "locale": "es",
+        "lighthouse_version": "13.6.0",
+        "chrome_version": "157.0.8103.38",
+        "screen": null,
+        "throttling_method": null,
+        "throttling": null,
+        "cache": null,
+        "network_policy": "google-managed"
+      },
+      "environment_observed": {
+        "networkUserAgent": "Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Mobile Safari/537.36",
+        "hostUserAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/157.0.8103.38 Safari/537.36",
+        "benchmarkIndex": 1304,
+        "credits": {
+          "axe-core": "4.14.0"
+        }
+      },
+      "response_sha256": "8a2f1b15a5f9abf62ecf0dea2894a005b5cb7859a1fd88abbdb5a32febd45635",
+      "scores": {
+        "accessibility": 0.97,
+        "best-practices": 0.96,
+        "performance": 0.84,
+        "seo": 1.0
+      },
+      "metrics": {
+        "lcp": 3668.503710631088,
+        "fcp": 1357.501981063485,
+        "cls": 0.04414939378816738,
+        "tbt": 233.0000000000009,
+        "speed_index": 3737.831587800904
+      },
+      "warnings": [],
+      "duplicate_of": null,
+      "report": "reports/runs/rhino-performance/20261112T014137-performance-d2436adf/performance.json"
+    },
+    {
+      "device": "desktop",
+      "sample": 2,
+      "measured_at": "2026-11-12T01:41:40.655Z",
+      "profile": {
+        "source": "pagespeed",
+        "url": "https://rhino-performance.com/",
+        "final_url": "https://rhino-performance.com/",
+        "device": "desktop",
+        "categories": [
+          "accessibility",
+          "best-practices",
+          "performance",
+          "seo"
+        ],
+        "locale": "es",
+        "lighthouse_version": "13.6.0",
+        "chrome_version": "157.0.8103.38",
+        "screen": null,
+        "throttling_method": null,
+        "throttling": null,
+        "cache": null,
+        "network_policy": "google-managed"
+      },
+      "environment_observed": {
+        "networkUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36",
+        "hostUserAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/157.0.8103.38 Safari/537.36",
+        "benchmarkIndex": 471.5,
+        "credits": {
+          "axe-core": "4.14.0"
+        }
+      },
+      "response_sha256": "b7f14a653227e932bfa679fef1f9680ebb9f7aa164421d54f055e47d68e4fbc1",
+      "scores": {
+        "accessibility": 0.97,
+        "best-practices": 0.96,
+        "performance": 0.79,
+        "seo": 1.0
+      },
+      "metrics": {
+        "lcp": 918.5049052254121,
+        "fcp": 328.0027686408757,
+        "cls": 0.002061045663545717,
+        "tbt": 456.49999999999955,
+        "speed_index": 1084.5173591375474
+      },
+      "warnings": [],
+      "duplicate_of": null,
+      "report": "reports/runs/rhino-performance/20261112T014205-performance-2f5fb558/performance.json"
+    },
+    {
+      "device": "mobile",
+      "sample": 3,
+      "measured_at": "2026-11-12T01:42:08.267Z",
+      "profile": {
+        "source": "pagespeed",
+        "url": "https://rhino-performance.com/",
+        "final_url": "https://rhino-performance.com/",
+        "device": "mobile",
+        "categories": [
+          "accessibility",
+          "best-practices",
+          "performance",
+          "seo"
+        ],
+        "locale": "es",
+        "lighthouse_version": "13.6.0",
+        "chrome_version": "157.0.8103.38",
+        "screen": null,
+        "throttling_method": null,
+        "throttling": null,
+        "cache": null,
+        "network_policy": "google-managed"
+      },
+      "environment_observed": {
+        "networkUserAgent": "Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Mobile Safari/537.36",
+        "hostUserAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/157.0.8103.38 Safari/537.36",
+        "benchmarkIndex": 949.5,
+        "credits": {
+          "axe-core": "4.14.0"
+        }
+      },
+      "response_sha256": "571220f2c11c581cb20a496ffe2379bbfb6fba007035509e025198b91added77",
+      "scores": {
+        "accessibility": 0.97,
+        "best-practices": 0.96,
+        "performance": 0.55,
+        "seo": 1.0
+      },
+      "metrics": {
+        "lcp": 8792.516969487962,
+        "fcp": 1368.003083297829,
+        "cls": 0.02128825923562379,
+        "tbt": 664.9999999999991,
+        "speed_index": 5093.271456553404
+      },
+      "warnings": [],
+      "duplicate_of": null,
+      "report": "reports/runs/rhino-performance/20261112T014227-performance-61de89fe/performance.json"
+    },
+    {
+      "device": "desktop",
+      "sample": 3,
+      "measured_at": "2026-11-12T01:41:40.655Z",
+      "profile": {
+        "source": "pagespeed",
+        "url": "https://rhino-performance.com/",
+        "final_url": "https://rhino-performance.com/",
+        "device": "desktop",
+        "categories": [
+          "accessibility",
+          "best-practices",
+          "performance",
+          "seo"
+        ],
+        "locale": "es",
+        "lighthouse_version": "13.6.0",
+        "chrome_version": "157.0.8103.38",
+        "screen": null,
+        "throttling_method": null,
+        "throttling": null,
+        "cache": null,
+        "network_policy": "google-managed"
+      },
+      "environment_observed": {
+        "networkUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36",
+        "hostUserAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/157.0.8103.38 Safari/537.36",
+        "benchmarkIndex": 471.5,
+        "credits": {
+          "axe-core": "4.14.0"
+        }
+      },
+      "response_sha256": "b7f14a653227e932bfa679fef1f9680ebb9f7aa164421d54f055e47d68e4fbc1",
+      "scores": {
+        "accessibility": 0.97,
+        "best-practices": 0.96,
+        "performance": 0.79,
+        "seo": 1.0
+      },
+      "metrics": {
+        "lcp": 918.5049052254121,
+        "fcp": 328.0027686408757,
+        "cls": 0.002061045663545717,
+        "tbt": 456.49999999999955,
+        "speed_index": 1084.5173591375474
+      },
+      "warnings": [],
+      "duplicate_of": 2,
+      "report": "reports/runs/rhino-performance/20261112T014228-performance-268e3918/performance.json"
+    },
+    {
+      "device": "mobile",
+      "sample": 4,
+      "measured_at": "2026-11-12T01:42:32.129Z",
+      "profile": {
+        "source": "pagespeed",
+        "url": "https://rhino-performance.com/",
+        "final_url": "https://rhino-performance.com/",
+        "device": "mobile",
+        "categories": [
+          "accessibility",
+          "best-practices",
+          "performance",
+          "seo"
+        ],
+        "locale": "es",
+        "lighthouse_version": "13.6.0",
+        "chrome_version": "157.0.8103.38",
+        "screen": null,
+        "throttling_method": null,
+        "throttling": null,
+        "cache": null,
+        "network_policy": "google-managed"
+      },
+      "environment_observed": {
+        "networkUserAgent": "Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Mobile Safari/537.36",
+        "hostUserAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/157.0.8103.38 Safari/537.36",
+        "benchmarkIndex": 535.5,
+        "credits": {
+          "axe-core": "4.14.0"
+        }
+      },
+      "response_sha256": "8bed399d896aed926bd956cfb444ca2ddd19456933f3b63399f72528fde4c677",
+      "scores": {
+        "accessibility": 0.97,
+        "best-practices": 0.96,
+        "performance": 0.49,
+        "seo": 1.0
+      },
+      "metrics": {
+        "lcp": 7769.505677006611,
+        "fcp": 1411.000566831312,
+        "cls": 0.04498738742313164,
+        "tbt": 1138.0,
+        "speed_index": 4602.177218696286
+      },
+      "warnings": [],
+      "duplicate_of": null,
+      "report": "reports/runs/rhino-performance/20261112T014307-performance-0a17ce18/performance.json"
+    },
+    {
+      "device": "desktop",
+      "sample": 4,
+      "measured_at": "2026-11-12T01:43:10.539Z",
+      "profile": {
+        "source": "pagespeed",
+        "url": "https://rhino-performance.com/",
+        "final_url": "https://rhino-performance.com/",
+        "device": "desktop",
+        "categories": [
+          "accessibility",
+          "best-practices",
+          "performance",
+          "seo"
+        ],
+        "locale": "es",
+        "lighthouse_version": "13.6.0",
+        "chrome_version": "157.0.8103.38",
+        "screen": null,
+        "throttling_method": null,
+        "throttling": null,
+        "cache": null,
+        "network_policy": "google-managed"
+      },
+      "environment_observed": {
+        "networkUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36",
+        "hostUserAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/157.0.8103.38 Safari/537.36",
+        "benchmarkIndex": 688.5,
+        "credits": {
+          "axe-core": "4.14.0"
+        }
+      },
+      "response_sha256": "94a30d624a5517329a1ace9b18d6afb5b7fb39af542cc3e879f34ca9377e4254",
+      "scores": {
+        "accessibility": 0.97,
+        "best-practices": 0.96,
+        "performance": 0.75,
+        "seo": 1.0
+      },
+      "metrics": {
+        "lcp": 936.0040707682763,
+        "fcp": 328.5040707682764,
+        "cls": 0.002051504637401909,
+        "tbt": 575.3579632679002,
+        "speed_index": 913.0916407417203
+      },
+      "warnings": [],
+      "duplicate_of": null,
+      "report": "reports/runs/rhino-performance/20261112T014337-performance-d783b39e/performance.json"
+    },
+    {
+      "device": "mobile",
+      "sample": 5,
+      "measured_at": "2026-11-12T01:43:40.046Z",
+      "profile": {
+        "source": "pagespeed",
+        "url": "https://rhino-performance.com/",
+        "final_url": "https://rhino-performance.com/",
+        "device": "mobile",
+        "categories": [
+          "accessibility",
+          "best-practices",
+          "performance",
+          "seo"
+        ],
+        "locale": "es",
+        "lighthouse_version": "13.6.0",
+        "chrome_version": "157.0.8103.38",
+        "screen": null,
+        "throttling_method": null,
+        "throttling": null,
+        "cache": null,
+        "network_policy": "google-managed"
+      },
+      "environment_observed": {
+        "networkUserAgent": "Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Mobile Safari/537.36",
+        "hostUserAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/157.0.8103.38 Safari/537.36",
+        "benchmarkIndex": 745,
+        "credits": {
+          "axe-core": "4.14.0"
+        }
+      },
+      "response_sha256": "04e4c58486f8c9a6f73bce8e1950b45115644902c163ede190a763e183a6c9ba",
+      "scores": {
+        "accessibility": 0.97,
+        "best-practices": 0.96,
+        "performance": 0.71,
+        "seo": 1.0
+      },
+      "metrics": {
+        "lcp": 3698.006273672772,
+        "fcp": 1360.0015634181732,
+        "cls": 0.04549803224256637,
+        "tbt": 658.0,
+        "speed_index": 3535.96836805624
+      },
+      "warnings": [],
+      "duplicate_of": null,
+      "report": "reports/runs/rhino-performance/20261112T014401-performance-bd17da9e/performance.json"
+    },
+    {
+      "device": "desktop",
+      "sample": 5,
+      "measured_at": "2026-11-12T01:44:04.185Z",
+      "profile": {
+        "source": "pagespeed",
+        "url": "https://rhino-performance.com/",
+        "final_url": "https://rhino-performance.com/",
+        "device": "desktop",
+        "categories": [
+          "accessibility",
+          "best-practices",
+          "performance",
+          "seo"
+        ],
+        "locale": "es",
+        "lighthouse_version": "13.6.0",
+        "chrome_version": "157.0.8103.38",
+        "screen": null,
+        "throttling_method": null,
+        "throttling": null,
+        "cache": null,
+        "network_policy": "google-managed"
+      },
+      "environment_observed": {
+        "networkUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36",
+        "hostUserAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/157.0.8103.38 Safari/537.36",
+        "benchmarkIndex": 1340,
+        "credits": {
+          "axe-core": "4.14.0"
+        }
+      },
+      "response_sha256": "9f8c5103dead4432eb21d9c5f1e2e3cdc18a4ca297a773e47532a6215c9ff293",
+      "scores": {
+        "accessibility": 0.97,
+        "best-practices": 0.96,
+        "performance": 0.96,
+        "seo": 1.0
+      },
+      "metrics": {
+        "lcp": 844.0039395314781,
+        "fcp": 325.0017553618927,
+        "cls": 0.0020239339131428767,
+        "tbt": 155.49999999999955,
+        "speed_index": 785.420148190468
+      },
+      "warnings": [],
+      "duplicate_of": null,
+      "report": "reports/runs/rhino-performance/20261112T014419-performance-0c6b9596/performance.json"
+    }
+  ],
+  "production_changed": false,
+  "slides": 22
+}

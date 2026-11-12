@@ -1,0 +1,54 @@
+{
+  "kind": "seo-v4-robots-source-boundary-candidate",
+  "patch": "reports/seo/v4-robots-sources-final.patch",
+  "patch_sha256": "7a5a7066bb22d2f87c18286100a9fba0ce76e50e53a8cf9b211821d0eba8b4a0",
+  "patch_bytes": 58469,
+  "blocked_reference_sha256": "4369d84d3a84bd99808d92eb12ad13bcf185f300615817bb6eedd517412acc6f",
+  "base_hashes": {
+    "tools/ipanema/seo/robots.py": "7a83bdac275ac8783b7b85841f14d80da0157b9044b1556989a226c1000c8f2b",
+    "tools/ipanema/seo/indexability.py": "c379c404241180894d7a0b25f91f357a56173a059f461532ec1f78fb7650b0e8",
+    "tools/ipanema/seo/page_audit.py": "e60c8b928d8e2fd62e2034a247d407f2e52bd62cddcad5b398713a561c5d140b",
+    "tools/ipanema/seo/crawl_policy.py": "0f62445b9e0fb07bce6c55c59f60b107b52a460b343ea073bb0bee5e8a6009ff",
+    "tools/ipanema/seo/crawler.py": "0cebeb3685255ac5104ce676ade56fdb071d32b00a28f8a3829a1000f2f73f4e",
+    "tools/ipanema/seo/regression.py": "17de56d903987bd89786abeb4320498fe6cdb2dca9b89d9ab70803a9d73f4d91"
+  },
+  "candidate_hashes": {
+    "tests/unit/test_seo_review_additional_v4.py": "f803cc48ddd33e34184e10b62d3ade078975d51b16f2ba81ba630b7317af647e",
+    "tests/unit/test_seo_robots_sources_v4.py": "7a85a2ff7e7de2daa8725dcf97f7384dc6cda4903aa6659cde70ccd3a10b690b",
+    "tests/unit/test_seo_robots_values_v4.py": "6dd1dac3206bf5113f437e69209dbaf5c32a5b6015158e90d5cd8fb4bfdee1cb",
+    "tools/ipanema/seo/crawl_policy.py": "c719ba73adb1e54141cbb04dbbc0b0a6b56407fbb1459d6f4814b23718e526c1",
+    "tools/ipanema/seo/crawler.py": "29b42a929132bd5bb5ec07770a247dbd5b42a35747874f711617f5ff204d2e5b",
+    "tools/ipanema/seo/indexability.py": "6f4f34d2ded8af574b3822e74e9b795a5a74b41a3f7bfd16f4b6009c981cddd1",
+    "tools/ipanema/seo/page_audit.py": "a6b10451443aac8ea222eb0fcf8cdae673e21014b31d7431452b8fe669db6f34",
+    "tools/ipanema/seo/regression.py": "7e2dda4914557b3017d114b1441cca8eac4c5d32eec9328086ff11f5ad332026",
+    "tools/ipanema/seo/robots.py": "768e23461f75497826333ae48609cae996338c93bffab07cf7de25f9953d672a"
+  },
+  "new_files_expected_absent": [
+    "tests/unit/test_seo_review_additional_v4.py",
+    "tests/unit/test_seo_robots_sources_v4.py",
+    "tests/unit/test_seo_robots_values_v4.py"
+  ],
+  "original_two_failures_reproduced_before": true,
+  "specific_exit": 0,
+  "unit_exit": 0,
+  "integration_exit": 0,
+  "tls_exit": 0,
+  "qa_outcome": "passed",
+  "all_checks_pass": true,
+  "direct_single_patch_from_base": true,
+  "artifact_matches_tested_tree": true,
+  "workspace_base_unchanged": true,
+  "applied_to_workspace": false,
+  "theme_modified": false,
+  "production_modified": false,
+  "external_crawl_executed": false,
+  "review": "new exact-hash independent review pending; prior approvals not reused",
+  "candidate_directory": ".local/seo-v4-source-final3-eb5sdc3g",
+  "sources": [
+    "https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag",
+    "https://developers.google.com/search/docs/crawling-indexing/block-indexing"
+  ],
+  "general_unit_exit": 0,
+  "reviewed_predecessor_sha256": "467b97cc915f87ceb289b4aa36b69e8ffc6e2e45749b58b30181a9ad7842b2a9",
+  "peer_critical_cases_reproduced_before": true
+}

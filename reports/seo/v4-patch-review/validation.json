@@ -1,0 +1,50 @@
+{
+  "kind": "seo-v4-exact-patch-review",
+  "patch_sha256": "bb126cbf3300208673443de8eca360a4e797c49e91866c99413f2c434f29d093",
+  "source_hashes": {
+    "tools/ipanema/seo/robots.py": "7a83bdac275ac8783b7b85841f14d80da0157b9044b1556989a226c1000c8f2b",
+    "tools/ipanema/seo/indexability.py": "c379c404241180894d7a0b25f91f357a56173a059f461532ec1f78fb7650b0e8",
+    "tools/ipanema/seo/page_audit.py": "e60c8b928d8e2fd62e2034a247d407f2e52bd62cddcad5b398713a561c5d140b",
+    "tools/ipanema/seo/crawl_policy.py": "0f62445b9e0fb07bce6c55c59f60b107b52a460b343ea073bb0bee5e8a6009ff",
+    "tools/ipanema/seo/crawler.py": "0cebeb3685255ac5104ce676ade56fdb071d32b00a28f8a3829a1000f2f73f4e"
+  },
+  "workspace_source_unchanged": true,
+  "theme_modified": false,
+  "storefront_network_requests": 0,
+  "patch_applied_to_workspace": false,
+  "before_exit": 1,
+  "after_exact_patch_exit": 1,
+  "seo_unit_exit": 0,
+  "seo_integration_exit": 0,
+  "isolated_directory": ".local/seo-v4-exact-patch-9zof3065",
+  "before_failures": [
+    "test_O5_editorial_action_word_allowed",
+    "test_O1_preview_none_is_not_noindex",
+    "test_O1_preview_none_is_not_noindex",
+    "test_O1_preview_none_is_not_noindex",
+    "test_O2_robot_product_token_not_substring",
+    "test_O3_late_exclusion_partial",
+    "test_O4_unchecked_sitemap_partial",
+    "test_commercial_suffix_and_matrix_routes_excluded",
+    "test_commercial_suffix_and_matrix_routes_excluded",
+    "test_commercial_suffix_and_matrix_routes_excluded",
+    "test_deadline_rechecked_after_scheduler_delay",
+    "test_disconnected_sitemap_outgoing_required_unchecked",
+    "test_dns_transition_prefix_private_not_accepted",
+    "test_headers_multiple_and_scope",
+    "test_sitemap_redirect_cycle_not_complete",
+    "test_sitemap_redirect_limit_not_complete"
+  ],
+  "remaining_failures": [
+    "test_commercial_suffix_and_matrix_routes_excluded",
+    "test_commercial_suffix_and_matrix_routes_excluded",
+    "test_commercial_suffix_and_matrix_routes_excluded",
+    "test_commercial_suffix_and_matrix_routes_excluded",
+    "test_deadline_rechecked_after_scheduler_delay",
+    "test_disconnected_sitemap_outgoing_required_unchecked",
+    "test_dns_transition_prefix_private_not_accepted",
+    "test_sitemap_redirect_cycle_not_complete",
+    "test_sitemap_redirect_limit_not_complete"
+  ],
+  "policy": "No change to AGENTS, no inferred approval, no external crawl"
+}

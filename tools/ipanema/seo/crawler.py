@@ -25,9 +25,9 @@ def _public_link(link):
         return None
     try:
         value = normalize(link.get('absolute') or link['href'])
-        from .crawl_policy import PRIVATE, ACTIONS
-        from urllib.parse import unquote
-        if PRIVATE.search(unquote(urlsplit(value).path)) or ACTIONS.search(value):
+        from .crawl_policy import PRIVATE, ACTIONS, decoded_path
+        path = decoded_path(urlsplit(value).path)
+        if PRIVATE.search(path) or ACTIONS.search(path):
             return None
     except ValueError:
         return None
@@ -50,10 +50,20 @@ def graph(nodes, edges, home, sitemap_urls, *, complete=False):
                 depths[target] = depths[source] + 1
                 queue.append(target)
     by_url = {n['url']: n for n in nodes}
-    broken = [e for e in edges if by_url.get(e['target'], {}).get('status') in (404, 410)]
     site = set(sitemap_urls)
+    inventory = set(by_url) | site | set(incoming) | set(outgoing)
+    observed_nodes = []
+    for url in sorted(inventory):
+        if url in by_url:
+            observed_nodes.append({**by_url[url], 'fetched': by_url[url].get('status') is not None})
+        else:
+            kind, basis = page_type(url, {})
+            observed_nodes.append({'url': url, 'status': None, 'fetched': False,
+                'page_type': kind if basis != 'fallback_needs_template_evidence' else 'unknown', 'type_basis': basis,
+                'in_sitemap': url in site, 'indexability': {'state': 'insufficient_evidence', 'indexation_observed': False}})
+    broken = [e for e in edges if by_url.get(e['target'], {}).get('status') in (404, 410)]
     return {'nodes': [{**n, 'depth_from_home': depths.get(n['url']), 'incoming': sorted(incoming[n['url']]),
-                       'outgoing': sorted(outgoing[n['url']])} for n in nodes],
+                       'outgoing': sorted(outgoing[n['url']])} for n in observed_nodes],
             'edges': edges, 'broken_internal_links': broken,
             'sitemap_not_discovered_from_home': sorted(site - set(depths)),
             'potential_orphans': [{'url': u, 'reason': 'sitemap_url_not_reached_in_observed_home_graph',
@@ -150,10 +160,13 @@ def crawl(project, *, limits=None, allow_network=False, transport=None, captures
                     continue
                 if response['status'] != 200:
                     result['sitemaps'].append({'url': url, 'status': response['status']})
+                    result['errors'].append({'operation': 'sitemap', 'url': url, 'reason': 'http_error'})
                     continue
                 parsed = parse_sitemap(response['body'], source=url, max_entries=policy.limits.max_sitemap_entries,
                                        max_bytes=policy.limits.max_bytes)
                 result['sitemaps'].append({k: v for k, v in parsed.items() if k != 'entries'})
+                if parsed['errors']:
+                    result['errors'].append({'operation': 'sitemap', 'url': url, 'reason': 'invalid_entries'})
                 for entry in parsed['entries']:
                     try:
                         target = policy.check(entry['url'], document=parsed['kind'] == 'sitemapindex')
@@ -168,6 +181,9 @@ def crawl(project, *, limits=None, allow_network=False, transport=None, captures
                     else:
                         result['sitemap_entries'].append({**entry, 'url': target})
                         if target not in normalized_sitemap:
+                            if len(normalized_sitemap) >= policy.limits.max_discovered_urls:
+                                excluded('discovery_budget', url)
+                                continue
                             normalized_sitemap.add(target)
                             sitemap_urls.append(target)
             except IpanemaError as exc:
@@ -186,6 +202,14 @@ def crawl(project, *, limits=None, allow_network=False, transport=None, captures
                 sitemap_checks_added = True
                 for url in sitemap_urls:
                     if url not in queued:
+                        if len(queued) >= policy.limits.max_discovered_urls:
+                            excluded('discovery_budget')
+                            continue
+                        path = urlsplit(url).path
+                        if len(path_variants[path]) >= policy.limits.max_variants_per_path:
+                            excluded('query_variants_limit')
+                            continue
+                        path_variants[path].add(url)
                         queue.append((url, None, 'sitemap_check', 0))
                         queued.add(url)
                 if not queue:
@@ -213,8 +237,16 @@ def crawl(project, *, limits=None, allow_network=False, transport=None, captures
                 if response['status'] in (301, 302, 303, 307, 308):
                     target = policy.check(urljoin(url, response['headers'].get('location', '')))
                     node['redirect'] = target
-                    result['edges'].append({'source': url, 'target': target, 'text': '', 'relation': 'redirect'})
-                    if target not in queued and redirects < policy.limits.max_redirects:
+                    if len(result['edges']) < policy.limits.max_edges:
+                        result['edges'].append({'source': url, 'target': target, 'text': '', 'relation': 'redirect'})
+                    else:
+                        excluded('edge_budget', url)
+                    if target not in queued and len(queued) >= policy.limits.max_discovered_urls:
+                        excluded('discovery_budget', url)
+                    elif target not in queued and len(path_variants[urlsplit(target).path]) >= policy.limits.max_variants_per_path:
+                        excluded('query_variants_limit', url)
+                    elif target not in queued and redirects < policy.limits.max_redirects:
+                        path_variants[urlsplit(target).path].add(target)
                         queued.add(target)
                         queue.append((target, depth, 'redirect', redirects + 1))
                     elif target in seen or redirects >= policy.limits.max_redirects:
@@ -272,6 +304,9 @@ def crawl(project, *, limits=None, allow_network=False, transport=None, captures
                 rendered = extract(supplied['rendered'], url) if supplied.get('rendered') is not None else None
                 no_js = extract(supplied['no_js'], url) if supplied.get('no_js') is not None else None
                 node['layers'] = layers(snap, rendered, no_js)
+                node['layers']['main_content'] = {'initial': content,
+                    'rendered': Content(supplied['rendered']).evidence() if rendered is not None else None,
+                    'no_js': Content(supplied['no_js']).evidence() if no_js is not None else None}
                 node['readiness'] = readiness(node, node['template_audit'], rendered=rendered,
                     no_js={'links_removed': node['layers']['initial_to_no_js']['links_removed_after_js']} if no_js is not None else None)
             except (IpanemaError, ValueError) as exc:
@@ -286,7 +321,7 @@ def crawl(project, *, limits=None, allow_network=False, transport=None, captures
     result['provenance'] = fetcher.provenance()
     result['sitemap_urls'] = result.get('sitemap_urls', [])
     complete = bool(robots_known and not fetcher.stop_reason and not result['errors'] and
-                    not any(n.get('error') for n in result['urls']) and
+                    not any(n.get('error') or n.get('redirect_limit_or_cycle') for n in result['urls']) and
                     not result.get('navigation_queue_remaining') and
                     not any(x['reason'] in ('depth_limit', 'query_variants_limit', 'discovery_budget', 'edge_budget') for x in result['excluded']))
     result['graph'] = graph(result['urls'], result['edges'], policy.home, result['sitemap_urls'], complete=complete)
@@ -333,5 +368,9 @@ def export(run, result):
               'readiness': n.get('readiness', {}).get('approval')} for n in result['graph']['nodes']],
               ['url', 'status', 'page_type', 'indexability', 'canonical', 'depth', 'in_sitemap', 'incoming', 'readiness'])
     save_csv(run / 'edges.csv', result['edges'], ['source', 'target', 'text', 'relation'])
-    save_csv(run / 'sitemap.csv', result['sitemap_entries'], ['url', 'source_sitemap', 'lastmod', 'lastmod_state'])
+    by = {n['url']: n for n in result['graph']['nodes']}
+    save_csv(run / 'sitemap.csv', [{**entry, 'page_type': by.get(entry['url'], {}).get('page_type', 'unknown'),
+        'status': by.get(entry['url'], {}).get('status'), 'canonical': by.get(entry['url'], {}).get('canonical'),
+        'indexability': by.get(entry['url'], {}).get('indexability', {}).get('state', 'insufficient_evidence')}
+        for entry in result['sitemap_entries']], ['url', 'source_sitemap', 'lastmod', 'lastmod_state', 'page_type', 'status', 'canonical', 'indexability'])
     save_csv(run / 'backlog.csv', result['backlog'], ['priority', 'url', 'issue', 'component', 'action'])
