@@ -1,0 +1,21 @@
+{
+  "id": "ADR-RHINO-012-opportunities-incremental-20261113",
+  "parent": "../exports-20261113/ADR.json",
+  "status": "needs_evidence",
+  "implementation_allowed": false,
+  "decision": "Prioritize exact-page query evidence for Presoterapia, then Compresión; preserve redirect routes and metadata until a demonstrated cause exists. Reconcile incoming official Google examples by exact URL.",
+  "review": "review-status.json",
+  "remaining_conditions": [
+    "Additional official examples and verified exact-page query exports",
+    "Confirmed comparable date/filter cohorts",
+    "Dated served snippet and landing evidence before metadata mismatch claims",
+    "Destination/chain and thematic evidence before any redirect proposal",
+    "Explicit viable bounded scope before future redirect HTTP authorization"
+  ],
+  "restrictions": [
+    "No network to Rhino or Google",
+    "No production or crawler changes",
+    "No menus, content, catalog, metadata or canonical edits"
+  ],
+  "not_authorized": "No new execution or publication request is issued by this ADR."
+}

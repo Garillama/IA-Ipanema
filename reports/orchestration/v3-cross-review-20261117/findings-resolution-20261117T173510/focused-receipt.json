@@ -1,0 +1,26 @@
+{
+  "command": [
+    "python3",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "/home/alanrichard/Escritorio/IA inversa/.local/v3-findings-resolution/20261117T173510/candidate/tests/unit",
+    "-p",
+    "test_code_review_v3.py",
+    "-v"
+  ],
+  "exit_code": 0,
+  "elapsed_seconds": 1.03,
+  "network": "none; synthetic fixtures only",
+  "historical_159_repeated": false,
+  "scope": "29 focused tests plus 31 previous gate cases migrated to changed contracts; no council/orchestration suites",
+  "candidate_patch_sha256": "c240b16f37ec13a84db4e54f656f15beda7316642c2e078e8d94b906d7ed6085",
+  "checked_source_files": {
+    "tools/ipanema/orchestration/council.py": "f2e7ac875515f9d625338172eec8181aea2d9755ff9813bbf15ee532f605a1b6",
+    "tools/ipanema/orchestration/code_review.py": "ef2340db1abc358ee569439968df574f2646cfbf31ea7e545e37c64ee8f597f0",
+    "tests/unit/test_code_review_v3.py": "b45b23e2e19db2408f5bd90282fa205a34b6820389e1f490c4e609e13ab7bd09"
+  },
+  "test_output_sha256": "ef9e379816fd808ddfc63f710321e07900f992ddd495c19705cc5c26c1b7de3e",
+  "tests_passed": 60
+}

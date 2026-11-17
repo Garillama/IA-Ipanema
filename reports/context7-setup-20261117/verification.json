@@ -1,0 +1,112 @@
+{
+  "at": "2026-11-17T16:22:46.268266+00:00",
+  "versions": {
+    "node": "24.22.0",
+    "npm": "11.19.1",
+    "claude": "2.1.326",
+    "codex": "0.169.0",
+    "ctx7": "0.12.2"
+  },
+  "checks": [
+    {
+      "id": "preserved_prior_config_.claude.json",
+      "passed": true,
+      "direct_mcp_before": [],
+      "direct_mcp_after": [
+        "context7"
+      ]
+    },
+    {
+      "id": "preserved_prior_config_config.toml",
+      "passed": true,
+      "direct_mcp_before": [],
+      "direct_mcp_after": [
+        "context7"
+      ]
+    },
+    {
+      "id": "original_project_instructions_preserved",
+      "passed": true
+    },
+    {
+      "id": "claude_existing_postman_plugin_settings_unchanged",
+      "passed": true
+    },
+    {
+      "id": "scoped_docs_guidance_.claude/rules/context7.md",
+      "passed": true
+    },
+    {
+      "id": "scoped_docs_guidance_.codex/AGENTS.md",
+      "passed": true
+    }
+  ],
+  "modified_files": [
+    {
+      "path": "/home/alanrichard/.claude.json",
+      "before_sha256": "c1a60b325477c40902b0e2b5aae3d0e7edfd2f8d36c417685b5a1ef1f421d27d",
+      "after_sha256": "95bb506c6a18d59d8f7d2139041bf3851e40139fcadbbf38bad515516a61e976",
+      "created": false
+    },
+    {
+      "path": "/home/alanrichard/.claude/rules/context7.md",
+      "before_sha256": null,
+      "after_sha256": "40d4cfbca0ab9bd5edcfd6a06ce161634060a683a0d28e356331938326ddc282",
+      "created": true
+    },
+    {
+      "path": "/home/alanrichard/.claude/skills/context7-mcp/SKILL.md",
+      "before_sha256": null,
+      "after_sha256": "d1ea3447e915a7fc49ad7c6635fc4eb264ce2b15d87e4d5aa42703b5efb9d726",
+      "created": true
+    },
+    {
+      "path": "/home/alanrichard/.codex/config.toml",
+      "before_sha256": "00dbae34b7cde9bd693f0a99041d59ffc00cf02283f37138be9f67c167c1d154",
+      "after_sha256": "5a3eb52a6f5af605adcada24346b5c67c09b58aabd6375f0e6d0149939118c4e",
+      "created": false
+    },
+    {
+      "path": "/home/alanrichard/.codex/AGENTS.md",
+      "before_sha256": null,
+      "after_sha256": "992037baf4183061af7dcc269a53a8bab25d916e8249ce72aa6acc7166f5604c",
+      "created": true
+    },
+    {
+      "path": "/home/alanrichard/.agents/skills/context7-mcp/SKILL.md",
+      "before_sha256": null,
+      "after_sha256": "d1ea3447e915a7fc49ad7c6635fc4eb264ce2b15d87e4d5aa42703b5efb9d726",
+      "created": true
+    },
+    {
+      "path": "/home/alanrichard/Escritorio/IA inversa/AGENTS.md",
+      "before_sha256": "0d26605296d0107c59dd498689e79e08f91d2fc2941bf82ab16593708c576f27",
+      "after_sha256": "af67cb5269b39a340e35e6cdb187a8d706b9529ec87321b363ea22d2d6e71f22",
+      "created": false
+    }
+  ],
+  "backup_dir": "/home/alanrichard/Escritorio/IA inversa/.local/context7-setup/20261117T162025",
+  "authentication_started": false,
+  "clients": {
+    "claude": {
+      "configured": true,
+      "listed": true,
+      "auth": "Needs authentication",
+      "docs_check": "pending owner authentication and client reload"
+    },
+    "codex": {
+      "configured": true,
+      "listed": true,
+      "enabled": true,
+      "auth": "not_logged_in",
+      "docs_check": "pending owner authentication and client reload"
+    }
+  },
+  "existing_other_mcp": {
+    "codex_postman-mcp": "still listed enabled; not_logged_in; functionality not certified",
+    "claude_postman_plugin": "configuration preserved byte-for-byte; runtime functionality not tested"
+  },
+  "client_projects_modified": false,
+  "storefront_requests": 0,
+  "remote_production_changes": 0
+}

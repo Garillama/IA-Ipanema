@@ -1,0 +1,2119 @@
+{
+  "scope": "Original breadcrumb/SEO-audit/integral/indexability capture families; not arbitrary private files or future live data",
+  "candidate_capture_files_examined": 203,
+  "files_with_target_path_matches": [
+    {
+      "file": "reports/runs/rhino-performance/20261112T041447-breadcrumb-affected-article-3ec9127f/article.json",
+      "sha256": "5c5386fe9148e1efdd398939232ecc0d6d9029d333890a4fdfa6bd2e2bd3ff7d"
+    },
+    {
+      "file": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-after.json",
+      "sha256": "227b880307aaf721eb95a30ecc28622264a3f14fc0cd5c90ae4a07ac4f846bcd"
+    },
+    {
+      "file": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-before.json",
+      "sha256": "f9733c5205f54f0efdc03e87bfd1d9f8e09ea8208fd8fd4f59d732e1b37c0f15"
+    },
+    {
+      "file": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/baseline-qa.json",
+      "sha256": "342a2af14f0efe5f633ad3d3c29134f1f651495d302a4b47bd250d003ff387db"
+    },
+    {
+      "file": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/post-qa-before-harness-correction.json",
+      "sha256": "f0228bc05b8e2b8816364c14a37700a57eba3b941be1fd66e9245b8f676b04dc"
+    },
+    {
+      "file": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/post-qa-corrected.json",
+      "sha256": "573ea8fc6577338795600189d14bd6c174645f8d6b8f8b79f3713360f522c720"
+    },
+    {
+      "file": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/post-qa.json",
+      "sha256": "f0228bc05b8e2b8816364c14a37700a57eba3b941be1fd66e9245b8f676b04dc"
+    },
+    {
+      "file": "reports/runs/rhino-performance/20261112T043917-indexability-inventory-223e7de9/known-documents.json",
+      "sha256": "4b1b0c5d5dd7baacb81fc748bf3c484a654c5fd83a0fe661c3df3e22c0861968"
+    }
+  ],
+  "original_script": ".local/rhino-gsc-breadcrumb/affected.py",
+  "original_script_sha256": "ef10ba4d86bc024951a9dd785e9c89c86f9ac53317ae081d23d9ec9f004fa77f",
+  "original_retained_keys": [
+    "url",
+    "final_url",
+    "http",
+    "at",
+    "html_sha256",
+    "canonical",
+    "json_errors",
+    "breadcrumb_blocks",
+    "breadcrumb",
+    "blog_item"
+  ],
+  "rows": [
+    {
+      "url": "https://rhino-performance.com/blog/posts/brazo-de-presoterapia-transforma-tu-experiencia-deportiva-66afbbe13c5b/",
+      "original_http": 200,
+      "original_at": "2026-11-12T04:28:37.308461+00:00",
+      "original_source": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-after.json",
+      "original_source_sha256": "227b880307aaf721eb95a30ecc28622264a3f14fc0cd5c90ae4a07ac4f846bcd",
+      "canonical_recovered": [
+        "https://rhino-performance.com/blog/posts/brazo-de-presoterapia-transforma-tu-experiencia-deportiva-66afbbe13c5b/"
+      ],
+      "canonical_was_already_in_matrix": true,
+      "retained_html_sha256": "53c47195a4d5e245233cb9d9eca94c8971fdc6e94240652797e2542a5a28ff9c",
+      "retained_full_body": false,
+      "meta_robots": "not_recovered_from_scanned_original_artifacts",
+      "X_Robots_Tag": "not_recovered_from_scanned_original_artifacts",
+      "main_content": "not_recovered_from_scanned_original_artifacts",
+      "matching_records": [
+        {
+          "file": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-after.json",
+          "sha256": "227b880307aaf721eb95a30ecc28622264a3f14fc0cd5c90ae4a07ac4f846bcd",
+          "pointer": "$/rows/2",
+          "keys": [
+            "url",
+            "final_url",
+            "http",
+            "at",
+            "html_sha256",
+            "canonical",
+            "json_errors",
+            "breadcrumb_blocks",
+            "breadcrumb",
+            "blog_item"
+          ],
+          "at": "2026-11-12T04:28:37.308461+00:00",
+          "canonical": [
+            "https://rhino-performance.com/blog/posts/brazo-de-presoterapia-transforma-tu-experiencia-deportiva-66afbbe13c5b/"
+          ],
+          "meta_present": false,
+          "headers_present": false,
+          "content_present": false
+        },
+        {
+          "file": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-before.json",
+          "sha256": "f9733c5205f54f0efdc03e87bfd1d9f8e09ea8208fd8fd4f59d732e1b37c0f15",
+          "pointer": "$/rows/2",
+          "keys": [
+            "url",
+            "final_url",
+            "http",
+            "at",
+            "html_sha256",
+            "canonical",
+            "json_errors",
+            "breadcrumb_blocks",
+            "breadcrumb",
+            "blog_item"
+          ],
+          "at": "2026-11-12T04:23:39.781491+00:00",
+          "canonical": [
+            "https://rhino-performance.com/blog/posts/brazo-de-presoterapia-transforma-tu-experiencia-deportiva-66afbbe13c5b/"
+          ],
+          "meta_present": false,
+          "headers_present": false,
+          "content_present": false
+        },
+        {
+          "file": "reports/runs/rhino-performance/20261112T043917-indexability-inventory-223e7de9/known-documents.json",
+          "sha256": "4b1b0c5d5dd7baacb81fc748bf3c484a654c5fd83a0fe661c3df3e22c0861968",
+          "pointer": "$/rows/1/sitemap/entries/1",
+          "keys": [
+            "url",
+            "source_sitemap",
+            "entry",
+            "lastmod",
+            "lastmod_state"
+          ],
+          "at": null,
+          "canonical": null,
+          "meta_present": false,
+          "headers_present": false,
+          "content_present": false
+        },
+        {
+          "file": "reports/runs/rhino-performance/20261112T043917-indexability-inventory-223e7de9/known-documents.json",
+          "sha256": "4b1b0c5d5dd7baacb81fc748bf3c484a654c5fd83a0fe661c3df3e22c0861968",
+          "pointer": "$/rows/2/sitemap/entries/1",
+          "keys": [
+            "url",
+            "source_sitemap",
+            "entry",
+            "lastmod",
+            "lastmod_state"
+          ],
+          "at": null,
+          "canonical": null,
+          "meta_present": false,
+          "headers_present": false,
+          "content_present": false
+        }
+      ],
+      "potential_additional_signals": [],
+      "state": "needs_evidence_no_new_HTTP"
+    },
+    {
+      "url": "https://rhino-performance.com/blog/posts/presoterapia-el-secreto-mejor-guardado-de-los-atletas-de-elite-191a8f66c1d6/",
+      "original_http": 200,
+      "original_at": "2026-11-12T04:28:55.837755+00:00",
+      "original_source": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-after.json",
+      "original_source_sha256": "227b880307aaf721eb95a30ecc28622264a3f14fc0cd5c90ae4a07ac4f846bcd",
+      "canonical_recovered": [
+        "https://rhino-performance.com/blog/posts/presoterapia-el-secreto-mejor-guardado-de-los-atletas-de-elite-191a8f66c1d6/"
+      ],
+      "canonical_was_already_in_matrix": true,
+      "retained_html_sha256": "5be45ba0a12bb86254c15e4b292438da27a27c92651716d009ab6c112a1717a1",
+      "retained_full_body": false,
+      "meta_robots": "not_recovered_from_scanned_original_artifacts",
+      "X_Robots_Tag": "not_recovered_from_scanned_original_artifacts",
+      "main_content": "not_recovered_from_scanned_original_artifacts",
+      "matching_records": [
+        {
+          "file": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-after.json",
+          "sha256": "227b880307aaf721eb95a30ecc28622264a3f14fc0cd5c90ae4a07ac4f846bcd",
+          "pointer": "$/rows/18",
+          "keys": [
+            "url",
+            "final_url",
+            "http",
+            "at",
+            "html_sha256",
+            "canonical",
+            "json_errors",
+            "breadcrumb_blocks",
+            "breadcrumb",
+            "blog_item"
+          ],
+          "at": "2026-11-12T04:28:55.837755+00:00",
+          "canonical": [
+            "https://rhino-performance.com/blog/posts/presoterapia-el-secreto-mejor-guardado-de-los-atletas-de-elite-191a8f66c1d6/"
+          ],
+          "meta_present": false,
+          "headers_present": false,
+          "content_present": false
+        },
+        {
+          "file": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-before.json",
+          "sha256": "f9733c5205f54f0efdc03e87bfd1d9f8e09ea8208fd8fd4f59d732e1b37c0f15",
+          "pointer": "$/rows/18",
+          "keys": [
+            "url",
+            "final_url",
+            "http",
+            "at",
+            "html_sha256",
+            "canonical",
+            "json_errors",
+            "breadcrumb_blocks",
+            "breadcrumb",
+            "blog_item"
+          ],
+          "at": "2026-11-12T04:23:55.859381+00:00",
+          "canonical": [
+            "https://rhino-performance.com/blog/posts/presoterapia-el-secreto-mejor-guardado-de-los-atletas-de-elite-191a8f66c1d6/"
+          ],
+          "meta_present": false,
+          "headers_present": false,
+          "content_present": false
+        },
+        {
+          "file": "reports/runs/rhino-performance/20261112T043917-indexability-inventory-223e7de9/known-documents.json",
+          "sha256": "4b1b0c5d5dd7baacb81fc748bf3c484a654c5fd83a0fe661c3df3e22c0861968",
+          "pointer": "$/rows/1/sitemap/entries/3",
+          "keys": [
+            "url",
+            "source_sitemap",
+            "entry",
+            "lastmod",
+            "lastmod_state"
+          ],
+          "at": null,
+          "canonical": null,
+          "meta_present": false,
+          "headers_present": false,
+          "content_present": false
+        },
+        {
+          "file": "reports/runs/rhino-performance/20261112T043917-indexability-inventory-223e7de9/known-documents.json",
+          "sha256": "4b1b0c5d5dd7baacb81fc748bf3c484a654c5fd83a0fe661c3df3e22c0861968",
+          "pointer": "$/rows/2/sitemap/entries/3",
+          "keys": [
+            "url",
+            "source_sitemap",
+            "entry",
+            "lastmod",
+            "lastmod_state"
+          ],
+          "at": null,
+          "canonical": null,
+          "meta_present": false,
+          "headers_present": false,
+          "content_present": false
+        }
+      ],
+      "potential_additional_signals": [],
+      "state": "needs_evidence_no_new_HTTP"
+    },
+    {
+      "url": "https://rhino-performance.com/blog/posts/manga-de-compresion-frio-y-calor-el-aliado-perfecto-para-tu-entrenamiento-4f2d85d7c839/",
+      "original_http": 200,
+      "original_at": "2026-11-12T04:28:53.856299+00:00",
+      "original_source": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-after.json",
+      "original_source_sha256": "227b880307aaf721eb95a30ecc28622264a3f14fc0cd5c90ae4a07ac4f846bcd",
+      "canonical_recovered": [
+        "https://rhino-performance.com/blog/posts/manga-de-compresion-frio-y-calor-el-aliado-perfecto-para-tu-entrenamiento-4f2d85d7c839/"
+      ],
+      "canonical_was_already_in_matrix": true,
+      "retained_html_sha256": "1095397130980d544224b2620af97da020dad565075aba7cc5903c4cf7071a65",
+      "retained_full_body": false,
+      "meta_robots": "not_recovered_from_scanned_original_artifacts",
+      "X_Robots_Tag": "not_recovered_from_scanned_original_artifacts",
+      "main_content": "not_recovered_from_scanned_original_artifacts",
+      "matching_records": [
+        {
+          "file": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-after.json",
+          "sha256": "227b880307aaf721eb95a30ecc28622264a3f14fc0cd5c90ae4a07ac4f846bcd",
+          "pointer": "$/rows/15",
+          "keys": [
+            "url",
+            "final_url",
+            "http",
+            "at",
+            "html_sha256",
+            "canonical",
+            "json_errors",
+            "breadcrumb_blocks",
+            "breadcrumb",
+            "blog_item"
+          ],
+          "at": "2026-11-12T04:28:53.856299+00:00",
+          "canonical": [
+            "https://rhino-performance.com/blog/posts/manga-de-compresion-frio-y-calor-el-aliado-perfecto-para-tu-entrenamiento-4f2d85d7c839/"
+          ],
+          "meta_present": false,
+          "headers_present": false,
+          "content_present": false
+        },
+        {
+          "file": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-before.json",
+          "sha256": "f9733c5205f54f0efdc03e87bfd1d9f8e09ea8208fd8fd4f59d732e1b37c0f15",
+          "pointer": "$/rows/15",
+          "keys": [
+            "url",
+            "final_url",
+            "http",
+            "at",
+            "html_sha256",
+            "canonical",
+            "json_errors",
+            "breadcrumb_blocks",
+            "breadcrumb",
+            "blog_item"
+          ],
+          "at": "2026-11-12T04:23:53.303830+00:00",
+          "canonical": [
+            "https://rhino-performance.com/blog/posts/manga-de-compresion-frio-y-calor-el-aliado-perfecto-para-tu-entrenamiento-4f2d85d7c839/"
+          ],
+          "meta_present": false,
+          "headers_present": false,
+          "content_present": false
+        },
+        {
+          "file": "reports/runs/rhino-performance/20261112T043917-indexability-inventory-223e7de9/known-documents.json",
+          "sha256": "4b1b0c5d5dd7baacb81fc748bf3c484a654c5fd83a0fe661c3df3e22c0861968",
+          "pointer": "$/rows/1/sitemap/entries/4",
+          "keys": [
+            "url",
+            "source_sitemap",
+            "entry",
+            "lastmod",
+            "lastmod_state"
+          ],
+          "at": null,
+          "canonical": null,
+          "meta_present": false,
+          "headers_present": false,
+          "content_present": false
+        },
+        {
+          "file": "reports/runs/rhino-performance/20261112T043917-indexability-inventory-223e7de9/known-documents.json",
+          "sha256": "4b1b0c5d5dd7baacb81fc748bf3c484a654c5fd83a0fe661c3df3e22c0861968",
+          "pointer": "$/rows/2/sitemap/entries/4",
+          "keys": [
+            "url",
+            "source_sitemap",
+            "entry",
+            "lastmod",
+            "lastmod_state"
+          ],
+          "at": null,
+          "canonical": null,
+          "meta_present": false,
+          "headers_present": false,
+          "content_present": false
+        }
+      ],
+      "potential_additional_signals": [],
+      "state": "needs_evidence_no_new_HTTP"
+    },
+    {
+      "url": "https://rhino-performance.com/blog/posts/lo-que-tienes-que-saber-del-drenaje-linfatico-para-atletas-y-deportistas-d8be8c1a69a3/",
+      "original_http": 200,
+      "original_at": "2026-11-12T04:28:48.441023+00:00",
+      "original_source": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-after.json",
+      "original_source_sha256": "227b880307aaf721eb95a30ecc28622264a3f14fc0cd5c90ae4a07ac4f846bcd",
+      "canonical_recovered": [
+        "https://rhino-performance.com/blog/posts/lo-que-tienes-que-saber-del-drenaje-linfatico-para-atletas-y-deportistas-d8be8c1a69a3/"
+      ],
+      "canonical_was_already_in_matrix": true,
+      "retained_html_sha256": "4d92121a37e3a5e9effe0033e8d01a3aa7947b64cc0a9df18122bb96cb6aaf87",
+      "retained_full_body": false,
+      "meta_robots": "not_recovered_from_scanned_original_artifacts",
+      "X_Robots_Tag": "not_recovered_from_scanned_original_artifacts",
+      "main_content": "not_recovered_from_scanned_original_artifacts",
+      "matching_records": [
+        {
+          "file": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-after.json",
+          "sha256": "227b880307aaf721eb95a30ecc28622264a3f14fc0cd5c90ae4a07ac4f846bcd",
+          "pointer": "$/rows/10",
+          "keys": [
+            "url",
+            "final_url",
+            "http",
+            "at",
+            "html_sha256",
+            "canonical",
+            "json_errors",
+            "breadcrumb_blocks",
+            "breadcrumb",
+            "blog_item"
+          ],
+          "at": "2026-11-12T04:28:48.441023+00:00",
+          "canonical": [
+            "https://rhino-performance.com/blog/posts/lo-que-tienes-que-saber-del-drenaje-linfatico-para-atletas-y-deportistas-d8be8c1a69a3/"
+          ],
+          "meta_present": false,
+          "headers_present": false,
+          "content_present": false
+        },
+        {
+          "file": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-before.json",
+          "sha256": "f9733c5205f54f0efdc03e87bfd1d9f8e09ea8208fd8fd4f59d732e1b37c0f15",
+          "pointer": "$/rows/10",
+          "keys": [
+            "url",
+            "final_url",
+            "http",
+            "at",
+            "html_sha256",
+            "canonical",
+            "json_errors",
+            "breadcrumb_blocks",
+            "breadcrumb",
+            "blog_item"
+          ],
+          "at": "2026-11-12T04:23:48.233465+00:00",
+          "canonical": [
+            "https://rhino-performance.com/blog/posts/lo-que-tienes-que-saber-del-drenaje-linfatico-para-atletas-y-deportistas-d8be8c1a69a3/"
+          ],
+          "meta_present": false,
+          "headers_present": false,
+          "content_present": false
+        },
+        {
+          "file": "reports/runs/rhino-performance/20261112T043917-indexability-inventory-223e7de9/known-documents.json",
+          "sha256": "4b1b0c5d5dd7baacb81fc748bf3c484a654c5fd83a0fe661c3df3e22c0861968",
+          "pointer": "$/rows/1/sitemap/entries/12",
+          "keys": [
+            "url",
+            "source_sitemap",
+            "entry",
+            "lastmod",
+            "lastmod_state"
+          ],
+          "at": null,
+          "canonical": null,
+          "meta_present": false,
+          "headers_present": false,
+          "content_present": false
+        },
+        {
+          "file": "reports/runs/rhino-performance/20261112T043917-indexability-inventory-223e7de9/known-documents.json",
+          "sha256": "4b1b0c5d5dd7baacb81fc748bf3c484a654c5fd83a0fe661c3df3e22c0861968",
+          "pointer": "$/rows/2/sitemap/entries/12",
+          "keys": [
+            "url",
+            "source_sitemap",
+            "entry",
+            "lastmod",
+            "lastmod_state"
+          ],
+          "at": null,
+          "canonical": null,
+          "meta_present": false,
+          "headers_present": false,
+          "content_present": false
+        }
+      ],
+      "potential_additional_signals": [],
+      "state": "needs_evidence_no_new_HTTP"
+    },
+    {
+      "url": "https://rhino-performance.com/blog/posts/beneficios-de-la-siesta-despues-de-entrenar-clave-para-mejorar-el-rendimiento-fisico-y-mental-ef9f9c1ce142/",
+      "original_http": 200,
+      "original_at": "2026-11-12T04:28:45.294431+00:00",
+      "original_source": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-after.json",
+      "original_source_sha256": "227b880307aaf721eb95a30ecc28622264a3f14fc0cd5c90ae4a07ac4f846bcd",
+      "canonical_recovered": [
+        "https://rhino-performance.com/blog/posts/beneficios-de-la-siesta-despues-de-entrenar-clave-para-mejorar-el-rendimiento-fisico-y-mental-ef9f9c1ce142/"
+      ],
+      "canonical_was_already_in_matrix": true,
+      "retained_html_sha256": "244d64cf747debde177a83ca89272279816fafcf43779115bea1cdac2e2f43fe",
+      "retained_full_body": false,
+      "meta_robots": "not_recovered_from_scanned_original_artifacts",
+      "X_Robots_Tag": "not_recovered_from_scanned_original_artifacts",
+      "main_content": "not_recovered_from_scanned_original_artifacts",
+      "matching_records": [
+        {
+          "file": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-after.json",
+          "sha256": "227b880307aaf721eb95a30ecc28622264a3f14fc0cd5c90ae4a07ac4f846bcd",
+          "pointer": "$/rows/7",
+          "keys": [
+            "url",
+            "final_url",
+            "http",
+            "at",
+            "html_sha256",
+            "canonical",
+            "json_errors",
+            "breadcrumb_blocks",
+            "breadcrumb",
+            "blog_item"
+          ],
+          "at": "2026-11-12T04:28:45.294431+00:00",
+          "canonical": [
+            "https://rhino-performance.com/blog/posts/beneficios-de-la-siesta-despues-de-entrenar-clave-para-mejorar-el-rendimiento-fisico-y-mental-ef9f9c1ce142/"
+          ],
+          "meta_present": false,
+          "headers_present": false,
+          "content_present": false
+        },
+        {
+          "file": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-before.json",
+          "sha256": "f9733c5205f54f0efdc03e87bfd1d9f8e09ea8208fd8fd4f59d732e1b37c0f15",
+          "pointer": "$/rows/7",
+          "keys": [
+            "url",
+            "final_url",
+            "http",
+            "at",
+            "html_sha256",
+            "canonical",
+            "json_errors",
+            "breadcrumb_blocks",
+            "breadcrumb",
+            "blog_item"
+          ],
+          "at": "2026-11-12T04:23:45.131989+00:00",
+          "canonical": [
+            "https://rhino-performance.com/blog/posts/beneficios-de-la-siesta-despues-de-entrenar-clave-para-mejorar-el-rendimiento-fisico-y-mental-ef9f9c1ce142/"
+          ],
+          "meta_present": false,
+          "headers_present": false,
+          "content_present": false
+        },
+        {
+          "file": "reports/runs/rhino-performance/20261112T043917-indexability-inventory-223e7de9/known-documents.json",
+          "sha256": "4b1b0c5d5dd7baacb81fc748bf3c484a654c5fd83a0fe661c3df3e22c0861968",
+          "pointer": "$/rows/1/sitemap/entries/14",
+          "keys": [
+            "url",
+            "source_sitemap",
+            "entry",
+            "lastmod",
+            "lastmod_state"
+          ],
+          "at": null,
+          "canonical": null,
+          "meta_present": false,
+          "headers_present": false,
+          "content_present": false
+        },
+        {
+          "file": "reports/runs/rhino-performance/20261112T043917-indexability-inventory-223e7de9/known-documents.json",
+          "sha256": "4b1b0c5d5dd7baacb81fc748bf3c484a654c5fd83a0fe661c3df3e22c0861968",
+          "pointer": "$/rows/2/sitemap/entries/14",
+          "keys": [
+            "url",
+            "source_sitemap",
+            "entry",
+            "lastmod",
+            "lastmod_state"
+          ],
+          "at": null,
+          "canonical": null,
+          "meta_present": false,
+          "headers_present": false,
+          "content_present": false
+        }
+      ],
+      "potential_additional_signals": [],
+      "state": "needs_evidence_no_new_HTTP"
+    },
+    {
+      "url": "https://rhino-performance.com/blog/posts/mejora-tu-rendimiento-con-las-botas-de-presoterapia-2fc8df74a4e1/",
+      "original_http": 200,
+      "original_at": "2026-11-12T04:28:39.469421+00:00",
+      "original_source": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-after.json",
+      "original_source_sha256": "227b880307aaf721eb95a30ecc28622264a3f14fc0cd5c90ae4a07ac4f846bcd",
+      "canonical_recovered": [
+        "https://rhino-performance.com/blog/posts/mejora-tu-rendimiento-con-las-botas-de-presoterapia-2fc8df74a4e1/"
+      ],
+      "canonical_was_already_in_matrix": true,
+      "retained_html_sha256": "4665b321bcf659082169cf1a0956c838b959fc51106ce89a6d0c65d59ea3f647",
+      "retained_full_body": false,
+      "meta_robots": "not_recovered_from_scanned_original_artifacts",
+      "X_Robots_Tag": "not_recovered_from_scanned_original_artifacts",
+      "main_content": "not_recovered_from_scanned_original_artifacts",
+      "matching_records": [
+        {
+          "file": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-after.json",
+          "sha256": "227b880307aaf721eb95a30ecc28622264a3f14fc0cd5c90ae4a07ac4f846bcd",
+          "pointer": "$/rows/4",
+          "keys": [
+            "url",
+            "final_url",
+            "http",
+            "at",
+            "html_sha256",
+            "canonical",
+            "json_errors",
+            "breadcrumb_blocks",
+            "breadcrumb",
+            "blog_item"
+          ],
+          "at": "2026-11-12T04:28:39.469421+00:00",
+          "canonical": [
+            "https://rhino-performance.com/blog/posts/mejora-tu-rendimiento-con-las-botas-de-presoterapia-2fc8df74a4e1/"
+          ],
+          "meta_present": false,
+          "headers_present": false,
+          "content_present": false
+        },
+        {
+          "file": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-before.json",
+          "sha256": "f9733c5205f54f0efdc03e87bfd1d9f8e09ea8208fd8fd4f59d732e1b37c0f15",
+          "pointer": "$/rows/4",
+          "keys": [
+            "url",
+            "final_url",
+            "http",
+            "at",
+            "html_sha256",
+            "canonical",
+            "json_errors",
+            "breadcrumb_blocks",
+            "breadcrumb",
+            "blog_item"
+          ],
+          "at": "2026-11-12T04:23:41.854021+00:00",
+          "canonical": [
+            "https://rhino-performance.com/blog/posts/mejora-tu-rendimiento-con-las-botas-de-presoterapia-2fc8df74a4e1/"
+          ],
+          "meta_present": false,
+          "headers_present": false,
+          "content_present": false
+        },
+        {
+          "file": "reports/runs/rhino-performance/20261112T043917-indexability-inventory-223e7de9/known-documents.json",
+          "sha256": "4b1b0c5d5dd7baacb81fc748bf3c484a654c5fd83a0fe661c3df3e22c0861968",
+          "pointer": "$/rows/1/sitemap/entries/18",
+          "keys": [
+            "url",
+            "source_sitemap",
+            "entry",
+            "lastmod",
+            "lastmod_state"
+          ],
+          "at": null,
+          "canonical": null,
+          "meta_present": false,
+          "headers_present": false,
+          "content_present": false
+        },
+        {
+          "file": "reports/runs/rhino-performance/20261112T043917-indexability-inventory-223e7de9/known-documents.json",
+          "sha256": "4b1b0c5d5dd7baacb81fc748bf3c484a654c5fd83a0fe661c3df3e22c0861968",
+          "pointer": "$/rows/2/sitemap/entries/18",
+          "keys": [
+            "url",
+            "source_sitemap",
+            "entry",
+            "lastmod",
+            "lastmod_state"
+          ],
+          "at": null,
+          "canonical": null,
+          "meta_present": false,
+          "headers_present": false,
+          "content_present": false
+        }
+      ],
+      "potential_additional_signals": [],
+      "state": "needs_evidence_no_new_HTTP"
+    },
+    {
+      "url": "https://rhino-performance.com/blog/posts/cuando-y-cuantas-veces-deberias-usar-la-presoterapia-78ce2c4b4e15/",
+      "original_http": 200,
+      "original_at": "2026-11-12T04:28:51.575819+00:00",
+      "original_source": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-after.json",
+      "original_source_sha256": "227b880307aaf721eb95a30ecc28622264a3f14fc0cd5c90ae4a07ac4f846bcd",
+      "canonical_recovered": [
+        "https://rhino-performance.com/blog/posts/cuando-y-cuantas-veces-deberias-usar-la-presoterapia-78ce2c4b4e15/"
+      ],
+      "canonical_was_already_in_matrix": true,
+      "retained_html_sha256": "757da8ab0ac512ffd89cddaa6ae88b9d337620c27f3d3d1eb0f1a688b74bbdc1",
+      "retained_full_body": false,
+      "meta_robots": "not_recovered_from_scanned_original_artifacts",
+      "X_Robots_Tag": "not_recovered_from_scanned_original_artifacts",
+      "main_content": "not_recovered_from_scanned_original_artifacts",
+      "matching_records": [
+        {
+          "file": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-after.json",
+          "sha256": "227b880307aaf721eb95a30ecc28622264a3f14fc0cd5c90ae4a07ac4f846bcd",
+          "pointer": "$/rows/13",
+          "keys": [
+            "url",
+            "final_url",
+            "http",
+            "at",
+            "html_sha256",
+            "canonical",
+            "json_errors",
+            "breadcrumb_blocks",
+            "breadcrumb",
+            "blog_item"
+          ],
+          "at": "2026-11-12T04:28:51.575819+00:00",
+          "canonical": [
+            "https://rhino-performance.com/blog/posts/cuando-y-cuantas-veces-deberias-usar-la-presoterapia-78ce2c4b4e15/"
+          ],
+          "meta_present": false,
+          "headers_present": false,
+          "content_present": false
+        },
+        {
+          "file": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-before.json",
+          "sha256": "f9733c5205f54f0efdc03e87bfd1d9f8e09ea8208fd8fd4f59d732e1b37c0f15",
+          "pointer": "$/rows/13",
+          "keys": [
+            "url",
+            "final_url",
+            "http",
+            "at",
+            "html_sha256",
+            "canonical",
+            "json_errors",
+            "breadcrumb_blocks",
+            "breadcrumb",
+            "blog_item"
+          ],
+          "at": "2026-11-12T04:23:51.178899+00:00",
+          "canonical": [
+            "https://rhino-performance.com/blog/posts/cuando-y-cuantas-veces-deberias-usar-la-presoterapia-78ce2c4b4e15/"
+          ],
+          "meta_present": false,
+          "headers_present": false,
+          "content_present": false
+        },
+        {
+          "file": "reports/runs/rhino-performance/20261112T043917-indexability-inventory-223e7de9/known-documents.json",
+          "sha256": "4b1b0c5d5dd7baacb81fc748bf3c484a654c5fd83a0fe661c3df3e22c0861968",
+          "pointer": "$/rows/1/sitemap/entries/22",
+          "keys": [
+            "url",
+            "source_sitemap",
+            "entry",
+            "lastmod",
+            "lastmod_state"
+          ],
+          "at": null,
+          "canonical": null,
+          "meta_present": false,
+          "headers_present": false,
+          "content_present": false
+        },
+        {
+          "file": "reports/runs/rhino-performance/20261112T043917-indexability-inventory-223e7de9/known-documents.json",
+          "sha256": "4b1b0c5d5dd7baacb81fc748bf3c484a654c5fd83a0fe661c3df3e22c0861968",
+          "pointer": "$/rows/2/sitemap/entries/22",
+          "keys": [
+            "url",
+            "source_sitemap",
+            "entry",
+            "lastmod",
+            "lastmod_state"
+          ],
+          "at": null,
+          "canonical": null,
+          "meta_present": false,
+          "headers_present": false,
+          "content_present": false
+        }
+      ],
+      "potential_additional_signals": [],
+      "state": "needs_evidence_no_new_HTTP"
+    },
+    {
+      "url": "https://rhino-performance.com/blog/posts/la-presoterapia-como-complemento-en-la-recuperacion-postoperatoria-5bab92e6be21/",
+      "original_http": 200,
+      "original_at": "2026-11-12T04:28:36.277119+00:00",
+      "original_source": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-after.json",
+      "original_source_sha256": "227b880307aaf721eb95a30ecc28622264a3f14fc0cd5c90ae4a07ac4f846bcd",
+      "canonical_recovered": [
+        "https://rhino-performance.com/blog/posts/la-presoterapia-como-complemento-en-la-recuperacion-postoperatoria-5bab92e6be21/"
+      ],
+      "canonical_was_already_in_matrix": true,
+      "retained_html_sha256": "6ac5394e188908b0116d60e2d9d4abe596011d2c024f590f573052571c8cc104",
+      "retained_full_body": false,
+      "meta_robots": "not_recovered_from_scanned_original_artifacts",
+      "X_Robots_Tag": "not_recovered_from_scanned_original_artifacts",
+      "main_content": "not_recovered_from_scanned_original_artifacts",
+      "matching_records": [
+        {
+          "file": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-after.json",
+          "sha256": "227b880307aaf721eb95a30ecc28622264a3f14fc0cd5c90ae4a07ac4f846bcd",
+          "pointer": "$/rows/1",
+          "keys": [
+            "url",
+            "final_url",
+            "http",
+            "at",
+            "html_sha256",
+            "canonical",
+            "json_errors",
+            "breadcrumb_blocks",
+            "breadcrumb",
+            "blog_item"
+          ],
+          "at": "2026-11-12T04:28:36.277119+00:00",
+          "canonical": [
+            "https://rhino-performance.com/blog/posts/la-presoterapia-como-complemento-en-la-recuperacion-postoperatoria-5bab92e6be21/"
+          ],
+          "meta_present": false,
+          "headers_present": false,
+          "content_present": false
+        },
+        {
+          "file": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-before.json",
+          "sha256": "f9733c5205f54f0efdc03e87bfd1d9f8e09ea8208fd8fd4f59d732e1b37c0f15",
+          "pointer": "$/rows/1",
+          "keys": [
+            "url",
+            "final_url",
+            "http",
+            "at",
+            "html_sha256",
+            "canonical",
+            "json_errors",
+            "breadcrumb_blocks",
+            "breadcrumb",
+            "blog_item"
+          ],
+          "at": "2026-11-12T04:23:38.799682+00:00",
+          "canonical": [
+            "https://rhino-performance.com/blog/posts/la-presoterapia-como-complemento-en-la-recuperacion-postoperatoria-5bab92e6be21/"
+          ],
+          "meta_present": false,
+          "headers_present": false,
+          "content_present": false
+        },
+        {
+          "file": "reports/runs/rhino-performance/20261112T043917-indexability-inventory-223e7de9/known-documents.json",
+          "sha256": "4b1b0c5d5dd7baacb81fc748bf3c484a654c5fd83a0fe661c3df3e22c0861968",
+          "pointer": "$/rows/1/sitemap/entries/23",
+          "keys": [
+            "url",
+            "source_sitemap",
+            "entry",
+            "lastmod",
+            "lastmod_state"
+          ],
+          "at": null,
+          "canonical": null,
+          "meta_present": false,
+          "headers_present": false,
+          "content_present": false
+        },
+        {
+          "file": "reports/runs/rhino-performance/20261112T043917-indexability-inventory-223e7de9/known-documents.json",
+          "sha256": "4b1b0c5d5dd7baacb81fc748bf3c484a654c5fd83a0fe661c3df3e22c0861968",
+          "pointer": "$/rows/2/sitemap/entries/23",
+          "keys": [
+            "url",
+            "source_sitemap",
+            "entry",
+            "lastmod",
+            "lastmod_state"
+          ],
+          "at": null,
+          "canonical": null,
+          "meta_present": false,
+          "headers_present": false,
+          "content_present": false
+        }
+      ],
+      "potential_additional_signals": [],
+      "state": "needs_evidence_no_new_HTTP"
+    },
+    {
+      "url": "https://rhino-performance.com/blog/posts/7-tipos-de-entrenamiento-que-debes-hacer-antes-de-correr-un-maraton-o-cualquier-carrera-244573e551fa/",
+      "original_http": 200,
+      "original_at": "2026-11-12T04:28:52.774600+00:00",
+      "original_source": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-after.json",
+      "original_source_sha256": "227b880307aaf721eb95a30ecc28622264a3f14fc0cd5c90ae4a07ac4f846bcd",
+      "canonical_recovered": [
+        "https://rhino-performance.com/blog/posts/7-tipos-de-entrenamiento-que-debes-hacer-antes-de-correr-un-maraton-o-cualquier-carrera-244573e551fa/"
+      ],
+      "canonical_was_already_in_matrix": true,
+      "retained_html_sha256": "88a1639e31aa5bbe29f3a36a9a29706256b947c1fc8143d75e1e9e08c2e88976",
+      "retained_full_body": false,
+      "meta_robots": "not_recovered_from_scanned_original_artifacts",
+      "X_Robots_Tag": "not_recovered_from_scanned_original_artifacts",
+      "main_content": "not_recovered_from_scanned_original_artifacts",
+      "matching_records": [
+        {
+          "file": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-after.json",
+          "sha256": "227b880307aaf721eb95a30ecc28622264a3f14fc0cd5c90ae4a07ac4f846bcd",
+          "pointer": "$/rows/14",
+          "keys": [
+            "url",
+            "final_url",
+            "http",
+            "at",
+            "html_sha256",
+            "canonical",
+            "json_errors",
+            "breadcrumb_blocks",
+            "breadcrumb",
+            "blog_item"
+          ],
+          "at": "2026-11-12T04:28:52.774600+00:00",
+          "canonical": [
+            "https://rhino-performance.com/blog/posts/7-tipos-de-entrenamiento-que-debes-hacer-antes-de-correr-un-maraton-o-cualquier-carrera-244573e551fa/"
+          ],
+          "meta_present": false,
+          "headers_present": false,
+          "content_present": false
+        },
+        {
+          "file": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-before.json",
+          "sha256": "f9733c5205f54f0efdc03e87bfd1d9f8e09ea8208fd8fd4f59d732e1b37c0f15",
+          "pointer": "$/rows/14",
+          "keys": [
+            "url",
+            "final_url",
+            "http",
+            "at",
+            "html_sha256",
+            "canonical",
+            "json_errors",
+            "breadcrumb_blocks",
+            "breadcrumb",
+            "blog_item"
+          ],
+          "at": "2026-11-12T04:23:52.250795+00:00",
+          "canonical": [
+            "https://rhino-performance.com/blog/posts/7-tipos-de-entrenamiento-que-debes-hacer-antes-de-correr-un-maraton-o-cualquier-carrera-244573e551fa/"
+          ],
+          "meta_present": false,
+          "headers_present": false,
+          "content_present": false
+        },
+        {
+          "file": "reports/runs/rhino-performance/20261112T043917-indexability-inventory-223e7de9/known-documents.json",
+          "sha256": "4b1b0c5d5dd7baacb81fc748bf3c484a654c5fd83a0fe661c3df3e22c0861968",
+          "pointer": "$/rows/1/sitemap/entries/28",
+          "keys": [
+            "url",
+            "source_sitemap",
+            "entry",
+            "lastmod",
+            "lastmod_state"
+          ],
+          "at": null,
+          "canonical": null,
+          "meta_present": false,
+          "headers_present": false,
+          "content_present": false
+        },
+        {
+          "file": "reports/runs/rhino-performance/20261112T043917-indexability-inventory-223e7de9/known-documents.json",
+          "sha256": "4b1b0c5d5dd7baacb81fc748bf3c484a654c5fd83a0fe661c3df3e22c0861968",
+          "pointer": "$/rows/2/sitemap/entries/28",
+          "keys": [
+            "url",
+            "source_sitemap",
+            "entry",
+            "lastmod",
+            "lastmod_state"
+          ],
+          "at": null,
+          "canonical": null,
+          "meta_present": false,
+          "headers_present": false,
+          "content_present": false
+        }
+      ],
+      "potential_additional_signals": [],
+      "state": "needs_evidence_no_new_HTTP"
+    },
+    {
+      "url": "https://rhino-performance.com/blog/posts/hormonas-que-hacen-que-ames-correr-d6b29d573534/",
+      "original_http": 200,
+      "original_at": "2026-11-12T04:28:49.413618+00:00",
+      "original_source": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-after.json",
+      "original_source_sha256": "227b880307aaf721eb95a30ecc28622264a3f14fc0cd5c90ae4a07ac4f846bcd",
+      "canonical_recovered": [
+        "https://rhino-performance.com/blog/posts/hormonas-que-hacen-que-ames-correr-d6b29d573534/"
+      ],
+      "canonical_was_already_in_matrix": true,
+      "retained_html_sha256": "c09862e7e36d1ad7982b24c2a0ae35e1392c80b229aba2930ec028fba69176e8",
+      "retained_full_body": false,
+      "meta_robots": "not_recovered_from_scanned_original_artifacts",
+      "X_Robots_Tag": "not_recovered_from_scanned_original_artifacts",
+      "main_content": "not_recovered_from_scanned_original_artifacts",
+      "matching_records": [
+        {
+          "file": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-after.json",
+          "sha256": "227b880307aaf721eb95a30ecc28622264a3f14fc0cd5c90ae4a07ac4f846bcd",
+          "pointer": "$/rows/11",
+          "keys": [
+            "url",
+            "final_url",
+            "http",
+            "at",
+            "html_sha256",
+            "canonical",
+            "json_errors",
+            "breadcrumb_blocks",
+            "breadcrumb",
+            "blog_item"
+          ],
+          "at": "2026-11-12T04:28:49.413618+00:00",
+          "canonical": [
+            "https://rhino-performance.com/blog/posts/hormonas-que-hacen-que-ames-correr-d6b29d573534/"
+          ],
+          "meta_present": false,
+          "headers_present": false,
+          "content_present": false
+        },
+        {
+          "file": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-before.json",
+          "sha256": "f9733c5205f54f0efdc03e87bfd1d9f8e09ea8208fd8fd4f59d732e1b37c0f15",
+          "pointer": "$/rows/11",
+          "keys": [
+            "url",
+            "final_url",
+            "http",
+            "at",
+            "html_sha256",
+            "canonical",
+            "json_errors",
+            "breadcrumb_blocks",
+            "breadcrumb",
+            "blog_item"
+          ],
+          "at": "2026-11-12T04:23:49.125790+00:00",
+          "canonical": [
+            "https://rhino-performance.com/blog/posts/hormonas-que-hacen-que-ames-correr-d6b29d573534/"
+          ],
+          "meta_present": false,
+          "headers_present": false,
+          "content_present": false
+        },
+        {
+          "file": "reports/runs/rhino-performance/20261112T043917-indexability-inventory-223e7de9/known-documents.json",
+          "sha256": "4b1b0c5d5dd7baacb81fc748bf3c484a654c5fd83a0fe661c3df3e22c0861968",
+          "pointer": "$/rows/1/sitemap/entries/32",
+          "keys": [
+            "url",
+            "source_sitemap",
+            "entry",
+            "lastmod",
+            "lastmod_state"
+          ],
+          "at": null,
+          "canonical": null,
+          "meta_present": false,
+          "headers_present": false,
+          "content_present": false
+        },
+        {
+          "file": "reports/runs/rhino-performance/20261112T043917-indexability-inventory-223e7de9/known-documents.json",
+          "sha256": "4b1b0c5d5dd7baacb81fc748bf3c484a654c5fd83a0fe661c3df3e22c0861968",
+          "pointer": "$/rows/2/sitemap/entries/32",
+          "keys": [
+            "url",
+            "source_sitemap",
+            "entry",
+            "lastmod",
+            "lastmod_state"
+          ],
+          "at": null,
+          "canonical": null,
+          "meta_present": false,
+          "headers_present": false,
+          "content_present": false
+        }
+      ],
+      "potential_additional_signals": [],
+      "state": "needs_evidence_no_new_HTTP"
+    },
+    {
+      "url": "https://rhino-performance.com/blog/posts/recuperacion-muscular-en-el-futbol-americano-la-clave-para-un-mejor-rendimiento-b450f269375a/",
+      "original_http": 200,
+      "original_at": "2026-11-12T04:28:38.377755+00:00",
+      "original_source": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-after.json",
+      "original_source_sha256": "227b880307aaf721eb95a30ecc28622264a3f14fc0cd5c90ae4a07ac4f846bcd",
+      "canonical_recovered": [
+        "https://rhino-performance.com/blog/posts/recuperacion-muscular-en-el-futbol-americano-la-clave-para-un-mejor-rendimiento-b450f269375a/"
+      ],
+      "canonical_was_already_in_matrix": true,
+      "retained_html_sha256": "c6349e1fee15e986cb95897932dfa80dda2de4c20571737b582a0709600796eb",
+      "retained_full_body": false,
+      "meta_robots": "not_recovered_from_scanned_original_artifacts",
+      "X_Robots_Tag": "not_recovered_from_scanned_original_artifacts",
+      "main_content": "not_recovered_from_scanned_original_artifacts",
+      "matching_records": [
+        {
+          "file": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-after.json",
+          "sha256": "227b880307aaf721eb95a30ecc28622264a3f14fc0cd5c90ae4a07ac4f846bcd",
+          "pointer": "$/rows/3",
+          "keys": [
+            "url",
+            "final_url",
+            "http",
+            "at",
+            "html_sha256",
+            "canonical",
+            "json_errors",
+            "breadcrumb_blocks",
+            "breadcrumb",
+            "blog_item"
+          ],
+          "at": "2026-11-12T04:28:38.377755+00:00",
+          "canonical": [
+            "https://rhino-performance.com/blog/posts/recuperacion-muscular-en-el-futbol-americano-la-clave-para-un-mejor-rendimiento-b450f269375a/"
+          ],
+          "meta_present": false,
+          "headers_present": false,
+          "content_present": false
+        },
+        {
+          "file": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-before.json",
+          "sha256": "f9733c5205f54f0efdc03e87bfd1d9f8e09ea8208fd8fd4f59d732e1b37c0f15",
+          "pointer": "$/rows/3",
+          "keys": [
+            "url",
+            "final_url",
+            "http",
+            "at",
+            "html_sha256",
+            "canonical",
+            "json_errors",
+            "breadcrumb_blocks",
+            "breadcrumb",
+            "blog_item"
+          ],
+          "at": "2026-11-12T04:23:40.755477+00:00",
+          "canonical": [
+            "https://rhino-performance.com/blog/posts/recuperacion-muscular-en-el-futbol-americano-la-clave-para-un-mejor-rendimiento-b450f269375a/"
+          ],
+          "meta_present": false,
+          "headers_present": false,
+          "content_present": false
+        },
+        {
+          "file": "reports/runs/rhino-performance/20261112T043917-indexability-inventory-223e7de9/known-documents.json",
+          "sha256": "4b1b0c5d5dd7baacb81fc748bf3c484a654c5fd83a0fe661c3df3e22c0861968",
+          "pointer": "$/rows/1/sitemap/entries/35",
+          "keys": [
+            "url",
+            "source_sitemap",
+            "entry",
+            "lastmod",
+            "lastmod_state"
+          ],
+          "at": null,
+          "canonical": null,
+          "meta_present": false,
+          "headers_present": false,
+          "content_present": false
+        },
+        {
+          "file": "reports/runs/rhino-performance/20261112T043917-indexability-inventory-223e7de9/known-documents.json",
+          "sha256": "4b1b0c5d5dd7baacb81fc748bf3c484a654c5fd83a0fe661c3df3e22c0861968",
+          "pointer": "$/rows/2/sitemap/entries/35",
+          "keys": [
+            "url",
+            "source_sitemap",
+            "entry",
+            "lastmod",
+            "lastmod_state"
+          ],
+          "at": null,
+          "canonical": null,
+          "meta_present": false,
+          "headers_present": false,
+          "content_present": false
+        }
+      ],
+      "potential_additional_signals": [],
+      "state": "needs_evidence_no_new_HTTP"
+    },
+    {
+      "url": "https://rhino-performance.com/blog/posts/retencion-de-liquidos-en-atletas-por-que-ocurre-y-como-tratarla-70e0723bf879/",
+      "original_http": 200,
+      "original_at": "2026-11-12T04:28:41.362755+00:00",
+      "original_source": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-after.json",
+      "original_source_sha256": "227b880307aaf721eb95a30ecc28622264a3f14fc0cd5c90ae4a07ac4f846bcd",
+      "canonical_recovered": [
+        "https://rhino-performance.com/blog/posts/retencion-de-liquidos-en-atletas-por-que-ocurre-y-como-tratarla-70e0723bf879/"
+      ],
+      "canonical_was_already_in_matrix": true,
+      "retained_html_sha256": "789ae36be3b263cf6fac3a8d989878cc42d58e088aaefa88c99d04da4886bdb5",
+      "retained_full_body": false,
+      "meta_robots": "not_recovered_from_scanned_original_artifacts",
+      "X_Robots_Tag": "not_recovered_from_scanned_original_artifacts",
+      "main_content": "not_recovered_from_scanned_original_artifacts",
+      "matching_records": [
+        {
+          "file": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-after.json",
+          "sha256": "227b880307aaf721eb95a30ecc28622264a3f14fc0cd5c90ae4a07ac4f846bcd",
+          "pointer": "$/rows/5",
+          "keys": [
+            "url",
+            "final_url",
+            "http",
+            "at",
+            "html_sha256",
+            "canonical",
+            "json_errors",
+            "breadcrumb_blocks",
+            "breadcrumb",
+            "blog_item"
+          ],
+          "at": "2026-11-12T04:28:41.362755+00:00",
+          "canonical": [
+            "https://rhino-performance.com/blog/posts/retencion-de-liquidos-en-atletas-por-que-ocurre-y-como-tratarla-70e0723bf879/"
+          ],
+          "meta_present": false,
+          "headers_present": false,
+          "content_present": false
+        },
+        {
+          "file": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-before.json",
+          "sha256": "f9733c5205f54f0efdc03e87bfd1d9f8e09ea8208fd8fd4f59d732e1b37c0f15",
+          "pointer": "$/rows/5",
+          "keys": [
+            "url",
+            "final_url",
+            "http",
+            "at",
+            "html_sha256",
+            "canonical",
+            "json_errors",
+            "breadcrumb_blocks",
+            "breadcrumb",
+            "blog_item"
+          ],
+          "at": "2026-11-12T04:23:43.267690+00:00",
+          "canonical": [
+            "https://rhino-performance.com/blog/posts/retencion-de-liquidos-en-atletas-por-que-ocurre-y-como-tratarla-70e0723bf879/"
+          ],
+          "meta_present": false,
+          "headers_present": false,
+          "content_present": false
+        },
+        {
+          "file": "reports/runs/rhino-performance/20261112T043917-indexability-inventory-223e7de9/known-documents.json",
+          "sha256": "4b1b0c5d5dd7baacb81fc748bf3c484a654c5fd83a0fe661c3df3e22c0861968",
+          "pointer": "$/rows/1/sitemap/entries/49",
+          "keys": [
+            "url",
+            "source_sitemap",
+            "entry",
+            "lastmod",
+            "lastmod_state"
+          ],
+          "at": null,
+          "canonical": null,
+          "meta_present": false,
+          "headers_present": false,
+          "content_present": false
+        },
+        {
+          "file": "reports/runs/rhino-performance/20261112T043917-indexability-inventory-223e7de9/known-documents.json",
+          "sha256": "4b1b0c5d5dd7baacb81fc748bf3c484a654c5fd83a0fe661c3df3e22c0861968",
+          "pointer": "$/rows/2/sitemap/entries/49",
+          "keys": [
+            "url",
+            "source_sitemap",
+            "entry",
+            "lastmod",
+            "lastmod_state"
+          ],
+          "at": null,
+          "canonical": null,
+          "meta_present": false,
+          "headers_present": false,
+          "content_present": false
+        }
+      ],
+      "potential_additional_signals": [],
+      "state": "needs_evidence_no_new_HTTP"
+    },
+    {
+      "url": "https://rhino-performance.com/blog/posts/en-que-situaciones-no-se-recomienda-el-uso-de-presoterapia-61b45d53ea7b/",
+      "original_http": 200,
+      "original_at": "2026-11-12T04:28:50.565305+00:00",
+      "original_source": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-after.json",
+      "original_source_sha256": "227b880307aaf721eb95a30ecc28622264a3f14fc0cd5c90ae4a07ac4f846bcd",
+      "canonical_recovered": [
+        "https://rhino-performance.com/blog/posts/en-que-situaciones-no-se-recomienda-el-uso-de-presoterapia-61b45d53ea7b/"
+      ],
+      "canonical_was_already_in_matrix": true,
+      "retained_html_sha256": "8ced148120b2113e0d9e187aafb90a0f8040fa9604eacc4c676e7bd50f68a094",
+      "retained_full_body": false,
+      "meta_robots": "not_recovered_from_scanned_original_artifacts",
+      "X_Robots_Tag": "not_recovered_from_scanned_original_artifacts",
+      "main_content": "not_recovered_from_scanned_original_artifacts",
+      "matching_records": [
+        {
+          "file": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-after.json",
+          "sha256": "227b880307aaf721eb95a30ecc28622264a3f14fc0cd5c90ae4a07ac4f846bcd",
+          "pointer": "$/rows/12",
+          "keys": [
+            "url",
+            "final_url",
+            "http",
+            "at",
+            "html_sha256",
+            "canonical",
+            "json_errors",
+            "breadcrumb_blocks",
+            "breadcrumb",
+            "blog_item"
+          ],
+          "at": "2026-11-12T04:28:50.565305+00:00",
+          "canonical": [
+            "https://rhino-performance.com/blog/posts/en-que-situaciones-no-se-recomienda-el-uso-de-presoterapia-61b45d53ea7b/"
+          ],
+          "meta_present": false,
+          "headers_present": false,
+          "content_present": false
+        },
+        {
+          "file": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-before.json",
+          "sha256": "f9733c5205f54f0efdc03e87bfd1d9f8e09ea8208fd8fd4f59d732e1b37c0f15",
+          "pointer": "$/rows/12",
+          "keys": [
+            "url",
+            "final_url",
+            "http",
+            "at",
+            "html_sha256",
+            "canonical",
+            "json_errors",
+            "breadcrumb_blocks",
+            "breadcrumb",
+            "blog_item"
+          ],
+          "at": "2026-11-12T04:23:50.051777+00:00",
+          "canonical": [
+            "https://rhino-performance.com/blog/posts/en-que-situaciones-no-se-recomienda-el-uso-de-presoterapia-61b45d53ea7b/"
+          ],
+          "meta_present": false,
+          "headers_present": false,
+          "content_present": false
+        },
+        {
+          "file": "reports/runs/rhino-performance/20261112T043917-indexability-inventory-223e7de9/known-documents.json",
+          "sha256": "4b1b0c5d5dd7baacb81fc748bf3c484a654c5fd83a0fe661c3df3e22c0861968",
+          "pointer": "$/rows/1/sitemap/entries/52",
+          "keys": [
+            "url",
+            "source_sitemap",
+            "entry",
+            "lastmod",
+            "lastmod_state"
+          ],
+          "at": null,
+          "canonical": null,
+          "meta_present": false,
+          "headers_present": false,
+          "content_present": false
+        },
+        {
+          "file": "reports/runs/rhino-performance/20261112T043917-indexability-inventory-223e7de9/known-documents.json",
+          "sha256": "4b1b0c5d5dd7baacb81fc748bf3c484a654c5fd83a0fe661c3df3e22c0861968",
+          "pointer": "$/rows/2/sitemap/entries/52",
+          "keys": [
+            "url",
+            "source_sitemap",
+            "entry",
+            "lastmod",
+            "lastmod_state"
+          ],
+          "at": null,
+          "canonical": null,
+          "meta_present": false,
+          "headers_present": false,
+          "content_present": false
+        }
+      ],
+      "potential_additional_signals": [],
+      "state": "needs_evidence_no_new_HTTP"
+    },
+    {
+      "url": "https://rhino-performance.com/blog/posts/mangas-de-compresion-frio-y-calor-para-el-cuidado-muscular-a30fa0abf6a7/",
+      "original_http": 200,
+      "original_at": "2026-11-12T04:28:46.385337+00:00",
+      "original_source": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-after.json",
+      "original_source_sha256": "227b880307aaf721eb95a30ecc28622264a3f14fc0cd5c90ae4a07ac4f846bcd",
+      "canonical_recovered": [
+        "https://rhino-performance.com/blog/posts/mangas-de-compresion-frio-y-calor-para-el-cuidado-muscular-a30fa0abf6a7/"
+      ],
+      "canonical_was_already_in_matrix": true,
+      "retained_html_sha256": "3b6f0412c753a348d7919d8fe31fba84da95c6c58971ca961d444cf1ef853f82",
+      "retained_full_body": false,
+      "meta_robots": "not_recovered_from_scanned_original_artifacts",
+      "X_Robots_Tag": "not_recovered_from_scanned_original_artifacts",
+      "main_content": "not_recovered_from_scanned_original_artifacts",
+      "matching_records": [
+        {
+          "file": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-after.json",
+          "sha256": "227b880307aaf721eb95a30ecc28622264a3f14fc0cd5c90ae4a07ac4f846bcd",
+          "pointer": "$/rows/8",
+          "keys": [
+            "url",
+            "final_url",
+            "http",
+            "at",
+            "html_sha256",
+            "canonical",
+            "json_errors",
+            "breadcrumb_blocks",
+            "breadcrumb",
+            "blog_item"
+          ],
+          "at": "2026-11-12T04:28:46.385337+00:00",
+          "canonical": [
+            "https://rhino-performance.com/blog/posts/mangas-de-compresion-frio-y-calor-para-el-cuidado-muscular-a30fa0abf6a7/"
+          ],
+          "meta_present": false,
+          "headers_present": false,
+          "content_present": false
+        },
+        {
+          "file": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-before.json",
+          "sha256": "f9733c5205f54f0efdc03e87bfd1d9f8e09ea8208fd8fd4f59d732e1b37c0f15",
+          "pointer": "$/rows/8",
+          "keys": [
+            "url",
+            "final_url",
+            "http",
+            "at",
+            "html_sha256",
+            "canonical",
+            "json_errors",
+            "breadcrumb_blocks",
+            "breadcrumb",
+            "blog_item"
+          ],
+          "at": "2026-11-12T04:23:46.160490+00:00",
+          "canonical": [
+            "https://rhino-performance.com/blog/posts/mangas-de-compresion-frio-y-calor-para-el-cuidado-muscular-a30fa0abf6a7/"
+          ],
+          "meta_present": false,
+          "headers_present": false,
+          "content_present": false
+        },
+        {
+          "file": "reports/runs/rhino-performance/20261112T043917-indexability-inventory-223e7de9/known-documents.json",
+          "sha256": "4b1b0c5d5dd7baacb81fc748bf3c484a654c5fd83a0fe661c3df3e22c0861968",
+          "pointer": "$/rows/1/sitemap/entries/57",
+          "keys": [
+            "url",
+            "source_sitemap",
+            "entry",
+            "lastmod",
+            "lastmod_state"
+          ],
+          "at": null,
+          "canonical": null,
+          "meta_present": false,
+          "headers_present": false,
+          "content_present": false
+        },
+        {
+          "file": "reports/runs/rhino-performance/20261112T043917-indexability-inventory-223e7de9/known-documents.json",
+          "sha256": "4b1b0c5d5dd7baacb81fc748bf3c484a654c5fd83a0fe661c3df3e22c0861968",
+          "pointer": "$/rows/2/sitemap/entries/57",
+          "keys": [
+            "url",
+            "source_sitemap",
+            "entry",
+            "lastmod",
+            "lastmod_state"
+          ],
+          "at": null,
+          "canonical": null,
+          "meta_present": false,
+          "headers_present": false,
+          "content_present": false
+        }
+      ],
+      "potential_additional_signals": [],
+      "state": "needs_evidence_no_new_HTTP"
+    },
+    {
+      "url": "https://rhino-performance.com/blog/posts/motivacion-deportiva-como-conseguirla-a299c19dcb3c/",
+      "original_http": 200,
+      "original_at": "2026-11-12T04:28:56.921617+00:00",
+      "original_source": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-after.json",
+      "original_source_sha256": "227b880307aaf721eb95a30ecc28622264a3f14fc0cd5c90ae4a07ac4f846bcd",
+      "canonical_recovered": [
+        "https://rhino-performance.com/blog/posts/motivacion-deportiva-como-conseguirla-a299c19dcb3c/"
+      ],
+      "canonical_was_already_in_matrix": true,
+      "retained_html_sha256": "c052493cde1d36735a868f43e4b70831ca118a59c70880c8ea4024106d815ecf",
+      "retained_full_body": false,
+      "meta_robots": "not_recovered_from_scanned_original_artifacts",
+      "X_Robots_Tag": "not_recovered_from_scanned_original_artifacts",
+      "main_content": "not_recovered_from_scanned_original_artifacts",
+      "matching_records": [
+        {
+          "file": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-after.json",
+          "sha256": "227b880307aaf721eb95a30ecc28622264a3f14fc0cd5c90ae4a07ac4f846bcd",
+          "pointer": "$/rows/20",
+          "keys": [
+            "url",
+            "final_url",
+            "http",
+            "at",
+            "html_sha256",
+            "canonical",
+            "json_errors",
+            "breadcrumb_blocks",
+            "breadcrumb",
+            "blog_item"
+          ],
+          "at": "2026-11-12T04:28:56.921617+00:00",
+          "canonical": [
+            "https://rhino-performance.com/blog/posts/motivacion-deportiva-como-conseguirla-a299c19dcb3c/"
+          ],
+          "meta_present": false,
+          "headers_present": false,
+          "content_present": false
+        },
+        {
+          "file": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-before.json",
+          "sha256": "f9733c5205f54f0efdc03e87bfd1d9f8e09ea8208fd8fd4f59d732e1b37c0f15",
+          "pointer": "$/rows/20",
+          "keys": [
+            "url",
+            "final_url",
+            "http",
+            "at",
+            "html_sha256",
+            "canonical",
+            "json_errors",
+            "breadcrumb_blocks",
+            "breadcrumb",
+            "blog_item"
+          ],
+          "at": "2026-11-12T04:23:57.655610+00:00",
+          "canonical": [
+            "https://rhino-performance.com/blog/posts/motivacion-deportiva-como-conseguirla-a299c19dcb3c/"
+          ],
+          "meta_present": false,
+          "headers_present": false,
+          "content_present": false
+        },
+        {
+          "file": "reports/runs/rhino-performance/20261112T043917-indexability-inventory-223e7de9/known-documents.json",
+          "sha256": "4b1b0c5d5dd7baacb81fc748bf3c484a654c5fd83a0fe661c3df3e22c0861968",
+          "pointer": "$/rows/1/sitemap/entries/60",
+          "keys": [
+            "url",
+            "source_sitemap",
+            "entry",
+            "lastmod",
+            "lastmod_state"
+          ],
+          "at": null,
+          "canonical": null,
+          "meta_present": false,
+          "headers_present": false,
+          "content_present": false
+        },
+        {
+          "file": "reports/runs/rhino-performance/20261112T043917-indexability-inventory-223e7de9/known-documents.json",
+          "sha256": "4b1b0c5d5dd7baacb81fc748bf3c484a654c5fd83a0fe661c3df3e22c0861968",
+          "pointer": "$/rows/2/sitemap/entries/60",
+          "keys": [
+            "url",
+            "source_sitemap",
+            "entry",
+            "lastmod",
+            "lastmod_state"
+          ],
+          "at": null,
+          "canonical": null,
+          "meta_present": false,
+          "headers_present": false,
+          "content_present": false
+        }
+      ],
+      "potential_additional_signals": [],
+      "state": "needs_evidence_no_new_HTTP"
+    },
+    {
+      "url": "https://rhino-performance.com/blog/posts/los-mejores-estiramientos-despues-de-un-entrenamiento-intenso-e60dcadb9471/",
+      "original_http": 200,
+      "original_at": "2026-11-12T04:28:58.085255+00:00",
+      "original_source": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-after.json",
+      "original_source_sha256": "227b880307aaf721eb95a30ecc28622264a3f14fc0cd5c90ae4a07ac4f846bcd",
+      "canonical_recovered": [
+        "https://rhino-performance.com/blog/posts/los-mejores-estiramientos-despues-de-un-entrenamiento-intenso-e60dcadb9471/"
+      ],
+      "canonical_was_already_in_matrix": true,
+      "retained_html_sha256": "5eaf0ff9329be64842a6bd7b4c710a59cd8a749451cde68d2861ebbb8e23502b",
+      "retained_full_body": false,
+      "meta_robots": "not_recovered_from_scanned_original_artifacts",
+      "X_Robots_Tag": "not_recovered_from_scanned_original_artifacts",
+      "main_content": "not_recovered_from_scanned_original_artifacts",
+      "matching_records": [
+        {
+          "file": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-after.json",
+          "sha256": "227b880307aaf721eb95a30ecc28622264a3f14fc0cd5c90ae4a07ac4f846bcd",
+          "pointer": "$/rows/21",
+          "keys": [
+            "url",
+            "final_url",
+            "http",
+            "at",
+            "html_sha256",
+            "canonical",
+            "json_errors",
+            "breadcrumb_blocks",
+            "breadcrumb",
+            "blog_item"
+          ],
+          "at": "2026-11-12T04:28:58.085255+00:00",
+          "canonical": [
+            "https://rhino-performance.com/blog/posts/los-mejores-estiramientos-despues-de-un-entrenamiento-intenso-e60dcadb9471/"
+          ],
+          "meta_present": false,
+          "headers_present": false,
+          "content_present": false
+        },
+        {
+          "file": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-before.json",
+          "sha256": "f9733c5205f54f0efdc03e87bfd1d9f8e09ea8208fd8fd4f59d732e1b37c0f15",
+          "pointer": "$/rows/21",
+          "keys": [
+            "url",
+            "final_url",
+            "http",
+            "at",
+            "html_sha256",
+            "canonical",
+            "json_errors",
+            "breadcrumb_blocks",
+            "breadcrumb",
+            "blog_item"
+          ],
+          "at": "2026-11-12T04:23:58.707106+00:00",
+          "canonical": [
+            "https://rhino-performance.com/blog/posts/los-mejores-estiramientos-despues-de-un-entrenamiento-intenso-e60dcadb9471/"
+          ],
+          "meta_present": false,
+          "headers_present": false,
+          "content_present": false
+        },
+        {
+          "file": "reports/runs/rhino-performance/20261112T043917-indexability-inventory-223e7de9/known-documents.json",
+          "sha256": "4b1b0c5d5dd7baacb81fc748bf3c484a654c5fd83a0fe661c3df3e22c0861968",
+          "pointer": "$/rows/1/sitemap/entries/61",
+          "keys": [
+            "url",
+            "source_sitemap",
+            "entry",
+            "lastmod",
+            "lastmod_state"
+          ],
+          "at": null,
+          "canonical": null,
+          "meta_present": false,
+          "headers_present": false,
+          "content_present": false
+        },
+        {
+          "file": "reports/runs/rhino-performance/20261112T043917-indexability-inventory-223e7de9/known-documents.json",
+          "sha256": "4b1b0c5d5dd7baacb81fc748bf3c484a654c5fd83a0fe661c3df3e22c0861968",
+          "pointer": "$/rows/2/sitemap/entries/61",
+          "keys": [
+            "url",
+            "source_sitemap",
+            "entry",
+            "lastmod",
+            "lastmod_state"
+          ],
+          "at": null,
+          "canonical": null,
+          "meta_present": false,
+          "headers_present": false,
+          "content_present": false
+        }
+      ],
+      "potential_additional_signals": [],
+      "state": "needs_evidence_no_new_HTTP"
+    },
+    {
+      "url": "https://rhino-performance.com/blog/posts/recuperacion-deportiva-las-tecnicas-con-mayor-respaldo-cientifico-8d45b8378042/",
+      "original_http": 200,
+      "original_at": "2026-11-12T04:28:47.463590+00:00",
+      "original_source": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-after.json",
+      "original_source_sha256": "227b880307aaf721eb95a30ecc28622264a3f14fc0cd5c90ae4a07ac4f846bcd",
+      "canonical_recovered": [
+        "https://rhino-performance.com/blog/posts/recuperacion-deportiva-las-tecnicas-con-mayor-respaldo-cientifico-8d45b8378042/"
+      ],
+      "canonical_was_already_in_matrix": true,
+      "retained_html_sha256": "3091a6a7b9c92ffa65bd3b133e1e90c7a81f957b740d00ddde7ce08c631d0f7e",
+      "retained_full_body": false,
+      "meta_robots": "not_recovered_from_scanned_original_artifacts",
+      "X_Robots_Tag": "not_recovered_from_scanned_original_artifacts",
+      "main_content": "not_recovered_from_scanned_original_artifacts",
+      "matching_records": [
+        {
+          "file": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-after.json",
+          "sha256": "227b880307aaf721eb95a30ecc28622264a3f14fc0cd5c90ae4a07ac4f846bcd",
+          "pointer": "$/rows/9",
+          "keys": [
+            "url",
+            "final_url",
+            "http",
+            "at",
+            "html_sha256",
+            "canonical",
+            "json_errors",
+            "breadcrumb_blocks",
+            "breadcrumb",
+            "blog_item"
+          ],
+          "at": "2026-11-12T04:28:47.463590+00:00",
+          "canonical": [
+            "https://rhino-performance.com/blog/posts/recuperacion-deportiva-las-tecnicas-con-mayor-respaldo-cientifico-8d45b8378042/"
+          ],
+          "meta_present": false,
+          "headers_present": false,
+          "content_present": false
+        },
+        {
+          "file": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-before.json",
+          "sha256": "f9733c5205f54f0efdc03e87bfd1d9f8e09ea8208fd8fd4f59d732e1b37c0f15",
+          "pointer": "$/rows/9",
+          "keys": [
+            "url",
+            "final_url",
+            "http",
+            "at",
+            "html_sha256",
+            "canonical",
+            "json_errors",
+            "breadcrumb_blocks",
+            "breadcrumb",
+            "blog_item"
+          ],
+          "at": "2026-11-12T04:23:47.283974+00:00",
+          "canonical": [
+            "https://rhino-performance.com/blog/posts/recuperacion-deportiva-las-tecnicas-con-mayor-respaldo-cientifico-8d45b8378042/"
+          ],
+          "meta_present": false,
+          "headers_present": false,
+          "content_present": false
+        },
+        {
+          "file": "reports/runs/rhino-performance/20261112T043917-indexability-inventory-223e7de9/known-documents.json",
+          "sha256": "4b1b0c5d5dd7baacb81fc748bf3c484a654c5fd83a0fe661c3df3e22c0861968",
+          "pointer": "$/rows/1/sitemap/entries/63",
+          "keys": [
+            "url",
+            "source_sitemap",
+            "entry",
+            "lastmod",
+            "lastmod_state"
+          ],
+          "at": null,
+          "canonical": null,
+          "meta_present": false,
+          "headers_present": false,
+          "content_present": false
+        },
+        {
+          "file": "reports/runs/rhino-performance/20261112T043917-indexability-inventory-223e7de9/known-documents.json",
+          "sha256": "4b1b0c5d5dd7baacb81fc748bf3c484a654c5fd83a0fe661c3df3e22c0861968",
+          "pointer": "$/rows/2/sitemap/entries/63",
+          "keys": [
+            "url",
+            "source_sitemap",
+            "entry",
+            "lastmod",
+            "lastmod_state"
+          ],
+          "at": null,
+          "canonical": null,
+          "meta_present": false,
+          "headers_present": false,
+          "content_present": false
+        }
+      ],
+      "potential_additional_signals": [],
+      "state": "needs_evidence_no_new_HTTP"
+    },
+    {
+      "url": "https://rhino-performance.com/blog/posts/ejercicio-en-la-manana-antes-o-despues-de-desayunar-6b4da8f2797c/",
+      "original_http": 200,
+      "original_at": "2026-11-12T04:28:35.118629+00:00",
+      "original_source": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-after.json",
+      "original_source_sha256": "227b880307aaf721eb95a30ecc28622264a3f14fc0cd5c90ae4a07ac4f846bcd",
+      "canonical_recovered": [
+        "https://rhino-performance.com/blog/posts/ejercicio-en-la-manana-antes-o-despues-de-desayunar-6b4da8f2797c/"
+      ],
+      "canonical_was_already_in_matrix": true,
+      "retained_html_sha256": "bb402b3ed7e2337db60c57b0e7b571ae62af86933b7b30715f443145b9aa644a",
+      "retained_full_body": false,
+      "meta_robots": "not_recovered_from_scanned_original_artifacts",
+      "X_Robots_Tag": "not_recovered_from_scanned_original_artifacts",
+      "main_content": "not_recovered_from_scanned_original_artifacts",
+      "matching_records": [
+        {
+          "file": "reports/runs/rhino-performance/20261112T041447-breadcrumb-affected-article-3ec9127f/article.json",
+          "sha256": "5c5386fe9148e1efdd398939232ecc0d6d9029d333890a4fdfa6bd2e2bd3ff7d",
+          "pointer": "$",
+          "keys": [
+            "at",
+            "url",
+            "final_url",
+            "http",
+            "html_sha256",
+            "canonical",
+            "json_ld",
+            "microdata",
+            "rdfa_entities",
+            "production_modified"
+          ],
+          "at": "2026-11-12T04:14:47.580617+00:00",
+          "canonical": [
+            "https://rhino-performance.com/blog/posts/ejercicio-en-la-manana-antes-o-despues-de-desayunar-6b4da8f2797c/"
+          ],
+          "meta_present": false,
+          "headers_present": false,
+          "content_present": false
+        },
+        {
+          "file": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-after.json",
+          "sha256": "227b880307aaf721eb95a30ecc28622264a3f14fc0cd5c90ae4a07ac4f846bcd",
+          "pointer": "$/rows/0",
+          "keys": [
+            "url",
+            "final_url",
+            "http",
+            "at",
+            "html_sha256",
+            "canonical",
+            "json_errors",
+            "breadcrumb_blocks",
+            "breadcrumb",
+            "blog_item"
+          ],
+          "at": "2026-11-12T04:28:35.118629+00:00",
+          "canonical": [
+            "https://rhino-performance.com/blog/posts/ejercicio-en-la-manana-antes-o-despues-de-desayunar-6b4da8f2797c/"
+          ],
+          "meta_present": false,
+          "headers_present": false,
+          "content_present": false
+        },
+        {
+          "file": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-before.json",
+          "sha256": "f9733c5205f54f0efdc03e87bfd1d9f8e09ea8208fd8fd4f59d732e1b37c0f15",
+          "pointer": "$/rows/0",
+          "keys": [
+            "url",
+            "final_url",
+            "http",
+            "at",
+            "html_sha256",
+            "canonical",
+            "json_errors",
+            "breadcrumb_blocks",
+            "breadcrumb",
+            "blog_item"
+          ],
+          "at": "2026-11-12T04:23:37.850912+00:00",
+          "canonical": [
+            "https://rhino-performance.com/blog/posts/ejercicio-en-la-manana-antes-o-despues-de-desayunar-6b4da8f2797c/"
+          ],
+          "meta_present": false,
+          "headers_present": false,
+          "content_present": false
+        },
+        {
+          "file": "reports/runs/rhino-performance/20261112T043917-indexability-inventory-223e7de9/known-documents.json",
+          "sha256": "4b1b0c5d5dd7baacb81fc748bf3c484a654c5fd83a0fe661c3df3e22c0861968",
+          "pointer": "$/rows/1/sitemap/entries/65",
+          "keys": [
+            "url",
+            "source_sitemap",
+            "entry",
+            "lastmod",
+            "lastmod_state"
+          ],
+          "at": null,
+          "canonical": null,
+          "meta_present": false,
+          "headers_present": false,
+          "content_present": false
+        },
+        {
+          "file": "reports/runs/rhino-performance/20261112T043917-indexability-inventory-223e7de9/known-documents.json",
+          "sha256": "4b1b0c5d5dd7baacb81fc748bf3c484a654c5fd83a0fe661c3df3e22c0861968",
+          "pointer": "$/rows/2/sitemap/entries/65",
+          "keys": [
+            "url",
+            "source_sitemap",
+            "entry",
+            "lastmod",
+            "lastmod_state"
+          ],
+          "at": null,
+          "canonical": null,
+          "meta_present": false,
+          "headers_present": false,
+          "content_present": false
+        }
+      ],
+      "potential_additional_signals": [],
+      "state": "needs_evidence_no_new_HTTP"
+    },
+    {
+      "url": "https://rhino-performance.com/blog/posts/guia-para-el-uso-de-tus-botas-de-presoterapia-aad204c7149a/",
+      "original_http": 200,
+      "original_at": "2026-11-12T04:28:54.881425+00:00",
+      "original_source": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-after.json",
+      "original_source_sha256": "227b880307aaf721eb95a30ecc28622264a3f14fc0cd5c90ae4a07ac4f846bcd",
+      "canonical_recovered": [
+        "https://rhino-performance.com/blog/posts/guia-para-el-uso-de-tus-botas-de-presoterapia-aad204c7149a/"
+      ],
+      "canonical_was_already_in_matrix": true,
+      "retained_html_sha256": "dd50777a2f968869c580a10f75d4b54b3c7e4f5de5aade22592772b61bc7b991",
+      "retained_full_body": false,
+      "meta_robots": "not_recovered_from_scanned_original_artifacts",
+      "X_Robots_Tag": "not_recovered_from_scanned_original_artifacts",
+      "main_content": "not_recovered_from_scanned_original_artifacts",
+      "matching_records": [
+        {
+          "file": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-after.json",
+          "sha256": "227b880307aaf721eb95a30ecc28622264a3f14fc0cd5c90ae4a07ac4f846bcd",
+          "pointer": "$/rows/16",
+          "keys": [
+            "url",
+            "final_url",
+            "http",
+            "at",
+            "html_sha256",
+            "canonical",
+            "json_errors",
+            "breadcrumb_blocks",
+            "breadcrumb",
+            "blog_item"
+          ],
+          "at": "2026-11-12T04:28:54.881425+00:00",
+          "canonical": [
+            "https://rhino-performance.com/blog/posts/guia-para-el-uso-de-tus-botas-de-presoterapia-aad204c7149a/"
+          ],
+          "meta_present": false,
+          "headers_present": false,
+          "content_present": false
+        },
+        {
+          "file": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-before.json",
+          "sha256": "f9733c5205f54f0efdc03e87bfd1d9f8e09ea8208fd8fd4f59d732e1b37c0f15",
+          "pointer": "$/rows/16",
+          "keys": [
+            "url",
+            "final_url",
+            "http",
+            "at",
+            "html_sha256",
+            "canonical",
+            "json_errors",
+            "breadcrumb_blocks",
+            "breadcrumb",
+            "blog_item"
+          ],
+          "at": "2026-11-12T04:23:54.232655+00:00",
+          "canonical": [
+            "https://rhino-performance.com/blog/posts/guia-para-el-uso-de-tus-botas-de-presoterapia-aad204c7149a/"
+          ],
+          "meta_present": false,
+          "headers_present": false,
+          "content_present": false
+        },
+        {
+          "file": "reports/runs/rhino-performance/20261112T043917-indexability-inventory-223e7de9/known-documents.json",
+          "sha256": "4b1b0c5d5dd7baacb81fc748bf3c484a654c5fd83a0fe661c3df3e22c0861968",
+          "pointer": "$/rows/1/sitemap/entries/69",
+          "keys": [
+            "url",
+            "source_sitemap",
+            "entry",
+            "lastmod",
+            "lastmod_state"
+          ],
+          "at": null,
+          "canonical": null,
+          "meta_present": false,
+          "headers_present": false,
+          "content_present": false
+        },
+        {
+          "file": "reports/runs/rhino-performance/20261112T043917-indexability-inventory-223e7de9/known-documents.json",
+          "sha256": "4b1b0c5d5dd7baacb81fc748bf3c484a654c5fd83a0fe661c3df3e22c0861968",
+          "pointer": "$/rows/2/sitemap/entries/69",
+          "keys": [
+            "url",
+            "source_sitemap",
+            "entry",
+            "lastmod",
+            "lastmod_state"
+          ],
+          "at": null,
+          "canonical": null,
+          "meta_present": false,
+          "headers_present": false,
+          "content_present": false
+        }
+      ],
+      "potential_additional_signals": [],
+      "state": "needs_evidence_no_new_HTTP"
+    },
+    {
+      "url": "https://rhino-performance.com/blog/posts/sacale-el-maximo-partido-a-tus-botas-de-presoterapia-6d64eb420000/",
+      "original_http": 200,
+      "original_at": "2026-11-12T04:28:43.421639+00:00",
+      "original_source": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-after.json",
+      "original_source_sha256": "227b880307aaf721eb95a30ecc28622264a3f14fc0cd5c90ae4a07ac4f846bcd",
+      "canonical_recovered": [
+        "https://rhino-performance.com/blog/posts/sacale-el-maximo-partido-a-tus-botas-de-presoterapia-6d64eb420000/"
+      ],
+      "canonical_was_already_in_matrix": true,
+      "retained_html_sha256": "85f4108b7f48ac76a057a3052ae33e025c06f750874a811c243067732d5a6b26",
+      "retained_full_body": false,
+      "meta_robots": "not_recovered_from_scanned_original_artifacts",
+      "X_Robots_Tag": "not_recovered_from_scanned_original_artifacts",
+      "main_content": "not_recovered_from_scanned_original_artifacts",
+      "matching_records": [
+        {
+          "file": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-after.json",
+          "sha256": "227b880307aaf721eb95a30ecc28622264a3f14fc0cd5c90ae4a07ac4f846bcd",
+          "pointer": "$/rows/6",
+          "keys": [
+            "url",
+            "final_url",
+            "http",
+            "at",
+            "html_sha256",
+            "canonical",
+            "json_errors",
+            "breadcrumb_blocks",
+            "breadcrumb",
+            "blog_item"
+          ],
+          "at": "2026-11-12T04:28:43.421639+00:00",
+          "canonical": [
+            "https://rhino-performance.com/blog/posts/sacale-el-maximo-partido-a-tus-botas-de-presoterapia-6d64eb420000/"
+          ],
+          "meta_present": false,
+          "headers_present": false,
+          "content_present": false
+        },
+        {
+          "file": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-before.json",
+          "sha256": "f9733c5205f54f0efdc03e87bfd1d9f8e09ea8208fd8fd4f59d732e1b37c0f15",
+          "pointer": "$/rows/6",
+          "keys": [
+            "url",
+            "final_url",
+            "http",
+            "at",
+            "html_sha256",
+            "canonical",
+            "json_errors",
+            "breadcrumb_blocks",
+            "breadcrumb",
+            "blog_item"
+          ],
+          "at": "2026-11-12T04:23:44.167224+00:00",
+          "canonical": [
+            "https://rhino-performance.com/blog/posts/sacale-el-maximo-partido-a-tus-botas-de-presoterapia-6d64eb420000/"
+          ],
+          "meta_present": false,
+          "headers_present": false,
+          "content_present": false
+        },
+        {
+          "file": "reports/runs/rhino-performance/20261112T043917-indexability-inventory-223e7de9/known-documents.json",
+          "sha256": "4b1b0c5d5dd7baacb81fc748bf3c484a654c5fd83a0fe661c3df3e22c0861968",
+          "pointer": "$/rows/1/sitemap/entries/72",
+          "keys": [
+            "url",
+            "source_sitemap",
+            "entry",
+            "lastmod",
+            "lastmod_state"
+          ],
+          "at": null,
+          "canonical": null,
+          "meta_present": false,
+          "headers_present": false,
+          "content_present": false
+        },
+        {
+          "file": "reports/runs/rhino-performance/20261112T043917-indexability-inventory-223e7de9/known-documents.json",
+          "sha256": "4b1b0c5d5dd7baacb81fc748bf3c484a654c5fd83a0fe661c3df3e22c0861968",
+          "pointer": "$/rows/2/sitemap/entries/72",
+          "keys": [
+            "url",
+            "source_sitemap",
+            "entry",
+            "lastmod",
+            "lastmod_state"
+          ],
+          "at": null,
+          "canonical": null,
+          "meta_present": false,
+          "headers_present": false,
+          "content_present": false
+        }
+      ],
+      "potential_additional_signals": [],
+      "state": "needs_evidence_no_new_HTTP"
+    }
+  ],
+  "limitation": "Absence in inspected saved families is not proof no file exists elsewhere; no raw-body data invented from a SHA."
+}

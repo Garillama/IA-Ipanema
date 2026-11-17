@@ -1,0 +1,28 @@
+{
+  "status": "authorization_requested_not_executed",
+  "purpose": "Only current category text and five product factual con/sincompresor checks; no edits, indexation or404calls",
+  "origin": "https://rhino-performance.com",
+  "document_URLs": [
+    "https://rhino-performance.com/presoterapia/",
+    "https://rhino-performance.com/productos/kit-botas-de-presoterapia-pro-3/",
+    "https://rhino-performance.com/productos/kit-botas-y-brazos-de-presoterapia-pro-3/",
+    "https://rhino-performance.com/productos/botas-presoterapia-pro-3/",
+    "https://rhino-performance.com/productos/brazos-presoterapia-pro-3/",
+    "https://rhino-performance.com/productos/brazo-presoterapia-pro-3-individual/"
+  ],
+  "additional_permitted_resources_if_authorized": "robots.txt and safe necessary same-origin redirect hops only; no home/sitemap/assets/Google/administration",
+  "not_a_crawler_manifest": true,
+  "transport_condition": "No fictitious six-seed invocation: existing closedV4selector requires5. This is a scope for approval, not an executable V4 command. Before any execution select a documented supported read method preserving approved safety. Do not adapt motor or use filler/duplicate URLs to force6into5.",
+  "forbidden": [
+    "Forms",
+    "Cart/checkout",
+    "Marketing configuration",
+    "Content mutations",
+    "Admin credentials",
+    "GSCcalls",
+    "HTTP404route checks",
+    "New theme modifications"
+  ],
+  "stop": "403/429, robots unknown/denied, insecure origin/redirect/TLS/nonpublicIP, timeout or safety budget failure; no retries/evasion",
+  "if_transport_not_available": "Owner may supply current category text/HTML and exact product specification/box-contents captures; do not bypass controls."
+}

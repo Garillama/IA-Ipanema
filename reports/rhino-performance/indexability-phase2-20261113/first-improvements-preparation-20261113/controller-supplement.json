@@ -1,0 +1,25 @@
+{
+  "id": "seo.first-improvements.editorial-revision",
+  "kind": "offline_minimal_editorial_revision",
+  "subject": "Exact updated draft and navigation distinction",
+  "passed": true,
+  "sha256": "1378141593e74d8d948e678ca8be08d59d6e14c26dbecc60ffc4773f7332520e",
+  "measurement_scope": "Local draft only, no theme/remote updates or current-state verification",
+  "editorial_before_sha256": "37438b54aac3bb55949b9438adc76895f5ebc277b86285ecfafa139eb009aa51",
+  "revision": {
+    "chosen_candidate": "Two groups: kitsPRO3 with compressor vsPRO3 products sold without compressor. PROAIR omitted from comparison, no kits labeled complete.",
+    "reason": "Reduce repetition, retain explicit documented distinction for boots/arms/kits/accessories without unsupported PROAIR comparison.",
+    "context_links_not_listing_membership": "Allfive product URLs have exact saved descriptions. Contextual links in a proposed guide do not claim products are currently in this category grid; no request to add products to grid/catalog. Current destination and product facts must be verified before any publication.",
+    "claude_constraint_disagreement": "Requiring a product to appear in the grid before it can be contextually linked is not a demonstrated native-platform requirement. Challenge that premise; preserve actual current-state evidence requirement. No requirement waived for publication."
+  },
+  "source_claims": "Each con/sincompresor fact remains backed by the exact prior captured metadescription in catalog-claim-provenance.json. Historical metadata not a live/full box validation.",
+  "current_membership": "No new source shows accessories in currentPresoterapia grid. Explicitly unknown.",
+  "conditions_remaining": [
+    "Current editorial gap",
+    "Current product facts and destination status",
+    "Native field/placement and no repeatedblockhybridscroll",
+    "Official GSCresults",
+    "Current404status/equivalence",
+    "No new externalcalls permitted"
+  ]
+}

@@ -1,0 +1,133 @@
+{
+  "observed_at": "2026-11-13T17:08:23.796904+00:00",
+  "scope": "Current local code read only; no remote/source equality verified. Native server/editor behavior not tested now.",
+  "sources": {
+    "sections/page-header.tpl": {
+      "local_path": "/home/alanrichard/Escritorio/Cli/Rhino-Ipanema/sections/page-header.tpl",
+      "sha256": "b86f9cdb8b49f4ff990543378c2b6e9b994bafefa625f420712d8c670c24f98d"
+    },
+    "sections/rich-text.tpl": {
+      "local_path": "/home/alanrichard/Escritorio/Cli/Rhino-Ipanema/sections/rich-text.tpl",
+      "sha256": "66646d0a69295331925511536c0b641c2d61fc82ffa8e070e24cca7c2ec8bfc8"
+    },
+    "sections/main-products-grid.tpl": {
+      "local_path": "/home/alanrichard/Escritorio/Cli/Rhino-Ipanema/sections/main-products-grid.tpl",
+      "sha256": "44ea7562f20638605536af4abe5f9230565f4aa46a0b177f3208ce2d968ad4ec"
+    },
+    "blocks/text.tpl": {
+      "local_path": "/home/alanrichard/Escritorio/Cli/Rhino-Ipanema/blocks/text.tpl",
+      "sha256": "ce5179f53423c1234bbba6f8a1f20fe90250c51d6eea74e7ed3ae038b1fa4b4b"
+    },
+    "blocks/heading.tpl": {
+      "local_path": "/home/alanrichard/Escritorio/Cli/Rhino-Ipanema/blocks/heading.tpl",
+      "sha256": "c708f5fcfdc022a129cc0188ca30d5c619cbc2e1528c2db9cc909cd0c8037e7f"
+    },
+    "templates/pages/category.json": {
+      "local_path": "/home/alanrichard/Escritorio/Cli/Rhino-Ipanema/templates/pages/category.json",
+      "sha256": "1de2cd2fa42138e0b8943452f40f6f6d48c612a0e339fccf184b5e716dfdaea5"
+    },
+    "snippets/product-list/pagination.tpl": {
+      "local_path": "/home/alanrichard/Escritorio/Cli/Rhino-Ipanema/snippets/product-list/pagination.tpl",
+      "sha256": "0958c668ee40bf0d16c76db4d6493bf6387d17e3ec7ff8f66aaffcce564d463c"
+    },
+    "static/js/store.js": {
+      "local_path": "/home/alanrichard/Escritorio/Cli/Rhino-Ipanema/static/js/store.js",
+      "sha256": "f97557494e017eba623ba2dd7e568789f8d9035d467f0b03f71bc0b3b8393be9"
+    }
+  },
+  "category_template": {
+    "order": [
+      "category_hero",
+      "heading",
+      "category_tabs",
+      "product_list",
+      "category_faqs"
+    ],
+    "heading": {
+      "type": "page-header",
+      "settings": {
+        "section_width": "page",
+        "padding_top": 32,
+        "padding_bottom": 32,
+        "horizontal_padding": 32
+      },
+      "disabled": true
+    },
+    "grid_settings": {
+      "columns": "3",
+      "columns_mobile": "2",
+      "pagination": "infinite",
+      "section_width": "page",
+      "padding_top": 8,
+      "padding_bottom": 48,
+      "horizontal_padding": 32
+    }
+  },
+  "findings": [
+    {
+      "id": "native-description",
+      "fact": "Only matching render of category.description in sections/snippets is page-header.tpl, wrapped in p, atheader; heading isdisabled in current local category.json. No after-grid consumer found in these directories.",
+      "limit": "Does not prove admin field state or rich HTML contract; do not paste H2/list into this p or enable header as a workaround."
+    },
+    {
+      "id": "existing-rich-text",
+      "fact": "rich-text enabled_on.page_templates=all; blocks text uses setting_type=richtext and raw HTML output inside user-content. Can conceptually follow grid in template order.",
+      "limit": "Availability in actual editor, per-category isolation and remote equality not confirmed. Default preset has heading/button; remove unnecessary defaults rather than add unwantedCTA. Shared category template means global content risk."
+    },
+    {
+      "id": "grid-boundary",
+      "fact": "main-products-grid renders product cards inside .js-product-table; pagination is after closing it. store.js config passes this selector to LS.hybridScroll.",
+      "limit": "A separate sibling section after the grid would be outside this configured append target. Actual injected section not tested with real LS; absence of duplicate guide not certified."
+    },
+    {
+      "id": "heading-semantics",
+      "fact": "blocks/heading.tpl wraps richtext title in div; the visual size alone does not guarantee H2.",
+      "limit": "Need explicit semantic H2 in richtext HTML via supported editor output, verify final HTML; do not add redundantARIA."
+    }
+  ],
+  "excerpts": [
+    {
+      "file": "sections/page-header.tpl",
+      "lines": "115-118",
+      "sha256": "b86f9cdb8b49f4ff990543378c2b6e9b994bafefa625f420712d8c670c24f98d",
+      "text": "            {% if template == 'category' and category.description %}\n              <p class=\"page-header-description\">{{ category.description }}</p>\n            {% endif %}\n          </div>"
+    },
+    {
+      "file": "sections/rich-text.tpl",
+      "lines": "26-42",
+      "sha256": "66646d0a69295331925511536c0b641c2d61fc82ffa8e070e24cca7c2ec8bfc8",
+      "text": "\n<div\n\tclass=\"rich-text-section {% if full_width %}section-full-width{% endif %}\"\n\tdata-store=\"{{ data_store_value }}\"\n\tdata-section-id=\"{{ section.id }}\"\n\t{% if section_styles | trim %}style=\"{{ section_styles | trim }}\"{% endif %}\n>\n\t{% if page_width %}\n\t\t<div class=\"container\">\n\t{% endif %}\n\t\t\t<div class=\"rich-text d-flex flex-column text-{{ alignment }} {{ align_items_class }}\" style=\"gap: {{ gap | default(16) }}px;\">\n\t\t\t\t{% for block in section.blocks %}\n\t\t\t\t\t{% include 'blocks/' ~ block.type ~ '.tpl' with { block: block } %}\n\t\t\t\t{% endfor %}\n\t\t\t</div>\n\t{% if page_width %}\n\t\t</div>"
+    },
+    {
+      "file": "sections/rich-text.tpl",
+      "lines": "137-153",
+      "sha256": "66646d0a69295331925511536c0b641c2d61fc82ffa8e070e24cca7c2ec8bfc8",
+      "text": "      \"step\": 4,\n      \"unit\": \"px\",\n      \"default\": 32,\n      \"icon\": \"horizontal_padding\",\n      \"disabled_if\": \"{{ section.settings.section_width == 'page' }}\"\n    }\n  ],\n  \"enabled_on\": {\n    \"page_templates\": \"all\",\n    \"layout_templates\": [\"footer\"]\n  },\n  \"presets\": [\n    {\n      \"name\": \"t:names.text_editorial\",\n      \"category\": \"t:categories.content\",\n      \"settings\": {\n        \"alignment\": \"center\","
+    },
+    {
+      "file": "blocks/text.tpl",
+      "lines": "7-14",
+      "sha256": "ce5179f53423c1234bbba6f8a1f20fe90250c51d6eea74e7ed3ae038b1fa4b4b",
+      "text": "\n<div class=\"text-block {% if block_width == 'fill' %}block-fill{% endif %}\" {{ block | block_attributes }} data-store=\"text-block-{{ block.id }}\">\n\t{% if text_settings.text %}\n\t\t<div class=\"text-content user-content {{ text_size_class }} {{ text_align_class }}\">\n\t\t\t{{ text_settings.text | raw }}\n\t\t</div>\n\t{% endif %}\n</div>"
+    },
+    {
+      "file": "blocks/heading.tpl",
+      "lines": "23-33",
+      "sha256": "c708f5fcfdc022a129cc0188ca30d5c619cbc2e1528c2db9cc909cd0c8037e7f",
+      "text": "\t{% set heading_class = 'heading-block heading-custom' ~ fill_class %}\n{% else %}\n\t{% set heading_class = 'heading-block ' ~ heading_size %}\n\t{% if heading_mobile %}\n\t\t{% set heading_class = heading_class ~ '-md ' ~ heading_settings.mobile_size %}\n\t{% endif %}\n\t{% set heading_class = heading_class ~ fill_class %}\n{% endif %}\n\n{% if heading_settings.title %}\n\t<div"
+    },
+    {
+      "file": "sections/main-products-grid.tpl",
+      "lines": "119-149",
+      "sha256": "44ea7562f20638605536af4abe5f9230565f4aa46a0b177f3208ce2d968ad4ec",
+      "text": "                {% include 'snippets/product-list/filters/sort-by.tpl' %}\n              </div>\n            </div>\n          {% endif %}\n\n          {# Product list #}\n          <div class=\"js-product-table grid {{ grid_mobile_class }} {{ grid_desktop_class }}\">\n            {# Prioritize first 2 product images for LCP. Category bumps the threshold to absorb category-hero. #}\n            {% set is_priority_section = section.index <= (template == 'category' ? 3 : 2) %}\n            {% for product in display_products %}\n              {# `shipping_label_long_wording` makes the badge read \"Envío gratis\" like the\n                 reference, instead of the short \"Gratis\". Only this grid asks for it, so\n                 every other surface that shares the card is untouched. #}\n              {% include 'snippets/product-list/product-item/item.tpl' with {\n                image_priority_high: is_priority_section and loop.index in [1, 2],\n                product_aspect_ratio: section.settings.image_ratio,\n                shipping_label_long_wording: true,\n              } %}\n            {% endfor %}\n          </div>\n\n          {# Pagination - not shown in preview mode with simulated products #}\n          {% if products %}\n            {% if section.settings.pagination == 'infinite' %}\n              {% include \"snippets/product-list/pagination.tpl\" with {infinite_scroll: true} %}\n            {% else %}\n              {% include \"snippets/product-list/pagination.tpl\" with {infinite_scroll: false} %}\n            {% endif %}\n          {% endif %}\n        {% else %}\n          {# Empty state #}"
+    },
+    {
+      "file": "static/js/store.js",
+      "lines": "1744-1759",
+      "sha256": "f97557494e017eba623ba2dd7e568789f8d9035d467f0b03f71bc0b3b8393be9",
+      "text": "  function initInfiniteScroll() {\n    const loadMoreBtn = document.querySelector('.js-load-more');\n    if (!loadMoreBtn) return;\n    const loadMoreButton = loadMoreBtn.querySelector('button');\n    let keyboardLoad = null;\n\n    LS.hybridScroll({\n      productGridSelector: '.js-product-table',\n      spinnerSelector: '#js-infinite-scroll-spinner',\n      loadMoreButtonSelector: '.js-load-more',\n      hideWhileScrollingSelector: '.js-hide-footer-while-scrolling',\n      productsBeforeLoadMoreButton: 60,\n      productsPerPage: 12,\n      afterLoaded: function() {\n        LS.productItemSlider({ pagination_type: 'fraction' });\n        if (keyboardLoad) {"
+    }
+  ],
+  "protected_pagination": "Local hashes match owner-approved publication postimages. This is not a fresh remote hash check."
+}

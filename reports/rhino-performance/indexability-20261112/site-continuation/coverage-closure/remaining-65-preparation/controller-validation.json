@@ -1,0 +1,27 @@
+{
+  "status": "passed_offline",
+  "inventory_count": 125,
+  "HTML_total": 124,
+  "HTML_individual_HTTP_verified": 59,
+  "HTTP_pending": 65,
+  "pending_by_type": {
+    "product": 7,
+    "article": 58
+  },
+  "batch_count": 13,
+  "batch_size": 5,
+  "duplicate_urls": 0,
+  "omitted_urls": 0,
+  "overlap_with_previous_two_executions": 0,
+  "native_manifest_validations_passed": 13,
+  "all_manifest_bytes_under_65536": true,
+  "source_pending_matches_matrix": true,
+  "engine_and_transport_hashes_unchanged": true,
+  "matrix_sha256": "5d12dccb6d24ee8e7eded9e387057f46e61aadeb6e78b3ec8e31354c8466c3a5",
+  "matrix_unchanged": true,
+  "pending_source_sha256": "b10768f192f06f711b324794f8c2729910b09d0f2271bf128f2303bcef755071",
+  "batch_index_sha256": "0d28290785f138648866fb603940250168f7b4a16666b6ebd613207ffa2d76c7",
+  "execution_policy_sha256": "825416b81890bbb896f8ce35db6ddb1b7598c73777ab2f538eeac71db25d697c",
+  "network_requests": 0,
+  "regression_suites_repeated": false
+}

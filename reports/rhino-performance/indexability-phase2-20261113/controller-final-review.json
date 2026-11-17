@@ -1,0 +1,81 @@
+{
+  "scope": "Incremental evidence review; no new motor deliberation or implementation",
+  "controller_receipts": [
+    "controller-validation.json",
+    "controller-supplement.json"
+  ],
+  "cross_questions_answered": true,
+  "syntax_and_contracts_valid": 4,
+  "both_original_providers_participated": true,
+  "decisions_preserved": [
+    {
+      "agent": "claude",
+      "phase": "review",
+      "file": "claude-review.json",
+      "sha256": "ae73f1b5f44a83067c10f5991ca1948f67e7bf9afde4ee448e7d5e8e4b03b01c",
+      "decision": "proposed"
+    },
+    {
+      "agent": "claude",
+      "phase": "contrast",
+      "file": "claude-contrast.json",
+      "sha256": "11c830fa495085acd5eeceeddc8dd13365bfd24362f6415378e91ee1e75f992d",
+      "decision": "changes_requested"
+    },
+    {
+      "agent": "codex",
+      "phase": "review",
+      "file": "codex-review.json",
+      "sha256": "c2fad85973ed9ff56360527b9de59e2f44f9b81b84312599b9e6bb3d2a317ad5",
+      "decision": "proposed"
+    },
+    {
+      "agent": "codex",
+      "phase": "contrast",
+      "file": "codex-contrast.json",
+      "sha256": "64f17ab72caa934c5b5214ce5c445b251e16565a3144b0f964479ab4e7056830",
+      "decision": "proposed"
+    }
+  ],
+  "resolved": [
+    {
+      "issue": "robots GET justification",
+      "evidence": "crawler.py135..175 in controller-supplement.json: mandatory before destinations"
+    },
+    {
+      "issue": "rate unit mistake",
+      "evidence": "crawl_policy.py236 interval=1/rate; .5 requests/s => at least2s"
+    }
+  ],
+  "open_conditions": [
+    {
+      "condition": "Twenty original records lack meta/header/main evidence in targeted captures",
+      "effect": "No technical closure of these fields; any new GET needs separately approved five-target operation"
+    },
+    {
+      "condition": "Old one-shot drivers require HTTP not_observed and are incompatible with this purpose",
+      "effect": "Commands/manifests prepared, not execution-ready until controller verifies missing-field preflight, fresh binding and one-use marker. No motor modification needed."
+    },
+    {
+      "condition": "Author editorial identity/type and current published source correspondence unverified",
+      "effect": "Blocks any author/schema diff or production change"
+    },
+    {
+      "condition": "GSC credential unavailable",
+      "effect": "No current URLInspection data; obtain official exports or restore access via authorized existing flow"
+    },
+    {
+      "condition": "Blog official canonical mechanism unconfirmed",
+      "effect": "No canonical/head-tags modifications"
+    }
+  ],
+  "no_full_consensus_claimed": true,
+  "implementation_allowed": false,
+  "production_allowed": false,
+  "new_storefront_requests": 0,
+  "new_GSC_API_calls": 0,
+  "public_documentation_only": [
+    "https://support.google.com/webmasters/answer/7440203?hl=es",
+    "https://support.google.com/webmasters/answer/9012289?hl=es"
+  ]
+}

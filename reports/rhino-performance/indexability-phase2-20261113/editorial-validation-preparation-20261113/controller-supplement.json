@@ -1,0 +1,17 @@
+{
+  "id": "seo.editorial.scope-conditions",
+  "kind": "documentary_conditions_only",
+  "subject": "Assigned questions: all-page enablement is not per-category isolation",
+  "passed": true,
+  "sha256": "1d620fdae088eb8a28835c6ca4b1e6f2a97730f10370ae37b71374076069d87b",
+  "measurement_scope": "No new evidence about admin/current production; no calls or theme edits. Conditions explicitly remain open.",
+  "known": "enabled_on.page_templates=all permits local schema placement, not isolated per-category settings. category.json currentlycommon. No source was located proving actual admin per-category isolation.",
+  "decision": "Keep native-rich-text-after-grid candidate needs_evidence; no static global text or theme patch is prepared. If scope cannot be proven, document only minimal conditional fallback without implementing.",
+  "open_conditions": [
+    "Current production category and product reads not authorized",
+    "Native admin per-category scope unproven",
+    "RealLSduplication test missing",
+    "Six-document scope has no validated V4closed command and is not ready to execute as that mode",
+    "ExplicitH2 and responsive/performance QA require future actualrender"
+  ]
+}

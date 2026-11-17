@@ -1,0 +1,33 @@
+{
+  "status": "needs_evidence",
+  "review_status": "changes_requested",
+  "author": "codex",
+  "reviewer": "claude",
+  "candidate_patch_sha256": "fb292ff7f11c2ccaed5e90a2325c1703f23ece67bdc1b2a6f96ad3c6d49b8e4f",
+  "packet_sha256": "198dfc02fbf49c85ac3f08eb8ad02bef51f50ee8830ce7e44071c7ea393bf192",
+  "independent_review_received": true,
+  "reviewer_assessments": {
+    "N1": "resolved",
+    "N2": "partially_resolved",
+    "N3": "resolved",
+    "N4": "resolved"
+  },
+  "isolated_phase_closed": false,
+  "integration_authorized": false,
+  "activation_allowed": false,
+  "production_authorized": false,
+  "implementation_allowed": false,
+  "mandatory_pending": [
+    "N2a: accepted clarification/mitigation of evidence novelty and controller-asserted events; focused tests only after separate authorization",
+    "independent review of any changed candidate hash, no automatic iteration",
+    "real controller history/anchor/native identity bridge and QA coverage; future integration dependencies",
+    "Antigravity requirements and independent review remain blocked",
+    "explicit integration authorization"
+  ],
+  "nonblocking_followups": [
+    "N4a synthetic result label/consumer guard before integration",
+    "N1a preserve alternative identity and candidate binding distinction in future bridge"
+  ],
+  "origin_reviews_preserved": true,
+  "new_provider_calls": 1
+}

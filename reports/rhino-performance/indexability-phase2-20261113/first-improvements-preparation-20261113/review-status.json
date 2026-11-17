@@ -1,0 +1,127 @@
+{
+  "scope": "Incremental independent review of new saved evidence, short editorial candidate and two procedures",
+  "participants": {
+    "claude": {
+      "review": {
+        "file": "claude-review.json",
+        "sha256": "17ae083f18d329e2520f2a1d4aa59816c798bc5dd13d0e1edb07bde2296173c1",
+        "model": {
+          "model": "claude-sonnet-5-5",
+          "effort": "medium",
+          "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+          "verified_at": "2026-11-08"
+        },
+        "decision": "changes_requested",
+        "input_hashes": {
+          "reports/rhino-performance/indexability-phase2-20261113/first-improvements-preparation-20261113/review-packet.json": "79940aef8cc1b774000bb56d5f05a43a4c1c22245a13a6f132eafca9db2dca67",
+          "reports/rhino-performance/indexability-phase2-20261113/first-improvements-preparation-20261113/controller-validation.json": "960ad430908535349858ad125fab55c9c1ea3d45832f3c7c07bf08dcd6c7e0cc",
+          "reports/rhino-performance/indexability-phase2-20261113/first-improvements-preparation-20261113/catalog-claim-provenance.json": "c5a8acf7b323d219b8901fa84411a274ba11c7a88e78d5836c7746b3862f0c2e",
+          "reports/rhino-performance/indexability-phase2-20261113/first-improvements-preparation-20261113/presoterapia-saved-content.json": "7ec05be18bd6256e9889422eae2f5b38f3099e9b43e571a8705e5703b4a941a9",
+          "reports/rhino-performance/indexability-phase2-20261113/first-improvements-preparation-20261113/query-context.json": "570b121d7abbd8e7d30e198aa7dae3c8a4fe0ff0593028edfc300618149f1dc1",
+          "reports/rhino-performance/indexability-phase2-20261113/first-improvements-preparation-20261113/editorial-candidate.md": "37438b54aac3bb55949b9438adc76895f5ebc277b86285ecfafa139eb009aa51",
+          "reports/rhino-performance/indexability-phase2-20261113/first-improvements-preparation-20261113/inspection-procedure.md": "b5704688b767eef16c96c4792e15b2b1adfd48072e83c5d1296c54e0e68ba8f5",
+          "reports/rhino-performance/indexability-phase2-20261113/first-improvements-preparation-20261113/commercial-404-plan.json": "ad822bda418044323b85cf0b3e2590524fc347a918129438ea38719099c72428"
+        }
+      },
+      "contrast": {
+        "file": "claude-contrast.json",
+        "sha256": "9d42761aa1c52140b9bbf057fb03657f72e29010160c2902ef82c8b936b5a3dd",
+        "model": {
+          "model": "claude-sonnet-5-5",
+          "effort": "medium",
+          "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+          "verified_at": "2026-11-08"
+        },
+        "decision": "changes_requested",
+        "input_hashes": {
+          "reports/rhino-performance/indexability-phase2-20261113/first-improvements-preparation-20261113/review-packet.json": "0c8e1bca6904280acdc6825a95054cbfd3632b4159abc0cb8ceb0a3b6ea8d615",
+          "reports/rhino-performance/indexability-phase2-20261113/first-improvements-preparation-20261113/controller-validation.json": "960ad430908535349858ad125fab55c9c1ea3d45832f3c7c07bf08dcd6c7e0cc",
+          "reports/rhino-performance/indexability-phase2-20261113/first-improvements-preparation-20261113/controller-supplement.json": "9f147bade7905344ef7d44ac8d08a62e3288cb8e1bb69091d2ecf65aa389c48e",
+          "reports/rhino-performance/indexability-phase2-20261113/first-improvements-preparation-20261113/catalog-claim-provenance.json": "c5a8acf7b323d219b8901fa84411a274ba11c7a88e78d5836c7746b3862f0c2e",
+          "reports/rhino-performance/indexability-phase2-20261113/first-improvements-preparation-20261113/presoterapia-saved-content.json": "7ec05be18bd6256e9889422eae2f5b38f3099e9b43e571a8705e5703b4a941a9",
+          "reports/rhino-performance/indexability-phase2-20261113/first-improvements-preparation-20261113/editorial-candidate.md": "1378141593e74d8d948e678ca8be08d59d6e14c26dbecc60ffc4773f7332520e",
+          "reports/rhino-performance/indexability-phase2-20261113/first-improvements-preparation-20261113/editorial-candidate-v1.md": "37438b54aac3bb55949b9438adc76895f5ebc277b86285ecfafa139eb009aa51",
+          "reports/rhino-performance/indexability-phase2-20261113/first-improvements-preparation-20261113/inspection-procedure.md": "b5704688b767eef16c96c4792e15b2b1adfd48072e83c5d1296c54e0e68ba8f5",
+          "reports/rhino-performance/indexability-phase2-20261113/first-improvements-preparation-20261113/commercial-404-plan.json": "ad822bda418044323b85cf0b3e2590524fc347a918129438ea38719099c72428",
+          "reports/rhino-performance/indexability-phase2-20261113/first-improvements-preparation-20261113/README.md": "61ea2e6ba9dde0bcc6139dad20a9f7f6285d85641a7bc539e12de2d07fefeb84"
+        }
+      }
+    },
+    "codex": {
+      "review": {
+        "file": "codex-review.json",
+        "sha256": "0d6793724afd9fce7c1d7cc69d689ac153df78d8c68ccc91457d729b7d9e01da",
+        "model": {
+          "model": "gpt-6.1-sol",
+          "effort": "medium",
+          "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+          "verified_at": "2026-11-08"
+        },
+        "decision": "proposed",
+        "input_hashes": {
+          "reports/rhino-performance/indexability-phase2-20261113/first-improvements-preparation-20261113/review-packet.json": "79940aef8cc1b774000bb56d5f05a43a4c1c22245a13a6f132eafca9db2dca67",
+          "reports/rhino-performance/indexability-phase2-20261113/first-improvements-preparation-20261113/controller-validation.json": "960ad430908535349858ad125fab55c9c1ea3d45832f3c7c07bf08dcd6c7e0cc",
+          "reports/rhino-performance/indexability-phase2-20261113/first-improvements-preparation-20261113/catalog-claim-provenance.json": "c5a8acf7b323d219b8901fa84411a274ba11c7a88e78d5836c7746b3862f0c2e",
+          "reports/rhino-performance/indexability-phase2-20261113/first-improvements-preparation-20261113/presoterapia-saved-content.json": "7ec05be18bd6256e9889422eae2f5b38f3099e9b43e571a8705e5703b4a941a9",
+          "reports/rhino-performance/indexability-phase2-20261113/first-improvements-preparation-20261113/query-context.json": "570b121d7abbd8e7d30e198aa7dae3c8a4fe0ff0593028edfc300618149f1dc1",
+          "reports/rhino-performance/indexability-phase2-20261113/first-improvements-preparation-20261113/editorial-candidate.md": "37438b54aac3bb55949b9438adc76895f5ebc277b86285ecfafa139eb009aa51",
+          "reports/rhino-performance/indexability-phase2-20261113/first-improvements-preparation-20261113/inspection-procedure.md": "b5704688b767eef16c96c4792e15b2b1adfd48072e83c5d1296c54e0e68ba8f5",
+          "reports/rhino-performance/indexability-phase2-20261113/first-improvements-preparation-20261113/commercial-404-plan.json": "ad822bda418044323b85cf0b3e2590524fc347a918129438ea38719099c72428"
+        }
+      },
+      "contrast": {
+        "file": "codex-contrast.json",
+        "sha256": "94528017ed02b4eb358d5a6b029e8e2efd189c803f34770dd2e82aa379b56824",
+        "model": {
+          "model": "gpt-6.1-sol",
+          "effort": "medium",
+          "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+          "verified_at": "2026-11-08"
+        },
+        "decision": "proposed",
+        "input_hashes": {
+          "reports/rhino-performance/indexability-phase2-20261113/first-improvements-preparation-20261113/review-packet.json": "0c8e1bca6904280acdc6825a95054cbfd3632b4159abc0cb8ceb0a3b6ea8d615",
+          "reports/rhino-performance/indexability-phase2-20261113/first-improvements-preparation-20261113/controller-validation.json": "960ad430908535349858ad125fab55c9c1ea3d45832f3c7c07bf08dcd6c7e0cc",
+          "reports/rhino-performance/indexability-phase2-20261113/first-improvements-preparation-20261113/controller-supplement.json": "9f147bade7905344ef7d44ac8d08a62e3288cb8e1bb69091d2ecf65aa389c48e",
+          "reports/rhino-performance/indexability-phase2-20261113/first-improvements-preparation-20261113/catalog-claim-provenance.json": "c5a8acf7b323d219b8901fa84411a274ba11c7a88e78d5836c7746b3862f0c2e",
+          "reports/rhino-performance/indexability-phase2-20261113/first-improvements-preparation-20261113/presoterapia-saved-content.json": "7ec05be18bd6256e9889422eae2f5b38f3099e9b43e571a8705e5703b4a941a9",
+          "reports/rhino-performance/indexability-phase2-20261113/first-improvements-preparation-20261113/editorial-candidate.md": "1378141593e74d8d948e678ca8be08d59d6e14c26dbecc60ffc4773f7332520e",
+          "reports/rhino-performance/indexability-phase2-20261113/first-improvements-preparation-20261113/editorial-candidate-v1.md": "37438b54aac3bb55949b9438adc76895f5ebc277b86285ecfafa139eb009aa51",
+          "reports/rhino-performance/indexability-phase2-20261113/first-improvements-preparation-20261113/inspection-procedure.md": "b5704688b767eef16c96c4792e15b2b1adfd48072e83c5d1296c54e0e68ba8f5",
+          "reports/rhino-performance/indexability-phase2-20261113/first-improvements-preparation-20261113/commercial-404-plan.json": "ad822bda418044323b85cf0b3e2590524fc347a918129438ea38719099c72428",
+          "reports/rhino-performance/indexability-phase2-20261113/first-improvements-preparation-20261113/README.md": "61ea2e6ba9dde0bcc6139dad20a9f7f6285d85641a7bc539e12de2d07fefeb84"
+        }
+      }
+    }
+  },
+  "contracts_and_assigned_answers_valid": true,
+  "exact_final_draft_sha256": "1378141593e74d8d948e678ca8be08d59d6e14c26dbecc60ffc4773f7332520e",
+  "discussion_result": "Two-group draft removes repetition and unsupported PROAIR comparison; contextual product links do not require category grid membership, but current destination/truth verification still required.",
+  "preserved_preference_labels": {
+    "claude": "claude-editorial-minimal-gated",
+    "codex": "codex.editorial-minimo"
+  },
+  "no_claim_of_unanimous_implementation_approval": true,
+  "documentary_objections_resolved": [
+    "claude-obj-1"
+  ],
+  "open_conditions": [
+    {
+      "id": "claude-obj-2",
+      "state": "needs_evidence",
+      "scope": "Current category gap, product truth, native placement and GSC/404 evidence remain unverified"
+    },
+    {
+      "id": "codex.obj.integracion",
+      "state": "needs_evidence",
+      "scope": "Native field/after-grid position and no duplication with hybridScroll"
+    },
+    {
+      "id": "codex.obj.vigencia",
+      "state": "needs_evidence",
+      "scope": "Current content, product facts and destination status"
+    }
+  ],
+  "implementation_allowed": false,
+  "external_operations_performed": false
+}

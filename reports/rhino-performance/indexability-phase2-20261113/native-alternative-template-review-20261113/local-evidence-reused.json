@@ -1,0 +1,34 @@
+{
+  "source": "reports/rhino-performance/indexability-phase2-20261113/editorial-validation-preparation-20261113/local-native-evidence.json",
+  "sha256": "89085d9bbf4e3e39a8c491065ee17f6414166cfe553f0df7dc6a968cac070ac8",
+  "rechecked_local_hashes": {
+    "sections/page-header.tpl": "b86f9cdb8b49f4ff990543378c2b6e9b994bafefa625f420712d8c670c24f98d",
+    "sections/rich-text.tpl": "66646d0a69295331925511536c0b641c2d61fc82ffa8e070e24cca7c2ec8bfc8",
+    "sections/main-products-grid.tpl": "44ea7562f20638605536af4abe5f9230565f4aa46a0b177f3208ce2d968ad4ec",
+    "blocks/text.tpl": "ce5179f53423c1234bbba6f8a1f20fe90250c51d6eea74e7ed3ae038b1fa4b4b",
+    "blocks/heading.tpl": "c708f5fcfdc022a129cc0188ca30d5c619cbc2e1528c2db9cc909cd0c8037e7f",
+    "templates/pages/category.json": "1de2cd2fa42138e0b8943452f40f6f6d48c612a0e339fccf184b5e716dfdaea5",
+    "snippets/product-list/pagination.tpl": "0958c668ee40bf0d16c76db4d6493bf6387d17e3ec7ff8f66aaffcce564d463c",
+    "static/js/store.js": "f97557494e017eba623ba2dd7e568789f8d9035d467f0b03f71bc0b3b8393be9"
+  },
+  "sources_unchanged": true,
+  "remote_equality": "not_checked",
+  "facts": [
+    {
+      "id": "LOCAL-01",
+      "fact": "rich-text enabled for all page templates; block text supports richtext. Existing section can conceptually follow product_list in template order."
+    },
+    {
+      "id": "LOCAL-02",
+      "fact": "Shared category.json must remain untouched. page-header/heading remains disabled; description consumer is only header."
+    },
+    {
+      "id": "LOCAL-03",
+      "fact": "Product cards inside .js-product-table; pagination after cards; hybridScroll uses that selector. Separate sibling guide after list is outside configured append target, not tested behavior."
+    },
+    {
+      "id": "LOCAL-04",
+      "fact": "Heading block visual size is not semanticH2; actual richtext heading markup must be checked."
+    }
+  ]
+}

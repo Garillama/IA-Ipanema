@@ -1,0 +1,169 @@
+{
+  "requested_agent": "claude",
+  "effective_agent": "claude",
+  "scope": "offline remaining65 planning only",
+  "input_hashes": {
+    "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/remaining-65-preparation/batch-index.json": "0d28290785f138648866fb603940250168f7b4a16666b6ebd613207ffa2d76c7",
+    "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/remaining-65-preparation/execution-policy.json": "825416b81890bbb896f8ce35db6ddb1b7598c73777ab2f538eeac71db25d697c",
+    "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/remaining-65-preparation/controller-validation.json": "0c860d4d51cbb445dee657309d3bfa0010961f10461dcf2da7d9570c26486291",
+    "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/remaining-65-preparation/pending-65-list.txt": "cba500f318ee5ebca08cdd67fa7cb6dc1d41f3295729fa59246c06f509f5d878",
+    "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/remaining-65-preparation/batch-03/operation.json": "ba02285e8c33ef3405b5a1e6d4ccf2f933ed64ba253411bc5f97daf7eb71c6f4",
+    "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/remaining-65-preparation/batch-03/command-NOT-AUTHORIZED.txt": "deeca80733781f11c228720660813ee6b27178a0f5c84169c64aa463ce6c98b4"
+  },
+  "response": {
+    "decision": "approve",
+    "summary": "Apruebo solo solicitar autorización del lote 03 y la planificación general, con condiciones. La partición 65 = 7 productos + 58 artículos en 13 lotes es coherente y los límites del lote 03 coinciden con lo pedido. Faltan evidencias independientes: controller_evidence está vacío y solo se aportó el material completo del lote 03. Esto no autoriza ejecución ni red, ni promete éxitos ni indexación.",
+    "changes": [],
+    "evidence": [
+      "pending-65-list.txt: 65 líneas, lotes 03..15; productos 2+2+2+1=7 (lotes 03-06), artículos 3+3+3+4+5x9=58; sin solapamiento visible entre lotes.",
+      "batch-index.json: ordering 'Preserve pending-65.csv order', sin reordenar ni reescribir URLs; type_counts suman 7 y 58; las 5 URLs del lote 03 coinciden con pending-65-list.txt.",
+      "batch-03/operation.json (sha ba02285e...) y command-NOT-AUTHORIZED.txt (sha deeca807...) coinciden con operation_sha256 y command_sha256 del índice; argv coincide con el texto del comando.",
+      "Límites lote 03: max-requests 12, 0.5 rps, max-seconds 120, timeout 20, max-bytes 2000000, max-redirects 3, concurrency 1, max-sitemaps 0, network_authorized false, executed false.",
+      "execution-policy.json: each_batch_separately_authorized true; preflight con not_observed fresco; marcador de un solo uso; no lanzar el siguiente lote automáticamente; no_precreated_or_simulated_runtime_checkpoint true.",
+      "controller-validation.json: status passed_offline, duplicate_urls 0, omitted_urls 0, overlap_with_previous_two_executions 0, native_manifest_validations_passed 13, network_requests 0.",
+      "controller_evidence vacío: no cito evidence_refs ni verifiqué por mi cuenta hashes de motor, matriz, CSV pendiente ni targets.json."
+    ],
+    "objections": [
+      {
+        "id": "O1",
+        "alternative_id": "Plan de 13 lotes cerrados 03..15 con autorización independiente por lote",
+        "category": "evidencia",
+        "severity": "medium",
+        "claim": "controller_evidence está vacío: los hashes de motor/transporte, matriz, pending CSV y targets.json solo constan como afirmaciones del recibo controller-validation.json (engine_and_transport_hashes_unchanged, source_pending_matches_matrix). No los verifiqué de forma independiente; el preflight del controlador debe recalcularlos antes de autorizar el lote 03.",
+        "status": "open",
+        "evidence_refs": [],
+        "resolution_evidence_refs": []
+      },
+      {
+        "id": "O2",
+        "alternative_id": "Plan de 13 lotes cerrados 03..15 con autorización independiente por lote",
+        "category": "cobertura de revisión",
+        "severity": "medium",
+        "claim": "Solo se aportaron operation.json y comando del lote 03; los lotes 04-15 solo se respaldan con operation_sha256/command_sha256 del índice, sin contenido. La identidad de comandos/presupuestos en esos lotes no está verificada y deberá revisarse al solicitar cada autorización.",
+        "status": "open",
+        "evidence_refs": [],
+        "resolution_evidence_refs": []
+      },
+      {
+        "id": "O3",
+        "alternative_id": "Plan de 13 lotes cerrados 03..15 con autorización independiente por lote",
+        "category": "contrato de estado",
+        "severity": "low",
+        "claim": "registry_contract.allowed_states solo admite pending_authorization, executed y blocked, mientras failure_handling habla de parcial, started-unconfirmed y timeout. Falta definir a qué estado se mapea un lote parcial o no HTTP sin perder la incertidumbre ni habilitar reintento automático.",
+        "status": "open",
+        "evidence_refs": [],
+        "resolution_evidence_refs": []
+      },
+      {
+        "id": "O4",
+        "alternative_id": "Plan de 13 lotes cerrados 03..15 con autorización independiente por lote",
+        "category": "presupuesto",
+        "severity": "low",
+        "claim": "--max-urls 8 supera las 5 URLs del manifiesto, y 12 GET x timeout 20s excede los 120s supervisados, así que un lote parcial es posible. La acotación a cinco depende del manifiesto y del hash, y no debe presentarse como garantía de cinco resultados.",
+        "status": "open",
+        "evidence_refs": [],
+        "resolution_evidence_refs": []
+      },
+      {
+        "id": "O5",
+        "alternative_id": "Plan de 13 lotes cerrados 03..15 con autorización independiente por lote",
+        "category": "historial",
+        "severity": "low",
+        "claim": "La matriz viva cambiará tras cada lote y el índice solo conserva el hash de source_matrix_sha256. El snapshot de procedencia debe guardarse como copia congelada, no solo como hash, para poder reconciliar selección y posibles redirecciones o duplicados sucesivos.",
+        "status": "open",
+        "evidence_refs": [],
+        "resolution_evidence_refs": []
+      }
+    ],
+    "preferred_alternative": "Plan de 13 lotes cerrados 03..15 con autorización independiente por lote (hash de manifiesto y comando); aprobar ahora solo solicitar autorización del lote 03.",
+    "questions": [
+      {
+        "id": "Q1",
+        "to_agent": "codex",
+        "alternative_id": "Plan de 13 lotes cerrados 03..15 con autorización independiente por lote",
+        "question": "Según el contrato de registro (allowed_states: pending_authorization, executed, blocked), ¿a qué estado se mapea un lote con resultado parcial, timeout o una URL started-unconfirmed, y qué campo del recibo conserva esa incertidumbre sin permitir reintento automático ni duplicar destinos en lotes posteriores?",
+        "evidence_refs": []
+      }
+    ]
+  },
+  "model": {
+    "model": "claude-sonnet-5-5",
+    "effort": "medium",
+    "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+    "verified_at": "2026-11-08"
+  },
+  "execution": {
+    "exit_code": 0,
+    "timed_out": false,
+    "output_limited": false,
+    "idle_timed_out": false,
+    "cancelled": false,
+    "process_started": true,
+    "process_reaped": true,
+    "stdin_bytes_written": 59588,
+    "context_complete": true,
+    "duration_s": 44.902,
+    "timing": {
+      "spawn_s": 0.000651,
+      "input_complete_s": 0.0008,
+      "first_stdout_s": 1.622395,
+      "first_stderr_s": null,
+      "timeout_phase": null,
+      "event_counts": {
+        "system": 14,
+        "stream_event": 759,
+        "event:message_start": 2,
+        "event:content_block_start": 3,
+        "event:content_block_delta": 747,
+        "assistant": 3,
+        "event:content_block_stop": 3,
+        "user": 2,
+        "event:message_delta": 2,
+        "event:message_stop": 2,
+        "rate_limit_event": 2,
+        "result": 1
+      },
+      "inference_vs_initialization": "not_separable_without_provider_events"
+    },
+    "output_accounting": {
+      "transport_bytes": 288510,
+      "retained_bytes": 288510,
+      "discarded_progress_bytes": 0,
+      "transport_limit_bytes": 20000000,
+      "retained_limit_bytes": 2000000
+    },
+    "isolation": {
+      "backend": "bubblewrap",
+      "snapshot_read_only": true,
+      "host_home_mounted": false,
+      "network": "enabled_no_destination_firewall",
+      "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+    },
+    "started_at": "2026-11-13T06:39:03.006582+00:00",
+    "prompt_bytes": 59588,
+    "prompt_sha256": "c3926b5746097243699dbafe9dcdcb835cd03e169f9092a115ef7089a31af7a7",
+    "usage": {
+      "provider_reported": {
+        "total_cost_usd": 0.2023947,
+        "duration_ms": 42900,
+        "input_tokens": 4,
+        "cache_creation_input_tokens": 34204,
+        "cache_read_input_tokens": 31307,
+        "output_tokens": 6244
+      },
+      "measured_cost_available": true,
+      "estimated_cost": null
+    },
+    "limits": {
+      "timeout": 240,
+      "idle_timeout": 90,
+      "startup_timeout": 30,
+      "first_response_timeout": 120
+    },
+    "structured_output": "native_schema",
+    "contract_validation": {
+      "status": "passed",
+      "duration_s": 0.017233
+    }
+  }
+}

@@ -1,0 +1,125 @@
+{
+  "requested_agent": "codex",
+  "effective_agent": "codex",
+  "scope": "incremental exchange on saved pilot1 findings + batch2 only",
+  "input_hashes": {
+    "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/batch-02-preparation/saved-evidence-excerpts.json": "496f4cf79ac0c1e331b6220f6dc6a3d2b4068cb87150169f209a57e9e0ad8b6e",
+    "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/batch-02-preparation/targets.json": "7117b37560a94eb8477d6e1328e2999cd103d69857c1e01b87910b8d269b8f42",
+    "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/batch-02-preparation/controller-validation.json": "0b137ec113445e633c6982ab9544e4c962ea544145c0c960e3b0042697d0db87",
+    "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/batch-02-preparation/operation.json": "84e906a7854dedcc03f629de332b68fb2f80a5f1bdb5a7c126a82d70f9949a4c",
+    "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/batch-02-preparation/command-NOT-AUTHORIZED.txt": "ca8d3738821b062200c00e9b822cd83382536906aefca901f1e8d8772849172c"
+  },
+  "response": {
+    "decision": "approve",
+    "summary": "Apruebo únicamente solicitar autorización del manifiesto targets.json con SHA256 7117b37560a94eb8477d6e1328e2999cd103d69857c1e01b87910b8d269b8f42 y la invocación existente de operation.json.argv. No autoriza ejecución ni modificaciones. controller-validation.json respalda cinco destinos únicos, sin solapamiento y con HTTP pendiente. D010/D050 secundarios siguen como posibles falsos positivos; D011 separa comparación contextual y codificación no resuelta; D070 permanece needs_evidence. La evidencia aportada no permite cerrar su clasificación ni certificar Google.",
+    "changes": [],
+    "evidence": [
+      "saved-evidence-excerpts.json, products[0..1]: primary_Product_entities identifica structured-data.page, bloque 1, $.mainEntity; secondary_Product_entities identifica structured-data.item, bloques 3..7. primary_comparison_flags=[] no demuestra validación integral.",
+      "saved-evidence-excerpts.json, secondary_comparisons y all_secondary_comparison_flags: D010 compara el destino secundario con canonical; D050 compara su nombre con el H1 principal. matching_main_carousel_links respalda el contexto de carrusel, pero no prueba cómo discrimina entidades el validador.",
+      "saved-evidence-excerpts.json, all_secondary_comparison_flags y projection_omits: D011 conserva '&amp%3B', sin establecer su origen; D070 carece de candidatos de imagen y currentSrc. properties enumera campos, sin verificar precio o stock. Datos omitidos por la proyección no equivalen a datos ausentes del HTML.",
+      "saved-evidence-excerpts.json, articles[0..2]: declared_author_strings conserva RHINO PERFORMANCE, Marketing RHINO y Erick; author_truth=declared_not_editorially_verified. La representación escalar está documentada; identidad, tipo y perfiles siguen unknown.",
+      "controller-validation.json: selected_type_counts=2 product/3 article, five_unique_urls=true, no_overlap_with_pilot1=true, all_five_current_HTTP_not_observed=true y native_manifest_validator_passed=true. Declara coincidencia de hashes de transporte con piloto1, network_requests=0 y no_tests_repeated=true.",
+      "targets.json conserva procedencia y hashes de pending-70.csv y url-matrix.csv. operation.json.argv coincide con command-NOT-AUTHORIZED.txt: 12 GET, 0.5 solicitudes/s, 120 s, timeout 20 s, 2000000 bytes, tres saltos globales, concurrencia 1, profundidad y sitemaps 0. network_authorized=false y executed=false; completar cinco respuestas sigue unknown."
+    ],
+    "objections": [
+      {
+        "id": "O1",
+        "alternative_id": "claude-solicitar-autorizacion-lote2-sin-cambios",
+        "category": "limite_de_evidencia",
+        "severity": "low",
+        "claim": "Conservar HTML crudo es trabajo futuro, no una capacidad demostrada ni una condición añadida al lote2. La invocación actual debe mantenerse sin prometer esa captura. D011 y D070 siguen pendientes; esta limitación no impide solicitar autorización del manifiesto exacto.",
+        "status": "open",
+        "evidence_refs": [],
+        "resolution_evidence_refs": []
+      }
+    ],
+    "preferred_alternative": "codex.A1",
+    "answers": [
+      {
+        "question_id": "Q1",
+        "from_agent": "claude",
+        "answer": "Ninguna fuente aportada demuestra que la lógica de D010/D050 distinga principal y secundarios. saved-evidence-excerpts.json conserva products[0..1].primary_Product_entities con component=structured-data.page y path=$.mainEntity, y secondary_Product_entities con component=structured-data.item. all_secondary_comparison_flags identifica Product@structured-data.item; D010.evidence compara value con canonical y D050.evidence compara name con h1, con scope=null y path=null. source.node_pointer remite a /urls/0 y /urls/1 del raw-crawl-report.json, pero no aporta código ni una condición de discriminación. Esto sustenta posibles falsos positivos contextuales, sin cerrarlos como falsos positivos ciertos o defectos confirmados.",
+        "disposition": "needs_evidence",
+        "evidence_refs": []
+      }
+    ],
+    "withdrawn_alternatives": [],
+    "revision_notes": [
+      "El contraste permite pasar de proposed a approve exclusivamente para solicitar autorización; no constituye autorización de ejecución.",
+      "Mantengo codex.A1 y coincido con el alcance operativo de la alternativa de Claude.",
+      "Preciso D070 como needs_evidence y mantengo abierta la atribución de la codificación D011. No se ejecutaron pruebas ni se resolvieron hallazgos mediante esta defensa.",
+      "controller_evidence está vacío; evidence_refs y resolution_evidence_refs permanecen vacíos."
+    ]
+  },
+  "model": {
+    "model": "gpt-6.1-sol",
+    "effort": "medium",
+    "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+    "verified_at": "2026-11-08"
+  },
+  "execution": {
+    "exit_code": 0,
+    "timed_out": false,
+    "output_limited": false,
+    "idle_timed_out": false,
+    "cancelled": false,
+    "process_started": true,
+    "process_reaped": true,
+    "stdin_bytes_written": 150149,
+    "context_complete": true,
+    "duration_s": 28.76,
+    "timing": {
+      "spawn_s": 0.000911,
+      "input_complete_s": 0.15819,
+      "first_stdout_s": 0.960751,
+      "first_stderr_s": null,
+      "timeout_phase": null,
+      "event_counts": {
+        "thread.started": 1,
+        "item.completed": 2,
+        "turn.started": 1,
+        "turn.completed": 1
+      },
+      "inference_vs_initialization": "not_separable_without_provider_events"
+    },
+    "output_accounting": {
+      "transport_bytes": 5437,
+      "retained_bytes": 5437,
+      "discarded_progress_bytes": 0,
+      "transport_limit_bytes": 20000000,
+      "retained_limit_bytes": 2000000
+    },
+    "isolation": {
+      "backend": "bubblewrap",
+      "snapshot_read_only": true,
+      "host_home_mounted": false,
+      "network": "enabled_no_destination_firewall",
+      "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+    },
+    "started_at": "2026-11-12T22:35:38.944481+00:00",
+    "prompt_bytes": 150149,
+    "prompt_sha256": "e69a555e5fe39fbf33fbe57373cee1240ffedb816bf5fdd9a09832493777a175",
+    "usage": {
+      "provider_reported": {
+        "input_tokens": 53491,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1143,
+        "reasoning_output_tokens": 71
+      },
+      "measured_cost_available": false,
+      "estimated_cost": null
+    },
+    "limits": {
+      "timeout": 240,
+      "idle_timeout": 90,
+      "startup_timeout": 30,
+      "first_response_timeout": 150
+    },
+    "structured_output": "native_schema",
+    "contract_validation": {
+      "status": "passed",
+      "duration_s": 0.000174
+    }
+  }
+}

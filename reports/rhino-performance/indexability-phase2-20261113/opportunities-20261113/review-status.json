@@ -1,0 +1,113 @@
+{
+  "scope": "Incremental new documentation only; no restart of original council",
+  "participants": {
+    "claude": {
+      "review": {
+        "receipt": "claude-review.json",
+        "sha256": "562e44b7c48fb06dce02e591c25562abb2d7d32a11280b26e2fa0eb0518e665a",
+        "model": {
+          "model": "claude-sonnet-5-5",
+          "effort": "medium",
+          "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+          "verified_at": "2026-11-08"
+        },
+        "decision": "changes_requested",
+        "input_hashes": {
+          "reports/rhino-performance/indexability-phase2-20261113/opportunities-20261113/review-packet.json": "af0b2a98f82fad7926cc6859914ab26aaf5ceb55b9d061617cb4e6496053c758",
+          "reports/rhino-performance/indexability-phase2-20261113/opportunities-20261113/controller-validation.json": "a7a27537737bc6d42c1c68068464f41bf965edcbadc157d785c5d70335bc0764",
+          "reports/rhino-performance/indexability-phase2-20261113/opportunities-20261113/categories.json": "211fb22809de54afc9bde4e15029bfdd73188998e27ecaa35aaa53e8e25a0f66",
+          "reports/rhino-performance/indexability-phase2-20261113/opportunities-20261113/legacy-top-five.json": "77c24ccac241b4b187f8bdb59d7e0f3d1db298048ad205873f5d1f6e94a8bf5f",
+          "reports/rhino-performance/indexability-phase2-20261113/opportunities-20261113/intake-contract.json": "9d7d07ed8ea55c1f1eb7a09e820673fe170a0d2dfd2b292f29b93fcf26548316",
+          "reports/rhino-performance/indexability-phase2-20261113/opportunities-20261113/opportunity-backlog.json": "3d7803e452739e0c0f12354a46864b66a52f4f0d23d5a5934f98bf38ed421d49"
+        }
+      },
+      "contrast": {
+        "receipt": "claude-contrast.json",
+        "sha256": "acc2eeda7718762c96b61fbf191a38863778b7b9d2d4f175fe48728761c4f03a",
+        "model": {
+          "model": "claude-sonnet-5-5",
+          "effort": "medium",
+          "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+          "verified_at": "2026-11-08"
+        },
+        "decision": "proposed",
+        "input_hashes": {
+          "reports/rhino-performance/indexability-phase2-20261113/opportunities-20261113/review-packet.json": "9ae8454aecd05ef7f2ff2774d79381e7e13a7746b4a334438a1942ef262e2d05",
+          "reports/rhino-performance/indexability-phase2-20261113/opportunities-20261113/controller-validation.json": "a7a27537737bc6d42c1c68068464f41bf965edcbadc157d785c5d70335bc0764",
+          "reports/rhino-performance/indexability-phase2-20261113/opportunities-20261113/controller-supplement.json": "059db873b53552f62d6b9c0f9ca98ab961ed4616f6458134da7a0a724df2ce5f",
+          "reports/rhino-performance/indexability-phase2-20261113/opportunities-20261113/performance-scope.json": "38b1e731d00349b3dc442503cdf3d3adb29b7d42b228ee7987d224defd8ff7bb",
+          "reports/rhino-performance/indexability-phase2-20261113/opportunities-20261113/intake-contract.json": "763786b6e6d90c016293b6567a61b5d186632db0734a68ddf05ef1a10580c846",
+          "reports/rhino-performance/indexability-phase2-20261113/opportunities-20261113/opportunity-backlog.json": "cdcb6f5cf957e33ab41b1a5047f8f31400174ac600092d79b698746deedd7d44",
+          "reports/rhino-performance/indexability-phase2-20261113/opportunities-20261113/README.md": "252d7c1dd74e1688f147cb95b2c2deaf104cae45ef63de82929121752b0e1e8d",
+          "reports/rhino-performance/indexability-phase2-20261113/opportunities-20261113/redirect-read-scope.md": "a39c7353af16b903c857071bedfc06b871edb258d52cebc57e0bd3b156bb6053"
+        }
+      }
+    },
+    "codex": {
+      "review": {
+        "receipt": "codex-review.json",
+        "sha256": "fc925fbed3f31a154dafe753abeaa8bb13869999f34e5804dd996971cf0feea7",
+        "model": {
+          "model": "gpt-6.1-sol",
+          "effort": "medium",
+          "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+          "verified_at": "2026-11-08"
+        },
+        "decision": "proposed",
+        "input_hashes": {
+          "reports/rhino-performance/indexability-phase2-20261113/opportunities-20261113/review-packet.json": "af0b2a98f82fad7926cc6859914ab26aaf5ceb55b9d061617cb4e6496053c758",
+          "reports/rhino-performance/indexability-phase2-20261113/opportunities-20261113/controller-validation.json": "a7a27537737bc6d42c1c68068464f41bf965edcbadc157d785c5d70335bc0764",
+          "reports/rhino-performance/indexability-phase2-20261113/opportunities-20261113/categories.json": "211fb22809de54afc9bde4e15029bfdd73188998e27ecaa35aaa53e8e25a0f66",
+          "reports/rhino-performance/indexability-phase2-20261113/opportunities-20261113/legacy-top-five.json": "77c24ccac241b4b187f8bdb59d7e0f3d1db298048ad205873f5d1f6e94a8bf5f",
+          "reports/rhino-performance/indexability-phase2-20261113/opportunities-20261113/intake-contract.json": "9d7d07ed8ea55c1f1eb7a09e820673fe170a0d2dfd2b292f29b93fcf26548316",
+          "reports/rhino-performance/indexability-phase2-20261113/opportunities-20261113/opportunity-backlog.json": "3d7803e452739e0c0f12354a46864b66a52f4f0d23d5a5934f98bf38ed421d49"
+        }
+      },
+      "contrast": {
+        "receipt": "codex-contrast.json",
+        "sha256": "1c6e423ac0843acd02e9574b2b6d59523d29eb0bfcb82fbdc30aae56fb5bbc7a",
+        "model": {
+          "model": "gpt-6.1-sol",
+          "effort": "medium",
+          "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+          "verified_at": "2026-11-08"
+        },
+        "decision": "proposed",
+        "input_hashes": {
+          "reports/rhino-performance/indexability-phase2-20261113/opportunities-20261113/review-packet.json": "9ae8454aecd05ef7f2ff2774d79381e7e13a7746b4a334438a1942ef262e2d05",
+          "reports/rhino-performance/indexability-phase2-20261113/opportunities-20261113/controller-validation.json": "a7a27537737bc6d42c1c68068464f41bf965edcbadc157d785c5d70335bc0764",
+          "reports/rhino-performance/indexability-phase2-20261113/opportunities-20261113/controller-supplement.json": "059db873b53552f62d6b9c0f9ca98ab961ed4616f6458134da7a0a724df2ce5f",
+          "reports/rhino-performance/indexability-phase2-20261113/opportunities-20261113/performance-scope.json": "38b1e731d00349b3dc442503cdf3d3adb29b7d42b228ee7987d224defd8ff7bb",
+          "reports/rhino-performance/indexability-phase2-20261113/opportunities-20261113/intake-contract.json": "763786b6e6d90c016293b6567a61b5d186632db0734a68ddf05ef1a10580c846",
+          "reports/rhino-performance/indexability-phase2-20261113/opportunities-20261113/opportunity-backlog.json": "cdcb6f5cf957e33ab41b1a5047f8f31400174ac600092d79b698746deedd7d44",
+          "reports/rhino-performance/indexability-phase2-20261113/opportunities-20261113/README.md": "252d7c1dd74e1688f147cb95b2c2deaf104cae45ef63de82929121752b0e1e8d",
+          "reports/rhino-performance/indexability-phase2-20261113/opportunities-20261113/redirect-read-scope.md": "a39c7353af16b903c857071bedfc06b871edb258d52cebc57e0bd3b156bb6053"
+        }
+      }
+    }
+  },
+  "provider_review_and_cross_answers_valid": true,
+  "controller_semantic_checks": [
+    "Both assigned questions answered directly",
+    "Absolute dates correctly distinguished from literal Filtros label",
+    "Snippet/content dated evidence required before metadata proposal",
+    "No claimed historic traffic loss or known redirect destination",
+    "No approval for implementation inferred from provider proposed status"
+  ],
+  "documentary_objections_resolved": [
+    "claude-obj-1",
+    "claude-obj-2",
+    "codex-obj-01"
+  ],
+  "open_objections": [
+    {
+      "id": "codex-obj-02",
+      "status": "needs_evidence",
+      "reason": "Five-target closed selector and three global redirects do not guarantee five complete chains; future operation must state acceptable partial outcome or explicitly reviewed/authorized budget. No engine changes requested."
+    }
+  ],
+  "implementation_allowed": false,
+  "current_opportunities_status": "needs_evidence",
+  "original_exports_and_baselines_unchanged": true,
+  "no_storefront_or_google_requests": true
+}

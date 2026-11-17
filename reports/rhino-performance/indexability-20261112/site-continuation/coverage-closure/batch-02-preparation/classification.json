@@ -1,0 +1,81 @@
+{
+  "source_report_sha256": "90ed920ae812460e9d2481e3c36ec3f85f2e665516a6666b591456af3662d6a2",
+  "analysis_source": "saved artifacts only, no network or theme/code inspection for these findings",
+  "primary_comparison_flags": 0,
+  "secondary_links_matched": 10,
+  "raw_secondary_rule_counts": {
+    "D010": 10,
+    "D011": 10,
+    "D050": 10,
+    "D070": 10
+  },
+  "items": [
+    {
+      "id": "PRIMARY-PRODUCT",
+      "classification": "no_defect_demonstrated_in_saved_subset",
+      "evidence": "One Product per PDP at structured-data.page / $.mainEntity, id matches canonical; no D010/D011/D050/D070 flags assigned to that entity in saved report",
+      "limit": "No raw commercial values or external Google validation; not complete schema certification",
+      "recommendation": "Leave primary Product and commercial data unchanged"
+    },
+    {
+      "id": "D010-SECONDARY",
+      "classification": "possible_context_false_positive",
+      "raw_count": 10,
+      "evidence": "All ten flags are Product@structured-data.item; each declared page matches an HTML main/carousel product link, while comparator uses the containing PDP canonical",
+      "limit": "Does not prove global validator implementation or universal validity of secondary entities",
+      "recommendation": "Do not rewrite secondary mainEntityOfPage to host canonical; preserve identity"
+    },
+    {
+      "id": "D050-SECONDARY",
+      "classification": "possible_context_false_positive",
+      "raw_count": 10,
+      "evidence": "Secondary product names compared against the main PDP H1; distinct product cards are observed",
+      "recommendation": "Do not rename secondary products or main H1 to make the comparison pass"
+    },
+    {
+      "id": "D011-SECONDARY",
+      "classification": "possible_context_false_positive_plus_encoding_needs_evidence",
+      "raw_count": 10,
+      "evidence": "Offer URL identifies secondary product with recommendation parameters; artifact has amp%3B while anchor has normal recommender parameter",
+      "limit": "Raw JSON-LD absent: cannot attribute encoding to emitter/serializer/collector or prove endpoint behavior",
+      "recommendation": "Do not strip attribution parameters, force host URL or infer variants/ProductGroup"
+    },
+    {
+      "id": "D070-IMAGE",
+      "classification": "needs_evidence",
+      "raw_count": 10,
+      "evidence": "Related image projection has placeholder GIF, alt and boolean srcset=true, without candidate URLs/data-src/currentSrc/download evidence",
+      "limit": "An omitted image URL in this projection does not demonstrate a broken or missing image",
+      "recommendation": "No image replacement, removal or priority changes based on this warning"
+    },
+    {
+      "id": "BLOG-AUTHOR",
+      "classification": "scalar_representation_and_local_validator_warning_confirmed",
+      "URLs": [
+        "https://rhino-performance.com/blog/posts/la-presoterapia-como-transformador-de-tu-salud-mental-relajacion-y-recuperacion-127cdc829590/",
+        "https://rhino-performance.com/blog/posts/el-fro-no-es-un-castigo-es-una-herramienta-cbe9a25855f8/",
+        "https://rhino-performance.com/blog/posts/faja-de-compresion-lumbar-el-soporte-que-tu-espalda-agradecera-047c381cf3ac/"
+      ],
+      "declared_strings": [
+        [
+          "RHINO PERFORMANCE"
+        ],
+        [
+          "Marketing RHINO"
+        ],
+        [
+          "Erick"
+        ]
+      ],
+      "rules": [
+        "B030",
+        "B100"
+      ],
+      "evidence": "Author string representation retained and warned about in all three BlogPosting records",
+      "limit": "Declared display names, not editorial truth; no confirmed Google index block or verified Person/Organization identity",
+      "recommendation": "Only after native emitter/CMS and editorial identity are confirmed, consider typed author; do not invent people, organizations or profiles"
+    }
+  ],
+  "confirmed_HTTP_robots_canonical_indexability_blockers": [],
+  "raw_flags_preserved_not_rewritten": true
+}

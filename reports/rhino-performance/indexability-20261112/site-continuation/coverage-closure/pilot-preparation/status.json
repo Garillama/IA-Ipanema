@@ -1,0 +1,63 @@
+{
+  "project": "rhino-performance",
+  "status": "blocked_before_network",
+  "preparation_completed": true,
+  "ready_for_pilot_authorization": false,
+  "specific_network_authorization_received": false,
+  "targets": 5,
+  "products": 2,
+  "articles": 3,
+  "supported_exact_five_target_invocation": false,
+  "required_adaptation": "opt-in closed-target scope in existing crawler; strict stop/checkpoint and validated absolute deadline",
+  "motor_integrated_patch_unchanged": "611a5dac1e2767c0d331e42b06c60834e8a427c8bbc41671b9a81a8c977f3e2c",
+  "all_11_integrated_hashes_match": true,
+  "existing_191_13_quick_tests_not_repeated": true,
+  "new_offline_procedure_demonstrations": 2,
+  "new_storefront_requests": 0,
+  "new_Google_requests": 0,
+  "engine_changes": false,
+  "theme_changes": false,
+  "reviews": [
+    {
+      "requested_agent": "claude",
+      "effective_agent": "claude",
+      "model": {
+        "model": "claude-sonnet-5-5",
+        "effort": "medium",
+        "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+        "verified_at": "2026-11-08"
+      },
+      "decision": "blocked",
+      "duration_s": 29.044,
+      "contract_valid": true
+    },
+    {
+      "requested_agent": "codex",
+      "effective_agent": "codex",
+      "model": {
+        "model": "gpt-6.1-sol",
+        "effort": "medium",
+        "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+        "verified_at": "2026-11-08"
+      },
+      "decision": "blocked",
+      "duration_s": 40.889,
+      "contract_valid": true
+    }
+  ],
+  "budget_proposed": {
+    "HTTP_total_max": 12,
+    "concurrency": 1,
+    "requests_per_second_max": 0.5,
+    "wall_seconds_max": 120,
+    "per_request_timeout_max": 20,
+    "accepted_body_bytes_encoded_and_decoded_max": 2000000,
+    "redirect_hops_global_proposed": 3,
+    "redirect_interpretation_requires_ratification": true,
+    "expected_GET_without_redirects": 6,
+    "expected_GET_with_global_three_hops_max": 9,
+    "sitemap_GET": 0,
+    "home_GET": 0
+  },
+  "next_authorization": "Prepare isolated minimal adaptation candidate and fixtures only; no integration/network"
+}

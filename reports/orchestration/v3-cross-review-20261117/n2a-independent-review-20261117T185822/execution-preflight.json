@@ -1,0 +1,41 @@
+{
+  "requested_agent": "claude",
+  "effective_agent": "claude",
+  "author": "codex",
+  "input_sha256": "56951ce2905ab945b80eb218436aa78e8ed1e37aa771ab630baa09bc2bfd0d00",
+  "input_bytes": 191609,
+  "candidate_patch_sha256": "288ef3739417e0e15e105e4826ea65598f17c0807265ed68cf42d3fc5008aa6f",
+  "literal_input": true,
+  "wrapper_used": false,
+  "attempts": 1,
+  "retries": 0,
+  "fallback": false,
+  "status": "preflight_passed",
+  "limits": {
+    "timeout": 240,
+    "idle_timeout": 90,
+    "startup_timeout": 30,
+    "first_response_timeout": 120
+  },
+  "model": {
+    "model": "claude-sonnet-5-5",
+    "effort": "medium",
+    "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+    "verified_at": "2026-11-08"
+  },
+  "isolation": {
+    "available": true,
+    "reason": "namespace_probe_passed",
+    "exit_code": 0,
+    "fallback": false
+  },
+  "tools": [],
+  "MCP": false,
+  "subagents": false,
+  "production_access": false,
+  "snapshot_files": [
+    "packet.json"
+  ],
+  "candidate_mutation_allowed": false,
+  "destination_firewall": "not provided by existing inference transport"
+}

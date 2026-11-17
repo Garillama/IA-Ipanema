@@ -1,0 +1,192 @@
+[
+  {
+    "id": "SEO-F2-01",
+    "priority": "P1",
+    "kind": "indexation_investigation_not_confirmed_technical_fix",
+    "urls": [
+      "https://rhino-performance.com/terapia-fria/",
+      "https://rhino-performance.com/productos/brazo-presoterapia-pro-3-individual/"
+    ],
+    "evidence": "Exact discovered-not-indexed examples; technical200/selfcanonical observations retained separately; last-crawl raw25568 unusable. No proven theme block.",
+    "commercial_potential": "Commercial category/product, sales or stock not supplied; no revenue prediction",
+    "proposal": "Inspect only these two exact URLs in GSC after specific read authorization or accept official inspection exports; compare Google selected canonical, fetch/index permission, last crawl and live-tested HTML if separately authorized. Investigate demand and substantive product/category distinction before content or indexing request.",
+    "alternatives": [
+      "Keep unchanged if exclusion is temporary/unknown and no defect established",
+      "Prepare a minimal technical fix only for a reproduced cause",
+      "If only useful-content gap confirmed, request separate editorial proposal"
+    ],
+    "risk": "Treating discovery without index as a theme failure or mass-submitting unchanged pages",
+    "status": "needs_evidence",
+    "implementation_allowed": false
+  },
+  {
+    "id": "SEO-F2-02",
+    "priority": "P1",
+    "kind": "positioning_investigation_with_conditional_editorial_alternative",
+    "urls": [
+      "https://rhino-performance.com/presoterapia/"
+    ],
+    "query_evidence": [
+      {
+        "query": "presoterapia brazos",
+        "clicks": 0.0,
+        "impressions": 75.0,
+        "CTR_exported": 0.0,
+        "position_exported": 9.15,
+        "intent_candidate_not_Google_fact": "commercial_equipment_candidate",
+        "source_sheet": "Consultas",
+        "Excel_row": 11,
+        "source_sha256": "0035009ff7d40dcdfc24f27758d63974c849791d127659546bf83730f787bbe5",
+        "landing_observed_in_same_export": "https://rhino-performance.com/presoterapia/",
+        "filter_operator": "not_explicitly_encoded_beyond_plus_URL; exact_vs_contains_unconfirmed",
+        "query_country_device_joint_evidence": false
+      },
+      {
+        "query": "botas de presoterapia",
+        "clicks": 0.0,
+        "impressions": 54.0,
+        "CTR_exported": 0.0,
+        "position_exported": 7.61,
+        "intent_candidate_not_Google_fact": "commercial_equipment_candidate",
+        "source_sheet": "Consultas",
+        "Excel_row": 14,
+        "source_sha256": "0035009ff7d40dcdfc24f27758d63974c849791d127659546bf83730f787bbe5",
+        "landing_observed_in_same_export": "https://rhino-performance.com/presoterapia/",
+        "filter_operator": "not_explicitly_encoded_beyond_plus_URL; exact_vs_contains_unconfirmed",
+        "query_country_device_joint_evidence": false
+      },
+      {
+        "query": "botas de presoterapia precio",
+        "clicks": 1.0,
+        "impressions": 45.0,
+        "CTR_exported": 0.0222,
+        "position_exported": 8.49,
+        "intent_candidate_not_Google_fact": "commercial_equipment_candidate",
+        "source_sheet": "Consultas",
+        "Excel_row": 4,
+        "source_sha256": "0035009ff7d40dcdfc24f27758d63974c849791d127659546bf83730f787bbe5",
+        "landing_observed_in_same_export": "https://rhino-performance.com/presoterapia/",
+        "filter_operator": "not_explicitly_encoded_beyond_plus_URL; exact_vs_contains_unconfirmed",
+        "query_country_device_joint_evidence": false
+      },
+      {
+        "query": "botas presoterapia",
+        "clicks": 1.0,
+        "impressions": 35.0,
+        "CTR_exported": 0.0286,
+        "position_exported": 8.23,
+        "intent_candidate_not_Google_fact": "commercial_equipment_candidate",
+        "source_sheet": "Consultas",
+        "Excel_row": 5,
+        "source_sha256": "0035009ff7d40dcdfc24f27758d63974c849791d127659546bf83730f787bbe5",
+        "landing_observed_in_same_export": "https://rhino-performance.com/presoterapia/",
+        "filter_operator": "not_explicitly_encoded_beyond_plus_URL; exact_vs_contains_unconfirmed",
+        "query_country_device_joint_evidence": false
+      },
+      {
+        "query": "botas brazos precio",
+        "clicks": 0.0,
+        "impressions": 25.0,
+        "CTR_exported": 0.0,
+        "position_exported": 10.96,
+        "intent_candidate_not_Google_fact": "commercial_equipment_candidate",
+        "source_sheet": "Consultas",
+        "Excel_row": 19,
+        "source_sha256": "0035009ff7d40dcdfc24f27758d63974c849791d127659546bf83730f787bbe5",
+        "landing_observed_in_same_export": "https://rhino-performance.com/presoterapia/",
+        "filter_operator": "not_explicitly_encoded_beyond_plus_URL; exact_vs_contains_unconfirmed",
+        "query_country_device_joint_evidence": false
+      },
+      {
+        "query": "precio de botas de presoterapia",
+        "clicks": 0.0,
+        "impressions": 8.0,
+        "CTR_exported": 0.0,
+        "position_exported": 8.25,
+        "intent_candidate_not_Google_fact": "commercial_equipment_candidate",
+        "source_sheet": "Consultas",
+        "Excel_row": 25,
+        "source_sha256": "0035009ff7d40dcdfc24f27758d63974c849791d127659546bf83730f787bbe5",
+        "landing_observed_in_same_export": "https://rhino-performance.com/presoterapia/",
+        "filter_operator": "not_explicitly_encoded_beyond_plus_URL; exact_vs_contains_unconfirmed",
+        "query_country_device_joint_evidence": false
+      }
+    ],
+    "evidence": "117 queries in supplied category-filtered workbook; exact filter operator not confirmed; sole page row equals category. Existing captured title already mentions botas/brazos.",
+    "commercial_potential": "Queries about equipment/price around positions7.61..10.96 are a more focused commercial investigation than aggregate CTR. Prices/stock/offers must be verified before prose.",
+    "proposal": "Prepare a compact category buying guide comparing boots/arms and equipment versus accessory, retaining native product links/prices. Explain how to choose from currently authorized actual products. Place after existing product grid if a gap is demonstrated and owner later authorizes; preserve first viewport. Prioritize checking existing content to avoid duplication.",
+    "title_decision": "Keep title for now: it already contains core terms. No served snippet evidence proves a defect. Do not insert price claims or local-service keywords automatically.",
+    "minimum_evidence": [
+      "Confirm raw page filter operator and selected range before exact attribution/comparisons",
+      "Use comparable query-filtered Pages to decide category/PDP/article targeting; multiple landings alone do not demonstrate cannibalization",
+      "For editorial guide: dated current category main text and verified catalog distinctions must demonstrate a useful gap",
+      "For CTR/title/snippet hypothesis ONLY: dated actual served snippet and query/landing evidence; snippet absence is not a demonstrated editorial gap",
+      "Confirm commercial market, no query-country-device crossjoin; no prices or availability invented"
+    ],
+    "risk": "Duplicate content, unsupported commercial claims, category/PDP intent overlap, above-fold layout or performance regression",
+    "validation": "Before any implementation, predefine target query cohort, canonical landing, commercial country/device and same-length date windows; log changes and external confounders. Determine observation period/sample sufficiency from cohort data and minimum useful effect before launch, not a universalCTR target. If counts too low, filters/date incomparable, effect uncertainty or external confounding dominates, result=inconclusive, not success. No numeric sufficiency or uplift is established by this import.",
+    "status": "needs_evidence",
+    "implementation_allowed": false,
+    "priority_scope": "P1 investigation of observed commercial queries, not proof of high impact or approval of editorial implementation. Counts0-1clicks are low."
+  },
+  {
+    "id": "SEO-F2-03",
+    "priority": "P2",
+    "kind": "retain_and_measure_no_content_patch_yet",
+    "urls": [
+      "https://rhino-performance.com/compresion-frio-y-calor/"
+    ],
+    "evidence": "8 visible queries,876 impressions; rhino performance843impressions4clicks atposition1.0. Page aggregate1079/6 includes unexplained gap.",
+    "commercial_potential": "Nonbrand product demand scarcely represented; cannot justify a large rewrite from current export",
+    "proposal": "Retain title/content. First verify served snippet, page filter/date and segment relevance. Investigate whether existing product pages or category should serve nonbrand cold/hot compress queries only after actual query-page evidence. No keyword migration or new pages.",
+    "risk": "Changing a landing mainly seen for brand queries based on a generic expected CTR; false cannibalization",
+    "status": "needs_evidence",
+    "implementation_allowed": false
+  },
+  {
+    "id": "SEO-F2-04",
+    "priority": "P1",
+    "kind": "historical_404_read_verification_before_any_recovery",
+    "urls": [
+      "https://rhino-performance.com/producto/kit-tina-y-chiller-pro/",
+      "https://rhino-performance.com/productos/kit-tina-de-hielo-tub-air-chiller-ice-pro/",
+      "https://rhino-performance.com/producto/faja-lumbar-compresion-fria/",
+      "https://rhino-performance.com/producto/chiller-ice-pro/"
+    ],
+    "evidence": "Official404examples plus exact historic traffic:22/582,16/442,19/1008,14/512clicks/impressions. Outside124inventory; currentHTTP not checked.",
+    "proposal": "First request bounded read authorization only, establishing current HTTP and real product lifecycle from authorized sources. Only if a current404 and valid replacement are demonstrated, prepare a separate exact redirect proposal. With no equivalent or retired product, keep404 when appropriate; never blanketredirect to home.",
+    "commercial_potential": "Commercial legacy exposure, not proven lost sales or available replacement",
+    "risk": "Inventing equivalences or redirecting unavailable products to irrelevant categories",
+    "status": "needs_evidence",
+    "implementation_allowed": false,
+    "priority_scope": "P1 for limited read verification of possible commercially useful paths; not proof of broken current routes or eligibility for301."
+  },
+  {
+    "id": "SEO-F2-05",
+    "priority": "P2",
+    "kind": "support_document_recovery_candidate",
+    "urls": [
+      "https://rhino-performance.com/wp-content/uploads/2023/08/RHINO-PRO-V3-MANUAL-DE-USO-1.pdf",
+      "https://rhino-performance.com/wp-content/uploads/2025/09/MANUAL_RHINO_PRO3.pdf"
+    ],
+    "evidence": "404examples with55/375 and31/677historicclicks/impressions. PDFresources outsideHTMLinventory.",
+    "proposal": "Ask owner for official current manufacturer/manual version and rights/source before considering restoring file or mapping to an equivalent manual. Do not download now or substitute another product manual.",
+    "commercial_potential": "Support/customer intent, not directly acquisition or revenue",
+    "risk": "Wrong instructions/product version; no authorized source of replacement yet",
+    "status": "needs_evidence",
+    "implementation_allowed": false
+  },
+  {
+    "id": "SEO-F2-06",
+    "priority": "P2",
+    "kind": "article_legacy_recovery_candidate",
+    "urls": [
+      "https://rhino-performance.com/por-que-corres-lento-posibles-causas-y-como-solucionarlas/"
+    ],
+    "evidence": "Official404example and18historicclicks/1460impressions. Inventory has an article with related slug; thematic match not validated by source title alone.",
+    "proposal": "Compare retained article subject/content with legacy evidence; if a true equivalent and live404 are confirmed later, propose one exact redirect. No article rewrite or new page now.",
+    "risk": "Assuming slug resemblance proves equivalence; unmeasured conversion contribution",
+    "status": "needs_evidence",
+    "implementation_allowed": false
+  }
+]

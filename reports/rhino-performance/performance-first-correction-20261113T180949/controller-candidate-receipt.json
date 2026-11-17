@@ -1,0 +1,988 @@
+{
+  "id": "rhino.reviews.candidate.offline-controller",
+  "scope": "Isolated source-bound browser fixture only, no new storefront requests",
+  "manifest": {
+    "status": "isolated_candidate_not_applied",
+    "installation": 14828608,
+    "store": 7400935,
+    "files": [
+      {
+        "path": "sections/google-reviews.tpl",
+        "before_sha256": "75a487600c5d71001fa2e0970dad1cb943f80d399f1af89db559bffc3253fd30",
+        "after_sha256": "e6f79c2fd59376efe955662adff44d13329300360a118249c88480d59dde3cd3",
+        "remote_backup": "reports/runs/rhino-performance/20261113T180949-home-performance-authorized-e593dae0/remote-before/sections/google-reviews.tpl",
+        "candidate": "reports/runs/rhino-performance/20261113T180949-home-performance-authorized-e593dae0/candidate/sections/google-reviews.tpl",
+        "size_before": 23382,
+        "size_after": 24417
+      }
+    ],
+    "patch_sha256": "2c88fb0d3e619b5d08c8e217eecb9e104d9d402dbe47997c95b91f0e4b1c8d32",
+    "modifications": 1,
+    "additions": 0,
+    "deletions": 0,
+    "source_published_equals_local": true,
+    "native_validation": "not_authorized_POST",
+    "production_change": false,
+    "theme_local_change": false
+  },
+  "checks": [
+    {
+      "path": "reports/runs/rhino-performance/20261113T180949-home-performance-authorized-e593dae0/reviews-offline-QA.json",
+      "sha256": "83fecc51a437fe97042e7e3b0c868021245cb0aabcb20ead2855c400bb95b043",
+      "passed": true,
+      "count": 144,
+      "details": [
+        {
+          "id": "markup_before_script_unchanged",
+          "passed": true
+        },
+        {
+          "id": "schema_after_script_unchanged",
+          "passed": true
+        },
+        {
+          "id": "GET_immediate_360_baseline",
+          "passed": true,
+          "detail": {
+            "duration": 7.800000000745058,
+            "reads": 3,
+            "fetches": 1
+          }
+        },
+        {
+          "id": "initial_geometry_360_baseline",
+          "passed": true,
+          "detail": {
+            "duration": 7.800000000745058,
+            "reads": 3,
+            "fetches": 1
+          }
+        },
+        {
+          "id": "API_updated_before_visibility_360_baseline",
+          "passed": true,
+          "detail": {
+            "reads": 53,
+            "cards": 10
+          }
+        },
+        {
+          "id": "geometry_on_approach_360_baseline",
+          "passed": true
+        },
+        {
+          "id": "longtext_control_360_baseline",
+          "passed": true
+        },
+        {
+          "id": "expand_360_baseline",
+          "passed": true
+        },
+        {
+          "id": "collapse_360_baseline",
+          "passed": true
+        },
+        {
+          "id": "focus_360_baseline",
+          "passed": true
+        },
+        {
+          "id": "GET_immediate_360_candidate",
+          "passed": true,
+          "detail": {
+            "duration": 1.5,
+            "reads": 0,
+            "fetches": 1
+          }
+        },
+        {
+          "id": "initial_geometry_360_candidate",
+          "passed": true,
+          "detail": {
+            "duration": 1.5,
+            "reads": 0,
+            "fetches": 1
+          }
+        },
+        {
+          "id": "API_updated_before_visibility_360_candidate",
+          "passed": true,
+          "detail": {
+            "reads": 0,
+            "cards": 10
+          }
+        },
+        {
+          "id": "offscreen_events_no_geometry_360",
+          "passed": true,
+          "detail": {
+            "reads": 0,
+            "cards": 10
+          }
+        },
+        {
+          "id": "geometry_on_approach_360_candidate",
+          "passed": true
+        },
+        {
+          "id": "longtext_control_360_candidate",
+          "passed": true
+        },
+        {
+          "id": "expand_360_candidate",
+          "passed": true
+        },
+        {
+          "id": "collapse_360_candidate",
+          "passed": true
+        },
+        {
+          "id": "focus_360_candidate",
+          "passed": true
+        },
+        {
+          "id": "visible_equivalence_360",
+          "passed": true
+        },
+        {
+          "id": "resized_equivalence_360",
+          "passed": true
+        },
+        {
+          "id": "visual_equivalence_360",
+          "passed": true
+        },
+        {
+          "id": "GET_immediate_390_baseline",
+          "passed": true,
+          "detail": {
+            "duration": 3.900000000372529,
+            "reads": 3,
+            "fetches": 1
+          }
+        },
+        {
+          "id": "initial_geometry_390_baseline",
+          "passed": true,
+          "detail": {
+            "duration": 3.900000000372529,
+            "reads": 3,
+            "fetches": 1
+          }
+        },
+        {
+          "id": "API_updated_before_visibility_390_baseline",
+          "passed": true,
+          "detail": {
+            "reads": 53,
+            "cards": 10
+          }
+        },
+        {
+          "id": "geometry_on_approach_390_baseline",
+          "passed": true
+        },
+        {
+          "id": "longtext_control_390_baseline",
+          "passed": true
+        },
+        {
+          "id": "expand_390_baseline",
+          "passed": true
+        },
+        {
+          "id": "collapse_390_baseline",
+          "passed": true
+        },
+        {
+          "id": "focus_390_baseline",
+          "passed": true
+        },
+        {
+          "id": "GET_immediate_390_candidate",
+          "passed": true,
+          "detail": {
+            "duration": 1.599999999627471,
+            "reads": 0,
+            "fetches": 1
+          }
+        },
+        {
+          "id": "initial_geometry_390_candidate",
+          "passed": true,
+          "detail": {
+            "duration": 1.599999999627471,
+            "reads": 0,
+            "fetches": 1
+          }
+        },
+        {
+          "id": "API_updated_before_visibility_390_candidate",
+          "passed": true,
+          "detail": {
+            "reads": 0,
+            "cards": 10
+          }
+        },
+        {
+          "id": "offscreen_events_no_geometry_390",
+          "passed": true,
+          "detail": {
+            "reads": 0,
+            "cards": 10
+          }
+        },
+        {
+          "id": "geometry_on_approach_390_candidate",
+          "passed": true
+        },
+        {
+          "id": "longtext_control_390_candidate",
+          "passed": true
+        },
+        {
+          "id": "expand_390_candidate",
+          "passed": true
+        },
+        {
+          "id": "collapse_390_candidate",
+          "passed": true
+        },
+        {
+          "id": "focus_390_candidate",
+          "passed": true
+        },
+        {
+          "id": "axe_390",
+          "passed": true,
+          "detail": {
+            "violations": [],
+            "incomplete": [
+              "color-contrast"
+            ],
+            "passes": 17
+          }
+        },
+        {
+          "id": "visible_equivalence_390",
+          "passed": true
+        },
+        {
+          "id": "resized_equivalence_390",
+          "passed": true
+        },
+        {
+          "id": "visual_equivalence_390",
+          "passed": true
+        },
+        {
+          "id": "GET_immediate_768_baseline",
+          "passed": true,
+          "detail": {
+            "duration": 4.200000001117587,
+            "reads": 3,
+            "fetches": 1
+          }
+        },
+        {
+          "id": "initial_geometry_768_baseline",
+          "passed": true,
+          "detail": {
+            "duration": 4.200000001117587,
+            "reads": 3,
+            "fetches": 1
+          }
+        },
+        {
+          "id": "API_updated_before_visibility_768_baseline",
+          "passed": true,
+          "detail": {
+            "reads": 53,
+            "cards": 10
+          }
+        },
+        {
+          "id": "geometry_on_approach_768_baseline",
+          "passed": true
+        },
+        {
+          "id": "longtext_control_768_baseline",
+          "passed": true
+        },
+        {
+          "id": "expand_768_baseline",
+          "passed": true
+        },
+        {
+          "id": "collapse_768_baseline",
+          "passed": true
+        },
+        {
+          "id": "focus_768_baseline",
+          "passed": true
+        },
+        {
+          "id": "arrow_moves_768_baseline",
+          "passed": true
+        },
+        {
+          "id": "GET_immediate_768_candidate",
+          "passed": true,
+          "detail": {
+            "duration": 1.900000000372529,
+            "reads": 0,
+            "fetches": 1
+          }
+        },
+        {
+          "id": "initial_geometry_768_candidate",
+          "passed": true,
+          "detail": {
+            "duration": 1.900000000372529,
+            "reads": 0,
+            "fetches": 1
+          }
+        },
+        {
+          "id": "API_updated_before_visibility_768_candidate",
+          "passed": true,
+          "detail": {
+            "reads": 0,
+            "cards": 10
+          }
+        },
+        {
+          "id": "offscreen_events_no_geometry_768",
+          "passed": true,
+          "detail": {
+            "reads": 0,
+            "cards": 10
+          }
+        },
+        {
+          "id": "geometry_on_approach_768_candidate",
+          "passed": true
+        },
+        {
+          "id": "longtext_control_768_candidate",
+          "passed": true
+        },
+        {
+          "id": "expand_768_candidate",
+          "passed": true
+        },
+        {
+          "id": "collapse_768_candidate",
+          "passed": true
+        },
+        {
+          "id": "focus_768_candidate",
+          "passed": true
+        },
+        {
+          "id": "arrow_moves_768_candidate",
+          "passed": true
+        },
+        {
+          "id": "visible_equivalence_768",
+          "passed": true
+        },
+        {
+          "id": "resized_equivalence_768",
+          "passed": true
+        },
+        {
+          "id": "visual_equivalence_768",
+          "passed": true
+        },
+        {
+          "id": "GET_immediate_1024_baseline",
+          "passed": true,
+          "detail": {
+            "duration": 3.400000000372529,
+            "reads": 3,
+            "fetches": 1
+          }
+        },
+        {
+          "id": "initial_geometry_1024_baseline",
+          "passed": true,
+          "detail": {
+            "duration": 3.400000000372529,
+            "reads": 3,
+            "fetches": 1
+          }
+        },
+        {
+          "id": "API_updated_before_visibility_1024_baseline",
+          "passed": true,
+          "detail": {
+            "reads": 53,
+            "cards": 10
+          }
+        },
+        {
+          "id": "geometry_on_approach_1024_baseline",
+          "passed": true
+        },
+        {
+          "id": "longtext_control_1024_baseline",
+          "passed": true
+        },
+        {
+          "id": "expand_1024_baseline",
+          "passed": true
+        },
+        {
+          "id": "collapse_1024_baseline",
+          "passed": true
+        },
+        {
+          "id": "focus_1024_baseline",
+          "passed": true
+        },
+        {
+          "id": "arrow_moves_1024_baseline",
+          "passed": true
+        },
+        {
+          "id": "GET_immediate_1024_candidate",
+          "passed": true,
+          "detail": {
+            "duration": 1.599999999627471,
+            "reads": 0,
+            "fetches": 1
+          }
+        },
+        {
+          "id": "initial_geometry_1024_candidate",
+          "passed": true,
+          "detail": {
+            "duration": 1.599999999627471,
+            "reads": 0,
+            "fetches": 1
+          }
+        },
+        {
+          "id": "API_updated_before_visibility_1024_candidate",
+          "passed": true,
+          "detail": {
+            "reads": 0,
+            "cards": 10
+          }
+        },
+        {
+          "id": "offscreen_events_no_geometry_1024",
+          "passed": true,
+          "detail": {
+            "reads": 0,
+            "cards": 10
+          }
+        },
+        {
+          "id": "geometry_on_approach_1024_candidate",
+          "passed": true
+        },
+        {
+          "id": "longtext_control_1024_candidate",
+          "passed": true
+        },
+        {
+          "id": "expand_1024_candidate",
+          "passed": true
+        },
+        {
+          "id": "collapse_1024_candidate",
+          "passed": true
+        },
+        {
+          "id": "focus_1024_candidate",
+          "passed": true
+        },
+        {
+          "id": "arrow_moves_1024_candidate",
+          "passed": true
+        },
+        {
+          "id": "visible_equivalence_1024",
+          "passed": true
+        },
+        {
+          "id": "resized_equivalence_1024",
+          "passed": true
+        },
+        {
+          "id": "visual_equivalence_1024",
+          "passed": true
+        },
+        {
+          "id": "GET_immediate_1440_baseline",
+          "passed": true,
+          "detail": {
+            "duration": 3.599999999627471,
+            "reads": 3,
+            "fetches": 1
+          }
+        },
+        {
+          "id": "initial_geometry_1440_baseline",
+          "passed": true,
+          "detail": {
+            "duration": 3.599999999627471,
+            "reads": 3,
+            "fetches": 1
+          }
+        },
+        {
+          "id": "API_updated_before_visibility_1440_baseline",
+          "passed": true,
+          "detail": {
+            "reads": 53,
+            "cards": 10
+          }
+        },
+        {
+          "id": "geometry_on_approach_1440_baseline",
+          "passed": true
+        },
+        {
+          "id": "longtext_control_1440_baseline",
+          "passed": true
+        },
+        {
+          "id": "expand_1440_baseline",
+          "passed": true
+        },
+        {
+          "id": "collapse_1440_baseline",
+          "passed": true
+        },
+        {
+          "id": "focus_1440_baseline",
+          "passed": true
+        },
+        {
+          "id": "arrow_moves_1440_baseline",
+          "passed": true
+        },
+        {
+          "id": "GET_immediate_1440_candidate",
+          "passed": true,
+          "detail": {
+            "duration": 1.599999999627471,
+            "reads": 0,
+            "fetches": 1
+          }
+        },
+        {
+          "id": "initial_geometry_1440_candidate",
+          "passed": true,
+          "detail": {
+            "duration": 1.599999999627471,
+            "reads": 0,
+            "fetches": 1
+          }
+        },
+        {
+          "id": "API_updated_before_visibility_1440_candidate",
+          "passed": true,
+          "detail": {
+            "reads": 0,
+            "cards": 10
+          }
+        },
+        {
+          "id": "offscreen_events_no_geometry_1440",
+          "passed": true,
+          "detail": {
+            "reads": 0,
+            "cards": 10
+          }
+        },
+        {
+          "id": "geometry_on_approach_1440_candidate",
+          "passed": true
+        },
+        {
+          "id": "longtext_control_1440_candidate",
+          "passed": true
+        },
+        {
+          "id": "expand_1440_candidate",
+          "passed": true
+        },
+        {
+          "id": "collapse_1440_candidate",
+          "passed": true
+        },
+        {
+          "id": "focus_1440_candidate",
+          "passed": true
+        },
+        {
+          "id": "arrow_moves_1440_candidate",
+          "passed": true
+        },
+        {
+          "id": "axe_1440",
+          "passed": true,
+          "detail": {
+            "violations": [],
+            "incomplete": [
+              "color-contrast"
+            ],
+            "passes": 18
+          }
+        },
+        {
+          "id": "visible_equivalence_1440",
+          "passed": true
+        },
+        {
+          "id": "resized_equivalence_1440",
+          "passed": true
+        },
+        {
+          "id": "visual_equivalence_1440",
+          "passed": true
+        },
+        {
+          "id": "GET_immediate_1920_baseline",
+          "passed": true,
+          "detail": {
+            "duration": 4.199999999254942,
+            "reads": 3,
+            "fetches": 1
+          }
+        },
+        {
+          "id": "initial_geometry_1920_baseline",
+          "passed": true,
+          "detail": {
+            "duration": 4.199999999254942,
+            "reads": 3,
+            "fetches": 1
+          }
+        },
+        {
+          "id": "API_updated_before_visibility_1920_baseline",
+          "passed": true,
+          "detail": {
+            "reads": 53,
+            "cards": 10
+          }
+        },
+        {
+          "id": "geometry_on_approach_1920_baseline",
+          "passed": true
+        },
+        {
+          "id": "longtext_control_1920_baseline",
+          "passed": true
+        },
+        {
+          "id": "expand_1920_baseline",
+          "passed": true
+        },
+        {
+          "id": "collapse_1920_baseline",
+          "passed": true
+        },
+        {
+          "id": "focus_1920_baseline",
+          "passed": true
+        },
+        {
+          "id": "arrow_moves_1920_baseline",
+          "passed": true
+        },
+        {
+          "id": "GET_immediate_1920_candidate",
+          "passed": true,
+          "detail": {
+            "duration": 2.100000001490116,
+            "reads": 0,
+            "fetches": 1
+          }
+        },
+        {
+          "id": "initial_geometry_1920_candidate",
+          "passed": true,
+          "detail": {
+            "duration": 2.100000001490116,
+            "reads": 0,
+            "fetches": 1
+          }
+        },
+        {
+          "id": "API_updated_before_visibility_1920_candidate",
+          "passed": true,
+          "detail": {
+            "reads": 0,
+            "cards": 10
+          }
+        },
+        {
+          "id": "offscreen_events_no_geometry_1920",
+          "passed": true,
+          "detail": {
+            "reads": 0,
+            "cards": 10
+          }
+        },
+        {
+          "id": "geometry_on_approach_1920_candidate",
+          "passed": true
+        },
+        {
+          "id": "longtext_control_1920_candidate",
+          "passed": true
+        },
+        {
+          "id": "expand_1920_candidate",
+          "passed": true
+        },
+        {
+          "id": "collapse_1920_candidate",
+          "passed": true
+        },
+        {
+          "id": "focus_1920_candidate",
+          "passed": true
+        },
+        {
+          "id": "arrow_moves_1920_candidate",
+          "passed": true
+        },
+        {
+          "id": "visible_equivalence_1920",
+          "passed": true
+        },
+        {
+          "id": "resized_equivalence_1920",
+          "passed": true
+        },
+        {
+          "id": "visual_equivalence_1920",
+          "passed": true
+        },
+        {
+          "id": "fallback_unsupported",
+          "passed": true
+        },
+        {
+          "id": "fallback_throw",
+          "passed": true
+        },
+        {
+          "id": "no_IO_delivery_initial",
+          "passed": true
+        },
+        {
+          "id": "early_keyboard_prepares_geometry",
+          "passed": true
+        },
+        {
+          "id": "observer_disconnected_on_focus",
+          "passed": true
+        },
+        {
+          "id": "count_equivalence_0",
+          "passed": true
+        },
+        {
+          "id": "count_equivalence_1",
+          "passed": true
+        },
+        {
+          "id": "count_equivalence_24",
+          "passed": true
+        },
+        {
+          "id": "count_equivalence_100",
+          "passed": true
+        },
+        {
+          "id": "multi_fetch_immediate",
+          "passed": true
+        },
+        {
+          "id": "multi_only_first_activated",
+          "passed": true
+        },
+        {
+          "id": "pointer_before_IO_prepares_geometry",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261113T180949-home-performance-authorized-e593dae0/reviews-offline-supplement-QA.json",
+      "sha256": "4b834088e977f38b721d99f4e1fa772a295602cafad5a11d4ec3d14db8d5e95d",
+      "passed": true,
+      "count": 19,
+      "details": [
+        {
+          "id": "markup_before_script_unchanged",
+          "passed": true
+        },
+        {
+          "id": "schema_after_script_unchanged",
+          "passed": true
+        },
+        {
+          "id": "multi_fetch_immediate",
+          "passed": true
+        },
+        {
+          "id": "multi_only_first_activated",
+          "passed": true
+        },
+        {
+          "id": "pointer_before_IO_prepares_geometry",
+          "passed": true
+        },
+        {
+          "id": "empty_API_keeps_fallback_390_baseline",
+          "passed": true
+        },
+        {
+          "id": "empty_API_keeps_fallback_390_candidate",
+          "passed": true
+        },
+        {
+          "id": "abovefold_visible_equivalence_390",
+          "passed": true
+        },
+        {
+          "id": "abovefold_fontChange_equivalence_390",
+          "passed": true
+        },
+        {
+          "id": "abovefold_emptyAPI_equivalence_390",
+          "passed": true
+        },
+        {
+          "id": "empty_API_keeps_fallback_1440_baseline",
+          "passed": true
+        },
+        {
+          "id": "empty_API_keeps_fallback_1440_candidate",
+          "passed": true
+        },
+        {
+          "id": "abovefold_visible_equivalence_1440",
+          "passed": true
+        },
+        {
+          "id": "abovefold_fontChange_equivalence_1440",
+          "passed": true
+        },
+        {
+          "id": "abovefold_emptyAPI_equivalence_1440",
+          "passed": true
+        },
+        {
+          "id": "API_after_activation_equivalence",
+          "passed": true
+        },
+        {
+          "id": "Tab_first_source_activation",
+          "passed": true
+        },
+        {
+          "id": "Tab_reaches_newly_enabled_more",
+          "passed": true
+        },
+        {
+          "id": "reinit_characterized_same_baseline_behavior",
+          "passed": true
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "Arial font fixture, not actual Poppins/Twig production render",
+    "POSTblocked production baseline does not certify commerce events",
+    "setupMore mobile profile samples occurred after observed LCP",
+    "10LH baseline host benchmark drift1977to842; not stable attributable historicalregression"
+  ],
+  "candidate_behavior": "Immediate API GET, HTML CSS setupMore function preserved. IO600px prewarm, first focusin/capturepointerdown activates, one-way gate disconnects. NoinitialgetBoundingClientRect; no additionalnetwork or library.",
+  "native_validation": {
+    "exit_code": 0,
+    "validation_posts": 1,
+    "post_statuses": [
+      200
+    ],
+    "local_theme_unchanged": true,
+    "persisting_writes": 0,
+    "scope": "Official syntax/schema validation, not rendered storefront proof"
+  },
+  "coalescing_control_already_measured": [
+    {
+      "width": 390,
+      "variant": "baseline",
+      "n": 6,
+      "init_duration_ms": 4.6000000005587935,
+      "synchronous_card_reads": 24.0,
+      "after_frame_card_reads": 24.0,
+      "synchronous_layouts": 1.0,
+      "synchronous_layout_ms": 2.1110000000000007
+    },
+    {
+      "width": 390,
+      "variant": "coalesced",
+      "n": 6,
+      "init_duration_ms": 1.1500000013038516,
+      "synchronous_card_reads": 0.0,
+      "after_frame_card_reads": 24.0,
+      "synchronous_layouts": 0.0,
+      "synchronous_layout_ms": 0.0
+    },
+    {
+      "width": 390,
+      "variant": "candidate",
+      "n": 6,
+      "init_duration_ms": 1.3500000005587935,
+      "synchronous_card_reads": 0.0,
+      "after_frame_card_reads": 0.0,
+      "synchronous_layouts": 0.0,
+      "synchronous_layout_ms": 0.0
+    },
+    {
+      "width": 1440,
+      "variant": "baseline",
+      "n": 6,
+      "init_duration_ms": 5.7999999998137355,
+      "synchronous_card_reads": 24.0,
+      "after_frame_card_reads": 24.0,
+      "synchronous_layouts": 1.0,
+      "synchronous_layout_ms": 2.6515000000000004
+    },
+    {
+      "width": 1440,
+      "variant": "coalesced",
+      "n": 6,
+      "init_duration_ms": 1.0499999998137355,
+      "synchronous_card_reads": 0.0,
+      "after_frame_card_reads": 24.0,
+      "synchronous_layouts": 0.0,
+      "synchronous_layout_ms": 0.0
+    },
+    {
+      "width": 1440,
+      "variant": "candidate",
+      "n": 6,
+      "init_duration_ms": 1.3500000005587935,
+      "synchronous_card_reads": 0.0,
+      "after_frame_card_reads": 0.0,
+      "synchronous_layouts": 0.0,
+      "synchronous_layout_ms": 0.0
+    }
+  ],
+  "scope_correction": "Initial contrast snapshot omitted existing benchmark rows. No new run. Coalesced uses rAF, leaves24 reads afterframe vs candidate0 whileoffscreen; durations not productionbenefits.",
+  "native_server_response": {
+    "valid": true,
+    "errors": []
+  }
+}

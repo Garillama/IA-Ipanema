@@ -1,0 +1,134 @@
+{
+  "requested_agent": "codex",
+  "effective_agent": "codex",
+  "scope": "incremental organic opportunities and evidence intake only",
+  "input_hashes": {
+    "reports/rhino-performance/indexability-phase2-20261113/additional-exports-20261113/review-packet.json": "6c7c62fa9b9cf3583a062f59e1030c6836c2c931c494c4b9bedb3ff35aa00400",
+    "reports/rhino-performance/indexability-phase2-20261113/additional-exports-20261113/controller-validation.json": "9b0a222acfe6db62e5cfb01ba51f82211f34c6e7ec403c14ae6adb52748f8aa9",
+    "reports/rhino-performance/indexability-phase2-20261113/additional-exports-20261113/category-status.json": "334f8a7122cd92b35519fb4897565dceef3ffd8ac40ba7e9d7be3a41ca2b886c",
+    "reports/rhino-performance/indexability-phase2-20261113/additional-exports-20261113/summary.json": "2899eb214dd9820b7ef3070d78afddc2755f8eaa15848785190147143c88afd5",
+    "reports/rhino-performance/indexability-phase2-20261113/additional-exports-20261113/opportunity-backlog.json": "da350baa584612b24d403e77945c314a92e290b86f2f943b5078618bc5bad212"
+  },
+  "response": {
+    "decision": "proposed",
+    "summary": "Las seis propuestas son viables como backlog condicional: conservar needs_evidence e implementation_allowed=false. Priorizar la evidencia documental de SEO-F2-01; ninguna causa técnica está demostrada. SEO-F2-02 es editorial y de posicionamiento; SEO-F2-03 justifica conservar y medir; SEO-F2-04/06 requieren estado actual y equivalencia; SEO-F2-05 exige origen y versión del manual. No se aportaron propuestas de pares para contrastar preferencias.",
+    "changes": [],
+    "evidence": [
+      "seo.additional-exports.reconciliation: recibo del controlador de conciliación local; no constituye QA ejecutado por mí ni comprobación actual HTTP/GSC.",
+      "Inventario: 109 indexed_example, 4 discovered_not_indexed y 11 unknown sobre 124; preservar las 10 inspecciones históricas. Los 32 ejemplos indexed externos no amplían el inventario verificado.",
+      "La ausencia de coincidencias exactas con los 33 crawled y 33 not_found no demuestra ausencia de problemas actuales. Las cinco fechas raw25568 son inutilizables como fechas reales de rastreo.",
+      "Los dos ámbitos tienen una sola landing observada; operador del filtro y comparabilidad pendientes. Gráfico observado: 11 agosto–10 noviembre, 92 días.",
+      "Páginas/Consultas: presoterapia 30/2810 frente a 10/1912; compresión 6/1079 frente a 4/876. Causa del desfase unknown; no cruzar tablas marginales.",
+      "Presoterapia presenta candidatos comerciales, pero el título capturado ya menciona botas/brazos. Las 843 impresiones de rhino performance sobre 876 visibles en compresión no explican causalmente su CTR. Snippet servido e ingresos: unknown."
+    ],
+    "objections": [
+      {
+        "id": "codex-obj-01",
+        "alternative_id": "SEO-F2-02",
+        "category": "dependencias de evidencia",
+        "severity": "low",
+        "claim": "El mínimo de evidencia agrupa snippet servido y texto principal para demostrar una carencia editorial. Conviene separar las condiciones: contenido y catálogo sustentan la guía; el snippet sustenta hipótesis sobre presentación en resultados. Su ausencia no demuestra una carencia del contenido.",
+        "status": "open",
+        "evidence_refs": [
+          "seo.additional-exports.reconciliation"
+        ],
+        "resolution_evidence_refs": []
+      },
+      {
+        "id": "codex-obj-02",
+        "alternative_id": "SEO-F2-02",
+        "category": "validación condicional",
+        "severity": "low",
+        "claim": "La validación pide suficientes observaciones sin definir un criterio de suficiencia. Antes de habilitar una implementación futura deben fijarse periodo, cohortes comparables y regla para declarar resultado inconcluso; con estos datos no procede establecer un umbral numérico ni prometer mejora.",
+        "status": "open",
+        "evidence_refs": [
+          "seo.additional-exports.reconciliation"
+        ],
+        "resolution_evidence_refs": []
+      }
+    ],
+    "preferred_alternative": "unknown",
+    "questions": [
+      {
+        "id": "codex-q-01",
+        "to_agent": "claude",
+        "alternative_id": "SEO-F2-02",
+        "question": "Sin una propuesta tuya adjunta, ¿qué condición exigirías para elegir categoría frente a PDP en SEO-F2-02, considerando opportunity-backlog.json, minimum_evidence, y el recibo seo.additional-exports.reconciliation, que solo acredita conciliación local y no un cruce consulta-página?",
+        "evidence_refs": [
+          "seo.additional-exports.reconciliation"
+        ]
+      }
+    ]
+  },
+  "model": {
+    "model": "gpt-6.1-sol",
+    "effort": "medium",
+    "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+    "verified_at": "2026-11-08"
+  },
+  "execution": {
+    "exit_code": 0,
+    "timed_out": false,
+    "output_limited": false,
+    "idle_timed_out": false,
+    "cancelled": false,
+    "process_started": true,
+    "process_reaped": true,
+    "stdin_bytes_written": 169777,
+    "context_complete": true,
+    "duration_s": 37.218,
+    "timing": {
+      "spawn_s": 0.000739,
+      "input_complete_s": 0.092263,
+      "first_stdout_s": 0.753738,
+      "first_stderr_s": null,
+      "timeout_phase": null,
+      "event_counts": {
+        "thread.started": 1,
+        "item.completed": 2,
+        "turn.started": 1,
+        "turn.completed": 1
+      },
+      "inference_vs_initialization": "not_separable_without_provider_events"
+    },
+    "output_accounting": {
+      "transport_bytes": 4348,
+      "retained_bytes": 4348,
+      "discarded_progress_bytes": 0,
+      "transport_limit_bytes": 20000000,
+      "retained_limit_bytes": 2000000
+    },
+    "isolation": {
+      "backend": "bubblewrap",
+      "snapshot_read_only": true,
+      "host_home_mounted": false,
+      "network": "enabled_no_destination_firewall",
+      "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+    },
+    "started_at": "2026-11-13T16:46:37.019395+00:00",
+    "prompt_bytes": 169777,
+    "prompt_sha256": "f5f999b4932416d2283dde36bd8f05213204ed3a2508f7657ee3eef7889f0a2c",
+    "usage": {
+      "provider_reported": {
+        "input_tokens": 59998,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1033,
+        "reasoning_output_tokens": 208
+      },
+      "measured_cost_available": false,
+      "estimated_cost": null
+    },
+    "limits": {
+      "timeout": 240,
+      "idle_timeout": 90,
+      "startup_timeout": 30,
+      "first_response_timeout": 150
+    },
+    "structured_output": "native_schema",
+    "contract_validation": {
+      "status": "passed",
+      "duration_s": 0.000202
+    }
+  }
+}

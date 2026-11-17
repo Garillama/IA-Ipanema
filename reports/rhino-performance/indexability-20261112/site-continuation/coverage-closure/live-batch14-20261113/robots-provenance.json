@@ -1,0 +1,23 @@
+{
+  "current_live_GET_status": 200,
+  "current_live_body_sha256": "db70bc399232bb79de1b60b66f2be049be38fa2d4ae27389bafcadc0a4fec77d",
+  "robots": {
+    "known": true,
+    "status": 200,
+    "url": "https://rhino-performance.com/robots.txt",
+    "sha256": "db70bc399232bb79de1b60b66f2be049be38fa2d4ae27389bafcadc0a4fec77d",
+    "crawler_agent": "IAIpanemaAudit/4.0",
+    "googlebot_is_separate": true,
+    "parse_errors": [],
+    "parse_warnings": [
+      {
+        "line": 67,
+        "reason": "invalid_product_token"
+      }
+    ]
+  },
+  "historical_body_identical": true,
+  "body_copy_source": "reports/runs/rhino-performance/20261112T043917-indexability-inventory-223e7de9/robots.txt",
+  "body_copy_note": "Historical raw body reused only because SHA256 equals the newly returned body hash. No second robots GET.",
+  "warning_line_67": "User-agent: MJ12bot"
+}

@@ -1,0 +1,140 @@
+{
+  "requested_agent": "codex",
+  "effective_agent": "codex",
+  "scope": "official XLSX cross-examination and prioritization only",
+  "input_hashes": {
+    "reports/rhino-performance/indexability-phase2-20261113/native-alternative-template-review-20261113/review-packet.json": "9c520345781e1bfafd460638ca8818b287907f9466304d037712a0ff178f6d00",
+    "reports/rhino-performance/indexability-phase2-20261113/native-alternative-template-review-20261113/controller-validation.json": "fc594ffef6a01e9e4a0e8be82c0c2ac4dbb1bf1ec10b617d49106d32983bca20",
+    "reports/rhino-performance/indexability-phase2-20261113/native-alternative-template-review-20261113/controller-supplement.json": "bee61425ceb6fa3dee9ba23fd790d963b214990654d9e2c34ced91614431bbe9",
+    "reports/rhino-performance/indexability-phase2-20261113/native-alternative-template-review-20261113/official-source-facts.json": "a2cecff413379ff6552f1c01f2d9f5784fb44e4ceb05db1f95021406db8c2afe",
+    "reports/rhino-performance/indexability-phase2-20261113/native-alternative-template-review-20261113/local-evidence-reused.json": "d7fbf1ac8578f684f61e8698209f2bc41d08b0d6468d3674a9d4bcde78861930",
+    "reports/rhino-performance/indexability-phase2-20261113/native-alternative-template-review-20261113/README.md": "6fc271d16cf780c2a165cc64e83b278bd44e88144aabe5757d7ecb1efa6e8caa"
+  },
+  "response": {
+    "decision": "changes_requested",
+    "summary": "La aclaración documental confirma la capacidad general y distingue lectura de mutaciones. No demuestra aplicabilidad a Rhino ni resuelve las objeciones abiertas. El candidato permanece needs_evidence, con implementación no habilitada.",
+    "changes": [],
+    "evidence": [
+      "seo.editorial.official-template-guide",
+      "seo.editorial.native-template-limits"
+    ],
+    "objections": [
+      {
+        "id": "codex-obj-01",
+        "alternative_id": "native-alternative-category-template",
+        "category": "aplicabilidad e integración",
+        "severity": "high",
+        "claim": "La identidad del diseño publicado, su equivalencia con las copias locales, los controles actuales y las asignaciones nominales siguen sin comprobarse. La documentación general no acredita aislamiento exclusivo en Presoterapia.",
+        "status": "open",
+        "evidence_refs": [
+          "seo.editorial.official-template-guide",
+          "seo.editorial.native-template-limits"
+        ],
+        "resolution_evidence_refs": []
+      },
+      {
+        "id": "codex-obj-02",
+        "alternative_id": "native-alternative-category-template",
+        "category": "composición y preservación",
+        "severity": "medium",
+        "claim": "Posición posterior al listado, creación sin asignaciones, ausencia de duplicación y preservación de filtros, paginación, SEO, accesibilidad, responsive y rendimiento siguen unknown. La aclaración del procedimiento no sustituye pruebas reales.",
+        "status": "open",
+        "evidence_refs": [
+          "seo.editorial.native-template-limits"
+        ],
+        "resolution_evidence_refs": []
+      }
+    ],
+    "preferred_alternative": "native-alternative-category-template",
+    "answers": [
+      {
+        "question_id": "claude-q1",
+        "from_agent": "claude",
+        "answer": "Ninguna fuente aportada demuestra esa igualdad ni los controles actuales. Se necesita evidencia fechada del propietario que vincule tienda 7400935 y diseño publicado 14828608 con una exportación actual comparable mediante hashes; registro nominal de las plantillas de Presoterapia, TerapiaFria y Accesorios; y capturas de solo lectura del editor con alternativas de categoría, configuración origen y secciones disponibles. Si comprobar rich-text tras product_list exige modificar, debe quedar pendiente: un selector visible no prueba esa posición. También falta contenido comercial actual. El README separa correctamente inspeccionar de Crear/Guardar/Asignar; estas últimas operaciones requieren autorización específica.",
+        "disposition": "needs_evidence",
+        "evidence_refs": [
+          "seo.editorial.official-template-guide",
+          "seo.editorial.native-template-limits"
+        ]
+      }
+    ],
+    "withdrawn_alternatives": [],
+    "revision_notes": [
+      "Sustituyo unknown por el ID confirmado native-alternative-category-template en la preferencia y las objeciones.",
+      "El avance corresponde al conocimiento general de plataforma; la aplicación concreta a Rhino continúa pendiente.",
+      "Mantengo la vía nativa antes de un parche compartido: copiar la configuración realmente asignada, sin base vacía ni publicación de otro diseño para habilitarla.",
+      "No se ejecutaron pruebas ni cambios; esta defensa no resuelve las objeciones ni habilita operaciones administrativas."
+    ]
+  },
+  "model": {
+    "model": "gpt-6.1-sol",
+    "effort": "medium",
+    "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+    "verified_at": "2026-11-08"
+  },
+  "execution": {
+    "exit_code": 0,
+    "timed_out": false,
+    "output_limited": false,
+    "idle_timed_out": false,
+    "cancelled": false,
+    "process_started": true,
+    "process_reaped": true,
+    "stdin_bytes_written": 66179,
+    "context_complete": true,
+    "duration_s": 23.585,
+    "timing": {
+      "spawn_s": 0.000824,
+      "input_complete_s": 0.127048,
+      "first_stdout_s": 2.45029,
+      "first_stderr_s": null,
+      "timeout_phase": null,
+      "event_counts": {
+        "thread.started": 1,
+        "item.completed": 2,
+        "turn.started": 1,
+        "turn.completed": 1
+      },
+      "inference_vs_initialization": "not_separable_without_provider_events"
+    },
+    "output_accounting": {
+      "transport_bytes": 4224,
+      "retained_bytes": 4224,
+      "discarded_progress_bytes": 0,
+      "transport_limit_bytes": 20000000,
+      "retained_limit_bytes": 2000000
+    },
+    "isolation": {
+      "backend": "bubblewrap",
+      "snapshot_read_only": true,
+      "host_home_mounted": false,
+      "network": "enabled_no_destination_firewall",
+      "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+    },
+    "started_at": "2026-11-13T17:22:17.821430+00:00",
+    "prompt_bytes": 66179,
+    "prompt_sha256": "33ec216b00cfbac416dd7acf4e290b66c9c00e3ead3cf6f2c7c5b87f4eee3bbc",
+    "usage": {
+      "provider_reported": {
+        "input_tokens": 30535,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 765,
+        "reasoning_output_tokens": 42
+      },
+      "measured_cost_available": false,
+      "estimated_cost": null
+    },
+    "limits": {
+      "timeout": 240,
+      "idle_timeout": 90,
+      "startup_timeout": 30,
+      "first_response_timeout": 150
+    },
+    "structured_output": "native_schema",
+    "contract_validation": {
+      "status": "passed",
+      "duration_s": 0.000415
+    }
+  }
+}

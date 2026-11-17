@@ -1,0 +1,1342 @@
+[
+  {
+    "url": "https://rhino-performance.com/blog/posts/la-inmovilidad-es-el-verdadero-deterioro-674a0d517ef4/",
+    "http": 200,
+    "redirect": null,
+    "canonical": [
+      "https://rhino-performance.com/blog/posts/la-inmovilidad-es-el-verdadero-deterioro-674a0d517ef4/"
+    ],
+    "canonical_self": true,
+    "meta_robots": {},
+    "meta_robots_presence": "absent_in_observed_HTML",
+    "x_robots_tag": null,
+    "x_robots_tag_presence": "absent_in_observed_headers",
+    "crawl_permission": {
+      "crawler_allowed": true,
+      "googlebot_allowed": true
+    },
+    "title": "La inmovilidad es el verdadero deterioro",
+    "description": [
+      "No es la edad.No es el desgaste.Ni siquiera es entrenar “demasiado”. El verdadero problema es otro:dejar de moverte… o no recuperarte bien después de hacerlo. E"
+    ],
+    "h1": [
+      "La inmovilidad es el verdadero deterioro"
+    ],
+    "main_content": {
+      "main_present": true,
+      "main_text_characters": 3777,
+      "main_text_sha256": "d839fb88502c56c68451df7f85b5380d84650436100f25266c78ff92f08cf785",
+      "soft_404_candidate": false,
+      "body_class": " template-blog-post ",
+      "product_ids": [],
+      "declared_times": []
+    },
+    "HTML_sha256": "da56b1a4320b65b9c236159a4a4ea89e46050085d31602e47c9ca745cf705535",
+    "technical_indexability": {
+      "state": "indexable_candidate",
+      "reasons": [],
+      "robots_evidence": {
+        "sources": [],
+        "flags": [],
+        "noindex": false,
+        "relevant_errors": [],
+        "processing_complete": true,
+        "counts": {
+          "sources_seen": 0,
+          "sources_processed": 0,
+          "input_bytes_processed": 0,
+          "parameters": 0,
+          "unknown": 0,
+          "errors": 0,
+          "sources_retained": 0
+        },
+        "unvisited_sources_count": 0,
+        "processed_collection_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "truncated": false,
+        "state": "no_restrictive_flag_observed",
+        "scope": "Googlebot text results; not Google rendering/index inspection"
+      },
+      "indexation_observed": false,
+      "google_selected_canonical": null,
+      "evidence_scope": "technical_observation_not_google_index"
+    },
+    "audited_at": "2026-11-13T07:31:33.859600+00:00",
+    "HTTP_observation_window": {
+      "run_started_at": "2026-11-13T07:31:30.373655+00:00",
+      "CLI_finished_at": "2026-11-13T07:31:44.414468+00:00"
+    },
+    "full_readiness": {
+      "checks": [
+        {
+          "name": "http_access",
+          "status": "passed",
+          "critical": true,
+          "evidence": 200
+        },
+        {
+          "name": "indexability",
+          "status": "passed",
+          "critical": true,
+          "evidence": {
+            "state": "indexable_candidate",
+            "reasons": [],
+            "robots_evidence": {
+              "sources": [],
+              "flags": [],
+              "noindex": false,
+              "relevant_errors": [],
+              "processing_complete": true,
+              "counts": {
+                "sources_seen": 0,
+                "sources_processed": 0,
+                "input_bytes_processed": 0,
+                "parameters": 0,
+                "unknown": 0,
+                "errors": 0,
+                "sources_retained": 0
+              },
+              "unvisited_sources_count": 0,
+              "processed_collection_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "truncated": false,
+              "state": "no_restrictive_flag_observed",
+              "scope": "Googlebot text results; not Google rendering/index inspection"
+            },
+            "indexation_observed": false,
+            "google_selected_canonical": null,
+            "evidence_scope": "technical_observation_not_google_index"
+          }
+        },
+        {
+          "name": "main_content",
+          "status": "passed",
+          "critical": true,
+          "evidence": "text length/hash, not tags counted"
+        },
+        {
+          "name": "crawlable_navigation",
+          "status": "passed",
+          "critical": false,
+          "evidence": "observed href targets"
+        },
+        {
+          "name": "sitemap_membership",
+          "status": "unknown",
+          "critical": false,
+          "evidence": "native sitemap inventory"
+        },
+        {
+          "name": "structured_data",
+          "status": "passed",
+          "critical": true,
+          "evidence": "existing SEO validator A-D, limits preserved"
+        },
+        {
+          "name": "pagination",
+          "status": "passed",
+          "critical": false,
+          "evidence": {
+            "observed_links": [],
+            "head_rel_links": [],
+            "active_controls_without_href": 0,
+            "state": "needs_evidence",
+            "continuity": "needs_multi_page_evidence",
+            "native_contract": "observed_hrefs_only_no_invented_routes"
+          }
+        },
+        {
+          "name": "render_comparison",
+          "status": "unknown",
+          "critical": false,
+          "evidence": "capture supplied, not Googlebot"
+        },
+        {
+          "name": "no_js_navigation",
+          "status": "unknown",
+          "critical": true,
+          "evidence": "no-JS capture required"
+        },
+        {
+          "name": "no_js_main_content",
+          "status": "unknown",
+          "critical": true,
+          "evidence": "extracted main text in no-JS DOM; hidden/visual state requires browser QA"
+        }
+      ],
+      "critical_blockers": [],
+      "required_evidence_missing": [
+        "no_js_navigation",
+        "no_js_main_content"
+      ],
+      "approval": "insufficient_evidence",
+      "score": 60,
+      "coverage": 0.6,
+      "meaning": "diagnostic evidence completion, not Google ranking; blockers override score"
+    },
+    "validator_findings": [
+      {
+        "rule": "B002",
+        "level": "B",
+        "severity": "optional",
+        "message": "@context usa http://; schema.org acepta ambos, https es la forma preferida.",
+        "entity": "structured-data.blog-post",
+        "path": null,
+        "evidence": "http://schema.org",
+        "source": null,
+        "fix": null,
+        "scope": null,
+        "priority": "P3"
+      },
+      {
+        "rule": "B030",
+        "level": "B",
+        "severity": "warning",
+        "message": "`author` es texto plano; Google y schema.org esperan Person u Organization.",
+        "entity": "BlogPosting@structured-data.blog-post",
+        "path": "author",
+        "evidence": null,
+        "source": null,
+        "fix": "Emitir {\"@type\":\"Person\",\"name\":…} solo con el autor real del artículo.",
+        "scope": null,
+        "priority": "P2"
+      },
+      {
+        "rule": "C410",
+        "level": "C",
+        "severity": "optional",
+        "message": "SearchAction: la función de sitelinks searchbox fue retirada; solo mantener si refleja una búsqueda real y por semántica.",
+        "entity": null,
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/blog/2024/10/sitelinks-search-box",
+        "fix": null,
+        "scope": "sitelinks_searchbox",
+        "priority": "P3"
+      },
+      {
+        "rule": "G005",
+        "level": "D",
+        "severity": "optional",
+        "message": "1 Organization anidada(s) sin @id junto a una Organization global: la identidad del negocio está dividida.",
+        "entity": null,
+        "path": null,
+        "evidence": [
+          "$.publisher"
+        ],
+        "source": null,
+        "fix": "Asignar @id estable a la Organization global y referenciarla (seller/publisher/author).",
+        "scope": null,
+        "priority": "P3"
+      },
+      {
+        "rule": "B100",
+        "level": "B",
+        "severity": "warning",
+        "message": "Se espera una entidad del vocabulario, no texto sin tipo.",
+        "entity": "1:$",
+        "path": "author",
+        "evidence": null,
+        "source": "https://schema.org/version/latest/schemaorg-current-https.jsonld",
+        "fix": null,
+        "scope": null,
+        "priority": "P2"
+      },
+      {
+        "rule": "SEO012",
+        "level": "D",
+        "severity": "recommendation",
+        "message": "Imagen sin atributo alt; revisar contexto/decoración.",
+        "entity": null,
+        "path": null,
+        "evidence": {
+          "src": "https://www.facebook.com/tr?id=393081466010695&ev=PageView&noscript=1"
+        },
+        "source": null,
+        "fix": null,
+        "scope": null,
+        "priority": "P3"
+      }
+    ],
+    "validator_severity_counts": {
+      "optional": 3,
+      "warning": 2,
+      "recommendation": 1
+    },
+    "source": {
+      "file": "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/live-batch08-20261113/raw-crawl-report.json",
+      "node_index": 0
+    },
+    "controller_interpretation": "BlogPosting author plain text warnings observed; not an HTTP/robots/canonical block and no Google inspection."
+  },
+  {
+    "url": "https://rhino-performance.com/blog/posts/rhino-gun-air-recuperacion-profunda-estes-donde-estes-234790e68abf/",
+    "http": 200,
+    "redirect": null,
+    "canonical": [
+      "https://rhino-performance.com/blog/posts/rhino-gun-air-recuperacion-profunda-estes-donde-estes-234790e68abf/"
+    ],
+    "canonical_self": true,
+    "meta_robots": {},
+    "meta_robots_presence": "absent_in_observed_HTML",
+    "x_robots_tag": null,
+    "x_robots_tag_presence": "absent_in_observed_headers",
+    "crawl_permission": {
+      "crawler_allowed": true,
+      "googlebot_allowed": true
+    },
+    "title": "RHINO GUN AIR: recuperación profunda, estés donde estés",
+    "description": [
+      "En el entrenamiento, en el deporte y en la vida diaria, el rendimiento no solo se construye con esfuerzo: también se construye con recuperación. Cada sesión int"
+    ],
+    "h1": [
+      "RHINO GUN AIR: recuperación profunda, estés donde estés"
+    ],
+    "main_content": {
+      "main_present": true,
+      "main_text_characters": 4216,
+      "main_text_sha256": "e89429a5be4766ed5ed978fe88368b069756e4965074d7b468df4a18c94757a0",
+      "soft_404_candidate": false,
+      "body_class": " template-blog-post ",
+      "product_ids": [],
+      "declared_times": []
+    },
+    "HTML_sha256": "7b98a38f1ef52cedd1159267964be7e0965f1696bae16dc3a5775e5e33be091d",
+    "technical_indexability": {
+      "state": "indexable_candidate",
+      "reasons": [],
+      "robots_evidence": {
+        "sources": [],
+        "flags": [],
+        "noindex": false,
+        "relevant_errors": [],
+        "processing_complete": true,
+        "counts": {
+          "sources_seen": 0,
+          "sources_processed": 0,
+          "input_bytes_processed": 0,
+          "parameters": 0,
+          "unknown": 0,
+          "errors": 0,
+          "sources_retained": 0
+        },
+        "unvisited_sources_count": 0,
+        "processed_collection_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "truncated": false,
+        "state": "no_restrictive_flag_observed",
+        "scope": "Googlebot text results; not Google rendering/index inspection"
+      },
+      "indexation_observed": false,
+      "google_selected_canonical": null,
+      "evidence_scope": "technical_observation_not_google_index"
+    },
+    "audited_at": "2026-11-13T07:31:35.482974+00:00",
+    "HTTP_observation_window": {
+      "run_started_at": "2026-11-13T07:31:30.373655+00:00",
+      "CLI_finished_at": "2026-11-13T07:31:44.414468+00:00"
+    },
+    "full_readiness": {
+      "checks": [
+        {
+          "name": "http_access",
+          "status": "passed",
+          "critical": true,
+          "evidence": 200
+        },
+        {
+          "name": "indexability",
+          "status": "passed",
+          "critical": true,
+          "evidence": {
+            "state": "indexable_candidate",
+            "reasons": [],
+            "robots_evidence": {
+              "sources": [],
+              "flags": [],
+              "noindex": false,
+              "relevant_errors": [],
+              "processing_complete": true,
+              "counts": {
+                "sources_seen": 0,
+                "sources_processed": 0,
+                "input_bytes_processed": 0,
+                "parameters": 0,
+                "unknown": 0,
+                "errors": 0,
+                "sources_retained": 0
+              },
+              "unvisited_sources_count": 0,
+              "processed_collection_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "truncated": false,
+              "state": "no_restrictive_flag_observed",
+              "scope": "Googlebot text results; not Google rendering/index inspection"
+            },
+            "indexation_observed": false,
+            "google_selected_canonical": null,
+            "evidence_scope": "technical_observation_not_google_index"
+          }
+        },
+        {
+          "name": "main_content",
+          "status": "passed",
+          "critical": true,
+          "evidence": "text length/hash, not tags counted"
+        },
+        {
+          "name": "crawlable_navigation",
+          "status": "passed",
+          "critical": false,
+          "evidence": "observed href targets"
+        },
+        {
+          "name": "sitemap_membership",
+          "status": "unknown",
+          "critical": false,
+          "evidence": "native sitemap inventory"
+        },
+        {
+          "name": "structured_data",
+          "status": "passed",
+          "critical": true,
+          "evidence": "existing SEO validator A-D, limits preserved"
+        },
+        {
+          "name": "pagination",
+          "status": "passed",
+          "critical": false,
+          "evidence": {
+            "observed_links": [],
+            "head_rel_links": [],
+            "active_controls_without_href": 0,
+            "state": "needs_evidence",
+            "continuity": "needs_multi_page_evidence",
+            "native_contract": "observed_hrefs_only_no_invented_routes"
+          }
+        },
+        {
+          "name": "render_comparison",
+          "status": "unknown",
+          "critical": false,
+          "evidence": "capture supplied, not Googlebot"
+        },
+        {
+          "name": "no_js_navigation",
+          "status": "unknown",
+          "critical": true,
+          "evidence": "no-JS capture required"
+        },
+        {
+          "name": "no_js_main_content",
+          "status": "unknown",
+          "critical": true,
+          "evidence": "extracted main text in no-JS DOM; hidden/visual state requires browser QA"
+        }
+      ],
+      "critical_blockers": [],
+      "required_evidence_missing": [
+        "no_js_navigation",
+        "no_js_main_content"
+      ],
+      "approval": "insufficient_evidence",
+      "score": 60,
+      "coverage": 0.6,
+      "meaning": "diagnostic evidence completion, not Google ranking; blockers override score"
+    },
+    "validator_findings": [
+      {
+        "rule": "B002",
+        "level": "B",
+        "severity": "optional",
+        "message": "@context usa http://; schema.org acepta ambos, https es la forma preferida.",
+        "entity": "structured-data.blog-post",
+        "path": null,
+        "evidence": "http://schema.org",
+        "source": null,
+        "fix": null,
+        "scope": null,
+        "priority": "P3"
+      },
+      {
+        "rule": "B030",
+        "level": "B",
+        "severity": "warning",
+        "message": "`author` es texto plano; Google y schema.org esperan Person u Organization.",
+        "entity": "BlogPosting@structured-data.blog-post",
+        "path": "author",
+        "evidence": null,
+        "source": null,
+        "fix": "Emitir {\"@type\":\"Person\",\"name\":…} solo con el autor real del artículo.",
+        "scope": null,
+        "priority": "P2"
+      },
+      {
+        "rule": "C410",
+        "level": "C",
+        "severity": "optional",
+        "message": "SearchAction: la función de sitelinks searchbox fue retirada; solo mantener si refleja una búsqueda real y por semántica.",
+        "entity": null,
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/blog/2024/10/sitelinks-search-box",
+        "fix": null,
+        "scope": "sitelinks_searchbox",
+        "priority": "P3"
+      },
+      {
+        "rule": "G005",
+        "level": "D",
+        "severity": "optional",
+        "message": "1 Organization anidada(s) sin @id junto a una Organization global: la identidad del negocio está dividida.",
+        "entity": null,
+        "path": null,
+        "evidence": [
+          "$.publisher"
+        ],
+        "source": null,
+        "fix": "Asignar @id estable a la Organization global y referenciarla (seller/publisher/author).",
+        "scope": null,
+        "priority": "P3"
+      },
+      {
+        "rule": "B100",
+        "level": "B",
+        "severity": "warning",
+        "message": "Se espera una entidad del vocabulario, no texto sin tipo.",
+        "entity": "1:$",
+        "path": "author",
+        "evidence": null,
+        "source": "https://schema.org/version/latest/schemaorg-current-https.jsonld",
+        "fix": null,
+        "scope": null,
+        "priority": "P2"
+      },
+      {
+        "rule": "SEO012",
+        "level": "D",
+        "severity": "recommendation",
+        "message": "Imagen sin atributo alt; revisar contexto/decoración.",
+        "entity": null,
+        "path": null,
+        "evidence": {
+          "src": "https://www.facebook.com/tr?id=393081466010695&ev=PageView&noscript=1"
+        },
+        "source": null,
+        "fix": null,
+        "scope": null,
+        "priority": "P3"
+      }
+    ],
+    "validator_severity_counts": {
+      "optional": 3,
+      "warning": 2,
+      "recommendation": 1
+    },
+    "source": {
+      "file": "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/live-batch08-20261113/raw-crawl-report.json",
+      "node_index": 1
+    },
+    "controller_interpretation": "BlogPosting author plain text warnings observed; not an HTTP/robots/canonical block and no Google inspection."
+  },
+  {
+    "url": "https://rhino-performance.com/blog/posts/nuevos-productos-rhino-air-recuperacion-profesional-donde-sea-y-cuando-sea-168c475f7bfa/",
+    "http": 200,
+    "redirect": null,
+    "canonical": [
+      "https://rhino-performance.com/blog/posts/nuevos-productos-rhino-air-recuperacion-profesional-donde-sea-y-cuando-sea-168c475f7bfa/"
+    ],
+    "canonical_self": true,
+    "meta_robots": {},
+    "meta_robots_presence": "absent_in_observed_HTML",
+    "x_robots_tag": null,
+    "x_robots_tag_presence": "absent_in_observed_headers",
+    "crawl_permission": {
+      "crawler_allowed": true,
+      "googlebot_allowed": true
+    },
+    "title": "NUEVOS PRODUCTOS RHINO AIR: recuperación profesional, donde sea y cuan",
+    "description": [
+      "En RHINO Performance sabemos que entrenar fuerte es solo la mitad del camino. La otra mitad —igual de importante— es la recuperación.Por eso hoy presentamos tre"
+    ],
+    "h1": [
+      "NUEVOS PRODUCTOS RHINO AIR: recuperación profesional, donde sea y cuando sea"
+    ],
+    "main_content": {
+      "main_present": true,
+      "main_text_characters": 4452,
+      "main_text_sha256": "a87785a8ba2f01a037520140bab4609935a0449223f2218639322b88f9a41987",
+      "soft_404_candidate": false,
+      "body_class": " template-blog-post ",
+      "product_ids": [],
+      "declared_times": []
+    },
+    "HTML_sha256": "a7ea0d265bcfad2ed3e669c654503547c9a26d51a0d2049e3c3415f583a3ecf8",
+    "technical_indexability": {
+      "state": "indexable_candidate",
+      "reasons": [],
+      "robots_evidence": {
+        "sources": [],
+        "flags": [],
+        "noindex": false,
+        "relevant_errors": [],
+        "processing_complete": true,
+        "counts": {
+          "sources_seen": 0,
+          "sources_processed": 0,
+          "input_bytes_processed": 0,
+          "parameters": 0,
+          "unknown": 0,
+          "errors": 0,
+          "sources_retained": 0
+        },
+        "unvisited_sources_count": 0,
+        "processed_collection_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "truncated": false,
+        "state": "no_restrictive_flag_observed",
+        "scope": "Googlebot text results; not Google rendering/index inspection"
+      },
+      "indexation_observed": false,
+      "google_selected_canonical": null,
+      "evidence_scope": "technical_observation_not_google_index"
+    },
+    "audited_at": "2026-11-13T07:31:37.571322+00:00",
+    "HTTP_observation_window": {
+      "run_started_at": "2026-11-13T07:31:30.373655+00:00",
+      "CLI_finished_at": "2026-11-13T07:31:44.414468+00:00"
+    },
+    "full_readiness": {
+      "checks": [
+        {
+          "name": "http_access",
+          "status": "passed",
+          "critical": true,
+          "evidence": 200
+        },
+        {
+          "name": "indexability",
+          "status": "passed",
+          "critical": true,
+          "evidence": {
+            "state": "indexable_candidate",
+            "reasons": [],
+            "robots_evidence": {
+              "sources": [],
+              "flags": [],
+              "noindex": false,
+              "relevant_errors": [],
+              "processing_complete": true,
+              "counts": {
+                "sources_seen": 0,
+                "sources_processed": 0,
+                "input_bytes_processed": 0,
+                "parameters": 0,
+                "unknown": 0,
+                "errors": 0,
+                "sources_retained": 0
+              },
+              "unvisited_sources_count": 0,
+              "processed_collection_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "truncated": false,
+              "state": "no_restrictive_flag_observed",
+              "scope": "Googlebot text results; not Google rendering/index inspection"
+            },
+            "indexation_observed": false,
+            "google_selected_canonical": null,
+            "evidence_scope": "technical_observation_not_google_index"
+          }
+        },
+        {
+          "name": "main_content",
+          "status": "passed",
+          "critical": true,
+          "evidence": "text length/hash, not tags counted"
+        },
+        {
+          "name": "crawlable_navigation",
+          "status": "passed",
+          "critical": false,
+          "evidence": "observed href targets"
+        },
+        {
+          "name": "sitemap_membership",
+          "status": "unknown",
+          "critical": false,
+          "evidence": "native sitemap inventory"
+        },
+        {
+          "name": "structured_data",
+          "status": "passed",
+          "critical": true,
+          "evidence": "existing SEO validator A-D, limits preserved"
+        },
+        {
+          "name": "pagination",
+          "status": "passed",
+          "critical": false,
+          "evidence": {
+            "observed_links": [],
+            "head_rel_links": [],
+            "active_controls_without_href": 0,
+            "state": "needs_evidence",
+            "continuity": "needs_multi_page_evidence",
+            "native_contract": "observed_hrefs_only_no_invented_routes"
+          }
+        },
+        {
+          "name": "render_comparison",
+          "status": "unknown",
+          "critical": false,
+          "evidence": "capture supplied, not Googlebot"
+        },
+        {
+          "name": "no_js_navigation",
+          "status": "unknown",
+          "critical": true,
+          "evidence": "no-JS capture required"
+        },
+        {
+          "name": "no_js_main_content",
+          "status": "unknown",
+          "critical": true,
+          "evidence": "extracted main text in no-JS DOM; hidden/visual state requires browser QA"
+        }
+      ],
+      "critical_blockers": [],
+      "required_evidence_missing": [
+        "no_js_navigation",
+        "no_js_main_content"
+      ],
+      "approval": "insufficient_evidence",
+      "score": 60,
+      "coverage": 0.6,
+      "meaning": "diagnostic evidence completion, not Google ranking; blockers override score"
+    },
+    "validator_findings": [
+      {
+        "rule": "B002",
+        "level": "B",
+        "severity": "optional",
+        "message": "@context usa http://; schema.org acepta ambos, https es la forma preferida.",
+        "entity": "structured-data.blog-post",
+        "path": null,
+        "evidence": "http://schema.org",
+        "source": null,
+        "fix": null,
+        "scope": null,
+        "priority": "P3"
+      },
+      {
+        "rule": "B030",
+        "level": "B",
+        "severity": "warning",
+        "message": "`author` es texto plano; Google y schema.org esperan Person u Organization.",
+        "entity": "BlogPosting@structured-data.blog-post",
+        "path": "author",
+        "evidence": null,
+        "source": null,
+        "fix": "Emitir {\"@type\":\"Person\",\"name\":…} solo con el autor real del artículo.",
+        "scope": null,
+        "priority": "P2"
+      },
+      {
+        "rule": "C410",
+        "level": "C",
+        "severity": "optional",
+        "message": "SearchAction: la función de sitelinks searchbox fue retirada; solo mantener si refleja una búsqueda real y por semántica.",
+        "entity": null,
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/blog/2024/10/sitelinks-search-box",
+        "fix": null,
+        "scope": "sitelinks_searchbox",
+        "priority": "P3"
+      },
+      {
+        "rule": "G005",
+        "level": "D",
+        "severity": "optional",
+        "message": "1 Organization anidada(s) sin @id junto a una Organization global: la identidad del negocio está dividida.",
+        "entity": null,
+        "path": null,
+        "evidence": [
+          "$.publisher"
+        ],
+        "source": null,
+        "fix": "Asignar @id estable a la Organization global y referenciarla (seller/publisher/author).",
+        "scope": null,
+        "priority": "P3"
+      },
+      {
+        "rule": "B100",
+        "level": "B",
+        "severity": "warning",
+        "message": "Se espera una entidad del vocabulario, no texto sin tipo.",
+        "entity": "1:$",
+        "path": "author",
+        "evidence": null,
+        "source": "https://schema.org/version/latest/schemaorg-current-https.jsonld",
+        "fix": null,
+        "scope": null,
+        "priority": "P2"
+      },
+      {
+        "rule": "SEO012",
+        "level": "D",
+        "severity": "recommendation",
+        "message": "Imagen sin atributo alt; revisar contexto/decoración.",
+        "entity": null,
+        "path": null,
+        "evidence": {
+          "src": "https://www.facebook.com/tr?id=393081466010695&ev=PageView&noscript=1"
+        },
+        "source": null,
+        "fix": null,
+        "scope": null,
+        "priority": "P3"
+      }
+    ],
+    "validator_severity_counts": {
+      "optional": 3,
+      "warning": 2,
+      "recommendation": 1
+    },
+    "source": {
+      "file": "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/live-batch08-20261113/raw-crawl-report.json",
+      "node_index": 2
+    },
+    "controller_interpretation": "BlogPosting author plain text warnings observed; not an HTTP/robots/canonical block and no Google inspection."
+  },
+  {
+    "url": "https://rhino-performance.com/blog/posts/estas-respirando-mal-y-esta-afectando-tu-rendimiento-75b8c1cc4493/",
+    "http": 200,
+    "redirect": null,
+    "canonical": [
+      "https://rhino-performance.com/blog/posts/estas-respirando-mal-y-esta-afectando-tu-rendimiento-75b8c1cc4493/"
+    ],
+    "canonical_self": true,
+    "meta_robots": {},
+    "meta_robots_presence": "absent_in_observed_HTML",
+    "x_robots_tag": null,
+    "x_robots_tag_presence": "absent_in_observed_headers",
+    "crawl_permission": {
+      "crawler_allowed": true,
+      "googlebot_allowed": true
+    },
+    "title": "Estás respirando mal (y está afectando tu rendimiento)",
+    "description": [
+      "Todos entrenan fuerza.Muchos trabajan resistencia.Algunos perfeccionan su técnica. Pero hay algo que está presente en absolutamente todo… y casi nadie entrena: "
+    ],
+    "h1": [
+      "Estás respirando mal (y está afectando tu rendimiento)"
+    ],
+    "main_content": {
+      "main_present": true,
+      "main_text_characters": 3532,
+      "main_text_sha256": "075bb6245a076f68c0fa0a74974c5acf976f768527d372abfde3552a3847e770",
+      "soft_404_candidate": false,
+      "body_class": " template-blog-post ",
+      "product_ids": [],
+      "declared_times": []
+    },
+    "HTML_sha256": "b836dd25164a41b05d8e10880dfbd2cc82dcbd86137bc6b74c75a950824a4c97",
+    "technical_indexability": {
+      "state": "indexable_candidate",
+      "reasons": [],
+      "robots_evidence": {
+        "sources": [],
+        "flags": [],
+        "noindex": false,
+        "relevant_errors": [],
+        "processing_complete": true,
+        "counts": {
+          "sources_seen": 0,
+          "sources_processed": 0,
+          "input_bytes_processed": 0,
+          "parameters": 0,
+          "unknown": 0,
+          "errors": 0,
+          "sources_retained": 0
+        },
+        "unvisited_sources_count": 0,
+        "processed_collection_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "truncated": false,
+        "state": "no_restrictive_flag_observed",
+        "scope": "Googlebot text results; not Google rendering/index inspection"
+      },
+      "indexation_observed": false,
+      "google_selected_canonical": null,
+      "evidence_scope": "technical_observation_not_google_index"
+    },
+    "audited_at": "2026-11-13T07:31:39.563613+00:00",
+    "HTTP_observation_window": {
+      "run_started_at": "2026-11-13T07:31:30.373655+00:00",
+      "CLI_finished_at": "2026-11-13T07:31:44.414468+00:00"
+    },
+    "full_readiness": {
+      "checks": [
+        {
+          "name": "http_access",
+          "status": "passed",
+          "critical": true,
+          "evidence": 200
+        },
+        {
+          "name": "indexability",
+          "status": "passed",
+          "critical": true,
+          "evidence": {
+            "state": "indexable_candidate",
+            "reasons": [],
+            "robots_evidence": {
+              "sources": [],
+              "flags": [],
+              "noindex": false,
+              "relevant_errors": [],
+              "processing_complete": true,
+              "counts": {
+                "sources_seen": 0,
+                "sources_processed": 0,
+                "input_bytes_processed": 0,
+                "parameters": 0,
+                "unknown": 0,
+                "errors": 0,
+                "sources_retained": 0
+              },
+              "unvisited_sources_count": 0,
+              "processed_collection_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "truncated": false,
+              "state": "no_restrictive_flag_observed",
+              "scope": "Googlebot text results; not Google rendering/index inspection"
+            },
+            "indexation_observed": false,
+            "google_selected_canonical": null,
+            "evidence_scope": "technical_observation_not_google_index"
+          }
+        },
+        {
+          "name": "main_content",
+          "status": "passed",
+          "critical": true,
+          "evidence": "text length/hash, not tags counted"
+        },
+        {
+          "name": "crawlable_navigation",
+          "status": "passed",
+          "critical": false,
+          "evidence": "observed href targets"
+        },
+        {
+          "name": "sitemap_membership",
+          "status": "unknown",
+          "critical": false,
+          "evidence": "native sitemap inventory"
+        },
+        {
+          "name": "structured_data",
+          "status": "passed",
+          "critical": true,
+          "evidence": "existing SEO validator A-D, limits preserved"
+        },
+        {
+          "name": "pagination",
+          "status": "passed",
+          "critical": false,
+          "evidence": {
+            "observed_links": [],
+            "head_rel_links": [],
+            "active_controls_without_href": 0,
+            "state": "needs_evidence",
+            "continuity": "needs_multi_page_evidence",
+            "native_contract": "observed_hrefs_only_no_invented_routes"
+          }
+        },
+        {
+          "name": "render_comparison",
+          "status": "unknown",
+          "critical": false,
+          "evidence": "capture supplied, not Googlebot"
+        },
+        {
+          "name": "no_js_navigation",
+          "status": "unknown",
+          "critical": true,
+          "evidence": "no-JS capture required"
+        },
+        {
+          "name": "no_js_main_content",
+          "status": "unknown",
+          "critical": true,
+          "evidence": "extracted main text in no-JS DOM; hidden/visual state requires browser QA"
+        }
+      ],
+      "critical_blockers": [],
+      "required_evidence_missing": [
+        "no_js_navigation",
+        "no_js_main_content"
+      ],
+      "approval": "insufficient_evidence",
+      "score": 60,
+      "coverage": 0.6,
+      "meaning": "diagnostic evidence completion, not Google ranking; blockers override score"
+    },
+    "validator_findings": [
+      {
+        "rule": "B002",
+        "level": "B",
+        "severity": "optional",
+        "message": "@context usa http://; schema.org acepta ambos, https es la forma preferida.",
+        "entity": "structured-data.blog-post",
+        "path": null,
+        "evidence": "http://schema.org",
+        "source": null,
+        "fix": null,
+        "scope": null,
+        "priority": "P3"
+      },
+      {
+        "rule": "B030",
+        "level": "B",
+        "severity": "warning",
+        "message": "`author` es texto plano; Google y schema.org esperan Person u Organization.",
+        "entity": "BlogPosting@structured-data.blog-post",
+        "path": "author",
+        "evidence": null,
+        "source": null,
+        "fix": "Emitir {\"@type\":\"Person\",\"name\":…} solo con el autor real del artículo.",
+        "scope": null,
+        "priority": "P2"
+      },
+      {
+        "rule": "C410",
+        "level": "C",
+        "severity": "optional",
+        "message": "SearchAction: la función de sitelinks searchbox fue retirada; solo mantener si refleja una búsqueda real y por semántica.",
+        "entity": null,
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/blog/2024/10/sitelinks-search-box",
+        "fix": null,
+        "scope": "sitelinks_searchbox",
+        "priority": "P3"
+      },
+      {
+        "rule": "G005",
+        "level": "D",
+        "severity": "optional",
+        "message": "1 Organization anidada(s) sin @id junto a una Organization global: la identidad del negocio está dividida.",
+        "entity": null,
+        "path": null,
+        "evidence": [
+          "$.publisher"
+        ],
+        "source": null,
+        "fix": "Asignar @id estable a la Organization global y referenciarla (seller/publisher/author).",
+        "scope": null,
+        "priority": "P3"
+      },
+      {
+        "rule": "B100",
+        "level": "B",
+        "severity": "warning",
+        "message": "Se espera una entidad del vocabulario, no texto sin tipo.",
+        "entity": "1:$",
+        "path": "author",
+        "evidence": null,
+        "source": "https://schema.org/version/latest/schemaorg-current-https.jsonld",
+        "fix": null,
+        "scope": null,
+        "priority": "P2"
+      },
+      {
+        "rule": "SEO012",
+        "level": "D",
+        "severity": "recommendation",
+        "message": "Imagen sin atributo alt; revisar contexto/decoración.",
+        "entity": null,
+        "path": null,
+        "evidence": {
+          "src": "https://www.facebook.com/tr?id=393081466010695&ev=PageView&noscript=1"
+        },
+        "source": null,
+        "fix": null,
+        "scope": null,
+        "priority": "P3"
+      }
+    ],
+    "validator_severity_counts": {
+      "optional": 3,
+      "warning": 2,
+      "recommendation": 1
+    },
+    "source": {
+      "file": "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/live-batch08-20261113/raw-crawl-report.json",
+      "node_index": 3
+    },
+    "controller_interpretation": "BlogPosting author plain text warnings observed; not an HTTP/robots/canonical block and no Google inspection."
+  },
+  {
+    "url": "https://rhino-performance.com/blog/posts/escalada-y-recuperacion-por-que-la-presoterapia-es-tu-mejor-aliada-f9d767f0feda/",
+    "http": 200,
+    "redirect": null,
+    "canonical": [
+      "https://rhino-performance.com/blog/posts/escalada-y-recuperacion-por-que-la-presoterapia-es-tu-mejor-aliada-f9d767f0feda/"
+    ],
+    "canonical_self": true,
+    "meta_robots": {},
+    "meta_robots_presence": "absent_in_observed_HTML",
+    "x_robots_tag": null,
+    "x_robots_tag_presence": "absent_in_observed_headers",
+    "crawl_permission": {
+      "crawler_allowed": true,
+      "googlebot_allowed": true
+    },
+    "title": "Escalada y Recuperación: ¿Por Qué la Presoterapia es tu Mejor Aliada?",
+    "description": [
+      "La escalada no solo es fuerza y técnica, es también un deporte que exige al máximo tus brazos, hombros y piernas. Desde rutas de boulder explosivas hasta ascens"
+    ],
+    "h1": [
+      "Escalada y Recuperación: ¿Por Qué la Presoterapia es tu Mejor Aliada?"
+    ],
+    "main_content": {
+      "main_present": true,
+      "main_text_characters": 3786,
+      "main_text_sha256": "d50cc2e2bf6bf2a141fc8b332d6be7090b2a4121d7ec98f28d493bfac1f08c15",
+      "soft_404_candidate": false,
+      "body_class": " template-blog-post ",
+      "product_ids": [],
+      "declared_times": []
+    },
+    "HTML_sha256": "0be1f1855b5d93934cbe087a6f631e4542a85b105cfcbc8290c17587206205eb",
+    "technical_indexability": {
+      "state": "indexable_candidate",
+      "reasons": [],
+      "robots_evidence": {
+        "sources": [],
+        "flags": [],
+        "noindex": false,
+        "relevant_errors": [],
+        "processing_complete": true,
+        "counts": {
+          "sources_seen": 0,
+          "sources_processed": 0,
+          "input_bytes_processed": 0,
+          "parameters": 0,
+          "unknown": 0,
+          "errors": 0,
+          "sources_retained": 0
+        },
+        "unvisited_sources_count": 0,
+        "processed_collection_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "truncated": false,
+        "state": "no_restrictive_flag_observed",
+        "scope": "Googlebot text results; not Google rendering/index inspection"
+      },
+      "indexation_observed": false,
+      "google_selected_canonical": null,
+      "evidence_scope": "technical_observation_not_google_index"
+    },
+    "audited_at": "2026-11-13T07:31:41.402710+00:00",
+    "HTTP_observation_window": {
+      "run_started_at": "2026-11-13T07:31:30.373655+00:00",
+      "CLI_finished_at": "2026-11-13T07:31:44.414468+00:00"
+    },
+    "full_readiness": {
+      "checks": [
+        {
+          "name": "http_access",
+          "status": "passed",
+          "critical": true,
+          "evidence": 200
+        },
+        {
+          "name": "indexability",
+          "status": "passed",
+          "critical": true,
+          "evidence": {
+            "state": "indexable_candidate",
+            "reasons": [],
+            "robots_evidence": {
+              "sources": [],
+              "flags": [],
+              "noindex": false,
+              "relevant_errors": [],
+              "processing_complete": true,
+              "counts": {
+                "sources_seen": 0,
+                "sources_processed": 0,
+                "input_bytes_processed": 0,
+                "parameters": 0,
+                "unknown": 0,
+                "errors": 0,
+                "sources_retained": 0
+              },
+              "unvisited_sources_count": 0,
+              "processed_collection_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "truncated": false,
+              "state": "no_restrictive_flag_observed",
+              "scope": "Googlebot text results; not Google rendering/index inspection"
+            },
+            "indexation_observed": false,
+            "google_selected_canonical": null,
+            "evidence_scope": "technical_observation_not_google_index"
+          }
+        },
+        {
+          "name": "main_content",
+          "status": "passed",
+          "critical": true,
+          "evidence": "text length/hash, not tags counted"
+        },
+        {
+          "name": "crawlable_navigation",
+          "status": "passed",
+          "critical": false,
+          "evidence": "observed href targets"
+        },
+        {
+          "name": "sitemap_membership",
+          "status": "unknown",
+          "critical": false,
+          "evidence": "native sitemap inventory"
+        },
+        {
+          "name": "structured_data",
+          "status": "passed",
+          "critical": true,
+          "evidence": "existing SEO validator A-D, limits preserved"
+        },
+        {
+          "name": "pagination",
+          "status": "passed",
+          "critical": false,
+          "evidence": {
+            "observed_links": [],
+            "head_rel_links": [],
+            "active_controls_without_href": 0,
+            "state": "needs_evidence",
+            "continuity": "needs_multi_page_evidence",
+            "native_contract": "observed_hrefs_only_no_invented_routes"
+          }
+        },
+        {
+          "name": "render_comparison",
+          "status": "unknown",
+          "critical": false,
+          "evidence": "capture supplied, not Googlebot"
+        },
+        {
+          "name": "no_js_navigation",
+          "status": "unknown",
+          "critical": true,
+          "evidence": "no-JS capture required"
+        },
+        {
+          "name": "no_js_main_content",
+          "status": "unknown",
+          "critical": true,
+          "evidence": "extracted main text in no-JS DOM; hidden/visual state requires browser QA"
+        }
+      ],
+      "critical_blockers": [],
+      "required_evidence_missing": [
+        "no_js_navigation",
+        "no_js_main_content"
+      ],
+      "approval": "insufficient_evidence",
+      "score": 60,
+      "coverage": 0.6,
+      "meaning": "diagnostic evidence completion, not Google ranking; blockers override score"
+    },
+    "validator_findings": [
+      {
+        "rule": "B002",
+        "level": "B",
+        "severity": "optional",
+        "message": "@context usa http://; schema.org acepta ambos, https es la forma preferida.",
+        "entity": "structured-data.blog-post",
+        "path": null,
+        "evidence": "http://schema.org",
+        "source": null,
+        "fix": null,
+        "scope": null,
+        "priority": "P3"
+      },
+      {
+        "rule": "B030",
+        "level": "B",
+        "severity": "warning",
+        "message": "`author` es texto plano; Google y schema.org esperan Person u Organization.",
+        "entity": "BlogPosting@structured-data.blog-post",
+        "path": "author",
+        "evidence": null,
+        "source": null,
+        "fix": "Emitir {\"@type\":\"Person\",\"name\":…} solo con el autor real del artículo.",
+        "scope": null,
+        "priority": "P2"
+      },
+      {
+        "rule": "C410",
+        "level": "C",
+        "severity": "optional",
+        "message": "SearchAction: la función de sitelinks searchbox fue retirada; solo mantener si refleja una búsqueda real y por semántica.",
+        "entity": null,
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/blog/2024/10/sitelinks-search-box",
+        "fix": null,
+        "scope": "sitelinks_searchbox",
+        "priority": "P3"
+      },
+      {
+        "rule": "G005",
+        "level": "D",
+        "severity": "optional",
+        "message": "1 Organization anidada(s) sin @id junto a una Organization global: la identidad del negocio está dividida.",
+        "entity": null,
+        "path": null,
+        "evidence": [
+          "$.publisher"
+        ],
+        "source": null,
+        "fix": "Asignar @id estable a la Organization global y referenciarla (seller/publisher/author).",
+        "scope": null,
+        "priority": "P3"
+      },
+      {
+        "rule": "B100",
+        "level": "B",
+        "severity": "warning",
+        "message": "Se espera una entidad del vocabulario, no texto sin tipo.",
+        "entity": "1:$",
+        "path": "author",
+        "evidence": null,
+        "source": "https://schema.org/version/latest/schemaorg-current-https.jsonld",
+        "fix": null,
+        "scope": null,
+        "priority": "P2"
+      },
+      {
+        "rule": "SEO012",
+        "level": "D",
+        "severity": "recommendation",
+        "message": "Imagen sin atributo alt; revisar contexto/decoración.",
+        "entity": null,
+        "path": null,
+        "evidence": {
+          "src": "https://www.facebook.com/tr?id=393081466010695&ev=PageView&noscript=1"
+        },
+        "source": null,
+        "fix": null,
+        "scope": null,
+        "priority": "P3"
+      }
+    ],
+    "validator_severity_counts": {
+      "optional": 3,
+      "warning": 2,
+      "recommendation": 1
+    },
+    "source": {
+      "file": "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/live-batch08-20261113/raw-crawl-report.json",
+      "node_index": 4
+    },
+    "controller_interpretation": "BlogPosting author plain text warnings observed; not an HTTP/robots/canonical block and no Google inspection."
+  }
+]

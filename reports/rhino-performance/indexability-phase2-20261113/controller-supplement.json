@@ -1,0 +1,31 @@
+{
+  "id": "phase2.offline.safety",
+  "kind": "existing_engine_source_observation",
+  "subject": "Robots mandatory; correct rate units; missing-field preflight and schema limits",
+  "passed": true,
+  "sha256": "a16820c38ac46d9bba0d85eb4d1ff617cec7b5808ec268accfcd5b755c369f11",
+  "measurement_scope": "Offline exact source excerpts; no new tests, HTTP, account calls or code changes",
+  "source_excerpts": [
+    {
+      "file": "tools/ipanema/seo/crawler.py",
+      "sha256": "f6e5de5fd60c16eb3e464dd5b10111bf60eb9e4289dcc05f00503805f056415f",
+      "start": 135,
+      "end": 175,
+      "text": "        return robots_known and robot.can_fetch(AGENT, url)\n    try:\n        robots_url = urljoin(policy.home, 'robots.txt')\n        # Redirects de robots se validan sin reutilizar reglas de otro origen.\n        seen_robots = set()\n        for _ in range(policy.limits.max_redirects + 1):\n            if robots_url in seen_robots:\n                raise IpanemaError('Ciclo de redirección en robots.')\n            seen_robots.add(robots_url)\n            response = fetcher.get(robots_url, document=True)\n            if fetcher.stop_reason:\n                break\n            if response['status'] in (301, 302, 303, 307, 308):\n                if not response['headers'].get('location'):\n                    raise IpanemaError('Redirección sin Location.')\n                target = policy.check(urljoin(robots_url, response['headers'].get('location', '')), document=True)\n                if closed:\n                    if redirects_used >= policy.limits.max_redirects:\n                        raise IpanemaError('Presupuesto global de redirecciones agotado.')\n                    redirects_used += 1\n                    if on_event:\n                        on_event({'event': 'planned', 'url': target})\n                robots_url = target\n                continue\n            robots_text = response['body'].decode('utf-8', 'replace') if response['status'] == 200 else '' if response['status'] in (404, 410) else None\n            robots_known = robots_text is not None\n            if robots_known:\n                robot.parse(robots_text.splitlines())\n                robots_known = not robot.errors\n            result['robots'] = {'known': robots_known, 'status': response['status'], 'url': robots_url,\n                                'sha256': hashlib.sha256(response['body']).hexdigest(),\n                                'crawler_agent': AGENT, 'googlebot_is_separate': True,\n                                'parse_errors': robot.errors, 'parse_warnings': robot.warnings}\n            delay = robot.crawl_delay(AGENT) if robots_known else None\n            rate = robot.request_rate_interval(AGENT) if robots_known else 0\n            fetcher.interval = max(fetcher.interval, delay or 0, rate)\n            break\n        if not robots_known and not fetcher.stop_reason:\n            result['errors'].append({'operation': 'robots', 'reason': 'robots_unavailable_no_crawl'})\n            if closed:\n                fetcher.stop_reason = 'robots_unknown'"
+    },
+    {
+      "file": "tools/ipanema/seo/crawl_policy.py",
+      "sha256": "d30c444a60853ee482934515c2d628238cca26c5eb9dc364aa44542e5daaa4e9",
+      "start": 226,
+      "end": 252,
+      "text": "    def __init__(self, policy, *, allow_network=False, transport=None, clock=time.monotonic, sleep=time.sleep, on_event=None):\n        if not allow_network and transport is None:\n            raise IpanemaError('Red deshabilitada: se requiere --allow-network.')\n        if on_event is not None and not callable(on_event):\n            raise IpanemaError(\"Checkpoint callback inválido.\")\n        self.on_event = on_event\n        self.policy, self.transport = policy, transport or https_get\n        self.clock, self.sleep = clock, sleep\n        self.started, self.last = clock(), None\n        self.calls, self.stop_reason = 0, None\n        self.interval = 1 / policy.limits.requests_per_second\n        self.log = []\n\n    def get(self, url, *, document=False):\n        url = self.policy.check(url, document=document)\n        limits = self.policy.limits\n        if self.stop_reason:\n            raise IpanemaError('Run detenido; no se permiten nuevas solicitudes.')\n        if self.calls >= limits.max_requests:\n            self.stop_reason = 'request_budget'\n            raise IpanemaError('Presupuesto de solicitudes agotado.')\n        delay = max(0, self.interval - (self.clock() - self.last)) if self.last is not None else 0\n        if self.clock() - self.started + delay >= limits.max_seconds:\n            self.stop_reason = 'time_budget'\n            raise IpanemaError('Presupuesto de tiempo agotado.')\n        self.sleep(delay)\n        remaining = limits.max_seconds - (self.clock() - self.started)"
+    }
+  ],
+  "facts": [
+    "Existing crawl performs GET robots.txt before destinations; it is a mandatory safety guard, not an optimization to remove. Six nominal GET per five-target operation are justified by unchanged transport.",
+    "requests_per_second=.5 means interval >=2 seconds, possibly greater from crawl-delay/request-rate. Codex initial phrase interval0.5s is wrong; preserve original response and correct interpretation.",
+    "Prospective preflight checks actual missing-field evidence, source hashes, fresh scope, authorization and one-use marker. It must not require HTTP not_observed. It is documented, not a new implemented executor.",
+    "No saved artifact in this packet proves CURRENT remote/local template identity or Person/Organization author truth. Do not generate/apply diff.",
+    "GSC token unavailable; export instructions and four prepared account evidence targets are not executed."
+  ]
+}

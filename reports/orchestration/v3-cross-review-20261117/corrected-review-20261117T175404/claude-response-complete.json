@@ -1,0 +1,313 @@
+{
+  "candidate_sha256": "c240b16f37ec13a84db4e54f656f15beda7316642c2e078e8d94b906d7ed6085",
+  "reviewed_files": [
+    "tools/ipanema/orchestration/council.py",
+    "tools/ipanema/orchestration/code_review.py",
+    "tests/unit/test_code_review_v3.py"
+  ],
+  "decision": "changes_requested",
+  "challenges": {
+    "architecture": {
+      "status": "fail",
+      "evidence_refs": [
+        "code_review.py:evaluate (history merge, closure)",
+        "code_review.py:advance_objection",
+        "code_review.py:bind_receipt/principal_valid",
+        "adapters.py:agent_policy"
+      ],
+      "notes": "O1 largely resolved: PARTICIPANTS is gone and agent_policy() is the single participation source, with a policy fingerprint and a principal/capability/authorization split. The remaining gap is that capability_verified and principal are self-asserted fields inside an unkeyed self-hash binding (N4). O2 partially resolved: legacy rows are kept unmutated and bound by a separate v2 object. No existing QA producer can satisfy the QA coverage rule, and context hashing differs from council_runtime.binding (N1, N5). O3 partially resolved: explicit states and history exist. advance_objection is not consumed by evaluate, so there are two closure mechanisms (N2). The history contract has gaps: it is caller-supplied, and the cross-candidate path has no migration, so it is either bypassable or a dead end (N3). These are architectural contract gaps, not a bypass of production, since the gate stays inactive and all activation flags are false."
+    },
+    "duplication": {
+      "status": "fail",
+      "evidence_refs": [
+        "code_review.py:_hash vs council_runtime.py:binding participation_sha256",
+        "code_review.py:read_legacy_receipts -> council._ledger/_proven",
+        "tests: CrossReview.receipt/rebind vs FindingsResolution.add/review/principal"
+      ],
+      "notes": "The same field name, participation_sha256, is computed with two different canonical serializations (compact separators in code_review._hash; default separators in council_runtime.binding). That is semantic duplication with divergent output (N1). The bidirectional private coupling between council and code_review (O6) is unchanged (N7). The test file keeps two parallel fixture harnesses (N8). Reuse of validate_schema, safe_path and agent_policy is good."
+    },
+    "performance": {
+      "status": "pass",
+      "evidence_refs": [
+        "code_review.py:source_snapshot (64 files, 2MB each, 4MB total)",
+        "code_review.py:bind_receipt",
+        "code_review.py:checked_bindings"
+      ],
+      "notes": "Work remains bounded by explicit limits. The new reads are single-pass with an over-read guard. The per-receipt cost of bind_receipt and the repeated fingerprint in checked_bindings is a LOW concern (N8) at the stated caps, not a failure."
+    },
+    "regression": {
+      "status": "needs_evidence",
+      "evidence_refs": [
+        "council.py:review_code_candidate (additive optional params)",
+        "preserved_qa: 60 gate tests, not independently executed by me",
+        "council_runtime.py:binding, central_qa"
+      ],
+      "notes": "The council.py change is additive, with defaults that preserve the signature. V2 aggregate is untouched. I did not run the QA, and it covers only the gate file with synthetic fixtures. The regression risk is the mismatch between the new gate's contracts and the real producers: context hash (N1) and QA shape (N5). Neither is exercised by a test that uses a real producer's output."
+    },
+    "maintainability": {
+      "status": "fail",
+      "evidence_refs": [
+        "code_review.py:evaluate (~280-455, one function)",
+        "code_review.py: unused digest import",
+        "tests: two fixture harnesses",
+        "code_review.py:read_legacy_receipts"
+      ],
+      "notes": "evaluate grows to roughly 175 lines with history merge, supersession, closure and citation checks in one function. Supersession ids are stored inside the principal identity object, which mixes verdict lineage with transport identity. read_legacy_receipts calls _ledger(row, row['context']), so the context check is vacuous. The digest import is now unused. The synthetic policy fixture (members including antigravity) would fail the real agent_policy validation, because NAMES has no antigravity. The tests only pass because the function is mocked."
+    }
+  },
+  "objections": [
+    {
+      "id": "N1",
+      "severity": "MEDIUM",
+      "challenge": "duplication",
+      "sites": [
+        {
+          "file": "tools/ipanema/orchestration/code_review.py",
+          "function": "evaluate",
+          "start": 311,
+          "end": 312
+        },
+        {
+          "file": "tools/ipanema/orchestration/code_review.py",
+          "function": "_hash",
+          "start": 22,
+          "end": 24
+        },
+        {
+          "file": "tools/ipanema/orchestration/council_runtime.py",
+          "function": "binding",
+          "start": 26,
+          "end": 37
+        }
+      ],
+      "evidence_refs": [
+        "code_review.evaluate: context.get('participation_sha256') != _hash(policy)",
+        "code_review._hash uses json.dumps(sort_keys, ensure_ascii=False, separators=(',',':'))",
+        "council_runtime.binding: sha256(json.dumps(agent_policy(), sort_keys=True)) with default separators",
+        "tests compute participation_sha256 with code_review._hash on both sides"
+      ],
+      "claim": "The existing controller context (council_runtime.binding) and the new gate both define context.participation_sha256, but they hash the same policy with different serializations, so the values differ for the same policy. A context produced by the real binding() would always yield participation_policy_changed. binding() also does not emit permissions_sha256, which the gate requires. The tests build both sides with code_review._hash, so the mismatch is invisible. This is the same failure mode as the original O2: fixtures hide a real producer shape.",
+      "impact": "The optional gate cannot consume a real controller context, and a field with one name has two meanings. The first integration attempt will return needs_evidence with a misleading reason.",
+      "recommendation": "Use one shared canonical-hash helper for participation_sha256, or give the new field a distinct name. Document the full context shape the gate requires. Add a test that feeds the output of council_runtime.binding() (extended with permissions) into the gate.",
+      "resolution_condition": "A test uses real binding() output, or the two hashes are provably the same function, and the required context fields are documented in one place.",
+      "duplication_kind": "semantic"
+    },
+    {
+      "id": "N2",
+      "severity": "MEDIUM",
+      "challenge": "architecture",
+      "sites": [
+        {
+          "file": "tools/ipanema/orchestration/code_review.py",
+          "function": "advance_objection",
+          "start": 219,
+          "end": 277
+        },
+        {
+          "file": "tools/ipanema/orchestration/code_review.py",
+          "function": "evaluate",
+          "start": 429,
+          "end": 440
+        }
+      ],
+      "evidence_refs": [
+        "evaluate computes closed from `answers` (a bare list) plus any bound resolution receipt",
+        "advance_objection is not called anywhere in evaluate or council.py",
+        "evaluate never reads record state, events, or resolution_state resolved/refuted",
+        "answers carry no candidate_sha256 or author identity"
+      ],
+      "claim": "There are two independent closure paths. The advance_objection state machine (author_answered, review_pending, refuted/resolved) is not consumed by the gate. evaluate closes a finding with an unauthenticated `answers` entry plus a resolution receipt, and ignores the record, its event order and resolution_state. A resolution binding can close a finding without any author_answered, new_evidence or review_pending transition ever having been recorded. The answer is not bound to the candidate or to the author.",
+      "impact": "The state machine documented as the O3 resolution contract is not what enforces closure. Behaviour validated by the state-machine tests is not the behaviour that gates approval.",
+      "recommendation": "Make evaluate take objection records (or their derived state) as input and close only when the record is terminal with a valid confirmation. Alternatively, remove advance_objection and document the receipt-only closure. Bind answers to the candidate hash.",
+      "resolution_condition": "One closure mechanism is enforced by evaluate, with a test showing a resolution receipt without a prior author answer record does not close.",
+      "duplication_kind": "not_applicable"
+    },
+    {
+      "id": "N3",
+      "severity": "MEDIUM",
+      "challenge": "architecture",
+      "sites": [
+        {
+          "file": "tools/ipanema/orchestration/code_review.py",
+          "function": "evaluate",
+          "start": 345,
+          "end": 353
+        },
+        {
+          "file": "tools/ipanema/orchestration/code_review.py",
+          "function": "evaluate",
+          "start": 367,
+          "end": 400
+        }
+      ],
+      "evidence_refs": [
+        "review_history defaults to () and is caller-supplied; no completeness or chain check",
+        "prior_candidate_review_requires_migration is emitted but no function consumes or clears it",
+        "same-candidate history is merged only after the stale_review/unverified_reviewer `continue` paths",
+        "test_O3_different_candidate_does_not_erase_adverse_history asserts only the missing marker"
+      ],
+      "claim": "The adverse-history protection depends on the caller passing complete history. Omitting it, which is the default, erases the prior changes_requested. The cross-candidate path has no clearing contract, so with complete history a corrected candidate can never leave needs_evidence. Same-candidate history of a reviewer is merged only after earlier `continue` branches. A reviewer whose envelope is stale, unverified or absent leaves a prior BLOCKER or HIGH out of blockers and changes, and the state degrades to needs_evidence.",
+      "impact": "The gate is either bypassable by omitting history or a dead end for any corrected diff after an adverse review. A BLOCKER can be reported as only needs_evidence.",
+      "recommendation": "Define a controller-store loader that returns the complete history for the objection lineage, and fail closed if it is not provided. Specify the migration receipt that lets a new candidate carry forward a resolved prior finding. Evaluate history for every expected reviewer before the envelope `continue` branches.",
+      "resolution_condition": "A test shows that omitted history is rejected (or comes from a store handle), that a defined migration clears a prior-candidate finding, and that a prior BLOCKER yields blocked even when the current envelope is unverified.",
+      "duplication_kind": "not_applicable"
+    },
+    {
+      "id": "N4",
+      "severity": "MEDIUM",
+      "challenge": "architecture",
+      "sites": [
+        {
+          "file": "tools/ipanema/orchestration/code_review.py",
+          "function": "bind_receipt",
+          "start": 149,
+          "end": 196
+        },
+        {
+          "file": "tools/ipanema/orchestration/code_review.py",
+          "function": "principal_valid",
+          "start": 140,
+          "end": 146
+        },
+        {
+          "file": "tools/ipanema/orchestration/code_review.py",
+          "function": "checked_bindings",
+          "start": 199,
+          "end": 217
+        }
+      ],
+      "evidence_refs": [
+        "bind_receipt accepts any principal dict and stores a copy",
+        "principal_valid checks string equality only, including capability_verified == 'code_review_readonly'",
+        "binding_sha256 is an unkeyed hash of the payload",
+        "supersedes_review_ids is read from principal and gates approval"
+      ],
+      "claim": "bind_receipt is a public function that mints a binding for any principal dict the caller supplies. The binding hash is unkeyed and the legacy row hash is recomputable, so whoever can call it can mint a row and a binding that make an arbitrary reviewer, capability and supersession list appear verified. The docstrings state that the controller supplies these, but nothing in evaluate or checked_bindings distinguishes store-loaded bindings from caller-built ones. The trust boundary is therefore the same as before the change, while the result name suggests stronger proof. The approval-relevant supersedes list lives inside the identity object.",
+      "impact": "The O1 identity and capability separation is a consistency check, not verification. Approved states depend on a boundary the code does not enforce or label.",
+      "recommendation": "State the boundary in the result, for example a trust_basis field naming the unauthenticated inputs. Better, accept only a controller-store handle, or add a keyed MAC held by the controller. Move supersedes_review_ids out of principal into a separate binding field.",
+      "resolution_condition": "The result or API makes the trust basis explicit, and supersession lineage is not part of the identity object.",
+      "duplication_kind": "not_applicable"
+    },
+    {
+      "id": "N5",
+      "severity": "LOW",
+      "challenge": "regression",
+      "sites": [
+        {
+          "file": "tools/ipanema/orchestration/code_review.py",
+          "function": "bind_receipt",
+          "start": 172,
+          "end": 178
+        },
+        {
+          "file": "tools/ipanema/orchestration/council_runtime.py",
+          "function": "deliberate",
+          "start": 132,
+          "end": 138
+        }
+      ],
+      "evidence_refs": [
+        "bind_receipt requires qa_report.checked_source_files or verification_state.workspace to equal context.files",
+        "engine.central_qa and the baseline row carry neither field",
+        "verification_state.theme is not read",
+        "code_review.evaluate uses enabled = agent_policy()['members']; adapters allows multi-agent with commandcode",
+        "test O1 covers only the dual policy and a synthetic claude/codex/antigravity policy"
+      ],
+      "claim": "No existing QA producer (central_qa and the qa:baseline row) emits the coverage field the gate requires, so required_qa cannot be satisfied until a new QA producer exists. The theme scope key is ignored. The author defence says two reviewers need Antigravity. The real registry already allows a multi-agent policy with commandcode, which would give two non-author reviewers for a codex author. That path is untested. The synthetic policy with antigravity would fail the real agent_policy validation, because NAMES lacks it.",
+      "impact": "The integration plan is under-specified. The test evidence for O1/O2 does not exercise the paths the real system can reach.",
+      "recommendation": "Specify the QA producer change needed, or state in the docstring that QA must be re-run with coverage. Add a test with the real multi-agent policy shape (claude, codex, commandcode).",
+      "resolution_condition": "A QA producer contract is documented and a real-policy multi-agent test exists.",
+      "duplication_kind": "not_applicable"
+    },
+    {
+      "id": "N6",
+      "severity": "LOW",
+      "challenge": "performance",
+      "sites": [
+        {
+          "file": "tools/ipanema/orchestration/code_review.py",
+          "function": "bind_receipt",
+          "start": 164,
+          "end": 182
+        },
+        {
+          "file": "tools/ipanema/orchestration/code_review.py",
+          "function": "checked_bindings",
+          "start": 199,
+          "end": 217
+        }
+      ],
+      "evidence_refs": [
+        "bind_receipt calls source_snapshot (reads up to 4MB) per receipt",
+        "bind_receipt calls agent_policy() (reads models.json) per principal receipt",
+        "checked_bindings recomputes fingerprint(candidate) and _hash(context) per binding"
+      ],
+      "claim": "Binding N receipts re-reads all context files and the policy file N times. checked_bindings recomputes the candidate and context hashes per binding. Both are bounded by the 1000-receipt cap but wasteful.",
+      "impact": "Up to about 4 GB of reads in a pathological bind loop. Negligible for the typical case.",
+      "recommendation": "Accept a precomputed source snapshot and identity, and compute the fingerprint and context hash once in checked_bindings.",
+      "resolution_condition": "The per-binding recomputation is hoisted, or the limits are documented as acceptable.",
+      "duplication_kind": "not_applicable"
+    },
+    {
+      "id": "N7",
+      "severity": "LOW",
+      "challenge": "duplication",
+      "sites": [
+        {
+          "file": "tools/ipanema/orchestration/code_review.py",
+          "function": "read_legacy_receipts",
+          "start": 124,
+          "end": 137
+        },
+        {
+          "file": "tools/ipanema/orchestration/council.py",
+          "function": "review_code_candidate",
+          "start": 656,
+          "end": 664
+        }
+      ],
+      "evidence_refs": [
+        "read_legacy_receipts imports council._ledger and council._proven (private)",
+        "review_code_candidate lazy-imports code_review.evaluate",
+        "read_legacy_receipts calls _ledger([row], row['context']), comparing each row's context with itself"
+      ],
+      "claim": "O6 is not addressed. The bidirectional lazy coupling to private council helpers remains. The context comparison inside _ledger is vacuous when called with the row's own context, so the legacy validation checks only format.",
+      "impact": "A refactor of council private helpers silently breaks the gate. The vacuous check can mislead a reader into thinking context is validated at read time. It is only validated at bind time.",
+      "recommendation": "Expose a small public ledger helper used by both modules, or let callers import code_review directly. Note in the docstring that context is bound by bind_receipt, not read_legacy_receipts.",
+      "resolution_condition": "No cyclic private import, or the coupling is explicit and the docstring corrected.",
+      "duplication_kind": "semantic"
+    },
+    {
+      "id": "N8",
+      "severity": "LOW",
+      "challenge": "maintainability",
+      "sites": [
+        {
+          "file": "tools/ipanema/orchestration/code_review.py",
+          "function": "evaluate",
+          "start": 280,
+          "end": 455
+        },
+        {
+          "file": "tests/unit/test_code_review_v3.py",
+          "function": "FindingsResolution.setUp",
+          "start": 228,
+          "end": 300
+        }
+      ],
+      "evidence_refs": [
+        "evaluate now holds authorship, receipts, history merge, supersession, citations and closure in one function",
+        "digest is imported and no longer used in code_review.py",
+        "CrossReview.receipt/rebind and FindingsResolution.add/review/principal build the same receipts twice",
+        "test_O1_actual_dual_policy reads the live models.json at setUp"
+      ],
+      "claim": "evaluate is a single function of about 175 lines. There is an unused import, and two independent fixture harnesses build receipts and bindings with divergent conventions (one rebinds on every evaluate, the other binds once). The O1 tests depend on the live registry staying in dual mode.",
+      "impact": "Harder review and test drift. A policy edit in models.json breaks unrelated tests.",
+      "recommendation": "Split evaluate into per-reviewer and per-objection helpers. Remove the unused import. Share one fixture builder. Pin the 'actual policy' tests to a fixture copy.",
+      "resolution_condition": "Unused import removed, one fixture builder, and the tests do not read the live models.json.",
+      "duplication_kind": "semantic"
+    }
+  ],
+  "summary": "Changes requested. I did not run the tests; the 60-test result is supplied and not independently verified. Status of the earlier objections. O1 is largely resolved: PARTICIPANTS is gone, agent_policy() is the single registry, and a policy change invalidates the context. Two non-author reviewers remain required, and Antigravity is not enabled. The identity, capability and authorization checks are self-asserted in an unkeyed binding (N4). O2 is partially resolved: legacy rows are preserved and bound separately. No real QA producer can satisfy the coverage rule (N5), and participation_sha256 is computed differently from council_runtime.binding, which the fixtures hide (N1). O3 is partially resolved: explicit states and history exist. The state machine is not what closes findings in evaluate (N2). History is caller-supplied, and the cross-candidate path has no clearing contract, so the gate is either bypassable or a dead end. A prior BLOCKER can also degrade to needs_evidence (N3). O6 is unchanged (N7). No finding shows a production or activation bypass: the gate is not integrated, the activation flags stay false, and council.py is additive. The remaining issues are contract gaps in the optional gate. Favourable review here is not an integration authorization.",
+  "changes": []
+}

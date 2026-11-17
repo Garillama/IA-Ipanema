@@ -1,0 +1,40 @@
+{
+  "requested_agent": "claude",
+  "effective_agent": "claude",
+  "author": "codex",
+  "input_sha256": "1f0de2c1e33d01863c1055266bd67362f714b7069b2583d1f2197b762064a188",
+  "input_bytes": 396414,
+  "patch_sha256": "c240b16f37ec13a84db4e54f656f15beda7316642c2e078e8d94b906d7ed6085",
+  "literal_input": true,
+  "wrapper_used": false,
+  "attempts": 1,
+  "retries": 0,
+  "fallback": false,
+  "status": "needs_evidence",
+  "limits": {
+    "timeout": 240,
+    "idle_timeout": 90,
+    "startup_timeout": 30,
+    "first_response_timeout": 120
+  },
+  "model": {
+    "model": "claude-sonnet-5-5",
+    "effort": "medium",
+    "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+    "verified_at": "2026-11-08"
+  },
+  "isolation": {
+    "available": true,
+    "reason": "namespace_probe_passed",
+    "exit_code": 0,
+    "fallback": false
+  },
+  "tools": [],
+  "MCP": false,
+  "subagents": false,
+  "production_access": false,
+  "snapshot_files": [
+    "packet.json"
+  ],
+  "candidate_mutation_allowed": false
+}

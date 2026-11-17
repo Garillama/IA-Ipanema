@@ -1,0 +1,50 @@
+{
+  "kind": "controller-integrated-closed-pilot-checks",
+  "project": "rhino-performance",
+  "actual_pilot_manifest_sha256": "3b14fcb031ae57ab43ef247ff087c6d8df0b0c400ca12ac3694edfc654a38bb6",
+  "actual_manifest_validated_without_requests": [
+    "https://rhino-performance.com/productos/pistola-de-masaje-gun-pro/",
+    "https://rhino-performance.com/productos/tina-de-hielo-tub-air/",
+    "https://rhino-performance.com/blog/posts/la-presoterapia-como-transformador-de-tu-salud-mental-relajacion-y-recuperacion-127cdc829590/",
+    "https://rhino-performance.com/blog/posts/el-fro-no-es-un-castigo-es-una-herramienta-cbe9a25855f8/",
+    "https://rhino-performance.com/blog/posts/faja-de-compresion-lumbar-el-soporte-que-tu-espalda-agradecera-047c381cf3ac/"
+  ],
+  "fixture_only": true,
+  "normal_fixture_requests": [
+    "https://example.invalid/robots.txt",
+    "https://example.invalid/selected-0",
+    "https://example.invalid/selected-1",
+    "https://example.invalid/selected-2",
+    "https://example.invalid/selected-3",
+    "https://example.invalid/selected-4"
+  ],
+  "normal_fixture_count": 6,
+  "extra_home_sitemap_or_link_requests": false,
+  "effective_limits": {
+    "max_urls": 8,
+    "max_depth": 0,
+    "max_requests": 12,
+    "requests_per_second": 0.5,
+    "max_seconds": 120,
+    "timeout": 20,
+    "max_bytes": 2000000,
+    "max_sitemaps": 0,
+    "max_sitemap_entries": 2000,
+    "max_variants_per_path": 4,
+    "max_redirects": 3,
+    "max_discovered_urls": 2000,
+    "max_edges": 10000,
+    "concurrency": 1
+  },
+  "virtual_clock_seconds": 10.0,
+  "requests_after_simulated_error": [
+    "https://example.invalid/robots.txt",
+    "https://example.invalid/selected-0"
+  ],
+  "stop_reason_on_error": "closed_scope_error",
+  "checkpoint_before": "before-fixture-checkpoint.json",
+  "checkpoint_completed": "normal-fixture-checkpoint.json",
+  "checkpoint_unconfirmed": "failed-fixture-checkpoint.json",
+  "Rhino_HTTP_requests": 0,
+  "Google_HTTP_requests": 0
+}

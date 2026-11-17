@@ -1,0 +1,44 @@
+{
+  "matrix_csv": "reports/rhino-performance/indexability-20261112/site-continuation/url-matrix.csv",
+  "matrix_json": "reports/rhino-performance/indexability-20261112/site-continuation/url-matrix.json",
+  "before_hashes": {
+    "csv": "2105c151949dca6ba1e219f5d4810ef6f9b032f1a3032305a4a4cbc165d567b3",
+    "json": "72b8f477979600c1b75be50b4dffeebaf94e149b486e69d9a2fbc5d783819f15"
+  },
+  "after_hashes": {
+    "csv": "06fb8da2c66b16d735fe63b6405737b970c0664901803b4ddf85e4699faa96ee",
+    "json": "b814e654fefdab0a473cd4cdca64efa46f4de54d59b1944a87ed9f13b7e517c2"
+  },
+  "backup_csv": "reports/runs/rhino-performance/20261113T080007-authorized-five-url-batch13/url-matrix-before.csv",
+  "backup_json": "reports/runs/rhino-performance/20261113T080007-authorized-five-url-batch13/url-matrix-before.json",
+  "exactly_five_rows_updated": true,
+  "updated_URLs": [
+    "https://rhino-performance.com/blog/posts/incorporando-la-presoterapia-a-tu-rutina-8f14d49b1a4f/",
+    "https://rhino-performance.com/blog/posts/presoterapia-el-impulso-de-los-campeones-para-recuperacion-y-rendimiento-optimos-86fee398bc70/",
+    "https://rhino-performance.com/blog/posts/impulso-esencial-para-escaladores-y-hikers-con-nuestras-botas-de-presoterapia-39d899588656/",
+    "https://rhino-performance.com/blog/posts/presoterapia-en-casa-que-debes-considerar-antes-de-comprar-un-equipo-360d9486bed8/",
+    "https://rhino-performance.com/blog/posts/presoterapia-por-que-destaca-entre-los-tratamientos-25db433b12c4/"
+  ],
+  "Google_fields_unchanged": true,
+  "other_120_rows_unchanged": true,
+  "before": {
+    "total_urls": 125,
+    "HTML_total": 124,
+    "HTML_with_individual_HTTP": 109,
+    "pending_individual_HTTP": 15,
+    "pending_by_type": {
+      "article": 15
+    }
+  },
+  "after": {
+    "total_urls": 125,
+    "HTML_total": 124,
+    "HTML_with_individual_HTTP": 114,
+    "pending_individual_HTTP": 10,
+    "pending_by_type": {
+      "article": 10
+    }
+  },
+  "original_pending75_and_pending70_files_preserved": true,
+  "next_pending_list": "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/live-batch13-20261113/pending-10.csv"
+}

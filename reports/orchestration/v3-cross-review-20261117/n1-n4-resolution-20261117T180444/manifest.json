@@ -1,0 +1,35 @@
+{
+  "previous_patch_sha256": "c240b16f37ec13a84db4e54f656f15beda7316642c2e078e8d94b906d7ed6085",
+  "candidate_patch_sha256": "fb292ff7f11c2ccaed5e90a2325c1703f23ece67bdc1b2a6f96ad3c6d49b8e4f",
+  "incremental_patch_sha256": "dc0e6d56aa4ed9eb84486cc93a1afaa9ea2a3242f0c779f09a865e363c62a9c3",
+  "isolated_candidate_root": "/home/alanrichard/Escritorio/IA inversa/.local/v3-n1-n4/20261117T180444/candidate",
+  "files": [
+    {
+      "path": "tools/ipanema/orchestration/council.py",
+      "operation": "modify",
+      "operational_before_sha256": "4ec261a0d84fbdc12d5abf85eab489d21cf85f30af57eac9769c722d17541261",
+      "previous_candidate_sha256": "f2e7ac875515f9d625338172eec8181aea2d9755ff9813bbf15ee532f605a1b6",
+      "candidate_after_sha256": "3bbe36122abe1966fa0fc89eb2a23576284797c4afb2a1b4c071e83cb4cfad7a",
+      "previous_candidate_backup": "/home/alanrichard/Escritorio/IA inversa/.local/v3-n1-n4/20261117T180444/backups/previous-candidate/tools/ipanema/orchestration/council.py",
+      "operational_backup": "/home/alanrichard/Escritorio/IA inversa/.local/v3-n1-n4/20261117T180444/backups/operational-before/tools/ipanema/orchestration/council.py"
+    },
+    {
+      "path": "tools/ipanema/orchestration/code_review.py",
+      "operation": "add",
+      "operational_before_sha256": null,
+      "previous_candidate_sha256": "ef2340db1abc358ee569439968df574f2646cfbf31ea7e545e37c64ee8f597f0",
+      "candidate_after_sha256": "e8ac3a263a2b94922f1c0d5844517913e714b5234c5d1f30a7c11a22224e2cba",
+      "previous_candidate_backup": "/home/alanrichard/Escritorio/IA inversa/.local/v3-n1-n4/20261117T180444/backups/previous-candidate/tools/ipanema/orchestration/code_review.py",
+      "operational_backup": null
+    },
+    {
+      "path": "tests/unit/test_code_review_v3.py",
+      "operation": "add",
+      "operational_before_sha256": null,
+      "previous_candidate_sha256": "b45b23e2e19db2408f5bd90282fa205a34b6820389e1f490c4e609e13ab7bd09",
+      "candidate_after_sha256": "39763d930ac76248c9800456793a26b16f9053cf1071b1eec845a1650cd97b9d",
+      "previous_candidate_backup": "/home/alanrichard/Escritorio/IA inversa/.local/v3-n1-n4/20261117T180444/backups/previous-candidate/tests/unit/test_code_review_v3.py",
+      "operational_backup": null
+    }
+  ]
+}

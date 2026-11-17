@@ -1,0 +1,82 @@
+[
+  {
+    "id": "SEO-CLOSE-01",
+    "priority": "P1",
+    "action": "Recuperar primero los campos ausentes de las capturas guardadas de20 artículos y, si no existen, preparar una comprobación acotada con autorización nueva. No repetir sus HTTP solo por rutina.",
+    "evidence": "evidence-gaps.json + historical-20-source-shape.json",
+    "cause": "La evidencia HTTP previa del postcheck de BreadcrumbList no cubre meta/X-Robots/contenido en la matriz. No se demuestra bloqueo.",
+    "risk": "Bajo para análisis offline; toda nueva red requiere alcance aprobado.",
+    "status": "needs_evidence",
+    "change_authorized": false
+  },
+  {
+    "id": "SEO-CLOSE-02",
+    "priority": "P1",
+    "action": "Contrastar cobertura con Google al recuperar acceso autorizado: priorizar /pistolas-de-masaje/, /terapia-fria/, /compresion-frio-y-calor/ y /productos/page/2/. Exportar informe oficial de indexación si se necesita cobertura global.",
+    "evidence": "google-historical-summary.json + coverage-closure/README.md",
+    "cause": "Solo15 inspecciones históricas;109HTML sin inspección conservada.",
+    "risk": "Cuotas/privacidad; no repetir las15 sin motivo.",
+    "status": "requires_authorized_access_and_scope",
+    "change_authorized": false
+  },
+  {
+    "id": "SEO-CLOSE-03",
+    "priority": "P1",
+    "action": "Conciliar categorías públicas/subcategorías con inventario administrativo autorizado o plantilla manual; no crear categorías ni cambiar menús.",
+    "evidence": "coverage-closure/admin-category-reconciliation.csv",
+    "cause": "Cinco categorías públicas no demuestran totalidad del árbol administrativo.",
+    "risk": "Bajo si lectura autorizada; no introducir privadas/ocultas como candidatas.",
+    "status": "needs_administrative_evidence",
+    "change_authorized": false
+  },
+  {
+    "id": "SEO-CLOSE-04",
+    "priority": "P2",
+    "action": "Resolver consulta preparada a Tiendanube sobre canonical nativo de blog2..8 antes de proponer cambios.",
+    "evidence": "three-issues/operations/consulta-tiendanube.md + blog-continuity.json",
+    "cause": "Contenido distinto con canonical hacia /blog/; no hay causalidad demostrada con exclusión de artículos.",
+    "risk": "Alto si se altera head-tags de forma global o se duplica canonical.",
+    "status": "pending_official_supported_mechanism",
+    "change_authorized": false
+  },
+  {
+    "id": "SEO-CLOSE-05",
+    "priority": "P2",
+    "action": "Revisar el emisor real de author con procedencia editorial; elegir Person/Organization solo con datos verificados y revisar un diff independiente antes de implementar.",
+    "evidence": "V4-raw-warning-error-findings.json;64 artículos con B030/B100",
+    "cause": "Representación escalar observada; no confirma autoría ni rechazo Google.",
+    "risk": "Medio: inventar identidad o duplicar JSON-LD.",
+    "status": "needs_contextual_review",
+    "change_authorized": false
+  },
+  {
+    "id": "SEO-CLOSE-06",
+    "priority": "P2",
+    "action": "Revisar D010/D050 en su contexto secundario y D011/D070 con datos guardados; no corregir todos los PDP por un comparador global.",
+    "evidence": "V4-raw-warning-error-findings.json + batch-02-preparation/classification.json",
+    "cause": "61 grupos de avisos secundarios en11PDP; comparación con canonical/H1 contenedor puede ser falso positivo; codificación/imágenes sin resolver.",
+    "risk": "Medio/alto si se borran entidades o se inventan datos comerciales.",
+    "status": "needs_evidence",
+    "change_authorized": false
+  },
+  {
+    "id": "SEO-CLOSE-07",
+    "priority": "P1",
+    "action": "Revisar vías de descubrimiento de Contacto con evidencia existente; documentar alternativas sin cambiar menús ni añadir enlaces automáticamente.",
+    "evidence": "inventory-124.csv Contacto;sin camino en corpus y GSC descubierta sin indexar",
+    "cause": "No hay ruta observada en el grafo parcial; no es orfandad global demostrada ni causa cierta de exclusión.",
+    "risk": "Bajo para análisis, visible si cambia navegación.",
+    "status": "needs_evidence_no_menu_changes",
+    "change_authorized": false
+  },
+  {
+    "id": "SEO-CLOSE-08",
+    "priority": "P3",
+    "action": "Mantener Sobre Rhino pendiente de contenido, sin promoción ni solicitud de indexación; no editar hasta autorización editorial.",
+    "evidence": "inventory-124.csv Sobre Rhino y decisión del propietario",
+    "cause": "Contenido incompleto declarado por propietario.",
+    "risk": "Promocionar una página sin contenido útil.",
+    "status": "deferred_by_owner",
+    "change_authorized": false
+  }
+]

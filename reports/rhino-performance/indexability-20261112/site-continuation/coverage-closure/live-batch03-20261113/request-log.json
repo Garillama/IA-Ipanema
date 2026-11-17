@@ -1,0 +1,45 @@
+{
+  "requests": [
+    {
+      "url": "https://rhino-performance.com/robots.txt",
+      "status": 200,
+      "bytes": 1742,
+      "method": "GET"
+    },
+    {
+      "url": "https://rhino-performance.com/productos/tobillera-frio-y-calor/",
+      "status": 200,
+      "bytes": 726933,
+      "method": "GET"
+    },
+    {
+      "url": "https://rhino-performance.com/productos/hombrera-frio-y-calor/",
+      "status": 200,
+      "bytes": 760631,
+      "method": "GET"
+    },
+    {
+      "url": "https://rhino-performance.com/blog/posts/errores-comunes-al-usar-los-brazos-de-presoterapia-c80d6e476fb3/",
+      "status": 200,
+      "bytes": 243939,
+      "method": "GET"
+    },
+    {
+      "url": "https://rhino-performance.com/blog/posts/lesiones-por-estres-sintomas-y-como-tratarlas-d080cbc403b8/",
+      "status": 200,
+      "bytes": 246642,
+      "method": "GET"
+    },
+    {
+      "url": "https://rhino-performance.com/blog/posts/claves-para-potenciar-los-resultados-del-ejercicio-a823a76cbadd/",
+      "status": 200,
+      "bytes": 252248,
+      "method": "GET"
+    }
+  ],
+  "started": 6,
+  "completed": 6,
+  "unconfirmed": 0,
+  "redirect_hops": 0,
+  "source": "live guarded GET; no retries"
+}

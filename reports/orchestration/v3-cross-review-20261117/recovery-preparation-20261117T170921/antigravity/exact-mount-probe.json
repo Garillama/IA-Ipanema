@@ -1,0 +1,12 @@
+{
+  "exit_code": 0,
+  "checks": {
+    "host_marker_inaccessible": true,
+    "workspace_write_denied": true,
+    "host_home_not_mounted": true,
+    "net_namespace_isolated": true,
+    "network_test_connection_denied": true
+  },
+  "provider_executed": false,
+  "scope": "Proposed bwrap argv and mounts exercised with synthetic Python instead of Antigravity; no native tool or auth claim"
+}

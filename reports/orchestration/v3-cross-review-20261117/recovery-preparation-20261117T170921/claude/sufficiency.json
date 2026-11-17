@@ -1,0 +1,34 @@
+{
+  "state": "prepared_for_selective_source_review_not_approval",
+  "patch_verified": true,
+  "candidate_files_complete": [
+    "candidate/tools/ipanema/orchestration/council.py",
+    "candidate/tools/ipanema/orchestration/code_review.py",
+    "candidate/tests/unit/test_code_review_v3.py"
+  ],
+  "original_input_bytes": 677905,
+  "prepared_packet_bytes": 243861,
+  "prepared_packet_sha256": "790b3dcd3e3f40612ff8ddebb45445b23420d13b3864bd28f25b3a35ae1b2060",
+  "original_prompt_reconstructed_exactly": true,
+  "source_locations_preserved": true,
+  "critical_direct_imports_covered": true,
+  "global_dependency_closure_certified": false,
+  "expansion_rule": "No broad filesystem tools. If caller/supervisor/sandbox dependency is material, stop conclusion and request exact extra definition from controller. Preparation does not prove reviewer capability or completeness for every possible question.",
+  "timeouts_unchanged": {
+    "first_response": 120,
+    "absolute": 240
+  },
+  "provider_calls": 0,
+  "related_complete_modules": [
+    "tools/ipanema/orchestration/adapters.py",
+    "tools/ipanema/orchestration/planner.py",
+    "tools/ipanema/core.py",
+    "tools/ipanema/orchestration/council_runtime.py",
+    "tools/ipanema/orchestration/engine.py",
+    "tools/ipanema/orchestration/isolation.py",
+    "tools/ipanema/orchestration/recovery.py",
+    "tests/unit/test_council_receipts.py"
+  ],
+  "reduction_fraction_against_old_input": 0.6402726045684868,
+  "expected_transport": "Literal packet bytes on stdin using existing isolated transport; avoid rewrapping through role-review snapshot expansion. No execution instruction approved yet."
+}

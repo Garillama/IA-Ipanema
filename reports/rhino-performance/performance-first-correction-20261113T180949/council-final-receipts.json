@@ -1,0 +1,799 @@
+{
+  "scope": "Independent proposals, one contrast, one defense; Claude final independent review of exact diff; no provider substitution",
+  "reviews": [
+    {
+      "agent": "claude",
+      "phase": "proposal",
+      "path": "reports/runs/rhino-performance/20261113T180949-home-performance-authorized-e593dae0/claude-proposal.json",
+      "sha256": "2683f70f3b3579fedf81b3ff983875dc9e4f09bddfc070c560f6205a8b7fe91d",
+      "model": {
+        "model": "claude-sonnet-5-5",
+        "effort": "medium",
+        "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+        "verified_at": "2026-11-08"
+      },
+      "contract_valid": true,
+      "decision": "proposed",
+      "response": {
+        "decision": "proposed",
+        "summary": "Se propone como candidato mínimo, sin aplicar, una compuerta de visibilidad con IntersectionObserver y rootMargin en google-reviews.tpl. Conserva el setupMore de dos pasos, el fetch inmediato de la API, el HTML y el CSS, con respaldo síncrono si IO no existe. Se compara contra fusionar llamadas y contra no cambiar. El ahorro causal es desconocido; exige reproducción offline antes de aprobar.",
+        "changes": [],
+        "evidence": [
+          "rhino.current.trace-preflight (recibo del controlador, no QA propio): dos trazas CDP de la Home, una por dispositivo, sin escrituras. setupMore asocia 258 ms de task-tail en móvil y 82 ms en escritorio, con las reseñas en 2413 px y 2892 px.",
+          "google-reviews.tpl (fuente local, sha 75a48760...): setupMore y updateArrows se llaman síncronos en init, render, load y resize; setupMore ya hace lecturas y luego escrituras. El fetch de la API es inmediato.",
+          "El TPL remoto no está confirmado igual al local (GET pendiente).",
+          "No hay propuesta de otro agente; todos los criterios quedan unknown salvo recibo del controlador."
+        ],
+        "analysis": {
+          "problem": "En la Home, el componente google-reviews.tpl (setupMore y updateArrows en el script de la sección) lee geometría (scrollHeight/clientHeight, scrollWidth/clientWidth) de forma síncrona en init, render, load y resize, aunque la sección está muy por debajo del primer viewport (top ≈2413 px móvil, ≈2892 px escritorio, 10 tarjetas). En el perfil móvil setupMore asocia 282 ms de self y 258 ms de task-tail; en escritorio 121 ms y 82 ms. Es CPU asociada, no ahorro causal.",
+          "cause": "Hipótesis, no demostrada: la medición geométrica corre aunque la sección no esté visible, y se repite 3–4 veces al cargar. Puede forzar layout global (síncrono) mientras otros scripts escriben el DOM. El diagnóstico de la fuente apoya la presencia de llamadas redundantes, no su peso causal. Hace falta una reproducción offline controlada. El CPU de GoogleTags/Meta/TikTok es mayor que el de este componente y queda fuera de alcance.",
+          "recommendation": "claude-visibility-gate-geometry",
+          "evidence_refs": [
+            "rhino.current.trace-preflight"
+          ],
+          "hypotheses": [
+            "H1: la compuerta de visibilidad elimina las lecturas de geometría iniciales fuera de pantalla y reduce el task-tail asociado; el ahorro real es desconocido.",
+            "H2: la fusión simple (un solo pase por rAF) elimina duplicados, pero conserva la primera lectura que fuerza layout, así que ahorra menos que H1.",
+            "H3: parte del self-time de setupMore es layout que el navegador haría igual en el render normal, por lo que el ahorro neto puede ser menor que 258 ms.",
+            "H4: la trampa principal es medir antes de que existan fuentes o ancho final; hay que marcar la sección como sucia en resize, fonts.ready, render de la API y load."
+          ],
+          "native_components": [
+            "google-reviews.tpl (sección, script setupMore/updateArrows)",
+            "IntersectionObserver nativo del navegador con respaldo síncrono",
+            "Snapshot servidor de reseñas y GET de la API existente (sin cambios)",
+            "setupMore de dos pasos ya agrupado (se conserva)"
+          ],
+          "risks": [
+            "El archivo local puede no coincidir con el remoto: la igualdad del TPL remoto no está confirmada (GET pendiente).",
+            "El ahorro causal es desconocido: una traza por dispositivo, con overhead de Profiler y Coverage. No es INP ni equivale a una mejora de puntaje.",
+            "Una medición diferida con fuentes o resize tardíos puede dejar mal el botón Leer más o las flechas: se mitiga con la bandera sucia y fonts.ready.",
+            "Teclado o toque antes del callback de IO: se mitiga con focusin/pointerdown forzando medición inmediata.",
+            "El CPU de GoogleTags/Meta/TikTok sigue dominando en móvil, así que el efecto global puede ser pequeño.",
+            "Sin validación nativa de Tiendanube (POST no permitido): no se puede afirmar certificación de render.",
+            "La línea base de 10 corridas de Lighthouse sigue en curso: no se inventan resultados ni se afirma 90+."
+          ],
+          "tests": [
+            "Reproducción offline controlada con red bloqueada: comparar llamadas de geometría y de layout forzado antes y después, con la raíz fuera de pantalla (causal, no por puntaje).",
+            "Equivalencia con el setupMore de dos pasos actual en seis anchos, con condiciones de fuente y recursos explícitos, y capturas comparadas.",
+            "Casos de borde: refresco de API antes de la visibilidad, teclado temprano, resize oculto, fuentes tardías, reseñas vacías o ausentes, instancias múltiples, tarjeta ya abierta, IO no soportado, limpieza del editor.",
+            "Perfil móvil y de escritorio idénticos antes y después, con varias muestras, para task-tail de setupMore. Registrar el límite de atribución; sin INP a partir de TBT.",
+            "Validación nativa de Tiendanube pendiente de autorización (POST); la línea base de 10 corridas de Lighthouse sigue en curso."
+          ],
+          "files": [
+            "reports/runs/rhino-performance/20261113T180949-home-performance-authorized-e593dae0/source/sections/google-reviews.tpl"
+          ],
+          "impacts": {
+            "seo": "Sin cambios previstos: el HTML del snapshot del servidor, los enlaces y el contenido semántico se conservan. La indexación no se evalúa.",
+            "performance": "Hipótesis: menos lecturas de geometría y layout forzado al cargar en móvil. El ahorro es desconocido; solo hay correlación con 258 ms de task-tail asociado y no hay medición de INP ni de LCP causal.",
+            "responsive": "Debe verse igual en seis anchos. El riesgo está en una medición tardía tras resize o carga de fuentes.",
+            "accessibility": "Los botones Leer más y las flechas mantienen aria-expanded, aria-controls y foco; la ruta de teclado temprano se prueba explícitamente.",
+            "uiux": "Sin cambio visual esperado; los datos de la API se refrescan de inmediato como ahora.",
+            "commerce": "Sin impacto en precio, stock, carrito o checkout. No se tocan tags de marketing ni eventos."
+          },
+          "confidence": 0.4,
+          "alternatives": [
+            {
+              "id": "claude-visibility-gate-geometry",
+              "description": "Candidato mínimo en google-reviews.tpl. Una función schedule() marca la sección como sucia y mide con el mismo setupMore de dos pasos (lecturas y luego escrituras), sin cambiarlo, solo cuando la raíz está cerca del viewport (IntersectionObserver con rootMargin amplio, por ejemplo 600px, como prewarm). Si IO no existe, mantiene el comportamiento síncrono actual. focusin/pointerdown/touchstart en la raíz fuerzan una medición inmediata para el teclado temprano. El fetch de la API sigue inmediato, y render() actualiza el DOM y marca sucio sin medir si no está visible. resize, load y fonts.ready solo marcan sucio y miden si está visible. Un observer por instancia, desconectado al limpiar. Sin cambios en HTML del servidor, CSS, API, eventos, navegación ni tags de marketing.",
+              "constraints": {
+                "functional": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "security": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "compatibility": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "native_reuse": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "seo": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "performance": {
+                  "status": "unknown",
+                  "evidence_refs": [
+                    "rhino.current.trace-preflight"
+                  ]
+                },
+                "accessibility": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "responsive": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "maintainability": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "reversibility": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "complexity": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "development_cost": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "execution_cost": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                }
+              },
+              "files": [
+                "reports/runs/rhino-performance/20261113T180949-home-performance-authorized-e593dae0/source/sections/google-reviews.tpl"
+              ],
+              "tests": [
+                "Fixture offline sin red: contar llamadas a scrollHeight/clientHeight y a updateArrows antes y después con la raíz fuera de pantalla (cero lecturas iniciales), como causa controlada y no como puntaje.",
+                "Resultado visible o cercano idéntico al código de dos pasos actual: clases has-more, estado de los botones de flecha, aria-expanded y aria-controls, en seis anchos con capturas y condiciones de fuente explícitas.",
+                "Datos de la API llegan antes de la visibilidad: las tarjetas se actualizan y la medición diferida es correcta al acercarse. Cubrir también: reseñas vacías o ausentes, múltiples instancias, tarjeta previamente abierta y limpieza al recargar la sección en el editor.",
+                "Foco por teclado y clic en las flechas antes del callback de IO; resize mientras está oculta; carga de fuentes tardía; navegador sin IntersectionObserver (ruta de respaldo síncrona)."
+              ]
+            },
+            {
+              "id": "claude-coalesce-geometry-calls",
+              "description": "Alternativa más simple. Sustituye las llamadas síncronas de init, render, load y resize por un solo pase agendado con requestAnimationFrame y una bandera de pendiente. Conserva setupMore de dos pasos y sin compuerta de visibilidad. Elimina duplicados, pero mantiene al menos una lectura de geometría fuera de pantalla al cargar, con riesgo de lectura anticipada si el pase se agenda antes de tiempo.",
+              "constraints": {
+                "functional": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "security": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "compatibility": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "native_reuse": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "seo": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "performance": {
+                  "status": "unknown",
+                  "evidence_refs": [
+                    "rhino.current.trace-preflight"
+                  ]
+                },
+                "accessibility": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "responsive": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "maintainability": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "reversibility": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "complexity": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "development_cost": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "execution_cost": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                }
+              },
+              "files": [
+                "reports/runs/rhino-performance/20261113T180949-home-performance-authorized-e593dae0/source/sections/google-reviews.tpl"
+              ],
+              "tests": [
+                "Fixture offline: contar pases de medición por carga (de 3–4 a 1) y verificar que la primera lectura sigue ocurriendo fuera de pantalla.",
+                "Equivalencia visual y de estado con el código actual en seis anchos; resize encadenado; refresco de la API; foco de teclado antes del pase agendado."
+              ]
+            },
+            {
+              "id": "claude-leave-unchanged",
+              "description": "No tocar la sección hasta demostrar en fixture que las lecturas de geometría fuera de pantalla causan el task-tail. Se mantiene el setupMore de dos pasos y no se genera candidato. Es el curso más seguro si la reproducción offline no muestra reducción de lecturas o layout forzado.",
+              "constraints": {
+                "functional": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "security": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "compatibility": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "native_reuse": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "seo": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "performance": {
+                  "status": "unknown",
+                  "evidence_refs": [
+                    "rhino.current.trace-preflight"
+                  ]
+                },
+                "accessibility": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "responsive": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "maintainability": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "reversibility": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "complexity": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "development_cost": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "execution_cost": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                }
+              },
+              "files": [],
+              "tests": [
+                "Reproducción offline que mida el costo de setupMore con la raíz fuera de pantalla; si es insignificante, cerrar el hallazgo sin cambio."
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "agent": "claude",
+      "phase": "contrast",
+      "path": "reports/runs/rhino-performance/20261113T180949-home-performance-authorized-e593dae0/claude-contrast.json",
+      "sha256": "5e953f14048a3fd117593c64afb4ac7b3a292750d90ec112e5bb98f93b21cb02",
+      "model": {
+        "model": "claude-sonnet-5-5",
+        "effort": "medium",
+        "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+        "verified_at": "2026-11-08"
+      },
+      "contract_valid": true,
+      "decision": "approve",
+      "response": {
+        "decision": "approve",
+        "summary": "Reviso el diff exacto (patch 2c88fb0d, tpl e6f79c2f). Prefiero la compuerta de visibilidad sobre la simple fusión. Con la raíz fuera de pantalla deja 0 lecturas de geometría, frente a 3 en la base. Una fusión por rAF conserva al menos 1 lectura. Mantiene setupMore de dos pasos, el GET inmediato, el HTML, el CSS y el schema. No encuentro defectos críticos que bloqueen el candidato aislado. Quedan riesgos bajos y medios de medición. La validación nativa sigue pendiente: no la doy por pasada. El beneficio en producción y LH es desconocido.",
+        "changes": [],
+        "evidence": [
+          "Recibo del controlador: 144 checks pasaron en el fixture offline principal y 19 en el suplemento. Cubren seis anchos, IO no soportado, IO lanzando excepción, teclado temprano, pointerdown antes de IO y varias instancias.",
+          "Fixture: lecturas iniciales de geometría 3 a 0 en los seis anchos; con la API antes de la visibilidad, 53 a 0, y las 10 tarjetas se actualizan. Duración 3.4-7.8 ms a 1.5-2.1 ms, con fuente Arial. No es el render real ni ahorro de producción.",
+          "Diff: layoutEnabled arranca en false solo si existe IO; activateLayout es de un solo sentido, desconecta el observer y retira los listeners. Si IO falla, se activa de forma síncrona.",
+          "El patch tiene 1 modificación, 0 adiciones y 0 eliminaciones. El HTML previo al script y el schema posterior no cambian (checks markup_before_script_unchanged y schema_after_script_unchanged).",
+          "El recibo no incluye brazo de control con fusión por rAF. La preferencia por la compuerta se apoya en que deja 0 lecturas y en la construcción del código, no en una medición comparativa.",
+          "Límites del recibo: fuente Arial, no Poppins/Twig real; sin POST nativo; muestras de setupMore posteriores al LCP; deriva de 10 LH de 1977 a 842, sin atribución estable."
+        ],
+        "objections": [
+          {
+            "id": "claude-obj-gate-initial-rect-read",
+            "alternative_id": "codex-review-geometry-gate",
+            "category": "performance/arquitectura",
+            "severity": "medium",
+            "claim": "La lectura inicial del rectángulo raíz puede forzar un layout global síncrono en init. Eso reproduce la causa que se quiere eliminar y requiere un segundo camino de activación. El candidato evita esa lectura: IO lanza un callback asíncrono con 0 lecturas iniciales. Para igualar su ahorro, la alternativa de Codex necesita medición de control.",
+            "status": "open",
+            "evidence_refs": [
+              "rhino.reviews.candidate.offline-controller"
+            ],
+            "resolution_evidence_refs": []
+          },
+          {
+            "id": "claude-obj-no-coalesce-arm",
+            "alternative_id": "claude-visibility-gate-geometry",
+            "category": "medición",
+            "severity": "medium",
+            "claim": "El recibo carece de un brazo de fusión simple medido en el mismo fixture. La elección de la compuerta se apoya en la construcción (0 lecturas frente a 1 o más), no en una comparación medida. La mejora de duración es de fixture con Arial. No puede presentarse como mejora de Lighthouse ni de INP, ni como ahorro de 258 ms.",
+            "status": "open",
+            "evidence_refs": [
+              "rhino.reviews.candidate.offline-controller"
+            ],
+            "resolution_evidence_refs": []
+          },
+          {
+            "id": "claude-obj-async-first-frame",
+            "alternative_id": "claude-visibility-gate-geometry",
+            "category": "CLS/responsive",
+            "severity": "low",
+            "claim": "Si la sección estuviera arriba del pliegue (reordenada en el editor), el callback de IO es asíncrono. El primer frame sale sin has-more y el botón Leer más puede aparecer después, con un salto de altura. Los checks abovefold prueban el estado final igual, no la ausencia de desplazamiento. En la Home actual la sección está a 2413/2892 px, con 600 px de anticipación, así que el riesgo observado es bajo.",
+            "status": "open",
+            "evidence_refs": [
+              "rhino.reviews.candidate.offline-controller"
+            ],
+            "resolution_evidence_refs": []
+          },
+          {
+            "id": "claude-obj-detached-root-print",
+            "alternative_id": "claude-visibility-gate-geometry",
+            "category": "robustez",
+            "severity": "low",
+            "claim": "El observer sobre una raíz retirada del DOM queda sin desconexión explícita hasta que el GC lo libere. Eso es proporcional: el riesgo es una fuga mínima en el editor. La doble alternancia del toggle en reinit completo es igual que en la base y no es un defecto nuevo. En una impresión sin scroll no se calcula has-more. Además, rootMargin se ignora dentro de un iframe de origen cruzado, como una vista previa del editor.",
+            "status": "open",
+            "evidence_refs": [
+              "rhino.reviews.candidate.offline-controller"
+            ],
+            "resolution_evidence_refs": []
+          }
+        ],
+        "preferred_alternative": "claude-visibility-gate-geometry",
+        "questions": [
+          {
+            "id": "claude-q1-codex-initial-rect",
+            "to_agent": "codex",
+            "alternative_id": "codex-review-geometry-gate",
+            "question": "Tu puerta lee primero el rectángulo raíz. ¿Tienes una medición (conteo de layouts forzados) que demuestre que esa lectura no recupera el costo de layout que se quiere evitar? ¿Qué fuente concreta justifica 400 px en lugar de los 600 px del candidato?",
+            "evidence_refs": [
+              "rhino.reviews.candidate.offline-controller"
+            ]
+          },
+          {
+            "id": "claude-q2-codex-coalesce-arm",
+            "to_agent": "codex",
+            "alternative_id": "codex-review-geometry-gate",
+            "question": "Acordaste usar la fusión simple como control experimental. ¿Qué lecturas y qué layouts por carga esperas medir con ella? ¿Qué diferencia mínima respecto de las 0 lecturas del candidato bastaría para que prefieras la fusión por simplicidad?",
+            "evidence_refs": [
+              "rhino.reviews.candidate.offline-controller"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "agent": "claude",
+      "phase": "defense",
+      "path": "reports/runs/rhino-performance/20261113T180949-home-performance-authorized-e593dae0/claude-defense.json",
+      "sha256": "691684bcc06b44f4c5b38086f233a759a386d7e02ec7990ba3f0b6fd5d3aa253",
+      "model": {
+        "model": "claude-sonnet-5-5",
+        "effort": "medium",
+        "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+        "verified_at": "2026-11-08"
+      },
+      "contract_valid": true,
+      "decision": "approve",
+      "response": {
+        "decision": "approve",
+        "summary": "Revisión independiente del diff exacto (patch 2c88fb0d, tpl e6f79c2f, base 75a48760): sin objeciones críticas abiertas. Es revisable para que el propietario decida autorizar un despliegue controlado de un solo archivo. No está desplegado ni medido en producción. La eficacia en producción y en Lighthouse es unknown. La validación nativa (válida, sin errores, sin escrituras) solo prueba sintaxis y esquema, no render.",
+        "changes": [],
+        "evidence": [
+          "Leí el diff y el tpl candidato: 1 modificación, 0 adiciones y 0 eliminaciones. El HTML previo al script y el schema no cambian. setupMore de dos pasos, el GET inmediato y el CSS se conservan.",
+          "Compuerta de un solo sentido: layoutEnabled parte en false solo si existe IO. La activación desconecta el observer y retira los listeners, incluido pointerdown en captura con el mismo flag. Sin IO, o si IO lanza excepción, se mide de forma síncrona.",
+          "Recibo: 144 checks principales y 19 suplementarios pasan. Lecturas iniciales de geometría 3→0 en seis anchos; con API antes de la visibilidad 53→0 y las 10 tarjetas se actualizan. Cubre teclado y pointer tempranos, instancias múltiples, API vacía y reinit igual a la base.",
+          "Brazo coalesced ya medido (n=6, 390 y 1440 px): 0 lecturas síncronas pero 24 después del frame. El candidato tiene 0 y 0 mientras está fuera de pantalla. Las duraciones de fixture (~1,05–1,35 ms) no son ms de producción.",
+          "Límites: fixture Arial, no Poppins ni Twig real. Sin QA de producción ni 10 LH estables (deriva 1977→842). Muestras de setupMore posteriores al LCP. Sin beneficio global demostrado."
+        ],
+        "objections": [
+          {
+            "id": "claude-obj-gate-initial-rect-read",
+            "alternative_id": "codex-review-geometry-gate",
+            "category": "performance/arquitectura",
+            "severity": "medium",
+            "claim": "La lectura inicial del rectángulo raíz, con 400 px provisionales, queda fuera del candidato. Codex retiró esa alternativa y la comprobación inicial, así que esta objeción ya no aplica.",
+            "status": "resolved",
+            "evidence_refs": [
+              "rhino.reviews.candidate.offline-controller"
+            ],
+            "resolution_evidence_refs": [
+              "rhino.reviews.candidate.offline-controller"
+            ]
+          },
+          {
+            "id": "claude-obj-no-coalesce-arm",
+            "alternative_id": "claude-visibility-gate-geometry",
+            "category": "medición",
+            "severity": "medium",
+            "claim": "Faltaba el brazo coalesced. El recibo ya lo incluye (6 iteraciones, 390 y 1440 px): 24 lecturas tras el frame frente a 0 del candidato. Sigue unknown la ventaja temporal y la de producción.",
+            "status": "resolved",
+            "evidence_refs": [
+              "rhino.reviews.candidate.offline-controller"
+            ],
+            "resolution_evidence_refs": [
+              "rhino.reviews.candidate.offline-controller"
+            ]
+          },
+          {
+            "id": "claude-obj-async-first-frame",
+            "alternative_id": "claude-visibility-gate-geometry",
+            "category": "CLS/responsive",
+            "severity": "low",
+            "claim": "Si la sección estuviera arriba del pliegue, el callback de IO es asíncrono. El primer frame saldría sin has-more y podría haber un salto de altura. Los checks abovefold prueban solo el estado final. Límite no bloqueante: hoy la sección está a 2413/2892 px.",
+            "status": "open",
+            "evidence_refs": [
+              "rhino.reviews.candidate.offline-controller"
+            ],
+            "resolution_evidence_refs": []
+          },
+          {
+            "id": "claude-obj-detached-root-print",
+            "alternative_id": "claude-visibility-gate-geometry",
+            "category": "robustez",
+            "severity": "low",
+            "claim": "Si la raíz se retira antes de activarse, el observer no se desconecta explícitamente. Impresión sin scroll no calcula has-more. rootMargin se ignora en iframes de origen distinto. El reinit repite el comportamiento de la base. Límites no bloqueantes.",
+            "status": "open",
+            "evidence_refs": [
+              "rhino.reviews.candidate.offline-controller"
+            ],
+            "resolution_evidence_refs": []
+          },
+          {
+            "id": "claude-obj-arrows-pre-activation",
+            "alternative_id": "claude-visibility-gate-geometry",
+            "category": "equivalencia visual",
+            "severity": "low",
+            "claim": "Antes de activarse, el estado disabled de las flechas no se calcula. La anticipación de 600 px no es un umbral óptimo medido. Poppins y el render real siguen sin validar. Es un límite no bloqueante, no una regresión demostrada.",
+            "status": "open",
+            "evidence_refs": [
+              "rhino.reviews.candidate.offline-controller"
+            ],
+            "resolution_evidence_refs": []
+          }
+        ],
+        "preferred_alternative": "claude-visibility-gate-geometry",
+        "answers": [
+          {
+            "question_id": "codex-question-exact-gate",
+            "from_agent": "codex",
+            "answer": "Acepto el diff exacto (candidate.patch 2c88fb0d) como concreción de mi alternativa. No identifico una regresión incremental concreta. La compuerta irreversible sin dirty/fonts.ready es equivalente a la base: tras activar, load y resize siguen midiendo, y antes de activar la primera medición lee el DOM vigente. El recibo cubre abovefold_fontChange_equivalence y API_after_activation_equivalence, con Arial. Poppins y el render Twig real siguen como límite pendiente, no bloqueante. Mi alternativa dirty/fontReady no es necesaria para este candidato.",
+            "disposition": "revise",
+            "evidence_refs": [
+              "rhino.reviews.candidate.offline-controller"
+            ]
+          },
+          {
+            "question_id": "codex-question-coalescing",
+            "from_agent": "codex",
+            "answer": "Sí. La corrección de alcance ya incluye el brazo coalesced medido (n=6, 390 y 1440 px). Deja 24 lecturas tras el frame frente a 0 del candidato mientras está fuera de pantalla. Prefiero la compuerta por esas 0 lecturas automáticas iniciales y por la equivalencia observada. Su ventaja temporal frente a coalescing es unknown: el init del coalesced fue incluso algo menor, ~1,05–1,15 ms frente a 1,35 ms. Tampoco hay mejora de Lighthouse ni de producción demostrada.",
+            "disposition": "defend",
+            "evidence_refs": [
+              "rhino.reviews.candidate.offline-controller"
+            ]
+          }
+        ],
+        "withdrawn_alternatives": [
+          "claude-coalesce-geometry-calls"
+        ],
+        "revision_notes": [
+          "Sin objeciones críticas. Los límites no bloqueantes son: IO asíncrono arriba del pliegue, observer sin desmontaje explícito, flechas sin estado previo a la activación, 600 px sin medir, Arial en vez de Poppins, y eficacia en producción y Lighthouse unknown.",
+          "Puertas duras antes de producir cualquier efecto: autorización explícita del propietario, un solo archivo (sections/google-reviews.tpl), hash previo e8 posterior verificados, y copia de respaldo remota para revertir.",
+          "Este candidato es revisable para esa autorización, pero no está desplegado ni medido en producción. QA posterior y revisión independiente siguen siendo obligatorios.",
+          "Retiro mi alternativa de coalescing como preferencia. Acepto la retirada de Codex de la lectura inicial y los 400 px, y aceptó mi 600 px."
+        ]
+      }
+    },
+    {
+      "agent": "codex",
+      "phase": "proposal",
+      "path": "reports/runs/rhino-performance/20261113T180949-home-performance-authorized-e593dae0/codex-proposal.json",
+      "sha256": "b09fb593822715f2e7cd679a2d8c6c2b96c432fe42fb8282d051a110ec3a92d6",
+      "model": {
+        "model": "gpt-6.1-sol",
+        "effort": "medium",
+        "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+        "verified_at": "2026-11-08"
+      },
+      "contract_valid": true,
+      "decision": "proposed",
+      "response": {
+        "decision": "proposed",
+        "summary": "Preparar como hipótesis un candidato aislado que posponga la geometría del carrusel de reseñas hasta su proximidad al viewport. Conservar setupMore en dos pasadas y el GET inmediato. Su aprobación requiere reproducción controlada offline; no hay cambios aplicados ni ahorro demostrado.",
+        "changes": [],
+        "evidence": [
+          "rhino.current.trace-preflight: recibo del controlador, no QA propio; una traza CDP por dispositivo con instrumentación.",
+          "El controlador registra 258,067 ms móviles y 82,318 ms desktop de CPU asociada a setupMore en colas de tareas; no representan ahorro causal.",
+          "Las reseñas estaban a aproximadamente 2413 px en móvil y 2892 px en desktop, con diez tarjetas por sesión.",
+          "La TPL completa aportada conserva mediciones en dos pasadas y ejecuta setupMore/updateArrows en inicialización, render, load y resize.",
+          "La igualdad entre TPL local y remota sigue pendiente. Las diez mediciones Lighthouse no tienen resultados aportados."
+        ],
+        "analysis": {
+          "problem": "El componente Google Reviews Carousel de sections/google-reviews.tpl mide geometría aunque esté lejos del viewport. La fuente examinada es reports/runs/rhino-performance/20261113T180949-home-performance-authorized-e593dae0/source/sections/google-reviews.tpl, SHA-256 75a487600c5d71001fa2e0970dad1cb943f80d399f1af89db559bffc3253fd30. Se busca un candidato mínimo para móvil, sin aplicarlo.",
+          "cause": "setupMore lee scrollHeight/clientHeight y updateArrows lee dimensiones del track desde varios disparadores síncronos. Pueden exigir layout global fuera de pantalla; las trazas solo muestran asociación. Google Tags, Meta y TikTok siguen siendo contribuyentes importantes, sin corrección demostrada que preserve sus eventos.",
+          "recommendation": "codex-review-geometry-gate",
+          "evidence_refs": [
+            "rhino.current.trace-preflight"
+          ],
+          "hypotheses": [
+            "Una puerta de proximidad podría evitar mediciones de tarjetas durante la carga inicial fuera de pantalla; su beneficio debe aislarse experimentalmente.",
+            "Agrupar llamadas en un frame es más simple y evita duplicados cercanos, pero todavía mide fuera de pantalla y no fusiona eventos separados. Compararlo como control experimental.",
+            "Una lectura inicial del rectángulo raíz permite atender inmediatamente una sección situada arriba del pliegue, pero puede forzar layout global y reducir el beneficio buscado."
+          ],
+          "native_components": [
+            "Carrusel existente data-hgr-carousel y track con scroll-snap",
+            "setupMore con lectura y escritura en dos pasadas",
+            "updateArrows, step y eventos existentes",
+            "render/cardEl y refresco GET inmediato",
+            "Snapshot HTML, estilos responsive y atributos del editor"
+          ],
+          "risks": [
+            "Crítico: falta reproducción causal offline y equivalencia funcional; impide aprobar el candidato.",
+            "La igualdad de la fuente local con producción no está confirmada; limita la atribución y cualquier traslado posterior.",
+            "El botón Leer más parte oculto por CSS: focusin debe preparar desde el primer elemento enfocable del carrusel, antes de que la navegación lo omita.",
+            "El margen puede resultar insuficiente con scroll rápido; la activación también puede trasladar trabajo a una interacción.",
+            "La lectura raíz inicial puede seguir forzando layout global; evitar lecturas de tarjetas no garantiza reducción equivalente de CPU.",
+            "El script consulta todas las instancias en cada ejecución y no expone desmontaje: verificar duplicación y ciclo del editor sin ampliar innecesariamente el cambio.",
+            "La agrupación simple podría ofrecer mejor relación entre beneficio y complejidad; cambiar la preferencia si la comparación lo demuestra."
+          ],
+          "tests": [
+            "No se ejecutaron pruebas propias. El recibo rhino.current.trace-preflight acredita observación del controlador, no regresión ni eficacia del candidato.",
+            "Antes de aprobar: reproducción offline con red bloqueada y API simulada, comparación causal contra fuente intacta y agrupación simple bajo condiciones iguales.",
+            "Antes de aprobar: completar casos funcionales, teclado, responsive y ciclo de editor; exigir recibos del controlador que resuelvan las objeciones críticas.",
+            "Separar los resultados Lighthouse pendientes de las trazas instrumentadas; no inferir INP desde TBT ni prometer una puntuación."
+          ],
+          "files": [
+            "reports/runs/rhino-performance/20261113T180949-home-performance-authorized-e593dae0/source/sections/google-reviews.tpl"
+          ],
+          "impacts": {
+            "seo": "Se propone conservar HTML inicial, contenido y enlaces; equivalencia sin JS y tras refresco pendiente.",
+            "performance": "Posible reducción del trabajo inicial fuera de pantalla, con coste desplazado a activación. Sin ahorro causal, mejora Lighthouse o INP demostrados.",
+            "responsive": "CSS conservado; comprobar overflow tras cambios de ancho y fuentes, especialmente alrededor de 768 px.",
+            "accessibility": "Preparación síncrona temprana para teclado y conservación de aria-controls/aria-expanded; equivalencia pendiente.",
+            "uiux": "Conservar flechas, expansión y navegación. Verificar ausencia de saltos visibles al habilitar Leer más.",
+            "commerce": "Conservar GET inmediato, datos comerciales y tracking. No proponer cambios remotos ni publicación."
+          },
+          "confidence": 0.55,
+          "alternatives": [
+            {
+              "id": "codex-review-geometry-gate",
+              "description": "Puerta única por instancia para setupMore/updateArrows automáticos: una comprobación inicial del rectángulo raíz activa inmediatamente si está visible o próxima; en otro caso IntersectionObserver con margen provisional de 400 px. Antes de activarse, render/load/resize/fuentes solo marcan pendiente. La activación mide el DOM vigente y conserva después el comportamiento existente. focusin y acciones del carrusel fuerzan preparación síncrona; sin IO se conserva ejecución inmediata. Mantener dos pasadas, GET, HTML y CSS. Añade estado y ciclo de vida frente a la simple agrupación; el margen necesita validación.",
+              "constraints": {
+                "functional": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "security": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "compatibility": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "native_reuse": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "seo": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "performance": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "accessibility": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "responsive": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "maintainability": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "reversibility": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "complexity": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "development_cost": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "execution_cost": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                }
+              },
+              "files": [
+                "reports/runs/rhino-performance/20261113T180949-home-performance-authorized-e593dae0/source/sections/google-reviews.tpl"
+              ],
+              "tests": [
+                "Pendiente: comparar fuente intacta, simple agrupación y puerta en fixture offline idéntico; contar mediciones, layouts y duración, incluyendo la lectura raíz y el coste al activarse.",
+                "Pendiente: sección fuera de pantalla, próxima y arriba del pliegue; aproximación rápida, foco antes del callback y ausencia de IntersectionObserver.",
+                "Pendiente: GET simulado inmediato con respuesta anterior/posterior a activación, error y respuesta vacía; verificar actualización de tarjetas y contador.",
+                "Pendiente: fuentes tardías, resize antes/después de activar, tarjetas abiertas, flechas, scroll, Leer más/menos y atributos ARIA.",
+                "Pendiente: múltiples instancias y scripts repetidos; reinicialización idempotente y limpieza de observadores/listeners al retirar o reemplazar secciones en editor.",
+                "Pendiente: comparación visual a 320, 375, 412, 768, 1024 y 1440 px, con fuentes y recursos fijados y red bloqueada."
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "agent": "codex",
+      "phase": "contrast",
+      "path": "reports/runs/rhino-performance/20261113T180949-home-performance-authorized-e593dae0/codex-contrast.json",
+      "sha256": "f2d3a17331acd9d8dde9489fddc1fd55fffa08a0d9dba3d5f5f84b1746f360d4",
+      "model": {
+        "model": "gpt-6.1-sol",
+        "effort": "medium",
+        "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+        "verified_at": "2026-11-08"
+      },
+      "contract_valid": true,
+      "decision": "proposed",
+      "response": {
+        "decision": "proposed",
+        "summary": "Prefiero claude-visibility-gate-geometry, acotada al diff exacto del candidato e6f79c2f. Los 163 checks respaldan eliminar lecturas automáticas iniciales fuera de pantalla y conservar funcionalidad en fixture; no demuestran mejora Lighthouse ni superioridad temporal frente a coalescing. Retiro mi comprobación geométrica inicial y el margen provisional de 400 px. La validación nativa autorizada sigue pendiente de recibo; esta preferencia no autoriza publicación.",
+        "changes": [],
+        "evidence": [
+          "rhino.reviews.candidate.offline-controller: fuente publicada 75a48760 y candidato e6f79c2f vinculados; setupMore, HTML, CSS y schema conservados.",
+          "rhino.reviews.candidate.offline-controller: 144 checks principales y 19 suplementarios aprobados. En seis anchos, las lecturas iniciales pasan de 3 a 0; tras actualizar API fuera de pantalla, de 53 a 0.",
+          "rhino.reviews.candidate.offline-controller: GET inmediato, API antes/después de activación, respuesta vacía, equivalencia visible, resize, múltiples instancias y fallback sin IO o con excepción cubiertos.",
+          "rhino.reviews.candidate.offline-controller: focusin y pointerdown antes del callback preparan geometría; Tab alcanza Leer más. La equivalencia arriba del pliegue está cubierta, pero no acredita ausencia de un estado transitorio anterior al callback asíncrono.",
+          "rhino.reviews.candidate.offline-controller: fixture Arial; equivalencia con Poppins y render Twig real unknown. La reinicialización reproduce el comportamiento basal, incluido el doble toggle; no es una regresión nueva."
+        ],
+        "objections": [
+          {
+            "id": "codex-objection-anticipation",
+            "alternative_id": "claude-visibility-gate-geometry",
+            "category": "activación y equivalencia visual",
+            "severity": "low",
+            "claim": "600 px es una anticipación razonable para este candidato, pero no un umbral óptimo medido. IO sigue siendo asíncrono arriba del pliegue; focusin/pointerdown protegen la interacción temprana, sin demostrar ausencia de todo transitorio visual. Arial y el cambio de fuente simulado no certifican Poppins. Son límites de validación, no defectos bloqueantes demostrados.",
+            "status": "open",
+            "evidence_refs": [
+              "rhino.reviews.candidate.offline-controller"
+            ],
+            "resolution_evidence_refs": []
+          },
+          {
+            "id": "codex-objection-detached-root",
+            "alternative_id": "claude-visibility-gate-geometry",
+            "category": "ciclo de vida",
+            "severity": "low",
+            "claim": "Si se retira la raíz antes de activar, el nuevo observer carece de desconexión explícita por desmontaje. El riesgo incremental es retención de la instancia; su frecuencia e impacto son unknown. La desconexión al activar está cubierta. No atribuyo al candidato el doble toggle basal ni exijo ampliar esta corrección a una reescritura del editor.",
+            "status": "open",
+            "evidence_refs": [
+              "rhino.reviews.candidate.offline-controller"
+            ],
+            "resolution_evidence_refs": []
+          }
+        ],
+        "preferred_alternative": "claude-visibility-gate-geometry",
+        "questions": [
+          {
+            "id": "codex-question-exact-gate",
+            "to_agent": "claude",
+            "alternative_id": "claude-visibility-gate-geometry",
+            "question": "En candidate.patch la compuerta es irreversible, sin bandera dirty ni fonts.ready. Considerando los checks abovefold_fontChange_equivalence y API_after_activation_equivalence del recibo, ¿aceptas ese diff exacto como concreción de tu alternativa y dejas Poppins como límite pendiente, o identificas una regresión incremental concreta?",
+            "evidence_refs": [
+              "rhino.reviews.candidate.offline-controller"
+            ]
+          },
+          {
+            "id": "codex-question-coalescing",
+            "to_agent": "claude",
+            "alternative_id": "claude-coalesce-geometry-calls",
+            "question": "El recibo compara baseline y gate, sin un brazo coalescing medido. ¿Coincides en preferir gate por sus cero lecturas automáticas iniciales y equivalencia observada, dejando unknown su ventaja temporal frente a coalescing y cualquier mejora Lighthouse de producción?",
+            "evidence_refs": [
+              "rhino.reviews.candidate.offline-controller"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "agent": "codex",
+      "phase": "defense",
+      "path": "reports/runs/rhino-performance/20261113T180949-home-performance-authorized-e593dae0/codex-defense.json",
+      "sha256": "a1204f9f242f3b6ef72d3de0c26022d86d8825eaf8d2b0b242ef1897226cd9eb",
+      "model": {
+        "model": "gpt-6.1-sol",
+        "effort": "medium",
+        "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+        "verified_at": "2026-11-08"
+      },
+      "contract_valid": true,
+      "decision": "approve",
+      "response": {
+        "decision": "approve",
+        "summary": "El candidato exacto e6f79c2f es revisable para solicitar autorización del propietario de un despliegue controlado de un solo archivo. No identifico objeciones críticas abiertas en la evidencia aportada. Esta defensa no autoriza ni ejecuta publicación, ni sustituye la revisión final independiente de Claude sobre ese archivo. La eficacia en producción es unknown; no se ha demostrado 90+.",
+        "changes": [],
+        "evidence": [
+          "rhino.reviews.candidate.offline-controller: sections/google-reviews.tpl pasa de SHA-256 75a487600c5d71001fa2e0970dad1cb943f80d399f1af89db559bffc3253fd30 a e6f79c2fd59376efe955662adff44d13329300360a118249c88480d59dde3cd3; patch 2c88fb0d3e619b5d08c8e217eecb9e104d9d402dbe47997c95b91f0e4b1c8d32.",
+          "rhino.reviews.candidate.offline-controller: 163 checks aislados aprobados; preserva HTML, CSS, schema, GET inmediato y setupMore de dos pasadas.",
+          "rhino.reviews.candidate.offline-controller: control ya medido, seis iteraciones por variante a 390 y 1440 px. Coalescing deja 24 lecturas de tarjetas después del frame; candidato deja 0 mientras permanece fuera de pantalla.",
+          "rhino.reviews.candidate.offline-controller: validación nativa HTTP 200, un POST, valid:true, errors:[], sin escrituras persistentes. Valida sintaxis/schema, no renderizado de producción."
+        ],
+        "objections": [
+          {
+            "id": "codex-objection-anticipation",
+            "alternative_id": "claude-visibility-gate-geometry",
+            "category": "activación y alcance de validación",
+            "severity": "low",
+            "claim": "IO es asíncrono: arriba del pliegue puede existir un primer frame sin Leer más. La equivalencia final y las rutas tempranas de interacción están cubiertas; ausencia de desplazamiento inicial, margen óptimo de 600 px y equivalencia Poppins/Twig en producción son unknown. Límite no bloqueante para presentar el candidato al propietario.",
+            "status": "open",
+            "evidence_refs": [
+              "rhino.reviews.candidate.offline-controller"
+            ],
+            "resolution_evidence_refs": []
+          },
+          {
+            "id": "codex-objection-detached-root",
+            "alternative_id": "claude-visibility-gate-geometry",
+            "category": "ciclo de vida e impresión",
+            "severity": "low",
+            "claim": "Una raíz retirada antes de activarse carece de desconexión explícita por desmontaje; impacto unknown. La impresión sin scroll puede conservar has-more sin calcular. La reinicialización reproduce el defecto basal y no constituye regresión demostrada. Son límites no bloqueantes de este alcance.",
+            "status": "open",
+            "evidence_refs": [
+              "rhino.reviews.candidate.offline-controller"
+            ],
+            "resolution_evidence_refs": []
+          }
+        ],
+        "preferred_alternative": "claude-visibility-gate-geometry",
+        "answers": [
+          {
+            "question_id": "claude-q1-codex-initial-rect",
+            "from_agent": "claude",
+            "answer": "No existe medición aportada que exonere mi lectura inicial del rectángulo raíz, ni fuente concreta que justifique 400 px frente a 600 px. Retiro esa formulación, como indiqué en contraste. Prefiero el candidato exacto sin lectura inicial y con IO600px: elimina lecturas automáticas iniciales en el fixture. No afirmo que 600 px sea óptimo ni que IO garantice preparación antes del primer frame arriba del pliegue.",
+            "disposition": "withdraw",
+            "evidence_refs": [
+              "rhino.reviews.candidate.offline-controller"
+            ]
+          },
+          {
+            "question_id": "claude-q2-codex-coalesce-arm",
+            "from_agent": "claude",
+            "answer": "Corrijo la omisión del contraste: el control rAF ya estaba medido, sin nueva ejecución. En seis iteraciones a 390 y 1440 px, coalescing registra 0 lecturas síncronas, 0 layouts síncronos y 24 lecturas de tarjetas después del frame; el candidato registra 0 también después del frame fuera de pantalla. No fijé un umbral temporal mínimo y no lo invento ahora: prefiero gate por evitar ese trabajo con equivalencia funcional observada. Su ventaja temporal neta en producción es unknown; las duraciones de fixture no prueban ahorro comercial, INP ni Lighthouse.",
+            "disposition": "revise",
+            "evidence_refs": [
+              "rhino.reviews.candidate.offline-controller"
+            ]
+          }
+        ],
+        "withdrawn_alternatives": [
+          "codex-review-geometry-gate"
+        ],
+        "revision_notes": [
+          "Acepto el candidato exacto sin dirty ni fonts.ready: mide el DOM vigente al activarse y conserva render/load/resize después. Los checks de cambio de fuente simulado no certifican fuentes reales.",
+          "La ausencia del brazo coalescing era un error de empaquetado, corregido mediante filas existentes del recibo; no fue una prueba nueva.",
+          "El recibo actualizado resuelve la validación nativa antes pendiente; sus campos históricos not_authorized_POST quedan superados por valid:true y errors:[].",
+          "Antes de desplegar siguen siendo obligatorias la revisión final independiente de Claude del hash exacto y la autorización específica del propietario. Después corresponden QA y comparación controlada; esta defensa no los sustituye."
+        ]
+      }
+    }
+  ],
+  "not_a_production_authorization": true
+}

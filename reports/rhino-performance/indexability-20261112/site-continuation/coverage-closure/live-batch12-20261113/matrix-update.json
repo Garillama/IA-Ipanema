@@ -1,0 +1,44 @@
+{
+  "matrix_csv": "reports/rhino-performance/indexability-20261112/site-continuation/url-matrix.csv",
+  "matrix_json": "reports/rhino-performance/indexability-20261112/site-continuation/url-matrix.json",
+  "before_hashes": {
+    "csv": "01c1f3eb8134f7fa9f1dd757697c7194e2c3ce8934ab1a737a3b98fe729dd781",
+    "json": "348d45032ecb53d50f326b748757a96534a50be43041025041f317711a49ce93"
+  },
+  "after_hashes": {
+    "csv": "2105c151949dca6ba1e219f5d4810ef6f9b032f1a3032305a4a4cbc165d567b3",
+    "json": "72b8f477979600c1b75be50b4dffeebaf94e149b486e69d9a2fbc5d783819f15"
+  },
+  "backup_csv": "reports/runs/rhino-performance/20261113T075511-authorized-five-url-batch12/url-matrix-before.csv",
+  "backup_json": "reports/runs/rhino-performance/20261113T075511-authorized-five-url-batch12/url-matrix-before.json",
+  "exactly_five_rows_updated": true,
+  "updated_URLs": [
+    "https://rhino-performance.com/blog/posts/comienza-el-ano-con-energia-9bb92d785569/",
+    "https://rhino-performance.com/blog/posts/eleva-tu-experiencia-deportiva-37e67fbefb52/",
+    "https://rhino-performance.com/blog/posts/como-tener-una-gran-semana-pre-triatlon-7451956a975f/",
+    "https://rhino-performance.com/blog/posts/botas-presoterpia-rhino-pro-v3-032780da6369/",
+    "https://rhino-performance.com/blog/posts/mejora-tu-practica-de-yoga-con-la-recuperacion-de-las-botas-de-presoterapia-b40f7aab659b/"
+  ],
+  "Google_fields_unchanged": true,
+  "other_120_rows_unchanged": true,
+  "before": {
+    "total_urls": 125,
+    "HTML_total": 124,
+    "HTML_with_individual_HTTP": 104,
+    "pending_individual_HTTP": 20,
+    "pending_by_type": {
+      "article": 20
+    }
+  },
+  "after": {
+    "total_urls": 125,
+    "HTML_total": 124,
+    "HTML_with_individual_HTTP": 109,
+    "pending_individual_HTTP": 15,
+    "pending_by_type": {
+      "article": 15
+    }
+  },
+  "original_pending75_and_pending70_files_preserved": true,
+  "next_pending_list": "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/live-batch12-20261113/pending-15.csv"
+}

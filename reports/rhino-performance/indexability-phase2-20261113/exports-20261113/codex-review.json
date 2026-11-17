@@ -1,0 +1,124 @@
+{
+  "requested_agent": "codex",
+  "effective_agent": "codex",
+  "scope": "official XLSX reconciliation and organic opportunity review only",
+  "input_hashes": {
+    "reports/rhino-performance/indexability-phase2-20261113/exports-20261113/review-packet.json": "e459744c1976e6da448d7c3bbbf1a5b2ecd6bd5dcb0043e693f2ef573b9eb980",
+    "reports/rhino-performance/indexability-phase2-20261113/exports-20261113/controller-validation.json": "5c3362b8d8960d36bf2ea160a122015359490299edbf109071c455f3b5079a53",
+    "reports/rhino-performance/indexability-phase2-20261113/exports-20261113/categories.json": "211fb22809de54afc9bde4e15029bfdd73188998e27ecaa35aaa53e8e25a0f66",
+    "reports/rhino-performance/indexability-phase2-20261113/exports-20261113/performance-scope.json": "38b1e731d00349b3dc442503cdf3d3adb29b7d42b228ee7987d224defd8ff7bb",
+    "reports/rhino-performance/indexability-phase2-20261113/exports-20261113/summary.json": "0697f6c2a8a78a22e70cb47beb70d3b2e46a5a9ac68fc7fb819416441e292898"
+  },
+  "response": {
+    "decision": "proposed",
+    "summary": "La evidencia demuestra exclusiones históricas en todas las URL conocidas, pero no identifica un impedimento de indexación para las 124 URL del inventario. Prioridad: completar listas de cobertura y cruces de rendimiento; después evaluar categorías y redirecciones históricas. Impacto potencial y causas comerciales: unknown. Sin propuesta del otro proveedor, la preferencia queda unknown. No se proponen cambios, títulos ni contenido.",
+    "changes": [],
+    "evidence": [
+      "gsc.xlsx.reconciliation: recibo del controlador aprobado para extracción local y conciliación exacta; no acredita pruebas de regresión ni acceso en vivo. Los hashes son los aportados, no recalculados personalmente.",
+      "Cobertura al 2026-11-08: 141 indexadas y 347 sin indexar, sobre todas las URL conocidas, no sobre las 124. Desgloses entregados: 148 alternativas, 112 redirecciones y 16 bloqueadas. Cero coincidencias exactas con el inventario; 113+2 candidatos por path/host/slash no transfieren estado ni prueban destino canónico.",
+      "Las 16 bloqueadas corresponden a checkout o add-to-cart: no visitarlas ni recomendar desbloqueo. Faltan listas de 33 URL 404, 33 rastreadas sin indexar, 5 descubiertas sin indexar y ejemplos de indexadas. Los estados de URL ausentes son unknown.",
+      "Conservar por separado fecha del gráfico y lastcrawl individual, incluso si esta es posterior. Se mantienen 15 inspecciones históricas, 10 indexadas y 109 URL sin inspeccionar; ninguno de esos datos acredita índice actual.",
+      "Rendimiento Web del 2026-08-11 al 2026-11-10: 440 páginas, 108 coincidencias exactas y 1000 consultas posiblemente limitadas. Consultas, páginas, países y dispositivos son marginales separadas. Gráfico: 5431 clics/212491 impresiones; páginas: 5577/259926; consultas: 2811/71722. Causa de discrepancia: unknown; no sumar, escalar ni construir comparaciones antes/después incompatibles.",
+      "Prioridad de análisis por visibilidad observada, riesgo operativo nulo: /presoterapia/ 30 clics/2810 impresiones; /compresion-frio-y-calor/ 6/1079; /accesorios/ 27/1071; /pistolas-de-masaje/ 0/45. /terapia-fria/ carece de fila observada. Presoterapia y accesorios tienen inspección histórica indexada del 2026-11-12; índice actual de todas: unknown.",
+      "Prioridad de conciliación documental de legacy redirects: /producto/botas-de-presoterapia-botas/ 539 clics/20338 impresiones, /home/ 283/3519 y /producto/botas-de-presoterapia-kit/ 100/4973. Coinciden exactamente entre rendimiento histórico y lista de redirecciones; destino, vigencia comercial y pérdida de tráfico: unknown.",
+      "Exportaciones mínimas faltantes: listas de cobertura indicadas; consultas por página para categorías y legacy priorizados, segmentadas por dispositivo y país, con fechas/filtros iguales y límites declarados. Candidatas: 'botas de presoterapia' 7396 impresiones, 'botas presoterapia' 7346, 'botas de compresion' 5905 y 'pistola de percusion' 1185. Su intención es hipótesis y su categoría no está asignada; obtener el cruce antes de proponer títulos o contenido."
+    ],
+    "objections": [
+      {
+        "id": "codex-o1",
+        "alternative_id": "unknown",
+        "category": "suficiencia_de_evidencia",
+        "severity": "medium",
+        "claim": "Faltan listas y cruces para atribuir causas a categorías concretas. Es una limitación del expediente; no se atribuye a una alternativa del otro proveedor porque no se ha recibido.",
+        "status": "open",
+        "evidence_refs": [
+          "gsc.xlsx.reconciliation"
+        ],
+        "resolution_evidence_refs": []
+      }
+    ],
+    "preferred_alternative": "unknown",
+    "questions": [
+      {
+        "id": "codex-q1",
+        "to_agent": "claude",
+        "alternative_id": "unknown",
+        "question": "¿Qué prioridad propone tu alternativa a partir de categories.json y cómo evita interpretar /compresion-frio-y-calor/ (1079 impresiones, posición 1.35) como un problema de contenido sin el cruce consulta-página-dispositivo-país que performance-scope.json declara ausente? No recibí el ID de tu alternativa.",
+        "evidence_refs": [
+          "gsc.xlsx.reconciliation"
+        ]
+      }
+    ]
+  },
+  "model": {
+    "model": "gpt-6.1-sol",
+    "effort": "medium",
+    "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+    "verified_at": "2026-11-08"
+  },
+  "execution": {
+    "exit_code": 0,
+    "timed_out": false,
+    "output_limited": false,
+    "idle_timed_out": false,
+    "cancelled": false,
+    "process_started": true,
+    "process_reaped": true,
+    "stdin_bytes_written": 54408,
+    "context_complete": true,
+    "duration_s": 39.274,
+    "timing": {
+      "spawn_s": 0.00259,
+      "input_complete_s": 0.002806,
+      "first_stdout_s": 3.72201,
+      "first_stderr_s": null,
+      "timeout_phase": null,
+      "event_counts": {
+        "thread.started": 1,
+        "item.completed": 2,
+        "turn.started": 1,
+        "turn.completed": 1
+      },
+      "inference_vs_initialization": "not_separable_without_provider_events"
+    },
+    "output_accounting": {
+      "transport_bytes": 5040,
+      "retained_bytes": 5040,
+      "discarded_progress_bytes": 0,
+      "transport_limit_bytes": 20000000,
+      "retained_limit_bytes": 2000000
+    },
+    "isolation": {
+      "backend": "bubblewrap",
+      "snapshot_read_only": true,
+      "host_home_mounted": false,
+      "network": "enabled_no_destination_firewall",
+      "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+    },
+    "started_at": "2026-11-13T08:53:20.266986+00:00",
+    "prompt_bytes": 54408,
+    "prompt_sha256": "295c42b05217b869a0dba82070c2421b19f721435dec27ac532f5c6060687291",
+    "usage": {
+      "provider_reported": {
+        "input_tokens": 29574,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1128,
+        "reasoning_output_tokens": 60
+      },
+      "measured_cost_available": false,
+      "estimated_cost": null
+    },
+    "limits": {
+      "timeout": 240,
+      "idle_timeout": 90,
+      "startup_timeout": 30,
+      "first_response_timeout": 150
+    },
+    "structured_output": "native_schema",
+    "contract_validation": {
+      "status": "passed",
+      "duration_s": 0.001387
+    }
+  }
+}

@@ -1,0 +1,153 @@
+{
+  "requested_agent": "claude",
+  "effective_agent": "claude",
+  "scope": "phase2 incremental cross-examination and defense only",
+  "input_hashes": {
+    "reports/rhino-performance/indexability-phase2-20261113/evidence-packet.json": "7f1bc2f16a8d48ab98bb5a61cb1e2b7e696b5896fe332a2afac36c4ea279657a",
+    "reports/rhino-performance/indexability-phase2-20261113/source-candidates.json": "dd0646e04b75acc2b5c1209beec3c270bbeb32739aa464a857a583770eaea6d2",
+    "reports/rhino-performance/indexability-phase2-20261113/schema-context-packet.json": "496f4cf79ac0c1e331b6220f6dc6a3d2b4068cb87150169f209a57e9e0ad8b6e",
+    "reports/rhino-performance/indexability-phase2-20261113/limited-completion-plan.json": "a16820c38ac46d9bba0d85eb4d1ff617cec7b5808ec268accfcd5b755c369f11",
+    "reports/rhino-performance/indexability-phase2-20261113/controller-validation.json": "e9f9ce4bb5a1d7cf99c8f97e6e11441436e3748dd1cc222533d9ed41c830c263",
+    "reports/rhino-performance/indexability-phase2-20261113/controller-supplement.json": "65c748d331d2cd7383a39a81d4b38ae6a1fbf081053325247bab578e9e702253",
+    "reports/rhino-performance/indexability-phase2-20261113/category-visibility-historical.json": "dd4b1f76d2babd88b034b03643b20fea75184019775dd9fea63f1ba4e4d795e1"
+  },
+  "response": {
+    "decision": "changes_requested",
+    "summary": "Respondo a codex-q1 con predicado de campos faltantes, no HTTP not_observed. Plan solo investigativo: categorías comerciales sin inspección GSC primero; cuatro solicitudes separadas de 5 URLs, 6 GET nominales cada una, robots obligatorio, intervalo >=2s. Sin identidad editorial/remota actual comprobada: implementation_allowed=false, sin diff. Objeciones de preflight y autoría siguen como condiciones abiertas, sin falso consenso.",
+    "changes": [],
+    "evidence": [
+      "phase2.offline.evidence",
+      "phase2.offline.safety"
+    ],
+    "objections": [
+      {
+        "id": "claude-O1-preflight-campos",
+        "alternative_id": "claude-A-investigar-sin-cambios-solicitudes-separadas",
+        "category": "alcance-verificabilidad",
+        "severity": "medium",
+        "claim": "Condición abierta: el preflight prospectivo es procedimiento documentado, no ejecutor implementado. Debe verificar campos faltantes reales, hashes de fuente, alcance vigente, autorización y marcador de un solo uso por lote; no HTTP not_observed. Corrijo mi imprecisión previa: robots GET es obligatorio y .5 req/s equivale a intervalo >=2s, no 0.5s.",
+        "status": "open",
+        "evidence_refs": [
+          "phase2.offline.safety",
+          "phase2.offline.evidence"
+        ],
+        "resolution_evidence_refs": []
+      },
+      {
+        "id": "claude-O2-autor-emisor-abierta",
+        "alternative_id": "claude-A-investigar-sin-cambios-solicitudes-separadas",
+        "category": "identidad-editorial",
+        "severity": "high",
+        "claim": "Abierta: ningún artefacto guardado demuestra emisor remoto actual ni Person/Organization; emitter_markers=unknown_theme_or_app y los hashes locales son solo candidatos. Bloquea cualquier diff de author y mantiene implementation_allowed=false.",
+        "status": "open",
+        "evidence_refs": [
+          "phase2.offline.evidence",
+          "phase2.offline.safety"
+        ],
+        "resolution_evidence_refs": []
+      }
+    ],
+    "preferred_alternative": "claude-A-investigar-sin-cambios-solicitudes-separadas",
+    "answers": [
+      {
+        "question_id": "codex-q1",
+        "from_agent": "codex",
+        "answer": "Nota: el id es codex-q1 y la pregunta venía de codex hacia mí. Criterio: el preflight por lote comprueba, por cada una de las 5 URLs, que falte realmente al menos un campo requerido en el artefacto guardado (meta robots, X-Robots-Tag/headers, main/H1 y cuerpo), conforme al motivo de limited-completion-plan.json (cuerpos y headers ausentes en las capturas retenidas). No exige HTTP not_observed, pues las 20 ya tienen HTTP 200. Además valida hash del manifiesto, alcance fresco, autorización específica y marcador propio de un solo uso. Sin ampliar los cuatro lotes: 6 GET nominales, máx. 12, robots obligatorio, intervalo >=2s. Es procedimiento documentado, no ejecutor implementado; ninguna operación autorizada ni ejecutada.",
+        "disposition": "revise",
+        "evidence_refs": [
+          "phase2.offline.safety",
+          "phase2.offline.evidence"
+        ]
+      }
+    ],
+    "withdrawn_alternatives": [],
+    "revision_notes": [
+      "Corregida imprecisión original: robots GET es obligatorio; se mantiene la cuenta de 6 GET nominales por 5 URLs.",
+      "Corregida imprecisión: .5 solicitudes/s equivale a intervalo >=2s, no 0.5s.",
+      "Datos SearchAnalytics de categorías: visibilidad histórica, no indexación actual, ranking causal ni keywords demostradas.",
+      "Pendientes como solicitudes independientes: cuatro lotes de 5 URLs, export GSC con credenciales, consulta oficial Tiendanube sobre blog (preparada, no enviada).",
+      "Prioridad categorías: pistolas-de-masaje, terapia-fria, compresion-frio-y-calor (sin inspección); separar bloqueo de indexación, calidad editorial y posicionamiento sin prometer tráfico.",
+      "D010/D050 posibles falsos positivos de tarjetas secundarias; D011 amp%3B origen indeterminado; D070 no demuestra imagen ausente."
+    ]
+  },
+  "model": {
+    "model": "claude-sonnet-5-5",
+    "effort": "medium",
+    "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+    "verified_at": "2026-11-08"
+  },
+  "execution": {
+    "exit_code": 0,
+    "timed_out": false,
+    "output_limited": false,
+    "idle_timed_out": false,
+    "cancelled": false,
+    "process_started": true,
+    "process_reaped": true,
+    "stdin_bytes_written": 166541,
+    "context_complete": true,
+    "duration_s": 14.938,
+    "timing": {
+      "spawn_s": 0.000859,
+      "input_complete_s": 1.538228,
+      "first_stdout_s": 2.735934,
+      "first_stderr_s": null,
+      "timeout_phase": null,
+      "event_counts": {
+        "system": 2,
+        "stream_event": 265,
+        "event:message_start": 1,
+        "event:content_block_start": 1,
+        "event:content_block_delta": 260,
+        "assistant": 1,
+        "event:content_block_stop": 1,
+        "user": 1,
+        "event:message_delta": 1,
+        "event:message_stop": 1,
+        "rate_limit_event": 1,
+        "result": 1
+      },
+      "inference_vs_initialization": "not_separable_without_provider_events"
+    },
+    "output_accounting": {
+      "transport_bytes": 105456,
+      "retained_bytes": 105456,
+      "discarded_progress_bytes": 0,
+      "transport_limit_bytes": 20000000,
+      "retained_limit_bytes": 2000000
+    },
+    "isolation": {
+      "backend": "bubblewrap",
+      "snapshot_read_only": true,
+      "host_home_mounted": false,
+      "network": "enabled_no_destination_firewall",
+      "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+    },
+    "started_at": "2026-11-13T08:24:40.022839+00:00",
+    "prompt_bytes": 166541,
+    "prompt_sha256": "b15d8cca94f91486f3a152fb95e83de5eeb41de0a6dc950bf097c340e225a9a8",
+    "usage": {
+      "provider_reported": {
+        "total_cost_usd": 0.31267,
+        "duration_ms": 11983,
+        "input_tokens": 2,
+        "cache_creation_input_tokens": 73924,
+        "cache_read_input_tokens": 0,
+        "output_tokens": 1697
+      },
+      "measured_cost_available": true,
+      "estimated_cost": null
+    },
+    "limits": {
+      "timeout": 240,
+      "idle_timeout": 90,
+      "startup_timeout": 30,
+      "first_response_timeout": 120
+    },
+    "structured_output": "native_schema",
+    "contract_validation": {
+      "status": "passed",
+      "duration_s": 0.017306
+    }
+  }
+}

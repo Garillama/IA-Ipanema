@@ -1,0 +1,137 @@
+{
+  "requested_agent": "claude",
+  "effective_agent": "claude",
+  "scope": "incremental organic opportunities and evidence intake only",
+  "input_hashes": {
+    "reports/rhino-performance/indexability-phase2-20261113/native-alternative-template-review-20261113/review-packet.json": "b2feacbd57a84b4148732cce6505433af9dd45e3039611ee50a6013a8cae3fac",
+    "reports/rhino-performance/indexability-phase2-20261113/native-alternative-template-review-20261113/controller-validation.json": "fc594ffef6a01e9e4a0e8be82c0c2ac4dbb1bf1ec10b617d49106d32983bca20",
+    "reports/rhino-performance/indexability-phase2-20261113/native-alternative-template-review-20261113/official-source-facts.json": "a2cecff413379ff6552f1c01f2d9f5784fb44e4ceb05db1f95021406db8c2afe",
+    "reports/rhino-performance/indexability-phase2-20261113/native-alternative-template-review-20261113/local-evidence-reused.json": "d7fbf1ac8578f684f61e8698209f2bc41d08b0d6468d3674a9d4bcde78861930"
+  },
+  "response": {
+    "decision": "changes_requested",
+    "summary": "La guía oficial (seo.editorial.official-template-guide) cierra la hipótesis general de plantillas alternativas de categoría (crear, copiar, asignar por entidad con diseño publicado, conteo). No prueba aplicabilidad al Rhino personalizado, ni la posición del rich-text tras la rejilla, ni la preservación de filtros/paginación/SEO/responsive. Se mantiene needs_evidence e implementation=false. No se autoriza crear, guardar ni asignar. Falta verificación de solo lectura de la UI y del estado de asignación actual.",
+    "changes": [],
+    "evidence": [
+      "seo.editorial.official-template-guide"
+    ],
+    "objections": [
+      {
+        "id": "claude-obj-1",
+        "alternative_id": "native-alternative-category-template",
+        "category": "aplicabilidad / evidencia",
+        "severity": "high",
+        "claim": "La guía describe soporte general de la plataforma, no el editor del Rhino personalizado (diseño 14828608/tienda 7400935 sin verificar). La posición del rich-text tras el grid es inferencia local (LOCAL-01, LOCAL-03), no cita de la guía, y el contenedor hybridScroll no se ha probado. Esto no habilita implementar ni afirmar preservación de filtros, paginación, SEO o responsive.",
+        "status": "open",
+        "evidence_refs": [
+          "seo.editorial.official-template-guide"
+        ],
+        "resolution_evidence_refs": []
+      },
+      {
+        "id": "claude-obj-2",
+        "alternative_id": "native-alternative-category-template",
+        "category": "aislamiento / prerrequisitos",
+        "severity": "medium",
+        "claim": "El conteo de asignaciones (DOC-03) no prueba qué categorías usan la plantilla actual. Hace falta la lista de asignación de Presoterapia, TerapiaFria y Accesorios antes de cualquier cambio. Crear una plantilla sin asignar sin otros cambios de diseño tampoco está demostrado. Si falta el selector por ser un tema personalizado, no se debe publicar otro diseño ni actualizar/bifurcar.",
+        "status": "open",
+        "evidence_refs": [
+          "seo.editorial.official-template-guide"
+        ],
+        "resolution_evidence_refs": []
+      }
+    ],
+    "preferred_alternative": "Plantilla alternativa nativa de categoría copiada de la configuración actual, con rich-text existente tras listado/paginación, asignada solo a Presoterapia. Sigue en needs_evidence e implementation=false hasta verificar en solo lectura el editor y las asignaciones actuales.",
+    "questions": [
+      {
+        "id": "claude-q1",
+        "to_agent": "codex",
+        "alternative_id": "native-alternative-category-template",
+        "question": "¿Qué fuente concreta (archivo con hash o evidencia del propietario) demuestra que el diseño publicado en 14828608/7400935 es el mismo que las copias locales con hash, y que el editor ofrece el selector de plantilla de categoría y la sección rich-text tras product_list, sin crear ni guardar nada?",
+        "evidence_refs": [
+          "seo.editorial.official-template-guide"
+        ]
+      }
+    ]
+  },
+  "model": {
+    "model": "claude-sonnet-5-5",
+    "effort": "medium",
+    "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+    "verified_at": "2026-11-08"
+  },
+  "execution": {
+    "exit_code": 0,
+    "timed_out": false,
+    "output_limited": false,
+    "idle_timed_out": false,
+    "cancelled": false,
+    "process_started": true,
+    "process_reaped": true,
+    "stdin_bytes_written": 36117,
+    "context_complete": true,
+    "duration_s": 10.655,
+    "timing": {
+      "spawn_s": 0.0006,
+      "input_complete_s": 0.00072,
+      "first_stdout_s": 1.293354,
+      "first_stderr_s": null,
+      "timeout_phase": null,
+      "event_counts": {
+        "system": 4,
+        "stream_event": 202,
+        "event:message_start": 1,
+        "event:content_block_start": 1,
+        "event:content_block_delta": 197,
+        "assistant": 1,
+        "event:content_block_stop": 1,
+        "user": 1,
+        "event:message_delta": 1,
+        "event:message_stop": 1,
+        "rate_limit_event": 1,
+        "result": 1
+      },
+      "inference_vs_initialization": "not_separable_without_provider_events"
+    },
+    "output_accounting": {
+      "transport_bytes": 109969,
+      "retained_bytes": 109969,
+      "discarded_progress_bytes": 0,
+      "transport_limit_bytes": 20000000,
+      "retained_limit_bytes": 2000000
+    },
+    "isolation": {
+      "backend": "bubblewrap",
+      "snapshot_read_only": true,
+      "host_home_mounted": false,
+      "network": "enabled_no_destination_firewall",
+      "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+    },
+    "started_at": "2026-11-13T17:19:49.090533+00:00",
+    "prompt_bytes": 36117,
+    "prompt_sha256": "064297e4cafdce008b756cc2cdae1602988f1af1ef00dcaa8abe96cb31d63958",
+    "usage": {
+      "provider_reported": {
+        "total_cost_usd": 0.0742174,
+        "duration_ms": 8973,
+        "input_tokens": 2,
+        "cache_creation_input_tokens": 15499,
+        "cache_read_input_tokens": 2674,
+        "output_tokens": 1195
+      },
+      "measured_cost_available": true,
+      "estimated_cost": null
+    },
+    "limits": {
+      "timeout": 240,
+      "idle_timeout": 90,
+      "startup_timeout": 30,
+      "first_response_timeout": 120
+    },
+    "structured_output": "native_schema",
+    "contract_validation": {
+      "status": "passed",
+      "duration_s": 0.005838
+    }
+  }
+}

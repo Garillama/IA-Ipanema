@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 from collections import Counter, defaultdict, deque
+from dataclasses import replace
 import csv
 import hashlib
 import json
@@ -9,7 +10,7 @@ from urllib.parse import urljoin, urlsplit
 
 from ..core import IpanemaError, now
 from .adapters import authorize_url
-from .crawl_policy import AGENT, Fetcher, Policy, normalize
+from .crawl_policy import AGENT, Fetcher, Policy, Limits, normalize
 from .extractor import extract
 from .indexability import Content, classify, layers, page_type, pagination, readiness, template_checks
 from .page_audit import audit_snapshot, crawlable
@@ -89,17 +90,40 @@ def _sanitized_audit(snapshot, project, kind):
     return audit_snapshot(project, snapshot, kind)
 
 
-def crawl(project, *, limits=None, allow_network=False, transport=None, captures=None, clock=None, sleep=None):
+def pilot_limits(limits=None):
+    """Opt-in caps only; ordinary crawl defaults and behavior remain unchanged."""
+    limits = (limits or Limits()).validate()
+    return replace(limits, max_urls=8, max_depth=0, max_sitemaps=0,
+                   max_requests=min(12, limits.max_requests), requests_per_second=min(.5, limits.requests_per_second),
+                   max_seconds=min(120, limits.max_seconds), timeout=min(20, limits.timeout),
+                   max_bytes=min(2_000_000, limits.max_bytes), max_redirects=min(3, limits.max_redirects), concurrency=1)
+
+
+def crawl(project, *, limits=None, allow_network=False, transport=None, captures=None, clock=None, sleep=None,
+          targets=None, on_event=None):
     authorize_url(project, project.data['public_url'])
+    closed = targets is not None
+    limits = pilot_limits(limits) if closed else limits
     policy = Policy(project.data['public_url'], limits)
+    if closed:
+        if not isinstance(targets, (list, tuple)) or len(targets) != 5 or len(set(targets)) != 5:
+            raise IpanemaError('El piloto exige cinco destinos únicos.')
+        if any(not isinstance(u, str) or policy.check(u) != u for u in targets):
+            raise IpanemaError('Destinos fuera del contrato literal del piloto.')
+        targets = tuple(targets)
     options = {k: v for k, v in [('clock', clock), ('sleep', sleep)] if v is not None}
-    fetcher = Fetcher(policy, allow_network=allow_network, transport=transport, **options)
+    fetcher = Fetcher(policy, allow_network=allow_network, transport=transport, on_event=on_event, **options)
     result = {'kind': 'seo-crawl-v4', 'project': project.id, 'at': now(), 'home': policy.home,
               'source': 'offline_injected_transport' if transport else 'live_read_only_http',
               'urls': [], 'edges': [], 'sitemaps': [], 'sitemap_entries': [], 'errors': [], 'excluded': [],
               'google': {'connection': 'not_consulted', 'indexation_observed': False},
               'robots': {'known': False, 'status': None}, 'remote_mutations': False}
+    if closed:
+        result['selected_scope'] = list(targets)
+        result['whole_site_complete'] = False
     robot = Robots()
+    redirects_used = 0
+    redirect_targets = {}
     robots_text, robots_known = None, False
     def excluded(reason, source=None):
         result['excluded_total'] = result.get('excluded_total', 0) + 1
@@ -123,7 +147,14 @@ def crawl(project, *, limits=None, allow_network=False, transport=None, captures
             if response['status'] in (301, 302, 303, 307, 308):
                 if not response['headers'].get('location'):
                     raise IpanemaError('Redirección sin Location.')
-                robots_url = policy.check(urljoin(robots_url, response['headers'].get('location', '')), document=True)
+                target = policy.check(urljoin(robots_url, response['headers'].get('location', '')), document=True)
+                if closed:
+                    if redirects_used >= policy.limits.max_redirects:
+                        raise IpanemaError('Presupuesto global de redirecciones agotado.')
+                    redirects_used += 1
+                    if on_event:
+                        on_event({'event': 'planned', 'url': target})
+                robots_url = target
                 continue
             robots_text = response['body'].decode('utf-8', 'replace') if response['status'] == 200 else '' if response['status'] in (404, 410) else None
             robots_known = robots_text is not None
@@ -140,8 +171,10 @@ def crawl(project, *, limits=None, allow_network=False, transport=None, captures
             break
         if not robots_known and not fetcher.stop_reason:
             result['errors'].append({'operation': 'robots', 'reason': 'robots_unavailable_no_crawl'})
+            if closed:
+                fetcher.stop_reason = 'robots_unknown'
         # Solo metadata; jamás usa sitemap como semillas de navegación.
-        sitemap_queue = deque((url, 0) for url in ((robot.site_maps() or [urljoin(policy.home, 'sitemap.xml')]) if robots_known else []))
+        sitemap_queue = deque((url, 0) for url in ((robot.site_maps() or [urljoin(policy.home, 'sitemap.xml')]) if robots_known and not closed else []))
         sitemap_seen, sitemap_urls, normalized_sitemap = set(), [], set()
         sitemap_redirect_targets = {}
         while sitemap_queue and len(sitemap_seen) < policy.limits.max_sitemaps and not fetcher.stop_reason:
@@ -211,10 +244,11 @@ def crawl(project, *, limits=None, allow_network=False, transport=None, captures
             result['errors'].append({'operation': 'sitemap', 'reason': 'unresolved_sitemap_documents'})
         if sitemap_queue:
             result['errors'].append({'operation': 'sitemap', 'reason': 'sitemap_document_limit'})
-        queue, queued, seen, path_variants = deque([(policy.home, 0, 'home', 0)]), {policy.home}, set(), defaultdict(set)
+        queue = deque((u, None, 'selected', 0) for u in targets) if closed else deque([(policy.home, 0, 'home', 0)])
+        queued, seen, path_variants = set(targets) if closed else {policy.home}, set(), defaultdict(set)
         navigation_exhausted = False
         # Chequeos de URLs adicionales del sitemap son independientes del BFS de home.
-        sitemap_checks_added = False
+        sitemap_checks_added = closed
         while robots_known and not fetcher.stop_reason and len(seen) < policy.limits.max_urls:
             if not queue:
                 navigation_exhausted = True
@@ -245,9 +279,16 @@ def crawl(project, *, limits=None, allow_network=False, transport=None, captures
             result['urls'].append(node)
             google_allowed = robot.can_fetch('Googlebot', url)
             node['robots'] = {'crawler_allowed': allowed(url), 'googlebot_allowed': google_allowed}
+            if closed and not google_allowed:
+                fetcher.stop_reason = 'googlebot_disallowed'
+                node['error'] = 'blocked_by_robots_for_googlebot'
+                break
             if not allowed(url):
                 node.update({'status': None, 'indexability': classify({'url': url}, googlebot_allowed=google_allowed, robots_known=True),
                              'error': 'blocked_by_robots_for_audit_agent'})
+                if closed:
+                    fetcher.stop_reason = 'audit_agent_disallowed'
+                    break
                 continue
             try:
                 response = fetcher.get(url)
@@ -260,6 +301,21 @@ def crawl(project, *, limits=None, allow_network=False, transport=None, captures
                         raise IpanemaError('Redirección sin Location.')
                     target = policy.check(urljoin(url, response['headers'].get('location', '')))
                     node['redirect'] = target
+                    if closed:
+                        cursor, chain = target, {url}
+                        while cursor is not None:
+                            if cursor in chain:
+                                raise IpanemaError('Ciclo de redirección en piloto.')
+                            chain.add(cursor)
+                            cursor = redirect_targets.get(cursor)
+                        redirect_targets[url] = target
+                        if redirects_used >= policy.limits.max_redirects:
+                            raise IpanemaError('Presupuesto global de redirecciones agotado.')
+                        redirects_used += 1
+                        if not allowed(target) or not robot.can_fetch('Googlebot', target):
+                            raise IpanemaError('Destino redirigido bloqueado por robots.')
+                        if on_event:
+                            on_event({'event': 'planned', 'url': target})
                     if len(result['edges']) < policy.limits.max_edges:
                         result['edges'].append({'source': url, 'target': target, 'text': '', 'relation': 'redirect'})
                     else:
@@ -273,7 +329,10 @@ def crawl(project, *, limits=None, allow_network=False, transport=None, captures
                         queued.add(target)
                         queue.append((target, depth, 'redirect', redirects + 1))
                     elif target in seen or redirects >= policy.limits.max_redirects:
-                        node['redirect_limit_or_cycle'] = True
+                        if closed and target in seen:
+                            node['redirect_response_already_observed'] = True
+                        else:
+                            node['redirect_limit_or_cycle'] = True
                 snap = extract(response['body'].decode('utf-8', 'replace') if response['status'] == 200 and not fetcher.stop_reason else '',
                                url, status=response['status'], headers=node['headers'])
                 node['indexability'] = classify(snap, googlebot_allowed=google_allowed, robots_known=True)
@@ -336,15 +395,19 @@ def crawl(project, *, limits=None, allow_network=False, transport=None, captures
                 node['error'] = str(exc)
                 node.setdefault('status', None)
                 node.setdefault('indexability', {'state': 'insufficient_evidence', 'indexation_observed': False})
+                if closed:
+                    fetcher.stop_reason = fetcher.stop_reason or 'closed_scope_error'
         result['navigation_queue_remaining'] = len(queue)
         result['navigation_exhausted_before_sitemap_checks'] = navigation_exhausted
         result['sitemap_urls'] = sitemap_urls
     except (IpanemaError, ValueError) as exc:
         result['errors'].append({'operation': 'crawl', 'reason': str(exc)})
+        if closed:
+            fetcher.stop_reason = fetcher.stop_reason or 'closed_scope_error'
     result['provenance'] = fetcher.provenance()
     result['sitemap_urls'] = result.get('sitemap_urls', [])
     verified_urls = {n['url'] for n in result['urls'] if n.get('status') is not None and not n.get('error')}
-    required_urls = {policy.home, *result['sitemap_urls'], *(e['target'] for e in result['edges'])}
+    required_urls = set(targets) | {n['redirect'] for n in result['urls'] if n.get('redirect')} if closed else {policy.home, *result['sitemap_urls'], *(e['target'] for e in result['edges'])}
     result['verification_coverage'] = {'required_count': len(required_urls), 'verified_count': len(required_urls & verified_urls),
                                        'unverified_required_urls': sorted(required_urls - verified_urls),
                                        'meaning': 'home, accepted sitemap URLs and observed permitted internal/redirect targets; HTTP 404 is checked, not healthy'}
@@ -352,10 +415,15 @@ def crawl(project, *, limits=None, allow_network=False, transport=None, captures
                     not any(n.get('error') or n.get('redirect_limit_or_cycle') for n in result['urls']) and
                     not result.get('navigation_queue_remaining') and
                     not any(result.get('excluded_by_reason', {}).get(reason, 0) for reason in ('depth_limit', 'query_variants_limit', 'discovery_budget', 'edge_budget')))
-    result['graph'] = graph(result['urls'], result['edges'], policy.home, result['sitemap_urls'], complete=complete)
+    result['graph'] = graph(result['urls'], result['edges'], policy.home, result['sitemap_urls'], complete=complete and not closed)
+    if closed:
+        result['graph']['complete_for_selected_scope'] = complete
     result['coverage_by_type'] = dict(Counter(n.get('page_type', 'unknown') for n in result['urls']))
     result['indexability_counts'] = dict(Counter(n.get('indexability', {}).get('state', 'insufficient_evidence') for n in result['urls']))
-    result['state'] = 'stopped' if fetcher.stop_reason else 'complete_for_policy' if complete else 'partial'
+    if closed:
+        result['redirect_hops_used'] = redirects_used
+        result['verification_coverage']['meaning'] = 'selected targets and their accepted redirects only; never site coverage'
+    result['state'] = 'stopped' if fetcher.stop_reason else ('complete_for_selected_scope' if closed else 'complete_for_policy') if complete else 'partial'
     result['backlog'] = backlog(result)
     result['limitations'] = ['No es Googlebot ni prueba de indexación; DOM solo si se aporta captura explícita.',
                             'Concurrencia real 1, límites explícitos. Sin JS de terceros durante el rastreo HTTP.',

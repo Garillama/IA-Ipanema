@@ -1,0 +1,46 @@
+{
+  "matrix_csv": "reports/rhino-performance/indexability-20261112/site-continuation/url-matrix.csv",
+  "matrix_json": "reports/rhino-performance/indexability-20261112/site-continuation/url-matrix.json",
+  "before_hashes": {
+    "csv": "5d12dccb6d24ee8e7eded9e387057f46e61aadeb6e78b3ec8e31354c8466c3a5",
+    "json": "c7c2718251df1137559a60dc229dd6e4f9c6f08948969b44b1b640f41aa3bf47"
+  },
+  "after_hashes": {
+    "csv": "39f2cc9cee3b0c9c8f8705fe446cde639b0e88e6e5d16ee910b9a5dbd64641ac",
+    "json": "c61b7e1ac68bb0b321698e7ee2a39ed6e99288e7990132c1b53d360445c8ae06"
+  },
+  "backup_csv": "reports/runs/rhino-performance/20261113T064801-authorized-five-url-batch03/url-matrix-before.csv",
+  "backup_json": "reports/runs/rhino-performance/20261113T064801-authorized-five-url-batch03/url-matrix-before.json",
+  "exactly_five_rows_updated": true,
+  "updated_URLs": [
+    "https://rhino-performance.com/productos/tobillera-frio-y-calor/",
+    "https://rhino-performance.com/productos/hombrera-frio-y-calor/",
+    "https://rhino-performance.com/blog/posts/errores-comunes-al-usar-los-brazos-de-presoterapia-c80d6e476fb3/",
+    "https://rhino-performance.com/blog/posts/lesiones-por-estres-sintomas-y-como-tratarlas-d080cbc403b8/",
+    "https://rhino-performance.com/blog/posts/claves-para-potenciar-los-resultados-del-ejercicio-a823a76cbadd/"
+  ],
+  "Google_fields_unchanged": true,
+  "other_120_rows_unchanged": true,
+  "before": {
+    "total_urls": 125,
+    "HTML_total": 124,
+    "HTML_with_individual_HTTP": 59,
+    "pending_individual_HTTP": 65,
+    "pending_by_type": {
+      "product": 7,
+      "article": 58
+    }
+  },
+  "after": {
+    "total_urls": 125,
+    "HTML_total": 124,
+    "HTML_with_individual_HTTP": 64,
+    "pending_individual_HTTP": 60,
+    "pending_by_type": {
+      "product": 5,
+      "article": 55
+    }
+  },
+  "original_pending75_and_pending70_files_preserved": true,
+  "next_pending_list": "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/live-batch03-20261113/pending-60.csv"
+}

@@ -1,0 +1,68 @@
+--- a/sections/google-reviews.tpl
++++ b/sections/google-reviews.tpl
+@@ -361,6 +361,41 @@
+ 			return card;
+ 		}
+ 
++		// Keep the snapshot and API refresh immediate; prepare geometry near first use.
++		var layoutEnabled = !('IntersectionObserver' in window);
++		var layoutObserver = null;
++
++		function measureLayout() {
++			if (!layoutEnabled) return;
++			setupMore();
++			updateArrows();
++		}
++
++		function activateLayout() {
++			if (layoutEnabled) return;
++			layoutEnabled = true;
++			if (layoutObserver) { layoutObserver.disconnect(); layoutObserver = null; }
++			root.removeEventListener('focusin', activateLayout);
++			root.removeEventListener('pointerdown', activateLayout, true);
++			measureLayout();
++		}
++
++		if (!layoutEnabled) {
++			try {
++				layoutObserver = new IntersectionObserver(function (entries) {
++					for (var i = 0; i < entries.length; i++) {
++						if (entries[i].isIntersecting) { activateLayout(); break; }
++					}
++				}, { rootMargin: '600px 0px' });
++				layoutObserver.observe(root);
++				root.addEventListener('focusin', activateLayout);
++				root.addEventListener('pointerdown', activateLayout, true);
++			} catch (e) {
++				if (layoutObserver) { layoutObserver.disconnect(); layoutObserver = null; }
++				layoutEnabled = true;
++			}
++		}
++
+ 		function setupMore() {
+ 			var cards = root.querySelectorAll('.hgr-carousel__card');
+ 			var states = [];
+@@ -425,8 +460,7 @@
+ 			track.appendChild(frag);
+ 			track.scrollLeft = 0;
+ 			if (source && source.reviews_count && countEl) countEl.textContent = source.reviews_count;
+-			setupMore();
+-			updateArrows();
++			measureLayout();
+ 		}
+ 
+ 		if (apiUrl) {
+@@ -439,10 +473,9 @@
+ 				.catch(function () {});
+ 		}
+ 
+-		setupMore();
+-		updateArrows();
+-		window.addEventListener('load', function () { setupMore(); updateArrows(); });
+-		window.addEventListener('resize', function () { setupMore(); updateArrows(); });
++		measureLayout();
++		window.addEventListener('load', measureLayout);
++		window.addEventListener('resize', measureLayout);
+ 	}
+ 
+ 	document.querySelectorAll('[data-hgr-carousel]').forEach(init);

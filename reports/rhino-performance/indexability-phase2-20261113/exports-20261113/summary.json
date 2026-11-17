@@ -1,0 +1,51 @@
+{
+  "inventory_HTML": 124,
+  "HTTP_baseline_verified": 124,
+  "exact_drilldown_matches_inventory": 0,
+  "original_inspections_retained": 15,
+  "original_known_indexed_inspections": 10,
+  "uninspected_inventory_URLs": 109,
+  "latest_coverage_chart_date": "2026-11-08",
+  "coverage_indexed_aggregate": 141.0,
+  "coverage_not_indexed_aggregate": 347.0,
+  "supplied_drilldown_counts": {
+    "Página alternativa con etiqueta canónica adecuada": 148,
+    "Página con redirección": 112,
+    "Bloqueada por robots.txt": 16
+  },
+  "candidate_alias_counts_NOT_transferred": {
+    "Página alternativa con etiqueta canónica adecuada": 113,
+    "Página con redirección": 2
+  },
+  "robots_rows_sensitive_checkout_or_add_to_cart": 16,
+  "performance_period": {
+    "first_chart_date": "2026-08-11",
+    "last_chart_date": "2026-11-10",
+    "filter_label": [
+      [
+        "Filtrar",
+        "Valor"
+      ],
+      [
+        "Tipo de búsqueda",
+        "Web (basada en texto)"
+      ],
+      [
+        "Fecha",
+        "Últimos 3 meses"
+      ]
+    ],
+    "search_type": "Web (basada en texto)"
+  },
+  "performance_pages": 440,
+  "performance_exact_inventory_matches": 108,
+  "query_rows": 1000,
+  "missing_reason_detail_lists": [
+    "No se ha encontrado (404):33",
+    "Rastreada: actualmente sin indexar:33",
+    "Descubierta: actualmente sin indexar:5",
+    "Indexed URL examples:aggregate141 only"
+  ],
+  "no_new_storefront_or_account_requests": true,
+  "no_implementation": true
+}

@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "scope": "Local evidence recording and explicitly authorized ADR-only annotation",
+  "previous_ADR_sha256": "52f9775e0d9a07b637dbcd5b675459de6473b17c2abed7e266fc44274854050e",
+  "updated_ADR_sha256": "c173806408a02c91a19a31fcde7345f6d564330e5158b34e00d0b60ea89ce49f",
+  "historical_preimage_preserved": true,
+  "changed_existing_files": [
+    "ADR.json"
+  ],
+  "new_evidence_directory": "reports/rhino-performance/indexability-phase2-20261113/native-alternative-template-review-20261113/admin-inspection-preparation/owner-confirmation-01",
+  "status": "needs_evidence",
+  "implementation_allowed": false,
+  "no_external_requests_or_production_changes": true,
+  "historical_hash_manifests": "Retained unchanged as historical receipts; this amendment has its own before/after hash record."
+}

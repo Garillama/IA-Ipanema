@@ -1,0 +1,339 @@
+{
+  "review_is_independent": true,
+  "review_decision": "changes_requested",
+  "review_not_integration_authorization": true,
+  "findings": {
+    "N1": {
+      "assessment": "confirmed_by_source_and_pure_serialization_comparison",
+      "detail": "Mismo participation_sha256 con serialización distinta. El contexto real no emite permissions_sha256. No se ejecutó binding ni QA adicional.",
+      "native_policy_sha256": "9ff597857187450dc19d945e8124e6a50c9a76a12101de1d08f41ada93399d8c",
+      "candidate_policy_sha256": "56b0c3927ca4ea6c791939e7918655a5e7e48c48ab0e5924491b50f5c7d827c0"
+    },
+    "N2": {
+      "assessment": "confirmed_structural_contract_gap",
+      "detail": "evaluate no consume advance_objection ni sus eventos; cierre por answers+resolución. La confirmación del revisor sí se exige por binding, pero no se exige esa máquina de estados. No se reprodujo un cierre real."
+    },
+    "N3": {
+      "assessment": "confirmed_structure_with_trust_boundary_qualification",
+      "detail": "Historial opcional y migración entre candidatos ausente; merge de mismo candidato sucede después de continue. Bypass es condicional a un llamador que omita/maneje mal el historial, que hoy se declara confiable. No hay bypass operativo demostrado ni fallo real del controlador acreditado."
+    },
+    "N4": {
+      "assessment": "acknowledged_trust_boundary_not_native_identity_proof",
+      "detail": "Hash sin clave y principal aportado por controlador no autentican procedencia. La documentación y docstrings ya reconocían esta frontera; no es una explotación de producción nueva. Falta hacer explícita esta limitación en resultado/API y separar supersedes de identidad. No se requiere automáticamente una infraestructura MAC nueva sin evaluar alternativa mínima."
+    },
+    "N5": {
+      "assessment": "integration_dependency_confirmed_policy_suggestion_constrained",
+      "detail": "QA actual sin hashes de cobertura no puede promoverse y debe seguir insuficiente; esta limitación ya está documentada. Theme no pertenece al alcance autorizado. Que el parser admita otro shape de política no habilita CommandCode: permanece prohibido/deshabilitado. No se ejecutará ni se modificará política para satisfacer una prueba."
+    },
+    "N6": {
+      "assessment": "bounded_cost_hypothesis_not_benchmark",
+      "detail": "Relectura por recibo y recalculo de hashes visibles por inspección. Aproximación de4GB es cota de trabajo repetido a máximos, no medición de memoria ni transferencia de red; no ejecutar benchmark no solicitado."
+    },
+    "N7": {
+      "assessment": "known_maintenance_coupling_not_demonstrated_semantic_duplicate",
+      "detail": "Dependencia privada bidireccional sigue; _proven se importa en evaluate, no en read_legacy_receipts como dice parte de la evidencia original. Parser de formato no vincula contexto por diseño; bind_receipt lo comprueba después. No se ha demostrado que wrapper y parser realicen la misma tarea."
+    },
+    "N8": {
+      "assessment": "mixed_observation_with_inaccurate_source_ranges",
+      "detail": "Dos harnesses, digest importado sin uso y pruebas dependientes de política actual son visibles. La recomendación de dividir evaluate no obliga a un refactor fuera de alcance. Algunas líneas de la clase de pruebas son incorrectas; se conservan sin reescribir respuesta."
+    }
+  },
+  "citation_audit": [
+    {
+      "id": "N1",
+      "original": {
+        "file": "tools/ipanema/orchestration/code_review.py",
+        "function": "evaluate",
+        "start": 311,
+        "end": 312
+      },
+      "actual_named_definitions": [
+        [
+          272,
+          455
+        ]
+      ],
+      "range_within_named_definition": true
+    },
+    {
+      "id": "N1",
+      "original": {
+        "file": "tools/ipanema/orchestration/code_review.py",
+        "function": "_hash",
+        "start": 22,
+        "end": 24
+      },
+      "actual_named_definitions": [
+        [
+          23,
+          25
+        ]
+      ],
+      "range_within_named_definition": false
+    },
+    {
+      "id": "N1",
+      "original": {
+        "file": "tools/ipanema/orchestration/council_runtime.py",
+        "function": "binding",
+        "start": 26,
+        "end": 37
+      },
+      "actual_named_definitions": [
+        [
+          26,
+          36
+        ]
+      ],
+      "range_within_named_definition": false
+    },
+    {
+      "id": "N2",
+      "original": {
+        "file": "tools/ipanema/orchestration/code_review.py",
+        "function": "advance_objection",
+        "start": 219,
+        "end": 277
+      },
+      "actual_named_definitions": [
+        [
+          218,
+          270
+        ]
+      ],
+      "range_within_named_definition": false
+    },
+    {
+      "id": "N2",
+      "original": {
+        "file": "tools/ipanema/orchestration/code_review.py",
+        "function": "evaluate",
+        "start": 429,
+        "end": 440
+      },
+      "actual_named_definitions": [
+        [
+          272,
+          455
+        ]
+      ],
+      "range_within_named_definition": true
+    },
+    {
+      "id": "N3",
+      "original": {
+        "file": "tools/ipanema/orchestration/code_review.py",
+        "function": "evaluate",
+        "start": 345,
+        "end": 353
+      },
+      "actual_named_definitions": [
+        [
+          272,
+          455
+        ]
+      ],
+      "range_within_named_definition": true
+    },
+    {
+      "id": "N3",
+      "original": {
+        "file": "tools/ipanema/orchestration/code_review.py",
+        "function": "evaluate",
+        "start": 367,
+        "end": 400
+      },
+      "actual_named_definitions": [
+        [
+          272,
+          455
+        ]
+      ],
+      "range_within_named_definition": true
+    },
+    {
+      "id": "N4",
+      "original": {
+        "file": "tools/ipanema/orchestration/code_review.py",
+        "function": "bind_receipt",
+        "start": 149,
+        "end": 196
+      },
+      "actual_named_definitions": [
+        [
+          149,
+          195
+        ]
+      ],
+      "range_within_named_definition": false
+    },
+    {
+      "id": "N4",
+      "original": {
+        "file": "tools/ipanema/orchestration/code_review.py",
+        "function": "principal_valid",
+        "start": 140,
+        "end": 146
+      },
+      "actual_named_definitions": [
+        [
+          140,
+          146
+        ]
+      ],
+      "range_within_named_definition": true
+    },
+    {
+      "id": "N4",
+      "original": {
+        "file": "tools/ipanema/orchestration/code_review.py",
+        "function": "checked_bindings",
+        "start": 199,
+        "end": 217
+      },
+      "actual_named_definitions": [
+        [
+          198,
+          215
+        ]
+      ],
+      "range_within_named_definition": false
+    },
+    {
+      "id": "N5",
+      "original": {
+        "file": "tools/ipanema/orchestration/code_review.py",
+        "function": "bind_receipt",
+        "start": 172,
+        "end": 178
+      },
+      "actual_named_definitions": [
+        [
+          149,
+          195
+        ]
+      ],
+      "range_within_named_definition": true
+    },
+    {
+      "id": "N5",
+      "original": {
+        "file": "tools/ipanema/orchestration/council_runtime.py",
+        "function": "deliberate",
+        "start": 132,
+        "end": 138
+      },
+      "actual_named_definitions": [
+        [
+          122,
+          305
+        ]
+      ],
+      "range_within_named_definition": true
+    },
+    {
+      "id": "N6",
+      "original": {
+        "file": "tools/ipanema/orchestration/code_review.py",
+        "function": "bind_receipt",
+        "start": 164,
+        "end": 182
+      },
+      "actual_named_definitions": [
+        [
+          149,
+          195
+        ]
+      ],
+      "range_within_named_definition": true
+    },
+    {
+      "id": "N6",
+      "original": {
+        "file": "tools/ipanema/orchestration/code_review.py",
+        "function": "checked_bindings",
+        "start": 199,
+        "end": 217
+      },
+      "actual_named_definitions": [
+        [
+          198,
+          215
+        ]
+      ],
+      "range_within_named_definition": false
+    },
+    {
+      "id": "N7",
+      "original": {
+        "file": "tools/ipanema/orchestration/code_review.py",
+        "function": "read_legacy_receipts",
+        "start": 124,
+        "end": 137
+      },
+      "actual_named_definitions": [
+        [
+          124,
+          137
+        ]
+      ],
+      "range_within_named_definition": true
+    },
+    {
+      "id": "N7",
+      "original": {
+        "file": "tools/ipanema/orchestration/council.py",
+        "function": "review_code_candidate",
+        "start": 656,
+        "end": 664
+      },
+      "actual_named_definitions": [
+        [
+          656,
+          664
+        ]
+      ],
+      "range_within_named_definition": true
+    },
+    {
+      "id": "N8",
+      "original": {
+        "file": "tools/ipanema/orchestration/code_review.py",
+        "function": "evaluate",
+        "start": 280,
+        "end": 455
+      },
+      "actual_named_definitions": [
+        [
+          272,
+          455
+        ]
+      ],
+      "range_within_named_definition": true
+    },
+    {
+      "id": "N8",
+      "original": {
+        "file": "tests/unit/test_code_review_v3.py",
+        "function": "FindingsResolution.setUp",
+        "start": 228,
+        "end": 300
+      },
+      "actual_named_definitions": [
+        [
+          22,
+          52
+        ],
+        [
+          314,
+          341
+        ]
+      ],
+      "range_within_named_definition": false
+    }
+  ],
+  "qa_not_repeated": true,
+  "new_reproductions_executed": false,
+  "pure_hash_comparison_only": true,
+  "author_not_closing_objections": true
+}

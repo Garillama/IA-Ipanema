@@ -1,0 +1,64 @@
+{
+  "facts": [
+    {
+      "url": "https://rhino-performance.com/productos/brazo-presoterapia-pro-3-individual/",
+      "title": "Brazo de Presoterapia PRO 3 Individual | RHINO Performance",
+      "description_original": "Brazo de presoterapia individual sin compresor. Compatible con compresor PRO 3 y PRO 2, talla única. Hasta 12 MSI y envío gratis.",
+      "claim_used": "Brazo de presoterapia individual sin compresor.",
+      "source": "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/live-batch05-20261113/raw-crawl-report.json",
+      "source_sha256": "77caac7b0117b46baac60bad9dd418dc170c8de0bbf872c35e6937e7e57dbea0",
+      "json_pointer": "/urls/0/template_audit/content/meta/description/0",
+      "scope": "Published product metadata captured in prior authorized live batch; not current stock/prices or verified full box contents."
+    },
+    {
+      "url": "https://rhino-performance.com/productos/kit-botas-de-presoterapia-pro-3/",
+      "title": "Kit Botas de Presoterapia PRO 3 con Compresor | RHINO",
+      "description_original": "Kit de botas de presoterapia con compresor. 6 modos, presión de 20 a 200 mmHg y 4 zonas independientes. Hasta 12 MSI y envío gratis.",
+      "claim_used": "Kit de botas de presoterapia con compresor.",
+      "source": "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/live-batch05-20261113/raw-crawl-report.json",
+      "source_sha256": "77caac7b0117b46baac60bad9dd418dc170c8de0bbf872c35e6937e7e57dbea0",
+      "json_pointer": "/urls/1/template_audit/content/meta/description/0",
+      "scope": "Published product metadata captured in prior authorized live batch; not current stock/prices or verified full box contents."
+    },
+    {
+      "url": "https://rhino-performance.com/productos/kit-botas-y-brazos-de-presoterapia-pro-3/",
+      "title": "Kit Botas y Brazos de Presoterapia PRO 3 | RHINO",
+      "description_original": "Kit de presoterapia para piernas y brazos con compresor. 6 modos y presión de 20 a 200 mmHg. Hasta 12 MSI y envío gratis.",
+      "claim_used": "Kit de presoterapia para piernas y brazos con compresor.",
+      "source": "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/live-batch04-20261113/raw-crawl-report.json",
+      "source_sha256": "963002d7137fb3c7d9adfce908f6499f89efd258805251704316f9ffc1827070",
+      "json_pointer": "/urls/0/template_audit/content/meta/description/0",
+      "scope": "Published product metadata captured in prior authorized live batch; not current stock/prices or verified full box contents."
+    },
+    {
+      "url": "https://rhino-performance.com/productos/botas-presoterapia-pro-3/",
+      "title": "Botas de Presoterapia PRO 3 (Accesorio) | RHINO Performance",
+      "description_original": "Par de botas accesorio de presoterapia sin compresor. Compatibles con compresor PRO 3 y PRO 2, en varias tallas. Hasta 12 MSI y envío gratis.",
+      "claim_used": "Par de botas accesorio de presoterapia sin compresor.",
+      "source": "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/live-batch06-20261113/raw-crawl-report.json",
+      "source_sha256": "fb23525e8bcf9294dfbbd9bf8b33e230e737b317190c355369742930b6310a52",
+      "json_pointer": "/urls/0/template_audit/content/meta/description/0",
+      "scope": "Published product metadata captured in prior authorized live batch; not current stock/prices or verified full box contents."
+    },
+    {
+      "url": "https://rhino-performance.com/productos/brazos-presoterapia-pro-3/",
+      "title": "Par de Brazos de Presoterapia PRO 3 | Accesorio | RHINO",
+      "description_original": "Par de brazos de presoterapia sin compresor. Compatibles con compresor PRO 3 y PRO 2, talla única. Hasta 12 MSI y envío gratis.",
+      "claim_used": "Par de brazos de presoterapia sin compresor.",
+      "source": "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/live-batch02-20261113/raw-crawl-report.json",
+      "source_sha256": "cb75c4b11a8863d9cf0d17788bfd7d8d9227922f70da18c74d635b3012405f68",
+      "json_pointer": "/urls/1/template_audit/content/meta/description/0",
+      "scope": "Published product metadata captured in prior authorized live batch; not current stock/prices or verified full box contents."
+    }
+  ],
+  "category_card_routes": [
+    "https://rhino-performance.com/productos/botas-presoterapia-inalambricas-pro-air/?entry_path=category",
+    "https://rhino-performance.com/productos/kit-botas-y-brazos-de-presoterapia-pro-3/?entry_path=category",
+    "https://rhino-performance.com/productos/kit-botas-de-presoterapia-pro-3/?entry_path=category"
+  ],
+  "card_source": "reports/runs/rhino-performance/20261112T191008-site-discoverability-continuation-54a878c3/category-nojs/result.json",
+  "card_source_sha256": "94635638653dbea92559b95a2a7315f09b87bb057b9d1b89bfc1edf1221f3e50",
+  "card_observed_at": "2026-11-12; see parent run evidence",
+  "warning": "Global product_links include menus/footer; only card_hrefs establish listing members. Do not claim accessories currently listed within Presoterapia grid.",
+  "PRO_AIR_claim_limit": "Listed by exact card name; draft makes no pressure, autonomy, compatibility, included-compressor or medical assertions about it."
+}

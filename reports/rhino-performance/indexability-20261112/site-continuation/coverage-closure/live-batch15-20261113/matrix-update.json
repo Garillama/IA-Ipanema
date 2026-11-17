@@ -1,0 +1,42 @@
+{
+  "matrix_csv": "reports/rhino-performance/indexability-20261112/site-continuation/url-matrix.csv",
+  "matrix_json": "reports/rhino-performance/indexability-20261112/site-continuation/url-matrix.json",
+  "before_hashes": {
+    "csv": "ba084cc447ca2efb72e4e158e464f57d22510eb50d19e8ac192a112951b50296",
+    "json": "82925f98fbee39395579628533d009a37db4807087aecffe0c943e4e2adcfd82"
+  },
+  "after_hashes": {
+    "csv": "bf86c1b656c2c7be38706a50bd8325525d60987a125fc034caef636f483390a5",
+    "json": "4eda0500c380915a30a9101a3dac3425a08c2ad9f647f90ac08761da991ccc92"
+  },
+  "backup_csv": "reports/runs/rhino-performance/20261113T080745-authorized-five-url-batch15/url-matrix-before.csv",
+  "backup_json": "reports/runs/rhino-performance/20261113T080745-authorized-five-url-batch15/url-matrix-before.json",
+  "exactly_five_rows_updated": true,
+  "updated_URLs": [
+    "https://rhino-performance.com/blog/posts/tina-fratub-air-el-aliado-que-tu-cuerpo-necesita-despus-de-entrenar-b41c0ed3a1dd/",
+    "https://rhino-performance.com/blog/posts/que-debes-saber-antes-de-de-comprar-unas-botas-de-presoterapia-f0d33d668783/",
+    "https://rhino-performance.com/blog/posts/como-mejorar-la-salud-vascular-con-la-presoterapia-f919e9e6aae2/",
+    "https://rhino-performance.com/blog/posts/mejora-tu-circulacion-y-reduce-la-retencion-de-liquidos-con-la-presoterapia-4aa13734ec51/",
+    "https://rhino-performance.com/blog/posts/como-la-presoterapia-puede-revolucionar-tu-metodo-detox-0b0ae76ebe79/"
+  ],
+  "Google_fields_unchanged": true,
+  "other_120_rows_unchanged": true,
+  "before": {
+    "total_urls": 125,
+    "HTML_total": 124,
+    "HTML_with_individual_HTTP": 119,
+    "pending_individual_HTTP": 5,
+    "pending_by_type": {
+      "article": 5
+    }
+  },
+  "after": {
+    "total_urls": 125,
+    "HTML_total": 124,
+    "HTML_with_individual_HTTP": 124,
+    "pending_individual_HTTP": 0,
+    "pending_by_type": {}
+  },
+  "original_pending75_and_pending70_files_preserved": true,
+  "next_pending_list": "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/live-batch15-20261113/pending-0.csv"
+}

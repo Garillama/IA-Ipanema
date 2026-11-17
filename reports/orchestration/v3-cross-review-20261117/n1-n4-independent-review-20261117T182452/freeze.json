@@ -1,0 +1,68 @@
+{
+  "packet_sha256": "e7bfe2cd4c040e16177928666b816e24a41f173f908d5d73f209e792e9629679",
+  "packet_bytes": 421425,
+  "patch_sha256": "fb292ff7f11c2ccaed5e90a2325c1703f23ece67bdc1b2a6f96ad3c6d49b8e4f",
+  "candidate_hashes": {
+    "tools/ipanema/orchestration/council.py": "3bbe36122abe1966fa0fc89eb2a23576284797c4afb2a1b4c071e83cb4cfad7a",
+    "tools/ipanema/orchestration/code_review.py": "e8ac3a263a2b94922f1c0d5844517913e714b5234c5d1f30a7c11a22224e2cba",
+    "tests/unit/test_code_review_v3.py": "39763d930ac76248c9800456793a26b16f9053cf1071b1eec845a1650cd97b9d"
+  },
+  "operational_hashes": {
+    "tools/ipanema/orchestration/council.py": "4ec261a0d84fbdc12d5abf85eab489d21cf85f30af57eac9769c722d17541261",
+    "tools/ipanema/orchestration/code_review.py": null,
+    "tests/unit/test_code_review_v3.py": null
+  },
+  "related_source_hashes": {
+    "tools/ipanema/orchestration/adapters.py": "bae25bee06cf7574ee35f65e9f9055dfa8a495336f80615165ddd5232359d01d",
+    "tools/ipanema/orchestration/planner.py": "b09a3bc644618502680e8804ed7f135eaa074e7b82812d2013c5293ef909117e",
+    "tools/ipanema/core.py": "07731645318b727cefcf80f3f25e977842ab422280ca873a36cef0f4c0aeee25",
+    "tools/ipanema/orchestration/council_runtime.py": "92b6e47eb8942c26161c240a3258e481ae108b42ee2894cd0577403ea0d49635",
+    "tools/ipanema/orchestration/engine.py": "74885e94f8f9cbf8f7a6e71c0cc8f5f44eec032fac8892f7507e2eb06879319f",
+    "tools/ipanema/orchestration/isolation.py": "0d734fcbf6d10e839d2a7cb46f3416ca60f0751e1491974d73186a8d56408079",
+    "tools/ipanema/orchestration/recovery.py": "1d8b3a4d0e22bb0c8507f036ab7ff1b285e6517d8fbe670b70d679a0c317f12c",
+    "tests/unit/test_council_receipts.py": "a70bffee039ef3e5e901eabb2f2add4ad8e28535445a90d5291aaec1274942ff"
+  },
+  "policy_source_sha256": "14fede6b13b294a8e685b8ce1072777959850d8ae05bf3270f5dd9ea527aba39",
+  "preserved_qa_sha256": "6d74d71ec532eea9790e071c2917dae13698701cd3c2d38946229de5b81e6512",
+  "candidate_root": "/home/alanrichard/Escritorio/IA inversa/.local/v3-n1-n4/20261117T180444/candidate",
+  "patch_source": "/home/alanrichard/Escritorio/IA inversa/reports/orchestration/v3-cross-review-20261117/n1-n4-resolution-20261117T180444/candidate.patch",
+  "qa_artifacts": {
+    "/home/alanrichard/Escritorio/IA inversa/reports/orchestration/v3-cross-review-20261117/n1-n4-resolution-20261117T180444/gate-tests-receipt.json": "6d74d71ec532eea9790e071c2917dae13698701cd3c2d38946229de5b81e6512",
+    "/home/alanrichard/Escritorio/IA inversa/reports/orchestration/v3-cross-review-20261117/n1-n4-resolution-20261117T180444/legacy-receipts-receipt.json": "68dd2d0b0a5aa820a96effbf17d5b3c89f122954cbfc6f80a84d80e062ba5bc9",
+    "/home/alanrichard/Escritorio/IA inversa/reports/orchestration/v3-cross-review-20261117/n1-n4-resolution-20261117T180444/tests-attempt-3.txt": "8f74f24e7f41048fb0851231c8655c5711b55d1d9e8d9585b4e160beabbc4ce5",
+    "/home/alanrichard/Escritorio/IA inversa/reports/orchestration/v3-cross-review-20261117/n1-n4-resolution-20261117T180444/legacy-receipts-results.txt": "1960b19ccfe7d199b36d1e89d8d5da84f8f72ece6eea0faaa1b1a83c0567cedc"
+  },
+  "literal_input": true,
+  "wrapper_used": false,
+  "provider_invocations": 0,
+  "limits": {
+    "timeout": 240,
+    "idle_timeout": 90,
+    "startup_timeout": 30,
+    "first_response_timeout": 120
+  },
+  "sufficiency": {
+    "candidate_sources_complete": true,
+    "diff_and_delta_reconstructed_exactly": true,
+    "direct_imports_covered": [
+      "council",
+      "adapters",
+      "planner",
+      "core"
+    ],
+    "receipt_producer_consumer_context_covered": [
+      "council_runtime",
+      "engine"
+    ],
+    "transport_context_covered": [
+      "adapters",
+      "isolation",
+      "recovery"
+    ],
+    "legacy_receipt_tests_preserved": true,
+    "private_client_data_included": false,
+    "global_transitive_closure_certified": false,
+    "missing_dependency_rule": "request precise evidence; never infer approval"
+  },
+  "patch_apply_check": 0
+}

@@ -1,0 +1,54 @@
+{
+  "patch_sha256": "59d76bf8b54285dab38271aaedb78bba777fe61efd9edfc4500fec75759bf459",
+  "candidate_hashes": {
+    "tests/integration/test_seo_pilot_cli_v4.py": "7e8e6ea49211d4258f82b69e992aa74e97c4b84add1140f02ad9cffbc43203cd",
+    "tests/unit/test_seo_pilot_v4.py": "88eb5a4d173f43d6ccb1165ff35f5f1ddf24e32d4d889481b131584b282cb116",
+    "tools/ipanema/seo/crawl_policy.py": "d30c444a60853ee482934515c2d628238cca26c5eb9dc364aa44542e5daaa4e9",
+    "tools/ipanema/seo/crawler.py": "f6e5de5fd60c16eb3e464dd5b10111bf60eb9e4289dcc05f00503805f056415f",
+    "tools/ipanema/seo/engineering.py": "1c6c0534755723cfac59e4395ad0fc44af6dc5df35dd88a1da98eb6c4ab7bd8d"
+  },
+  "SEO_unit": {
+    "status": "passed",
+    "tests": 209,
+    "includes_new_tests": 18
+  },
+  "SEO_general_integration": {
+    "status": "passed",
+    "tests": 13,
+    "scope": "reused latest isolated regression on unchanged source"
+  },
+  "pilot_integration": {
+    "exit_code": 0,
+    "elapsed_s": 3.7572149070001615,
+    "stdout": "",
+    "stderr": "test_closed_offline_execute_supervised_and_exported (test_seo_pilot_cli_v4.PilotCLI.test_closed_offline_execute_supervised_and_exported) ... ok\ntest_deadline_covers_export (test_seo_pilot_cli_v4.PilotCLI.test_deadline_covers_export) ... ok\ntest_deadline_covers_parsing (test_seo_pilot_cli_v4.PilotCLI.test_deadline_covers_parsing) ... ok\ntest_hash_and_project_rejected_without_requests (test_seo_pilot_cli_v4.PilotCLI.test_hash_and_project_rejected_without_requests) ... ok\ntest_interrupting_supervisor_cancels_worker_and_descendant (test_seo_pilot_cli_v4.PilotCLI.test_interrupting_supervisor_cancels_worker_and_descendant) ... ok\ntest_invalid_manifest_cli_returns_stopped (test_seo_pilot_cli_v4.PilotCLI.test_invalid_manifest_cli_returns_stopped) ... ok\ntest_missing_paired_flag_rejected (test_seo_pilot_cli_v4.PilotCLI.test_missing_paired_flag_rejected) ... ok\ntest_real_120_second_process_group_cancellation (test_seo_pilot_cli_v4.PilotCLI.test_real_120_second_process_group_cancellation) ... skipped 'explicit real 120-second fixture only'\ntest_real_cli_parses_closed_flags_without_network (test_seo_pilot_cli_v4.PilotCLI.test_real_cli_parses_closed_flags_without_network) ... ok\ntest_real_short_process_group_cancellation (test_seo_pilot_cli_v4.PilotCLI.test_real_short_process_group_cancellation) ... ok\n\n----------------------------------------------------------------------\nRan 10 tests in 3.559s\n\nOK (skipped=1)\n"
+  },
+  "real_120_test": {
+    "exit_code": 0,
+    "elapsed_s": 119.73780040400015,
+    "stdout": "",
+    "stderr": "test_real_120_second_process_group_cancellation (tests.integration.test_seo_pilot_cli_v4.PilotCLI.test_real_120_second_process_group_cancellation) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 119.610s\n\nOK\n"
+  },
+  "real_120_proof": {
+    "elapsed_seconds": 119.5064956540009,
+    "limit_seconds": 120,
+    "worker_reaped": true,
+    "descendant_pid": 143754,
+    "descendant_active": false,
+    "HTTP_requests": 0,
+    "checkpoint_states": [
+      "started_without_confirmed_result"
+    ]
+  },
+  "real_120_source_binding": {
+    "engineering_exact_sha256": "1c6c0534755723cfac59e4395ad0fc44af6dc5df35dd88a1da98eb6c4ab7bd8d",
+    "watchdog_worker_checkpoint_source_unchanged_after_full_test": true,
+    "full_120_test_function_AST_unchanged": true,
+    "separate_changes_after_full_test": "crawler convergence handling + extra tests; watchdog code unchanged"
+  },
+  "fresh_patch_apply": true,
+  "reverse_patch_restores_base_and_removes_two_own_additions": true,
+  "root_integrated_source_unchanged": true,
+  "network_requests_to_Rhino_or_Google": 0,
+  "source": "controller isolated candidate only, not production"
+}

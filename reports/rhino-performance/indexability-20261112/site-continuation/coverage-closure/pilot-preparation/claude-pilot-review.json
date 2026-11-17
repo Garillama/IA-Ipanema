@@ -1,0 +1,187 @@
+{
+  "requested_agent": "claude",
+  "effective_agent": "claude",
+  "scope": "incremental pilot procedure only",
+  "input_hashes": {
+    "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/pilot-preparation/procedure.md": "270d1482c254b57d94c0b12bdccc4dd803e9b77a33568ce74d812f39b13b8f61",
+    "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/pilot-preparation/targets.json": "3b14fcb031ae57ab43ef247ff087c6d8df0b0c400ca12ac3694edfc654a38bb6",
+    "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/pilot-preparation/source-binding.json": "c1de3b96487aaff3b4df0ad5707ecae41504c938d9747ed31b24fdce8dbb4c01",
+    "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/pilot-preparation/offline-procedure-proofs.json": "8a45728008cd65908796e0f031a5b88c2ae4889bf56de62518120b5aca746b00",
+    "tools/ipanema/seo/crawler.py": "29b42a929132bd5bb5ec07770a247dbd5b42a35747874f711617f5ff204d2e5b",
+    "tools/ipanema/seo/crawl_policy.py": "c719ba73adb1e54141cbb04dbbc0b0a6b56407fbb1459d6f4814b23718e526c1",
+    "tools/ipanema/seo/engineering.py": "85a0729730f61efc24be661679276c9f3e005682db10db392a11db110ba9f5f1",
+    "tools/ipanema/seo/robots.py": "57d01f9086dffa7f25f26b59976098770d585731eca3d758ee9235000399a3df"
+  },
+  "response": {
+    "decision": "blocked",
+    "summary": "No existe invocación soportada que limite exactamente los cinco destinos: crawl() siempre encola la home, lee sitemaps y hace BFS; max_urls=5 no selecciona. Faltan además watchdog de 120s y checkpoint validados. Red bloqueada. La adaptación mínima opt-in en el mismo crawler es razonable, con requisitos recortados.",
+    "changes": [],
+    "evidence": [
+      "crawler.py: crawl() no recibe destinos; cola inicial [(policy.home,0,'home',0)]",
+      "crawl_policy.py: Policy exige home raíz; https_get usa subprocess.run con timeout propio, sin grupo de procesos",
+      "offline-procedure-proofs.json: max_urls=5 solo consulta robots y home; excepción de transporte no aborta la cola",
+      "procedure.md admite que max_seconds no es watchdog duro y que checkpoint/watchdog no están validados"
+    ],
+    "objections": [
+      {
+        "id": "claude-O1",
+        "alternative_id": "claude-A1-modo-cerrado-opt-in-mismo-crawler",
+        "category": "invocacion",
+        "severity": "critical",
+        "claim": "No hay invocación soportada para exactamente cinco destinos: Policy exige home raíz, crawl() siempre encola home y lee sitemap, y la CLI no tiene lista de semillas. Ejecutar red está bloqueado hasta integrar el modo cerrado.",
+        "status": "open",
+        "evidence_refs": [
+          "tools/ipanema/seo/crawl_policy.py",
+          "tools/ipanema/seo/crawler.py",
+          "offline-procedure-proofs.json"
+        ],
+        "resolution_evidence_refs": []
+      },
+      {
+        "id": "claude-O2",
+        "alternative_id": "claude-A1-modo-cerrado-opt-in-mismo-crawler",
+        "category": "limite-absoluto",
+        "severity": "critical",
+        "claim": "Los 120s absolutos no están garantizados: max_seconds no cubre parsing/exportación y https_get lanza un hijo sin grupo de procesos. Watchdog y checkpoint solo se mencionan como requisito, sin diseño concreto ni validación. Sin ellos no se autoriza red.",
+        "status": "open",
+        "evidence_refs": [
+          "tools/ipanema/seo/crawl_policy.py",
+          "procedure.md"
+        ],
+        "resolution_evidence_refs": []
+      },
+      {
+        "id": "claude-O3",
+        "alternative_id": "claude-A1-modo-cerrado-opt-in-mismo-crawler",
+        "category": "parada-global",
+        "severity": "high",
+        "claim": "Un error genérico de transporte (DNS/TLS/IP) o un redirect rechazado no activa stop_reason y el loop continúa. El modo cerrado debe fijar parada terminal ante cualquier IpanemaError de red, sin cambiar el modo general.",
+        "status": "open",
+        "evidence_refs": [
+          "tools/ipanema/seo/crawl_policy.py",
+          "offline-procedure-proofs.json"
+        ],
+        "resolution_evidence_refs": []
+      },
+      {
+        "id": "claude-O4",
+        "alternative_id": "claude-A1-modo-cerrado-opt-in-mismo-crawler",
+        "category": "limites-excesivos",
+        "severity": "medium",
+        "claim": "Limits.max_redirects por defecto es 5 y max_requests 60; el modo cerrado debe fijar explícitamente max_requests=12, max_redirects=3, timeout=20, max_seconds=120. Además, el presupuesto de saltos global compartido añade lógica nueva no pedida (se pidió máximo 3 saltos); bastaría el máximo por cadena con techo de 12 GET. Requisito opcional que aumenta el diff.",
+        "status": "open",
+        "evidence_refs": [
+          "tools/ipanema/seo/crawl_policy.py",
+          "procedure.md"
+        ],
+        "resolution_evidence_refs": []
+      },
+      {
+        "id": "claude-O5",
+        "alternative_id": "claude-A1-modo-cerrado-opt-in-mismo-crawler",
+        "category": "requisitos-excesivos",
+        "severity": "low",
+        "claim": "Validar la lista contra hashes de pending-75.csv dentro del crawler es excesivo; basta un manifiesto local validado en engineering.py (origen, unicidad, exactamente 5, hash). Además el documento mezcla diseño y CLI real: debe etiquetar claramente que 0,5/s con intervalo 2s coincide con el default y que 'Google' no se consulta. Hay riesgo de que el límite de 2MB por respuesta (12 respuestas, 24MB) se interprete como presupuesto total.",
+        "status": "open",
+        "evidence_refs": [
+          "procedure.md",
+          "targets.json"
+        ],
+        "resolution_evidence_refs": []
+      }
+    ],
+    "preferred_alternative": "claude-A1-modo-cerrado-opt-in-mismo-crawler",
+    "questions": [
+      {
+        "id": "claude-Q1",
+        "to_agent": "codex",
+        "alternative_id": "claude-A1-modo-cerrado-opt-in-mismo-crawler",
+        "question": "¿Qué mecanismo concreto ya instalado (p. ej. timeout(1) con grupo de procesos o start_new_session+killpg en https_get) propones para el watchdog de 120s, y qué fuente del repositorio demuestra que recoge hijos DNS/TLS? ¿Ves una invocación soportada existente que yo haya pasado por alto?",
+        "evidence_refs": [
+          "tools/ipanema/seo/crawl_policy.py",
+          "tools/ipanema/seo/engineering.py"
+        ]
+      }
+    ]
+  },
+  "model": {
+    "model": "claude-sonnet-5-5",
+    "effort": "medium",
+    "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+    "verified_at": "2026-11-08"
+  },
+  "execution": {
+    "exit_code": 0,
+    "timed_out": false,
+    "output_limited": false,
+    "idle_timed_out": false,
+    "cancelled": false,
+    "process_started": true,
+    "process_reaped": true,
+    "stdin_bytes_written": 122086,
+    "context_complete": true,
+    "duration_s": 29.044,
+    "timing": {
+      "spawn_s": 0.000812,
+      "input_complete_s": 0.580446,
+      "first_stdout_s": 1.705037,
+      "first_stderr_s": null,
+      "timeout_phase": null,
+      "event_counts": {
+        "system": 3,
+        "stream_event": 666,
+        "event:message_start": 2,
+        "event:content_block_start": 2,
+        "event:content_block_delta": 656,
+        "assistant": 2,
+        "event:content_block_stop": 2,
+        "user": 2,
+        "event:message_delta": 2,
+        "event:message_stop": 2,
+        "rate_limit_event": 2,
+        "result": 1
+      },
+      "inference_vs_initialization": "not_separable_without_provider_events"
+    },
+    "output_accounting": {
+      "transport_bytes": 238758,
+      "retained_bytes": 238758,
+      "discarded_progress_bytes": 0,
+      "transport_limit_bytes": 20000000,
+      "retained_limit_bytes": 2000000
+    },
+    "isolation": {
+      "backend": "bubblewrap",
+      "snapshot_read_only": true,
+      "host_home_mounted": false,
+      "network": "enabled_no_destination_firewall",
+      "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+    },
+    "started_at": "2026-11-12T21:24:42.858619+00:00",
+    "prompt_bytes": 122086,
+    "prompt_sha256": "5e766e8daa4b558f319fdaeceda2594c49f0e18f6c67d98acb73df03a0fb177c",
+    "usage": {
+      "provider_reported": {
+        "total_cost_usd": 0.2503924,
+        "duration_ms": 27411,
+        "input_tokens": 4,
+        "cache_creation_input_tokens": 51238,
+        "cache_read_input_tokens": 55224,
+        "output_tokens": 3991
+      },
+      "measured_cost_available": true,
+      "estimated_cost": null
+    },
+    "limits": {
+      "timeout": 240,
+      "idle_timeout": 90,
+      "startup_timeout": 30,
+      "first_response_timeout": 120
+    },
+    "structured_output": "native_schema",
+    "contract_validation": {
+      "status": "passed",
+      "duration_s": 0.005802
+    }
+  }
+}

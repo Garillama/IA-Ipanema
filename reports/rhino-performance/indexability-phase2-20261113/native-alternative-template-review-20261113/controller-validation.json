@@ -1,0 +1,15 @@
+{
+  "id": "seo.editorial.official-template-guide",
+  "kind": "authorized_single_document_review_plus_local_hashes",
+  "subject": "Official alternative-template capability vs Rhino-specific applicability",
+  "passed": true,
+  "sha256": "b2feacbd57a84b4148732cce6505433af9dd45e3039611ee50a6013a8cae3fac",
+  "measurement_scope": "One authorized web reader open; no other external pages, storefront, Google, admin, images or linked articles; eight local sourcehashes reused/checked. No rendering or production test.",
+  "authorizes_mutation": false,
+  "conditions_remaining": [
+    "Rhino editor applicability and exact assignment state",
+    "Current six page content/commercialfacts",
+    "Future semanticrender/hybridScroll/responsive/performance QA",
+    "Specific authorization for any create/save/assign/publication"
+  ]
+}

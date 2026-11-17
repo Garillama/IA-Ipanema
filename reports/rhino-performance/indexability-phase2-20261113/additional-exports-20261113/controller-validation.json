@@ -1,0 +1,25 @@
+{
+  "id": "seo.additional-exports.reconciliation",
+  "kind": "offline_official_XLSX_reconciliation",
+  "subject": "Six new source files,124knownURLs,two category query scopes",
+  "passed": true,
+  "sha256": "6c7c62fa9b9cf3583a062f59e1030c6836c2c931c494c4b9bedb3ff35aa00400",
+  "measurement_scope": "Local standard ZIP/XML read, no formulas executed or dependencies added, exact URL joins only, no HTTP/GSC and no repeat crawler suites",
+  "source_hashes": {
+    "/home/alanrichard/Escritorio/rhino-performance.com-Coverage-Drilldown-2026-11-13 (3).xlsx": "c425c4a73ea4f09f137543ab8f1cf2d44685fc85536e7456d5785f13f8ef7037",
+    "/home/alanrichard/Escritorio/rhino-performance.com-Coverage-Drilldown-2026-11-13 (4).xlsx": "2f2b541f763c04d26018b352f3dfcf8b2fbebe21fa014825fd23ece1c94f357c",
+    "/home/alanrichard/Escritorio/rhino-performance.com-Coverage-Drilldown-2026-11-13 (5).xlsx": "f9d70b65d6fb5b196dabd3ab1e2375dd5415fd307cd5c0193d36a627aaacf944",
+    "/home/alanrichard/Escritorio/rhino-performance.com-Coverage-Valid-2026-11-13.xlsx": "dc4164fa98eb6b1336c8bee7a74f1b630e5387fd246cf0c938d2e35544c130e2",
+    "/home/alanrichard/Escritorio/rhino-performance.com-Performance-on-Search-2026-11-13 (1).xlsx": "0035009ff7d40dcdfc24f27758d63974c849791d127659546bf83730f787bbe5",
+    "/home/alanrichard/Escritorio/rhino-performance.com-Performance-on-Search-2026-11-13 (2).xlsx": "f797b335df3c9fb2d46ea3b66f08dddd37b3a68a5aa797238380f77e2ed81e2e"
+  },
+  "checks": [
+    "212 unique coverage observations",
+    "124 distinct baseline URLs retained",
+    "No source date1904 epoch",
+    "Raw25568 date retained but not treated as actual1969crawl",
+    "Single observed exact inventory landing per category export; plusURL operator not inferred",
+    "Metric gaps kept unknown, marginal tables not cross-joined"
+  ],
+  "date_clarification": "Excel25568 decodes1969-12-31; all5discovered rows flagged unusable, causeunknown"
+}

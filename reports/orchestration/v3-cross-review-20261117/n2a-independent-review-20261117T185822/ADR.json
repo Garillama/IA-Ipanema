@@ -1,0 +1,22 @@
+{
+  "status": "needs_evidence",
+  "candidate_patch_sha256": "288ef3739417e0e15e105e4826ea65598f17c0807265ed68cf42d3fc5008aa6f",
+  "independent_review": {
+    "agent": "claude",
+    "decision": "approve",
+    "response_sha256": "3176d33b95f02ad0d8904b6d0cc852f98e30c44b1180a24ce0c8ef84bf2fece1",
+    "packet_sha256": "56951ce2905ab945b80eb218436aa78e8ed1e37aa771ab630baa09bc2bfd0d00"
+  },
+  "N2a": "resolved_at_isolated_API_review; real material verifier remains integration_dependency",
+  "N4a": "resolved_at_isolated_contract_review; synthetic_pass is distinct and authorization_ready=false",
+  "N1": "not re-approved on this hash; no delta regression observed",
+  "N3": "not re-approved on this hash; no delta regression observed",
+  "N4": "not re-approved on this hash; no delta regression observed",
+  "new_objections": [
+    "N2a-dep",
+    "N2a-fixture-scope"
+  ],
+  "integration_allowed": false,
+  "activation_allowed": false,
+  "reason": "Native controller materiality verifier and end-to-end producer/store/consumer contracts remain unimplemented or unverified; prior N1/N3/N4 approvals are bound to the older patch hash."
+}

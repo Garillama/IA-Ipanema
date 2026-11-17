@@ -1,0 +1,51 @@
+{
+  "status": "needs_evidence",
+  "candidate_patch_sha256": "fb292ff7f11c2ccaed5e90a2325c1703f23ece67bdc1b2a6f96ad3c6d49b8e4f",
+  "previous_patch_sha256": "c240b16f37ec13a84db4e54f656f15beda7316642c2e078e8d94b906d7ed6085",
+  "author": "codex",
+  "author_response": "N1–N4 accepted with documented trust-boundary qualifications",
+  "findings": {
+    "N1": {
+      "origin_review_patch_sha256": "c240b16f37ec13a84db4e54f656f15beda7316642c2e078e8d94b906d7ed6085",
+      "origin_reviewer": "claude",
+      "origin_id": "N1",
+      "state": "correction_prepared_pending_independent_review",
+      "closed": false
+    },
+    "N2": {
+      "origin_review_patch_sha256": "c240b16f37ec13a84db4e54f656f15beda7316642c2e078e8d94b906d7ed6085",
+      "origin_reviewer": "claude",
+      "origin_id": "N2",
+      "state": "correction_prepared_pending_independent_review",
+      "closed": false
+    },
+    "N3": {
+      "origin_review_patch_sha256": "c240b16f37ec13a84db4e54f656f15beda7316642c2e078e8d94b906d7ed6085",
+      "origin_reviewer": "claude",
+      "origin_id": "N3",
+      "state": "correction_prepared_pending_independent_review",
+      "closed": false
+    },
+    "N4": {
+      "origin_review_patch_sha256": "c240b16f37ec13a84db4e54f656f15beda7316642c2e078e8d94b906d7ed6085",
+      "origin_reviewer": "claude",
+      "origin_id": "N4",
+      "state": "correction_prepared_pending_independent_review",
+      "closed": false
+    }
+  },
+  "implementation_allowed": false,
+  "integration_authorized": false,
+  "activation_allowed": false,
+  "production_authorized": false,
+  "synthetic_tests_only": true,
+  "real_adapter_controller_bridge_available": false,
+  "mandatory_pending": [
+    "independent Claude review of exact new patch, separately authorized",
+    "native adapter/controller evidence bridge and complete history source, future authorized integration",
+    "QA producer with explicit coverage, future authorized integration",
+    "Antigravity authentication/egress/isolation and independent review remain blocked",
+    "explicit owner integration authorization"
+  ],
+  "provider_calls": 0
+}

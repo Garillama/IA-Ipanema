@@ -1,0 +1,99 @@
+{
+  "requested_agent": "claude",
+  "effective_agent": "claude",
+  "patch_sha256": "59d76bf8b54285dab38271aaedb78bba777fe61efd9edfc4500fec75759bf459",
+  "input_hashes": {
+    "tests/integration/test_seo_pilot_cli_v4.py": "7e8e6ea49211d4258f82b69e992aa74e97c4b84add1140f02ad9cffbc43203cd",
+    "tests/unit/test_seo_pilot_v4.py": "88eb5a4d173f43d6ccb1165ff35f5f1ddf24e32d4d889481b131584b282cb116",
+    "tools/ipanema/seo/crawl_policy.py": "d30c444a60853ee482934515c2d628238cca26c5eb9dc364aa44542e5daaa4e9",
+    "tools/ipanema/seo/crawler.py": "f6e5de5fd60c16eb3e464dd5b10111bf60eb9e4289dcc05f00503805f056415f",
+    "tools/ipanema/seo/engineering.py": "1c6c0534755723cfac59e4395ad0fc44af6dc5df35dd88a1da98eb6c4ab7bd8d",
+    "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/closed-pilot-candidate/candidate.patch": "59d76bf8b54285dab38271aaedb78bba777fe61efd9edfc4500fec75759bf459",
+    "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/closed-pilot-candidate/manifest.json": "c9bfe5aefc7b8ec9b073730b7d7d87e54a79fc8ab3f8ab01aa19cac57602e400",
+    "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/closed-pilot-candidate/controller-qa.json": "0a7ebb7f9ddfb6cd989809b2727a02a3c5fe84d5a2ed7b6002df0ff5682cc6a4",
+    "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/closed-pilot-candidate/design.md": "0200d0bfca9009b720c79d50428697acf8a0f93c02a10eece066af77a27daf59",
+    "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/pilot-preparation/targets.json": "3b14fcb031ae57ab43ef247ff087c6d8df0b0c400ca12ac3694edfc654a38bb6",
+    "tools/ipanema/seo/robots.py": "57d01f9086dffa7f25f26b59976098770d585731eca3d758ee9235000399a3df"
+  },
+  "error": "ID de objeción inválido.",
+  "model": {
+    "model": "claude-sonnet-5-5",
+    "effort": "medium",
+    "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+    "verified_at": "2026-11-08"
+  },
+  "execution": {
+    "exit_code": 0,
+    "timed_out": false,
+    "output_limited": false,
+    "idle_timed_out": false,
+    "cancelled": false,
+    "process_started": true,
+    "process_reaped": true,
+    "stdin_bytes_written": 196514,
+    "context_complete": true,
+    "duration_s": 67.393,
+    "timing": {
+      "spawn_s": 0.000732,
+      "input_complete_s": 0.586941,
+      "first_stdout_s": 1.235855,
+      "first_stderr_s": null,
+      "timeout_phase": null,
+      "event_counts": {
+        "system": 36,
+        "stream_event": 759,
+        "event:message_start": 2,
+        "event:content_block_start": 3,
+        "event:content_block_delta": 747,
+        "assistant": 3,
+        "event:content_block_stop": 3,
+        "event:message_delta": 2,
+        "event:message_stop": 2,
+        "rate_limit_event": 2,
+        "user": 2,
+        "result": 1
+      },
+      "inference_vs_initialization": "not_separable_without_provider_events"
+    },
+    "output_accounting": {
+      "transport_bytes": 338591,
+      "retained_bytes": 338591,
+      "discarded_progress_bytes": 0,
+      "transport_limit_bytes": 20000000,
+      "retained_limit_bytes": 2000000
+    },
+    "isolation": {
+      "backend": "bubblewrap",
+      "snapshot_read_only": true,
+      "host_home_mounted": false,
+      "network": "enabled_no_destination_firewall",
+      "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+    },
+    "started_at": "2026-11-12T21:48:12.631852+00:00",
+    "prompt_bytes": 196514,
+    "prompt_sha256": "d22b3725f079551a286525776065ee7ba94a6f363c0c938d8212b4c26e546440",
+    "usage": {
+      "provider_reported": {
+        "total_cost_usd": 0.452916,
+        "duration_ms": 65917,
+        "input_tokens": 6,
+        "cache_creation_input_tokens": 88459,
+        "cache_read_input_tokens": 86980,
+        "output_tokens": 9037
+      },
+      "measured_cost_available": true,
+      "estimated_cost": null
+    },
+    "limits": {
+      "timeout": 240,
+      "idle_timeout": 90,
+      "startup_timeout": 30,
+      "first_response_timeout": 120
+    },
+    "structured_output": "native_schema",
+    "contract_validation": {
+      "status": "passed",
+      "duration_s": 0.010595
+    }
+  }
+}

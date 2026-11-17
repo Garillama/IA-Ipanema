@@ -1,0 +1,54 @@
+{
+  "at": "2026-11-17T16:32:59.197740+00:00",
+  "scope": "Read-only discovery; no inference runs or production access",
+  "context7_tools_loaded": false,
+  "antigravity_cli_version": "1.5.10",
+  "antigravity_cli_path": "/home/alanrichard/.local/bin/agy",
+  "ide_launcher_version": "1.107.0",
+  "ide_launcher_path": "/usr/bin/antigravity",
+  "gemini_cli_in_PATH": false,
+  "python_antigravity_sdk_distribution_installed": false,
+  "agy_agents_list": {
+    "exit_code": 0,
+    "stdout_bytes": 0,
+    "custom_agents_verified": 0,
+    "builtins_runtime_verified": false
+  },
+  "agy_mcp_list": {
+    "exit_code": 0,
+    "context7_found": false
+  },
+  "auth": {
+    "cli_presence_proves_auth": false,
+    "authenticated_inference_tested": false,
+    "state": "unknown",
+    "reason": "No agent prompt or keyring access performed; --help/list do not prove authenticated inference"
+  },
+  "antigravity_mcp_config": {
+    "path": "~/.gemini/config/mcp_config.json",
+    "bytes": 0,
+    "json_valid": false,
+    "changed": false,
+    "impact": "Empty file found; agy mcp list succeeded. No demonstrated runtime failure; do not infer broken installation."
+  },
+  "existing_adapter_limits": [
+    "Claude --tools empty and strict empty MCP config",
+    "Codex read-only and ignore user config/rules",
+    "OS sandbox read-only workspace; inference network is not destination firewall",
+    "No existing antigravity adapter or native subagent trace contract"
+  ],
+  "hardware": {
+    "logical_cpu": 8,
+    "ram_total_kib": 7900616,
+    "ram_available_observed_kib": 3079504,
+    "resource_use_benchmark_performed": false
+  },
+  "production_requests": 0,
+  "agent_inference_calls": 0,
+  "new_installs": 0,
+  "config_changes": 0,
+  "claude_version": "2.1.326 (Claude Code)",
+  "codex_version": "codex-cli 0.169.0",
+  "chrome_version": "Google Chrome 155.0.8059.84",
+  "codex_subagents_setting": "No explicit agents section; absence does not establish disabled default or runtime availability"
+}

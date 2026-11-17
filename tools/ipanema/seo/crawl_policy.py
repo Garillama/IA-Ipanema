@@ -223,9 +223,12 @@ def https_get(url, *, timeout, max_bytes):
 
 
 class Fetcher:
-    def __init__(self, policy, *, allow_network=False, transport=None, clock=time.monotonic, sleep=time.sleep):
+    def __init__(self, policy, *, allow_network=False, transport=None, clock=time.monotonic, sleep=time.sleep, on_event=None):
         if not allow_network and transport is None:
             raise IpanemaError('Red deshabilitada: se requiere --allow-network.')
+        if on_event is not None and not callable(on_event):
+            raise IpanemaError("Checkpoint callback inválido.")
+        self.on_event = on_event
         self.policy, self.transport = policy, transport or https_get
         self.clock, self.sleep = clock, sleep
         self.started, self.last = clock(), None
@@ -251,6 +254,8 @@ class Fetcher:
             self.stop_reason = 'time_budget'
             raise IpanemaError('Presupuesto agotado durante la espera; no se inicia otra solicitud.')
         self.last, self.calls = self.clock(), self.calls + 1
+        if self.on_event:
+            self.on_event({'event': 'started', 'ordinal': self.calls, 'url': url})
         try:
             row = self.transport(url, timeout=min(limits.timeout, remaining), max_bytes=limits.max_bytes)
             status, body = row['status'], row.get('body', b'')
@@ -268,11 +273,17 @@ class Fetcher:
                 self.stop_reason = self.stop_reason or 'access_challenge'
             if self.clock() - self.started >= limits.max_seconds:
                 self.stop_reason = self.stop_reason or 'time_budget'
+            if self.on_event:
+                self.on_event({'event': 'completed', 'ordinal': self.calls, 'url': url, 'status': status, 'bytes': len(body)})
             return {'url': url, 'status': status, 'headers': {k.lower(): v for k, v in row.get('headers', {}).items()
                     if k.lower() in ('content-type', 'location', 'x-robots-tag')}, 'body': body}
         except IpanemaError:
+            if self.on_event:
+                self.on_event({'event': 'unconfirmed', 'ordinal': self.calls, 'url': url})
             raise
         except Exception:
+            if self.on_event:
+                self.on_event({'event': 'unconfirmed', 'ordinal': self.calls, 'url': url})
             raise IpanemaError('Transporte fallido; cuerpo y secretos no se registran.') from None
 
     def provenance(self):

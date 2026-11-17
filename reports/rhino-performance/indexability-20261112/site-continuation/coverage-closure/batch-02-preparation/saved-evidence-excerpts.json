@@ -1,0 +1,2269 @@
+{
+  "source_report": "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/live-pilot-20261112/raw-crawl-report.json",
+  "source_sha256": "90ed920ae812460e9d2481e3c36ec3f85f2e665516a6666b591456af3662d6a2",
+  "scope": "excerpts from saved initial-HTML report only; no new HTTP and no raw JSON-LD block/DOM reconstruction",
+  "products": [
+    {
+      "URL": "https://rhino-performance.com/productos/pistola-de-masaje-gun-pro/",
+      "source": {
+        "file": "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/live-pilot-20261112/raw-crawl-report.json",
+        "node_pointer": "/urls/0"
+      },
+      "canonical": [
+        "https://rhino-performance.com/productos/pistola-de-masaje-gun-pro/"
+      ],
+      "main_H1": [
+        "Pistola de Masaje GUN PRO"
+      ],
+      "primary_Product_entities": [
+        {
+          "key": "https://rhino-performance.com/productos/pistola-de-masaje-gun-pro/",
+          "id": "https://rhino-performance.com/productos/pistola-de-masaje-gun-pro/",
+          "types": [
+            "Product"
+          ],
+          "source": "jsonld",
+          "block": 1,
+          "component": "structured-data.page",
+          "path": "$.mainEntity",
+          "parent": "https://rhino-performance.com/productos/pistola-de-masaje-gun-pro/",
+          "parent_prop": "mainEntity",
+          "nested": true,
+          "ref_only": false,
+          "properties": [
+            "@type",
+            "@id",
+            "name",
+            "image",
+            "description",
+            "sku",
+            "brand",
+            "weight",
+            "offers"
+          ]
+        }
+      ],
+      "secondary_Product_entities": [
+        {
+          "key": "3:$",
+          "id": null,
+          "types": [
+            "Product"
+          ],
+          "source": "jsonld",
+          "block": 3,
+          "component": "structured-data.item",
+          "path": "$",
+          "parent": null,
+          "parent_prop": null,
+          "nested": false,
+          "ref_only": false,
+          "properties": [
+            "@context",
+            "@type",
+            "mainEntityOfPage",
+            "name",
+            "image",
+            "description",
+            "sku",
+            "brand",
+            "weight",
+            "offers"
+          ]
+        },
+        {
+          "key": "4:$",
+          "id": null,
+          "types": [
+            "Product"
+          ],
+          "source": "jsonld",
+          "block": 4,
+          "component": "structured-data.item",
+          "path": "$",
+          "parent": null,
+          "parent_prop": null,
+          "nested": false,
+          "ref_only": false,
+          "properties": [
+            "@context",
+            "@type",
+            "mainEntityOfPage",
+            "name",
+            "image",
+            "description",
+            "sku",
+            "brand",
+            "weight",
+            "offers"
+          ]
+        },
+        {
+          "key": "5:$",
+          "id": null,
+          "types": [
+            "Product"
+          ],
+          "source": "jsonld",
+          "block": 5,
+          "component": "structured-data.item",
+          "path": "$",
+          "parent": null,
+          "parent_prop": null,
+          "nested": false,
+          "ref_only": false,
+          "properties": [
+            "@context",
+            "@type",
+            "mainEntityOfPage",
+            "name",
+            "image",
+            "description",
+            "sku",
+            "brand",
+            "weight",
+            "offers"
+          ]
+        },
+        {
+          "key": "6:$",
+          "id": null,
+          "types": [
+            "Product"
+          ],
+          "source": "jsonld",
+          "block": 6,
+          "component": "structured-data.item",
+          "path": "$",
+          "parent": null,
+          "parent_prop": null,
+          "nested": false,
+          "ref_only": false,
+          "properties": [
+            "@context",
+            "@type",
+            "mainEntityOfPage",
+            "name",
+            "image",
+            "description",
+            "sku",
+            "brand",
+            "weight",
+            "offers"
+          ]
+        },
+        {
+          "key": "7:$",
+          "id": null,
+          "types": [
+            "Product"
+          ],
+          "source": "jsonld",
+          "block": 7,
+          "component": "structured-data.item",
+          "path": "$",
+          "parent": null,
+          "parent_prop": null,
+          "nested": false,
+          "ref_only": false,
+          "properties": [
+            "@context",
+            "@type",
+            "mainEntityOfPage",
+            "name",
+            "image",
+            "description",
+            "sku",
+            "brand",
+            "weight",
+            "offers"
+          ]
+        }
+      ],
+      "primary_comparison_flags": [],
+      "secondary_comparisons": [
+        {
+          "secondary_declared_page": "https://rhino-performance.com/productos/botas-presoterapia-inalambricas-pro-air/",
+          "D010": {
+            "rule": "D010",
+            "level": "D",
+            "severity": "error",
+            "message": "`mainEntityOfPage` no coincide con la canonical de la página.",
+            "entity": "Product@structured-data.item",
+            "path": null,
+            "evidence": {
+              "value": "https://rhino-performance.com/productos/botas-presoterapia-inalambricas-pro-air/",
+              "canonical": "https://rhino-performance.com/productos/pistola-de-masaje-gun-pro/"
+            },
+            "source": null,
+            "fix": null,
+            "scope": null,
+            "priority": "P1"
+          },
+          "matching_main_carousel_links": [
+            {
+              "href": "https://rhino-performance.com/productos/botas-presoterapia-inalambricas-pro-air/?recommendation_source=alternative-carousel&recommender=manual",
+              "absolute": "https://rhino-performance.com/productos/botas-presoterapia-inalambricas-pro-air/?recommendation_source=alternative-carousel&recommender=manual",
+              "aria_label": "Botas de Presoterapia Inalámbricas PRO AIR",
+              "title": "Botas de Presoterapia Inalámbricas PRO AIR",
+              "img_alt": "Botas de Presoterapia Inalámbricas PRO AIR Botas de Presoterapia Inalámbricas PRO AIR",
+              "class": "js-product-item-image-link-private ",
+              "context": {
+                "nav": false,
+                "header": false,
+                "footer": false,
+                "main": true,
+                "list": false,
+                "noscript": false,
+                "carousel": true,
+                "clone": false,
+                "pagination": false,
+                "hidden": false
+              },
+              "pointer": "/urls/0/template_audit/crawl/links/76"
+            },
+            {
+              "href": "https://rhino-performance.com/productos/botas-presoterapia-inalambricas-pro-air/?recommendation_source=alternative-carousel&recommender=manual",
+              "absolute": "https://rhino-performance.com/productos/botas-presoterapia-inalambricas-pro-air/?recommendation_source=alternative-carousel&recommender=manual",
+              "aria_label": "",
+              "title": "Botas de Presoterapia Inalámbricas PRO AIR",
+              "img_alt": "",
+              "class": "product-item-link ",
+              "context": {
+                "nav": false,
+                "header": false,
+                "footer": false,
+                "main": true,
+                "list": false,
+                "noscript": false,
+                "carousel": true,
+                "clone": false,
+                "pagination": false,
+                "hidden": false
+              },
+              "pointer": "/urls/0/template_audit/crawl/links/77"
+            }
+          ]
+        },
+        {
+          "secondary_declared_page": "https://rhino-performance.com/productos/kit-botas-y-brazos-de-presoterapia-pro-3/",
+          "D010": {
+            "rule": "D010",
+            "level": "D",
+            "severity": "error",
+            "message": "`mainEntityOfPage` no coincide con la canonical de la página.",
+            "entity": "Product@structured-data.item",
+            "path": null,
+            "evidence": {
+              "value": "https://rhino-performance.com/productos/kit-botas-y-brazos-de-presoterapia-pro-3/",
+              "canonical": "https://rhino-performance.com/productos/pistola-de-masaje-gun-pro/"
+            },
+            "source": null,
+            "fix": null,
+            "scope": null,
+            "priority": "P1"
+          },
+          "matching_main_carousel_links": [
+            {
+              "href": "https://rhino-performance.com/productos/kit-botas-y-brazos-de-presoterapia-pro-3/?recommendation_source=alternative-carousel&recommender=manual",
+              "absolute": "https://rhino-performance.com/productos/kit-botas-y-brazos-de-presoterapia-pro-3/?recommendation_source=alternative-carousel&recommender=manual",
+              "aria_label": "Kit Botas y Brazos de Presoterapia PRO 3",
+              "title": "Kit Botas y Brazos de Presoterapia PRO 3",
+              "img_alt": "Kit Botas y Brazos de Presoterapia PRO 3 Kit Botas y Brazos de Presoterapia PRO 3",
+              "class": "js-product-item-image-link-private ",
+              "context": {
+                "nav": false,
+                "header": false,
+                "footer": false,
+                "main": true,
+                "list": false,
+                "noscript": false,
+                "carousel": true,
+                "clone": false,
+                "pagination": false,
+                "hidden": false
+              },
+              "pointer": "/urls/0/template_audit/crawl/links/78"
+            },
+            {
+              "href": "https://rhino-performance.com/productos/kit-botas-y-brazos-de-presoterapia-pro-3/?recommendation_source=alternative-carousel&recommender=manual",
+              "absolute": "https://rhino-performance.com/productos/kit-botas-y-brazos-de-presoterapia-pro-3/?recommendation_source=alternative-carousel&recommender=manual",
+              "aria_label": "",
+              "title": "Kit Botas y Brazos de Presoterapia PRO 3",
+              "img_alt": "",
+              "class": "product-item-link ",
+              "context": {
+                "nav": false,
+                "header": false,
+                "footer": false,
+                "main": true,
+                "list": false,
+                "noscript": false,
+                "carousel": true,
+                "clone": false,
+                "pagination": false,
+                "hidden": false
+              },
+              "pointer": "/urls/0/template_audit/crawl/links/79"
+            }
+          ]
+        },
+        {
+          "secondary_declared_page": "https://rhino-performance.com/productos/tina-de-hielo-tub-air/",
+          "D010": {
+            "rule": "D010",
+            "level": "D",
+            "severity": "error",
+            "message": "`mainEntityOfPage` no coincide con la canonical de la página.",
+            "entity": "Product@structured-data.item",
+            "path": null,
+            "evidence": {
+              "value": "https://rhino-performance.com/productos/tina-de-hielo-tub-air/",
+              "canonical": "https://rhino-performance.com/productos/pistola-de-masaje-gun-pro/"
+            },
+            "source": null,
+            "fix": null,
+            "scope": null,
+            "priority": "P1"
+          },
+          "matching_main_carousel_links": [
+            {
+              "href": "https://rhino-performance.com/productos/tina-de-hielo-tub-air/?recommendation_source=alternative-carousel&recommender=manual",
+              "absolute": "https://rhino-performance.com/productos/tina-de-hielo-tub-air/?recommendation_source=alternative-carousel&recommender=manual",
+              "aria_label": "Tina de Hielo TUB AIR",
+              "title": "Tina de Hielo TUB AIR",
+              "img_alt": "Tina de Hielo TUB AIR Tina de Hielo TUB AIR",
+              "class": "js-product-item-image-link-private ",
+              "context": {
+                "nav": false,
+                "header": false,
+                "footer": false,
+                "main": true,
+                "list": false,
+                "noscript": false,
+                "carousel": true,
+                "clone": false,
+                "pagination": false,
+                "hidden": false
+              },
+              "pointer": "/urls/0/template_audit/crawl/links/80"
+            },
+            {
+              "href": "https://rhino-performance.com/productos/tina-de-hielo-tub-air/?recommendation_source=alternative-carousel&recommender=manual",
+              "absolute": "https://rhino-performance.com/productos/tina-de-hielo-tub-air/?recommendation_source=alternative-carousel&recommender=manual",
+              "aria_label": "",
+              "title": "Tina de Hielo TUB AIR",
+              "img_alt": "",
+              "class": "product-item-link ",
+              "context": {
+                "nav": false,
+                "header": false,
+                "footer": false,
+                "main": true,
+                "list": false,
+                "noscript": false,
+                "carousel": true,
+                "clone": false,
+                "pagination": false,
+                "hidden": false
+              },
+              "pointer": "/urls/0/template_audit/crawl/links/81"
+            }
+          ]
+        },
+        {
+          "secondary_declared_page": "https://rhino-performance.com/productos/manga-frio-y-calor-pierna-y-brazo/",
+          "D010": {
+            "rule": "D010",
+            "level": "D",
+            "severity": "error",
+            "message": "`mainEntityOfPage` no coincide con la canonical de la página.",
+            "entity": "Product@structured-data.item",
+            "path": null,
+            "evidence": {
+              "value": "https://rhino-performance.com/productos/manga-frio-y-calor-pierna-y-brazo/",
+              "canonical": "https://rhino-performance.com/productos/pistola-de-masaje-gun-pro/"
+            },
+            "source": null,
+            "fix": null,
+            "scope": null,
+            "priority": "P1"
+          },
+          "matching_main_carousel_links": [
+            {
+              "href": "https://rhino-performance.com/productos/manga-frio-y-calor-pierna-y-brazo/?recommendation_source=alternative-carousel&recommender=manual",
+              "absolute": "https://rhino-performance.com/productos/manga-frio-y-calor-pierna-y-brazo/?recommendation_source=alternative-carousel&recommender=manual",
+              "aria_label": "Manga de Compresión Frío y Calor",
+              "title": "Manga de Compresión Frío y Calor",
+              "img_alt": "Manga de Compresión Frío y Calor Manga de Compresión Frío y Calor",
+              "class": "js-product-item-image-link-private ",
+              "context": {
+                "nav": false,
+                "header": false,
+                "footer": false,
+                "main": true,
+                "list": false,
+                "noscript": false,
+                "carousel": true,
+                "clone": false,
+                "pagination": false,
+                "hidden": false
+              },
+              "pointer": "/urls/0/template_audit/crawl/links/82"
+            },
+            {
+              "href": "https://rhino-performance.com/productos/manga-frio-y-calor-pierna-y-brazo/?recommendation_source=alternative-carousel&recommender=manual",
+              "absolute": "https://rhino-performance.com/productos/manga-frio-y-calor-pierna-y-brazo/?recommendation_source=alternative-carousel&recommender=manual",
+              "aria_label": "",
+              "title": "Manga de Compresión Frío y Calor",
+              "img_alt": "",
+              "class": "product-item-link ",
+              "context": {
+                "nav": false,
+                "header": false,
+                "footer": false,
+                "main": true,
+                "list": false,
+                "noscript": false,
+                "carousel": true,
+                "clone": false,
+                "pagination": false,
+                "hidden": false
+              },
+              "pointer": "/urls/0/template_audit/crawl/links/83"
+            }
+          ]
+        },
+        {
+          "secondary_declared_page": "https://rhino-performance.com/productos/hombrera-frio-y-calor/",
+          "D010": {
+            "rule": "D010",
+            "level": "D",
+            "severity": "error",
+            "message": "`mainEntityOfPage` no coincide con la canonical de la página.",
+            "entity": "Product@structured-data.item",
+            "path": null,
+            "evidence": {
+              "value": "https://rhino-performance.com/productos/hombrera-frio-y-calor/",
+              "canonical": "https://rhino-performance.com/productos/pistola-de-masaje-gun-pro/"
+            },
+            "source": null,
+            "fix": null,
+            "scope": null,
+            "priority": "P1"
+          },
+          "matching_main_carousel_links": [
+            {
+              "href": "https://rhino-performance.com/productos/hombrera-frio-y-calor/?recommendation_source=alternative-carousel&recommender=manual",
+              "absolute": "https://rhino-performance.com/productos/hombrera-frio-y-calor/?recommendation_source=alternative-carousel&recommender=manual",
+              "aria_label": "Hombrera de Compresión Frío y Calor",
+              "title": "Hombrera de Compresión Frío y Calor",
+              "img_alt": "Hombrera de Compresión Frío y Calor Hombrera de Compresión Frío y Calor",
+              "class": "js-product-item-image-link-private ",
+              "context": {
+                "nav": false,
+                "header": false,
+                "footer": false,
+                "main": true,
+                "list": false,
+                "noscript": false,
+                "carousel": true,
+                "clone": false,
+                "pagination": false,
+                "hidden": false
+              },
+              "pointer": "/urls/0/template_audit/crawl/links/84"
+            },
+            {
+              "href": "https://rhino-performance.com/productos/hombrera-frio-y-calor/?recommendation_source=alternative-carousel&recommender=manual",
+              "absolute": "https://rhino-performance.com/productos/hombrera-frio-y-calor/?recommendation_source=alternative-carousel&recommender=manual",
+              "aria_label": "",
+              "title": "Hombrera de Compresión Frío y Calor",
+              "img_alt": "",
+              "class": "product-item-link ",
+              "context": {
+                "nav": false,
+                "header": false,
+                "footer": false,
+                "main": true,
+                "list": false,
+                "noscript": false,
+                "carousel": true,
+                "clone": false,
+                "pagination": false,
+                "hidden": false
+              },
+              "pointer": "/urls/0/template_audit/crawl/links/85"
+            }
+          ]
+        }
+      ],
+      "all_secondary_comparison_flags": [
+        {
+          "rule": "D010",
+          "level": "D",
+          "severity": "error",
+          "message": "`mainEntityOfPage` no coincide con la canonical de la página.",
+          "entity": "Product@structured-data.item",
+          "path": null,
+          "evidence": {
+            "value": "https://rhino-performance.com/productos/botas-presoterapia-inalambricas-pro-air/",
+            "canonical": "https://rhino-performance.com/productos/pistola-de-masaje-gun-pro/"
+          },
+          "source": null,
+          "fix": null,
+          "scope": null,
+          "priority": "P1"
+        },
+        {
+          "rule": "D011",
+          "level": "D",
+          "severity": "warning",
+          "message": "Offer.url difiere de la canonical (¿variante con URL propia?).",
+          "entity": "Product@structured-data.item",
+          "path": null,
+          "evidence": {
+            "offer_url": "https://rhino-performance.com/productos/botas-presoterapia-inalambricas-pro-air/?recommendation_source=alternative-carousel&amp%3Brecommender=manual",
+            "canonical": "https://rhino-performance.com/productos/pistola-de-masaje-gun-pro/"
+          },
+          "source": null,
+          "fix": null,
+          "scope": null,
+          "priority": "P2"
+        },
+        {
+          "rule": "D050",
+          "level": "D",
+          "severity": "warning",
+          "message": "Product.name no coincide con el H1 visible.",
+          "entity": "Product@structured-data.item",
+          "path": null,
+          "evidence": {
+            "name": "Botas de Presoterapia Inalámbricas PRO AIR",
+            "h1": "Pistola de Masaje GUN PRO"
+          },
+          "source": null,
+          "fix": null,
+          "scope": null,
+          "priority": "P2"
+        },
+        {
+          "rule": "D070",
+          "level": "D",
+          "severity": "warning",
+          "message": "La imagen del schema no aparece (por nombre de archivo) entre las imágenes/og:image de la página.",
+          "entity": "Product@structured-data.item",
+          "path": null,
+          "evidence": [
+            "https://acdn-us.mitiendanube.com/stores/007/400/935/products/kit-botas-de-presoterapia-pro-air-1-2-aefbc830fbd8eb0aca17852047770296-480-0.webp"
+          ],
+          "source": null,
+          "fix": null,
+          "scope": null,
+          "priority": "P2"
+        },
+        {
+          "rule": "D010",
+          "level": "D",
+          "severity": "error",
+          "message": "`mainEntityOfPage` no coincide con la canonical de la página.",
+          "entity": "Product@structured-data.item",
+          "path": null,
+          "evidence": {
+            "value": "https://rhino-performance.com/productos/kit-botas-y-brazos-de-presoterapia-pro-3/",
+            "canonical": "https://rhino-performance.com/productos/pistola-de-masaje-gun-pro/"
+          },
+          "source": null,
+          "fix": null,
+          "scope": null,
+          "priority": "P1"
+        },
+        {
+          "rule": "D011",
+          "level": "D",
+          "severity": "warning",
+          "message": "Offer.url difiere de la canonical (¿variante con URL propia?).",
+          "entity": "Product@structured-data.item",
+          "path": null,
+          "evidence": {
+            "offer_url": "https://rhino-performance.com/productos/kit-botas-y-brazos-de-presoterapia-pro-3/?recommendation_source=alternative-carousel&amp%3Brecommender=manual",
+            "canonical": "https://rhino-performance.com/productos/pistola-de-masaje-gun-pro/"
+          },
+          "source": null,
+          "fix": null,
+          "scope": null,
+          "priority": "P2"
+        },
+        {
+          "rule": "D050",
+          "level": "D",
+          "severity": "warning",
+          "message": "Product.name no coincide con el H1 visible.",
+          "entity": "Product@structured-data.item",
+          "path": null,
+          "evidence": {
+            "name": "Kit Botas y Brazos de Presoterapia PRO 3",
+            "h1": "Pistola de Masaje GUN PRO"
+          },
+          "source": null,
+          "fix": null,
+          "scope": null,
+          "priority": "P2"
+        },
+        {
+          "rule": "D070",
+          "level": "D",
+          "severity": "warning",
+          "message": "La imagen del schema no aparece (por nombre de archivo) entre las imágenes/og:image de la página.",
+          "entity": "Product@structured-data.item",
+          "path": null,
+          "evidence": [
+            "https://acdn-us.mitiendanube.com/stores/007/400/935/products/kit-botas-brazos-presoterapia-pro3-a3d13e4ef14f06367c17885602094186-480-0.webp"
+          ],
+          "source": null,
+          "fix": null,
+          "scope": null,
+          "priority": "P2"
+        },
+        {
+          "rule": "D010",
+          "level": "D",
+          "severity": "error",
+          "message": "`mainEntityOfPage` no coincide con la canonical de la página.",
+          "entity": "Product@structured-data.item",
+          "path": null,
+          "evidence": {
+            "value": "https://rhino-performance.com/productos/tina-de-hielo-tub-air/",
+            "canonical": "https://rhino-performance.com/productos/pistola-de-masaje-gun-pro/"
+          },
+          "source": null,
+          "fix": null,
+          "scope": null,
+          "priority": "P1"
+        },
+        {
+          "rule": "D011",
+          "level": "D",
+          "severity": "warning",
+          "message": "Offer.url difiere de la canonical (¿variante con URL propia?).",
+          "entity": "Product@structured-data.item",
+          "path": null,
+          "evidence": {
+            "offer_url": "https://rhino-performance.com/productos/tina-de-hielo-tub-air/?recommendation_source=alternative-carousel&amp%3Brecommender=manual",
+            "canonical": "https://rhino-performance.com/productos/pistola-de-masaje-gun-pro/"
+          },
+          "source": null,
+          "fix": null,
+          "scope": null,
+          "priority": "P2"
+        },
+        {
+          "rule": "D050",
+          "level": "D",
+          "severity": "warning",
+          "message": "Product.name no coincide con el H1 visible.",
+          "entity": "Product@structured-data.item",
+          "path": null,
+          "evidence": {
+            "name": "Tina de Hielo TUB AIR",
+            "h1": "Pistola de Masaje GUN PRO"
+          },
+          "source": null,
+          "fix": null,
+          "scope": null,
+          "priority": "P2"
+        },
+        {
+          "rule": "D070",
+          "level": "D",
+          "severity": "warning",
+          "message": "La imagen del schema no aparece (por nombre de archivo) entre las imágenes/og:image de la página.",
+          "entity": "Product@structured-data.item",
+          "path": null,
+          "evidence": [
+            "https://acdn-us.mitiendanube.com/stores/007/400/935/products/rhino-tina-tub-air-carrusel-b09ece51431a13db8617887512365509-480-0.webp"
+          ],
+          "source": null,
+          "fix": null,
+          "scope": null,
+          "priority": "P2"
+        },
+        {
+          "rule": "D010",
+          "level": "D",
+          "severity": "error",
+          "message": "`mainEntityOfPage` no coincide con la canonical de la página.",
+          "entity": "Product@structured-data.item",
+          "path": null,
+          "evidence": {
+            "value": "https://rhino-performance.com/productos/manga-frio-y-calor-pierna-y-brazo/",
+            "canonical": "https://rhino-performance.com/productos/pistola-de-masaje-gun-pro/"
+          },
+          "source": null,
+          "fix": null,
+          "scope": null,
+          "priority": "P1"
+        },
+        {
+          "rule": "D011",
+          "level": "D",
+          "severity": "warning",
+          "message": "Offer.url difiere de la canonical (¿variante con URL propia?).",
+          "entity": "Product@structured-data.item",
+          "path": null,
+          "evidence": {
+            "offer_url": "https://rhino-performance.com/productos/manga-frio-y-calor-pierna-y-brazo/?recommendation_source=alternative-carousel&amp%3Brecommender=manual",
+            "canonical": "https://rhino-performance.com/productos/pistola-de-masaje-gun-pro/"
+          },
+          "source": null,
+          "fix": null,
+          "scope": null,
+          "priority": "P2"
+        },
+        {
+          "rule": "D050",
+          "level": "D",
+          "severity": "warning",
+          "message": "Product.name no coincide con el H1 visible.",
+          "entity": "Product@structured-data.item",
+          "path": null,
+          "evidence": {
+            "name": "Manga de Compresión Frío y Calor",
+            "h1": "Pistola de Masaje GUN PRO"
+          },
+          "source": null,
+          "fix": null,
+          "scope": null,
+          "priority": "P2"
+        },
+        {
+          "rule": "D070",
+          "level": "D",
+          "severity": "warning",
+          "message": "La imagen del schema no aparece (por nombre de archivo) entre las imágenes/og:image de la página.",
+          "entity": "Product@structured-data.item",
+          "path": null,
+          "evidence": [
+            "https://acdn-us.mitiendanube.com/stores/007/400/935/products/manga-de-compresion-frio-calor-5-21c9967576e345800a17852038833165-480-0.webp"
+          ],
+          "source": null,
+          "fix": null,
+          "scope": null,
+          "priority": "P2"
+        },
+        {
+          "rule": "D010",
+          "level": "D",
+          "severity": "error",
+          "message": "`mainEntityOfPage` no coincide con la canonical de la página.",
+          "entity": "Product@structured-data.item",
+          "path": null,
+          "evidence": {
+            "value": "https://rhino-performance.com/productos/hombrera-frio-y-calor/",
+            "canonical": "https://rhino-performance.com/productos/pistola-de-masaje-gun-pro/"
+          },
+          "source": null,
+          "fix": null,
+          "scope": null,
+          "priority": "P1"
+        },
+        {
+          "rule": "D011",
+          "level": "D",
+          "severity": "warning",
+          "message": "Offer.url difiere de la canonical (¿variante con URL propia?).",
+          "entity": "Product@structured-data.item",
+          "path": null,
+          "evidence": {
+            "offer_url": "https://rhino-performance.com/productos/hombrera-frio-y-calor/?recommendation_source=alternative-carousel&amp%3Brecommender=manual",
+            "canonical": "https://rhino-performance.com/productos/pistola-de-masaje-gun-pro/"
+          },
+          "source": null,
+          "fix": null,
+          "scope": null,
+          "priority": "P2"
+        },
+        {
+          "rule": "D050",
+          "level": "D",
+          "severity": "warning",
+          "message": "Product.name no coincide con el H1 visible.",
+          "entity": "Product@structured-data.item",
+          "path": null,
+          "evidence": {
+            "name": "Hombrera de Compresión Frío y Calor",
+            "h1": "Pistola de Masaje GUN PRO"
+          },
+          "source": null,
+          "fix": null,
+          "scope": null,
+          "priority": "P2"
+        },
+        {
+          "rule": "D070",
+          "level": "D",
+          "severity": "warning",
+          "message": "La imagen del schema no aparece (por nombre de archivo) entre las imágenes/og:image de la página.",
+          "entity": "Product@structured-data.item",
+          "path": null,
+          "evidence": [
+            "https://acdn-us.mitiendanube.com/stores/007/400/935/products/hombrera-de-compresion-frio-calor-2-7ef0a017d48f7f072717852044021824-480-0.webp"
+          ],
+          "source": null,
+          "fix": null,
+          "scope": null,
+          "priority": "P2"
+        }
+      ],
+      "related_image_projection": [
+        {
+          "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+          "srcset": true,
+          "alt": "Botas de Presoterapia Inalámbricas PRO AIR",
+          "context": {
+            "nav": false,
+            "header": false,
+            "footer": false,
+            "main": true,
+            "list": false,
+            "noscript": false,
+            "carousel": true,
+            "clone": false,
+            "pagination": false,
+            "hidden": false
+          }
+        },
+        {
+          "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+          "srcset": true,
+          "alt": "Botas de Presoterapia Inalámbricas PRO AIR",
+          "context": {
+            "nav": false,
+            "header": false,
+            "footer": false,
+            "main": true,
+            "list": false,
+            "noscript": false,
+            "carousel": true,
+            "clone": false,
+            "pagination": false,
+            "hidden": false
+          }
+        },
+        {
+          "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+          "srcset": true,
+          "alt": "Kit Botas y Brazos de Presoterapia PRO 3",
+          "context": {
+            "nav": false,
+            "header": false,
+            "footer": false,
+            "main": true,
+            "list": false,
+            "noscript": false,
+            "carousel": true,
+            "clone": false,
+            "pagination": false,
+            "hidden": false
+          }
+        },
+        {
+          "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+          "srcset": true,
+          "alt": "Kit Botas y Brazos de Presoterapia PRO 3",
+          "context": {
+            "nav": false,
+            "header": false,
+            "footer": false,
+            "main": true,
+            "list": false,
+            "noscript": false,
+            "carousel": true,
+            "clone": false,
+            "pagination": false,
+            "hidden": false
+          }
+        },
+        {
+          "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+          "srcset": true,
+          "alt": "Tina de Hielo TUB AIR",
+          "context": {
+            "nav": false,
+            "header": false,
+            "footer": false,
+            "main": true,
+            "list": false,
+            "noscript": false,
+            "carousel": true,
+            "clone": false,
+            "pagination": false,
+            "hidden": false
+          }
+        },
+        {
+          "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+          "srcset": true,
+          "alt": "Tina de Hielo TUB AIR",
+          "context": {
+            "nav": false,
+            "header": false,
+            "footer": false,
+            "main": true,
+            "list": false,
+            "noscript": false,
+            "carousel": true,
+            "clone": false,
+            "pagination": false,
+            "hidden": false
+          }
+        },
+        {
+          "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+          "srcset": true,
+          "alt": "Manga de Compresión Frío y Calor",
+          "context": {
+            "nav": false,
+            "header": false,
+            "footer": false,
+            "main": true,
+            "list": false,
+            "noscript": false,
+            "carousel": true,
+            "clone": false,
+            "pagination": false,
+            "hidden": false
+          }
+        },
+        {
+          "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+          "srcset": true,
+          "alt": "Manga de Compresión Frío y Calor",
+          "context": {
+            "nav": false,
+            "header": false,
+            "footer": false,
+            "main": true,
+            "list": false,
+            "noscript": false,
+            "carousel": true,
+            "clone": false,
+            "pagination": false,
+            "hidden": false
+          }
+        },
+        {
+          "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+          "srcset": true,
+          "alt": "Hombrera de Compresión Frío y Calor",
+          "context": {
+            "nav": false,
+            "header": false,
+            "footer": false,
+            "main": true,
+            "list": false,
+            "noscript": false,
+            "carousel": true,
+            "clone": false,
+            "pagination": false,
+            "hidden": false
+          }
+        },
+        {
+          "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+          "srcset": true,
+          "alt": "Hombrera de Compresión Frío y Calor",
+          "context": {
+            "nav": false,
+            "header": false,
+            "footer": false,
+            "main": true,
+            "list": false,
+            "noscript": false,
+            "carousel": true,
+            "clone": false,
+            "pagination": false,
+            "hidden": false
+          }
+        }
+      ],
+      "projection_omits": [
+        "raw JSON-LD property values except those retained in findings",
+        "data-src/data-srcset",
+        "computed visibility/currentSrc/network downloads"
+      ],
+      "graph_conflicts": [],
+      "graph_duplicates": []
+    },
+    {
+      "URL": "https://rhino-performance.com/productos/tina-de-hielo-tub-air/",
+      "source": {
+        "file": "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/live-pilot-20261112/raw-crawl-report.json",
+        "node_pointer": "/urls/1"
+      },
+      "canonical": [
+        "https://rhino-performance.com/productos/tina-de-hielo-tub-air/"
+      ],
+      "main_H1": [
+        "Tina de Hielo TUB AIR"
+      ],
+      "primary_Product_entities": [
+        {
+          "key": "https://rhino-performance.com/productos/tina-de-hielo-tub-air/",
+          "id": "https://rhino-performance.com/productos/tina-de-hielo-tub-air/",
+          "types": [
+            "Product"
+          ],
+          "source": "jsonld",
+          "block": 1,
+          "component": "structured-data.page",
+          "path": "$.mainEntity",
+          "parent": "https://rhino-performance.com/productos/tina-de-hielo-tub-air/",
+          "parent_prop": "mainEntity",
+          "nested": true,
+          "ref_only": false,
+          "properties": [
+            "@type",
+            "@id",
+            "name",
+            "image",
+            "description",
+            "sku",
+            "brand",
+            "weight",
+            "offers"
+          ]
+        }
+      ],
+      "secondary_Product_entities": [
+        {
+          "key": "3:$",
+          "id": null,
+          "types": [
+            "Product"
+          ],
+          "source": "jsonld",
+          "block": 3,
+          "component": "structured-data.item",
+          "path": "$",
+          "parent": null,
+          "parent_prop": null,
+          "nested": false,
+          "ref_only": false,
+          "properties": [
+            "@context",
+            "@type",
+            "mainEntityOfPage",
+            "name",
+            "image",
+            "description",
+            "sku",
+            "brand",
+            "weight",
+            "offers"
+          ]
+        },
+        {
+          "key": "4:$",
+          "id": null,
+          "types": [
+            "Product"
+          ],
+          "source": "jsonld",
+          "block": 4,
+          "component": "structured-data.item",
+          "path": "$",
+          "parent": null,
+          "parent_prop": null,
+          "nested": false,
+          "ref_only": false,
+          "properties": [
+            "@context",
+            "@type",
+            "mainEntityOfPage",
+            "name",
+            "image",
+            "description",
+            "sku",
+            "brand",
+            "weight",
+            "offers"
+          ]
+        },
+        {
+          "key": "5:$",
+          "id": null,
+          "types": [
+            "Product"
+          ],
+          "source": "jsonld",
+          "block": 5,
+          "component": "structured-data.item",
+          "path": "$",
+          "parent": null,
+          "parent_prop": null,
+          "nested": false,
+          "ref_only": false,
+          "properties": [
+            "@context",
+            "@type",
+            "mainEntityOfPage",
+            "name",
+            "image",
+            "description",
+            "sku",
+            "brand",
+            "weight",
+            "offers"
+          ]
+        },
+        {
+          "key": "6:$",
+          "id": null,
+          "types": [
+            "Product"
+          ],
+          "source": "jsonld",
+          "block": 6,
+          "component": "structured-data.item",
+          "path": "$",
+          "parent": null,
+          "parent_prop": null,
+          "nested": false,
+          "ref_only": false,
+          "properties": [
+            "@context",
+            "@type",
+            "mainEntityOfPage",
+            "name",
+            "image",
+            "description",
+            "sku",
+            "brand",
+            "weight",
+            "offers"
+          ]
+        },
+        {
+          "key": "7:$",
+          "id": null,
+          "types": [
+            "Product"
+          ],
+          "source": "jsonld",
+          "block": 7,
+          "component": "structured-data.item",
+          "path": "$",
+          "parent": null,
+          "parent_prop": null,
+          "nested": false,
+          "ref_only": false,
+          "properties": [
+            "@context",
+            "@type",
+            "mainEntityOfPage",
+            "name",
+            "image",
+            "description",
+            "sku",
+            "brand",
+            "weight",
+            "offers"
+          ]
+        }
+      ],
+      "primary_comparison_flags": [],
+      "secondary_comparisons": [
+        {
+          "secondary_declared_page": "https://rhino-performance.com/productos/botas-presoterapia-inalambricas-pro-air/",
+          "D010": {
+            "rule": "D010",
+            "level": "D",
+            "severity": "error",
+            "message": "`mainEntityOfPage` no coincide con la canonical de la página.",
+            "entity": "Product@structured-data.item",
+            "path": null,
+            "evidence": {
+              "value": "https://rhino-performance.com/productos/botas-presoterapia-inalambricas-pro-air/",
+              "canonical": "https://rhino-performance.com/productos/tina-de-hielo-tub-air/"
+            },
+            "source": null,
+            "fix": null,
+            "scope": null,
+            "priority": "P1"
+          },
+          "matching_main_carousel_links": [
+            {
+              "href": "https://rhino-performance.com/productos/botas-presoterapia-inalambricas-pro-air/?recommendation_source=alternative-carousel&recommender=manual",
+              "absolute": "https://rhino-performance.com/productos/botas-presoterapia-inalambricas-pro-air/?recommendation_source=alternative-carousel&recommender=manual",
+              "aria_label": "Botas de Presoterapia Inalámbricas PRO AIR",
+              "title": "Botas de Presoterapia Inalámbricas PRO AIR",
+              "img_alt": "Botas de Presoterapia Inalámbricas PRO AIR Botas de Presoterapia Inalámbricas PRO AIR",
+              "class": "js-product-item-image-link-private ",
+              "context": {
+                "nav": false,
+                "header": false,
+                "footer": false,
+                "main": true,
+                "list": false,
+                "noscript": false,
+                "carousel": true,
+                "clone": false,
+                "pagination": false,
+                "hidden": false
+              },
+              "pointer": "/urls/1/template_audit/crawl/links/81"
+            },
+            {
+              "href": "https://rhino-performance.com/productos/botas-presoterapia-inalambricas-pro-air/?recommendation_source=alternative-carousel&recommender=manual",
+              "absolute": "https://rhino-performance.com/productos/botas-presoterapia-inalambricas-pro-air/?recommendation_source=alternative-carousel&recommender=manual",
+              "aria_label": "",
+              "title": "Botas de Presoterapia Inalámbricas PRO AIR",
+              "img_alt": "",
+              "class": "product-item-link ",
+              "context": {
+                "nav": false,
+                "header": false,
+                "footer": false,
+                "main": true,
+                "list": false,
+                "noscript": false,
+                "carousel": true,
+                "clone": false,
+                "pagination": false,
+                "hidden": false
+              },
+              "pointer": "/urls/1/template_audit/crawl/links/82"
+            }
+          ]
+        },
+        {
+          "secondary_declared_page": "https://rhino-performance.com/productos/pistola-de-masaje-gun-air/",
+          "D010": {
+            "rule": "D010",
+            "level": "D",
+            "severity": "error",
+            "message": "`mainEntityOfPage` no coincide con la canonical de la página.",
+            "entity": "Product@structured-data.item",
+            "path": null,
+            "evidence": {
+              "value": "https://rhino-performance.com/productos/pistola-de-masaje-gun-air/",
+              "canonical": "https://rhino-performance.com/productos/tina-de-hielo-tub-air/"
+            },
+            "source": null,
+            "fix": null,
+            "scope": null,
+            "priority": "P1"
+          },
+          "matching_main_carousel_links": [
+            {
+              "href": "https://rhino-performance.com/productos/pistola-de-masaje-gun-air/?recommendation_source=alternative-carousel&recommender=manual",
+              "absolute": "https://rhino-performance.com/productos/pistola-de-masaje-gun-air/?recommendation_source=alternative-carousel&recommender=manual",
+              "aria_label": "Pistola de Masaje GUN AIR",
+              "title": "Pistola de Masaje GUN AIR",
+              "img_alt": "Pistola de Masaje GUN AIR Pistola de Masaje GUN AIR",
+              "class": "js-product-item-image-link-private ",
+              "context": {
+                "nav": false,
+                "header": false,
+                "footer": false,
+                "main": true,
+                "list": false,
+                "noscript": false,
+                "carousel": true,
+                "clone": false,
+                "pagination": false,
+                "hidden": false
+              },
+              "pointer": "/urls/1/template_audit/crawl/links/83"
+            },
+            {
+              "href": "https://rhino-performance.com/productos/pistola-de-masaje-gun-air/?recommendation_source=alternative-carousel&recommender=manual",
+              "absolute": "https://rhino-performance.com/productos/pistola-de-masaje-gun-air/?recommendation_source=alternative-carousel&recommender=manual",
+              "aria_label": "",
+              "title": "Pistola de Masaje GUN AIR",
+              "img_alt": "",
+              "class": "product-item-link ",
+              "context": {
+                "nav": false,
+                "header": false,
+                "footer": false,
+                "main": true,
+                "list": false,
+                "noscript": false,
+                "carousel": true,
+                "clone": false,
+                "pagination": false,
+                "hidden": false
+              },
+              "pointer": "/urls/1/template_audit/crawl/links/84"
+            }
+          ]
+        },
+        {
+          "secondary_declared_page": "https://rhino-performance.com/productos/pistola-de-masaje-gun-pro/",
+          "D010": {
+            "rule": "D010",
+            "level": "D",
+            "severity": "error",
+            "message": "`mainEntityOfPage` no coincide con la canonical de la página.",
+            "entity": "Product@structured-data.item",
+            "path": null,
+            "evidence": {
+              "value": "https://rhino-performance.com/productos/pistola-de-masaje-gun-pro/",
+              "canonical": "https://rhino-performance.com/productos/tina-de-hielo-tub-air/"
+            },
+            "source": null,
+            "fix": null,
+            "scope": null,
+            "priority": "P1"
+          },
+          "matching_main_carousel_links": [
+            {
+              "href": "https://rhino-performance.com/productos/pistola-de-masaje-gun-pro/?recommendation_source=alternative-carousel&recommender=manual",
+              "absolute": "https://rhino-performance.com/productos/pistola-de-masaje-gun-pro/?recommendation_source=alternative-carousel&recommender=manual",
+              "aria_label": "Pistola de Masaje GUN PRO",
+              "title": "Pistola de Masaje GUN PRO",
+              "img_alt": "Pistola de Masaje GUN PRO Pistola de Masaje GUN PRO",
+              "class": "js-product-item-image-link-private ",
+              "context": {
+                "nav": false,
+                "header": false,
+                "footer": false,
+                "main": true,
+                "list": false,
+                "noscript": false,
+                "carousel": true,
+                "clone": false,
+                "pagination": false,
+                "hidden": false
+              },
+              "pointer": "/urls/1/template_audit/crawl/links/85"
+            },
+            {
+              "href": "https://rhino-performance.com/productos/pistola-de-masaje-gun-pro/?recommendation_source=alternative-carousel&recommender=manual",
+              "absolute": "https://rhino-performance.com/productos/pistola-de-masaje-gun-pro/?recommendation_source=alternative-carousel&recommender=manual",
+              "aria_label": "",
+              "title": "Pistola de Masaje GUN PRO",
+              "img_alt": "",
+              "class": "product-item-link ",
+              "context": {
+                "nav": false,
+                "header": false,
+                "footer": false,
+                "main": true,
+                "list": false,
+                "noscript": false,
+                "carousel": true,
+                "clone": false,
+                "pagination": false,
+                "hidden": false
+              },
+              "pointer": "/urls/1/template_audit/crawl/links/86"
+            }
+          ]
+        },
+        {
+          "secondary_declared_page": "https://rhino-performance.com/productos/hombrera-frio-y-calor/",
+          "D010": {
+            "rule": "D010",
+            "level": "D",
+            "severity": "error",
+            "message": "`mainEntityOfPage` no coincide con la canonical de la página.",
+            "entity": "Product@structured-data.item",
+            "path": null,
+            "evidence": {
+              "value": "https://rhino-performance.com/productos/hombrera-frio-y-calor/",
+              "canonical": "https://rhino-performance.com/productos/tina-de-hielo-tub-air/"
+            },
+            "source": null,
+            "fix": null,
+            "scope": null,
+            "priority": "P1"
+          },
+          "matching_main_carousel_links": [
+            {
+              "href": "https://rhino-performance.com/productos/hombrera-frio-y-calor/?recommendation_source=alternative-carousel&recommender=manual",
+              "absolute": "https://rhino-performance.com/productos/hombrera-frio-y-calor/?recommendation_source=alternative-carousel&recommender=manual",
+              "aria_label": "Hombrera de Compresión Frío y Calor",
+              "title": "Hombrera de Compresión Frío y Calor",
+              "img_alt": "Hombrera de Compresión Frío y Calor Hombrera de Compresión Frío y Calor",
+              "class": "js-product-item-image-link-private ",
+              "context": {
+                "nav": false,
+                "header": false,
+                "footer": false,
+                "main": true,
+                "list": false,
+                "noscript": false,
+                "carousel": true,
+                "clone": false,
+                "pagination": false,
+                "hidden": false
+              },
+              "pointer": "/urls/1/template_audit/crawl/links/87"
+            },
+            {
+              "href": "https://rhino-performance.com/productos/hombrera-frio-y-calor/?recommendation_source=alternative-carousel&recommender=manual",
+              "absolute": "https://rhino-performance.com/productos/hombrera-frio-y-calor/?recommendation_source=alternative-carousel&recommender=manual",
+              "aria_label": "",
+              "title": "Hombrera de Compresión Frío y Calor",
+              "img_alt": "",
+              "class": "product-item-link ",
+              "context": {
+                "nav": false,
+                "header": false,
+                "footer": false,
+                "main": true,
+                "list": false,
+                "noscript": false,
+                "carousel": true,
+                "clone": false,
+                "pagination": false,
+                "hidden": false
+              },
+              "pointer": "/urls/1/template_audit/crawl/links/88"
+            }
+          ]
+        },
+        {
+          "secondary_declared_page": "https://rhino-performance.com/productos/manga-frio-y-calor-pierna-y-brazo/",
+          "D010": {
+            "rule": "D010",
+            "level": "D",
+            "severity": "error",
+            "message": "`mainEntityOfPage` no coincide con la canonical de la página.",
+            "entity": "Product@structured-data.item",
+            "path": null,
+            "evidence": {
+              "value": "https://rhino-performance.com/productos/manga-frio-y-calor-pierna-y-brazo/",
+              "canonical": "https://rhino-performance.com/productos/tina-de-hielo-tub-air/"
+            },
+            "source": null,
+            "fix": null,
+            "scope": null,
+            "priority": "P1"
+          },
+          "matching_main_carousel_links": [
+            {
+              "href": "https://rhino-performance.com/productos/manga-frio-y-calor-pierna-y-brazo/?recommendation_source=alternative-carousel&recommender=manual",
+              "absolute": "https://rhino-performance.com/productos/manga-frio-y-calor-pierna-y-brazo/?recommendation_source=alternative-carousel&recommender=manual",
+              "aria_label": "Manga de Compresión Frío y Calor",
+              "title": "Manga de Compresión Frío y Calor",
+              "img_alt": "Manga de Compresión Frío y Calor Manga de Compresión Frío y Calor",
+              "class": "js-product-item-image-link-private ",
+              "context": {
+                "nav": false,
+                "header": false,
+                "footer": false,
+                "main": true,
+                "list": false,
+                "noscript": false,
+                "carousel": true,
+                "clone": false,
+                "pagination": false,
+                "hidden": false
+              },
+              "pointer": "/urls/1/template_audit/crawl/links/89"
+            },
+            {
+              "href": "https://rhino-performance.com/productos/manga-frio-y-calor-pierna-y-brazo/?recommendation_source=alternative-carousel&recommender=manual",
+              "absolute": "https://rhino-performance.com/productos/manga-frio-y-calor-pierna-y-brazo/?recommendation_source=alternative-carousel&recommender=manual",
+              "aria_label": "",
+              "title": "Manga de Compresión Frío y Calor",
+              "img_alt": "",
+              "class": "product-item-link ",
+              "context": {
+                "nav": false,
+                "header": false,
+                "footer": false,
+                "main": true,
+                "list": false,
+                "noscript": false,
+                "carousel": true,
+                "clone": false,
+                "pagination": false,
+                "hidden": false
+              },
+              "pointer": "/urls/1/template_audit/crawl/links/90"
+            }
+          ]
+        }
+      ],
+      "all_secondary_comparison_flags": [
+        {
+          "rule": "D010",
+          "level": "D",
+          "severity": "error",
+          "message": "`mainEntityOfPage` no coincide con la canonical de la página.",
+          "entity": "Product@structured-data.item",
+          "path": null,
+          "evidence": {
+            "value": "https://rhino-performance.com/productos/botas-presoterapia-inalambricas-pro-air/",
+            "canonical": "https://rhino-performance.com/productos/tina-de-hielo-tub-air/"
+          },
+          "source": null,
+          "fix": null,
+          "scope": null,
+          "priority": "P1"
+        },
+        {
+          "rule": "D011",
+          "level": "D",
+          "severity": "warning",
+          "message": "Offer.url difiere de la canonical (¿variante con URL propia?).",
+          "entity": "Product@structured-data.item",
+          "path": null,
+          "evidence": {
+            "offer_url": "https://rhino-performance.com/productos/botas-presoterapia-inalambricas-pro-air/?recommendation_source=alternative-carousel&amp%3Brecommender=manual",
+            "canonical": "https://rhino-performance.com/productos/tina-de-hielo-tub-air/"
+          },
+          "source": null,
+          "fix": null,
+          "scope": null,
+          "priority": "P2"
+        },
+        {
+          "rule": "D050",
+          "level": "D",
+          "severity": "warning",
+          "message": "Product.name no coincide con el H1 visible.",
+          "entity": "Product@structured-data.item",
+          "path": null,
+          "evidence": {
+            "name": "Botas de Presoterapia Inalámbricas PRO AIR",
+            "h1": "Tina de Hielo TUB AIR"
+          },
+          "source": null,
+          "fix": null,
+          "scope": null,
+          "priority": "P2"
+        },
+        {
+          "rule": "D070",
+          "level": "D",
+          "severity": "warning",
+          "message": "La imagen del schema no aparece (por nombre de archivo) entre las imágenes/og:image de la página.",
+          "entity": "Product@structured-data.item",
+          "path": null,
+          "evidence": [
+            "https://acdn-us.mitiendanube.com/stores/007/400/935/products/kit-botas-de-presoterapia-pro-air-1-2-aefbc830fbd8eb0aca17852047770296-480-0.webp"
+          ],
+          "source": null,
+          "fix": null,
+          "scope": null,
+          "priority": "P2"
+        },
+        {
+          "rule": "D010",
+          "level": "D",
+          "severity": "error",
+          "message": "`mainEntityOfPage` no coincide con la canonical de la página.",
+          "entity": "Product@structured-data.item",
+          "path": null,
+          "evidence": {
+            "value": "https://rhino-performance.com/productos/pistola-de-masaje-gun-air/",
+            "canonical": "https://rhino-performance.com/productos/tina-de-hielo-tub-air/"
+          },
+          "source": null,
+          "fix": null,
+          "scope": null,
+          "priority": "P1"
+        },
+        {
+          "rule": "D011",
+          "level": "D",
+          "severity": "warning",
+          "message": "Offer.url difiere de la canonical (¿variante con URL propia?).",
+          "entity": "Product@structured-data.item",
+          "path": null,
+          "evidence": {
+            "offer_url": "https://rhino-performance.com/productos/pistola-de-masaje-gun-air/?recommendation_source=alternative-carousel&amp%3Brecommender=manual",
+            "canonical": "https://rhino-performance.com/productos/tina-de-hielo-tub-air/"
+          },
+          "source": null,
+          "fix": null,
+          "scope": null,
+          "priority": "P2"
+        },
+        {
+          "rule": "D050",
+          "level": "D",
+          "severity": "warning",
+          "message": "Product.name no coincide con el H1 visible.",
+          "entity": "Product@structured-data.item",
+          "path": null,
+          "evidence": {
+            "name": "Pistola de Masaje GUN AIR",
+            "h1": "Tina de Hielo TUB AIR"
+          },
+          "source": null,
+          "fix": null,
+          "scope": null,
+          "priority": "P2"
+        },
+        {
+          "rule": "D070",
+          "level": "D",
+          "severity": "warning",
+          "message": "La imagen del schema no aparece (por nombre de archivo) entre las imágenes/og:image de la página.",
+          "entity": "Product@structured-data.item",
+          "path": null,
+          "evidence": [
+            "https://acdn-us.mitiendanube.com/stores/007/400/935/products/rhino-gun-air-carrusel-706469bdc49690a1f417887432053357-480-0.webp"
+          ],
+          "source": null,
+          "fix": null,
+          "scope": null,
+          "priority": "P2"
+        },
+        {
+          "rule": "D010",
+          "level": "D",
+          "severity": "error",
+          "message": "`mainEntityOfPage` no coincide con la canonical de la página.",
+          "entity": "Product@structured-data.item",
+          "path": null,
+          "evidence": {
+            "value": "https://rhino-performance.com/productos/pistola-de-masaje-gun-pro/",
+            "canonical": "https://rhino-performance.com/productos/tina-de-hielo-tub-air/"
+          },
+          "source": null,
+          "fix": null,
+          "scope": null,
+          "priority": "P1"
+        },
+        {
+          "rule": "D011",
+          "level": "D",
+          "severity": "warning",
+          "message": "Offer.url difiere de la canonical (¿variante con URL propia?).",
+          "entity": "Product@structured-data.item",
+          "path": null,
+          "evidence": {
+            "offer_url": "https://rhino-performance.com/productos/pistola-de-masaje-gun-pro/?recommendation_source=alternative-carousel&amp%3Brecommender=manual",
+            "canonical": "https://rhino-performance.com/productos/tina-de-hielo-tub-air/"
+          },
+          "source": null,
+          "fix": null,
+          "scope": null,
+          "priority": "P2"
+        },
+        {
+          "rule": "D050",
+          "level": "D",
+          "severity": "warning",
+          "message": "Product.name no coincide con el H1 visible.",
+          "entity": "Product@structured-data.item",
+          "path": null,
+          "evidence": {
+            "name": "Pistola de Masaje GUN PRO",
+            "h1": "Tina de Hielo TUB AIR"
+          },
+          "source": null,
+          "fix": null,
+          "scope": null,
+          "priority": "P2"
+        },
+        {
+          "rule": "D070",
+          "level": "D",
+          "severity": "warning",
+          "message": "La imagen del schema no aparece (por nombre de archivo) entre las imágenes/og:image de la página.",
+          "entity": "Product@structured-data.item",
+          "path": null,
+          "evidence": [
+            "https://acdn-us.mitiendanube.com/stores/007/400/935/products/rhino-gun-pro-carrusel-8194d1019bbddb842517887497698642-480-0.webp"
+          ],
+          "source": null,
+          "fix": null,
+          "scope": null,
+          "priority": "P2"
+        },
+        {
+          "rule": "D010",
+          "level": "D",
+          "severity": "error",
+          "message": "`mainEntityOfPage` no coincide con la canonical de la página.",
+          "entity": "Product@structured-data.item",
+          "path": null,
+          "evidence": {
+            "value": "https://rhino-performance.com/productos/hombrera-frio-y-calor/",
+            "canonical": "https://rhino-performance.com/productos/tina-de-hielo-tub-air/"
+          },
+          "source": null,
+          "fix": null,
+          "scope": null,
+          "priority": "P1"
+        },
+        {
+          "rule": "D011",
+          "level": "D",
+          "severity": "warning",
+          "message": "Offer.url difiere de la canonical (¿variante con URL propia?).",
+          "entity": "Product@structured-data.item",
+          "path": null,
+          "evidence": {
+            "offer_url": "https://rhino-performance.com/productos/hombrera-frio-y-calor/?recommendation_source=alternative-carousel&amp%3Brecommender=manual",
+            "canonical": "https://rhino-performance.com/productos/tina-de-hielo-tub-air/"
+          },
+          "source": null,
+          "fix": null,
+          "scope": null,
+          "priority": "P2"
+        },
+        {
+          "rule": "D050",
+          "level": "D",
+          "severity": "warning",
+          "message": "Product.name no coincide con el H1 visible.",
+          "entity": "Product@structured-data.item",
+          "path": null,
+          "evidence": {
+            "name": "Hombrera de Compresión Frío y Calor",
+            "h1": "Tina de Hielo TUB AIR"
+          },
+          "source": null,
+          "fix": null,
+          "scope": null,
+          "priority": "P2"
+        },
+        {
+          "rule": "D070",
+          "level": "D",
+          "severity": "warning",
+          "message": "La imagen del schema no aparece (por nombre de archivo) entre las imágenes/og:image de la página.",
+          "entity": "Product@structured-data.item",
+          "path": null,
+          "evidence": [
+            "https://acdn-us.mitiendanube.com/stores/007/400/935/products/hombrera-de-compresion-frio-calor-2-7ef0a017d48f7f072717852044021824-480-0.webp"
+          ],
+          "source": null,
+          "fix": null,
+          "scope": null,
+          "priority": "P2"
+        },
+        {
+          "rule": "D010",
+          "level": "D",
+          "severity": "error",
+          "message": "`mainEntityOfPage` no coincide con la canonical de la página.",
+          "entity": "Product@structured-data.item",
+          "path": null,
+          "evidence": {
+            "value": "https://rhino-performance.com/productos/manga-frio-y-calor-pierna-y-brazo/",
+            "canonical": "https://rhino-performance.com/productos/tina-de-hielo-tub-air/"
+          },
+          "source": null,
+          "fix": null,
+          "scope": null,
+          "priority": "P1"
+        },
+        {
+          "rule": "D011",
+          "level": "D",
+          "severity": "warning",
+          "message": "Offer.url difiere de la canonical (¿variante con URL propia?).",
+          "entity": "Product@structured-data.item",
+          "path": null,
+          "evidence": {
+            "offer_url": "https://rhino-performance.com/productos/manga-frio-y-calor-pierna-y-brazo/?recommendation_source=alternative-carousel&amp%3Brecommender=manual",
+            "canonical": "https://rhino-performance.com/productos/tina-de-hielo-tub-air/"
+          },
+          "source": null,
+          "fix": null,
+          "scope": null,
+          "priority": "P2"
+        },
+        {
+          "rule": "D050",
+          "level": "D",
+          "severity": "warning",
+          "message": "Product.name no coincide con el H1 visible.",
+          "entity": "Product@structured-data.item",
+          "path": null,
+          "evidence": {
+            "name": "Manga de Compresión Frío y Calor",
+            "h1": "Tina de Hielo TUB AIR"
+          },
+          "source": null,
+          "fix": null,
+          "scope": null,
+          "priority": "P2"
+        },
+        {
+          "rule": "D070",
+          "level": "D",
+          "severity": "warning",
+          "message": "La imagen del schema no aparece (por nombre de archivo) entre las imágenes/og:image de la página.",
+          "entity": "Product@structured-data.item",
+          "path": null,
+          "evidence": [
+            "https://acdn-us.mitiendanube.com/stores/007/400/935/products/manga-de-compresion-frio-calor-5-21c9967576e345800a17852038833165-480-0.webp"
+          ],
+          "source": null,
+          "fix": null,
+          "scope": null,
+          "priority": "P2"
+        }
+      ],
+      "related_image_projection": [
+        {
+          "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+          "srcset": true,
+          "alt": "Botas de Presoterapia Inalámbricas PRO AIR",
+          "context": {
+            "nav": false,
+            "header": false,
+            "footer": false,
+            "main": true,
+            "list": false,
+            "noscript": false,
+            "carousel": true,
+            "clone": false,
+            "pagination": false,
+            "hidden": false
+          }
+        },
+        {
+          "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+          "srcset": true,
+          "alt": "Botas de Presoterapia Inalámbricas PRO AIR",
+          "context": {
+            "nav": false,
+            "header": false,
+            "footer": false,
+            "main": true,
+            "list": false,
+            "noscript": false,
+            "carousel": true,
+            "clone": false,
+            "pagination": false,
+            "hidden": false
+          }
+        },
+        {
+          "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+          "srcset": true,
+          "alt": "Pistola de Masaje GUN AIR",
+          "context": {
+            "nav": false,
+            "header": false,
+            "footer": false,
+            "main": true,
+            "list": false,
+            "noscript": false,
+            "carousel": true,
+            "clone": false,
+            "pagination": false,
+            "hidden": false
+          }
+        },
+        {
+          "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+          "srcset": true,
+          "alt": "Pistola de Masaje GUN AIR",
+          "context": {
+            "nav": false,
+            "header": false,
+            "footer": false,
+            "main": true,
+            "list": false,
+            "noscript": false,
+            "carousel": true,
+            "clone": false,
+            "pagination": false,
+            "hidden": false
+          }
+        },
+        {
+          "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+          "srcset": true,
+          "alt": "Pistola de Masaje GUN PRO",
+          "context": {
+            "nav": false,
+            "header": false,
+            "footer": false,
+            "main": true,
+            "list": false,
+            "noscript": false,
+            "carousel": true,
+            "clone": false,
+            "pagination": false,
+            "hidden": false
+          }
+        },
+        {
+          "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+          "srcset": true,
+          "alt": "Pistola de Masaje GUN PRO",
+          "context": {
+            "nav": false,
+            "header": false,
+            "footer": false,
+            "main": true,
+            "list": false,
+            "noscript": false,
+            "carousel": true,
+            "clone": false,
+            "pagination": false,
+            "hidden": false
+          }
+        },
+        {
+          "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+          "srcset": true,
+          "alt": "Hombrera de Compresión Frío y Calor",
+          "context": {
+            "nav": false,
+            "header": false,
+            "footer": false,
+            "main": true,
+            "list": false,
+            "noscript": false,
+            "carousel": true,
+            "clone": false,
+            "pagination": false,
+            "hidden": false
+          }
+        },
+        {
+          "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+          "srcset": true,
+          "alt": "Hombrera de Compresión Frío y Calor",
+          "context": {
+            "nav": false,
+            "header": false,
+            "footer": false,
+            "main": true,
+            "list": false,
+            "noscript": false,
+            "carousel": true,
+            "clone": false,
+            "pagination": false,
+            "hidden": false
+          }
+        },
+        {
+          "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+          "srcset": true,
+          "alt": "Manga de Compresión Frío y Calor",
+          "context": {
+            "nav": false,
+            "header": false,
+            "footer": false,
+            "main": true,
+            "list": false,
+            "noscript": false,
+            "carousel": true,
+            "clone": false,
+            "pagination": false,
+            "hidden": false
+          }
+        },
+        {
+          "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+          "srcset": true,
+          "alt": "Manga de Compresión Frío y Calor",
+          "context": {
+            "nav": false,
+            "header": false,
+            "footer": false,
+            "main": true,
+            "list": false,
+            "noscript": false,
+            "carousel": true,
+            "clone": false,
+            "pagination": false,
+            "hidden": false
+          }
+        }
+      ],
+      "projection_omits": [
+        "raw JSON-LD property values except those retained in findings",
+        "data-src/data-srcset",
+        "computed visibility/currentSrc/network downloads"
+      ],
+      "graph_conflicts": [],
+      "graph_duplicates": []
+    }
+  ],
+  "articles": [
+    {
+      "URL": "https://rhino-performance.com/blog/posts/la-presoterapia-como-transformador-de-tu-salud-mental-relajacion-y-recuperacion-127cdc829590/",
+      "source": {
+        "file": "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/live-pilot-20261112/raw-crawl-report.json",
+        "node_pointer": "/urls/2"
+      },
+      "declared_author_strings": [
+        "RHINO PERFORMANCE"
+      ],
+      "author_findings": [
+        {
+          "rule": "B030",
+          "level": "B",
+          "severity": "warning",
+          "message": "`author` es texto plano; Google y schema.org esperan Person u Organization.",
+          "entity": "BlogPosting@structured-data.blog-post",
+          "path": "author",
+          "evidence": null,
+          "source": null,
+          "fix": "Emitir {\"@type\":\"Person\",\"name\":…} solo con el autor real del artículo.",
+          "scope": null,
+          "priority": "P2"
+        },
+        {
+          "rule": "B100",
+          "level": "B",
+          "severity": "warning",
+          "message": "Se espera una entidad del vocabulario, no texto sin tipo.",
+          "entity": "1:$",
+          "path": "author",
+          "evidence": null,
+          "source": "https://schema.org/version/latest/schemaorg-current-https.jsonld",
+          "fix": null,
+          "scope": null,
+          "priority": "P2"
+        }
+      ],
+      "BlogPosting_entities": [
+        {
+          "key": "1:$",
+          "id": null,
+          "types": [
+            "BlogPosting"
+          ],
+          "source": "jsonld",
+          "block": 1,
+          "component": "structured-data.blog-post",
+          "path": "$",
+          "parent": null,
+          "parent_prop": null,
+          "nested": false,
+          "ref_only": false,
+          "properties": [
+            "@context",
+            "@type",
+            "headline",
+            "author",
+            "description",
+            "url",
+            "mainEntityOfPage",
+            "datePublished",
+            "dateModified",
+            "publisher",
+            "image"
+          ]
+        }
+      ],
+      "author_truth": "declared_not_editorially_verified",
+      "emitter_markers": [
+        {
+          "block": 0,
+          "marker": "structured-data.organization",
+          "source_candidates": [],
+          "attribution": "unknown_theme_or_app",
+          "confirmed_runtime_initiator": false
+        },
+        {
+          "block": 1,
+          "marker": "structured-data.blog-post",
+          "source_candidates": [],
+          "attribution": "unknown_theme_or_app",
+          "confirmed_runtime_initiator": false
+        },
+        {
+          "block": 2,
+          "marker": "structured-data.blog-post-breadcrumbs",
+          "source_candidates": [],
+          "attribution": "unknown_theme_or_app",
+          "confirmed_runtime_initiator": false
+        }
+      ]
+    },
+    {
+      "URL": "https://rhino-performance.com/blog/posts/el-fro-no-es-un-castigo-es-una-herramienta-cbe9a25855f8/",
+      "source": {
+        "file": "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/live-pilot-20261112/raw-crawl-report.json",
+        "node_pointer": "/urls/3"
+      },
+      "declared_author_strings": [
+        "Marketing RHINO"
+      ],
+      "author_findings": [
+        {
+          "rule": "B030",
+          "level": "B",
+          "severity": "warning",
+          "message": "`author` es texto plano; Google y schema.org esperan Person u Organization.",
+          "entity": "BlogPosting@structured-data.blog-post",
+          "path": "author",
+          "evidence": null,
+          "source": null,
+          "fix": "Emitir {\"@type\":\"Person\",\"name\":…} solo con el autor real del artículo.",
+          "scope": null,
+          "priority": "P2"
+        },
+        {
+          "rule": "B100",
+          "level": "B",
+          "severity": "warning",
+          "message": "Se espera una entidad del vocabulario, no texto sin tipo.",
+          "entity": "1:$",
+          "path": "author",
+          "evidence": null,
+          "source": "https://schema.org/version/latest/schemaorg-current-https.jsonld",
+          "fix": null,
+          "scope": null,
+          "priority": "P2"
+        }
+      ],
+      "BlogPosting_entities": [
+        {
+          "key": "1:$",
+          "id": null,
+          "types": [
+            "BlogPosting"
+          ],
+          "source": "jsonld",
+          "block": 1,
+          "component": "structured-data.blog-post",
+          "path": "$",
+          "parent": null,
+          "parent_prop": null,
+          "nested": false,
+          "ref_only": false,
+          "properties": [
+            "@context",
+            "@type",
+            "headline",
+            "author",
+            "description",
+            "url",
+            "mainEntityOfPage",
+            "datePublished",
+            "dateModified",
+            "publisher",
+            "image"
+          ]
+        }
+      ],
+      "author_truth": "declared_not_editorially_verified",
+      "emitter_markers": [
+        {
+          "block": 0,
+          "marker": "structured-data.organization",
+          "source_candidates": [],
+          "attribution": "unknown_theme_or_app",
+          "confirmed_runtime_initiator": false
+        },
+        {
+          "block": 1,
+          "marker": "structured-data.blog-post",
+          "source_candidates": [],
+          "attribution": "unknown_theme_or_app",
+          "confirmed_runtime_initiator": false
+        },
+        {
+          "block": 2,
+          "marker": "structured-data.blog-post-breadcrumbs",
+          "source_candidates": [],
+          "attribution": "unknown_theme_or_app",
+          "confirmed_runtime_initiator": false
+        }
+      ]
+    },
+    {
+      "URL": "https://rhino-performance.com/blog/posts/faja-de-compresion-lumbar-el-soporte-que-tu-espalda-agradecera-047c381cf3ac/",
+      "source": {
+        "file": "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/live-pilot-20261112/raw-crawl-report.json",
+        "node_pointer": "/urls/4"
+      },
+      "declared_author_strings": [
+        "Erick"
+      ],
+      "author_findings": [
+        {
+          "rule": "B030",
+          "level": "B",
+          "severity": "warning",
+          "message": "`author` es texto plano; Google y schema.org esperan Person u Organization.",
+          "entity": "BlogPosting@structured-data.blog-post",
+          "path": "author",
+          "evidence": null,
+          "source": null,
+          "fix": "Emitir {\"@type\":\"Person\",\"name\":…} solo con el autor real del artículo.",
+          "scope": null,
+          "priority": "P2"
+        },
+        {
+          "rule": "B100",
+          "level": "B",
+          "severity": "warning",
+          "message": "Se espera una entidad del vocabulario, no texto sin tipo.",
+          "entity": "1:$",
+          "path": "author",
+          "evidence": null,
+          "source": "https://schema.org/version/latest/schemaorg-current-https.jsonld",
+          "fix": null,
+          "scope": null,
+          "priority": "P2"
+        }
+      ],
+      "BlogPosting_entities": [
+        {
+          "key": "1:$",
+          "id": null,
+          "types": [
+            "BlogPosting"
+          ],
+          "source": "jsonld",
+          "block": 1,
+          "component": "structured-data.blog-post",
+          "path": "$",
+          "parent": null,
+          "parent_prop": null,
+          "nested": false,
+          "ref_only": false,
+          "properties": [
+            "@context",
+            "@type",
+            "headline",
+            "author",
+            "description",
+            "url",
+            "mainEntityOfPage",
+            "datePublished",
+            "dateModified",
+            "publisher",
+            "image"
+          ]
+        }
+      ],
+      "author_truth": "declared_not_editorially_verified",
+      "emitter_markers": [
+        {
+          "block": 0,
+          "marker": "structured-data.organization",
+          "source_candidates": [],
+          "attribution": "unknown_theme_or_app",
+          "confirmed_runtime_initiator": false
+        },
+        {
+          "block": 1,
+          "marker": "structured-data.blog-post",
+          "source_candidates": [],
+          "attribution": "unknown_theme_or_app",
+          "confirmed_runtime_initiator": false
+        },
+        {
+          "block": 2,
+          "marker": "structured-data.blog-post-breadcrumbs",
+          "source_candidates": [],
+          "attribution": "unknown_theme_or_app",
+          "confirmed_runtime_initiator": false
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+# Aclaraciones del controlador posteriores a la revisión
+
+No cambian el código ni convierten las objeciones en resueltas.
+
+- Los CSV completos no se enviaron a los agentes para ahorrar contexto. El controlador sí leyó ambos, conservó sus hashes y comprobó pertenencia literal de las cinco URLs. source-excerpts.json añade los cinco registros originales de cada CSV. Los agentes no han revisado este extracto posterior; no se atribuye esa comprobación a ellos.
+- Se propone tres saltos GLOBALES para este piloto como interpretación conservadora de «máximo3redirecciones» solicitado por el propietario; no cambiar el límite general del motor. Claude considera suficiente el límite por cadena más12GET y cuestiona el contador adicional. La configuración definitiva debe ratificarse antes de ejecutar: conservar3globales implica6a9GET;permitir3por cadena puede alcanzar12y dejar destinos pendientes. No se autoriza ampliar a más de12.
+- No se necesita implementar resume, caché compartida ni deduplicación de cuerpos para preparar el piloto. Se retira la reutilización opcional propuesta de respuestas: registrar asociación de cadenas si confluyen, sin repetir un GET ya observado si puede evitarse de manera trivial, pero sin motor de caché nuevo. No se declara cobertura de una URL no confirmada.
+- El origen de una cadena autorizada puede ser robots.txt o uno de los cinco destinos. Cada salto de documentos exige comprobar robots vigente para el agente propio ANTES del GET, además de Policy. Los saltos de robots se validan por origen/ruta/DNS/TLS durante la adquisición inicial, sin fingir disponer ya de reglas.
+- El modo cerrado debe detenerse también ante timeout, error genérico de transporte, gzip excedido/incompleto, codificación rechazada, ciclo o Location ausente/ambiguo;no continuar pendientes. La reproducción de excepción genérica es sintética, no una prueba TLS de Rhino.
+- Checkpoint mínimo: registrar intención antes del transporte, ordinal/URL y estados pendiente, iniciada_sin_resultado_confirmado y completada/error. Tras cancelar no afirmar si el servidor recibió un GET sin respuesta registrada. Persistir eventos inmutables con los mecanismos de reporte existentes; no requiere resume ni nueva arquitectura. Si no puede persistirse la intención, no iniciar la petición.
+- Existe /usr/bin/timeout, pero aún no se han validado terminación del grupo/recogida de hijos ni un checkpoint. Diseño candidato: utilidad existente con temporizador119s y hasta1s de gracia incluidos en120s, invocando la CLI del mismo crawler. No se presenta ese diseño como garantía ni comando aprobado: requiere prueba offline parametrizada, revisar semántica de señales y anotar terminación incierta como bloqueo.
+- 0,5GET/s equivale a mínimo2s entre inicios, ya soportado por Fetcher. Debe usarse un único Fetcher para robots y documentos;no cinco sesiones que reinicien el presupuesto. El plazo debe empezar antes de la primera intención de red y la cancelación abarcar el cliente hijo DNS/TLS.
+- 2.000.000bytes es el límite de cuerpo codificado y descomprimido, no de tráfico completo TLS/HTTP ni de cabeceras. El transporte puede leer hasta max_bytes+1 para detectar exceso y rechazarlo.24MB es la cota nominal de cuerpos aceptados con12GET, no un peso medido ni techo exacto de tráfico. Ratificar esta semántica;si se exige un límite incluyendo cabeceras, hace falta otra revisión mínima del transporte.
+- Sitemap:0lecturas;home:0lecturas en el modo cerrado propuesto. No pasar el sitemap de117URLs, recortar sus respuestas ni cambiar public_url para simular cinco semillas. El manifest debe validarse una vez en la CLI;no hacer que el crawler lea la matriz entera o replique el inventario administrativo.
+
+## Alcance mínimo que se propone autorizar para preparar un candidato aislado
+
+1. tools/ipanema/seo/crawler.py: destinos cerrados opt-in, misma cola/robots/auditorías, sin BFS/sitemap/home, paradas terminales y cobertura del scope.
+2. tools/ipanema/seo/engineering.py: manifiesto validado, interfaz explícita del modo, reporte/checkpoint y coordinación del límite de proceso ya disponible.
+3. tools/ipanema/seo/crawl_policy.py: únicamente si hace falta un callback opcional de eventos de petición para checkpoint; mantener https_get/DNS/TLS y límites vigentes, sin alterar el modo general.
+4. tests/unit/test_seo_pilot_v4.py y tests/integration/test_seo_pilot_cli_v4.py: fixtures del alcance, límites, paradas y cancelación;no consultas reales.
+
+Son tres módulos candidatos y dos archivos de pruebas, no un diff aprobado. No se ha modificado ninguno. Preparar ese candidato no autoriza integrarlo. El diff exacto y sus hashes necesitarán revisión dual y autorización de integración antes de solicitar otra autorización de red.

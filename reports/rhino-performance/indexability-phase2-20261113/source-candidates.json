@@ -1,0 +1,87 @@
+[
+  {
+    "file": "snippets/structured-data/structured-data.tpl",
+    "local_sha256": "704d05b3b65a1cc3d762d40f782f8fc05bc2ceebe9c11d25862ef16b3f8afeac",
+    "scope": "local source candidate; current published equality not reverified in this phase",
+    "excerpts": [
+      {
+        "start": 35,
+        "end": 48,
+        "text": "{% if item and not product.is_unlisted %}\n\t<script type=\"application/ld+json\" data-component='structured-data.item'>\n\t{\n\t\t\"@context\": \"https://schema.org/\",\n\t\t\"@type\": \"Product\",\n\t\t\"mainEntityOfPage\": {\n\t\t\t\"@type\": \"WebPage\",\n\t\t\t\"@id\": \"{{ product.canonical_url }}\"\n\t\t},\n\t\t\"name\": \"{{ product.name | replace('\"', '\\\"') }}\",\n\t\t\"image\": \"{{ 'https:' ~ product.featured_image | product_image_url('large') }}\",\n\t\t\"description\": \"{{ _self.escape_text(product.seo_description) }}\",\n\t\t{% if store_has_replace_sku_microdata_tag %}\n\t\t\"productID\": \"{{ product.get_product_variant_meta_content_id(store_has_preexisting_meta_catalog_tag, store_has_meta_track_product_groups_tag) | replace('\"', '\\\"') }}\","
+      },
+      {
+        "start": 68,
+        "end": 77,
+        "text": "\t\t\t{% if product.stock_control %}\n\t\t\t\t\"availability\": \"https://schema.org/{{ product.stock ? 'InStock' : 'OutOfStock' }}\",\n\t\t\t\t\"inventoryLevel\": {\n\t\t\t\t\t\"@type\": \"QuantitativeValue\",\n\t\t\t\t\t\"value\": \"{{ product.stock }}\"\n\t\t\t\t},\n\t\t\t{% endif %}\n\t\t\t\"seller\": {\n\t\t\t\t\"@type\": \"Organization\",\n\t\t\t\t\"name\": \"{{ store.name | replace('\"', '\\\"') }}\""
+      },
+      {
+        "start": 81,
+        "end": 104,
+        "text": "\t</script>\n{% elseif blog_item %}\n\t\t<script type=\"application/ld+json\" data-component='structured-data.blog-post'>\n\t\t{\n\t\t\t\"@context\" : \"http://schema.org\",\n\t\t\t\"@type\" : \"BlogPosting\",\n\t\t\t\"headline\" : \"{{ post.seo_title }}\",\n\t\t{% if post.author_name %}\n\t\t\t\"author\" : \"{{ post.author_name }}\",\n\t\t{% endif %}\n\t\t\t\"description\": \"{{ _self.escape_text(post.seo_description) }}\",\n\t\t\t\t\"url\": \"{{ store.url }}/blog/posts/{{ post.handle }}\",\n\t\t\t\t\"mainEntityOfPage\": {\n\t\t\t\t\t\"@type\": \"WebPage\",\n\t\t\t\t\t\"@id\": \"{{ store.url }}/blog/posts/{{ post.handle }}\"\n\t\t\t\t},\n\t\t\t\t\"datePublished\" : \"{{ post.published_at }}\",\n\t\t\t\t\"dateModified\" : \"{{ post.updated_at }}\",\n\t\t\t\t\"publisher\" : {\n\t\t\t\t\t\"@type\" : \"Organization\",\n\t\t\t\t\t\"name\" : \"{{ store.name | replace('\"', '\\\"') }}\"\n\t\t\t\t}\n\t\t{% if post.thumbnail %}\n\t\t\t,\"image\" : {"
+      },
+      {
+        "start": 123,
+        "end": 134,
+        "text": "\t\t\t},\n\t\t\t\"blogPost\": [\n\t\t\t{% for post in blog.posts %}\n\t\t\t{\n\t\t\t\t\"@type\" : \"BlogPosting\",\n\t\t\t\t\"headline\" : \"{{ post.seo_title }}\",\n\t\t\t\t{% if post.author_name %}\n\t\t\t\t\t\"author\" : \"{{ post.author_name }}\",\n\t\t\t\t{% endif %}\n\t\t\t\t\"description\": \"{{ _self.escape_text(post.seo_description) }}\",\n\t\t\t\t\t\"url\": \"{{ store.url }}/blog/posts/{{ post.handle }}\",\n\t\t\t\t\t\"mainEntityOfPage\": {"
+      },
+      {
+        "start": 155,
+        "end": 178,
+        "text": "{% elseif not item %}\n\t<script type=\"application/ld+json\" data-component='structured-data.page'>\n\t{\n\t\t\"@context\": \"https://schema.org/\",\n\t\t\"@type\": \"WebPage\",\n\t\t\"@id\": \"{{ (template == 'product' and product ? product.canonical_url : (template == 'category' and category ? category.url : store.url)) }}#webpage\",\n\t\t\"isPartOf\": {\n\t\t\t\"@id\": \"{{ store.url }}#website\"\n\t\t},\n\t\t\"name\": \"{{ page_title | replace('\"', '\\\"') }}\",\n\t\t{% if page_description %}\n\t\t\t\"description\": \"{{ _self.escape_text(page_description) }}\",\n\t\t{% endif %}\n\t\t\"breadcrumb\": {\n\t\t\t\"@type\": \"BreadcrumbList\",\n\t\t\t\"itemListElement\": [\n\t\t\t{\n\t\t\t\t\"@type\": \"ListItem\",\n\t\t\t\t\"position\": 1,\n\t\t\t\t\"name\": \"{{ 'breadcrumbs.home' | t }}\",\n\t\t\t\t\"item\": \"{{ store.url }}\"\n\t\t\t}{% if template != 'home' %},{% endif %}\n\t\t\t{% if template == 'page' %}\n\t\t\t\t{"
+      }
+    ]
+  },
+  {
+    "file": "layouts/layout.tpl",
+    "local_sha256": "aa0d59caa5947993a057fc13b4517057286a65a28e24029abb22b839cc18ba31",
+    "scope": "local source candidate; current published equality not reverified in this phase",
+    "excerpts": [
+      {
+        "start": 69,
+        "end": 75,
+        "text": "<!DOCTYPE html>\n<html lang=\"{{ html_lang }}\">\n  <head>\n    {# Meta tags component #}\n    {{ component('head-tags') }}\n\n    {# Google Fonts preconnect & DNS prefetch #}"
+      },
+      {
+        "start": 124,
+        "end": 145,
+        "text": "\n    {# Structured data #}\n    {% include 'snippets/structured-data/structured-data-organization.tpl' %}\n    {% include 'snippets/structured-data/structured-data.tpl' %}\n    {# Blog post: the include above already emits BlogPosting on this template (the\n       platform defines blog_item there); only its breadcrumbs are added here #}\n    {% if template == 'blog-post' %}\n      <script type=\"application/ld+json\" data-component=\"structured-data.blog-post-breadcrumbs\">\n      {\n        \"@context\": \"https://schema.org/\",\n        \"@type\": \"BreadcrumbList\",\n        \"itemListElement\": [\n          {\n            \"@type\": \"ListItem\",\n            \"position\": 1,\n            \"name\": {{ 'breadcrumbs.home' | t | json_encode | raw }},\n            \"item\": {{ store.url | json_encode | raw }}\n          },\n          {\n            \"@type\": \"ListItem\",\n            \"position\": 2,\n            \"name\": {{ 'breadcrumbs.blog' | t | json_encode | raw }},"
+      }
+    ]
+  },
+  {
+    "file": "snippets/blog/blog-post-item.tpl",
+    "local_sha256": "e52b2d4a5674ee171025cee779cda6ead008b4b4829757ecb8cc99885f2e7c2f",
+    "scope": "local source candidate; current published equality not reverified in this phase",
+    "excerpts": [
+      {
+        "start": 33,
+        "end": 38,
+        "text": "            <div class=\"post-item-summary\">{{ post.summary }}</div>\n            <div class=\"post-item-read-more btn-link\">{{ 'blog.read_more' | t }}</div>\n        </a>\n    </div>\n    {% include 'snippets/structured-data/structured-data.tpl' with {'blog_item': true} %}\n</div>"
+      }
+    ]
+  },
+  {
+    "file": "snippets/blog/blog-post-content.tpl",
+    "local_sha256": "39974bb54e1eea429f1a05bb1a0ff7a00b569e5f464310872e237d31b4d90b4d",
+    "scope": "local source candidate; current published equality not reverified in this phase",
+    "excerpts": [
+      {
+        "start": 1,
+        "end": 13,
+        "text": "{#\n  Blog Post Content\n  Renders blog post date, thumbnail image, and content.\n#}\n{% set image_alt = post.title %}\n{% set published_date = 'blog.published_at' | t ~ ' ' ~ (post.created_at | date('d/m/Y')) %}\n{% if post.author_name is not empty %}\n    {% set published_date = published_date ~ ' ' ~ 'blog.by' | t ~ ' ' ~ post.author_name %}\n{% endif %}\n\n<p class=\"post-date\">{{published_date}}</p>\n{% if post.thumbnail %}\n    {% include 'snippets/image.tpl' with {"
+      }
+    ]
+  },
+  {
+    "file": "snippets/product-list/product-item/item.tpl",
+    "local_sha256": "daa3928d4c256ed94de9d8e7bd536e3143945a6461cef4e628cef0892c9ac3fd",
+    "scope": "local source candidate; current published equality not reverified in this phase",
+    "excerpts": [
+      {
+        "start": 240,
+        "end": 246,
+        "text": "\t</div>\n\n\t{% if not product.is_placeholder %}\n\t\t<span class=\"hidden\" data-store=\"stock-product-{{ product.id }}-{% if product.has_stock %}{% if product.stock %}{{ product.stock }}{% else %}infinite{% endif %}{% else %}0{% endif %}\"></span>\n\t\t{% include 'snippets/structured-data/structured-data.tpl' with {'item': true} %}\n\t{% endif %}\n</div>"
+      }
+    ]
+  }
+]

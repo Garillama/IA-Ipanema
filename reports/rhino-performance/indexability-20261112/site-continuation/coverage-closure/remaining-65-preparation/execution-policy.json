@@ -1,0 +1,90 @@
+{
+  "scope": "Preparation only. This document grants no network authorization.",
+  "each_batch_separately_authorized": true,
+  "same_integrated_engine_required": {
+    "tests/integration/test_seo_pilot_cli_v4.py": "7e8e6ea49211d4258f82b69e992aa74e97c4b84add1140f02ad9cffbc43203cd",
+    "tests/unit/test_seo_pilot_v4.py": "88eb5a4d173f43d6ccb1165ff35f5f1ddf24e32d4d889481b131584b282cb116",
+    "tools/ipanema/seo/crawl_policy.py": "d30c444a60853ee482934515c2d628238cca26c5eb9dc364aa44542e5daaa4e9",
+    "tools/ipanema/seo/crawler.py": "f6e5de5fd60c16eb3e464dd5b10111bf60eb9e4289dcc05f00503805f056415f",
+    "tools/ipanema/seo/engineering.py": "1c6c0534755723cfac59e4395ad0fc44af6dc5df35dd88a1da98eb6c4ab7bd8d"
+  },
+  "same_transport_dependencies_required": {
+    "tools/ipanema/seo/consistency.py": "fa58a7d1525fb1563c8b86602bd03d09486c7c84387d6ab4844977d810868923",
+    "tools/ipanema/seo/coverage_import.py": "6ce90c8248565d551c1a71bcfaac98a6637e28552590cd6ea14974aacc535877",
+    "tools/ipanema/seo/generator.py": "1ec7dc25788324a44977128f31d05f96f19e453138cb21ec9614d97b1e125840",
+    "tools/ipanema/seo/adapters.py": "a7919bedc8a48741a09587f95f244e08cd360263a329d88f6052dc58643d02c0",
+    "tools/ipanema/seo/schema_graph.py": "d251dfadfc2765319688b9ed41a77d59749acd5f567fdc1c0b7d0f10ea9fb3fa",
+    "tools/ipanema/seo/evals.py": "c6f67c506975cc4160c2b71519be5bb7218577d3db7ae0e66b137a11b96d7935",
+    "tools/ipanema/seo/extractor.py": "8bffda623a4d416c2536b689e58e71306ce0a1e45aaf613bdd470065040705cc",
+    "tools/ipanema/seo/vocabulary.py": "94cecfbd79ce47bed3ef67a630f0fb621cf808a9d9c523c4a32b3e81ddb439c9",
+    "tools/ipanema/seo/page_audit.py": "a6b10451443aac8ea222eb0fcf8cdae673e21014b31d7431452b8fe669db6f34",
+    "tools/ipanema/seo/engineering.py": "1c6c0534755723cfac59e4395ad0fc44af6dc5df35dd88a1da98eb6c4ab7bd8d",
+    "tools/ipanema/seo/intelligence.py": "dc8e10884d8ee133896fdaa2685d9eeebbb6ef7427fc32b667b08c2578570f5c",
+    "tools/ipanema/seo/reports.py": "4d0cda54af0cbc460b82b7db8e2f9ce42a9a48589d7ab2bd53f7343f89dfeacd",
+    "tools/ipanema/seo/crawler.py": "f6e5de5fd60c16eb3e464dd5b10111bf60eb9e4289dcc05f00503805f056415f",
+    "tools/ipanema/seo/crawl_policy.py": "d30c444a60853ee482934515c2d628238cca26c5eb9dc364aa44542e5daaa4e9",
+    "tools/ipanema/seo/regression.py": "0bf7eca8c50b906fa083f4422af7863f6a37bad7519e1dbd8349cac3a07b257e",
+    "tools/ipanema/seo/robots.py": "57d01f9086dffa7f25f26b59976098770d585731eca3d758ee9235000399a3df",
+    "tools/ipanema/seo/cli.py": "1167dba05704569d77b076f3f32a63e30e27598ef9411e9dc8e4f87fcae62410",
+    "tools/ipanema/seo/schema_validator.py": "a3a55809f53db255326aedf86989da51576f097df36365139a7b8e33b24000e4",
+    "tools/ipanema/seo/source_audit.py": "890eb8498d703cd302e6e640d03db2ae59f8e8de9f52d81a223383c16d0a4ae3",
+    "tools/ipanema/seo/sitemaps.py": "8b3a0d0740e76fd21cf0bf9c1c5f467bb74374b5a1264bc8d570a72878c60f44",
+    "tools/ipanema/seo/indexability.py": "6f4f34d2ded8af574b3822e74e9b795a5a74b41a3f7bfd16f4b6009c981cddd1",
+    "tools/ipanema/seo/__init__.py": "b0a93b056ab56188b45836bec1f47af683303311e5852c1ba2b10c67cde19b04",
+    "tools/ipanema/core.py": "07731645318b727cefcf80f3f25e977842ab422280ca873a36cef0f4c0aeee25",
+    "tools/ia.py": "7e73b354c2847d1058fc258e1cf605989764128652dd795c0b844a30ee1cef2c"
+  },
+  "limits": {
+    "argv": "See exact operation.json in each batch",
+    "manifest_sha256": "See batch-index.json",
+    "origin": "https://rhino-performance.com",
+    "targets": "Exactly the five manifest URLs",
+    "network_authorized": false,
+    "executed": false,
+    "max_GET": 12,
+    "concurrency": 1,
+    "max_requests_per_second": 0.5,
+    "max_supervised_seconds": 120,
+    "GET_timeout_seconds": 20,
+    "max_encoded_and_decoded_body_bytes": 2000000,
+    "global_redirect_hops_max": 3,
+    "auxiliaries": [
+      "robots.txt and safe in-origin redirect hops only"
+    ],
+    "home_sitemap_assets_GSC": false
+  },
+  "preflight": [
+    "Verify exact manifest SHA and five URLs, origin and native validator",
+    "Recheck current matrix: every target still has HTTP not_observed; if any already checked, stop and reconcile WITHOUT changing approved manifest",
+    "Verify integrated code and transport dependencies hashes; do not overwrite changes",
+    "Verify frozen snapshot hashes; current matrix is expected to evolve, do not require its original full-file hash after each batch",
+    "Require explicit owner authorization for this batch/hash/command, then exclusive project execution and persistent one-use marker",
+    "Use only native supervised CLI command. Native checkpoint path is unique per invocation; save report path, checkpoint and supervision under that batch receipt",
+    "After terminal state, perform offline report/matrix update only. Do not launch next batch automatically"
+  ],
+  "failure_handling": [
+    "No retry automatically; authorization consumed at invocation even when partial or timeout",
+    "Stop active execution on existing critical safety conditions",
+    "Mark executed/blocked accurately; retain pending, started-unconfirmed and completed requests",
+    "Do not duplicate successful destinations in later manifests; reconcile remaining state and request new authorization if needed"
+  ],
+  "registry_contract": {
+    "allowed_states": [
+      "pending_authorization",
+      "executed",
+      "blocked"
+    ],
+    "execution_report": null,
+    "checkpoint": null,
+    "supervision": null,
+    "one_use_marker": null,
+    "no_precreated_or_simulated_runtime_checkpoint": true
+  },
+  "not_authorized": [
+    "Rhino or Google requests now",
+    "GSC",
+    "assets/home/sitemap",
+    "theme/content/menu/canonical changes",
+    "crawler/orchestrator/policy modifications"
+  ]
+}

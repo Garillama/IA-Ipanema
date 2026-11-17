@@ -1,0 +1,202 @@
+{
+  "baseline": {
+    "at": "2026-11-13T08:13:26.376232+00:00",
+    "known_inventory": 125,
+    "known_HTML": 124,
+    "XML_documents": 1,
+    "HTML_individual_HTTP": 124,
+    "HTML_HTTP200": 124,
+    "HTML_pending_HTTP": 0,
+    "HTML_sitemap_members": 116,
+    "HTML_paths_observed": 122,
+    "HTML_paths_not_observed": 2,
+    "known_products": 14,
+    "known_articles": 86,
+    "public_categories_known": 5,
+    "administrative_catalog_complete": false,
+    "google_historical_inspections": 15,
+    "google_historical_PASS": 10,
+    "google_inventory_without_inspection": 109,
+    "V4_closed_runs": 15,
+    "V4_distinct_destinations": 75,
+    "V4_GET_total": 90,
+    "V4_robots_auxiliary_GET": 15,
+    "V4_destination_GET": 75,
+    "V4_readiness_counts": {
+      "blocked": 11,
+      "insufficient_evidence": 64
+    },
+    "V4_warning_error_counts": {
+      "D010:error": 61,
+      "D011:warning": 61,
+      "D050:warning": 61,
+      "D070:warning": 61,
+      "B030:warning": 64,
+      "B100:warning": 64
+    },
+    "technical_states_preserved": {
+      "candidate_no_block_observed_not_Google_confirmation": 22,
+      "indexable_candidate_technical_HTML_observation_not_Google_index": 75,
+      "partial_checks_remaining_content_or_directives_review": 20,
+      "canonical_consolidates_elsewhere": 7
+    },
+    "incomplete_technical_signal_rows": 20,
+    "blog_canonical_consolidation_rows": 7,
+    "field_dates_min": "2026-11-10T20:55:16.385Z",
+    "field_dates_max": "2026-11-13T08:07:57.174430+00:00",
+    "new_requests_after_batch15": 0,
+    "new_GSC_requests": 0,
+    "remote_mutations_in_this_closure": false,
+    "Google_indexation_total_known": false
+  },
+  "GSC_current_access": {
+    "transport": "existing_official_rest",
+    "mcp_required": false,
+    "configured": true,
+    "credential_available": false,
+    "credential_source": null,
+    "account_access_tested": false,
+    "api_available": null,
+    "default_enabled": false,
+    "operations": [
+      "search_analytics",
+      "inspect_url",
+      "sitemaps"
+    ],
+    "status": "configuration_or_credentials_required"
+  },
+  "Google_matrix_status_counts": {
+    "indexed_historical": 10,
+    "discovered_not_indexed_historical": 1,
+    "unknown_no_official_evidence": 109,
+    "unknown_to_Google_at_historical_inspection": 4
+  },
+  "twenty_recovery": {
+    "checked_files": 203,
+    "canonical_retained": 20,
+    "meta_headers_main_recovered": 0,
+    "scope_limited": true
+  },
+  "category_focus": [
+    {
+      "url": "https://rhino-performance.com/contacto/",
+      "type": "page",
+      "http": "200",
+      "canonical": "https://rhino-performance.com/contacto/",
+      "google_state": "Descubierta: actualmente sin indexar",
+      "google_verdict": "NEUTRAL",
+      "google_observed_at": "2026-11-12T16:14:35.810074+00:00"
+    },
+    {
+      "url": "https://rhino-performance.com/aviso-de-privacidad/",
+      "type": "page",
+      "http": "200",
+      "canonical": "https://rhino-performance.com/aviso-de-privacidad/",
+      "google_state": "not_inspected_current_status_unknown",
+      "google_verdict": "",
+      "google_observed_at": ""
+    },
+    {
+      "url": "https://rhino-performance.com/politica-de-reembolso-y-cambios/",
+      "type": "page",
+      "http": "200",
+      "canonical": "https://rhino-performance.com/politica-de-reembolso-y-cambios/",
+      "google_state": "not_inspected_current_status_unknown",
+      "google_verdict": "",
+      "google_observed_at": ""
+    },
+    {
+      "url": "https://rhino-performance.com/politica-de-cookies/",
+      "type": "page",
+      "http": "200",
+      "canonical": "https://rhino-performance.com/politica-de-cookies/",
+      "google_state": "not_inspected_current_status_unknown",
+      "google_verdict": "",
+      "google_observed_at": ""
+    },
+    {
+      "url": "https://rhino-performance.com/politica-de-envios/",
+      "type": "page",
+      "http": "200",
+      "canonical": "https://rhino-performance.com/politica-de-envios/",
+      "google_state": "not_inspected_current_status_unknown",
+      "google_verdict": "",
+      "google_observed_at": ""
+    },
+    {
+      "url": "https://rhino-performance.com/arma-tu-pack-de-recuperacion/",
+      "type": "page",
+      "http": "200",
+      "canonical": "https://rhino-performance.com/arma-tu-pack-de-recuperacion/",
+      "google_state": "not_inspected_current_status_unknown",
+      "google_verdict": "",
+      "google_observed_at": ""
+    },
+    {
+      "url": "https://rhino-performance.com/sobre-rhino-performance/",
+      "type": "page",
+      "http": "200",
+      "canonical": "https://rhino-performance.com/sobre-rhino-performance/",
+      "google_state": "Google no reconoce esta URL",
+      "google_verdict": "NEUTRAL",
+      "google_observed_at": "2026-11-12T16:14:46.336992+00:00"
+    },
+    {
+      "url": "https://rhino-performance.com/politica-de-devolucion/",
+      "type": "page",
+      "http": "200",
+      "canonical": "https://rhino-performance.com/politica-de-devolucion/",
+      "google_state": "Enviada e indexada",
+      "google_verdict": "PASS",
+      "google_observed_at": "2026-11-12T16:14:54.571616+00:00"
+    },
+    {
+      "url": "https://rhino-performance.com/presoterapia/",
+      "type": "category",
+      "http": "200",
+      "canonical": "https://rhino-performance.com/presoterapia/",
+      "google_state": "Enviada e indexada",
+      "google_verdict": "PASS",
+      "google_observed_at": "2026-11-12T16:13:34.894824+00:00"
+    },
+    {
+      "url": "https://rhino-performance.com/pistolas-de-masaje/",
+      "type": "category",
+      "http": "200",
+      "canonical": "https://rhino-performance.com/pistolas-de-masaje/",
+      "google_state": "not_inspected_current_status_unknown",
+      "google_verdict": "",
+      "google_observed_at": ""
+    },
+    {
+      "url": "https://rhino-performance.com/terapia-fria/",
+      "type": "category",
+      "http": "200",
+      "canonical": "https://rhino-performance.com/terapia-fria/",
+      "google_state": "not_inspected_current_status_unknown",
+      "google_verdict": "",
+      "google_observed_at": ""
+    },
+    {
+      "url": "https://rhino-performance.com/compresion-frio-y-calor/",
+      "type": "category",
+      "http": "200",
+      "canonical": "https://rhino-performance.com/compresion-frio-y-calor/",
+      "google_state": "not_inspected_current_status_unknown",
+      "google_verdict": "",
+      "google_observed_at": ""
+    },
+    {
+      "url": "https://rhino-performance.com/accesorios/",
+      "type": "category",
+      "http": "200",
+      "canonical": "https://rhino-performance.com/accesorios/",
+      "google_state": "Enviada e indexada",
+      "google_verdict": "PASS",
+      "google_observed_at": "2026-11-12T16:13:43.562814+00:00"
+    }
+  ],
+  "prioritization": "Commercial categories unknown in GSC first; distinguish indexing blockers, editorial quality and query positioning. Search Analytics is historical, not demand/causality proof.",
+  "blog_official_mechanism": "Query prepared in three-issues/operations/consulta-tiendanube.md, not sent; no official reply located in referenced artifacts; preserve canonical.",
+  "permissions": "No code or theme changes, no new store requests or GSC API; inference-only dual review permitted; do not claim current remote/local source equality or editorial author truth."
+}

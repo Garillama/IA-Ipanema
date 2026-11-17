@@ -1,0 +1,134 @@
+{
+  "requested_agent": "codex",
+  "effective_agent": "codex",
+  "scope": "incremental exchange on saved pilot1 findings + batch2 only",
+  "input_hashes": {
+    "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/remaining-65-preparation/batch-index.json": "0d28290785f138648866fb603940250168f7b4a16666b6ebd613207ffa2d76c7",
+    "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/remaining-65-preparation/execution-policy.json": "825416b81890bbb896f8ce35db6ddb1b7598c73777ab2f538eeac71db25d697c",
+    "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/remaining-65-preparation/controller-validation.json": "0c860d4d51cbb445dee657309d3bfa0010961f10461dcf2da7d9570c26486291",
+    "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/remaining-65-preparation/pending-65-list.txt": "cba500f318ee5ebca08cdd67fa7cb6dc1d41f3295729fa59246c06f509f5d878",
+    "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/remaining-65-preparation/batch-03/operation.json": "ba02285e8c33ef3405b5a1e6d4ccf2f933ed64ba253411bc5f97daf7eb71c6f4",
+    "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/remaining-65-preparation/batch-03/command-NOT-AUTHORIZED.txt": "deeca80733781f11c228720660813ee6b27178a0f5c84169c64aa463ce6c98b4",
+    "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/remaining-65-preparation/all-operations-verified.json": "2d31deae0c7cabd729945dd94d3be0aaba6ab38599e71715b349c13dbf2a3515",
+    "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/remaining-65-preparation/registry-semantics.json": "1359ff74535d985334f68b3c249caa4c76422f71be9b8c36a1dfd0549bb186e9",
+    "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/remaining-65-preparation/controller-supplement.json": "d5604692b72a19f3d31a3eb3781ea1dea5eff4b5b429904b6ef350dd76860f28"
+  },
+  "response": {
+    "decision": "approve",
+    "summary": "Apruebo solo solicitar autorización específica del lote 03 y planificar los restantes. Los nuevos recibos resuelven la carencia de comparación de comandos y documentan procedencia y estados parciales. No autorizan red ni ejecución. El preflight fresco por lote sigue obligatorio; no se garantizan cinco éxitos ni indexación.",
+    "changes": [],
+    "evidence": [
+      "batch-index.json: ordering y batches conservan la partición determinista de 65 URLs en 13 lotes de cinco: 7 productos y 58 artículos, sin reescritura.",
+      "controller-validation.json: duplicate_urls=0, omitted_urls=0, overlap_with_previous_two_executions=0 y source_pending_matches_matrix=true; resultados declarados por el controlador.",
+      "remaining65.offline.all13 respalda all-operations-verified.json: operations contiene los 13 argv, manifest_sha256_actual, operation_sha256_actual y command_sha256_actual. comparison registra equivalencia salvo ruta y hash del manifiesto.",
+      "operations[].limits mantiene 12 GET, 0.5 solicitudes/s, 120 s supervisados, timeout de 20 s, 2000000 bytes, tres redirecciones globales y concurrencia 1.",
+      "controller-supplement.json: frozen_sources_match_original_hashes=true y all13_native_manifest_validations_passed=true. La comprobación de hashes procede del controlador; no los recalculé personalmente.",
+      "registry-semantics.json: mapping distingue ejecución completa de parcial; receipt_required_fields conserva pendientes, iniciadas sin confirmar, completadas y stop_reason. live_matrix_hash_not_fixed_after_prior_batch=true."
+    ],
+    "objections": [
+      {
+        "id": "O1",
+        "alternative_id": "Plan de 13 lotes cerrados 03..15 con autorización independiente por lote",
+        "category": "cobertura de evidencia",
+        "severity": "medium",
+        "claim": "La carencia previa de comparación explícita de argv y presupuestos de 04..15 queda resuelta por el recibo del controlador y sus 13 operaciones detalladas. Esto no sustituye el preflight de cada ejecución.",
+        "status": "resolved",
+        "evidence_refs": [],
+        "resolution_evidence_refs": [
+          "remaining65.offline.all13"
+        ]
+      }
+    ],
+    "preferred_alternative": "Plan de 13 lotes cerrados 03..15 con autorización independiente por lote",
+    "answers": [
+      {
+        "question_id": "Q1",
+        "from_agent": "claude",
+        "answer": "registry-semantics.json mapea parcial, timeout, parada crítica o started-unconfirmed a blocked, con execution_started=true y authorization_consumed=true. outcome conserva el estado nativo sin inferir HTTP completado; started_unconfirmed_requests, pending_requests, completed_requests y stop_reason preservan la incertidumbre. retry_policy prohíbe reintentos automáticos: cualquier nuevo intento exige reconciliación y autorización específica, excluyendo destinos confirmados de futuros manifiestos.",
+        "disposition": "defend",
+        "evidence_refs": [
+          "remaining65.offline.all13"
+        ]
+      }
+    ],
+    "withdrawn_alternatives": [],
+    "revision_notes": [
+      "Retiro la condición documental pendiente sobre igualdad de argv de 04..15; la resuelve evidencia del controlador, no una comprobación propia.",
+      "Antes de cada invocación: verificar cinco objetivos aún not_observed, manifiesto y comando autorizados, hashes de código/transporte y snapshots congelados; ante discrepancia, detener y reconciliar sin alterar el manifiesto aprobado.",
+      "Conservar la matriz viva actualizada sin exigir perpetuamente su hash inicial; mantener snapshots de procedencia, exclusividad, marcador persistente de un uso y checkpoint nativo único por invocación.",
+      "Un resultado parcial o no HTTP conserva incertidumbre y consume autorización si hubo invocación. No continuar al siguiente lote ni reintentar automáticamente; los presupuestos son por lote, sin autorización global.",
+      "Los contratos siguen siendo artefactos de planificación. No hubo cambios, herramientas, suites ni solicitudes de red en esta defensa."
+    ]
+  },
+  "model": {
+    "model": "gpt-6.1-sol",
+    "effort": "medium",
+    "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+    "verified_at": "2026-11-08"
+  },
+  "execution": {
+    "exit_code": 0,
+    "timed_out": false,
+    "output_limited": false,
+    "idle_timed_out": false,
+    "cancelled": false,
+    "process_started": true,
+    "process_reaped": true,
+    "stdin_bytes_written": 107163,
+    "context_complete": true,
+    "duration_s": 34.122,
+    "timing": {
+      "spawn_s": 0.000977,
+      "input_complete_s": 0.648619,
+      "first_stdout_s": 2.194506,
+      "first_stderr_s": null,
+      "timeout_phase": null,
+      "event_counts": {
+        "thread.started": 1,
+        "item.completed": 2,
+        "turn.started": 1,
+        "turn.completed": 1
+      },
+      "inference_vs_initialization": "not_separable_without_provider_events"
+    },
+    "output_accounting": {
+      "transport_bytes": 4908,
+      "retained_bytes": 4908,
+      "discarded_progress_bytes": 0,
+      "transport_limit_bytes": 20000000,
+      "retained_limit_bytes": 2000000
+    },
+    "isolation": {
+      "backend": "bubblewrap",
+      "snapshot_read_only": true,
+      "host_home_mounted": false,
+      "network": "enabled_no_destination_firewall",
+      "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+    },
+    "started_at": "2026-11-13T06:41:18.943312+00:00",
+    "prompt_bytes": 107163,
+    "prompt_sha256": "1892899f1cdf69617988ec0335f875bf525d819d64e9486ae9b1346268e4ec12",
+    "usage": {
+      "provider_reported": {
+        "input_tokens": 45932,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1023,
+        "reasoning_output_tokens": 117
+      },
+      "measured_cost_available": false,
+      "estimated_cost": null
+    },
+    "limits": {
+      "timeout": 240,
+      "idle_timeout": 90,
+      "startup_timeout": 30,
+      "first_response_timeout": 150
+    },
+    "structured_output": "native_schema",
+    "contract_validation": {
+      "status": "passed",
+      "duration_s": 0.000653
+    }
+  }
+}

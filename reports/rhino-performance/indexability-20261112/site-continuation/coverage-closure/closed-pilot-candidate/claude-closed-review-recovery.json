@@ -1,0 +1,175 @@
+{
+  "requested_agent": "claude",
+  "effective_agent": "claude",
+  "patch_sha256": "59d76bf8b54285dab38271aaedb78bba777fe61efd9edfc4500fec75759bf459",
+  "input_hashes": {
+    "tests/integration/test_seo_pilot_cli_v4.py": "7e8e6ea49211d4258f82b69e992aa74e97c4b84add1140f02ad9cffbc43203cd",
+    "tests/unit/test_seo_pilot_v4.py": "88eb5a4d173f43d6ccb1165ff35f5f1ddf24e32d4d889481b131584b282cb116",
+    "tools/ipanema/seo/crawl_policy.py": "d30c444a60853ee482934515c2d628238cca26c5eb9dc364aa44542e5daaa4e9",
+    "tools/ipanema/seo/crawler.py": "f6e5de5fd60c16eb3e464dd5b10111bf60eb9e4289dcc05f00503805f056415f",
+    "tools/ipanema/seo/engineering.py": "1c6c0534755723cfac59e4395ad0fc44af6dc5df35dd88a1da98eb6c4ab7bd8d",
+    "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/closed-pilot-candidate/candidate.patch": "59d76bf8b54285dab38271aaedb78bba777fe61efd9edfc4500fec75759bf459",
+    "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/closed-pilot-candidate/manifest.json": "c9bfe5aefc7b8ec9b073730b7d7d87e54a79fc8ab3f8ab01aa19cac57602e400",
+    "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/closed-pilot-candidate/controller-qa.json": "0a7ebb7f9ddfb6cd989809b2727a02a3c5fe84d5a2ed7b6002df0ff5682cc6a4",
+    "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/closed-pilot-candidate/design.md": "0200d0bfca9009b720c79d50428697acf8a0f93c02a10eece066af77a27daf59",
+    "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/pilot-preparation/targets.json": "3b14fcb031ae57ab43ef247ff087c6d8df0b0c400ca12ac3694edfc654a38bb6",
+    "tools/ipanema/seo/robots.py": "57d01f9086dffa7f25f26b59976098770d585731eca3d758ee9235000399a3df"
+  },
+  "response": {
+    "decision": "approve",
+    "summary": "No encontré defectos críticos ni altos reproducibles en el candidato 59d76bf8. El alcance cerrado, los topes de 12 GET y 3 saltos, las paradas globales, el checkpoint previo al GET, el watchdog de 120 s con parsing y exportación dentro del worker, y el modo general se sostienen en el código y los tests. Esto solo indica que está listo para solicitar integración local. No autoriza aplicar el parche ni hacer red. Quedan riesgos bajos y medios abiertos.",
+    "changes": [],
+    "evidence": [
+      "Revisión del código completo de engineering.py, crawler.py y crawl_policy.py. controller_evidence llegó vacío, así que no cito evidence_refs.",
+      "Los cinco destinos se validan por Policy. La cola inicial son solo los 5 seleccionados, sin home ni sitemaps, y depth=None impide seguir enlaces. Hay un Fetcher compartido con tope 12 y 0.5/s.",
+      "El conteo global de 3 saltos cubre robots y documentos. Los ciclos, destinos externos o privados y los bloqueos de robots paran la ejecución. Una convergencia a un destino ya observado no cuenta como ciclo ni como GET duplicado.",
+      "Las paradas globales cubren 403, 429, access_challenge, robots_unknown, Googlebot o agente de auditoría bloqueado, y cualquier error de transporte o Policy (closed_scope_error).",
+      "started se persiste con fsync antes del transporte. Si on_event falla, el GET no sale (test_checkpoint_failure_prevents_transport). completed y unconfirmed no afirman si la petición llegó al servidor.",
+      "El watchdog (fork, setsid, handshake, TERM y luego killpg KILL) envuelve manifiesto, HTTP, parsing y export. Los tests de parsing/export y de SIGTERM al supervisor pasaron en controller-qa. La prueba real de 120 s se ejecutó aparte: 119.5 s, worker reaped, descendiente inactivo, 0 HTTP.",
+      "Modo general: todas las ramas nuevas dependen de closed o de on_event=None. La expresión de state conserva la semántica original. Hay un test de home seed sin cambios, y 209 unit y 13 de integración general pasaron según el recibo.",
+      "El skipped del test de 120 s en el batch corto es esperado por el flag de entorno. El recibo real_120_test lo cubre con ejecución separada."
+    ],
+    "objections": [
+      {
+        "id": "O1",
+        "alternative_id": "claude.approve_candidate_for_local_integration_request",
+        "category": "verification_binding",
+        "severity": "medium",
+        "claim": "El binding de la prueba de 120 s a engineering.py depende de afirmaciones del recibo del controlador (AST sin cambios, watchdog sin cambios tras la ejecución). controller_evidence está vacío y no hay hash de la versión probada, así que no pude verificarlo de forma independiente. crawler.py y los tests cambiaron después de esa prueba. Es plausible porque sleeping_worker no toca crawler, pero se confía en el controlador.",
+        "status": "open",
+        "evidence_refs": [],
+        "resolution_evidence_refs": []
+      },
+      {
+        "id": "O2",
+        "alternative_id": "claude.approve_candidate_for_local_integration_request",
+        "category": "scope_limit",
+        "severity": "low",
+        "claim": "El watchdog limpia solo el process group del worker. Un descendiente que haga setsid o doble fork escaparía de killpg. El cliente https_get actual no lo hace, y la garantía no debe presentarse como universal.",
+        "status": "open",
+        "evidence_refs": [],
+        "resolution_evidence_refs": []
+      },
+      {
+        "id": "O3",
+        "alternative_id": "claude.approve_candidate_for_local_integration_request",
+        "category": "checkpoint_fidelity",
+        "severity": "low",
+        "claim": "El checkpoint nunca actualiza state='running' a un estado final. El campo project queda en None. En una ejecución terminada el checkpoint sigue diciendo 'running'. Es cosmético, pero puede confundir en una auditoría.",
+        "status": "open",
+        "evidence_refs": [],
+        "resolution_evidence_refs": []
+      },
+      {
+        "id": "O4",
+        "alternative_id": "claude.approve_candidate_for_local_integration_request",
+        "category": "signal_handling",
+        "severity": "low",
+        "claim": "El worker hereda los handlers de SIGTERM/SIGINT del supervisor, que lanzan IpanemaError. En producción un TERM aborta con gracia antes del KILL, pero los tests lo ignoran con SIG_IGN, así que ese camino real no se ejerce. Un signal durante el finally del supervisor podría propagarse. Es un caso límite sin impacto en los topes.",
+        "status": "open",
+        "evidence_refs": [],
+        "resolution_evidence_refs": []
+      },
+      {
+        "id": "O5",
+        "alternative_id": "claude.approve_candidate_for_local_integration_request",
+        "category": "portability",
+        "severity": "low",
+        "claim": "Los tests de cancelación leen /proc, y el supervisor exige POSIX. En macOS u otros sistemas sin /proc las pruebas fallarían. Es aceptable para el entorno Linux del controlador, pero no es una garantía multiplataforma.",
+        "status": "open",
+        "evidence_refs": [],
+        "resolution_evidence_refs": []
+      }
+    ],
+    "preferred_alternative": "claude.approve_candidate_for_local_integration_request",
+    "questions": [
+      {
+        "id": "Q1",
+        "to_agent": "codex",
+        "alternative_id": "claude.approve_candidate_for_local_integration_request",
+        "question": "¿Tu revisión independiente encontró alguna reproducción concreta en la que un GET exceda 12 o los saltos pasen de 3 (por ejemplo robots con redirect más redirects de documentos), o en la que el watchdog no cubra parsing o export? Indica archivo y línea.",
+        "evidence_refs": []
+      }
+    ]
+  },
+  "model": {
+    "model": "claude-sonnet-5-5",
+    "effort": "medium",
+    "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+    "verified_at": "2026-11-08"
+  },
+  "execution": {
+    "exit_code": 0,
+    "timed_out": false,
+    "output_limited": false,
+    "idle_timed_out": false,
+    "cancelled": false,
+    "process_started": true,
+    "process_reaped": true,
+    "stdin_bytes_written": 196898,
+    "context_complete": true,
+    "duration_s": 63.067,
+    "timing": {
+      "spawn_s": 0.000557,
+      "input_complete_s": 0.577495,
+      "first_stdout_s": 1.355487,
+      "first_stderr_s": null,
+      "timeout_phase": null,
+      "event_counts": {
+        "system": 32,
+        "stream_event": 689,
+        "event:message_start": 2,
+        "event:content_block_start": 3,
+        "event:content_block_delta": 677,
+        "assistant": 3,
+        "event:content_block_stop": 3,
+        "event:message_delta": 2,
+        "event:message_stop": 2,
+        "rate_limit_event": 2,
+        "user": 2,
+        "result": 1
+      },
+      "inference_vs_initialization": "not_separable_without_provider_events"
+    },
+    "output_accounting": {
+      "transport_bytes": 288618,
+      "retained_bytes": 288618,
+      "discarded_progress_bytes": 0,
+      "transport_limit_bytes": 20000000,
+      "retained_limit_bytes": 2000000
+    },
+    "isolation": {
+      "backend": "bubblewrap",
+      "snapshot_read_only": true,
+      "host_home_mounted": false,
+      "network": "enabled_no_destination_firewall",
+      "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+    },
+    "started_at": "2026-11-12T21:50:13.702271+00:00",
+    "prompt_bytes": 196898,
+    "prompt_sha256": "e04f7e593cc4bf669c3f2573b31ce1080a04169a85f27d106becd868f1cf2ab6",
+    "usage": {
+      "provider_reported": {
+        "total_cost_usd": 0.4451756,
+        "duration_ms": 61586,
+        "input_tokens": 6,
+        "cache_creation_input_tokens": 88085,
+        "cache_read_input_tokens": 87136,
+        "output_tokens": 8411
+      },
+      "measured_cost_available": true,
+      "estimated_cost": null
+    },
+    "limits": {
+      "timeout": 240,
+      "idle_timeout": 90,
+      "startup_timeout": 30,
+      "first_response_timeout": 120
+    },
+    "structured_output": "native_schema",
+    "contract_validation": {
+      "status": "passed",
+      "duration_s": 0.092844
+    }
+  }
+}

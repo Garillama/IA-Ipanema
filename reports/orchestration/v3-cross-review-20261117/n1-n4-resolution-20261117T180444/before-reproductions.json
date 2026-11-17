@@ -1,0 +1,32 @@
+{
+  "implementation": "previous isolated candidate c240b16f",
+  "network": false,
+  "synthetic_only": true,
+  "historical_suites_repeated": false,
+  "cases": [
+    {
+      "id": "N1",
+      "native_hash": "9ff597857187450dc19d945e8124e6a50c9a76a12101de1d08f41ada93399d8c",
+      "gate_hash": "56b0c3927ca4ea6c791939e7918655a5e7e48c48ab0e5924491b50f5c7d827c0",
+      "mismatch": true
+    },
+    {
+      "id": "N2",
+      "state_without_state_record": "approved_for_authorization",
+      "state_machine_records": 0
+    },
+    {
+      "id": "N3-omitted",
+      "omitted_adverse_history_state": "approved_for_authorization"
+    },
+    {
+      "id": "N3-severity",
+      "prior_BLOCKER_current_reviews_missing": "needs_evidence"
+    },
+    {
+      "id": "N4",
+      "state_with_only_self_described_principal": "approved_for_authorization",
+      "native_adapter_attestations": 0
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "at": "2026-11-17T17:03:05.390421+00:00",
+  "state": "needs_evidence",
+  "patch_sha256": "69c75ac77596439227c4066439711334e8c7bf2724b5a28fbbfabdf2336e0dbb",
+  "candidate_unchanged": true,
+  "prior_evidence_unchanged": true,
+  "tests_reused": 159,
+  "new_tests": 0,
+  "independent_final_reviews_completed": 0,
+  "required_independent_final_reviews": 2,
+  "agents": {
+    "codex": {
+      "role": "author",
+      "prior_proposal_preserved": true,
+      "new_call": false,
+      "approval": false
+    },
+    "claude": {
+      "attempts": 1,
+      "valid_review": false,
+      "category": "timeout",
+      "previous_category_preserved": "rate_limit",
+      "duration_s": 120.602,
+      "timeout_phase": "first_response",
+      "process_reaped": true,
+      "input_bytes": 677905,
+      "context_complete": true,
+      "transport_output_bytes": 0,
+      "retries": 0,
+      "fallback": false
+    },
+    "antigravity": {
+      "executed": false,
+      "blocked": "Missing approved transport/authentication/isolation pilot"
+    }
+  },
+  "new_confirmed_review_findings": [],
+  "new_confirmed_duplicate_findings": [],
+  "cross_examination_executed": false,
+  "implementation_allowed": false,
+  "activation_allowed": false,
+  "production_operations": 0,
+  "code_changes": 0,
+  "native_subagents": 0
+}

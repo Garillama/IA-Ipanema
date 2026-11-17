@@ -1,0 +1,113 @@
+{
+  "id": "ADR-RHINO-012-exports-20261113",
+  "parent": "ADR-RHINO-012-phase2-indexation",
+  "project": "rhino-performance",
+  "status": "needs_evidence",
+  "decision": "Conciliar official exact URL observations and retain aggregate/marginal limits; prioritize missing lists and category-specific search exports. No corrective implementation approved.",
+  "source_evidence": [
+    "source-manifest.json",
+    "review-packet.json",
+    "controller-validation.json",
+    "controller-supplement.json"
+  ],
+  "baseline_preserved": true,
+  "findings_confirmed": [
+    "Aggregate141indexed347nonindexed inlatestchart2026-11-08; not124inventory",
+    "Three reason tables276uniqueURLs,0exactinventorymatches",
+    "16robots checkout/add-to-cart; do not unblock",
+    "108inventoryexactURLs present in historicalperformance, not currentindexproof",
+    "94redirect/performanceexactjoins, no destination"
+  ],
+  "hypotheses_not_confirmed": [
+    "Current124URLs excluded",
+    "Broken redirects causing traffic loss",
+    "LowCTR caused by titles",
+    "Generic query lands on a given category",
+    "Author/schema orblogcanonical causing article exclusion"
+  ],
+  "alternatives": [
+    {
+      "option": "Obtain missing coverage and filtered query/page exports",
+      "selection": "preferred",
+      "impact": "Identify actual URLs and actionable intent; no direct traffic guarantee",
+      "risk": "Low, no production change"
+    },
+    {
+      "option": "Change titles,canonicals orrobots from aggregate counts",
+      "selection": "rejected",
+      "risk": "High; no exactURL orjoint-dimensional cause"
+    },
+    {
+      "option": "Fresh legacy redirect check",
+      "selection": "conditional_future_only",
+      "risk": "Requires separately authorized minimal read-only scope; not executed"
+    }
+  ],
+  "conditions": [
+    {
+      "id": "missing_index_URL_lists",
+      "status": "needs_evidence",
+      "detail": "33rastreada,5descubierta,33404 and indexed examples missing; do not classify124 by aggregate."
+    },
+    {
+      "id": "missing_joint_dimensions",
+      "status": "needs_evidence",
+      "detail": "No query/page/country/device join; no category title/content change justified."
+    },
+    {
+      "id": "redirect_destination_unknown",
+      "status": "needs_evidence",
+      "detail": "94historicalperformance/reason exact joins prioritize evidence only, not a redirect defect or lost traffic."
+    },
+    {
+      "id": "aggregate_mismatch",
+      "status": "needs_evidence",
+      "detail": "Different totals by dimension retained; cause not proven, no artificial balancing."
+    },
+    {
+      "id": "prior_phase2_conditions",
+      "status": "needs_evidence",
+      "detail": "20technical missing fields,author identity/emitter and native blogcanonical mechanism remain unchanged."
+    }
+  ],
+  "implementation_allowed": false,
+  "production_allowed": false,
+  "reviews": [
+    {
+      "agent": "claude",
+      "phase": "review",
+      "file": "claude-review.json",
+      "sha256": "16890eb20efd2560480c4c5f82873f6d6ba631ddc0807665d4f42ed8d53ece8d",
+      "decision": "changes_requested"
+    },
+    {
+      "agent": "codex",
+      "phase": "review",
+      "file": "codex-review.json",
+      "sha256": "450c5a47befdf8fad7a9ebb0015dd4ca2c86c2b3244d6fc883cc1e6d84ce16e5",
+      "decision": "proposed"
+    },
+    {
+      "agent": "claude",
+      "phase": "contrast",
+      "file": "claude-contrast.json",
+      "sha256": "c1c6955b6fbb7657a9d15051a65c68ad070ec4362d0018ce6559024a775a9dcf",
+      "decision": "changes_requested"
+    },
+    {
+      "agent": "codex",
+      "phase": "contrast",
+      "file": "codex-contrast.json",
+      "sha256": "a1af19810802937ef602ff3f3f61d4b72d32e698a2e46ccd4891d9de5b86e5a9",
+      "decision": "proposed"
+    },
+    {
+      "agent": "claude",
+      "phase": "clarification",
+      "file": "claude-clarification.json",
+      "sha256": "57b49b18af544d248e960ec114d4a3b0a7f12f7b4167c8cb52be7095f36876e4",
+      "decision": "changes_requested"
+    }
+  ],
+  "inference_scope": "No motor council repeated; one bounded semantic clarification, no new generic debate."
+}

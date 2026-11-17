@@ -1,0 +1,40 @@
+{
+  "result.json": {
+    "exit_code": 0,
+    "validation_posts": 1,
+    "post_statuses": [
+      200
+    ],
+    "local_theme_unchanged": true,
+    "persisting_writes": 0,
+    "scope": "Official syntax/schema validation, not rendered storefront proof"
+  },
+  "transport.json": [
+    {
+      "method": "GET",
+      "path": "/v1/7400935/theme-installations/14828608",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/v1/7400935/theme-installations/14828608/file-hashes",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/v1/7400935/theme-installations/14828608/files/validate",
+      "status": 200,
+      "operation": "non-persisting-native-validation",
+      "files": [
+        {
+          "path": "sections/google-reviews.tpl",
+          "sha256": "e6f79c2fd59376efe955662adff44d13329300360a118249c88480d59dde3cd3"
+        }
+      ]
+    }
+  ],
+  "server-validation-response.json": {
+    "valid": true,
+    "errors": []
+  }
+}

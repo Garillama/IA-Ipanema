@@ -1,0 +1,16 @@
+{
+  "status": "applied_exactly",
+  "patch_sha256": "59d76bf8b54285dab38271aaedb78bba777fe61efd9edfc4500fec75759bf459",
+  "post_hashes": {
+    "tests/integration/test_seo_pilot_cli_v4.py": "7e8e6ea49211d4258f82b69e992aa74e97c4b84add1140f02ad9cffbc43203cd",
+    "tools/ipanema/seo/crawl_policy.py": "d30c444a60853ee482934515c2d628238cca26c5eb9dc364aa44542e5daaa4e9",
+    "tools/ipanema/seo/crawler.py": "f6e5de5fd60c16eb3e464dd5b10111bf60eb9e4289dcc05f00503805f056415f",
+    "tools/ipanema/seo/engineering.py": "1c6c0534755723cfac59e4395ad0fc44af6dc5df35dd88a1da98eb6c4ab7bd8d",
+    "tests/unit/test_seo_pilot_v4.py": "88eb5a4d173f43d6ccb1165ff35f5f1ddf24e32d4d889481b131584b282cb116"
+  },
+  "all_five_hashes_match": true,
+  "outside_tracked_unchanged": true,
+  "production_operations": false,
+  "Rhino_HTTP_requests": 0,
+  "Google_HTTP_requests": 0
+}

@@ -1,0 +1,88 @@
+{
+  "baseline": {
+    "HTML_HTTP_verified": 124,
+    "observed_HTML_discovery_paths": 122
+  },
+  "additional_source_count": 6,
+  "coverage_example_counts": {
+    "crawled_not_indexed": 33,
+    "discovered_not_indexed": 5,
+    "not_found_404": 33,
+    "indexed_example": 141
+  },
+  "exact_inventory_states": {
+    "indexed_example": 109,
+    "discovered_not_indexed": 4,
+    "unknown_not_present_in_supplied_new_examples": 11
+  },
+  "exact_by_type": {
+    "article": {
+      "indexed_example": 83,
+      "unknown_not_present_in_supplied_new_examples": 3
+    },
+    "blog": {
+      "indexed_example": 1
+    },
+    "blog_pagination": {
+      "unknown_not_present_in_supplied_new_examples": 7
+    },
+    "catalog": {
+      "indexed_example": 1
+    },
+    "catalog_pagination": {
+      "unknown_not_present_in_supplied_new_examples": 1
+    },
+    "category": {
+      "indexed_example": 4,
+      "discovered_not_indexed": 1
+    },
+    "home": {
+      "indexed_example": 1
+    },
+    "page": {
+      "discovered_not_indexed": 2,
+      "indexed_example": 6
+    },
+    "product": {
+      "indexed_example": 13,
+      "discovered_not_indexed": 1
+    }
+  },
+  "individual_status_date": "not supplied; filename13nov and last chart8nov not URL inspection time",
+  "unusable_crawl_date_rows": 5,
+  "new_exact_exclusions": [
+    {
+      "url": "https://rhino-performance.com/contacto/",
+      "state": "discovered_not_indexed"
+    },
+    {
+      "url": "https://rhino-performance.com/productos/brazo-presoterapia-pro-3-individual/",
+      "state": "discovered_not_indexed"
+    },
+    {
+      "url": "https://rhino-performance.com/sobre-rhino-performance/",
+      "state": "discovered_not_indexed"
+    },
+    {
+      "url": "https://rhino-performance.com/terapia-fria/",
+      "state": "discovered_not_indexed"
+    }
+  ],
+  "unknown_inventory_URLs": [
+    "https://rhino-performance.com/blog/posts/lo-que-nadie-ve-cuando-termina-el-partido-596267de630b/",
+    "https://rhino-performance.com/blog/posts/la-inmovilidad-es-el-verdadero-deterioro-674a0d517ef4/",
+    "https://rhino-performance.com/blog/posts/gun-air-y-padel-recuperacion-inteligente-para-seguir-jugando-mejor-4b345fdbe280/",
+    "https://rhino-performance.com/blog/?page=2",
+    "https://rhino-performance.com/blog/?page=3",
+    "https://rhino-performance.com/blog/?page=4",
+    "https://rhino-performance.com/blog/?page=5",
+    "https://rhino-performance.com/blog/?page=6",
+    "https://rhino-performance.com/blog/?page=7",
+    "https://rhino-performance.com/blog/?page=8",
+    "https://rhino-performance.com/productos/page/2/"
+  ],
+  "historical_10_inspections_indexed_all_in_new_indexed_examples": true,
+  "new_indexed_example_rows_not_exact_inventory": 32,
+  "no_live_HTTP_GSC_or_production_changes": true,
+  "date_anomaly": "All5discovered examples raw25568 decode1969-12-31, not accepted as actual crawl dates"
+}

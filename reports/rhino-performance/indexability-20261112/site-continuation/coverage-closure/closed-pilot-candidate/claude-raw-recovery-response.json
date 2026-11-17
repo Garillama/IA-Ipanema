@@ -1,0 +1,77 @@
+{
+  "decision": "approve",
+  "summary": "No encontré defectos críticos ni altos reproducibles en el candidato 59d76bf8. El alcance cerrado, los topes de 12 GET y 3 saltos, las paradas globales, el checkpoint previo al GET, el watchdog de 120 s con parsing y exportación dentro del worker, y el modo general se sostienen en el código y los tests. Esto solo indica que está listo para solicitar integración local. No autoriza aplicar el parche ni hacer red. Quedan riesgos bajos y medios abiertos.",
+  "evidence": [
+    "Revisión del código completo de engineering.py, crawler.py y crawl_policy.py. controller_evidence llegó vacío, así que no cito evidence_refs.",
+    "Los cinco destinos se validan por Policy. La cola inicial son solo los 5 seleccionados, sin home ni sitemaps, y depth=None impide seguir enlaces. Hay un Fetcher compartido con tope 12 y 0.5/s.",
+    "El conteo global de 3 saltos cubre robots y documentos. Los ciclos, destinos externos o privados y los bloqueos de robots paran la ejecución. Una convergencia a un destino ya observado no cuenta como ciclo ni como GET duplicado.",
+    "Las paradas globales cubren 403, 429, access_challenge, robots_unknown, Googlebot o agente de auditoría bloqueado, y cualquier error de transporte o Policy (closed_scope_error).",
+    "started se persiste con fsync antes del transporte. Si on_event falla, el GET no sale (test_checkpoint_failure_prevents_transport). completed y unconfirmed no afirman si la petición llegó al servidor.",
+    "El watchdog (fork, setsid, handshake, TERM y luego killpg KILL) envuelve manifiesto, HTTP, parsing y export. Los tests de parsing/export y de SIGTERM al supervisor pasaron en controller-qa. La prueba real de 120 s se ejecutó aparte: 119.5 s, worker reaped, descendiente inactivo, 0 HTTP.",
+    "Modo general: todas las ramas nuevas dependen de closed o de on_event=None. La expresión de state conserva la semántica original. Hay un test de home seed sin cambios, y 209 unit y 13 de integración general pasaron según el recibo.",
+    "El skipped del test de 120 s en el batch corto es esperado por el flag de entorno. El recibo real_120_test lo cubre con ejecución separada."
+  ],
+  "changes": [],
+  "preferred_alternative": "claude.approve_candidate_for_local_integration_request",
+  "objections": [
+    {
+      "id": "O1",
+      "alternative_id": "claude.approve_candidate_for_local_integration_request",
+      "category": "verification_binding",
+      "severity": "medium",
+      "claim": "El binding de la prueba de 120 s a engineering.py depende de afirmaciones del recibo del controlador (AST sin cambios, watchdog sin cambios tras la ejecución). controller_evidence está vacío y no hay hash de la versión probada, así que no pude verificarlo de forma independiente. crawler.py y los tests cambiaron después de esa prueba. Es plausible porque sleeping_worker no toca crawler, pero se confía en el controlador.",
+      "evidence_refs": [],
+      "resolution_evidence_refs": [],
+      "status": "open"
+    },
+    {
+      "id": "O2",
+      "alternative_id": "claude.approve_candidate_for_local_integration_request",
+      "category": "scope_limit",
+      "severity": "low",
+      "claim": "El watchdog limpia solo el process group del worker. Un descendiente que haga setsid o doble fork escaparía de killpg. El cliente https_get actual no lo hace, y la garantía no debe presentarse como universal.",
+      "evidence_refs": [],
+      "resolution_evidence_refs": [],
+      "status": "open"
+    },
+    {
+      "id": "O3",
+      "alternative_id": "claude.approve_candidate_for_local_integration_request",
+      "category": "checkpoint_fidelity",
+      "severity": "low",
+      "claim": "El checkpoint nunca actualiza state='running' a un estado final. El campo project queda en None. En una ejecución terminada el checkpoint sigue diciendo 'running'. Es cosmético, pero puede confundir en una auditoría.",
+      "evidence_refs": [],
+      "resolution_evidence_refs": [],
+      "status": "open"
+    },
+    {
+      "id": "O4",
+      "alternative_id": "claude.approve_candidate_for_local_integration_request",
+      "category": "signal_handling",
+      "severity": "low",
+      "claim": "El worker hereda los handlers de SIGTERM/SIGINT del supervisor, que lanzan IpanemaError. En producción un TERM aborta con gracia antes del KILL, pero los tests lo ignoran con SIG_IGN, así que ese camino real no se ejerce. Un signal durante el finally del supervisor podría propagarse. Es un caso límite sin impacto en los topes.",
+      "evidence_refs": [],
+      "resolution_evidence_refs": [],
+      "status": "open"
+    },
+    {
+      "id": "O5",
+      "alternative_id": "claude.approve_candidate_for_local_integration_request",
+      "category": "portability",
+      "severity": "low",
+      "claim": "Los tests de cancelación leen /proc, y el supervisor exige POSIX. En macOS u otros sistemas sin /proc las pruebas fallarían. Es aceptable para el entorno Linux del controlador, pero no es una garantía multiplataforma.",
+      "evidence_refs": [],
+      "resolution_evidence_refs": [],
+      "status": "open"
+    }
+  ],
+  "questions": [
+    {
+      "id": "Q1",
+      "to_agent": "codex",
+      "alternative_id": "claude.approve_candidate_for_local_integration_request",
+      "question": "¿Tu revisión independiente encontró alguna reproducción concreta en la que un GET exceda 12 o los saltos pasen de 3 (por ejemplo robots con redirect más redirects de documentos), o en la que el watchdog no cubra parsing o export? Indica archivo y línea.",
+      "evidence_refs": []
+    }
+  ]
+}

@@ -1,0 +1,104 @@
+{
+  "scope": "Incremental local native-field/selector evidence and unchanged editorial candidate; not a restart of previous council",
+  "participants": {
+    "claude": {
+      "review": {
+        "file": "claude-review.json",
+        "sha256": "3ea30e43ad05e60662477a3aefe7cfc739b95082400a6338fe97b0d93fc5ffeb",
+        "model": {
+          "model": "claude-sonnet-5-5",
+          "effort": "medium",
+          "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+          "verified_at": "2026-11-08"
+        },
+        "decision": "changes_requested",
+        "input_hashes": {
+          "reports/rhino-performance/indexability-phase2-20261113/editorial-validation-preparation-20261113/review-packet.json": "1d620fdae088eb8a28835c6ca4b1e6f2a97730f10370ae37b71374076069d87b",
+          "reports/rhino-performance/indexability-phase2-20261113/editorial-validation-preparation-20261113/controller-validation.json": "0cafb53195b17d86fbccec7a158b6642a504691b9b04932fd3b8bb8b63aebe61",
+          "reports/rhino-performance/indexability-phase2-20261113/editorial-validation-preparation-20261113/local-native-evidence.json": "89085d9bbf4e3e39a8c491065ee17f6414166cfe553f0df7dc6a968cac070ac8",
+          "reports/rhino-performance/indexability-phase2-20261113/editorial-validation-preparation-20261113/editorial-proposed.md": "c1a940010bf89c92993d9439c596a5421665891bcd5b0b622c3248e9c846bcd3",
+          "reports/rhino-performance/indexability-phase2-20261113/editorial-validation-preparation-20261113/production-read-scope-NOT-AUTHORIZED.json": "1c808e9386d9246fc58997fd6be678b811b94988c7a70b0fb6b596538c0bfcdc",
+          "reports/rhino-performance/indexability-phase2-20261113/editorial-validation-preparation-20261113/README.md": "8e8969025e11acbae3b777488bf644b84178635e01e2b769b5f26c0627f4b86d"
+        }
+      },
+      "contrast": {
+        "file": "claude-contrast.json",
+        "sha256": "225bee29478f0593798f32584237e7ae8b68ec44eb1ce129395636911a7bdf48",
+        "model": {
+          "model": "claude-sonnet-5-5",
+          "effort": "medium",
+          "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+          "verified_at": "2026-11-08"
+        },
+        "decision": "blocked",
+        "input_hashes": {
+          "reports/rhino-performance/indexability-phase2-20261113/editorial-validation-preparation-20261113/review-packet.json": "1d620fdae088eb8a28835c6ca4b1e6f2a97730f10370ae37b71374076069d87b",
+          "reports/rhino-performance/indexability-phase2-20261113/editorial-validation-preparation-20261113/controller-validation.json": "0cafb53195b17d86fbccec7a158b6642a504691b9b04932fd3b8bb8b63aebe61",
+          "reports/rhino-performance/indexability-phase2-20261113/editorial-validation-preparation-20261113/controller-supplement.json": "05dad1161ce84964d7162448ef155301e1a503973fa286083ba22f3ddb9823da",
+          "reports/rhino-performance/indexability-phase2-20261113/editorial-validation-preparation-20261113/local-native-evidence.json": "89085d9bbf4e3e39a8c491065ee17f6414166cfe553f0df7dc6a968cac070ac8",
+          "reports/rhino-performance/indexability-phase2-20261113/editorial-validation-preparation-20261113/editorial-proposed.md": "c1a940010bf89c92993d9439c596a5421665891bcd5b0b622c3248e9c846bcd3",
+          "reports/rhino-performance/indexability-phase2-20261113/editorial-validation-preparation-20261113/production-read-scope-NOT-AUTHORIZED.json": "1c808e9386d9246fc58997fd6be678b811b94988c7a70b0fb6b596538c0bfcdc",
+          "reports/rhino-performance/indexability-phase2-20261113/editorial-validation-preparation-20261113/README.md": "8e8969025e11acbae3b777488bf644b84178635e01e2b769b5f26c0627f4b86d"
+        }
+      }
+    },
+    "codex": {
+      "review": {
+        "file": "codex-review.json",
+        "sha256": "bfb74614405294154876a5a869cd965416788ba5127e43532d791ec156528af2",
+        "model": {
+          "model": "gpt-6.1-sol",
+          "effort": "medium",
+          "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+          "verified_at": "2026-11-08"
+        },
+        "decision": "blocked",
+        "input_hashes": {
+          "reports/rhino-performance/indexability-phase2-20261113/editorial-validation-preparation-20261113/review-packet.json": "1d620fdae088eb8a28835c6ca4b1e6f2a97730f10370ae37b71374076069d87b",
+          "reports/rhino-performance/indexability-phase2-20261113/editorial-validation-preparation-20261113/controller-validation.json": "0cafb53195b17d86fbccec7a158b6642a504691b9b04932fd3b8bb8b63aebe61",
+          "reports/rhino-performance/indexability-phase2-20261113/editorial-validation-preparation-20261113/local-native-evidence.json": "89085d9bbf4e3e39a8c491065ee17f6414166cfe553f0df7dc6a968cac070ac8",
+          "reports/rhino-performance/indexability-phase2-20261113/editorial-validation-preparation-20261113/editorial-proposed.md": "c1a940010bf89c92993d9439c596a5421665891bcd5b0b622c3248e9c846bcd3",
+          "reports/rhino-performance/indexability-phase2-20261113/editorial-validation-preparation-20261113/production-read-scope-NOT-AUTHORIZED.json": "1c808e9386d9246fc58997fd6be678b811b94988c7a70b0fb6b596538c0bfcdc",
+          "reports/rhino-performance/indexability-phase2-20261113/editorial-validation-preparation-20261113/README.md": "8e8969025e11acbae3b777488bf644b84178635e01e2b769b5f26c0627f4b86d"
+        }
+      },
+      "contrast": {
+        "file": "codex-contrast.json",
+        "sha256": "f03bfbfbf00a2fbb46e8eb335ced3a5417177de2f18802ce5a6febb2f87e5498",
+        "model": {
+          "model": "gpt-6.1-sol",
+          "effort": "medium",
+          "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+          "verified_at": "2026-11-08"
+        },
+        "decision": "blocked",
+        "input_hashes": {
+          "reports/rhino-performance/indexability-phase2-20261113/editorial-validation-preparation-20261113/review-packet.json": "1d620fdae088eb8a28835c6ca4b1e6f2a97730f10370ae37b71374076069d87b",
+          "reports/rhino-performance/indexability-phase2-20261113/editorial-validation-preparation-20261113/controller-validation.json": "0cafb53195b17d86fbccec7a158b6642a504691b9b04932fd3b8bb8b63aebe61",
+          "reports/rhino-performance/indexability-phase2-20261113/editorial-validation-preparation-20261113/controller-supplement.json": "05dad1161ce84964d7162448ef155301e1a503973fa286083ba22f3ddb9823da",
+          "reports/rhino-performance/indexability-phase2-20261113/editorial-validation-preparation-20261113/local-native-evidence.json": "89085d9bbf4e3e39a8c491065ee17f6414166cfe553f0df7dc6a968cac070ac8",
+          "reports/rhino-performance/indexability-phase2-20261113/editorial-validation-preparation-20261113/editorial-proposed.md": "c1a940010bf89c92993d9439c596a5421665891bcd5b0b622c3248e9c846bcd3",
+          "reports/rhino-performance/indexability-phase2-20261113/editorial-validation-preparation-20261113/production-read-scope-NOT-AUTHORIZED.json": "1c808e9386d9246fc58997fd6be678b811b94988c7a70b0fb6b596538c0bfcdc",
+          "reports/rhino-performance/indexability-phase2-20261113/editorial-validation-preparation-20261113/README.md": "8e8969025e11acbae3b777488bf644b84178635e01e2b769b5f26c0627f4b86d"
+        }
+      }
+    }
+  },
+  "contracts_and_cross_answers_valid": true,
+  "decision": "blocked_for_implementation_and_publication",
+  "open_objections": [
+    "claude-obj-1",
+    "claude-obj-2",
+    "codex-obj-01",
+    "codex-obj-02"
+  ],
+  "critical_condition": "No actual native editor evidence that existing rich-text can be scoped exclusively to Presoterapia; shared template risk remains.",
+  "other_conditions": [
+    "Current category/product reads not authorized or performed",
+    "Real semanticH2/append responsive/performance QA not run",
+    "Six-document production scope is not a valid existing five-seed closed crawler command",
+    "Remote/source equality not checked"
+  ],
+  "implementation_allowed": false,
+  "review_is_not_execution_authorization": true
+}

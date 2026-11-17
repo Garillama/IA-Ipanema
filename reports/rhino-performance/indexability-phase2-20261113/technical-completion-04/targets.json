@@ -1,0 +1,63 @@
+{
+  "project": "rhino-performance",
+  "origin": "https://rhino-performance.com",
+  "purpose": "Fill missing meta robots, response headers and main evidence. HTTP already checked; do not revisit other pages.",
+  "targets": [
+    {
+      "url": "https://rhino-performance.com/blog/posts/los-mejores-estiramientos-despues-de-un-entrenamiento-intenso-e60dcadb9471/",
+      "type": "article",
+      "baseline_HTTP": 200,
+      "missing": [
+        "meta robots",
+        "X-Robots-Tag",
+        "main content"
+      ],
+      "source_original": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-after.json"
+    },
+    {
+      "url": "https://rhino-performance.com/blog/posts/recuperacion-deportiva-las-tecnicas-con-mayor-respaldo-cientifico-8d45b8378042/",
+      "type": "article",
+      "baseline_HTTP": 200,
+      "missing": [
+        "meta robots",
+        "X-Robots-Tag",
+        "main content"
+      ],
+      "source_original": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-after.json"
+    },
+    {
+      "url": "https://rhino-performance.com/blog/posts/ejercicio-en-la-manana-antes-o-despues-de-desayunar-6b4da8f2797c/",
+      "type": "article",
+      "baseline_HTTP": 200,
+      "missing": [
+        "meta robots",
+        "X-Robots-Tag",
+        "main content"
+      ],
+      "source_original": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-after.json"
+    },
+    {
+      "url": "https://rhino-performance.com/blog/posts/guia-para-el-uso-de-tus-botas-de-presoterapia-aad204c7149a/",
+      "type": "article",
+      "baseline_HTTP": 200,
+      "missing": [
+        "meta robots",
+        "X-Robots-Tag",
+        "main content"
+      ],
+      "source_original": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-after.json"
+    },
+    {
+      "url": "https://rhino-performance.com/blog/posts/sacale-el-maximo-partido-a-tus-botas-de-presoterapia-6d64eb420000/",
+      "type": "article",
+      "baseline_HTTP": 200,
+      "missing": [
+        "meta robots",
+        "X-Robots-Tag",
+        "main content"
+      ],
+      "source_original": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-after.json"
+    }
+  ],
+  "network_authorized": false
+}

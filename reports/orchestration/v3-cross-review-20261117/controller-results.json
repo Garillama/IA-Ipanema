@@ -1,0 +1,50 @@
+{
+  "at": "2026-11-17T16:53:14.404920+00:00",
+  "state": "needs_evidence",
+  "candidate_only": true,
+  "original_operational_source_hashes_unchanged": {
+    "tools/ipanema/orchestration/council.py": "4ec261a0d84fbdc12d5abf85eab489d21cf85f30af57eac9769c722d17541261",
+    "tools/ipanema/orchestration/adapters.py": "bae25bee06cf7574ee35f65e9f9055dfa8a495336f80615165ddd5232359d01d",
+    "tools/ipanema/orchestration/council_runtime.py": "92b6e47eb8942c26161c240a3258e481ae108b42ee2894cd0577403ea0d49635",
+    "tools/ipanema/orchestration/engine.py": "74885e94f8f9cbf8f7a6e71c0cc8f5f44eec032fac8892f7507e2eb06879319f",
+    "tools/ipanema/orchestration/models.json": "14fede6b13b294a8e685b8ce1072777959850d8ae05bf3270f5dd9ea527aba39"
+  },
+  "tests": {
+    "new_gate": {
+      "passed": 31,
+      "synthetic_reviewers": true,
+      "real_provider_detection": false
+    },
+    "council_existing": {
+      "passed": 87
+    },
+    "orchestration_existing": {
+      "passed": 41
+    },
+    "total": 159
+  },
+  "real_provider_results": {
+    "claude": "rate_limit; no retry; no valid proposal",
+    "codex": "original response revalidated against originally predeclared candidate paths; proposed only; not final review",
+    "antigravity": "not invoked; adapter not approved"
+  },
+  "receipts": [
+    {
+      "path": ".local/v3-cross-review/20261117T164026/claude-proposal.json",
+      "sha256": "f9bb040fbe701897a831d53f900d729875c6f55c47695b14a0ac43f5eab8384e"
+    },
+    {
+      "path": ".local/v3-cross-review/20261117T164026/codex-proposal.json",
+      "sha256": "47d380b847d691b7dad51b9b0b5a15e43be95c2f92abb20657f628d50c50bddb"
+    },
+    {
+      "path": ".local/v3-cross-review/20261117T164026/codex-proposal-revalidated.json",
+      "sha256": "551685e88f7c09ac005914bf867356bca216533393663b15652ad56336a75b6d"
+    }
+  ],
+  "backup": ".local/v3-cross-review/20261117T164026/backups/council.py",
+  "production_changes": 0,
+  "client_project_changes": 0,
+  "mandatory_activation": false,
+  "implementation_allowed": false
+}

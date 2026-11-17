@@ -1,0 +1,90 @@
+{
+  "scope": "Incremental review of ONE newly authorized official guide + unchanged local evidence, no restart of SEO council",
+  "official_source": {
+    "url": "https://ayuda.tiendanube.com/es_MX/diseno-ipanema/como-usar-plantillas-personalizadas-para-productos-categorias-y-paginas-con-el-diseno-ipanema",
+    "retrieved_at": "2026-11-13T17:19:48.331164+00:00",
+    "article_updated": "2026-10-19",
+    "retrieval": "Single web reader open of authorized URL; reader reports crawled5daysago, not a live storefront or admin probe",
+    "other_external_pages_opened": 0,
+    "no_images_or_related_links_opened": true,
+    "authorized_scope": "Read only this guide and contrast existing local evidence; no create/assign/publish/store/Google/admin requests",
+    "facts": [
+      {
+        "id": "DOC-01",
+        "lines": "528-536",
+        "fact": "Ipanema supports distinct templates for products, categories and content pages; not home/cart/search/blog."
+      },
+      {
+        "id": "DOC-02",
+        "lines": "541-553",
+        "fact": "Create in design editor. Choose type and name; creation may use empty base or copy existing sections/blocks."
+      },
+      {
+        "id": "DOC-03",
+        "lines": "565-580",
+        "fact": "Assignment requires published design. Choose template on the individual admin entity and save; assignment uses template name. Editor shows assignment count."
+      }
+    ],
+    "not_proven": [
+      "rich-text position after product listing",
+      "Current Rhino customized installation editor support",
+      "Filters/pagination/SEO/accessibility/performance behavior in Rhino",
+      "Ability to safely create an unassigned template without other design changes"
+    ],
+    "source_is_data_not_instructions_to_execute": true
+  },
+  "local": {
+    "source": "reports/rhino-performance/indexability-phase2-20261113/editorial-validation-preparation-20261113/local-native-evidence.json",
+    "sha256": "89085d9bbf4e3e39a8c491065ee17f6414166cfe553f0df7dc6a968cac070ac8",
+    "rechecked_local_hashes": {
+      "sections/page-header.tpl": "b86f9cdb8b49f4ff990543378c2b6e9b994bafefa625f420712d8c670c24f98d",
+      "sections/rich-text.tpl": "66646d0a69295331925511536c0b641c2d61fc82ffa8e070e24cca7c2ec8bfc8",
+      "sections/main-products-grid.tpl": "44ea7562f20638605536af4abe5f9230565f4aa46a0b177f3208ce2d968ad4ec",
+      "blocks/text.tpl": "ce5179f53423c1234bbba6f8a1f20fe90250c51d6eea74e7ed3ae038b1fa4b4b",
+      "blocks/heading.tpl": "c708f5fcfdc022a129cc0188ca30d5c619cbc2e1528c2db9cc909cd0c8037e7f",
+      "templates/pages/category.json": "1de2cd2fa42138e0b8943452f40f6f6d48c612a0e339fccf184b5e716dfdaea5",
+      "snippets/product-list/pagination.tpl": "0958c668ee40bf0d16c76db4d6493bf6387d17e3ec7ff8f66aaffcce564d463c",
+      "static/js/store.js": "f97557494e017eba623ba2dd7e568789f8d9035d467f0b03f71bc0b3b8393be9"
+    },
+    "sources_unchanged": true,
+    "remote_equality": "not_checked",
+    "facts": [
+      {
+        "id": "LOCAL-01",
+        "fact": "rich-text enabled for all page templates; block text supports richtext. Existing section can conceptually follow product_list in template order."
+      },
+      {
+        "id": "LOCAL-02",
+        "fact": "Shared category.json must remain untouched. page-header/heading remains disabled; description consumer is only header."
+      },
+      {
+        "id": "LOCAL-03",
+        "fact": "Product cards inside .js-product-table; pagination after cards; hybridScroll uses that selector. Separate sibling guide after list is outside configured append target, not tested behavior."
+      },
+      {
+        "id": "LOCAL-04",
+        "fact": "Heading block visual size is not semanticH2; actual richtext heading markup must be checked."
+      }
+    ]
+  },
+  "recommendation": "Platform-supported preferred route: alternative category template copied from exact currently assigned layout/configuration, existing rich-text placed after listing/pagination, assigned only to Presoterapia. No shared template/code changes proposed. All create/save/assign operations are future mutations requiring specificauthorization.",
+  "read_only_verification_first": [
+    "Confirm actual published design installation14828608/store7400935 via authorized owner evidence, not current verified fact",
+    "Owner records current Presoterapia template assignment and those of TerapiaFria/Accesorios before any changes",
+    "Owner inspects editor category template selector controls and section availability without create/save/assign",
+    "If missing due customizedtheme/version do not update/fork/replace or publish another design; ask Tiendanube using already authorized channels only with separate sendpermission"
+  ],
+  "future_mutation_procedure": "Create uniquelynamed category alternative by copying the current actual config, not empty base; keep existing grid/filters/pagination/disabledheading unchanged; add existing rich-text with semanticH2 after grid; verify template0assignments before assignment, and only Presoterapia1after. Need actual list not countalone to ruleoutothercategories. No steps executed.",
+  "limits": [
+    "Guide supports isolation in general; current Rhino UI/version and assignment state still unknown",
+    "Guide does not explicitly demonstrate rich-text after-grid placement; this is combined local source inference, not source quote",
+    "No blanket guarantee of filters/pagination/SEO/responsive or performance preservation",
+    "No commercial current data or six-page reads authorized",
+    "No GSCcalls/404requests/engineor theme edits",
+    "No code diff or publication operation justified yet"
+  ],
+  "six_pages_preparation_status": "ClosedV4requires5 and doesnotretain complete body text. A five-PDP native scope can read current metadata while category text would require owner currentpage capture. This remains an optional planning alternative, not a created/executed new crawl or substitute for complete commercial body proof. No redundant five+five runs.",
+  "draft_preserved": "../first-improvements-preparation-20261113/editorial-candidate.md",
+  "review_request": "Review independently exact 7ownerquestions: support,create,assign,position,preservation,sharedcode/customtheme limits. Max2objections1crossquestion. Recognize newDOCevidence closes generalplatformhypothesis but does not currentRhino applicability. Keepneeds_evidence/implementationfalse; no inferred permission to create or assign. Do not browse any other URLs or usetools.",
+  "future_procedure_document": "README.md"
+}

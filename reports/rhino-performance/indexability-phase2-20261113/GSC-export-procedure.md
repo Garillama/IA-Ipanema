@@ -1,0 +1,17 @@
+# Exportaciones oficiales necesarias — sin compartir credenciales
+
+Acceso actual: configuración presente, sin credencial utilizable en esta sesión. No se intentó la API, login ni refresh. No envíes contraseñas, cookies, claves, archivos OAuth o enlaces privados de sesión.
+
+1. En tu navegador autenticado, selecciona la propiedad de dominio `rhino-performance.com` (no DaMar ni otra propiedad). Abre **Indexación → Páginas** y deja el ámbito general de páginas; registra cualquier filtro activo y la fecha de actualización mostrada.
+2. Usa **Exportar** para descargar el resumen, preferiblemente CSV o Excel. Conserva el archivo original y una nota con propiedad, fecha/hora y filtros. Si entrega ZIP, conserva el ZIP íntegro.
+3. Abre cada motivo disponible de «¿Por qué hay páginas que no se indexan?» y exporta su tabla de ejemplos. Incluye descubierta sin indexar, rastreada sin indexar, duplicados/canonical alternativo, noindex, robots y errores, **solo cuando existan**. Nombra cada archivo con el motivo exacto; no conviertas la ausencia de un motivo en una declaración sobre cada URL.
+4. Abre **Ver datos sobre páginas indexadas** y exporta los ejemplos disponibles. No tomes los totales o listas como una correspondencia completa con nuestras 124 URLs: los ejemplos pueden ser incompletos incluso por debajo de 1.000 filas. No atribuyas estado por ausencia de una exportación. [Ayuda oficial de Indexación de páginas](https://support.google.com/webmasters/answer/7440203?hl=es).
+5. Para las categorías `/pistolas-de-masaje/`, `/terapia-fria/`, `/compresion-frio-y-calor/` y `/productos/page/2/`, introduce la URL exacta en la barra de inspección. Conserva el resultado de **la versión indexada**: estado/motivo, fecha del último rastreo, robots, obtención, indexación permitida y canonical del usuario/elegido por Google. Puedes proporcionar capturas o copiar los campos sin datos de sesión. La prueba en vivo es distinta y no certifica presencia en el índice. No pulses «Solicitar indexación» ni «Validar corrección» como parte de este procedimiento. [Ayuda oficial de Inspección de URLs](https://support.google.com/webmasters/answer/9012289?hl=es).
+6. Para oportunidades de tráfico, exporta por separado **Rendimiento → Resultados de búsqueda**, tipo Web, con fechas exactas y filtros guardados. Incluye tablas de Páginas y Consultas, y por categoría cuando sea posible. No mezcles dimensiones, periodos o muestras para inferir la palabra clave causante de un CTR bajo.
+7. Guarda los archivos públicos de resultados en una carpeta local y facilita su ruta, o adjúntalos. Conservaremos sus hashes, fecha, fuente y alcance antes de unirlos a la matriz. Una exportación de consultas puede contener datos sensibles: comparte solo lo pertinente a esta tienda.
+
+## Reglas de conciliación
+
+Coincidencia de URL exacta primero. Alias (www, slash, parámetros) quedan aparte hasta justificar su relación; no transferir automáticamente un estado de Google entre ellos. Cada fila nueva necesita fecha, motivo literal y origen (inspección, ejemplo o Search Analytics). Si fuentes discrepan, conservar ambas observaciones y sus fechas, sin elegir por conveniencia. Los campos ausentes siguen desconocidos; una URL sin ejemplos no pasa a «no indexada».
+
+La lectura de exportaciones no necesita OAuth ni solicita cambios en Google. La recuperación de acceso por el flujo existente sería una operación separada, sin autenticaciones improvisadas.

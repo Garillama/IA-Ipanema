@@ -1,0 +1,92 @@
+{
+  "created": "2026-11-13T18:39:57.864386+00:00",
+  "artifacts": [
+    {
+      "path": "reports/rhino-performance/performance-first-correction-20261113T180949/candidate.patch",
+      "sha256": "2c88fb0d3e619b5d08c8e217eecb9e104d9d402dbe47997c95b91f0e4b1c8d32",
+      "bytes": 2089
+    },
+    {
+      "path": "reports/rhino-performance/performance-first-correction-20261113T180949/candidate-manifest.json",
+      "sha256": "923b3d0ef5675535162e5a3f1bc688374658909e25efc9b06555c1a6caa65b3b",
+      "bytes": 1013
+    },
+    {
+      "path": "reports/rhino-performance/performance-first-correction-20261113T180949/controller-candidate-receipt.json",
+      "sha256": "7f16f675e3358f08e4dfef114a286b1b322311a59f9f11e278c1818ae723dc6f",
+      "bytes": 24690
+    },
+    {
+      "path": "reports/rhino-performance/performance-first-correction-20261113T180949/controller-final-gates.json",
+      "sha256": "f3d2661c2488968941488e40071460f6074d0b4542713dba8b3f27ca477cd261",
+      "bytes": 1683
+    },
+    {
+      "path": "reports/rhino-performance/performance-first-correction-20261113T180949/native-validation-receipt.json",
+      "sha256": "be5cbd4d247bf2515acda605ae75d7f6e2077c65794dd56886cdaec074eca8b1",
+      "bytes": 969
+    },
+    {
+      "path": "reports/rhino-performance/performance-first-correction-20261113T180949/council-final-receipts.json",
+      "sha256": "6b3fce6cd624a4af0b3844faaaab5ece653997e172001d5ee54c617e0cd482a7",
+      "bytes": 53309
+    },
+    {
+      "path": "reports/rhino-performance/performance-first-correction-20261113T180949/lighthouse-ten-samples.csv",
+      "sha256": "65690c16172b323225e71b76743c682682891fb00eb07080293c935dbcf921a7",
+      "bytes": 3904
+    },
+    {
+      "path": "reports/rhino-performance/performance-first-correction-20261113T180949/lighthouse-statistics.json",
+      "sha256": "98ede89046ca5050ea339e60e944a898257ca40cd84154ce7a92ae1e064bae08",
+      "bytes": 15096
+    },
+    {
+      "path": "reports/rhino-performance/performance-first-correction-20261113T180949/trace-findings.json",
+      "sha256": "3df402f0d0153e45edb1a21d235607d3bf92b11a3d5085854a435e66d24458b1",
+      "bytes": 15238
+    },
+    {
+      "path": "reports/rhino-performance/performance-first-correction-20261113T180949/README.md",
+      "sha256": "352dc8ef91e4781143b9ea5278d5416623a5f36a8c27db0c364d0cd4cbd5c937",
+      "bytes": 13676
+    },
+    {
+      "path": "reports/rhino-performance/performance-first-correction-20261113T180949/ADR.md",
+      "sha256": "d937b8ed45c27cfa4132e70e39468f3962ce273df26380e7c853c638123363eb",
+      "bytes": 2440
+    },
+    {
+      "path": "reports/rhino-performance/performance-first-correction-20261113T180949/QA-AND-ROLLBACK.md",
+      "sha256": "4142cfc358d0d59f5b4d481f73c52c7f5de4802b2f123b32f006fd0141c74bad",
+      "bytes": 2125
+    },
+    {
+      "path": "reports/rhino-performance/performance-first-correction-20261113T180949/authorization-request.md",
+      "sha256": "bd58d3930341d2749809011feea8ceb2c7e21a31f33f0f95da5fa158f8298101",
+      "bytes": 1637
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261113T180949-home-performance-authorized-e593dae0/trace-summary.json",
+      "sha256": "6391ede6edb788ea39ed27b03f45edbd1ddeae35313bc278179d5ade191167ad",
+      "bytes": 956598
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261113T180949-home-performance-authorized-e593dae0/reviews-offline-QA.json",
+      "sha256": "83fecc51a437fe97042e7e3b0c868021245cb0aabcb20ead2855c400bb95b043",
+      "bytes": 115350
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261113T180949-home-performance-authorized-e593dae0/reviews-offline-supplement-QA.json",
+      "sha256": "4b834088e977f38b721d99f4e1fa772a295602cafad5a11d4ec3d14db8d5e95d",
+      "bytes": 2170
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261113T180949-home-performance-authorized-e593dae0/lighthouse-checkpoint.json",
+      "sha256": "aff9b2ec99fd5f083046d2ff800f1ffc1d43fd998768f74cd964f3df86da0f17",
+      "bytes": 6659
+    }
+  ],
+  "theme_unchanged": true,
+  "production_modified": false
+}

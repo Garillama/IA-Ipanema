@@ -1,0 +1,45 @@
+{
+  "matrix_csv": "reports/rhino-performance/indexability-20261112/site-continuation/url-matrix.csv",
+  "matrix_json": "reports/rhino-performance/indexability-20261112/site-continuation/url-matrix.json",
+  "before_hashes": {
+    "csv": "2d80a01fe1fd3f4ce76024f8ba01dc44735dd4872304933b1ef14d4488e94708",
+    "json": "0f997ee0bdc4de57bac67146ac592d452f53cfcdde345079a68193c8b218c91a"
+  },
+  "after_hashes": {
+    "csv": "62c48d9647926360525f3f8573ab61274ac12852dc08d05d10ccb8471bdb3968",
+    "json": "c6c75c1b8bb648972dbc9d4fcaa0e3a64926b07540e1f423221ffe2e731c39c7"
+  },
+  "backup_csv": "reports/runs/rhino-performance/20261113T071832-authorized-five-url-batch06/url-matrix-before.csv",
+  "backup_json": "reports/runs/rhino-performance/20261113T071832-authorized-five-url-batch06/url-matrix-before.json",
+  "exactly_five_rows_updated": true,
+  "updated_URLs": [
+    "https://rhino-performance.com/productos/botas-presoterapia-pro-3/",
+    "https://rhino-performance.com/blog/posts/los-benecios-de-la-natacion-para-la-salud-y-el-rendimiento-fisico-ffeb1529210e/",
+    "https://rhino-performance.com/blog/posts/por-que-es-crucial-la-hidratacion-en-atletas-070675a646a6/",
+    "https://rhino-performance.com/blog/posts/palabras-clave-para-iniciarse-en-el-mundo-runner-120cd6cf0343/",
+    "https://rhino-performance.com/blog/posts/mangas-cold-therapy-recuperacion-inteligente-al-alcance-de-tu-cuerpo-30c1563de10f/"
+  ],
+  "Google_fields_unchanged": true,
+  "other_120_rows_unchanged": true,
+  "before": {
+    "total_urls": 125,
+    "HTML_total": 124,
+    "HTML_with_individual_HTTP": 74,
+    "pending_individual_HTTP": 50,
+    "pending_by_type": {
+      "product": 1,
+      "article": 49
+    }
+  },
+  "after": {
+    "total_urls": 125,
+    "HTML_total": 124,
+    "HTML_with_individual_HTTP": 79,
+    "pending_individual_HTTP": 45,
+    "pending_by_type": {
+      "article": 45
+    }
+  },
+  "original_pending75_and_pending70_files_preserved": true,
+  "next_pending_list": "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/live-batch06-20261113/pending-45.csv"
+}

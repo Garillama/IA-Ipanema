@@ -1,0 +1,57 @@
+{
+  "project": null,
+  "state": "running",
+  "planned": {
+    "https://rhino-performance.com/robots.txt": "completed",
+    "https://rhino-performance.com/productos/tobillera-frio-y-calor/": "completed",
+    "https://rhino-performance.com/productos/hombrera-frio-y-calor/": "completed",
+    "https://rhino-performance.com/blog/posts/errores-comunes-al-usar-los-brazos-de-presoterapia-c80d6e476fb3/": "completed",
+    "https://rhino-performance.com/blog/posts/lesiones-por-estres-sintomas-y-como-tratarlas-d080cbc403b8/": "completed",
+    "https://rhino-performance.com/blog/posts/claves-para-potenciar-los-resultados-del-ejercicio-a823a76cbadd/": "completed"
+  },
+  "requests": [
+    {
+      "ordinal": 1,
+      "url": "https://rhino-performance.com/robots.txt",
+      "state": "completed",
+      "status": 200,
+      "bytes": 1742
+    },
+    {
+      "ordinal": 2,
+      "url": "https://rhino-performance.com/productos/tobillera-frio-y-calor/",
+      "state": "completed",
+      "status": 200,
+      "bytes": 726933
+    },
+    {
+      "ordinal": 3,
+      "url": "https://rhino-performance.com/productos/hombrera-frio-y-calor/",
+      "state": "completed",
+      "status": 200,
+      "bytes": 760631
+    },
+    {
+      "ordinal": 4,
+      "url": "https://rhino-performance.com/blog/posts/errores-comunes-al-usar-los-brazos-de-presoterapia-c80d6e476fb3/",
+      "state": "completed",
+      "status": 200,
+      "bytes": 243939
+    },
+    {
+      "ordinal": 5,
+      "url": "https://rhino-performance.com/blog/posts/lesiones-por-estres-sintomas-y-como-tratarlas-d080cbc403b8/",
+      "state": "completed",
+      "status": 200,
+      "bytes": 246642
+    },
+    {
+      "ordinal": 6,
+      "url": "https://rhino-performance.com/blog/posts/claves-para-potenciar-los-resultados-del-ejercicio-a823a76cbadd/",
+      "state": "completed",
+      "status": 200,
+      "bytes": 252248
+    }
+  ],
+  "arrival_at_server_without_response": "unknown"
+}

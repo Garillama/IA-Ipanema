@@ -1,0 +1,32 @@
+{
+  "status": "passed",
+  "authorized_patch_sha256": "59d76bf8b54285dab38271aaedb78bba777fe61efd9edfc4500fec75759bf459",
+  "manifest_sha256": "c9bfe5aefc7b8ec9b073730b7d7d87e54a79fc8ab3f8ab01aa19cac57602e400",
+  "base_hashes": {
+    "tests/integration/test_seo_pilot_cli_v4.py": null,
+    "tests/unit/test_seo_pilot_v4.py": null,
+    "tools/ipanema/seo/crawl_policy.py": "c719ba73adb1e54141cbb04dbbc0b0a6b56407fbb1459d6f4814b23718e526c1",
+    "tools/ipanema/seo/crawler.py": "29b42a929132bd5bb5ec07770a247dbd5b42a35747874f711617f5ff204d2e5b",
+    "tools/ipanema/seo/engineering.py": "85a0729730f61efc24be661679276c9f3e005682db10db392a11db110ba9f5f1"
+  },
+  "backup_hashes": {
+    "tools/ipanema/seo/crawl_policy.py": "c719ba73adb1e54141cbb04dbbc0b0a6b56407fbb1459d6f4814b23718e526c1",
+    "tools/ipanema/seo/crawler.py": "29b42a929132bd5bb5ec07770a247dbd5b42a35747874f711617f5ff204d2e5b",
+    "tools/ipanema/seo/engineering.py": "85a0729730f61efc24be661679276c9f3e005682db10db392a11db110ba9f5f1"
+  },
+  "approved_backup_verified": true,
+  "preimages_match_exactly": true,
+  "new_files_absent": true,
+  "foreign_content_changes_in_scope": false,
+  "note": "Three files already have authorized uncommitted V4 changes. Their exact approved preimages, not a clean Git status, are the comparison boundary.",
+  "payload_files": [
+    "tests/integration/test_seo_pilot_cli_v4.py",
+    "tests/unit/test_seo_pilot_v4.py",
+    "tools/ipanema/seo/crawl_policy.py",
+    "tools/ipanema/seo/crawler.py",
+    "tools/ipanema/seo/engineering.py"
+  ],
+  "deletions": 0,
+  "network_authorized": false,
+  "outside_tracked_files_unchanged_after_QA": true
+}

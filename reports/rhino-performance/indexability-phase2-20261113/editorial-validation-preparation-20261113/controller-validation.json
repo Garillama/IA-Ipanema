@@ -1,0 +1,18 @@
+{
+  "id": "seo.editorial.native-preflight",
+  "kind": "local_source_only",
+  "subject": "Eight current local files, native positioning candidates, six-document read scope",
+  "passed": true,
+  "sha256": "1d620fdae088eb8a28835c6ca4b1e6f2a97730f10370ae37b71374076069d87b",
+  "measurement_scope": "Read local sources/hash/JSON settings and selector configuration only. No theme edits, native editor/server test, browser QA, storefront/GSC/HTTP calls or repeat audits.",
+  "local_postimage_hashes_match_approved_pagination": true,
+  "remote_hashes_not_checked": true,
+  "conditions_remaining": [
+    "Production read authorization",
+    "Current category/product truth",
+    "Current editor per-category scope",
+    "Published/native equality",
+    "RealhybridScroll no duplication",
+    "Responsive/a11y/performance QA after any future implementation"
+  ]
+}

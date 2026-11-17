@@ -1,0 +1,348 @@
+{
+  "type": "object",
+  "properties": {
+    "candidate_sha256": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 3000
+    },
+    "reviewed_files": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 3000
+      },
+      "minItems": 1,
+      "maxItems": 64
+    },
+    "decision": {
+      "type": "string",
+      "enum": [
+        "approve",
+        "changes_requested",
+        "needs_evidence",
+        "blocked"
+      ]
+    },
+    "challenges": {
+      "type": "object",
+      "properties": {
+        "architecture": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "string",
+              "enum": [
+                "pass",
+                "fail",
+                "needs_evidence"
+              ]
+            },
+            "evidence_refs": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 3000
+              },
+              "minItems": 0,
+              "maxItems": 64
+            },
+            "notes": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 3000
+            }
+          },
+          "required": [
+            "status",
+            "evidence_refs",
+            "notes"
+          ],
+          "additionalProperties": false
+        },
+        "duplication": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "string",
+              "enum": [
+                "pass",
+                "fail",
+                "needs_evidence"
+              ]
+            },
+            "evidence_refs": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 3000
+              },
+              "minItems": 0,
+              "maxItems": 64
+            },
+            "notes": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 3000
+            }
+          },
+          "required": [
+            "status",
+            "evidence_refs",
+            "notes"
+          ],
+          "additionalProperties": false
+        },
+        "performance": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "string",
+              "enum": [
+                "pass",
+                "fail",
+                "needs_evidence"
+              ]
+            },
+            "evidence_refs": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 3000
+              },
+              "minItems": 0,
+              "maxItems": 64
+            },
+            "notes": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 3000
+            }
+          },
+          "required": [
+            "status",
+            "evidence_refs",
+            "notes"
+          ],
+          "additionalProperties": false
+        },
+        "regression": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "string",
+              "enum": [
+                "pass",
+                "fail",
+                "needs_evidence"
+              ]
+            },
+            "evidence_refs": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 3000
+              },
+              "minItems": 0,
+              "maxItems": 64
+            },
+            "notes": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 3000
+            }
+          },
+          "required": [
+            "status",
+            "evidence_refs",
+            "notes"
+          ],
+          "additionalProperties": false
+        },
+        "maintainability": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "string",
+              "enum": [
+                "pass",
+                "fail",
+                "needs_evidence"
+              ]
+            },
+            "evidence_refs": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 3000
+              },
+              "minItems": 0,
+              "maxItems": 64
+            },
+            "notes": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 3000
+            }
+          },
+          "required": [
+            "status",
+            "evidence_refs",
+            "notes"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "architecture",
+        "duplication",
+        "performance",
+        "regression",
+        "maintainability"
+      ],
+      "additionalProperties": false
+    },
+    "objections": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 3000
+          },
+          "severity": {
+            "type": "string",
+            "enum": [
+              "BLOCKER",
+              "HIGH",
+              "MEDIUM",
+              "LOW",
+              "INFO"
+            ]
+          },
+          "challenge": {
+            "type": "string",
+            "enum": [
+              "architecture",
+              "duplication",
+              "performance",
+              "regression",
+              "maintainability"
+            ]
+          },
+          "sites": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "file": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 3000
+                },
+                "function": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 3000
+                },
+                "start": {
+                  "type": "number",
+                  "minimum": 1
+                },
+                "end": {
+                  "type": "number",
+                  "minimum": 1
+                }
+              },
+              "required": [
+                "file",
+                "function",
+                "start",
+                "end"
+              ],
+              "additionalProperties": false
+            },
+            "minItems": 1,
+            "maxItems": 8
+          },
+          "evidence_refs": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 3000
+            },
+            "minItems": 1,
+            "maxItems": 64
+          },
+          "claim": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 3000
+          },
+          "impact": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 3000
+          },
+          "recommendation": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 3000
+          },
+          "resolution_condition": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 3000
+          },
+          "duplication_kind": {
+            "type": "string",
+            "enum": [
+              "exact",
+              "semantic",
+              "legitimate",
+              "not_applicable"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "severity",
+          "challenge",
+          "sites",
+          "evidence_refs",
+          "claim",
+          "impact",
+          "recommendation",
+          "resolution_condition",
+          "duplication_kind"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 0,
+      "maxItems": 32
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 3000
+    }
+  },
+  "required": [
+    "candidate_sha256",
+    "reviewed_files",
+    "decision",
+    "challenges",
+    "objections",
+    "summary"
+  ],
+  "additionalProperties": false
+}

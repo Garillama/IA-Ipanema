@@ -1,0 +1,41 @@
+{
+  "old_receipt": {
+    "input_bytes": 677905,
+    "first_response_s": 120,
+    "absolute_timeout_s": 240,
+    "duration_s": 120.602,
+    "output_bytes": 0,
+    "context_complete": true,
+    "process_reaped": true
+  },
+  "offline_reconstruction": {
+    "bytes": 677905,
+    "sha256": "5dd778bce7c238524d286869b74f297aa64516399c1ae62865794b5331768f7f",
+    "matches_receipt_hash": true,
+    "fields_serialized_bytes": {
+      "instruction": 871,
+      "rules": 9103,
+      "project": 9,
+      "task": 7730,
+      "skills": 9132,
+      "validation_plan": 2,
+      "required_validation": 101,
+      "consumer_map": 1092,
+      "review_context": 300388,
+      "knowledge": 49651,
+      "files": 290698,
+      "previous_results": 2,
+      "council_context": 4459,
+      "approved_adr": 4,
+      "contract": 4415
+    }
+  },
+  "confirmed_generation_mechanism": "engine.prompt_for role review adds full-addition diffs for input files absent from the snapshot git root, in addition to the file bodies. Includes metadata/schema as review files as well. This is observed duplication, not proof of timeout causation.",
+  "causes_not_established": [
+    "quota",
+    "authentication",
+    "context size",
+    "provider initialization vs inference latency"
+  ],
+  "no_provider_call": true
+}

@@ -1,0 +1,171 @@
+{
+  "requested_agent": "codex",
+  "effective_agent": "codex",
+  "scope": "incremental pilot procedure only",
+  "input_hashes": {
+    "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/pilot-preparation/procedure.md": "270d1482c254b57d94c0b12bdccc4dd803e9b77a33568ce74d812f39b13b8f61",
+    "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/pilot-preparation/targets.json": "3b14fcb031ae57ab43ef247ff087c6d8df0b0c400ca12ac3694edfc654a38bb6",
+    "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/pilot-preparation/source-binding.json": "c1de3b96487aaff3b4df0ad5707ecae41504c938d9747ed31b24fdce8dbb4c01",
+    "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/pilot-preparation/offline-procedure-proofs.json": "8a45728008cd65908796e0f031a5b88c2ae4889bf56de62518120b5aca746b00",
+    "tools/ipanema/seo/crawler.py": "29b42a929132bd5bb5ec07770a247dbd5b42a35747874f711617f5ff204d2e5b",
+    "tools/ipanema/seo/crawl_policy.py": "c719ba73adb1e54141cbb04dbbc0b0a6b56407fbb1459d6f4814b23718e526c1",
+    "tools/ipanema/seo/engineering.py": "85a0729730f61efc24be661679276c9f3e005682db10db392a11db110ba9f5f1",
+    "tools/ipanema/seo/robots.py": "57d01f9086dffa7f25f26b59976098770d585731eca3d758ee9235000399a3df"
+  },
+  "response": {
+    "decision": "blocked",
+    "summary": "La ejecución sigue bloqueada: el CLI actual no selecciona exactamente los cinco destinos y faltan watchdog/checkpoint validados. La preparación describe correctamente una adaptación opt-in del mismo crawler, pero debe precisar errores terminales, redirecciones y persistencia. No se reabre el consejo del motor 611a5dac ni se afirman pruebas nuevas.",
+    "changes": [],
+    "evidence": [
+      "El manifiesto aportado enumera cinco URLs distintas del origen exacto: dos productos y tres artículos; las respuestas individuales siguen sin observarse. La conciliación con los CSV originales no puede verificarse con sus contenidos ausentes.",
+      "crawl no acepta semillas cerradas; engineering.add_parser solo expone los límites y los modos red/respuestas. Desactivar sitemaps mantiene home como semilla.",
+      "Las dos demostraciones offline aportadas ilustran selección incorrecta y continuación tras error; no demuestran el futuro modo cerrado.",
+      "El transporte existente incluye GET serial, IP pública fijada, TLS/SNI, timeout del hijo, límites de cuerpo y ausencia de reintentos. El loop puede continuar tras errores genéricos.",
+      "Con seis solicitudes base y tres saltos globales, el máximo previsto es nueve GET; doce sigue siendo un techo, no permiso para solicitudes adicionales.",
+      "controller_evidence está vacío; validación del watchdog, checkpoint e invocación futura: unknown."
+    ],
+    "objections": [
+      {
+        "id": "codex_o1",
+        "alternative_id": "codex_modo_cerrado_opt_in",
+        "category": "invocación",
+        "severity": "critical",
+        "claim": "No existe invocación soportada para este alcance. Antes de autorizar red hacen falta diff integrado y revisado, CLI real ligado al manifiesto aprobado, recibos de QA y autorización específica; el procedimiento por sí solo no satisface esas condiciones.",
+        "status": "open",
+        "evidence_refs": [],
+        "resolution_evidence_refs": []
+      },
+      {
+        "id": "codex_o2",
+        "alternative_id": "codex_modo_cerrado_opt_in",
+        "category": "cancelación y checkpoint",
+        "severity": "critical",
+        "claim": "Precisar inicio del plazo absoluto, terminación del grupo y recogida de hijos dentro de 120s. El checkpoint debe persistir intención antes del transporte y distinguir pendiente, iniciada sin resultado confirmado y completada; una cancelación no permite asegurar si el servidor recibió el GET. Su durabilidad y recuperación siguen sin validarse.",
+        "status": "open",
+        "evidence_refs": [],
+        "resolution_evidence_refs": []
+      },
+      {
+        "id": "codex_o3",
+        "alternative_id": "codex_modo_cerrado_opt_in",
+        "category": "parada global",
+        "severity": "high",
+        "claim": "El paso 5 no enumera inequívocamente todos los errores genéricos de transporte, timeout, gzip incompleto/codificación rechazada, ciclo o Location ausente/ambiguo. Debe definirlos como terminales en modo cerrado y registrar pendientes sin continuar la cola; el comportamiento actual no lo garantiza.",
+        "status": "open",
+        "evidence_refs": [],
+        "resolution_evidence_refs": []
+      },
+      {
+        "id": "codex_o4",
+        "alternative_id": "codex_modo_cerrado_opt_in",
+        "category": "redirecciones y robots",
+        "severity": "high",
+        "claim": "La regla de cadenas iniciadas en la lista omite la excepción explícita de robots.txt. Definir ambos tipos de raíz, comprobar robots del agente antes de cada GET documental redirigido y contar cada salto antes de seguirlo. La reutilización opcional de respuestas necesita conservar cadenas, permisos y asociación; puede omitirse para reducir el diff.",
+        "status": "open",
+        "evidence_refs": [],
+        "resolution_evidence_refs": []
+      },
+      {
+        "id": "codex_o5",
+        "alternative_id": "codex_modo_cerrado_opt_in",
+        "category": "proporcionalidad",
+        "severity": "medium",
+        "claim": "Tres saltos globales y detener todo ante cualquier bloqueo robots son restricciones adicionales, no requisitos del motor. Deben ratificarse para este piloto sin cambiar políticas generales. No hace falta implementar resume, caché compartida ni repetir íntegramente 191/13/quick para preparar el candidato; el QA posterior debe corresponder al diff.",
+        "status": "open",
+        "evidence_refs": [],
+        "resolution_evidence_refs": []
+      },
+      {
+        "id": "codex_o6",
+        "alternative_id": "codex_modo_cerrado_opt_in",
+        "category": "precisión del presupuesto",
+        "severity": "low",
+        "claim": "Aclarar que 2.000.000 bytes limita el cuerpo codificado y el descomprimido, no toda la respuesta HTTP ni el tráfico TLS. El límite real del código lee hasta max_bytes+1 para detectar exceso. Los 24MB son una cota nominal de cuerpos aceptados con doce GET, no una medición ni un techo exacto de red.",
+        "status": "open",
+        "evidence_refs": [],
+        "resolution_evidence_refs": []
+      }
+    ],
+    "preferred_alternative": "codex_modo_cerrado_opt_in",
+    "questions": [
+      {
+        "id": "codex_q1",
+        "to_agent": "claude",
+        "alternative_id": "unknown",
+        "question": "Tu alternativa no está disponible en esta revisión independiente. Al contrastar, identifica su ID y explica, usando crawler.py y engineering.py aportados, cómo limitaría exactamente los cinco destinos sin home/sitemaps y cómo resolvería la continuación tras errores; si requiere adaptación, indica qué condición concreta mantendría bloqueada la red.",
+        "evidence_refs": []
+      }
+    ]
+  },
+  "model": {
+    "model": "gpt-6.1-sol",
+    "effort": "medium",
+    "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+    "verified_at": "2026-11-08"
+  },
+  "execution": {
+    "exit_code": 0,
+    "timed_out": false,
+    "output_limited": false,
+    "idle_timed_out": false,
+    "cancelled": false,
+    "process_started": true,
+    "process_reaped": true,
+    "stdin_bytes_written": 122081,
+    "context_complete": true,
+    "duration_s": 40.889,
+    "timing": {
+      "spawn_s": 0.000657,
+      "input_complete_s": 0.121894,
+      "first_stdout_s": 1.30969,
+      "first_stderr_s": null,
+      "timeout_phase": null,
+      "event_counts": {
+        "thread.started": 1,
+        "item.completed": 2,
+        "turn.started": 1,
+        "turn.completed": 1
+      },
+      "inference_vs_initialization": "not_separable_without_provider_events"
+    },
+    "output_accounting": {
+      "transport_bytes": 6597,
+      "retained_bytes": 6597,
+      "discarded_progress_bytes": 0,
+      "transport_limit_bytes": 20000000,
+      "retained_limit_bytes": 2000000
+    },
+    "isolation": {
+      "backend": "bubblewrap",
+      "snapshot_read_only": true,
+      "host_home_mounted": false,
+      "network": "enabled_no_destination_firewall",
+      "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+    },
+    "started_at": "2026-11-12T21:24:42.885510+00:00",
+    "prompt_bytes": 122081,
+    "prompt_sha256": "d1fceafa88fea996bf0ef2268dbc4bbfd3ffcea2c2566a404a9a47b306a87a0a",
+    "usage": {
+      "provider_reported": {
+        "input_tokens": 45742,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1421,
+        "reasoning_output_tokens": 121
+      },
+      "measured_cost_available": false,
+      "estimated_cost": null
+    },
+    "limits": {
+      "timeout": 240,
+      "idle_timeout": 90,
+      "startup_timeout": 30,
+      "first_response_timeout": 150
+    },
+    "structured_output": "native_schema",
+    "contract_validation": {
+      "status": "passed",
+      "duration_s": 0.000337
+    }
+  }
+}

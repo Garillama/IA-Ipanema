@@ -1,0 +1,138 @@
+{
+  "requested_agent": "claude",
+  "effective_agent": "claude",
+  "scope": "official XLSX reconciliation and organic opportunity review only",
+  "input_hashes": {
+    "reports/rhino-performance/indexability-phase2-20261113/exports-20261113/review-packet.json": "e459744c1976e6da448d7c3bbbf1a5b2ecd6bd5dcb0043e693f2ef573b9eb980",
+    "reports/rhino-performance/indexability-phase2-20261113/exports-20261113/controller-validation.json": "5c3362b8d8960d36bf2ea160a122015359490299edbf109071c455f3b5079a53",
+    "reports/rhino-performance/indexability-phase2-20261113/exports-20261113/categories.json": "211fb22809de54afc9bde4e15029bfdd73188998e27ecaa35aaa53e8e25a0f66",
+    "reports/rhino-performance/indexability-phase2-20261113/exports-20261113/performance-scope.json": "38b1e731d00349b3dc442503cdf3d3adb29b7d42b228ee7987d224defd8ff7bb",
+    "reports/rhino-performance/indexability-phase2-20261113/exports-20261113/summary.json": "0697f6c2a8a78a22e70cb47beb70d3b2e46a5a9ac68fc7fb819416441e292898"
+  },
+  "response": {
+    "decision": "changes_requested",
+    "summary": "Demostrado: cobertura 08-nov con 141 indexadas y 347 sin indexar sobre todas las URLs conocidas (no las 124). Motivos: 148 alternativas, 112 redirecciones, 16 robots (checkout/add-to-cart; no tocar). 0 coincidencias exactas con las 124; 113 y 2 candidatos no se transfieren. Hipótesis: redirecciones heredadas con impresiones históricas y CTR bajo en consultas de botas. Faltan listas 404/rastreada/descubierta/indexadas: sin estados. Totales difieren: no escalar. Sin títulos hasta consulta×página con dispositivo/país. Recibo gsc.xlsx.reconciliation; hashes no recalculados. Acciones: 1) exportaciones mínimas; 2) revisar destino de redirecciones con más visibilidad; 3) categorías con consulta×página; 4) no desbloquear robots. Sin diff.",
+    "changes": [],
+    "evidence": [
+      "gsc.xlsx.reconciliation"
+    ],
+    "objections": [
+      {
+        "id": "claude-obj-totals",
+        "alternative_id": "claude-export-gap-first",
+        "category": "integridad de datos",
+        "severity": "medium",
+        "claim": "Los totales de gráfico (5431/212491), páginas (5577/259926) y consultas top-1000 (2811/71722) difieren sin causa demostrada; no sirven para estimar pérdida ni comparar períodos.",
+        "status": "open",
+        "evidence_refs": [
+          "gsc.xlsx.reconciliation"
+        ],
+        "resolution_evidence_refs": []
+      },
+      {
+        "id": "claude-obj-nojoin",
+        "alternative_id": "claude-export-gap-first",
+        "category": "alcance",
+        "severity": "medium",
+        "claim": "Sin unión consulta×página ni dispositivo/país, la asignación consulta-categoría e intención son hipótesis; el contenido queda bloqueado.",
+        "status": "open",
+        "evidence_refs": [
+          "gsc.xlsx.reconciliation"
+        ],
+        "resolution_evidence_refs": []
+      }
+    ],
+    "preferred_alternative": "claude-export-gap-first",
+    "questions": [
+      {
+        "id": "claude-q1",
+        "to_agent": "codex",
+        "alternative_id": "claude-export-gap-first",
+        "question": "¿Qué hoja o campo concreto del review-packet usas para sostener que las 112 redirecciones con visibilidad histórica exigen revisar destino, si las listas no traen destino y el cruce es solo por URL exacta en períodos distintos?",
+        "evidence_refs": [
+          "gsc.xlsx.reconciliation"
+        ]
+      }
+    ]
+  },
+  "model": {
+    "model": "claude-sonnet-5-5",
+    "effort": "medium",
+    "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+    "verified_at": "2026-11-08"
+  },
+  "execution": {
+    "exit_code": 0,
+    "timed_out": false,
+    "output_limited": false,
+    "idle_timed_out": false,
+    "cancelled": false,
+    "process_started": true,
+    "process_reaped": true,
+    "stdin_bytes_written": 54413,
+    "context_complete": true,
+    "duration_s": 34.953,
+    "timing": {
+      "spawn_s": 0.00341,
+      "input_complete_s": 0.003687,
+      "first_stdout_s": 6.570194,
+      "first_stderr_s": null,
+      "timeout_phase": null,
+      "event_counts": {
+        "system": 4,
+        "stream_event": 584,
+        "event:message_start": 3,
+        "event:content_block_start": 3,
+        "event:content_block_delta": 569,
+        "assistant": 3,
+        "event:content_block_stop": 3,
+        "user": 3,
+        "event:message_delta": 3,
+        "event:message_stop": 3,
+        "rate_limit_event": 2,
+        "result": 1
+      },
+      "inference_vs_initialization": "not_separable_without_provider_events"
+    },
+    "output_accounting": {
+      "transport_bytes": 213307,
+      "retained_bytes": 213307,
+      "discarded_progress_bytes": 0,
+      "transport_limit_bytes": 20000000,
+      "retained_limit_bytes": 2000000
+    },
+    "isolation": {
+      "backend": "bubblewrap",
+      "snapshot_read_only": true,
+      "host_home_mounted": false,
+      "network": "enabled_no_destination_firewall",
+      "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+    },
+    "started_at": "2026-11-13T08:53:20.258257+00:00",
+    "prompt_bytes": 54413,
+    "prompt_sha256": "1fe75d0d176e5674a6a041417c1008de6228659bd0aa271f8c1d380183207ad2",
+    "usage": {
+      "provider_reported": {
+        "total_cost_usd": 0.1541166,
+        "duration_ms": 27751,
+        "input_tokens": 6,
+        "cache_creation_input_tokens": 27534,
+        "cache_read_input_tokens": 58686,
+        "output_tokens": 3810
+      },
+      "measured_cost_available": true,
+      "estimated_cost": null
+    },
+    "limits": {
+      "timeout": 240,
+      "idle_timeout": 90,
+      "startup_timeout": 30,
+      "first_response_timeout": 120
+    },
+    "structured_output": "native_schema",
+    "contract_validation": {
+      "status": "passed",
+      "duration_s": 0.03468
+    }
+  }
+}

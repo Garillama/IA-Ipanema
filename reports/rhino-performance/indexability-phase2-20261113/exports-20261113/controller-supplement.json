@@ -1,0 +1,47 @@
+{
+  "id": "gsc.xlsx.scope-clarifications",
+  "kind": "exact_join_and_temporal_scope",
+  "subject": "Legacy priority hypotheses and marginal performance limits",
+  "passed": true,
+  "sha256": "053650a69a3cde3ce49ee25e37602d3b39eae5585a1cbc9af58449d50def2f04",
+  "measurement_scope": "Offline original sheet exact URL join only; no destinations tested or current account data",
+  "exact_redirection_performance_intersection_rows": 94,
+  "all112_redirects_have_performance_evidence": false,
+  "three_top_examples": [
+    {
+      "url": "https://rhino-performance.com/producto/botas-de-presoterapia-botas/",
+      "clicks": 539.0,
+      "impressions": 20338.0,
+      "CTR_exported": 0.0265,
+      "position_exported": 6.13,
+      "reason": "Página con redirección",
+      "source_evidence": "Exact URL match between separate historical performance period and reason list; not current status or destination proof"
+    },
+    {
+      "url": "https://rhino-performance.com/home/",
+      "clicks": 283.0,
+      "impressions": 3519.0,
+      "CTR_exported": 0.08039999999999999,
+      "position_exported": 3.57,
+      "reason": "Página con redirección",
+      "source_evidence": "Exact URL match between separate historical performance period and reason list; not current status or destination proof"
+    },
+    {
+      "url": "https://rhino-performance.com/producto/botas-de-presoterapia-kit/",
+      "clicks": 100.0,
+      "impressions": 4973.0,
+      "CTR_exported": 0.020099999999999996,
+      "position_exported": 4.48,
+      "reason": "Página con redirección",
+      "source_evidence": "Exact URL match between separate historical performance period and reason list; not current status or destination proof"
+    }
+  ],
+  "clarifications": [
+    "A historical traffic row plus an exclusion row justifies prioritizing collection of destination evidence, NOT claiming broken redirect, lost traffic or current commercial destination. Do not visit now.",
+    "No supplied sheet records Location or Google selected canonical for these rows; alias path relation is candidate only.",
+    "Compresion-frio-y-calor page average position1.35 andCTR0.56% do not prove title/content defect without query/page/device/country relation.",
+    "Keep graph latest date2026-11-08, filename date2026-11-13 and individual Lastcrawl dates separate; do not label every excluded URL as observed on the graph date.",
+    "Exactly1000queries and different totals by dimension remain limitations, not repaired values.",
+    "Partial original20,author/schema,blogcanonical ADR conditions remain unchanged."
+  ]
+}

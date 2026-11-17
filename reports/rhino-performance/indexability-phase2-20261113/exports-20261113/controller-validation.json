@@ -1,0 +1,20 @@
+{
+  "id": "gsc.xlsx.reconciliation",
+  "kind": "official_user_exports_read_only_reconciliation",
+  "subject": "Five supplied XLSX and124HTML baseline",
+  "passed": true,
+  "sha256": "e459744c1976e6da448d7c3bbbf1a5b2ecd6bd5dcb0043e693f2ef573b9eb980",
+  "measurement_scope": "Local ZIP/XML extraction, no Excel formulas executed, no dependencies installed; exact URL joins and dates preserved. No live account or storefront.",
+  "baseline_matrix_sha256": "519cb6a346c170dfe0af9257ef4f6c2e99c52570b468dc67e863f3c7c35750b4",
+  "baseline_unchanged": true,
+  "source_hashes": {
+    "/home/alanrichard/Escritorio/rhino-performance.com-Coverage-2026-11-13.xlsx": "bb3874d719ea5f33d6112f7585e3fd717318535f25bf7a06463326b7c5f94379",
+    "/home/alanrichard/Escritorio/rhino-performance.com-Coverage-Drilldown-2026-11-13.xlsx": "81676e917902ceeabfdbb6011da3c0fdabe555c56ae64f4ed6b586f8ef6d4c0c",
+    "/home/alanrichard/Escritorio/rhino-performance.com-Coverage-Drilldown-2026-11-13 (1).xlsx": "8fd5c8d20f3605b219eed4b8f446947ef898471d46a7a490edeac2205ef77678",
+    "/home/alanrichard/Escritorio/rhino-performance.com-Coverage-Drilldown-2026-11-13 (2).xlsx": "0f3948e29ca88172a8ee5a607fd6d75b00076acbec99ba80d9692513ca966842",
+    "/home/alanrichard/Escritorio/rhino-performance.com-Performance-on-Search-2026-11-13.xlsx": "b71bc7294509e52b71b409d903a1df33d13c20bffead17435fdc99407ddfd095"
+  },
+  "date_epoch": "Excel1900 verified; serial converted with1899-12-30; original serial retained",
+  "exact_joins": 0,
+  "formulas_evaluated": false
+}

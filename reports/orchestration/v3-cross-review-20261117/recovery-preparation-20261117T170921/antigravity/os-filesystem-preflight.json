@@ -1,0 +1,43 @@
+{
+  "exit_code": 0,
+  "timed_out": false,
+  "output_limited": false,
+  "idle_timed_out": false,
+  "cancelled": false,
+  "process_started": true,
+  "process_reaped": true,
+  "stdin_bytes_written": 0,
+  "context_complete": true,
+  "duration_s": 0.04,
+  "timing": {
+    "spawn_s": 0.000337,
+    "input_complete_s": 0.000337,
+    "first_stdout_s": 0.033679,
+    "first_stderr_s": null,
+    "timeout_phase": null,
+    "event_counts": {},
+    "inference_vs_initialization": "not_separable_without_provider_events"
+  },
+  "output_accounting": {
+    "transport_bytes": 170,
+    "retained_bytes": 170,
+    "discarded_progress_bytes": 0,
+    "transport_limit_bytes": 40960,
+    "retained_limit_bytes": 4096
+  },
+  "isolation": {
+    "backend": "bubblewrap",
+    "snapshot_read_only": true,
+    "host_home_mounted": false,
+    "network": "disabled",
+    "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+  },
+  "checks": {
+    "host_marker_inaccessible": true,
+    "workspace_write_denied": true,
+    "host_home_not_mounted": true,
+    "net_namespace_isolated": true,
+    "network_test_connection_denied": true
+  },
+  "scope": "Existing isolation runtime, synthetic Python only; does NOT prove Antigravity native permissions or authentication"
+}

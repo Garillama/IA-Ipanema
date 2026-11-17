@@ -1,0 +1,594 @@
+--- a/tools/ipanema/orchestration/code_review.py
++++ b/tools/ipanema/orchestration/code_review.py
+@@ -82,6 +82,22 @@
+     author: str
+ 
+ 
++@dataclass(frozen=True)
++class MaterialEvidence:
++    """Result of a trusted controller's factual/material demonstration verifier.
++
++    Never construct this from a model's assertion of novelty. The provider must
++    verify the artifact, facts, relevance to this claim, and prior assessed facts.
++    Hashes below prove integrity/anti-replay, not semantic materiality.
++    """
++    objection_identity: str
++    candidate_sha256: str
++    evidence_refs: tuple
++    verification_receipt_id: str
++    artifact_sha256: str
++    kind: str  # new_fact or documented_refutation (existing sources allowed)
++
++
+ class ControllerEvidenceSource:
+     """Read-only controller bridge, deliberately unavailable in current transport.
+ 
+@@ -101,6 +117,10 @@
+         return None
+ 
+     def migration(self, reference):
++        return None
++
++    def incremental_evidence(self, record, evidence_refs, candidate_sha256):
++        # Default unavailable: a reference, different ID or self-hash is not proof.
+         return None
+ 
+ 
+@@ -159,7 +179,9 @@
+                       'origin_candidate_sha256': candidate_sha256, 'definition_sha256': definition})
+     return {'id': objection['id'], 'author': author, 'reviewer': reviewer,
+             'origin_candidate_sha256': candidate_sha256, 'definition_sha256': definition,
+-            'identity': identity, 'candidate_sha256': candidate_sha256, 'state': 'open', 'events': []}
++            'identity': identity, 'candidate_sha256': candidate_sha256, 'state': 'open', 'events': [],
++            'record_contract': 'ipanema-objection/2', 'original_claim': objection['claim'],
++            'original_evidence_refs': copy.deepcopy(objection['evidence_refs'])}
+ 
+ 
+ def _require(condition, message):
+@@ -370,16 +392,36 @@
+     return result
+ 
+ 
++def material_proven(controller, record, refs, candidate_sha256):
++    """Controller verification + exact scope, never novelty by string/hash change."""
++    if not isinstance(controller, ControllerEvidenceSource) or controller.trust_basis not in (
++            'adapter_verified', 'synthetic_fixture'):
++        return None
++    proof = controller.incremental_evidence(copy.deepcopy(record), tuple(refs), candidate_sha256)
++    if (isinstance(proof, MaterialEvidence) and proof.objection_identity == record['identity']
++            and proof.candidate_sha256 == candidate_sha256 and proof.evidence_refs == tuple(refs)
++            and proof.kind in ('new_fact', 'documented_refutation')
++            and isinstance(proof.verification_receipt_id, str) and proof.verification_receipt_id
++            and isinstance(proof.artifact_sha256, str) and re.fullmatch('[a-f0-9]{64}', proof.artifact_sha256)
++            and not any(e.get('incremental_receipt_ref') == proof.verification_receipt_id
++                        or e.get('incremental_artifact_sha256') == proof.artifact_sha256
++                        for e in record['events'])):
++        return proof
++    return None
++
++
+ def advance_objection(record, event, *, actor, candidate_sha256, evidence_refs=(),
+                       confirmation=None, controller=None, migration_ref=None):
+     """Single reducer used both by authoring API and evaluate's verified replay."""
+     _require(isinstance(record, dict) and record.get('state') in
+              ('open', 'author_answered', 'correction_proposed', 'new_evidence',
+               'refuted', 'resolved', 'review_pending'), 'invalid objection state')
++    _require(record.get('record_contract') == 'ipanema-objection/2', 'objection record contract missing')
+     _require(record['state'] not in ('resolved', 'refuted'), 'terminal objection is immutable')
+     _require(re.fullmatch('[a-f0-9]{64}', str(candidate_sha256)), 'invalid event candidate')
+     result = copy.deepcopy(record)
+     refs = list(evidence_refs)
++    material = None
+     _require(all(isinstance(x, str) for x in refs), 'invalid evidence references')
+     if event == 'author_answer':
+         _require(actor == record['author'], 'only author answers')
+@@ -395,6 +437,8 @@
+         state = 'correction_proposed'
+     elif event == 'add_evidence':
+         _require(actor == 'controller' and refs and record['state'] == 'author_answered', 'new evidence after answer required')
++        material = material_proven(controller, record, refs, candidate_sha256)
++        _require(material is not None, 'material incremental demonstration unavailable')
+         state = 'new_evidence'
+     elif event == 'request_review':
+         _require(actor == 'controller' and record['state'] == 'new_evidence', 'review needs new evidence')
+@@ -423,7 +467,10 @@
+     result['events'].append({'event': event, 'actor': actor, 'state': state,
+                              'candidate_sha256': candidate_sha256, 'evidence_refs': refs,
+                              'confirmation_ref': confirmation.get('receipt_id') if confirmation else None,
+-                             'migration_ref': migration_ref})
++                             'migration_ref': migration_ref,
++                             'incremental_receipt_ref': material.verification_receipt_id if material else None,
++                             'incremental_artifact_sha256': material.artifact_sha256 if material else None,
++                             'incremental_kind': material.kind if material else None})
+     return result
+ 
+ 
+@@ -438,6 +485,18 @@
+             if event['event'] == 'add_evidence':
+                 _require(event['evidence_refs'] and all(ref in bound and _proven(ledger[ref])
+                          for ref in event['evidence_refs']), 'unverified new evidence')
++                material = material_proven(controller, current, event['evidence_refs'], event['candidate_sha256'])
++                _require(material is not None, 'unverified material demonstration')
++                row = ledger.get(material.verification_receipt_id)
++                _require(row and row['id'] in bound and _proven(row)
++                         and row.get('kind') == 'constraint' and row.get('constraint') == 'incremental_demonstration'
++                         and row.get('subject') == seed['identity']
++                         and row.get('method') == 'controller_verified_demonstration'
++                         and row.get('claim_sha256') == _hash(seed['original_claim'])
++                         and row.get('basis_refs') == event['evidence_refs']
++                         and row.get('material_kind') == material.kind
++                         and row.get('sha256') == material.artifact_sha256,
++                         'material verification receipt incomplete or stale')
+             confirmation = bound.get(event.get('confirmation_ref'))
+             if confirmation:
+                 row = ledger.get(confirmation['receipt_id'])
+@@ -452,7 +511,7 @@
+ 
+ 
+ def evaluate(candidate, reviews, *, evidence, root, answers=(), bindings=(), review_history=(), controller=None):
+-    """Return one of four owner-facing states; never authorizes an operation.
++    """Versioned result; synthetic success is never an operational approval.
+ 
+     Trusted inputs: candidate/context/required QA and controller receipt store.
+     Untrusted inputs: response bodies. Envelopes must be controller assignments.
+@@ -623,7 +682,12 @@
+     missing.extend('missing_reviewer:' + a for a in sorted(expected_reviewers - seen))
+     state = ('blocked' if blockers else 'changes_requested' if changes else
+              'needs_evidence' if missing else 'approved_for_authorization')
+-    return {'state': state, 'candidate_sha256': identity, 'findings': findings,
++    synthetic = isinstance(controller, ControllerEvidenceSource) and controller.trust_basis == 'synthetic_fixture'
++    if state == 'approved_for_authorization' and synthetic:
++        state = 'synthetic_pass'
++    return {'result_contract': 'ipanema-code-review-result/2',
++            'authorization_ready': state == 'approved_for_authorization',
++            'state': state, 'candidate_sha256': identity, 'findings': findings,
+             'blockers': blockers, 'changes': changes, 'missing_evidence': missing,
+             'review_history': copy.deepcopy(history),
+             'trust_basis': controller.trust_basis if isinstance(controller, ControllerEvidenceSource) else 'unavailable',
+--- a/tests/unit/test_code_review_v3.py
++++ b/tests/unit/test_code_review_v3.py
+@@ -24,7 +24,8 @@
+ 
+     def __init__(self):
+         self.rows = [];self.records = {};self.proofs = {};self.moves = {}
+-        self.auto_records = True;self.auto_history = True
++        self.auto_records = True;self.auto_history = True;self.auto_material = True
++        self.material = {};self.demonstrated = {}
+ 
+     def history(self, lineage_id):
+         return {'lineage_id': lineage_id, 'reviews': copy.deepcopy(self.rows),
+@@ -46,14 +47,76 @@
+             binding['permissions_sha256'], binding['binding_sha256'], 'e'*64,
+             'code_review_readonly', supersedes_review_ids=tuple(supersedes))
+ 
++    def incremental_evidence(self, record, refs, candidate_sha256):
++        entry=self.material.get((record['identity'],refs,candidate_sha256))
++        if not entry:return None
++        proof,checker=entry
++        return proof if checker(record) else None
++
++    def prepare_material(self, record, refs, *, kind='new_fact', baseline=None, metric='line_count'):
++        """Fixture's controller runs a real bounded observation, not a new-ID test.
++
++        Compatibility fixtures use a newly performed measurement. Dedicated N2a
++        cases bind an explicit factual claim to a computed counterexample.
++        This is not a general verifier for arbitrary natural-language claims.
++        """
++        self.material.pop((record['identity'],tuple(refs),record['candidate_sha256']),None)
++        owner=self.owner;candidate=owner.c if hasattr(owner,'c') else owner.candidate
++        evidence=owner.evidence if hasattr(owner,'evidence') else owner.ledger
++        basis=next((r for r in evidence if r['id'] in refs and r['kind']=='source'),None)
++        if basis is None:raise IpanemaError('Fixture source unavailable')
++        path=owner.root/basis['subject']
++        def observe():
++            lines=path.read_text().splitlines()
++            return sum(line.startswith('def ') for line in lines) if metric=='function_count' else len(lines)
++        actual=observe()
++        if kind=='documented_refutation' and metric=='function_count' and record['original_claim']!=f'sample.py has {baseline} function definitions':
++            return None
++        if (kind=='new_fact' and baseline is not None) or (kind=='documented_refutation' and (baseline is None or baseline==actual)):
++            return None
++        artifact={'contract':'synthetic-measurement/1','claim':record['original_claim'],
++                  'subject':record['identity'],'candidate':record['candidate_sha256'],
++                  'basis_refs':list(refs),'kind':kind,'metric':metric,
++                  'baseline':baseline,'observed':actual}
++        artifact_bytes=json.dumps(artifact,sort_keys=True).encode();artifact_sha=hashlib.sha256(artifact_bytes).hexdigest()
++        ident='material-'+record['identity']+'-'+str(len(record['events']))
++        artifact_path=owner.root/(ident+'.json');artifact_path.write_bytes(artifact_bytes)
++        proof=code_review.MaterialEvidence(record['identity'],record['candidate_sha256'],tuple(refs),ident,artifact_sha,kind)
++        semantic_key=(record['original_claim'],tuple(refs),kind,metric,baseline,actual)
++        self.demonstrated[ident]=semantic_key
++        def verify(current):
++            already_assessed=any(self.demonstrated.get(e.get('incremental_receipt_ref'))==semantic_key for e in current['events'])
++            # Grounded observation is recomputed; text/hash novelty alone is insufficient.
++            return (not already_assessed and artifact_path.exists() and hashlib.sha256(artifact_path.read_bytes()).hexdigest()==artifact_sha
++                    and current['identity']==artifact['subject'] and current['original_claim']==artifact['claim']
++                    and observe()==actual and ((kind=='new_fact' and baseline is None)
++                    or (kind=='documented_refutation' and baseline!=actual)))
++        self.material[(record['identity'],tuple(refs),record['candidate_sha256'])]=(proof,verify)
++        row={'id':ident,'kind':'constraint','constraint':'incremental_demonstration',
++             'subject':record['identity'],'sha256':artifact_sha,'executed':True,'passed':True,
++             'method':'controller_verified_demonstration','basis_refs':list(refs),
++             'material_kind':kind,'claim_sha256':code_review._hash(record['original_claim']),
++             'context':copy.deepcopy(candidate['context']),'alternative_sha256':code_review.fingerprint(candidate)}
++        evidence[:]=[r for r in evidence if r['id']!=ident]+[row]
++        permissions=owner.permissions if hasattr(owner,'permissions') else {'network':False}
++        bound=code_review.bind_receipt(row,candidate,root=owner.root,permissions=permissions)
++        owner.bindings=[b for b in owner.bindings if b['receipt_id']!=ident]+[bound]
++        return proof
++
++    def advance(self, record, event, **kwargs):
++        kwargs.pop('controller',None)
++        if event=='add_evidence' and self.auto_material:
++            self.prepare_material(record,kwargs.get('evidence_refs',()))
++        return code_review.advance_objection(record,event,controller=self,**kwargs)
++
+     def close_fixture(self, seed, binding, source_ref):
+-        record = code_review.advance_objection(seed,'author_answer',actor=seed['author'],
++        record = self.advance(seed,'author_answer',actor=seed['author'],
+                                                candidate_sha256=seed['candidate_sha256'])
+-        record = code_review.advance_objection(record,'add_evidence',actor='controller',
++        record = self.advance(record,'add_evidence',actor='controller',
+                                                candidate_sha256=seed['candidate_sha256'],evidence_refs=[source_ref])
+-        record = code_review.advance_objection(record,'request_review',actor='controller',
++        record = self.advance(record,'request_review',actor='controller',
+                                                candidate_sha256=seed['candidate_sha256'])
+-        record = code_review.advance_objection(record,'refute',actor=seed['reviewer'],
++        record = self.advance(record,'refute',actor=seed['reviewer'],
+                        candidate_sha256=seed['candidate_sha256'],evidence_refs=[binding['receipt_id']],
+                        confirmation=binding,controller=self)
+         self.records[seed['identity']]=record
+@@ -84,7 +147,7 @@
+         self.policy_patch.start();self.addCleanup(self.policy_patch.stop)
+         self.candidate['context']['participation_sha256'] = code_review.context_hash(self.synthetic_policy)
+         self.candidate['context'] = code_review.adapt_context(self.candidate['context'],policy=self.synthetic_policy,permissions={'network':False},lineage_id='fixture')
+-        self.controller=FixtureController()
++        self.controller=FixtureController();self.controller.owner=self
+         self.ledger = []
+         self.bindings = []
+         for key in self.candidate['preflight']:
+@@ -216,7 +279,7 @@
+ 
+     def test_07_legitimate_similarity_info_does_not_block(self):
+         self.finding(kind='legitimate', severity='INFO')
+-        self.assertEqual(self.evaluate()['state'], 'approved_for_authorization')
++        self.assertEqual(self.evaluate()['state'], 'synthetic_pass')
+ 
+     def test_08_high_refuted_requires_origin_confirmation_and_controller_receipt(self):
+         self.finding()
+@@ -226,7 +289,7 @@
+                            confirmed_by='codex')
+         self.assertEqual(self.evaluate()['state'], 'changes_requested')
+         row['confirmed_by'] = 'claude'
+-        self.assertEqual(self.evaluate()['state'], 'approved_for_authorization')
++        self.assertEqual(self.evaluate()['state'], 'synthetic_pass')
+ 
+     def test_09_missing_fundamental_evidence(self):
+         self.ledger = [r for r in self.ledger if r['id'] != 'regression-test']
+@@ -234,7 +297,7 @@
+ 
+     def test_10_clean_candidate_has_both_reviewers_but_no_operation_permission(self):
+         result = self.evaluate()
+-        self.assertEqual(result['state'], 'approved_for_authorization')
++        self.assertEqual(result['state'], 'synthetic_pass')
+         for key in ['implementation_allowed', 'production_authorized', 'activation_allowed']:
+             self.assertFalse(result[key])
+ 
+@@ -260,7 +323,7 @@
+ 
+     def test_changed_source_requires_fresh_review(self):
+         (self.root / 'existing.py').write_text('new contents\n')
+-        self.assertNotEqual(self.evaluate()['state'], 'approved_for_authorization')
++        self.assertNotEqual(self.evaluate()['state'], 'synthetic_pass')
+ 
+     def test_no_response_can_supply_own_receipts(self):
+         self.reviews[0]['response']['evidence'] = [{'passed': True}]
+@@ -292,7 +355,7 @@
+ 
+     def test_low_style_preference_does_not_block(self):
+         self.finding(category='maintainability', severity='LOW')
+-        self.assertEqual(self.evaluate()['state'], 'approved_for_authorization')
++        self.assertEqual(self.evaluate()['state'], 'synthetic_pass')
+ 
+     def test_blocker_not_overridden_by_missing_qa_or_votes(self):
+         self.finding(severity='BLOCKER')
+@@ -385,7 +448,7 @@
+                               'files': {'sample.py': hashlib.sha256((self.root/'sample.py').read_bytes()).hexdigest()}},
+                   'preflight': {k:k for k in ['reuse_search', 'module_placement', 'implementation_plan']}}
+         self.c['context']=cr.adapt_context(self.c['context'],policy=self.future_policy,permissions=self.permissions,lineage_id='fixture')
+-        self.controller=FixtureController()
++        self.controller=FixtureController();self.controller.owner=self
+         self.evidence=[];self.bindings=[];self.reviews=[];self.answers=[];self.history=[]
+         for check in self.c['preflight']:
+             self.add(check, 'constraint', constraint=check)
+@@ -457,9 +520,9 @@
+             ref='fixture-migration';self.controller.moves[ref]=cr.MigrationEvidence(record['identity'],record['candidate_sha256'],kwargs['candidate_sha256'],record['reviewer'],record['author'])
+             kwargs['migration_ref']=ref
+         if event in ('refute','resolve') and kwargs.get('actor')==record['reviewer'] and record['state']=='author_answered' and kwargs.get('confirmation'):
+-            record=cr.advance_objection(record,'add_evidence',actor='controller',candidate_sha256=record['candidate_sha256'],evidence_refs=['source:sample.py'])
+-            record=cr.advance_objection(record,'request_review',actor='controller',candidate_sha256=record['candidate_sha256'])
+-        return cr.advance_objection(record,event,controller=self.controller,**kwargs)
++            record=self.controller.advance(record,'add_evidence',actor='controller',candidate_sha256=record['candidate_sha256'],evidence_refs=['source:sample.py'])
++            record=self.controller.advance(record,'request_review',actor='controller',candidate_sha256=record['candidate_sha256'])
++        return self.controller.advance(record,event,controller=self.controller,**kwargs)
+ 
+     def test_O1_actual_dual_policy_keeps_two_reviewer_requirement(self):
+         self.policy_mock.return_value=self.current_policy
+@@ -473,7 +536,7 @@
+         self.assertEqual(self.evaluate()['state'],'blocked')
+ 
+     def test_O1_future_policy_is_explicit_synthetic_fixture_not_active_registry(self):
+-        self.assertEqual(self.evaluate()['state'],'approved_for_authorization')
++        self.assertEqual(self.evaluate()['state'],'synthetic_pass')
+         self.assertNotIn('antigravity',self.current_policy['members'])
+         self.assertFalse(self.evaluate()['activation_allowed'])
+         self.assertFalse(hasattr(cr,'PARTICIPANTS'))
+@@ -604,7 +667,7 @@
+         self.historical_high();before=copy.deepcopy(self.history)
+         self.answers=[{'reviewer':'claude','objection_id':'O1','action':'refute'}];self.resolution()
+         self.refresh(self.reviews[0],['prior-real-review']);result=self.evaluate()
+-        self.assertEqual(result['state'],'approved_for_authorization')
++        self.assertEqual(result['state'],'synthetic_pass')
+         self.assertEqual(result['review_history'],before);self.assertEqual(self.history,before)
+         self.assertFalse(result['implementation_allowed']);self.assertFalse(result['production_authorized'])
+ 
+@@ -708,7 +771,7 @@
+ 
+     def test_N1_contract_is_required_by_consumer(self):
+         self.c['context'].pop('context_contract')
+-        self.assertNotEqual(self.evaluate()['state'],'approved_for_authorization')
++        self.assertNotEqual(self.evaluate()['state'],'synthetic_pass')
+ 
+     def test_N1_nan_is_not_a_canonical_json_permission(self):
+         with self.assertRaises(ValueError):cr.context_hash({'timeout':float('nan')})
+@@ -721,7 +784,7 @@
+     def test_N2_reducer_replay_is_the_only_successful_closure(self):
+         self.add_high();binding=self.resolution()
+         self.controller.close_fixture(self.record(),binding,'source:sample.py')
+-        result=self.evaluate();self.assertEqual(result['state'],'approved_for_authorization')
++        result=self.evaluate();self.assertEqual(result['state'],'synthetic_pass')
+         self.assertTrue(result['findings'][0]['closed']);self.assertTrue(result['synthetic_only'])
+         self.assertFalse(result['identity_verified_by_hash'])
+ 
+@@ -731,20 +794,22 @@
+         self.assertEqual(self.evaluate()['state'],'changes_requested')
+ 
+     def test_N2_new_evidence_cannot_be_skipped(self):
+-        record=cr.advance_objection(self.record(),'author_answer',actor='codex',candidate_sha256=cr.fingerprint(self.c))
+-        with self.assertRaises(IpanemaError):
+-            cr.advance_objection(record,'request_review',actor='controller',candidate_sha256=cr.fingerprint(self.c))
++        record=self.controller.advance(self.record(),'author_answer',actor='codex',candidate_sha256=cr.fingerprint(self.c))
++        with self.assertRaises(IpanemaError):
++            self.controller.advance(record,'request_review',actor='controller',candidate_sha256=cr.fingerprint(self.c))
+ 
+     def test_N2_author_cannot_close_even_with_origin_confirmation(self):
+         self.add_high();b=self.resolution();record=self.record()
+-        record=cr.advance_objection(record,'author_answer',actor='codex',candidate_sha256=cr.fingerprint(self.c))
+-        record=cr.advance_objection(record,'add_evidence',actor='controller',candidate_sha256=cr.fingerprint(self.c),evidence_refs=['source:sample.py'])
+-        record=cr.advance_objection(record,'request_review',actor='controller',candidate_sha256=cr.fingerprint(self.c))
+-        with self.assertRaises(IpanemaError):
+-            cr.advance_objection(record,'resolve',actor='codex',candidate_sha256=cr.fingerprint(self.c),evidence_refs=[b['receipt_id']],confirmation=b,controller=self.controller)
++        record=self.controller.advance(record,'author_answer',actor='codex',candidate_sha256=cr.fingerprint(self.c))
++        record=self.controller.advance(record,'add_evidence',actor='controller',candidate_sha256=cr.fingerprint(self.c),evidence_refs=['source:sample.py'])
++        record=self.controller.advance(record,'request_review',actor='controller',candidate_sha256=cr.fingerprint(self.c))
++        with self.assertRaises(IpanemaError):
++            self.controller.advance(record,'resolve',actor='codex',candidate_sha256=cr.fingerprint(self.c),evidence_refs=[b['receipt_id']],confirmation=b,controller=self.controller)
+ 
+     def test_N2_unverified_new_evidence_makes_replay_fail(self):
+-        self.add_high();b=self.resolution();self.controller.close_fixture(self.record(),b,'nonexistent-source')
++        self.add_high();b=self.resolution()
++        with self.assertRaises(IpanemaError):
++            self.controller.close_fixture(self.record(),b,'nonexistent-source')
+         self.assertEqual(self.evaluate()['state'],'changes_requested')
+ 
+     def test_N2_current_changes_requested_survives_terminal_record(self):
+@@ -761,7 +826,7 @@
+     def test_N3_truncated_store_snapshot_fails_anchor(self):
+         self.historical_high();self.controller.rows=copy.deepcopy(self.history);self.controller.auto_history=False
+         with patch.object(self.controller,'history',return_value={'lineage_id':'fixture','reviews':[], 'complete_review_ids':[], 'objection_records':{}}):
+-            self.assertNotEqual(self.evaluate()['state'],'approved_for_authorization')
++            self.assertNotEqual(self.evaluate()['state'],'synthetic_pass')
+             self.assertIn('history_incomplete',self.evaluate()['missing_evidence'])
+ 
+     def test_N3_index_omission_is_rejected(self):
+@@ -784,21 +849,21 @@
+         self.controller.auto_records=False
+         seed=cr.new_objection('codex','claude',self.objection(),old);current=cr.fingerprint(self.c)
+         with self.assertRaises(IpanemaError):
+-            cr.advance_objection(seed,'propose_correction',actor='codex',candidate_sha256=current,controller=self.controller)
++            self.controller.advance(seed,'propose_correction',actor='codex',candidate_sha256=current,controller=self.controller)
+         self.controller.moves['move']=cr.MigrationEvidence(seed['identity'],old,current,'claude','codex')
+-        record=cr.advance_objection(seed,'propose_correction',actor='codex',candidate_sha256=current,controller=self.controller,migration_ref='move')
+-        record=cr.advance_objection(record,'author_answer',actor='codex',candidate_sha256=current)
+-        record=cr.advance_objection(record,'add_evidence',actor='controller',candidate_sha256=current,evidence_refs=['source:sample.py'])
+-        record=cr.advance_objection(record,'request_review',actor='controller',candidate_sha256=current)
++        record=self.controller.advance(seed,'propose_correction',actor='codex',candidate_sha256=current,controller=self.controller,migration_ref='move')
++        record=self.controller.advance(record,'author_answer',actor='codex',candidate_sha256=current)
++        record=self.controller.advance(record,'add_evidence',actor='controller',candidate_sha256=current,evidence_refs=['source:sample.py'])
++        record=self.controller.advance(record,'request_review',actor='controller',candidate_sha256=current)
+         self.controller.records[seed['identity']]=record
+         self.refresh(self.reviews[0],['prior-real-review'])
+         self.assertEqual(self.evaluate()['state'],'changes_requested')
+         self.resolution();row=self.evidence[-1]
+         b=cr.bind_receipt(row,self.c,root=self.root,permissions=self.permissions,principal=self.principal('claude'),resolution_state='refuted',objection_identity=seed['identity'])
+         self.bindings=[x for x in self.bindings if x['receipt_id']!=row['id']]+[b];self.controller.attest(b,'claude')
+-        record=cr.advance_objection(record,'refute',actor='claude',candidate_sha256=current,evidence_refs=[row['id']],confirmation=b,controller=self.controller)
++        record=self.controller.advance(record,'refute',actor='claude',candidate_sha256=current,evidence_refs=[row['id']],confirmation=b,controller=self.controller)
+         self.controller.records[seed['identity']]=record
+-        result=self.evaluate();self.assertEqual(result['state'],'approved_for_authorization')
++        result=self.evaluate();self.assertEqual(result['state'],'synthetic_pass')
+         self.assertEqual(result['findings'][0]['identity'],seed['identity'])
+         self.assertEqual(result['review_history'][0]['candidate_sha256'],old)
+ 
+@@ -863,4 +928,171 @@
+             cr.bind_receipt(row,self.c,root=self.root,permissions=self.permissions,qa_report=report)
+ 
+ 
++
++
++class MaterialIncrementTests(unittest.TestCase):
++    principal=FindingsResolution.principal
++    add=FindingsResolution.add
++    review=FindingsResolution.review
++    refresh=FindingsResolution.refresh
++    evaluate=FindingsResolution.evaluate
++    resolution=FindingsResolution.resolution
++    record=FindingsResolution.record
++
++    def objection(self):
++        obj=FindingsResolution.objection(self)
++        obj['claim']=self.claim
++        if getattr(self,'extra_ref',None):obj['evidence_refs'].append(self.extra_ref)
++        return obj
++
++    def setUp(self):
++        self.claim='sample.py has 0 function definitions'
++        FindingsResolution.setUp(self)
++        self.controller.auto_material=False;self.controller.auto_records=False
++        self.reviews[0]['response']['objections']=[self.objection()];self.refresh(self.reviews[0])
++
++    def answered(self):
++        return cr.advance_objection(self.record(),'author_answer',actor='codex',candidate_sha256=cr.fingerprint(self.c))
++
++    def demonstrated(self, kind='documented_refutation',baseline=0):
++        rec=self.answered()
++        proof=self.controller.prepare_material(rec,['source:sample.py'],kind=kind,baseline=baseline,metric='function_count')
++        self.assertIsNotNone(proof)
++        rec=cr.advance_objection(rec,'add_evidence',actor='controller',candidate_sha256=cr.fingerprint(self.c),evidence_refs=['source:sample.py'],controller=self.controller)
++        return rec,proof
++
++    def finish(self, rec):
++        rec=cr.advance_objection(rec,'request_review',actor='controller',candidate_sha256=cr.fingerprint(self.c))
++        b=self.resolution()
++        rec=cr.advance_objection(rec,'refute',actor='claude',candidate_sha256=cr.fingerprint(self.c),evidence_refs=[b['receipt_id']],confirmation=b,controller=self.controller)
++        self.controller.records[rec['identity']]=rec
++        return self.evaluate()
++
++    def test_repeated_original_reference_without_demonstration_rejected(self):
++        b=self.resolution()
++        self.assertIsNotNone(self.controller.attestation(b['receipt_id']))
++        rec=self.answered()
++        with self.assertRaises(IpanemaError):
++            cr.advance_objection(rec,'add_evidence',actor='controller',candidate_sha256=cr.fingerprint(self.c),evidence_refs=self.objection()['evidence_refs'],controller=self.controller)
++        self.assertEqual(self.evaluate()['state'],'changes_requested')
++
++    def test_forged_new_reference_is_not_material(self):
++        row=next(r for r in self.evidence if r['id']=='source:sample.py')
++        self.add('renamed-source','source',subject='sample.py',sha256=row['sha256'],alternative=False)
++        with self.assertRaises(IpanemaError):
++            cr.advance_objection(self.answered(),'add_evidence',actor='controller',candidate_sha256=cr.fingerprint(self.c),evidence_refs=['renamed-source'],controller=self.controller)
++
++    def test_changed_id_and_hash_with_no_counterexample_are_insufficient(self):
++        # A different artifact string/hash says count==1, which agrees with the observation;
++        # the controller computes the fact and refuses to call this a refutation.
++        self.claim='sample.py has 1 function definitions'
++        rec=self.answered();source=(self.root/'sample.py').read_bytes()
++        proof=self.controller.prepare_material(rec,['source:sample.py'],kind='documented_refutation',baseline=1,metric='function_count')
++        self.assertIsNone(proof)
++        self.assertEqual(sum(line.startswith(b'def ') for line in source.splitlines()),1)
++        with self.assertRaises(IpanemaError):
++            cr.advance_objection(rec,'add_evidence',actor='controller',candidate_sha256=cr.fingerprint(self.c),evidence_refs=['source:sample.py'],controller=self.controller)
++
++    def test_refutation_uses_existing_unchanged_source_and_same_reference(self):
++        before=hashlib.sha256((self.root/'sample.py').read_bytes()).hexdigest()
++        rec,proof=self.demonstrated()
++        self.assertEqual(proof.kind,'documented_refutation')
++        self.assertEqual(proof.evidence_refs,tuple(self.objection()['evidence_refs']))
++        self.assertEqual(rec['original_evidence_refs'],self.objection()['evidence_refs'])
++        result=self.finish(rec)
++        self.assertEqual(result['state'],'synthetic_pass');self.assertTrue(result['findings'][0]['closed'])
++        self.assertFalse(result['authorization_ready'])
++        self.assertEqual(before,hashlib.sha256((self.root/'sample.py').read_bytes()).hexdigest())
++
++    def test_new_measured_fact_permits_legitimate_review(self):
++        self.claim='function count has not been measured'
++        # Reflect the explicit different fixture claim in its review and transport receipt.
++        self.reviews[0]['response']['objections']=[self.objection()];self.refresh(self.reviews[0])
++        rec,proof=self.demonstrated(kind='new_fact',baseline=None)
++        self.assertEqual(proof.kind,'new_fact')
++        self.assertEqual(self.finish(rec)['state'],'synthetic_pass')
++
++    def test_unrelated_claim_does_not_receive_refutation_proof(self):
++        self.claim='a shopping cart request is duplicated'
++        rec=self.answered()
++        self.assertIsNone(self.controller.prepare_material(rec,['source:sample.py'],kind='documented_refutation',baseline=0,metric='function_count'))
++
++    def test_missing_material_verification_receipt_prevents_replay_closure(self):
++        rec,proof=self.demonstrated();self.finish(rec)
++        self.evidence=[r for r in self.evidence if r['id']!=proof.verification_receipt_id]
++        self.assertEqual(self.evaluate()['state'],'changes_requested')
++
++    def test_failed_or_wrong_scope_verification_receipt_prevents_closure(self):
++        rec,proof=self.demonstrated();self.finish(rec)
++        row=next(r for r in self.evidence if r['id']==proof.verification_receipt_id);row['passed']=False
++        self.assertEqual(self.evaluate()['state'],'changes_requested')
++
++    def test_material_proof_wrong_objection_or_candidate_is_rejected(self):
++        from dataclasses import replace
++        rec,proof=self.demonstrated()
++        key=(rec['identity'],tuple(['source:sample.py']),cr.fingerprint(self.c))
++        for attrs in ({'objection_identity':'0'*64},{'candidate_sha256':'1'*64}):
++            self.controller.material[key]=(replace(proof,**attrs),lambda _:True)
++            with self.assertRaises(IpanemaError):
++                cr.advance_objection(self.answered(),'add_evidence',actor='controller',candidate_sha256=cr.fingerprint(self.c),evidence_refs=['source:sample.py'],controller=self.controller)
++
++    def test_artifact_tampering_fails_actual_controller_verification(self):
++        rec,proof=self.demonstrated();self.finish(rec)
++        (self.root/(proof.verification_receipt_id+'.json')).write_text('{"observed":0}')
++        self.assertEqual(self.evaluate()['state'],'changes_requested')
++
++    def test_same_material_cannot_be_relabelled_and_reused(self):
++        rec,proof=self.demonstrated()
++        rec=cr.advance_objection(rec,'author_answer',actor='codex',candidate_sha256=cr.fingerprint(self.c))
++        # Fresh receipt ID is generated for the repeated measurement, but its material facts
++        # were already assessed. The controller rechecks that, independent of wording.
++        self.controller.prepare_material(rec,['source:sample.py'],kind='documented_refutation',baseline=0,metric='function_count')
++        with self.assertRaises(IpanemaError):
++            cr.advance_objection(rec,'add_evidence',actor='controller',candidate_sha256=cr.fingerprint(self.c),evidence_refs=['source:sample.py'],controller=self.controller)
++
++    def test_material_evidence_never_gives_author_closing_authority(self):
++        rec,_=self.demonstrated();rec=cr.advance_objection(rec,'request_review',actor='controller',candidate_sha256=cr.fingerprint(self.c));b=self.resolution()
++        with self.assertRaises(IpanemaError):
++            cr.advance_objection(rec,'refute',actor='codex',candidate_sha256=cr.fingerprint(self.c),evidence_refs=[b['receipt_id']],confirmation=b,controller=self.controller)
++
++    def test_no_adapter_origin_confirmation_keeps_objection_open(self):
++        rec,_=self.demonstrated();self.finish(rec)
++        self.controller.proofs.pop('resolution-claude')
++        self.assertEqual(self.evaluate()['state'],'changes_requested')
++
++    def test_N4a_top_level_state_cannot_look_like_plain_approval(self):
++        rec,_=self.demonstrated();result=self.finish(rec)
++        self.assertEqual(result['result_contract'],'ipanema-code-review-result/2')
++        self.assertEqual(result['state'],'synthetic_pass')
++        self.assertNotEqual(result['state'],'approved_for_authorization')
++        for flag in ('authorization_ready','implementation_allowed','production_authorized','activation_allowed'):
++            self.assertFalse(result[flag])
++
++
++    def test_model_json_materiality_claim_is_not_controller_verification(self):
++        rec=self.answered()
++        self.controller.material[(rec['identity'],('source:sample.py',),cr.fingerprint(self.c))]=(
++            {'material':True,'new_hash':'f'*64,'kind':'documented_refutation'},lambda _:True)
++        with self.assertRaises(IpanemaError):
++            cr.advance_objection(rec,'add_evidence',actor='controller',candidate_sha256=cr.fingerprint(self.c),evidence_refs=['source:sample.py'],controller=self.controller)
++
++
++
++    def test_already_available_verification_id_is_not_artificially_forbidden(self):
++        from dataclasses import replace
++        self.extra_ref='already-available-verification'
++        self.reviews[0]['response']['objections']=[self.objection()];self.refresh(self.reviews[0])
++        rec=self.answered()
++        proof=self.controller.prepare_material(rec,['source:sample.py'],kind='documented_refutation',baseline=0,metric='function_count')
++        row=copy.deepcopy(next(r for r in self.evidence if r['id']==proof.verification_receipt_id));row['id']=self.extra_ref
++        self.evidence.append(row)
++        self.bindings.append(cr.bind_receipt(row,self.c,root=self.root,permissions=self.permissions))
++        key=(rec['identity'],('source:sample.py',),cr.fingerprint(self.c))
++        _,checker=self.controller.material[key]
++        self.controller.material[key]=(replace(proof,verification_receipt_id=self.extra_ref),checker)
++        rec=cr.advance_objection(rec,'add_evidence',actor='controller',candidate_sha256=cr.fingerprint(self.c),evidence_refs=['source:sample.py'],controller=self.controller)
++        self.assertIn(self.extra_ref,rec['original_evidence_refs'])
++        self.assertEqual(self.finish(rec)['state'],'synthetic_pass')
++
++
+ if __name__=='__main__':unittest.main()

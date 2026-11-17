@@ -1,0 +1,16 @@
+{
+  "id": "remaining65.offline.all13",
+  "kind": "offline_source_and_operation_comparison",
+  "subject": "13 exact closed batches and frozen provenance",
+  "passed": true,
+  "sha256": "2d31deae0c7cabd729945dd94d3be0aaba6ab38599e71715b349c13dbf2a3515",
+  "measurement_scope": "Local bytes/native payload validation only; zero Rhino/Google requests",
+  "batch_index_sha256": "0d28290785f138648866fb603940250168f7b4a16666b6ebd613207ffa2d76c7",
+  "frozen_matrix_sha256": "5d12dccb6d24ee8e7eded9e387057f46e61aadeb6e78b3ec8e31354c8466c3a5",
+  "frozen_pending_sha256": "b10768f192f06f711b324794f8c2729910b09d0f2271bf128f2303bcef755071",
+  "frozen_sources_match_original_hashes": true,
+  "all13_argv_equivalence_except_path_hash": true,
+  "all13_native_manifest_validations_passed": true,
+  "partial_state_semantics_file": "registry-semantics.json",
+  "engine_preflight_still_required_at_execution": true
+}

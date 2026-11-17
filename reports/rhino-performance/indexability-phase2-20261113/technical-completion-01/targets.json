@@ -1,0 +1,63 @@
+{
+  "project": "rhino-performance",
+  "origin": "https://rhino-performance.com",
+  "purpose": "Fill missing meta robots, response headers and main evidence. HTTP already checked; do not revisit other pages.",
+  "targets": [
+    {
+      "url": "https://rhino-performance.com/blog/posts/brazo-de-presoterapia-transforma-tu-experiencia-deportiva-66afbbe13c5b/",
+      "type": "article",
+      "baseline_HTTP": 200,
+      "missing": [
+        "meta robots",
+        "X-Robots-Tag",
+        "main content"
+      ],
+      "source_original": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-after.json"
+    },
+    {
+      "url": "https://rhino-performance.com/blog/posts/presoterapia-el-secreto-mejor-guardado-de-los-atletas-de-elite-191a8f66c1d6/",
+      "type": "article",
+      "baseline_HTTP": 200,
+      "missing": [
+        "meta robots",
+        "X-Robots-Tag",
+        "main content"
+      ],
+      "source_original": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-after.json"
+    },
+    {
+      "url": "https://rhino-performance.com/blog/posts/manga-de-compresion-frio-y-calor-el-aliado-perfecto-para-tu-entrenamiento-4f2d85d7c839/",
+      "type": "article",
+      "baseline_HTTP": 200,
+      "missing": [
+        "meta robots",
+        "X-Robots-Tag",
+        "main content"
+      ],
+      "source_original": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-after.json"
+    },
+    {
+      "url": "https://rhino-performance.com/blog/posts/lo-que-tienes-que-saber-del-drenaje-linfatico-para-atletas-y-deportistas-d8be8c1a69a3/",
+      "type": "article",
+      "baseline_HTTP": 200,
+      "missing": [
+        "meta robots",
+        "X-Robots-Tag",
+        "main content"
+      ],
+      "source_original": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-after.json"
+    },
+    {
+      "url": "https://rhino-performance.com/blog/posts/beneficios-de-la-siesta-despues-de-entrenar-clave-para-mejorar-el-rendimiento-fisico-y-mental-ef9f9c1ce142/",
+      "type": "article",
+      "baseline_HTTP": 200,
+      "missing": [
+        "meta robots",
+        "X-Robots-Tag",
+        "main content"
+      ],
+      "source_original": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-after.json"
+    }
+  ],
+  "network_authorized": false
+}

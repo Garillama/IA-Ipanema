@@ -1,0 +1,33 @@
+{
+  "status": "prepared_not_executed",
+  "urls": [
+    "https://rhino-performance.com/terapia-fria/",
+    "https://rhino-performance.com/productos/brazo-presoterapia-pro-3-individual/"
+  ],
+  "local_access_check": {
+    "command": "python3 tools/ia.py --project rhino-performance access doctor",
+    "observed_at": "2026-11-13T16:57:59.464491+00:00",
+    "source": "Controller local command output this turn; no probe flag",
+    "configured": true,
+    "credential_available": false,
+    "account_access_tested": false,
+    "api_available": null,
+    "credentials_written": false
+  },
+  "route": "Owner official URL-inspection result; no new login/token recovery or API attempt",
+  "required_fields": [
+    "exact inspected URL",
+    "property sc-domain:rhino-performance.com",
+    "observation timestamp with timezone",
+    "version indexed/stored result versus live test",
+    "status/verdict and literal coverage reason",
+    "Google canonical if returned",
+    "user canonical if returned",
+    "last crawl if returned",
+    "robots/crawl permission",
+    "indexing permission",
+    "page fetch status",
+    "sitemap and referring-page evidence if available"
+  ],
+  "unknown_policy": "Blank or unavailable fields remain unknown. Never infer fresh crawl from export filename or raw25568 anomaly. Stored result does not verify current live fetch."
+}

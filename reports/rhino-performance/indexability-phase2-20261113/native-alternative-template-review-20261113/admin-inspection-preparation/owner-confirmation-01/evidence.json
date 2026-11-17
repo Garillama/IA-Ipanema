@@ -1,0 +1,29 @@
+{
+  "id": "owner-admin-confirmation-01",
+  "recorded_at": "2026-11-13T17:36:31.920562+00:00",
+  "source_type": "owner_statement_about_administrator_screenshot",
+  "owner_reported_facts": {
+    "category_create_template_option_available": true,
+    "base_template_name": "Categoría"
+  },
+  "image_file_provided_in_this_message": false,
+  "image_reviewed_by_controller": false,
+  "image_sha256": null,
+  "evidence_limit": "Owner explicitly confirms facts from a screenshot; no image attached to this message, so no independent visual verification or screenshot file/hash is claimed.",
+  "does_not_establish": [
+    "Template currently assigned to Presoterapia",
+    "Current assignments of other categories",
+    "Crear desde options or copying fidelity",
+    "Availability/placement of rich-text",
+    "H2/render/hybridScroll behavior",
+    "Current editorial/product facts"
+  ],
+  "authorization": {
+    "create": false,
+    "save": false,
+    "assign": false,
+    "publish": false
+  },
+  "next_step": "Owner-led read-only view of creation form and Crear desde options; no input/confirmation or template creation.",
+  "independent_review": "Pending direct screenshot evidence; no new provider approval simulated"
+}

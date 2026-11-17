@@ -1,0 +1,955 @@
+{
+  "scope": "Bounded offline search of selected original capture families only; not an exhaustive search of all repository history",
+  "roots": [
+    "reports/runs/rhino-performance/20261112T043917-indexability-inventory-223e7de9",
+    "reports/runs/rhino-performance/20261110T193530-seo-audit-635935a6",
+    "reports/runs/rhino-performance/20261110T193531-seo-audit-49ab37af",
+    "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4",
+    "reports/runs/rhino-performance/20261112T191008-site-discoverability-continuation-54a878c3",
+    "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d",
+    "reports/runs/rhino-performance/20261110T193533-seo-audit-8547d528",
+    "reports/runs/rhino-performance/20261112T041144-breadcrumb-public-verification-36ba6f24",
+    "reports/runs/rhino-performance/20261110T193529-seo-audit-2046af7c",
+    "reports/runs/rhino-performance/20261110T193532-seo-audit-0b78b0e7",
+    "reports/runs/rhino-performance/20261110T193533-seo-audit-40c3f664",
+    "reports/runs/rhino-performance/20261110T193531-seo-audit-c56e9f32",
+    "reports/runs/rhino-performance/20261110T193533-seo-audit-60fcca69",
+    "reports/runs/rhino-performance/20261112T032758-production-weight-analysis-8a197fd8",
+    "reports/runs/rhino-performance/20261112T041447-breadcrumb-affected-article-3ec9127f"
+  ],
+  "file_count": 232,
+  "files": [
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/product-mobile-lighthouse.json",
+      "sha256": "0ffb1b87a6d1a11e3a0e8221c42c5ef1dcc4446804dad6d862f8c69686a8a752"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/blog-seo-audit.json",
+      "sha256": "81cb5f051eece64b94ce0463289233b5ba011168a072077ecbb0e935099f27d2"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/category-mobile-lighthouse.json",
+      "sha256": "971192ba62ee922775151f2f15f51eda7336952317c511fead91c8c585dabd70"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/lighthouse-pages.json",
+      "sha256": "233857a2fde2912bb16bf9730b2f208757f20f3bcc573e73083f24dc06b88ca4"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/policy-seo-audit.json",
+      "sha256": "fab230d02d4ab115dff6fc36cc0dabdb2f9ad8c0668de598a9afac25a89c9c51"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/register-selection.json",
+      "sha256": "71c0423e47f0fa9c2b65b26c92546035dd5dc718b5e7f1546c208a7a05675fbd"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/pagination-continuity.json",
+      "sha256": "42266660808b77d512caf2ca1ec5135805638be526919395a582d13949a508f8"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/policy-job.json",
+      "sha256": "ba84ee17c894e4554d1ba6047fa3065ab0334c07e858ff41880903c8861818b6"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/product-seo-audit.json",
+      "sha256": "139747bc17c54378bf8ce909a34784e18bca0b6e99ef517c56d257951a83c499"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/product_accessory-job.json",
+      "sha256": "d80afacbc5132ba886e52c745f6cbb8ad4802b5ae3467c0a8d755c2c35f3e882"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/home-job.json",
+      "sha256": "0a942705d64e445fc19b421a03f6d3c3f5897bb98ba9a3b4a84425a85b5bb864"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/article_2-job.json",
+      "sha256": "a86679785941d438c64550339eb4867d18e5e577bb18e208edd447fc57b7910d"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/home-seo-audit.json",
+      "sha256": "163a784f119057fabe1be6b8b5224fa556712173b1c7223a40f9e9cf691c197f"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/article_1-seo-audit.json",
+      "sha256": "38e54613d408c694c35beb7cbd71ee7827d9032c80335ee35cf4db364454b365"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/local-source-after.json",
+      "sha256": "81eb81fc2ffee5fcb4e6cc8c3d85158310d8e1a5e5cbef4087f95b921cab2692"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/category-desktop-lighthouse.json",
+      "sha256": "3dcd0ef06c84eb31d4a59b449b580f6d337317ac0d30621540295660b5de2c58"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/product-job.json",
+      "sha256": "698f5ad7448438f920741702e59f911036b2255b1e1f275d1e9f2bb809d35287"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/local-source-before.json",
+      "sha256": "6ccccf03eb0ced8fc14e2b433c732c5cac0e7b838c70f1a6a736cf7a58a78247"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/search-job.json",
+      "sha256": "ada5b4574c1b200b9135301bab9723ba1d6e30d9e7c6b34918fbc866bc51d28c"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/devtools-mcp.json",
+      "sha256": "dc2e421173d3bc5e5208dc18e8fbca3c082facf6f7ed3710fc8df1241a34bb03"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/devtools-mcp-insights.json",
+      "sha256": "401b7d0428f0f6fd4c9f40c4626fb6e253a3c643698e1c47463036d1dc68e94c"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/article_1-job.json",
+      "sha256": "4537693378c35a6092b66ac8fa6f7a2c3e31406e62ff92a7ebb1af2b538bd18e"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/category-job.json",
+      "sha256": "120c04adf412b11b22081132a40eba364b1037c4bc9bc68f0e84998a39416932"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/not_found-job.json",
+      "sha256": "8e5325350ba8ea1e92ffbbe2bdd724245bfef54feb9ffedf71f33275c5600fc8"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/register-job.json",
+      "sha256": "74d3ca918952d87b616457b4b0475f9b5fa9dd39b8d345b52afd3945749f1f29"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/search_empty-job.json",
+      "sha256": "8968e05d2585639133a9cb0533b5c139cd59b64c3d03986171ea277a3d7b24ae"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/bundle-job.json",
+      "sha256": "8fdc807c4f55f57c939c51d1143f57a144cf1e7a5b521f3703a9bef47ccb7a29"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/category-seo-audit.json",
+      "sha256": "82dec7a880c658a552a1608d97f4d8005d2e9f75d3dfa17d38e5c3796ea04668"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/pagination-target.json",
+      "sha256": "bcdaade8cb4f79efb22d807bde04e634f30b699c59ad17019ee0333b67666abf"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/selection.json",
+      "sha256": "3c3ad26ead10729dd79fb7e5d90a81992208ef5f09f509c0291da3f918cecd0f"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/cart-selection.json",
+      "sha256": "4115c274bad1aa8b7dc24a5ae771d72f2fbbf6e3788b0eaeb74e7a321e1b909b"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/bundle-selection.json",
+      "sha256": "72bd14fdb4c5d8d1e129fc1a42db9da2fe78b50dce58cf682e3c379989cfce26"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/product_accessory-seo-audit.json",
+      "sha256": "e68c50142f41f55eb8efe7362feb3a2ce12aeaf648d16dbff4d571531e29f7a2"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/discovery-job.json",
+      "sha256": "2e7f58d9340420854f1228e88d910a691e1a301519636f43fdfd9bd26bac7e0c"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/blog-job.json",
+      "sha256": "23bd7701c6b375f865e44b54f3083e84286cadd1d93ba9d7d1c3c826e7d10e0c"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/static-execution-inventory.json",
+      "sha256": "4ab772c7f622f3f7c2df7e6e6b3a1271daf7313ae5fecba58bb23feb5292e65e"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/not_found-seo-audit.json",
+      "sha256": "75bd8498d1d64c6031c7056cacebbd56fd218ecb2ecf11dc4e0be94254395136"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/product-desktop-lighthouse.json",
+      "sha256": "ac197461271b4421897c1e76639c50b90912c3b43173e78582db98e717f38b81"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/login-selection.json",
+      "sha256": "2f0f0ff6c6d8c210942d48c94bf05224a14f9d1aa13280466ad1aea7fd681167"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/source-verification.json",
+      "sha256": "737a00cbf5fd652b76b8ca1b8155b4c4a8512d86262782d9ebb7132e47bbfdb9"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/login-job.json",
+      "sha256": "521bf702055cf610b88d6c25670efe97eb131ee887c757977173f66db86158f1"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/cart-job.json",
+      "sha256": "e14698d952a26972b368d311b5342f377f58a78b25fb22093ca13a1cec1de31b"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/commercial-price-consistency.json",
+      "sha256": "6914aaf91bf7abcf3ab3096940c30c86426a9f5679d5503807e4f222e1ff1654"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/category_accessories-job.json",
+      "sha256": "2a88735133b9402d7e453434151ef7e2aa250972dc1db5f856abab36196b0342"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/comparison-eligibility-checks.json",
+      "sha256": "9a0babd75fa4aef5dbabcb042111efa18566994e0a8acdea1e0bd82377f81dd8"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/bundle/bundle-390-rendered.json",
+      "sha256": "77d79716143d98760c49a2bc8ffd4a2e77669fafd6d678b011532e3d91b39ec5"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/bundle/bundle-1440-rendered.json",
+      "sha256": "d60a3f89572325b527fa52e9749c8a31c3849bbe924ec94ce8505c8b6e25d22e"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/bundle/browser-report.json",
+      "sha256": "542700ef85e0e38e8aff1741c5d12263acc8a4b221595ccf19bc124de56f0880"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/bundle/bundle-390-rendered.seo.json",
+      "sha256": "9079ef142ae3b810ca9eba51fca7feaa8eacbfe32a68ed7f127ae5ea84c4fb89"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/bundle/bundle-1440-rendered.seo.json",
+      "sha256": "3547a83a70d360083d94148f99aada963641d9d0a9c6604061b523720806ed7b"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/youtube-counterfactual/samples.json",
+      "sha256": "96ced910b32739caa862e5187944c2c432fe97f153c26b7d21da75d645857feb"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/youtube-counterfactual/summary.json",
+      "sha256": "fcc9a3e2bdd374bab6f0142c5b70c8c5f834189b2a382b82646d2db4dc7ad3d0"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/policy/policy-1440-rendered.seo.json",
+      "sha256": "f870a12b71bd6c614a0f43b365b6efb03aa03b93951ff822ae903650e4e37bfe"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/policy/browser-report.json",
+      "sha256": "aa4a6c8a480982c41198d30b1631200409a36f2240778f8b421218f9e092b188"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/policy/policy-390-rendered.json",
+      "sha256": "2be7f4e3a4ab586dfbdc58defe9a935d105433aad6e2acfb76b01f8698b25390"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/policy/policy-1440-rendered.json",
+      "sha256": "ae7a1859864dc7f57aba1a383a8b64a7b186438b80104557f8b3e24fc029788c"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/policy/policy-390-rendered.seo.json",
+      "sha256": "b025739e5fa0003e044643513426496780c5ea977c4d6d274e946d9982378f5f"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/search/search-390-rendered.json",
+      "sha256": "7076b94a28a1a7f1ba8d46941a0865592c827fb4c4e6a5040aeb86c4dbdfc2db"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/search/browser-report.json",
+      "sha256": "3c10c1a46e92c1dbad553c46360e52d5c9fd31178bbcfa4b755e19569db9e73a"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/search/search-1440-rendered.seo.json",
+      "sha256": "5ac4c9ad4c59d1502e3ce394b893779071428634fd3162a03e928b4f83696c5f"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/search/search-390-rendered.seo.json",
+      "sha256": "2fb6fa2af123983e1eab3dfcf13935ea78cc7f23fc8fa4eed0a20ca10bd3e6d6"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/search/search-1440-rendered.json",
+      "sha256": "d05e1288a93a7797a48eb6966109498802bb000a054b5d0a3581fe5c4651192e"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/home/home-1024-rendered.seo.json",
+      "sha256": "c9ddf099d59862867e96e7b3413ebd42bfe348859ee7023d6608040a26f9b1e5"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/home/home-1440-rendered.json",
+      "sha256": "8a450f1da5c272bc0dc5094f9ce14fff5f5edab7965cab827cfba854ea65a330"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/home/home-1920-rendered.seo.json",
+      "sha256": "1763d183233fe7eea2bf97c0a4bf987fc6456713e6b0cb0e57e6d83406e4bb2a"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/home/home-1920-rendered.json",
+      "sha256": "f394f66394979938808940c204ec55b193825f841dc36fd63518f9ef03096439"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/home/home-360-rendered.seo.json",
+      "sha256": "757fb3a22535056aa87a5342497d2a1d3fb4b2217b23bbb920f485f80ae99c89"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/home/home-390-rendered.seo.json",
+      "sha256": "245e1e8e0775b49e89088d60d2dd1a31f80d45fde98180d6cddf1b8215306872"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/home/home-390-rendered.json",
+      "sha256": "d2c67a603d22aa8f0934c736ad6fdbe568492e58d004d8b5ee70af7549ef0d40"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/home/browser-report.json",
+      "sha256": "b71b799fcfb1105b06fd9d28658541c5dcc4a709904218932a4c18c145548a69"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/home/home-360-reduced-motion.json",
+      "sha256": "54cd0661a46d088c6624db81e0581ec877b45cde1350604326d97dab7e3c4405"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/home/home-360-no-js.json",
+      "sha256": "824951ad6014543b2599a04e3ded5e4f6a8e15fde7a18e2d157175407fe61de5"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/home/home-768-rendered.json",
+      "sha256": "c46856907ec9007f11811b83d912d3776768b26042224e8680215d44e5348c10"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/home/home-360-rendered.json",
+      "sha256": "b41a3417781ad4b738edf08c00c11b215ed11a5031cde1ba73a53115e1e093eb"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/home/home-768-rendered.seo.json",
+      "sha256": "1964e62165c78771a9ab728206669386089c63339b474e4925c04f4989a56dab"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/home/home-360-reduced-motion.seo.json",
+      "sha256": "d31fd8a7cb272e909c213236718a976f94d23774a7965c0ac3a5952fa1c1900e"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/home/home-1024-rendered.json",
+      "sha256": "3221122526296c16a9db46b088cd68e69002d3faaea6ad118d3de97b01139ba6"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/home/home-1440-rendered.seo.json",
+      "sha256": "99ad98d94bf2cf22d3ee8a8e61bbd9caf298e1fb67c86a893faf4730048ceee5"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/home/home-360-no-js.seo.json",
+      "sha256": "e2f921b8d606ac15dfecffc683cd77226edcd64b583b34d6cb81b8b7f9bc5211"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/category_accessories/browser-report.json",
+      "sha256": "ad3ddf1fa2e9ba965c71defbf9e4d5a4b63b9eafe4eb2b06b2426b5d952520c3"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/category_accessories/category_accessories-1440-rendered.json",
+      "sha256": "5141b1d872a6b56263a304f3673d7e27a9ff97041311c9bb9b3e68eb915e493a"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/category_accessories/category_accessories-390-rendered.json",
+      "sha256": "db4afa91d0e953b98a2317879d1c6b3c45129086f28e3d12a6c2136f275a603b"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/category_accessories/category_accessories-390-rendered.seo.json",
+      "sha256": "0c60441511f6a4e1274a0dc263f19c4b201d7ae26a4e75198fc2958b959389ea"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/category_accessories/category_accessories-1440-rendered.seo.json",
+      "sha256": "bd3f4595eb559f0a249fbb07b1c7c4c18c18f347045864b37dde3b86e8fb024b"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/product_accessory/browser-report.json",
+      "sha256": "2c4b5b93359b03a61507d9d08cef0440e0c490deeff568103a16620a05d24aa0"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/product_accessory/product_accessory-390-rendered.json",
+      "sha256": "7b682c14f2e8d619f3004d96b08fa0708fc8a1685a0508c3dee826bc697d7695"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/product_accessory/product_accessory-1440-rendered.json",
+      "sha256": "b70d76eef29fbdb39a534231a617ef76d21434526888163e338804de83b9303b"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/product_accessory/product_accessory-390-rendered.seo.json",
+      "sha256": "a0d280e12affa74b5658aca729eae34315cb329a2a513ad0a71834b30d3fb2c8"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/product_accessory/product_accessory-1440-rendered.seo.json",
+      "sha256": "efa0c4cf87717d438b76e96505ed473a9c188ec39cd27c504d3982c9e935abc6"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/cart/cart-390-rendered.json",
+      "sha256": "46124dea2282e395a1abaa84c64cb6da5f108498cb6471014f193bf2642abd56"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/cart/cart-390-rendered.seo.json",
+      "sha256": "20fedca1ff80edd828ab0755ef9616872bd761171f1263cf54a0c89ab08f1e26"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/cart/browser-report.json",
+      "sha256": "7473b9beff01bc632ec0064eb4161a131e758655518955fbb9d228db62ecf71e"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/cart/cart-1440-rendered.seo.json",
+      "sha256": "ebbf6db571e1a460d7a407a8dad930514a6bce670e6e842c14fa0f0b5cd76008"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/cart/cart-1440-rendered.json",
+      "sha256": "58549b892db2fe6f690b470169823e8a988f75f799b977417b5226adb082a244"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/search_empty/search_empty-1440-rendered.json",
+      "sha256": "c234ad6f1bf7638cd7f59967c4fd74516bbb4434eed89cdec5a8e928e9db86b0"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/search_empty/browser-report.json",
+      "sha256": "06a03067f87dc7f5d9974dbd7b8996a143dc767ee01766acbdb0f91c2f2ef5dd"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/search_empty/search_empty-390-rendered.json",
+      "sha256": "d26f7be437598f3bac157913c52dad27f8dc14770b07f36e67ff8729f2e5677c"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/search_empty/search_empty-390-rendered.seo.json",
+      "sha256": "5b1c8e9866c78c6b1796d55c5e3ce488aff0df9e3ebe2204bdae024aa012c938"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/search_empty/search_empty-1440-rendered.seo.json",
+      "sha256": "699bb3c92da475947be03cc7f760be38f8d5ef388e290abb0e373671088f631d"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/login/login-1440-rendered.json",
+      "sha256": "d3a3c68ab3927cfc225f43c205b7034ae2fcc5453439dc2edf4b7154db2dd550"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/login/browser-report.json",
+      "sha256": "4fb6a6cbade60d1416e4bd47afbb6431c46e9b57e09a79f5f1cf1597a4b645ce"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/login/login-390-rendered.seo.json",
+      "sha256": "8e40ea80cc0e2bd40c6c24dbdf5d4534122f541690feed6f634d0d4415d6d5a5"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/login/login-1440-rendered.seo.json",
+      "sha256": "0bbc39258ebd4490e817eddbebf7990ff4ee40c00ba9006b7a1f66c6aa2af0ad"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/login/login-390-rendered.json",
+      "sha256": "08abd3e92d0efddbf9d4b5d6a1a7c13c69766a2e233fabbdb7922336042afa02"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/blog/blog-1440-rendered.json",
+      "sha256": "91100f43e7ad24528457e89ffe55c9f7314ba57f5bdbc44be95e8d36acb7d2ac"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/blog/browser-report.json",
+      "sha256": "a6d34a6a7fbe13722d5222b9e1cdf8d59040818399cc2d8eaee6bf392f8268ae"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/blog/blog-1440-rendered.seo.json",
+      "sha256": "460d1f4777eeb661944e13b9a9a541cde6906e6e794e5771ef68f4c01f862a32"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/blog/blog-390-rendered.seo.json",
+      "sha256": "261230d67dfdcd5be2bb7c90b4fea84a33469c1dcbd3f3cb9f7561cbbce855bc"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/blog/blog-390-rendered.json",
+      "sha256": "7bbcf007578ad8ed174c0399c9c6dce44b97dc7b6e7155354e27bcdd405a0951"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/verification/verification.json",
+      "sha256": "80ea4e166efe4dc879aea59786f6718355900822a838f947105e4c0883de0db7"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/article_2/article_2-390-rendered.seo.json",
+      "sha256": "cb1cf39475dd4c376374ee2563bb7918dab10a8303c5577de5b5e0cc361c7298"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/article_2/browser-report.json",
+      "sha256": "3b755088ee9f1fe01063277ab2eba819d9358da44ee97e7a3ccf168f89c93204"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/article_2/article_2-390-rendered.json",
+      "sha256": "d88975fb8ee4c1bfe1ff75e2553b4d58bf1fb37045384da13a2bbc6074a508e2"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/article_2/article_2-1440-rendered.json",
+      "sha256": "ae5280f777452d6bebeb592187ec70903b0b00a8ad65e9a806c58ab5b8b6eb90"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/article_2/article_2-1440-rendered.seo.json",
+      "sha256": "715ff477273dd33a1d2f95181c12a31e375fb98d4735e34e2be3fbf6dbb23a9c"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/states/states.json",
+      "sha256": "20e7b1f2f284589c75bee4cf8b5d9a9b77628ea55181f59a12ba520a7474f87c"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/article_1/browser-report.json",
+      "sha256": "076d18991f644458aadb186ff7e5ded44b49c7c088b87fce464f583cd4c3ee1b"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/article_1/article_1-1440-rendered.json",
+      "sha256": "1335e3c858d2d37f54bba3760c4558536a51ca6cc41f66236b2d9e056a0fa7f7"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/article_1/article_1-390-rendered.seo.json",
+      "sha256": "6b95a6eea0c271f8c99675556012a599ed83cc344bc8c4146b8f2e953a1007e3"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/article_1/article_1-1440-rendered.seo.json",
+      "sha256": "306918475a403d983d520a781ce181732e678dcd148a36c2fa5f28d1da335a63"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/article_1/article_1-390-rendered.json",
+      "sha256": "80b18245efe955d878940184320863c9dedf86ba9ad75db9b9a973b98f57b401"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/discovery/home-390-rendered.seo.json",
+      "sha256": "92e1fb884cb25f65b0eb9f9a1a421b9bf8502cdcb6c40db3890b5d38e26bcd10"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/discovery/home-390-rendered.json",
+      "sha256": "ad9d3123e2ac797fe9feecef530cc7c3ff9a80c53357767f06aaf70266d972cd"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/discovery/browser-report.json",
+      "sha256": "8936ec537b6d73366cdf9a0a3e918c0e454fe3e36f88bae3ae6737ee0929b08d"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/category/category-390-rendered.seo.json",
+      "sha256": "d867e8bc29abf6c21cdd885405750c0cd55731a5a3ca1bcb282365464199e988"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/category/category-360-no-js.json",
+      "sha256": "a0a73c1022adfe3cc013ab062ae13d1131efbec3bcba4df99a03670d19fc273c"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/category/browser-report.json",
+      "sha256": "cba71b7e38e5f12f39a22f02de439be06e36ec0631d77a47c1b20f3d95082b0f"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/category/category-1024-rendered.seo.json",
+      "sha256": "533d8795ef3e802603dcbc94adda7ae591ab200f93603980e4f570d1453b8cc7"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/category/category-360-rendered.seo.json",
+      "sha256": "6b45c222eaad021e0b678bb42e9767d9acd82c9139dcc031b39b19e2e87024a9"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/category/category-360-rendered.json",
+      "sha256": "dbdd2694e9588fa5fd63f8e6d83f03508b811d6d7c38bb813f301894a69279f7"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/category/category-1440-rendered.seo.json",
+      "sha256": "37f9bf80cb79d8e853e6f72958afe29c44516ff01c760c0680a2ecbe5fce5512"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/category/category-360-no-js.seo.json",
+      "sha256": "de243ca8eb07747706a3a63f0ec1ad20d83f37c67682471ce4910b46f66fa654"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/category/category-1024-rendered.json",
+      "sha256": "0ba97aa805a6c42c2c6b543d2c991302b5c76a9fc15064afbc145ee2b6c2f31b"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/category/category-360-reduced-motion.seo.json",
+      "sha256": "217893ae9115e5c2e615c225e34da0b38f52c8472e4a83253821afab724d5adb"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/category/category-768-rendered.seo.json",
+      "sha256": "cfba905063c7943a703ce6450ec0de41adb19f718f51342882775c9dadde3cf5"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/category/category-360-reduced-motion.json",
+      "sha256": "e332591815fb4a1b5efcbaad112773398561f1f50faf50975c1eab4b77d15084"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/category/category-1440-rendered.json",
+      "sha256": "80bd3ab6daed5c7be6eccc61f655a80a197ffe8c3cb7e59f0052019c2c603991"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/category/category-1920-rendered.json",
+      "sha256": "f700e699778f6312e76cb5fb2d83420c4efa7067b90651fc765ac3a9a60390da"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/category/category-768-rendered.json",
+      "sha256": "52fab280ff3d9df98398d450f7f30b1b7eb811d91a7bbd0332d8d36152f745e7"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/category/category-1920-rendered.seo.json",
+      "sha256": "d2fa7f44f7aec7e78a28b12109cf19cdb0c8a22b141a6d9d5b82ffa010ef4f91"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/category/category-390-rendered.json",
+      "sha256": "90e50956eebb4e76ae857e9e49145a5333d076af8bdae1bdf811778f1eaa26ca"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/register/register-390-rendered.json",
+      "sha256": "1a09c177028b45d4889199a55d81f077cb46d1921ac72f8f6553398982a01b81"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/register/register-1440-rendered.json",
+      "sha256": "b9f77602280bb44f3ffec1b4608ba98710a6390d1117593429154babd8633b8f"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/register/browser-report.json",
+      "sha256": "ec2de38c144805aefe1078de6a1a2e39285ff59803edd6a0fe3f5f9a7c7066b3"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/register/register-1440-rendered.seo.json",
+      "sha256": "56cb00202c4ff13453fb30622c20df4c05bde265d1e889a17563f4804d400f24"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/register/register-390-rendered.seo.json",
+      "sha256": "bf4d239d86fef412a1c926e9d9559d39e9ee738b090398295221ad8fdc6c04c3"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/states-verified/states.json",
+      "sha256": "b2992e70d878b0a09b76bec8b612ddccc463ce065e3668018e84b65dea5a9fef"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/not_found/not_found-1440-rendered.json",
+      "sha256": "881e9c606c4439dd54445b1751f2a0bc6a4b5e4aec14722b3159656b7d62c815"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/not_found/not_found-390-rendered.seo.json",
+      "sha256": "b91cbcbf1118960ad3b18983e4efc04198bd9e693f2d6cf6d38024b4cb9dea37"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/not_found/not_found-1440-rendered.seo.json",
+      "sha256": "2424c886764968934fa42ae05761a60dc3683dde62bfe7d48704c69f79fb3c82"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/not_found/browser-report.json",
+      "sha256": "15db9d29fc9d4ec96b1178382096abe5f428c510290669eb2a249fda6abffb1e"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/not_found/not_found-390-rendered.json",
+      "sha256": "99b5c63c8baa29f0a2d352d93e84fc59a77e0bff121f85333c18ac86835addf2"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/product/product-360-no-js.seo.json",
+      "sha256": "c85d7cb5d6538c459ad5c02fa3cc75a0e203cae38a674b8a1c3e1b1167f53f4d"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/product/product-1440-rendered.json",
+      "sha256": "9dfe6ceb41af24106e1732da0998cad12bc07cc7b4b55c19caec86961b2f2cbf"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/product/product-1440-rendered.seo.json",
+      "sha256": "ddf730650cf3979f162a09b97e78cc7a6fe4d1ac1e54f6752d09b7803f878cb0"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/product/product-390-rendered.seo.json",
+      "sha256": "252dff237a05804a943fb6c4674b43c4f83ccaa44a66140a2c49b3e8df85d01d"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/product/product-1024-rendered.json",
+      "sha256": "d0c6d05e8f081f4ce769267980258fc9d4437a4ba1abe3f556ee50a4cab0cd06"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/product/product-360-rendered.seo.json",
+      "sha256": "7d501f3cd2bfafbf21415fe6a359c952ce8836d2fd811d5eb9816bf816ab10ac"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/product/product-1024-rendered.seo.json",
+      "sha256": "8dc3a92e2aa172b4ff06b459e0140a48230c4bc20e3541f603984fec317ecbb7"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/product/browser-report.json",
+      "sha256": "b4fcc4d4ca1743f4e361bc1fee9c6342a6f65d97d3b6c78e7afe6b674e1b7248"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/product/product-768-rendered.json",
+      "sha256": "886cf6890e98fcea44ce8239013d3707632a9b1ad913e27e0a17cea6d0587042"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/product/product-768-rendered.seo.json",
+      "sha256": "ef500b85760033e175f075d8b4fc08bdf182724c8efb930e11f9310fdc9da5ab"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/product/product-360-reduced-motion.seo.json",
+      "sha256": "e02ec78d820873e1241caf1e4db086bf5a8947fd15721177b4a95bd9f5352c59"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/product/product-1920-rendered.json",
+      "sha256": "f4c574e71c0fd091dbb2cab3fd0f13d997078ca24f446b7d76ecec7d6e08471e"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/product/product-390-rendered.json",
+      "sha256": "490357aec49732ae5506594fed777c62525d74103ca313ca72e893a86fde4c11"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/product/product-1920-rendered.seo.json",
+      "sha256": "749f08983d3543e1bc2179d67ec6ffa8d06e0903a3355c302d10893f2b8ba0a1"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/product/product-360-no-js.json",
+      "sha256": "d15f5ddcbb573ae17db00f3e24a939501daea9522218347207a1ecfd88f02cfc"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/product/product-360-rendered.json",
+      "sha256": "d56fa7cd7848800c6da0b86ca1cce18405342fdbc4f718072e869d3bb65ee545"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T192537-integral-audit-b35e23a4/product/product-360-reduced-motion.json",
+      "sha256": "d601cf60905058a843c4c927e4f10bfba6b09e03e2442342c8d9264976c85d79"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T193529-seo-audit-2046af7c/report.json",
+      "sha256": "6454641861aa52e91e58d707ccb5ff2a143911fcce767e5f6c0b18dadc962d8d"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T193530-seo-audit-635935a6/report.json",
+      "sha256": "4f6b47629c47d302f7cff51a81afb3586163550585fa08a769d91ccb29c5f5d5"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T193531-seo-audit-49ab37af/report.json",
+      "sha256": "a07cce366a91d5a705a249b5b9a1422bcef26a031334d3cdd1ec96ec7e85335f"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T193531-seo-audit-c56e9f32/report.json",
+      "sha256": "6f8197a42bd887a34cb6889a93f7ceb1d2bdc48af1f18ef5f2e4fb8e9112fb7d"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T193532-seo-audit-0b78b0e7/report.json",
+      "sha256": "c798cbb470ef344507e58310fcfd4ef60e016cdbb091fc841a14f9eea4409bce"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T193533-seo-audit-40c3f664/report.json",
+      "sha256": "7d04feb9352fd4490fa37d66eef9465abc56a1168b7ccab3f11e54e6b05b50a8"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T193533-seo-audit-60fcca69/report.json",
+      "sha256": "0fc12166670f8219b54c0265ec45c37e18867a0b401bfda0535063c224bfc9d3"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261110T193533-seo-audit-8547d528/report.json",
+      "sha256": "e63ed41e0398b909e7f8f321ff2a3d21744b68f619837b9d0f5eec0d440be658"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261112T032758-production-weight-analysis-8a197fd8/analysis.json",
+      "sha256": "1034428dee34d6f087abf2bcc269f78afee8655f5b895551005e8251e4bcb1ce"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261112T032758-production-weight-analysis-8a197fd8/consumers.json",
+      "sha256": "ddf885c3bd8ff0d74da1bd5904d156554acf45d7250035af23378fca6f442abc"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261112T032758-production-weight-analysis-8a197fd8/served-source-comparison.json",
+      "sha256": "2ef7287be7720db13923e639dd6fd354dd62de25b6d8e16986bf2bf98d8ef65e"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261112T032758-production-weight-analysis-8a197fd8/production-probe.json",
+      "sha256": "a32d355990272de2feb815926285eb062792cbf457d8732be71180daadaf3e1e"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261112T032758-production-weight-analysis-8a197fd8/cache-accounting-diagnostic.json",
+      "sha256": "0f6437070cf98532c6bf7fdbe6b8e0779786d37679fb55c706dd83383228fb70"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261112T032758-production-weight-analysis-8a197fd8/video-candidate/comparison.json",
+      "sha256": "079410b8ad46657013328f26f0e09610f4f88e8f206b3e620ee37cfffb4cfae1"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261112T041144-breadcrumb-public-verification-36ba6f24/public-breadcrumbs.json",
+      "sha256": "fe64878e08f9390cec5f21d2923a5f884345371eae0ff2807f776352bcb93445"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261112T041447-breadcrumb-affected-article-3ec9127f/article.json",
+      "sha256": "5c5386fe9148e1efdd398939232ecc0d6d9029d333890a4fdfa6bd2e2bd3ff7d"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/transaction.json",
+      "sha256": "69a4b359b02c0ced2d8d0ccd7f977fb1c0f765a761f305f82dfb16e9a59c05ef"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/post-qa.json",
+      "sha256": "f0228bc05b8e2b8816364c14a37700a57eba3b941be1fd66e9245b8f676b04dc"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/transport-prepush.json",
+      "sha256": "5cf7789b5af04192744077b6cbe2dd69a7e77635e84fb19c60adb86cd8f735c9"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/local-apply.json",
+      "sha256": "370584eed799beda9381f011a16e3cd8b705a7f983f8991b681bbcae5b46ec61"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/post-qa-corrected.json",
+      "sha256": "573ea8fc6577338795600189d14bd6c174645f8d6b8f8b79f3713360f522c720"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/baseline-qa.json",
+      "sha256": "342a2af14f0efe5f633ad3d3c29134f1f651495d302a4b47bd250d003ff387db"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/transport-before.json",
+      "sha256": "e7fa6767970565d7f203fe2a9736fdfeef9112efaabf2f2d3007939a533821fd"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/transport-after.json",
+      "sha256": "bc81666e2c94c3f24e809eaa1c19e7d0c9934c27d8f33db8dfa9339d341542d7"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/native-diff-prepush.json",
+      "sha256": "24089e6fbf1460ea1d18e565ae6d8b70ee0e8e6a50e43d19d5879cc9172fc0be"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-before.json",
+      "sha256": "f9733c5205f54f0efdc03e87bfd1d9f8e09ea8208fd8fd4f59d732e1b37c0f15"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/post-qa-before-harness-correction.json",
+      "sha256": "f0228bc05b8e2b8816364c14a37700a57eba3b941be1fd66e9245b8f676b04dc"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/native-diff-after.json",
+      "sha256": "18f47e0fde53c9937a2f232cd60896e742708d1f93fb01c010492a828ffbbcc8"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/acceptance.json",
+      "sha256": "ca55519f7722c14e78e5ec71c4a05acd6b3c9a1d611769f6e66472a61363e673"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/push-result.json",
+      "sha256": "ad0bd8daa2a02bf73d721e8dfc2a26ceba7a93039f86f32d5588f606c3a2a203"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/native-diff-before.json",
+      "sha256": "18f47e0fde53c9937a2f232cd60896e742708d1f93fb01c010492a828ffbbcc8"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/controls-after.json",
+      "sha256": "5a0040832b81feeade2342bceef3fc7ba798927d75a11effd30c923f3413755a"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/authorized-scope.json",
+      "sha256": "0301a5baeb0d9ee7bb0c3fc08a10b1ec0cec62b059d6caf965ca66f687abd696"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-after.json",
+      "sha256": "227b880307aaf721eb95a30ecc28622264a3f14fc0cd5c90ae4a07ac4f846bcd"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/identity.json",
+      "sha256": "9d943acce2f35823b1c92a545dbe98c7ffd1decee488f2926f750d75543ed053"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261112T043917-indexability-inventory-223e7de9/inventory.json",
+      "sha256": "c7c7333c0a93430a09c6996f028ef703a2ece9fe84b5a0d0076c3adcd732b8c4"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261112T043917-indexability-inventory-223e7de9/pagination-observations.json",
+      "sha256": "ae27763946e1a514549157b46cc59214b1fe068cc5dd575ce377266c9a22be46"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261112T043917-indexability-inventory-223e7de9/summary.json",
+      "sha256": "d905538d2ad9b307a742714e7f6d6f9f6f610e36d86b105f0c393866e77b906d"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261112T043917-indexability-inventory-223e7de9/internal-link-graph.json",
+      "sha256": "6b2fe9b395117d1ad5f17436be4b65bc56bc7dadfbd47d17a320628b07bec66a"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261112T043917-indexability-inventory-223e7de9/known-documents.json",
+      "sha256": "4b1b0c5d5dd7baacb81fc748bf3c484a654c5fd83a0fe661c3df3e22c0861968"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261112T191008-site-discoverability-continuation-54a878c3/claude-cross-recovery.json",
+      "sha256": "e341c194ef13937a303443fa14dd574d11fd63304425c803bbc3657d96c89991"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261112T191008-site-discoverability-continuation-54a878c3/codex-defense-proofs.json",
+      "sha256": "d9f107caa9ad3f7ffce9e097892c08301dfc496a50d81547bc7dcc69b4f9699f"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261112T191008-site-discoverability-continuation-54a878c3/observations-index.json",
+      "sha256": "62ca279b6531a53265ceec5195ffe274bcb793e629af1e509d1979da0430c328"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261112T191008-site-discoverability-continuation-54a878c3/product-alias-checks.json",
+      "sha256": "69e8f631f78d907ee4a034d953cbf064093e78c0cbc5a30e0316e3202ff10cd8"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261112T191008-site-discoverability-continuation-54a878c3/shared-facts.json",
+      "sha256": "92e1b5380d9fe61d92e5bfed5a05d3ad1c54a815b08cbf224b30d5dd0a1674de"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261112T191008-site-discoverability-continuation-54a878c3/claude-final-delta.json",
+      "sha256": "a6f25bf43f4ed46396f7aa29384f8b459c9c56780a9f3232f8c6f230ba0d6c1e"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261112T191008-site-discoverability-continuation-54a878c3/source-checkpoint.json",
+      "sha256": "9243b34fbda71fd8041941dd48d08d1bb0ddb4d11a90ddad423348cd05fd0d69"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261112T191008-site-discoverability-continuation-54a878c3/cross-review-first-failure.json",
+      "sha256": "b2eae72be4a2c006d571507ba8b2922dc30acca31b64ec96e158b528fc26e185"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261112T191008-site-discoverability-continuation-54a878c3/summary.json",
+      "sha256": "aea0db3c592fba461323c0ac67acaa480f3db7386860308d7fe7833bed8800b0"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261112T191008-site-discoverability-continuation-54a878c3/internal-link-graph.json",
+      "sha256": "c6314e553efda92bac8f9a77159ef0a82e4f7a08570e7c68c36e233fa61d099d"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261112T191008-site-discoverability-continuation-54a878c3/codex-assessment.json",
+      "sha256": "0dc09b93c6a7d0e30bcc29d6d963b9622d8f7e119b2f549c91b48a10860071e9"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261112T191008-site-discoverability-continuation-54a878c3/fixed-documents.json",
+      "sha256": "b0b5620711621e104c48387cabd7a4dd5a5b25391b15df2b1d05e8aa96ac79cd"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261112T191008-site-discoverability-continuation-54a878c3/source-preservation-final.json",
+      "sha256": "cdd474231d2a983540b88c8e4c3f13754d98df47ab00f1695262dd3930c8b476"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261112T191008-site-discoverability-continuation-54a878c3/claude-gap-analysis.json",
+      "sha256": "3404d6fc7e56e98f35d452cba8f4ec92b1087b9b64451ff792d570b5f72871eb"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261112T191008-site-discoverability-continuation-54a878c3/incremental-cross-review/facts.json",
+      "sha256": "87630687f1835b4386d4f3fc5ddfe2bc1df00ad79f2fddb422bc07cfee61a26a"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261112T191008-site-discoverability-continuation-54a878c3/claude-gap-analysis/facts.json",
+      "sha256": "92e1b5380d9fe61d92e5bfed5a05d3ad1c54a815b08cbf224b30d5dd0a1674de"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261112T191008-site-discoverability-continuation-54a878c3/view-bounded-counting-canonical-defense-1794511968293839363/counting-canonical-delta.json",
+      "sha256": "d888aecc6ebddfd206eddadee68fc4632ea8c3405212cf60078367a8b8889177"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261112T191008-site-discoverability-continuation-54a878c3/incremental-cross-recovery/recovery-facts.json",
+      "sha256": "0bf008e9241840acc261cef84fe634d901a6acdb56aca7fbe8a0e124d40beffa"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261112T191008-site-discoverability-continuation-54a878c3/view-incremental-site-cross-recovery-1794511803148049373/recovery-facts.json",
+      "sha256": "0bf008e9241840acc261cef84fe634d901a6acdb56aca7fbe8a0e124d40beffa"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261112T191008-site-discoverability-continuation-54a878c3/category-nojs/result.json",
+      "sha256": "94635638653dbea92559b95a2a7315f09b87bb057b9d1b89bfc1edf1221f3e50"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261112T191008-site-discoverability-continuation-54a878c3/view-incremental-evidence-gaps-1794510608394511635/facts.json",
+      "sha256": "92e1b5380d9fe61d92e5bfed5a05d3ad1c54a815b08cbf224b30d5dd0a1674de"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261112T191008-site-discoverability-continuation-54a878c3/bounded-defense-close/counting-canonical-delta.json",
+      "sha256": "d888aecc6ebddfd206eddadee68fc4632ea8c3405212cf60078367a8b8889177"
+    },
+    {
+      "path": "reports/runs/rhino-performance/20261112T191008-site-discoverability-continuation-54a878c3/view-incremental-site-audit-cross-review-1794511575515621925/facts.json",
+      "sha256": "87630687f1835b4386d4f3fc5ddfe2bc1df00ad79f2fddb422bc07cfee61a26a"
+    }
+  ],
+  "skipped_files": [],
+  "literal_mentions": [],
+  "candidate_records": [],
+  "no_live_requests": true
+}

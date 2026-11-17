@@ -1,0 +1,57 @@
+{
+  "project": null,
+  "state": "running",
+  "planned": {
+    "https://example.invalid/robots.txt": "completed",
+    "https://example.invalid/selected-0": "completed",
+    "https://example.invalid/selected-1": "completed",
+    "https://example.invalid/selected-2": "completed",
+    "https://example.invalid/selected-3": "completed",
+    "https://example.invalid/selected-4": "completed"
+  },
+  "requests": [
+    {
+      "ordinal": 1,
+      "url": "https://example.invalid/robots.txt",
+      "state": "completed",
+      "status": 200,
+      "bytes": 67
+    },
+    {
+      "ordinal": 2,
+      "url": "https://example.invalid/selected-0",
+      "state": "completed",
+      "status": 200,
+      "bytes": 254
+    },
+    {
+      "ordinal": 3,
+      "url": "https://example.invalid/selected-1",
+      "state": "completed",
+      "status": 200,
+      "bytes": 254
+    },
+    {
+      "ordinal": 4,
+      "url": "https://example.invalid/selected-2",
+      "state": "completed",
+      "status": 200,
+      "bytes": 254
+    },
+    {
+      "ordinal": 5,
+      "url": "https://example.invalid/selected-3",
+      "state": "completed",
+      "status": 200,
+      "bytes": 254
+    },
+    {
+      "ordinal": 6,
+      "url": "https://example.invalid/selected-4",
+      "state": "completed",
+      "status": 200,
+      "bytes": 254
+    }
+  ],
+  "arrival_at_server_without_response": "unknown"
+}

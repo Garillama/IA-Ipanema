@@ -1,0 +1,42 @@
+{
+  "exit_code": -9,
+  "timed_out": true,
+  "output_limited": false,
+  "idle_timed_out": false,
+  "cancelled": false,
+  "process_started": true,
+  "process_reaped": true,
+  "stdin_bytes_written": 0,
+  "context_complete": true,
+  "duration_s": 2.034,
+  "timing": {
+    "spawn_s": 0.000409,
+    "input_complete_s": 0.000409,
+    "first_stdout_s": 0.02936,
+    "first_stderr_s": null,
+    "timeout_phase": "total",
+    "event_counts": {},
+    "inference_vs_initialization": "not_separable_without_provider_events"
+  },
+  "output_accounting": {
+    "transport_bytes": 27,
+    "retained_bytes": 27,
+    "discarded_progress_bytes": 0,
+    "transport_limit_bytes": 40960,
+    "retained_limit_bytes": 4096
+  },
+  "isolation": {
+    "backend": "bubblewrap",
+    "snapshot_read_only": true,
+    "host_home_mounted": false,
+    "network": "disabled",
+    "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+  },
+  "observed_detached_children": [
+    34091
+  ],
+  "host_child_states_after": {
+    "34091": "absent"
+  },
+  "scope": "Synthetic local process cancellation, including setsid child; not an Antigravity run or remote service cancellation"
+}

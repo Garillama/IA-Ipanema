@@ -1,0 +1,144 @@
+{
+  "candidate_sha256": "288ef3739417e0e15e105e4826ea65598f17c0807265ed68cf42d3fc5008aa6f",
+  "reviewed_files": [
+    "tools/ipanema/orchestration/code_review.py",
+    "tests/unit/test_code_review_v3.py"
+  ],
+  "decision": "approve",
+  "challenges": {
+    "architecture": {
+      "status": "pass",
+      "evidence_refs": [
+        "code_review.py:ControllerEvidenceSource.incremental_evidence",
+        "code_review.py:material_proven",
+        "code_review.py:advance_objection (add_evidence)",
+        "code_review.py:replay_closure"
+      ],
+      "notes": "Static review only. Materiality is delegated to a controller interface whose default returns None. The reducer remains the single state machine, and replay consumes it. The reducer demands a MaterialEvidence with exact objection identity, candidate and refs, a valid kind, a non-empty receipt id and a 64-hex artifact hash. Replay then requires a bound, proven receipt whose subject, claim hash, basis_refs, kind and sha256 match. Nothing infers novelty from a changed string, ID or hash, and reuse of the same source is allowed. The author gains no closing authority, because refute/resolve still needs the reviewer and an adapter-attested confirmation."
+    },
+    "duplication": {
+      "status": "pass",
+      "evidence_refs": [
+        "code_review.py:evaluate (synthetic variable vs synthetic_only expression)"
+      ],
+      "notes": "No semantic duplication of the reducer or verifier. The synthetic-fixture expression is computed twice in evaluate (the new local and the existing synthetic_only field). That is trivial and not a defect."
+    },
+    "performance": {
+      "status": "pass",
+      "evidence_refs": [
+        "code_review.py:replay_closure (events <= 128)",
+        "code_review.py:material_proven"
+      ],
+      "notes": "material_proven is called twice per add_evidence event during replay, once directly and once inside the reducer. It is bounded by the 128-event cap. The cost depends on the future controller verifier, which should be cheap and read-only per the contract. No unbounded work is added in this code."
+    },
+    "regression": {
+      "status": "pass",
+      "evidence_refs": [
+        "code_review.py:advance_objection record_contract check",
+        "code_review.py:evaluate result_contract/authorization_ready/synthetic_pass",
+        "tests: synthetic_pass substitutions",
+        "contracts: council.py unchanged"
+      ],
+      "notes": "Two intentional breaking changes are documented. Records without record_contract 'ipanema-objection/2' are rejected by the reducer, and replay returns closed=False for them. A synthetic run now returns state 'synthetic_pass' instead of 'approved_for_authorization'. I could not inspect council.py, since only its hash was supplied. The passing retained wrapper tests suggest it passes the state through, but I did not verify that it has no other comparison against the old string. implementation_allowed, production_authorized and activation_allowed stay False. authorization_ready is True only when the non-synthetic state is approved_for_authorization."
+    },
+    "maintainability": {
+      "status": "pass",
+      "evidence_refs": [
+        "tests: MaterialIncrementTests",
+        "tests: FixtureController.prepare_material"
+      ],
+      "notes": "The contract is documented and the failure modes are clearly named. The fixture verifier is explicitly limited to bounded synthetic measurements. MaterialIncrementTests borrows FindingsResolution methods by attribute assignment. That is workable but a little fragile if those methods start depending on other self attributes."
+    }
+  },
+  "objections": [
+    {
+      "id": "N2a-dep",
+      "severity": "INFO",
+      "challenge": "architecture",
+      "sites": [
+        {
+          "file": "tools/ipanema/orchestration/code_review.py",
+          "function": "material_proven",
+          "start": 395,
+          "end": 412
+        }
+      ],
+      "evidence_refs": [
+        "material_proven: all semantic judgment is delegated to controller.incremental_evidence",
+        "contracts: 'Las pruebas aquí son verificadores sintéticos acotados'",
+        "trust_basis is a plain class attribute"
+      ],
+      "claim": "Whether a demonstration is truly material, relevant to the claim and not previously assessed lives entirely in the future controller verifier. The code checks integrity, scope, anti-replay by receipt ID and artifact hash within one record, and the receipt linkage. It does not check semantics. A subclass that declares trust_basis='adapter_verified' and returns MaterialEvidence unconditionally would pass. The candidate states this limitation and does not claim operational behavior. Static review, nothing executed.",
+      "impact": "No defect in this delta. A real controller verifier must be implemented and reviewed before any non-synthetic use.",
+      "recommendation": "Keep the verifier as an explicit integration dependency. Do not treat synthetic_pass or the fixture verifier as evidence that a native verifier exists.",
+      "resolution_condition": "A real controller verifier is implemented and reviewed in a later increment.",
+      "duplication_kind": "not_applicable",
+      "classification": "integration_dependency"
+    },
+    {
+      "id": "N2a-fixture-scope",
+      "severity": "INFO",
+      "challenge": "maintainability",
+      "sites": [
+        {
+          "file": "tests/unit/test_code_review_v3.py",
+          "function": "FixtureController.prepare_material",
+          "start": 58,
+          "end": 100
+        }
+      ],
+      "evidence_refs": [
+        "prepare_material: kind=='new_fact' with baseline None needs no claim-specific counterexample",
+        "test_new_measured_fact_permits_legitimate_review"
+      ],
+      "claim": "For new_fact, the fixture issues a proof whenever a line or function count can be observed. The claim text is not tested against the observation. The compatibility tests that use auto_material therefore exercise the plumbing, not materiality. Only the documented_refutation cases use a real counterexample. The docstring and contract disclose this. Static reasoning.",
+      "impact": "Test coverage of materiality is narrower than the number of passing tests suggests. This does not affect the production code path.",
+      "recommendation": "Keep the existing disclaimer and avoid citing the auto_material tests as materiality evidence.",
+      "resolution_condition": "None required for this delta.",
+      "duplication_kind": "not_applicable",
+      "classification": "style_preference"
+    }
+  ],
+  "summary": "Static review only. I executed nothing and did not rerun the 106 controller-reported tests. N2a looks resolved at the API level. add_evidence now requires a controller-verified MaterialEvidence bound to the objection, candidate and refs. Replay additionally requires a bound, proven verification receipt that matches the claim hash, basis refs, kind and artifact hash. Reusing the same source is allowed when the controller proves a fact or refutation. Novelty is never inferred from strings, IDs or hashes, and the author gains no closing authority. N4a looks resolved. A synthetic controller yields synthetic_pass with authorization_ready=false, and the other permission flags stay false. I found no reproducible defect. The only caveats are that the real material verifier is an integration dependency and that the fixture verifier is deliberately narrow. I could not inspect council.py (hash only). This review does not authorize integration.",
+  "changes": [],
+  "prior_findings": {
+    "N1": {
+      "status": "needs_evidence",
+      "evidence": [
+        "code_review.py:context_hash and adapt_context are not touched by the delta",
+        "delta hunks: MaterialEvidence, incremental_evidence, new_objection fields, material_proven, advance_objection, replay_closure, evaluate return"
+      ],
+      "notes": "The delta does not touch the context/1 serialization. I found no static regression. Per the instructions I do not re-approve N1 for this hash. The earlier assessment applies to fb292ff7."
+    },
+    "N2": {
+      "status": "resolved",
+      "evidence": [
+        "code_review.py:material_proven",
+        "code_review.py:advance_objection add_evidence",
+        "code_review.py:replay_closure material receipt check",
+        "test_repeated_original_reference_without_demonstration_rejected",
+        "test_refutation_uses_existing_unchanged_source_and_same_reference",
+        "test_changed_id_and_hash_with_no_counterexample_are_insufficient",
+        "test_material_evidence_never_gives_author_closing_authority"
+      ],
+      "notes": "N2a is addressed. Repeating only the original reference does not close. A verified refutation or new fact can reuse the same source and bytes. The reducer is still the only state machine and the origin reviewer's attested confirmation is still required. The procedural events are controller-asserted and the record store is not anchored, but the contract says so explicitly. Real materiality verification is an integration dependency."
+    },
+    "N3": {
+      "status": "needs_evidence",
+      "evidence": [
+        "code_review.py:load_history unchanged",
+        "code_review.py:new_objection adds original_claim/original_evidence_refs and record_contract"
+      ],
+      "notes": "History loading, the anchor and migration are unchanged. Records lacking the new fields now replay as not closed, and that is documented. I saw no static regression. I do not re-approve N3 for this hash. The earlier assessment applies to fb292ff7."
+    },
+    "N4": {
+      "status": "needs_evidence",
+      "evidence": [
+        "code_review.py:adapter_proven unchanged",
+        "code_review.py:evaluate synthetic_pass/authorization_ready",
+        "test_N4a_top_level_state_cannot_look_like_plain_approval"
+      ],
+      "notes": "The attestation path is unchanged and the N4a headline-state concern is addressed in the delta. I saw no static regression. I do not re-approve N4 for this hash. The earlier assessment applies to fb292ff7."
+    }
+  }
+}

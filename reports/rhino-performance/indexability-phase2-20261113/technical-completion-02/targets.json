@@ -1,0 +1,63 @@
+{
+  "project": "rhino-performance",
+  "origin": "https://rhino-performance.com",
+  "purpose": "Fill missing meta robots, response headers and main evidence. HTTP already checked; do not revisit other pages.",
+  "targets": [
+    {
+      "url": "https://rhino-performance.com/blog/posts/mejora-tu-rendimiento-con-las-botas-de-presoterapia-2fc8df74a4e1/",
+      "type": "article",
+      "baseline_HTTP": 200,
+      "missing": [
+        "meta robots",
+        "X-Robots-Tag",
+        "main content"
+      ],
+      "source_original": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-after.json"
+    },
+    {
+      "url": "https://rhino-performance.com/blog/posts/cuando-y-cuantas-veces-deberias-usar-la-presoterapia-78ce2c4b4e15/",
+      "type": "article",
+      "baseline_HTTP": 200,
+      "missing": [
+        "meta robots",
+        "X-Robots-Tag",
+        "main content"
+      ],
+      "source_original": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-after.json"
+    },
+    {
+      "url": "https://rhino-performance.com/blog/posts/la-presoterapia-como-complemento-en-la-recuperacion-postoperatoria-5bab92e6be21/",
+      "type": "article",
+      "baseline_HTTP": 200,
+      "missing": [
+        "meta robots",
+        "X-Robots-Tag",
+        "main content"
+      ],
+      "source_original": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-after.json"
+    },
+    {
+      "url": "https://rhino-performance.com/blog/posts/7-tipos-de-entrenamiento-que-debes-hacer-antes-de-correr-un-maraton-o-cualquier-carrera-244573e551fa/",
+      "type": "article",
+      "baseline_HTTP": 200,
+      "missing": [
+        "meta robots",
+        "X-Robots-Tag",
+        "main content"
+      ],
+      "source_original": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-after.json"
+    },
+    {
+      "url": "https://rhino-performance.com/blog/posts/hormonas-que-hacen-que-ames-correr-d6b29d573534/",
+      "type": "article",
+      "baseline_HTTP": 200,
+      "missing": [
+        "meta robots",
+        "X-Robots-Tag",
+        "main content"
+      ],
+      "source_original": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-after.json"
+    }
+  ],
+  "network_authorized": false
+}

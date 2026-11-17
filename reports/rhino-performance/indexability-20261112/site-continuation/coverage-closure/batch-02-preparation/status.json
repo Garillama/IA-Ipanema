@@ -1,0 +1,29 @@
+{
+  "project": "rhino-performance",
+  "batch": "02",
+  "state": "ready_to_request_specific_network_authorization",
+  "manifest_sha256": "7117b37560a94eb8477d6e1328e2999cd103d69857c1e01b87910b8d269b8f42",
+  "source_code_unchanged": true,
+  "matrix_unchanged": true,
+  "HTTP_individual_verified_remains": 54,
+  "pending_HTTP_remains": 70,
+  "pending_products_remains": 9,
+  "pending_articles_remains": 61,
+  "new_HTTP_requests": 0,
+  "GSC_requests": 0,
+  "pilot1_repeated": false,
+  "regression_suites_repeated": false,
+  "long_cancel_test_repeated": false,
+  "batch2_executed": false,
+  "network_authorized": false,
+  "original_pilot1_authorization_remains_consumed": true,
+  "dual_review_complete_for_preparation": true,
+  "SEO_findings_all_resolved": false,
+  "open_findings": [
+    "D010/D050 remain possible false positives, not proven global validator regression",
+    "D011 origin/effect of query encoding unknown",
+    "D070 asset presence not determined from projection",
+    "Editorial author identity and native emitter attribution unknown"
+  ],
+  "next_action": "One exact approved invocation only after new specific owner authorization"
+}

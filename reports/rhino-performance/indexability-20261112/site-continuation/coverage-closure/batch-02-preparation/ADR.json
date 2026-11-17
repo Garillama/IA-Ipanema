@@ -1,0 +1,32 @@
+{
+  "id": "ADR-RHINO-011-batch02-read-only",
+  "scope": "Incremental saved-evidence review and proposed new five-target operation; not a reopening of V4 implementation council",
+  "decision": "approved_with_conditions",
+  "ready_to_request_execution_authorization": true,
+  "execution_allowed": false,
+  "implementation_allowed": false,
+  "manifest_sha256": "7117b37560a94eb8477d6e1328e2999cd103d69857c1e01b87910b8d269b8f42",
+  "operation_file": "operation.json",
+  "reviews": [
+    "claude-review.json",
+    "codex-review.json",
+    "claude-contrast.json",
+    "codex-contrast.json"
+  ],
+  "constraints": {
+    "same_existing_engine_hashes": true,
+    "local_manifest_validation": true,
+    "five_new_pending_targets": true,
+    "no_duplicate_or_pilot1_overlap": true,
+    "same_original_limits": true,
+    "no_tests_or_network_repeated": true
+  },
+  "unresolved_SEO_observations_do_not_authorize_corrections": true,
+  "conditions_before_execution": [
+    "Specific owner authorization for manifest/hash and exact argv",
+    "Recheck integrated code/transport hashes, origin, manifest and pending status",
+    "Single execution with persistent authorization marker; no automatic retry",
+    "Stop under existing safety/budget rules; no extra URLs or GSC"
+  ],
+  "answers_note": "Both contrast outputs are preserved unchanged. Claude confirms D011 contextual/encoding separation in summary, evidence and revision notes; its answer row discusses D010/D050. No answer text or closure state was rewritten. Missing evidence remains open."
+}

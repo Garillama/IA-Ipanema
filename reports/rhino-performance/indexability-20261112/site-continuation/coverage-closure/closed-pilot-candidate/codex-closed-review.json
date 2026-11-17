@@ -1,0 +1,126 @@
+{
+  "requested_agent": "codex",
+  "effective_agent": "codex",
+  "patch_sha256": "59d76bf8b54285dab38271aaedb78bba777fe61efd9edfc4500fec75759bf459",
+  "input_hashes": {
+    "tests/integration/test_seo_pilot_cli_v4.py": "7e8e6ea49211d4258f82b69e992aa74e97c4b84add1140f02ad9cffbc43203cd",
+    "tests/unit/test_seo_pilot_v4.py": "88eb5a4d173f43d6ccb1165ff35f5f1ddf24e32d4d889481b131584b282cb116",
+    "tools/ipanema/seo/crawl_policy.py": "d30c444a60853ee482934515c2d628238cca26c5eb9dc364aa44542e5daaa4e9",
+    "tools/ipanema/seo/crawler.py": "f6e5de5fd60c16eb3e464dd5b10111bf60eb9e4289dcc05f00503805f056415f",
+    "tools/ipanema/seo/engineering.py": "1c6c0534755723cfac59e4395ad0fc44af6dc5df35dd88a1da98eb6c4ab7bd8d",
+    "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/closed-pilot-candidate/candidate.patch": "59d76bf8b54285dab38271aaedb78bba777fe61efd9edfc4500fec75759bf459",
+    "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/closed-pilot-candidate/manifest.json": "c9bfe5aefc7b8ec9b073730b7d7d87e54a79fc8ab3f8ab01aa19cac57602e400",
+    "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/closed-pilot-candidate/controller-qa.json": "0a7ebb7f9ddfb6cd989809b2727a02a3c5fe84d5a2ed7b6002df0ff5682cc6a4",
+    "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/closed-pilot-candidate/design.md": "0200d0bfca9009b720c79d50428697acf8a0f93c02a10eece066af77a27daf59",
+    "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/pilot-preparation/targets.json": "3b14fcb031ae57ab43ef247ff087c6d8df0b0c400ca12ac3694edfc654a38bb6",
+    "tools/ipanema/seo/robots.py": "57d01f9086dffa7f25f26b59976098770d585731eca3d758ee9235000399a3df"
+  },
+  "response": {
+    "decision": "approve",
+    "summary": "Revisión individual favorable del candidato 59d76bf8b54285dab38271aaedb78bba777fe61efd9edfc4500fec75759bf459 para solicitar integración local. No identifico un defecto crítico demostrado en el diff y código aportados. No autoriza aplicar cambios ni realizar red; tampoco sustituye la segunda revisión independiente. La observación menor y los límites de prueba quedan abiertos.",
+    "changes": [],
+    "evidence": [
+      "El parche y el manifiesto aportados delimitan tres módulos y dos archivos de tests. No recalculé hashes ni ejecuté pruebas.",
+      "El modo cerrado valida cinco destinos literales únicos antes del transporte, omite semillas de home/sitemaps y evita BFS mediante depth=None; admite únicamente redirecciones validadas adicionales.",
+      "pilot_limits y el Fetcher compartido acotan robots/documentos a 12 GET, tres saltos globales, concurrencia uno y restricciones de velocidad, tiempo y bytes. Los errores terminales impiden continuar el scope.",
+      "El checkpoint registra started y persiste antes del transporte; una solicitud sin resultado confirmado conserva incertidumbre sobre su llegada al servidor.",
+      "El worker supervisado contiene validación del manifiesto, análisis y exportación. El supervisor verifica el grupo, reserva gracia dentro del plazo y termina el grupo incluso al completar o interrumpirse.",
+      "controller-qa.json declara 209 unitarias SEO, nueve integraciones cortas efectivas y ejecución separada satisfactoria del test real de 120 segundos. Su prueba registra 119.506495654 segundos, worker recogido, descendiente inactivo y cero HTTP; el skipped del batch no contradice esa ejecución.",
+      "El binding aportado identifica el SHA256 exacto de engineering.py y la función AST del test largo conservada. Esto respalda esa prueba del watchdog, sin garantizar universalmente todos los bloqueos, plataformas o descendientes posibles.",
+      "El diff mantiene las ramas generales mediante condiciones opt-in y callback nulo. El controlador declara 13 integraciones generales reutilizadas, aplicación aislada y reversión restaurando las tres preimágenes y eliminando las dos altas; no equivale a una nueva ejecución integral sobre el candidato."
+    ],
+    "objections": [
+      {
+        "id": "codex-obs-checkpoint",
+        "alternative_id": "codex-candidato-59d76bf8",
+        "category": "trazabilidad",
+        "severity": "low",
+        "claim": "_checkpoint_writer inicializa project=null y state=running, sin actualizar esos campos al terminar. Reproducción deducida del código, no ejecutada: tras un piloto satisfactorio, checkpoint.json seguirá mostrando running aunque supervision.json indique finished. Los estados por petición y el recibo permiten interpretarlo; conviene documentar que el checkpoint no expresa el estado terminal.",
+        "status": "open",
+        "evidence_refs": [],
+        "resolution_evidence_refs": []
+      }
+    ],
+    "preferred_alternative": "codex-candidato-59d76bf8",
+    "questions": [
+      {
+        "id": "codex-q-contraste",
+        "to_agent": "claude",
+        "alternative_id": "unknown",
+        "question": "No se aportó tu propuesta ni su ID. ¿Qué alternativa prefieres y cómo valoras, al contrastarla, el binding exacto y los límites de la prueba separada real_120_test/real_120_source_binding de controller-qa.json? Indica el ID exacto de tu alternativa y cualquier reproducción concreta que cambie la admisibilidad.",
+        "evidence_refs": []
+      }
+    ]
+  },
+  "model": {
+    "model": "gpt-6.1-sol",
+    "effort": "medium",
+    "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+    "verified_at": "2026-11-08"
+  },
+  "execution": {
+    "exit_code": 0,
+    "timed_out": false,
+    "output_limited": false,
+    "idle_timed_out": false,
+    "cancelled": false,
+    "process_started": true,
+    "process_reaped": true,
+    "stdin_bytes_written": 196509,
+    "context_complete": true,
+    "duration_s": 53.794,
+    "timing": {
+      "spawn_s": 0.000615,
+      "input_complete_s": 0.187325,
+      "first_stdout_s": 0.83837,
+      "first_stderr_s": null,
+      "timeout_phase": null,
+      "event_counts": {
+        "thread.started": 1,
+        "item.completed": 2,
+        "turn.started": 1,
+        "turn.completed": 1
+      },
+      "inference_vs_initialization": "not_separable_without_provider_events"
+    },
+    "output_accounting": {
+      "transport_bytes": 4335,
+      "retained_bytes": 4335,
+      "discarded_progress_bytes": 0,
+      "transport_limit_bytes": 20000000,
+      "retained_limit_bytes": 2000000
+    },
+    "isolation": {
+      "backend": "bubblewrap",
+      "snapshot_read_only": true,
+      "host_home_mounted": false,
+      "network": "enabled_no_destination_firewall",
+      "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+    },
+    "started_at": "2026-11-12T21:48:12.643132+00:00",
+    "prompt_bytes": 196509,
+    "prompt_sha256": "3ae9caa223a84e567542e78ff5f781c0bf04740c273a9322766b02c514e66dbf",
+    "usage": {
+      "provider_reported": {
+        "input_tokens": 65144,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1464,
+        "reasoning_output_tokens": 676
+      },
+      "measured_cost_available": false,
+      "estimated_cost": null
+    },
+    "limits": {
+      "timeout": 240,
+      "idle_timeout": 90,
+      "startup_timeout": 30,
+      "first_response_timeout": 150
+    },
+    "structured_output": "native_schema",
+    "contract_validation": {
+      "status": "passed",
+      "duration_s": 0.000378
+    }
+  }
+}

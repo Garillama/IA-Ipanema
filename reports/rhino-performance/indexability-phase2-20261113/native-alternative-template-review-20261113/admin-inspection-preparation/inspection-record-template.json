@@ -1,0 +1,52 @@
+{
+  "scope": "Local preparation of owner-led read-only admin inspection; no external requests or admin access",
+  "parent_ADR_unchanged": true,
+  "state": "awaiting_owner_evidence",
+  "implementation_allowed": false,
+  "category_assignment_records": {
+    "Presoterapia": {
+      "template": null,
+      "observed_at": null,
+      "source": null
+    },
+    "Terapia fría": {
+      "template": null,
+      "observed_at": null,
+      "source": null
+    },
+    "Accesorios": {
+      "template": null,
+      "observed_at": null,
+      "source": null
+    },
+    "Pistolas de masaje": {
+      "template": null,
+      "observed_at": null,
+      "source": null
+    },
+    "Compresión frío/calor": {
+      "template": null,
+      "observed_at": null,
+      "source": null
+    }
+  },
+  "first_requested_captures": [
+    "A-Presoterapia: category name and current Plantilla value",
+    "B: Category template selector with alternatives and create option; no confirmation"
+  ],
+  "never_infer": [
+    "Counter identifies assigned categories",
+    "Visible formatting dropdown proves semantic rendered H2",
+    "Template option proves correct current implementation",
+    "Five known categories constitute complete admin inventory"
+  ],
+  "protected_sources": {
+    "reports/rhino-performance/indexability-phase2-20261113/native-alternative-template-review-20261113/ADR.json": "52f9775e0d9a07b637dbcd5b675459de6473b17c2abed7e266fc44274854050e",
+    "reports/rhino-performance/indexability-phase2-20261113/native-alternative-template-review-20261113/review-status.json": "e3f10d456244c2e1abdd8f864b3b95bd8ebebcaa7b4ed25029b75b9f2ce5b12d",
+    "reports/rhino-performance/indexability-phase2-20261113/first-improvements-preparation-20261113/editorial-candidate.md": "1378141593e74d8d948e678ca8be08d59d6e14c26dbecc60ffc4773f7332520e",
+    "reports/rhino-performance/indexability-phase2-20261113/additional-exports-20261113/url-matrix-124.json": "82d7e49e49276fa86baf0b498b8e51b5d29e9e74d188d3c088c0f85148e31d77"
+  },
+  "checklist_sha256": "ec2e686d22e0583dad41d6e9d63a8c4020c078d83a8a74707a6aa5a662e78a3a",
+  "new_provider_runs": 0,
+  "review_policy": "Reuse completed council. Review actual new owner evidence incrementally after receipt, no simulated approval."
+}

@@ -1,0 +1,320 @@
+[
+  {
+    "agent": "claude",
+    "phase": "review",
+    "model": {
+      "model": "claude-sonnet-5-5",
+      "effort": "medium",
+      "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+      "verified_at": "2026-11-08"
+    },
+    "execution": {
+      "exit_code": 0,
+      "timed_out": false,
+      "output_limited": false,
+      "idle_timed_out": false,
+      "cancelled": false,
+      "process_started": true,
+      "process_reaped": true,
+      "stdin_bytes_written": 136410,
+      "context_complete": true,
+      "duration_s": 30.149,
+      "timing": {
+        "spawn_s": 0.001467,
+        "input_complete_s": 1.854188,
+        "first_stdout_s": 3.235689,
+        "first_stderr_s": null,
+        "timeout_phase": null,
+        "event_counts": {
+          "system": 4,
+          "stream_event": 514,
+          "event:message_start": 3,
+          "event:content_block_start": 3,
+          "event:content_block_delta": 499,
+          "assistant": 3,
+          "event:content_block_stop": 3,
+          "user": 3,
+          "event:message_delta": 3,
+          "event:message_stop": 3,
+          "rate_limit_event": 2,
+          "result": 1
+        },
+        "inference_vs_initialization": "not_separable_without_provider_events"
+      },
+      "output_accounting": {
+        "transport_bytes": 188888,
+        "retained_bytes": 188888,
+        "discarded_progress_bytes": 0,
+        "transport_limit_bytes": 20000000,
+        "retained_limit_bytes": 2000000
+      },
+      "isolation": {
+        "backend": "bubblewrap",
+        "snapshot_read_only": true,
+        "host_home_mounted": false,
+        "network": "enabled_no_destination_firewall",
+        "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+      },
+      "started_at": "2026-11-13T08:21:04.949505+00:00",
+      "prompt_bytes": 136410,
+      "prompt_sha256": "d4647944f630d03a8478f639af7477428645a3824d1fd007ca5e58f67e683a1e",
+      "usage": {
+        "provider_reported": {
+          "total_cost_usd": 0.3009525,
+          "duration_ms": 26786,
+          "input_tokens": 6,
+          "cache_creation_input_tokens": 63599,
+          "cache_read_input_tokens": 123145,
+          "output_tokens": 3423
+        },
+        "measured_cost_available": true,
+        "estimated_cost": null
+      },
+      "limits": {
+        "timeout": 240,
+        "idle_timeout": 90,
+        "startup_timeout": 30,
+        "first_response_timeout": 120
+      },
+      "structured_output": "native_schema",
+      "contract_validation": {
+        "status": "passed",
+        "duration_s": 0.026438
+      }
+    }
+  },
+  {
+    "agent": "claude",
+    "phase": "contrast",
+    "model": {
+      "model": "claude-sonnet-5-5",
+      "effort": "medium",
+      "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+      "verified_at": "2026-11-08"
+    },
+    "execution": {
+      "exit_code": 0,
+      "timed_out": false,
+      "output_limited": false,
+      "idle_timed_out": false,
+      "cancelled": false,
+      "process_started": true,
+      "process_reaped": true,
+      "stdin_bytes_written": 166541,
+      "context_complete": true,
+      "duration_s": 14.938,
+      "timing": {
+        "spawn_s": 0.000859,
+        "input_complete_s": 1.538228,
+        "first_stdout_s": 2.735934,
+        "first_stderr_s": null,
+        "timeout_phase": null,
+        "event_counts": {
+          "system": 2,
+          "stream_event": 265,
+          "event:message_start": 1,
+          "event:content_block_start": 1,
+          "event:content_block_delta": 260,
+          "assistant": 1,
+          "event:content_block_stop": 1,
+          "user": 1,
+          "event:message_delta": 1,
+          "event:message_stop": 1,
+          "rate_limit_event": 1,
+          "result": 1
+        },
+        "inference_vs_initialization": "not_separable_without_provider_events"
+      },
+      "output_accounting": {
+        "transport_bytes": 105456,
+        "retained_bytes": 105456,
+        "discarded_progress_bytes": 0,
+        "transport_limit_bytes": 20000000,
+        "retained_limit_bytes": 2000000
+      },
+      "isolation": {
+        "backend": "bubblewrap",
+        "snapshot_read_only": true,
+        "host_home_mounted": false,
+        "network": "enabled_no_destination_firewall",
+        "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+      },
+      "started_at": "2026-11-13T08:24:40.022839+00:00",
+      "prompt_bytes": 166541,
+      "prompt_sha256": "b15d8cca94f91486f3a152fb95e83de5eeb41de0a6dc950bf097c340e225a9a8",
+      "usage": {
+        "provider_reported": {
+          "total_cost_usd": 0.31267,
+          "duration_ms": 11983,
+          "input_tokens": 2,
+          "cache_creation_input_tokens": 73924,
+          "cache_read_input_tokens": 0,
+          "output_tokens": 1697
+        },
+        "measured_cost_available": true,
+        "estimated_cost": null
+      },
+      "limits": {
+        "timeout": 240,
+        "idle_timeout": 90,
+        "startup_timeout": 30,
+        "first_response_timeout": 120
+      },
+      "structured_output": "native_schema",
+      "contract_validation": {
+        "status": "passed",
+        "duration_s": 0.017306
+      }
+    }
+  },
+  {
+    "agent": "codex",
+    "phase": "review",
+    "model": {
+      "model": "gpt-6.1-sol",
+      "effort": "medium",
+      "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+      "verified_at": "2026-11-08"
+    },
+    "execution": {
+      "exit_code": 0,
+      "timed_out": false,
+      "output_limited": false,
+      "idle_timed_out": false,
+      "cancelled": false,
+      "process_started": true,
+      "process_reaped": true,
+      "stdin_bytes_written": 136405,
+      "context_complete": true,
+      "duration_s": 39.124,
+      "timing": {
+        "spawn_s": 0.001027,
+        "input_complete_s": 0.774636,
+        "first_stdout_s": 2.704368,
+        "first_stderr_s": null,
+        "timeout_phase": null,
+        "event_counts": {
+          "thread.started": 1,
+          "item.completed": 2,
+          "turn.started": 1,
+          "turn.completed": 1
+        },
+        "inference_vs_initialization": "not_separable_without_provider_events"
+      },
+      "output_accounting": {
+        "transport_bytes": 5327,
+        "retained_bytes": 5327,
+        "discarded_progress_bytes": 0,
+        "transport_limit_bytes": 20000000,
+        "retained_limit_bytes": 2000000
+      },
+      "isolation": {
+        "backend": "bubblewrap",
+        "snapshot_read_only": true,
+        "host_home_mounted": false,
+        "network": "enabled_no_destination_firewall",
+        "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+      },
+      "started_at": "2026-11-13T08:21:04.950126+00:00",
+      "prompt_bytes": 136405,
+      "prompt_sha256": "9051553228d769e30cd7ac04f9a41a549f0959cd6886c23feb03310f02038cbc",
+      "usage": {
+        "provider_reported": {
+          "input_tokens": 50182,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 1111,
+          "reasoning_output_tokens": 81
+        },
+        "measured_cost_available": false,
+        "estimated_cost": null
+      },
+      "limits": {
+        "timeout": 240,
+        "idle_timeout": 90,
+        "startup_timeout": 30,
+        "first_response_timeout": 150
+      },
+      "structured_output": "native_schema",
+      "contract_validation": {
+        "status": "passed",
+        "duration_s": 0.000453
+      }
+    }
+  },
+  {
+    "agent": "codex",
+    "phase": "contrast",
+    "model": {
+      "model": "gpt-6.1-sol",
+      "effort": "medium",
+      "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+      "verified_at": "2026-11-08"
+    },
+    "execution": {
+      "exit_code": 0,
+      "timed_out": false,
+      "output_limited": false,
+      "idle_timed_out": false,
+      "cancelled": false,
+      "process_started": true,
+      "process_reaped": true,
+      "stdin_bytes_written": 166536,
+      "context_complete": true,
+      "duration_s": 33.249,
+      "timing": {
+        "spawn_s": 0.000835,
+        "input_complete_s": 0.631056,
+        "first_stdout_s": 2.014773,
+        "first_stderr_s": null,
+        "timeout_phase": null,
+        "event_counts": {
+          "thread.started": 1,
+          "item.completed": 2,
+          "turn.started": 1,
+          "turn.completed": 1
+        },
+        "inference_vs_initialization": "not_separable_without_provider_events"
+      },
+      "output_accounting": {
+        "transport_bytes": 5410,
+        "retained_bytes": 5410,
+        "discarded_progress_bytes": 0,
+        "transport_limit_bytes": 20000000,
+        "retained_limit_bytes": 2000000
+      },
+      "isolation": {
+        "backend": "bubblewrap",
+        "snapshot_read_only": true,
+        "host_home_mounted": false,
+        "network": "enabled_no_destination_firewall",
+        "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+      },
+      "started_at": "2026-11-13T08:24:40.028602+00:00",
+      "prompt_bytes": 166536,
+      "prompt_sha256": "c9c033f0e40335f609bff2a21a365e4b45179d08e87e3bfc71c8ec86b5b0318a",
+      "usage": {
+        "provider_reported": {
+          "input_tokens": 57951,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 1154,
+          "reasoning_output_tokens": 110
+        },
+        "measured_cost_available": false,
+        "estimated_cost": null
+      },
+      "limits": {
+        "timeout": 240,
+        "idle_timeout": 90,
+        "startup_timeout": 30,
+        "first_response_timeout": 150
+      },
+      "structured_output": "native_schema",
+      "contract_validation": {
+        "status": "passed",
+        "duration_s": 0.003816
+      }
+    }
+  }
+]

@@ -1,0 +1,44 @@
+{
+  "matrix_csv": "reports/rhino-performance/indexability-20261112/site-continuation/url-matrix.csv",
+  "matrix_json": "reports/rhino-performance/indexability-20261112/site-continuation/url-matrix.json",
+  "before_hashes": {
+    "csv": "ed836f154f8df844b09ddce2d48eb377f422d717ba3505066bdb609362cd452e",
+    "json": "85f87095f2d85719c3386189a88fdf527b55bb352637583e2febc9ecf851d5a1"
+  },
+  "after_hashes": {
+    "csv": "f645992e668c80c2e46717f53b1544635e6d5e8fe05a735569830fcbaa0c005b",
+    "json": "2b38e4b4334ba534ca5506c1c8aab20efd42d2b398dcb1bbb5f83b547c73e133"
+  },
+  "backup_csv": "reports/runs/rhino-performance/20261113T074645-authorized-five-url-batch10/url-matrix-before.csv",
+  "backup_json": "reports/runs/rhino-performance/20261113T074645-authorized-five-url-batch10/url-matrix-before.json",
+  "exactly_five_rows_updated": true,
+  "updated_URLs": [
+    "https://rhino-performance.com/blog/posts/alimentos-que-te-ayudaran-a-aumentar-la-masa-muscular-7de57a9b8523/",
+    "https://rhino-performance.com/blog/posts/relajacion-progresiva-f7e777ea1906/",
+    "https://rhino-performance.com/blog/posts/la-meditacion-tu-aliada-en-la-recuperacion-post-entrenamiento-83e21067eb03/",
+    "https://rhino-performance.com/blog/posts/como-evitar-lesiones-antes-de-un-maraton-5d6eb14ddf00/",
+    "https://rhino-performance.com/blog/posts/dedica-un-dia-a-tu-recuperacion-muscular-con-botas-de-presoterapia-bb901e932055/"
+  ],
+  "Google_fields_unchanged": true,
+  "other_120_rows_unchanged": true,
+  "before": {
+    "total_urls": 125,
+    "HTML_total": 124,
+    "HTML_with_individual_HTTP": 94,
+    "pending_individual_HTTP": 30,
+    "pending_by_type": {
+      "article": 30
+    }
+  },
+  "after": {
+    "total_urls": 125,
+    "HTML_total": 124,
+    "HTML_with_individual_HTTP": 99,
+    "pending_individual_HTTP": 25,
+    "pending_by_type": {
+      "article": 25
+    }
+  },
+  "original_pending75_and_pending70_files_preserved": true,
+  "next_pending_list": "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/live-batch10-20261113/pending-25.csv"
+}

@@ -1,0 +1,53 @@
+{
+  "status": "needs_evidence",
+  "author": "codex",
+  "previous_candidate_patch_sha256": "69c75ac77596439227c4066439711334e8c7bf2724b5a28fbbfabdf2336e0dbb",
+  "candidate_patch_sha256": "c240b16f37ec13a84db4e54f656f15beda7316642c2e078e8d94b906d7ed6085",
+  "implementation_allowed": false,
+  "integration_authorized": false,
+  "activation_allowed": false,
+  "production_authorized": false,
+  "independent_review_of_new_diff": false,
+  "findings": {
+    "O1": {
+      "author_response": "accepted_with_qualifications",
+      "correction": "proposed_in_isolation",
+      "state": "review_pending",
+      "origin_reviewer": "claude",
+      "closed": false
+    },
+    "O2": {
+      "author_response": "accepted",
+      "correction": "proposed_in_isolation",
+      "state": "review_pending",
+      "origin_reviewer": "claude",
+      "closed": false
+    },
+    "O3": {
+      "author_response": "accepted_with_qualifications",
+      "correction": "proposed_in_isolation",
+      "state": "review_pending",
+      "origin_reviewer": "claude",
+      "closed": false
+    }
+  },
+  "mandatory_pending": [
+    "independent review of exact corrected diff by Claude",
+    "Antigravity authentication/egress/isolation pilot and independent review",
+    "explicit central participation policy migration; current dual policy preserved",
+    "real controller receipt producer/transport wiring evidence",
+    "explicit carry-forward of adverse history across candidate hashes",
+    "owner specific integration authorization",
+    "affected council/consumer compatibility QA before integration, justified by final reviewed scope"
+  ],
+  "evidence": [
+    "author-defense.md",
+    "design-contracts.md",
+    "manifest.json",
+    "focused-results.txt",
+    "focused-receipt.json",
+    "controller-integrity-receipt.json"
+  ],
+  "provider_calls": 0,
+  "historical_159_repeated": false
+}

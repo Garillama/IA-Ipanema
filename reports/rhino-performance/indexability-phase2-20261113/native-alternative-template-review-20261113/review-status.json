@@ -1,0 +1,100 @@
+{
+  "scope": "Incremental review of one newly authorized official guide and unchanged local code facts; two independent responses and one cross-question exchange",
+  "participants": {
+    "claude": {
+      "review": {
+        "file": "claude-review.json",
+        "sha256": "9ba112c2c98bffdea4ca4e01daf784234a7579d9b9a807d015403685de70601c",
+        "model": {
+          "model": "claude-sonnet-5-5",
+          "effort": "medium",
+          "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+          "verified_at": "2026-11-08"
+        },
+        "decision": "changes_requested",
+        "input_hashes": {
+          "reports/rhino-performance/indexability-phase2-20261113/native-alternative-template-review-20261113/review-packet.json": "b2feacbd57a84b4148732cce6505433af9dd45e3039611ee50a6013a8cae3fac",
+          "reports/rhino-performance/indexability-phase2-20261113/native-alternative-template-review-20261113/controller-validation.json": "fc594ffef6a01e9e4a0e8be82c0c2ac4dbb1bf1ec10b617d49106d32983bca20",
+          "reports/rhino-performance/indexability-phase2-20261113/native-alternative-template-review-20261113/official-source-facts.json": "a2cecff413379ff6552f1c01f2d9f5784fb44e4ceb05db1f95021406db8c2afe",
+          "reports/rhino-performance/indexability-phase2-20261113/native-alternative-template-review-20261113/local-evidence-reused.json": "d7fbf1ac8578f684f61e8698209f2bc41d08b0d6468d3674a9d4bcde78861930"
+        }
+      },
+      "contrast": {
+        "file": "claude-contrast.json",
+        "sha256": "c68b2e812084dd44b35a741e9e6ae168579bef38b0621588a6dc578f83aeff48",
+        "model": {
+          "model": "claude-sonnet-5-5",
+          "effort": "medium",
+          "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+          "verified_at": "2026-11-08"
+        },
+        "decision": "proposed",
+        "input_hashes": {
+          "reports/rhino-performance/indexability-phase2-20261113/native-alternative-template-review-20261113/review-packet.json": "9c520345781e1bfafd460638ca8818b287907f9466304d037712a0ff178f6d00",
+          "reports/rhino-performance/indexability-phase2-20261113/native-alternative-template-review-20261113/controller-validation.json": "fc594ffef6a01e9e4a0e8be82c0c2ac4dbb1bf1ec10b617d49106d32983bca20",
+          "reports/rhino-performance/indexability-phase2-20261113/native-alternative-template-review-20261113/controller-supplement.json": "bee61425ceb6fa3dee9ba23fd790d963b214990654d9e2c34ced91614431bbe9",
+          "reports/rhino-performance/indexability-phase2-20261113/native-alternative-template-review-20261113/official-source-facts.json": "a2cecff413379ff6552f1c01f2d9f5784fb44e4ceb05db1f95021406db8c2afe",
+          "reports/rhino-performance/indexability-phase2-20261113/native-alternative-template-review-20261113/local-evidence-reused.json": "d7fbf1ac8578f684f61e8698209f2bc41d08b0d6468d3674a9d4bcde78861930",
+          "reports/rhino-performance/indexability-phase2-20261113/native-alternative-template-review-20261113/README.md": "6fc271d16cf780c2a165cc64e83b278bd44e88144aabe5757d7ecb1efa6e8caa"
+        }
+      }
+    },
+    "codex": {
+      "review": {
+        "file": "codex-review.json",
+        "sha256": "f0fc99feb1f4b6400b7656c6a49f3ebaaa66cf382fedd12c948b5e064b6794e2",
+        "model": {
+          "model": "gpt-6.1-sol",
+          "effort": "medium",
+          "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+          "verified_at": "2026-11-08"
+        },
+        "decision": "proposed",
+        "input_hashes": {
+          "reports/rhino-performance/indexability-phase2-20261113/native-alternative-template-review-20261113/review-packet.json": "b2feacbd57a84b4148732cce6505433af9dd45e3039611ee50a6013a8cae3fac",
+          "reports/rhino-performance/indexability-phase2-20261113/native-alternative-template-review-20261113/controller-validation.json": "fc594ffef6a01e9e4a0e8be82c0c2ac4dbb1bf1ec10b617d49106d32983bca20",
+          "reports/rhino-performance/indexability-phase2-20261113/native-alternative-template-review-20261113/official-source-facts.json": "a2cecff413379ff6552f1c01f2d9f5784fb44e4ceb05db1f95021406db8c2afe",
+          "reports/rhino-performance/indexability-phase2-20261113/native-alternative-template-review-20261113/local-evidence-reused.json": "d7fbf1ac8578f684f61e8698209f2bc41d08b0d6468d3674a9d4bcde78861930"
+        }
+      },
+      "contrast": {
+        "file": "codex-contrast.json",
+        "sha256": "34a16737eb8f8e2957a316919f75ad386a0d5af4315c08da8b97622839e58cb9",
+        "model": {
+          "model": "gpt-6.1-sol",
+          "effort": "medium",
+          "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+          "verified_at": "2026-11-08"
+        },
+        "decision": "changes_requested",
+        "input_hashes": {
+          "reports/rhino-performance/indexability-phase2-20261113/native-alternative-template-review-20261113/review-packet.json": "9c520345781e1bfafd460638ca8818b287907f9466304d037712a0ff178f6d00",
+          "reports/rhino-performance/indexability-phase2-20261113/native-alternative-template-review-20261113/controller-validation.json": "fc594ffef6a01e9e4a0e8be82c0c2ac4dbb1bf1ec10b617d49106d32983bca20",
+          "reports/rhino-performance/indexability-phase2-20261113/native-alternative-template-review-20261113/controller-supplement.json": "bee61425ceb6fa3dee9ba23fd790d963b214990654d9e2c34ced91614431bbe9",
+          "reports/rhino-performance/indexability-phase2-20261113/native-alternative-template-review-20261113/official-source-facts.json": "a2cecff413379ff6552f1c01f2d9f5784fb44e4ceb05db1f95021406db8c2afe",
+          "reports/rhino-performance/indexability-phase2-20261113/native-alternative-template-review-20261113/local-evidence-reused.json": "d7fbf1ac8578f684f61e8698209f2bc41d08b0d6468d3674a9d4bcde78861930",
+          "reports/rhino-performance/indexability-phase2-20261113/native-alternative-template-review-20261113/README.md": "6fc271d16cf780c2a165cc64e83b278bd44e88144aabe5757d7ecb1efa6e8caa"
+        }
+      }
+    }
+  },
+  "contracts_and_assigned_answers_valid": true,
+  "recommended_alternative": "native-alternative-category-template",
+  "general_platform_support": "documented_by_authorized_official_guide",
+  "Rhino_installation_specific_support": "needs_evidence",
+  "open_objections": [
+    "claude-obj-1",
+    "claude-obj-2",
+    "codex-obj-01",
+    "codex-obj-02"
+  ],
+  "implementation_allowed": false,
+  "no_majority_or_opinion_replaces_QA": true,
+  "remaining": [
+    "Published installation/current config identity",
+    "Editor controls and actual assignment list",
+    "Current commercial/editorial evidence",
+    "Real render/H2/LS/no-dup/SEO/responsive/performance",
+    "Specific mutation authorization"
+  ]
+}

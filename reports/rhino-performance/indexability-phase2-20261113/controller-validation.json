@@ -1,0 +1,18 @@
+{
+  "id": "phase2.offline.evidence",
+  "kind": "saved_source_recovery_and_scope_validation",
+  "subject": "Google baseline124 +20 missing technical signals + source context",
+  "passed": true,
+  "sha256": "7f1bc2f16a8d48ab98bb5a61cb1e2b7e696b5896fe332a2afac36c4ea279657a",
+  "measurement_scope": "Offline original artifacts, access doctor without account API, local source candidates and four native payload validations; no storefront/GSC API",
+  "matrix_source_sha256": "bf86c1b656c2c7be38706a50bd8325525d60987a125fc034caef636f483390a5",
+  "source_theme_hashes": {
+    "snippets/structured-data/structured-data.tpl": "704d05b3b65a1cc3d762d40f782f8fc05bc2ceebe9c11d25862ef16b3f8afeac",
+    "layouts/layout.tpl": "aa0d59caa5947993a057fc13b4517057286a65a28e24029abb22b839cc18ba31",
+    "snippets/blog/blog-post-item.tpl": "e52b2d4a5674ee171025cee779cda6ead008b4b4829757ecb8cc99885f2e7c2f",
+    "snippets/blog/blog-post-content.tpl": "39974bb54e1eea429f1a05bb1a0ff7a00b569e5f464310872e237d31b4d90b4d",
+    "snippets/product-list/product-item/item.tpl": "daa3928d4c256ed94de9d8e7bd536e3143945a6461cef4e628cef0892c9ac3fd"
+  },
+  "zero_new_storefront_or_account_requests": true,
+  "no_theme_or_source_edits": true
+}

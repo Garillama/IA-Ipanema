@@ -1,0 +1,2 @@
+# NOT AUTHORIZED. One invocation only after separate exact scope authorization and fresh preflight.
+python3 tools/ia.py --project rhino-performance seo crawl --targets-manifest reports/rhino-performance/indexability-phase2-20261113/technical-completion-03/targets.json --targets-sha256 922631b61146275e73f8b1c4d221f2e265aead78f2d9ca578bf4864564305193 --allow-network --max-urls 8 --max-depth 0 --max-requests 12 --requests-per-second 0.5 --max-seconds 120 --timeout 20 --max-bytes 2000000 --max-sitemaps 0 --max-redirects 3 --concurrency 1

@@ -1,0 +1,14 @@
+test_ambiguous_or_missing_identity_cannot_prove_constraint (test_council_receipts.Receipts.test_ambiguous_or_missing_identity_cannot_prove_constraint) ... ok
+test_budget_shared_across_concurrent_attempts (test_council_receipts.Receipts.test_budget_shared_across_concurrent_attempts) ... ok
+test_council_rules_are_same_despite_original_mutation (test_council_receipts.Receipts.test_council_rules_are_same_despite_original_mutation) ... ok
+test_literal_receipt_exact_source_and_alternative_identity (test_council_receipts.Receipts.test_literal_receipt_exact_source_and_alternative_identity) ... ok
+test_no_command_execution_or_path_expansion (test_council_receipts.Receipts.test_no_command_execution_or_path_expansion) ... ok
+test_old_baseline_qa_does_not_prove_changed_implementation (test_council_receipts.Receipts.test_old_baseline_qa_does_not_prove_changed_implementation) ... ok
+test_qa_outside_project_evidence_is_rejected (test_council_receipts.Receipts.test_qa_outside_project_evidence_is_rejected) ... ok
+test_qa_wrong_project_expired_or_missing_check_fails (test_council_receipts.Receipts.test_qa_wrong_project_expired_or_missing_check_fails) ... ok
+test_skill_escape_rejected_before_loading_context (test_council_receipts.Receipts.test_skill_escape_rejected_before_loading_context) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.032s
+
+OK

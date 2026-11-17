@@ -1,0 +1,24 @@
+{
+  "command": [
+    "python3",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "/home/alanrichard/Escritorio/IA inversa/tests/unit",
+    "-p",
+    "test_council_receipts.py",
+    "-v"
+  ],
+  "exit_code": 0,
+  "duration_seconds": 0.108,
+  "network": false,
+  "target": "isolated candidate modules; existing receipt consumer tests",
+  "candidate_patch_sha256": "fb292ff7f11c2ccaed5e90a2325c1703f23ece67bdc1b2a6f96ad3c6d49b8e4f",
+  "checked_source_files": {
+    "tools/ipanema/orchestration/council.py": "3bbe36122abe1966fa0fc89eb2a23576284797c4afb2a1b4c071e83cb4cfad7a",
+    "tools/ipanema/orchestration/code_review.py": "e8ac3a263a2b94922f1c0d5844517913e714b5234c5d1f30a7c11a22224e2cba",
+    "tests/unit/test_code_review_v3.py": "39763d930ac76248c9800456793a26b16f9053cf1071b1eec845a1650cd97b9d"
+  },
+  "tests_passed": 9
+}

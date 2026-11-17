@@ -1,0 +1,35 @@
+{
+  "project": "rhino-performance",
+  "batch": "02",
+  "network_requests": 0,
+  "source_matrix_sha256": "d1c2ccd32206df4c5890d99d910736d8a7190dac6898a1eadca9c32d504dc7e5",
+  "source_pending70_sha256": "919713fde53f871a693fe7d9164ad9bc387dff0385a35f4191775f4b18f7e3d5",
+  "pending70_matches_current_matrix": true,
+  "selected_type_counts": {
+    "product": 2,
+    "article": 3
+  },
+  "five_unique_urls": true,
+  "no_overlap_with_pilot1": true,
+  "all_five_current_HTTP_not_observed": true,
+  "native_manifest_validator_passed": true,
+  "manifest_sha256": "7117b37560a94eb8477d6e1328e2999cd103d69857c1e01b87910b8d269b8f42",
+  "validated_urls": [
+    "https://rhino-performance.com/productos/compresor-pro-3-presoterapia/",
+    "https://rhino-performance.com/productos/brazos-presoterapia-pro-3/",
+    "https://rhino-performance.com/blog/posts/guia-completa-para-cuidar-tus-botas-de-presoterapia-57e0c1076e6c/",
+    "https://rhino-performance.com/blog/posts/cinco-consejos-infalibles-para-mejorar-tu-rendimiento-deportivo-con-la-presoterapia-92e925649706/",
+    "https://rhino-performance.com/blog/posts/la-presoterapia-un-nuevo-escencial-en-la-rutina-de-los-campeones-997eed183e73/"
+  ],
+  "installed_five_hashes": {
+    "tests/integration/test_seo_pilot_cli_v4.py": "7e8e6ea49211d4258f82b69e992aa74e97c4b84add1140f02ad9cffbc43203cd",
+    "tests/unit/test_seo_pilot_v4.py": "88eb5a4d173f43d6ccb1165ff35f5f1ddf24e32d4d889481b131584b282cb116",
+    "tools/ipanema/seo/crawl_policy.py": "d30c444a60853ee482934515c2d628238cca26c5eb9dc364aa44542e5daaa4e9",
+    "tools/ipanema/seo/crawler.py": "f6e5de5fd60c16eb3e464dd5b10111bf60eb9e4289dcc05f00503805f056415f",
+    "tools/ipanema/seo/engineering.py": "1c6c0534755723cfac59e4395ad0fc44af6dc5df35dd88a1da98eb6c4ab7bd8d"
+  },
+  "all_transport_dependency_hashes_match_pilot1": true,
+  "no_tests_repeated": true,
+  "no_source_or_matrix_changes": true,
+  "saved_report_sha256": "90ed920ae812460e9d2481e3c36ec3f85f2e665516a6666b591456af3662d6a2"
+}

@@ -1,0 +1,135 @@
+{
+  "requested_agent": "codex",
+  "effective_agent": "codex",
+  "scope": "phase2 saved evidence and prioritization only",
+  "input_hashes": {
+    "reports/rhino-performance/indexability-phase2-20261113/evidence-packet.json": "7f1bc2f16a8d48ab98bb5a61cb1e2b7e696b5896fe332a2afac36c4ea279657a",
+    "reports/rhino-performance/indexability-phase2-20261113/source-candidates.json": "dd0646e04b75acc2b5c1209beec3c270bbeb32739aa464a857a583770eaea6d2",
+    "reports/rhino-performance/indexability-phase2-20261113/schema-context-packet.json": "496f4cf79ac0c1e331b6220f6dc6a3d2b4068cb87150169f209a57e9e0ad8b6e",
+    "reports/rhino-performance/indexability-phase2-20261113/limited-completion-plan.json": "a16820c38ac46d9bba0d85eb4d1ff617cec7b5808ec268accfcd5b755c369f11",
+    "reports/rhino-performance/indexability-phase2-20261113/controller-validation.json": "e9f9ce4bb5a1d7cf99c8f97e6e11441436e3748dd1cc222533d9ed41c830c263"
+  },
+  "response": {
+    "decision": "proposed",
+    "summary": "Propongo únicamente investigación incremental: primero categorías comerciales con estado Google desconocido; después completar señales técnicas y verificar autoría/emisores. Separar bloqueos de indexación, calidad editorial y posicionamiento. Sin propuestas pares visibles, no puedo contrastar alternativas ni aprobar una selección conjunta. No se autorizan cambios, red ni publicación.",
+    "changes": [],
+    "evidence": [
+      "phase2.offline.evidence: 124 HTML con HTTP200, 122 rutas observadas y 15 inspecciones históricas, 10 PASS; quedan 109 HTML sin inspección. Indexación actual: unknown. Las 170 impresiones no constituyen censo ni prueban causalidad.",
+      "phase2.offline.evidence: priorizar pistolas-de-masaje, terapia-fria y compresion-frio-y-calor por categoría comercial y estado Google desconocido, antes de keywords o scores. Presoterapia y accesorios tienen PASS histórico, sin garantía actual ni promesa de tráfico.",
+      "phase2.offline.evidence: los 20 artículos conservan HTTP/canonical/hash/breadcrumbs, pero no cuerpo, headers ni main. La búsqueda en 203 archivos no recuperó esas señales; el límite pertenece a los artefactos examinados.",
+      "phase2.offline.evidence: cuatro operaciones propuestas de cinco destinos reutilizan CLI existente y requieren autorizaciones separadas; ninguna ejecutada. Mantener 12 GET máximos por operación, intervalo 0.5 s, 120 s totales, 20 s por solicitud, 2 MB y tres saltos. El preflight debe detectar señales faltantes aunque HTTP sea 200.",
+      "phase2.offline.evidence: author escalar está observado; post.author_name no acredita Person u Organization. Candidato local: snippets/structured-data/structured-data.tpl, líneas 88–89 y 129–130; consumidores: snippets/blog/blog-post-item.tpl y layouts/layout.tpl. snippets/blog/blog-post-content.tpl muestra la atribución visible. Identidad editorial y correspondencia con publicación actual: unknown.",
+      "phase2.offline.evidence: en dos PDP, Product principal no presenta flags comparativos; secundarios corresponden a enlaces de carrusel. D010/D050 pueden ser falsos positivos contextuales; origen de amp%3B en D011: unknown; D070 no demuestra ausencia de imagen. Candidatos de trazabilidad: structured-data.tpl y snippets/product-list/product-item/item.tpl; sin modificar motor ni inventar datos comerciales.",
+      "phase2.offline.evidence: contenido distinto en blog 2–8 y canonical raíz no demuestran exclusión de artículos. Consulta preparada en three-issues/operations/consulta-tiendanube.md, no enviada; mecanismo oficial: unknown. GSC está configurado, credential_available=false; no hubo API, solicitudes nuevas ni ediciones."
+    ],
+    "objections": [
+      {
+        "id": "codex-o1",
+        "alternative_id": "unknown",
+        "category": "suficiencia_de_evidencia",
+        "severity": "medium",
+        "claim": "No hay base para cerrar los 20 casos técnicos: HTTP200 no sustituye headers, directivas ni contenido. Exigir HTTP not_observed excluiría incorrectamente los objetivos. Es una condición del plan investigativo, no una objeción atribuida a una propuesta par ausente.",
+        "status": "open",
+        "evidence_refs": [
+          "phase2.offline.evidence"
+        ],
+        "resolution_evidence_refs": []
+      },
+      {
+        "id": "codex-o2",
+        "alternative_id": "unknown",
+        "category": "atribucion_y_riesgo_de_integracion",
+        "severity": "high",
+        "claim": "Un parche de autor o schema carecería de identidad editorial y correspondencia remota comprobadas. Los hashes locales y marcadores guardados solo permiten candidatos. No cambiar head-tags, menús, contenido, canonical ni schema para silenciar el validador; tampoco reabrir motor o lotes01–15.",
+        "status": "open",
+        "evidence_refs": [
+          "phase2.offline.evidence"
+        ],
+        "resolution_evidence_refs": []
+      }
+    ],
+    "preferred_alternative": "unknown",
+    "questions": [
+      {
+        "id": "codex-q1",
+        "to_agent": "claude",
+        "alternative_id": "unknown",
+        "question": "Sin disponer aquí del ID de tu alternativa, ¿qué criterio de preflight propones para detectar señales faltantes en destinos ya HTTP200, considerando reason y requests de limited-completion-plan.json, sin exigir HTTP not_observed ni ampliar las cuatro operaciones separadas?",
+        "evidence_refs": [
+          "phase2.offline.evidence"
+        ]
+      }
+    ]
+  },
+  "model": {
+    "model": "gpt-6.1-sol",
+    "effort": "medium",
+    "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+    "verified_at": "2026-11-08"
+  },
+  "execution": {
+    "exit_code": 0,
+    "timed_out": false,
+    "output_limited": false,
+    "idle_timed_out": false,
+    "cancelled": false,
+    "process_started": true,
+    "process_reaped": true,
+    "stdin_bytes_written": 136405,
+    "context_complete": true,
+    "duration_s": 39.124,
+    "timing": {
+      "spawn_s": 0.001027,
+      "input_complete_s": 0.774636,
+      "first_stdout_s": 2.704368,
+      "first_stderr_s": null,
+      "timeout_phase": null,
+      "event_counts": {
+        "thread.started": 1,
+        "item.completed": 2,
+        "turn.started": 1,
+        "turn.completed": 1
+      },
+      "inference_vs_initialization": "not_separable_without_provider_events"
+    },
+    "output_accounting": {
+      "transport_bytes": 5327,
+      "retained_bytes": 5327,
+      "discarded_progress_bytes": 0,
+      "transport_limit_bytes": 20000000,
+      "retained_limit_bytes": 2000000
+    },
+    "isolation": {
+      "backend": "bubblewrap",
+      "snapshot_read_only": true,
+      "host_home_mounted": false,
+      "network": "enabled_no_destination_firewall",
+      "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+    },
+    "started_at": "2026-11-13T08:21:04.950126+00:00",
+    "prompt_bytes": 136405,
+    "prompt_sha256": "9051553228d769e30cd7ac04f9a41a549f0959cd6886c23feb03310f02038cbc",
+    "usage": {
+      "provider_reported": {
+        "input_tokens": 50182,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1111,
+        "reasoning_output_tokens": 81
+      },
+      "measured_cost_available": false,
+      "estimated_cost": null
+    },
+    "limits": {
+      "timeout": 240,
+      "idle_timeout": 90,
+      "startup_timeout": 30,
+      "first_response_timeout": 150
+    },
+    "structured_output": "native_schema",
+    "contract_validation": {
+      "status": "passed",
+      "duration_s": 0.000453
+    }
+  }
+}

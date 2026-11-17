@@ -1,0 +1,178 @@
+{
+  "objective": "Independent readonly exact-diff code review, no author conclusions or other reviewer responses supplied",
+  "patch_sha256": "69c75ac77596439227c4066439711334e8c7bf2724b5a28fbbfabdf2336e0dbb",
+  "candidate_manifest": {
+    "status": "isolated_not_integrated_not_activated",
+    "files": [
+      {
+        "path": "tools/ipanema/orchestration/council.py",
+        "operation": "modify",
+        "before_sha256": "4ec261a0d84fbdc12d5abf85eab489d21cf85f30af57eac9769c722d17541261",
+        "after_sha256": "c23b72bc726f89a538f110b9fc627b6eab357917a78fae6804625ec686f116da",
+        "candidate": ".local/v3-cross-review/20261117T164026/candidate/tools/ipanema/orchestration/council.py"
+      },
+      {
+        "path": "tools/ipanema/orchestration/code_review.py",
+        "operation": "add",
+        "before_sha256": null,
+        "after_sha256": "d68512e340c68dd3985b0c70355640f7e5751a61d1664988ce3d6378d7788fd4",
+        "candidate": ".local/v3-cross-review/20261117T164026/candidate/tools/ipanema/orchestration/code_review.py"
+      },
+      {
+        "path": "tests/unit/test_code_review_v3.py",
+        "operation": "add",
+        "before_sha256": null,
+        "after_sha256": "a44f096e4a982062faaf68a47100a511b694cdd4f20f657ec814f61d8d91dda0",
+        "candidate": ".local/v3-cross-review/20261117T164026/candidate/tests/unit/test_code_review_v3.py"
+      }
+    ],
+    "modifications": 1,
+    "additions": 2,
+    "deletions": 0,
+    "patch_sha256": "69c75ac77596439227c4066439711334e8c7bf2724b5a28fbbfabdf2336e0dbb",
+    "implementation_allowed": false
+  },
+  "sources": {
+    "candidate/tools/ipanema/orchestration/council.py": {
+      "input_path": "reports/orchestration/v3-cross-review-20261117/real-review-20261117T165936/source/candidate/tools/ipanema/orchestration/council.py",
+      "sha256": "c23b72bc726f89a538f110b9fc627b6eab357917a78fae6804625ec686f116da",
+      "lines": 663
+    },
+    "candidate/tools/ipanema/orchestration/code_review.py": {
+      "input_path": "reports/orchestration/v3-cross-review-20261117/real-review-20261117T165936/source/candidate/tools/ipanema/orchestration/code_review.py",
+      "sha256": "d68512e340c68dd3985b0c70355640f7e5751a61d1664988ce3d6378d7788fd4",
+      "lines": 244
+    },
+    "candidate/tests/unit/test_code_review_v3.py": {
+      "input_path": "reports/orchestration/v3-cross-review-20261117/real-review-20261117T165936/source/candidate/tests/unit/test_code_review_v3.py",
+      "sha256": "a44f096e4a982062faaf68a47100a511b694cdd4f20f657ec814f61d8d91dda0",
+      "lines": 275
+    },
+    "baseline/tools/ipanema/orchestration/council.py": {
+      "input_path": "reports/orchestration/v3-cross-review-20261117/real-review-20261117T165936/source/baseline/tools/ipanema/orchestration/council.py",
+      "sha256": "4ec261a0d84fbdc12d5abf85eab489d21cf85f30af57eac9769c722d17541261",
+      "lines": 653
+    },
+    "baseline/tools/ipanema/orchestration/adapters.py": {
+      "input_path": "reports/orchestration/v3-cross-review-20261117/real-review-20261117T165936/source/baseline/tools/ipanema/orchestration/adapters.py",
+      "sha256": "bae25bee06cf7574ee35f65e9f9055dfa8a495336f80615165ddd5232359d01d",
+      "lines": 173
+    },
+    "baseline/tools/ipanema/orchestration/council_runtime.py": {
+      "input_path": "reports/orchestration/v3-cross-review-20261117/real-review-20261117T165936/source/baseline/tools/ipanema/orchestration/council_runtime.py",
+      "sha256": "92b6e47eb8942c26161c240a3258e481ae108b42ee2894cd0577403ea0d49635",
+      "lines": 305
+    },
+    "baseline/tools/ipanema/orchestration/engine.py": {
+      "input_path": "reports/orchestration/v3-cross-review-20261117/real-review-20261117T165936/source/baseline/tools/ipanema/orchestration/engine.py",
+      "sha256": "74885e94f8f9cbf8f7a6e71c0cc8f5f44eec032fac8892f7507e2eb06879319f",
+      "lines": 540
+    },
+    "baseline/tools/ipanema/orchestration/planner.py": {
+      "input_path": "reports/orchestration/v3-cross-review-20261117/real-review-20261117T165936/source/baseline/tools/ipanema/orchestration/planner.py",
+      "sha256": "b09a3bc644618502680e8804ed7f135eaa074e7b82812d2013c5293ef909117e",
+      "lines": 98
+    },
+    "baseline/tools/ipanema/orchestration/isolation.py": {
+      "input_path": "reports/orchestration/v3-cross-review-20261117/real-review-20261117T165936/source/baseline/tools/ipanema/orchestration/isolation.py",
+      "sha256": "0d734fcbf6d10e839d2a7cb46f3416ca60f0751e1491974d73186a8d56408079",
+      "lines": 261
+    },
+    "baseline/tests/unit/test_council_receipts.py": {
+      "input_path": "reports/orchestration/v3-cross-review-20261117/real-review-20261117T165936/source/baseline/tests/unit/test_council_receipts.py",
+      "sha256": "a70bffee039ef3e5e901eabb2f2add4ad8e28535445a90d5291aaec1274942ff",
+      "lines": 94
+    },
+    "baseline/tests/unit/test_council_policy.py": {
+      "input_path": "reports/orchestration/v3-cross-review-20261117/real-review-20261117T165936/source/baseline/tests/unit/test_council_policy.py",
+      "sha256": "9a65f6a4537ce963e9c1e105f09fe14a43813459fabc351d5571431ccece17f8",
+      "lines": 295
+    }
+  },
+  "available_evidence_refs": {
+    "source:candidate/tools/ipanema/orchestration/council.py": {
+      "input_path": "reports/orchestration/v3-cross-review-20261117/real-review-20261117T165936/source/candidate/tools/ipanema/orchestration/council.py",
+      "sha256": "c23b72bc726f89a538f110b9fc627b6eab357917a78fae6804625ec686f116da",
+      "lines": 663
+    },
+    "source:candidate/tools/ipanema/orchestration/code_review.py": {
+      "input_path": "reports/orchestration/v3-cross-review-20261117/real-review-20261117T165936/source/candidate/tools/ipanema/orchestration/code_review.py",
+      "sha256": "d68512e340c68dd3985b0c70355640f7e5751a61d1664988ce3d6378d7788fd4",
+      "lines": 244
+    },
+    "source:candidate/tests/unit/test_code_review_v3.py": {
+      "input_path": "reports/orchestration/v3-cross-review-20261117/real-review-20261117T165936/source/candidate/tests/unit/test_code_review_v3.py",
+      "sha256": "a44f096e4a982062faaf68a47100a511b694cdd4f20f657ec814f61d8d91dda0",
+      "lines": 275
+    },
+    "source:baseline/tools/ipanema/orchestration/council.py": {
+      "input_path": "reports/orchestration/v3-cross-review-20261117/real-review-20261117T165936/source/baseline/tools/ipanema/orchestration/council.py",
+      "sha256": "4ec261a0d84fbdc12d5abf85eab489d21cf85f30af57eac9769c722d17541261",
+      "lines": 653
+    },
+    "source:baseline/tools/ipanema/orchestration/adapters.py": {
+      "input_path": "reports/orchestration/v3-cross-review-20261117/real-review-20261117T165936/source/baseline/tools/ipanema/orchestration/adapters.py",
+      "sha256": "bae25bee06cf7574ee35f65e9f9055dfa8a495336f80615165ddd5232359d01d",
+      "lines": 173
+    },
+    "source:baseline/tools/ipanema/orchestration/council_runtime.py": {
+      "input_path": "reports/orchestration/v3-cross-review-20261117/real-review-20261117T165936/source/baseline/tools/ipanema/orchestration/council_runtime.py",
+      "sha256": "92b6e47eb8942c26161c240a3258e481ae108b42ee2894cd0577403ea0d49635",
+      "lines": 305
+    },
+    "source:baseline/tools/ipanema/orchestration/engine.py": {
+      "input_path": "reports/orchestration/v3-cross-review-20261117/real-review-20261117T165936/source/baseline/tools/ipanema/orchestration/engine.py",
+      "sha256": "74885e94f8f9cbf8f7a6e71c0cc8f5f44eec032fac8892f7507e2eb06879319f",
+      "lines": 540
+    },
+    "source:baseline/tools/ipanema/orchestration/planner.py": {
+      "input_path": "reports/orchestration/v3-cross-review-20261117/real-review-20261117T165936/source/baseline/tools/ipanema/orchestration/planner.py",
+      "sha256": "b09a3bc644618502680e8804ed7f135eaa074e7b82812d2013c5293ef909117e",
+      "lines": 98
+    },
+    "source:baseline/tools/ipanema/orchestration/isolation.py": {
+      "input_path": "reports/orchestration/v3-cross-review-20261117/real-review-20261117T165936/source/baseline/tools/ipanema/orchestration/isolation.py",
+      "sha256": "0d734fcbf6d10e839d2a7cb46f3416ca60f0751e1491974d73186a8d56408079",
+      "lines": 261
+    },
+    "source:baseline/tests/unit/test_council_receipts.py": {
+      "input_path": "reports/orchestration/v3-cross-review-20261117/real-review-20261117T165936/source/baseline/tests/unit/test_council_receipts.py",
+      "sha256": "a70bffee039ef3e5e901eabb2f2add4ad8e28535445a90d5291aaec1274942ff",
+      "lines": 94
+    },
+    "source:baseline/tests/unit/test_council_policy.py": {
+      "input_path": "reports/orchestration/v3-cross-review-20261117/real-review-20261117T165936/source/baseline/tests/unit/test_council_policy.py",
+      "sha256": "9a65f6a4537ce963e9c1e105f09fe14a43813459fabc351d5571431ccece17f8",
+      "lines": 295
+    },
+    "qa:unit-results.txt": {
+      "path": "reports/orchestration/v3-cross-review-20261117/unit-results.txt",
+      "sha256": "5869e0d72887afbe67d0bed149d59c0c513fbb493b9d5948aae3d1b3a1e5e18c",
+      "scope": "Saved controller test output only; no new execution or real-agent semantic detection"
+    },
+    "qa:council-compatibility.txt": {
+      "path": "reports/orchestration/v3-cross-review-20261117/council-compatibility.txt",
+      "sha256": "a6ab623a6a253799f5027549cb1c6b8980ded59eeadbff2633cd0255927864dd",
+      "scope": "Saved controller test output only; no new execution or real-agent semantic detection"
+    },
+    "qa:orchestration-compatibility.txt": {
+      "path": "reports/orchestration/v3-cross-review-20261117/orchestration-compatibility.txt",
+      "sha256": "16b4e6bf9f172fa76eb33c4fd967682f998a07b62e55133d41191a545bdb3d37",
+      "scope": "Saved controller test output only; no new execution or real-agent semantic detection"
+    }
+  },
+  "known_qa_facts": {
+    "new_synthetic_gate_tests": 31,
+    "old_council_tests": 87,
+    "old_orchestration_tests": 41,
+    "real_tri_agent_quality_not_proven": true
+  },
+  "permissions": {
+    "readonly": true,
+    "model_tools": false,
+    "subagents": false,
+    "production": false,
+    "modify_candidate": false
+  },
+  "source_alias_rule": "Use aliases candidate/... or baseline/... in objections sites; source hashes and line counts are frozen. Do not infer conflicts from superficial text overlap. Cite source:function:lines for every concrete finding."
+}

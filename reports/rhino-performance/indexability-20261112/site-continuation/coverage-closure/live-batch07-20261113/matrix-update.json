@@ -1,0 +1,44 @@
+{
+  "matrix_csv": "reports/rhino-performance/indexability-20261112/site-continuation/url-matrix.csv",
+  "matrix_json": "reports/rhino-performance/indexability-20261112/site-continuation/url-matrix.json",
+  "before_hashes": {
+    "csv": "62c48d9647926360525f3f8573ab61274ac12852dc08d05d10ccb8471bdb3968",
+    "json": "c6c75c1b8bb648972dbc9d4fcaa0e3a64926b07540e1f423221ffe2e731c39c7"
+  },
+  "after_hashes": {
+    "csv": "879d4331089b2722a509590852c9137626df90ec2528f16e05ff533bd35814d1",
+    "json": "6e6e47d9800d4c45ca57a17d14cf18e98bd593e5121f39c377b87e3cf78143c9"
+  },
+  "backup_csv": "reports/runs/rhino-performance/20261113T072357-authorized-five-url-batch07/url-matrix-before.csv",
+  "backup_json": "reports/runs/rhino-performance/20261113T072357-authorized-five-url-batch07/url-matrix-before.json",
+  "exactly_five_rows_updated": true,
+  "updated_URLs": [
+    "https://rhino-performance.com/blog/posts/tips-que-te-ayudaran-a-mejorar-en-tu-proximo-partido-de-tenis-da63bd38d5ff/",
+    "https://rhino-performance.com/blog/posts/desmintiendo-7-mitos-del-running-que-todos-hemos-creido-alguna-vez-092ce3ea8787/",
+    "https://rhino-performance.com/blog/posts/recuperarse-tambien-es-entrenar-asi-vive-un-atleta-la-recuperacion-con-rhino-pro-air-1c89f8f9e9be/",
+    "https://rhino-performance.com/blog/posts/mantener-cuerpo-en-forma-durante-las-vacaciones-c67b80b964a5/",
+    "https://rhino-performance.com/blog/posts/como-recuperarte-despues-de-un-maraton-claves-para-una-rapida-recuperacion-bbd01b52831b/"
+  ],
+  "Google_fields_unchanged": true,
+  "other_120_rows_unchanged": true,
+  "before": {
+    "total_urls": 125,
+    "HTML_total": 124,
+    "HTML_with_individual_HTTP": 79,
+    "pending_individual_HTTP": 45,
+    "pending_by_type": {
+      "article": 45
+    }
+  },
+  "after": {
+    "total_urls": 125,
+    "HTML_total": 124,
+    "HTML_with_individual_HTTP": 84,
+    "pending_individual_HTTP": 40,
+    "pending_by_type": {
+      "article": 40
+    }
+  },
+  "original_pending75_and_pending70_files_preserved": true,
+  "next_pending_list": "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/live-batch07-20261113/pending-40.csv"
+}

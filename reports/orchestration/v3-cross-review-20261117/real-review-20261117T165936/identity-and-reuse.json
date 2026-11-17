@@ -1,0 +1,53 @@
+{
+  "at": "2026-11-17T17:01:38.219856+00:00",
+  "patch_sha256": "69c75ac77596439227c4066439711334e8c7bf2724b5a28fbbfabdf2336e0dbb",
+  "all_candidate_hashes_match": true,
+  "files": [
+    {
+      "path": "tools/ipanema/orchestration/council.py",
+      "candidate_sha256": "c23b72bc726f89a538f110b9fc627b6eab357917a78fae6804625ec686f116da",
+      "matches_approved_after": true,
+      "operational_preimage_matches": true
+    },
+    {
+      "path": "tools/ipanema/orchestration/code_review.py",
+      "candidate_sha256": "d68512e340c68dd3985b0c70355640f7e5751a61d1664988ce3d6378d7788fd4",
+      "matches_approved_after": true,
+      "operational_preimage_matches": true
+    },
+    {
+      "path": "tests/unit/test_code_review_v3.py",
+      "candidate_sha256": "a44f096e4a982062faaf68a47100a511b694cdd4f20f657ec814f61d8d91dda0",
+      "matches_approved_after": true,
+      "operational_preimage_matches": true
+    }
+  ],
+  "prior_tests_reused": 159,
+  "new_tests_run": 0,
+  "existing_records": [
+    {
+      "path": "reports/orchestration/v3-cross-review-20261117/candidate.patch",
+      "sha256": "69c75ac77596439227c4066439711334e8c7bf2724b5a28fbbfabdf2336e0dbb"
+    },
+    {
+      "path": "reports/orchestration/v3-cross-review-20261117/candidate-manifest.json",
+      "sha256": "1184ef0c39af82fca0a6269a6c940df441caa76a00a949d45124d763aa1918ce"
+    },
+    {
+      "path": "reports/orchestration/v3-cross-review-20261117/ADR.md",
+      "sha256": "229c7f385fbd8e7bc66a76357c73638f35cc13961634286442e9cc9244754a3c"
+    },
+    {
+      "path": "reports/orchestration/v3-cross-review-20261117/controller-results.json",
+      "sha256": "48d62177a98bb3a68b578b56299a627d511bca26e3a132de914f410e2fcf1e7f"
+    },
+    {
+      "path": "reports/orchestration/v3-discovery-20261117/observations.json",
+      "sha256": "782c5500445093f9dc1d0fc74073147ce98def2d46a4ed7f98ab99af2f889ad2"
+    },
+    {
+      "path": "reports/orchestration/v3-discovery-20261117/verification.json",
+      "sha256": "c946c8b0fb25f2103c5d29960e913a8affa2c7d280e3660ac6c330d035f8b8a4"
+    }
+  ]
+}

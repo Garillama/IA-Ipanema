@@ -1,0 +1,1006 @@
+--- a/tools/ipanema/orchestration/council.py
++++ b/tools/ipanema/orchestration/council.py
+@@ -653,7 +653,7 @@
+                        'Las opiniones y confidence del modelo no son mediciones.']}
+ 
+ 
+-def review_code_candidate(candidate, reviews, *, evidence, root, answers=(), bindings=(), review_history=()):
++def review_code_candidate(candidate, reviews, *, evidence, root, answers=(), bindings=(), review_history=(), controller=None):
+     """Optional V3 gate; does not activate participants, apply code or publish.
+ 
+     Callers must first obtain verified independent review envelopes/receipts.
+@@ -661,4 +661,4 @@
+     """
+     from .code_review import evaluate
+     return evaluate(candidate, reviews, evidence=evidence, root=root, answers=answers,
+-                    bindings=bindings, review_history=review_history)
++                    bindings=bindings, review_history=review_history, controller=controller)
+--- a/tools/ipanema/orchestration/code_review.py
++++ b/tools/ipanema/orchestration/code_review.py
+@@ -10,6 +10,7 @@
+ import hashlib
+ import json
+ import re
++from dataclasses import dataclass
+ from pathlib import Path
+ 
+ from ..core import IpanemaError, digest, beneath
+@@ -23,6 +24,142 @@
+ def _hash(value):
+     return hashlib.sha256(json.dumps(value, sort_keys=True, ensure_ascii=False,
+                                      separators=(',', ':')).encode()).hexdigest()
++
++
++CONTEXT_CONTRACT = 'ipanema-code-review-context/1'
++
++
++def context_hash(value):
++    """Contract /1: matches existing JSON producer on its JSON domain.
++
++    Legacy candidate/receipt hashes keep _hash; never reinterpret their bytes.
++    """
++    return hashlib.sha256(json.dumps(value, sort_keys=True, ensure_ascii=True,
++                          allow_nan=False, separators=(', ', ': ')).encode('utf-8')).hexdigest()
++
++
++def history_head(lineage_id, reviews):
++    return context_hash({'lineage_id': lineage_id, 'reviews': reviews})
++
++
++def adapt_context(legacy, *, policy, permissions, lineage_id):
++    """Explicit isolated producer. Does not retrofit permissions into old receipts."""
++    _require(isinstance(legacy, dict) and legacy.get('participation_sha256') in
++             (context_hash(policy), _hash(policy)), 'unrecognized legacy policy hash')
++    _require(isinstance(permissions, dict) and bool(permissions), 'permissions absent')
++    _require(isinstance(lineage_id, str) and bool(lineage_id), 'lineage absent')
++    result = copy.deepcopy(legacy)
++    result.update(context_contract=CONTEXT_CONTRACT, participation_sha256=context_hash(policy),
++                  permissions_sha256=context_hash(permissions), review_lineage_id=lineage_id)
++    return result
++
++
++@dataclass(frozen=True)
++class AdapterEvidence:
++    """Controller adapter assertion, never deserialize from a model JSON object.
++
++    Type separation is an API boundary, not cryptographic authentication.
++    Native receipt verification must be implemented by the trusted integrator.
++    """
++    receipt_id: str
++    agent: str
++    candidate_sha256: str
++    permissions_sha256: str
++    binding_sha256: str
++    adapter_receipt_sha256: str
++    capability: str
++    actor_kind: str = 'principal'
++    parent_actor_id: str | None = None
++    supersedes_review_ids: tuple = ()
++
++
++@dataclass(frozen=True)
++class MigrationEvidence:
++    objection_identity: str
++    from_candidate_sha256: str
++    to_candidate_sha256: str
++    reviewer: str
++    author: str
++
++
++class ControllerEvidenceSource:
++    """Read-only controller bridge, deliberately unavailable in current transport.
++
++    Subclass only in controller code after native verification. Model data and
++    self-hashed bindings must never be promoted into this object. Synthetic
++    implementations must label their trust_basis as synthetic_fixture.
++    """
++    trust_basis = 'unavailable'
++
++    def history(self, lineage_id):
++        return None
++
++    def history_anchor(self, lineage_id):
++        return None
++
++    def attestation(self, receipt_id):
++        return None
++
++    def migration(self, reference):
++        return None
++
++
++def adapter_proven(source, binding, agent, candidate_sha256, permissions_sha256):
++    if not isinstance(source, ControllerEvidenceSource) or source.trust_basis not in (
++            'adapter_verified', 'synthetic_fixture'):
++        return None
++    proof = source.attestation(binding.get('receipt_id'))
++    if (isinstance(proof, AdapterEvidence) and proof.agent == agent
++            and proof.receipt_id == binding.get('receipt_id')
++            and proof.candidate_sha256 == candidate_sha256
++            and proof.permissions_sha256 == permissions_sha256
++            and proof.binding_sha256 == binding.get('binding_sha256')
++            and re.fullmatch('[a-f0-9]{64}', proof.adapter_receipt_sha256)
++            and proof.capability == 'code_review_readonly' and proof.actor_kind == 'principal'
++            and proof.parent_actor_id is None and isinstance(proof.supersedes_review_ids, tuple)
++            and all(isinstance(x, str) for x in proof.supersedes_review_ids)):
++        return proof
++    return None
++
++
++def load_history(source, context, supplied):
++    """A complete controller index plus an anchored head, not optional model data."""
++    if not isinstance(context.get('review_lineage_id'), str) or not context['review_lineage_id']:
++        return [], {}, ['review_lineage_missing']
++    if not isinstance(source, ControllerEvidenceSource) or source.trust_basis not in (
++            'adapter_verified', 'synthetic_fixture'):
++        return [], {}, ['controller_provenance_unavailable']
++    snapshot = source.history(context.get('review_lineage_id'))
++    if not isinstance(snapshot, dict):
++        return [], {}, ['controller_history_unavailable']
++    reviews = snapshot.get('reviews')
++    if (not isinstance(reviews, list) or len(reviews) > 64
++            or snapshot.get('lineage_id') != context.get('review_lineage_id')):
++        return [], {}, ['history_incomplete']
++    ids = [h.get('review_id') for h in reviews if isinstance(h, dict)]
++    if (len(ids) != len(reviews) or any(not isinstance(x, str) for x in ids)
++            or len(ids) != len(set(ids)) or snapshot.get('complete_review_ids') != ids
++            or history_head(snapshot['lineage_id'], reviews) != source.history_anchor(snapshot['lineage_id'])
++            or (supplied and supplied != reviews)):
++        return [], {}, ['history_incomplete']
++    for h in reviews:
++        _require(isinstance(h.get('author'), str) and bool(h['author'])
++                 and h['author'] != h.get('reviewer'), 'historical author identity missing')
++        validate_schema(h.get('response'), response_schema())
++        _require(h.get('candidate_sha256') == h['response']['candidate_sha256'], 'history candidate mismatch')
++    records = snapshot.get('objection_records')
++    if not isinstance(records, dict) or len(records) > 256:
++        return reviews, {}, ['objection_records_unavailable']
++    return copy.deepcopy(reviews), copy.deepcopy(records), []
++
++
++def new_objection(author, reviewer, objection, candidate_sha256):
++    definition = _hash(objection)
++    identity = _hash({'reviewer': reviewer, 'id': objection['id'],
++                      'origin_candidate_sha256': candidate_sha256, 'definition_sha256': definition})
++    return {'id': objection['id'], 'author': author, 'reviewer': reviewer,
++            'origin_candidate_sha256': candidate_sha256, 'definition_sha256': definition,
++            'identity': identity, 'candidate_sha256': candidate_sha256, 'state': 'open', 'events': []}
+ 
+ 
+ def _require(condition, message):
+@@ -72,7 +209,7 @@
+ 
+ def independent_packet(candidate, source_files, diff, tests, permissions):
+     """First-pass packet excludes author's narrative and other review results."""
+-    _require(_hash(permissions) == candidate['context']['permissions_sha256'], 'permission packet mismatch')
++    _require(context_hash(permissions) == candidate['context']['permissions_sha256'], 'permission packet mismatch')
+     _require(hashlib.sha256(diff.encode()).hexdigest() == candidate['diff_sha256'],
+              'diff bytes do not match candidate')
+     _require(set(source_files) == set(candidate['context']['files']), 'incomplete source packet')
+@@ -138,7 +275,7 @@
+ 
+ 
+ def principal_valid(principal, agent, enabled):
+-    """Controller transport identity, not a role/identity claimed by a model."""
++    """Declared metadata consistency only; provenance requires adapter evidence."""
+     return (isinstance(principal, dict) and agent in enabled
+             and principal.get('provider') == agent and principal.get('actor_kind') == 'principal'
+             and principal.get('parent_actor_id') is None
+@@ -147,20 +284,32 @@
+ 
+ 
+ def bind_receipt(receipt, candidate, *, root, permissions, qa_report=None, principal=None,
+-                 resolution_state=None):
++                 resolution_state=None, objection_identity=None):
+     """New controller producer v2. Never edits or retrofits a legacy receipt.
+ 
+     qa_report is an actual controller-loaded artifact, not model output. A legacy
+     QA without exact source coverage cannot be upgraded by hashing current files.
+-    principal is transport-verified controller metadata; no auth is performed here.
++    principal is declared metadata, not authentication. The separate controller
++    bridge must verify native identity/capability; this binding proves integrity only.
+     """
+     records, invalid = read_legacy_receipts([receipt])
+     _require(not invalid and receipt.get('id') in records, 'incomplete legacy receipt')
+     context = candidate['context']
+     old = receipt['context']
+-    _require(all(k in old for k in ('project', 'run_id', 'objective_sha256', 'files'))
+-             and all(k in context and context[k] == v for k, v in old.items()), 'stale receipt context')
+-    _require(_hash(permissions) == context['permissions_sha256'], 'permission mismatch')
++    _require(context.get('context_contract') == CONTEXT_CONTRACT, 'context contract absent')
++    _require(all(k in old for k in ('project', 'run_id', 'objective_sha256', 'files')), 'legacy context incomplete')
++    if old.get('context_contract') == CONTEXT_CONTRACT:
++        _require(all(old.get(k) for k in ('permissions_sha256', 'participation_sha256', 'review_lineage_id')),
++                 'versioned context incomplete')
++    for key, value in old.items():
++        expected = context.get(key)
++        if key == 'participation_sha256' and 'context_contract' not in old:
++            _require(value in (context_hash(agent_policy()), _hash(agent_policy())), 'legacy policy mismatch')
++        elif key == 'permissions_sha256' and 'context_contract' not in old:
++            _require(value in (context_hash(permissions), _hash(permissions)), 'legacy permissions mismatch')
++        else:
++            _require(key in context and expected == value, 'stale receipt context')
++    _require(context_hash(permissions) == context.get('permissions_sha256'), 'permission mismatch')
+     _, missing = source_snapshot(context, root)
+     _require(not missing, 'source binding incomplete')
+     identity = fingerprint(candidate)
+@@ -172,7 +321,10 @@
+     if receipt['kind'] == 'qa':
+         _require(isinstance(qa_report, dict), 'QA artifact required')
+         legacy_digest = hashlib.sha256(json.dumps(qa_report, sort_keys=True).encode()).hexdigest()
+-        coverage = qa_report.get('checked_source_files', qa_report.get('verification_state', {}).get('workspace'))
++        verification = qa_report.get('verification_state')
++        coverage = qa_report.get('checked_source_files')
++        if coverage is None and isinstance(verification, dict):
++            coverage = verification.get('workspace')
+         _require(legacy_digest == receipt['sha256'] and coverage == context['files']
+                  and qa_report.get('executed') is receipt['executed']
+                  and qa_report.get('passed') is receipt['passed'], 'QA artifact incomplete or stale')
+@@ -180,14 +332,16 @@
+     if needs_principal:
+         agent = receipt.get('reviewer') if receipt['kind'] != 'resolution' else receipt.get('confirmed_by')
+         _require(principal_valid(principal, agent, set(agent_policy()['members'])),
+-                 'principal/capability not verified or unauthorized')
++                 'declared principal metadata inconsistent or unauthorized')
+     if receipt['kind'] == 'resolution':
+         _require(isinstance(receipt.get('resolves'), list) and resolution_state in ('resolved', 'refuted'),
+                  'resolution requires explicit state/list')
+     binding = {'contract_version': 2, 'receipt_id': receipt['id'], 'legacy_sha256': _hash(receipt),
+                'candidate_sha256': identity, 'context_sha256': _hash(context),
+                'permissions_sha256': context['permissions_sha256'], 'checked_source_files': copy.deepcopy(context['files']),
+-               'principal': copy.deepcopy(principal), 'resolution_state': resolution_state,
++               'principal': {k: copy.deepcopy(v) for k, v in (principal or {}).items()
++                             if k != 'supersedes_review_ids'}, 'resolution_state': resolution_state,
++               'objection_identity': objection_identity, 'context_contract': CONTEXT_CONTRACT,
+                'purpose': receipt['kind'], 'subject': receipt.get('subject'),
+                'resolves': copy.deepcopy(receipt.get('resolves', [])),
+                'method': 'controller_revalidation_v2'}
+@@ -205,7 +359,8 @@
+         _require(ident not in result, 'duplicate binding ID')
+         row = ledger.get(ident)
+         payload = {k: v for k, v in item.items() if k != 'binding_sha256'}
+-        if (row and item.get('contract_version') == 2 and item.get('legacy_sha256') == _hash(row)
++        if (row and item.get('contract_version') == 2 and item.get('context_contract') == CONTEXT_CONTRACT
++                and item.get('legacy_sha256') == _hash(row)
+                 and item.get('candidate_sha256') == fingerprint(candidate)
+                 and item.get('context_sha256') == _hash(candidate['context'])
+                 and item.get('permissions_sha256') == candidate['context']['permissions_sha256']
+@@ -215,61 +370,88 @@
+     return result
+ 
+ 
+-def advance_objection(record, event, *, actor, candidate_sha256, evidence_refs=(), confirmation=None):
+-    """Append-only controller state machine; author responses never close findings.
+-
+-    confirmation is a producer-v2 resolution binding supplied from the verified
+-    controller store, never from a model. Verdict re-review is a separate gate.
+-    """
++def advance_objection(record, event, *, actor, candidate_sha256, evidence_refs=(),
++                      confirmation=None, controller=None, migration_ref=None):
++    """Single reducer used both by authoring API and evaluate's verified replay."""
+     _require(isinstance(record, dict) and record.get('state') in
+              ('open', 'author_answered', 'correction_proposed', 'new_evidence',
+               'refuted', 'resolved', 'review_pending'), 'invalid objection state')
+-    _require(re.fullmatch('[a-f0-9]{64}', str(candidate_sha256)), 'invalid event candidate hash')
+-    next_record = copy.deepcopy(record)
++    _require(record['state'] not in ('resolved', 'refuted'), 'terminal objection is immutable')
++    _require(re.fullmatch('[a-f0-9]{64}', str(candidate_sha256)), 'invalid event candidate')
++    result = copy.deepcopy(record)
++    refs = list(evidence_refs)
++    _require(all(isinstance(x, str) for x in refs), 'invalid evidence references')
+     if event == 'author_answer':
+         _require(actor == record['author'], 'only author answers')
+         state = 'author_answered'
+     elif event == 'propose_correction':
+-        _require(actor == record['author'] and candidate_sha256 != record['candidate_sha256'],
+-                 'correction needs new candidate')
++        proof = controller.migration(migration_ref) if isinstance(controller, ControllerEvidenceSource) else None
++        _require(actor == record['author'] and isinstance(proof, MigrationEvidence)
++                 and proof.objection_identity == record['identity']
++                 and proof.from_candidate_sha256 == record['candidate_sha256']
++                 and proof.to_candidate_sha256 == candidate_sha256
++                 and proof.author == record['author'] and proof.reviewer == record['reviewer']
++                 and candidate_sha256 != record['candidate_sha256'], 'explicit objection migration required')
+         state = 'correction_proposed'
+     elif event == 'add_evidence':
+-        _require(actor == 'controller' and bool(evidence_refs), 'controller evidence required')
++        _require(actor == 'controller' and refs and record['state'] == 'author_answered', 'new evidence after answer required')
+         state = 'new_evidence'
+     elif event == 'request_review':
+-        _require(actor == 'controller', 'only controller schedules review')
++        _require(actor == 'controller' and record['state'] == 'new_evidence', 'review needs new evidence')
+         state = 'review_pending'
+     elif event in ('refute', 'resolve'):
+-        _require(actor == record['reviewer'] and actor != record['author'] and confirmation
+-                 and record['state'] in ('author_answered', 'new_evidence', 'review_pending')
+-                 and any(e.get('event') == 'author_answer' and e.get('actor') == record['author']
+-                         for e in record.get('events', [])),
+-                 'origin reviewer confirmation required')
++        _require(actor == record['reviewer'] and actor != record['author'] and record['state'] == 'review_pending'
++                 and confirmation and confirmation.get('receipt_id') in refs, 'origin review after evidence required')
++        state = 'refuted' if event == 'refute' else 'resolved'
+         payload = {k: v for k, v in confirmation.items() if k != 'binding_sha256'}
+-        state = 'refuted' if event == 'refute' else 'resolved'
+         _require(confirmation.get('binding_sha256') == _hash(payload)
+-                 and confirmation.get('contract_version') == 2
+                  and confirmation.get('purpose') == 'resolution'
++                 and confirmation.get('objection_identity') == record['identity']
+                  and confirmation.get('subject') == record['reviewer'] + ':' + record['id']
+                  and isinstance(confirmation.get('resolves'), list)
+                  and record['reviewer'] + ':' + record['id'] in confirmation['resolves']
+                  and confirmation.get('candidate_sha256') == candidate_sha256
+-                 and confirmation.get('receipt_id') in evidence_refs
+                  and confirmation.get('resolution_state') == state
+-                 and principal_valid(confirmation.get('principal'), actor, set(agent_policy()['members'])),
+-                 'invalid resolution confirmation')
++                 and adapter_proven(controller, confirmation, actor, candidate_sha256,
++                                    confirmation.get('permissions_sha256')) is not None,
++                 'adapter-attested origin confirmation required')
+     else:
+         raise IpanemaError('Code review: unsupported objection event')
+     if event != 'propose_correction':
+         _require(candidate_sha256 == record['candidate_sha256'], 'stale objection event')
+-    _require(record['state'] not in ('resolved', 'refuted'), 'terminal objection is immutable; open a new record')
+-    next_record.update(state=state, candidate_sha256=candidate_sha256)
+-    next_record.setdefault('events', []).append({'event': event, 'actor': actor, 'state': state,
+-                                                'candidate_sha256': candidate_sha256,
+-                                                'evidence_refs': list(evidence_refs)})
+-    return next_record
+-
+-def evaluate(candidate, reviews, *, evidence, root, answers=(), bindings=(), review_history=()):
++    result.update(state=state, candidate_sha256=candidate_sha256)
++    result['events'].append({'event': event, 'actor': actor, 'state': state,
++                             'candidate_sha256': candidate_sha256, 'evidence_refs': refs,
++                             'confirmation_ref': confirmation.get('receipt_id') if confirmation else None,
++                             'migration_ref': migration_ref})
++    return result
++
++
++def replay_closure(record, seed, candidate, ledger, bound, controller):
++    """Only this replay determines closure. A declared terminal state is insufficient."""
++    from .council import _proven
++    if not isinstance(record, dict) or not isinstance(record.get('events'), list) or len(record['events']) > 128:
++        return False
++    current = copy.deepcopy(seed)
++    try:
++        for event in record['events']:
++            if event['event'] == 'add_evidence':
++                _require(event['evidence_refs'] and all(ref in bound and _proven(ledger[ref])
++                         for ref in event['evidence_refs']), 'unverified new evidence')
++            confirmation = bound.get(event.get('confirmation_ref'))
++            if confirmation:
++                row = ledger.get(confirmation['receipt_id'])
++                _require(row and row.get('confirmed_by') == seed['reviewer'] and _proven(row), 'resolution not proved')
++            current = advance_objection(current, event['event'], actor=event['actor'],
++                        candidate_sha256=event['candidate_sha256'], evidence_refs=event['evidence_refs'],
++                        confirmation=confirmation, controller=controller, migration_ref=event.get('migration_ref'))
++        return (current == record and current['candidate_sha256'] == fingerprint(candidate)
++                and current['state'] in ('resolved', 'refuted'))
++    except (IpanemaError, KeyError, TypeError):
++        return False
++
++
++def evaluate(candidate, reviews, *, evidence, root, answers=(), bindings=(), review_history=(), controller=None):
+     """Return one of four owner-facing states; never authorizes an operation.
+ 
+     Trusted inputs: candidate/context/required QA and controller receipt store.
+@@ -308,7 +490,9 @@
+         blockers.append('author_not_authorized')
+     if len(expected_reviewers) < 2:
+         missing.append('two_authorized_non_author_reviewers_required')
+-    if context.get('participation_sha256') != _hash(policy):
++    if context.get('context_contract') != CONTEXT_CONTRACT:
++        missing.append('context_contract_missing')
++    if context.get('participation_sha256') != context_hash(policy):
+         missing.append('participation_policy_changed')
+     sources, source_missing = source_snapshot(context, root)
+     missing.extend(source_missing)
+@@ -339,19 +523,39 @@
+     _require(isinstance(reviews, list) and len(reviews) <= 3, 'review envelopes excessive')
+     _require(isinstance(review_history, (list, tuple)) and len(review_history) <= 64, 'review history excessive')
+     _require(all(isinstance(h, dict) for h in review_history), 'invalid history envelope')
+-    # A corrected diff does not silently erase an earlier adverse review.
+-    # Cross-candidate carry-forward requires a separate controller migration;
+-    # until that contract exists the evidence remains explicitly insufficient.
+-    for historical in review_history:
+-        if historical.get('reviewer') in expected_reviewers and historical.get('candidate_sha256') != identity:
+-            _require(isinstance(historical.get('review_id'), str), 'unidentified prior review')
+-            validate_schema(historical.get('response'), response_schema())
+-            body = historical['response']
+-            if body['decision'] != 'approve' or any(c['status'] != 'pass' for c in body['challenges'].values()) or any(
+-                    o['severity'] in ('HIGH', 'BLOCKER') for o in body['objections']):
+-                missing.append('prior_candidate_review_requires_migration:' + historical['review_id'])
++    history, records, history_missing = load_history(controller, context, review_history)
++    missing.extend(history_missing)
+     seen = set()
+     findings = []
++    registered = {}
++    prior_verdicts = {}
++
++    def register(agent, objection, origin, original_author=None):
++        key = agent + ':' + objection['id']
++        seed = new_objection(original_author or author, agent, objection, origin)
++        if key in registered:
++            _require(registered[key]['definition_sha256'] == seed['definition_sha256'], 'objection identity redefined')
++            return
++        registered[key] = seed
++        closed = replay_closure(records.get(seed['identity']), seed, candidate, ledger, bound, controller)
++        findings.append({'id': key, 'identity': seed['identity'], 'severity': objection['severity'], 'closed': closed})
++        if not closed and objection['severity'] == 'BLOCKER':
++            blockers.append(key)
++        elif not closed and objection['severity'] == 'HIGH':
++            changes.append(key)
++        elif not closed and objection['severity'] == 'MEDIUM':
++            missing.append('unresolved_objection:' + key)
++
++    # Evaluate every historical objection before any absent/stale envelope branch.
++    for h in history:
++        agent = h.get('reviewer')
++        _require(agent in expected_reviewers and isinstance(h.get('review_id'), str), 'invalid history reviewer')
++        body = h['response']
++        if body['decision'] != 'approve' or any(x['status'] != 'pass' for x in body['challenges'].values()):
++            prior_verdicts[h['review_id']] = agent
++            missing.append('prior_verdict_requires_explicit_rereview:' + h['review_id'])
++        for objection in body['objections']:
++            register(agent, objection, h['candidate_sha256'], original_author=h.get('author'))
+     for env in reviews:
+         _require(isinstance(env, dict), 'review envelope must be an object')
+         agent = env.get('effective_agent')
+@@ -368,36 +572,23 @@
+             missing.append('stale_review:' + agent)
+             continue
+         attempts = proof([env.get('attempt_ref')], 'constraint', 'review_transport')
+-        if not any(r.get('reviewer') == agent and r.get('response_sha256') == _hash(response)
+-                   and r.get('phase') == 'independent_code_review'
+-                   and principal_valid(bound[r['id']].get('principal'), agent, enabled) for r in attempts):
++        proven_attempts = [(r, adapter_proven(controller, bound[r['id']], agent, identity,
++                                      context['permissions_sha256'])) for r in attempts
++                           if r.get('reviewer') == agent and r.get('response_sha256') == _hash(response)
++                           and r.get('phase') == 'independent_code_review']
++        proven_attempts = [(r, p) for r, p in proven_attempts if p is not None]
++        if not proven_attempts:
+             missing.append('unverified_reviewer:' + agent)
+             continue
+-        # Preserve earlier verdicts and findings. Only a verified new review may supersede them.
+-        previous = [h for h in review_history if h.get('reviewer') == agent
+-                    and h.get('candidate_sha256') == identity]
+-        needed_supersedes = set()
+-        historical_objections = {}
+-        for h in previous:
+-            _require(isinstance(h.get('review_id'), str) and isinstance(h.get('response'), dict),
+-                     'invalid controller review history')
+-            validate_schema(h['response'], response_schema())
+-            if h['response']['decision'] != 'approve' or any(
+-                    x['status'] != 'pass' for x in h['response']['challenges'].values()):
+-                needed_supersedes.add(h['review_id'])
+-            for obj in h['response']['objections']:
+-                historical_objections[obj['id']] = obj
+-        acknowledged = set().union(*(set(bound[r['id']].get('principal', {}).get(
+-            'supersedes_review_ids', [])) for r in attempts))
+-        if response['decision'] == 'approve' and not needed_supersedes <= acknowledged:
+-            missing.append('prior_verdict_requires_explicit_rereview:' + agent)
++        acknowledged = set().union(*(set(p.supersedes_review_ids) for _, p in proven_attempts))
++        if response['decision'] == 'approve':
++            for review_id, reviewer in prior_verdicts.items():
++                if reviewer == agent and review_id in acknowledged:
++                    marker = 'prior_verdict_requires_explicit_rereview:' + review_id
++                    if marker in missing:
++                        missing.remove(marker)
+         current_ids = [obj['id'] for obj in response['objections']]
+         _require(len(current_ids) == len(set(current_ids)), 'duplicate objection ID within reviewer')
+-        merged_objections = dict(historical_objections)
+-        for obj in response['objections']:
+-            if obj['id'] in merged_objections and _hash(obj) != _hash(merged_objections[obj['id']]):
+-                blockers.append('objection_identity_redefined:' + agent + ':' + obj['id'])
+-            merged_objections[obj['id']] = obj
+         if set(response['reviewed_files']) != set(files):
+             missing.append('incomplete_review_scope:' + agent)
+         for key, challenge in response['challenges'].items():
+@@ -412,7 +603,7 @@
+         elif response['decision'] == 'needs_evidence':
+             missing.append('reviewer_evidence:' + agent)
+         ids = set()
+-        for objection in merged_objections.values():
++        for objection in response['objections']:
+             key = agent + ':' + objection['id']
+             _require(key not in ids, 'duplicate objection ID within reviewer')
+             ids.add(key)
+@@ -428,28 +619,15 @@
+                 _require(objection['duplication_kind'] != 'not_applicable' and
+                          len({(s['file'], s['function'], s['start'], s['end']) for s in objection['sites']}) >= 2,
+                          'duplication needs two concrete implementations')
+-            defended = any(a.get('reviewer') == agent and a.get('objection_id') == objection['id']
+-                           and a.get('action') in ('accept', 'refute', 'alternative', 'request_evidence')
+-                           for a in answers)
+-            closed = defended and any(r['kind'] == 'resolution' and _proven(r)
+-                        and r['id'] in bound and r.get('subject') == key
+-                        and isinstance(r.get('resolves'), list) and key in r['resolves']
+-                        and r.get('confirmed_by') == agent
+-                        and principal_valid(bound[r['id']].get('principal'), agent, enabled)
+-                        for r in ledger.values())
+-            if objection['severity'] == 'MEDIUM' and not defended:
+-                missing.append('unanswered_objection:' + key)
+-            # Neither author answer nor status supplied by a model can close a finding.
+-            findings.append({'id': key, 'severity': objection['severity'], 'closed': closed})
+-            if not closed and objection['severity'] == 'BLOCKER':
+-                blockers.append(key)
+-            elif not closed and objection['severity'] == 'HIGH':
+-                changes.append(key)
++            register(agent, objection, identity)
+     missing.extend('missing_reviewer:' + a for a in sorted(expected_reviewers - seen))
+     state = ('blocked' if blockers else 'changes_requested' if changes else
+              'needs_evidence' if missing else 'approved_for_authorization')
+     return {'state': state, 'candidate_sha256': identity, 'findings': findings,
+             'blockers': blockers, 'changes': changes, 'missing_evidence': missing,
+-            'review_history': copy.deepcopy(list(review_history)),
++            'review_history': copy.deepcopy(history),
++            'trust_basis': controller.trust_basis if isinstance(controller, ControllerEvidenceSource) else 'unavailable',
++            'synthetic_only': isinstance(controller, ControllerEvidenceSource) and controller.trust_basis == 'synthetic_fixture',
++            'identity_verified_by_hash': False,
+             'implementation_allowed': False, 'production_authorized': False,
+             'activation_allowed': False, 'scope': 'Optional controller review gate only'}
+--- a/tests/unit/test_code_review_v3.py
++++ b/tests/unit/test_code_review_v3.py
+@@ -16,6 +16,47 @@
+ from ipanema.core import IpanemaError
+ from ipanema.orchestration import code_review
+ from ipanema.orchestration.council import review_code_candidate
++
++
++class FixtureController(code_review.ControllerEvidenceSource):
++    """Synthetic controller boundary; never native transport verification."""
++    trust_basis = 'synthetic_fixture'
++
++    def __init__(self):
++        self.rows = [];self.records = {};self.proofs = {};self.moves = {}
++        self.auto_records = True;self.auto_history = True
++
++    def history(self, lineage_id):
++        return {'lineage_id': lineage_id, 'reviews': copy.deepcopy(self.rows),
++                'complete_review_ids': [r['review_id'] for r in self.rows],
++                'objection_records': copy.deepcopy(self.records)}
++
++    def history_anchor(self, lineage_id):
++        return code_review.history_head(lineage_id, self.rows)
++
++    def attestation(self, receipt_id):
++        return self.proofs.get(receipt_id)
++
++    def migration(self, reference):
++        return self.moves.get(reference)
++
++    def attest(self, binding, agent, supersedes=()):
++        self.proofs[binding['receipt_id']] = code_review.AdapterEvidence(
++            binding['receipt_id'], agent, binding['candidate_sha256'],
++            binding['permissions_sha256'], binding['binding_sha256'], 'e'*64,
++            'code_review_readonly', supersedes_review_ids=tuple(supersedes))
++
++    def close_fixture(self, seed, binding, source_ref):
++        record = code_review.advance_objection(seed,'author_answer',actor=seed['author'],
++                                               candidate_sha256=seed['candidate_sha256'])
++        record = code_review.advance_objection(record,'add_evidence',actor='controller',
++                                               candidate_sha256=seed['candidate_sha256'],evidence_refs=[source_ref])
++        record = code_review.advance_objection(record,'request_review',actor='controller',
++                                               candidate_sha256=seed['candidate_sha256'])
++        record = code_review.advance_objection(record,'refute',actor=seed['reviewer'],
++                       candidate_sha256=seed['candidate_sha256'],evidence_refs=[binding['receipt_id']],
++                       confirmation=binding,controller=self)
++        self.records[seed['identity']]=record
+ 
+ 
+ class CrossReview(unittest.TestCase):
+@@ -41,7 +82,9 @@
+         self.synthetic_policy['members'] = ['claude', 'codex', 'antigravity']
+         self.policy_patch = patch.object(code_review, 'agent_policy', return_value=self.synthetic_policy)
+         self.policy_patch.start();self.addCleanup(self.policy_patch.stop)
+-        self.candidate['context']['participation_sha256'] = code_review._hash(self.synthetic_policy)
++        self.candidate['context']['participation_sha256'] = code_review.context_hash(self.synthetic_policy)
++        self.candidate['context'] = code_review.adapt_context(self.candidate['context'],policy=self.synthetic_policy,permissions={'network':False},lineage_id='fixture')
++        self.controller=FixtureController()
+         self.ledger = []
+         self.bindings = []
+         for key in self.candidate['preflight']:
+@@ -74,10 +117,22 @@
+         try:
+             bound = code_review.bind_receipt(row, self.candidate, root=self.root,
+                         permissions={'network': False}, qa_report=qa, principal=principal,
+-                        resolution_state='refuted' if row['kind']=='resolution' else None)
++                        resolution_state='refuted' if row['kind']=='resolution' else None,
++                        objection_identity=code_review.new_objection(self.candidate['author'],'claude',self.finding_definition(),code_review.fingerprint(self.candidate))['identity'] if row['kind']=='resolution' else None)
+         except IpanemaError:
+             return  # deliberately invalid fixture stays unbound; no retroactive approval
+         self.bindings = [b for b in self.bindings if b['receipt_id']!=row['id']] + [bound]
++        if principal:
++            self.controller.attest(bound,principal['provider'])
++        if row['kind']=='resolution' and row.get('confirmed_by')=='claude' and self.answers and row.get('subject')=='claude:O1':
++            seed=code_review.new_objection(self.candidate['author'],'claude',self.finding_definition(),code_review.fingerprint(self.candidate))
++            self.controller.close_fixture(seed,bound,'source')
++
++    def finding_definition(self):
++        for env in self.reviews:
++            if env['effective_agent']=='claude' and env['response']['objections']:
++                return env['response']['objections'][0]
++        return {'id':'O1'}
+ 
+     def review(self, agent):
+         response = {'candidate_sha256': code_review.fingerprint(self.candidate),
+@@ -103,7 +158,7 @@
+     def evaluate(self):
+         self.stamp()
+         return review_code_candidate(self.candidate, self.reviews, evidence=self.ledger,
+-                                     root=self.root, answers=self.answers, bindings=self.bindings)
++                                     root=self.root, answers=self.answers, bindings=self.bindings,controller=self.controller)
+ 
+     def finding(self, category='duplication', kind='semantic', severity='HIGH'):
+         obj = {'id': 'O1', 'severity': severity, 'challenge': category,
+@@ -280,7 +335,7 @@
+         self.assertEqual(self.evaluate()['state'], 'needs_evidence')
+         self.answers = [{'reviewer': 'claude', 'objection_id': 'O1', 'action': 'request_evidence'}]
+         result = self.evaluate()
+-        self.assertEqual(result['state'], 'approved_for_authorization')
++        self.assertEqual(result['state'], 'needs_evidence')
+         self.assertFalse(result['findings'][0]['closed'])
+ 
+     def test_same_objection_id_of_another_reviewer_cannot_close_origin(self):
+@@ -329,6 +384,8 @@
+                               'participation_sha256': cr._hash(self.future_policy),
+                               'files': {'sample.py': hashlib.sha256((self.root/'sample.py').read_bytes()).hexdigest()}},
+                   'preflight': {k:k for k in ['reuse_search', 'module_placement', 'implementation_plan']}}
++        self.c['context']=cr.adapt_context(self.c['context'],policy=self.future_policy,permissions=self.permissions,lineage_id='fixture')
++        self.controller=FixtureController()
+         self.evidence=[];self.bindings=[];self.reviews=[];self.answers=[];self.history=[]
+         for check in self.c['preflight']:
+             self.add(check, 'constraint', constraint=check)
+@@ -351,7 +408,9 @@
+         if alternative:row['alternative_sha256']=cr.fingerprint(self.c)
+         self.evidence.append(row)
+         self.bindings.append(cr.bind_receipt(row,self.c,root=self.root,permissions=self.permissions,
+-                                            qa_report=qa_report,principal=principal,resolution_state=resolution_state))
++                                            qa_report=qa_report,principal=principal,resolution_state=resolution_state,
++                                            objection_identity=self.record()['identity'] if kind=='resolution' else None))
++        if principal:self.controller.attest(self.bindings[-1],principal['provider'])
+         return row
+ 
+     def review(self, agent):
+@@ -369,10 +428,12 @@
+         b=cr.bind_receipt(row,self.c,root=self.root,permissions=self.permissions,
+                           principal=self.principal(env['effective_agent'],supersedes))
+         self.bindings=[x for x in self.bindings if x['receipt_id']!=row['id']]+[b]
++        self.controller.attest(b,env['effective_agent'],supersedes)
+ 
+     def evaluate(self):
++        if self.controller.auto_history:self.controller.rows=copy.deepcopy(self.history)
+         return review_code_candidate(self.c,self.reviews,evidence=self.evidence,root=self.root,
+-                                     answers=self.answers,bindings=self.bindings,review_history=self.history)
++                                     answers=self.answers,bindings=self.bindings,review_history=self.history,controller=self.controller)
+ 
+     def objection(self):
+         return {'id':'O1','severity':'HIGH','challenge':'architecture',
+@@ -384,11 +445,21 @@
+     def resolution(self, agent='claude', state='refuted', key='claude:O1'):
+         self.add('resolution-'+agent,'resolution',subject=key,resolves=[key],confirmed_by=agent,
+                  principal=self.principal(agent),resolution_state=state)
++        if self.answers and self.controller.auto_records and key=='claude:O1':
++            self.controller.close_fixture(self.record(),self.bindings[-1],'source:sample.py')
+         return self.bindings[-1]
+ 
+     def record(self):
+-        return {'id':'O1','author':'codex','reviewer':'claude','candidate_sha256':cr.fingerprint(self.c),
+-                'state':'open','events':[]}
++        return cr.new_objection('codex','claude',self.objection(),cr.fingerprint(self.c))
++
++    def advance(self, record, event, **kwargs):
++        if event=='propose_correction':
++            ref='fixture-migration';self.controller.moves[ref]=cr.MigrationEvidence(record['identity'],record['candidate_sha256'],kwargs['candidate_sha256'],record['reviewer'],record['author'])
++            kwargs['migration_ref']=ref
++        if event in ('refute','resolve') and kwargs.get('actor')==record['reviewer'] and record['state']=='author_answered' and kwargs.get('confirmation'):
++            record=cr.advance_objection(record,'add_evidence',actor='controller',candidate_sha256=record['candidate_sha256'],evidence_refs=['source:sample.py'])
++            record=cr.advance_objection(record,'request_review',actor='controller',candidate_sha256=record['candidate_sha256'])
++        return cr.advance_objection(record,event,controller=self.controller,**kwargs)
+ 
+     def test_O1_actual_dual_policy_keeps_two_reviewer_requirement(self):
+         self.policy_mock.return_value=self.current_policy
+@@ -476,37 +547,39 @@
+                             principal=self.principal('claude'),resolution_state='refuted')
+ 
+     def test_O3_author_answer_does_not_close(self):
+-        record=self.record();updated=cr.advance_objection(record,'author_answer',actor='codex',
++        record=self.record();updated=self.advance(record,'author_answer',actor='codex',
+                                                         candidate_sha256=record['candidate_sha256'])
+         self.assertEqual(record['state'],'open');self.assertEqual(updated['state'],'author_answered')
+         with self.assertRaises(IpanemaError):
+-            cr.advance_objection(updated,'resolve',actor='codex',candidate_sha256=record['candidate_sha256'])
++            self.advance(updated,'resolve',actor='codex',candidate_sha256=record['candidate_sha256'])
+ 
+     def test_O3_explicit_new_evidence_review_pending_and_refutation_same_hash(self):
+         record=self.record();sha=record['candidate_sha256']
+-        record=cr.advance_objection(record,'author_answer',actor='codex',candidate_sha256=sha)
+-        record=cr.advance_objection(record,'add_evidence',actor='controller',candidate_sha256=sha,evidence_refs=['source:sample.py'])
++        record=self.advance(record,'author_answer',actor='codex',candidate_sha256=sha)
++        record=self.advance(record,'add_evidence',actor='controller',candidate_sha256=sha,evidence_refs=['source:sample.py'])
+         self.assertEqual(record['state'],'new_evidence')
+-        record=cr.advance_objection(record,'request_review',actor='controller',candidate_sha256=sha)
+-        b=self.resolution();record=cr.advance_objection(record,'refute',actor='claude',candidate_sha256=sha,
++        record=self.advance(record,'request_review',actor='controller',candidate_sha256=sha)
++        b=self.resolution();record=self.advance(record,'refute',actor='claude',candidate_sha256=sha,
+                                                         evidence_refs=[b['receipt_id']],confirmation=b)
+         self.assertEqual(record['state'],'refuted');self.assertEqual(len(record['events']),4)
+ 
+     def test_O3_correction_changes_identity_and_requires_review(self):
+-        record=self.record();record=cr.advance_objection(record,'author_answer',actor='codex',candidate_sha256=record['candidate_sha256'])
+-        changed=cr.advance_objection(record,'propose_correction',actor='codex',candidate_sha256='b'*64)
++        record=self.record();record=self.advance(record,'author_answer',actor='codex',candidate_sha256=record['candidate_sha256'])
++        changed=self.advance(record,'propose_correction',actor='codex',candidate_sha256='b'*64)
+         self.assertEqual(changed['state'],'correction_proposed')
+-        pending=cr.advance_objection(changed,'request_review',actor='controller',candidate_sha256='b'*64)
++        changed=self.advance(changed,'author_answer',actor='codex',candidate_sha256='b'*64)
++        changed=self.advance(changed,'add_evidence',actor='controller',candidate_sha256='b'*64,evidence_refs=['source:sample.py'])
++        pending=self.advance(changed,'request_review',actor='controller',candidate_sha256='b'*64)
+         self.assertEqual(pending['state'],'review_pending')
+         with self.assertRaises(IpanemaError):
+-            cr.advance_objection(pending,'refute',actor='claude',candidate_sha256='b'*64,
++            self.advance(pending,'refute',actor='claude',candidate_sha256='b'*64,
+                                   evidence_refs=['resolution-claude'],confirmation=self.resolution())
+ 
+     def test_O3_resolution_for_another_objection_cannot_close(self):
+-        record=self.record();record=cr.advance_objection(record,'author_answer',actor='codex',candidate_sha256=record['candidate_sha256'])
++        record=self.record();record=self.advance(record,'author_answer',actor='codex',candidate_sha256=record['candidate_sha256'])
+         b=self.resolution(key='claude:O2')
+         with self.assertRaises(IpanemaError):
+-            cr.advance_objection(record,'refute',actor='claude',candidate_sha256=record['candidate_sha256'],
++            self.advance(record,'refute',actor='claude',candidate_sha256=record['candidate_sha256'],
+                                   evidence_refs=[b['receipt_id']],confirmation=b)
+ 
+     def test_O3_closed_finding_does_not_erase_changes_requested(self):
+@@ -517,7 +590,7 @@
+ 
+     def historical_high(self):
+         body=copy.deepcopy(self.reviews[0]['response']);body['decision']='changes_requested';body['objections']=[self.objection()]
+-        self.history=[{'review_id':'prior-real-review','reviewer':'claude','candidate_sha256':cr.fingerprint(self.c),'response':body}]
++        self.history=[{'review_id':'prior-real-review','author':'codex','reviewer':'claude','candidate_sha256':cr.fingerprint(self.c),'response':body}]
+ 
+     def test_O3_new_approval_must_acknowledge_prior_verdict(self):
+         self.historical_high();self.answers=[{'reviewer':'claude','objection_id':'O1','action':'refute'}];self.resolution()
+@@ -538,7 +611,7 @@
+ 
+     def test_O2_legacy_context_without_new_fields_is_explicitly_revalidated(self):
+         row=copy.deepcopy(next(r for r in self.evidence if r['id']=='source:sample.py'))
+-        row['context'].pop('participation_sha256');row['context'].pop('permissions_sha256')
++        row['context'].pop('participation_sha256');row['context'].pop('permissions_sha256');row['context'].pop('context_contract')
+         original=copy.deepcopy(row)
+         binding=cr.bind_receipt(row,self.c,root=self.root,permissions=self.permissions)
+         self.assertEqual(binding['context_sha256'],cr._hash(self.c['context']))
+@@ -562,12 +635,12 @@
+ 
+     def test_O3_terminal_state_cannot_be_reopened_by_author(self):
+         record=self.record();sha=record['candidate_sha256']
+-        record=cr.advance_objection(record,'author_answer',actor='codex',candidate_sha256=sha)
++        record=self.advance(record,'author_answer',actor='codex',candidate_sha256=sha)
+         binding=self.resolution()
+-        record=cr.advance_objection(record,'refute',actor='claude',candidate_sha256=sha,
++        record=self.advance(record,'refute',actor='claude',candidate_sha256=sha,
+                                     evidence_refs=[binding['receipt_id']],confirmation=binding)
+         with self.assertRaises(IpanemaError):
+-            cr.advance_objection(record,'author_answer',actor='codex',candidate_sha256=sha)
++            self.advance(record,'author_answer',actor='codex',candidate_sha256=sha)
+ 
+     def test_O3_duplicate_current_ids_do_not_disappear_in_history_merge(self):
+         env=self.reviews[0];obj=self.objection()
+@@ -580,10 +653,214 @@
+         self.history[0]['candidate_sha256']='b'*64
+         self.history[0]['response']['candidate_sha256']='b'*64
+         result=self.evaluate()
++        self.assertEqual(result['state'],'changes_requested')
++        self.assertIn('prior_verdict_requires_explicit_rereview:prior-real-review',result['missing_evidence'])
++
++
++
++
++
++
++class IncrementalContracts(unittest.TestCase):
++    # Reuse the focused fixture without inheriting/rerunning its test methods.
++    setUp=FindingsResolution.setUp
++    principal=FindingsResolution.principal
++    add=FindingsResolution.add
++    review=FindingsResolution.review
++    refresh=FindingsResolution.refresh
++    evaluate=FindingsResolution.evaluate
++    objection=FindingsResolution.objection
++    resolution=FindingsResolution.resolution
++    record=FindingsResolution.record
++    historical_high=FindingsResolution.historical_high
++
++    def add_high(self):
++        self.reviews[0]['response']['objections']=[self.objection()]
++        self.refresh(self.reviews[0])
++        self.controller.auto_records=False
++
++    def test_N1_real_context_producer_uses_same_canonical_policy(self):
++        from types import SimpleNamespace
++        from ipanema.orchestration.council_runtime import binding
++        plan={'allowed_files':['sample.py'],'objective':'Review fixture'}
++        native=binding(SimpleNamespace(id='fixture'),plan,self.root,Path('native-run'))
++        # Actual producer function and actual policy; no native/model requests.
++        self.assertEqual(native['participation_sha256'],cr.context_hash(agent_policy()))
++        self.assertNotIn('permissions_sha256',native)
++        adapted=cr.adapt_context(native,policy=agent_policy(),permissions=self.permissions,lineage_id='fixture')
++        self.assertEqual(adapted['participation_sha256'],native['participation_sha256'])
++        self.assertEqual(adapted['permissions_sha256'],cr.context_hash(self.permissions))
++        self.assertNotIn('permissions_sha256',native)
++
++    def test_N1_key_order_is_irrelevant_for_policy_and_permissions(self):
++        a={'z':[1,2],'a':{'y':True,'x':'á'}};b={'a':{'x':'á','y':True},'z':[1,2]}
++        self.assertEqual(cr.context_hash(a),cr.context_hash(b))
++        self.assertEqual(cr.context_hash(a),hashlib.sha256(json.dumps(a,sort_keys=True).encode()).hexdigest())
++
++    def test_N1_missing_policy_hash_is_rejected_without_fabrication(self):
++        legacy=copy.deepcopy(self.c['context']);legacy.pop('participation_sha256')
++        with self.assertRaises(IpanemaError):
++            cr.adapt_context(legacy,policy=self.future_policy,permissions=self.permissions,lineage_id='fixture')
++
++    def test_N1_permissions_changed_in_binding_are_rejected(self):
++        with self.assertRaises(IpanemaError):
++            cr.bind_receipt(self.evidence[0],self.c,root=self.root,permissions={'read_only':False,'production':False})
++
++    def test_N1_contract_is_required_by_consumer(self):
++        self.c['context'].pop('context_contract')
++        self.assertNotEqual(self.evaluate()['state'],'approved_for_authorization')
++
++    def test_N1_nan_is_not_a_canonical_json_permission(self):
++        with self.assertRaises(ValueError):cr.context_hash({'timeout':float('nan')})
++
++    def test_N2_resolution_plus_answer_without_record_does_not_close(self):
++        self.add_high();self.answers=[{'reviewer':'claude','objection_id':'O1','action':'refute'}];self.resolution()
++        self.assertEqual(self.controller.records,{})
++        self.assertEqual(self.evaluate()['state'],'changes_requested')
++
++    def test_N2_reducer_replay_is_the_only_successful_closure(self):
++        self.add_high();binding=self.resolution()
++        self.controller.close_fixture(self.record(),binding,'source:sample.py')
++        result=self.evaluate();self.assertEqual(result['state'],'approved_for_authorization')
++        self.assertTrue(result['findings'][0]['closed']);self.assertTrue(result['synthetic_only'])
++        self.assertFalse(result['identity_verified_by_hash'])
++
++    def test_N2_declared_terminal_state_without_events_is_not_closure(self):
++        self.add_high();record=self.record();record['state']='resolved'
++        self.controller.records[record['identity']]=record
++        self.assertEqual(self.evaluate()['state'],'changes_requested')
++
++    def test_N2_new_evidence_cannot_be_skipped(self):
++        record=cr.advance_objection(self.record(),'author_answer',actor='codex',candidate_sha256=cr.fingerprint(self.c))
++        with self.assertRaises(IpanemaError):
++            cr.advance_objection(record,'request_review',actor='controller',candidate_sha256=cr.fingerprint(self.c))
++
++    def test_N2_author_cannot_close_even_with_origin_confirmation(self):
++        self.add_high();b=self.resolution();record=self.record()
++        record=cr.advance_objection(record,'author_answer',actor='codex',candidate_sha256=cr.fingerprint(self.c))
++        record=cr.advance_objection(record,'add_evidence',actor='controller',candidate_sha256=cr.fingerprint(self.c),evidence_refs=['source:sample.py'])
++        record=cr.advance_objection(record,'request_review',actor='controller',candidate_sha256=cr.fingerprint(self.c))
++        with self.assertRaises(IpanemaError):
++            cr.advance_objection(record,'resolve',actor='codex',candidate_sha256=cr.fingerprint(self.c),evidence_refs=[b['receipt_id']],confirmation=b,controller=self.controller)
++
++    def test_N2_unverified_new_evidence_makes_replay_fail(self):
++        self.add_high();b=self.resolution();self.controller.close_fixture(self.record(),b,'nonexistent-source')
++        self.assertEqual(self.evaluate()['state'],'changes_requested')
++
++    def test_N2_current_changes_requested_survives_terminal_record(self):
++        self.add_high();b=self.resolution();self.controller.close_fixture(self.record(),b,'source:sample.py')
++        self.reviews[0]['response']['decision']='changes_requested';self.refresh(self.reviews[0])
++        self.assertEqual(self.evaluate()['state'],'changes_requested')
++
++    def test_N3_omitted_argument_cannot_hide_store_history(self):
++        self.historical_high();self.controller.rows=copy.deepcopy(self.history)
++        self.controller.auto_history=False;self.history=[]
++        self.assertEqual(self.evaluate()['state'],'changes_requested')
++        self.assertEqual(len(self.evaluate()['review_history']),1)
++
++    def test_N3_truncated_store_snapshot_fails_anchor(self):
++        self.historical_high();self.controller.rows=copy.deepcopy(self.history);self.controller.auto_history=False
++        with patch.object(self.controller,'history',return_value={'lineage_id':'fixture','reviews':[], 'complete_review_ids':[], 'objection_records':{}}):
++            self.assertNotEqual(self.evaluate()['state'],'approved_for_authorization')
++            self.assertIn('history_incomplete',self.evaluate()['missing_evidence'])
++
++    def test_N3_index_omission_is_rejected(self):
++        self.historical_high();snapshot=self.controller.history('fixture');snapshot['reviews']=copy.deepcopy(self.history)
++        with patch.object(self.controller,'history',return_value=snapshot):
++            self.assertIn('history_incomplete',self.evaluate()['missing_evidence'])
++
++    def test_N3_prior_blocker_survives_missing_and_stale_reviews(self):
++        self.historical_high();self.history[0]['response']['objections'][0]['severity']='BLOCKER'
++        old_env=copy.deepcopy(self.reviews[0])
++        self.reviews=[];self.assertEqual(self.evaluate()['state'],'blocked')
++        self.reviews=[old_env];self.reviews[0]['response']['candidate_sha256']='b'*64
++        self.assertEqual(self.evaluate()['state'],'blocked')
++
++    def test_N3_history_source_is_mandatory_even_for_genesis(self):
++        self.assertEqual(cr.evaluate(self.c,self.reviews,evidence=self.evidence,root=self.root,bindings=self.bindings)['state'],'needs_evidence')
++
++    def test_N3_explicit_migration_then_new_review_can_resolve_without_dead_end(self):
++        self.historical_high();old='b'*64;self.history[0]['candidate_sha256']=old;self.history[0]['response']['candidate_sha256']=old
++        self.controller.auto_records=False
++        seed=cr.new_objection('codex','claude',self.objection(),old);current=cr.fingerprint(self.c)
++        with self.assertRaises(IpanemaError):
++            cr.advance_objection(seed,'propose_correction',actor='codex',candidate_sha256=current,controller=self.controller)
++        self.controller.moves['move']=cr.MigrationEvidence(seed['identity'],old,current,'claude','codex')
++        record=cr.advance_objection(seed,'propose_correction',actor='codex',candidate_sha256=current,controller=self.controller,migration_ref='move')
++        record=cr.advance_objection(record,'author_answer',actor='codex',candidate_sha256=current)
++        record=cr.advance_objection(record,'add_evidence',actor='controller',candidate_sha256=current,evidence_refs=['source:sample.py'])
++        record=cr.advance_objection(record,'request_review',actor='controller',candidate_sha256=current)
++        self.controller.records[seed['identity']]=record
++        self.refresh(self.reviews[0],['prior-real-review'])
++        self.assertEqual(self.evaluate()['state'],'changes_requested')
++        self.resolution();row=self.evidence[-1]
++        b=cr.bind_receipt(row,self.c,root=self.root,permissions=self.permissions,principal=self.principal('claude'),resolution_state='refuted',objection_identity=seed['identity'])
++        self.bindings=[x for x in self.bindings if x['receipt_id']!=row['id']]+[b];self.controller.attest(b,'claude')
++        record=cr.advance_objection(record,'refute',actor='claude',candidate_sha256=current,evidence_refs=[row['id']],confirmation=b,controller=self.controller)
++        self.controller.records[seed['identity']]=record
++        result=self.evaluate();self.assertEqual(result['state'],'approved_for_authorization')
++        self.assertEqual(result['findings'][0]['identity'],seed['identity'])
++        self.assertEqual(result['review_history'][0]['candidate_sha256'],old)
++
++    def test_N3_changed_diff_invalidates_current_reviews_and_bindings(self):
++        self.c['diff_sha256']='9'*64
++        self.assertEqual(self.evaluate()['state'],'needs_evidence')
++
++    def test_N4_principal_json_and_self_hash_do_not_authenticate(self):
++        self.controller.proofs.clear()
++        result=self.evaluate();self.assertEqual(result['state'],'needs_evidence')
++        self.assertIn('unverified_reviewer:claude',result['missing_evidence'])
++
++    def test_N4_plain_dict_cannot_replace_controller_interface(self):
++        result=cr.evaluate(self.c,self.reviews,evidence=self.evidence,root=self.root,bindings=self.bindings,controller={'trust_basis':'adapter_verified'})
+         self.assertEqual(result['state'],'needs_evidence')
+-        self.assertIn('prior_candidate_review_requires_migration:prior-real-review',result['missing_evidence'])
+-
+-
++        self.assertEqual(result['trust_basis'],'unavailable')
++
++    def test_N4_json_cannot_replace_adapter_evidence(self):
++        self.controller.proofs['attempt-claude']={'agent':'claude','capability':'code_review_readonly'}
++        self.assertEqual(self.evaluate()['state'],'needs_evidence')
++
++    def test_N4_subagent_cannot_impersonate_native_principal(self):
++        from dataclasses import replace
++        self.controller.proofs['attempt-claude']=replace(self.controller.proofs['attempt-claude'],actor_kind='subagent',parent_actor_id='codex-parent')
++        self.assertEqual(self.evaluate()['state'],'needs_evidence')
++
++    def test_N4_missing_capability_and_wrong_provider_and_stale_permissions(self):
++        from dataclasses import replace
++        original=self.controller.proofs['attempt-claude']
++        for attrs in ({'capability':''},{'agent':'codex'},{'permissions_sha256':'a'*64},{'candidate_sha256':'b'*64},{'binding_sha256':'c'*64}):
++            with self.subTest(attrs=attrs):
++                self.controller.proofs['attempt-claude']=replace(original,**attrs)
++                self.assertEqual(self.evaluate()['state'],'needs_evidence')
++
++    def test_N4_supersession_is_not_identity_metadata(self):
++        self.refresh(self.reviews[0],['prior-review'])
++        b=next(x for x in self.bindings if x['receipt_id']=='attempt-claude')
++        self.assertNotIn('supersedes_review_ids',b['principal'])
++        self.assertEqual(self.controller.attestation('attempt-claude').supersedes_review_ids,('prior-review',))
++
++
++    def test_N1_versioned_receipt_missing_permissions_is_rejected(self):
++        row=copy.deepcopy(self.evidence[0]);row['context'].pop('permissions_sha256')
++        with self.assertRaises(IpanemaError):
++            cr.bind_receipt(row,self.c,root=self.root,permissions=self.permissions)
++
++    def test_N3_history_cannot_invent_an_unknown_author(self):
++        self.historical_high();self.history[0].pop('author')
++        with self.assertRaises(IpanemaError):self.evaluate()
++
++    def test_N2_state_event_tampering_does_not_close(self):
++        self.add_high();b=self.resolution();self.controller.close_fixture(self.record(),b,'source:sample.py')
++        record=self.controller.records[self.record()['identity']]
++        record['events'][0]['actor']='claude'
++        self.assertEqual(self.evaluate()['state'],'changes_requested')
++
++    def test_N1_incomplete_qa_with_null_verification_is_rejected(self):
++        row=copy.deepcopy(next(r for r in self.evidence if r['id']=='qa:baseline'))
++        report={'executed':True,'passed':True,'verification_state':None}
++        row['sha256']=hashlib.sha256(json.dumps(report,sort_keys=True).encode()).hexdigest()
++        with self.assertRaises(IpanemaError):
++            cr.bind_receipt(row,self.c,root=self.root,permissions=self.permissions,qa_report=report)
+ 
+ 
+ if __name__=='__main__':unittest.main()

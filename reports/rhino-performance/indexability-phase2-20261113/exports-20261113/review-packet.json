@@ -1,0 +1,574 @@
+{
+  "summary": {
+    "inventory_HTML": 124,
+    "HTTP_baseline_verified": 124,
+    "exact_drilldown_matches_inventory": 0,
+    "original_inspections_retained": 15,
+    "original_known_indexed_inspections": 10,
+    "uninspected_inventory_URLs": 109,
+    "latest_coverage_chart_date": "2026-11-08",
+    "coverage_indexed_aggregate": 141.0,
+    "coverage_not_indexed_aggregate": 347.0,
+    "supplied_drilldown_counts": {
+      "Página alternativa con etiqueta canónica adecuada": 148,
+      "Página con redirección": 112,
+      "Bloqueada por robots.txt": 16
+    },
+    "candidate_alias_counts_NOT_transferred": {
+      "Página alternativa con etiqueta canónica adecuada": 113,
+      "Página con redirección": 2
+    },
+    "robots_rows_sensitive_checkout_or_add_to_cart": 16,
+    "performance_period": {
+      "first_chart_date": "2026-08-11",
+      "last_chart_date": "2026-11-10",
+      "filter_label": [
+        [
+          "Filtrar",
+          "Valor"
+        ],
+        [
+          "Tipo de búsqueda",
+          "Web (basada en texto)"
+        ],
+        [
+          "Fecha",
+          "Últimos 3 meses"
+        ]
+      ],
+      "search_type": "Web (basada en texto)"
+    },
+    "performance_pages": 440,
+    "performance_exact_inventory_matches": 108,
+    "query_rows": 1000,
+    "missing_reason_detail_lists": [
+      "No se ha encontrado (404):33",
+      "Rastreada: actualmente sin indexar:33",
+      "Descubierta: actualmente sin indexar:5",
+      "Indexed URL examples:aggregate141 only"
+    ],
+    "no_new_storefront_or_account_requests": true,
+    "no_implementation": true
+  },
+  "coverage_reasons": [
+    {
+      "Motivo": "Página alternativa con etiqueta canónica adecuada",
+      "Fuente": "Sitio web",
+      "Validación": "No iniciada",
+      "Páginas": 148.0
+    },
+    {
+      "Motivo": "Página con redirección",
+      "Fuente": "Sitio web",
+      "Validación": "No iniciada",
+      "Páginas": 112.0
+    },
+    {
+      "Motivo": "No se ha encontrado (404)",
+      "Fuente": "Sitio web",
+      "Validación": "No iniciada",
+      "Páginas": 33.0
+    },
+    {
+      "Motivo": "Bloqueada por robots.txt",
+      "Fuente": "Sitio web",
+      "Validación": "No iniciada",
+      "Páginas": 16.0
+    },
+    {
+      "Motivo": "Rastreada: actualmente sin indexar",
+      "Fuente": "Sistemas de Google",
+      "Validación": "No iniciada",
+      "Páginas": 33.0
+    },
+    {
+      "Motivo": "Descubierta: actualmente sin indexar",
+      "Fuente": "Sistemas de Google",
+      "Validación": "No iniciada",
+      "Páginas": 5.0
+    },
+    {
+      "Motivo": "Soft 404",
+      "Fuente": "Sitio web",
+      "Validación": "N/D",
+      "Páginas": 0.0
+    },
+    {
+      "Motivo": "Excluida por una etiqueta \"noindex\"",
+      "Fuente": "Sitio web",
+      "Validación": "N/D",
+      "Páginas": 0.0
+    },
+    {
+      "Motivo": "Duplicada: Google ha elegido una versión canónica diferente a la del usuario",
+      "Fuente": "Sistemas de Google",
+      "Validación": "N/D",
+      "Páginas": 0.0
+    }
+  ],
+  "metadata_provenance": [
+    {
+      "file": "/home/alanrichard/Escritorio/rhino-performance.com-Coverage-2026-11-13.xlsx",
+      "name": "rhino-performance.com-Coverage-2026-11-13.xlsx",
+      "sha256": "bb3874d719ea5f33d6112f7585e3fd717318535f25bf7a06463326b7c5f94379",
+      "bytes": 7467,
+      "date_claimed_by_filename": "2026-11-13",
+      "date1904": false,
+      "sheets": {
+        "Gráfico": 87,
+        "Problemas críticos": 9,
+        "Problemas no críticos": 0,
+        "Metadatos": 1
+      },
+      "metadata_or_filters": [
+        [
+          "Propiedad",
+          "Valor"
+        ],
+        [
+          "Sitemap",
+          "Todas las páginas conocidas"
+        ]
+      ],
+      "property_binding": "User provided Rhino filenames; URL rows all restricted to rhino-performance.com/www; workbook metadata itself has no property identifier."
+    },
+    {
+      "file": "/home/alanrichard/Escritorio/rhino-performance.com-Coverage-Drilldown-2026-11-13.xlsx",
+      "name": "rhino-performance.com-Coverage-Drilldown-2026-11-13.xlsx",
+      "sha256": "81676e917902ceeabfdbb6011da3c0fdabe555c56ae64f4ed6b586f8ef6d4c0c",
+      "bytes": 11031,
+      "date_claimed_by_filename": "2026-11-13",
+      "date1904": false,
+      "sheets": {
+        "Gráfico": 85,
+        "Tabla": 148,
+        "Metadatos": 2
+      },
+      "metadata_or_filters": [
+        [
+          "Propiedad",
+          "Valor"
+        ],
+        [
+          "Sitemap",
+          "Todas las páginas conocidas"
+        ],
+        [
+          "Incidencia",
+          "Página alternativa con etiqueta canónica adecuada"
+        ]
+      ],
+      "property_binding": "User provided Rhino filenames; URL rows all restricted to rhino-performance.com/www; workbook metadata itself has no property identifier."
+    },
+    {
+      "file": "/home/alanrichard/Escritorio/rhino-performance.com-Coverage-Drilldown-2026-11-13 (1).xlsx",
+      "name": "rhino-performance.com-Coverage-Drilldown-2026-11-13 (1).xlsx",
+      "sha256": "8fd5c8d20f3605b219eed4b8f446947ef898471d46a7a490edeac2205ef77678",
+      "bytes": 9149,
+      "date_claimed_by_filename": "2026-11-13",
+      "date1904": false,
+      "sheets": {
+        "Gráfico": 85,
+        "Tabla": 112,
+        "Metadatos": 2
+      },
+      "metadata_or_filters": [
+        [
+          "Propiedad",
+          "Valor"
+        ],
+        [
+          "Sitemap",
+          "Todas las páginas conocidas"
+        ],
+        [
+          "Incidencia",
+          "Página con redirección"
+        ]
+      ],
+      "property_binding": "User provided Rhino filenames; URL rows all restricted to rhino-performance.com/www; workbook metadata itself has no property identifier."
+    },
+    {
+      "file": "/home/alanrichard/Escritorio/rhino-performance.com-Coverage-Drilldown-2026-11-13 (2).xlsx",
+      "name": "rhino-performance.com-Coverage-Drilldown-2026-11-13 (2).xlsx",
+      "sha256": "0f3948e29ca88172a8ee5a607fd6d75b00076acbec99ba80d9692513ca966842",
+      "bytes": 6096,
+      "date_claimed_by_filename": "2026-11-13",
+      "date1904": false,
+      "sheets": {
+        "Gráfico": 85,
+        "Tabla": 16,
+        "Metadatos": 2
+      },
+      "metadata_or_filters": [
+        [
+          "Propiedad",
+          "Valor"
+        ],
+        [
+          "Sitemap",
+          "Todas las páginas conocidas"
+        ],
+        [
+          "Incidencia",
+          "Bloqueada por robots.txt"
+        ]
+      ],
+      "property_binding": "User provided Rhino filenames; URL rows all restricted to rhino-performance.com/www; workbook metadata itself has no property identifier."
+    },
+    {
+      "file": "/home/alanrichard/Escritorio/rhino-performance.com-Performance-on-Search-2026-11-13.xlsx",
+      "name": "rhino-performance.com-Performance-on-Search-2026-11-13.xlsx",
+      "sha256": "b71bc7294509e52b71b409d903a1df33d13c20bffead17435fdc99407ddfd095",
+      "bytes": 64969,
+      "date_claimed_by_filename": "2026-11-13",
+      "date1904": false,
+      "sheets": {
+        "Gráfico": 92,
+        "Consultas": 1000,
+        "Páginas": 440,
+        "Países": 161,
+        "Dispositivos": 3,
+        "Aparición en búsquedas": 2,
+        "Filtros": 2
+      },
+      "metadata_or_filters": [
+        [
+          "Filtrar",
+          "Valor"
+        ],
+        [
+          "Tipo de búsqueda",
+          "Web (basada en texto)"
+        ],
+        [
+          "Fecha",
+          "Últimos 3 meses"
+        ]
+      ],
+      "property_binding": "User provided Rhino filenames; URL rows all restricted to rhino-performance.com/www; workbook metadata itself has no property identifier."
+    }
+  ],
+  "categories": [
+    {
+      "url": "https://rhino-performance.com/presoterapia/",
+      "historical_inspection_state": "indexed_historical",
+      "inspection_date": "2026-11-12T16:13:34.894824+00:00",
+      "performance": {
+        "url": "https://rhino-performance.com/presoterapia/",
+        "clicks": 30.0,
+        "impressions": 2810.0,
+        "CTR_exported": 0.010700000000000001,
+        "position_exported": 5.3
+      },
+      "performance_scope": "Full property period; not joined with queries/device/country",
+      "exact_export_exclusion": []
+    },
+    {
+      "url": "https://rhino-performance.com/pistolas-de-masaje/",
+      "historical_inspection_state": "unknown_no_official_evidence",
+      "inspection_date": "",
+      "performance": {
+        "url": "https://rhino-performance.com/pistolas-de-masaje/",
+        "clicks": 0.0,
+        "impressions": 45.0,
+        "CTR_exported": 0.0,
+        "position_exported": 6.78
+      },
+      "performance_scope": "Full property period; not joined with queries/device/country",
+      "exact_export_exclusion": []
+    },
+    {
+      "url": "https://rhino-performance.com/terapia-fria/",
+      "historical_inspection_state": "unknown_no_official_evidence",
+      "inspection_date": "",
+      "performance": null,
+      "performance_scope": "Full property period; not joined with queries/device/country",
+      "exact_export_exclusion": []
+    },
+    {
+      "url": "https://rhino-performance.com/compresion-frio-y-calor/",
+      "historical_inspection_state": "unknown_no_official_evidence",
+      "inspection_date": "",
+      "performance": {
+        "url": "https://rhino-performance.com/compresion-frio-y-calor/",
+        "clicks": 6.0,
+        "impressions": 1079.0,
+        "CTR_exported": 0.005600000000000001,
+        "position_exported": 1.35
+      },
+      "performance_scope": "Full property period; not joined with queries/device/country",
+      "exact_export_exclusion": []
+    },
+    {
+      "url": "https://rhino-performance.com/accesorios/",
+      "historical_inspection_state": "indexed_historical",
+      "inspection_date": "2026-11-12T16:13:43.562814+00:00",
+      "performance": {
+        "url": "https://rhino-performance.com/accesorios/",
+        "clicks": 27.0,
+        "impressions": 1071.0,
+        "CTR_exported": 0.0252,
+        "position_exported": 3.49
+      },
+      "performance_scope": "Full property period; not joined with queries/device/country",
+      "exact_export_exclusion": []
+    }
+  ],
+  "legacy_redirect_visibility_top": [
+    {
+      "url": "https://rhino-performance.com/producto/botas-de-presoterapia-botas/",
+      "clicks": 539.0,
+      "impressions": 20338.0,
+      "CTR_exported": 0.0265,
+      "position_exported": 6.13,
+      "reason": "Página con redirección",
+      "source_evidence": "Exact URL match between separate historical performance period and reason list; not current status or destination proof"
+    },
+    {
+      "url": "https://rhino-performance.com/home/",
+      "clicks": 283.0,
+      "impressions": 3519.0,
+      "CTR_exported": 0.08039999999999999,
+      "position_exported": 3.57,
+      "reason": "Página con redirección",
+      "source_evidence": "Exact URL match between separate historical performance period and reason list; not current status or destination proof"
+    },
+    {
+      "url": "https://rhino-performance.com/producto/botas-de-presoterapia-kit/",
+      "clicks": 100.0,
+      "impressions": 4973.0,
+      "CTR_exported": 0.020099999999999996,
+      "position_exported": 4.48,
+      "reason": "Página con redirección",
+      "source_evidence": "Exact URL match between separate historical performance period and reason list; not current status or destination proof"
+    },
+    {
+      "url": "https://rhino-performance.com/retencion-de-liquidos-en-atletas-por-que-ocurre-y-como-tratarla/",
+      "clicks": 76.0,
+      "impressions": 5504.0,
+      "CTR_exported": 0.0138,
+      "position_exported": 5.33,
+      "reason": "Página con redirección",
+      "source_evidence": "Exact URL match between separate historical performance period and reason list; not current status or destination proof"
+    },
+    {
+      "url": "https://rhino-performance.com/que-debes-saber-antes-de-de-comprar-unas-botas-de-presoterapia/",
+      "clicks": 67.0,
+      "impressions": 18189.0,
+      "CTR_exported": 0.0037,
+      "position_exported": 9.17,
+      "reason": "Página con redirección",
+      "source_evidence": "Exact URL match between separate historical performance period and reason list; not current status or destination proof"
+    },
+    {
+      "url": "https://rhino-performance.com/guia-para-el-uso-de-tus-botas-de-presoterapia/",
+      "clicks": 58.0,
+      "impressions": 5811.0,
+      "CTR_exported": 0.01,
+      "position_exported": 7.19,
+      "reason": "Página con redirección",
+      "source_evidence": "Exact URL match between separate historical performance period and reason list; not current status or destination proof"
+    },
+    {
+      "url": "https://rhino-performance.com/producto/tina-fria-tub-air/",
+      "clicks": 56.0,
+      "impressions": 717.0,
+      "CTR_exported": 0.0781,
+      "position_exported": 5.72,
+      "reason": "Página con redirección",
+      "source_evidence": "Exact URL match between separate historical performance period and reason list; not current status or destination proof"
+    },
+    {
+      "url": "https://rhino-performance.com/producto/pistola-masaje-gun-air/",
+      "clicks": 55.0,
+      "impressions": 691.0,
+      "CTR_exported": 0.0796,
+      "position_exported": 4.91,
+      "reason": "Página con redirección",
+      "source_evidence": "Exact URL match between separate historical performance period and reason list; not current status or destination proof"
+    }
+  ],
+  "query_candidates_top": [
+    {
+      "query": "botas de presoterapia",
+      "clicks": 47.0,
+      "impressions": 7396.0,
+      "CTR_exported": 0.0064,
+      "position_exported": 7.79,
+      "intent_hypothesis": "commercial_or_mixed_candidate",
+      "landing_page": "not_observed_in_export",
+      "category_mapping": "not_assigned",
+      "country_device": "not_joined"
+    },
+    {
+      "query": "botas presoterapia",
+      "clicks": 44.0,
+      "impressions": 7346.0,
+      "CTR_exported": 0.006,
+      "position_exported": 10.02,
+      "intent_hypothesis": "commercial_or_mixed_candidate",
+      "landing_page": "not_observed_in_export",
+      "category_mapping": "not_assigned",
+      "country_device": "not_joined"
+    },
+    {
+      "query": "botas de compresion",
+      "clicks": 41.0,
+      "impressions": 5905.0,
+      "CTR_exported": 0.0069,
+      "position_exported": 6.53,
+      "intent_hypothesis": "commercial_or_mixed_candidate",
+      "landing_page": "not_observed_in_export",
+      "category_mapping": "not_assigned",
+      "country_device": "not_joined"
+    },
+    {
+      "query": "pistola de percusion",
+      "clicks": 10.0,
+      "impressions": 1185.0,
+      "CTR_exported": 0.0084,
+      "position_exported": 9.02,
+      "intent_hypothesis": "commercial_or_mixed_candidate",
+      "landing_page": "not_observed_in_export",
+      "category_mapping": "not_assigned",
+      "country_device": "not_joined"
+    },
+    {
+      "query": "para que sirven las botas de compresion",
+      "clicks": 1.0,
+      "impressions": 1018.0,
+      "CTR_exported": 0.001,
+      "position_exported": 7.91,
+      "intent_hypothesis": "informational_candidate",
+      "landing_page": "not_observed_in_export",
+      "category_mapping": "not_assigned",
+      "country_device": "not_joined"
+    },
+    {
+      "query": "botas compresion",
+      "clicks": 8.0,
+      "impressions": 985.0,
+      "CTR_exported": 0.008100000000000001,
+      "position_exported": 7.86,
+      "intent_hypothesis": "commercial_or_mixed_candidate",
+      "landing_page": "not_observed_in_export",
+      "category_mapping": "not_assigned",
+      "country_device": "not_joined"
+    },
+    {
+      "query": "botas de compresión",
+      "clicks": 2.0,
+      "impressions": 768.0,
+      "CTR_exported": 0.0026,
+      "position_exported": 9.93,
+      "intent_hypothesis": "commercial_or_mixed_candidate",
+      "landing_page": "not_observed_in_export",
+      "category_mapping": "not_assigned",
+      "country_device": "not_joined"
+    },
+    {
+      "query": "recuperación deportiva",
+      "clicks": 2.0,
+      "impressions": 752.0,
+      "CTR_exported": 0.0027,
+      "position_exported": 13.43,
+      "intent_hypothesis": "commercial_or_mixed_candidate",
+      "landing_page": "not_observed_in_export",
+      "category_mapping": "not_assigned",
+      "country_device": "not_joined"
+    },
+    {
+      "query": "botas de compresion para que sirven",
+      "clicks": 1.0,
+      "impressions": 613.0,
+      "CTR_exported": 0.0016,
+      "position_exported": 8.54,
+      "intent_hypothesis": "informational_candidate",
+      "landing_page": "not_observed_in_export",
+      "category_mapping": "not_assigned",
+      "country_device": "not_joined"
+    },
+    {
+      "query": "presoterapia brazos",
+      "clicks": 1.0,
+      "impressions": 571.0,
+      "CTR_exported": 0.0018,
+      "position_exported": 5.81,
+      "intent_hypothesis": "commercial_or_mixed_candidate",
+      "landing_page": "not_observed_in_export",
+      "category_mapping": "not_assigned",
+      "country_device": "not_joined"
+    },
+    {
+      "query": "presoterapia botas",
+      "clicks": 6.0,
+      "impressions": 496.0,
+      "CTR_exported": 0.0121,
+      "position_exported": 7.26,
+      "intent_hypothesis": "commercial_or_mixed_candidate",
+      "landing_page": "not_observed_in_export",
+      "category_mapping": "not_assigned",
+      "country_device": "not_joined"
+    },
+    {
+      "query": "para que sirven las botas de presoterapia",
+      "clicks": 3.0,
+      "impressions": 460.0,
+      "CTR_exported": 0.006500000000000001,
+      "position_exported": 8.15,
+      "intent_hypothesis": "informational_candidate",
+      "landing_page": "not_observed_in_export",
+      "category_mapping": "not_assigned",
+      "country_device": "not_joined"
+    }
+  ],
+  "robots_examples": [
+    {
+      "url": "https://rhino-performance.com/checkout/",
+      "reason": "Bloqueada por robots.txt",
+      "operation_sensitive": true
+    },
+    {
+      "url": "https://rhino-performance.com/?from=AppAgg.com&utm_campaign=AppAgg.com&utm_medium=referral&utm_source=AppAgg.com&add-to-cart=10148",
+      "reason": "Bloqueada por robots.txt",
+      "operation_sensitive": true
+    },
+    {
+      "url": "https://rhino-performance.com/?from=AppAgg.com&utm_campaign=AppAgg.com&utm_medium=referral&utm_source=AppAgg.com&add-to-cart=10121",
+      "reason": "Bloqueada por robots.txt",
+      "operation_sensitive": true
+    }
+  ],
+  "performance_aggregation_caveats": [
+    [
+      "Filtrar",
+      "Valor"
+    ],
+    [
+      "Tipo de búsqueda",
+      "Web (basada en texto)"
+    ],
+    [
+      "Fecha",
+      "Últimos 3 meses"
+    ]
+  ],
+  "totals_by_dimension": {
+    "chart": {
+      "clicks": 5431.0,
+      "impressions": 212491.0
+    },
+    "pages": {
+      "clicks": 5577.0,
+      "impressions": 259926.0
+    },
+    "queries_top1000": {
+      "clicks": 2811.0,
+      "impressions": 71722.0
+    }
+  },
+  "reconciliation_rule": "Exact URL state only; host/scheme/trailing-slash candidates separate. No canonical target is provided in reason lists, do not invent it. Search rows are period visibility, not current index.",
+  "baseline_preserved": "No changes to124HTTP,20technical incomplete,author/schema warnings,blog canonical or menus. No new crawling/GSC API/OAuth.",
+  "prior_ADR": "needs_evidence; no publication or implementation approval."
+}

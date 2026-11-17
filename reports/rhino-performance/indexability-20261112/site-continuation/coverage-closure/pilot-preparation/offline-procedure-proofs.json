@@ -1,0 +1,33 @@
+{
+  "scope": "new procedure-only injected transport fixtures; not rerun of 191/13 suites; no real DNS/HTTP",
+  "network_requests": 0,
+  "proofs": [
+    {
+      "case": "max_urls_5_is_not_target_selection",
+      "fixture_project": "sample",
+      "requests": [
+        "https://example.invalid/robots.txt",
+        "https://example.invalid/"
+      ],
+      "result_nodes": [
+        "https://example.invalid/"
+      ],
+      "state": "partial",
+      "meaning": "max_depth0/max_sitemaps0 still reads home, cannot target selected list"
+    },
+    {
+      "case": "generic_transport_exception_does_not_abort_remaining_queue",
+      "requests": [
+        "https://example.invalid/robots.txt",
+        "https://example.invalid/",
+        "https://example.invalid/a",
+        "https://example.invalid/b"
+      ],
+      "stop_reason": null,
+      "errors": [
+        "simulated transport rejection, no real DNS or TLS"
+      ],
+      "meaning": "general crawler records node transport failure and continues; strict pilot requires terminal failure in scoped mode"
+    }
+  ]
+}

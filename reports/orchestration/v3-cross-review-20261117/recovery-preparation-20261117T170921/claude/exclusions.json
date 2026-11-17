@@ -1,0 +1,30 @@
+[
+  {
+    "item": "Full baseline council.py",
+    "reason": "Exact unchanged prefix of complete candidate council.py, byte/hash verified; duplicate body omitted only."
+  },
+  {
+    "item": "Automatic full-addition diffs of metadata/schema/source copies",
+    "reason": "Not changes to candidate; they arose because staged review files were absent from old snapshot initial commit. Keep only actual candidate.patch."
+  },
+  {
+    "item": "Historical proposal/failed review narratives and peer opinions",
+    "reason": "Avoid anchoring first independent review; hashes/receipts preserved at original paths."
+  },
+  {
+    "item": "test_council_policy.py full source",
+    "reason": "Candidate new tests + current full council code + receipt tests and 87-result artifact preserve key contract context; historical fixture duplication omitted."
+  },
+  {
+    "item": "Duplicated schema/manifest/context wrappers",
+    "reason": "Each appears once in the JSON packet, no whole packet auto-diff."
+  },
+  {
+    "item": "Rhino/storefront knowledge and theme consumers",
+    "reason": "Not a consumer of this pure optional code review helper and not authorized in this task."
+  },
+  {
+    "item": "Per-function clipping of security/interface modules",
+    "reason": "Not used in final packet: retain complete eight related modules because omitted globals/callers could be material. Shrink only duplicated representation, baseline prefix and irrelevant historical knowledge."
+  }
+]

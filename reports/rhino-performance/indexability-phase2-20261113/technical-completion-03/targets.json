@@ -1,0 +1,63 @@
+{
+  "project": "rhino-performance",
+  "origin": "https://rhino-performance.com",
+  "purpose": "Fill missing meta robots, response headers and main evidence. HTTP already checked; do not revisit other pages.",
+  "targets": [
+    {
+      "url": "https://rhino-performance.com/blog/posts/recuperacion-muscular-en-el-futbol-americano-la-clave-para-un-mejor-rendimiento-b450f269375a/",
+      "type": "article",
+      "baseline_HTTP": 200,
+      "missing": [
+        "meta robots",
+        "X-Robots-Tag",
+        "main content"
+      ],
+      "source_original": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-after.json"
+    },
+    {
+      "url": "https://rhino-performance.com/blog/posts/retencion-de-liquidos-en-atletas-por-que-ocurre-y-como-tratarla-70e0723bf879/",
+      "type": "article",
+      "baseline_HTTP": 200,
+      "missing": [
+        "meta robots",
+        "X-Robots-Tag",
+        "main content"
+      ],
+      "source_original": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-after.json"
+    },
+    {
+      "url": "https://rhino-performance.com/blog/posts/en-que-situaciones-no-se-recomienda-el-uso-de-presoterapia-61b45d53ea7b/",
+      "type": "article",
+      "baseline_HTTP": 200,
+      "missing": [
+        "meta robots",
+        "X-Robots-Tag",
+        "main content"
+      ],
+      "source_original": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-after.json"
+    },
+    {
+      "url": "https://rhino-performance.com/blog/posts/mangas-de-compresion-frio-y-calor-para-el-cuidado-muscular-a30fa0abf6a7/",
+      "type": "article",
+      "baseline_HTTP": 200,
+      "missing": [
+        "meta robots",
+        "X-Robots-Tag",
+        "main content"
+      ],
+      "source_original": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-after.json"
+    },
+    {
+      "url": "https://rhino-performance.com/blog/posts/motivacion-deportiva-como-conseguirla-a299c19dcb3c/",
+      "type": "article",
+      "baseline_HTTP": 200,
+      "missing": [
+        "meta robots",
+        "X-Robots-Tag",
+        "main content"
+      ],
+      "source_original": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-after.json"
+    }
+  ],
+  "network_authorized": false
+}

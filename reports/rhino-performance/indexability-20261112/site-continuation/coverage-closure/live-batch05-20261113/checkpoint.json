@@ -1,0 +1,57 @@
+{
+  "project": null,
+  "state": "running",
+  "planned": {
+    "https://rhino-performance.com/robots.txt": "completed",
+    "https://rhino-performance.com/productos/brazo-presoterapia-pro-3-individual/": "completed",
+    "https://rhino-performance.com/productos/kit-botas-de-presoterapia-pro-3/": "completed",
+    "https://rhino-performance.com/blog/posts/bienestar-emocional-como-el-masaje-de-compresion-puede-aliviar-el-estres-5244f5509cd6/": "completed",
+    "https://rhino-performance.com/blog/posts/presoterapia-tu-aliado-contra-la-celulitis-y-grasa-localizada-45080195e9b1/": "completed",
+    "https://rhino-performance.com/blog/posts/la-presoterapia-un-tratamiento-efectivo-para-mejorar-la-apariencia-de-la-piel-25a565de1dd8/": "completed"
+  },
+  "requests": [
+    {
+      "ordinal": 1,
+      "url": "https://rhino-performance.com/robots.txt",
+      "state": "completed",
+      "status": 200,
+      "bytes": 1742
+    },
+    {
+      "ordinal": 2,
+      "url": "https://rhino-performance.com/productos/brazo-presoterapia-pro-3-individual/",
+      "state": "completed",
+      "status": 200,
+      "bytes": 742061
+    },
+    {
+      "ordinal": 3,
+      "url": "https://rhino-performance.com/productos/kit-botas-de-presoterapia-pro-3/",
+      "state": "completed",
+      "status": 200,
+      "bytes": 766640
+    },
+    {
+      "ordinal": 4,
+      "url": "https://rhino-performance.com/blog/posts/bienestar-emocional-como-el-masaje-de-compresion-puede-aliviar-el-estres-5244f5509cd6/",
+      "state": "completed",
+      "status": 200,
+      "bytes": 245671
+    },
+    {
+      "ordinal": 5,
+      "url": "https://rhino-performance.com/blog/posts/presoterapia-tu-aliado-contra-la-celulitis-y-grasa-localizada-45080195e9b1/",
+      "state": "completed",
+      "status": 200,
+      "bytes": 245598
+    },
+    {
+      "ordinal": 6,
+      "url": "https://rhino-performance.com/blog/posts/la-presoterapia-un-tratamiento-efectivo-para-mejorar-la-apariencia-de-la-piel-25a565de1dd8/",
+      "state": "completed",
+      "status": 200,
+      "bytes": 259786
+    }
+  ],
+  "arrival_at_server_without_response": "unknown"
+}

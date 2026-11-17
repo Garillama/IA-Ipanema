@@ -1,0 +1,150 @@
+{
+  "requested_agent": "claude",
+  "effective_agent": "claude",
+  "scope": "official XLSX cross-examination and prioritization only",
+  "input_hashes": {
+    "reports/rhino-performance/indexability-phase2-20261113/native-alternative-template-review-20261113/review-packet.json": "9c520345781e1bfafd460638ca8818b287907f9466304d037712a0ff178f6d00",
+    "reports/rhino-performance/indexability-phase2-20261113/native-alternative-template-review-20261113/controller-validation.json": "fc594ffef6a01e9e4a0e8be82c0c2ac4dbb1bf1ec10b617d49106d32983bca20",
+    "reports/rhino-performance/indexability-phase2-20261113/native-alternative-template-review-20261113/controller-supplement.json": "bee61425ceb6fa3dee9ba23fd790d963b214990654d9e2c34ced91614431bbe9",
+    "reports/rhino-performance/indexability-phase2-20261113/native-alternative-template-review-20261113/official-source-facts.json": "a2cecff413379ff6552f1c01f2d9f5784fb44e4ceb05db1f95021406db8c2afe",
+    "reports/rhino-performance/indexability-phase2-20261113/native-alternative-template-review-20261113/local-evidence-reused.json": "d7fbf1ac8578f684f61e8698209f2bc41d08b0d6468d3674a9d4bcde78861930",
+    "reports/rhino-performance/indexability-phase2-20261113/native-alternative-template-review-20261113/README.md": "6fc271d16cf780c2a165cc64e83b278bd44e88144aabe5757d7ecb1efa6e8caa"
+  },
+  "response": {
+    "decision": "proposed",
+    "summary": "Defiendo la pregunta asignada codex-q-01. Mi alternativa es native-alternative-category-template. La guía oficial cierra la capacidad general de la plataforma, pero no la aplicabilidad al Rhino personalizado ni el aislamiento en Presoterapia. Sigue needs_evidence, sin implementación y sin autorizar crear, guardar ni asignar.",
+    "changes": [],
+    "evidence": [
+      "seo.editorial.official-template-guide",
+      "seo.editorial.native-template-limits"
+    ],
+    "objections": [
+      {
+        "id": "claude-obj-1",
+        "alternative_id": "native-alternative-category-template",
+        "category": "aplicabilidad / evidencia",
+        "severity": "high",
+        "claim": "La guía documenta soporte general, no el editor del Rhino personalizado. La posición del rich-text tras el listado es inferencia local no probada, y la preservación de filtros, paginación, SEO y responsive sigue sin medirse. Las aclaraciones documentales no resuelven esta objeción.",
+        "status": "open",
+        "evidence_refs": [
+          "seo.editorial.official-template-guide",
+          "seo.editorial.native-template-limits"
+        ],
+        "resolution_evidence_refs": []
+      },
+      {
+        "id": "claude-obj-2",
+        "alternative_id": "native-alternative-category-template",
+        "category": "aislamiento / prerrequisitos",
+        "severity": "medium",
+        "claim": "No hay fuente que garantice la configuración copiada ni la asignación exclusiva. El conteo de asignaciones no identifica las entidades, y la creación de una plantilla sin asignar sin otros cambios de diseño no está demostrada. La preservación sigue unknown.",
+        "status": "open",
+        "evidence_refs": [
+          "seo.editorial.official-template-guide",
+          "seo.editorial.native-template-limits"
+        ],
+        "resolution_evidence_refs": []
+      }
+    ],
+    "preferred_alternative": "native-alternative-category-template",
+    "answers": [
+      {
+        "question_id": "codex-q-01",
+        "from_agent": "codex",
+        "answer": "ID exacto: native-alternative-category-template. Ninguna fuente actual garantiza la igualdad remoto/local ni los controles del editor (remote_equality not_checked). Evidencia necesaria del propietario, solo lectura: (1) identidad del diseño publicado 14828608/7400935 y su fecha; (2) nombre de la plantilla de categoría asignada hoy a Presoterapia, TerapiaFria y Accesorios, como lista nominal y no solo el conteo; (3) captura del editor con el selector de alternativas y la sección rich-text disponibles, sin crear ni guardar; (4) exportación o captura de la configuración vigente para contrastarla con los hashes locales de category.json. Prueba posterior a una futura autorización: la plantilla nueva muestra 0 asignaciones antes de asignar y solo Presoterapia la usa después, con la configuración actual copiada y no una base vacía. Ver y copiar son operaciones distintas de Crear, Guardar y Asignar, que no están autorizadas.",
+        "disposition": "needs_evidence",
+        "evidence_refs": [
+          "seo.editorial.official-template-guide",
+          "seo.editorial.native-template-limits"
+        ]
+      }
+    ],
+    "withdrawn_alternatives": [],
+    "revision_notes": [
+      "Aclaración documental: la guía oficial avanza de 'capacidad desconocida' a 'capacidad general soportada'. No resuelve las objeciones high ni medium, que permanecen abiertas.",
+      "Recomendación: configuración nativa antes que un parche compartido; copiar la configuración actual y no una base vacía; no usar workarounds de diseño ni publicación.",
+      "Mantener sin cambios: aplicabilidad actual (high, open) y preservación (medium, unknown).",
+      "Crear, Guardar y Asignar son mutaciones remotas no autorizadas; la verificación de solo lectura va primero."
+    ]
+  },
+  "model": {
+    "model": "claude-sonnet-5-5",
+    "effort": "medium",
+    "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+    "verified_at": "2026-11-08"
+  },
+  "execution": {
+    "exit_code": 0,
+    "timed_out": false,
+    "output_limited": false,
+    "idle_timed_out": false,
+    "cancelled": false,
+    "process_started": true,
+    "process_reaped": true,
+    "stdin_bytes_written": 66184,
+    "context_complete": true,
+    "duration_s": 19.901,
+    "timing": {
+      "spawn_s": 0.000663,
+      "input_complete_s": 0.764903,
+      "first_stdout_s": 1.559577,
+      "first_stderr_s": null,
+      "timeout_phase": null,
+      "event_counts": {
+        "system": 7,
+        "stream_event": 402,
+        "event:message_start": 2,
+        "event:content_block_start": 3,
+        "event:content_block_delta": 390,
+        "assistant": 3,
+        "event:content_block_stop": 3,
+        "user": 2,
+        "event:message_delta": 2,
+        "event:message_stop": 2,
+        "rate_limit_event": 2,
+        "result": 1
+      },
+      "inference_vs_initialization": "not_separable_without_provider_events"
+    },
+    "output_accounting": {
+      "transport_bytes": 190552,
+      "retained_bytes": 190552,
+      "discarded_progress_bytes": 0,
+      "transport_limit_bytes": 20000000,
+      "retained_limit_bytes": 2000000
+    },
+    "isolation": {
+      "backend": "bubblewrap",
+      "snapshot_read_only": true,
+      "host_home_mounted": false,
+      "network": "enabled_no_destination_firewall",
+      "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+    },
+    "started_at": "2026-11-13T17:22:17.820660+00:00",
+    "prompt_bytes": 66184,
+    "prompt_sha256": "c73deebf5d3c725dfa399f5500b42b178d6fa7c1563d62098d26dbd0d09f3f9d",
+    "usage": {
+      "provider_reported": {
+        "total_cost_usd": 0.1506181,
+        "duration_ms": 18157,
+        "input_tokens": 4,
+        "cache_creation_input_tokens": 29137,
+        "cache_read_input_tokens": 33021,
+        "output_tokens": 3076
+      },
+      "measured_cost_available": true,
+      "estimated_cost": null
+    },
+    "limits": {
+      "timeout": 240,
+      "idle_timeout": 90,
+      "startup_timeout": 30,
+      "first_response_timeout": 120
+    },
+    "structured_output": "native_schema",
+    "contract_validation": {
+      "status": "passed",
+      "duration_s": 0.012989
+    }
+  }
+}

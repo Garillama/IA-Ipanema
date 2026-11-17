@@ -1,0 +1,24 @@
+{
+  "checked_at": "2026-11-17T18:30:01.299805+00:00",
+  "packet_sha256": "198dfc02fbf49c85ac3f08eb8ad02bef51f50ee8830ce7e44071c7ea393bf192",
+  "patch_sha256": "fb292ff7f11c2ccaed5e90a2325c1703f23ece67bdc1b2a6f96ad3c6d49b8e4f",
+  "candidate_files_unchanged": true,
+  "operational_sources_unchanged": true,
+  "related_sources_unchanged": true,
+  "qa_artifacts_unchanged": true,
+  "central_policy_unchanged": true,
+  "candidate_hashes": {
+    "tools/ipanema/orchestration/council.py": "3bbe36122abe1966fa0fc89eb2a23576284797c4afb2a1b4c071e83cb4cfad7a",
+    "tools/ipanema/orchestration/code_review.py": "e8ac3a263a2b94922f1c0d5844517913e714b5234c5d1f30a7c11a22224e2cba",
+    "tests/unit/test_code_review_v3.py": "39763d930ac76248c9800456793a26b16f9053cf1071b1eec845a1650cd97b9d"
+  },
+  "response_sha256": "2d5848dd08356c9efdb5e6ef081ee3d653181d6f7d94ae45dfd4a4048139afbc",
+  "schema_valid": true,
+  "provider_invocations": 1,
+  "retries": 0,
+  "antigravity_invocations": 0,
+  "new_tests_executed": 0,
+  "process_reaped": true,
+  "integration_executed": false,
+  "activation_executed": false
+}

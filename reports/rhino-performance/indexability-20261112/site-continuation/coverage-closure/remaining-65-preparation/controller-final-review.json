@@ -1,0 +1,72 @@
+{
+  "decision": "approved_with_conditions_for_preparation_only",
+  "ready_to_request_batch03_authorization": true,
+  "network_allowed": false,
+  "receipts": {
+    "claude.review": {
+      "file": "reports/runs/rhino-performance/20261113T-remaining65-review-1794551923192181517/claude-remaining65-review.json",
+      "sha256": "6aec3af2be47670096d720d1f77d12e43f906cd09c3877f58ef656005c0accb5",
+      "decision": "approve"
+    },
+    "claude.contrast": {
+      "file": "reports/runs/rhino-performance/20261113T-remaining65-review-1794551923192181517/claude-remaining65-contrast.json",
+      "sha256": "dc710260a274d34e2439d51e453e9d613e4a49fc40f0c12eba052c049746c6f0",
+      "decision": "approve"
+    },
+    "codex.review": {
+      "file": "reports/runs/rhino-performance/20261113T-remaining65-review-1794551923192181517/codex-remaining65-review.json",
+      "sha256": "3e0b4d0481b8bbe0ce99e25a5e750298760ee2af0ca2edb7081106f59ed7b296",
+      "decision": "approve"
+    },
+    "codex.contrast": {
+      "file": "reports/runs/rhino-performance/20261113T-remaining65-review-1794551923192181517/codex-remaining65-contrast.json",
+      "sha256": "e2e757fadea267665670299a74ec90661bc11fa742551b8f62c6fa8ec329f7e4",
+      "decision": "approve"
+    }
+  },
+  "registry_semantics_sha256": "1359ff74535d985334f68b3c249caa4c76422f71be9b8c36a1dfd0549bb186e9",
+  "all_operations_verified_sha256": "2d31deae0c7cabd729945dd94d3be0aaba6ab38599e71715b349c13dbf2a3515",
+  "frozen_snapshot_hashes": {
+    "matrix": "5d12dccb6d24ee8e7eded9e387057f46e61aadeb6e78b3ec8e31354c8466c3a5",
+    "pending": "b10768f192f06f711b324794f8c2729910b09d0f2271bf128f2303bcef755071"
+  },
+  "critical_objections_remaining": [],
+  "resolved_by_controller": [
+    {
+      "claim": "Explicit equality of all13 argv/budgets",
+      "evidence": "all-operations-verified.json + package-verification.json; actual comparison performed offline"
+    },
+    {
+      "claim": "Snapshots must be real copies, not only hashes",
+      "evidence": "matrix-snapshot.csv and pending-65-source.csv match original input SHA"
+    },
+    {
+      "claim": "Map partial/timeout/unconfirmed without automatic retry",
+      "evidence": "registry-semantics.json mapping + required receipt fields; planning only, no engine changes"
+    },
+    {
+      "claim": "Seal registry semantics SHA",
+      "evidence": "registry_semantics_sha256 in this receipt and artifact-hashes.json"
+    }
+  ],
+  "response_limitations_preserved": [
+    {
+      "agent": "claude",
+      "phase": "contrast",
+      "detail": "answers[0] uses the assigned Codex Q1 ID but discusses partial-state mapping instead of its exact argv-comparison question. Its summary/evidence explicitly address all13argv; controller independently verifies that factual issue. Original response preserved. Do not claim exact semantic Q/A completion from schema pass alone."
+    },
+    {
+      "agent": "claude",
+      "phase": "contrast",
+      "detail": "Alternative names and references to earlier preferences/objection IDs are not reliable links across phases; controller resolves by concrete claim and receipt, not by invented consensus."
+    }
+  ],
+  "review_scope": "Independent incremental review of planning only; byte hashes are controller evidence, not tools run by providers",
+  "preexecution_conditions": [
+    "Separate specific owner authorization",
+    "Fresh pending membership and exact code/transport/manifest preflight",
+    "Check package seals including registry semantics",
+    "One invocation only, exclusive project scope, persistent one-use marker, native checkpoint/supervisor",
+    "No automatic next-batch execution or retry"
+  ]
+}

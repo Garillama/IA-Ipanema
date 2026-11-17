@@ -1,0 +1,46 @@
+{
+  "matrix_csv": "reports/rhino-performance/indexability-20261112/site-continuation/url-matrix.csv",
+  "matrix_json": "reports/rhino-performance/indexability-20261112/site-continuation/url-matrix.json",
+  "before_hashes": {
+    "csv": "dc9c95008e40d78c6d378af510c63e330488cec1b9b5be24428cc4baefba2007",
+    "json": "aa4918c0a23b46e9fda1c2bcb7e5388a2d491bd39ff6f8632b6ddf83a9819504"
+  },
+  "after_hashes": {
+    "csv": "2d80a01fe1fd3f4ce76024f8ba01dc44735dd4872304933b1ef14d4488e94708",
+    "json": "0f997ee0bdc4de57bac67146ac592d452f53cfcdde345079a68193c8b218c91a"
+  },
+  "backup_csv": "reports/runs/rhino-performance/20261113T071307-authorized-five-url-batch05/url-matrix-before.csv",
+  "backup_json": "reports/runs/rhino-performance/20261113T071307-authorized-five-url-batch05/url-matrix-before.json",
+  "exactly_five_rows_updated": true,
+  "updated_URLs": [
+    "https://rhino-performance.com/productos/brazo-presoterapia-pro-3-individual/",
+    "https://rhino-performance.com/productos/kit-botas-de-presoterapia-pro-3/",
+    "https://rhino-performance.com/blog/posts/bienestar-emocional-como-el-masaje-de-compresion-puede-aliviar-el-estres-5244f5509cd6/",
+    "https://rhino-performance.com/blog/posts/presoterapia-tu-aliado-contra-la-celulitis-y-grasa-localizada-45080195e9b1/",
+    "https://rhino-performance.com/blog/posts/la-presoterapia-un-tratamiento-efectivo-para-mejorar-la-apariencia-de-la-piel-25a565de1dd8/"
+  ],
+  "Google_fields_unchanged": true,
+  "other_120_rows_unchanged": true,
+  "before": {
+    "total_urls": 125,
+    "HTML_total": 124,
+    "HTML_with_individual_HTTP": 69,
+    "pending_individual_HTTP": 55,
+    "pending_by_type": {
+      "product": 3,
+      "article": 52
+    }
+  },
+  "after": {
+    "total_urls": 125,
+    "HTML_total": 124,
+    "HTML_with_individual_HTTP": 74,
+    "pending_individual_HTTP": 50,
+    "pending_by_type": {
+      "product": 1,
+      "article": 49
+    }
+  },
+  "original_pending75_and_pending70_files_preserved": true,
+  "next_pending_list": "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/live-batch05-20261113/pending-50.csv"
+}

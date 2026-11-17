@@ -1,0 +1,18 @@
+{
+  "at": "2026-11-17T17:18:06.789382+00:00",
+  "state": "needs_evidence",
+  "candidate_sha256": "69c75ac77596439227c4066439711334e8c7bf2724b5a28fbbfabdf2336e0dbb",
+  "candidate_and_operational_code_unchanged": true,
+  "old_evidence_preserved": true,
+  "claude_calls": 0,
+  "antigravity_calls": 0,
+  "159_tests_repeated": false,
+  "new_checks_scope": "Synthetic OS/network/filesystem and PID cancellation only",
+  "claude_packet_sha256": "790b3dcd3e3f40612ff8ddebb45445b23420d13b3864bd28f25b3a35ae1b2060",
+  "claude_packet_bytes": 243861,
+  "old_wire_reconstruction_matches_hash": true,
+  "pilot_authentication": "not_tested",
+  "native_tool_denials": "not_tested",
+  "provider_execution_authorized": false,
+  "integration_or_activation": false
+}

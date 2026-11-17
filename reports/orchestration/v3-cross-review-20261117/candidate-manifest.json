@@ -1,0 +1,31 @@
+{
+  "status": "isolated_not_integrated_not_activated",
+  "files": [
+    {
+      "path": "tools/ipanema/orchestration/council.py",
+      "operation": "modify",
+      "before_sha256": "4ec261a0d84fbdc12d5abf85eab489d21cf85f30af57eac9769c722d17541261",
+      "after_sha256": "c23b72bc726f89a538f110b9fc627b6eab357917a78fae6804625ec686f116da",
+      "candidate": ".local/v3-cross-review/20261117T164026/candidate/tools/ipanema/orchestration/council.py"
+    },
+    {
+      "path": "tools/ipanema/orchestration/code_review.py",
+      "operation": "add",
+      "before_sha256": null,
+      "after_sha256": "d68512e340c68dd3985b0c70355640f7e5751a61d1664988ce3d6378d7788fd4",
+      "candidate": ".local/v3-cross-review/20261117T164026/candidate/tools/ipanema/orchestration/code_review.py"
+    },
+    {
+      "path": "tests/unit/test_code_review_v3.py",
+      "operation": "add",
+      "before_sha256": null,
+      "after_sha256": "a44f096e4a982062faaf68a47100a511b694cdd4f20f657ec814f61d8d91dda0",
+      "candidate": ".local/v3-cross-review/20261117T164026/candidate/tests/unit/test_code_review_v3.py"
+    }
+  ],
+  "modifications": 1,
+  "additions": 2,
+  "deletions": 0,
+  "patch_sha256": "69c75ac77596439227c4066439711334e8c7bf2724b5a28fbbfabdf2336e0dbb",
+  "implementation_allowed": false
+}

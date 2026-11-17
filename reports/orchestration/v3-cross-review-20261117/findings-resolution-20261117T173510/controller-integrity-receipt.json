@@ -1,0 +1,37 @@
+{
+  "checked_at": "2026-11-17T17:49:42.174868+00:00",
+  "operational_files_unchanged": true,
+  "operational_hashes": {
+    "tools/ipanema/orchestration/isolation.py": "0d734fcbf6d10e839d2a7cb46f3416ca60f0751e1491974d73186a8d56408079",
+    "tools/ipanema/orchestration/adapters.py": "bae25bee06cf7574ee35f65e9f9055dfa8a495336f80615165ddd5232359d01d",
+    "tools/ipanema/orchestration/council.py": "4ec261a0d84fbdc12d5abf85eab489d21cf85f30af57eac9769c722d17541261",
+    "tools/ipanema/orchestration/council_runtime.py": "92b6e47eb8942c26161c240a3258e481ae108b42ee2894cd0577403ea0d49635",
+    "tools/ipanema/orchestration/models.json": "14fede6b13b294a8e685b8ce1072777959850d8ae05bf3270f5dd9ea527aba39",
+    "tools/ipanema/orchestration/planner.py": "b09a3bc644618502680e8804ed7f135eaa074e7b82812d2013c5293ef909117e",
+    "tools/ipanema/orchestration/engine.py": "74885e94f8f9cbf8f7a6e71c0cc8f5f44eec032fac8892f7507e2eb06879319f",
+    "tools/ipanema/orchestration/cli.py": "04e661d92b687da162887aaca8ad5c7905359e7c8376cc0ddec2370d9d58c99b",
+    "tools/ipanema/orchestration/__init__.py": "d36de51224b4946f8db8df4b83d8feecb5852a86064fc09f762d6e5468dc0b39",
+    "tools/ipanema/orchestration/recovery.py": "1d8b3a4d0e22bb0c8507f036ab7ff1b285e6517d8fbe670b70d679a0c317f12c"
+  },
+  "original_patch_unchanged": true,
+  "original_candidate_hashes_unchanged": true,
+  "new_candidate_not_integrated": true,
+  "production_accesses": 0,
+  "provider_invocations": 0,
+  "antigravity_invocations": 0,
+  "historical_159_repeated": false,
+  "patch_apply_check": {
+    "exit_code": 0,
+    "stderr": ""
+  },
+  "scope": {
+    "modifications": 1,
+    "additions": 2,
+    "deletions": 0
+  },
+  "author": "codex",
+  "independent_approval": false,
+  "candidate_patch_sha256": "c240b16f37ec13a84db4e54f656f15beda7316642c2e078e8d94b906d7ed6085",
+  "original_test_cases_preserved_by_name": 31,
+  "new_test_cases": 29
+}

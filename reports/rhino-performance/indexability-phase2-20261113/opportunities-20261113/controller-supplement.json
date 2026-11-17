@@ -1,0 +1,40 @@
+{
+  "id": "seo.opportunities.scope-clarification",
+  "kind": "offline_source_provenance_check",
+  "subject": "Cross-questions about dates and served snippet evidence",
+  "passed": true,
+  "sha256": "9ae8454aecd05ef7f2ff2774d79381e7e13a7746b4a334438a1942ef262e2d05",
+  "measurement_scope": "Saved parsed workbook only; no new HTTP/GSC or repeat suites",
+  "period": {
+    "literal_filters": [
+      [
+        "Filtrar",
+        "Valor"
+      ],
+      [
+        "Tipo de búsqueda",
+        "Web (basada en texto)"
+      ],
+      [
+        "Fecha",
+        "Últimos 3 meses"
+      ]
+    ],
+    "first_chart_observation": {
+      "sheet": "Gráfico",
+      "Excel_row": 2,
+      "date": "2026-08-11"
+    },
+    "last_chart_observation": {
+      "sheet": "Gráfico",
+      "Excel_row": 93,
+      "date": "2026-11-10"
+    },
+    "chart_row_count": 92,
+    "source_sha256": "b71bc7294509e52b71b409d903a1df33d13c20bffead17435fdc99407ddfd095",
+    "interpretation": "Observed daily chart span, not literal absolute filter; require confirmation of selected period for new cross-file comparisons"
+  },
+  "OP01_correction": "Dated served snippet and landing content explicitly required alongside bound page queries before proposing metadata",
+  "negative_lookup": "Inconclusive outside selected232files; legacy destinations and traffic loss remain unknown",
+  "redirect_scope": "Draft only; closed selector five vs three global hops may leave chains incomplete; no command fabricated or run"
+}

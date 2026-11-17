@@ -1,0 +1,60 @@
+{
+  "id": "ADR-RHINO-011-closed-pilot-delta",
+  "continued_from": "../pilot-preparation/README.md",
+  "status": "approved_with_conditions",
+  "patch_sha256": "59d76bf8b54285dab38271aaedb78bba777fe61efd9edfc4500fec75759bf459",
+  "files": [
+    "tests/integration/test_seo_pilot_cli_v4.py",
+    "tests/unit/test_seo_pilot_v4.py",
+    "tools/ipanema/seo/crawl_policy.py",
+    "tools/ipanema/seo/crawler.py",
+    "tools/ipanema/seo/engineering.py"
+  ],
+  "technical_ready_to_request_integration": true,
+  "implementation_allowed": false,
+  "reason": "Specific owner authorization covers preparation only. Applying the five-file patch requires a new authorization.",
+  "workspace_integrated": false,
+  "network_authorized": false,
+  "pilot_executed": false,
+  "reviews": [
+    {
+      "agent": "claude",
+      "effective_agent": "claude",
+      "model": {
+        "model": "claude-sonnet-5-5",
+        "effort": "medium",
+        "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+        "verified_at": "2026-11-08"
+      },
+      "decision": "approve",
+      "duration_s": 63.067,
+      "receipt": "claude-closed-review-recovery.json"
+    },
+    {
+      "agent": "codex",
+      "effective_agent": "codex",
+      "model": {
+        "model": "gpt-6.1-sol",
+        "effort": "medium",
+        "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+        "verified_at": "2026-11-08"
+      },
+      "decision": "approve",
+      "duration_s": 53.794,
+      "receipt": "codex-closed-review.json"
+    }
+  ],
+  "binding_check": "binding-resolution.json",
+  "accepted_limitations": [
+    "Linux/POSIX only; /proc used in cancellation tests",
+    "Process-group cleanup covers current trusted client; descendants deliberately escaping session are not certified",
+    "Checkpoint top-level project=null/state=running is not terminal authority; read supervision.json and per-request states",
+    "SIGTERM handler inheritance and repeated-signal edge cases not universally certified",
+    "Supervisor cancellation receipt is written after worker cancellation; no HTTP/parsing/export continues while it is recorded"
+  ],
+  "authorizations_needed": [
+    "Integrate exact five-file hash with preimages/backups verified and run local post-QA",
+    "Only later:execute exact five-URL pilot under separate specific network authorization"
+  ],
+  "scope_no_other_source_files": true
+}

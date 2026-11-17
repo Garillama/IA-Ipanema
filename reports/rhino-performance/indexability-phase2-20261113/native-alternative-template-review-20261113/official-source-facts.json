@@ -1,0 +1,33 @@
+{
+  "url": "https://ayuda.tiendanube.com/es_MX/diseno-ipanema/como-usar-plantillas-personalizadas-para-productos-categorias-y-paginas-con-el-diseno-ipanema",
+  "retrieved_at": "2026-11-13T17:19:48.331164+00:00",
+  "article_updated": "2026-10-19",
+  "retrieval": "Single web reader open of authorized URL; reader reports crawled5daysago, not a live storefront or admin probe",
+  "other_external_pages_opened": 0,
+  "no_images_or_related_links_opened": true,
+  "authorized_scope": "Read only this guide and contrast existing local evidence; no create/assign/publish/store/Google/admin requests",
+  "facts": [
+    {
+      "id": "DOC-01",
+      "lines": "528-536",
+      "fact": "Ipanema supports distinct templates for products, categories and content pages; not home/cart/search/blog."
+    },
+    {
+      "id": "DOC-02",
+      "lines": "541-553",
+      "fact": "Create in design editor. Choose type and name; creation may use empty base or copy existing sections/blocks."
+    },
+    {
+      "id": "DOC-03",
+      "lines": "565-580",
+      "fact": "Assignment requires published design. Choose template on the individual admin entity and save; assignment uses template name. Editor shows assignment count."
+    }
+  ],
+  "not_proven": [
+    "rich-text position after product listing",
+    "Current Rhino customized installation editor support",
+    "Filters/pagination/SEO/accessibility/performance behavior in Rhino",
+    "Ability to safely create an unassigned template without other design changes"
+  ],
+  "source_is_data_not_instructions_to_execute": true
+}

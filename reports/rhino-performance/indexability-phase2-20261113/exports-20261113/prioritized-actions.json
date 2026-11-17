@@ -1,0 +1,86 @@
+[
+  {
+    "id": "GSC-X01",
+    "priority": "P1",
+    "class": "indexation_evidence",
+    "scope": "33 rastreadas sin indexar y5 descubiertas sin indexar",
+    "evidence": "Coverage Problemas críticos: total38, sin listas porURL",
+    "action": "Obtener dos tablas y conciliar URLs exactas antes de diagnosticar causas",
+    "potential_impact": "Identify commercially important exclusions; amount unknown",
+    "risk": "Low: local/offical export reading",
+    "authorization": "Owner export input only; no API/store request or implementation"
+  },
+  {
+    "id": "GSC-X02",
+    "priority": "P1",
+    "class": "technical_error_evidence",
+    "scope": "33 no encontradas404",
+    "evidence": "Aggregate count only;124knownHTML have retained200",
+    "action": "Obtener lista404 y distinguir rutas antiguas, aliases o páginas importantes actuales",
+    "potential_impact": "Prevent broken acquisition paths if present; unproven now",
+    "risk": "No redirect/delete until exact destination and source are verified",
+    "authorization": "No correction authorized"
+  },
+  {
+    "id": "GSC-X03",
+    "priority": "P1",
+    "class": "legacy_continuity_evidence",
+    "scope": [
+      "https://rhino-performance.com/producto/botas-de-presoterapia-botas/",
+      "https://rhino-performance.com/home/",
+      "https://rhino-performance.com/producto/botas-de-presoterapia-kit/"
+    ],
+    "evidence": "94 exact joins between historical performance and redirect examples; top539/283/100clicks",
+    "action": "Conciliar destinos desde evidencia existente; si falta, proponer lectura mínima de rutas públicas y pedir autorización aparte",
+    "potential_impact": "High historical acquisition exposure; no proven current traffic loss",
+    "risk": "Wrong mapping may damage SEO/commercial relevance",
+    "authorization": "No requests or redirect changes authorized"
+  },
+  {
+    "id": "GSC-X04",
+    "priority": "P1",
+    "class": "commercial_organic_opportunity",
+    "scope": [
+      "/presoterapia/",
+      "/compresion-frio-y-calor/"
+    ],
+    "evidence": "2810impressions30clicks and1079impressions6clicks; global category rows",
+    "action": "Exportar consultas filtradas por página; separar país/device; comprobar intención y landing real antes de titles/contenido",
+    "potential_impact": "Commercial hypothesis, no ranking/conversion gain estimated",
+    "risk": "Low evidence collection; higher if content rewritten without intent",
+    "authorization": "No title/content implementation"
+  },
+  {
+    "id": "GSC-X05",
+    "priority": "P2",
+    "class": "canonical_variant_reconciliation",
+    "scope": "148 alternativas,113 relacionados porpath con inventario",
+    "evidence": "Official alternative reason but no target canonical field;0 exact124matches",
+    "action": "Conservar aliases separados; no quitar canonicals ni convertir todas en indexables",
+    "potential_impact": "No defect proven; avoid destructive correction",
+    "risk": "High if duplicates promoted",
+    "authorization": "Keep published behavior"
+  },
+  {
+    "id": "GSC-X06",
+    "priority": "P2",
+    "class": "scope_preservation",
+    "scope": "16robots examples",
+    "evidence": "Checkout oradd-to-cart routes only;0 exactknownHTML matches",
+    "action": "No desbloquear; no navegar rutas comerciales para prueba",
+    "potential_impact": "Protect commerce and crawl hygiene",
+    "risk": "High if robots lifted merely to reduce counts",
+    "authorization": "No changes"
+  },
+  {
+    "id": "GSC-X07",
+    "priority": "P2",
+    "class": "existing_needs_evidence",
+    "scope": "20technical gaps,author/Product warnings,blogcanonical",
+    "evidence": "Existing phase2 ADR and saved data; new exports do not supply missing headers/authorship/platform mechanism",
+    "action": "Mantener condiciones y procedimientos anteriores; no reabrir ni cerrar sin nueva evidencia",
+    "potential_impact": "Unknown until corresponding evidence is obtained",
+    "risk": "Avoid schema invention orunsupported canonical edits",
+    "authorization": "No new crawl orpatch authorized"
+  }
+]

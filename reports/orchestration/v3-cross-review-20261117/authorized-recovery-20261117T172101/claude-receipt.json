@@ -1,0 +1,87 @@
+{
+  "requested_agent": "claude",
+  "effective_agent": "claude",
+  "input_sha256": "790b3dcd3e3f40612ff8ddebb45445b23420d13b3864bd28f25b3a35ae1b2060",
+  "input_bytes": 243861,
+  "patch_sha256": "69c75ac77596439227c4066439711334e8c7bf2724b5a28fbbfabdf2336e0dbb",
+  "literal_input": true,
+  "model": {
+    "model": "claude-sonnet-5-5",
+    "effort": "medium",
+    "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+    "verified_at": "2026-11-08"
+  },
+  "attempts": 1,
+  "retries": 0,
+  "fallback": false,
+  "status": "review_received",
+  "limits": {
+    "timeout": 240,
+    "idle_timeout": 90,
+    "startup_timeout": 30,
+    "first_response_timeout": 120
+  },
+  "execution": {
+    "exit_code": 0,
+    "timed_out": false,
+    "output_limited": false,
+    "idle_timed_out": false,
+    "cancelled": false,
+    "process_started": true,
+    "process_reaped": true,
+    "stdin_bytes_written": 243861,
+    "context_complete": true,
+    "duration_s": 78.434,
+    "timing": {
+      "spawn_s": 0.000669,
+      "input_complete_s": 0.533965,
+      "first_stdout_s": 1.336897,
+      "first_stderr_s": null,
+      "timeout_phase": null,
+      "event_counts": {
+        "system": 40,
+        "stream_event": 888,
+        "event:message_start": 1,
+        "event:content_block_start": 2,
+        "event:content_block_delta": 881,
+        "assistant": 2,
+        "event:content_block_stop": 2,
+        "user": 1,
+        "event:message_delta": 1,
+        "event:message_stop": 1,
+        "rate_limit_event": 1,
+        "result": 1
+      },
+      "inference_vs_initialization": "not_separable_without_provider_events"
+    },
+    "output_accounting": {
+      "transport_bytes": 387884,
+      "retained_bytes": 387884,
+      "discarded_progress_bytes": 0,
+      "transport_limit_bytes": 20000000,
+      "retained_limit_bytes": 2000000
+    },
+    "isolation": {
+      "backend": "bubblewrap",
+      "snapshot_read_only": true,
+      "host_home_mounted": false,
+      "network": "enabled_no_destination_firewall",
+      "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+    }
+  },
+  "usage": {
+    "provider_reported": {
+      "total_cost_usd": 0.498092,
+      "duration_ms": 76870,
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 99357,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 10066
+    },
+    "measured_cost_available": true,
+    "estimated_cost": null
+  },
+  "schema_valid": true,
+  "response_sha256": "5f3b4dbc6dbec12651e8094358cf7a554c29db671a182d87eac2cea2037318a1",
+  "response_file": "reports/orchestration/v3-cross-review-20261117/authorized-recovery-20261117T172101/claude-response-complete.json"
+}

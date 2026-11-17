@@ -1,0 +1,26 @@
+{
+  "id": "ADR-RHINO-012-native-alternative-template-guide-20261113",
+  "parent": "../editorial-validation-preparation-20261113/ADR.json",
+  "status": "needs_evidence",
+  "implementation_allowed": false,
+  "documented_advance": "Official guide supports alternative category templates created/copied in editor and assigned per entity. Previous general-capability uncertainty is reduced, not the Rhino-specific proof obligations.",
+  "recommendation": "Prefer native alternative category template copied from actual current configuration and assigned only to Presoterapia, using existingrich-textaftergrid when confirmed in currenteditor. No shared template/code changes proposed.",
+  "review": "review-status.json",
+  "source": "official-source-facts.json",
+  "authorization_executed": "Read only the one approved Tiendanube guide and analyze preserved local facts. No create/save/assign/store/GSC/admin calls.",
+  "mutation_operation_ready": false,
+  "publication_authorized": false,
+  "critical_conditions_remain_open": true,
+  "administrative_evidence_amendment": {
+    "evidence": "admin-inspection-preparation/owner-confirmation-01/evidence.json",
+    "source_type": "owner_statement_about_administrator_screenshot",
+    "owner_confirmed_create_option": true,
+    "owner_confirmed_base_name": "Categoría",
+    "visual_verification_by_controller": false,
+    "copy_from_base": "needs_evidence",
+    "assigned_template_for_Presoterapia": "needs_evidence",
+    "note": "Only these two owner-reported administrative facts advance. General high-priority installation/assignment and QA conditions remain open.",
+    "previous_ADR_sha256": "52f9775e0d9a07b637dbcd5b675459de6473b17c2abed7e266fc44274854050e",
+    "previous_ADR_backup": "admin-inspection-preparation/owner-confirmation-01/ADR-before.json"
+  }
+}

@@ -1,0 +1,30 @@
+[
+  {
+    "url": "https://rhino-performance.com/productos/brazo-presoterapia-pro-3-individual/",
+    "file": "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/live-batch05-20261113/raw-crawl-report.json",
+    "sha256": "77caac7b0117b46baac60bad9dd418dc170c8de0bbf872c35e6937e7e57dbea0",
+    "pointer": "/urls/0",
+    "observed_at": "2026-11-13T07:13:10.132130+00:00",
+    "status": 200,
+    "canonical": [
+      "https://rhino-performance.com/productos/brazo-presoterapia-pro-3-individual/"
+    ],
+    "robots": {
+      "crawler_allowed": true,
+      "googlebot_allowed": true
+    },
+    "limitation": "Saved technical initial HTML, not Google-selected canonical/index state. Missing field provenance not filled."
+  },
+  {
+    "url": "https://rhino-performance.com/terapia-fria/",
+    "file": "reports/runs/rhino-performance/20261112T191008-site-discoverability-continuation-54a878c3/fixed-documents.json",
+    "sha256": "b0b5620711621e104c48387cabd7a4dd5a5b25391b15df2b1d05e8aa96ac79cd",
+    "pointer": "/rows/1",
+    "observed_at": "2026-11-12T19:11:10.994666+00:00",
+    "status": 200,
+    "canonical": [
+      "https://rhino-performance.com/terapia-fria/"
+    ],
+    "limitation": "Saved technical observation, not Google fetch/index state; no cause of exclusion determined."
+  }
+]

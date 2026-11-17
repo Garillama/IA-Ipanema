@@ -1,0 +1,32 @@
+{
+  "id": "ADR-RHINO-012-first-improvements-preparation-20261113",
+  "parent": "../additional-exports-20261113/ADR.json",
+  "status": "needs_evidence",
+  "implementation_allowed": false,
+  "decision": "Prepare owner-supplied dated GSC inspections for two exact destinations; retain a short two-group editorial candidate grounded in saved catalog evidence; verify current404 and real successor before any redirect proposal.",
+  "selected_editorial_candidate": "editorial-candidate.md",
+  "candidate_sha256": "1378141593e74d8d948e678ca8be08d59d6e14c26dbecc60ffc4773f7332520e",
+  "technical_basis": "Saved category has no decision-guide in projected10Nov main, and exact product metadata support compressor distinction. This is historical content evidence, not current production proof.",
+  "alternatives": [
+    {
+      "id": "original-four-point",
+      "outcome": "Retained as previous version; revised to reduce repetition and omit unsupportedPROAIRcomparison"
+    },
+    {
+      "id": "omit-any-accessory-unless-listed-in-grid",
+      "outcome": "Not a demonstrated native requirement for contextual links; both participants distinguish context-link validity from membership. Keep current truth/destination verification mandatory."
+    },
+    {
+      "id": "publish-now",
+      "outcome": "Not allowed; operative evidence and owner authorization pending"
+    }
+  ],
+  "review": "review-status.json",
+  "constraints": [
+    "No titles/metadescriptions/canonical/menu edits",
+    "No external store/GSC requests or crawler changes",
+    "No production implementation",
+    "No structured-data mass changes",
+    "No automatic indexation requests"
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "project": null,
+  "state": "running",
+  "planned": {
+    "https://rhino-performance.com/robots.txt": "completed",
+    "https://rhino-performance.com/productos/botas-presoterapia-pro-3/": "completed",
+    "https://rhino-performance.com/blog/posts/los-benecios-de-la-natacion-para-la-salud-y-el-rendimiento-fisico-ffeb1529210e/": "completed",
+    "https://rhino-performance.com/blog/posts/por-que-es-crucial-la-hidratacion-en-atletas-070675a646a6/": "completed",
+    "https://rhino-performance.com/blog/posts/palabras-clave-para-iniciarse-en-el-mundo-runner-120cd6cf0343/": "completed",
+    "https://rhino-performance.com/blog/posts/mangas-cold-therapy-recuperacion-inteligente-al-alcance-de-tu-cuerpo-30c1563de10f/": "completed"
+  },
+  "requests": [
+    {
+      "ordinal": 1,
+      "url": "https://rhino-performance.com/robots.txt",
+      "state": "completed",
+      "status": 200,
+      "bytes": 1742
+    },
+    {
+      "ordinal": 2,
+      "url": "https://rhino-performance.com/productos/botas-presoterapia-pro-3/",
+      "state": "completed",
+      "status": 200,
+      "bytes": 747916
+    },
+    {
+      "ordinal": 3,
+      "url": "https://rhino-performance.com/blog/posts/los-benecios-de-la-natacion-para-la-salud-y-el-rendimiento-fisico-ffeb1529210e/",
+      "state": "completed",
+      "status": 200,
+      "bytes": 245991
+    },
+    {
+      "ordinal": 4,
+      "url": "https://rhino-performance.com/blog/posts/por-que-es-crucial-la-hidratacion-en-atletas-070675a646a6/",
+      "state": "completed",
+      "status": 200,
+      "bytes": 245127
+    },
+    {
+      "ordinal": 5,
+      "url": "https://rhino-performance.com/blog/posts/palabras-clave-para-iniciarse-en-el-mundo-runner-120cd6cf0343/",
+      "state": "completed",
+      "status": 200,
+      "bytes": 250325
+    },
+    {
+      "ordinal": 6,
+      "url": "https://rhino-performance.com/blog/posts/mangas-cold-therapy-recuperacion-inteligente-al-alcance-de-tu-cuerpo-30c1563de10f/",
+      "state": "completed",
+      "status": 200,
+      "bytes": 255423
+    }
+  ],
+  "arrival_at_server_without_response": "unknown"
+}

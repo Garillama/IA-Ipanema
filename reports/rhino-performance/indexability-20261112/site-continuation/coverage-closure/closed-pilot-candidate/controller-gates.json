@@ -1,0 +1,23 @@
+{
+  "kind": "controller-closed-pilot-gates",
+  "patch_sha256": "59d76bf8b54285dab38271aaedb78bba777fe61efd9edfc4500fec75759bf459",
+  "all_five_candidate_hashes_match": true,
+  "three_root_preimages_unchanged": true,
+  "two_root_additions_absent": true,
+  "backups_verified": true,
+  "old_integrated_11_hashes_unchanged": true,
+  "mandatory_scoped_checks": {
+    "functional": "passed:closed selector + runtime CLI + scoped report",
+    "security": "passed:Policy/Fetcher reused; global terminal failures; no redirects outside authorized origin/private routes",
+    "compatibility": "passed:209 SEO unit +13 prior general integration on isolated candidate; ordinary mode kept",
+    "native_reuse": "passed:same crawler loop and transport; optional callback and CLI supervisor only",
+    "SEO": "passed:scoped technical observations, no Google indexation assertions",
+    "resource_limits": "passed:caps,shared counters,rate,bytes budget and real120deadline/process cleanup"
+  },
+  "dual_review": "two original providers valid approvals, no critical/high open objection",
+  "binding_observation_resolution": "binding-resolution.json",
+  "reversal": "fresh isolated apply/reverse restores three originals and removes own two additions",
+  "scope": "isolated tools only, not production",
+  "new_Rhino_HTTP_requests": 0,
+  "new_Google_HTTP_requests": 0
+}

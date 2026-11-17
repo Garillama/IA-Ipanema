@@ -1,0 +1,24 @@
+{
+  "passed": true,
+  "scope": "Local source facts/hashes, preserved baseline, document links and provider answer checks only. Not live production validation, native server validation or QA of an implementation.",
+  "theme_local_files_checked": 8,
+  "theme_local_files_unchanged": true,
+  "approved_pagination_local_hashes_match": true,
+  "remote_hashes_checked": false,
+  "previous_reports_and_matrices_unchanged": true,
+  "local_links_checked": [
+    "../first-improvements-preparation-20261113/README.md",
+    "local-native-evidence.json",
+    "editorial-proposed.md",
+    "../first-improvements-preparation-20261113/catalog-claim-provenance.json",
+    "production-read-scope-NOT-AUTHORIZED.json",
+    "../first-improvements-preparation-20261113/inspection-procedure.md",
+    "../first-improvements-preparation-20261113/commercial-404-plan.json",
+    "review-status.json",
+    "ADR.json",
+    "../first-improvements-preparation-20261113/catalog-claim-provenance.json"
+  ],
+  "network_to_Rhino_or_Google": false,
+  "production_or_crawler_modifications": false,
+  "final_publication_gate": "blocked_needs_evidence"
+}

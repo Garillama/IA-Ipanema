@@ -1,0 +1,181 @@
+{
+  "candidate_sha256": "fb292ff7f11c2ccaed5e90a2325c1703f23ece67bdc1b2a6f96ad3c6d49b8e4f",
+  "reviewed_files": [
+    "tools/ipanema/orchestration/council.py",
+    "tools/ipanema/orchestration/code_review.py",
+    "tests/unit/test_code_review_v3.py"
+  ],
+  "decision": "changes_requested",
+  "challenges": {
+    "architecture": {
+      "status": "fail",
+      "evidence_refs": [
+        "code_review.py:advance_objection (add_evidence branch)",
+        "code_review.py:replay_closure",
+        "code_review.py:load_history (anchor covers reviews only)",
+        "test_N2_reducer_replay_is_the_only_successful_closure"
+      ],
+      "notes": "N1, N3 and N4 are addressed at the API level. N2 is mostly addressed: evaluate now replays the shared reducer, and closure needs an adapter-attested origin confirmation. One gap remains. The 'new evidence' step does not enforce novelty or provenance (see O-N2a). Static reasoning only; I did not run anything."
+    },
+    "duplication": {
+      "status": "pass",
+      "evidence_refs": [
+        "code_review.py:context_hash",
+        "council_runtime.py:binding",
+        "test_N1_real_context_producer_uses_same_canonical_policy"
+      ],
+      "notes": "The N1 duplication is resolved. context_hash's JSON arguments (sort_keys, ensure_ascii=True, default ', ' / ': ' separators) equal json.dumps(..., sort_keys=True) in binding(). The test calls the real binding(). Legacy _hash remains for candidate and receipt hashes, deliberately and documented."
+    },
+    "performance": {
+      "status": "pass",
+      "evidence_refs": [
+        "code_review.py:load_history (64 reviews, 256 records)",
+        "code_review.py:replay_closure (128 events)"
+      ],
+      "notes": "The new work is bounded by explicit caps. The replay cost is negligible at those caps. I measured nothing."
+    },
+    "regression": {
+      "status": "needs_evidence",
+      "evidence_refs": [
+        "council.py:review_code_candidate (additive)",
+        "preserved_qa: 90 gate tests + 9 receipt tests, not executed by me"
+      ],
+      "notes": "The council.py change is additive. The 99 passing tests are controller evidence that I did not independently run. Real producers still cannot satisfy the gate end to end (QA coverage, alternative_sha256 meaning). That is a documented integration dependency, not a regression."
+    },
+    "maintainability": {
+      "status": "pass",
+      "evidence_refs": [
+        "code_review.py:evaluate",
+        "code_review.py:ControllerEvidenceSource docstring"
+      ],
+      "notes": "The trust boundary is now explicit in docstrings and result fields (trust_basis, synthetic_only, identity_verified_by_hash=false). evaluate remains long. That is outside N1–N4 and is not re-raised."
+    }
+  },
+  "objections": [
+    {
+      "id": "N2a",
+      "severity": "MEDIUM",
+      "challenge": "architecture",
+      "sites": [
+        {
+          "file": "tools/ipanema/orchestration/code_review.py",
+          "function": "advance_objection",
+          "start": 388,
+          "end": 452
+        },
+        {
+          "file": "tools/ipanema/orchestration/code_review.py",
+          "function": "replay_closure",
+          "start": 453,
+          "end": 478
+        }
+      ],
+      "evidence_refs": [
+        "advance_objection add_evidence: only requires actor=='controller', non-empty refs, state=='author_answered'",
+        "replay_closure add_evidence: only requires each ref to be a bound, proven receipt",
+        "test_N2_reducer_replay_is_the_only_successful_closure uses 'source:sample.py', which is already in objection['evidence_refs']",
+        "load_history: history_anchor covers {lineage_id, reviews} only, not objection_records"
+      ],
+      "claim": "Replay enforces event order, the author/reviewer actors and the adapter-attested origin confirmation. It does not enforce that the 'new evidence' is new or related to the objection. Any proven bound receipt qualifies, including the one the reviewer already cited. The actor 'controller' on add_evidence and request_review, and the actor on author_answer, are plain strings in a record. objection_records are not covered by the history anchor, and those events carry no attestation. The closing authority is still the attested reviewer confirmation, so this is not a bypass of the reviewer. The N2 resolution condition asked that evidence be enforced and not merely declared, and that condition is only partly met. Static reasoning plus the retained passing test. I executed nothing.",
+      "impact": "The new_evidence/review_pending states can be satisfied with a vacuous step. Procedural events can be asserted by whoever writes the records, so they carry no independent weight.",
+      "recommendation": "In add_evidence, require refs that are not in the objection's own evidence_refs and not already used by an earlier event. Add a test where re-citing the original evidence does not close. Either cover objection_records with the anchor, or document that non-reviewer events are controller-asserted.",
+      "resolution_condition": "A test shows that replay with add_evidence referencing only the objection's original evidence returns closed=False. The record-integrity boundary is anchored or explicitly documented.",
+      "duplication_kind": "not_applicable",
+      "classification": "architectural_risk"
+    },
+    {
+      "id": "N4a",
+      "severity": "LOW",
+      "challenge": "architecture",
+      "sites": [
+        {
+          "file": "tools/ipanema/orchestration/code_review.py",
+          "function": "evaluate",
+          "start": 620,
+          "end": 633
+        }
+      ],
+      "evidence_refs": [
+        "evaluate return: state can be 'approved_for_authorization' while synthetic_only is True",
+        "adapter_proven accepts trust_basis in ('adapter_verified','synthetic_fixture')"
+      ],
+      "claim": "With a synthetic_fixture controller, the headline state is still approved_for_authorization. The synthetic label is a separate field. A consumer that reads only 'state' loses the trust qualifier. A subclass can declare trust_basis='adapter_verified' and nothing else distinguishes it, as the docstrings acknowledge. Static reasoning only.",
+      "impact": "A caller that does not check synthetic_only could treat a fixture run as an approval.",
+      "recommendation": "Add a distinct state or suffix for synthetic runs, or have the production wrapper refuse synthetic_fixture. Keep the existing documentation.",
+      "resolution_condition": "Synthetic runs cannot yield the plain approved state, or the wrapper contract states that callers must check trust_basis.",
+      "duplication_kind": "not_applicable",
+      "classification": "architectural_risk"
+    },
+    {
+      "id": "N1a",
+      "severity": "INFO",
+      "challenge": "regression",
+      "sites": [
+        {
+          "file": "tools/ipanema/orchestration/code_review.py",
+          "function": "bind_receipt",
+          "start": 318,
+          "end": 326
+        }
+      ],
+      "evidence_refs": [
+        "bind_receipt requires receipt['alternative_sha256'] == fingerprint(candidate) whenever the key is present",
+        "council_runtime.checks writes alternative_sha256 as the alternative's identity, or None"
+      ],
+      "claim": "The gate reuses the legacy field alternative_sha256 to mean candidate fingerprint. Real council_runtime.checks rows carry an alternative identity or None there, so they cannot bind. This is the same field-name-reuse pattern as N1. It sits in the legacy receipt shape, so it is a future integration dependency and not a defect in the candidate.",
+      "impact": "A future integrator needs a receipt producer that emits the candidate fingerprint in that field, or a renamed field.",
+      "recommendation": "Document the required receipt shape in one place, as was done for the context contract.",
+      "resolution_condition": "The receipt contract is documented, or a distinct field name is used.",
+      "duplication_kind": "semantic",
+      "classification": "integration_dependency"
+    }
+  ],
+  "summary": "I did not run any code or tests. The 99 retained tests are controller-supplied evidence. This is static review of the three files.\n\nN1 is resolved. context_hash is json.dumps with sort_keys, ensure_ascii=True, allow_nan=False and the default ', ' / ': ' separators, which equal binding()'s serialization. The test calls the real binding(). adapt_context supplies permissions, the contract and the lineage explicitly, and does not fabricate missing hashes.\n\nN2 is partially resolved. evaluate replays the single reducer and requires an adapter-attested origin confirmation. A declared terminal state, a missing record or tampered events do not close. The remaining gap is that add_evidence does not enforce novelty. Procedural events are also controller-asserted and sit outside the anchor (N2a, MEDIUM).\n\nN3 is resolved at the API level. History is mandatory from the controller source. It must match an index and an anchored head. Historical findings are evaluated before the envelope `continue` paths, so a prior BLOCKER still yields blocked. Migration is explicit and never closes anything by itself. The real anchor and store remain integration dependencies.\n\nN4 is resolved as a labelled contract. JSON claims, the typed AdapterEvidence, capability, permissions and binding integrity are separate. The code makes no cryptographic claim. Supersedes now lives in the attestation. The result exposes trust_basis and synthetic_only. A residual LOW remains about the headline state on synthetic runs (N4a).\n\nNo production or activation bypass is shown. Without a controller the result is needs_evidence. This review does not authorize integration.",
+  "changes": [],
+  "prior_findings": {
+    "N1": {
+      "status": "resolved",
+      "evidence": [
+        "code_review.py:context_hash",
+        "code_review.py:adapt_context",
+        "test_N1_real_context_producer_uses_same_canonical_policy",
+        "test_N1_versioned_receipt_missing_permissions_is_rejected",
+        "test_N1_nan_is_not_a_canonical_json_permission"
+      ],
+      "notes": "The serialization contract matches the real producer, and the test calls the real binding(). The permissions field is supplied explicitly by the adapter. The old receipts are not mutated. The legacy hash form is accepted only when it equals the current value. A related note: the alternative_sha256 meaning is an integration dependency (N1a, INFO). The real QA shape still cannot satisfy coverage, which is documented."
+    },
+    "N2": {
+      "status": "partially_resolved",
+      "evidence": [
+        "code_review.py:replay_closure",
+        "code_review.py:advance_objection",
+        "test_N2_declared_terminal_state_without_events_is_not_closure",
+        "test_N2_state_event_tampering_does_not_close",
+        "test_N2_resolution_plus_answer_without_record_does_not_close"
+      ],
+      "notes": "The single reducer is now consumed by evaluate through replay. The origin confirmation is attested and bound to the objection identity, the candidate and the state. The new-evidence step is not enforced as new, and the non-reviewer events are unattested and not anchored (N2a). I did not execute a counterexample."
+    },
+    "N3": {
+      "status": "resolved",
+      "evidence": [
+        "code_review.py:load_history",
+        "code_review.py:evaluate (history loop before envelope loop)",
+        "test_N3_omitted_argument_cannot_hide_store_history",
+        "test_N3_prior_blocker_survives_missing_and_stale_reviews",
+        "test_N3_explicit_migration_then_new_review_can_resolve_without_dead_end"
+      ],
+      "notes": "History comes from the controller source and is checked against an index and an anchored head. Omission, truncation and index mismatch fail closed to needs_evidence. A prior BLOCKER yields blocked. Migration is explicit and typed and does not close automatically. What is still needed is a real store and anchor from the integrator, which is an integration dependency."
+    },
+    "N4": {
+      "status": "resolved",
+      "evidence": [
+        "code_review.py:AdapterEvidence",
+        "code_review.py:adapter_proven",
+        "code_review.py:evaluate (trust_basis, synthetic_only, identity_verified_by_hash)",
+        "test_N4_plain_dict_cannot_replace_controller_interface",
+        "test_N4_missing_capability_and_wrong_provider_and_stale_permissions"
+      ],
+      "notes": "The levels are separated and the type check is correctly described as an API boundary, not authentication. Without a controller the result is needs_evidence. Real native verification is an integration dependency. The only residual item is that the synthetic state name needs a qualifier (N4a, LOW)."
+    }
+  }
+}

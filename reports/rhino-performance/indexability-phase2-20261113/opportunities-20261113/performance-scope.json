@@ -1,0 +1,81 @@
+{
+  "source": {
+    "file": "/home/alanrichard/Escritorio/rhino-performance.com-Performance-on-Search-2026-11-13.xlsx",
+    "name": "rhino-performance.com-Performance-on-Search-2026-11-13.xlsx",
+    "sha256": "b71bc7294509e52b71b409d903a1df33d13c20bffead17435fdc99407ddfd095",
+    "bytes": 64969,
+    "date_claimed_by_filename": "2026-11-13",
+    "date1904": false,
+    "sheets": {
+      "Gráfico": 92,
+      "Consultas": 1000,
+      "Páginas": 440,
+      "Países": 161,
+      "Dispositivos": 3,
+      "Aparición en búsquedas": 2,
+      "Filtros": 2
+    },
+    "metadata_or_filters": [
+      [
+        "Filtrar",
+        "Valor"
+      ],
+      [
+        "Tipo de búsqueda",
+        "Web (basada en texto)"
+      ],
+      [
+        "Fecha",
+        "Últimos 3 meses"
+      ]
+    ],
+    "property_binding": "User provided Rhino filenames; URL rows all restricted to rhino-performance.com/www; workbook metadata itself has no property identifier."
+  },
+  "period": {
+    "first_chart_date": "2026-08-11",
+    "last_chart_date": "2026-11-10",
+    "filter_label": [
+      [
+        "Filtrar",
+        "Valor"
+      ],
+      [
+        "Tipo de búsqueda",
+        "Web (basada en texto)"
+      ],
+      [
+        "Fecha",
+        "Últimos 3 meses"
+      ]
+    ],
+    "search_type": "Web (basada en texto)"
+  },
+  "separate_marginal_dimensions": [
+    "Gráfico",
+    "Consultas",
+    "Páginas",
+    "Países",
+    "Dispositivos",
+    "Aparición en búsquedas",
+    "Filtros"
+  ],
+  "page_query_join_available": false,
+  "category_device_country_query_joint_rows_available": false,
+  "totals_by_dimension_do_not_match": {
+    "chart": {
+      "clicks": 5431.0,
+      "impressions": 212491.0
+    },
+    "pages": {
+      "clicks": 5577.0,
+      "impressions": 259926.0
+    },
+    "queries_top1000": {
+      "clicks": 2811.0,
+      "impressions": 71722.0
+    }
+  },
+  "reason_for_difference": "Not proven by export alone; do not rescale, invent missing rows or sum dimensions together.",
+  "query_rows_limit_or_truncation_warning": "Exactly1000 query rows; not a guaranteed exhaustive query census.",
+  "CTR": "Retain provider rounded value; no artificial recombination of minima or rankings."
+}

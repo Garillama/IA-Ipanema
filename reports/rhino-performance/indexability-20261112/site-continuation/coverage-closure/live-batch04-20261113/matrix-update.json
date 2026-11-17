@@ -1,0 +1,46 @@
+{
+  "matrix_csv": "reports/rhino-performance/indexability-20261112/site-continuation/url-matrix.csv",
+  "matrix_json": "reports/rhino-performance/indexability-20261112/site-continuation/url-matrix.json",
+  "before_hashes": {
+    "csv": "39f2cc9cee3b0c9c8f8705fe446cde639b0e88e6e5d16ee910b9a5dbd64641ac",
+    "json": "c61b7e1ac68bb0b321698e7ee2a39ed6e99288e7990132c1b53d360445c8ae06"
+  },
+  "after_hashes": {
+    "csv": "dc9c95008e40d78c6d378af510c63e330488cec1b9b5be24428cc4baefba2007",
+    "json": "aa4918c0a23b46e9fda1c2bcb7e5388a2d491bd39ff6f8632b6ddf83a9819504"
+  },
+  "backup_csv": "reports/runs/rhino-performance/20261113T070549-authorized-five-url-batch04/url-matrix-before.csv",
+  "backup_json": "reports/runs/rhino-performance/20261113T070549-authorized-five-url-batch04/url-matrix-before.json",
+  "exactly_five_rows_updated": true,
+  "updated_URLs": [
+    "https://rhino-performance.com/productos/kit-botas-y-brazos-de-presoterapia-pro-3/",
+    "https://rhino-performance.com/productos/manga-frio-y-calor-pierna-y-brazo/",
+    "https://rhino-performance.com/blog/posts/te-pasa-esto-entonces-estas-corriendo-mal-y-no-lo-sabias-e8800665a332/",
+    "https://rhino-performance.com/blog/posts/recuperacion-de-alto-impacto-para-peleadores-de-alto-nivel-57c3e51bfe71/",
+    "https://rhino-performance.com/blog/posts/lo-que-nadie-ve-cuando-termina-el-partido-596267de630b/"
+  ],
+  "Google_fields_unchanged": true,
+  "other_120_rows_unchanged": true,
+  "before": {
+    "total_urls": 125,
+    "HTML_total": 124,
+    "HTML_with_individual_HTTP": 64,
+    "pending_individual_HTTP": 60,
+    "pending_by_type": {
+      "product": 5,
+      "article": 55
+    }
+  },
+  "after": {
+    "total_urls": 125,
+    "HTML_total": 124,
+    "HTML_with_individual_HTTP": 69,
+    "pending_individual_HTTP": 55,
+    "pending_by_type": {
+      "product": 3,
+      "article": 52
+    }
+  },
+  "original_pending75_and_pending70_files_preserved": true,
+  "next_pending_list": "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/live-batch04-20261113/pending-55.csv"
+}

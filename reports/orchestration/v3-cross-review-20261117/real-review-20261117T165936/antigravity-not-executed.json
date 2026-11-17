@@ -1,0 +1,14 @@
+{
+  "agent": "antigravity",
+  "executed": false,
+  "state": "needs_evidence",
+  "reason": "No approved transport/authentication/isolation pilot receipt located in current orchestration evidence. Existing discovery explicitly marks authenticated inference and native isolation unproven. CLI installation/help is not acceptance evidence.",
+  "unmet": [
+    "authenticated inference inside controller isolation",
+    "read-only tool/MCP/subagent restrictions",
+    "bounded execution and cancellation",
+    "validated result contract"
+  ],
+  "source": "reports/orchestration/v3-discovery-20261117/observations.json",
+  "no_permission_expansion": true
+}

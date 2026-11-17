@@ -1,0 +1,31 @@
+{
+  "input_sha256": "790b3dcd3e3f40612ff8ddebb45445b23420d13b3864bd28f25b3a35ae1b2060",
+  "input_bytes": 243861,
+  "patch_sha256": "69c75ac77596439227c4066439711334e8c7bf2724b5a28fbbfabdf2336e0dbb",
+  "literal_input": true,
+  "wrapper_used": false,
+  "model": {
+    "model": "claude-sonnet-5-5",
+    "effort": "medium",
+    "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+    "verified_at": "2026-11-08"
+  },
+  "isolation": {
+    "available": true,
+    "reason": "namespace_probe_passed",
+    "exit_code": 0,
+    "fallback": false
+  },
+  "limits": {
+    "timeout": 240,
+    "idle_timeout": 90,
+    "startup_timeout": 30,
+    "first_response_timeout": 120
+  },
+  "attempts_allowed": 1,
+  "retry": false,
+  "fallback": false,
+  "tools": [],
+  "native_subagents": false,
+  "production_access": false
+}

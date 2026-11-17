@@ -1,0 +1,135 @@
+{
+  "requested_agent": "codex",
+  "effective_agent": "codex",
+  "scope": "incremental organic opportunities and evidence intake only",
+  "input_hashes": {
+    "reports/rhino-performance/indexability-phase2-20261113/native-alternative-template-review-20261113/review-packet.json": "b2feacbd57a84b4148732cce6505433af9dd45e3039611ee50a6013a8cae3fac",
+    "reports/rhino-performance/indexability-phase2-20261113/native-alternative-template-review-20261113/controller-validation.json": "fc594ffef6a01e9e4a0e8be82c0c2ac4dbb1bf1ec10b617d49106d32983bca20",
+    "reports/rhino-performance/indexability-phase2-20261113/native-alternative-template-review-20261113/official-source-facts.json": "a2cecff413379ff6552f1c01f2d9f5784fb44e4ceb05db1f95021406db8c2afe",
+    "reports/rhino-performance/indexability-phase2-20261113/native-alternative-template-review-20261113/local-evidence-reused.json": "d7fbf1ac8578f684f61e8698209f2bc41d08b0d6468d3674a9d4bcde78861930"
+  },
+  "response": {
+    "decision": "proposed",
+    "summary": "La guía documenta soporte general para plantillas alternativas de categoría; la aplicabilidad al editor personalizado de Rhino sigue unknown. Se mantiene el candidato reutilizado en needs_evidence, implementation=false, sin cambios ni autorización de mutaciones. No se aportaron alternativas de pares con ID para contrastarlas.",
+    "changes": [],
+    "evidence": [
+      "seo.editorial.official-template-guide: guía actualizada el 19/10/2026; lector con caché indicada de cinco días, sin comprobación HTTP en vivo. Una URL consultada y ocho hashes locales comprobados por el controlador; sin QA propio.",
+      "Soporte: documentado para categorías en Ipanema; disponibilidad actual en Rhino unknown.",
+      "Creación: el editor permite elegir tipo y nombre y copiar secciones/bloques. El candidato requiere verificar y copiar la configuración actualmente asignada, no una base vacía.",
+      "Asignación individual: documentada por nombre desde la entidad del administrador, con diseño publicado como prerrequisito. El conteo 1 no identifica la categoría: deben constatarse Presoterapia, TerapiaFria y Accesorios.",
+      "Posición: rich-text y el orden local permiten inferir composición después del listado/paginación; la guía no demuestra esa posición en el editor actual ni un H2 semántico.",
+      "Preservación: filtros, paginación, hybridScroll, SEO, responsive y rendimiento siguen unknown; los hashes locales no prueban equivalencia remota ni comportamiento.",
+      "Sin código: conservar category.json compartido intacto y heading deshabilitado. No se anticipan cambios de código compartido; su viabilidad completa depende de verificar el editor.",
+      "Tema personalizado: inspección UI de solo lectura antes de Crear/Guardar/Asignar. No publicar otro diseño para cumplir el prerrequisito. Siguen pendientes las seis lecturas de contenido, sin cambios al crawler."
+    ],
+    "objections": [
+      {
+        "id": "codex-obj-01",
+        "alternative_id": "unknown",
+        "category": "aplicabilidad e integración",
+        "severity": "high",
+        "claim": "Falta verificar en modo lectura la instalación publicada, los controles disponibles, la configuración actualmente asignada y las asignaciones nominales. El soporte general documentado no demuestra aplicabilidad a Rhino ni aislamiento exclusivo en Presoterapia.",
+        "status": "open",
+        "evidence_refs": [
+          "seo.editorial.official-template-guide"
+        ],
+        "resolution_evidence_refs": []
+      },
+      {
+        "id": "codex-obj-02",
+        "alternative_id": "unknown",
+        "category": "composición y validación",
+        "severity": "medium",
+        "claim": "La posición rich-text posterior al listado es una inferencia local. Faltan comprobar HTML semántico y preservación de filtros, paginación, hybridScroll, SEO y responsive; tampoco hay medición de rendimiento. La defensa del candidato no sustituye recibos posteriores del controlador.",
+        "status": "open",
+        "evidence_refs": [
+          "seo.editorial.official-template-guide"
+        ],
+        "resolution_evidence_refs": []
+      }
+    ],
+    "preferred_alternative": "unknown",
+    "questions": [
+      {
+        "id": "codex-q-01",
+        "to_agent": "claude",
+        "alternative_id": "unknown",
+        "question": "¿Cuál es el ID exacto de tu alternativa y, al contrastarla con seo.editorial.official-template-guide, DOC-02/DOC-03, qué evidencia exigirías para comprobar que copia la configuración actualmente asignada y queda exclusivamente en Presoterapia, dado que el conteo 1 no identifica la entidad?",
+        "evidence_refs": [
+          "seo.editorial.official-template-guide"
+        ]
+      }
+    ]
+  },
+  "model": {
+    "model": "gpt-6.1-sol",
+    "effort": "medium",
+    "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+    "verified_at": "2026-11-08"
+  },
+  "execution": {
+    "exit_code": 0,
+    "timed_out": false,
+    "output_limited": false,
+    "idle_timed_out": false,
+    "cancelled": false,
+    "process_started": true,
+    "process_reaped": true,
+    "stdin_bytes_written": 36112,
+    "context_complete": true,
+    "duration_s": 27.085,
+    "timing": {
+      "spawn_s": 0.000599,
+      "input_complete_s": 0.000721,
+      "first_stdout_s": 1.66869,
+      "first_stderr_s": null,
+      "timeout_phase": null,
+      "event_counts": {
+        "thread.started": 1,
+        "item.completed": 2,
+        "turn.started": 1,
+        "turn.completed": 1
+      },
+      "inference_vs_initialization": "not_separable_without_provider_events"
+    },
+    "output_accounting": {
+      "transport_bytes": 4588,
+      "retained_bytes": 4588,
+      "discarded_progress_bytes": 0,
+      "transport_limit_bytes": 20000000,
+      "retained_limit_bytes": 2000000
+    },
+    "isolation": {
+      "backend": "bubblewrap",
+      "snapshot_read_only": true,
+      "host_home_mounted": false,
+      "network": "enabled_no_destination_firewall",
+      "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+    },
+    "started_at": "2026-11-13T17:19:49.097724+00:00",
+    "prompt_bytes": 36112,
+    "prompt_sha256": "a69608fa54a31c0872ee602e5d624eee4110420a75f2ecc2405978f50888410e",
+    "usage": {
+      "provider_reported": {
+        "input_tokens": 23647,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 944,
+        "reasoning_output_tokens": 111
+      },
+      "measured_cost_available": false,
+      "estimated_cost": null
+    },
+    "limits": {
+      "timeout": 240,
+      "idle_timeout": 90,
+      "startup_timeout": 30,
+      "first_response_timeout": 150
+    },
+    "structured_output": "native_schema",
+    "contract_validation": {
+      "status": "passed",
+      "duration_s": 0.000383
+    }
+  }
+}

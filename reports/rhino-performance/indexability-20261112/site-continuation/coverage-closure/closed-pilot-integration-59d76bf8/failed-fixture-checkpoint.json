@@ -1,0 +1,27 @@
+{
+  "project": null,
+  "state": "running",
+  "planned": {
+    "https://example.invalid/robots.txt": "completed",
+    "https://example.invalid/selected-0": "started_without_confirmed_result",
+    "https://example.invalid/selected-1": "pending",
+    "https://example.invalid/selected-2": "pending",
+    "https://example.invalid/selected-3": "pending",
+    "https://example.invalid/selected-4": "pending"
+  },
+  "requests": [
+    {
+      "ordinal": 1,
+      "url": "https://example.invalid/robots.txt",
+      "state": "completed",
+      "status": 200,
+      "bytes": 67
+    },
+    {
+      "ordinal": 2,
+      "url": "https://example.invalid/selected-0",
+      "state": "started_without_confirmed_result"
+    }
+  ],
+  "arrival_at_server_without_response": "unknown"
+}

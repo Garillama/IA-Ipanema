@@ -1,0 +1,46 @@
+{
+  "matrix_csv": "reports/rhino-performance/indexability-20261112/site-continuation/url-matrix.csv",
+  "matrix_json": "reports/rhino-performance/indexability-20261112/site-continuation/url-matrix.json",
+  "before_hashes": {
+    "csv": "034fec47dc6a04e7c3842ddd678af304671924fd4b7c21f58e503215e4481aa3",
+    "json": "9277204335440bbabcb3625647a2510815d5ec6c36637241eb1acbd95cccb1b6"
+  },
+  "after_hashes": {
+    "csv": "d1c2ccd32206df4c5890d99d910736d8a7190dac6898a1eadca9c32d504dc7e5",
+    "json": "99483415a3f1bc43b8df1ccba48a63920ddd6265de36d0b7c0694cca2e374b2a"
+  },
+  "backup_csv": "reports/runs/rhino-performance/20261112T220922-authorized-five-url-pilot/url-matrix-before.csv",
+  "backup_json": "reports/runs/rhino-performance/20261112T220922-authorized-five-url-pilot/url-matrix-before.json",
+  "exactly_five_rows_updated": true,
+  "updated_URLs": [
+    "https://rhino-performance.com/productos/pistola-de-masaje-gun-pro/",
+    "https://rhino-performance.com/productos/tina-de-hielo-tub-air/",
+    "https://rhino-performance.com/blog/posts/la-presoterapia-como-transformador-de-tu-salud-mental-relajacion-y-recuperacion-127cdc829590/",
+    "https://rhino-performance.com/blog/posts/el-fro-no-es-un-castigo-es-una-herramienta-cbe9a25855f8/",
+    "https://rhino-performance.com/blog/posts/faja-de-compresion-lumbar-el-soporte-que-tu-espalda-agradecera-047c381cf3ac/"
+  ],
+  "Google_fields_unchanged": true,
+  "other_120_rows_unchanged": true,
+  "before": {
+    "total_urls": 125,
+    "HTML_total": 124,
+    "HTML_with_individual_HTTP": 49,
+    "pending_individual_HTTP": 75,
+    "pending_by_type": {
+      "product": 11,
+      "article": 64
+    }
+  },
+  "after": {
+    "total_urls": 125,
+    "HTML_total": 124,
+    "HTML_with_individual_HTTP": 54,
+    "pending_individual_HTTP": 70,
+    "pending_by_type": {
+      "product": 9,
+      "article": 61
+    }
+  },
+  "original_pending75_file_preserved": true,
+  "next_pending_list": "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/live-pilot-20261112/pending-70.csv"
+}

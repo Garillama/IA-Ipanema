@@ -1,0 +1,19 @@
+{
+  "id": "ADR-RHINO-011-remaining65-planning",
+  "decision": "approved_with_conditions",
+  "scope": "13 closed five-target manifests using unchanged V4; no new engine deliberation",
+  "dual_incremental_review_complete": true,
+  "ready_to_request_batch03_authorization": true,
+  "network_execution_allowed": false,
+  "implementation_allowed": false,
+  "batch_index_sha256": "0d28290785f138648866fb603940250168f7b4a16666b6ebd613207ffa2d76c7",
+  "source_matrix_sha256": "5d12dccb6d24ee8e7eded9e387057f46e61aadeb6e78b3ec8e31354c8466c3a5",
+  "conditions": [
+    "Separate specific owner authorization per batch manifest/hash/exact command",
+    "Fresh pending-target and integrated code/transport hash preflight",
+    "Exclusive single execution, persistent authorization marker, native unique checkpoint and supervisor",
+    "Stop on original errors/budgets; no automatic retry or next-batch launch",
+    "Offline truthful matrix update; incomplete and unconfirmed requests remain unknown"
+  ],
+  "SEO_findings_not_resolved_by_this_plan": true
+}

@@ -1,0 +1,2 @@
+# NO AUTORIZADO. Ejecutar una sola vez únicamente después de autorización específica y preflight.
+python3 tools/ia.py --project rhino-performance seo crawl --targets-manifest reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/remaining-65-preparation/batch-08/targets.json --targets-sha256 986a67b016b38be92718b35bc820b8cefc5fa10d310c66e462755e0c5f921f2c --allow-network --max-urls 8 --max-depth 0 --max-requests 12 --requests-per-second 0.5 --max-seconds 120 --timeout 20 --max-bytes 2000000 --max-sitemaps 0 --max-redirects 3 --concurrency 1

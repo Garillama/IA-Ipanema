@@ -1,0 +1,49 @@
+{
+  "transport_indexability_blockers_confirmed": [],
+  "blog_author_observation": {
+    "URLs": [
+      "https://rhino-performance.com/blog/posts/la-presoterapia-como-transformador-de-tu-salud-mental-relajacion-y-recuperacion-127cdc829590/",
+      "https://rhino-performance.com/blog/posts/el-fro-no-es-un-castigo-es-una-herramienta-cbe9a25855f8/",
+      "https://rhino-performance.com/blog/posts/faja-de-compresion-lumbar-el-soporte-que-tu-espalda-agradecera-047c381cf3ac/"
+    ],
+    "rules": [
+      "B030",
+      "B100"
+    ],
+    "status": "plain_text_author_observed_not_indexation_block",
+    "priority": "P2",
+    "next": "Review native BlogPosting source/entity typing using stored evidence; no editorial author invented"
+  },
+  "product_validator_context": {
+    "URLs": [
+      "https://rhino-performance.com/productos/pistola-de-masaje-gun-pro/",
+      "https://rhino-performance.com/productos/tina-de-hielo-tub-air/"
+    ],
+    "raw_errors": 10,
+    "rules": [
+      "D010",
+      "D011",
+      "D050",
+      "D070"
+    ],
+    "entity_marker": "Product@structured-data.item",
+    "status": "needs_evidence_context_of_secondary_entities",
+    "priority": "P2 investigation, not P0 confirmed indexability defect",
+    "evidence": "Each PDP has one Product at structured-data.page for its own canonical and five Product entities at structured-data.item. All D010 flags address the latter; comparison against current PDP canonical/H1 may be contextually inappropriate. Raw flags are preserved unchanged.",
+    "next": "Review saved graph/secondary-card context before modifying shop or validator"
+  },
+  "robots_warning": {
+    "line": 67,
+    "agent": "MJ12bot",
+    "reason": "invalid_product_token",
+    "blocking": false,
+    "scope": "native parser warning for unrelated agent; own/Googlebot permission known"
+  },
+  "limitations": [
+    "No GSC consulted; no observed Google indexation",
+    "HTTP/HTML only; no rendered DOM or browser no-JS captures",
+    "Main content retained as metrics/hash, not full body transcript",
+    "Standalone CLI findings=0 is root-level count; per-node findings must be read",
+    "Schema observations do not authorize engine/theme corrections"
+  ]
+}

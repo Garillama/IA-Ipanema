@@ -1,0 +1,81 @@
+{
+  "previous_patch_sha256": "69c75ac77596439227c4066439711334e8c7bf2724b5a28fbbfabdf2336e0dbb",
+  "new_patch_sha256": "c240b16f37ec13a84db4e54f656f15beda7316642c2e078e8d94b906d7ed6085",
+  "previous_decision": "changes_requested",
+  "current_decision": "changes_requested",
+  "O1": {
+    "reviewer_assessment": "largely_resolved",
+    "remaining": [
+      "N4",
+      "N5"
+    ],
+    "formal_controller_closure": false
+  },
+  "O2": {
+    "reviewer_assessment": "partially_resolved",
+    "remaining": [
+      "N1",
+      "N5"
+    ],
+    "formal_controller_closure": false
+  },
+  "O3": {
+    "reviewer_assessment": "partially_resolved",
+    "remaining": [
+      "N2",
+      "N3"
+    ],
+    "formal_controller_closure": false
+  },
+  "new_objections": [
+    {
+      "id": "N1",
+      "severity": "MEDIUM",
+      "claim": "The existing controller context (council_runtime.binding) and the new gate both define context.participation_sha256, but they hash the same policy with different serializations, so the values differ for the same policy. A context produced by the real binding() would always yield participation_policy_changed. binding() also does not emit permissions_sha256, which the gate requires. The tests build both sides with code_review._hash, so the mismatch is invisible. This is the same failure mode as the original O2: fixtures hide a real producer shape.",
+      "resolution_condition": "A test uses real binding() output, or the two hashes are provably the same function, and the required context fields are documented in one place."
+    },
+    {
+      "id": "N2",
+      "severity": "MEDIUM",
+      "claim": "There are two independent closure paths. The advance_objection state machine (author_answered, review_pending, refuted/resolved) is not consumed by the gate. evaluate closes a finding with an unauthenticated `answers` entry plus a resolution receipt, and ignores the record, its event order and resolution_state. A resolution binding can close a finding without any author_answered, new_evidence or review_pending transition ever having been recorded. The answer is not bound to the candidate or to the author.",
+      "resolution_condition": "One closure mechanism is enforced by evaluate, with a test showing a resolution receipt without a prior author answer record does not close."
+    },
+    {
+      "id": "N3",
+      "severity": "MEDIUM",
+      "claim": "The adverse-history protection depends on the caller passing complete history. Omitting it, which is the default, erases the prior changes_requested. The cross-candidate path has no clearing contract, so with complete history a corrected candidate can never leave needs_evidence. Same-candidate history of a reviewer is merged only after earlier `continue` branches. A reviewer whose envelope is stale, unverified or absent leaves a prior BLOCKER or HIGH out of blockers and changes, and the state degrades to needs_evidence.",
+      "resolution_condition": "A test shows that omitted history is rejected (or comes from a store handle), that a defined migration clears a prior-candidate finding, and that a prior BLOCKER yields blocked even when the current envelope is unverified."
+    },
+    {
+      "id": "N4",
+      "severity": "MEDIUM",
+      "claim": "bind_receipt is a public function that mints a binding for any principal dict the caller supplies. The binding hash is unkeyed and the legacy row hash is recomputable, so whoever can call it can mint a row and a binding that make an arbitrary reviewer, capability and supersession list appear verified. The docstrings state that the controller supplies these, but nothing in evaluate or checked_bindings distinguishes store-loaded bindings from caller-built ones. The trust boundary is therefore the same as before the change, while the result name suggests stronger proof. The approval-relevant supersedes list lives inside the identity object.",
+      "resolution_condition": "The result or API makes the trust basis explicit, and supersession lineage is not part of the identity object."
+    },
+    {
+      "id": "N5",
+      "severity": "LOW",
+      "claim": "No existing QA producer (central_qa and the qa:baseline row) emits the coverage field the gate requires, so required_qa cannot be satisfied until a new QA producer exists. The theme scope key is ignored. The author defence says two reviewers need Antigravity. The real registry already allows a multi-agent policy with commandcode, which would give two non-author reviewers for a codex author. That path is untested. The synthetic policy with antigravity would fail the real agent_policy validation, because NAMES lacks it.",
+      "resolution_condition": "A QA producer contract is documented and a real-policy multi-agent test exists."
+    },
+    {
+      "id": "N6",
+      "severity": "LOW",
+      "claim": "Binding N receipts re-reads all context files and the policy file N times. checked_bindings recomputes the candidate and context hashes per binding. Both are bounded by the 1000-receipt cap but wasteful.",
+      "resolution_condition": "The per-binding recomputation is hoisted, or the limits are documented as acceptable."
+    },
+    {
+      "id": "N7",
+      "severity": "LOW",
+      "claim": "O6 is not addressed. The bidirectional lazy coupling to private council helpers remains. The context comparison inside _ledger is vacuous when called with the row's own context, so the legacy validation checks only format.",
+      "resolution_condition": "No cyclic private import, or the coupling is explicit and the docstring corrected."
+    },
+    {
+      "id": "N8",
+      "severity": "LOW",
+      "claim": "evaluate is a single function of about 175 lines. There is an unused import, and two independent fixture harnesses build receipts and bindings with divergent conventions (one rebinds on every evaluate, the other binds once). The O1 tests depend on the live registry staying in dual mode.",
+      "resolution_condition": "Unused import removed, one fixture builder, and the tests do not read the live models.json."
+    }
+  ],
+  "note": "Original HIGH no se borra ni se reduce por este documento; Claude reevalúa el nuevo diff, y el historial anterior permanece en su origen. El cierre formal requiere contrato controlador independiente aún pendiente."
+}

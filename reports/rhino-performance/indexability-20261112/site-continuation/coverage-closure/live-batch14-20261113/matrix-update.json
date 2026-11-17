@@ -1,0 +1,44 @@
+{
+  "matrix_csv": "reports/rhino-performance/indexability-20261112/site-continuation/url-matrix.csv",
+  "matrix_json": "reports/rhino-performance/indexability-20261112/site-continuation/url-matrix.json",
+  "before_hashes": {
+    "csv": "06fb8da2c66b16d735fe63b6405737b970c0664901803b4ddf85e4699faa96ee",
+    "json": "b814e654fefdab0a473cd4cdca64efa46f4de54d59b1944a87ed9f13b7e517c2"
+  },
+  "after_hashes": {
+    "csv": "ba084cc447ca2efb72e4e158e464f57d22510eb50d19e8ac192a112951b50296",
+    "json": "82925f98fbee39395579628533d009a37db4807087aecffe0c943e4e2adcfd82"
+  },
+  "backup_csv": "reports/runs/rhino-performance/20261113T080340-authorized-five-url-batch14/url-matrix-before.csv",
+  "backup_json": "reports/runs/rhino-performance/20261113T080340-authorized-five-url-batch14/url-matrix-before.json",
+  "exactly_five_rows_updated": true,
+  "updated_URLs": [
+    "https://rhino-performance.com/blog/posts/como-tener-una-gran-semana-pre-carrera-1892a35dc52c/",
+    "https://rhino-performance.com/blog/posts/presoterapia-y-alto-rendimiento-deportivo-10335b1b6d85/",
+    "https://rhino-performance.com/blog/posts/8-cosas-buenas-que-le-pasan-a-tu-cuerpo-cuando-empiezas-a-correr-b6e7a23c1566/",
+    "https://rhino-performance.com/blog/posts/septiembre-es-de-boxeo-y-el-boxeo-no-perdona-los-brazos-que-no-recuperan-80f8bbbdd1e5/",
+    "https://rhino-performance.com/blog/posts/por-que-corres-lento-posibles-causas-y-como-solucionarlas-3e1f78c2ae4f/"
+  ],
+  "Google_fields_unchanged": true,
+  "other_120_rows_unchanged": true,
+  "before": {
+    "total_urls": 125,
+    "HTML_total": 124,
+    "HTML_with_individual_HTTP": 114,
+    "pending_individual_HTTP": 10,
+    "pending_by_type": {
+      "article": 10
+    }
+  },
+  "after": {
+    "total_urls": 125,
+    "HTML_total": 124,
+    "HTML_with_individual_HTTP": 119,
+    "pending_individual_HTTP": 5,
+    "pending_by_type": {
+      "article": 5
+    }
+  },
+  "original_pending75_and_pending70_files_preserved": true,
+  "next_pending_list": "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/live-batch14-20261113/pending-5.csv"
+}

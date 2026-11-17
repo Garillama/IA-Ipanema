@@ -1,0 +1,140 @@
+{
+  "requested_agent": "claude",
+  "effective_agent": "claude",
+  "scope": "incremental exchange on saved pilot1 findings + batch2 only",
+  "input_hashes": {
+    "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/batch-02-preparation/saved-evidence-excerpts.json": "496f4cf79ac0c1e331b6220f6dc6a3d2b4068cb87150169f209a57e9e0ad8b6e",
+    "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/batch-02-preparation/targets.json": "7117b37560a94eb8477d6e1328e2999cd103d69857c1e01b87910b8d269b8f42",
+    "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/batch-02-preparation/controller-validation.json": "0b137ec113445e633c6982ab9544e4c962ea544145c0c960e3b0042697d0db87",
+    "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/batch-02-preparation/operation.json": "84e906a7854dedcc03f629de332b68fb2f80a5f1bdb5a7c126a82d70f9949a4c",
+    "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/batch-02-preparation/command-NOT-AUTHORIZED.txt": "ca8d3738821b062200c00e9b822cd83382536906aefca901f1e8d8772849172c"
+  },
+  "response": {
+    "decision": "approve",
+    "summary": "Se puede solicitar autorización para el manifiesto exacto del lote02 (5 destinos, 12 GET, 0.5 rps, 120 s, timeout 20 s, 2 MB, 3 saltos). Esto no autoriza ejecutarlo ni cambiar el motor, el tema o los flags, y no promete captura de HTML crudo. En el piloto1, D010, D011 y D050 sobre los Product secundarios son posibles falsos positivos, no defectos confirmados. D070 y la codificación de D011 quedan en needs_evidence. Los datos comerciales, la autoría editorial y la validación externa de Google no están verificados.",
+    "changes": [],
+    "evidence": [
+      "saved-evidence-excerpts.json products[0..1].primary_Product_entities: Product principal en block 1, component structured-data.page, path $.mainEntity, con @id igual a la canonical. primary_comparison_flags=[] no es certificación de Google.",
+      "saved-evidence-excerpts.json secondary_Product_entities: bloques 3-7, component structured-data.item, sin @id. Los flags D010/D011/D050/D070 aparecen solo en all_secondary_comparison_flags y secondary_comparisons.",
+      "saved-evidence-excerpts.json D010/D050: evidence.canonical y evidence.h1 son los de la PDP contenedora. Los matching_main_carousel_links del carrusel coinciden con cada secondary_declared_page. Por eso son posibles falsos positivos de contexto.",
+      "saved-evidence-excerpts.json D011: offer_url conserva '&amp%3Brecommender=manual' y el href del carrusel conserva '&recommender=manual'. El origen de la codificación es needs_evidence. La diferencia con la canonical contenedora es posible falso positivo.",
+      "saved-evidence-excerpts.json D070 y projection_omits: placeholders data:image/gif, srcset=true, sin data-src, currentSrc ni descargas. Es needs_evidence.",
+      "saved-evidence-excerpts.json articles[0..2]: author escalar 'RHINO PERFORMANCE', 'Marketing RHINO' y 'Erick', con B030/B100 y author_truth=declared_not_editorially_verified. No se inventa Person/Organization, perfil, precio ni stock.",
+      "targets.json y controller-validation.json: 2 product + 3 article, five_unique_urls=true, no_overlap_with_pilot1=true, individual_HTTP=not_observed, network_requests=0, native_manifest_validator_passed=true, manifest_sha256=7117b375...8b6e.",
+      "operation.json.argv coincide con command-NOT-AUTHORIZED.txt (max-requests 12, rps 0.5, max-seconds 120, timeout 20, max-bytes 2000000, max-redirects 3, max-sitemaps 0, depth 0, concurrency 1). network_authorized=false y executed=false."
+    ],
+    "objections": [
+      {
+        "id": "codex.O1",
+        "alternative_id": "codex.A1",
+        "category": "limite_de_evidencia",
+        "severity": "medium",
+        "claim": "El extracto no conserva JSON-LD crudo ni candidatos de imagen. Eso impide cerrar D011 (codificación) y D070, y declarar correcciones o validación completa. No bloquea solicitar autorización del lote02. Guardar HTML crudo es trabajo futuro no implementado, y no se autoriza cambiar el motor ni añadir flags.",
+        "status": "open",
+        "evidence_refs": [
+          "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/batch-02-preparation/saved-evidence-excerpts.json",
+          "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/batch-02-preparation/operation.json"
+        ],
+        "resolution_evidence_refs": []
+      }
+    ],
+    "preferred_alternative": "codex.A1",
+    "answers": [
+      {
+        "question_id": "codex.Q1",
+        "from_agent": "codex",
+        "answer": "La fuente es saved-evidence-excerpts.json (nodos /urls/0 y /urls/1 del raw-crawl-report). Muestra que los flags solo se emiten sobre las entidades secundarias: primary_comparison_flags=[] para el Product de $.mainEntity (block 1, structured-data.page, @id igual a la canonical). Los D010/D050 de las secundarias (blocks 3-7, structured-data.item) comparan contra evidence.canonical y evidence.h1 de la PDP contenedora, no contra la página declarada por su propio mainEntityOfPage. Sus enlaces matching_main_carousel_links existen en main/carousel. Esto sostiene la clasificación 'posible falso positivo'. No es prueba definitiva: el código del validador no está en los artefactos, y no se sabe si el motor pretende distinguir principal de secundaria. Tampoco hay validación externa de Google. Queda como posible falso positivo / needs_evidence sobre la lógica, nunca defecto confirmado.",
+        "disposition": "defend",
+        "evidence_refs": [
+          "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/batch-02-preparation/saved-evidence-excerpts.json"
+        ]
+      }
+    ],
+    "withdrawn_alternatives": [],
+    "revision_notes": [
+      "Sin cambios de preferencia: se mantiene codex.A1.",
+      "D011 se separa en dos partes: la comparación con la canonical contenedora (posible falso positivo) y la codificación '&amp%3B' (needs_evidence).",
+      "La limitación sobre HTML crudo se registra como trabajo futuro, sin prometer captura ni cambios en el lote02."
+    ]
+  },
+  "model": {
+    "model": "claude-sonnet-5-5",
+    "effort": "medium",
+    "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+    "verified_at": "2026-11-08"
+  },
+  "execution": {
+    "exit_code": 0,
+    "timed_out": false,
+    "output_limited": false,
+    "idle_timed_out": false,
+    "cancelled": false,
+    "process_started": true,
+    "process_reaped": true,
+    "stdin_bytes_written": 150154,
+    "context_complete": true,
+    "duration_s": 32.071,
+    "timing": {
+      "spawn_s": 0.000913,
+      "input_complete_s": 0.600826,
+      "first_stdout_s": 1.551597,
+      "first_stderr_s": null,
+      "timeout_phase": null,
+      "event_counts": {
+        "system": 7,
+        "stream_event": 603,
+        "event:message_start": 2,
+        "event:content_block_start": 3,
+        "event:content_block_delta": 591,
+        "assistant": 3,
+        "event:content_block_stop": 3,
+        "event:message_delta": 2,
+        "event:message_stop": 2,
+        "rate_limit_event": 2,
+        "user": 2,
+        "result": 1
+      },
+      "inference_vs_initialization": "not_separable_without_provider_events"
+    },
+    "output_accounting": {
+      "transport_bytes": 227400,
+      "retained_bytes": 227400,
+      "discarded_progress_bytes": 0,
+      "transport_limit_bytes": 20000000,
+      "retained_limit_bytes": 2000000
+    },
+    "isolation": {
+      "backend": "bubblewrap",
+      "snapshot_read_only": true,
+      "host_home_mounted": false,
+      "network": "enabled_no_destination_firewall",
+      "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+    },
+    "started_at": "2026-11-12T22:35:38.943206+00:00",
+    "prompt_bytes": 150154,
+    "prompt_sha256": "f4fb12ccd10cef56639cabdf336b53dc39343a1401603c5c1f2e97d72169c7ca",
+    "usage": {
+      "provider_reported": {
+        "total_cost_usd": 0.32757970000000003,
+        "duration_ms": 30275,
+        "input_tokens": 6,
+        "cache_creation_input_tokens": 68686,
+        "cache_read_input_tokens": 66137,
+        "output_tokens": 4621
+      },
+      "measured_cost_available": true,
+      "estimated_cost": null
+    },
+    "limits": {
+      "timeout": 240,
+      "idle_timeout": 90,
+      "startup_timeout": 30,
+      "first_response_timeout": 120
+    },
+    "structured_output": "native_schema",
+    "contract_validation": {
+      "status": "passed",
+      "duration_s": 0.010024
+    }
+  }
+}

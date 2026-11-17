@@ -1,0 +1,133 @@
+{
+  "review_scope": "Independent review of new six-export reconciliation and conditional proposals only; previous councils not restarted",
+  "participants": {
+    "claude": {
+      "review": {
+        "file": "claude-review.json",
+        "sha256": "44d0191b75d5e793bb6878ec2568592e2f7e1898f9ec5476beeb4dd547d44afd",
+        "model": {
+          "model": "claude-sonnet-5-5",
+          "effort": "medium",
+          "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+          "verified_at": "2026-11-08"
+        },
+        "decision": "changes_requested",
+        "input_hashes": {
+          "reports/rhino-performance/indexability-phase2-20261113/additional-exports-20261113/review-packet.json": "6c7c62fa9b9cf3583a062f59e1030c6836c2c931c494c4b9bedb3ff35aa00400",
+          "reports/rhino-performance/indexability-phase2-20261113/additional-exports-20261113/controller-validation.json": "9b0a222acfe6db62e5cfb01ba51f82211f34c6e7ec403c14ae6adb52748f8aa9",
+          "reports/rhino-performance/indexability-phase2-20261113/additional-exports-20261113/category-status.json": "334f8a7122cd92b35519fb4897565dceef3ffd8ac40ba7e9d7be3a41ca2b886c",
+          "reports/rhino-performance/indexability-phase2-20261113/additional-exports-20261113/summary.json": "2899eb214dd9820b7ef3070d78afddc2755f8eaa15848785190147143c88afd5",
+          "reports/rhino-performance/indexability-phase2-20261113/additional-exports-20261113/opportunity-backlog.json": "da350baa584612b24d403e77945c314a92e290b86f2f943b5078618bc5bad212"
+        }
+      },
+      "contrast": {
+        "file": "claude-contrast.json",
+        "sha256": "51b5f8182457844b3926aebcc1a89322e49cb047700b84a5148eb9e7ddb033a2",
+        "model": {
+          "model": "claude-sonnet-5-5",
+          "effort": "medium",
+          "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+          "verified_at": "2026-11-08"
+        },
+        "decision": "proposed",
+        "input_hashes": {
+          "reports/rhino-performance/indexability-phase2-20261113/additional-exports-20261113/review-packet.json": "50df67e34a4e4be939b303f67d666dd69ddcb8828e802c4c0fd7539eb9e323a6",
+          "reports/rhino-performance/indexability-phase2-20261113/additional-exports-20261113/controller-validation.json": "9b0a222acfe6db62e5cfb01ba51f82211f34c6e7ec403c14ae6adb52748f8aa9",
+          "reports/rhino-performance/indexability-phase2-20261113/additional-exports-20261113/controller-supplement.json": "3a6d59108b8b049a5e438f6c0ea6269e9a22dcb8e36da9243012a9b204dc22a7",
+          "reports/rhino-performance/indexability-phase2-20261113/additional-exports-20261113/summary.json": "2899eb214dd9820b7ef3070d78afddc2755f8eaa15848785190147143c88afd5",
+          "reports/rhino-performance/indexability-phase2-20261113/additional-exports-20261113/opportunity-backlog.json": "bc84279c786b0d14b5173af5526522960cd8fef071d4dc7a0627ed9cbe4dfb69",
+          "reports/rhino-performance/indexability-phase2-20261113/additional-exports-20261113/saved-commercial-page-evidence.json": "3294a50ac1732d0b6d7e0199710018a9adf072dda62c8d103d9c656295b4832b",
+          "reports/rhino-performance/indexability-phase2-20261113/additional-exports-20261113/README.md": "8e3e536ebfc4e4accadbbdfbf91911bc1ad9880bc9247125ccbf5c883bce227b"
+        }
+      },
+      "clarification": {
+        "file": "claude-clarification.json",
+        "sha256": "3eabe4f4ebe24df6b77337e178293251b72afd5e24fa8904081f0087c2ccde51",
+        "model": {
+          "model": "claude-sonnet-5-5",
+          "effort": "medium",
+          "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+          "verified_at": "2026-11-08"
+        },
+        "decision": "proposed",
+        "input_hashes": {
+          "reports/rhino-performance/indexability-phase2-20261113/additional-exports-20261113/review-packet.json": "50df67e34a4e4be939b303f67d666dd69ddcb8828e802c4c0fd7539eb9e323a6",
+          "reports/rhino-performance/indexability-phase2-20261113/additional-exports-20261113/controller-validation.json": "9b0a222acfe6db62e5cfb01ba51f82211f34c6e7ec403c14ae6adb52748f8aa9",
+          "reports/rhino-performance/indexability-phase2-20261113/additional-exports-20261113/controller-supplement.json": "3a6d59108b8b049a5e438f6c0ea6269e9a22dcb8e36da9243012a9b204dc22a7",
+          "reports/rhino-performance/indexability-phase2-20261113/additional-exports-20261113/summary.json": "2899eb214dd9820b7ef3070d78afddc2755f8eaa15848785190147143c88afd5",
+          "reports/rhino-performance/indexability-phase2-20261113/additional-exports-20261113/opportunity-backlog.json": "bc84279c786b0d14b5173af5526522960cd8fef071d4dc7a0627ed9cbe4dfb69",
+          "reports/rhino-performance/indexability-phase2-20261113/additional-exports-20261113/saved-commercial-page-evidence.json": "3294a50ac1732d0b6d7e0199710018a9adf072dda62c8d103d9c656295b4832b",
+          "reports/rhino-performance/indexability-phase2-20261113/additional-exports-20261113/README.md": "8e3e536ebfc4e4accadbbdfbf91911bc1ad9880bc9247125ccbf5c883bce227b"
+        }
+      }
+    },
+    "codex": {
+      "review": {
+        "file": "codex-review.json",
+        "sha256": "b5aa57417d5d8aac18934787bc853edf734c77e8972c6cc683effac9ab9c7023",
+        "model": {
+          "model": "gpt-6.1-sol",
+          "effort": "medium",
+          "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+          "verified_at": "2026-11-08"
+        },
+        "decision": "proposed",
+        "input_hashes": {
+          "reports/rhino-performance/indexability-phase2-20261113/additional-exports-20261113/review-packet.json": "6c7c62fa9b9cf3583a062f59e1030c6836c2c931c494c4b9bedb3ff35aa00400",
+          "reports/rhino-performance/indexability-phase2-20261113/additional-exports-20261113/controller-validation.json": "9b0a222acfe6db62e5cfb01ba51f82211f34c6e7ec403c14ae6adb52748f8aa9",
+          "reports/rhino-performance/indexability-phase2-20261113/additional-exports-20261113/category-status.json": "334f8a7122cd92b35519fb4897565dceef3ffd8ac40ba7e9d7be3a41ca2b886c",
+          "reports/rhino-performance/indexability-phase2-20261113/additional-exports-20261113/summary.json": "2899eb214dd9820b7ef3070d78afddc2755f8eaa15848785190147143c88afd5",
+          "reports/rhino-performance/indexability-phase2-20261113/additional-exports-20261113/opportunity-backlog.json": "da350baa584612b24d403e77945c314a92e290b86f2f943b5078618bc5bad212"
+        }
+      },
+      "contrast": {
+        "file": "codex-contrast.json",
+        "sha256": "52a7206a468fc9ee95ece15ca554cfbd305ee7da5f8ec17a9a2c6f3b5d4f6954",
+        "model": {
+          "model": "gpt-6.1-sol",
+          "effort": "medium",
+          "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+          "verified_at": "2026-11-08"
+        },
+        "decision": "proposed",
+        "input_hashes": {
+          "reports/rhino-performance/indexability-phase2-20261113/additional-exports-20261113/review-packet.json": "50df67e34a4e4be939b303f67d666dd69ddcb8828e802c4c0fd7539eb9e323a6",
+          "reports/rhino-performance/indexability-phase2-20261113/additional-exports-20261113/controller-validation.json": "9b0a222acfe6db62e5cfb01ba51f82211f34c6e7ec403c14ae6adb52748f8aa9",
+          "reports/rhino-performance/indexability-phase2-20261113/additional-exports-20261113/controller-supplement.json": "3a6d59108b8b049a5e438f6c0ea6269e9a22dcb8e36da9243012a9b204dc22a7",
+          "reports/rhino-performance/indexability-phase2-20261113/additional-exports-20261113/summary.json": "2899eb214dd9820b7ef3070d78afddc2755f8eaa15848785190147143c88afd5",
+          "reports/rhino-performance/indexability-phase2-20261113/additional-exports-20261113/opportunity-backlog.json": "bc84279c786b0d14b5173af5526522960cd8fef071d4dc7a0627ed9cbe4dfb69",
+          "reports/rhino-performance/indexability-phase2-20261113/additional-exports-20261113/saved-commercial-page-evidence.json": "3294a50ac1732d0b6d7e0199710018a9adf072dda62c8d103d9c656295b4832b",
+          "reports/rhino-performance/indexability-phase2-20261113/additional-exports-20261113/README.md": "8e3e536ebfc4e4accadbbdfbf91911bc1ad9880bc9247125ccbf5c883bce227b"
+        }
+      }
+    }
+  },
+  "contracts_valid": true,
+  "assigned_cross_questions_answered": true,
+  "clarification_reason": "Claude first contrast mislabeled peer objections; original retained. One bounded second exchange clarified own objections; no forced approval.",
+  "documentary_corrections": [
+    "P1 explicitly investigation priority, not proven high impact",
+    "Editorial content requirements separated from CTR/snippet hypothesis",
+    "404 current verification must precede any recovery proposal",
+    "Cohorts/windows/sufficiency and inconclusive condition defined as prerequisite for future implementation"
+  ],
+  "objections_resolved_documentarily_only": [
+    "codex-obj-01",
+    "codex-obj-02"
+  ],
+  "objections_left_open": [
+    {
+      "id": "claude-obj-1",
+      "state": "needs_evidence",
+      "scope": "Filter operator, selected range, current content/catalog, query-filtered Pages and cohorts remain pending"
+    },
+    {
+      "id": "claude-obj-2",
+      "state": "needs_evidence",
+      "scope": "Current historical-path HTTP and true replacement equivalent unverified"
+    }
+  ],
+  "implementation_allowed": false,
+  "preferred_next_investigation": "SEO-F2-01",
+  "no_independent_implementation_approval": true
+}

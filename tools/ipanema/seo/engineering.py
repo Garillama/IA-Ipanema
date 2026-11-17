@@ -9,8 +9,8 @@ import re
 from ..core import IpanemaError, digest, now, read_json, redact, write_json
 from . import reports
 from .adapters import authorize_url, import_observation
-from .crawl_policy import Limits, normalize
-from .crawler import crawl, export, save_csv
+from .crawl_policy import Limits, Policy, normalize
+from .crawler import crawl, export, save_csv, pilot_limits
 from .extractor import extract
 from .indexability import Content, classify, layers, page_type, pagination, readiness, template_checks
 from .regression import compare
@@ -28,6 +28,8 @@ def add_parser(commands):
     mode = crawler.add_mutually_exclusive_group(required=True)
     mode.add_argument('--allow-network', action='store_true')
     mode.add_argument('--responses', type=Path, help='Fixture/export local explícito; no hace red')
+    crawler.add_argument('--targets-manifest', type=Path, help='Piloto cerrado de cinco URLs, supervisado y con checkpoint')
+    crawler.add_argument('--targets-sha256', help='SHA256 exacto del manifiesto autorizado')
     for field in fields(Limits):
         option = '--' + field.name.replace('_', '-')
         crawler.add_argument(option, type=float if field.name in ('requests_per_second', 'max_seconds', 'timeout') else int,
@@ -181,7 +183,7 @@ def enrich_report(project, report, capture_paths, no_js_paths, observations, cov
     return report
 
 
-def execute(project, args):
+def _execute(project, args):
     command = args.seo_command
     inputs = []
     if command == 'sitemap':
@@ -195,10 +197,15 @@ def execute(project, args):
         limits = Limits(**{f.name: getattr(args, f.name) for f in fields(Limits)}).validate()
         fixture = OfflineResponses(project, args.responses) if args.responses else None
         result = crawl(project, limits=limits, allow_network=args.allow_network, transport=fixture,
+                       targets=getattr(args, '_closed_targets', None), on_event=getattr(args, '_closed_checkpoint', None),
                        clock=fixture.clock if fixture else None, sleep=fixture.sleep if fixture else None)
+        if getattr(args, '_closed_targets', None):
+            inputs.append(args.targets_manifest)
+            result['pilot_manifest_sha256'] = args.targets_sha256
+            result['checkpoint'] = str(args._closed_checkpoint_path)
         if fixture:
             result['provenance']['clock'] = 'virtual_offline_not_network_timing'
-            inputs = [args.responses]
+            inputs.append(args.responses)
     elif command == 'readiness':
         result = captured_readiness(project, args.capture, args.no_js, args.robots, args.facts)
         inputs = [p for p in [args.capture, args.no_js, args.robots, args.facts] if p]
@@ -259,3 +266,179 @@ def summary_markdown(result):
     lines += ['', '## Límites', ''] + ['- ' + safe(x) for x in result.get('limitations', [])]
     lines += ['', 'Sin escrituras remotas. No se sustituyó el sitemap nativo.', '']
     return '\n'.join(lines)
+
+
+# Closed mode has one bounded POSIX worker containing manifest parsing, HTTP,
+# analysis AND report export. It reuses _execute, not another crawl loop.
+def _pilot_manifest(project, args):
+    import hashlib
+    path = args.targets_manifest
+    if not path or path.is_symlink() or not path.is_file() or path.stat().st_size > 65536:
+        raise IpanemaError('Manifiesto del piloto inválido o excedido.')
+    raw = path.read_bytes()
+    if len(raw) > 65536 or not re.fullmatch(r'[0-9a-f]{64}', args.targets_sha256 or ''):
+        raise IpanemaError('Se requiere el hash exacto del manifiesto.')
+    if hashlib.sha256(raw).hexdigest() != args.targets_sha256:
+        raise IpanemaError('Hash del manifiesto no coincide.')
+    def unique(pairs):
+        result = {}
+        for k, v in pairs:
+            if k in result:
+                raise IpanemaError('Claves repetidas en manifiesto.')
+            result[k] = v
+        return result
+    data = json.loads(raw, object_pairs_hook=unique)
+    policy = Policy(project.data['public_url'])
+    if data.get('project') != project.id or data.get('origin') != policy.origin:
+        raise IpanemaError('Manifiesto de otro proyecto/origen.')
+    rows = data.get('targets')
+    if not isinstance(rows, list) or len(rows) != 5 or any(not isinstance(x, dict) for x in rows):
+        raise IpanemaError('El piloto exige cinco destinos.')
+    urls = [x.get('url') for x in rows]
+    if any(not isinstance(u, str) or policy.check(u) != u for u in urls) or len(set(urls)) != 5:
+        raise IpanemaError('Destinos inválidos, privados o repetidos.')
+    return urls
+
+
+def _checkpoint_writer(path, targets):
+    import os
+    data = {'project': None, 'state': 'running', 'planned': {u: 'pending' for u in targets},
+            'requests': [], 'arrival_at_server_without_response': 'unknown'}
+    def persist():
+        write_json(path, data, overwrite=True)
+        with path.open('rb') as stream:
+            os.fsync(stream.fileno())
+        fd = os.open(path.parent, os.O_RDONLY)
+        try:
+            os.fsync(fd)
+        finally:
+            os.close(fd)
+    def event(row):
+        url, kind = row['url'], row['event']
+        if kind == 'planned':
+            data['planned'].setdefault(url, 'pending')
+        elif kind == 'started':
+            data['planned'][url] = 'started_without_confirmed_result'
+            data['requests'].append({'ordinal': row['ordinal'], 'url': url, 'state': 'started_without_confirmed_result'})
+        else:
+            current = data['requests'][-1]
+            if current['ordinal'] != row['ordinal'] or current['url'] != url:
+                raise IpanemaError('Evento de checkpoint fuera de secuencia.')
+            if kind == 'completed':
+                current.update(state='completed', status=row['status'], bytes=row['bytes'])
+                data['planned'][url] = 'completed'
+            elif kind != 'unconfirmed':
+                raise IpanemaError('Evento de checkpoint desconocido.')
+        persist()
+    persist()
+    return event
+
+
+def _pilot_worker(channel, project, args, checkpoint, work):
+    import os
+    try:
+        os.setsid()
+        channel.send({'ready': os.getpid()})
+        if channel.recv() != 'go':
+            return
+        targets = _pilot_manifest(project, args)
+        args._closed_targets = targets
+        args._closed_checkpoint_path = checkpoint
+        args._closed_checkpoint = _checkpoint_writer(checkpoint, [normalize(project.data['public_url']) + 'robots.txt', *targets])
+        result = work(project, args)
+        channel.send({'result': result})
+    except Exception as exc:
+        channel.send({'error': type(exc).__name__, 'message': 'Piloto abortado; consultar checkpoint si existe.'})
+    finally:
+        channel.close()
+
+
+def _supervise_pilot(project, args, *, work=None):
+    import multiprocessing
+    import os
+    import signal
+    import time
+    import uuid
+    if os.name != 'posix':
+        raise IpanemaError('El piloto requiere supervisión POSIX; sin fallback sin límite.')
+    limits = pilot_limits(Limits(**{f.name: getattr(args, f.name) for f in fields(Limits)}))
+    started = time.monotonic()
+    seconds = limits.max_seconds
+    grace = min(1., seconds / 4)
+    deadline = started + seconds
+    # Pure path construction; all filesystem/manifest/report work runs in child.
+    run = project.evidence_root / ('pilot-checkpoint-' + uuid.uuid4().hex)
+    checkpoint = run / 'checkpoint.json'
+    parent, child = multiprocessing.get_context('fork').Pipe()
+    process = multiprocessing.get_context('fork').Process(target=_pilot_worker,
+                args=(child, project, args, checkpoint, work or _execute))
+    ready, message, stopped = False, None, False
+    previous = {}
+    def interrupt(signum, frame):
+        raise IpanemaError('Piloto interrumpido por señal; estado de llegada no inferido.')
+    try:
+        for sig in (signal.SIGTERM, signal.SIGINT):
+            previous[sig] = signal.signal(sig, interrupt)
+        process.start()
+        child.close()
+        while time.monotonic() < deadline - grace:
+            if parent.poll(min(.05, max(0, deadline - grace - time.monotonic()))):
+                try:
+                    message = parent.recv()
+                except EOFError:
+                    message = {'error': 'worker_eof'}
+                    break
+                if not ready:
+                    if message != {'ready': process.pid} or os.getpgid(process.pid) != process.pid:
+                        raise IpanemaError('Grupo del worker no validado.')
+                    ready = True
+                    parent.send('go')
+                    message = None
+                else:
+                    break
+            if not process.is_alive():
+                break
+        if message is None and process.is_alive():
+            stopped = True
+            if ready:
+                os.killpg(process.pid, signal.SIGTERM)
+            else:
+                process.terminate()
+            process.join(timeout=max(0, min(grace / 2, deadline - time.monotonic())))
+    except (IpanemaError, OSError) as exc:
+        message = {'error': type(exc).__name__}
+    finally:
+        # Always clean the verified session, even on success or Ctrl-C. Its
+        # subprocesses must not outlive a completed/cancelled pilot.
+        if process.pid:
+            try:
+                if ready:
+                    os.killpg(process.pid, signal.SIGKILL)
+                elif process.is_alive():
+                    process.kill()
+            except ProcessLookupError:
+                pass
+            process.join(timeout=max(.05, deadline - time.monotonic()))
+        parent.close()
+        child.close()
+        for sig, handler in previous.items():
+            signal.signal(sig, handler)
+    record = {'state': 'cancelled_deadline' if stopped else 'worker_failed' if not message or 'error' in message else 'finished', 'worker_pid': process.pid,
+              'worker_reaped': process.exitcode is not None, 'wall_seconds': time.monotonic() - started,
+              'absolute_limit_seconds': seconds, 'termination_grace_included': grace,
+              'checkpoint': str(checkpoint), 'remote_mutations': False}
+    # A supervisor receipt is outside the cancelled worker's work. No HTTP or
+    # analysis can continue while it is being recorded.
+    write_json(run / 'supervision.json', record)
+    if stopped or not message or 'error' in message or process.exitcode is None:
+        return {'state': 'stopped', 'checkpoint': str(checkpoint), 'supervision': str(run / 'supervision.json'),
+                'reason': 'absolute_deadline' if stopped else 'worker_failed', 'remote_mutations': False}, 2
+    return message['result']
+
+
+def execute(project, args):
+    if args.seo_command == 'crawl' and getattr(args, 'targets_manifest', None):
+        return _supervise_pilot(project, args)
+    if getattr(args, 'targets_sha256', None):
+        raise IpanemaError('--targets-sha256 requiere --targets-manifest.')
+    return _execute(project, args)

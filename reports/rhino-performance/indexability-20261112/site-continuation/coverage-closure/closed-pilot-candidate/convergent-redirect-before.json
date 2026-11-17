@@ -1,0 +1,14 @@
+{
+  "fixture": true,
+  "network_requests": 0,
+  "requests": [
+    "https://example.invalid/robots.txt",
+    "https://example.invalid/selected-0",
+    "https://example.invalid/selected-1"
+  ],
+  "state": "stopped",
+  "errors": [
+    "Ciclo de redirecci\u00f3n en piloto."
+  ],
+  "expected": "not a cycle; reuse already observed target without another GET"
+}

@@ -1,0 +1,28 @@
+{
+  "command": [
+    "python3",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "/home/alanrichard/Escritorio/IA inversa/.local/v3-n2a/20261117T183638/candidate/tests/unit",
+    "-p",
+    "test_code_review_v3.py",
+    "-v"
+  ],
+  "exit_code": 0,
+  "duration_s": 1.206,
+  "network": false,
+  "synthetic_only": true,
+  "candidate_patch_sha256": "288ef3739417e0e15e105e4826ea65598f17c0807265ed68cf42d3fc5008aa6f",
+  "checked_source_files": {
+    "tools/ipanema/orchestration/council.py": "3bbe36122abe1966fa0fc89eb2a23576284797c4afb2a1b4c071e83cb4cfad7a",
+    "tools/ipanema/orchestration/code_review.py": "4b9cd45475a9a8c0926d8b66ce86d02a153981a0273360760841d901374033e0",
+    "tests/unit/test_code_review_v3.py": "d56a68eb1b4e898d7fecb687853c79e22be07c399be68b5aff1f362bd77b9b77"
+  },
+  "tests_passed": 106,
+  "previous_tests_retained": 90,
+  "new_tests": 16,
+  "output_sha256": "f29a6fedcdba0eadd34af8919cf6739bf4d0858d4bf581944a22ade5a8007a5c",
+  "historical_159_repeated": false
+}

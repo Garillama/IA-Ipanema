@@ -1,0 +1,1818 @@
+--- a/tools/ipanema/orchestration/council.py
++++ b/tools/ipanema/orchestration/council.py
+@@ -651,3 +651,14 @@
+             'limits': ['Los hashes de fuente no prueban ejecución ni corrección.',
+                        'La aprobación del consejo no sustituye QA posterior ni autoriza producción.',
+                        'Las opiniones y confidence del modelo no son mediciones.']}
++
++
++def review_code_candidate(candidate, reviews, *, evidence, root, answers=(), bindings=(), review_history=(), controller=None):
++    """Optional V3 gate; does not activate participants, apply code or publish.
++
++    Callers must first obtain verified independent review envelopes/receipts.
++    Existing V2 aggregate behavior and provider policy remain unchanged.
++    """
++    from .code_review import evaluate
++    return evaluate(candidate, reviews, evidence=evidence, root=root, answers=answers,
++                    bindings=bindings, review_history=review_history, controller=controller)
+--- /dev/null
++++ b/tools/ipanema/orchestration/code_review.py
+@@ -0,0 +1,697 @@
++"""Optional exact-candidate review gate. No inference, activation or remote effects.
++
++All identity/preflight/QA/resolution receipts must be supplied by the trusted
++controller, never merged from a model response. This validates review evidence;
++it is not a universal semantic-clone detector or proof that a reviewer is honest.
++"""
++from __future__ import annotations
++
++import copy
++import hashlib
++import json
++import re
++from dataclasses import dataclass
++from pathlib import Path
++
++from ..core import IpanemaError, digest, beneath
++from .adapters import validate_schema, agent_policy
++from .planner import safe_path
++
++CHALLENGES = ('architecture', 'duplication', 'performance', 'regression', 'maintainability')
++SEVERITIES = ('BLOCKER', 'HIGH', 'MEDIUM', 'LOW', 'INFO')
++
++
++def _hash(value):
++    return hashlib.sha256(json.dumps(value, sort_keys=True, ensure_ascii=False,
++                                     separators=(',', ':')).encode()).hexdigest()
++
++
++CONTEXT_CONTRACT = 'ipanema-code-review-context/1'
++
++
++def context_hash(value):
++    """Contract /1: matches existing JSON producer on its JSON domain.
++
++    Legacy candidate/receipt hashes keep _hash; never reinterpret their bytes.
++    """
++    return hashlib.sha256(json.dumps(value, sort_keys=True, ensure_ascii=True,
++                          allow_nan=False, separators=(', ', ': ')).encode('utf-8')).hexdigest()
++
++
++def history_head(lineage_id, reviews):
++    return context_hash({'lineage_id': lineage_id, 'reviews': reviews})
++
++
++def adapt_context(legacy, *, policy, permissions, lineage_id):
++    """Explicit isolated producer. Does not retrofit permissions into old receipts."""
++    _require(isinstance(legacy, dict) and legacy.get('participation_sha256') in
++             (context_hash(policy), _hash(policy)), 'unrecognized legacy policy hash')
++    _require(isinstance(permissions, dict) and bool(permissions), 'permissions absent')
++    _require(isinstance(lineage_id, str) and bool(lineage_id), 'lineage absent')
++    result = copy.deepcopy(legacy)
++    result.update(context_contract=CONTEXT_CONTRACT, participation_sha256=context_hash(policy),
++                  permissions_sha256=context_hash(permissions), review_lineage_id=lineage_id)
++    return result
++
++
++@dataclass(frozen=True)
++class AdapterEvidence:
++    """Controller adapter assertion, never deserialize from a model JSON object.
++
++    Type separation is an API boundary, not cryptographic authentication.
++    Native receipt verification must be implemented by the trusted integrator.
++    """
++    receipt_id: str
++    agent: str
++    candidate_sha256: str
++    permissions_sha256: str
++    binding_sha256: str
++    adapter_receipt_sha256: str
++    capability: str
++    actor_kind: str = 'principal'
++    parent_actor_id: str | None = None
++    supersedes_review_ids: tuple = ()
++
++
++@dataclass(frozen=True)
++class MigrationEvidence:
++    objection_identity: str
++    from_candidate_sha256: str
++    to_candidate_sha256: str
++    reviewer: str
++    author: str
++
++
++@dataclass(frozen=True)
++class MaterialEvidence:
++    """Result of a trusted controller's factual/material demonstration verifier.
++
++    Never construct this from a model's assertion of novelty. The provider must
++    verify the artifact, facts, relevance to this claim, and prior assessed facts.
++    Hashes below prove integrity/anti-replay, not semantic materiality.
++    """
++    objection_identity: str
++    candidate_sha256: str
++    evidence_refs: tuple
++    verification_receipt_id: str
++    artifact_sha256: str
++    kind: str  # new_fact or documented_refutation (existing sources allowed)
++
++
++class ControllerEvidenceSource:
++    """Read-only controller bridge, deliberately unavailable in current transport.
++
++    Subclass only in controller code after native verification. Model data and
++    self-hashed bindings must never be promoted into this object. Synthetic
++    implementations must label their trust_basis as synthetic_fixture.
++    """
++    trust_basis = 'unavailable'
++
++    def history(self, lineage_id):
++        return None
++
++    def history_anchor(self, lineage_id):
++        return None
++
++    def attestation(self, receipt_id):
++        return None
++
++    def migration(self, reference):
++        return None
++
++    def incremental_evidence(self, record, evidence_refs, candidate_sha256):
++        # Default unavailable: a reference, different ID or self-hash is not proof.
++        return None
++
++
++def adapter_proven(source, binding, agent, candidate_sha256, permissions_sha256):
++    if not isinstance(source, ControllerEvidenceSource) or source.trust_basis not in (
++            'adapter_verified', 'synthetic_fixture'):
++        return None
++    proof = source.attestation(binding.get('receipt_id'))
++    if (isinstance(proof, AdapterEvidence) and proof.agent == agent
++            and proof.receipt_id == binding.get('receipt_id')
++            and proof.candidate_sha256 == candidate_sha256
++            and proof.permissions_sha256 == permissions_sha256
++            and proof.binding_sha256 == binding.get('binding_sha256')
++            and re.fullmatch('[a-f0-9]{64}', proof.adapter_receipt_sha256)
++            and proof.capability == 'code_review_readonly' and proof.actor_kind == 'principal'
++            and proof.parent_actor_id is None and isinstance(proof.supersedes_review_ids, tuple)
++            and all(isinstance(x, str) for x in proof.supersedes_review_ids)):
++        return proof
++    return None
++
++
++def load_history(source, context, supplied):
++    """A complete controller index plus an anchored head, not optional model data."""
++    if not isinstance(context.get('review_lineage_id'), str) or not context['review_lineage_id']:
++        return [], {}, ['review_lineage_missing']
++    if not isinstance(source, ControllerEvidenceSource) or source.trust_basis not in (
++            'adapter_verified', 'synthetic_fixture'):
++        return [], {}, ['controller_provenance_unavailable']
++    snapshot = source.history(context.get('review_lineage_id'))
++    if not isinstance(snapshot, dict):
++        return [], {}, ['controller_history_unavailable']
++    reviews = snapshot.get('reviews')
++    if (not isinstance(reviews, list) or len(reviews) > 64
++            or snapshot.get('lineage_id') != context.get('review_lineage_id')):
++        return [], {}, ['history_incomplete']
++    ids = [h.get('review_id') for h in reviews if isinstance(h, dict)]
++    if (len(ids) != len(reviews) or any(not isinstance(x, str) for x in ids)
++            or len(ids) != len(set(ids)) or snapshot.get('complete_review_ids') != ids
++            or history_head(snapshot['lineage_id'], reviews) != source.history_anchor(snapshot['lineage_id'])
++            or (supplied and supplied != reviews)):
++        return [], {}, ['history_incomplete']
++    for h in reviews:
++        _require(isinstance(h.get('author'), str) and bool(h['author'])
++                 and h['author'] != h.get('reviewer'), 'historical author identity missing')
++        validate_schema(h.get('response'), response_schema())
++        _require(h.get('candidate_sha256') == h['response']['candidate_sha256'], 'history candidate mismatch')
++    records = snapshot.get('objection_records')
++    if not isinstance(records, dict) or len(records) > 256:
++        return reviews, {}, ['objection_records_unavailable']
++    return copy.deepcopy(reviews), copy.deepcopy(records), []
++
++
++def new_objection(author, reviewer, objection, candidate_sha256):
++    definition = _hash(objection)
++    identity = _hash({'reviewer': reviewer, 'id': objection['id'],
++                      'origin_candidate_sha256': candidate_sha256, 'definition_sha256': definition})
++    return {'id': objection['id'], 'author': author, 'reviewer': reviewer,
++            'origin_candidate_sha256': candidate_sha256, 'definition_sha256': definition,
++            'identity': identity, 'candidate_sha256': candidate_sha256, 'state': 'open', 'events': [],
++            'record_contract': 'ipanema-objection/2', 'original_claim': objection['claim'],
++            'original_evidence_refs': copy.deepcopy(objection['evidence_refs'])}
++
++
++def _require(condition, message):
++    if not condition:
++        raise IpanemaError('Code review: ' + message)
++
++
++def _text_schema():
++    return {'type': 'string', 'minLength': 1, 'maxLength': 3000}
++
++
++def _obj(properties):
++    return {'type': 'object', 'properties': properties, 'required': list(properties),
++            'additionalProperties': False}
++
++
++def _list(items, minimum=0, maximum=64):
++    return {'type': 'array', 'items': items, 'minItems': minimum, 'maxItems': maximum}
++
++
++def response_schema():
++    text = _text_schema()
++    refs = _list(text)
++    site = _obj({'file': text, 'function': text,
++                 'start': {'type': 'number', 'minimum': 1},
++                 'end': {'type': 'number', 'minimum': 1}})
++    challenge = _obj({'status': {'type': 'string', 'enum': ['pass', 'fail', 'needs_evidence']},
++                      'evidence_refs': refs, 'notes': text})
++    objection = _obj({'id': text, 'severity': {'type': 'string', 'enum': list(SEVERITIES)},
++                     'challenge': {'type': 'string', 'enum': list(CHALLENGES)},
++                     'sites': _list(site, 1, 8), 'evidence_refs': _list(text, 1),
++                     'claim': text, 'impact': text, 'recommendation': text,
++                     'resolution_condition': text,
++                     'duplication_kind': {'type': 'string', 'enum':
++                                          ['exact', 'semantic', 'legitimate', 'not_applicable']}})
++    return _obj({'candidate_sha256': text, 'reviewed_files': _list(text, 1),
++                 'decision': {'type': 'string', 'enum':
++                              ['approve', 'changes_requested', 'needs_evidence', 'blocked']},
++                 'challenges': _obj({key: challenge for key in CHALLENGES}),
++                 'objections': _list(objection, maximum=32), 'summary': text})
++
++
++def fingerprint(candidate):
++    """Controller candidate includes authorship, diff, scope, QA and source context."""
++    return _hash(candidate)
++
++
++def independent_packet(candidate, source_files, diff, tests, permissions):
++    """First-pass packet excludes author's narrative and other review results."""
++    _require(context_hash(permissions) == candidate['context']['permissions_sha256'], 'permission packet mismatch')
++    _require(hashlib.sha256(diff.encode()).hexdigest() == candidate['diff_sha256'],
++             'diff bytes do not match candidate')
++    _require(set(source_files) == set(candidate['context']['files']), 'incomplete source packet')
++    for name, content in source_files.items():
++        expected = candidate['context']['files'][name]
++        _require((content is None and expected is None) or
++                 (isinstance(content, str) and hashlib.sha256(content.encode()).hexdigest() == expected),
++                 'source packet hash mismatch')
++    safe_candidate = {k: copy.deepcopy(candidate[k]) for k in
++                      ('author', 'contributors', 'objective', 'risk', 'diff_sha256', 'context',
++                       'preflight', 'required_qa') if k in candidate}
++    return {'candidate': safe_candidate, 'sources': copy.deepcopy(source_files), 'diff': diff,
++            'tests': copy.deepcopy(tests), 'permissions': copy.deepcopy(permissions),
++            'protocol': 'ipanema-code-review-candidate-1', 'phase': 'independent_code_review'}
++
++
++
++def source_snapshot(context, root):
++    """Hash the same bounded bytes that supply source citations; no provider access."""
++    root = Path(root).resolve()
++    sources, missing, total = {}, [], 0
++    files = context.get('files')
++    _require(isinstance(files, dict) and 0 < len(files) <= 64, 'source scope missing or excessive')
++    for name, sha in files.items():
++        _require(safe_path(name) == name, 'unsafe source path')
++        path = root / name
++        _require(beneath(path, root) and not any(p.is_symlink() for p in
++                 [path, *path.parents] if p != root and beneath(p, root)), 'source escapes root')
++        if sha is None:
++            missing.append('deleted_source_context_unavailable:' + name)
++            continue
++        _require(re.fullmatch('[0-9a-f]{64}', str(sha)), 'invalid source digest')
++        if not path.is_file():
++            missing.append('unavailable_source:' + name)
++            continue
++        with path.open('rb') as stream:
++            data = stream.read(2_000_001)
++        total += len(data)
++        _require(len(data) <= 2_000_000 and total <= 4_000_000, 'source packet budget exceeded')
++        if hashlib.sha256(data).hexdigest() != sha:
++            missing.append('stale_source:' + name)
++        try:
++            sources[name] = data.decode('utf-8').splitlines()
++        except UnicodeDecodeError as exc:
++            raise IpanemaError('Code review: non UTF-8 source') from exc
++    return sources, missing
++
++
++def read_legacy_receipts(evidence):
++    """Read legacy formats unchanged. Parsing alone never binds them to a new diff."""
++    from .council import _ledger
++    _require(isinstance(evidence, list) and len(evidence) <= 1000, 'legacy ledger excessive')
++    result, invalid = {}, []
++    for row in evidence:
++        if not isinstance(row, dict) or not isinstance(row.get('context'), dict):
++            invalid.append('malformed_receipt')
++            continue
++        records, errors = _ledger([row], row['context'])
++        _require(not (set(records) & set(result)), 'duplicate legacy receipt ID')
++        result.update(records)
++        invalid.extend(errors)
++    return result, invalid
++
++
++def principal_valid(principal, agent, enabled):
++    """Declared metadata consistency only; provenance requires adapter evidence."""
++    return (isinstance(principal, dict) and agent in enabled
++            and principal.get('provider') == agent and principal.get('actor_kind') == 'principal'
++            and principal.get('parent_actor_id') is None
++            and principal.get('capability_verified') == 'code_review_readonly'
++            and isinstance(principal.get('supersedes_review_ids', []), list))
++
++
++def bind_receipt(receipt, candidate, *, root, permissions, qa_report=None, principal=None,
++                 resolution_state=None, objection_identity=None):
++    """New controller producer v2. Never edits or retrofits a legacy receipt.
++
++    qa_report is an actual controller-loaded artifact, not model output. A legacy
++    QA without exact source coverage cannot be upgraded by hashing current files.
++    principal is declared metadata, not authentication. The separate controller
++    bridge must verify native identity/capability; this binding proves integrity only.
++    """
++    records, invalid = read_legacy_receipts([receipt])
++    _require(not invalid and receipt.get('id') in records, 'incomplete legacy receipt')
++    context = candidate['context']
++    old = receipt['context']
++    _require(context.get('context_contract') == CONTEXT_CONTRACT, 'context contract absent')
++    _require(all(k in old for k in ('project', 'run_id', 'objective_sha256', 'files')), 'legacy context incomplete')
++    if old.get('context_contract') == CONTEXT_CONTRACT:
++        _require(all(old.get(k) for k in ('permissions_sha256', 'participation_sha256', 'review_lineage_id')),
++                 'versioned context incomplete')
++    for key, value in old.items():
++        expected = context.get(key)
++        if key == 'participation_sha256' and 'context_contract' not in old:
++            _require(value in (context_hash(agent_policy()), _hash(agent_policy())), 'legacy policy mismatch')
++        elif key == 'permissions_sha256' and 'context_contract' not in old:
++            _require(value in (context_hash(permissions), _hash(permissions)), 'legacy permissions mismatch')
++        else:
++            _require(key in context and expected == value, 'stale receipt context')
++    _require(context_hash(permissions) == context.get('permissions_sha256'), 'permission mismatch')
++    _, missing = source_snapshot(context, root)
++    _require(not missing, 'source binding incomplete')
++    identity = fingerprint(candidate)
++    if 'alternative_sha256' in receipt:
++        _require(receipt['alternative_sha256'] == identity, 'receipt belongs to another candidate')
++    if receipt['kind'] == 'source':
++        _require(context['files'].get(receipt.get('subject')) == receipt['sha256'],
++                 'source receipt hash mismatch')
++    if receipt['kind'] == 'qa':
++        _require(isinstance(qa_report, dict), 'QA artifact required')
++        legacy_digest = hashlib.sha256(json.dumps(qa_report, sort_keys=True).encode()).hexdigest()
++        verification = qa_report.get('verification_state')
++        coverage = qa_report.get('checked_source_files')
++        if coverage is None and isinstance(verification, dict):
++            coverage = verification.get('workspace')
++        _require(legacy_digest == receipt['sha256'] and coverage == context['files']
++                 and qa_report.get('executed') is receipt['executed']
++                 and qa_report.get('passed') is receipt['passed'], 'QA artifact incomplete or stale')
++    needs_principal = receipt.get('constraint') == 'review_transport' or receipt['kind'] == 'resolution'
++    if needs_principal:
++        agent = receipt.get('reviewer') if receipt['kind'] != 'resolution' else receipt.get('confirmed_by')
++        _require(principal_valid(principal, agent, set(agent_policy()['members'])),
++                 'declared principal metadata inconsistent or unauthorized')
++    if receipt['kind'] == 'resolution':
++        _require(isinstance(receipt.get('resolves'), list) and resolution_state in ('resolved', 'refuted'),
++                 'resolution requires explicit state/list')
++    binding = {'contract_version': 2, 'receipt_id': receipt['id'], 'legacy_sha256': _hash(receipt),
++               'candidate_sha256': identity, 'context_sha256': _hash(context),
++               'permissions_sha256': context['permissions_sha256'], 'checked_source_files': copy.deepcopy(context['files']),
++               'principal': {k: copy.deepcopy(v) for k, v in (principal or {}).items()
++                             if k != 'supersedes_review_ids'}, 'resolution_state': resolution_state,
++               'objection_identity': objection_identity, 'context_contract': CONTEXT_CONTRACT,
++               'purpose': receipt['kind'], 'subject': receipt.get('subject'),
++               'resolves': copy.deepcopy(receipt.get('resolves', [])),
++               'method': 'controller_revalidation_v2'}
++    binding['binding_sha256'] = _hash(binding)
++    return binding
++
++
++def checked_bindings(bindings, ledger, candidate):
++    _require(isinstance(bindings, (list, tuple)) and len(bindings) <= 1000, 'binding list excessive')
++    result = {}
++    for item in bindings:
++        if not isinstance(item, dict):
++            continue
++        ident = item.get('receipt_id')
++        _require(ident not in result, 'duplicate binding ID')
++        row = ledger.get(ident)
++        payload = {k: v for k, v in item.items() if k != 'binding_sha256'}
++        if (row and item.get('contract_version') == 2 and item.get('context_contract') == CONTEXT_CONTRACT
++                and item.get('legacy_sha256') == _hash(row)
++                and item.get('candidate_sha256') == fingerprint(candidate)
++                and item.get('context_sha256') == _hash(candidate['context'])
++                and item.get('permissions_sha256') == candidate['context']['permissions_sha256']
++                and item.get('checked_source_files') == candidate['context']['files']
++                and item.get('binding_sha256') == _hash(payload)):
++            result[ident] = item
++    return result
++
++
++def material_proven(controller, record, refs, candidate_sha256):
++    """Controller verification + exact scope, never novelty by string/hash change."""
++    if not isinstance(controller, ControllerEvidenceSource) or controller.trust_basis not in (
++            'adapter_verified', 'synthetic_fixture'):
++        return None
++    proof = controller.incremental_evidence(copy.deepcopy(record), tuple(refs), candidate_sha256)
++    if (isinstance(proof, MaterialEvidence) and proof.objection_identity == record['identity']
++            and proof.candidate_sha256 == candidate_sha256 and proof.evidence_refs == tuple(refs)
++            and proof.kind in ('new_fact', 'documented_refutation')
++            and isinstance(proof.verification_receipt_id, str) and proof.verification_receipt_id
++            and isinstance(proof.artifact_sha256, str) and re.fullmatch('[a-f0-9]{64}', proof.artifact_sha256)
++            and not any(e.get('incremental_receipt_ref') == proof.verification_receipt_id
++                        or e.get('incremental_artifact_sha256') == proof.artifact_sha256
++                        for e in record['events'])):
++        return proof
++    return None
++
++
++def advance_objection(record, event, *, actor, candidate_sha256, evidence_refs=(),
++                      confirmation=None, controller=None, migration_ref=None):
++    """Single reducer used both by authoring API and evaluate's verified replay."""
++    _require(isinstance(record, dict) and record.get('state') in
++             ('open', 'author_answered', 'correction_proposed', 'new_evidence',
++              'refuted', 'resolved', 'review_pending'), 'invalid objection state')
++    _require(record.get('record_contract') == 'ipanema-objection/2', 'objection record contract missing')
++    _require(record['state'] not in ('resolved', 'refuted'), 'terminal objection is immutable')
++    _require(re.fullmatch('[a-f0-9]{64}', str(candidate_sha256)), 'invalid event candidate')
++    result = copy.deepcopy(record)
++    refs = list(evidence_refs)
++    material = None
++    _require(all(isinstance(x, str) for x in refs), 'invalid evidence references')
++    if event == 'author_answer':
++        _require(actor == record['author'], 'only author answers')
++        state = 'author_answered'
++    elif event == 'propose_correction':
++        proof = controller.migration(migration_ref) if isinstance(controller, ControllerEvidenceSource) else None
++        _require(actor == record['author'] and isinstance(proof, MigrationEvidence)
++                 and proof.objection_identity == record['identity']
++                 and proof.from_candidate_sha256 == record['candidate_sha256']
++                 and proof.to_candidate_sha256 == candidate_sha256
++                 and proof.author == record['author'] and proof.reviewer == record['reviewer']
++                 and candidate_sha256 != record['candidate_sha256'], 'explicit objection migration required')
++        state = 'correction_proposed'
++    elif event == 'add_evidence':
++        _require(actor == 'controller' and refs and record['state'] == 'author_answered', 'new evidence after answer required')
++        material = material_proven(controller, record, refs, candidate_sha256)
++        _require(material is not None, 'material incremental demonstration unavailable')
++        state = 'new_evidence'
++    elif event == 'request_review':
++        _require(actor == 'controller' and record['state'] == 'new_evidence', 'review needs new evidence')
++        state = 'review_pending'
++    elif event in ('refute', 'resolve'):
++        _require(actor == record['reviewer'] and actor != record['author'] and record['state'] == 'review_pending'
++                 and confirmation and confirmation.get('receipt_id') in refs, 'origin review after evidence required')
++        state = 'refuted' if event == 'refute' else 'resolved'
++        payload = {k: v for k, v in confirmation.items() if k != 'binding_sha256'}
++        _require(confirmation.get('binding_sha256') == _hash(payload)
++                 and confirmation.get('purpose') == 'resolution'
++                 and confirmation.get('objection_identity') == record['identity']
++                 and confirmation.get('subject') == record['reviewer'] + ':' + record['id']
++                 and isinstance(confirmation.get('resolves'), list)
++                 and record['reviewer'] + ':' + record['id'] in confirmation['resolves']
++                 and confirmation.get('candidate_sha256') == candidate_sha256
++                 and confirmation.get('resolution_state') == state
++                 and adapter_proven(controller, confirmation, actor, candidate_sha256,
++                                    confirmation.get('permissions_sha256')) is not None,
++                 'adapter-attested origin confirmation required')
++    else:
++        raise IpanemaError('Code review: unsupported objection event')
++    if event != 'propose_correction':
++        _require(candidate_sha256 == record['candidate_sha256'], 'stale objection event')
++    result.update(state=state, candidate_sha256=candidate_sha256)
++    result['events'].append({'event': event, 'actor': actor, 'state': state,
++                             'candidate_sha256': candidate_sha256, 'evidence_refs': refs,
++                             'confirmation_ref': confirmation.get('receipt_id') if confirmation else None,
++                             'migration_ref': migration_ref,
++                             'incremental_receipt_ref': material.verification_receipt_id if material else None,
++                             'incremental_artifact_sha256': material.artifact_sha256 if material else None,
++                             'incremental_kind': material.kind if material else None})
++    return result
++
++
++def replay_closure(record, seed, candidate, ledger, bound, controller):
++    """Only this replay determines closure. A declared terminal state is insufficient."""
++    from .council import _proven
++    if not isinstance(record, dict) or not isinstance(record.get('events'), list) or len(record['events']) > 128:
++        return False
++    current = copy.deepcopy(seed)
++    try:
++        for event in record['events']:
++            if event['event'] == 'add_evidence':
++                _require(event['evidence_refs'] and all(ref in bound and _proven(ledger[ref])
++                         for ref in event['evidence_refs']), 'unverified new evidence')
++                material = material_proven(controller, current, event['evidence_refs'], event['candidate_sha256'])
++                _require(material is not None, 'unverified material demonstration')
++                row = ledger.get(material.verification_receipt_id)
++                _require(row and row['id'] in bound and _proven(row)
++                         and row.get('kind') == 'constraint' and row.get('constraint') == 'incremental_demonstration'
++                         and row.get('subject') == seed['identity']
++                         and row.get('method') == 'controller_verified_demonstration'
++                         and row.get('claim_sha256') == _hash(seed['original_claim'])
++                         and row.get('basis_refs') == event['evidence_refs']
++                         and row.get('material_kind') == material.kind
++                         and row.get('sha256') == material.artifact_sha256,
++                         'material verification receipt incomplete or stale')
++            confirmation = bound.get(event.get('confirmation_ref'))
++            if confirmation:
++                row = ledger.get(confirmation['receipt_id'])
++                _require(row and row.get('confirmed_by') == seed['reviewer'] and _proven(row), 'resolution not proved')
++            current = advance_objection(current, event['event'], actor=event['actor'],
++                        candidate_sha256=event['candidate_sha256'], evidence_refs=event['evidence_refs'],
++                        confirmation=confirmation, controller=controller, migration_ref=event.get('migration_ref'))
++        return (current == record and current['candidate_sha256'] == fingerprint(candidate)
++                and current['state'] in ('resolved', 'refuted'))
++    except (IpanemaError, KeyError, TypeError):
++        return False
++
++
++def evaluate(candidate, reviews, *, evidence, root, answers=(), bindings=(), review_history=(), controller=None):
++    """Versioned result; synthetic success is never an operational approval.
++
++    Trusted inputs: candidate/context/required QA and controller receipt store.
++    Untrusted inputs: response bodies. Envelopes must be controller assignments.
++    """
++    from .council import _proven
++
++    policy = agent_policy()
++    enabled = set(policy['members'])
++    known = enabled | set(policy['disabled'])
++
++    _require(isinstance(candidate, dict), 'candidate missing')
++    author = candidate.get('author')
++    authors = candidate.get('contributors', [author])
++    _require(author in known and isinstance(authors, list) and author in authors
++             and len(authors) == len(set(authors)) and set(authors) <= known,
++             'invalid controller authorship')
++    expected_reviewers = enabled - set(authors)
++    _require(candidate.get('risk') in ('low', 'medium', 'high'), 'risk missing')
++    _require(re.fullmatch('[0-9a-f]{64}', str(candidate.get('diff_sha256', ''))), 'invalid diff hash')
++    context = candidate.get('context', {})
++    _require(isinstance(context, dict) and all(context.get(k) for k in
++             ('project', 'run_id', 'objective_sha256', 'permissions_sha256')), 'unbound context')
++    files = context.get('files')
++    _require(isinstance(files, dict) and 0 < len(files) <= 64, 'source scope missing or excessive')
++    _require(isinstance(candidate.get('objective'), str) and 0 < len(candidate['objective']) <= 3000
++             and hashlib.sha256(candidate['objective'].encode()).hexdigest() == context['objective_sha256'],
++             'objective text/hash mismatch')
++    identity = fingerprint(candidate)
++    ledger, invalid = read_legacy_receipts(evidence)
++    bound = checked_bindings(bindings, ledger, candidate)
++    missing, changes, blockers = [], [], []
++    if invalid:
++        missing.append('invalid_controller_receipts')
++    if author not in enabled:
++        blockers.append('author_not_authorized')
++    if len(expected_reviewers) < 2:
++        missing.append('two_authorized_non_author_reviewers_required')
++    if context.get('context_contract') != CONTEXT_CONTRACT:
++        missing.append('context_contract_missing')
++    if context.get('participation_sha256') != context_hash(policy):
++        missing.append('participation_policy_changed')
++    sources, source_missing = source_snapshot(context, root)
++    missing.extend(source_missing)
++
++    def proof(refs, kind=None, constraint=None):
++        return [r for ident in refs if (r := ledger.get(ident)) and _proven(r)
++                and ident in bound
++                and (kind is None or r['kind'] == kind)
++                and (constraint is None or r.get('constraint') == constraint)]
++
++    preflight = candidate.get('preflight', {})
++    required = ['reuse_search', 'module_placement']
++    if candidate['risk'] != 'low':
++        required.append('implementation_plan')
++    for check in required:
++        if not proof([preflight.get(check)], 'constraint', check):
++            missing.append('preflight:' + check)
++    qa = candidate.get('required_qa')
++    _require(isinstance(qa, list) and qa and all(isinstance(x, str) for x in qa), 'essential QA undeclared')
++    for ident in qa:
++        receipt = ledger.get(ident)
++        if not receipt or receipt.get('kind') != 'qa' or not receipt.get('executed'):
++            missing.append('qa:' + ident)
++        elif ident not in bound:
++            missing.append('stale_qa:' + ident)
++        elif not receipt.get('passed'):
++            changes.append('failed_qa:' + ident)
++    _require(isinstance(reviews, list) and len(reviews) <= 3, 'review envelopes excessive')
++    _require(isinstance(review_history, (list, tuple)) and len(review_history) <= 64, 'review history excessive')
++    _require(all(isinstance(h, dict) for h in review_history), 'invalid history envelope')
++    history, records, history_missing = load_history(controller, context, review_history)
++    missing.extend(history_missing)
++    seen = set()
++    findings = []
++    registered = {}
++    prior_verdicts = {}
++
++    def register(agent, objection, origin, original_author=None):
++        key = agent + ':' + objection['id']
++        seed = new_objection(original_author or author, agent, objection, origin)
++        if key in registered:
++            _require(registered[key]['definition_sha256'] == seed['definition_sha256'], 'objection identity redefined')
++            return
++        registered[key] = seed
++        closed = replay_closure(records.get(seed['identity']), seed, candidate, ledger, bound, controller)
++        findings.append({'id': key, 'identity': seed['identity'], 'severity': objection['severity'], 'closed': closed})
++        if not closed and objection['severity'] == 'BLOCKER':
++            blockers.append(key)
++        elif not closed and objection['severity'] == 'HIGH':
++            changes.append(key)
++        elif not closed and objection['severity'] == 'MEDIUM':
++            missing.append('unresolved_objection:' + key)
++
++    # Evaluate every historical objection before any absent/stale envelope branch.
++    for h in history:
++        agent = h.get('reviewer')
++        _require(agent in expected_reviewers and isinstance(h.get('review_id'), str), 'invalid history reviewer')
++        body = h['response']
++        if body['decision'] != 'approve' or any(x['status'] != 'pass' for x in body['challenges'].values()):
++            prior_verdicts[h['review_id']] = agent
++            missing.append('prior_verdict_requires_explicit_rereview:' + h['review_id'])
++        for objection in body['objections']:
++            register(agent, objection, h['candidate_sha256'], original_author=h.get('author'))
++    for env in reviews:
++        _require(isinstance(env, dict), 'review envelope must be an object')
++        agent = env.get('effective_agent')
++        if agent in authors:
++            blockers.append('self_review:' + str(agent))
++            continue
++        if agent not in expected_reviewers or env.get('requested_agent') != agent or agent in seen:
++            blockers.append('duplicate_or_substituted_reviewer')
++            continue
++        seen.add(agent)
++        response = env.get('response')
++        validate_schema(response, response_schema())
++        if response['candidate_sha256'] != identity:
++            missing.append('stale_review:' + agent)
++            continue
++        attempts = proof([env.get('attempt_ref')], 'constraint', 'review_transport')
++        proven_attempts = [(r, adapter_proven(controller, bound[r['id']], agent, identity,
++                                      context['permissions_sha256'])) for r in attempts
++                           if r.get('reviewer') == agent and r.get('response_sha256') == _hash(response)
++                           and r.get('phase') == 'independent_code_review']
++        proven_attempts = [(r, p) for r, p in proven_attempts if p is not None]
++        if not proven_attempts:
++            missing.append('unverified_reviewer:' + agent)
++            continue
++        acknowledged = set().union(*(set(p.supersedes_review_ids) for _, p in proven_attempts))
++        if response['decision'] == 'approve':
++            for review_id, reviewer in prior_verdicts.items():
++                if reviewer == agent and review_id in acknowledged:
++                    marker = 'prior_verdict_requires_explicit_rereview:' + review_id
++                    if marker in missing:
++                        missing.remove(marker)
++        current_ids = [obj['id'] for obj in response['objections']]
++        _require(len(current_ids) == len(set(current_ids)), 'duplicate objection ID within reviewer')
++        if set(response['reviewed_files']) != set(files):
++            missing.append('incomplete_review_scope:' + agent)
++        for key, challenge in response['challenges'].items():
++            if challenge['status'] == 'needs_evidence' or not proof(challenge['evidence_refs']):
++                missing.append(agent + ':' + key)
++            elif challenge['status'] == 'fail':
++                changes.append(agent + ':' + key)
++        if response['decision'] == 'blocked':
++            blockers.append('reviewer_blocked:' + agent)
++        elif response['decision'] == 'changes_requested':
++            changes.append('reviewer_changes:' + agent)
++        elif response['decision'] == 'needs_evidence':
++            missing.append('reviewer_evidence:' + agent)
++        ids = set()
++        for objection in response['objections']:
++            key = agent + ':' + objection['id']
++            _require(key not in ids, 'duplicate objection ID within reviewer')
++            ids.add(key)
++            _require(bool(proof(objection['evidence_refs'])), 'objection without scoped evidence')
++            for site in objection['sites']:
++                lines = sources.get(site['file'], [])
++                _require(type(site['start']) is int and type(site['end']) is int and
++                         1 <= site['start'] <= site['end'] <= len(lines), 'invalid cited location')
++                _require(site['function'] == '<module>' or
++                         site['function'] in '\n'.join(lines[site['start'] - 1:site['end']]),
++                         'cited function absent from range')
++            if objection['challenge'] == 'duplication':
++                _require(objection['duplication_kind'] != 'not_applicable' and
++                         len({(s['file'], s['function'], s['start'], s['end']) for s in objection['sites']}) >= 2,
++                         'duplication needs two concrete implementations')
++            register(agent, objection, identity)
++    missing.extend('missing_reviewer:' + a for a in sorted(expected_reviewers - seen))
++    state = ('blocked' if blockers else 'changes_requested' if changes else
++             'needs_evidence' if missing else 'approved_for_authorization')
++    synthetic = isinstance(controller, ControllerEvidenceSource) and controller.trust_basis == 'synthetic_fixture'
++    if state == 'approved_for_authorization' and synthetic:
++        state = 'synthetic_pass'
++    return {'result_contract': 'ipanema-code-review-result/2',
++            'authorization_ready': state == 'approved_for_authorization',
++            'state': state, 'candidate_sha256': identity, 'findings': findings,
++            'blockers': blockers, 'changes': changes, 'missing_evidence': missing,
++            'review_history': copy.deepcopy(history),
++            'trust_basis': controller.trust_basis if isinstance(controller, ControllerEvidenceSource) else 'unavailable',
++            'synthetic_only': isinstance(controller, ControllerEvidenceSource) and controller.trust_basis == 'synthetic_fixture',
++            'identity_verified_by_hash': False,
++            'implementation_allowed': False, 'production_authorized': False,
++            'activation_allowed': False, 'scope': 'Optional controller review gate only'}
+--- /dev/null
++++ b/tests/unit/test_code_review_v3.py
+@@ -0,0 +1,1098 @@
++"""Controlled synthetic reviewer records: gate tests, NOT real AI detection.
++
++All native identities/receipts below are deliberately synthetic. No inference,
++Context7, browser or client project is accessed by this suite.
++"""
++import copy
++import hashlib
++import json
++from unittest.mock import patch
++from pathlib import Path
++import tempfile
++import subprocess
++import sys
++import unittest
++
++from ipanema.core import IpanemaError
++from ipanema.orchestration import code_review
++from ipanema.orchestration.council import review_code_candidate
++
++
++class FixtureController(code_review.ControllerEvidenceSource):
++    """Synthetic controller boundary; never native transport verification."""
++    trust_basis = 'synthetic_fixture'
++
++    def __init__(self):
++        self.rows = [];self.records = {};self.proofs = {};self.moves = {}
++        self.auto_records = True;self.auto_history = True;self.auto_material = True
++        self.material = {};self.demonstrated = {}
++
++    def history(self, lineage_id):
++        return {'lineage_id': lineage_id, 'reviews': copy.deepcopy(self.rows),
++                'complete_review_ids': [r['review_id'] for r in self.rows],
++                'objection_records': copy.deepcopy(self.records)}
++
++    def history_anchor(self, lineage_id):
++        return code_review.history_head(lineage_id, self.rows)
++
++    def attestation(self, receipt_id):
++        return self.proofs.get(receipt_id)
++
++    def migration(self, reference):
++        return self.moves.get(reference)
++
++    def attest(self, binding, agent, supersedes=()):
++        self.proofs[binding['receipt_id']] = code_review.AdapterEvidence(
++            binding['receipt_id'], agent, binding['candidate_sha256'],
++            binding['permissions_sha256'], binding['binding_sha256'], 'e'*64,
++            'code_review_readonly', supersedes_review_ids=tuple(supersedes))
++
++    def incremental_evidence(self, record, refs, candidate_sha256):
++        entry=self.material.get((record['identity'],refs,candidate_sha256))
++        if not entry:return None
++        proof,checker=entry
++        return proof if checker(record) else None
++
++    def prepare_material(self, record, refs, *, kind='new_fact', baseline=None, metric='line_count'):
++        """Fixture's controller runs a real bounded observation, not a new-ID test.
++
++        Compatibility fixtures use a newly performed measurement. Dedicated N2a
++        cases bind an explicit factual claim to a computed counterexample.
++        This is not a general verifier for arbitrary natural-language claims.
++        """
++        self.material.pop((record['identity'],tuple(refs),record['candidate_sha256']),None)
++        owner=self.owner;candidate=owner.c if hasattr(owner,'c') else owner.candidate
++        evidence=owner.evidence if hasattr(owner,'evidence') else owner.ledger
++        basis=next((r for r in evidence if r['id'] in refs and r['kind']=='source'),None)
++        if basis is None:raise IpanemaError('Fixture source unavailable')
++        path=owner.root/basis['subject']
++        def observe():
++            lines=path.read_text().splitlines()
++            return sum(line.startswith('def ') for line in lines) if metric=='function_count' else len(lines)
++        actual=observe()
++        if kind=='documented_refutation' and metric=='function_count' and record['original_claim']!=f'sample.py has {baseline} function definitions':
++            return None
++        if (kind=='new_fact' and baseline is not None) or (kind=='documented_refutation' and (baseline is None or baseline==actual)):
++            return None
++        artifact={'contract':'synthetic-measurement/1','claim':record['original_claim'],
++                  'subject':record['identity'],'candidate':record['candidate_sha256'],
++                  'basis_refs':list(refs),'kind':kind,'metric':metric,
++                  'baseline':baseline,'observed':actual}
++        artifact_bytes=json.dumps(artifact,sort_keys=True).encode();artifact_sha=hashlib.sha256(artifact_bytes).hexdigest()
++        ident='material-'+record['identity']+'-'+str(len(record['events']))
++        artifact_path=owner.root/(ident+'.json');artifact_path.write_bytes(artifact_bytes)
++        proof=code_review.MaterialEvidence(record['identity'],record['candidate_sha256'],tuple(refs),ident,artifact_sha,kind)
++        semantic_key=(record['original_claim'],tuple(refs),kind,metric,baseline,actual)
++        self.demonstrated[ident]=semantic_key
++        def verify(current):
++            already_assessed=any(self.demonstrated.get(e.get('incremental_receipt_ref'))==semantic_key for e in current['events'])
++            # Grounded observation is recomputed; text/hash novelty alone is insufficient.
++            return (not already_assessed and artifact_path.exists() and hashlib.sha256(artifact_path.read_bytes()).hexdigest()==artifact_sha
++                    and current['identity']==artifact['subject'] and current['original_claim']==artifact['claim']
++                    and observe()==actual and ((kind=='new_fact' and baseline is None)
++                    or (kind=='documented_refutation' and baseline!=actual)))
++        self.material[(record['identity'],tuple(refs),record['candidate_sha256'])]=(proof,verify)
++        row={'id':ident,'kind':'constraint','constraint':'incremental_demonstration',
++             'subject':record['identity'],'sha256':artifact_sha,'executed':True,'passed':True,
++             'method':'controller_verified_demonstration','basis_refs':list(refs),
++             'material_kind':kind,'claim_sha256':code_review._hash(record['original_claim']),
++             'context':copy.deepcopy(candidate['context']),'alternative_sha256':code_review.fingerprint(candidate)}
++        evidence[:]=[r for r in evidence if r['id']!=ident]+[row]
++        permissions=owner.permissions if hasattr(owner,'permissions') else {'network':False}
++        bound=code_review.bind_receipt(row,candidate,root=owner.root,permissions=permissions)
++        owner.bindings=[b for b in owner.bindings if b['receipt_id']!=ident]+[bound]
++        return proof
++
++    def advance(self, record, event, **kwargs):
++        kwargs.pop('controller',None)
++        if event=='add_evidence' and self.auto_material:
++            self.prepare_material(record,kwargs.get('evidence_refs',()))
++        return code_review.advance_objection(record,event,controller=self,**kwargs)
++
++    def close_fixture(self, seed, binding, source_ref):
++        record = self.advance(seed,'author_answer',actor=seed['author'],
++                                               candidate_sha256=seed['candidate_sha256'])
++        record = self.advance(record,'add_evidence',actor='controller',
++                                               candidate_sha256=seed['candidate_sha256'],evidence_refs=[source_ref])
++        record = self.advance(record,'request_review',actor='controller',
++                                               candidate_sha256=seed['candidate_sha256'])
++        record = self.advance(record,'refute',actor=seed['reviewer'],
++                       candidate_sha256=seed['candidate_sha256'],evidence_refs=[binding['receipt_id']],
++                       confirmation=binding,controller=self)
++        self.records[seed['identity']]=record
++
++
++class CrossReview(unittest.TestCase):
++    def setUp(self):
++        self.tmp = tempfile.TemporaryDirectory()
++        self.addCleanup(self.tmp.cleanup)
++        self.root = Path(self.tmp.name)
++        self.texts = {'existing.py': 'def original(data):\n    return data[::-1]\n',
++                      'candidate.py': 'def duplicate(data):\n    return list(reversed(data))\n',
++                      'ui.js': "target.addEventListener('click', handler);\ntarget.addEventListener('click', handler);\n"}
++        for name, text in self.texts.items():
++            (self.root / name).write_text(text)
++        self.candidate = {'author': 'codex', 'contributors': ['codex'], 'risk': 'medium', 'objective': 'Review a controlled fixture',
++                          'diff_sha256': hashlib.sha256(b'synthetic diff').hexdigest(),
++                          'context': {'project': 'fixture', 'run_id': 'synthetic-review',
++                                      'objective_sha256': hashlib.sha256(b'Review a controlled fixture').hexdigest(),
++                                      'permissions_sha256': code_review._hash({'network': False}),
++                                      'files': {k: hashlib.sha256(v.encode()).hexdigest()
++                                                for k, v in self.texts.items()}},
++                          'preflight': {k: k for k in ('reuse_search', 'module_placement', 'implementation_plan')},
++                          'required_qa': ['regression-test']}
++        self.synthetic_policy = copy.deepcopy(code_review.agent_policy())
++        self.synthetic_policy['members'] = ['claude', 'codex', 'antigravity']
++        self.policy_patch = patch.object(code_review, 'agent_policy', return_value=self.synthetic_policy)
++        self.policy_patch.start();self.addCleanup(self.policy_patch.stop)
++        self.candidate['context']['participation_sha256'] = code_review.context_hash(self.synthetic_policy)
++        self.candidate['context'] = code_review.adapt_context(self.candidate['context'],policy=self.synthetic_policy,permissions={'network':False},lineage_id='fixture')
++        self.controller=FixtureController();self.controller.owner=self
++        self.ledger = []
++        self.bindings = []
++        for key in self.candidate['preflight']:
++            self.receipt(key, 'constraint', constraint=key)
++        self.receipt('source', 'source', subject='existing.py', sha256=self.candidate['context']['files']['existing.py'])
++        self.receipt('regression-test', 'qa')
++        self.reviews = [self.review(a) for a in ['claude', 'antigravity']]
++        self.answers = []
++
++    def receipt(self, ident, kind, **extra):
++        row = {'id': ident, 'kind': kind, 'sha256': 'f' * 64, 'executed': True, 'passed': True,
++               'context': copy.deepcopy(self.candidate['context']),
++               'alternative_sha256': code_review.fingerprint(self.candidate),
++               'method': 'synthetic_unit_fixture', **extra}
++        self.ledger.append(row)
++        self.rebind(row)
++        return row
++
++    def rebind(self, row):
++        qa = None
++        principal = None
++        if row['kind'] == 'qa':
++            qa = {'executed': row['executed'], 'passed': row['passed'],
++                  'checked_source_files': copy.deepcopy(row['context']['files'])}
++            row['sha256'] = hashlib.sha256(json.dumps(qa, sort_keys=True).encode()).hexdigest()
++        if row.get('constraint') == 'review_transport' or row['kind'] == 'resolution':
++            principal = {'provider': row.get('reviewer', row.get('confirmed_by')),
++                         'actor_kind': 'principal', 'parent_actor_id': None,
++                         'capability_verified': 'code_review_readonly', 'supersedes_review_ids': []}
++        try:
++            bound = code_review.bind_receipt(row, self.candidate, root=self.root,
++                        permissions={'network': False}, qa_report=qa, principal=principal,
++                        resolution_state='refuted' if row['kind']=='resolution' else None,
++                        objection_identity=code_review.new_objection(self.candidate['author'],'claude',self.finding_definition(),code_review.fingerprint(self.candidate))['identity'] if row['kind']=='resolution' else None)
++        except IpanemaError:
++            return  # deliberately invalid fixture stays unbound; no retroactive approval
++        self.bindings = [b for b in self.bindings if b['receipt_id']!=row['id']] + [bound]
++        if principal:
++            self.controller.attest(bound,principal['provider'])
++        if row['kind']=='resolution' and row.get('confirmed_by')=='claude' and self.answers and row.get('subject')=='claude:O1':
++            seed=code_review.new_objection(self.candidate['author'],'claude',self.finding_definition(),code_review.fingerprint(self.candidate))
++            self.controller.close_fixture(seed,bound,'source')
++
++    def finding_definition(self):
++        for env in self.reviews:
++            if env['effective_agent']=='claude' and env['response']['objections']:
++                return env['response']['objections'][0]
++        return {'id':'O1'}
++
++    def review(self, agent):
++        response = {'candidate_sha256': code_review.fingerprint(self.candidate),
++                    'reviewed_files': list(self.texts), 'decision': 'approve',
++                    'challenges': {k: {'status': 'pass', 'evidence_refs': ['source'],
++                                      'notes': 'Synthetic assessed fixture, not provider output'}
++                                   for k in code_review.CHALLENGES},
++                    'objections': [], 'summary': 'Synthetic reviewer'}
++        env = {'requested_agent': agent, 'effective_agent': agent, 'response': response,
++               'attempt_ref': 'attempt-' + agent}
++        self.receipt(env['attempt_ref'], 'constraint', constraint='review_transport', reviewer=agent,
++                     phase='independent_code_review', response_sha256=code_review._hash(response))
++        return env
++
++    def stamp(self):
++        for env in self.reviews:
++            for row in self.ledger:
++                if row['id'] == env['attempt_ref']:
++                    row['response_sha256'] = code_review._hash(env['response'])
++        for row in self.ledger:
++            self.rebind(row)
++
++    def evaluate(self):
++        self.stamp()
++        return review_code_candidate(self.candidate, self.reviews, evidence=self.ledger,
++                                     root=self.root, answers=self.answers, bindings=self.bindings,controller=self.controller)
++
++    def finding(self, category='duplication', kind='semantic', severity='HIGH'):
++        obj = {'id': 'O1', 'severity': severity, 'challenge': category,
++               'sites': [{'file': 'existing.py', 'function': 'original', 'start': 1, 'end': 2},
++                         {'file': 'candidate.py', 'function': 'duplicate', 'start': 1, 'end': 2}],
++               'evidence_refs': ['source'], 'claim': 'Synthetic contextual finding',
++               'impact': 'Repeated responsibility in controlled source example',
++               'recommendation': 'Reuse if context and contracts match',
++               'resolution_condition': 'Origin reviewer confirms controller evidence',
++               'duplication_kind': kind if category == 'duplication' else 'not_applicable'}
++        self.reviews[0]['response']['objections'].append(obj)
++        return obj
++
++    def test_01_exact_duplicate_finding_blocks_even_two_approvals(self):
++        # Equal bodies; duplicate classification is supplied as a synthetic review, not inferred.
++        self.texts['candidate.py'] = 'def duplicate(data):\n    return data[::-1]\n'
++        (self.root / 'candidate.py').write_text(self.texts['candidate.py'])
++        self.candidate['context']['files']['candidate.py'] = hashlib.sha256(self.texts['candidate.py'].encode()).hexdigest()
++        identity = code_review.fingerprint(self.candidate)
++        for row in self.ledger:
++            row['context'] = copy.deepcopy(self.candidate['context']);row['alternative_sha256'] = identity
++        for env in self.reviews:
++            env['response']['candidate_sha256'] = identity
++        self.finding(kind='exact')
++        self.assertEqual(self.evaluate()['state'], 'changes_requested')
++
++    def test_02_semantic_equivalence_finding_is_not_ignored(self):
++        # Bounded fixture equivalence is verified, but the reviewer classification remains synthetic.
++        for values in [[], [1], [3, -1, 3]]:
++            self.assertEqual(values[::-1], list(reversed(values)))
++        self.finding(kind='semantic')
++        self.assertEqual(self.evaluate()['state'], 'changes_requested')
++
++    def test_03_wrong_module_architecture_finding(self):
++        self.finding(category='architecture')
++        self.assertEqual(self.evaluate()['state'], 'changes_requested')
++
++    def test_04_unnecessary_dependency_finding(self):
++        self.finding(category='maintainability')
++        self.assertEqual(self.evaluate()['state'], 'changes_requested')
++
++    def test_05_duplicate_listener_finding_has_two_real_locations(self):
++        obj = self.finding(category='performance')
++        obj['sites'] = [{'file': 'ui.js', 'function': '<module>', 'start': x, 'end': x} for x in [1, 2]]
++        self.assertEqual(self.evaluate()['state'], 'changes_requested')
++
++    def test_06_executed_regression_test_fails_gate(self):
++        # Real failing assertion in a fixed controller-owned fixture, never model-provided code.
++        result = subprocess.run([sys.executable, '-c',
++                                 'price = 100; percent = 10; actual = price * (1 + percent / 100); assert actual == 90'],
++                                capture_output=True, text=True, timeout=3)
++        self.assertNotEqual(result.returncode, 0)
++        next(r for r in self.ledger if r['id'] == 'regression-test')['passed'] = result.returncode == 0
++        self.assertEqual(self.evaluate()['state'], 'changes_requested')
++
++    def test_07_legitimate_similarity_info_does_not_block(self):
++        self.finding(kind='legitimate', severity='INFO')
++        self.assertEqual(self.evaluate()['state'], 'synthetic_pass')
++
++    def test_08_high_refuted_requires_origin_confirmation_and_controller_receipt(self):
++        self.finding()
++        self.answers = [{'reviewer': 'claude', 'objection_id': 'O1', 'action': 'refute'}]
++        self.assertEqual(self.evaluate()['state'], 'changes_requested')
++        row = self.receipt('resolution', 'resolution', subject='claude:O1', resolves=['claude:O1'],
++                           confirmed_by='codex')
++        self.assertEqual(self.evaluate()['state'], 'changes_requested')
++        row['confirmed_by'] = 'claude'
++        self.assertEqual(self.evaluate()['state'], 'synthetic_pass')
++
++    def test_09_missing_fundamental_evidence(self):
++        self.ledger = [r for r in self.ledger if r['id'] != 'regression-test']
++        self.assertEqual(self.evaluate()['state'], 'needs_evidence')
++
++    def test_10_clean_candidate_has_both_reviewers_but_no_operation_permission(self):
++        result = self.evaluate()
++        self.assertEqual(result['state'], 'synthetic_pass')
++        for key in ['implementation_allowed', 'production_authorized', 'activation_allowed']:
++            self.assertFalse(result[key])
++
++    def test_author_review_blocked_for_all_three_possible_authors(self):
++        for author in self.synthetic_policy['members']:
++            with self.subTest(author=author):
++                self.reviews[0]['effective_agent'] = author
++                self.candidate['author'] = author
++                self.candidate['contributors'] = [author]
++                self.assertEqual(self.evaluate()['state'], 'blocked')
++
++    def test_reviewer_substitution_or_duplicate_is_blocked(self):
++        self.reviews[1]['effective_agent'] = 'claude'
++        self.assertEqual(self.evaluate()['state'], 'blocked')
++
++    def test_missing_second_reviewer_is_not_fake_consensus(self):
++        self.reviews = self.reviews[:1]
++        self.assertEqual(self.evaluate()['state'], 'needs_evidence')
++
++    def test_changed_diff_invalidates_both_reviews_preflight_and_qa(self):
++        self.candidate['diff_sha256'] = '1' * 64
++        self.assertEqual(self.evaluate()['state'], 'needs_evidence')
++
++    def test_changed_source_requires_fresh_review(self):
++        (self.root / 'existing.py').write_text('new contents\n')
++        self.assertNotEqual(self.evaluate()['state'], 'synthetic_pass')
++
++    def test_no_response_can_supply_own_receipts(self):
++        self.reviews[0]['response']['evidence'] = [{'passed': True}]
++        with self.assertRaises(IpanemaError):
++            self.evaluate()
++
++    def test_missing_five_challenge_field_is_rejected(self):
++        del self.reviews[0]['response']['challenges']['architecture']
++        with self.assertRaises(IpanemaError):
++            self.evaluate()
++
++    def test_source_citation_outside_scope_rejected(self):
++        obj = self.finding();obj['sites'][0]['file'] = '../secret'
++        with self.assertRaises(IpanemaError):
++            self.evaluate()
++
++    def test_unilateral_author_closure_and_wildcard_resolution_rejected(self):
++        self.finding();self.answers = [{'reviewer': 'claude', 'objection_id': 'O1', 'action': 'accept'}]
++        self.receipt('bad-resolution', 'resolution', subject='*', resolves=['claude:O1'], confirmed_by='claude')
++        self.assertEqual(self.evaluate()['state'], 'changes_requested')
++
++    def test_bad_line_number_and_missing_function_rejected(self):
++        obj = self.finding();obj['sites'][0]['end'] = 999
++        with self.assertRaises(IpanemaError):
++            self.evaluate()
++        obj['sites'][0]['end'] = 2;obj['sites'][0]['function'] = 'missing_fn'
++        with self.assertRaises(IpanemaError):
++            self.evaluate()
++
++    def test_low_style_preference_does_not_block(self):
++        self.finding(category='maintainability', severity='LOW')
++        self.assertEqual(self.evaluate()['state'], 'synthetic_pass')
++
++    def test_blocker_not_overridden_by_missing_qa_or_votes(self):
++        self.finding(severity='BLOCKER')
++        self.ledger = [r for r in self.ledger if r['id'] != 'regression-test']
++        self.assertEqual(self.evaluate()['state'], 'blocked')
++
++    def test_scope_permission_and_objective_changes_invalidate_review(self):
++        self.candidate['context']['permissions_sha256'] = 'e' * 64
++        self.assertEqual(self.evaluate()['state'], 'needs_evidence')
++
++    def test_unverified_transport_cannot_count_as_independent_review(self):
++        self.ledger = [r for r in self.ledger if r['id'] != 'attempt-antigravity']
++        self.assertEqual(self.evaluate()['state'], 'needs_evidence')
++
++    def test_packet_excludes_author_conclusions_and_peer_reviews(self):
++        self.candidate['author_rationale'] = 'Do not seed reviewer conclusions'
++        packet = code_review.independent_packet(self.candidate, self.texts, 'synthetic diff',
++                                                ['unit'], {'network': False})
++        self.assertNotIn('author_rationale', packet)
++        self.assertNotIn('peer_reviews', packet)
++        self.assertNotIn('author_rationale', packet['candidate'])
++        packet['candidate']['author'] = 'claude'
++        self.assertEqual(self.candidate['author'], 'codex')
++        with self.assertRaises(IpanemaError):
++            code_review.independent_packet(self.candidate, self.texts, 'changed diff', [], {})
++
++    def test_no_qa_list_cannot_be_silently_empty(self):
++        self.candidate['required_qa'] = []
++        with self.assertRaises(IpanemaError):
++            self.evaluate()
++
++    def test_readonly_related_source_symlink_cannot_escape(self):
++        (self.root / 'candidate.py').unlink()
++        (self.root / 'candidate.py').symlink_to(self.root / 'existing.py')
++        with self.assertRaises(IpanemaError):
++            self.evaluate()
++
++    def test_medium_objection_requires_author_answer_not_silent_approval(self):
++        self.finding(severity='MEDIUM')
++        self.assertEqual(self.evaluate()['state'], 'needs_evidence')
++        self.answers = [{'reviewer': 'claude', 'objection_id': 'O1', 'action': 'request_evidence'}]
++        result = self.evaluate()
++        self.assertEqual(result['state'], 'needs_evidence')
++        self.assertFalse(result['findings'][0]['closed'])
++
++    def test_same_objection_id_of_another_reviewer_cannot_close_origin(self):
++        obj = self.finding()
++        self.reviews[1]['response']['objections'].append(copy.deepcopy(obj))
++        self.answers = [{'reviewer': 'claude', 'objection_id': 'O1', 'action': 'refute'}]
++        self.receipt('resolution', 'resolution', subject='claude:O1', resolves=['claude:O1'], confirmed_by='claude')
++        result = self.evaluate()
++        self.assertEqual(result['state'], 'changes_requested')
++        self.assertIn('antigravity:O1', result['changes'])
++
++    def test_coauthors_leave_no_two_independent_reviewers(self):
++        self.candidate['contributors'].append('claude')
++        self.assertEqual(self.evaluate()['state'], 'blocked')
++
++    def test_permission_packet_mismatch_cannot_be_sent_to_review(self):
++        with self.assertRaises(IpanemaError):
++            code_review.independent_packet(self.candidate, self.texts, 'synthetic diff', [], {'network': True})
++
++
++
++
++
++# O1/O2/O3 focused tests. Future policies/identities remain synthetic.
++# Real producer shapes are reproduced without invoking providers.
++from ipanema.orchestration.adapters import agent_policy
++cr = code_review
++
++
++class FindingsResolution(unittest.TestCase):
++    def setUp(self):
++        self.tmp = tempfile.TemporaryDirectory();self.addCleanup(self.tmp.cleanup)
++        self.root = Path(self.tmp.name);(self.root/'sample.py').write_text('def original(x):\n    return x\n')
++        self.current_policy = agent_policy()
++        self.future_policy = copy.deepcopy(self.current_policy)
++        self.future_policy['members'] = ['claude', 'codex', 'antigravity']
++        self.future_policy['mode'] = 'multi-agent'
++        self.policy_mock = patch.object(cr, 'agent_policy', return_value=self.future_policy).start()
++        self.addCleanup(patch.stopall)
++        self.permissions = {'read_only': True, 'production': False}
++        self.c = {'author': 'codex', 'contributors': ['codex'], 'risk': 'medium', 'objective': 'Review fixture',
++                  'diff_sha256': 'a'*64, 'required_qa': ['qa:baseline'],
++                  'context': {'project': 'fixture', 'run_id': 'fixture-run',
++                              'objective_sha256': hashlib.sha256(b'Review fixture').hexdigest(),
++                              'permissions_sha256': cr._hash(self.permissions),
++                              'participation_sha256': cr._hash(self.future_policy),
++                              'files': {'sample.py': hashlib.sha256((self.root/'sample.py').read_bytes()).hexdigest()}},
++                  'preflight': {k:k for k in ['reuse_search', 'module_placement', 'implementation_plan']}}
++        self.c['context']=cr.adapt_context(self.c['context'],policy=self.future_policy,permissions=self.permissions,lineage_id='fixture')
++        self.controller=FixtureController();self.controller.owner=self
++        self.evidence=[];self.bindings=[];self.reviews=[];self.answers=[];self.history=[]
++        for check in self.c['preflight']:
++            self.add(check, 'constraint', constraint=check)
++        self.add('source:sample.py','source',subject='sample.py',sha256=self.c['context']['files']['sample.py'],alternative=False)
++        self.qa = {'executed':True,'passed':True,'kind':'synthetic-current-QA',
++                   'checked_source_files':copy.deepcopy(self.c['context']['files'])}
++        self.add('qa:baseline','qa',subject='baseline',alternative=False,
++                 sha256=hashlib.sha256(json.dumps(self.qa,sort_keys=True).encode()).hexdigest(),qa_report=self.qa)
++        for agent in ['claude','antigravity']:
++            self.reviews.append(self.review(agent))
++
++    def principal(self, agent, supersedes=()):
++        return {'provider':agent,'actor_kind':'principal','parent_actor_id':None,
++                'capability_verified':'code_review_readonly','supersedes_review_ids':list(supersedes)}
++
++    def add(self, ident, kind, *, alternative=True, qa_report=None, principal=None, resolution_state=None, **extra):
++        # Legacy source/qa intentionally omit alternative_sha256 as real producers do.
++        row={'id':ident,'kind':kind,'executed':True,'passed':True,'sha256':'f'*64,
++             'context':copy.deepcopy(self.c['context']),**extra}
++        if alternative:row['alternative_sha256']=cr.fingerprint(self.c)
++        self.evidence.append(row)
++        self.bindings.append(cr.bind_receipt(row,self.c,root=self.root,permissions=self.permissions,
++                                            qa_report=qa_report,principal=principal,resolution_state=resolution_state,
++                                            objection_identity=self.record()['identity'] if kind=='resolution' else None))
++        if principal:self.controller.attest(self.bindings[-1],principal['provider'])
++        return row
++
++    def review(self, agent):
++        body={'candidate_sha256':cr.fingerprint(self.c),'reviewed_files':['sample.py'],
++              'decision':'approve','summary':'Synthetic reviewer only',
++              'challenges':{k:{'status':'pass','evidence_refs':['source:sample.py'],'notes':'fixture'}
++                            for k in cr.CHALLENGES},'objections':[]}
++        env={'requested_agent':agent,'effective_agent':agent,'response':body,'attempt_ref':'attempt-'+agent}
++        self.add(env['attempt_ref'],'constraint',constraint='review_transport',reviewer=agent,
++                 phase='independent_code_review',response_sha256=cr._hash(body),principal=self.principal(agent))
++        return env
++
++    def refresh(self, env, supersedes=()):
++        row=next(r for r in self.evidence if r['id']==env['attempt_ref']);row['response_sha256']=cr._hash(env['response'])
++        b=cr.bind_receipt(row,self.c,root=self.root,permissions=self.permissions,
++                          principal=self.principal(env['effective_agent'],supersedes))
++        self.bindings=[x for x in self.bindings if x['receipt_id']!=row['id']]+[b]
++        self.controller.attest(b,env['effective_agent'],supersedes)
++
++    def evaluate(self):
++        if self.controller.auto_history:self.controller.rows=copy.deepcopy(self.history)
++        return review_code_candidate(self.c,self.reviews,evidence=self.evidence,root=self.root,
++                                     answers=self.answers,bindings=self.bindings,review_history=self.history,controller=self.controller)
++
++    def objection(self):
++        return {'id':'O1','severity':'HIGH','challenge':'architecture',
++                'sites':[{'file':'sample.py','function':'original','start':1,'end':2}],
++                'evidence_refs':['source:sample.py'],'claim':'Fixture contract issue','impact':'fixture',
++                'recommendation':'verify','resolution_condition':'origin confirms',
++                'duplication_kind':'not_applicable'}
++
++    def resolution(self, agent='claude', state='refuted', key='claude:O1'):
++        self.add('resolution-'+agent,'resolution',subject=key,resolves=[key],confirmed_by=agent,
++                 principal=self.principal(agent),resolution_state=state)
++        if self.answers and self.controller.auto_records and key=='claude:O1':
++            self.controller.close_fixture(self.record(),self.bindings[-1],'source:sample.py')
++        return self.bindings[-1]
++
++    def record(self):
++        return cr.new_objection('codex','claude',self.objection(),cr.fingerprint(self.c))
++
++    def advance(self, record, event, **kwargs):
++        if event=='propose_correction':
++            ref='fixture-migration';self.controller.moves[ref]=cr.MigrationEvidence(record['identity'],record['candidate_sha256'],kwargs['candidate_sha256'],record['reviewer'],record['author'])
++            kwargs['migration_ref']=ref
++        if event in ('refute','resolve') and kwargs.get('actor')==record['reviewer'] and record['state']=='author_answered' and kwargs.get('confirmation'):
++            record=self.controller.advance(record,'add_evidence',actor='controller',candidate_sha256=record['candidate_sha256'],evidence_refs=['source:sample.py'])
++            record=self.controller.advance(record,'request_review',actor='controller',candidate_sha256=record['candidate_sha256'])
++        return self.controller.advance(record,event,controller=self.controller,**kwargs)
++
++    def test_O1_actual_dual_policy_keeps_two_reviewer_requirement(self):
++        self.policy_mock.return_value=self.current_policy
++        self.reviews=[]
++        result=self.evaluate()
++        self.assertEqual(result['state'],'needs_evidence')
++        self.assertIn('two_authorized_non_author_reviewers_required',result['missing_evidence'])
++
++    def test_O1_disabled_or_unknown_reviewer_not_authorized(self):
++        self.policy_mock.return_value=self.current_policy
++        self.assertEqual(self.evaluate()['state'],'blocked')
++
++    def test_O1_future_policy_is_explicit_synthetic_fixture_not_active_registry(self):
++        self.assertEqual(self.evaluate()['state'],'synthetic_pass')
++        self.assertNotIn('antigravity',self.current_policy['members'])
++        self.assertFalse(self.evaluate()['activation_allowed'])
++        self.assertFalse(hasattr(cr,'PARTICIPANTS'))
++
++    def test_O1_subagent_cannot_pose_as_principal(self):
++        row=next(r for r in self.evidence if r['id']=='attempt-claude');identity=self.principal('claude')
++        identity['actor_kind']='subagent';identity['parent_actor_id']='parent-codex'
++        with self.assertRaises(IpanemaError):
++            cr.bind_receipt(row,self.c,root=self.root,permissions=self.permissions,principal=identity)
++
++    def test_O1_claimed_role_cannot_change_provider_identity(self):
++        row=next(r for r in self.evidence if r['id']=='attempt-claude')
++        with self.assertRaises(IpanemaError):
++            cr.bind_receipt(row,self.c,root=self.root,permissions=self.permissions,principal=self.principal('codex'))
++
++    def test_O1_capability_absence_is_not_operational_authority(self):
++        row=next(r for r in self.evidence if r['id']=='attempt-claude');identity=self.principal('claude')
++        identity.pop('capability_verified')
++        with self.assertRaises(IpanemaError):
++            cr.bind_receipt(row,self.c,root=self.root,permissions=self.permissions,principal=identity)
++
++    def test_O2_source_legacy_shape_preserved_and_bound_without_retrofit(self):
++        row=next(r for r in self.evidence if r['id']=='source:sample.py');before=copy.deepcopy(row)
++        b=cr.bind_receipt(row,self.c,root=self.root,permissions=self.permissions)
++        self.assertEqual(row,before);self.assertNotIn('alternative_sha256',row)
++        self.assertEqual(b['contract_version'],2)
++
++    def test_O2_legacy_receipts_parse_without_becoming_proof(self):
++        records,invalid=cr.read_legacy_receipts(self.evidence)
++        self.assertFalse(invalid);self.assertIn('qa:baseline',records)
++        self.bindings=[]
++        self.assertEqual(self.evaluate()['state'],'needs_evidence')
++
++    def test_O2_baseline_qa_without_source_artifact_cannot_be_upgraded(self):
++        row=copy.deepcopy(next(r for r in self.evidence if r['id']=='qa:baseline'))
++        report={'executed':True,'passed':True,'kind':'old-baseline'}
++        row['sha256']=hashlib.sha256(json.dumps(report,sort_keys=True).encode()).hexdigest()
++        with self.assertRaises(IpanemaError):
++            cr.bind_receipt(row,self.c,root=self.root,permissions=self.permissions,qa_report=report)
++
++    def test_O2_verified_current_qa_artifact_is_bound(self):
++        row=next(r for r in self.evidence if r['id']=='qa:baseline')
++        b=cr.bind_receipt(row,self.c,root=self.root,permissions=self.permissions,qa_report=self.qa)
++        self.assertEqual(b['legacy_sha256'],cr._hash(row));self.assertNotIn('alternative_sha256',row)
++
++    def test_O2_wrong_permissions_rejected(self):
++        with self.assertRaises(IpanemaError):
++            cr.bind_receipt(self.evidence[0],self.c,root=self.root,permissions={'read_only':False})
++
++    def test_O2_stale_context_and_another_candidate_are_rejected(self):
++        row=copy.deepcopy(self.evidence[0]);row['context']['run_id']='other'
++        with self.assertRaises(IpanemaError):cr.bind_receipt(row,self.c,root=self.root,permissions=self.permissions)
++        row=copy.deepcopy(self.evidence[0]);row['alternative_sha256']='b'*64
++        with self.assertRaises(IpanemaError):cr.bind_receipt(row,self.c,root=self.root,permissions=self.permissions)
++
++    def test_O2_stale_source_binding_rejected(self):
++        (self.root/'sample.py').write_text('changed\n')
++        with self.assertRaises(IpanemaError):cr.bind_receipt(self.evidence[0],self.c,root=self.root,permissions=self.permissions)
++        self.assertEqual(self.evaluate()['state'],'needs_evidence')
++
++    def test_O2_mutated_binding_does_not_prove_qa(self):
++        b=next(x for x in self.bindings if x['receipt_id']=='qa:baseline');b['candidate_sha256']='0'*64
++        self.assertEqual(self.evaluate()['state'],'needs_evidence')
++
++    def test_O2_string_resolution_list_is_rejected(self):
++        row={'id':'bad-res','kind':'resolution','sha256':'f'*64,'executed':True,'passed':True,
++             'context':self.c['context'],'alternative_sha256':cr.fingerprint(self.c),
++             'subject':'claude:O1','resolves':'claude:O10','confirmed_by':'claude'}
++        with self.assertRaises(IpanemaError):
++            cr.bind_receipt(row,self.c,root=self.root,permissions=self.permissions,
++                            principal=self.principal('claude'),resolution_state='refuted')
++
++    def test_O3_author_answer_does_not_close(self):
++        record=self.record();updated=self.advance(record,'author_answer',actor='codex',
++                                                        candidate_sha256=record['candidate_sha256'])
++        self.assertEqual(record['state'],'open');self.assertEqual(updated['state'],'author_answered')
++        with self.assertRaises(IpanemaError):
++            self.advance(updated,'resolve',actor='codex',candidate_sha256=record['candidate_sha256'])
++
++    def test_O3_explicit_new_evidence_review_pending_and_refutation_same_hash(self):
++        record=self.record();sha=record['candidate_sha256']
++        record=self.advance(record,'author_answer',actor='codex',candidate_sha256=sha)
++        record=self.advance(record,'add_evidence',actor='controller',candidate_sha256=sha,evidence_refs=['source:sample.py'])
++        self.assertEqual(record['state'],'new_evidence')
++        record=self.advance(record,'request_review',actor='controller',candidate_sha256=sha)
++        b=self.resolution();record=self.advance(record,'refute',actor='claude',candidate_sha256=sha,
++                                                        evidence_refs=[b['receipt_id']],confirmation=b)
++        self.assertEqual(record['state'],'refuted');self.assertEqual(len(record['events']),4)
++
++    def test_O3_correction_changes_identity_and_requires_review(self):
++        record=self.record();record=self.advance(record,'author_answer',actor='codex',candidate_sha256=record['candidate_sha256'])
++        changed=self.advance(record,'propose_correction',actor='codex',candidate_sha256='b'*64)
++        self.assertEqual(changed['state'],'correction_proposed')
++        changed=self.advance(changed,'author_answer',actor='codex',candidate_sha256='b'*64)
++        changed=self.advance(changed,'add_evidence',actor='controller',candidate_sha256='b'*64,evidence_refs=['source:sample.py'])
++        pending=self.advance(changed,'request_review',actor='controller',candidate_sha256='b'*64)
++        self.assertEqual(pending['state'],'review_pending')
++        with self.assertRaises(IpanemaError):
++            self.advance(pending,'refute',actor='claude',candidate_sha256='b'*64,
++                                  evidence_refs=['resolution-claude'],confirmation=self.resolution())
++
++    def test_O3_resolution_for_another_objection_cannot_close(self):
++        record=self.record();record=self.advance(record,'author_answer',actor='codex',candidate_sha256=record['candidate_sha256'])
++        b=self.resolution(key='claude:O2')
++        with self.assertRaises(IpanemaError):
++            self.advance(record,'refute',actor='claude',candidate_sha256=record['candidate_sha256'],
++                                  evidence_refs=[b['receipt_id']],confirmation=b)
++
++    def test_O3_closed_finding_does_not_erase_changes_requested(self):
++        self.reviews[0]['response']['decision']='changes_requested'
++        self.reviews[0]['response']['objections']=[self.objection()];self.refresh(self.reviews[0])
++        self.answers=[{'reviewer':'claude','objection_id':'O1','action':'refute'}];self.resolution()
++        self.assertEqual(self.evaluate()['state'],'changes_requested')
++
++    def historical_high(self):
++        body=copy.deepcopy(self.reviews[0]['response']);body['decision']='changes_requested';body['objections']=[self.objection()]
++        self.history=[{'review_id':'prior-real-review','author':'codex','reviewer':'claude','candidate_sha256':cr.fingerprint(self.c),'response':body}]
++
++    def test_O3_new_approval_must_acknowledge_prior_verdict(self):
++        self.historical_high();self.answers=[{'reviewer':'claude','objection_id':'O1','action':'refute'}];self.resolution()
++        self.assertEqual(self.evaluate()['state'],'needs_evidence')
++
++    def test_O3_high_cannot_disappear_from_new_review(self):
++        self.historical_high();self.refresh(self.reviews[0],['prior-real-review'])
++        self.assertEqual(self.evaluate()['state'],'changes_requested')
++
++    def test_O3_same_hash_refutation_plus_explicit_new_review_preserves_history(self):
++        self.historical_high();before=copy.deepcopy(self.history)
++        self.answers=[{'reviewer':'claude','objection_id':'O1','action':'refute'}];self.resolution()
++        self.refresh(self.reviews[0],['prior-real-review']);result=self.evaluate()
++        self.assertEqual(result['state'],'synthetic_pass')
++        self.assertEqual(result['review_history'],before);self.assertEqual(self.history,before)
++        self.assertFalse(result['implementation_allowed']);self.assertFalse(result['production_authorized'])
++
++
++    def test_O2_legacy_context_without_new_fields_is_explicitly_revalidated(self):
++        row=copy.deepcopy(next(r for r in self.evidence if r['id']=='source:sample.py'))
++        row['context'].pop('participation_sha256');row['context'].pop('permissions_sha256');row['context'].pop('context_contract')
++        original=copy.deepcopy(row)
++        binding=cr.bind_receipt(row,self.c,root=self.root,permissions=self.permissions)
++        self.assertEqual(binding['context_sha256'],cr._hash(self.c['context']))
++        self.assertEqual(row,original)
++        self.assertNotIn('permissions_sha256',row['context'])
++
++    def test_O2_failed_current_qa_is_not_masked_by_binding(self):
++        row=next(r for r in self.evidence if r['id']=='qa:baseline')
++        self.qa['passed']=False;row['passed']=False
++        row['sha256']=hashlib.sha256(json.dumps(self.qa,sort_keys=True).encode()).hexdigest()
++        self.bindings=[b for b in self.bindings if b['receipt_id']!=row['id']]
++        self.bindings.append(cr.bind_receipt(row,self.c,root=self.root,permissions=self.permissions,qa_report=self.qa))
++        self.assertEqual(self.evaluate()['state'],'changes_requested')
++
++    def test_O1_policy_fingerprint_change_requires_new_context(self):
++        self.policy_mock.return_value=copy.deepcopy(self.future_policy)
++        self.policy_mock.return_value['version']='different-policy'
++        result=self.evaluate()
++        self.assertEqual(result['state'],'needs_evidence')
++        self.assertIn('participation_policy_changed',result['missing_evidence'])
++
++    def test_O3_terminal_state_cannot_be_reopened_by_author(self):
++        record=self.record();sha=record['candidate_sha256']
++        record=self.advance(record,'author_answer',actor='codex',candidate_sha256=sha)
++        binding=self.resolution()
++        record=self.advance(record,'refute',actor='claude',candidate_sha256=sha,
++                                    evidence_refs=[binding['receipt_id']],confirmation=binding)
++        with self.assertRaises(IpanemaError):
++            self.advance(record,'author_answer',actor='codex',candidate_sha256=sha)
++
++    def test_O3_duplicate_current_ids_do_not_disappear_in_history_merge(self):
++        env=self.reviews[0];obj=self.objection()
++        env['response']['objections']=[obj,copy.deepcopy(obj)]
++        self.refresh(env)
++        with self.assertRaises(IpanemaError):self.evaluate()
++
++    def test_O3_different_candidate_does_not_erase_adverse_history(self):
++        self.historical_high()
++        self.history[0]['candidate_sha256']='b'*64
++        self.history[0]['response']['candidate_sha256']='b'*64
++        result=self.evaluate()
++        self.assertEqual(result['state'],'changes_requested')
++        self.assertIn('prior_verdict_requires_explicit_rereview:prior-real-review',result['missing_evidence'])
++
++
++
++
++
++
++class IncrementalContracts(unittest.TestCase):
++    # Reuse the focused fixture without inheriting/rerunning its test methods.
++    setUp=FindingsResolution.setUp
++    principal=FindingsResolution.principal
++    add=FindingsResolution.add
++    review=FindingsResolution.review
++    refresh=FindingsResolution.refresh
++    evaluate=FindingsResolution.evaluate
++    objection=FindingsResolution.objection
++    resolution=FindingsResolution.resolution
++    record=FindingsResolution.record
++    historical_high=FindingsResolution.historical_high
++
++    def add_high(self):
++        self.reviews[0]['response']['objections']=[self.objection()]
++        self.refresh(self.reviews[0])
++        self.controller.auto_records=False
++
++    def test_N1_real_context_producer_uses_same_canonical_policy(self):
++        from types import SimpleNamespace
++        from ipanema.orchestration.council_runtime import binding
++        plan={'allowed_files':['sample.py'],'objective':'Review fixture'}
++        native=binding(SimpleNamespace(id='fixture'),plan,self.root,Path('native-run'))
++        # Actual producer function and actual policy; no native/model requests.
++        self.assertEqual(native['participation_sha256'],cr.context_hash(agent_policy()))
++        self.assertNotIn('permissions_sha256',native)
++        adapted=cr.adapt_context(native,policy=agent_policy(),permissions=self.permissions,lineage_id='fixture')
++        self.assertEqual(adapted['participation_sha256'],native['participation_sha256'])
++        self.assertEqual(adapted['permissions_sha256'],cr.context_hash(self.permissions))
++        self.assertNotIn('permissions_sha256',native)
++
++    def test_N1_key_order_is_irrelevant_for_policy_and_permissions(self):
++        a={'z':[1,2],'a':{'y':True,'x':'á'}};b={'a':{'x':'á','y':True},'z':[1,2]}
++        self.assertEqual(cr.context_hash(a),cr.context_hash(b))
++        self.assertEqual(cr.context_hash(a),hashlib.sha256(json.dumps(a,sort_keys=True).encode()).hexdigest())
++
++    def test_N1_missing_policy_hash_is_rejected_without_fabrication(self):
++        legacy=copy.deepcopy(self.c['context']);legacy.pop('participation_sha256')
++        with self.assertRaises(IpanemaError):
++            cr.adapt_context(legacy,policy=self.future_policy,permissions=self.permissions,lineage_id='fixture')
++
++    def test_N1_permissions_changed_in_binding_are_rejected(self):
++        with self.assertRaises(IpanemaError):
++            cr.bind_receipt(self.evidence[0],self.c,root=self.root,permissions={'read_only':False,'production':False})
++
++    def test_N1_contract_is_required_by_consumer(self):
++        self.c['context'].pop('context_contract')
++        self.assertNotEqual(self.evaluate()['state'],'synthetic_pass')
++
++    def test_N1_nan_is_not_a_canonical_json_permission(self):
++        with self.assertRaises(ValueError):cr.context_hash({'timeout':float('nan')})
++
++    def test_N2_resolution_plus_answer_without_record_does_not_close(self):
++        self.add_high();self.answers=[{'reviewer':'claude','objection_id':'O1','action':'refute'}];self.resolution()
++        self.assertEqual(self.controller.records,{})
++        self.assertEqual(self.evaluate()['state'],'changes_requested')
++
++    def test_N2_reducer_replay_is_the_only_successful_closure(self):
++        self.add_high();binding=self.resolution()
++        self.controller.close_fixture(self.record(),binding,'source:sample.py')
++        result=self.evaluate();self.assertEqual(result['state'],'synthetic_pass')
++        self.assertTrue(result['findings'][0]['closed']);self.assertTrue(result['synthetic_only'])
++        self.assertFalse(result['identity_verified_by_hash'])
++
++    def test_N2_declared_terminal_state_without_events_is_not_closure(self):
++        self.add_high();record=self.record();record['state']='resolved'
++        self.controller.records[record['identity']]=record
++        self.assertEqual(self.evaluate()['state'],'changes_requested')
++
++    def test_N2_new_evidence_cannot_be_skipped(self):
++        record=self.controller.advance(self.record(),'author_answer',actor='codex',candidate_sha256=cr.fingerprint(self.c))
++        with self.assertRaises(IpanemaError):
++            self.controller.advance(record,'request_review',actor='controller',candidate_sha256=cr.fingerprint(self.c))
++
++    def test_N2_author_cannot_close_even_with_origin_confirmation(self):
++        self.add_high();b=self.resolution();record=self.record()
++        record=self.controller.advance(record,'author_answer',actor='codex',candidate_sha256=cr.fingerprint(self.c))
++        record=self.controller.advance(record,'add_evidence',actor='controller',candidate_sha256=cr.fingerprint(self.c),evidence_refs=['source:sample.py'])
++        record=self.controller.advance(record,'request_review',actor='controller',candidate_sha256=cr.fingerprint(self.c))
++        with self.assertRaises(IpanemaError):
++            self.controller.advance(record,'resolve',actor='codex',candidate_sha256=cr.fingerprint(self.c),evidence_refs=[b['receipt_id']],confirmation=b,controller=self.controller)
++
++    def test_N2_unverified_new_evidence_makes_replay_fail(self):
++        self.add_high();b=self.resolution()
++        with self.assertRaises(IpanemaError):
++            self.controller.close_fixture(self.record(),b,'nonexistent-source')
++        self.assertEqual(self.evaluate()['state'],'changes_requested')
++
++    def test_N2_current_changes_requested_survives_terminal_record(self):
++        self.add_high();b=self.resolution();self.controller.close_fixture(self.record(),b,'source:sample.py')
++        self.reviews[0]['response']['decision']='changes_requested';self.refresh(self.reviews[0])
++        self.assertEqual(self.evaluate()['state'],'changes_requested')
++
++    def test_N3_omitted_argument_cannot_hide_store_history(self):
++        self.historical_high();self.controller.rows=copy.deepcopy(self.history)
++        self.controller.auto_history=False;self.history=[]
++        self.assertEqual(self.evaluate()['state'],'changes_requested')
++        self.assertEqual(len(self.evaluate()['review_history']),1)
++
++    def test_N3_truncated_store_snapshot_fails_anchor(self):
++        self.historical_high();self.controller.rows=copy.deepcopy(self.history);self.controller.auto_history=False
++        with patch.object(self.controller,'history',return_value={'lineage_id':'fixture','reviews':[], 'complete_review_ids':[], 'objection_records':{}}):
++            self.assertNotEqual(self.evaluate()['state'],'synthetic_pass')
++            self.assertIn('history_incomplete',self.evaluate()['missing_evidence'])
++
++    def test_N3_index_omission_is_rejected(self):
++        self.historical_high();snapshot=self.controller.history('fixture');snapshot['reviews']=copy.deepcopy(self.history)
++        with patch.object(self.controller,'history',return_value=snapshot):
++            self.assertIn('history_incomplete',self.evaluate()['missing_evidence'])
++
++    def test_N3_prior_blocker_survives_missing_and_stale_reviews(self):
++        self.historical_high();self.history[0]['response']['objections'][0]['severity']='BLOCKER'
++        old_env=copy.deepcopy(self.reviews[0])
++        self.reviews=[];self.assertEqual(self.evaluate()['state'],'blocked')
++        self.reviews=[old_env];self.reviews[0]['response']['candidate_sha256']='b'*64
++        self.assertEqual(self.evaluate()['state'],'blocked')
++
++    def test_N3_history_source_is_mandatory_even_for_genesis(self):
++        self.assertEqual(cr.evaluate(self.c,self.reviews,evidence=self.evidence,root=self.root,bindings=self.bindings)['state'],'needs_evidence')
++
++    def test_N3_explicit_migration_then_new_review_can_resolve_without_dead_end(self):
++        self.historical_high();old='b'*64;self.history[0]['candidate_sha256']=old;self.history[0]['response']['candidate_sha256']=old
++        self.controller.auto_records=False
++        seed=cr.new_objection('codex','claude',self.objection(),old);current=cr.fingerprint(self.c)
++        with self.assertRaises(IpanemaError):
++            self.controller.advance(seed,'propose_correction',actor='codex',candidate_sha256=current,controller=self.controller)
++        self.controller.moves['move']=cr.MigrationEvidence(seed['identity'],old,current,'claude','codex')
++        record=self.controller.advance(seed,'propose_correction',actor='codex',candidate_sha256=current,controller=self.controller,migration_ref='move')
++        record=self.controller.advance(record,'author_answer',actor='codex',candidate_sha256=current)
++        record=self.controller.advance(record,'add_evidence',actor='controller',candidate_sha256=current,evidence_refs=['source:sample.py'])
++        record=self.controller.advance(record,'request_review',actor='controller',candidate_sha256=current)
++        self.controller.records[seed['identity']]=record
++        self.refresh(self.reviews[0],['prior-real-review'])
++        self.assertEqual(self.evaluate()['state'],'changes_requested')
++        self.resolution();row=self.evidence[-1]
++        b=cr.bind_receipt(row,self.c,root=self.root,permissions=self.permissions,principal=self.principal('claude'),resolution_state='refuted',objection_identity=seed['identity'])
++        self.bindings=[x for x in self.bindings if x['receipt_id']!=row['id']]+[b];self.controller.attest(b,'claude')
++        record=self.controller.advance(record,'refute',actor='claude',candidate_sha256=current,evidence_refs=[row['id']],confirmation=b,controller=self.controller)
++        self.controller.records[seed['identity']]=record
++        result=self.evaluate();self.assertEqual(result['state'],'synthetic_pass')
++        self.assertEqual(result['findings'][0]['identity'],seed['identity'])
++        self.assertEqual(result['review_history'][0]['candidate_sha256'],old)
++
++    def test_N3_changed_diff_invalidates_current_reviews_and_bindings(self):
++        self.c['diff_sha256']='9'*64
++        self.assertEqual(self.evaluate()['state'],'needs_evidence')
++
++    def test_N4_principal_json_and_self_hash_do_not_authenticate(self):
++        self.controller.proofs.clear()
++        result=self.evaluate();self.assertEqual(result['state'],'needs_evidence')
++        self.assertIn('unverified_reviewer:claude',result['missing_evidence'])
++
++    def test_N4_plain_dict_cannot_replace_controller_interface(self):
++        result=cr.evaluate(self.c,self.reviews,evidence=self.evidence,root=self.root,bindings=self.bindings,controller={'trust_basis':'adapter_verified'})
++        self.assertEqual(result['state'],'needs_evidence')
++        self.assertEqual(result['trust_basis'],'unavailable')
++
++    def test_N4_json_cannot_replace_adapter_evidence(self):
++        self.controller.proofs['attempt-claude']={'agent':'claude','capability':'code_review_readonly'}
++        self.assertEqual(self.evaluate()['state'],'needs_evidence')
++
++    def test_N4_subagent_cannot_impersonate_native_principal(self):
++        from dataclasses import replace
++        self.controller.proofs['attempt-claude']=replace(self.controller.proofs['attempt-claude'],actor_kind='subagent',parent_actor_id='codex-parent')
++        self.assertEqual(self.evaluate()['state'],'needs_evidence')
++
++    def test_N4_missing_capability_and_wrong_provider_and_stale_permissions(self):
++        from dataclasses import replace
++        original=self.controller.proofs['attempt-claude']
++        for attrs in ({'capability':''},{'agent':'codex'},{'permissions_sha256':'a'*64},{'candidate_sha256':'b'*64},{'binding_sha256':'c'*64}):
++            with self.subTest(attrs=attrs):
++                self.controller.proofs['attempt-claude']=replace(original,**attrs)
++                self.assertEqual(self.evaluate()['state'],'needs_evidence')
++
++    def test_N4_supersession_is_not_identity_metadata(self):
++        self.refresh(self.reviews[0],['prior-review'])
++        b=next(x for x in self.bindings if x['receipt_id']=='attempt-claude')
++        self.assertNotIn('supersedes_review_ids',b['principal'])
++        self.assertEqual(self.controller.attestation('attempt-claude').supersedes_review_ids,('prior-review',))
++
++
++    def test_N1_versioned_receipt_missing_permissions_is_rejected(self):
++        row=copy.deepcopy(self.evidence[0]);row['context'].pop('permissions_sha256')
++        with self.assertRaises(IpanemaError):
++            cr.bind_receipt(row,self.c,root=self.root,permissions=self.permissions)
++
++    def test_N3_history_cannot_invent_an_unknown_author(self):
++        self.historical_high();self.history[0].pop('author')
++        with self.assertRaises(IpanemaError):self.evaluate()
++
++    def test_N2_state_event_tampering_does_not_close(self):
++        self.add_high();b=self.resolution();self.controller.close_fixture(self.record(),b,'source:sample.py')
++        record=self.controller.records[self.record()['identity']]
++        record['events'][0]['actor']='claude'
++        self.assertEqual(self.evaluate()['state'],'changes_requested')
++
++    def test_N1_incomplete_qa_with_null_verification_is_rejected(self):
++        row=copy.deepcopy(next(r for r in self.evidence if r['id']=='qa:baseline'))
++        report={'executed':True,'passed':True,'verification_state':None}
++        row['sha256']=hashlib.sha256(json.dumps(report,sort_keys=True).encode()).hexdigest()
++        with self.assertRaises(IpanemaError):
++            cr.bind_receipt(row,self.c,root=self.root,permissions=self.permissions,qa_report=report)
++
++
++
++
++class MaterialIncrementTests(unittest.TestCase):
++    principal=FindingsResolution.principal
++    add=FindingsResolution.add
++    review=FindingsResolution.review
++    refresh=FindingsResolution.refresh
++    evaluate=FindingsResolution.evaluate
++    resolution=FindingsResolution.resolution
++    record=FindingsResolution.record
++
++    def objection(self):
++        obj=FindingsResolution.objection(self)
++        obj['claim']=self.claim
++        if getattr(self,'extra_ref',None):obj['evidence_refs'].append(self.extra_ref)
++        return obj
++
++    def setUp(self):
++        self.claim='sample.py has 0 function definitions'
++        FindingsResolution.setUp(self)
++        self.controller.auto_material=False;self.controller.auto_records=False
++        self.reviews[0]['response']['objections']=[self.objection()];self.refresh(self.reviews[0])
++
++    def answered(self):
++        return cr.advance_objection(self.record(),'author_answer',actor='codex',candidate_sha256=cr.fingerprint(self.c))
++
++    def demonstrated(self, kind='documented_refutation',baseline=0):
++        rec=self.answered()
++        proof=self.controller.prepare_material(rec,['source:sample.py'],kind=kind,baseline=baseline,metric='function_count')
++        self.assertIsNotNone(proof)
++        rec=cr.advance_objection(rec,'add_evidence',actor='controller',candidate_sha256=cr.fingerprint(self.c),evidence_refs=['source:sample.py'],controller=self.controller)
++        return rec,proof
++
++    def finish(self, rec):
++        rec=cr.advance_objection(rec,'request_review',actor='controller',candidate_sha256=cr.fingerprint(self.c))
++        b=self.resolution()
++        rec=cr.advance_objection(rec,'refute',actor='claude',candidate_sha256=cr.fingerprint(self.c),evidence_refs=[b['receipt_id']],confirmation=b,controller=self.controller)
++        self.controller.records[rec['identity']]=rec
++        return self.evaluate()
++
++    def test_repeated_original_reference_without_demonstration_rejected(self):
++        b=self.resolution()
++        self.assertIsNotNone(self.controller.attestation(b['receipt_id']))
++        rec=self.answered()
++        with self.assertRaises(IpanemaError):
++            cr.advance_objection(rec,'add_evidence',actor='controller',candidate_sha256=cr.fingerprint(self.c),evidence_refs=self.objection()['evidence_refs'],controller=self.controller)
++        self.assertEqual(self.evaluate()['state'],'changes_requested')
++
++    def test_forged_new_reference_is_not_material(self):
++        row=next(r for r in self.evidence if r['id']=='source:sample.py')
++        self.add('renamed-source','source',subject='sample.py',sha256=row['sha256'],alternative=False)
++        with self.assertRaises(IpanemaError):
++            cr.advance_objection(self.answered(),'add_evidence',actor='controller',candidate_sha256=cr.fingerprint(self.c),evidence_refs=['renamed-source'],controller=self.controller)
++
++    def test_changed_id_and_hash_with_no_counterexample_are_insufficient(self):
++        # A different artifact string/hash says count==1, which agrees with the observation;
++        # the controller computes the fact and refuses to call this a refutation.
++        self.claim='sample.py has 1 function definitions'
++        rec=self.answered();source=(self.root/'sample.py').read_bytes()
++        proof=self.controller.prepare_material(rec,['source:sample.py'],kind='documented_refutation',baseline=1,metric='function_count')
++        self.assertIsNone(proof)
++        self.assertEqual(sum(line.startswith(b'def ') for line in source.splitlines()),1)
++        with self.assertRaises(IpanemaError):
++            cr.advance_objection(rec,'add_evidence',actor='controller',candidate_sha256=cr.fingerprint(self.c),evidence_refs=['source:sample.py'],controller=self.controller)
++
++    def test_refutation_uses_existing_unchanged_source_and_same_reference(self):
++        before=hashlib.sha256((self.root/'sample.py').read_bytes()).hexdigest()
++        rec,proof=self.demonstrated()
++        self.assertEqual(proof.kind,'documented_refutation')
++        self.assertEqual(proof.evidence_refs,tuple(self.objection()['evidence_refs']))
++        self.assertEqual(rec['original_evidence_refs'],self.objection()['evidence_refs'])
++        result=self.finish(rec)
++        self.assertEqual(result['state'],'synthetic_pass');self.assertTrue(result['findings'][0]['closed'])
++        self.assertFalse(result['authorization_ready'])
++        self.assertEqual(before,hashlib.sha256((self.root/'sample.py').read_bytes()).hexdigest())
++
++    def test_new_measured_fact_permits_legitimate_review(self):
++        self.claim='function count has not been measured'
++        # Reflect the explicit different fixture claim in its review and transport receipt.
++        self.reviews[0]['response']['objections']=[self.objection()];self.refresh(self.reviews[0])
++        rec,proof=self.demonstrated(kind='new_fact',baseline=None)
++        self.assertEqual(proof.kind,'new_fact')
++        self.assertEqual(self.finish(rec)['state'],'synthetic_pass')
++
++    def test_unrelated_claim_does_not_receive_refutation_proof(self):
++        self.claim='a shopping cart request is duplicated'
++        rec=self.answered()
++        self.assertIsNone(self.controller.prepare_material(rec,['source:sample.py'],kind='documented_refutation',baseline=0,metric='function_count'))
++
++    def test_missing_material_verification_receipt_prevents_replay_closure(self):
++        rec,proof=self.demonstrated();self.finish(rec)
++        self.evidence=[r for r in self.evidence if r['id']!=proof.verification_receipt_id]
++        self.assertEqual(self.evaluate()['state'],'changes_requested')
++
++    def test_failed_or_wrong_scope_verification_receipt_prevents_closure(self):
++        rec,proof=self.demonstrated();self.finish(rec)
++        row=next(r for r in self.evidence if r['id']==proof.verification_receipt_id);row['passed']=False
++        self.assertEqual(self.evaluate()['state'],'changes_requested')
++
++    def test_material_proof_wrong_objection_or_candidate_is_rejected(self):
++        from dataclasses import replace
++        rec,proof=self.demonstrated()
++        key=(rec['identity'],tuple(['source:sample.py']),cr.fingerprint(self.c))
++        for attrs in ({'objection_identity':'0'*64},{'candidate_sha256':'1'*64}):
++            self.controller.material[key]=(replace(proof,**attrs),lambda _:True)
++            with self.assertRaises(IpanemaError):
++                cr.advance_objection(self.answered(),'add_evidence',actor='controller',candidate_sha256=cr.fingerprint(self.c),evidence_refs=['source:sample.py'],controller=self.controller)
++
++    def test_artifact_tampering_fails_actual_controller_verification(self):
++        rec,proof=self.demonstrated();self.finish(rec)
++        (self.root/(proof.verification_receipt_id+'.json')).write_text('{"observed":0}')
++        self.assertEqual(self.evaluate()['state'],'changes_requested')
++
++    def test_same_material_cannot_be_relabelled_and_reused(self):
++        rec,proof=self.demonstrated()
++        rec=cr.advance_objection(rec,'author_answer',actor='codex',candidate_sha256=cr.fingerprint(self.c))
++        # Fresh receipt ID is generated for the repeated measurement, but its material facts
++        # were already assessed. The controller rechecks that, independent of wording.
++        self.controller.prepare_material(rec,['source:sample.py'],kind='documented_refutation',baseline=0,metric='function_count')
++        with self.assertRaises(IpanemaError):
++            cr.advance_objection(rec,'add_evidence',actor='controller',candidate_sha256=cr.fingerprint(self.c),evidence_refs=['source:sample.py'],controller=self.controller)
++
++    def test_material_evidence_never_gives_author_closing_authority(self):
++        rec,_=self.demonstrated();rec=cr.advance_objection(rec,'request_review',actor='controller',candidate_sha256=cr.fingerprint(self.c));b=self.resolution()
++        with self.assertRaises(IpanemaError):
++            cr.advance_objection(rec,'refute',actor='codex',candidate_sha256=cr.fingerprint(self.c),evidence_refs=[b['receipt_id']],confirmation=b,controller=self.controller)
++
++    def test_no_adapter_origin_confirmation_keeps_objection_open(self):
++        rec,_=self.demonstrated();self.finish(rec)
++        self.controller.proofs.pop('resolution-claude')
++        self.assertEqual(self.evaluate()['state'],'changes_requested')
++
++    def test_N4a_top_level_state_cannot_look_like_plain_approval(self):
++        rec,_=self.demonstrated();result=self.finish(rec)
++        self.assertEqual(result['result_contract'],'ipanema-code-review-result/2')
++        self.assertEqual(result['state'],'synthetic_pass')
++        self.assertNotEqual(result['state'],'approved_for_authorization')
++        for flag in ('authorization_ready','implementation_allowed','production_authorized','activation_allowed'):
++            self.assertFalse(result[flag])
++
++
++    def test_model_json_materiality_claim_is_not_controller_verification(self):
++        rec=self.answered()
++        self.controller.material[(rec['identity'],('source:sample.py',),cr.fingerprint(self.c))]=(
++            {'material':True,'new_hash':'f'*64,'kind':'documented_refutation'},lambda _:True)
++        with self.assertRaises(IpanemaError):
++            cr.advance_objection(rec,'add_evidence',actor='controller',candidate_sha256=cr.fingerprint(self.c),evidence_refs=['source:sample.py'],controller=self.controller)
++
++
++
++    def test_already_available_verification_id_is_not_artificially_forbidden(self):
++        from dataclasses import replace
++        self.extra_ref='already-available-verification'
++        self.reviews[0]['response']['objections']=[self.objection()];self.refresh(self.reviews[0])
++        rec=self.answered()
++        proof=self.controller.prepare_material(rec,['source:sample.py'],kind='documented_refutation',baseline=0,metric='function_count')
++        row=copy.deepcopy(next(r for r in self.evidence if r['id']==proof.verification_receipt_id));row['id']=self.extra_ref
++        self.evidence.append(row)
++        self.bindings.append(cr.bind_receipt(row,self.c,root=self.root,permissions=self.permissions))
++        key=(rec['identity'],('source:sample.py',),cr.fingerprint(self.c))
++        _,checker=self.controller.material[key]
++        self.controller.material[key]=(replace(proof,verification_receipt_id=self.extra_ref),checker)
++        rec=cr.advance_objection(rec,'add_evidence',actor='controller',candidate_sha256=cr.fingerprint(self.c),evidence_refs=['source:sample.py'],controller=self.controller)
++        self.assertIn(self.extra_ref,rec['original_evidence_refs'])
++        self.assertEqual(self.finish(rec)['state'],'synthetic_pass')
++
++
++if __name__=='__main__':unittest.main()

@@ -1,0 +1,55 @@
+{
+  "at": "2026-11-13T18:39:57.862642+00:00",
+  "checks": [
+    {
+      "id": "source_identity_backup_integrity",
+      "passed": true,
+      "before_sha256": "75a487600c5d71001fa2e0970dad1cb943f80d399f1af89db559bffc3253fd30"
+    },
+    {
+      "id": "candidate_patch_identity",
+      "passed": true,
+      "after_sha256": "e6f79c2fd59376efe955662adff44d13329300360a118249c88480d59dde3cd3",
+      "patch_sha256": "2c88fb0d3e619b5d08c8e217eecb9e104d9d402dbe47997c95b91f0e4b1c8d32"
+    },
+    {
+      "id": "native_validation",
+      "passed": true,
+      "scope": "Syntax/schema only, no persistence"
+    },
+    {
+      "id": "isolated_browser_checks",
+      "passed": true,
+      "count": 163,
+      "scope": "6 widths, keyboard, API, IO fallback, source unchanged HTML/CSS/schema; Arial fixture"
+    },
+    {
+      "id": "independent_exact_diff_review",
+      "passed": true,
+      "reviewer": "claude",
+      "implementer": "codex",
+      "scope": "Exactcandidate review, no critical objections"
+    },
+    {
+      "id": "published_candidate_qa",
+      "passed": null,
+      "state": "needs_evidence",
+      "reason": "Not deployed; requires owner authorization"
+    },
+    {
+      "id": "production_performance_benefit",
+      "passed": null,
+      "state": "needs_evidence",
+      "reason": "Not deployed; host performance drift also prevents stable historical attribution"
+    },
+    {
+      "id": "owner_deployment_authorization",
+      "passed": false,
+      "state": "not_requested_yet",
+      "reason": "Validation authorization only"
+    }
+  ],
+  "status": "ready_for_owner_review_not_deployed",
+  "implementation_allowed": false,
+  "automatic_publication_allowed": false
+}

@@ -1,0 +1,149 @@
+{
+  "requested_agent": "claude",
+  "effective_agent": "claude",
+  "scope": "official XLSX cross-examination and prioritization only",
+  "input_hashes": {
+    "reports/rhino-performance/indexability-phase2-20261113/editorial-validation-preparation-20261113/review-packet.json": "1d620fdae088eb8a28835c6ca4b1e6f2a97730f10370ae37b71374076069d87b",
+    "reports/rhino-performance/indexability-phase2-20261113/editorial-validation-preparation-20261113/controller-validation.json": "0cafb53195b17d86fbccec7a158b6642a504691b9b04932fd3b8bb8b63aebe61",
+    "reports/rhino-performance/indexability-phase2-20261113/editorial-validation-preparation-20261113/controller-supplement.json": "05dad1161ce84964d7162448ef155301e1a503973fa286083ba22f3ddb9823da",
+    "reports/rhino-performance/indexability-phase2-20261113/editorial-validation-preparation-20261113/local-native-evidence.json": "89085d9bbf4e3e39a8c491065ee17f6414166cfe553f0df7dc6a968cac070ac8",
+    "reports/rhino-performance/indexability-phase2-20261113/editorial-validation-preparation-20261113/editorial-proposed.md": "c1a940010bf89c92993d9439c596a5421665891bcd5b0b622c3248e9c846bcd3",
+    "reports/rhino-performance/indexability-phase2-20261113/editorial-validation-preparation-20261113/production-read-scope-NOT-AUTHORIZED.json": "1c808e9386d9246fc58997fd6be678b811b94988c7a70b0fb6b596538c0bfcdc",
+    "reports/rhino-performance/indexability-phase2-20261113/editorial-validation-preparation-20261113/README.md": "8e8969025e11acbae3b777488bf644b84178635e01e2b769b5f26c0627f4b86d"
+  },
+  "response": {
+    "decision": "blocked",
+    "summary": "Respondo codex-q-01. No hay fuente actual que acredite aislamiento administrativo por categoría: enabled_on.page_templates=all solo permite colocar la sección en el esquema local, y category.json es común. La alternativa native-rich-text-after-grid queda condicionada y en needs_evidence, sin implementar. Las aclaraciones documentales no resuelven las objeciones high; siguen abiertas. No se publica.",
+    "changes": [],
+    "evidence": [
+      "seo.editorial.native-preflight",
+      "seo.editorial.scope-conditions"
+    ],
+    "objections": [
+      {
+        "id": "claude-obj-1",
+        "alternative_id": "native-rich-text-after-grid",
+        "category": "alcance global de plantilla",
+        "severity": "high",
+        "claim": "No hay fuente actual de aislamiento por categoría. category.json es común y page_templates=all no prueba una instancia exclusiva de Presoterapia. Las aclaraciones documentales (seo.editorial.scope-conditions) confirman la condición abierta pero no aportan evidencia que la resuelva. Una guía estática en la plantilla compartida se mostraría en otras categorías.",
+        "status": "open",
+        "evidence_refs": [
+          "seo.editorial.native-preflight",
+          "seo.editorial.scope-conditions"
+        ],
+        "resolution_evidence_refs": []
+      },
+      {
+        "id": "claude-obj-2",
+        "alternative_id": "native-rich-text-after-grid",
+        "category": "semántica H2 y límite de anexado",
+        "severity": "medium",
+        "claim": "El H2 real y la ausencia de duplicado con LS.hybridScroll no están probados. El selector .js-product-table es solo evidencia arquitectónica, no ejecución. Un render futuro real queda pendiente.",
+        "status": "open",
+        "evidence_refs": [
+          "seo.editorial.native-preflight"
+        ],
+        "resolution_evidence_refs": []
+      }
+    ],
+    "preferred_alternative": "native-rich-text-after-grid",
+    "answers": [
+      {
+        "question_id": "codex-q-01",
+        "from_agent": "codex",
+        "answer": "Sostengo native-rich-text-after-grid, condicionada al alcance real y sin atribuirle aislamiento. enabled_on.page_templates=all en rich-text.tpl solo declara en qué plantillas puede colocarse la sección. templates/pages/category.json es una plantilla común a todas las categorías. Ninguna de las dos fuentes demuestra que el administrador permita una instancia solo para Presoterapia. No hay fuente actual de aislamiento administrativo por categoría. La alternativa queda en needs_evidence, no se implementa y no se prepara ningún parche. La fuente permitida sería una captura del editor del propietario. Los hashes locales coinciden con lo aprobado, pero no prueban igualdad remota. El H2 real y el append no prueban ejecución.",
+        "disposition": "needs_evidence",
+        "evidence_refs": [
+          "seo.editorial.native-preflight",
+          "seo.editorial.scope-conditions"
+        ]
+      }
+    ],
+    "withdrawn_alternatives": [],
+    "revision_notes": [
+      "Sin consenso por unanimidad: la alternativa sigue condicionada y no implementada.",
+      "Estado comercial actual: unknown. No se hicieron llamadas a GSC ni 404, ni se alteró el motor. No hay manifiesto de seis URLs.",
+      "Las objeciones high siguen abiertas en needs_evidence. No se publica y no hay investigación nueva."
+    ]
+  },
+  "model": {
+    "model": "claude-sonnet-5-5",
+    "effort": "medium",
+    "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+    "verified_at": "2026-11-08"
+  },
+  "execution": {
+    "exit_code": 0,
+    "timed_out": false,
+    "output_limited": false,
+    "idle_timed_out": false,
+    "cancelled": false,
+    "process_started": true,
+    "process_reaped": true,
+    "stdin_bytes_written": 87853,
+    "context_complete": true,
+    "duration_s": 12.617,
+    "timing": {
+      "spawn_s": 0.000663,
+      "input_complete_s": 0.568012,
+      "first_stdout_s": 1.373575,
+      "first_stderr_s": null,
+      "timeout_phase": null,
+      "event_counts": {
+        "system": 4,
+        "stream_event": 195,
+        "event:message_start": 1,
+        "event:content_block_start": 1,
+        "event:content_block_delta": 190,
+        "assistant": 1,
+        "event:content_block_stop": 1,
+        "user": 1,
+        "event:message_delta": 1,
+        "event:message_stop": 1,
+        "rate_limit_event": 1,
+        "result": 1
+      },
+      "inference_vs_initialization": "not_separable_without_provider_events"
+    },
+    "output_accounting": {
+      "transport_bytes": 109196,
+      "retained_bytes": 109196,
+      "discarded_progress_bytes": 0,
+      "transport_limit_bytes": 20000000,
+      "retained_limit_bytes": 2000000
+    },
+    "isolation": {
+      "backend": "bubblewrap",
+      "snapshot_read_only": true,
+      "host_home_mounted": false,
+      "network": "enabled_no_destination_firewall",
+      "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+    },
+    "started_at": "2026-11-13T17:11:13.581312+00:00",
+    "prompt_bytes": 87853,
+    "prompt_sha256": "19a98272f724bf70b61a64c8c4b174554ead4c4c869ac784a981a616527372fd",
+    "usage": {
+      "provider_reported": {
+        "total_cost_usd": 0.1639016,
+        "duration_ms": 10763,
+        "input_tokens": 2,
+        "cache_creation_input_tokens": 37579,
+        "cache_read_input_tokens": 2816,
+        "output_tokens": 1330
+      },
+      "measured_cost_available": true,
+      "estimated_cost": null
+    },
+    "limits": {
+      "timeout": 240,
+      "idle_timeout": 90,
+      "startup_timeout": 30,
+      "first_response_timeout": 120
+    },
+    "structured_output": "native_schema",
+    "contract_validation": {
+      "status": "passed",
+      "duration_s": 0.007661
+    }
+  }
+}

@@ -1,0 +1,148 @@
+{
+  "requested_agent": "claude",
+  "effective_agent": "claude",
+  "scope": "incremental organic opportunities and evidence intake only",
+  "input_hashes": {
+    "reports/rhino-performance/indexability-phase2-20261113/editorial-validation-preparation-20261113/review-packet.json": "1d620fdae088eb8a28835c6ca4b1e6f2a97730f10370ae37b71374076069d87b",
+    "reports/rhino-performance/indexability-phase2-20261113/editorial-validation-preparation-20261113/controller-validation.json": "0cafb53195b17d86fbccec7a158b6642a504691b9b04932fd3b8bb8b63aebe61",
+    "reports/rhino-performance/indexability-phase2-20261113/editorial-validation-preparation-20261113/local-native-evidence.json": "89085d9bbf4e3e39a8c491065ee17f6414166cfe553f0df7dc6a968cac070ac8",
+    "reports/rhino-performance/indexability-phase2-20261113/editorial-validation-preparation-20261113/editorial-proposed.md": "c1a940010bf89c92993d9439c596a5421665891bcd5b0b622c3248e9c846bcd3",
+    "reports/rhino-performance/indexability-phase2-20261113/editorial-validation-preparation-20261113/production-read-scope-NOT-AUTHORIZED.json": "1c808e9386d9246fc58997fd6be678b811b94988c7a70b0fb6b596538c0bfcdc",
+    "reports/rhino-performance/indexability-phase2-20261113/editorial-validation-preparation-20261113/README.md": "8e8969025e11acbae3b777488bf644b84178635e01e2b769b5f26c0627f4b86d"
+  },
+  "response": {
+    "decision": "changes_requested",
+    "summary": "La preparación local es coherente con el recibo seo.editorial.native-preflight, que cubre solo lectura local, hashes y selectores. No hay base para implementar ni publicar. La opción preferida (rich-text nativo tras el grid) exige aislar Presoterapia en el editor y eso no está confirmado. category.json es compartida, así que el riesgo global sigue abierto. Se mantiene el bloqueo comercial y de publicación (needs_evidence). Los seis documentos requieren autorización y un transporte soportado, porque V4 acepta cinco.",
+    "changes": [],
+    "evidence": [
+      "seo.editorial.native-preflight: passed=true, kind local_source_only, sin editor, navegador, HTTP ni GSC. Es un recibo del controlador, no una prueba propia.",
+      "local-native-evidence.json: category.description solo se renderiza en page-header.tpl (líneas 115-118) dentro de un p. En category.json el heading tiene disabled=true. No hay consumidor después del grid.",
+      "rich-text.tpl: enabled_on.page_templates=all. blocks/text.tpl imprime richtext con raw en user-content. category.json es una plantilla compartida entre categorías.",
+      "main-products-grid.tpl 119-149: las tarjetas van dentro de .js-product-table y la paginación fuera. store.js 1744-1759 pasa productGridSelector '.js-product-table' a LS.hybridScroll.",
+      "blocks/heading.tpl envuelve el título en un div, así que el tamaño visual no garantiza un H2.",
+      "production-read-scope-NOT-AUTHORIZED.json: las seis URLs no se ejecutaron. Su transport_condition indica que V4 cerrado exige cinco URLs y prohíbe rellenos o ajustar el motor.",
+      "controller-validation.json: remote_hashes_not_checked=true. Las condiciones pendientes incluyen autorización de lectura, verdad comercial actual y alcance por categoría en el editor."
+    ],
+    "objections": [
+      {
+        "id": "claude-obj-1",
+        "alternative_id": "native-rich-text-after-grid",
+        "category": "alcance global de plantilla",
+        "severity": "high",
+        "claim": "templates/pages/category.json es común a todas las categorías. Añadir rich-text con texto estático ahí mostraría la guía de Presoterapia en Terapia fría, Accesorios y otras. El esquema declara page_templates=all, pero eso no prueba que el editor permita una instancia por categoría. No hay evidencia administrativa. Es un riesgo global que no debe quedar como mitigado.",
+        "status": "open",
+        "evidence_refs": [
+          "seo.editorial.native-preflight",
+          "reports/rhino-performance/indexability-phase2-20261113/editorial-validation-preparation-20261113/local-native-evidence.json"
+        ],
+        "resolution_evidence_refs": []
+      },
+      {
+        "id": "claude-obj-2",
+        "alternative_id": "native-rich-text-after-grid",
+        "category": "semántica H2 y límite de anexado",
+        "severity": "medium",
+        "claim": "blocks/heading.tpl usa un div, así que el H2 debe venir en el HTML richtext y comprobarse en el resultado final. Una sección hermana fuera de .js-product-table queda fuera del selector de hybridScroll, pero eso es solo arquitectura. No se probó con LS real, y Presoterapia tenía 3 tarjetas, por lo que probablemente no haya página siguiente que lo ejercite. No debe afirmarse ausencia de duplicado. Tampoco debe forzarse ningún cambio de pagination.tpl ni store.js.",
+        "status": "open",
+        "evidence_refs": [
+          "seo.editorial.native-preflight",
+          "reports/rhino-performance/indexability-phase2-20261113/editorial-validation-preparation-20261113/README.md"
+        ],
+        "resolution_evidence_refs": []
+      }
+    ],
+    "preferred_alternative": "Editor nativo con alcance real: reutilizar rich-text tras product_list solo si el editor lo limita a Presoterapia. Si no es posible, no publicar y esperar un parche futuro de contenido de categoría tras el grid que no toque pagination.tpl ni store.js.",
+    "questions": [
+      {
+        "id": "claude-q-1",
+        "to_agent": "codex",
+        "alternative_id": "native-rich-text-after-grid",
+        "question": "¿Qué fuente concreta (captura del editor del propietario, documentación oficial del editor de temas o un archivo local que no sea category.json) demuestra que una sección rich-text puede aplicarse solo a la categoría Presoterapia y no a la plantilla compartida? Si no existe, ¿aceptas que la alternativa nativa quede en needs_evidence y que no se proponga ningún parche hasta tenerla?",
+        "evidence_refs": [
+          "seo.editorial.native-preflight",
+          "reports/rhino-performance/indexability-phase2-20261113/editorial-validation-preparation-20261113/local-native-evidence.json"
+        ]
+      }
+    ]
+  },
+  "model": {
+    "model": "claude-sonnet-5-5",
+    "effort": "medium",
+    "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+    "verified_at": "2026-11-08"
+  },
+  "execution": {
+    "exit_code": 0,
+    "timed_out": false,
+    "output_limited": false,
+    "idle_timed_out": false,
+    "cancelled": false,
+    "process_started": true,
+    "process_reaped": true,
+    "stdin_bytes_written": 64945,
+    "context_complete": true,
+    "duration_s": 36.926,
+    "timing": {
+      "spawn_s": 0.000496,
+      "input_complete_s": 0.000607,
+      "first_stdout_s": 1.423462,
+      "first_stderr_s": null,
+      "timeout_phase": null,
+      "event_counts": {
+        "system": 4,
+        "stream_event": 834,
+        "event:message_start": 3,
+        "event:content_block_start": 3,
+        "event:content_block_delta": 819,
+        "assistant": 3,
+        "event:content_block_stop": 3,
+        "user": 3,
+        "event:message_delta": 3,
+        "event:message_stop": 3,
+        "rate_limit_event": 2,
+        "result": 1
+      },
+      "inference_vs_initialization": "not_separable_without_provider_events"
+    },
+    "output_accounting": {
+      "transport_bytes": 298030,
+      "retained_bytes": 298030,
+      "discarded_progress_bytes": 0,
+      "transport_limit_bytes": 20000000,
+      "retained_limit_bytes": 2000000
+    },
+    "isolation": {
+      "backend": "bubblewrap",
+      "snapshot_read_only": true,
+      "host_home_mounted": false,
+      "network": "enabled_no_destination_firewall",
+      "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+    },
+    "started_at": "2026-11-13T17:10:08.230159+00:00",
+    "prompt_bytes": 64945,
+    "prompt_sha256": "5e17e8ed7c91a0b3fe0e6f6300895ff889fc4358aeab85a9353eee2aef445b51",
+    "usage": {
+      "provider_reported": {
+        "total_cost_usd": 0.18170589999999998,
+        "duration_ms": 35299,
+        "input_tokens": 6,
+        "cache_creation_input_tokens": 30776,
+        "cache_read_input_tokens": 65999,
+        "output_tokens": 5199
+      },
+      "measured_cost_available": true,
+      "estimated_cost": null
+    },
+    "limits": {
+      "timeout": 240,
+      "idle_timeout": 90,
+      "startup_timeout": 30,
+      "first_response_timeout": 120
+    },
+    "structured_output": "native_schema",
+    "contract_validation": {
+      "status": "passed",
+      "duration_s": 0.016254
+    }
+  }
+}

@@ -1,0 +1,120 @@
+{
+  "requested_agent": "codex",
+  "effective_agent": "codex",
+  "scope": "offline remaining65 planning only",
+  "input_hashes": {
+    "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/remaining-65-preparation/batch-index.json": "0d28290785f138648866fb603940250168f7b4a16666b6ebd613207ffa2d76c7",
+    "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/remaining-65-preparation/execution-policy.json": "825416b81890bbb896f8ce35db6ddb1b7598c73777ab2f538eeac71db25d697c",
+    "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/remaining-65-preparation/controller-validation.json": "0c860d4d51cbb445dee657309d3bfa0010961f10461dcf2da7d9570c26486291",
+    "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/remaining-65-preparation/pending-65-list.txt": "cba500f318ee5ebca08cdd67fa7cb6dc1d41f3295729fa59246c06f509f5d878",
+    "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/remaining-65-preparation/batch-03/operation.json": "ba02285e8c33ef3405b5a1e6d4ccf2f933ed64ba253411bc5f97daf7eb71c6f4",
+    "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/remaining-65-preparation/batch-03/command-NOT-AUTHORIZED.txt": "deeca80733781f11c228720660813ee6b27178a0f5c84169c64aa463ce6c98b4"
+  },
+  "response": {
+    "decision": "approve",
+    "summary": "Apruebo únicamente la planificación general y solicitar autorización específica del lote 03; ninguna ejecución queda autorizada. La comprobación independiente de hashes es unknown. La identidad de comandos y presupuestos de 04..15 permanece condicionada a evidencia del controlador.",
+    "changes": [],
+    "evidence": [
+      "batch-index.json: batches 03..15 contiene cinco URLs por lote; type_counts suma 7 productos y 58 artículos. La lista visible concuerda con pending-65-list.txt.",
+      "batch-index.json: ordering define partición determinista por orden dentro de cada tipo, máximo dos productos y relleno con artículos, sin reescribir URLs.",
+      "controller-validation.json declara duplicate_urls=0, omitted_urls=0, overlap_with_previous_two_executions=0 y source_pending_matches_matrix=true; son resultados del recibo aportado, no verificaciones independientes realizadas aquí.",
+      "controller-validation.json vincula matrix_sha256, pending_source_sha256, batch_index_sha256 y execution_policy_sha256; declara network_requests=0 y regression_suites_repeated=false.",
+      "batch-03/operation.json: argv y límites concuerdan con command-NOT-AUTHORIZED.txt: 12 GET, 0.5 solicitudes/s, 120 s, timeout 20 s, 2000000 bytes, tres redirecciones y concurrencia 1; network_authorized=false y executed=false.",
+      "execution-policy.json: preflight exige pendientes actuales, hashes de código/transporte, snapshot conservado, autorización por lote/hash/comando, exclusividad, marcador persistente de un uso y checkpoint nativo único; permite evolucionar la matriz.",
+      "execution-policy.json: failure_handling consume autorización al invocar, prohíbe reintentos automáticos y exige conservar solicitudes pendientes, iniciadas sin confirmar y completadas; no garantiza cinco éxitos ni indexación."
+    ],
+    "objections": [
+      {
+        "id": "O1",
+        "alternative_id": "unknown",
+        "category": "cobertura de evidencia",
+        "severity": "medium",
+        "claim": "No se aportan contenidos de manifests ni operaciones/comandos de 04..15. Sus hashes indexados y las validaciones declaradas no demuestran aquí presupuestos idénticos: el recibo no incluye un resultado explícito de comparación de argv. Mantener esa condición antes de solicitar autorización de cada lote; no bloquea planificar ni solicitar la del 03. controller_evidence está vacío.",
+        "status": "open",
+        "evidence_refs": [],
+        "resolution_evidence_refs": []
+      }
+    ],
+    "preferred_alternative": "unknown",
+    "questions": [
+      {
+        "id": "Q1",
+        "to_agent": "claude",
+        "alternative_id": "unknown",
+        "question": "Sin propuesta tuya recibida, ¿consideras también pendiente demostrar la igualdad de argv y presupuestos de 04..15, dado que controller-validation.json solo declara native_manifest_validations_passed=13 y no registra esa comparación?",
+        "evidence_refs": []
+      }
+    ]
+  },
+  "model": {
+    "model": "gpt-6.1-sol",
+    "effort": "medium",
+    "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+    "verified_at": "2026-11-08"
+  },
+  "execution": {
+    "exit_code": 0,
+    "timed_out": false,
+    "output_limited": false,
+    "idle_timed_out": false,
+    "cancelled": false,
+    "process_started": true,
+    "process_reaped": true,
+    "stdin_bytes_written": 59583,
+    "context_complete": true,
+    "duration_s": 23.335,
+    "timing": {
+      "spawn_s": 0.000403,
+      "input_complete_s": 0.000671,
+      "first_stdout_s": 0.914418,
+      "first_stderr_s": null,
+      "timeout_phase": null,
+      "event_counts": {
+        "thread.started": 1,
+        "item.completed": 2,
+        "turn.started": 1,
+        "turn.completed": 1
+      },
+      "inference_vs_initialization": "not_separable_without_provider_events"
+    },
+    "output_accounting": {
+      "transport_bytes": 3793,
+      "retained_bytes": 3793,
+      "discarded_progress_bytes": 0,
+      "transport_limit_bytes": 20000000,
+      "retained_limit_bytes": 2000000
+    },
+    "isolation": {
+      "backend": "bubblewrap",
+      "snapshot_read_only": true,
+      "host_home_mounted": false,
+      "network": "enabled_no_destination_firewall",
+      "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+    },
+    "started_at": "2026-11-13T06:39:03.005637+00:00",
+    "prompt_bytes": 59583,
+    "prompt_sha256": "02edb007d07fe57732cb791f53c1a8ffcf57436bd7d59991d0e4f01a9a538c89",
+    "usage": {
+      "provider_reported": {
+        "input_tokens": 32356,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 761,
+        "reasoning_output_tokens": 88
+      },
+      "measured_cost_available": false,
+      "estimated_cost": null
+    },
+    "limits": {
+      "timeout": 240,
+      "idle_timeout": 90,
+      "startup_timeout": 30,
+      "first_response_timeout": 150
+    },
+    "structured_output": "native_schema",
+    "contract_validation": {
+      "status": "passed",
+      "duration_s": 0.000467
+    }
+  }
+}

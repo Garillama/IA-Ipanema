@@ -1,0 +1,100 @@
+{
+  "source": {
+    "file": "/home/alanrichard/Escritorio/rhino-performance.com-Coverage-2026-11-13.xlsx",
+    "name": "rhino-performance.com-Coverage-2026-11-13.xlsx",
+    "sha256": "bb3874d719ea5f33d6112f7585e3fd717318535f25bf7a06463326b7c5f94379",
+    "bytes": 7467,
+    "date_claimed_by_filename": "2026-11-13",
+    "date1904": false,
+    "sheets": {
+      "Gráfico": 87,
+      "Problemas críticos": 9,
+      "Problemas no críticos": 0,
+      "Metadatos": 1
+    },
+    "metadata_or_filters": [
+      [
+        "Propiedad",
+        "Valor"
+      ],
+      [
+        "Sitemap",
+        "Todas las páginas conocidas"
+      ]
+    ],
+    "property_binding": "User provided Rhino filenames; URL rows all restricted to rhino-performance.com/www; workbook metadata itself has no property identifier."
+  },
+  "chart_columns": [
+    "Fecha",
+    "Sin indexar",
+    "Indexadas",
+    "Impresiones"
+  ],
+  "latest_chart_row": {
+    "Fecha": "2026-11-08",
+    "Sin indexar": 347.0,
+    "Indexadas": 141.0,
+    "Impresiones": 3076.0
+  },
+  "export_filename_date": "2026-11-13",
+  "individual_URL_status_dates": "Not supplied except last crawl in drilldowns; do not assign chart date as each URL status date.",
+  "scope": "Todas las páginas conocidas; not the124 inventory",
+  "reason_counts": [
+    {
+      "Motivo": "Página alternativa con etiqueta canónica adecuada",
+      "Fuente": "Sitio web",
+      "Validación": "No iniciada",
+      "Páginas": 148.0
+    },
+    {
+      "Motivo": "Página con redirección",
+      "Fuente": "Sitio web",
+      "Validación": "No iniciada",
+      "Páginas": 112.0
+    },
+    {
+      "Motivo": "No se ha encontrado (404)",
+      "Fuente": "Sitio web",
+      "Validación": "No iniciada",
+      "Páginas": 33.0
+    },
+    {
+      "Motivo": "Bloqueada por robots.txt",
+      "Fuente": "Sitio web",
+      "Validación": "No iniciada",
+      "Páginas": 16.0
+    },
+    {
+      "Motivo": "Rastreada: actualmente sin indexar",
+      "Fuente": "Sistemas de Google",
+      "Validación": "No iniciada",
+      "Páginas": 33.0
+    },
+    {
+      "Motivo": "Descubierta: actualmente sin indexar",
+      "Fuente": "Sistemas de Google",
+      "Validación": "No iniciada",
+      "Páginas": 5.0
+    },
+    {
+      "Motivo": "Soft 404",
+      "Fuente": "Sitio web",
+      "Validación": "N/D",
+      "Páginas": 0.0
+    },
+    {
+      "Motivo": "Excluida por una etiqueta \"noindex\"",
+      "Fuente": "Sitio web",
+      "Validación": "N/D",
+      "Páginas": 0.0
+    },
+    {
+      "Motivo": "Duplicada: Google ha elegido una versión canónica diferente a la del usuario",
+      "Fuente": "Sistemas de Google",
+      "Validación": "N/D",
+      "Páginas": 0.0
+    }
+  ],
+  "reason_count_sum": 347.0,
+  "indexed_URL_examples_supplied": false
+}

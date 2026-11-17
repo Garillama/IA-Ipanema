@@ -1,0 +1,44 @@
+{
+  "matrix_csv": "reports/rhino-performance/indexability-20261112/site-continuation/url-matrix.csv",
+  "matrix_json": "reports/rhino-performance/indexability-20261112/site-continuation/url-matrix.json",
+  "before_hashes": {
+    "csv": "f645992e668c80c2e46717f53b1544635e6d5e8fe05a735569830fcbaa0c005b",
+    "json": "2b38e4b4334ba534ca5506c1c8aab20efd42d2b398dcb1bbb5f83b547c73e133"
+  },
+  "after_hashes": {
+    "csv": "01c1f3eb8134f7fa9f1dd757697c7194e2c3ce8934ab1a737a3b98fe729dd781",
+    "json": "348d45032ecb53d50f326b748757a96534a50be43041025041f317711a49ce93"
+  },
+  "backup_csv": "reports/runs/rhino-performance/20261113T075122-authorized-five-url-batch11/url-matrix-before.csv",
+  "backup_json": "reports/runs/rhino-performance/20261113T075122-authorized-five-url-batch11/url-matrix-before.json",
+  "exactly_five_rows_updated": true,
+  "updated_URLs": [
+    "https://rhino-performance.com/blog/posts/rhino-gun-pro-la-recuperacion-inteligente-que-acompana-tu-rendimiento-45fc22ac1fc6/",
+    "https://rhino-performance.com/blog/posts/lo-que-separa-a-los-pros-no-es-el-talento-es-la-recuperacion-697880232704/",
+    "https://rhino-performance.com/blog/posts/triatlon-sin-filtros-lo-que-no-todos-te-cuentan-de-este-deporte-2c4e228df07a/",
+    "https://rhino-performance.com/blog/posts/mucho-calor-7-tips-para-seguir-corriendo-sin-derretirte-0d5c9e64023e/",
+    "https://rhino-performance.com/blog/posts/cual-es-tu-tipo-de-pisada-al-correr-cd55a3a976e2/"
+  ],
+  "Google_fields_unchanged": true,
+  "other_120_rows_unchanged": true,
+  "before": {
+    "total_urls": 125,
+    "HTML_total": 124,
+    "HTML_with_individual_HTTP": 99,
+    "pending_individual_HTTP": 25,
+    "pending_by_type": {
+      "article": 25
+    }
+  },
+  "after": {
+    "total_urls": 125,
+    "HTML_total": 124,
+    "HTML_with_individual_HTTP": 104,
+    "pending_individual_HTTP": 20,
+    "pending_by_type": {
+      "article": 20
+    }
+  },
+  "original_pending75_and_pending70_files_preserved": true,
+  "next_pending_list": "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/live-batch11-20261113/pending-20.csv"
+}

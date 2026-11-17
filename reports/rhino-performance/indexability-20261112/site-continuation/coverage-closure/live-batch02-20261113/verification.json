@@ -1,0 +1,37 @@
+{
+  "manifest_sha256": "7117b37560a94eb8477d6e1328e2999cd103d69857c1e01b87910b8d269b8f42",
+  "engine_five_hashes_unchanged": true,
+  "transport_dependencies_unchanged": true,
+  "only_five_selected_rows_changed": true,
+  "other_120_rows_unchanged": true,
+  "Google_and_Search_Analytics_fields_unchanged": true,
+  "supervisor": {
+    "state": "finished",
+    "worker_pid": 167529,
+    "worker_reaped": true,
+    "wall_seconds": 16.028116708999733,
+    "absolute_limit_seconds": 120,
+    "termination_grace_included": 1.0,
+    "checkpoint": "/home/alanrichard/Escritorio/IA inversa/reports/runs/rhino-performance/pilot-checkpoint-0f72d47bee8a485ea4f3b1cd47b61014/checkpoint.json",
+    "remote_mutations": false
+  },
+  "started": 6,
+  "completed": 6,
+  "unconfirmed": 0,
+  "pending": 0,
+  "redirect_hops": 0,
+  "stop_reason": null,
+  "source_request_count": 6,
+  "matrix_after": {
+    "total_urls": 125,
+    "HTML_total": 124,
+    "HTML_with_individual_HTTP": 59,
+    "pending_individual_HTTP": 65,
+    "pending_by_type": {
+      "product": 7,
+      "article": 58
+    }
+  },
+  "no_additional_network_for_reporting": true,
+  "production_mutations": false
+}

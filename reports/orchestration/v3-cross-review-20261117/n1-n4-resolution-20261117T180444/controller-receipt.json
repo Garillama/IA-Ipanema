@@ -1,0 +1,54 @@
+{
+  "checked_at": "2026-11-17T18:17:32.976773+00:00",
+  "patch_sha256": "fb292ff7f11c2ccaed5e90a2325c1703f23ece67bdc1b2a6f96ad3c6d49b8e4f",
+  "patch_apply_check": 0,
+  "candidate_isolated": true,
+  "integration_executed": false,
+  "provider_calls": 0,
+  "production_requests": 0,
+  "policies_changed": false,
+  "operational_sources_unchanged": true,
+  "operational_hashes": {
+    "tools/ipanema/orchestration/isolation.py": "0d734fcbf6d10e839d2a7cb46f3416ca60f0751e1491974d73186a8d56408079",
+    "tools/ipanema/orchestration/adapters.py": "bae25bee06cf7574ee35f65e9f9055dfa8a495336f80615165ddd5232359d01d",
+    "tools/ipanema/orchestration/council.py": "4ec261a0d84fbdc12d5abf85eab489d21cf85f30af57eac9769c722d17541261",
+    "tools/ipanema/orchestration/council_runtime.py": "92b6e47eb8942c26161c240a3258e481ae108b42ee2894cd0577403ea0d49635",
+    "tools/ipanema/orchestration/models.json": "14fede6b13b294a8e685b8ce1072777959850d8ae05bf3270f5dd9ea527aba39",
+    "tools/ipanema/orchestration/planner.py": "b09a3bc644618502680e8804ed7f135eaa074e7b82812d2013c5293ef909117e",
+    "tools/ipanema/orchestration/engine.py": "74885e94f8f9cbf8f7a6e71c0cc8f5f44eec032fac8892f7507e2eb06879319f",
+    "tools/ipanema/orchestration/cli.py": "04e661d92b687da162887aaca8ad5c7905359e7c8376cc0ddec2370d9d58c99b",
+    "tools/ipanema/orchestration/__init__.py": "d36de51224b4946f8db8df4b83d8feecb5852a86064fc09f762d6e5468dc0b39",
+    "tools/ipanema/orchestration/recovery.py": "1d8b3a4d0e22bb0c8507f036ab7ff1b285e6517d8fbe670b70d679a0c317f12c"
+  },
+  "previous_candidate_intact": true,
+  "previous_test_names_retained": 60,
+  "new_test_count": 30,
+  "preserved_evidence": [
+    {
+      "path": "reports/orchestration/v3-cross-review-20261117/corrected-review-20261117T175404/claude-response-complete.json",
+      "sha256": "a6151d3ca32a91cf8a459b10b5a5cebd1421695dbdb06aaf9c2dfeb2f9a58531"
+    },
+    {
+      "path": "reports/orchestration/v3-cross-review-20261117/corrected-review-20261117T175404/claude-receipt.json",
+      "sha256": "b92149188a20d3d76f483646c2419a01db188d824be0c0a4e7cd4913ecb9fcda"
+    },
+    {
+      "path": "reports/orchestration/v3-cross-review-20261117/corrected-review-20261117T175404/controller-findings-audit.json",
+      "sha256": "7ff5ac80b22dc566945dfe70ab5c52d7a8a17cb0cd13e9909e523c8b1885b2a7"
+    },
+    {
+      "path": "reports/orchestration/v3-cross-review-20261117/corrected-review-20261117T175404/ADR.json",
+      "sha256": "d9261f79059ee3be603b429cd8a51638683c58b7500797e56cac7f9e9b322e53"
+    },
+    {
+      "path": "reports/orchestration/v3-cross-review-20261117/findings-resolution-20261117T173510/candidate.patch",
+      "sha256": "c240b16f37ec13a84db4e54f656f15beda7316642c2e078e8d94b906d7ed6085"
+    },
+    {
+      "path": "reports/orchestration/v3-cross-review-20261117/findings-resolution-20261117T173510/ADR.json",
+      "sha256": "77b5816f2bbf96ada8759fd85f4852c1d42cbb85bff7c1c60e6d763e084e1795"
+    }
+  ],
+  "author": "codex",
+  "independent_approval": false
+}

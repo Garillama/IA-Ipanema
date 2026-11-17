@@ -1,0 +1,81 @@
+{
+  "scope": "Incremental review of user-provided XLSX only",
+  "decisions_preserved": [
+    {
+      "agent": "claude",
+      "phase": "review",
+      "file": "claude-review.json",
+      "sha256": "16890eb20efd2560480c4c5f82873f6d6ba631ddc0807665d4f42ed8d53ece8d",
+      "decision": "changes_requested"
+    },
+    {
+      "agent": "codex",
+      "phase": "review",
+      "file": "codex-review.json",
+      "sha256": "450c5a47befdf8fad7a9ebb0015dd4ca2c86c2b3244d6fc883cc1e6d84ce16e5",
+      "decision": "proposed"
+    },
+    {
+      "agent": "claude",
+      "phase": "contrast",
+      "file": "claude-contrast.json",
+      "sha256": "c1c6955b6fbb7657a9d15051a65c68ad070ec4362d0018ce6559024a775a9dcf",
+      "decision": "changes_requested"
+    },
+    {
+      "agent": "codex",
+      "phase": "contrast",
+      "file": "codex-contrast.json",
+      "sha256": "a1af19810802937ef602ff3f3f61d4b72d32e698a2e46ccd4891d9de5b86e5a9",
+      "decision": "proposed"
+    },
+    {
+      "agent": "claude",
+      "phase": "clarification",
+      "file": "claude-clarification.json",
+      "sha256": "57b49b18af544d248e960ec114d4a3b0a7f12f7b4167c8cb52be7095f36876e4",
+      "decision": "changes_requested"
+    }
+  ],
+  "original_two_providers_real": true,
+  "initial_reviews_independent": true,
+  "contracts_valid": 5,
+  "cross_questions_answered": true,
+  "semantic_clarification": {
+    "detail": "Claude initial contrast answered legacy instead of assigned category question; one bounded clarification answered categories. Both original and clarification preserved.",
+    "file": "claude-clarification.json"
+  },
+  "selected_direction": "Export-gap-first; evidence before category or redirect changes",
+  "conditions_open": [
+    {
+      "id": "missing_index_URL_lists",
+      "status": "needs_evidence",
+      "detail": "33rastreada,5descubierta,33404 and indexed examples missing; do not classify124 by aggregate."
+    },
+    {
+      "id": "missing_joint_dimensions",
+      "status": "needs_evidence",
+      "detail": "No query/page/country/device join; no category title/content change justified."
+    },
+    {
+      "id": "redirect_destination_unknown",
+      "status": "needs_evidence",
+      "detail": "94historicalperformance/reason exact joins prioritize evidence only, not a redirect defect or lost traffic."
+    },
+    {
+      "id": "aggregate_mismatch",
+      "status": "needs_evidence",
+      "detail": "Different totals by dimension retained; cause not proven, no artificial balancing."
+    },
+    {
+      "id": "prior_phase2_conditions",
+      "status": "needs_evidence",
+      "detail": "20technical missing fields,author identity/emitter and native blogcanonical mechanism remain unchanged."
+    }
+  ],
+  "implementation_allowed": false,
+  "production_allowed": false,
+  "new_storefront_requests": 0,
+  "new_GSC_API_calls": 0,
+  "no_approval_simulated": true
+}

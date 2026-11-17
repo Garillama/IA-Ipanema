@@ -1,0 +1,75 @@
+{
+  "id": "seo.additional-exports.proposal-clarification",
+  "kind": "offline_documentary_scope_and_source_check",
+  "subject": "Four incremental objections and two assigned cross-questions",
+  "passed": true,
+  "sha256": "50df67e34a4e4be939b303f67d666dd69ddcb8828e802c4c0fd7539eb9e323a6",
+  "measurement_scope": "Read two exact saved source records, no new store/GSC calls; clarify backlog proposal gates only",
+  "saved_facts": [
+    {
+      "url": "https://rhino-performance.com/productos/brazo-presoterapia-pro-3-individual/",
+      "file": "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/live-batch05-20261113/raw-crawl-report.json",
+      "sha256": "77caac7b0117b46baac60bad9dd418dc170c8de0bbf872c35e6937e7e57dbea0",
+      "pointer": "/urls/0",
+      "observed_at": "2026-11-13T07:13:10.132130+00:00",
+      "status": 200,
+      "canonical": [
+        "https://rhino-performance.com/productos/brazo-presoterapia-pro-3-individual/"
+      ],
+      "robots": {
+        "crawler_allowed": true,
+        "googlebot_allowed": true
+      },
+      "limitation": "Saved technical initial HTML, not Google-selected canonical/index state. Missing field provenance not filled."
+    },
+    {
+      "url": "https://rhino-performance.com/terapia-fria/",
+      "file": "reports/runs/rhino-performance/20261112T191008-site-discoverability-continuation-54a878c3/fixed-documents.json",
+      "sha256": "b0b5620711621e104c48387cabd7a4dd5a5b25391b15df2b1d05e8aa96ac79cd",
+      "pointer": "/rows/1",
+      "observed_at": "2026-11-12T19:11:10.994666+00:00",
+      "status": 200,
+      "canonical": [
+        "https://rhino-performance.com/terapia-fria/"
+      ],
+      "limitation": "Saved technical observation, not Google fetch/index state; no cause of exclusion determined."
+    }
+  ],
+  "new_GSC_evidence_needed": "Official perURL inspection export, timestamp and exactURL, Google selected/user canonical, permission and lastcrawl; can clarify technical states but does not itself prove content quality/ranking cause. No authority to execute granted.",
+  "proposal_corrections": {
+    "separate_dependencies": "Category/PDP targeting needs query-filtered Pages + intent. Editorial guide needs useful gap in current main text + verifiedcatalog; actual snippet is specific to CTR/title diagnosis, not a universal editorial prerequisite.",
+    "low_volume": "P1 refers to investigation order, not proven large impact;0-1clicks per selectedquery are low.",
+    "404_read_first": "P1readverification only, recovery conditional after actualstate+equivalence.",
+    "measurement_sufficiency": "Plan predeclared before any implementation, otherwise inconclusive; no numeric rule invented now",
+    "saved_two_commercial_pages": [
+      {
+        "url": "https://rhino-performance.com/productos/brazo-presoterapia-pro-3-individual/",
+        "file": "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/live-batch05-20261113/raw-crawl-report.json",
+        "sha256": "77caac7b0117b46baac60bad9dd418dc170c8de0bbf872c35e6937e7e57dbea0",
+        "pointer": "/urls/0",
+        "observed_at": "2026-11-13T07:13:10.132130+00:00",
+        "status": 200,
+        "canonical": [
+          "https://rhino-performance.com/productos/brazo-presoterapia-pro-3-individual/"
+        ],
+        "robots": {
+          "crawler_allowed": true,
+          "googlebot_allowed": true
+        },
+        "limitation": "Saved technical initial HTML, not Google-selected canonical/index state. Missing field provenance not filled."
+      },
+      {
+        "url": "https://rhino-performance.com/terapia-fria/",
+        "file": "reports/runs/rhino-performance/20261112T191008-site-discoverability-continuation-54a878c3/fixed-documents.json",
+        "sha256": "b0b5620711621e104c48387cabd7a4dd5a5b25391b15df2b1d05e8aa96ac79cd",
+        "pointer": "/rows/1",
+        "observed_at": "2026-11-12T19:11:10.994666+00:00",
+        "status": 200,
+        "canonical": [
+          "https://rhino-performance.com/terapia-fria/"
+        ],
+        "limitation": "Saved technical observation, not Google fetch/index state; no cause of exclusion determined."
+      }
+    ]
+  }
+}

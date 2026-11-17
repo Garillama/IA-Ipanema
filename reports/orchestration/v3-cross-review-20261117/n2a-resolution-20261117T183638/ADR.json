@@ -1,0 +1,31 @@
+{
+  "status": "needs_evidence",
+  "candidate_patch_sha256": "288ef3739417e0e15e105e4826ea65598f17c0807265ed68cf42d3fc5008aa6f",
+  "previous_patch_sha256": "fb292ff7f11c2ccaed5e90a2325c1703f23ece67bdc1b2a6f96ad3c6d49b8e4f",
+  "author": "codex",
+  "N2a": {
+    "state": "correction_prepared_pending_independent_review",
+    "origin_reviewer": "claude",
+    "origin_patch_sha256": "fb292ff7f11c2ccaed5e90a2325c1703f23ece67bdc1b2a6f96ad3c6d49b8e4f",
+    "closed": false
+  },
+  "N4a": {
+    "state": "explicit_signal_prepared_pending_review",
+    "origin_reviewer": "claude",
+    "origin_patch_sha256": "fb292ff7f11c2ccaed5e90a2325c1703f23ece67bdc1b2a6f96ad3c6d49b8e4f",
+    "closed": false
+  },
+  "N1_N3_N4": "prior independent assessments preserved at fb292ff7; compatibility tests run, not retargeted as approval of this new hash",
+  "implementation_allowed": false,
+  "integration_authorized": false,
+  "activation_allowed": false,
+  "production_authorized": false,
+  "mandatory_pending": [
+    "independent review of exact new hash, separately authorized",
+    "native material verifier must substantiate facts, relevance and prior assessments; current default unavailable",
+    "consumer migration to result/2 and record/2; no silent upgrade of historical closures",
+    "previous native history/identity/QA and Antigravity dependencies unchanged",
+    "owner integration authorization"
+  ],
+  "provider_calls": 0
+}

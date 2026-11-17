@@ -1,0 +1,40 @@
+{
+  "execution_authorized": false,
+  "provider": "claude",
+  "model": {
+    "model": "claude-sonnet-5-5",
+    "effort": "medium",
+    "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+    "verified_at": "2026-11-08"
+  },
+  "literal_input": {
+    "path": "reports/orchestration/v3-cross-review-20261117/recovery-preparation-20261117T170921/claude/review-packet.json",
+    "bytes": 243861,
+    "sha256": "790b3dcd3e3f40612ff8ddebb45445b23420d13b3864bd28f25b3a35ae1b2060"
+  },
+  "transport": "Reuse existing adapters.argv + isolation.run_isolated in controller. Do not feed this packet into the old generic role-review builder unchanged; it would wrap/diff metadata and reintroduce duplication. No engine or model policy change is included.",
+  "limits_unchanged": {
+    "timeout": 240,
+    "idle_timeout": 90,
+    "startup_timeout": 30,
+    "first_response_timeout": 120
+  },
+  "max_attempts": 1,
+  "fallback": false,
+  "model_tools": false,
+  "native_subagents": false,
+  "MCP": false,
+  "filesystem": "Existing sanitized readonly view only; no actual home or client project mounts. Existing provider-only credential handling unchanged; no new credentials requested.",
+  "preconditions": [
+    "Owner authorizes the next call separately",
+    "Exact candidate/input/interface hashes unchanged",
+    "Existing isolation preflight and original provider policy remain valid",
+    "Freeze exact literal payload bytes before transport; reject if rewrapping changes size/hash",
+    "Do not infer approvals from the preserved Codex proposal or synthetic QA"
+  ],
+  "postconditions": [
+    "Validate response schema, exact patch and source citations",
+    "No automatic fix, integration or new review loops",
+    "Keep needs_evidence if original peer reviewers or critical QA missing"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "file": "reports/runs/rhino-performance/20261112T042043-breadcrumb-production-fix-287ff54d/articles-after.json",
+  "sha256": "227b880307aaf721eb95a30ecc28622264a3f14fc0cd5c90ae4a07ac4f846bcd",
+  "top_level_keys": [
+    "at",
+    "mode",
+    "rows",
+    "production_modified_by_test"
+  ],
+  "first_row_keys": [
+    "url",
+    "final_url",
+    "http",
+    "at",
+    "html_sha256",
+    "canonical",
+    "json_errors",
+    "breadcrumb_blocks",
+    "breadcrumb",
+    "blog_item"
+  ],
+  "matrix_missing_signals_preserved": true,
+  "no_HTTP_repeated": true
+}

@@ -1,0 +1,224 @@
+{
+  "objective": "Select exactly one minimal performance correction to prepare as isolated candidate; not apply to theme. Highest mobileimpact with low commerce/tracking risk. Existing setupMore two-pass optimization stays.",
+  "authorization": "Confirmed14828608viaGETnative;twoChromeHome traces and5LHperdeviceonly, allPOSTblocked. More nativefileGET ornativevalidationPOSTneedsseparatepermission. No other browsing/apps/marketingconfiguration/POST/indexation orproduction changes.",
+  "native_status": {
+    "status": "confirmed",
+    "published": {
+      "theme_id": 14828608,
+      "store_id": 7400935,
+      "title": "RHINO - FAQ Categorias",
+      "is_productive": true,
+      "is_sectionable": true,
+      "theme_version": "1.8.0",
+      "updated_at": "2026-11-13T05:25:01+00:00"
+    },
+    "guard": "nativeGETonly",
+    "no_writes": true
+  },
+  "trace_facts": [
+    {
+      "device": "mobile",
+      "profile": {
+        "width": 412,
+        "height": 823,
+        "DPR": 1.75,
+        "cpu_rate": 4,
+        "latency_ms": 150,
+        "throughput_kbps": 1638.4,
+        "cache": "disabled",
+        "consent": "fresh/no choice",
+        "trace_window": "20s after DOMContentLoaded; coverage/profiler instrumentation enabled"
+      },
+      "LCP": {
+        "start": 2100,
+        "duration": 0,
+        "url": "https://acdn-us.mitiendanube.com/stores/007/400/935/media/fc9598f3-rhino-performance-bfm/avif/820.avif",
+        "tag": "IMG",
+        "classes": " image-priority-high d-md-none ",
+        "outer": "<img fetchpriority=\"high\" width=\"820\" height=\"1000\" class=\" image-priority-high d-md-none \" alt=\"Hero\" src=\"https://acdn-us.mitiendanube.com/stores/007/400/935/media/fc9598f3-rhino-performance-bfm/source.jpg\" srcset=\"https://acdn-us.mitiendanube.com/stores/007/400/935/media/fc9598f3-rhino-performance-bfm/original/50.jpg 50w, https://acdn-us.mitiendanube.com/stores/007/400/935/media/fc9598f3-rhino-performance-bfm/original/100.jpg 100w, https://acdn-us.mitiendanube.com/stores/007/400/935/media/fc9598f3-rhino-performance-bfm/original/240.jpg 240w, https://acdn-us.mitiendanube.com/stores/007/400/935/media/fc9598f3-rhino-performance-bfm/original/320.jpg 320w, https://acdn-us.mitiendanube.com/stores/007/400/935/media/fc9598f3-rhino-performance-bfm/original/480.jpg 480w, https://acdn-us.mitiendanube.com/stores/007/400/935/media/fc9598f3-rhino-performance-bfm/original/640.jpg 640w, https://acdn-us.mitiendanube.com/stores/007/400/935/media/fc9598f3-rhino-performance-bfm/original/820.jpg 820w\" style=\"aspect-ratio: 820 / 1000\">"
+      },
+      "reviews": {
+        "instances": 1,
+        "top": 2412.921875,
+        "cards": 10
+      },
+      "long_task_count": 26,
+      "observed_task_excess_ms": 4002,
+      "top_scripts": [
+        {
+          "url": "https://www.googletagmanager.com/gtag/js",
+          "self_ms": 872.8319999999993,
+          "task_tail_self_ms": 775.71
+        },
+        {
+          "url": "[browser]",
+          "self_ms": 20132.92199999994,
+          "task_tail_self_ms": 747.7669999999998
+        },
+        {
+          "url": "https://connect.facebook.net/en_US/fbevents.js",
+          "self_ms": 496.7940000000001,
+          "task_tail_self_ms": 458.17500000000007
+        },
+        {
+          "url": "https://rhino-performance.com/",
+          "self_ms": 466.7600000000001,
+          "task_tail_self_ms": 343.84900000000005
+        },
+        {
+          "url": "https://nsk-cdn-static.tiendanube.com/vanilla-adapter-0.40.0.min.js",
+          "self_ms": 464.5110000000001,
+          "task_tail_self_ms": 310.84400000000005
+        },
+        {
+          "url": "https://analytics.tiktok.com/i18n/pixel/static/main.MTAyNjc1NzVmOQ.js",
+          "self_ms": 445.905,
+          "task_tail_self_ms": 303.17000000000013
+        },
+        {
+          "url": "https://acdn-us.mitiendanube.com/assets/stores/js/linkedstore-v2-47d134454a67ec2bdabb724b194e8aa930.js",
+          "self_ms": 282.93199999999985,
+          "task_tail_self_ms": 256.39500000000004
+        },
+        {
+          "url": "https://scripts.clarity.ms/0.8.77/clarity.js",
+          "self_ms": 281.398,
+          "task_tail_self_ms": 200.936
+        },
+        {
+          "url": "https://bzrcdn.openai.com/sdk/oaiq.min.js",
+          "self_ms": 365.69200000000006,
+          "task_tail_self_ms": 197.81199999999995
+        }
+      ],
+      "setupMore": {
+        "url": "https://rhino-performance.com/",
+        "fn": "setupMore",
+        "line": 16862,
+        "column": 20,
+        "self_ms": 282.1330000000001,
+        "task_tail_self_ms": 258.06700000000006
+      },
+      "network_request_count": 143,
+      "instrumentation_limits": "Profiler+Coverage diagnostic overhead; observed LCP not Lighthouse simulatedLCP. TasktailselfisassociatedCPU, not known causal savings or INP. One trace perdevice."
+    },
+    {
+      "device": "desktop",
+      "profile": {
+        "width": 1440,
+        "height": 900,
+        "DPR": 1,
+        "cpu_rate": 1,
+        "latency_ms": 40,
+        "throughput_kbps": 10240,
+        "cache": "disabled",
+        "consent": "fresh/no choice",
+        "trace_window": "20s after DOMContentLoaded; coverage/profiler instrumentation enabled"
+      },
+      "LCP": {
+        "start": 1880,
+        "duration": 0,
+        "url": "https://acdn-us.mitiendanube.com/stores/007/400/935/media/95cbfc17-rhino-performance-bf/avif/1920.avif",
+        "tag": "IMG",
+        "classes": "d-none d-md-block fade-in lazyloaded",
+        "outer": "<img width=\"1920\" height=\"900\" class=\"d-none d-md-block fade-in lazyloaded\" alt=\"Hero\" src=\"data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-srcset=\"https://acdn-us.mitiendanube.com/stores/007/400/935/media/95cbfc17-rhino-performance-bf/original/50.jpg 50w, https://acdn-us.mitiendanube.com/stores/007/400/935/media/95cbfc17-rhino-performance-bf/original/100.jpg 100w, https://acdn-us.mitiendanube.com/stores/007/400/935/media/95cbfc17-rhino-performance-bf/original/240.jpg 240w, https://acdn-us.mitiendanube.com/stores/007/400/935/media/95cbfc17-rhino-performance-bf/original/320.jpg 320w, https://acdn-us.mitiendanube.com/stores/007/400/935/media/95cbfc17-rhino-performance-bf/original/480.jpg 480w, https://acdn-us.mitiendanube.com/stores/007/400/935/media/95cbfc17-rhino-performance-bf/original/640.jpg 640w, https://acdn-us.mitiendanube.com/stores/007/400/935/media/95cbfc17-rhino-performance-bf/original/1024.jpg 1024w, https://acdn-us.mitiendanube.com/stores/007/400/935/media/95cbfc17-rhino-performance-bf/original/1400.jpg 1400w, https://acdn-us.mitiendanube.com/stores/007/400/935/media/95cbfc17-rhino-performance-bf/original/1920.jpg 1920w\" style=\"aspect-ratio: 1920 / 900\" srcset=\"https://acdn-us.mitiendanube.com/stores/007/400/935/media/95cbfc17-rhino-performance-bf/original/50.jpg 50w, https://acdn-us.mitiendanube.com/stores/007/400/935/media/95cbfc17-rhino-performance-bf/original/100.jpg 100w, https://acdn-us.mitiendanube.com/stores/007/400/935/med"
+      },
+      "reviews": {
+        "instances": 1,
+        "top": 2892.453125,
+        "cards": 10
+      },
+      "long_task_count": 12,
+      "observed_task_excess_ms": 538,
+      "top_scripts": [
+        {
+          "url": "https://www.googletagmanager.com/gtag/js",
+          "self_ms": 192.46799999999988,
+          "task_tail_self_ms": 101.7199999999999
+        },
+        {
+          "url": "https://rhino-performance.com/",
+          "self_ms": 197.443,
+          "task_tail_self_ms": 92.76499999999997
+        },
+        {
+          "url": "https://acdn-us.mitiendanube.com/assets/stores/js/linkedstore-v2-47d134454a67ec2bdabb724b194e8aa930.js",
+          "self_ms": 118.82899999999995,
+          "task_tail_self_ms": 73.02599999999998
+        },
+        {
+          "url": "[browser]",
+          "self_ms": 19903.124999999884,
+          "task_tail_self_ms": 66.60600000000002
+        },
+        {
+          "url": "https://connect.facebook.net/en_US/fbevents.js",
+          "self_ms": 115.14499999999998,
+          "task_tail_self_ms": 57.19700000000001
+        },
+        {
+          "url": "https://ftp-cdn.mitiendanube.com/forked-files/007/400/935/installations/14828608/static/js/featured-collection-a3c03f55d53014612d213148512387d2.js",
+          "self_ms": 104.25899999999999,
+          "task_tail_self_ms": 49.57899999999999
+        },
+        {
+          "url": "https://connect.facebook.net/signals/config/393081466010695",
+          "self_ms": 52.82600000000002,
+          "task_tail_self_ms": 33.399
+        },
+        {
+          "url": "https://analytics.tiktok.com/i18n/pixel/static/main.MTAyNjc1NzVmOQ.js",
+          "self_ms": 99.538,
+          "task_tail_self_ms": 30.429
+        },
+        {
+          "url": "https://nsk-cdn-static.tiendanube.com/vanilla-adapter-0.40.0.min.js",
+          "self_ms": 143.47599999999997,
+          "task_tail_self_ms": 27.152999999999995
+        }
+      ],
+      "setupMore": {
+        "url": "https://rhino-performance.com/",
+        "fn": "setupMore",
+        "line": 16862,
+        "column": 20,
+        "self_ms": 121.317,
+        "task_tail_self_ms": 82.31799999999998
+      },
+      "network_request_count": 132,
+      "instrumentation_limits": "Profiler+Coverage diagnostic overhead; observed LCP not Lighthouse simulatedLCP. TasktailselfisassociatedCPU, not known causal savings or INP. One trace perdevice."
+    }
+  ],
+  "source": {
+    "path": "reports/runs/rhino-performance/20261113T180949-home-performance-authorized-e593dae0/source/sections/google-reviews.tpl",
+    "sha256": "75a487600c5d71001fa2e0970dad1cb943f80d399f1af89db559bffc3253fd30",
+    "actual_theme_source": "/home/alanrichard/Escritorio/Cli/Rhino-Ipanema/sections/google-reviews.tpl",
+    "remote_tpl_equality": "notconfirmed;GET permission requested",
+    "store_js_remote_sha": "f97557494e017eba623ba2dd7e568789f8d9035d467f0b03f71bc0b3b8393be9"
+  },
+  "current_source_behavior": [
+    "Customreviews server snapshot present; immediate GETrefresh still occurs and muststayunchanged unless separatelyjustified",
+    "setupMore andupdateArrows calledsynchronouslyinit,render,load,resize; geometric reads can forceglobal layout even offscreen",
+    "Existing two-pass geometry read/classwrite fix approvedhistorically and mustnot beundone",
+    "Reviewroot at2413mobile/2892desktop below initialviewport;10cardsinbothsessions",
+    "Large mobilemarketingCPU stillgreaterthanthisonecomponent; no event-preserving marketingfix demonstrated, do not removeor blinddelaytags",
+    "Sectionfy/Swiper alreadyhaveconditionalbehavior; no causalreason rewrite now"
+  ],
+  "alternatives_to_evaluate": [
+    "Visibility-gate review geometry measurement with nearviewportprewarm, earlykeyboard path and unsupportedObserverfallback; keepHTML,API,events/styles",
+    "Only coalesce repeatedgeometry calls without visibilitygate",
+    "Compress desktopvideoasset lowrisk butnotinitialmobilebenefit",
+    "Leaveunchanged untilothercauseproven"
+  ],
+  "tests_needed": [
+    "Initialoffscreen geometrycalls eliminated causallyincontrolledfixture, not just percentscore",
+    "Visible/nearviewport result sameastwo-passsource",
+    "Datarefreshbeforevisibility stillupdatescards; delayedoverflowmeasure correctonapproach",
+    "KeyboardfocusbeforeObserver callback, arrows,moretext,aria-controls/state",
+    "Resize whilehidden, fontsload,emptyreviews,noreviews,multipleinstances,unsupportedIO,interactionpreviouslyopenedcard",
+    "Sixwidthsscreenshotcomparison withexplicitfont/resource conditions, offlineblockednetwork",
+    "NativeTiendanubevalidationnotyetallowedPOST; do not claimrendernativecertification",
+    "10LH baseline results stillrunning; do not fabricate finalstats or90+"
+  ],
+  "limits": "Currenttracesarecorrelation,source and controlledtests mustestablishcause. No global scorebenefit yet measured. No APIkey available forPSI/CrUX, usevalidhistoricalevidence separated."
+}

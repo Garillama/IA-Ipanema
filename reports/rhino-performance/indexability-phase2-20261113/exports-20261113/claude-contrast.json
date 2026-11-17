@@ -1,0 +1,148 @@
+{
+  "requested_agent": "claude",
+  "effective_agent": "claude",
+  "scope": "official XLSX cross-examination and prioritization only",
+  "input_hashes": {
+    "reports/rhino-performance/indexability-phase2-20261113/exports-20261113/review-packet.json": "e459744c1976e6da448d7c3bbbf1a5b2ecd6bd5dcb0043e693f2ef573b9eb980",
+    "reports/rhino-performance/indexability-phase2-20261113/exports-20261113/controller-validation.json": "5c3362b8d8960d36bf2ea160a122015359490299edbf109071c455f3b5079a53",
+    "reports/rhino-performance/indexability-phase2-20261113/exports-20261113/controller-supplement.json": "74b4ef78c86e3cdf3a24adbec56eac578cd4f3d44d56079cadf28c22f5c0ba86",
+    "reports/rhino-performance/indexability-phase2-20261113/exports-20261113/categories.json": "211fb22809de54afc9bde4e15029bfdd73188998e27ecaa35aaa53e8e25a0f66",
+    "reports/rhino-performance/indexability-phase2-20261113/exports-20261113/performance-scope.json": "38b1e731d00349b3dc442503cdf3d3adb29b7d42b228ee7987d224defd8ff7bb",
+    "reports/rhino-performance/indexability-phase2-20261113/exports-20261113/summary.json": "0697f6c2a8a78a22e70cb47beb70d3b2e46a5a9ac68fc7fb819416441e292898"
+  },
+  "response": {
+    "decision": "changes_requested",
+    "summary": "Respuesta a codex-q1: la prioridad de las 112 redirecciones es de conciliación, no un defecto demostrado. Campos usados: legacy_redirect_visibility_top (url, clicks, impressions, CTR_exported, position_exported, reason, source_evidence) y el recibo gsc.xlsx.scope-clarifications. No hay destino, Location ni canónica elegida por Google. Sin implementación; el ADR sigue en needs_evidence.",
+    "changes": [],
+    "evidence": [
+      "gsc.xlsx.reconciliation",
+      "gsc.xlsx.scope-clarifications"
+    ],
+    "objections": [
+      {
+        "id": "claude-obj-nojoin2",
+        "alternative_id": "codex-o1",
+        "category": "alcance",
+        "severity": "medium",
+        "claim": "Sin cruce consulta×página×dispositivo×país no se puede atribuir causa a categorías ni redirecciones; títulos y contenido siguen bloqueados.",
+        "status": "open",
+        "evidence_refs": [
+          "gsc.xlsx.reconciliation"
+        ],
+        "resolution_evidence_refs": []
+      },
+      {
+        "id": "claude-obj-totals2",
+        "alternative_id": "codex-o1",
+        "category": "integridad de datos",
+        "severity": "low",
+        "claim": "Los totales del gráfico, las páginas y las consultas difieren sin causa demostrada (unknown). No hay que escalarlos ni usarlos para comparar períodos.",
+        "status": "open",
+        "evidence_refs": [
+          "gsc.xlsx.reconciliation"
+        ],
+        "resolution_evidence_refs": []
+      }
+    ],
+    "preferred_alternative": "claude-export-gap-first",
+    "answers": [
+      {
+        "question_id": "codex-q1",
+        "from_agent": "codex",
+        "answer": "Campos de legacy_redirect_visibility_top: url, clicks, impressions, CTR_exported, position_exported, reason ('Página con redirección') y source_evidence. Ejemplos: /producto/botas-de-presoterapia-botas/ 539 clics/20338 impresiones; /home/ 283/3519; /producto/botas-de-presoterapia-kit/ 100/4973. Según scope-clarifications, 94 de las 112 filas coinciden exactamente con filas de rendimiento, así que all112_redirects_have_performance_evidence es false. Límites: el cruce es por URL exacta entre períodos distintos (lista de cobertura frente a 11-ago..10-nov). Ninguna hoja trae destino, Location ni canónica elegida por Google. No prueba redirección rota, pérdida de tráfico ni destino comercial actual. No afirmo que las 112 tengan tráfico ni que estén mal. Es prioridad para recolectar evidencia de destino; no se visita nada ahora. Fechas separadas: export 13-nov, gráfico 08-nov y lastcrawl individual.",
+        "disposition": "defend",
+        "evidence_refs": [
+          "gsc.xlsx.reconciliation",
+          "gsc.xlsx.scope-clarifications"
+        ]
+      }
+    ],
+    "withdrawn_alternatives": [],
+    "revision_notes": [
+      "Pregunta asignada contestada; no se añadieron preguntas genéricas.",
+      "Pendiente: exportaciones mínimas (listas 404/rastreada/descubierta/indexadas y consultas por página con dispositivo/país) antes de cualquier cambio.",
+      "Los 16 bloqueados por robots son checkout/add-to-cart: no desbloquear ni visitar.",
+      "Los hashes son los aportados por el controlador; no afirmo haberlos recalculado."
+    ]
+  },
+  "model": {
+    "model": "claude-sonnet-5-5",
+    "effort": "medium",
+    "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+    "verified_at": "2026-11-08"
+  },
+  "execution": {
+    "exit_code": 0,
+    "timed_out": false,
+    "output_limited": false,
+    "idle_timed_out": false,
+    "cancelled": false,
+    "process_started": true,
+    "process_reaped": true,
+    "stdin_bytes_written": 76481,
+    "context_complete": true,
+    "duration_s": 35.823,
+    "timing": {
+      "spawn_s": 0.001868,
+      "input_complete_s": 12.679857,
+      "first_stdout_s": 25.284946,
+      "first_stderr_s": null,
+      "timeout_phase": null,
+      "event_counts": {
+        "system": 2,
+        "stream_event": 201,
+        "event:message_start": 1,
+        "event:content_block_start": 1,
+        "event:content_block_delta": 196,
+        "assistant": 1,
+        "event:content_block_stop": 1,
+        "user": 1,
+        "event:message_delta": 1,
+        "event:message_stop": 1,
+        "rate_limit_event": 1,
+        "result": 1
+      },
+      "inference_vs_initialization": "not_separable_without_provider_events"
+    },
+    "output_accounting": {
+      "transport_bytes": 82529,
+      "retained_bytes": 82529,
+      "discarded_progress_bytes": 0,
+      "transport_limit_bytes": 20000000,
+      "retained_limit_bytes": 2000000
+    },
+    "isolation": {
+      "backend": "bubblewrap",
+      "snapshot_read_only": true,
+      "host_home_mounted": false,
+      "network": "enabled_no_destination_firewall",
+      "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+    },
+    "started_at": "2026-11-13T08:55:34.151003+00:00",
+    "prompt_bytes": 76481,
+    "prompt_sha256": "8fb6e9efedc90aae496cde5b8c2ae87b2aeea20c397c180b81f949491a11d11a",
+    "usage": {
+      "provider_reported": {
+        "total_cost_usd": 0.1504455,
+        "duration_ms": 13817,
+        "input_tokens": 2,
+        "cache_creation_input_tokens": 34110,
+        "cache_read_input_tokens": 2815,
+        "output_tokens": 1372
+      },
+      "measured_cost_available": true,
+      "estimated_cost": null
+    },
+    "limits": {
+      "timeout": 240,
+      "idle_timeout": 90,
+      "startup_timeout": 30,
+      "first_response_timeout": 120
+    },
+    "structured_output": "native_schema",
+    "contract_validation": {
+      "status": "passed",
+      "duration_s": 0.015667
+    }
+  }
+}

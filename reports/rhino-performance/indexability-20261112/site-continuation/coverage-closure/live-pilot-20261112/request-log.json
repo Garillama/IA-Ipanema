@@ -1,0 +1,45 @@
+{
+  "requests": [
+    {
+      "url": "https://rhino-performance.com/robots.txt",
+      "status": 200,
+      "bytes": 1742,
+      "method": "GET"
+    },
+    {
+      "url": "https://rhino-performance.com/productos/pistola-de-masaje-gun-pro/",
+      "status": 200,
+      "bytes": 735602,
+      "method": "GET"
+    },
+    {
+      "url": "https://rhino-performance.com/productos/tina-de-hielo-tub-air/",
+      "status": 200,
+      "bytes": 733871,
+      "method": "GET"
+    },
+    {
+      "url": "https://rhino-performance.com/blog/posts/la-presoterapia-como-transformador-de-tu-salud-mental-relajacion-y-recuperacion-127cdc829590/",
+      "status": 200,
+      "bytes": 244057,
+      "method": "GET"
+    },
+    {
+      "url": "https://rhino-performance.com/blog/posts/el-fro-no-es-un-castigo-es-una-herramienta-cbe9a25855f8/",
+      "status": 200,
+      "bytes": 250968,
+      "method": "GET"
+    },
+    {
+      "url": "https://rhino-performance.com/blog/posts/faja-de-compresion-lumbar-el-soporte-que-tu-espalda-agradecera-047c381cf3ac/",
+      "status": 200,
+      "bytes": 246364,
+      "method": "GET"
+    }
+  ],
+  "started": 6,
+  "completed": 6,
+  "unconfirmed": 0,
+  "redirect_hops": 0,
+  "source": "live guarded GET; no retries"
+}

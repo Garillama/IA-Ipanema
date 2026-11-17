@@ -1,0 +1,249 @@
+{
+  "scope": "Incremental opportunities review only, previous council/exports valid; zero storefront/GSC calls or modifications. No additional files received this turn.",
+  "baseline": "124 HTTP, 122 discovery paths, historic15 inspections/10 indexed; do not equate with current Google total",
+  "source_package": "reports/rhino-performance/indexability-phase2-20261113/exports-20261113",
+  "cards": [
+    {
+      "id": "OP-01",
+      "priority": "P1",
+      "page": "https://rhino-performance.com/presoterapia/",
+      "evidence": "30 clicks, 2810 impressions, CTR exported 1.07%, position 5.30; Web 2026-08-11..2026-11-10, all country/device",
+      "commercial_potential": "High relative investigation priority for a commercial category; revenue and conversion impact unmeasured",
+      "decision_now": "Prioritize the exact-page query export. No title/content change approved.",
+      "hypotheses": [
+        "Transactional query cluster may justify more precise snippet wording",
+        "Informational queries may need a different existing landing; do not create one yet"
+      ],
+      "minimum_evidence": "Verified exact-page queries plus matching period; country/device segment if used commercially; query-filtered Pages for suspected overlapping landings; dated evidence of served snippet and landing content before asserting mismatch",
+      "action_if_supported": "Propose a minimal title/metadescription change only if the actual served intent is mismatched; content change requires useful content gap evidence and separate authorization",
+      "validation": "Compare same-page query cohorts before/after after sufficient observations, accounting for position/device/country; no promised uplift",
+      "risk": "Loss of relevant intent or cannibalization if optimized against unbound generic queries",
+      "status": "needs_evidence"
+    },
+    {
+      "id": "OP-02",
+      "priority": "P1",
+      "page": "https://rhino-performance.com/compresion-frio-y-calor/",
+      "evidence": "6 clicks, 1079 impressions, CTR exported 0.56%, position 1.35; same period and global filters",
+      "commercial_potential": "Commercial landing; current low click volume makes an uplift estimate unreliable",
+      "decision_now": "Preserve current title/content. Determine which queries contribute impressions and whether demand is commercial.",
+      "hypotheses": [
+        "Global average may hide branded, geographic or device differences",
+        "Snippet/intent mismatch is possible but not demonstrated by low aggregate CTR"
+      ],
+      "minimum_evidence": "Verified page-filtered query export; comparable commercial country/device segment, and served snippet/content evidence if a change is proposed",
+      "action_if_supported": "Choose between retaining current wording, clarifying product use in snippet, or documenting informational intent. No automatic expansion or keyword insertion.",
+      "validation": "Same query/landing/date profile with uncertainty noted for low counts; not a universal expected CTR by rank",
+      "risk": "Damaging a currently visible landing by optimizing against a misleading aggregate",
+      "status": "needs_evidence"
+    },
+    {
+      "id": "OP-03",
+      "priority": "P1",
+      "page": [
+        "https://rhino-performance.com/producto/botas-de-presoterapia-botas/",
+        "https://rhino-performance.com/home/",
+        "https://rhino-performance.com/producto/botas-de-presoterapia-kit/",
+        "https://rhino-performance.com/retencion-de-liquidos-en-atletas-por-que-ocurre-y-como-tratarla/",
+        "https://rhino-performance.com/que-debes-saber-antes-de-de-comprar-unas-botas-de-presoterapia/"
+      ],
+      "evidence": "Five exact URL joins of official redirect examples with historical performance; destinations/chains unconfirmed",
+      "commercial_potential": "Preserve existing discovery routes; historic clicks are exposure, not current lost sales",
+      "decision_now": "Do not remove redirects. Finish offline destination-evidence qualification; request bounded read authorization only if required.",
+      "minimum_evidence": "Actual source HTTP/Location and each safe hop, final status/canonical/content and theme correspondence",
+      "action_if_supported": "Only a demonstrated broken/irrelevant/looping/needlessly chained route supports a separate correction proposal. Correct existing redirects need no change.",
+      "risk": "Removing useful legacy routes or falsely mapping old products to new products",
+      "status": "needs_evidence"
+    },
+    {
+      "id": "OP-04",
+      "priority": "P1",
+      "page": "Exact affected inventory URLs not yet supplied",
+      "evidence": "Aggregate 33 crawled-not-indexed, 5 discovered-not-indexed and 33 404; missing URL example lists",
+      "commercial_potential": "Prioritize commercially important exact matches if supplied; no blanket indexing request",
+      "decision_now": "Reconcile incoming official lists before attributing an exclusion to a current category/product/article",
+      "action_if_supported": "Separate historical redirects/variants from current important canonical pages; only confirmed technical/content causes support a fix",
+      "risk": "Treating an example list as exhaustive or changing useful aliases",
+      "status": "needs_evidence"
+    }
+  ],
+  "redirect_search_summary": {
+    "file_count": 232,
+    "mention_count": 0,
+    "candidate_record_count": 0,
+    "limited_scope": true
+  },
+  "intake_contract": {
+    "status": "awaiting_additional_files",
+    "already_received_sources": [
+      {
+        "file": "/home/alanrichard/Escritorio/rhino-performance.com-Coverage-2026-11-13.xlsx",
+        "name": "rhino-performance.com-Coverage-2026-11-13.xlsx",
+        "sha256": "bb3874d719ea5f33d6112f7585e3fd717318535f25bf7a06463326b7c5f94379",
+        "bytes": 7467,
+        "date_claimed_by_filename": "2026-11-13",
+        "date1904": false,
+        "sheets": {
+          "Gráfico": 87,
+          "Problemas críticos": 9,
+          "Problemas no críticos": 0,
+          "Metadatos": 1
+        },
+        "metadata_or_filters": [
+          [
+            "Propiedad",
+            "Valor"
+          ],
+          [
+            "Sitemap",
+            "Todas las páginas conocidas"
+          ]
+        ],
+        "property_binding": "User provided Rhino filenames; URL rows all restricted to rhino-performance.com/www; workbook metadata itself has no property identifier."
+      },
+      {
+        "file": "/home/alanrichard/Escritorio/rhino-performance.com-Coverage-Drilldown-2026-11-13.xlsx",
+        "name": "rhino-performance.com-Coverage-Drilldown-2026-11-13.xlsx",
+        "sha256": "81676e917902ceeabfdbb6011da3c0fdabe555c56ae64f4ed6b586f8ef6d4c0c",
+        "bytes": 11031,
+        "date_claimed_by_filename": "2026-11-13",
+        "date1904": false,
+        "sheets": {
+          "Gráfico": 85,
+          "Tabla": 148,
+          "Metadatos": 2
+        },
+        "metadata_or_filters": [
+          [
+            "Propiedad",
+            "Valor"
+          ],
+          [
+            "Sitemap",
+            "Todas las páginas conocidas"
+          ],
+          [
+            "Incidencia",
+            "Página alternativa con etiqueta canónica adecuada"
+          ]
+        ],
+        "property_binding": "User provided Rhino filenames; URL rows all restricted to rhino-performance.com/www; workbook metadata itself has no property identifier."
+      },
+      {
+        "file": "/home/alanrichard/Escritorio/rhino-performance.com-Coverage-Drilldown-2026-11-13 (1).xlsx",
+        "name": "rhino-performance.com-Coverage-Drilldown-2026-11-13 (1).xlsx",
+        "sha256": "8fd5c8d20f3605b219eed4b8f446947ef898471d46a7a490edeac2205ef77678",
+        "bytes": 9149,
+        "date_claimed_by_filename": "2026-11-13",
+        "date1904": false,
+        "sheets": {
+          "Gráfico": 85,
+          "Tabla": 112,
+          "Metadatos": 2
+        },
+        "metadata_or_filters": [
+          [
+            "Propiedad",
+            "Valor"
+          ],
+          [
+            "Sitemap",
+            "Todas las páginas conocidas"
+          ],
+          [
+            "Incidencia",
+            "Página con redirección"
+          ]
+        ],
+        "property_binding": "User provided Rhino filenames; URL rows all restricted to rhino-performance.com/www; workbook metadata itself has no property identifier."
+      },
+      {
+        "file": "/home/alanrichard/Escritorio/rhino-performance.com-Coverage-Drilldown-2026-11-13 (2).xlsx",
+        "name": "rhino-performance.com-Coverage-Drilldown-2026-11-13 (2).xlsx",
+        "sha256": "0f3948e29ca88172a8ee5a607fd6d75b00076acbec99ba80d9692513ca966842",
+        "bytes": 6096,
+        "date_claimed_by_filename": "2026-11-13",
+        "date1904": false,
+        "sheets": {
+          "Gráfico": 85,
+          "Tabla": 16,
+          "Metadatos": 2
+        },
+        "metadata_or_filters": [
+          [
+            "Propiedad",
+            "Valor"
+          ],
+          [
+            "Sitemap",
+            "Todas las páginas conocidas"
+          ],
+          [
+            "Incidencia",
+            "Bloqueada por robots.txt"
+          ]
+        ],
+        "property_binding": "User provided Rhino filenames; URL rows all restricted to rhino-performance.com/www; workbook metadata itself has no property identifier."
+      },
+      {
+        "file": "/home/alanrichard/Escritorio/rhino-performance.com-Performance-on-Search-2026-11-13.xlsx",
+        "name": "rhino-performance.com-Performance-on-Search-2026-11-13.xlsx",
+        "sha256": "b71bc7294509e52b71b409d903a1df33d13c20bffead17435fdc99407ddfd095",
+        "bytes": 64969,
+        "date_claimed_by_filename": "2026-11-13",
+        "date1904": false,
+        "sheets": {
+          "Gráfico": 92,
+          "Consultas": 1000,
+          "Páginas": 440,
+          "Países": 161,
+          "Dispositivos": 3,
+          "Aparición en búsquedas": 2,
+          "Filtros": 2
+        },
+        "metadata_or_filters": [
+          [
+            "Filtrar",
+            "Valor"
+          ],
+          [
+            "Tipo de búsqueda",
+            "Web (basada en texto)"
+          ],
+          [
+            "Fecha",
+            "Últimos 3 meses"
+          ]
+        ],
+        "property_binding": "User provided Rhino filenames; URL rows all restricted to rhino-performance.com/www; workbook metadata itself has no property identifier."
+      }
+    ],
+    "matching": "Exact original URL string; keep scheme, host, path, query, trailing slash. Aliases are separate candidate relations, never propagated Google status.",
+    "required_per_observation": [
+      "original_file_sha256",
+      "sheet",
+      "row",
+      "literal_URL_or_query",
+      "property_if_provided",
+      "search_type",
+      "date_start",
+      "date_end",
+      "page_exact_filter",
+      "query_filter_if_any",
+      "country_filter",
+      "device_filter",
+      "export_date_separate_from_observation_and_last_crawl",
+      "literal_reason",
+      "limits_and_missing_fields"
+    ],
+    "conflicts": "Append observations; preserve old evidence and dates. New file date alone does not prove newer URL status. Flag contradictory same-scope observations.",
+    "missing_rows": "unknown; absence from examples or truncated query table is not zero, indexed, or problem-free",
+    "query_binding": "Only a verified exact-page filter binds its queries to that page; marginal country/device tables do not produce a query-country-device join. Missing filter metadata requires owner confirmation.",
+    "comparability": "Keep country/device/date/search-type cohorts separate; retain clicks and impressions, compute CTR only for a matching denominator; do not average position or CTR across incompatible/overlapping cohorts.",
+    "cannibalization": "Require query-to-multiple-current-canonical-landing evidence in comparable cohorts and evidence of competing intent or instability. Shared words, canonical aliases and two aggregate page rows are not proof.",
+    "indexed_evidence": "Official URL inspection or indexed examples with source/date; impressions establish historic visibility, not current index state."
+  },
+  "pending": "Additional official coverage examples, exact-page queries for two categories. Need evidence before metadata/content or redirects correction.",
+  "review_request": "Review only new opportunity cards, intake handling and bounded redirect lookup. Challenge unsupported causal/conversion claims; at most one concrete cross-question. Do not re-open crawler/schema/old council. No implementation approval requested.",
+  "period_provenance": "Absolute dates are first/last daily Gráfico rows (92 observations), not literal absolute Filtros metadata. Filtros says Últimos 3 meses. Confirm exact selected range before before/after or segmented comparison."
+}

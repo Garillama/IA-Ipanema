@@ -1,0 +1,710 @@
+{
+  "historical_completed_batches": [
+    "live-pilot-20261112",
+    "live-batch02-20261113"
+  ],
+  "batches": [
+    {
+      "batch": "03",
+      "manifest_sha256": "27375186058c9e953be9cd5e32a550864e852fa4fe49a38478b0b80db91b60be",
+      "state": "executed",
+      "executed": true,
+      "execution_report": "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/live-batch03-20261113/raw-crawl-report.json",
+      "checkpoint": "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/live-batch03-20261113/checkpoint.json",
+      "supervision": "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/live-batch03-20261113/supervision.json",
+      "one_use_marker": ".local/rhino-indexability/authorized-batch03-27375186-once.json",
+      "execution_started": true,
+      "authorization_consumed": true,
+      "outcome": "complete_for_selected_scope",
+      "stop_reason": null,
+      "pending_requests": [],
+      "started_unconfirmed_requests": [],
+      "completed_requests": [
+        {
+          "url": "https://rhino-performance.com/robots.txt",
+          "status": 200,
+          "bytes": 1742,
+          "method": "GET"
+        },
+        {
+          "url": "https://rhino-performance.com/productos/tobillera-frio-y-calor/",
+          "status": 200,
+          "bytes": 726933,
+          "method": "GET"
+        },
+        {
+          "url": "https://rhino-performance.com/productos/hombrera-frio-y-calor/",
+          "status": 200,
+          "bytes": 760631,
+          "method": "GET"
+        },
+        {
+          "url": "https://rhino-performance.com/blog/posts/errores-comunes-al-usar-los-brazos-de-presoterapia-c80d6e476fb3/",
+          "status": 200,
+          "bytes": 243939,
+          "method": "GET"
+        },
+        {
+          "url": "https://rhino-performance.com/blog/posts/lesiones-por-estres-sintomas-y-como-tratarlas-d080cbc403b8/",
+          "status": 200,
+          "bytes": 246642,
+          "method": "GET"
+        },
+        {
+          "url": "https://rhino-performance.com/blog/posts/claves-para-potenciar-los-resultados-del-ejercicio-a823a76cbadd/",
+          "status": 200,
+          "bytes": 252248,
+          "method": "GET"
+        }
+      ]
+    },
+    {
+      "batch": "04",
+      "manifest_sha256": "2e0222f4abeadad55b5bcc98f63bf0660771c2cf6630c4e66fef9f63f0adc56c",
+      "state": "executed",
+      "executed": true,
+      "execution_report": "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/live-batch04-20261113/raw-crawl-report.json",
+      "checkpoint": "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/live-batch04-20261113/checkpoint.json",
+      "supervision": "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/live-batch04-20261113/supervision.json",
+      "one_use_marker": ".local/rhino-indexability/authorized-batch04-2e0222f4-once.json",
+      "execution_started": true,
+      "authorization_consumed": true,
+      "outcome": "complete_for_selected_scope",
+      "stop_reason": null,
+      "pending_requests": [],
+      "started_unconfirmed_requests": [],
+      "completed_requests": [
+        {
+          "url": "https://rhino-performance.com/robots.txt",
+          "status": 200,
+          "bytes": 1742,
+          "method": "GET"
+        },
+        {
+          "url": "https://rhino-performance.com/productos/kit-botas-y-brazos-de-presoterapia-pro-3/",
+          "status": 200,
+          "bytes": 803281,
+          "method": "GET"
+        },
+        {
+          "url": "https://rhino-performance.com/productos/manga-frio-y-calor-pierna-y-brazo/",
+          "status": 200,
+          "bytes": 735679,
+          "method": "GET"
+        },
+        {
+          "url": "https://rhino-performance.com/blog/posts/te-pasa-esto-entonces-estas-corriendo-mal-y-no-lo-sabias-e8800665a332/",
+          "status": 200,
+          "bytes": 246703,
+          "method": "GET"
+        },
+        {
+          "url": "https://rhino-performance.com/blog/posts/recuperacion-de-alto-impacto-para-peleadores-de-alto-nivel-57c3e51bfe71/",
+          "status": 200,
+          "bytes": 250162,
+          "method": "GET"
+        },
+        {
+          "url": "https://rhino-performance.com/blog/posts/lo-que-nadie-ve-cuando-termina-el-partido-596267de630b/",
+          "status": 200,
+          "bytes": 245378,
+          "method": "GET"
+        }
+      ]
+    },
+    {
+      "batch": "05",
+      "manifest_sha256": "a6e21fdd410e33e0394f168a28e4244ddb535370e876582459b499d8c603105e",
+      "state": "executed",
+      "executed": true,
+      "execution_report": "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/live-batch05-20261113/raw-crawl-report.json",
+      "checkpoint": "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/live-batch05-20261113/checkpoint.json",
+      "supervision": "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/live-batch05-20261113/supervision.json",
+      "one_use_marker": ".local/rhino-indexability/authorized-batch05-a6e21fdd-once.json",
+      "execution_started": true,
+      "authorization_consumed": true,
+      "outcome": "complete_for_selected_scope",
+      "stop_reason": null,
+      "pending_requests": [],
+      "started_unconfirmed_requests": [],
+      "completed_requests": [
+        {
+          "url": "https://rhino-performance.com/robots.txt",
+          "status": 200,
+          "bytes": 1742,
+          "method": "GET"
+        },
+        {
+          "url": "https://rhino-performance.com/productos/brazo-presoterapia-pro-3-individual/",
+          "status": 200,
+          "bytes": 742061,
+          "method": "GET"
+        },
+        {
+          "url": "https://rhino-performance.com/productos/kit-botas-de-presoterapia-pro-3/",
+          "status": 200,
+          "bytes": 766640,
+          "method": "GET"
+        },
+        {
+          "url": "https://rhino-performance.com/blog/posts/bienestar-emocional-como-el-masaje-de-compresion-puede-aliviar-el-estres-5244f5509cd6/",
+          "status": 200,
+          "bytes": 245671,
+          "method": "GET"
+        },
+        {
+          "url": "https://rhino-performance.com/blog/posts/presoterapia-tu-aliado-contra-la-celulitis-y-grasa-localizada-45080195e9b1/",
+          "status": 200,
+          "bytes": 245598,
+          "method": "GET"
+        },
+        {
+          "url": "https://rhino-performance.com/blog/posts/la-presoterapia-un-tratamiento-efectivo-para-mejorar-la-apariencia-de-la-piel-25a565de1dd8/",
+          "status": 200,
+          "bytes": 259786,
+          "method": "GET"
+        }
+      ]
+    },
+    {
+      "batch": "06",
+      "manifest_sha256": "d8e56a7144bf6694e25e09a973c8def5564dc483e3c35fb6fc84a19f362adf8c",
+      "state": "executed",
+      "executed": true,
+      "execution_report": "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/live-batch06-20261113/raw-crawl-report.json",
+      "checkpoint": "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/live-batch06-20261113/checkpoint.json",
+      "supervision": "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/live-batch06-20261113/supervision.json",
+      "one_use_marker": ".local/rhino-indexability/authorized-batch06-d8e56a71-once.json",
+      "execution_started": true,
+      "authorization_consumed": true,
+      "outcome": "complete_for_selected_scope",
+      "stop_reason": null,
+      "pending_requests": [],
+      "started_unconfirmed_requests": [],
+      "completed_requests": [
+        {
+          "url": "https://rhino-performance.com/robots.txt",
+          "status": 200,
+          "bytes": 1742,
+          "method": "GET"
+        },
+        {
+          "url": "https://rhino-performance.com/productos/botas-presoterapia-pro-3/",
+          "status": 200,
+          "bytes": 747916,
+          "method": "GET"
+        },
+        {
+          "url": "https://rhino-performance.com/blog/posts/los-benecios-de-la-natacion-para-la-salud-y-el-rendimiento-fisico-ffeb1529210e/",
+          "status": 200,
+          "bytes": 245991,
+          "method": "GET"
+        },
+        {
+          "url": "https://rhino-performance.com/blog/posts/por-que-es-crucial-la-hidratacion-en-atletas-070675a646a6/",
+          "status": 200,
+          "bytes": 245127,
+          "method": "GET"
+        },
+        {
+          "url": "https://rhino-performance.com/blog/posts/palabras-clave-para-iniciarse-en-el-mundo-runner-120cd6cf0343/",
+          "status": 200,
+          "bytes": 250325,
+          "method": "GET"
+        },
+        {
+          "url": "https://rhino-performance.com/blog/posts/mangas-cold-therapy-recuperacion-inteligente-al-alcance-de-tu-cuerpo-30c1563de10f/",
+          "status": 200,
+          "bytes": 255423,
+          "method": "GET"
+        }
+      ]
+    },
+    {
+      "batch": "07",
+      "manifest_sha256": "451b86e22685c0e6657d41bb6cb0dbe22ff0db8dcfe7ec8e4826de9bea797fdc",
+      "state": "executed",
+      "executed": true,
+      "execution_report": "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/live-batch07-20261113/raw-crawl-report.json",
+      "checkpoint": "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/live-batch07-20261113/checkpoint.json",
+      "supervision": "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/live-batch07-20261113/supervision.json",
+      "one_use_marker": ".local/rhino-indexability/authorized-batch07-451b86e2-once.json",
+      "execution_started": true,
+      "authorization_consumed": true,
+      "outcome": "complete_for_selected_scope",
+      "stop_reason": null,
+      "pending_requests": [],
+      "started_unconfirmed_requests": [],
+      "completed_requests": [
+        {
+          "url": "https://rhino-performance.com/robots.txt",
+          "status": 200,
+          "bytes": 1742,
+          "method": "GET"
+        },
+        {
+          "url": "https://rhino-performance.com/blog/posts/tips-que-te-ayudaran-a-mejorar-en-tu-proximo-partido-de-tenis-da63bd38d5ff/",
+          "status": 200,
+          "bytes": 244980,
+          "method": "GET"
+        },
+        {
+          "url": "https://rhino-performance.com/blog/posts/desmintiendo-7-mitos-del-running-que-todos-hemos-creido-alguna-vez-092ce3ea8787/",
+          "status": 200,
+          "bytes": 245674,
+          "method": "GET"
+        },
+        {
+          "url": "https://rhino-performance.com/blog/posts/recuperarse-tambien-es-entrenar-asi-vive-un-atleta-la-recuperacion-con-rhino-pro-air-1c89f8f9e9be/",
+          "status": 200,
+          "bytes": 253966,
+          "method": "GET"
+        },
+        {
+          "url": "https://rhino-performance.com/blog/posts/mantener-cuerpo-en-forma-durante-las-vacaciones-c67b80b964a5/",
+          "status": 200,
+          "bytes": 243335,
+          "method": "GET"
+        },
+        {
+          "url": "https://rhino-performance.com/blog/posts/como-recuperarte-despues-de-un-maraton-claves-para-una-rapida-recuperacion-bbd01b52831b/",
+          "status": 200,
+          "bytes": 248112,
+          "method": "GET"
+        }
+      ]
+    },
+    {
+      "batch": "08",
+      "manifest_sha256": "986a67b016b38be92718b35bc820b8cefc5fa10d310c66e462755e0c5f921f2c",
+      "state": "executed",
+      "executed": true,
+      "execution_report": "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/live-batch08-20261113/raw-crawl-report.json",
+      "checkpoint": "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/live-batch08-20261113/checkpoint.json",
+      "supervision": "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/live-batch08-20261113/supervision.json",
+      "one_use_marker": ".local/rhino-indexability/authorized-batch08-986a67b0-once.json",
+      "execution_started": true,
+      "authorization_consumed": true,
+      "outcome": "complete_for_selected_scope",
+      "stop_reason": null,
+      "pending_requests": [],
+      "started_unconfirmed_requests": [],
+      "completed_requests": [
+        {
+          "url": "https://rhino-performance.com/robots.txt",
+          "status": 200,
+          "bytes": 1742,
+          "method": "GET"
+        },
+        {
+          "url": "https://rhino-performance.com/blog/posts/la-inmovilidad-es-el-verdadero-deterioro-674a0d517ef4/",
+          "status": 200,
+          "bytes": 248309,
+          "method": "GET"
+        },
+        {
+          "url": "https://rhino-performance.com/blog/posts/rhino-gun-air-recuperacion-profunda-estes-donde-estes-234790e68abf/",
+          "status": 200,
+          "bytes": 249304,
+          "method": "GET"
+        },
+        {
+          "url": "https://rhino-performance.com/blog/posts/nuevos-productos-rhino-air-recuperacion-profesional-donde-sea-y-cuando-sea-168c475f7bfa/",
+          "status": 200,
+          "bytes": 255351,
+          "method": "GET"
+        },
+        {
+          "url": "https://rhino-performance.com/blog/posts/estas-respirando-mal-y-esta-afectando-tu-rendimiento-75b8c1cc4493/",
+          "status": 200,
+          "bytes": 252088,
+          "method": "GET"
+        },
+        {
+          "url": "https://rhino-performance.com/blog/posts/escalada-y-recuperacion-por-que-la-presoterapia-es-tu-mejor-aliada-f9d767f0feda/",
+          "status": 200,
+          "bytes": 248990,
+          "method": "GET"
+        }
+      ]
+    },
+    {
+      "batch": "09",
+      "manifest_sha256": "6b800083d76be4152c17f0cc6b937c2226afc59266074e3cda35ae0a85fcd46b",
+      "state": "executed",
+      "executed": true,
+      "execution_report": "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/live-batch09-20261113/raw-crawl-report.json",
+      "checkpoint": "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/live-batch09-20261113/checkpoint.json",
+      "supervision": "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/live-batch09-20261113/supervision.json",
+      "one_use_marker": ".local/rhino-indexability/authorized-batch09-6b800083-once.json",
+      "execution_started": true,
+      "authorization_consumed": true,
+      "outcome": "complete_for_selected_scope",
+      "stop_reason": null,
+      "pending_requests": [],
+      "started_unconfirmed_requests": [],
+      "completed_requests": [
+        {
+          "url": "https://rhino-performance.com/robots.txt",
+          "status": 200,
+          "bytes": 1742,
+          "method": "GET"
+        },
+        {
+          "url": "https://rhino-performance.com/blog/posts/no-es-solo-fuerza-es-lo-que-tu-brazo-acumula-en-cada-remada-7af1ab353271/",
+          "status": 200,
+          "bytes": 240264,
+          "method": "GET"
+        },
+        {
+          "url": "https://rhino-performance.com/blog/posts/gun-air-y-padel-recuperacion-inteligente-para-seguir-jugando-mejor-4b345fdbe280/",
+          "status": 200,
+          "bytes": 247977,
+          "method": "GET"
+        },
+        {
+          "url": "https://rhino-performance.com/blog/posts/triatlon-entrenar-tres-disciplinas-tambien-exige-recuperar-mejor-2b8eef6549a9/",
+          "status": 200,
+          "bytes": 249886,
+          "method": "GET"
+        },
+        {
+          "url": "https://rhino-performance.com/blog/posts/ciclos-de-sueno-la-base-invisible-del-rendimiento-deportivo-93045d28a62d/",
+          "status": 200,
+          "bytes": 253794,
+          "method": "GET"
+        },
+        {
+          "url": "https://rhino-performance.com/blog/posts/de-cero-a-runner-la-guia-para-empezar-a-correr-sin-rendirte-en-el-intento-1bad9b3cb42d/",
+          "status": 200,
+          "bytes": 247023,
+          "method": "GET"
+        }
+      ]
+    },
+    {
+      "batch": "10",
+      "manifest_sha256": "f3b328166e9c817e163c0c78401fd53b1d405e519d4e77b281721dcb47d2fbf5",
+      "state": "executed",
+      "executed": true,
+      "execution_report": "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/live-batch10-20261113/raw-crawl-report.json",
+      "checkpoint": "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/live-batch10-20261113/checkpoint.json",
+      "supervision": "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/live-batch10-20261113/supervision.json",
+      "one_use_marker": ".local/rhino-indexability/authorized-batch10-f3b32816-once.json",
+      "execution_started": true,
+      "authorization_consumed": true,
+      "outcome": "complete_for_selected_scope",
+      "stop_reason": null,
+      "pending_requests": [],
+      "started_unconfirmed_requests": [],
+      "completed_requests": [
+        {
+          "url": "https://rhino-performance.com/robots.txt",
+          "status": 200,
+          "bytes": 1742,
+          "method": "GET"
+        },
+        {
+          "url": "https://rhino-performance.com/blog/posts/alimentos-que-te-ayudaran-a-aumentar-la-masa-muscular-7de57a9b8523/",
+          "status": 200,
+          "bytes": 244011,
+          "method": "GET"
+        },
+        {
+          "url": "https://rhino-performance.com/blog/posts/relajacion-progresiva-f7e777ea1906/",
+          "status": 200,
+          "bytes": 249180,
+          "method": "GET"
+        },
+        {
+          "url": "https://rhino-performance.com/blog/posts/la-meditacion-tu-aliada-en-la-recuperacion-post-entrenamiento-83e21067eb03/",
+          "status": 200,
+          "bytes": 251668,
+          "method": "GET"
+        },
+        {
+          "url": "https://rhino-performance.com/blog/posts/como-evitar-lesiones-antes-de-un-maraton-5d6eb14ddf00/",
+          "status": 200,
+          "bytes": 243692,
+          "method": "GET"
+        },
+        {
+          "url": "https://rhino-performance.com/blog/posts/dedica-un-dia-a-tu-recuperacion-muscular-con-botas-de-presoterapia-bb901e932055/",
+          "status": 200,
+          "bytes": 243460,
+          "method": "GET"
+        }
+      ]
+    },
+    {
+      "batch": "11",
+      "manifest_sha256": "d4d5717dacd3236005c6a6c73cbcdab058a7d61246338c70134895f83e680242",
+      "state": "executed",
+      "executed": true,
+      "execution_report": "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/live-batch11-20261113/raw-crawl-report.json",
+      "checkpoint": "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/live-batch11-20261113/checkpoint.json",
+      "supervision": "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/live-batch11-20261113/supervision.json",
+      "one_use_marker": ".local/rhino-indexability/authorized-batch11-d4d5717d-once.json",
+      "execution_started": true,
+      "authorization_consumed": true,
+      "outcome": "complete_for_selected_scope",
+      "stop_reason": null,
+      "pending_requests": [],
+      "started_unconfirmed_requests": [],
+      "completed_requests": [
+        {
+          "url": "https://rhino-performance.com/robots.txt",
+          "status": 200,
+          "bytes": 1742,
+          "method": "GET"
+        },
+        {
+          "url": "https://rhino-performance.com/blog/posts/rhino-gun-pro-la-recuperacion-inteligente-que-acompana-tu-rendimiento-45fc22ac1fc6/",
+          "status": 200,
+          "bytes": 251895,
+          "method": "GET"
+        },
+        {
+          "url": "https://rhino-performance.com/blog/posts/lo-que-separa-a-los-pros-no-es-el-talento-es-la-recuperacion-697880232704/",
+          "status": 200,
+          "bytes": 249097,
+          "method": "GET"
+        },
+        {
+          "url": "https://rhino-performance.com/blog/posts/triatlon-sin-filtros-lo-que-no-todos-te-cuentan-de-este-deporte-2c4e228df07a/",
+          "status": 200,
+          "bytes": 245348,
+          "method": "GET"
+        },
+        {
+          "url": "https://rhino-performance.com/blog/posts/mucho-calor-7-tips-para-seguir-corriendo-sin-derretirte-0d5c9e64023e/",
+          "status": 200,
+          "bytes": 244273,
+          "method": "GET"
+        },
+        {
+          "url": "https://rhino-performance.com/blog/posts/cual-es-tu-tipo-de-pisada-al-correr-cd55a3a976e2/",
+          "status": 200,
+          "bytes": 245608,
+          "method": "GET"
+        }
+      ]
+    },
+    {
+      "batch": "12",
+      "manifest_sha256": "4dee97f0cf689956cc97846145fc3cbd1d620b3153bbcb2bdf7c01411722b30d",
+      "state": "executed",
+      "executed": true,
+      "execution_report": "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/live-batch12-20261113/raw-crawl-report.json",
+      "checkpoint": "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/live-batch12-20261113/checkpoint.json",
+      "supervision": "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/live-batch12-20261113/supervision.json",
+      "one_use_marker": ".local/rhino-indexability/authorized-batch12-4dee97f0-once.json",
+      "execution_started": true,
+      "authorization_consumed": true,
+      "outcome": "complete_for_selected_scope",
+      "stop_reason": null,
+      "pending_requests": [],
+      "started_unconfirmed_requests": [],
+      "completed_requests": [
+        {
+          "url": "https://rhino-performance.com/robots.txt",
+          "status": 200,
+          "bytes": 1742,
+          "method": "GET"
+        },
+        {
+          "url": "https://rhino-performance.com/blog/posts/comienza-el-ano-con-energia-9bb92d785569/",
+          "status": 200,
+          "bytes": 245877,
+          "method": "GET"
+        },
+        {
+          "url": "https://rhino-performance.com/blog/posts/eleva-tu-experiencia-deportiva-37e67fbefb52/",
+          "status": 200,
+          "bytes": 242260,
+          "method": "GET"
+        },
+        {
+          "url": "https://rhino-performance.com/blog/posts/como-tener-una-gran-semana-pre-triatlon-7451956a975f/",
+          "status": 200,
+          "bytes": 255923,
+          "method": "GET"
+        },
+        {
+          "url": "https://rhino-performance.com/blog/posts/botas-presoterpia-rhino-pro-v3-032780da6369/",
+          "status": 200,
+          "bytes": 253597,
+          "method": "GET"
+        },
+        {
+          "url": "https://rhino-performance.com/blog/posts/mejora-tu-practica-de-yoga-con-la-recuperacion-de-las-botas-de-presoterapia-b40f7aab659b/",
+          "status": 200,
+          "bytes": 243938,
+          "method": "GET"
+        }
+      ]
+    },
+    {
+      "batch": "13",
+      "manifest_sha256": "ab28cea5f15c41fdcdca840328e828219b728eb28efae31a2ad212263ba091c5",
+      "state": "executed",
+      "executed": true,
+      "execution_report": "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/live-batch13-20261113/raw-crawl-report.json",
+      "checkpoint": "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/live-batch13-20261113/checkpoint.json",
+      "supervision": "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/live-batch13-20261113/supervision.json",
+      "one_use_marker": ".local/rhino-indexability/authorized-batch13-ab28cea5-once.json",
+      "execution_started": true,
+      "authorization_consumed": true,
+      "outcome": "complete_for_selected_scope",
+      "stop_reason": null,
+      "pending_requests": [],
+      "started_unconfirmed_requests": [],
+      "completed_requests": [
+        {
+          "url": "https://rhino-performance.com/robots.txt",
+          "status": 200,
+          "bytes": 1742,
+          "method": "GET"
+        },
+        {
+          "url": "https://rhino-performance.com/blog/posts/incorporando-la-presoterapia-a-tu-rutina-8f14d49b1a4f/",
+          "status": 200,
+          "bytes": 242898,
+          "method": "GET"
+        },
+        {
+          "url": "https://rhino-performance.com/blog/posts/presoterapia-el-impulso-de-los-campeones-para-recuperacion-y-rendimiento-optimos-86fee398bc70/",
+          "status": 200,
+          "bytes": 243562,
+          "method": "GET"
+        },
+        {
+          "url": "https://rhino-performance.com/blog/posts/impulso-esencial-para-escaladores-y-hikers-con-nuestras-botas-de-presoterapia-39d899588656/",
+          "status": 200,
+          "bytes": 242359,
+          "method": "GET"
+        },
+        {
+          "url": "https://rhino-performance.com/blog/posts/presoterapia-en-casa-que-debes-considerar-antes-de-comprar-un-equipo-360d9486bed8/",
+          "status": 200,
+          "bytes": 244489,
+          "method": "GET"
+        },
+        {
+          "url": "https://rhino-performance.com/blog/posts/presoterapia-por-que-destaca-entre-los-tratamientos-25db433b12c4/",
+          "status": 200,
+          "bytes": 245663,
+          "method": "GET"
+        }
+      ]
+    },
+    {
+      "batch": "14",
+      "manifest_sha256": "e5833a05665651080a44b4aacd5c5fed3cd35a8bd8213d81fd2959fe5c34280e",
+      "state": "executed",
+      "executed": true,
+      "execution_report": "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/live-batch14-20261113/raw-crawl-report.json",
+      "checkpoint": "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/live-batch14-20261113/checkpoint.json",
+      "supervision": "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/live-batch14-20261113/supervision.json",
+      "one_use_marker": ".local/rhino-indexability/authorized-batch14-e5833a05-once.json",
+      "execution_started": true,
+      "authorization_consumed": true,
+      "outcome": "complete_for_selected_scope",
+      "stop_reason": null,
+      "pending_requests": [],
+      "started_unconfirmed_requests": [],
+      "completed_requests": [
+        {
+          "url": "https://rhino-performance.com/robots.txt",
+          "status": 200,
+          "bytes": 1742,
+          "method": "GET"
+        },
+        {
+          "url": "https://rhino-performance.com/blog/posts/como-tener-una-gran-semana-pre-carrera-1892a35dc52c/",
+          "status": 200,
+          "bytes": 239548,
+          "method": "GET"
+        },
+        {
+          "url": "https://rhino-performance.com/blog/posts/presoterapia-y-alto-rendimiento-deportivo-10335b1b6d85/",
+          "status": 200,
+          "bytes": 252919,
+          "method": "GET"
+        },
+        {
+          "url": "https://rhino-performance.com/blog/posts/8-cosas-buenas-que-le-pasan-a-tu-cuerpo-cuando-empiezas-a-correr-b6e7a23c1566/",
+          "status": 200,
+          "bytes": 248361,
+          "method": "GET"
+        },
+        {
+          "url": "https://rhino-performance.com/blog/posts/septiembre-es-de-boxeo-y-el-boxeo-no-perdona-los-brazos-que-no-recuperan-80f8bbbdd1e5/",
+          "status": 200,
+          "bytes": 246270,
+          "method": "GET"
+        },
+        {
+          "url": "https://rhino-performance.com/blog/posts/por-que-corres-lento-posibles-causas-y-como-solucionarlas-3e1f78c2ae4f/",
+          "status": 200,
+          "bytes": 260268,
+          "method": "GET"
+        }
+      ]
+    },
+    {
+      "batch": "15",
+      "manifest_sha256": "e6835d4f1804d59042172800306e8a38eb11b276572530d642c6f51a788b57eb",
+      "state": "executed",
+      "executed": true,
+      "execution_report": "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/live-batch15-20261113/raw-crawl-report.json",
+      "checkpoint": "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/live-batch15-20261113/checkpoint.json",
+      "supervision": "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/live-batch15-20261113/supervision.json",
+      "one_use_marker": ".local/rhino-indexability/authorized-batch15-e6835d4f-once.json",
+      "execution_started": true,
+      "authorization_consumed": true,
+      "outcome": "complete_for_selected_scope",
+      "stop_reason": null,
+      "pending_requests": [],
+      "started_unconfirmed_requests": [],
+      "completed_requests": [
+        {
+          "url": "https://rhino-performance.com/robots.txt",
+          "status": 200,
+          "bytes": 1742,
+          "method": "GET"
+        },
+        {
+          "url": "https://rhino-performance.com/blog/posts/tina-fratub-air-el-aliado-que-tu-cuerpo-necesita-despus-de-entrenar-b41c0ed3a1dd/",
+          "status": 200,
+          "bytes": 251503,
+          "method": "GET"
+        },
+        {
+          "url": "https://rhino-performance.com/blog/posts/que-debes-saber-antes-de-de-comprar-unas-botas-de-presoterapia-f0d33d668783/",
+          "status": 200,
+          "bytes": 252924,
+          "method": "GET"
+        },
+        {
+          "url": "https://rhino-performance.com/blog/posts/como-mejorar-la-salud-vascular-con-la-presoterapia-f919e9e6aae2/",
+          "status": 200,
+          "bytes": 246122,
+          "method": "GET"
+        },
+        {
+          "url": "https://rhino-performance.com/blog/posts/mejora-tu-circulacion-y-reduce-la-retencion-de-liquidos-con-la-presoterapia-4aa13734ec51/",
+          "status": 200,
+          "bytes": 249437,
+          "method": "GET"
+        },
+        {
+          "url": "https://rhino-performance.com/blog/posts/como-la-presoterapia-puede-revolucionar-tu-metodo-detox-0b0ae76ebe79/",
+          "status": 200,
+          "bytes": 255332,
+          "method": "GET"
+        }
+      ]
+    }
+  ]
+}

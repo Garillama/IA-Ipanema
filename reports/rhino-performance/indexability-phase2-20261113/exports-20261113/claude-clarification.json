@@ -1,0 +1,121 @@
+{
+  "requested_agent": "claude",
+  "effective_agent": "claude",
+  "scope": "official XLSX cross-examination and prioritization only",
+  "input_hashes": {
+    "reports/rhino-performance/indexability-phase2-20261113/exports-20261113/review-packet.json": "e459744c1976e6da448d7c3bbbf1a5b2ecd6bd5dcb0043e693f2ef573b9eb980",
+    "reports/rhino-performance/indexability-phase2-20261113/exports-20261113/controller-validation.json": "5c3362b8d8960d36bf2ea160a122015359490299edbf109071c455f3b5079a53",
+    "reports/rhino-performance/indexability-phase2-20261113/exports-20261113/controller-supplement.json": "74b4ef78c86e3cdf3a24adbec56eac578cd4f3d44d56079cadf28c22f5c0ba86",
+    "reports/rhino-performance/indexability-phase2-20261113/exports-20261113/categories.json": "211fb22809de54afc9bde4e15029bfdd73188998e27ecaa35aaa53e8e25a0f66",
+    "reports/rhino-performance/indexability-phase2-20261113/exports-20261113/performance-scope.json": "38b1e731d00349b3dc442503cdf3d3adb29b7d42b228ee7987d224defd8ff7bb",
+    "reports/rhino-performance/indexability-phase2-20261113/exports-20261113/summary.json": "0697f6c2a8a78a22e70cb47beb70d3b2e46a5a9ac68fc7fb819416441e292898"
+  },
+  "response": {
+    "decision": "changes_requested",
+    "summary": "Respuesta a codex-q1 (categorías). Prioridad por visibilidad observada, no por defecto probado. Posición 1.35 y CTR 0.56% de Compresión son promedios marginales y no prueban defecto de contenido. Falta el cruce consulta×página×dispositivo×país. Sin acciones ni cambios; ADR sigue en needs_evidence.",
+    "changes": [],
+    "evidence": [
+      "gsc.xlsx.reconciliation",
+      "gsc.xlsx.scope-clarifications"
+    ],
+    "objections": [],
+    "preferred_alternative": "claude-export-gap-first",
+    "answers": [
+      {
+        "question_id": "codex-q1",
+        "from_agent": "codex",
+        "answer": "Orden de análisis por visibilidad (no diagnóstico): 1) /presoterapia/ (30 clics, 2810 imps, pos 5.3, CTR 1.07%); 2) /compresion-frio-y-calor/ (6 clics, 1079 imps, pos 1.35, CTR 0.56%, estado unknown); 3) /accesorios/ (27 clics, 1071 imps, CTR 2.52%). /pistolas-de-masaje/ (0/45) y /terapia-fria/ (sin fila) quedan unknown. En Compresión, pos 1.35 es un promedio de toda la página sobre consultas, dispositivos y países mezclados, y 6 clics son muestra pequeña; el export no une consulta con página (page_query_join_available=false). Por eso no se infiere defecto de título/contenido ni se propone cambio. Exportación mínima faltante: consultas por cada página prioritaria, segmentadas por dispositivo y país, mismo periodo y filtros, declarando el límite de filas. Intenciones: hipótesis.",
+        "disposition": "needs_evidence",
+        "evidence_refs": [
+          "gsc.xlsx.reconciliation",
+          "gsc.xlsx.scope-clarifications"
+        ]
+      }
+    ],
+    "withdrawn_alternatives": [],
+    "revision_notes": [
+      "Aclara la pregunta de categorías; la respuesta previa sobre redirecciones se conserva sin reemplazo.",
+      "Sin implementación; ADR sigue en needs_evidence."
+    ]
+  },
+  "model": {
+    "model": "claude-sonnet-5-5",
+    "effort": "medium",
+    "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+    "verified_at": "2026-11-08"
+  },
+  "execution": {
+    "exit_code": 0,
+    "timed_out": false,
+    "output_limited": false,
+    "idle_timed_out": false,
+    "cancelled": false,
+    "process_started": true,
+    "process_reaped": true,
+    "stdin_bytes_written": 77103,
+    "context_complete": true,
+    "duration_s": 16.351,
+    "timing": {
+      "spawn_s": 0.000888,
+      "input_complete_s": 1.167505,
+      "first_stdout_s": 2.367734,
+      "first_stderr_s": null,
+      "timeout_phase": null,
+      "event_counts": {
+        "system": 3,
+        "stream_event": 291,
+        "event:message_start": 2,
+        "event:content_block_start": 2,
+        "event:content_block_delta": 281,
+        "assistant": 2,
+        "event:content_block_stop": 2,
+        "user": 2,
+        "event:message_delta": 2,
+        "event:message_stop": 2,
+        "rate_limit_event": 2,
+        "result": 1
+      },
+      "inference_vs_initialization": "not_separable_without_provider_events"
+    },
+    "output_accounting": {
+      "transport_bytes": 113539,
+      "retained_bytes": 113539,
+      "discarded_progress_bytes": 0,
+      "transport_limit_bytes": 20000000,
+      "retained_limit_bytes": 2000000
+    },
+    "isolation": {
+      "backend": "bubblewrap",
+      "snapshot_read_only": true,
+      "host_home_mounted": false,
+      "network": "enabled_no_destination_firewall",
+      "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+    },
+    "started_at": "2026-11-13T08:58:44.518863+00:00",
+    "prompt_bytes": 77103,
+    "prompt_sha256": "ee1671f325fa457a76a37c7cdc5b7a7bcfe11b8ec49b9728bd305d53be007199",
+    "usage": {
+      "provider_reported": {
+        "total_cost_usd": 0.1678542,
+        "duration_ms": 13583,
+        "input_tokens": 4,
+        "cache_creation_input_tokens": 35744,
+        "cache_read_input_tokens": 40002,
+        "output_tokens": 2087
+      },
+      "measured_cost_available": true,
+      "estimated_cost": null
+    },
+    "limits": {
+      "timeout": 240,
+      "idle_timeout": 90,
+      "startup_timeout": 30,
+      "first_response_timeout": 120
+    },
+    "structured_output": "native_schema",
+    "contract_validation": {
+      "status": "passed",
+      "duration_s": 0.008456
+    }
+  }
+}

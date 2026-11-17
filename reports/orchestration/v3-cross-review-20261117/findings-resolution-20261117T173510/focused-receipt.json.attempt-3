@@ -1,0 +1,17 @@
+{
+  "command": [
+    "python3",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "/home/alanrichard/Escritorio/IA inversa/.local/v3-findings-resolution/20261117T173510/candidate/tests/unit",
+    "-p",
+    "test_code_review_v3.py",
+    "-v"
+  ],
+  "exit_code": 0,
+  "elapsed_seconds": 0.262,
+  "network": "none; synthetic fixtures only",
+  "historical_159_repeated": false
+}

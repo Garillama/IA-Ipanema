@@ -1,0 +1,41 @@
+{
+  "status": "needs_evidence",
+  "reviewer_status": "changes_requested",
+  "author": "codex",
+  "reviewer": "claude",
+  "patch_sha256": "c240b16f37ec13a84db4e54f656f15beda7316642c2e078e8d94b906d7ed6085",
+  "packet_sha256": "1f0de2c1e33d01863c1055266bd67362f714b7069b2583d1f2197b762064a188",
+  "independent_review_received": true,
+  "implementation_allowed": false,
+  "integration_authorized": false,
+  "activation_allowed": false,
+  "production_authorized": false,
+  "open_review_objections": [
+    "N1",
+    "N2",
+    "N3",
+    "N4",
+    "N5",
+    "N6",
+    "N7",
+    "N8"
+  ],
+  "new_BLOCKER_or_HIGH": false,
+  "mandatory_pending": [
+    "Author defense and minimal isolated correction/reproductions for N1-N4, separately authorized before candidate changes",
+    "Contract with actual context/QA producers and exact coverage",
+    "Unified objection closure and complete history/migration contract",
+    "Independent review of any future corrected hash",
+    "Antigravity bounded authentication/egress/isolation and independent review, still blocked",
+    "Explicit owner integration authorization"
+  ],
+  "evidence": [
+    "claude-response-complete.json",
+    "claude-receipt.json",
+    "freeze.json",
+    "controller-findings-audit.json",
+    "comparison.json",
+    "postflight.json"
+  ],
+  "prior_ADR_unchanged": true
+}

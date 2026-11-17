@@ -1,0 +1,86 @@
+{
+  "project": "rhino-performance",
+  "execution_policy": {
+    "mode": "dual-agent",
+    "enabled": true,
+    "members": [
+      "claude",
+      "codex"
+    ],
+    "disabled": [
+      "commandcode"
+    ],
+    "require_both_for_major_decisions": true,
+    "independent_proposals": true,
+    "cross_examination": true,
+    "require_defense": true,
+    "evidence_based_decisions": true,
+    "max_deliberation_rounds": 2,
+    "production_requires_human_authorization": "[redacted]"
+  },
+  "runtimes_installed": {
+    "claude": true,
+    "codex": true,
+    "commandcode": true
+  },
+  "repeatable_qa": "Puppeteer/Lighthouse existentes; no se reemplazan",
+  "credentials_written_by_doctor": false,
+  "providers": {
+    "devtools": {
+      "installed": true,
+      "pinned_version": "1.12.0",
+      "server_available": null,
+      "tools_verified": [],
+      "account_access_tested": false
+    },
+    "gsc": {
+      "transport": "existing_official_rest",
+      "mcp_required": false,
+      "configured": true,
+      "credential_available": false,
+      "credential_source": null,
+      "account_access_tested": false,
+      "api_available": null,
+      "default_enabled": false,
+      "operations": [
+        "search_analytics",
+        "inspect_url",
+        "sitemaps"
+      ],
+      "status": "configuration_or_credentials_required"
+    },
+    "analytics": {
+      "transport": "existing_official_rest",
+      "mcp_required": false,
+      "configured": false,
+      "credential_available": false,
+      "credential_source": null,
+      "account_access_tested": false,
+      "api_available": null,
+      "default_enabled": false,
+      "operations": [
+        "run_report"
+      ],
+      "status": "configuration_or_credentials_required"
+    },
+    "merchant": {
+      "transport": "existing_official_rest",
+      "mcp_required": false,
+      "configured": false,
+      "credential_available": false,
+      "credential_source": null,
+      "account_access_tested": false,
+      "api_available": null,
+      "default_enabled": false,
+      "operations": [
+        "products"
+      ],
+      "status": "configuration_or_credentials_required"
+    }
+  },
+  "limitations": [
+    "CLI instalada no acredita autenticación ni uso del MCP por el modelo.",
+    "Los permisos gobiernan esta puerta, no procesos que el mismo usuario ejecute fuera de ella.",
+    "Workers aislados existentes no reciben credenciales ni nuevos montajes automáticamente."
+  ]
+}

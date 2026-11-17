@@ -1,0 +1,79 @@
+{
+  "state": "blocked_pending_security_evidence",
+  "provider_executed": false,
+  "agy_invocations": 0,
+  "auth_options": {
+    "local_account": "Official but no verified narrow keyring reuse within sandbox; do not mount HOME, DBus or keyring.",
+    "gemini_api": {
+      "official": true,
+      "configuration": {
+        "modelProvider": "gemini"
+      },
+      "credential_env_name": "GEMINI_API_KEY",
+      "status": "Compatible in principle with empty HOME and one owner-managed secret. Not configured or read; separate credential and billing consent required."
+    },
+    "gcp_adc": "Official alternative; project/location, refresh destinations, credential scope and billing unapproved."
+  },
+  "egress_candidate": {
+    "route": "Gemini API mode, conditional on owner selection",
+    "host": "generativelanguage.googleapis.com",
+    "port": 443,
+    "methods": [
+      "POST"
+    ],
+    "paths": [
+      "/v1beta/models/{OWNER_APPROVED_FIXED_MODEL}:generateContent",
+      "/v1beta/models/{OWNER_APPROVED_FIXED_MODEL}:streamGenerateContent"
+    ],
+    "status": "Official templates, not a verified exhaustive agy allowlist. No requests made. Unresolved model placeholders cannot be enabled.",
+    "enforcement_required": [
+      "No direct public routing from namespace",
+      "Reviewed restricted relay/firewall with exact host, TLS/SNI validation and default-deny",
+      "Application gateway required for HTTP method/path enforcement; CONNECT proxy alone is insufficient",
+      "Proxy environment variables or prompts are not a security boundary",
+      "Stop on undeclared destination/redirect; no automatic allowlist expansion"
+    ],
+    "implementation": "No restricted egress enforcement validated; Internet remains denied"
+  },
+  "native_controls": {
+    "hooks": "Global ~/.gemini/config/hooks.json and workspace .agents/hooks.json are separate. hooks key in settings.json is ignored. Ephemeral empty HOME/synthetic workspace avoid user discovery; bundled behavior remains unverified.",
+    "plugins": "Do not mount global ~/.gemini/config/plugins or workspace .agents/plugins. Empty HOME is not proof that native builtins cannot delegate.",
+    "tools": "Keep documented Deny namespaces, no MCP configured, no display/profile/DBus mounts. Verify native attempted/denied events with controller, not model claims.",
+    "subagents": "No verified universal CLI disable flag; --disable-slash-commands is insufficient. subagent:false controls eligibility, not necessarily parent delegation.",
+    "status": "Provider not run; native enforcement unproven"
+  },
+  "receipts_cancellation": {
+    "reuse": "Existing supervisor process-group termination and PID namespace lifecycle tested previously with synthetic Python; not repeated now.",
+    "required_receipts": [
+      "owner authorization",
+      "binary/config/literal synthetic input/model hashes",
+      "effective mounts and restricted egress policy",
+      "native init/result/events metadata sanitized without reasoning/tokens",
+      "method/host/path attempt accounting without credentials",
+      "exit code, schema, duration, context complete, parent and descendant cleanup"
+    ],
+    "deadline_s": 60,
+    "concurrency": 1,
+    "retries": 0,
+    "retained_output_bytes": 65536,
+    "stop_if": [
+      "auth interaction or new permission",
+      "403/429/quota",
+      "undeclared hook/plugin/tool/MCP/browser/subagent",
+      "undeclared network destination",
+      "timeout/output overflow/invalid final JSON",
+      "cleanup uncertain"
+    ],
+    "real_provider_cancellation": "pending"
+  },
+  "sources": [
+    "https://antigravity.google/docs/install/",
+    "https://ai.google.dev/api/generate-content?hl=en",
+    "https://antigravity.google/docs/settings?tab=cli",
+    "https://antigravity.google/docs/permissions/",
+    "https://antigravity.google/docs/subagents?tab=cli"
+  ],
+  "no_config_changes": true,
+  "no_secrets_read_or_requested": true,
+  "no_public_internet_opened": true
+}

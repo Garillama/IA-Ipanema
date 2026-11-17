@@ -1,0 +1,53 @@
+{
+  "checked_at": "2026-11-17T18:49:41.524720+00:00",
+  "candidate_patch_sha256": "288ef3739417e0e15e105e4826ea65598f17c0807265ed68cf42d3fc5008aa6f",
+  "operational_sources_unchanged": true,
+  "operational_hashes": {
+    "tools/ipanema/orchestration/isolation.py": "0d734fcbf6d10e839d2a7cb46f3416ca60f0751e1491974d73186a8d56408079",
+    "tools/ipanema/orchestration/adapters.py": "bae25bee06cf7574ee35f65e9f9055dfa8a495336f80615165ddd5232359d01d",
+    "tools/ipanema/orchestration/council.py": "4ec261a0d84fbdc12d5abf85eab489d21cf85f30af57eac9769c722d17541261",
+    "tools/ipanema/orchestration/council_runtime.py": "92b6e47eb8942c26161c240a3258e481ae108b42ee2894cd0577403ea0d49635",
+    "tools/ipanema/orchestration/models.json": "14fede6b13b294a8e685b8ce1072777959850d8ae05bf3270f5dd9ea527aba39",
+    "tools/ipanema/orchestration/planner.py": "b09a3bc644618502680e8804ed7f135eaa074e7b82812d2013c5293ef909117e",
+    "tools/ipanema/orchestration/engine.py": "74885e94f8f9cbf8f7a6e71c0cc8f5f44eec032fac8892f7507e2eb06879319f",
+    "tools/ipanema/orchestration/cli.py": "04e661d92b687da162887aaca8ad5c7905359e7c8376cc0ddec2370d9d58c99b",
+    "tools/ipanema/orchestration/__init__.py": "d36de51224b4946f8db8df4b83d8feecb5852a86064fc09f762d6e5468dc0b39",
+    "tools/ipanema/orchestration/recovery.py": "1d8b3a4d0e22bb0c8507f036ab7ff1b285e6517d8fbe670b70d679a0c317f12c"
+  },
+  "old_candidate_intact": true,
+  "patch_apply_check": 0,
+  "provider_calls": 0,
+  "antigravity_calls": 0,
+  "production_requests": 0,
+  "integration_executed": false,
+  "activation_executed": false,
+  "scope_delta_files": 2,
+  "source_evidence": [
+    {
+      "path": "reports/orchestration/v3-cross-review-20261117/n1-n4-resolution-20261117T180444/candidate.patch",
+      "sha256": "fb292ff7f11c2ccaed5e90a2325c1703f23ece67bdc1b2a6f96ad3c6d49b8e4f"
+    },
+    {
+      "path": "reports/orchestration/v3-cross-review-20261117/n1-n4-resolution-20261117T180444/ADR.json",
+      "sha256": "9c15c7c2e5bbf050c25246c1c05dbb02b66299a28620ace5eb15f79cf88d2d54"
+    },
+    {
+      "path": "reports/orchestration/v3-cross-review-20261117/n1-n4-independent-review-20261117T182530/claude-response-complete.json",
+      "sha256": "2d5848dd08356c9efdb5e6ef081ee3d653181d6f7d94ae45dfd4a4048139afbc"
+    },
+    {
+      "path": "reports/orchestration/v3-cross-review-20261117/n1-n4-independent-review-20261117T182530/claude-receipt.json",
+      "sha256": "9b78b9a86a5f3009b53fbc53ae61c036382696e51dbc379f1bacf4a1f3c4460e"
+    },
+    {
+      "path": "reports/orchestration/v3-cross-review-20261117/n1-n4-independent-review-20261117T182530/controller-findings-audit.json",
+      "sha256": "80eb9fbd5110acafaa683eba857cafcfad1dec5716912a0ec462968eb68365c3"
+    },
+    {
+      "path": "reports/orchestration/v3-cross-review-20261117/n1-n4-independent-review-20261117T182530/ADR.json",
+      "sha256": "91b4b11fed27fb98d1d06d5415a35422cbf1d1f86b4132cb35df753dc3a7dae6"
+    }
+  ],
+  "author": "codex",
+  "independent_approval": false
+}

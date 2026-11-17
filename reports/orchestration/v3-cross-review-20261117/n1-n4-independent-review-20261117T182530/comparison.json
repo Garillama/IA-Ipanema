@@ -1,0 +1,72 @@
+{
+  "previous_patch_sha256": "c240b16f37ec13a84db4e54f656f15beda7316642c2e078e8d94b906d7ed6085",
+  "current_patch_sha256": "fb292ff7f11c2ccaed5e90a2325c1703f23ece67bdc1b2a6f96ad3c6d49b8e4f",
+  "previous_decision": "changes_requested",
+  "current_decision": "changes_requested",
+  "prior_findings": {
+    "N1": {
+      "status": "resolved",
+      "evidence": [
+        "code_review.py:context_hash",
+        "code_review.py:adapt_context",
+        "test_N1_real_context_producer_uses_same_canonical_policy",
+        "test_N1_versioned_receipt_missing_permissions_is_rejected",
+        "test_N1_nan_is_not_a_canonical_json_permission"
+      ],
+      "notes": "The serialization contract matches the real producer, and the test calls the real binding(). The permissions field is supplied explicitly by the adapter. The old receipts are not mutated. The legacy hash form is accepted only when it equals the current value. A related note: the alternative_sha256 meaning is an integration dependency (N1a, INFO). The real QA shape still cannot satisfy coverage, which is documented."
+    },
+    "N2": {
+      "status": "partially_resolved",
+      "evidence": [
+        "code_review.py:replay_closure",
+        "code_review.py:advance_objection",
+        "test_N2_declared_terminal_state_without_events_is_not_closure",
+        "test_N2_state_event_tampering_does_not_close",
+        "test_N2_resolution_plus_answer_without_record_does_not_close"
+      ],
+      "notes": "The single reducer is now consumed by evaluate through replay. The origin confirmation is attested and bound to the objection identity, the candidate and the state. The new-evidence step is not enforced as new, and the non-reviewer events are unattested and not anchored (N2a). I did not execute a counterexample."
+    },
+    "N3": {
+      "status": "resolved",
+      "evidence": [
+        "code_review.py:load_history",
+        "code_review.py:evaluate (history loop before envelope loop)",
+        "test_N3_omitted_argument_cannot_hide_store_history",
+        "test_N3_prior_blocker_survives_missing_and_stale_reviews",
+        "test_N3_explicit_migration_then_new_review_can_resolve_without_dead_end"
+      ],
+      "notes": "History comes from the controller source and is checked against an index and an anchored head. Omission, truncation and index mismatch fail closed to needs_evidence. A prior BLOCKER yields blocked. Migration is explicit and typed and does not close automatically. What is still needed is a real store and anchor from the integrator, which is an integration dependency."
+    },
+    "N4": {
+      "status": "resolved",
+      "evidence": [
+        "code_review.py:AdapterEvidence",
+        "code_review.py:adapter_proven",
+        "code_review.py:evaluate (trust_basis, synthetic_only, identity_verified_by_hash)",
+        "test_N4_plain_dict_cannot_replace_controller_interface",
+        "test_N4_missing_capability_and_wrong_provider_and_stale_permissions"
+      ],
+      "notes": "The levels are separated and the type check is correctly described as an API boundary, not authentication. Without a controller the result is needs_evidence. Real native verification is an integration dependency. The only residual item is that the synthetic state name needs a qualifier (N4a, LOW)."
+    }
+  },
+  "assessment_scope": "isolated API/contract; not integration readiness",
+  "formal_gate_closure_receipts_created": false,
+  "previous_reviews_or_ADR_rewritten": false,
+  "new_objections": [
+    {
+      "id": "N2a",
+      "severity": "MEDIUM",
+      "classification": "architectural_risk"
+    },
+    {
+      "id": "N4a",
+      "severity": "LOW",
+      "classification": "architectural_risk"
+    },
+    {
+      "id": "N1a",
+      "severity": "INFO",
+      "classification": "integration_dependency"
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "project": null,
+  "state": "running",
+  "planned": {
+    "https://rhino-performance.com/robots.txt": "completed",
+    "https://rhino-performance.com/productos/pistola-de-masaje-gun-pro/": "completed",
+    "https://rhino-performance.com/productos/tina-de-hielo-tub-air/": "completed",
+    "https://rhino-performance.com/blog/posts/la-presoterapia-como-transformador-de-tu-salud-mental-relajacion-y-recuperacion-127cdc829590/": "completed",
+    "https://rhino-performance.com/blog/posts/el-fro-no-es-un-castigo-es-una-herramienta-cbe9a25855f8/": "completed",
+    "https://rhino-performance.com/blog/posts/faja-de-compresion-lumbar-el-soporte-que-tu-espalda-agradecera-047c381cf3ac/": "completed"
+  },
+  "requests": [
+    {
+      "ordinal": 1,
+      "url": "https://rhino-performance.com/robots.txt",
+      "state": "completed",
+      "status": 200,
+      "bytes": 1742
+    },
+    {
+      "ordinal": 2,
+      "url": "https://rhino-performance.com/productos/pistola-de-masaje-gun-pro/",
+      "state": "completed",
+      "status": 200,
+      "bytes": 735602
+    },
+    {
+      "ordinal": 3,
+      "url": "https://rhino-performance.com/productos/tina-de-hielo-tub-air/",
+      "state": "completed",
+      "status": 200,
+      "bytes": 733871
+    },
+    {
+      "ordinal": 4,
+      "url": "https://rhino-performance.com/blog/posts/la-presoterapia-como-transformador-de-tu-salud-mental-relajacion-y-recuperacion-127cdc829590/",
+      "state": "completed",
+      "status": 200,
+      "bytes": 244057
+    },
+    {
+      "ordinal": 5,
+      "url": "https://rhino-performance.com/blog/posts/el-fro-no-es-un-castigo-es-una-herramienta-cbe9a25855f8/",
+      "state": "completed",
+      "status": 200,
+      "bytes": 250968
+    },
+    {
+      "ordinal": 6,
+      "url": "https://rhino-performance.com/blog/posts/faja-de-compresion-lumbar-el-soporte-que-tu-espalda-agradecera-047c381cf3ac/",
+      "state": "completed",
+      "status": 200,
+      "bytes": 246364
+    }
+  ],
+  "arrival_at_server_without_response": "unknown"
+}

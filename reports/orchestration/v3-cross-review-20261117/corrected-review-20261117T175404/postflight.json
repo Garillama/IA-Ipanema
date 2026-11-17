@@ -1,0 +1,23 @@
+{
+  "checked_at": "2026-11-17T17:59:22.531567+00:00",
+  "candidate_patch_sha256": "c240b16f37ec13a84db4e54f656f15beda7316642c2e078e8d94b906d7ed6085",
+  "packet_sha256": "1f0de2c1e33d01863c1055266bd67362f714b7069b2583d1f2197b762064a188",
+  "candidate_files_unchanged": true,
+  "operational_sources_unchanged": true,
+  "central_policy_unchanged": true,
+  "candidate_hashes": {
+    "tools/ipanema/orchestration/council.py": "f2e7ac875515f9d625338172eec8181aea2d9755ff9813bbf15ee532f605a1b6",
+    "tools/ipanema/orchestration/code_review.py": "ef2340db1abc358ee569439968df574f2646cfbf31ea7e545e37c64ee8f597f0",
+    "tests/unit/test_code_review_v3.py": "b45b23e2e19db2408f5bd90282fa205a34b6820389e1f490c4e609e13ab7bd09"
+  },
+  "original_response_file_sha256": "a6151d3ca32a91cf8a459b10b5a5cebd1421695dbdb06aaf9c2dfeb2f9a58531",
+  "response_schema_valid": true,
+  "snapshot_read_only": true,
+  "process_reaped": true,
+  "model_invocations": 1,
+  "retries": 0,
+  "antigravity_invocations": 0,
+  "qa_suites_repeated": 0,
+  "integration_executed": false,
+  "activation_executed": false
+}

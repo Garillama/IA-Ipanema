@@ -1,0 +1,28 @@
+{
+  "packet_sha256": "56951ce2905ab945b80eb218436aa78e8ed1e37aa771ab630baa09bc2bfd0d00",
+  "packet_bytes": 191609,
+  "candidate_patch_sha256": "288ef3739417e0e15e105e4826ea65598f17c0807265ed68cf42d3fc5008aa6f",
+  "previous_candidate_patch_sha256": "fb292ff7f11c2ccaed5e90a2325c1703f23ece67bdc1b2a6f96ad3c6d49b8e4f",
+  "delta_sha256": "715707766927a7e7e0ea6890add15364c048d3607e958261fd29577cc87b2a1b",
+  "changed_source_hashes": {
+    "tools/ipanema/orchestration/code_review.py": "4b9cd45475a9a8c0926d8b66ce86d02a153981a0273360760841d901374033e0",
+    "tests/unit/test_code_review_v3.py": "d56a68eb1b4e898d7fecb687853c79e22be07c399be68b5aff1f362bd77b9b77"
+  },
+  "unchanged_candidate_context": {
+    "tools/ipanema/orchestration/council.py": "3bbe36122abe1966fa0fc89eb2a23576284797c4afb2a1b4c071e83cb4cfad7a"
+  },
+  "qa_receipt_sha256": "6498bcc8dcfcbf0c421c8bf950fbffca90f10386b15199f5570568a55686c454",
+  "qa_output_sha256": "f29a6fedcdba0eadd34af8919cf6739bf4d0858d4bf581944a22ade5a8007a5c",
+  "before_repro_sha256": "4621c985faf3be85f007f5db19b6a12b06dfd74c1e6ad4fda6bac700afcf31fd",
+  "after_repro_sha256": "3b59c76ba4aaba95c1a8fac30754238241aaff13e62015330fa79dab1182c491",
+  "prior_claude_response_sha256": "2d5848dd08356c9efdb5e6ef081ee3d653181d6f7d94ae45dfd4a4048139afbc",
+  "limits": {
+    "timeout": 240,
+    "idle_timeout": 90,
+    "startup_timeout": 30,
+    "first_response_timeout": 120
+  },
+  "provider_invocations": 0,
+  "sufficiency": "passed",
+  "patch_apply_check": "passed"
+}

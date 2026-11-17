@@ -1,0 +1,742 @@
+--- /dev/null
++++ b/tests/integration/test_seo_pilot_cli_v4.py
+@@ -0,0 +1,140 @@
++import argparse
++import dataclasses
++import hashlib
++import json
++import os
++from pathlib import Path
++import signal
++import shutil
++import subprocess
++import sys
++import tempfile
++import time
++import unittest
++from tests.support import ROOT,make_project
++from tests.unit.test_seo_crawler_v4 import HOME,doc
++from ipanema.core import Project,IpanemaError
++from ipanema.seo.crawl_policy import Limits
++from ipanema.seo.engineering import execute,_pilot_manifest,_supervise_pilot
++
++
++def sleeping_worker(project,args):
++    # No sockets or HTTP. Fake a durable started event, then exercise process
++    # group cleanup for a TERM-resistant worker and descendant.
++    signal.signal(signal.SIGTERM,signal.SIG_IGN)
++    args._closed_checkpoint({'event':'started','ordinal':1,'url':HOME+'robots.txt'})
++    run=args._closed_checkpoint_path.parent
++    child=subprocess.Popen([sys.executable,'-c',"import signal,time;signal.signal(signal.SIGTERM,signal.SIG_IGN);time.sleep(180)"])
++    (run/'descendant.pid').write_text(str(child.pid))
++    while True:time.sleep(.05)
++
++
++def parsing_stall(project,args):
++    signal.signal(signal.SIGTERM,signal.SIG_IGN)
++    while True:sum(range(10000))
++
++
++def export_stall(project,args):
++    from unittest.mock import patch
++    from ipanema.seo import engineering
++    def stalled(*a,**k):
++        signal.signal(signal.SIGTERM,signal.SIG_IGN)
++        while True:time.sleep(.01)
++    with patch.object(engineering,'export',stalled):return engineering._execute(project,args)
++
++
++class PilotCLI(unittest.TestCase):
++    def setUp(self):
++        self.tmp=tempfile.TemporaryDirectory();self.root=Path(self.tmp.name);self.project=Project(make_project(self.root,theme=False))
++        self.targets=[HOME+'target-'+str(i) for i in range(5)]
++        self.manifest=self.root/'targets.json';self.manifest.write_text(json.dumps({'project':self.project.id,'origin':HOME.rstrip('/'),'targets':[{'url':u} for u in self.targets]}))
++        pages={HOME+'robots.txt':{'status':200,'body':'User-agent: *'}};pages.update({u:{'status':200,'body':doc('/'+u.rsplit('/',1)[1])} for u in self.targets})
++        self.responses=self.root/'responses.json';self.responses.write_text(json.dumps({'project':self.project.id,'home':HOME,'responses':pages}))
++
++    def tearDown(self):self.tmp.cleanup()
++
++    def args(self,seconds=20):
++        return argparse.Namespace(seo_command='crawl',allow_network=False,responses=self.responses,targets_manifest=self.manifest,
++                targets_sha256=hashlib.sha256(self.manifest.read_bytes()).hexdigest(),**(dataclasses.asdict(Limits())|{'max_seconds':seconds}))
++
++    def test_closed_offline_execute_supervised_and_exported(self):
++        result,code=execute(self.project,self.args());self.assertEqual(code,0,result)
++        data=json.loads(Path(result['report']).read_text());self.assertEqual(data['selected_scope'],self.targets)
++        self.assertEqual([r['url'] for r in data['provenance']['request_log']],[HOME+'robots.txt',*self.targets])
++        checkpoint=json.loads(Path(data['checkpoint']).read_text());self.assertEqual(len(checkpoint['requests']),6)
++        self.assertTrue(all(r['state']=='completed' for r in checkpoint['requests']))
++
++    def test_real_cli_parses_closed_flags_without_network(self):
++        shutil.copytree(ROOT/'tools',self.root/'tools',ignore=shutil.ignore_patterns('__pycache__'))
++        env={k:v for k,v in os.environ.items() if not k.startswith('IPANEMA_')}
++        z=subprocess.run([sys.executable,str(self.root/'tools/ia.py'),'seo','crawl','--targets-manifest',str(self.manifest),
++              '--targets-sha256',self.args().targets_sha256,'--responses',str(self.responses),'--max-seconds','20'],
++              cwd=self.root,env=env,capture_output=True,text=True,timeout=25)
++        self.assertEqual(z.returncode,0,z.stderr);data=json.loads(z.stdout)
++        report=json.loads(Path(data['report']).read_text());self.assertEqual(report['selected_scope'],self.targets)
++        self.assertEqual(len(report['provenance']['request_log']),6)
++
++    def test_hash_and_project_rejected_without_requests(self):
++        args=self.args();args.targets_sha256='0'*64
++        with self.assertRaises(IpanemaError):_pilot_manifest(self.project,args)
++        data=json.loads(self.manifest.read_text());data['project']='wrong';self.manifest.write_text(json.dumps(data))
++        with self.assertRaises(IpanemaError):_pilot_manifest(self.project,self.args())
++
++    def test_invalid_manifest_cli_returns_stopped(self):
++        args=self.args();args.targets_sha256='0'*64
++        result,code=execute(self.project,args);self.assertEqual(code,2);self.assertEqual(result['reason'],'worker_failed')
++        path=Path(result['checkpoint']);self.assertFalse(path.exists())
++
++    def test_missing_paired_flag_rejected(self):
++        args=self.args();args.targets_manifest=None
++        with self.assertRaises(IpanemaError):execute(self.project,args)
++
++    def assert_cancel(self,work,seconds):
++        start=time.monotonic();result,code=_supervise_pilot(self.project,self.args(seconds),work=work);elapsed=time.monotonic()-start
++        self.assertEqual(code,2);self.assertEqual(result['reason'],'absolute_deadline');self.assertLess(elapsed,seconds+1)
++        receipt=json.loads(Path(result['supervision']).read_text());self.assertTrue(receipt['worker_reaped'])
++        return result,elapsed
++
++    def test_real_short_process_group_cancellation(self):
++        result,elapsed=self.assert_cancel(sleeping_worker,1)
++        checkpoint=json.loads(Path(result['checkpoint']).read_text());self.assertEqual(checkpoint['requests'][0]['state'],'started_without_confirmed_result')
++        self.assertEqual(sum(v=='pending' for v in checkpoint['planned'].values()),5)
++        pid=int((Path(result['checkpoint']).parent/'descendant.pid').read_text());time.sleep(.1)
++        status=Path('/proc')/str(pid)/'stat'
++        self.assertTrue(not status.exists() or status.read_text().split()[2]=='Z','descendant still active')
++
++    def test_interrupting_supervisor_cancels_worker_and_descendant(self):
++        import multiprocessing
++        result_path=self.root/'interrupted.json'
++        def run():
++            result,code=_supervise_pilot(self.project,self.args(10),work=sleeping_worker)
++            result_path.write_text(json.dumps({'result':result,'code':code}))
++        driver=multiprocessing.get_context('fork').Process(target=run);driver.start()
++        try:
++            deadline=time.monotonic()+4
++            files=[]
++            while time.monotonic()<deadline:
++                files=list(self.project.evidence_root.glob('pilot-checkpoint-*/descendant.pid'))
++                if files:break
++                time.sleep(.01)
++            self.assertTrue(files)
++            os.kill(driver.pid,signal.SIGTERM);driver.join(3);self.assertFalse(driver.is_alive())
++            z=json.loads(result_path.read_text());self.assertEqual(z['code'],2)
++            receipt=json.loads(Path(z['result']['supervision']).read_text());self.assertTrue(receipt['worker_reaped'])
++            pid=int(files[0].read_text());status=Path('/proc')/str(pid)/'stat'
++            self.assertTrue(not status.exists() or status.read_text().split()[2]=='Z')
++        finally:
++            if driver.is_alive():driver.kill();driver.join()
++
++    def test_deadline_covers_parsing(self):self.assert_cancel(parsing_stall,1)
++    def test_deadline_covers_export(self):self.assert_cancel(export_stall,1)
++
++    @unittest.skipUnless(os.environ.get('IPANEMA_PILOT_FULL_120_TEST')=='1','explicit real 120-second fixture only')
++    def test_real_120_second_process_group_cancellation(self):
++        result,elapsed=self.assert_cancel(sleeping_worker,120)
++        checkpoint=json.loads(Path(result['checkpoint']).read_text());self.assertEqual(checkpoint['requests'][0]['state'],'started_without_confirmed_result')
++        pid=int((Path(result['checkpoint']).parent/'descendant.pid').read_text());time.sleep(.1)
++        status=Path('/proc')/str(pid)/'stat';self.assertTrue(not status.exists() or status.read_text().split()[2]=='Z')
++        proof={'elapsed_seconds':elapsed,'limit_seconds':120,'worker_reaped':True,'descendant_pid':pid,'descendant_active':False,'HTTP_requests':0,'checkpoint_states':[x['state'] for x in checkpoint['requests']]}
++        destination=os.environ.get('IPANEMA_PILOT_120_RECEIPT')
++        if destination:Path(destination).write_text(json.dumps(proof,indent=2))
+--- /dev/null
++++ b/tests/unit/test_seo_pilot_v4.py
+@@ -0,0 +1,131 @@
++import copy
++import json
++from pathlib import Path
++import tempfile
++import unittest
++from unittest.mock import patch
++from tests.support import make_project
++from tests.unit.test_seo_crawler_v4 import FakeClock, FixtureTransport, doc, HOME
++from ipanema.core import Project, IpanemaError
++from ipanema.seo.crawler import crawl
++from ipanema.seo.crawl_policy import Limits, Fetcher, Policy
++
++
++class ClosedPilot(unittest.TestCase):
++    def setUp(self):
++        self.tmp = tempfile.TemporaryDirectory();self.project = Project(make_project(Path(self.tmp.name),theme=False))
++        self.targets = [HOME + 'selected-' + str(i) for i in range(5)]
++        self.pages = {HOME+'robots.txt': {'status':200,'body':'User-agent: *\nAllow: /\nSitemap: '+HOME+'sitemap.xml'}}
++        self.pages.update({u:{'status':200,'body':doc('/'+u.rsplit('/',1)[1],links='<a href="/extra">extra</a>')} for u in self.targets})
++
++    def tearDown(self):self.tmp.cleanup()
++
++    def run_crawl(self, pages=None, transport=None, **kwargs):
++        clock=FakeClock();t=transport or FixtureTransport(pages or self.pages)
++        z=crawl(self.project,targets=self.targets,limits=kwargs.pop('limits',Limits(timeout=20)),transport=t,clock=clock,sleep=clock.sleep,**kwargs)
++        return z,t,clock
++
++    def test_exact_selection_no_home_sitemap_or_extra(self):
++        z,t,_=self.run_crawl();self.assertEqual(t.calls,[HOME+'robots.txt',*self.targets])
++        self.assertEqual([n['url'] for n in z['urls']],self.targets)
++        self.assertEqual(z['state'],'complete_for_selected_scope');self.assertFalse(z['graph']['complete_for_policy'])
++        self.assertFalse(z['whole_site_complete'])
++
++    def test_caps_and_rate_shared_with_robots(self):
++        z,t,clock=self.run_crawl(limits=Limits(max_requests=100,requests_per_second=2,max_seconds=300,timeout=30,max_bytes=5000000))
++        caps=z['provenance']['limits'];self.assertEqual(caps['max_requests'],12);self.assertEqual(caps['max_redirects'],3)
++        self.assertEqual(caps['requests_per_second'],.5);self.assertEqual(caps['max_seconds'],120);self.assertEqual(caps['timeout'],20)
++        self.assertEqual(caps['max_bytes'],2000000);self.assertEqual(clock.value,10)
++
++    def test_robots_slower_rate(self):
++        pages=copy.deepcopy(self.pages);pages[HOME+'robots.txt']['body']='User-agent: *\nCrawl-delay: 3'
++        _,_,clock=self.run_crawl(pages);self.assertEqual(clock.value,15)
++
++    def test_invalid_targets_rejected_before_any_request(self):
++        for bad in (self.targets[:4],self.targets[:4]+[self.targets[0]],self.targets[:4]+[HOME+'checkout/'],self.targets[:4]+['https://other.invalid/a']):
++            t=FixtureTransport(self.pages)
++            with self.subTest(targets=bad),self.assertRaises((IpanemaError,ValueError)):
++                crawl(self.project,targets=bad,transport=t)
++            self.assertEqual(t.calls,[])
++
++    def test_403_and_429_abort_globally(self):
++        for status in (403,429):
++            pages=copy.deepcopy(self.pages);pages[self.targets[0]]={'status':status}
++            z,t,_=self.run_crawl(pages);self.assertEqual(t.calls,[HOME+'robots.txt',self.targets[0]])
++            self.assertEqual(z['provenance']['stop_reason'],'http_'+str(status))
++
++    def test_unknown_robots_aborts(self):
++        pages=copy.deepcopy(self.pages);pages[HOME+'robots.txt']={'status':500}
++        z,t,_=self.run_crawl(pages);self.assertEqual(t.calls,[HOME+'robots.txt']);self.assertEqual(z['provenance']['stop_reason'],'robots_unknown')
++
++    def test_absent_robots_404_410_native_semantics(self):
++        for status in (404,410):
++            pages=copy.deepcopy(self.pages);pages[HOME+'robots.txt']={'status':status}
++            z,t,_=self.run_crawl(pages);self.assertEqual(len(t.calls),6);self.assertTrue(z['robots']['known'])
++
++    def test_robots_block_no_document_get(self):
++        pages=copy.deepcopy(self.pages);pages[HOME+'robots.txt']['body']='User-agent: *\nDisallow: /'
++        z,t,_=self.run_crawl(pages);self.assertEqual(t.calls,[HOME+'robots.txt']);self.assertEqual(z['state'],'stopped')
++
++    def test_generic_transport_safety_failures_abort_remaining(self):
++        for reason in ('TLS','private IP','DNS','timeout','gzip incomplete','encoding rejected'):
++            class F(FixtureTransport):
++                def __call__(inner,url,**kw):
++                    if url==self.targets[0]:inner.calls.append(url);raise IpanemaError(reason)
++                    return super().__call__(url,**kw)
++            z,t,_=self.run_crawl(transport=F(self.pages));self.assertEqual(t.calls,[HOME+'robots.txt',self.targets[0]])
++            self.assertEqual(z['provenance']['stop_reason'],'closed_scope_error')
++
++    def test_redirect_external_private_missing_and_cycle_stop(self):
++        for location in ('https://other.invalid/a',HOME+'checkout/',None,self.targets[0]):
++            pages=copy.deepcopy(self.pages);pages[self.targets[0]]={'status':302,'headers':{'location':location} if location else {}}
++            z,t,_=self.run_crawl(pages);self.assertEqual(t.calls,[HOME+'robots.txt',self.targets[0]]);self.assertEqual(z['state'],'stopped')
++
++    def test_robots_and_documents_share_three_hops(self):
++        pages=copy.deepcopy(self.pages);pages[HOME+'robots.txt']={'status':302,'headers':{'location':HOME+'robots-real.txt'}}
++        pages[HOME+'robots-real.txt']={'status':200,'body':'User-agent: *\nAllow: /'}
++        pages[self.targets[0]]={'status':302,'headers':{'location':HOME+'hop-1'}}
++        pages[HOME+'hop-1']={'status':302,'headers':{'location':HOME+'hop-2'}}
++        pages[HOME+'hop-2']={'status':302,'headers':{'location':HOME+'hop-3'}}
++        z,t,_=self.run_crawl(pages);self.assertNotIn(HOME+'hop-3',t.calls);self.assertEqual(z['redirect_hops_used'],3)
++        self.assertEqual(z['state'],'stopped')
++
++    def test_redirect_blocked_by_robots_not_fetched(self):
++        pages=copy.deepcopy(self.pages);pages[HOME+'robots.txt']['body']='User-agent: *\nDisallow: /blocked'
++        pages[self.targets[0]]={'status':302,'headers':{'location':HOME+'blocked'}}
++        z,t,_=self.run_crawl(pages);self.assertNotIn(HOME+'blocked',t.calls);self.assertEqual(z['state'],'stopped')
++
++    def test_convergent_redirect_is_not_cycle_or_duplicate_get(self):
++        pages=copy.deepcopy(self.pages);pages[self.targets[1]]={'status':302,'headers':{'location':self.targets[0]}}
++        z,t,_=self.run_crawl(pages);self.assertEqual(z['state'],'complete_for_selected_scope')
++        self.assertEqual(t.calls.count(self.targets[0]),1);self.assertEqual(len(t.calls),6)
++
++    def test_two_selected_urls_redirect_cycle_is_terminal(self):
++        pages=copy.deepcopy(self.pages);pages[self.targets[0]]={'status':302,'headers':{'location':self.targets[1]}}
++        pages[self.targets[1]]={'status':302,'headers':{'location':self.targets[0]}}
++        z,t,_=self.run_crawl(pages);self.assertEqual(z['state'],'stopped')
++        self.assertEqual(t.calls,[HOME+'robots.txt',self.targets[0],self.targets[1]])
++
++    def test_request_budget_and_time_budget_stop(self):
++        z,t,_=self.run_crawl(limits=Limits(max_requests=2));self.assertEqual(len(t.calls),2);self.assertEqual(z['state'],'stopped')
++        z,t,_=self.run_crawl(limits=Limits(max_seconds=1));self.assertEqual(len(t.calls),1);self.assertEqual(z['state'],'stopped')
++
++    def test_checkpoint_failure_prevents_transport(self):
++        t=FixtureTransport(self.pages)
++        def failure(row):raise OSError('checkpoint fixture failure')
++        with self.assertRaises(OSError):self.run_crawl(transport=t,on_event=failure)
++        self.assertEqual(t.calls,[])
++
++    def test_request_events_preserve_unconfirmed_arrival(self):
++        events=[]
++        class F(FixtureTransport):
++            def __call__(inner,url,**kw):
++                if url==self.targets[0]:inner.calls.append(url);raise IpanemaError('fixture')
++                return super().__call__(url,**kw)
++        z,t,_=self.run_crawl(transport=F(self.pages),on_event=events.append)
++        self.assertEqual([x['event'] for x in events],['started','completed','started','unconfirmed'])
++
++    def test_general_mode_unchanged_home_seed(self):
++        t=FixtureTransport({HOME+'robots.txt':{'status':200,'body':'User-agent: *'},HOME:{'status':200,'body':doc()}});clock=FakeClock()
++        z=crawl(self.project,transport=t,limits=Limits(max_urls=1,max_sitemaps=0),clock=clock,sleep=clock.sleep)
++        self.assertEqual(t.calls,[HOME+'robots.txt',HOME]);self.assertNotIn('selected_scope',z)
+--- a/tools/ipanema/seo/crawl_policy.py
++++ b/tools/ipanema/seo/crawl_policy.py
+@@ -223,9 +223,12 @@
+ 
+ 
+ class Fetcher:
+-    def __init__(self, policy, *, allow_network=False, transport=None, clock=time.monotonic, sleep=time.sleep):
++    def __init__(self, policy, *, allow_network=False, transport=None, clock=time.monotonic, sleep=time.sleep, on_event=None):
+         if not allow_network and transport is None:
+             raise IpanemaError('Red deshabilitada: se requiere --allow-network.')
++        if on_event is not None and not callable(on_event):
++            raise IpanemaError("Checkpoint callback inválido.")
++        self.on_event = on_event
+         self.policy, self.transport = policy, transport or https_get
+         self.clock, self.sleep = clock, sleep
+         self.started, self.last = clock(), None
+@@ -251,6 +254,8 @@
+             self.stop_reason = 'time_budget'
+             raise IpanemaError('Presupuesto agotado durante la espera; no se inicia otra solicitud.')
+         self.last, self.calls = self.clock(), self.calls + 1
++        if self.on_event:
++            self.on_event({'event': 'started', 'ordinal': self.calls, 'url': url})
+         try:
+             row = self.transport(url, timeout=min(limits.timeout, remaining), max_bytes=limits.max_bytes)
+             status, body = row['status'], row.get('body', b'')
+@@ -268,11 +273,17 @@
+                 self.stop_reason = self.stop_reason or 'access_challenge'
+             if self.clock() - self.started >= limits.max_seconds:
+                 self.stop_reason = self.stop_reason or 'time_budget'
++            if self.on_event:
++                self.on_event({'event': 'completed', 'ordinal': self.calls, 'url': url, 'status': status, 'bytes': len(body)})
+             return {'url': url, 'status': status, 'headers': {k.lower(): v for k, v in row.get('headers', {}).items()
+                     if k.lower() in ('content-type', 'location', 'x-robots-tag')}, 'body': body}
+         except IpanemaError:
++            if self.on_event:
++                self.on_event({'event': 'unconfirmed', 'ordinal': self.calls, 'url': url})
+             raise
+         except Exception:
++            if self.on_event:
++                self.on_event({'event': 'unconfirmed', 'ordinal': self.calls, 'url': url})
+             raise IpanemaError('Transporte fallido; cuerpo y secretos no se registran.') from None
+ 
+     def provenance(self):
+--- a/tools/ipanema/seo/crawler.py
++++ b/tools/ipanema/seo/crawler.py
+@@ -2,6 +2,7 @@
+ from __future__ import annotations
+ 
+ from collections import Counter, defaultdict, deque
++from dataclasses import replace
+ import csv
+ import hashlib
+ import json
+@@ -9,7 +10,7 @@
+ 
+ from ..core import IpanemaError, now
+ from .adapters import authorize_url
+-from .crawl_policy import AGENT, Fetcher, Policy, normalize
++from .crawl_policy import AGENT, Fetcher, Policy, Limits, normalize
+ from .extractor import extract
+ from .indexability import Content, classify, layers, page_type, pagination, readiness, template_checks
+ from .page_audit import audit_snapshot, crawlable
+@@ -89,17 +90,40 @@
+     return audit_snapshot(project, snapshot, kind)
+ 
+ 
+-def crawl(project, *, limits=None, allow_network=False, transport=None, captures=None, clock=None, sleep=None):
++def pilot_limits(limits=None):
++    """Opt-in caps only; ordinary crawl defaults and behavior remain unchanged."""
++    limits = (limits or Limits()).validate()
++    return replace(limits, max_urls=8, max_depth=0, max_sitemaps=0,
++                   max_requests=min(12, limits.max_requests), requests_per_second=min(.5, limits.requests_per_second),
++                   max_seconds=min(120, limits.max_seconds), timeout=min(20, limits.timeout),
++                   max_bytes=min(2_000_000, limits.max_bytes), max_redirects=min(3, limits.max_redirects), concurrency=1)
++
++
++def crawl(project, *, limits=None, allow_network=False, transport=None, captures=None, clock=None, sleep=None,
++          targets=None, on_event=None):
+     authorize_url(project, project.data['public_url'])
++    closed = targets is not None
++    limits = pilot_limits(limits) if closed else limits
+     policy = Policy(project.data['public_url'], limits)
++    if closed:
++        if not isinstance(targets, (list, tuple)) or len(targets) != 5 or len(set(targets)) != 5:
++            raise IpanemaError('El piloto exige cinco destinos únicos.')
++        if any(not isinstance(u, str) or policy.check(u) != u for u in targets):
++            raise IpanemaError('Destinos fuera del contrato literal del piloto.')
++        targets = tuple(targets)
+     options = {k: v for k, v in [('clock', clock), ('sleep', sleep)] if v is not None}
+-    fetcher = Fetcher(policy, allow_network=allow_network, transport=transport, **options)
++    fetcher = Fetcher(policy, allow_network=allow_network, transport=transport, on_event=on_event, **options)
+     result = {'kind': 'seo-crawl-v4', 'project': project.id, 'at': now(), 'home': policy.home,
+               'source': 'offline_injected_transport' if transport else 'live_read_only_http',
+               'urls': [], 'edges': [], 'sitemaps': [], 'sitemap_entries': [], 'errors': [], 'excluded': [],
+               'google': {'connection': 'not_consulted', 'indexation_observed': False},
+               'robots': {'known': False, 'status': None}, 'remote_mutations': False}
++    if closed:
++        result['selected_scope'] = list(targets)
++        result['whole_site_complete'] = False
+     robot = Robots()
++    redirects_used = 0
++    redirect_targets = {}
+     robots_text, robots_known = None, False
+     def excluded(reason, source=None):
+         result['excluded_total'] = result.get('excluded_total', 0) + 1
+@@ -123,7 +147,14 @@
+             if response['status'] in (301, 302, 303, 307, 308):
+                 if not response['headers'].get('location'):
+                     raise IpanemaError('Redirección sin Location.')
+-                robots_url = policy.check(urljoin(robots_url, response['headers'].get('location', '')), document=True)
++                target = policy.check(urljoin(robots_url, response['headers'].get('location', '')), document=True)
++                if closed:
++                    if redirects_used >= policy.limits.max_redirects:
++                        raise IpanemaError('Presupuesto global de redirecciones agotado.')
++                    redirects_used += 1
++                    if on_event:
++                        on_event({'event': 'planned', 'url': target})
++                robots_url = target
+                 continue
+             robots_text = response['body'].decode('utf-8', 'replace') if response['status'] == 200 else '' if response['status'] in (404, 410) else None
+             robots_known = robots_text is not None
+@@ -140,8 +171,10 @@
+             break
+         if not robots_known and not fetcher.stop_reason:
+             result['errors'].append({'operation': 'robots', 'reason': 'robots_unavailable_no_crawl'})
++            if closed:
++                fetcher.stop_reason = 'robots_unknown'
+         # Solo metadata; jamás usa sitemap como semillas de navegación.
+-        sitemap_queue = deque((url, 0) for url in ((robot.site_maps() or [urljoin(policy.home, 'sitemap.xml')]) if robots_known else []))
++        sitemap_queue = deque((url, 0) for url in ((robot.site_maps() or [urljoin(policy.home, 'sitemap.xml')]) if robots_known and not closed else []))
+         sitemap_seen, sitemap_urls, normalized_sitemap = set(), [], set()
+         sitemap_redirect_targets = {}
+         while sitemap_queue and len(sitemap_seen) < policy.limits.max_sitemaps and not fetcher.stop_reason:
+@@ -211,10 +244,11 @@
+             result['errors'].append({'operation': 'sitemap', 'reason': 'unresolved_sitemap_documents'})
+         if sitemap_queue:
+             result['errors'].append({'operation': 'sitemap', 'reason': 'sitemap_document_limit'})
+-        queue, queued, seen, path_variants = deque([(policy.home, 0, 'home', 0)]), {policy.home}, set(), defaultdict(set)
++        queue = deque((u, None, 'selected', 0) for u in targets) if closed else deque([(policy.home, 0, 'home', 0)])
++        queued, seen, path_variants = set(targets) if closed else {policy.home}, set(), defaultdict(set)
+         navigation_exhausted = False
+         # Chequeos de URLs adicionales del sitemap son independientes del BFS de home.
+-        sitemap_checks_added = False
++        sitemap_checks_added = closed
+         while robots_known and not fetcher.stop_reason and len(seen) < policy.limits.max_urls:
+             if not queue:
+                 navigation_exhausted = True
+@@ -245,9 +279,16 @@
+             result['urls'].append(node)
+             google_allowed = robot.can_fetch('Googlebot', url)
+             node['robots'] = {'crawler_allowed': allowed(url), 'googlebot_allowed': google_allowed}
++            if closed and not google_allowed:
++                fetcher.stop_reason = 'googlebot_disallowed'
++                node['error'] = 'blocked_by_robots_for_googlebot'
++                break
+             if not allowed(url):
+                 node.update({'status': None, 'indexability': classify({'url': url}, googlebot_allowed=google_allowed, robots_known=True),
+                              'error': 'blocked_by_robots_for_audit_agent'})
++                if closed:
++                    fetcher.stop_reason = 'audit_agent_disallowed'
++                    break
+                 continue
+             try:
+                 response = fetcher.get(url)
+@@ -260,6 +301,21 @@
+                         raise IpanemaError('Redirección sin Location.')
+                     target = policy.check(urljoin(url, response['headers'].get('location', '')))
+                     node['redirect'] = target
++                    if closed:
++                        cursor, chain = target, {url}
++                        while cursor is not None:
++                            if cursor in chain:
++                                raise IpanemaError('Ciclo de redirección en piloto.')
++                            chain.add(cursor)
++                            cursor = redirect_targets.get(cursor)
++                        redirect_targets[url] = target
++                        if redirects_used >= policy.limits.max_redirects:
++                            raise IpanemaError('Presupuesto global de redirecciones agotado.')
++                        redirects_used += 1
++                        if not allowed(target) or not robot.can_fetch('Googlebot', target):
++                            raise IpanemaError('Destino redirigido bloqueado por robots.')
++                        if on_event:
++                            on_event({'event': 'planned', 'url': target})
+                     if len(result['edges']) < policy.limits.max_edges:
+                         result['edges'].append({'source': url, 'target': target, 'text': '', 'relation': 'redirect'})
+                     else:
+@@ -273,7 +329,10 @@
+                         queued.add(target)
+                         queue.append((target, depth, 'redirect', redirects + 1))
+                     elif target in seen or redirects >= policy.limits.max_redirects:
+-                        node['redirect_limit_or_cycle'] = True
++                        if closed and target in seen:
++                            node['redirect_response_already_observed'] = True
++                        else:
++                            node['redirect_limit_or_cycle'] = True
+                 snap = extract(response['body'].decode('utf-8', 'replace') if response['status'] == 200 and not fetcher.stop_reason else '',
+                                url, status=response['status'], headers=node['headers'])
+                 node['indexability'] = classify(snap, googlebot_allowed=google_allowed, robots_known=True)
+@@ -336,15 +395,19 @@
+                 node['error'] = str(exc)
+                 node.setdefault('status', None)
+                 node.setdefault('indexability', {'state': 'insufficient_evidence', 'indexation_observed': False})
++                if closed:
++                    fetcher.stop_reason = fetcher.stop_reason or 'closed_scope_error'
+         result['navigation_queue_remaining'] = len(queue)
+         result['navigation_exhausted_before_sitemap_checks'] = navigation_exhausted
+         result['sitemap_urls'] = sitemap_urls
+     except (IpanemaError, ValueError) as exc:
+         result['errors'].append({'operation': 'crawl', 'reason': str(exc)})
++        if closed:
++            fetcher.stop_reason = fetcher.stop_reason or 'closed_scope_error'
+     result['provenance'] = fetcher.provenance()
+     result['sitemap_urls'] = result.get('sitemap_urls', [])
+     verified_urls = {n['url'] for n in result['urls'] if n.get('status') is not None and not n.get('error')}
+-    required_urls = {policy.home, *result['sitemap_urls'], *(e['target'] for e in result['edges'])}
++    required_urls = set(targets) | {n['redirect'] for n in result['urls'] if n.get('redirect')} if closed else {policy.home, *result['sitemap_urls'], *(e['target'] for e in result['edges'])}
+     result['verification_coverage'] = {'required_count': len(required_urls), 'verified_count': len(required_urls & verified_urls),
+                                        'unverified_required_urls': sorted(required_urls - verified_urls),
+                                        'meaning': 'home, accepted sitemap URLs and observed permitted internal/redirect targets; HTTP 404 is checked, not healthy'}
+@@ -352,10 +415,15 @@
+                     not any(n.get('error') or n.get('redirect_limit_or_cycle') for n in result['urls']) and
+                     not result.get('navigation_queue_remaining') and
+                     not any(result.get('excluded_by_reason', {}).get(reason, 0) for reason in ('depth_limit', 'query_variants_limit', 'discovery_budget', 'edge_budget')))
+-    result['graph'] = graph(result['urls'], result['edges'], policy.home, result['sitemap_urls'], complete=complete)
++    result['graph'] = graph(result['urls'], result['edges'], policy.home, result['sitemap_urls'], complete=complete and not closed)
++    if closed:
++        result['graph']['complete_for_selected_scope'] = complete
+     result['coverage_by_type'] = dict(Counter(n.get('page_type', 'unknown') for n in result['urls']))
+     result['indexability_counts'] = dict(Counter(n.get('indexability', {}).get('state', 'insufficient_evidence') for n in result['urls']))
+-    result['state'] = 'stopped' if fetcher.stop_reason else 'complete_for_policy' if complete else 'partial'
++    if closed:
++        result['redirect_hops_used'] = redirects_used
++        result['verification_coverage']['meaning'] = 'selected targets and their accepted redirects only; never site coverage'
++    result['state'] = 'stopped' if fetcher.stop_reason else ('complete_for_selected_scope' if closed else 'complete_for_policy') if complete else 'partial'
+     result['backlog'] = backlog(result)
+     result['limitations'] = ['No es Googlebot ni prueba de indexación; DOM solo si se aporta captura explícita.',
+                             'Concurrencia real 1, límites explícitos. Sin JS de terceros durante el rastreo HTTP.',
+--- a/tools/ipanema/seo/engineering.py
++++ b/tools/ipanema/seo/engineering.py
+@@ -9,8 +9,8 @@
+ from ..core import IpanemaError, digest, now, read_json, redact, write_json
+ from . import reports
+ from .adapters import authorize_url, import_observation
+-from .crawl_policy import Limits, normalize
+-from .crawler import crawl, export, save_csv
++from .crawl_policy import Limits, Policy, normalize
++from .crawler import crawl, export, save_csv, pilot_limits
+ from .extractor import extract
+ from .indexability import Content, classify, layers, page_type, pagination, readiness, template_checks
+ from .regression import compare
+@@ -28,6 +28,8 @@
+     mode = crawler.add_mutually_exclusive_group(required=True)
+     mode.add_argument('--allow-network', action='store_true')
+     mode.add_argument('--responses', type=Path, help='Fixture/export local explícito; no hace red')
++    crawler.add_argument('--targets-manifest', type=Path, help='Piloto cerrado de cinco URLs, supervisado y con checkpoint')
++    crawler.add_argument('--targets-sha256', help='SHA256 exacto del manifiesto autorizado')
+     for field in fields(Limits):
+         option = '--' + field.name.replace('_', '-')
+         crawler.add_argument(option, type=float if field.name in ('requests_per_second', 'max_seconds', 'timeout') else int,
+@@ -181,7 +183,7 @@
+     return report
+ 
+ 
+-def execute(project, args):
++def _execute(project, args):
+     command = args.seo_command
+     inputs = []
+     if command == 'sitemap':
+@@ -195,10 +197,15 @@
+         limits = Limits(**{f.name: getattr(args, f.name) for f in fields(Limits)}).validate()
+         fixture = OfflineResponses(project, args.responses) if args.responses else None
+         result = crawl(project, limits=limits, allow_network=args.allow_network, transport=fixture,
++                       targets=getattr(args, '_closed_targets', None), on_event=getattr(args, '_closed_checkpoint', None),
+                        clock=fixture.clock if fixture else None, sleep=fixture.sleep if fixture else None)
++        if getattr(args, '_closed_targets', None):
++            inputs.append(args.targets_manifest)
++            result['pilot_manifest_sha256'] = args.targets_sha256
++            result['checkpoint'] = str(args._closed_checkpoint_path)
+         if fixture:
+             result['provenance']['clock'] = 'virtual_offline_not_network_timing'
+-            inputs = [args.responses]
++            inputs.append(args.responses)
+     elif command == 'readiness':
+         result = captured_readiness(project, args.capture, args.no_js, args.robots, args.facts)
+         inputs = [p for p in [args.capture, args.no_js, args.robots, args.facts] if p]
+@@ -259,3 +266,179 @@
+     lines += ['', '## Límites', ''] + ['- ' + safe(x) for x in result.get('limitations', [])]
+     lines += ['', 'Sin escrituras remotas. No se sustituyó el sitemap nativo.', '']
+     return '\n'.join(lines)
++
++
++# Closed mode has one bounded POSIX worker containing manifest parsing, HTTP,
++# analysis AND report export. It reuses _execute, not another crawl loop.
++def _pilot_manifest(project, args):
++    import hashlib
++    path = args.targets_manifest
++    if not path or path.is_symlink() or not path.is_file() or path.stat().st_size > 65536:
++        raise IpanemaError('Manifiesto del piloto inválido o excedido.')
++    raw = path.read_bytes()
++    if len(raw) > 65536 or not re.fullmatch(r'[0-9a-f]{64}', args.targets_sha256 or ''):
++        raise IpanemaError('Se requiere el hash exacto del manifiesto.')
++    if hashlib.sha256(raw).hexdigest() != args.targets_sha256:
++        raise IpanemaError('Hash del manifiesto no coincide.')
++    def unique(pairs):
++        result = {}
++        for k, v in pairs:
++            if k in result:
++                raise IpanemaError('Claves repetidas en manifiesto.')
++            result[k] = v
++        return result
++    data = json.loads(raw, object_pairs_hook=unique)
++    policy = Policy(project.data['public_url'])
++    if data.get('project') != project.id or data.get('origin') != policy.origin:
++        raise IpanemaError('Manifiesto de otro proyecto/origen.')
++    rows = data.get('targets')
++    if not isinstance(rows, list) or len(rows) != 5 or any(not isinstance(x, dict) for x in rows):
++        raise IpanemaError('El piloto exige cinco destinos.')
++    urls = [x.get('url') for x in rows]
++    if any(not isinstance(u, str) or policy.check(u) != u for u in urls) or len(set(urls)) != 5:
++        raise IpanemaError('Destinos inválidos, privados o repetidos.')
++    return urls
++
++
++def _checkpoint_writer(path, targets):
++    import os
++    data = {'project': None, 'state': 'running', 'planned': {u: 'pending' for u in targets},
++            'requests': [], 'arrival_at_server_without_response': 'unknown'}
++    def persist():
++        write_json(path, data, overwrite=True)
++        with path.open('rb') as stream:
++            os.fsync(stream.fileno())
++        fd = os.open(path.parent, os.O_RDONLY)
++        try:
++            os.fsync(fd)
++        finally:
++            os.close(fd)
++    def event(row):
++        url, kind = row['url'], row['event']
++        if kind == 'planned':
++            data['planned'].setdefault(url, 'pending')
++        elif kind == 'started':
++            data['planned'][url] = 'started_without_confirmed_result'
++            data['requests'].append({'ordinal': row['ordinal'], 'url': url, 'state': 'started_without_confirmed_result'})
++        else:
++            current = data['requests'][-1]
++            if current['ordinal'] != row['ordinal'] or current['url'] != url:
++                raise IpanemaError('Evento de checkpoint fuera de secuencia.')
++            if kind == 'completed':
++                current.update(state='completed', status=row['status'], bytes=row['bytes'])
++                data['planned'][url] = 'completed'
++            elif kind != 'unconfirmed':
++                raise IpanemaError('Evento de checkpoint desconocido.')
++        persist()
++    persist()
++    return event
++
++
++def _pilot_worker(channel, project, args, checkpoint, work):
++    import os
++    try:
++        os.setsid()
++        channel.send({'ready': os.getpid()})
++        if channel.recv() != 'go':
++            return
++        targets = _pilot_manifest(project, args)
++        args._closed_targets = targets
++        args._closed_checkpoint_path = checkpoint
++        args._closed_checkpoint = _checkpoint_writer(checkpoint, [normalize(project.data['public_url']) + 'robots.txt', *targets])
++        result = work(project, args)
++        channel.send({'result': result})
++    except Exception as exc:
++        channel.send({'error': type(exc).__name__, 'message': 'Piloto abortado; consultar checkpoint si existe.'})
++    finally:
++        channel.close()
++
++
++def _supervise_pilot(project, args, *, work=None):
++    import multiprocessing
++    import os
++    import signal
++    import time
++    import uuid
++    if os.name != 'posix':
++        raise IpanemaError('El piloto requiere supervisión POSIX; sin fallback sin límite.')
++    limits = pilot_limits(Limits(**{f.name: getattr(args, f.name) for f in fields(Limits)}))
++    started = time.monotonic()
++    seconds = limits.max_seconds
++    grace = min(1., seconds / 4)
++    deadline = started + seconds
++    # Pure path construction; all filesystem/manifest/report work runs in child.
++    run = project.evidence_root / ('pilot-checkpoint-' + uuid.uuid4().hex)
++    checkpoint = run / 'checkpoint.json'
++    parent, child = multiprocessing.get_context('fork').Pipe()
++    process = multiprocessing.get_context('fork').Process(target=_pilot_worker,
++                args=(child, project, args, checkpoint, work or _execute))
++    ready, message, stopped = False, None, False
++    previous = {}
++    def interrupt(signum, frame):
++        raise IpanemaError('Piloto interrumpido por señal; estado de llegada no inferido.')
++    try:
++        for sig in (signal.SIGTERM, signal.SIGINT):
++            previous[sig] = signal.signal(sig, interrupt)
++        process.start()
++        child.close()
++        while time.monotonic() < deadline - grace:
++            if parent.poll(min(.05, max(0, deadline - grace - time.monotonic()))):
++                try:
++                    message = parent.recv()
++                except EOFError:
++                    message = {'error': 'worker_eof'}
++                    break
++                if not ready:
++                    if message != {'ready': process.pid} or os.getpgid(process.pid) != process.pid:
++                        raise IpanemaError('Grupo del worker no validado.')
++                    ready = True
++                    parent.send('go')
++                    message = None
++                else:
++                    break
++            if not process.is_alive():
++                break
++        if message is None and process.is_alive():
++            stopped = True
++            if ready:
++                os.killpg(process.pid, signal.SIGTERM)
++            else:
++                process.terminate()
++            process.join(timeout=max(0, min(grace / 2, deadline - time.monotonic())))
++    except (IpanemaError, OSError) as exc:
++        message = {'error': type(exc).__name__}
++    finally:
++        # Always clean the verified session, even on success or Ctrl-C. Its
++        # subprocesses must not outlive a completed/cancelled pilot.
++        if process.pid:
++            try:
++                if ready:
++                    os.killpg(process.pid, signal.SIGKILL)
++                elif process.is_alive():
++                    process.kill()
++            except ProcessLookupError:
++                pass
++            process.join(timeout=max(.05, deadline - time.monotonic()))
++        parent.close()
++        child.close()
++        for sig, handler in previous.items():
++            signal.signal(sig, handler)
++    record = {'state': 'cancelled_deadline' if stopped else 'worker_failed' if not message or 'error' in message else 'finished', 'worker_pid': process.pid,
++              'worker_reaped': process.exitcode is not None, 'wall_seconds': time.monotonic() - started,
++              'absolute_limit_seconds': seconds, 'termination_grace_included': grace,
++              'checkpoint': str(checkpoint), 'remote_mutations': False}
++    # A supervisor receipt is outside the cancelled worker's work. No HTTP or
++    # analysis can continue while it is being recorded.
++    write_json(run / 'supervision.json', record)
++    if stopped or not message or 'error' in message or process.exitcode is None:
++        return {'state': 'stopped', 'checkpoint': str(checkpoint), 'supervision': str(run / 'supervision.json'),
++                'reason': 'absolute_deadline' if stopped else 'worker_failed', 'remote_mutations': False}, 2
++    return message['result']
++
++
++def execute(project, args):
++    if args.seo_command == 'crawl' and getattr(args, 'targets_manifest', None):
++        return _supervise_pilot(project, args)
++    if getattr(args, 'targets_sha256', None):
++        raise IpanemaError('--targets-sha256 requiere --targets-manifest.')
++    return _execute(project, args)

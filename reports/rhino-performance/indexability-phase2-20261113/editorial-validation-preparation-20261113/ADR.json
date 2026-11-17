@@ -1,0 +1,12 @@
+{
+  "id": "ADR-RHINO-012-editorial-validation-local-20261113",
+  "parent": "../first-improvements-preparation-20261113/ADR.json",
+  "status": "needs_evidence",
+  "implementation_allowed": false,
+  "decision": "Preserve editorial candidate. Prefer existing rich-text composition only if admin per-category isolation and placement are proved. Native category.description current local consumer is header, not requested after-grid placement. Do not add static guide to common category template or modify pagination.",
+  "conditions": "review-status.json",
+  "read_scope": "production-read-scope-NOT-AUTHORIZED.json",
+  "publication_operation": "not_prepared_not_justified",
+  "no_remote_actions": true,
+  "no_theme_or_engine_changes": true
+}

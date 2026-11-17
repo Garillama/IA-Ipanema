@@ -1,0 +1,14 @@
+{
+  "kind": "controller-resolution",
+  "objection": "Claude O1 verification_binding",
+  "status": "resolved_with_scoped_controller_checks",
+  "patch_sha256": "59d76bf8b54285dab38271aaedb78bba777fe61efd9edfc4500fec75759bf459",
+  "engineering_exact_sha256": "1c6c0534755723cfac59e4395ad0fc44af6dc5df35dd88a1da98eb6c4ab7bd8d",
+  "checks": {
+    "provided_QA_binding_equals_candidate_manifest": true,
+    "current_candidate_engineering_file_matches": true,
+    "full_120_test_function_AST_matches_preserved_source": true,
+    "crawler_change_after_long_test_did_not_modify_supervisor_module": true
+  },
+  "limits": "Reviewers did not run hashes/tests themselves. Receipt certifies this exact module/test evidence, not all possible descendants or a hard-real-time OS guarantee."
+}

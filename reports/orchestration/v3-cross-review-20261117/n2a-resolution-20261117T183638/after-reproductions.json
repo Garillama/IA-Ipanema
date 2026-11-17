@@ -1,0 +1,57 @@
+{
+  "candidate_patch_sha256": "288ef3739417e0e15e105e4826ea65598f17c0807265ed68cf42d3fc5008aa6f",
+  "synthetic_only": true,
+  "network": false,
+  "cases": [
+    {
+      "case": "no_demonstration",
+      "same_original_reference": true,
+      "origin_confirmation_available": true,
+      "incremental_step_rejected": true,
+      "state": "changes_requested",
+      "closed": false
+    },
+    {
+      "case": "documented_refutation",
+      "artifact": {
+        "baseline": 0,
+        "basis_refs": [
+          "source:sample.py"
+        ],
+        "candidate": "e354ae70d12770bd961c57b7c12dc23f336544594bc5d9b9872db99b053fd9bf",
+        "claim": "sample.py has 0 function definitions",
+        "contract": "synthetic-measurement/1",
+        "kind": "documented_refutation",
+        "metric": "function_count",
+        "observed": 1,
+        "subject": "224a458655cd1031d2f0a0e58ff333224444a8651e1e58f7c94d351ef3839d97"
+      },
+      "same_original_reference": true,
+      "source_bytes_unchanged": true,
+      "state": "synthetic_pass",
+      "closed": true,
+      "authorization_ready": false
+    },
+    {
+      "case": "new_fact",
+      "artifact": {
+        "baseline": null,
+        "basis_refs": [
+          "source:sample.py"
+        ],
+        "candidate": "e354ae70d12770bd961c57b7c12dc23f336544594bc5d9b9872db99b053fd9bf",
+        "claim": "function count has not been measured",
+        "contract": "synthetic-measurement/1",
+        "kind": "new_fact",
+        "metric": "function_count",
+        "observed": 1,
+        "subject": "4f929213ad9fdfd18e142a93c8992618ad7084b7ad98c51bdfb2bcc23e167456"
+      },
+      "same_original_reference": true,
+      "source_bytes_unchanged": true,
+      "state": "synthetic_pass",
+      "closed": true,
+      "authorization_ready": false
+    }
+  ]
+}

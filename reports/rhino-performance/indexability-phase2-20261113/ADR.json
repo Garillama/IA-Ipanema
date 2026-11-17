@@ -1,0 +1,80 @@
+{
+  "id": "ADR-RHINO-012-phase2-indexation",
+  "project": "rhino-performance",
+  "objective": "Priorizar indexación y visibilidad con evidencia oficial sin repetir cobertura HTTP",
+  "decision": "needs_evidence",
+  "scope": "Evidence and conditional investigation plan only",
+  "implementation_allowed": false,
+  "network_execution_allowed_by_this_ADR": false,
+  "proposals": [
+    "claude-review.json",
+    "codex-review.json"
+  ],
+  "cross_examination_and_defenses": [
+    "claude-contrast.json",
+    "codex-contrast.json"
+  ],
+  "decision_basis": "Google access unavailable; identity/editorial/emitter unknown; missing technical signals and prospective controller preflight remain open. A correct JSON contract is not technical approval.",
+  "selected_investigation_direction": "Priorizar categorías comerciales con estado Google desconocido; reutilizar evidencia; separar calidad schema y posicionamiento de bloqueos",
+  "alternatives": [
+    {
+      "option": "Official GSC exports plus preserved records",
+      "status": "preferred_now",
+      "reason": "No credential required in agent session; scope/limits explicitly retained"
+    },
+    {
+      "option": "Fresh read-only URLInspection of four not-yet-inspected commercial/navigation targets",
+      "status": "pending_credential",
+      "reason": "Would add precise official evidence without repeating15 old inspections"
+    },
+    {
+      "option": "Four closed five-target checks for missing20 technical fields",
+      "status": "prepared_conditional_not_executed",
+      "reason": "Native transport can obtain missing headers/main, but requires purpose-specific preflight and separate authorization"
+    },
+    {
+      "option": "Change author to Person or Organization automatically",
+      "status": "rejected_without_editorial_source"
+    },
+    {
+      "option": "Replace native canonical or silence secondary Product warnings",
+      "status": "rejected_without_mechanism_and_context"
+    }
+  ],
+  "risks": [
+    "Overinterpreting examples or historical impressions as complete index",
+    "Transferring Google status between aliases",
+    "Inventing author identity or commercial values",
+    "Reusing HTTP-not_observed drivers for already-HTTP-verified targets",
+    "Calling historical ranking/CTR a causal optimization opportunity"
+  ],
+  "required_evidence": [
+    {
+      "condition": "Twenty original records lack meta/header/main evidence in targeted captures",
+      "effect": "No technical closure of these fields; any new GET needs separately approved five-target operation"
+    },
+    {
+      "condition": "Old one-shot drivers require HTTP not_observed and are incompatible with this purpose",
+      "effect": "Commands/manifests prepared, not execution-ready until controller verifies missing-field preflight, fresh binding and one-use marker. No motor modification needed."
+    },
+    {
+      "condition": "Author editorial identity/type and current published source correspondence unverified",
+      "effect": "Blocks any author/schema diff or production change"
+    },
+    {
+      "condition": "GSC credential unavailable",
+      "effect": "No current URLInspection data; obtain official exports or restore access via authorized existing flow"
+    },
+    {
+      "condition": "Blog official canonical mechanism unconfirmed",
+      "effect": "No canonical/head-tags modifications"
+    }
+  ],
+  "authorizations": [
+    "No new storefront crawl granted by this planning report",
+    "Future production changes require exact diff, remote hash/backup, independent review and specific owner approval",
+    "No contacting Tiendanube or account login performed"
+  ],
+  "QA": "Local evidence/source hash reconciliation and valid independent runtime contracts; no prior suites repeated",
+  "raw_receipts_preserved": true
+}

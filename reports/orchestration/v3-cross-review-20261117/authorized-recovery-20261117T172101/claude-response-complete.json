@@ -1,0 +1,216 @@
+{
+  "candidate_sha256": "69c75ac77596439227c4066439711334e8c7bf2724b5a28fbbfabdf2336e0dbb",
+  "reviewed_files": [
+    "tools/ipanema/orchestration/council.py",
+    "tools/ipanema/orchestration/code_review.py",
+    "tests/unit/test_code_review_v3.py"
+  ],
+  "decision": "changes_requested",
+  "challenges": {
+    "architecture": {
+      "status": "fail",
+      "evidence_refs": [
+        "code_review.py:PARTICIPANTS",
+        "adapters.py:agent_policy",
+        "adapters.py:require_agent",
+        "council_runtime.py:deliberate (source_ledger/qa:baseline)"
+      ],
+      "notes": "The gate hardcodes a third participant registry (claude/codex/antigravity). The existing single registry (models.json council policy, adapters.AGENTS/NAMES) enables claude/codex(/commandcode) only. The gate never calls require_agent. Under the current dual-agent policy it cannot approve a claude- or codex-authored candidate, because only one eligible non-author reviewer exists. It would also accept a provider the system cannot run. The existing source/qa receipts lack alternative_sha256 and so cannot satisfy proof()."
+    },
+    "duplication": {
+      "status": "fail",
+      "evidence_refs": [
+        "code_review.py:PARTICIPANTS vs adapters.AGENTS/NAMES",
+        "code_review.py:_hash vs council_runtime.py hash/json.dumps(sort_keys) idiom",
+        "code_review.py:evaluate source loop vs council_runtime.checks symlink/beneath logic"
+      ],
+      "notes": "The participant list duplicates the provider registry semantically, with divergent contents. The canonical-hash helper and the symlink/containment checks are re-implemented rather than shared. The reuse of validate_schema and safe_path is good."
+    },
+    "performance": {
+      "status": "pass",
+      "evidence_refs": [
+        "code_review.py:evaluate (2MB per file, 4MB total, 64 files, 32 objections, 3 envelopes)"
+      ],
+      "notes": "Work is bounded by explicit limits. Per-objection scans of the ledger are O(n*m) on tiny n and m. The TOCTOU between digest() and read_text() is minor and noted in O5."
+    },
+    "regression": {
+      "status": "pass",
+      "evidence_refs": [
+        "council.py diff: append-only wrapper with lazy import",
+        "preserved_qa: council-compatibility 87 OK, orchestration-compatibility 41 OK"
+      ],
+      "notes": "The change to council.py is additive and does not alter aggregate or the policy. I did not run the QA outputs; they are supplied as preserved text. The new gate is not wired into any caller. The integration-contract risk is recorded in O2."
+    },
+    "maintainability": {
+      "status": "fail",
+      "evidence_refs": [
+        "code_review.py:evaluate (reviewer decision/challenge handling vs objection closure)",
+        "test_code_review_v3.py:test_08, test_medium_objection_requires_author_answer_not_silent_approval"
+      ],
+      "notes": "A reviewer's changes_requested decision or failed challenge has no closure path. Only objections can be closed. Invalid reviewer bodies raise exceptions instead of producing a state. The tests use bespoke receipts and never real controller receipt shapes."
+    }
+  },
+  "objections": [
+    {
+      "id": "O1",
+      "severity": "HIGH",
+      "challenge": "architecture",
+      "sites": [
+        {
+          "file": "tools/ipanema/orchestration/code_review.py",
+          "function": "evaluate",
+          "start": 18,
+          "end": 20
+        },
+        {
+          "file": "tools/ipanema/orchestration/adapters.py",
+          "function": "agent_policy",
+          "start": 11,
+          "end": 30
+        }
+      ],
+      "evidence_refs": [
+        "candidate code_review.py PARTICIPANTS and expected_reviewers = PARTICIPANTS - set(authors)",
+        "adapters.py agent_policy/NAMES/require_agent",
+        "council_policy: members [claude, codex], disabled [commandcode]"
+      ],
+      "claim": "PARTICIPANTS = {claude, codex, antigravity} is a new participation registry. It is not derived from models.json council policy or adapters.enabled_agents(), and require_agent is never called. 'antigravity' has no NAMES entry, model profile or argv adapter. The docstring says provider policy is unchanged, yet the gate bypasses it.",
+      "impact": "With the current dual-agent policy, a claude- or codex-authored candidate has only one eligible non-author reviewer. The gate then always reports 'two_non_author_providers_required' (blocked). Conversely, an envelope from a provider the system cannot run or authorise is accepted as an independent reviewer. That conflicts with the rule that one registry owns participation.",
+      "recommendation": "Derive the reviewer universe from the existing registry (enabled_agents). Decide explicitly how independence works with two members, for example one independent reviewer plus a controller receipt. Alternatively, make the three-provider policy a declared extension in models.json with the same validation. Call require_agent for the author and each reviewer.",
+      "resolution_condition": "No hardcoded participant set remains in code_review.py. A test shows the intended outcome for a codex-authored candidate under the real dual-agent policy.",
+      "duplication_kind": "semantic"
+    },
+    {
+      "id": "O2",
+      "severity": "MEDIUM",
+      "challenge": "architecture",
+      "sites": [
+        {
+          "file": "tools/ipanema/orchestration/code_review.py",
+          "function": "evaluate",
+          "start": 131,
+          "end": 175
+        },
+        {
+          "file": "tools/ipanema/orchestration/council_runtime.py",
+          "function": "deliberate",
+          "start": 119,
+          "end": 127
+        }
+      ],
+      "evidence_refs": [
+        "code_review.py proof() requires r.get('alternative_sha256') == identity",
+        "code_review.py qa loop: stale_qa unless receipt alternative_sha256 == identity",
+        "council_runtime.deliberate source_ledger and qa:baseline rows have no alternative_sha256",
+        "council._ledger enforces alternative_sha256 only for constraint/resolution",
+        "test_code_review_v3.py receipt() stamps alternative_sha256 on every kind"
+      ],
+      "claim": "The gate reuses council._ledger. It additionally demands that source and qa receipts carry alternative_sha256 equal to the candidate fingerprint. Receipts produced by existing controller code do not carry it. The tests stamp this field on every synthetic row, so the mismatch is invisible.",
+      "impact": "Existing-style source and qa receipts can never satisfy challenge evidence or required_qa. They always yield needs_evidence or stale_qa. The caller must adopt an unspecified new receipt contract. The tests do not exercise it, which gives false confidence.",
+      "recommendation": "Document and validate the receipt schema for this gate in one place. Alternatively, add a negative test using a council_runtime-shaped receipt that asserts the intended outcome.",
+      "resolution_condition": "Receipt requirements are specified and tested with the real producer's shape, or the producer is shown to emit the field.",
+      "duplication_kind": "not_applicable"
+    },
+    {
+      "id": "O3",
+      "severity": "MEDIUM",
+      "challenge": "maintainability",
+      "sites": [
+        {
+          "file": "tools/ipanema/orchestration/code_review.py",
+          "function": "evaluate",
+          "start": 186,
+          "end": 243
+        }
+      ],
+      "evidence_refs": [
+        "evaluate: challenge 'fail' and decision 'changes_requested' append to changes with no closure logic",
+        "evaluate: closure only computed per objection",
+        "test_08 passes only when the reviewer decision is approve with a HIGH objection"
+      ],
+      "claim": "A reviewer's own changes_requested decision or a failed challenge can never be closed. Only objections have a resolution-receipt path. A reviewer who files a HIGH objection and sets decision=changes_requested (the natural combination) cannot be unblocked by the origin-confirmation flow that test_08 validates.",
+      "impact": "The documented resolution protocol is reachable only for an inconsistent reviewer output. In practice every closure needs a new candidate fingerprint. This is possibly intended but is undocumented and untested.",
+      "recommendation": "State the intended semantics in the docstring. Either tie decision/challenge failures to objection IDs that can be closed, or declare that closure requires re-review, and test that.",
+      "resolution_condition": "Behaviour is documented and covered by a test with decision=changes_requested plus a confirmed resolution.",
+      "duplication_kind": "not_applicable"
+    },
+    {
+      "id": "O4",
+      "severity": "LOW",
+      "challenge": "maintainability",
+      "sites": [
+        {
+          "file": "tools/ipanema/orchestration/code_review.py",
+          "function": "evaluate",
+          "start": 222,
+          "end": 240
+        }
+      ],
+      "evidence_refs": [
+        "evaluate: defended action set includes 'request_evidence' and 'accept'",
+        "test_medium_objection_requires_author_answer_not_silent_approval asserts approval with closed=False"
+      ],
+      "claim": "An unclosed MEDIUM objection counts as answered once an author answer exists, including the action 'request_evidence'. The answers are not controller receipts. The gate then returns approved_for_authorization with open MEDIUM findings.",
+      "impact": "Asking for evidence unblocks a MEDIUM finding. The result is only partly visible, as findings[].closed=false.",
+      "recommendation": "Map 'request_evidence' to missing_evidence, or require closure for MEDIUM objections. Bind answers to the candidate identity.",
+      "resolution_condition": "request_evidence no longer yields approval, or the policy is documented as intended.",
+      "duplication_kind": "not_applicable"
+    },
+    {
+      "id": "O5",
+      "severity": "LOW",
+      "challenge": "maintainability",
+      "sites": [
+        {
+          "file": "tools/ipanema/orchestration/code_review.py",
+          "function": "evaluate",
+          "start": 103,
+          "end": 244
+        }
+      ],
+      "evidence_refs": [
+        "evaluate: env.get on non-dict env",
+        "evaluate: path.read_text(encoding='utf-8') uncaught UnicodeDecodeError",
+        "evaluate: key in r.get('resolves', []) is a substring test when resolves is a str",
+        "evaluate: site['function'] in joined lines is a substring test",
+        "evaluate: digest(path) then read_text(path) are separate reads"
+      ],
+      "claim": "Several robustness gaps in evaluate. (1) Non-dict envelopes raise AttributeError. (2) Non-UTF-8 sources raise UnicodeDecodeError. (3) A string 'resolves' makes 'claude:O1' match 'claude:O10'. (4) The cited function check is a bare substring match. (5) The hash and the read are separate, so the cited lines may differ from the hashed bytes. (6) Citation errors raise IpanemaError instead of producing one of the four states.",
+      "impact": "Malformed or hostile inputs either crash with non-IpanemaError exceptions or abort the whole review. Some of them weaken the citation checks.",
+      "recommendation": "Read each file once and hash those bytes. Validate the type of resolves (list). Check envelope types. Match function names with a structural pattern. Decide whether a bad reviewer body should yield blocked or an exception, and keep it consistent.",
+      "resolution_condition": "The cases are handled and tested.",
+      "duplication_kind": "not_applicable"
+    },
+    {
+      "id": "O6",
+      "severity": "LOW",
+      "challenge": "duplication",
+      "sites": [
+        {
+          "file": "tools/ipanema/orchestration/council.py",
+          "function": "review_code_candidate",
+          "start": 655,
+          "end": 663
+        },
+        {
+          "file": "tools/ipanema/orchestration/code_review.py",
+          "function": "evaluate",
+          "start": 103,
+          "end": 112
+        }
+      ],
+      "evidence_refs": [
+        "council.py review_code_candidate lazy-imports code_review.evaluate",
+        "code_review.evaluate lazy-imports council._ledger/_proven",
+        "code_review.py _hash canonical JSON"
+      ],
+      "claim": "The wrapper in council.py only forwards to code_review.evaluate. code_review in turn imports the private helpers _ledger and _proven from council. The result is a bidirectional lazy dependency on underscore-private symbols. The canonical-hash idiom is also re-implemented locally.",
+      "impact": "This is a fragile coupling. A refactor of council's private helpers silently breaks the gate. It also grows a 660-line module with a non-council responsibility.",
+      "recommendation": "Drop the wrapper and let callers import code_review directly. Alternatively, expose a small public ledger helper module that both modules use.",
+      "resolution_condition": "There is no cyclic private import, or the coupling is made explicit with a public helper.",
+      "duplication_kind": "semantic"
+    }
+  ],
+  "summary": "Changes requested. The main problem is O1: code_review.py hardcodes a three-provider registry (claude/codex/antigravity), separate from models.json council policy and adapters. That gate would block every claude- or codex-authored candidate under the current dual-agent policy, and would accept an envelope from a provider the system cannot run. O2 (receipt-shape mismatch with existing source/qa receipts) and O3 (no closure path for reviewer-level decisions or failed challenges) should also be resolved. O4–O6 are low severity. Good points: no authorisation is granted, there is bounded I/O, identity binding includes author/diff/context, schema reuse is sound, and the change to council.py is additive. The 159-test and 31-test counts are for synthetic reviewers and are not evidence of real detection quality. I did not independently run the preserved QA outputs.",
+  "changes": []
+}

@@ -1,0 +1,71 @@
+{
+  "reason": "Original bodies and headers absent from targeted retained captures; no HTTP-only gap remains",
+  "20_unique_urls": true,
+  "native_payload_validations": 4,
+  "requests": [
+    {
+      "batch": 1,
+      "manifest": "reports/rhino-performance/indexability-phase2-20261113/technical-completion-01/targets.json",
+      "sha256": "77115227846b88a06aa97f62d73ead43ee007ab8c0db7b9f72cdb4958f865232",
+      "urls": [
+        "https://rhino-performance.com/blog/posts/brazo-de-presoterapia-transforma-tu-experiencia-deportiva-66afbbe13c5b/",
+        "https://rhino-performance.com/blog/posts/presoterapia-el-secreto-mejor-guardado-de-los-atletas-de-elite-191a8f66c1d6/",
+        "https://rhino-performance.com/blog/posts/manga-de-compresion-frio-y-calor-el-aliado-perfecto-para-tu-entrenamiento-4f2d85d7c839/",
+        "https://rhino-performance.com/blog/posts/lo-que-tienes-que-saber-del-drenaje-linfatico-para-atletas-y-deportistas-d8be8c1a69a3/",
+        "https://rhino-performance.com/blog/posts/beneficios-de-la-siesta-despues-de-entrenar-clave-para-mejorar-el-rendimiento-fisico-y-mental-ef9f9c1ce142/"
+      ],
+      "expected_GET_without_redirects": 6,
+      "max_GET": 12,
+      "executed": false
+    },
+    {
+      "batch": 2,
+      "manifest": "reports/rhino-performance/indexability-phase2-20261113/technical-completion-02/targets.json",
+      "sha256": "bb15cf37dce574107be9dd767768827c351775dec651eb6e1ea62c3708d0f46c",
+      "urls": [
+        "https://rhino-performance.com/blog/posts/mejora-tu-rendimiento-con-las-botas-de-presoterapia-2fc8df74a4e1/",
+        "https://rhino-performance.com/blog/posts/cuando-y-cuantas-veces-deberias-usar-la-presoterapia-78ce2c4b4e15/",
+        "https://rhino-performance.com/blog/posts/la-presoterapia-como-complemento-en-la-recuperacion-postoperatoria-5bab92e6be21/",
+        "https://rhino-performance.com/blog/posts/7-tipos-de-entrenamiento-que-debes-hacer-antes-de-correr-un-maraton-o-cualquier-carrera-244573e551fa/",
+        "https://rhino-performance.com/blog/posts/hormonas-que-hacen-que-ames-correr-d6b29d573534/"
+      ],
+      "expected_GET_without_redirects": 6,
+      "max_GET": 12,
+      "executed": false
+    },
+    {
+      "batch": 3,
+      "manifest": "reports/rhino-performance/indexability-phase2-20261113/technical-completion-03/targets.json",
+      "sha256": "922631b61146275e73f8b1c4d221f2e265aead78f2d9ca578bf4864564305193",
+      "urls": [
+        "https://rhino-performance.com/blog/posts/recuperacion-muscular-en-el-futbol-americano-la-clave-para-un-mejor-rendimiento-b450f269375a/",
+        "https://rhino-performance.com/blog/posts/retencion-de-liquidos-en-atletas-por-que-ocurre-y-como-tratarla-70e0723bf879/",
+        "https://rhino-performance.com/blog/posts/en-que-situaciones-no-se-recomienda-el-uso-de-presoterapia-61b45d53ea7b/",
+        "https://rhino-performance.com/blog/posts/mangas-de-compresion-frio-y-calor-para-el-cuidado-muscular-a30fa0abf6a7/",
+        "https://rhino-performance.com/blog/posts/motivacion-deportiva-como-conseguirla-a299c19dcb3c/"
+      ],
+      "expected_GET_without_redirects": 6,
+      "max_GET": 12,
+      "executed": false
+    },
+    {
+      "batch": 4,
+      "manifest": "reports/rhino-performance/indexability-phase2-20261113/technical-completion-04/targets.json",
+      "sha256": "3f9bd756c98c6121496323abace180b2eac19aef654f868469068fe2781fd56d",
+      "urls": [
+        "https://rhino-performance.com/blog/posts/los-mejores-estiramientos-despues-de-un-entrenamiento-intenso-e60dcadb9471/",
+        "https://rhino-performance.com/blog/posts/recuperacion-deportiva-las-tecnicas-con-mayor-respaldo-cientifico-8d45b8378042/",
+        "https://rhino-performance.com/blog/posts/ejercicio-en-la-manana-antes-o-despues-de-desayunar-6b4da8f2797c/",
+        "https://rhino-performance.com/blog/posts/guia-para-el-uso-de-tus-botas-de-presoterapia-aad204c7149a/",
+        "https://rhino-performance.com/blog/posts/sacale-el-maximo-partido-a-tus-botas-de-presoterapia-6d64eb420000/"
+      ],
+      "expected_GET_without_redirects": 6,
+      "max_GET": 12,
+      "executed": false
+    }
+  ],
+  "authorization": "Separate per five-target operation; none executed. Do not rerun prior batches or all124 URLs.",
+  "max_total_proposed_GET": 48,
+  "nominal_proposed_GET": 24,
+  "no_group_authorization": true
+}

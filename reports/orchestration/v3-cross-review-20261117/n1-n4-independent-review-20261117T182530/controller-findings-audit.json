@@ -1,0 +1,95 @@
+{
+  "basis": "source-only audit; no new tests or providers",
+  "reviewer_response_unchanged": true,
+  "findings": {
+    "N2a": {
+      "reviewer_classification": "architectural_risk",
+      "severity": "MEDIUM",
+      "confirmed_observation": "add_evidence exige referencia no vacía y recibo vigente/probado, pero no descarta evidencia ya citada ni comprueba un delta específico del hallazgo. La fixture positiva conserva source:sample.py, que ya era evidencia de la objeción.",
+      "limits": "Revisión estática y test conservado; no se ejecutó un contraejemplo nuevo. El cierre todavía exige confirmación acreditada del revisor originario; no hay bypass de este ni de producción.",
+      "precision": "objection_records quedan fuera de la cabecera de reviews; son datos de la fuente confiable del controlador según el contrato. La naturaleza de esa afirmación y la novedad de evidencia deben explicitarse mejor, sin inferir autenticación criptográfica. No basta necesariamente cambiar ID de recibo: una refutación documental nueva puede citar el mismo archivo.",
+      "minimum_proposal": "Definir evidencia incremental por hallazgo/candidato; rechazar reutilizar solo la evidencia original como paso nuevo; admitir una nueva explicación/artefacto comprobable sobre fuentes existentes. Documentar o anclar la procedencia de los eventos no revisores. Pruebas negativa de reutilización y positiva de refutación documental. Sin implementar en esta fase."
+    },
+    "N4a": {
+      "reviewer_classification": "architectural_risk",
+      "severity": "LOW",
+      "confirmed_observation": "Fixtures pueden devolver approved_for_authorization junto con synthetic_only=true. Un consumidor que descarte la etiqueta pierde el matiz.",
+      "limits": "No se demostró consumidor operativo que apruebe integraciones así; todas las banderas operativas siguen falsas y V3 está inactivo. No bloquea por sí sola como HIGH.",
+      "minimum_proposal": "Antes de integrar, contrato de consumidor que rechace fixtures o un estado de simulación inequívoco; evaluar cambio mínimo con revisión separada."
+    },
+    "N1a": {
+      "reviewer_classification": "integration_dependency",
+      "severity": "INFO",
+      "confirmed_observation": "checks nativo asigna alternative_sha256 a una alternativa; bind_receipt exige fingerprint del candidato. Son identidades diferentes. La integración real no existe y este recibo no debe retargetearse.",
+      "limits": "Es dependencia de adaptación de productor/consumidor, no un nuevo defecto reproducido del gate aislado ni autorización para modificar receipts históricos.",
+      "minimum_proposal": "Documentar mapa de campos en el bridge futuro: conservar alternative_sha256 original y acreditar por separado el candidato/binding actual. No inventar un campo emitido por el productor antiguo."
+    }
+  },
+  "citation_audit": [
+    {
+      "objection_id": "N2a",
+      "original_site": {
+        "file": "tools/ipanema/orchestration/code_review.py",
+        "function": "advance_objection",
+        "start": 388,
+        "end": 452
+      },
+      "actual_named_definitions": [
+        [
+          373,
+          427
+        ]
+      ],
+      "original_range_within_definition": false
+    },
+    {
+      "objection_id": "N2a",
+      "original_site": {
+        "file": "tools/ipanema/orchestration/code_review.py",
+        "function": "replay_closure",
+        "start": 453,
+        "end": 478
+      },
+      "actual_named_definitions": [
+        [
+          430,
+          451
+        ]
+      ],
+      "original_range_within_definition": false
+    },
+    {
+      "objection_id": "N4a",
+      "original_site": {
+        "file": "tools/ipanema/orchestration/code_review.py",
+        "function": "evaluate",
+        "start": 620,
+        "end": 633
+      },
+      "actual_named_definitions": [
+        [
+          454,
+          633
+        ]
+      ],
+      "original_range_within_definition": true
+    },
+    {
+      "objection_id": "N1a",
+      "original_site": {
+        "file": "tools/ipanema/orchestration/code_review.py",
+        "function": "bind_receipt",
+        "start": 318,
+        "end": 326
+      },
+      "actual_named_definitions": [
+        [
+          286,
+          349
+        ]
+      ],
+      "original_range_within_definition": true
+    }
+  ],
+  "note": "Varias citas originales no están dentro de la función nombrada. Se registran rangos reales sin editar la respuesta ni rechazar por ello la observación sustentada."
+}

@@ -1,0 +1,138 @@
+{
+  "requested_agent": "claude",
+  "effective_agent": "claude",
+  "scope": "phase2 saved evidence and prioritization only",
+  "input_hashes": {
+    "reports/rhino-performance/indexability-phase2-20261113/evidence-packet.json": "7f1bc2f16a8d48ab98bb5a61cb1e2b7e696b5896fe332a2afac36c4ea279657a",
+    "reports/rhino-performance/indexability-phase2-20261113/source-candidates.json": "dd0646e04b75acc2b5c1209beec3c270bbeb32739aa464a857a583770eaea6d2",
+    "reports/rhino-performance/indexability-phase2-20261113/schema-context-packet.json": "496f4cf79ac0c1e331b6220f6dc6a3d2b4068cb87150169f209a57e9e0ad8b6e",
+    "reports/rhino-performance/indexability-phase2-20261113/limited-completion-plan.json": "a16820c38ac46d9bba0d85eb4d1ff617cec7b5808ec268accfcd5b755c369f11",
+    "reports/rhino-performance/indexability-phase2-20261113/controller-validation.json": "e9f9ce4bb5a1d7cf99c8f97e6e11441436e3748dd1cc222533d9ed41c830c263"
+  },
+  "response": {
+    "decision": "proposed",
+    "summary": "Plan solo investigativo, sin cambios ni diff. Prioridad 1: categorías comerciales sin inspección GSC (pistolas-de-masaje, terapia-fria, compresion-frio-y-calor), separando bloqueo de indexación, calidad editorial y posicionamiento. Prioridad 2: confirmar emisor remoto y autor real del BlogPosting antes de tocar author. Prioridad 3: cuatro lotes de 5 URLs, cada uno con solicitud separada. D010/D050/D070 siguen como posibles falsos positivos de tarjetas secundarias; D011 queda indeterminado. No hay evidencia de bloqueo de indexación, solo límites de artefactos.",
+    "changes": [],
+    "evidence": [
+      "phase2.offline.evidence"
+    ],
+    "objections": [
+      {
+        "id": "claude-O1-preflight-http",
+        "alternative_id": "claude-A-investigar-sin-cambios-solicitudes-separadas",
+        "category": "alcance-verificabilidad",
+        "severity": "medium",
+        "claim": "Los 20 objetivos ya tienen HTTP 200. Si el preflight de los 4 lotes exige HTTP not_observed, bloqueará lotes válidos. El predicado debe ser señal faltante (meta robots, X-Robots, main/H1), no estado HTTP. Tampoco se justifica el GET auxiliar de robots por lote (6 GET nominales para 5 URLs).",
+        "status": "open",
+        "evidence_refs": [
+          "phase2.offline.evidence"
+        ],
+        "resolution_evidence_refs": []
+      },
+      {
+        "id": "claude-O2-autor-emisor",
+        "alternative_id": "claude-A-investigar-sin-cambios-solicitudes-separadas",
+        "category": "identidad-editorial",
+        "severity": "medium",
+        "claim": "Los candidatos locales (structured-data.tpl 88..89 y 129..130) no equivalen al hash publicado actual: emitter_markers figura como unknown_theme_or_app. post.author_name tampoco prueba Person u Organization. Cambiar author sin autor real y emisor remoto confirmado sería inventar datos.",
+        "status": "open",
+        "evidence_refs": [
+          "phase2.offline.evidence"
+        ],
+        "resolution_evidence_refs": []
+      }
+    ],
+    "preferred_alternative": "claude-A-investigar-sin-cambios-solicitudes-separadas",
+    "questions": [
+      {
+        "id": "claude-Q1-fuente-emisor",
+        "to_agent": "codex",
+        "alternative_id": "claude-A-investigar-sin-cambios-solicitudes-separadas",
+        "question": "¿Qué fuente concreta y ya guardada (archivo y puntero) demuestra que el emisor remoto actual de structured-data.blog-post coincide con structured-data.tpl local, y cómo distingues Person de Organization sin inventar autoría?",
+        "evidence_refs": [
+          "phase2.offline.evidence"
+        ]
+      }
+    ]
+  },
+  "model": {
+    "model": "claude-sonnet-5-5",
+    "effort": "medium",
+    "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+    "verified_at": "2026-11-08"
+  },
+  "execution": {
+    "exit_code": 0,
+    "timed_out": false,
+    "output_limited": false,
+    "idle_timed_out": false,
+    "cancelled": false,
+    "process_started": true,
+    "process_reaped": true,
+    "stdin_bytes_written": 136410,
+    "context_complete": true,
+    "duration_s": 30.149,
+    "timing": {
+      "spawn_s": 0.001467,
+      "input_complete_s": 1.854188,
+      "first_stdout_s": 3.235689,
+      "first_stderr_s": null,
+      "timeout_phase": null,
+      "event_counts": {
+        "system": 4,
+        "stream_event": 514,
+        "event:message_start": 3,
+        "event:content_block_start": 3,
+        "event:content_block_delta": 499,
+        "assistant": 3,
+        "event:content_block_stop": 3,
+        "user": 3,
+        "event:message_delta": 3,
+        "event:message_stop": 3,
+        "rate_limit_event": 2,
+        "result": 1
+      },
+      "inference_vs_initialization": "not_separable_without_provider_events"
+    },
+    "output_accounting": {
+      "transport_bytes": 188888,
+      "retained_bytes": 188888,
+      "discarded_progress_bytes": 0,
+      "transport_limit_bytes": 20000000,
+      "retained_limit_bytes": 2000000
+    },
+    "isolation": {
+      "backend": "bubblewrap",
+      "snapshot_read_only": true,
+      "host_home_mounted": false,
+      "network": "enabled_no_destination_firewall",
+      "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+    },
+    "started_at": "2026-11-13T08:21:04.949505+00:00",
+    "prompt_bytes": 136410,
+    "prompt_sha256": "d4647944f630d03a8478f639af7477428645a3824d1fd007ca5e58f67e683a1e",
+    "usage": {
+      "provider_reported": {
+        "total_cost_usd": 0.3009525,
+        "duration_ms": 26786,
+        "input_tokens": 6,
+        "cache_creation_input_tokens": 63599,
+        "cache_read_input_tokens": 123145,
+        "output_tokens": 3423
+      },
+      "measured_cost_available": true,
+      "estimated_cost": null
+    },
+    "limits": {
+      "timeout": 240,
+      "idle_timeout": 90,
+      "startup_timeout": 30,
+      "first_response_timeout": 120
+    },
+    "structured_output": "native_schema",
+    "contract_validation": {
+      "status": "passed",
+      "duration_s": 0.026438
+    }
+  }
+}

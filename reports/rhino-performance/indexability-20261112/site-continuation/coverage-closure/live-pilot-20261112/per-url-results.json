@@ -1,0 +1,3352 @@
+[
+  {
+    "url": "https://rhino-performance.com/productos/pistola-de-masaje-gun-pro/",
+    "http": 200,
+    "redirect": null,
+    "canonical": [
+      "https://rhino-performance.com/productos/pistola-de-masaje-gun-pro/"
+    ],
+    "canonical_self": true,
+    "meta_robots": {},
+    "meta_robots_presence": "absent_in_observed_HTML",
+    "x_robots_tag": null,
+    "x_robots_tag_presence": "absent_in_observed_headers",
+    "crawl_permission": {
+      "crawler_allowed": true,
+      "googlebot_allowed": true
+    },
+    "title": "Pistola de Masaje GUN PRO | Masajeador de Percusión | RHINO",
+    "description": [
+      "Pistola de masaje con brazo articulado, 7 cabezales y 4 modos. Amplitud de 8 a 16 mm y pantalla OLED. Hasta 12 MSI y envío gratis."
+    ],
+    "h1": [
+      "Pistola de Masaje GUN PRO"
+    ],
+    "main_content": {
+      "main_present": true,
+      "main_text_characters": 8280,
+      "main_text_sha256": "c1b738626fce0da6b5d7aba3231144caec87f7053d64fba504a2a35ef0fe9d58",
+      "soft_404_candidate": false,
+      "body_class": " template-product ",
+      "product_ids": [
+        "355908349",
+        "355908446",
+        "355908507",
+        "355908537",
+        "355908602"
+      ],
+      "declared_times": []
+    },
+    "HTML_sha256": "d63f687ce15287b7c9c50407be02253907366339626bd9f15a57b6986db5faf6",
+    "technical_indexability": {
+      "state": "indexable_candidate",
+      "reasons": [],
+      "robots_evidence": {
+        "sources": [],
+        "flags": [],
+        "noindex": false,
+        "relevant_errors": [],
+        "processing_complete": true,
+        "counts": {
+          "sources_seen": 0,
+          "sources_processed": 0,
+          "input_bytes_processed": 0,
+          "parameters": 0,
+          "unknown": 0,
+          "errors": 0,
+          "sources_retained": 0
+        },
+        "unvisited_sources_count": 0,
+        "processed_collection_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "truncated": false,
+        "state": "no_restrictive_flag_observed",
+        "scope": "Googlebot text results; not Google rendering/index inspection"
+      },
+      "indexation_observed": false,
+      "google_selected_canonical": null,
+      "evidence_scope": "technical_observation_not_google_index"
+    },
+    "audited_at": "2026-11-12T22:09:28.156389+00:00",
+    "HTTP_observation_window": {
+      "run_started_at": "2026-11-12T22:09:22.233240+00:00",
+      "CLI_finished_at": "2026-11-12T22:09:41.334726+00:00"
+    },
+    "full_readiness": {
+      "checks": [
+        {
+          "name": "http_access",
+          "status": "passed",
+          "critical": true,
+          "evidence": 200
+        },
+        {
+          "name": "indexability",
+          "status": "passed",
+          "critical": true,
+          "evidence": {
+            "state": "indexable_candidate",
+            "reasons": [],
+            "robots_evidence": {
+              "sources": [],
+              "flags": [],
+              "noindex": false,
+              "relevant_errors": [],
+              "processing_complete": true,
+              "counts": {
+                "sources_seen": 0,
+                "sources_processed": 0,
+                "input_bytes_processed": 0,
+                "parameters": 0,
+                "unknown": 0,
+                "errors": 0,
+                "sources_retained": 0
+              },
+              "unvisited_sources_count": 0,
+              "processed_collection_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "truncated": false,
+              "state": "no_restrictive_flag_observed",
+              "scope": "Googlebot text results; not Google rendering/index inspection"
+            },
+            "indexation_observed": false,
+            "google_selected_canonical": null,
+            "evidence_scope": "technical_observation_not_google_index"
+          }
+        },
+        {
+          "name": "main_content",
+          "status": "passed",
+          "critical": true,
+          "evidence": "text length/hash, not tags counted"
+        },
+        {
+          "name": "crawlable_navigation",
+          "status": "passed",
+          "critical": false,
+          "evidence": "observed href targets"
+        },
+        {
+          "name": "sitemap_membership",
+          "status": "unknown",
+          "critical": false,
+          "evidence": "native sitemap inventory"
+        },
+        {
+          "name": "structured_data",
+          "status": "failed",
+          "critical": true,
+          "evidence": "existing SEO validator A-D, limits preserved"
+        },
+        {
+          "name": "pagination",
+          "status": "passed",
+          "critical": false,
+          "evidence": {
+            "observed_links": [],
+            "head_rel_links": [],
+            "active_controls_without_href": 0,
+            "state": "needs_evidence",
+            "continuity": "needs_multi_page_evidence",
+            "native_contract": "observed_hrefs_only_no_invented_routes"
+          }
+        },
+        {
+          "name": "render_comparison",
+          "status": "unknown",
+          "critical": false,
+          "evidence": "capture supplied, not Googlebot"
+        },
+        {
+          "name": "no_js_navigation",
+          "status": "unknown",
+          "critical": true,
+          "evidence": "no-JS capture required"
+        },
+        {
+          "name": "no_js_main_content",
+          "status": "unknown",
+          "critical": true,
+          "evidence": "extracted main text in no-JS DOM; hidden/visual state requires browser QA"
+        }
+      ],
+      "critical_blockers": [
+        "structured_data"
+      ],
+      "required_evidence_missing": [
+        "no_js_navigation",
+        "no_js_main_content"
+      ],
+      "approval": "blocked",
+      "score": 50,
+      "coverage": 0.6,
+      "meaning": "diagnostic evidence completion, not Google ranking; blockers override score"
+    },
+    "validator_findings": [
+      {
+        "rule": "C112",
+        "level": "C",
+        "severity": "optional",
+        "message": "Offer sin `hasMerchantReturnPolicy` (recomendado). No se genera sin una fuente verificable de políticas.",
+        "entity": "Product@structured-data.page",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "fix": null,
+        "scope": "merchant_listing",
+        "priority": "P3"
+      },
+      {
+        "rule": "C112",
+        "level": "C",
+        "severity": "recommendation",
+        "message": "Offer sin `itemCondition` (recomendado).",
+        "entity": "Product@structured-data.page",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "fix": null,
+        "scope": "merchant_listing",
+        "priority": "P3"
+      },
+      {
+        "rule": "C112",
+        "level": "C",
+        "severity": "recommendation",
+        "message": "Offer sin `priceValidUntil` (recomendado).",
+        "entity": "Product@structured-data.page",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "fix": null,
+        "scope": "merchant_listing",
+        "priority": "P3"
+      },
+      {
+        "rule": "C112",
+        "level": "C",
+        "severity": "optional",
+        "message": "Offer sin `shippingDetails` (recomendado). No se genera sin una fuente verificable de políticas.",
+        "entity": "Product@structured-data.page",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "fix": null,
+        "scope": "merchant_listing",
+        "priority": "P3"
+      },
+      {
+        "rule": "C112",
+        "level": "C",
+        "severity": "recommendation",
+        "message": "Offer sin `validFrom` (recomendado).",
+        "entity": "Product@structured-data.page",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "fix": null,
+        "scope": "merchant_listing",
+        "priority": "P3"
+      },
+      {
+        "rule": "C112",
+        "level": "C",
+        "severity": "recommendation",
+        "message": "Offer sin `validThrough` (recomendado).",
+        "entity": "Product@structured-data.page",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "fix": null,
+        "scope": "merchant_listing",
+        "priority": "P3"
+      },
+      {
+        "rule": "C120",
+        "level": "C",
+        "severity": "recommendation",
+        "message": "Sin GTIN/ISBN (recomendado). No se deduce de SKU: solo si el catálogo lo contiene.",
+        "entity": "Product@structured-data.page",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "fix": null,
+        "scope": null,
+        "priority": "P3"
+      },
+      {
+        "rule": "C112",
+        "level": "C",
+        "severity": "optional",
+        "message": "Offer sin `hasMerchantReturnPolicy` (recomendado). No se genera sin una fuente verificable de políticas.",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "fix": null,
+        "scope": "merchant_listing",
+        "priority": "P3"
+      },
+      {
+        "rule": "C112",
+        "level": "C",
+        "severity": "recommendation",
+        "message": "Offer sin `itemCondition` (recomendado).",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "fix": null,
+        "scope": "merchant_listing",
+        "priority": "P3"
+      },
+      {
+        "rule": "C112",
+        "level": "C",
+        "severity": "recommendation",
+        "message": "Offer sin `priceValidUntil` (recomendado).",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "fix": null,
+        "scope": "merchant_listing",
+        "priority": "P3"
+      },
+      {
+        "rule": "C112",
+        "level": "C",
+        "severity": "optional",
+        "message": "Offer sin `shippingDetails` (recomendado). No se genera sin una fuente verificable de políticas.",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "fix": null,
+        "scope": "merchant_listing",
+        "priority": "P3"
+      },
+      {
+        "rule": "C112",
+        "level": "C",
+        "severity": "recommendation",
+        "message": "Offer sin `validFrom` (recomendado).",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "fix": null,
+        "scope": "merchant_listing",
+        "priority": "P3"
+      },
+      {
+        "rule": "C112",
+        "level": "C",
+        "severity": "recommendation",
+        "message": "Offer sin `validThrough` (recomendado).",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "fix": null,
+        "scope": "merchant_listing",
+        "priority": "P3"
+      },
+      {
+        "rule": "C120",
+        "level": "C",
+        "severity": "recommendation",
+        "message": "Sin GTIN/ISBN (recomendado). No se deduce de SKU: solo si el catálogo lo contiene.",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "fix": null,
+        "scope": null,
+        "priority": "P3"
+      },
+      {
+        "rule": "C112",
+        "level": "C",
+        "severity": "optional",
+        "message": "Offer sin `hasMerchantReturnPolicy` (recomendado). No se genera sin una fuente verificable de políticas.",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "fix": null,
+        "scope": "merchant_listing",
+        "priority": "P3"
+      },
+      {
+        "rule": "C112",
+        "level": "C",
+        "severity": "recommendation",
+        "message": "Offer sin `itemCondition` (recomendado).",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "fix": null,
+        "scope": "merchant_listing",
+        "priority": "P3"
+      },
+      {
+        "rule": "C112",
+        "level": "C",
+        "severity": "recommendation",
+        "message": "Offer sin `priceValidUntil` (recomendado).",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "fix": null,
+        "scope": "merchant_listing",
+        "priority": "P3"
+      },
+      {
+        "rule": "C112",
+        "level": "C",
+        "severity": "optional",
+        "message": "Offer sin `shippingDetails` (recomendado). No se genera sin una fuente verificable de políticas.",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "fix": null,
+        "scope": "merchant_listing",
+        "priority": "P3"
+      },
+      {
+        "rule": "C112",
+        "level": "C",
+        "severity": "recommendation",
+        "message": "Offer sin `validFrom` (recomendado).",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "fix": null,
+        "scope": "merchant_listing",
+        "priority": "P3"
+      },
+      {
+        "rule": "C112",
+        "level": "C",
+        "severity": "recommendation",
+        "message": "Offer sin `validThrough` (recomendado).",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "fix": null,
+        "scope": "merchant_listing",
+        "priority": "P3"
+      },
+      {
+        "rule": "C120",
+        "level": "C",
+        "severity": "recommendation",
+        "message": "Sin GTIN/ISBN (recomendado). No se deduce de SKU: solo si el catálogo lo contiene.",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "fix": null,
+        "scope": null,
+        "priority": "P3"
+      },
+      {
+        "rule": "C112",
+        "level": "C",
+        "severity": "optional",
+        "message": "Offer sin `hasMerchantReturnPolicy` (recomendado). No se genera sin una fuente verificable de políticas.",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "fix": null,
+        "scope": "merchant_listing",
+        "priority": "P3"
+      },
+      {
+        "rule": "C112",
+        "level": "C",
+        "severity": "recommendation",
+        "message": "Offer sin `itemCondition` (recomendado).",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "fix": null,
+        "scope": "merchant_listing",
+        "priority": "P3"
+      },
+      {
+        "rule": "C112",
+        "level": "C",
+        "severity": "recommendation",
+        "message": "Offer sin `priceValidUntil` (recomendado).",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "fix": null,
+        "scope": "merchant_listing",
+        "priority": "P3"
+      },
+      {
+        "rule": "C112",
+        "level": "C",
+        "severity": "optional",
+        "message": "Offer sin `shippingDetails` (recomendado). No se genera sin una fuente verificable de políticas.",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "fix": null,
+        "scope": "merchant_listing",
+        "priority": "P3"
+      },
+      {
+        "rule": "C112",
+        "level": "C",
+        "severity": "recommendation",
+        "message": "Offer sin `validFrom` (recomendado).",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "fix": null,
+        "scope": "merchant_listing",
+        "priority": "P3"
+      },
+      {
+        "rule": "C112",
+        "level": "C",
+        "severity": "recommendation",
+        "message": "Offer sin `validThrough` (recomendado).",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "fix": null,
+        "scope": "merchant_listing",
+        "priority": "P3"
+      },
+      {
+        "rule": "C120",
+        "level": "C",
+        "severity": "recommendation",
+        "message": "Sin GTIN/ISBN (recomendado). No se deduce de SKU: solo si el catálogo lo contiene.",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "fix": null,
+        "scope": null,
+        "priority": "P3"
+      },
+      {
+        "rule": "C112",
+        "level": "C",
+        "severity": "optional",
+        "message": "Offer sin `hasMerchantReturnPolicy` (recomendado). No se genera sin una fuente verificable de políticas.",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "fix": null,
+        "scope": "merchant_listing",
+        "priority": "P3"
+      },
+      {
+        "rule": "C112",
+        "level": "C",
+        "severity": "recommendation",
+        "message": "Offer sin `itemCondition` (recomendado).",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "fix": null,
+        "scope": "merchant_listing",
+        "priority": "P3"
+      },
+      {
+        "rule": "C112",
+        "level": "C",
+        "severity": "recommendation",
+        "message": "Offer sin `priceValidUntil` (recomendado).",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "fix": null,
+        "scope": "merchant_listing",
+        "priority": "P3"
+      },
+      {
+        "rule": "C112",
+        "level": "C",
+        "severity": "optional",
+        "message": "Offer sin `shippingDetails` (recomendado). No se genera sin una fuente verificable de políticas.",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "fix": null,
+        "scope": "merchant_listing",
+        "priority": "P3"
+      },
+      {
+        "rule": "C112",
+        "level": "C",
+        "severity": "recommendation",
+        "message": "Offer sin `validFrom` (recomendado).",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "fix": null,
+        "scope": "merchant_listing",
+        "priority": "P3"
+      },
+      {
+        "rule": "C112",
+        "level": "C",
+        "severity": "recommendation",
+        "message": "Offer sin `validThrough` (recomendado).",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "fix": null,
+        "scope": "merchant_listing",
+        "priority": "P3"
+      },
+      {
+        "rule": "C120",
+        "level": "C",
+        "severity": "recommendation",
+        "message": "Sin GTIN/ISBN (recomendado). No se deduce de SKU: solo si el catálogo lo contiene.",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "fix": null,
+        "scope": null,
+        "priority": "P3"
+      },
+      {
+        "rule": "C112",
+        "level": "C",
+        "severity": "optional",
+        "message": "Offer sin `hasMerchantReturnPolicy` (recomendado). No se genera sin una fuente verificable de políticas.",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "fix": null,
+        "scope": "merchant_listing",
+        "priority": "P3"
+      },
+      {
+        "rule": "C112",
+        "level": "C",
+        "severity": "recommendation",
+        "message": "Offer sin `itemCondition` (recomendado).",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "fix": null,
+        "scope": "merchant_listing",
+        "priority": "P3"
+      },
+      {
+        "rule": "C112",
+        "level": "C",
+        "severity": "recommendation",
+        "message": "Offer sin `priceValidUntil` (recomendado).",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "fix": null,
+        "scope": "merchant_listing",
+        "priority": "P3"
+      },
+      {
+        "rule": "C112",
+        "level": "C",
+        "severity": "optional",
+        "message": "Offer sin `shippingDetails` (recomendado). No se genera sin una fuente verificable de políticas.",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "fix": null,
+        "scope": "merchant_listing",
+        "priority": "P3"
+      },
+      {
+        "rule": "C112",
+        "level": "C",
+        "severity": "recommendation",
+        "message": "Offer sin `validFrom` (recomendado).",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "fix": null,
+        "scope": "merchant_listing",
+        "priority": "P3"
+      },
+      {
+        "rule": "C112",
+        "level": "C",
+        "severity": "recommendation",
+        "message": "Offer sin `validThrough` (recomendado).",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "fix": null,
+        "scope": "merchant_listing",
+        "priority": "P3"
+      },
+      {
+        "rule": "C120",
+        "level": "C",
+        "severity": "recommendation",
+        "message": "Sin GTIN/ISBN (recomendado). No se deduce de SKU: solo si el catálogo lo contiene.",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "fix": null,
+        "scope": null,
+        "priority": "P3"
+      },
+      {
+        "rule": "C400",
+        "level": "C",
+        "severity": "optional",
+        "message": "FAQPage describe preguntas, pero el resultado enriquecido FAQ de Google está retirado (2026-05-07). No es un beneficio de presentación.",
+        "entity": "FAQPage@2",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/updates",
+        "fix": null,
+        "scope": "faq",
+        "priority": "P3"
+      },
+      {
+        "rule": "C410",
+        "level": "C",
+        "severity": "optional",
+        "message": "SearchAction: la función de sitelinks searchbox fue retirada; solo mantener si refleja una búsqueda real y por semántica.",
+        "entity": null,
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/blog/2024/10/sitelinks-search-box",
+        "fix": null,
+        "scope": "sitelinks_searchbox",
+        "priority": "P3"
+      },
+      {
+        "rule": "G005",
+        "level": "D",
+        "severity": "optional",
+        "message": "6 Organization anidada(s) sin @id junto a una Organization global: la identidad del negocio está dividida.",
+        "entity": null,
+        "path": null,
+        "evidence": [
+          "$.mainEntity.offers.seller",
+          "$.offers.seller",
+          "$.offers.seller",
+          "$.offers.seller",
+          "$.offers.seller",
+          "$.offers.seller"
+        ],
+        "source": null,
+        "fix": "Asignar @id estable a la Organization global y referenciarla (seller/publisher/author).",
+        "scope": null,
+        "priority": "P3"
+      },
+      {
+        "rule": "D022",
+        "level": "D",
+        "severity": "optional",
+        "message": "Precio no verificado: no se proporcionó fuente comercial ni meta de precio.",
+        "entity": "Product@structured-data.page",
+        "path": null,
+        "evidence": null,
+        "source": null,
+        "fix": null,
+        "scope": null,
+        "priority": "P3"
+      },
+      {
+        "rule": "D042",
+        "level": "D",
+        "severity": "optional",
+        "message": "inventoryLevel expone existencias numéricas; confirmar que es información que la tienda quiere publicar.",
+        "entity": "Product@structured-data.page",
+        "path": null,
+        "evidence": null,
+        "source": null,
+        "fix": null,
+        "scope": null,
+        "priority": "P3"
+      },
+      {
+        "rule": "D010",
+        "level": "D",
+        "severity": "error",
+        "message": "`mainEntityOfPage` no coincide con la canonical de la página.",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": {
+          "value": "https://rhino-performance.com/productos/botas-presoterapia-inalambricas-pro-air/",
+          "canonical": "https://rhino-performance.com/productos/pistola-de-masaje-gun-pro/"
+        },
+        "source": null,
+        "fix": null,
+        "scope": null,
+        "priority": "P1"
+      },
+      {
+        "rule": "D011",
+        "level": "D",
+        "severity": "warning",
+        "message": "Offer.url difiere de la canonical (¿variante con URL propia?).",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": {
+          "offer_url": "https://rhino-performance.com/productos/botas-presoterapia-inalambricas-pro-air/?recommendation_source=alternative-carousel&amp%3Brecommender=manual",
+          "canonical": "https://rhino-performance.com/productos/pistola-de-masaje-gun-pro/"
+        },
+        "source": null,
+        "fix": null,
+        "scope": null,
+        "priority": "P2"
+      },
+      {
+        "rule": "D022",
+        "level": "D",
+        "severity": "optional",
+        "message": "Precio no verificado: no se proporcionó fuente comercial ni meta de precio.",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": null,
+        "fix": null,
+        "scope": null,
+        "priority": "P3"
+      },
+      {
+        "rule": "D042",
+        "level": "D",
+        "severity": "optional",
+        "message": "inventoryLevel expone existencias numéricas; confirmar que es información que la tienda quiere publicar.",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": null,
+        "fix": null,
+        "scope": null,
+        "priority": "P3"
+      },
+      {
+        "rule": "D050",
+        "level": "D",
+        "severity": "warning",
+        "message": "Product.name no coincide con el H1 visible.",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": {
+          "name": "Botas de Presoterapia Inalámbricas PRO AIR",
+          "h1": "Pistola de Masaje GUN PRO"
+        },
+        "source": null,
+        "fix": null,
+        "scope": null,
+        "priority": "P2"
+      },
+      {
+        "rule": "D070",
+        "level": "D",
+        "severity": "warning",
+        "message": "La imagen del schema no aparece (por nombre de archivo) entre las imágenes/og:image de la página.",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": [
+          "https://acdn-us.mitiendanube.com/stores/007/400/935/products/kit-botas-de-presoterapia-pro-air-1-2-aefbc830fbd8eb0aca17852047770296-480-0.webp"
+        ],
+        "source": null,
+        "fix": null,
+        "scope": null,
+        "priority": "P2"
+      },
+      {
+        "rule": "D010",
+        "level": "D",
+        "severity": "error",
+        "message": "`mainEntityOfPage` no coincide con la canonical de la página.",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": {
+          "value": "https://rhino-performance.com/productos/kit-botas-y-brazos-de-presoterapia-pro-3/",
+          "canonical": "https://rhino-performance.com/productos/pistola-de-masaje-gun-pro/"
+        },
+        "source": null,
+        "fix": null,
+        "scope": null,
+        "priority": "P1"
+      },
+      {
+        "rule": "D011",
+        "level": "D",
+        "severity": "warning",
+        "message": "Offer.url difiere de la canonical (¿variante con URL propia?).",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": {
+          "offer_url": "https://rhino-performance.com/productos/kit-botas-y-brazos-de-presoterapia-pro-3/?recommendation_source=alternative-carousel&amp%3Brecommender=manual",
+          "canonical": "https://rhino-performance.com/productos/pistola-de-masaje-gun-pro/"
+        },
+        "source": null,
+        "fix": null,
+        "scope": null,
+        "priority": "P2"
+      },
+      {
+        "rule": "D022",
+        "level": "D",
+        "severity": "optional",
+        "message": "Precio no verificado: no se proporcionó fuente comercial ni meta de precio.",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": null,
+        "fix": null,
+        "scope": null,
+        "priority": "P3"
+      },
+      {
+        "rule": "D042",
+        "level": "D",
+        "severity": "optional",
+        "message": "inventoryLevel expone existencias numéricas; confirmar que es información que la tienda quiere publicar.",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": null,
+        "fix": null,
+        "scope": null,
+        "priority": "P3"
+      },
+      {
+        "rule": "D050",
+        "level": "D",
+        "severity": "warning",
+        "message": "Product.name no coincide con el H1 visible.",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": {
+          "name": "Kit Botas y Brazos de Presoterapia PRO 3",
+          "h1": "Pistola de Masaje GUN PRO"
+        },
+        "source": null,
+        "fix": null,
+        "scope": null,
+        "priority": "P2"
+      },
+      {
+        "rule": "D070",
+        "level": "D",
+        "severity": "warning",
+        "message": "La imagen del schema no aparece (por nombre de archivo) entre las imágenes/og:image de la página.",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": [
+          "https://acdn-us.mitiendanube.com/stores/007/400/935/products/kit-botas-brazos-presoterapia-pro3-a3d13e4ef14f06367c17885602094186-480-0.webp"
+        ],
+        "source": null,
+        "fix": null,
+        "scope": null,
+        "priority": "P2"
+      },
+      {
+        "rule": "D010",
+        "level": "D",
+        "severity": "error",
+        "message": "`mainEntityOfPage` no coincide con la canonical de la página.",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": {
+          "value": "https://rhino-performance.com/productos/tina-de-hielo-tub-air/",
+          "canonical": "https://rhino-performance.com/productos/pistola-de-masaje-gun-pro/"
+        },
+        "source": null,
+        "fix": null,
+        "scope": null,
+        "priority": "P1"
+      },
+      {
+        "rule": "D011",
+        "level": "D",
+        "severity": "warning",
+        "message": "Offer.url difiere de la canonical (¿variante con URL propia?).",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": {
+          "offer_url": "https://rhino-performance.com/productos/tina-de-hielo-tub-air/?recommendation_source=alternative-carousel&amp%3Brecommender=manual",
+          "canonical": "https://rhino-performance.com/productos/pistola-de-masaje-gun-pro/"
+        },
+        "source": null,
+        "fix": null,
+        "scope": null,
+        "priority": "P2"
+      },
+      {
+        "rule": "D022",
+        "level": "D",
+        "severity": "optional",
+        "message": "Precio no verificado: no se proporcionó fuente comercial ni meta de precio.",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": null,
+        "fix": null,
+        "scope": null,
+        "priority": "P3"
+      },
+      {
+        "rule": "D042",
+        "level": "D",
+        "severity": "optional",
+        "message": "inventoryLevel expone existencias numéricas; confirmar que es información que la tienda quiere publicar.",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": null,
+        "fix": null,
+        "scope": null,
+        "priority": "P3"
+      },
+      {
+        "rule": "D050",
+        "level": "D",
+        "severity": "warning",
+        "message": "Product.name no coincide con el H1 visible.",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": {
+          "name": "Tina de Hielo TUB AIR",
+          "h1": "Pistola de Masaje GUN PRO"
+        },
+        "source": null,
+        "fix": null,
+        "scope": null,
+        "priority": "P2"
+      },
+      {
+        "rule": "D070",
+        "level": "D",
+        "severity": "warning",
+        "message": "La imagen del schema no aparece (por nombre de archivo) entre las imágenes/og:image de la página.",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": [
+          "https://acdn-us.mitiendanube.com/stores/007/400/935/products/rhino-tina-tub-air-carrusel-b09ece51431a13db8617887512365509-480-0.webp"
+        ],
+        "source": null,
+        "fix": null,
+        "scope": null,
+        "priority": "P2"
+      },
+      {
+        "rule": "D010",
+        "level": "D",
+        "severity": "error",
+        "message": "`mainEntityOfPage` no coincide con la canonical de la página.",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": {
+          "value": "https://rhino-performance.com/productos/manga-frio-y-calor-pierna-y-brazo/",
+          "canonical": "https://rhino-performance.com/productos/pistola-de-masaje-gun-pro/"
+        },
+        "source": null,
+        "fix": null,
+        "scope": null,
+        "priority": "P1"
+      },
+      {
+        "rule": "D011",
+        "level": "D",
+        "severity": "warning",
+        "message": "Offer.url difiere de la canonical (¿variante con URL propia?).",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": {
+          "offer_url": "https://rhino-performance.com/productos/manga-frio-y-calor-pierna-y-brazo/?recommendation_source=alternative-carousel&amp%3Brecommender=manual",
+          "canonical": "https://rhino-performance.com/productos/pistola-de-masaje-gun-pro/"
+        },
+        "source": null,
+        "fix": null,
+        "scope": null,
+        "priority": "P2"
+      },
+      {
+        "rule": "D022",
+        "level": "D",
+        "severity": "optional",
+        "message": "Precio no verificado: no se proporcionó fuente comercial ni meta de precio.",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": null,
+        "fix": null,
+        "scope": null,
+        "priority": "P3"
+      },
+      {
+        "rule": "D042",
+        "level": "D",
+        "severity": "optional",
+        "message": "inventoryLevel expone existencias numéricas; confirmar que es información que la tienda quiere publicar.",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": null,
+        "fix": null,
+        "scope": null,
+        "priority": "P3"
+      },
+      {
+        "rule": "D050",
+        "level": "D",
+        "severity": "warning",
+        "message": "Product.name no coincide con el H1 visible.",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": {
+          "name": "Manga de Compresión Frío y Calor",
+          "h1": "Pistola de Masaje GUN PRO"
+        },
+        "source": null,
+        "fix": null,
+        "scope": null,
+        "priority": "P2"
+      },
+      {
+        "rule": "D070",
+        "level": "D",
+        "severity": "warning",
+        "message": "La imagen del schema no aparece (por nombre de archivo) entre las imágenes/og:image de la página.",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": [
+          "https://acdn-us.mitiendanube.com/stores/007/400/935/products/manga-de-compresion-frio-calor-5-21c9967576e345800a17852038833165-480-0.webp"
+        ],
+        "source": null,
+        "fix": null,
+        "scope": null,
+        "priority": "P2"
+      },
+      {
+        "rule": "D010",
+        "level": "D",
+        "severity": "error",
+        "message": "`mainEntityOfPage` no coincide con la canonical de la página.",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": {
+          "value": "https://rhino-performance.com/productos/hombrera-frio-y-calor/",
+          "canonical": "https://rhino-performance.com/productos/pistola-de-masaje-gun-pro/"
+        },
+        "source": null,
+        "fix": null,
+        "scope": null,
+        "priority": "P1"
+      },
+      {
+        "rule": "D011",
+        "level": "D",
+        "severity": "warning",
+        "message": "Offer.url difiere de la canonical (¿variante con URL propia?).",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": {
+          "offer_url": "https://rhino-performance.com/productos/hombrera-frio-y-calor/?recommendation_source=alternative-carousel&amp%3Brecommender=manual",
+          "canonical": "https://rhino-performance.com/productos/pistola-de-masaje-gun-pro/"
+        },
+        "source": null,
+        "fix": null,
+        "scope": null,
+        "priority": "P2"
+      },
+      {
+        "rule": "D022",
+        "level": "D",
+        "severity": "optional",
+        "message": "Precio no verificado: no se proporcionó fuente comercial ni meta de precio.",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": null,
+        "fix": null,
+        "scope": null,
+        "priority": "P3"
+      },
+      {
+        "rule": "D042",
+        "level": "D",
+        "severity": "optional",
+        "message": "inventoryLevel expone existencias numéricas; confirmar que es información que la tienda quiere publicar.",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": null,
+        "fix": null,
+        "scope": null,
+        "priority": "P3"
+      },
+      {
+        "rule": "D050",
+        "level": "D",
+        "severity": "warning",
+        "message": "Product.name no coincide con el H1 visible.",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": {
+          "name": "Hombrera de Compresión Frío y Calor",
+          "h1": "Pistola de Masaje GUN PRO"
+        },
+        "source": null,
+        "fix": null,
+        "scope": null,
+        "priority": "P2"
+      },
+      {
+        "rule": "D070",
+        "level": "D",
+        "severity": "warning",
+        "message": "La imagen del schema no aparece (por nombre de archivo) entre las imágenes/og:image de la página.",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": [
+          "https://acdn-us.mitiendanube.com/stores/007/400/935/products/hombrera-de-compresion-frio-calor-2-7ef0a017d48f7f072717852044021824-480-0.webp"
+        ],
+        "source": null,
+        "fix": null,
+        "scope": null,
+        "priority": "P2"
+      },
+      {
+        "rule": "SEO012",
+        "level": "D",
+        "severity": "recommendation",
+        "message": "Imagen sin atributo alt; revisar contexto/decoración.",
+        "entity": null,
+        "path": null,
+        "evidence": {
+          "src": "https://www.facebook.com/tr?id=393081466010695&ev=PageView&noscript=1"
+        },
+        "source": null,
+        "fix": null,
+        "scope": null,
+        "priority": "P3"
+      }
+    ],
+    "validator_severity_counts": {
+      "optional": 27,
+      "recommendation": 31,
+      "error": 5,
+      "warning": 15
+    },
+    "source": {
+      "file": "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/live-pilot-20261112/raw-crawl-report.json",
+      "node_index": 0
+    },
+    "controller_interpretation": "Secondary Product entities carry structured-data.item and are compared with the current PDP canonical/H1. Raw D010 errors preserved; context review needed before declaring a primary Product or indexability defect."
+  },
+  {
+    "url": "https://rhino-performance.com/productos/tina-de-hielo-tub-air/",
+    "http": 200,
+    "redirect": null,
+    "canonical": [
+      "https://rhino-performance.com/productos/tina-de-hielo-tub-air/"
+    ],
+    "canonical_self": true,
+    "meta_robots": {},
+    "meta_robots_presence": "absent_in_observed_HTML",
+    "x_robots_tag": null,
+    "x_robots_tag_presence": "absent_in_observed_headers",
+    "crawl_permission": {
+      "crawler_allowed": true,
+      "googlebot_allowed": true
+    },
+    "title": "Tina de Hielo TUB AIR | Baño de Hielo Inflable | RHINO",
+    "description": [
+      "Tina de hielo inflable y portátil para inmersión en frío. 380 litros, doble pared y 5 cm de aislamiento. Hasta 12 MSI y envío gratis."
+    ],
+    "h1": [
+      "Tina de Hielo TUB AIR"
+    ],
+    "main_content": {
+      "main_present": true,
+      "main_text_characters": 7522,
+      "main_text_sha256": "d98af5b43837b455294a21b9631ce1dbe412c02d234a1112355d103b2df3ffa3",
+      "soft_404_candidate": false,
+      "body_class": " template-product ",
+      "product_ids": [
+        "355908325",
+        "355908340",
+        "355908446",
+        "355908507",
+        "355908602"
+      ],
+      "declared_times": []
+    },
+    "HTML_sha256": "250d6ccb756f850f5231610d2726fdf254fe122d8987962bb38919771036e808",
+    "technical_indexability": {
+      "state": "indexable_candidate",
+      "reasons": [],
+      "robots_evidence": {
+        "sources": [],
+        "flags": [],
+        "noindex": false,
+        "relevant_errors": [],
+        "processing_complete": true,
+        "counts": {
+          "sources_seen": 0,
+          "sources_processed": 0,
+          "input_bytes_processed": 0,
+          "parameters": 0,
+          "unknown": 0,
+          "errors": 0,
+          "sources_retained": 0
+        },
+        "unvisited_sources_count": 0,
+        "processed_collection_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "truncated": false,
+        "state": "no_restrictive_flag_observed",
+        "scope": "Googlebot text results; not Google rendering/index inspection"
+      },
+      "indexation_observed": false,
+      "google_selected_canonical": null,
+      "evidence_scope": "technical_observation_not_google_index"
+    },
+    "audited_at": "2026-11-12T22:09:30.169877+00:00",
+    "HTTP_observation_window": {
+      "run_started_at": "2026-11-12T22:09:22.233240+00:00",
+      "CLI_finished_at": "2026-11-12T22:09:41.334726+00:00"
+    },
+    "full_readiness": {
+      "checks": [
+        {
+          "name": "http_access",
+          "status": "passed",
+          "critical": true,
+          "evidence": 200
+        },
+        {
+          "name": "indexability",
+          "status": "passed",
+          "critical": true,
+          "evidence": {
+            "state": "indexable_candidate",
+            "reasons": [],
+            "robots_evidence": {
+              "sources": [],
+              "flags": [],
+              "noindex": false,
+              "relevant_errors": [],
+              "processing_complete": true,
+              "counts": {
+                "sources_seen": 0,
+                "sources_processed": 0,
+                "input_bytes_processed": 0,
+                "parameters": 0,
+                "unknown": 0,
+                "errors": 0,
+                "sources_retained": 0
+              },
+              "unvisited_sources_count": 0,
+              "processed_collection_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "truncated": false,
+              "state": "no_restrictive_flag_observed",
+              "scope": "Googlebot text results; not Google rendering/index inspection"
+            },
+            "indexation_observed": false,
+            "google_selected_canonical": null,
+            "evidence_scope": "technical_observation_not_google_index"
+          }
+        },
+        {
+          "name": "main_content",
+          "status": "passed",
+          "critical": true,
+          "evidence": "text length/hash, not tags counted"
+        },
+        {
+          "name": "crawlable_navigation",
+          "status": "passed",
+          "critical": false,
+          "evidence": "observed href targets"
+        },
+        {
+          "name": "sitemap_membership",
+          "status": "unknown",
+          "critical": false,
+          "evidence": "native sitemap inventory"
+        },
+        {
+          "name": "structured_data",
+          "status": "failed",
+          "critical": true,
+          "evidence": "existing SEO validator A-D, limits preserved"
+        },
+        {
+          "name": "pagination",
+          "status": "passed",
+          "critical": false,
+          "evidence": {
+            "observed_links": [],
+            "head_rel_links": [],
+            "active_controls_without_href": 0,
+            "state": "needs_evidence",
+            "continuity": "needs_multi_page_evidence",
+            "native_contract": "observed_hrefs_only_no_invented_routes"
+          }
+        },
+        {
+          "name": "render_comparison",
+          "status": "unknown",
+          "critical": false,
+          "evidence": "capture supplied, not Googlebot"
+        },
+        {
+          "name": "no_js_navigation",
+          "status": "unknown",
+          "critical": true,
+          "evidence": "no-JS capture required"
+        },
+        {
+          "name": "no_js_main_content",
+          "status": "unknown",
+          "critical": true,
+          "evidence": "extracted main text in no-JS DOM; hidden/visual state requires browser QA"
+        }
+      ],
+      "critical_blockers": [
+        "structured_data"
+      ],
+      "required_evidence_missing": [
+        "no_js_navigation",
+        "no_js_main_content"
+      ],
+      "approval": "blocked",
+      "score": 50,
+      "coverage": 0.6,
+      "meaning": "diagnostic evidence completion, not Google ranking; blockers override score"
+    },
+    "validator_findings": [
+      {
+        "rule": "C112",
+        "level": "C",
+        "severity": "optional",
+        "message": "Offer sin `hasMerchantReturnPolicy` (recomendado). No se genera sin una fuente verificable de políticas.",
+        "entity": "Product@structured-data.page",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "fix": null,
+        "scope": "merchant_listing",
+        "priority": "P3"
+      },
+      {
+        "rule": "C112",
+        "level": "C",
+        "severity": "recommendation",
+        "message": "Offer sin `itemCondition` (recomendado).",
+        "entity": "Product@structured-data.page",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "fix": null,
+        "scope": "merchant_listing",
+        "priority": "P3"
+      },
+      {
+        "rule": "C112",
+        "level": "C",
+        "severity": "recommendation",
+        "message": "Offer sin `priceValidUntil` (recomendado).",
+        "entity": "Product@structured-data.page",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "fix": null,
+        "scope": "merchant_listing",
+        "priority": "P3"
+      },
+      {
+        "rule": "C112",
+        "level": "C",
+        "severity": "optional",
+        "message": "Offer sin `shippingDetails` (recomendado). No se genera sin una fuente verificable de políticas.",
+        "entity": "Product@structured-data.page",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "fix": null,
+        "scope": "merchant_listing",
+        "priority": "P3"
+      },
+      {
+        "rule": "C112",
+        "level": "C",
+        "severity": "recommendation",
+        "message": "Offer sin `validFrom` (recomendado).",
+        "entity": "Product@structured-data.page",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "fix": null,
+        "scope": "merchant_listing",
+        "priority": "P3"
+      },
+      {
+        "rule": "C112",
+        "level": "C",
+        "severity": "recommendation",
+        "message": "Offer sin `validThrough` (recomendado).",
+        "entity": "Product@structured-data.page",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "fix": null,
+        "scope": "merchant_listing",
+        "priority": "P3"
+      },
+      {
+        "rule": "C120",
+        "level": "C",
+        "severity": "recommendation",
+        "message": "Sin GTIN/ISBN (recomendado). No se deduce de SKU: solo si el catálogo lo contiene.",
+        "entity": "Product@structured-data.page",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "fix": null,
+        "scope": null,
+        "priority": "P3"
+      },
+      {
+        "rule": "C112",
+        "level": "C",
+        "severity": "optional",
+        "message": "Offer sin `hasMerchantReturnPolicy` (recomendado). No se genera sin una fuente verificable de políticas.",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "fix": null,
+        "scope": "merchant_listing",
+        "priority": "P3"
+      },
+      {
+        "rule": "C112",
+        "level": "C",
+        "severity": "recommendation",
+        "message": "Offer sin `itemCondition` (recomendado).",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "fix": null,
+        "scope": "merchant_listing",
+        "priority": "P3"
+      },
+      {
+        "rule": "C112",
+        "level": "C",
+        "severity": "recommendation",
+        "message": "Offer sin `priceValidUntil` (recomendado).",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "fix": null,
+        "scope": "merchant_listing",
+        "priority": "P3"
+      },
+      {
+        "rule": "C112",
+        "level": "C",
+        "severity": "optional",
+        "message": "Offer sin `shippingDetails` (recomendado). No se genera sin una fuente verificable de políticas.",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "fix": null,
+        "scope": "merchant_listing",
+        "priority": "P3"
+      },
+      {
+        "rule": "C112",
+        "level": "C",
+        "severity": "recommendation",
+        "message": "Offer sin `validFrom` (recomendado).",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "fix": null,
+        "scope": "merchant_listing",
+        "priority": "P3"
+      },
+      {
+        "rule": "C112",
+        "level": "C",
+        "severity": "recommendation",
+        "message": "Offer sin `validThrough` (recomendado).",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "fix": null,
+        "scope": "merchant_listing",
+        "priority": "P3"
+      },
+      {
+        "rule": "C120",
+        "level": "C",
+        "severity": "recommendation",
+        "message": "Sin GTIN/ISBN (recomendado). No se deduce de SKU: solo si el catálogo lo contiene.",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "fix": null,
+        "scope": null,
+        "priority": "P3"
+      },
+      {
+        "rule": "C112",
+        "level": "C",
+        "severity": "optional",
+        "message": "Offer sin `hasMerchantReturnPolicy` (recomendado). No se genera sin una fuente verificable de políticas.",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "fix": null,
+        "scope": "merchant_listing",
+        "priority": "P3"
+      },
+      {
+        "rule": "C112",
+        "level": "C",
+        "severity": "recommendation",
+        "message": "Offer sin `itemCondition` (recomendado).",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "fix": null,
+        "scope": "merchant_listing",
+        "priority": "P3"
+      },
+      {
+        "rule": "C112",
+        "level": "C",
+        "severity": "recommendation",
+        "message": "Offer sin `priceValidUntil` (recomendado).",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "fix": null,
+        "scope": "merchant_listing",
+        "priority": "P3"
+      },
+      {
+        "rule": "C112",
+        "level": "C",
+        "severity": "optional",
+        "message": "Offer sin `shippingDetails` (recomendado). No se genera sin una fuente verificable de políticas.",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "fix": null,
+        "scope": "merchant_listing",
+        "priority": "P3"
+      },
+      {
+        "rule": "C112",
+        "level": "C",
+        "severity": "recommendation",
+        "message": "Offer sin `validFrom` (recomendado).",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "fix": null,
+        "scope": "merchant_listing",
+        "priority": "P3"
+      },
+      {
+        "rule": "C112",
+        "level": "C",
+        "severity": "recommendation",
+        "message": "Offer sin `validThrough` (recomendado).",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "fix": null,
+        "scope": "merchant_listing",
+        "priority": "P3"
+      },
+      {
+        "rule": "C120",
+        "level": "C",
+        "severity": "recommendation",
+        "message": "Sin GTIN/ISBN (recomendado). No se deduce de SKU: solo si el catálogo lo contiene.",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "fix": null,
+        "scope": null,
+        "priority": "P3"
+      },
+      {
+        "rule": "C112",
+        "level": "C",
+        "severity": "optional",
+        "message": "Offer sin `hasMerchantReturnPolicy` (recomendado). No se genera sin una fuente verificable de políticas.",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "fix": null,
+        "scope": "merchant_listing",
+        "priority": "P3"
+      },
+      {
+        "rule": "C112",
+        "level": "C",
+        "severity": "recommendation",
+        "message": "Offer sin `itemCondition` (recomendado).",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "fix": null,
+        "scope": "merchant_listing",
+        "priority": "P3"
+      },
+      {
+        "rule": "C112",
+        "level": "C",
+        "severity": "recommendation",
+        "message": "Offer sin `priceValidUntil` (recomendado).",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "fix": null,
+        "scope": "merchant_listing",
+        "priority": "P3"
+      },
+      {
+        "rule": "C112",
+        "level": "C",
+        "severity": "optional",
+        "message": "Offer sin `shippingDetails` (recomendado). No se genera sin una fuente verificable de políticas.",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "fix": null,
+        "scope": "merchant_listing",
+        "priority": "P3"
+      },
+      {
+        "rule": "C112",
+        "level": "C",
+        "severity": "recommendation",
+        "message": "Offer sin `validFrom` (recomendado).",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "fix": null,
+        "scope": "merchant_listing",
+        "priority": "P3"
+      },
+      {
+        "rule": "C112",
+        "level": "C",
+        "severity": "recommendation",
+        "message": "Offer sin `validThrough` (recomendado).",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "fix": null,
+        "scope": "merchant_listing",
+        "priority": "P3"
+      },
+      {
+        "rule": "C120",
+        "level": "C",
+        "severity": "recommendation",
+        "message": "Sin GTIN/ISBN (recomendado). No se deduce de SKU: solo si el catálogo lo contiene.",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "fix": null,
+        "scope": null,
+        "priority": "P3"
+      },
+      {
+        "rule": "C112",
+        "level": "C",
+        "severity": "optional",
+        "message": "Offer sin `hasMerchantReturnPolicy` (recomendado). No se genera sin una fuente verificable de políticas.",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "fix": null,
+        "scope": "merchant_listing",
+        "priority": "P3"
+      },
+      {
+        "rule": "C112",
+        "level": "C",
+        "severity": "recommendation",
+        "message": "Offer sin `itemCondition` (recomendado).",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "fix": null,
+        "scope": "merchant_listing",
+        "priority": "P3"
+      },
+      {
+        "rule": "C112",
+        "level": "C",
+        "severity": "recommendation",
+        "message": "Offer sin `priceValidUntil` (recomendado).",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "fix": null,
+        "scope": "merchant_listing",
+        "priority": "P3"
+      },
+      {
+        "rule": "C112",
+        "level": "C",
+        "severity": "optional",
+        "message": "Offer sin `shippingDetails` (recomendado). No se genera sin una fuente verificable de políticas.",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "fix": null,
+        "scope": "merchant_listing",
+        "priority": "P3"
+      },
+      {
+        "rule": "C112",
+        "level": "C",
+        "severity": "recommendation",
+        "message": "Offer sin `validFrom` (recomendado).",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "fix": null,
+        "scope": "merchant_listing",
+        "priority": "P3"
+      },
+      {
+        "rule": "C112",
+        "level": "C",
+        "severity": "recommendation",
+        "message": "Offer sin `validThrough` (recomendado).",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "fix": null,
+        "scope": "merchant_listing",
+        "priority": "P3"
+      },
+      {
+        "rule": "C120",
+        "level": "C",
+        "severity": "recommendation",
+        "message": "Sin GTIN/ISBN (recomendado). No se deduce de SKU: solo si el catálogo lo contiene.",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "fix": null,
+        "scope": null,
+        "priority": "P3"
+      },
+      {
+        "rule": "C112",
+        "level": "C",
+        "severity": "optional",
+        "message": "Offer sin `hasMerchantReturnPolicy` (recomendado). No se genera sin una fuente verificable de políticas.",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "fix": null,
+        "scope": "merchant_listing",
+        "priority": "P3"
+      },
+      {
+        "rule": "C112",
+        "level": "C",
+        "severity": "recommendation",
+        "message": "Offer sin `itemCondition` (recomendado).",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "fix": null,
+        "scope": "merchant_listing",
+        "priority": "P3"
+      },
+      {
+        "rule": "C112",
+        "level": "C",
+        "severity": "recommendation",
+        "message": "Offer sin `priceValidUntil` (recomendado).",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "fix": null,
+        "scope": "merchant_listing",
+        "priority": "P3"
+      },
+      {
+        "rule": "C112",
+        "level": "C",
+        "severity": "optional",
+        "message": "Offer sin `shippingDetails` (recomendado). No se genera sin una fuente verificable de políticas.",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "fix": null,
+        "scope": "merchant_listing",
+        "priority": "P3"
+      },
+      {
+        "rule": "C112",
+        "level": "C",
+        "severity": "recommendation",
+        "message": "Offer sin `validFrom` (recomendado).",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "fix": null,
+        "scope": "merchant_listing",
+        "priority": "P3"
+      },
+      {
+        "rule": "C112",
+        "level": "C",
+        "severity": "recommendation",
+        "message": "Offer sin `validThrough` (recomendado).",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "fix": null,
+        "scope": "merchant_listing",
+        "priority": "P3"
+      },
+      {
+        "rule": "C120",
+        "level": "C",
+        "severity": "recommendation",
+        "message": "Sin GTIN/ISBN (recomendado). No se deduce de SKU: solo si el catálogo lo contiene.",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "fix": null,
+        "scope": null,
+        "priority": "P3"
+      },
+      {
+        "rule": "C400",
+        "level": "C",
+        "severity": "optional",
+        "message": "FAQPage describe preguntas, pero el resultado enriquecido FAQ de Google está retirado (2026-05-07). No es un beneficio de presentación.",
+        "entity": "FAQPage@2",
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/updates",
+        "fix": null,
+        "scope": "faq",
+        "priority": "P3"
+      },
+      {
+        "rule": "C410",
+        "level": "C",
+        "severity": "optional",
+        "message": "SearchAction: la función de sitelinks searchbox fue retirada; solo mantener si refleja una búsqueda real y por semántica.",
+        "entity": null,
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/blog/2024/10/sitelinks-search-box",
+        "fix": null,
+        "scope": "sitelinks_searchbox",
+        "priority": "P3"
+      },
+      {
+        "rule": "G005",
+        "level": "D",
+        "severity": "optional",
+        "message": "6 Organization anidada(s) sin @id junto a una Organization global: la identidad del negocio está dividida.",
+        "entity": null,
+        "path": null,
+        "evidence": [
+          "$.mainEntity.offers.seller",
+          "$.offers.seller",
+          "$.offers.seller",
+          "$.offers.seller",
+          "$.offers.seller",
+          "$.offers.seller"
+        ],
+        "source": null,
+        "fix": "Asignar @id estable a la Organization global y referenciarla (seller/publisher/author).",
+        "scope": null,
+        "priority": "P3"
+      },
+      {
+        "rule": "D022",
+        "level": "D",
+        "severity": "optional",
+        "message": "Precio no verificado: no se proporcionó fuente comercial ni meta de precio.",
+        "entity": "Product@structured-data.page",
+        "path": null,
+        "evidence": null,
+        "source": null,
+        "fix": null,
+        "scope": null,
+        "priority": "P3"
+      },
+      {
+        "rule": "D042",
+        "level": "D",
+        "severity": "optional",
+        "message": "inventoryLevel expone existencias numéricas; confirmar que es información que la tienda quiere publicar.",
+        "entity": "Product@structured-data.page",
+        "path": null,
+        "evidence": null,
+        "source": null,
+        "fix": null,
+        "scope": null,
+        "priority": "P3"
+      },
+      {
+        "rule": "D010",
+        "level": "D",
+        "severity": "error",
+        "message": "`mainEntityOfPage` no coincide con la canonical de la página.",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": {
+          "value": "https://rhino-performance.com/productos/botas-presoterapia-inalambricas-pro-air/",
+          "canonical": "https://rhino-performance.com/productos/tina-de-hielo-tub-air/"
+        },
+        "source": null,
+        "fix": null,
+        "scope": null,
+        "priority": "P1"
+      },
+      {
+        "rule": "D011",
+        "level": "D",
+        "severity": "warning",
+        "message": "Offer.url difiere de la canonical (¿variante con URL propia?).",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": {
+          "offer_url": "https://rhino-performance.com/productos/botas-presoterapia-inalambricas-pro-air/?recommendation_source=alternative-carousel&amp%3Brecommender=manual",
+          "canonical": "https://rhino-performance.com/productos/tina-de-hielo-tub-air/"
+        },
+        "source": null,
+        "fix": null,
+        "scope": null,
+        "priority": "P2"
+      },
+      {
+        "rule": "D022",
+        "level": "D",
+        "severity": "optional",
+        "message": "Precio no verificado: no se proporcionó fuente comercial ni meta de precio.",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": null,
+        "fix": null,
+        "scope": null,
+        "priority": "P3"
+      },
+      {
+        "rule": "D042",
+        "level": "D",
+        "severity": "optional",
+        "message": "inventoryLevel expone existencias numéricas; confirmar que es información que la tienda quiere publicar.",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": null,
+        "fix": null,
+        "scope": null,
+        "priority": "P3"
+      },
+      {
+        "rule": "D050",
+        "level": "D",
+        "severity": "warning",
+        "message": "Product.name no coincide con el H1 visible.",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": {
+          "name": "Botas de Presoterapia Inalámbricas PRO AIR",
+          "h1": "Tina de Hielo TUB AIR"
+        },
+        "source": null,
+        "fix": null,
+        "scope": null,
+        "priority": "P2"
+      },
+      {
+        "rule": "D070",
+        "level": "D",
+        "severity": "warning",
+        "message": "La imagen del schema no aparece (por nombre de archivo) entre las imágenes/og:image de la página.",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": [
+          "https://acdn-us.mitiendanube.com/stores/007/400/935/products/kit-botas-de-presoterapia-pro-air-1-2-aefbc830fbd8eb0aca17852047770296-480-0.webp"
+        ],
+        "source": null,
+        "fix": null,
+        "scope": null,
+        "priority": "P2"
+      },
+      {
+        "rule": "D010",
+        "level": "D",
+        "severity": "error",
+        "message": "`mainEntityOfPage` no coincide con la canonical de la página.",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": {
+          "value": "https://rhino-performance.com/productos/pistola-de-masaje-gun-air/",
+          "canonical": "https://rhino-performance.com/productos/tina-de-hielo-tub-air/"
+        },
+        "source": null,
+        "fix": null,
+        "scope": null,
+        "priority": "P1"
+      },
+      {
+        "rule": "D011",
+        "level": "D",
+        "severity": "warning",
+        "message": "Offer.url difiere de la canonical (¿variante con URL propia?).",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": {
+          "offer_url": "https://rhino-performance.com/productos/pistola-de-masaje-gun-air/?recommendation_source=alternative-carousel&amp%3Brecommender=manual",
+          "canonical": "https://rhino-performance.com/productos/tina-de-hielo-tub-air/"
+        },
+        "source": null,
+        "fix": null,
+        "scope": null,
+        "priority": "P2"
+      },
+      {
+        "rule": "D022",
+        "level": "D",
+        "severity": "optional",
+        "message": "Precio no verificado: no se proporcionó fuente comercial ni meta de precio.",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": null,
+        "fix": null,
+        "scope": null,
+        "priority": "P3"
+      },
+      {
+        "rule": "D042",
+        "level": "D",
+        "severity": "optional",
+        "message": "inventoryLevel expone existencias numéricas; confirmar que es información que la tienda quiere publicar.",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": null,
+        "fix": null,
+        "scope": null,
+        "priority": "P3"
+      },
+      {
+        "rule": "D050",
+        "level": "D",
+        "severity": "warning",
+        "message": "Product.name no coincide con el H1 visible.",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": {
+          "name": "Pistola de Masaje GUN AIR",
+          "h1": "Tina de Hielo TUB AIR"
+        },
+        "source": null,
+        "fix": null,
+        "scope": null,
+        "priority": "P2"
+      },
+      {
+        "rule": "D070",
+        "level": "D",
+        "severity": "warning",
+        "message": "La imagen del schema no aparece (por nombre de archivo) entre las imágenes/og:image de la página.",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": [
+          "https://acdn-us.mitiendanube.com/stores/007/400/935/products/rhino-gun-air-carrusel-706469bdc49690a1f417887432053357-480-0.webp"
+        ],
+        "source": null,
+        "fix": null,
+        "scope": null,
+        "priority": "P2"
+      },
+      {
+        "rule": "D010",
+        "level": "D",
+        "severity": "error",
+        "message": "`mainEntityOfPage` no coincide con la canonical de la página.",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": {
+          "value": "https://rhino-performance.com/productos/pistola-de-masaje-gun-pro/",
+          "canonical": "https://rhino-performance.com/productos/tina-de-hielo-tub-air/"
+        },
+        "source": null,
+        "fix": null,
+        "scope": null,
+        "priority": "P1"
+      },
+      {
+        "rule": "D011",
+        "level": "D",
+        "severity": "warning",
+        "message": "Offer.url difiere de la canonical (¿variante con URL propia?).",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": {
+          "offer_url": "https://rhino-performance.com/productos/pistola-de-masaje-gun-pro/?recommendation_source=alternative-carousel&amp%3Brecommender=manual",
+          "canonical": "https://rhino-performance.com/productos/tina-de-hielo-tub-air/"
+        },
+        "source": null,
+        "fix": null,
+        "scope": null,
+        "priority": "P2"
+      },
+      {
+        "rule": "D022",
+        "level": "D",
+        "severity": "optional",
+        "message": "Precio no verificado: no se proporcionó fuente comercial ni meta de precio.",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": null,
+        "fix": null,
+        "scope": null,
+        "priority": "P3"
+      },
+      {
+        "rule": "D042",
+        "level": "D",
+        "severity": "optional",
+        "message": "inventoryLevel expone existencias numéricas; confirmar que es información que la tienda quiere publicar.",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": null,
+        "fix": null,
+        "scope": null,
+        "priority": "P3"
+      },
+      {
+        "rule": "D050",
+        "level": "D",
+        "severity": "warning",
+        "message": "Product.name no coincide con el H1 visible.",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": {
+          "name": "Pistola de Masaje GUN PRO",
+          "h1": "Tina de Hielo TUB AIR"
+        },
+        "source": null,
+        "fix": null,
+        "scope": null,
+        "priority": "P2"
+      },
+      {
+        "rule": "D070",
+        "level": "D",
+        "severity": "warning",
+        "message": "La imagen del schema no aparece (por nombre de archivo) entre las imágenes/og:image de la página.",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": [
+          "https://acdn-us.mitiendanube.com/stores/007/400/935/products/rhino-gun-pro-carrusel-8194d1019bbddb842517887497698642-480-0.webp"
+        ],
+        "source": null,
+        "fix": null,
+        "scope": null,
+        "priority": "P2"
+      },
+      {
+        "rule": "D010",
+        "level": "D",
+        "severity": "error",
+        "message": "`mainEntityOfPage` no coincide con la canonical de la página.",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": {
+          "value": "https://rhino-performance.com/productos/hombrera-frio-y-calor/",
+          "canonical": "https://rhino-performance.com/productos/tina-de-hielo-tub-air/"
+        },
+        "source": null,
+        "fix": null,
+        "scope": null,
+        "priority": "P1"
+      },
+      {
+        "rule": "D011",
+        "level": "D",
+        "severity": "warning",
+        "message": "Offer.url difiere de la canonical (¿variante con URL propia?).",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": {
+          "offer_url": "https://rhino-performance.com/productos/hombrera-frio-y-calor/?recommendation_source=alternative-carousel&amp%3Brecommender=manual",
+          "canonical": "https://rhino-performance.com/productos/tina-de-hielo-tub-air/"
+        },
+        "source": null,
+        "fix": null,
+        "scope": null,
+        "priority": "P2"
+      },
+      {
+        "rule": "D022",
+        "level": "D",
+        "severity": "optional",
+        "message": "Precio no verificado: no se proporcionó fuente comercial ni meta de precio.",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": null,
+        "fix": null,
+        "scope": null,
+        "priority": "P3"
+      },
+      {
+        "rule": "D042",
+        "level": "D",
+        "severity": "optional",
+        "message": "inventoryLevel expone existencias numéricas; confirmar que es información que la tienda quiere publicar.",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": null,
+        "fix": null,
+        "scope": null,
+        "priority": "P3"
+      },
+      {
+        "rule": "D050",
+        "level": "D",
+        "severity": "warning",
+        "message": "Product.name no coincide con el H1 visible.",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": {
+          "name": "Hombrera de Compresión Frío y Calor",
+          "h1": "Tina de Hielo TUB AIR"
+        },
+        "source": null,
+        "fix": null,
+        "scope": null,
+        "priority": "P2"
+      },
+      {
+        "rule": "D070",
+        "level": "D",
+        "severity": "warning",
+        "message": "La imagen del schema no aparece (por nombre de archivo) entre las imágenes/og:image de la página.",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": [
+          "https://acdn-us.mitiendanube.com/stores/007/400/935/products/hombrera-de-compresion-frio-calor-2-7ef0a017d48f7f072717852044021824-480-0.webp"
+        ],
+        "source": null,
+        "fix": null,
+        "scope": null,
+        "priority": "P2"
+      },
+      {
+        "rule": "D010",
+        "level": "D",
+        "severity": "error",
+        "message": "`mainEntityOfPage` no coincide con la canonical de la página.",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": {
+          "value": "https://rhino-performance.com/productos/manga-frio-y-calor-pierna-y-brazo/",
+          "canonical": "https://rhino-performance.com/productos/tina-de-hielo-tub-air/"
+        },
+        "source": null,
+        "fix": null,
+        "scope": null,
+        "priority": "P1"
+      },
+      {
+        "rule": "D011",
+        "level": "D",
+        "severity": "warning",
+        "message": "Offer.url difiere de la canonical (¿variante con URL propia?).",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": {
+          "offer_url": "https://rhino-performance.com/productos/manga-frio-y-calor-pierna-y-brazo/?recommendation_source=alternative-carousel&amp%3Brecommender=manual",
+          "canonical": "https://rhino-performance.com/productos/tina-de-hielo-tub-air/"
+        },
+        "source": null,
+        "fix": null,
+        "scope": null,
+        "priority": "P2"
+      },
+      {
+        "rule": "D022",
+        "level": "D",
+        "severity": "optional",
+        "message": "Precio no verificado: no se proporcionó fuente comercial ni meta de precio.",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": null,
+        "fix": null,
+        "scope": null,
+        "priority": "P3"
+      },
+      {
+        "rule": "D042",
+        "level": "D",
+        "severity": "optional",
+        "message": "inventoryLevel expone existencias numéricas; confirmar que es información que la tienda quiere publicar.",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": null,
+        "source": null,
+        "fix": null,
+        "scope": null,
+        "priority": "P3"
+      },
+      {
+        "rule": "D050",
+        "level": "D",
+        "severity": "warning",
+        "message": "Product.name no coincide con el H1 visible.",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": {
+          "name": "Manga de Compresión Frío y Calor",
+          "h1": "Tina de Hielo TUB AIR"
+        },
+        "source": null,
+        "fix": null,
+        "scope": null,
+        "priority": "P2"
+      },
+      {
+        "rule": "D070",
+        "level": "D",
+        "severity": "warning",
+        "message": "La imagen del schema no aparece (por nombre de archivo) entre las imágenes/og:image de la página.",
+        "entity": "Product@structured-data.item",
+        "path": null,
+        "evidence": [
+          "https://acdn-us.mitiendanube.com/stores/007/400/935/products/manga-de-compresion-frio-calor-5-21c9967576e345800a17852038833165-480-0.webp"
+        ],
+        "source": null,
+        "fix": null,
+        "scope": null,
+        "priority": "P2"
+      },
+      {
+        "rule": "SEO012",
+        "level": "D",
+        "severity": "recommendation",
+        "message": "Imagen sin atributo alt; revisar contexto/decoración.",
+        "entity": null,
+        "path": null,
+        "evidence": {
+          "src": "https://www.facebook.com/tr?id=393081466010695&ev=PageView&noscript=1"
+        },
+        "source": null,
+        "fix": null,
+        "scope": null,
+        "priority": "P3"
+      }
+    ],
+    "validator_severity_counts": {
+      "optional": 27,
+      "recommendation": 31,
+      "error": 5,
+      "warning": 15
+    },
+    "source": {
+      "file": "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/live-pilot-20261112/raw-crawl-report.json",
+      "node_index": 1
+    },
+    "controller_interpretation": "Secondary Product entities carry structured-data.item and are compared with the current PDP canonical/H1. Raw D010 errors preserved; context review needed before declaring a primary Product or indexability defect."
+  },
+  {
+    "url": "https://rhino-performance.com/blog/posts/la-presoterapia-como-transformador-de-tu-salud-mental-relajacion-y-recuperacion-127cdc829590/",
+    "http": 200,
+    "redirect": null,
+    "canonical": [
+      "https://rhino-performance.com/blog/posts/la-presoterapia-como-transformador-de-tu-salud-mental-relajacion-y-recuperacion-127cdc829590/"
+    ],
+    "canonical_self": true,
+    "meta_robots": {},
+    "meta_robots_presence": "absent_in_observed_HTML",
+    "x_robots_tag": null,
+    "x_robots_tag_presence": "absent_in_observed_headers",
+    "crawl_permission": {
+      "crawler_allowed": true,
+      "googlebot_allowed": true
+    },
+    "title": "La Presoterapia como Transformador de tu Salud Mental: Relajación y Re",
+    "description": [
+      "La presoterapia es un tratamiento de bienestar que ha ganado popularidad en los últimos años. A menudo se asocia con la mejora de la circulación y la reducción "
+    ],
+    "h1": [
+      "La Presoterapia como Transformador de tu Salud Mental: Relajación y Recuperación"
+    ],
+    "main_content": {
+      "main_present": true,
+      "main_text_characters": 3247,
+      "main_text_sha256": "c6fe35e6d298b09f7fcb532215c3e7a8bfa47cbe05253d46b88c642c7baec69f",
+      "soft_404_candidate": false,
+      "body_class": " template-blog-post ",
+      "product_ids": [],
+      "declared_times": []
+    },
+    "HTML_sha256": "94d533709e89826fd62d91b794650ccd8d411767a0a29832f5257897e0f3bdf8",
+    "technical_indexability": {
+      "state": "indexable_candidate",
+      "reasons": [],
+      "robots_evidence": {
+        "sources": [],
+        "flags": [],
+        "noindex": false,
+        "relevant_errors": [],
+        "processing_complete": true,
+        "counts": {
+          "sources_seen": 0,
+          "sources_processed": 0,
+          "input_bytes_processed": 0,
+          "parameters": 0,
+          "unknown": 0,
+          "errors": 0,
+          "sources_retained": 0
+        },
+        "unvisited_sources_count": 0,
+        "processed_collection_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "truncated": false,
+        "state": "no_restrictive_flag_observed",
+        "scope": "Googlebot text results; not Google rendering/index inspection"
+      },
+      "indexation_observed": false,
+      "google_selected_canonical": null,
+      "evidence_scope": "technical_observation_not_google_index"
+    },
+    "audited_at": "2026-11-12T22:09:32.720163+00:00",
+    "HTTP_observation_window": {
+      "run_started_at": "2026-11-12T22:09:22.233240+00:00",
+      "CLI_finished_at": "2026-11-12T22:09:41.334726+00:00"
+    },
+    "full_readiness": {
+      "checks": [
+        {
+          "name": "http_access",
+          "status": "passed",
+          "critical": true,
+          "evidence": 200
+        },
+        {
+          "name": "indexability",
+          "status": "passed",
+          "critical": true,
+          "evidence": {
+            "state": "indexable_candidate",
+            "reasons": [],
+            "robots_evidence": {
+              "sources": [],
+              "flags": [],
+              "noindex": false,
+              "relevant_errors": [],
+              "processing_complete": true,
+              "counts": {
+                "sources_seen": 0,
+                "sources_processed": 0,
+                "input_bytes_processed": 0,
+                "parameters": 0,
+                "unknown": 0,
+                "errors": 0,
+                "sources_retained": 0
+              },
+              "unvisited_sources_count": 0,
+              "processed_collection_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "truncated": false,
+              "state": "no_restrictive_flag_observed",
+              "scope": "Googlebot text results; not Google rendering/index inspection"
+            },
+            "indexation_observed": false,
+            "google_selected_canonical": null,
+            "evidence_scope": "technical_observation_not_google_index"
+          }
+        },
+        {
+          "name": "main_content",
+          "status": "passed",
+          "critical": true,
+          "evidence": "text length/hash, not tags counted"
+        },
+        {
+          "name": "crawlable_navigation",
+          "status": "passed",
+          "critical": false,
+          "evidence": "observed href targets"
+        },
+        {
+          "name": "sitemap_membership",
+          "status": "unknown",
+          "critical": false,
+          "evidence": "native sitemap inventory"
+        },
+        {
+          "name": "structured_data",
+          "status": "passed",
+          "critical": true,
+          "evidence": "existing SEO validator A-D, limits preserved"
+        },
+        {
+          "name": "pagination",
+          "status": "passed",
+          "critical": false,
+          "evidence": {
+            "observed_links": [],
+            "head_rel_links": [],
+            "active_controls_without_href": 0,
+            "state": "needs_evidence",
+            "continuity": "needs_multi_page_evidence",
+            "native_contract": "observed_hrefs_only_no_invented_routes"
+          }
+        },
+        {
+          "name": "render_comparison",
+          "status": "unknown",
+          "critical": false,
+          "evidence": "capture supplied, not Googlebot"
+        },
+        {
+          "name": "no_js_navigation",
+          "status": "unknown",
+          "critical": true,
+          "evidence": "no-JS capture required"
+        },
+        {
+          "name": "no_js_main_content",
+          "status": "unknown",
+          "critical": true,
+          "evidence": "extracted main text in no-JS DOM; hidden/visual state requires browser QA"
+        }
+      ],
+      "critical_blockers": [],
+      "required_evidence_missing": [
+        "no_js_navigation",
+        "no_js_main_content"
+      ],
+      "approval": "insufficient_evidence",
+      "score": 60,
+      "coverage": 0.6,
+      "meaning": "diagnostic evidence completion, not Google ranking; blockers override score"
+    },
+    "validator_findings": [
+      {
+        "rule": "B002",
+        "level": "B",
+        "severity": "optional",
+        "message": "@context usa http://; schema.org acepta ambos, https es la forma preferida.",
+        "entity": "structured-data.blog-post",
+        "path": null,
+        "evidence": "http://schema.org",
+        "source": null,
+        "fix": null,
+        "scope": null,
+        "priority": "P3"
+      },
+      {
+        "rule": "B030",
+        "level": "B",
+        "severity": "warning",
+        "message": "`author` es texto plano; Google y schema.org esperan Person u Organization.",
+        "entity": "BlogPosting@structured-data.blog-post",
+        "path": "author",
+        "evidence": null,
+        "source": null,
+        "fix": "Emitir {\"@type\":\"Person\",\"name\":…} solo con el autor real del artículo.",
+        "scope": null,
+        "priority": "P2"
+      },
+      {
+        "rule": "C410",
+        "level": "C",
+        "severity": "optional",
+        "message": "SearchAction: la función de sitelinks searchbox fue retirada; solo mantener si refleja una búsqueda real y por semántica.",
+        "entity": null,
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/blog/2024/10/sitelinks-search-box",
+        "fix": null,
+        "scope": "sitelinks_searchbox",
+        "priority": "P3"
+      },
+      {
+        "rule": "G005",
+        "level": "D",
+        "severity": "optional",
+        "message": "1 Organization anidada(s) sin @id junto a una Organization global: la identidad del negocio está dividida.",
+        "entity": null,
+        "path": null,
+        "evidence": [
+          "$.publisher"
+        ],
+        "source": null,
+        "fix": "Asignar @id estable a la Organization global y referenciarla (seller/publisher/author).",
+        "scope": null,
+        "priority": "P3"
+      },
+      {
+        "rule": "B100",
+        "level": "B",
+        "severity": "warning",
+        "message": "Se espera una entidad del vocabulario, no texto sin tipo.",
+        "entity": "1:$",
+        "path": "author",
+        "evidence": null,
+        "source": "https://schema.org/version/latest/schemaorg-current-https.jsonld",
+        "fix": null,
+        "scope": null,
+        "priority": "P2"
+      },
+      {
+        "rule": "SEO012",
+        "level": "D",
+        "severity": "recommendation",
+        "message": "Imagen sin atributo alt; revisar contexto/decoración.",
+        "entity": null,
+        "path": null,
+        "evidence": {
+          "src": "https://www.facebook.com/tr?id=393081466010695&ev=PageView&noscript=1"
+        },
+        "source": null,
+        "fix": null,
+        "scope": null,
+        "priority": "P3"
+      }
+    ],
+    "validator_severity_counts": {
+      "optional": 3,
+      "warning": 2,
+      "recommendation": 1
+    },
+    "source": {
+      "file": "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/live-pilot-20261112/raw-crawl-report.json",
+      "node_index": 2
+    },
+    "controller_interpretation": "BlogPosting author plain text warnings observed; not an HTTP/robots/canonical block and no Google inspection."
+  },
+  {
+    "url": "https://rhino-performance.com/blog/posts/el-fro-no-es-un-castigo-es-una-herramienta-cbe9a25855f8/",
+    "http": 200,
+    "redirect": null,
+    "canonical": [
+      "https://rhino-performance.com/blog/posts/el-fro-no-es-un-castigo-es-una-herramienta-cbe9a25855f8/"
+    ],
+    "canonical_self": true,
+    "meta_robots": {},
+    "meta_robots_presence": "absent_in_observed_HTML",
+    "x_robots_tag": null,
+    "x_robots_tag_presence": "absent_in_observed_headers",
+    "crawl_permission": {
+      "crawler_allowed": true,
+      "googlebot_allowed": true
+    },
+    "title": "El frío no es un castigo. Es una herramienta.",
+    "description": [
+      "Nadie se mete a una tina de hielo por gusto. Se mete porque sabe algo que la mayoría todavía no entiende: el frío no es sufrimiento, es estrategia. "
+    ],
+    "h1": [
+      "El frío no es sufrimiento, es estrategia."
+    ],
+    "main_content": {
+      "main_present": true,
+      "main_text_characters": 4250,
+      "main_text_sha256": "f65f5ecc7f06e588013b5823f12db8a731bc9d0f908a72780164548fb404fb94",
+      "soft_404_candidate": false,
+      "body_class": " template-blog-post ",
+      "product_ids": [],
+      "declared_times": []
+    },
+    "HTML_sha256": "5efe3eda52dc6b8ac298570653a5ae90593681c6cdb0ec79bdb96b5cb00ddf6c",
+    "technical_indexability": {
+      "state": "indexable_candidate",
+      "reasons": [],
+      "robots_evidence": {
+        "sources": [],
+        "flags": [],
+        "noindex": false,
+        "relevant_errors": [],
+        "processing_complete": true,
+        "counts": {
+          "sources_seen": 0,
+          "sources_processed": 0,
+          "input_bytes_processed": 0,
+          "parameters": 0,
+          "unknown": 0,
+          "errors": 0,
+          "sources_retained": 0
+        },
+        "unvisited_sources_count": 0,
+        "processed_collection_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "truncated": false,
+        "state": "no_restrictive_flag_observed",
+        "scope": "Googlebot text results; not Google rendering/index inspection"
+      },
+      "indexation_observed": false,
+      "google_selected_canonical": null,
+      "evidence_scope": "technical_observation_not_google_index"
+    },
+    "audited_at": "2026-11-12T22:09:34.998738+00:00",
+    "HTTP_observation_window": {
+      "run_started_at": "2026-11-12T22:09:22.233240+00:00",
+      "CLI_finished_at": "2026-11-12T22:09:41.334726+00:00"
+    },
+    "full_readiness": {
+      "checks": [
+        {
+          "name": "http_access",
+          "status": "passed",
+          "critical": true,
+          "evidence": 200
+        },
+        {
+          "name": "indexability",
+          "status": "passed",
+          "critical": true,
+          "evidence": {
+            "state": "indexable_candidate",
+            "reasons": [],
+            "robots_evidence": {
+              "sources": [],
+              "flags": [],
+              "noindex": false,
+              "relevant_errors": [],
+              "processing_complete": true,
+              "counts": {
+                "sources_seen": 0,
+                "sources_processed": 0,
+                "input_bytes_processed": 0,
+                "parameters": 0,
+                "unknown": 0,
+                "errors": 0,
+                "sources_retained": 0
+              },
+              "unvisited_sources_count": 0,
+              "processed_collection_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "truncated": false,
+              "state": "no_restrictive_flag_observed",
+              "scope": "Googlebot text results; not Google rendering/index inspection"
+            },
+            "indexation_observed": false,
+            "google_selected_canonical": null,
+            "evidence_scope": "technical_observation_not_google_index"
+          }
+        },
+        {
+          "name": "main_content",
+          "status": "passed",
+          "critical": true,
+          "evidence": "text length/hash, not tags counted"
+        },
+        {
+          "name": "crawlable_navigation",
+          "status": "passed",
+          "critical": false,
+          "evidence": "observed href targets"
+        },
+        {
+          "name": "sitemap_membership",
+          "status": "unknown",
+          "critical": false,
+          "evidence": "native sitemap inventory"
+        },
+        {
+          "name": "structured_data",
+          "status": "passed",
+          "critical": true,
+          "evidence": "existing SEO validator A-D, limits preserved"
+        },
+        {
+          "name": "pagination",
+          "status": "passed",
+          "critical": false,
+          "evidence": {
+            "observed_links": [],
+            "head_rel_links": [],
+            "active_controls_without_href": 0,
+            "state": "needs_evidence",
+            "continuity": "needs_multi_page_evidence",
+            "native_contract": "observed_hrefs_only_no_invented_routes"
+          }
+        },
+        {
+          "name": "render_comparison",
+          "status": "unknown",
+          "critical": false,
+          "evidence": "capture supplied, not Googlebot"
+        },
+        {
+          "name": "no_js_navigation",
+          "status": "unknown",
+          "critical": true,
+          "evidence": "no-JS capture required"
+        },
+        {
+          "name": "no_js_main_content",
+          "status": "unknown",
+          "critical": true,
+          "evidence": "extracted main text in no-JS DOM; hidden/visual state requires browser QA"
+        }
+      ],
+      "critical_blockers": [],
+      "required_evidence_missing": [
+        "no_js_navigation",
+        "no_js_main_content"
+      ],
+      "approval": "insufficient_evidence",
+      "score": 60,
+      "coverage": 0.6,
+      "meaning": "diagnostic evidence completion, not Google ranking; blockers override score"
+    },
+    "validator_findings": [
+      {
+        "rule": "B002",
+        "level": "B",
+        "severity": "optional",
+        "message": "@context usa http://; schema.org acepta ambos, https es la forma preferida.",
+        "entity": "structured-data.blog-post",
+        "path": null,
+        "evidence": "http://schema.org",
+        "source": null,
+        "fix": null,
+        "scope": null,
+        "priority": "P3"
+      },
+      {
+        "rule": "B030",
+        "level": "B",
+        "severity": "warning",
+        "message": "`author` es texto plano; Google y schema.org esperan Person u Organization.",
+        "entity": "BlogPosting@structured-data.blog-post",
+        "path": "author",
+        "evidence": null,
+        "source": null,
+        "fix": "Emitir {\"@type\":\"Person\",\"name\":…} solo con el autor real del artículo.",
+        "scope": null,
+        "priority": "P2"
+      },
+      {
+        "rule": "C410",
+        "level": "C",
+        "severity": "optional",
+        "message": "SearchAction: la función de sitelinks searchbox fue retirada; solo mantener si refleja una búsqueda real y por semántica.",
+        "entity": null,
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/blog/2024/10/sitelinks-search-box",
+        "fix": null,
+        "scope": "sitelinks_searchbox",
+        "priority": "P3"
+      },
+      {
+        "rule": "G005",
+        "level": "D",
+        "severity": "optional",
+        "message": "1 Organization anidada(s) sin @id junto a una Organization global: la identidad del negocio está dividida.",
+        "entity": null,
+        "path": null,
+        "evidence": [
+          "$.publisher"
+        ],
+        "source": null,
+        "fix": "Asignar @id estable a la Organization global y referenciarla (seller/publisher/author).",
+        "scope": null,
+        "priority": "P3"
+      },
+      {
+        "rule": "B100",
+        "level": "B",
+        "severity": "warning",
+        "message": "Se espera una entidad del vocabulario, no texto sin tipo.",
+        "entity": "1:$",
+        "path": "author",
+        "evidence": null,
+        "source": "https://schema.org/version/latest/schemaorg-current-https.jsonld",
+        "fix": null,
+        "scope": null,
+        "priority": "P2"
+      },
+      {
+        "rule": "SEO012",
+        "level": "D",
+        "severity": "recommendation",
+        "message": "Imagen sin atributo alt; revisar contexto/decoración.",
+        "entity": null,
+        "path": null,
+        "evidence": {
+          "src": "https://www.facebook.com/tr?id=393081466010695&ev=PageView&noscript=1"
+        },
+        "source": null,
+        "fix": null,
+        "scope": null,
+        "priority": "P3"
+      }
+    ],
+    "validator_severity_counts": {
+      "optional": 3,
+      "warning": 2,
+      "recommendation": 1
+    },
+    "source": {
+      "file": "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/live-pilot-20261112/raw-crawl-report.json",
+      "node_index": 3
+    },
+    "controller_interpretation": "BlogPosting author plain text warnings observed; not an HTTP/robots/canonical block and no Google inspection."
+  },
+  {
+    "url": "https://rhino-performance.com/blog/posts/faja-de-compresion-lumbar-el-soporte-que-tu-espalda-agradecera-047c381cf3ac/",
+    "http": 200,
+    "redirect": null,
+    "canonical": [
+      "https://rhino-performance.com/blog/posts/faja-de-compresion-lumbar-el-soporte-que-tu-espalda-agradecera-047c381cf3ac/"
+    ],
+    "canonical_self": true,
+    "meta_robots": {},
+    "meta_robots_presence": "absent_in_observed_HTML",
+    "x_robots_tag": null,
+    "x_robots_tag_presence": "absent_in_observed_headers",
+    "crawl_permission": {
+      "crawler_allowed": true,
+      "googlebot_allowed": true
+    },
+    "title": "Faja de Compresión Lumbar: El Soporte que tu Espalda Agradecerá",
+    "description": [
+      "La zona lumbar es el eje silencioso de casi todos nuestros movimientos, pero también una de las más castigadas. Pasar horas de pie, cargar peso, entrenar con in"
+    ],
+    "h1": [
+      "Faja de Compresión Lumbar: El Soporte que tu Espalda Agradecerá"
+    ],
+    "main_content": {
+      "main_present": true,
+      "main_text_characters": 3963,
+      "main_text_sha256": "b4c4dc39b275af8835a656c4d9a885b7c64b0c7a26151a437f9b7888f2b0e5b2",
+      "soft_404_candidate": false,
+      "body_class": " template-blog-post ",
+      "product_ids": [],
+      "declared_times": []
+    },
+    "HTML_sha256": "5a9e452be73e8faef06a4009c02607c8536b2c904c6d8886b06ef77dd8935b3a",
+    "technical_indexability": {
+      "state": "indexable_candidate",
+      "reasons": [],
+      "robots_evidence": {
+        "sources": [],
+        "flags": [],
+        "noindex": false,
+        "relevant_errors": [],
+        "processing_complete": true,
+        "counts": {
+          "sources_seen": 0,
+          "sources_processed": 0,
+          "input_bytes_processed": 0,
+          "parameters": 0,
+          "unknown": 0,
+          "errors": 0,
+          "sources_retained": 0
+        },
+        "unvisited_sources_count": 0,
+        "processed_collection_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "truncated": false,
+        "state": "no_restrictive_flag_observed",
+        "scope": "Googlebot text results; not Google rendering/index inspection"
+      },
+      "indexation_observed": false,
+      "google_selected_canonical": null,
+      "evidence_scope": "technical_observation_not_google_index"
+    },
+    "audited_at": "2026-11-12T22:09:36.775358+00:00",
+    "HTTP_observation_window": {
+      "run_started_at": "2026-11-12T22:09:22.233240+00:00",
+      "CLI_finished_at": "2026-11-12T22:09:41.334726+00:00"
+    },
+    "full_readiness": {
+      "checks": [
+        {
+          "name": "http_access",
+          "status": "passed",
+          "critical": true,
+          "evidence": 200
+        },
+        {
+          "name": "indexability",
+          "status": "passed",
+          "critical": true,
+          "evidence": {
+            "state": "indexable_candidate",
+            "reasons": [],
+            "robots_evidence": {
+              "sources": [],
+              "flags": [],
+              "noindex": false,
+              "relevant_errors": [],
+              "processing_complete": true,
+              "counts": {
+                "sources_seen": 0,
+                "sources_processed": 0,
+                "input_bytes_processed": 0,
+                "parameters": 0,
+                "unknown": 0,
+                "errors": 0,
+                "sources_retained": 0
+              },
+              "unvisited_sources_count": 0,
+              "processed_collection_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "truncated": false,
+              "state": "no_restrictive_flag_observed",
+              "scope": "Googlebot text results; not Google rendering/index inspection"
+            },
+            "indexation_observed": false,
+            "google_selected_canonical": null,
+            "evidence_scope": "technical_observation_not_google_index"
+          }
+        },
+        {
+          "name": "main_content",
+          "status": "passed",
+          "critical": true,
+          "evidence": "text length/hash, not tags counted"
+        },
+        {
+          "name": "crawlable_navigation",
+          "status": "passed",
+          "critical": false,
+          "evidence": "observed href targets"
+        },
+        {
+          "name": "sitemap_membership",
+          "status": "unknown",
+          "critical": false,
+          "evidence": "native sitemap inventory"
+        },
+        {
+          "name": "structured_data",
+          "status": "passed",
+          "critical": true,
+          "evidence": "existing SEO validator A-D, limits preserved"
+        },
+        {
+          "name": "pagination",
+          "status": "passed",
+          "critical": false,
+          "evidence": {
+            "observed_links": [],
+            "head_rel_links": [],
+            "active_controls_without_href": 0,
+            "state": "needs_evidence",
+            "continuity": "needs_multi_page_evidence",
+            "native_contract": "observed_hrefs_only_no_invented_routes"
+          }
+        },
+        {
+          "name": "render_comparison",
+          "status": "unknown",
+          "critical": false,
+          "evidence": "capture supplied, not Googlebot"
+        },
+        {
+          "name": "no_js_navigation",
+          "status": "unknown",
+          "critical": true,
+          "evidence": "no-JS capture required"
+        },
+        {
+          "name": "no_js_main_content",
+          "status": "unknown",
+          "critical": true,
+          "evidence": "extracted main text in no-JS DOM; hidden/visual state requires browser QA"
+        }
+      ],
+      "critical_blockers": [],
+      "required_evidence_missing": [
+        "no_js_navigation",
+        "no_js_main_content"
+      ],
+      "approval": "insufficient_evidence",
+      "score": 60,
+      "coverage": 0.6,
+      "meaning": "diagnostic evidence completion, not Google ranking; blockers override score"
+    },
+    "validator_findings": [
+      {
+        "rule": "B002",
+        "level": "B",
+        "severity": "optional",
+        "message": "@context usa http://; schema.org acepta ambos, https es la forma preferida.",
+        "entity": "structured-data.blog-post",
+        "path": null,
+        "evidence": "http://schema.org",
+        "source": null,
+        "fix": null,
+        "scope": null,
+        "priority": "P3"
+      },
+      {
+        "rule": "B030",
+        "level": "B",
+        "severity": "warning",
+        "message": "`author` es texto plano; Google y schema.org esperan Person u Organization.",
+        "entity": "BlogPosting@structured-data.blog-post",
+        "path": "author",
+        "evidence": null,
+        "source": null,
+        "fix": "Emitir {\"@type\":\"Person\",\"name\":…} solo con el autor real del artículo.",
+        "scope": null,
+        "priority": "P2"
+      },
+      {
+        "rule": "C410",
+        "level": "C",
+        "severity": "optional",
+        "message": "SearchAction: la función de sitelinks searchbox fue retirada; solo mantener si refleja una búsqueda real y por semántica.",
+        "entity": null,
+        "path": null,
+        "evidence": null,
+        "source": "https://developers.google.com/search/blog/2024/10/sitelinks-search-box",
+        "fix": null,
+        "scope": "sitelinks_searchbox",
+        "priority": "P3"
+      },
+      {
+        "rule": "G005",
+        "level": "D",
+        "severity": "optional",
+        "message": "1 Organization anidada(s) sin @id junto a una Organization global: la identidad del negocio está dividida.",
+        "entity": null,
+        "path": null,
+        "evidence": [
+          "$.publisher"
+        ],
+        "source": null,
+        "fix": "Asignar @id estable a la Organization global y referenciarla (seller/publisher/author).",
+        "scope": null,
+        "priority": "P3"
+      },
+      {
+        "rule": "B100",
+        "level": "B",
+        "severity": "warning",
+        "message": "Se espera una entidad del vocabulario, no texto sin tipo.",
+        "entity": "1:$",
+        "path": "author",
+        "evidence": null,
+        "source": "https://schema.org/version/latest/schemaorg-current-https.jsonld",
+        "fix": null,
+        "scope": null,
+        "priority": "P2"
+      },
+      {
+        "rule": "SEO012",
+        "level": "D",
+        "severity": "recommendation",
+        "message": "Imagen sin atributo alt; revisar contexto/decoración.",
+        "entity": null,
+        "path": null,
+        "evidence": {
+          "src": "https://www.facebook.com/tr?id=393081466010695&ev=PageView&noscript=1"
+        },
+        "source": null,
+        "fix": null,
+        "scope": null,
+        "priority": "P3"
+      }
+    ],
+    "validator_severity_counts": {
+      "optional": 3,
+      "warning": 2,
+      "recommendation": 1
+    },
+    "source": {
+      "file": "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/live-pilot-20261112/raw-crawl-report.json",
+      "node_index": 4
+    },
+    "controller_interpretation": "BlogPosting author plain text warnings observed; not an HTTP/robots/canonical block and no Google inspection."
+  }
+]

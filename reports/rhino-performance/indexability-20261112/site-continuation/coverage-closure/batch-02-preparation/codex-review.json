@@ -1,0 +1,120 @@
+{
+  "requested_agent": "codex",
+  "effective_agent": "codex",
+  "scope": "saved pilot1 evidence + batch2 preparation only",
+  "input_hashes": {
+    "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/batch-02-preparation/saved-evidence-excerpts.json": "496f4cf79ac0c1e331b6220f6dc6a3d2b4068cb87150169f209a57e9e0ad8b6e",
+    "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/batch-02-preparation/targets.json": "7117b37560a94eb8477d6e1328e2999cd103d69857c1e01b87910b8d269b8f42",
+    "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/batch-02-preparation/controller-validation.json": "0b137ec113445e633c6982ab9544e4c962ea544145c0c960e3b0042697d0db87",
+    "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/batch-02-preparation/operation.json": "84e906a7854dedcc03f629de332b68fb2f80a5f1bdb5a7c126a82d70f9949a4c",
+    "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/batch-02-preparation/command-NOT-AUTHORIZED.txt": "ca8d3738821b062200c00e9b822cd83382536906aefca901f1e8d8772849172c"
+  },
+  "response": {
+    "decision": "proposed",
+    "summary": "codex.A1: considero admisible solicitar autorización exclusivamente para el manifiesto lote02; no autoriza ejecutarlo ni modificar archivos. controller-validation.json declara cinco destinos únicos, sin solapamiento con piloto1 y HTTP pendiente; operation.json mantiene network_authorized=false y executed=false. D010/D050 secundarios: posibles falsos positivos; D011 requiere separar comparación de entidad y codificación; D070: needs_evidence. Falta contraste: no se recibió alternativa del otro proveedor.",
+    "changes": [],
+    "evidence": [
+      "saved-evidence-excerpts.json, products[0..1].primary_Product_entities: Product principal en bloque 1, structured-data.page, $.mainEntity, con @id coincidente con canonical. Los cinco Product secundarios por PDP proceden de structured-data.item, bloques 3..7. primary_comparison_flags=[], graph_conflicts=[] y graph_duplicates=[] son resultados guardados, no certificación integral ni validación externa Google.",
+      "saved-evidence-excerpts.json, products[0..1].secondary_comparisons: D010 es posible falso positivo al comparar mainEntityOfPage secundario con canonical de la PDP contenedora; los destinos tienen enlaces correspondientes en main/carousel. D050 es posible falso positivo: los nombres secundarios corresponden a tarjetas distintas del H1 principal. Esto no demuestra validez universal de las entidades.",
+      "saved-evidence-excerpts.json, products[0..1].all_secondary_comparison_flags: D011 es posible falso positivo respecto a la canonical contenedora. La cadena Offer.url conserva '&amp%3Brecommender=manual', mientras matching_main_carousel_links conserva '&recommender=manual'; su origen y efecto son needs_evidence, sin atribuir el defecto al emisor o al extractor.",
+      "saved-evidence-excerpts.json, related_image_projection y projection_omits: D070 es needs_evidence. Se preservan placeholder, alt y srcset=true, pero no candidatos srcset, data-src/data-srcset, currentSrc ni descargas. No está demostrada la ausencia de imagen. properties preserva nombres de campos comerciales, no acredita valores ni corrección de precio/stock.",
+      "saved-evidence-excerpts.json, articles[0..2].declared_author_strings y author_findings: representación escalar confirmada para RHINO PERFORMANCE, Marketing RHINO y Erick, con B030/B100 registrados. author_truth=declared_not_editorially_verified: autoría editorial, tipo Person/Organization y perfiles siguen unknown. emitter_markers no identifica tema/app responsable; no procede adoptar automáticamente el fix Person.",
+      "targets.json: compresor-pro-3-presoterapia y brazos-presoterapia-pro-3 son productos; los artículos terminan en 57e0c1076e6c, 92e925649706 y 997eed183e73. Registros pending 1,2,10,11,12; individual_HTTP=not_observed. Hash declarado del manifiesto: 7117b37560a94eb8477d6e1328e2999cd103d69857c1e01b87910b8d269b8f42. Las fuentes históricas no prueban disponibilidad actual; el campo de entradas HTML de productos contiene una concatenación codificada que limita su interpretación.",
+      "controller-validation.json declara pending70_matches_current_matrix, five_unique_urls, no_overlap_with_pilot1 y native_manifest_validator_passed=true; hashes pending=919713fde53f871a693fe7d9164ad9bc387dff0385a35f4191775f4b18f7e3d5 y matriz=d1c2ccd32206df4c5890d99d910736d8a7190dac6898a1eadca9c32d504dc7e5. Declara coincidencia de dependencias de transporte con piloto1, cero solicitudes y ninguna repetición de pruebas. Compatibilidad respaldada por ese recibo, sin nueva comprobación independiente.",
+      "operation.json.argv coincide textualmente con la invocación preparada en command-NOT-AUTHORIZED.txt: manifiesto/hash exactos, max-urls=8, profundidad=0, 12 GET, 0.5 solicitudes/s, 120 s, timeout=20 s, 2000000 bytes, cero sitemaps, tres saltos y concurrencia=1. operation.json acota auxiliares a robots y redirecciones seguras del origen. Los presupuestos pueden dejar destinos pendientes; no garantizan cinco respuestas. Su cumplimiento efectivo sigue unknown."
+    ],
+    "objections": [
+      {
+        "id": "codex.O1",
+        "alternative_id": "codex.A1",
+        "category": "limite_de_evidencia",
+        "severity": "medium",
+        "claim": "La preparación permite solicitar autorización, pero no cerrar los hallazgos SEO: faltan valores JSON-LD originales y candidatos de imágenes para atribuir la codificación D011 o resolver D070. No bloquea solicitar autorización del lote nuevo; sí impide declarar correcciones necesarias o validación completa.",
+        "status": "open",
+        "evidence_refs": [],
+        "resolution_evidence_refs": []
+      }
+    ],
+    "preferred_alternative": "codex.A1",
+    "questions": [
+      {
+        "id": "codex.Q1",
+        "to_agent": "claude",
+        "alternative_id": "unknown",
+        "question": "En tu alternativa, cuyo ID no recibí, ¿clasificas D011 como posible falso positivo por comparar con la PDP contenedora y dejas la codificación como needs_evidence, considerando all_secondary_comparison_flags y matching_main_carousel_links de saved-evidence-excerpts.json?",
+        "evidence_refs": []
+      }
+    ]
+  },
+  "model": {
+    "model": "gpt-6.1-sol",
+    "effort": "medium",
+    "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+    "verified_at": "2026-11-08"
+  },
+  "execution": {
+    "exit_code": 0,
+    "timed_out": false,
+    "output_limited": false,
+    "idle_timed_out": false,
+    "cancelled": false,
+    "process_started": true,
+    "process_reaped": true,
+    "stdin_bytes_written": 126649,
+    "context_complete": true,
+    "duration_s": 35.316,
+    "timing": {
+      "spawn_s": 0.000553,
+      "input_complete_s": 0.243333,
+      "first_stdout_s": 1.202039,
+      "first_stderr_s": null,
+      "timeout_phase": null,
+      "event_counts": {
+        "thread.started": 1,
+        "item.completed": 2,
+        "turn.started": 1,
+        "turn.completed": 1
+      },
+      "inference_vs_initialization": "not_separable_without_provider_events"
+    },
+    "output_accounting": {
+      "transport_bytes": 5970,
+      "retained_bytes": 5970,
+      "discarded_progress_bytes": 0,
+      "transport_limit_bytes": 20000000,
+      "retained_limit_bytes": 2000000
+    },
+    "isolation": {
+      "backend": "bubblewrap",
+      "snapshot_read_only": true,
+      "host_home_mounted": false,
+      "network": "enabled_no_destination_firewall",
+      "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+    },
+    "started_at": "2026-11-12T22:33:20.882158+00:00",
+    "prompt_bytes": 126649,
+    "prompt_sha256": "2240fde8dd69c924e187e6fedb7c63bca7516d946531c016fe65bdc053dd5556",
+    "usage": {
+      "provider_reported": {
+        "input_tokens": 47472,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1421,
+        "reasoning_output_tokens": 185
+      },
+      "measured_cost_available": false,
+      "estimated_cost": null
+    },
+    "limits": {
+      "timeout": 240,
+      "idle_timeout": 90,
+      "startup_timeout": 30,
+      "first_response_timeout": 150
+    },
+    "structured_output": "native_schema",
+    "contract_validation": {
+      "status": "passed",
+      "duration_s": 0.000176
+    }
+  }
+}

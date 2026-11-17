@@ -1,0 +1,45 @@
+{
+  "requests": [
+    {
+      "url": "https://rhino-performance.com/robots.txt",
+      "status": 200,
+      "bytes": 1742,
+      "method": "GET"
+    },
+    {
+      "url": "https://rhino-performance.com/productos/kit-botas-y-brazos-de-presoterapia-pro-3/",
+      "status": 200,
+      "bytes": 803281,
+      "method": "GET"
+    },
+    {
+      "url": "https://rhino-performance.com/productos/manga-frio-y-calor-pierna-y-brazo/",
+      "status": 200,
+      "bytes": 735679,
+      "method": "GET"
+    },
+    {
+      "url": "https://rhino-performance.com/blog/posts/te-pasa-esto-entonces-estas-corriendo-mal-y-no-lo-sabias-e8800665a332/",
+      "status": 200,
+      "bytes": 246703,
+      "method": "GET"
+    },
+    {
+      "url": "https://rhino-performance.com/blog/posts/recuperacion-de-alto-impacto-para-peleadores-de-alto-nivel-57c3e51bfe71/",
+      "status": 200,
+      "bytes": 250162,
+      "method": "GET"
+    },
+    {
+      "url": "https://rhino-performance.com/blog/posts/lo-que-nadie-ve-cuando-termina-el-partido-596267de630b/",
+      "status": 200,
+      "bytes": 245378,
+      "method": "GET"
+    }
+  ],
+  "started": 6,
+  "completed": 6,
+  "unconfirmed": 0,
+  "redirect_hops": 0,
+  "source": "live guarded GET; no retries"
+}

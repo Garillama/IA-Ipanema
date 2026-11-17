@@ -1,0 +1,124 @@
+{
+  "requested_agent": "codex",
+  "effective_agent": "codex",
+  "scope": "incremental organic opportunities and evidence intake only",
+  "input_hashes": {
+    "reports/rhino-performance/indexability-phase2-20261113/opportunities-20261113/review-packet.json": "af0b2a98f82fad7926cc6859914ab26aaf5ceb55b9d061617cb4e6496053c758",
+    "reports/rhino-performance/indexability-phase2-20261113/opportunities-20261113/controller-validation.json": "a7a27537737bc6d42c1c68068464f41bf965edcbadc157d785c5d70335bc0764",
+    "reports/rhino-performance/indexability-phase2-20261113/opportunities-20261113/categories.json": "211fb22809de54afc9bde4e15029bfdd73188998e27ecaa35aaa53e8e25a0f66",
+    "reports/rhino-performance/indexability-phase2-20261113/opportunities-20261113/legacy-top-five.json": "77c24ccac241b4b187f8bdb59d7e0f3d1db298048ad205873f5d1f6e94a8bf5f",
+    "reports/rhino-performance/indexability-phase2-20261113/opportunities-20261113/intake-contract.json": "9d7d07ed8ea55c1f1eb7a09e820673fe170a0d2dfd2b292f29b93fcf26548316",
+    "reports/rhino-performance/indexability-phase2-20261113/opportunities-20261113/opportunity-backlog.json": "3d7803e452739e0c0f12354a46864b66a52f4f0d23d5a5934f98bf38ed421d49"
+  },
+  "response": {
+    "decision": "proposed",
+    "summary": "Mantener OP-01–OP-04 en needs_evidence. El paquete permite priorizar investigación, sin aprobar cambios ni atribuir causalidad al CTR. No hay propuestas pares para contrastar o seleccionar una alternativa exacta; preferred_alternative queda unknown.",
+    "changes": [],
+    "evidence": [
+      "Recibido seo.opportunities.offline-preparation: procesamiento local de evidencia guardada; no acredita pruebas ejecutadas por mí, regresión, HTTP ni GSC.",
+      "Presoterapia: 30 clics/2810 impresiones, CTR exportado 1,07 %, posición 5,30. Compresión: 6/1079, 0,56 %, 1,35. Periodo 2026-08-11–2026-11-10, Web, todos los países/dispositivos; consultas asociadas: unknown.",
+      "OP-01/02: conservar metadatos y contenido. Solo considerar una propuesta mínima si consultas verificadas por página exacta y evidencia del snippet/contenido servido demuestran desajuste de intención; una ampliación exige una carencia útil demostrada.",
+      "Canibalización exige una misma consulta vinculada a varias landings canónicas actuales, cohortes comparables y competencia de intención o inestabilidad. Palabras compartidas, alias y agregados por página no bastan.",
+      "Conciliar por URL literal, hash, hoja/fila, propiedad si consta, filtros exactos, fechas inicial/final y motivo literal. Separar exportación, observación y último rastreo; conservar observaciones históricas. Campos ausentes: unknown; tablas marginales no permiten cruces consulta-país-dispositivo.",
+      "La búsqueda del controlador obtuvo cero coincidencias en 232 archivos seleccionados; no demuestra ausencia global ni destino. Los 539/283/100/76/67 clics legacy son históricos: destino, cadena y correspondencia siguen sin demostrar; no retirar redirecciones.",
+      "OP-04 requiere ejemplos oficiales de URLs antes de atribuir exclusiones a páginas actuales. Ausencia en listas parciales no significa cero incidencias ni indexación; ingresos e incremento de clics: unknown."
+    ],
+    "objections": [
+      {
+        "id": "codex-obj-01",
+        "alternative_id": "unknown",
+        "category": "suficiencia de evidencia",
+        "severity": "low",
+        "claim": "OP-01 debería exigir expresamente evidencia del snippet y contenido servido, como OP-02, antes de sostener un desajuste de intención. Las consultas por página permitirían investigar, pero por sí solas no justificarían cambiar metadatos.",
+        "status": "open",
+        "evidence_refs": [
+          "seo.opportunities.offline-preparation"
+        ],
+        "resolution_evidence_refs": []
+      }
+    ],
+    "preferred_alternative": "unknown",
+    "questions": [
+      {
+        "id": "codex-q-01",
+        "to_agent": "claude",
+        "alternative_id": "unknown",
+        "question": "Sin una propuesta tuya incluida para identificarla, ¿qué condición de tu alternativa mantendrías pendiente para OP-01 al contrastarla con review-packet.json, cards[0].minimum_evidence: exigirías, además de consultas con filtro de página exacta, evidencia fechada del snippet y contenido servido antes de proponer metadatos? No se han recibido archivos nuevos.",
+        "evidence_refs": [
+          "seo.opportunities.offline-preparation"
+        ]
+      }
+    ]
+  },
+  "model": {
+    "model": "gpt-6.1-sol",
+    "effort": "medium",
+    "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+    "verified_at": "2026-11-08"
+  },
+  "execution": {
+    "exit_code": 0,
+    "timed_out": false,
+    "output_limited": false,
+    "idle_timed_out": false,
+    "cancelled": false,
+    "process_started": true,
+    "process_reaped": true,
+    "stdin_bytes_written": 56612,
+    "context_complete": true,
+    "duration_s": 32.037,
+    "timing": {
+      "spawn_s": 0.000407,
+      "input_complete_s": 0.000474,
+      "first_stdout_s": 1.362866,
+      "first_stderr_s": null,
+      "timeout_phase": null,
+      "event_counts": {
+        "thread.started": 1,
+        "item.completed": 2,
+        "turn.started": 1,
+        "turn.completed": 1
+      },
+      "inference_vs_initialization": "not_separable_without_provider_events"
+    },
+    "output_accounting": {
+      "transport_bytes": 4052,
+      "retained_bytes": 4052,
+      "discarded_progress_bytes": 0,
+      "transport_limit_bytes": 20000000,
+      "retained_limit_bytes": 2000000
+    },
+    "isolation": {
+      "backend": "bubblewrap",
+      "snapshot_read_only": true,
+      "host_home_mounted": false,
+      "network": "enabled_no_destination_firewall",
+      "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+    },
+    "started_at": "2026-11-13T16:02:15.189397+00:00",
+    "prompt_bytes": 56612,
+    "prompt_sha256": "901630e1851d3e0e05455cf7b765236d5a1e99b024b11e85e412ed33913484d4",
+    "usage": {
+      "provider_reported": {
+        "input_tokens": 28844,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 888,
+        "reasoning_output_tokens": 120
+      },
+      "measured_cost_available": false,
+      "estimated_cost": null
+    },
+    "limits": {
+      "timeout": 240,
+      "idle_timeout": 90,
+      "startup_timeout": 30,
+      "first_response_timeout": 150
+    },
+    "structured_output": "native_schema",
+    "contract_validation": {
+      "status": "passed",
+      "duration_s": 0.000295
+    }
+  }
+}

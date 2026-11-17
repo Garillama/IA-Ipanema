@@ -1,0 +1,45 @@
+{
+  "requests": [
+    {
+      "url": "https://rhino-performance.com/robots.txt",
+      "status": 200,
+      "bytes": 1742,
+      "method": "GET"
+    },
+    {
+      "url": "https://rhino-performance.com/productos/brazo-presoterapia-pro-3-individual/",
+      "status": 200,
+      "bytes": 742061,
+      "method": "GET"
+    },
+    {
+      "url": "https://rhino-performance.com/productos/kit-botas-de-presoterapia-pro-3/",
+      "status": 200,
+      "bytes": 766640,
+      "method": "GET"
+    },
+    {
+      "url": "https://rhino-performance.com/blog/posts/bienestar-emocional-como-el-masaje-de-compresion-puede-aliviar-el-estres-5244f5509cd6/",
+      "status": 200,
+      "bytes": 245671,
+      "method": "GET"
+    },
+    {
+      "url": "https://rhino-performance.com/blog/posts/presoterapia-tu-aliado-contra-la-celulitis-y-grasa-localizada-45080195e9b1/",
+      "status": 200,
+      "bytes": 245598,
+      "method": "GET"
+    },
+    {
+      "url": "https://rhino-performance.com/blog/posts/la-presoterapia-un-tratamiento-efectivo-para-mejorar-la-apariencia-de-la-piel-25a565de1dd8/",
+      "status": 200,
+      "bytes": 259786,
+      "method": "GET"
+    }
+  ],
+  "started": 6,
+  "completed": 6,
+  "unconfirmed": 0,
+  "redirect_hops": 0,
+  "source": "live guarded GET; no retries"
+}

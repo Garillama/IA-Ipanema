@@ -1,0 +1,37 @@
+usage: ia.py seo crawl [-h] (--allow-network | --responses RESPONSES)
+                       [--targets-manifest TARGETS_MANIFEST]
+                       [--targets-sha256 TARGETS_SHA256] [--max-urls MAX_URLS]
+                       [--max-depth MAX_DEPTH] [--max-requests MAX_REQUESTS]
+                       [--requests-per-second REQUESTS_PER_SECOND]
+                       [--max-seconds MAX_SECONDS] [--timeout TIMEOUT]
+                       [--max-bytes MAX_BYTES] [--max-sitemaps MAX_SITEMAPS]
+                       [--max-sitemap-entries MAX_SITEMAP_ENTRIES]
+                       [--max-variants-per-path MAX_VARIANTS_PER_PATH]
+                       [--max-redirects MAX_REDIRECTS]
+                       [--max-discovered-urls MAX_DISCOVERED_URLS]
+                       [--max-edges MAX_EDGES] [--concurrency CONCURRENCY]
+
+options:
+  -h, --help            show this help message and exit
+  --allow-network
+  --responses RESPONSES
+                        Fixture/export local explícito; no hace red
+  --targets-manifest TARGETS_MANIFEST
+                        Piloto cerrado de cinco URLs, supervisado y con
+                        checkpoint
+  --targets-sha256 TARGETS_SHA256
+                        SHA256 exacto del manifiesto autorizado
+  --max-urls MAX_URLS
+  --max-depth MAX_DEPTH
+  --max-requests MAX_REQUESTS
+  --requests-per-second REQUESTS_PER_SECOND
+  --max-seconds MAX_SECONDS
+  --timeout TIMEOUT
+  --max-bytes MAX_BYTES
+  --max-sitemaps MAX_SITEMAPS
+  --max-sitemap-entries MAX_SITEMAP_ENTRIES
+  --max-variants-per-path MAX_VARIANTS_PER_PATH
+  --max-redirects MAX_REDIRECTS
+  --max-discovered-urls MAX_DISCOVERED_URLS
+  --max-edges MAX_EDGES
+  --concurrency CONCURRENCY

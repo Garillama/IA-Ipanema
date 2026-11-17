@@ -1,0 +1,145 @@
+{
+  "requested_agent": "codex",
+  "effective_agent": "codex",
+  "scope": "phase2 incremental cross-examination and defense only",
+  "input_hashes": {
+    "reports/rhino-performance/indexability-phase2-20261113/evidence-packet.json": "7f1bc2f16a8d48ab98bb5a61cb1e2b7e696b5896fe332a2afac36c4ea279657a",
+    "reports/rhino-performance/indexability-phase2-20261113/source-candidates.json": "dd0646e04b75acc2b5c1209beec3c270bbeb32739aa464a857a583770eaea6d2",
+    "reports/rhino-performance/indexability-phase2-20261113/schema-context-packet.json": "496f4cf79ac0c1e331b6220f6dc6a3d2b4068cb87150169f209a57e9e0ad8b6e",
+    "reports/rhino-performance/indexability-phase2-20261113/limited-completion-plan.json": "a16820c38ac46d9bba0d85eb4d1ff617cec7b5808ec268accfcd5b755c369f11",
+    "reports/rhino-performance/indexability-phase2-20261113/controller-validation.json": "e9f9ce4bb5a1d7cf99c8f97e6e11441436e3748dd1cc222533d9ed41c830c263",
+    "reports/rhino-performance/indexability-phase2-20261113/controller-supplement.json": "65c748d331d2cd7383a39a81d4b38ae6a1fbf081053325247bab578e9e702253",
+    "reports/rhino-performance/indexability-phase2-20261113/category-visibility-historical.json": "dd4b1f76d2babd88b034b03643b20fea75184019775dd9fea63f1ba4e4d795e1"
+  },
+  "response": {
+    "decision": "proposed",
+    "summary": "Prefiero el plan investigativo de Claude con las correcciones operacionales indicadas. Priorizar categorías comerciales con estado Google desconocido; mantener independientes las solicitudes de evidencia editorial/remota, los cuatro lotes técnicos y la consulta oficial preparada. Solo se decide el plan: implementation_allowed=false; ninguna ejecución, modificación o publicación queda autorizada.",
+    "changes": [],
+    "evidence": [
+      "phase2.offline.evidence",
+      "phase2.offline.safety"
+    ],
+    "objections": [
+      {
+        "id": "codex-o3-robots-rate",
+        "alternative_id": "claude-A-investigar-sin-cambios-solicitudes-separadas",
+        "category": "seguridad_operacional",
+        "severity": "medium",
+        "claim": "El recibo justifica el GET obligatorio de robots: conservar seis GET nominales por cinco destinos. Corrijo también mi intervalo original: 0.5 solicitudes/s significa intervalo mínimo de 2 s, ampliable por robots. La discrepancia técnica queda resuelta por el controlador; la corrección de ambas propuestas queda registrada aquí.",
+        "status": "resolved",
+        "evidence_refs": [
+          "phase2.offline.safety"
+        ],
+        "resolution_evidence_refs": [
+          "phase2.offline.safety"
+        ]
+      },
+      {
+        "id": "codex-o2",
+        "alternative_id": "claude-A-investigar-sin-cambios-solicitudes-separadas",
+        "category": "identidad_editorial_y_publicacion",
+        "severity": "high",
+        "claim": "Siguen abiertas la identidad editorial tipada y la correspondencia del emisor local con la publicación actual. Es una condición para cualquier futuro diff, compatible con el plan investigativo. Esta defensa no la resuelve ni acredita consenso final.",
+        "status": "open",
+        "evidence_refs": [
+          "phase2.offline.evidence",
+          "phase2.offline.safety"
+        ],
+        "resolution_evidence_refs": []
+      }
+    ],
+    "preferred_alternative": "claude-A-investigar-sin-cambios-solicitudes-separadas",
+    "answers": [
+      {
+        "question_id": "claude-Q1-fuente-emisor",
+        "from_agent": "claude",
+        "answer": "Ninguna fuente guardada demuestra esa coincidencia actual. En reports/rhino-performance/indexability-phase2-20261113/schema-context-packet.json, /articles/0/emitter_markers/1 conserva structured-data.blog-post con attribution=unknown_theme_or_app y confirmed_runtime_initiator=false; /articles/0/author_truth indica declared_not_editorially_verified. source-candidates.json solo aporta el candidato local snippets/structured-data/structured-data.tpl, líneas 88–89 y 129–130. No hay evidencia remota actual ni identidad editorial tipada: post.author_name no permite decidir Person u Organization. Se requiere procedencia editorial autorizada y correspondencia verificable de la publicación antes de proponer un diff; no inventaré ninguna.",
+        "disposition": "needs_evidence",
+        "evidence_refs": [
+          "phase2.offline.evidence",
+          "phase2.offline.safety"
+        ]
+      }
+    ],
+    "withdrawn_alternatives": [],
+    "revision_notes": [
+      "Cambio preferred_alternative de unknown al ID exacto de Claude; no supone aprobación conjunta ni autorización de ejecución.",
+      "El preflight prospectivo comprueba señales faltantes, hashes, alcance vigente, autorización separada y marcador propio de un uso; nunca exige HTTP not_observed. Es procedimiento documentado, no ejecutor implementado. codex-o1 permanece abierto respecto de las señales aún no recuperadas.",
+      "Cada lote conserva cinco destinos, seis GET nominales, máximo 12 GET, 0.5 solicitudes/s, 120 s totales, 20 s por solicitud, 2 MB y tres saltos. Robots permanece obligatorio; no se cambia el motor.",
+      "Prioridad comercial: pistolas-de-masaje, terapia-fria y compresion-frio-y-calor. Search Analytics aporta visibilidad histórica, no indexación actual, keywords demostradas ni causalidad. Separar bloqueos técnicos, calidad editorial y posicionamiento.",
+      "D010/D050 pueden ser falsos positivos de Product secundarios; D011 y su amp%3B siguen de origen unknown; D070 no demuestra ausencia de imagen. No modificar schema, head-tags, menús o contenido para silenciar avisos.",
+      "La búsqueda en 203 artefactos limita esos archivos; no prueba ausencia universal. Canonical raíz del blog no demuestra exclusión de artículos. Consulta oficial preparada, sin envío ni mecanismo confirmado; GSC sin credencial disponible. No reabrir lotes01–15 ni producir cambios o diff."
+    ]
+  },
+  "model": {
+    "model": "gpt-6.1-sol",
+    "effort": "medium",
+    "reason": "balanced según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+    "verified_at": "2026-11-08"
+  },
+  "execution": {
+    "exit_code": 0,
+    "timed_out": false,
+    "output_limited": false,
+    "idle_timed_out": false,
+    "cancelled": false,
+    "process_started": true,
+    "process_reaped": true,
+    "stdin_bytes_written": 166536,
+    "context_complete": true,
+    "duration_s": 33.249,
+    "timing": {
+      "spawn_s": 0.000835,
+      "input_complete_s": 0.631056,
+      "first_stdout_s": 2.014773,
+      "first_stderr_s": null,
+      "timeout_phase": null,
+      "event_counts": {
+        "thread.started": 1,
+        "item.completed": 2,
+        "turn.started": 1,
+        "turn.completed": 1
+      },
+      "inference_vs_initialization": "not_separable_without_provider_events"
+    },
+    "output_accounting": {
+      "transport_bytes": 5410,
+      "retained_bytes": 5410,
+      "discarded_progress_bytes": 0,
+      "transport_limit_bytes": 20000000,
+      "retained_limit_bytes": 2000000
+    },
+    "isolation": {
+      "backend": "bubblewrap",
+      "snapshot_read_only": true,
+      "host_home_mounted": false,
+      "network": "enabled_no_destination_firewall",
+      "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+    },
+    "started_at": "2026-11-13T08:24:40.028602+00:00",
+    "prompt_bytes": 166536,
+    "prompt_sha256": "c9c033f0e40335f609bff2a21a365e4b45179d08e87e3bfc71c8ec86b5b0318a",
+    "usage": {
+      "provider_reported": {
+        "input_tokens": 57951,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1154,
+        "reasoning_output_tokens": 110
+      },
+      "measured_cost_available": false,
+      "estimated_cost": null
+    },
+    "limits": {
+      "timeout": 240,
+      "idle_timeout": 90,
+      "startup_timeout": 30,
+      "first_response_timeout": 150
+    },
+    "structured_output": "native_schema",
+    "contract_validation": {
+      "status": "passed",
+      "duration_s": 0.003816
+    }
+  }
+}

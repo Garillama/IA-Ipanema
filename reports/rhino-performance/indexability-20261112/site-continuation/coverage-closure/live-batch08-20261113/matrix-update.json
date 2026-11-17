@@ -1,0 +1,44 @@
+{
+  "matrix_csv": "reports/rhino-performance/indexability-20261112/site-continuation/url-matrix.csv",
+  "matrix_json": "reports/rhino-performance/indexability-20261112/site-continuation/url-matrix.json",
+  "before_hashes": {
+    "csv": "879d4331089b2722a509590852c9137626df90ec2528f16e05ff533bd35814d1",
+    "json": "6e6e47d9800d4c45ca57a17d14cf18e98bd593e5121f39c377b87e3cf78143c9"
+  },
+  "after_hashes": {
+    "csv": "1a9450bd55b64f418ecb6236338056d860025c9fd039603201ff6cc81e760dc0",
+    "json": "b623c47cd6ead65ab56d82a85b42e7269d4b259164d975af95a8eb2b5c631e14"
+  },
+  "backup_csv": "reports/runs/rhino-performance/20261113T073130-authorized-five-url-batch08/url-matrix-before.csv",
+  "backup_json": "reports/runs/rhino-performance/20261113T073130-authorized-five-url-batch08/url-matrix-before.json",
+  "exactly_five_rows_updated": true,
+  "updated_URLs": [
+    "https://rhino-performance.com/blog/posts/la-inmovilidad-es-el-verdadero-deterioro-674a0d517ef4/",
+    "https://rhino-performance.com/blog/posts/rhino-gun-air-recuperacion-profunda-estes-donde-estes-234790e68abf/",
+    "https://rhino-performance.com/blog/posts/nuevos-productos-rhino-air-recuperacion-profesional-donde-sea-y-cuando-sea-168c475f7bfa/",
+    "https://rhino-performance.com/blog/posts/estas-respirando-mal-y-esta-afectando-tu-rendimiento-75b8c1cc4493/",
+    "https://rhino-performance.com/blog/posts/escalada-y-recuperacion-por-que-la-presoterapia-es-tu-mejor-aliada-f9d767f0feda/"
+  ],
+  "Google_fields_unchanged": true,
+  "other_120_rows_unchanged": true,
+  "before": {
+    "total_urls": 125,
+    "HTML_total": 124,
+    "HTML_with_individual_HTTP": 84,
+    "pending_individual_HTTP": 40,
+    "pending_by_type": {
+      "article": 40
+    }
+  },
+  "after": {
+    "total_urls": 125,
+    "HTML_total": 124,
+    "HTML_with_individual_HTTP": 89,
+    "pending_individual_HTTP": 35,
+    "pending_by_type": {
+      "article": 35
+    }
+  },
+  "original_pending75_and_pending70_files_preserved": true,
+  "next_pending_list": "reports/rhino-performance/indexability-20261112/site-continuation/coverage-closure/live-batch08-20261113/pending-35.csv"
+}

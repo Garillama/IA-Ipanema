@@ -1,0 +1,17 @@
+{
+  "previous_candidate_sha256": "fb292ff7f11c2ccaed5e90a2325c1703f23ece67bdc1b2a6f96ad3c6d49b8e4f",
+  "source": "synthetic existing fixture, no network",
+  "original_objection_evidence": [
+    "source:sample.py"
+  ],
+  "incremental_step_evidence": [
+    "source:sample.py"
+  ],
+  "new_facts_or_demonstrations": 0,
+  "state": "approved_for_authorization",
+  "closed": true,
+  "origin_reviewer_confirmation_present": true,
+  "synthetic_only": true,
+  "top_level_only_consumer_could_misread": true,
+  "interpretation": "N2a confirmed: same original receipt qualifies as new evidence. This does not bypass the origin reviewer, whose synthetic confirmation exists."
+}

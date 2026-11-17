@@ -1,0 +1,52 @@
+{
+  "scope": "Documentation supplement to existing execution-policy.json; no engine change",
+  "mapping": [
+    {
+      "case": "Not invoked, waiting specific authorization",
+      "state": "pending_authorization",
+      "execution_started": false,
+      "authorization_consumed": false,
+      "outcome": "not_run"
+    },
+    {
+      "case": "Preflight discrepancy, no invocation",
+      "state": "blocked",
+      "execution_started": false,
+      "authorization_consumed": false,
+      "outcome": "preflight_blocked"
+    },
+    {
+      "case": "Invocation completed for selected scope",
+      "state": "executed",
+      "execution_started": true,
+      "authorization_consumed": true,
+      "outcome": "complete_for_selected_scope"
+    },
+    {
+      "case": "Invocation partial, timeout, critical stop or started-unconfirmed",
+      "state": "blocked",
+      "execution_started": true,
+      "authorization_consumed": true,
+      "outcome": "Preserve exact native state/stop reason, never infer completed HTTP"
+    }
+  ],
+  "receipt_required_fields": [
+    "execution_report",
+    "checkpoint",
+    "supervision",
+    "one_use_marker",
+    "pending_requests",
+    "started_unconfirmed_requests",
+    "completed_requests",
+    "stop_reason",
+    "execution_started",
+    "authorization_consumed",
+    "outcome"
+  ],
+  "retry_policy": "No automatic retry; any retry requires fresh reconciliation and specific authorization; exclude confirmed destinations from future requested manifests",
+  "frozen_sources": [
+    "matrix-snapshot.csv",
+    "pending-65-source.csv"
+  ],
+  "live_matrix_hash_not_fixed_after_prior_batch": true
+}

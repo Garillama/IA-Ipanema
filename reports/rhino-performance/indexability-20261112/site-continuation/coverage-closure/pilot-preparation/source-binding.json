@@ -1,0 +1,16 @@
+{
+  "integrated_patch_sha256": "611a5dac1e2767c0d331e42b06c60834e8a427c8bbc41671b9a81a8c977f3e2c",
+  "current_11_hashes_match": true,
+  "source_hashes": {
+    "tools/ipanema/seo/crawler.py": "29b42a929132bd5bb5ec07770a247dbd5b42a35747874f711617f5ff204d2e5b",
+    "tools/ipanema/seo/crawl_policy.py": "c719ba73adb1e54141cbb04dbbc0b0a6b56407fbb1459d6f4814b23718e526c1",
+    "tools/ipanema/seo/engineering.py": "85a0729730f61efc24be661679276c9f3e005682db10db392a11db110ba9f5f1",
+    "tools/ipanema/seo/robots.py": "57d01f9086dffa7f25f26b59976098770d585731eca3d758ee9235000399a3df"
+  },
+  "full_regression_suites_reused_not_repeated": {
+    "SEO_unit": 191,
+    "SEO_integration": 13,
+    "quick": "passed"
+  },
+  "no_source_changes": true
+}
