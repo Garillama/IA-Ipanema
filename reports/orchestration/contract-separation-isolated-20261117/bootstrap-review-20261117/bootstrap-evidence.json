@@ -1,0 +1,97 @@
+{
+  "package": {
+    "path": "reports/orchestration/contract-separation-isolated-20261117/review-package-16802138",
+    "manifest_sha256": "d32d4dd0ef5a9b50996cec5bb4e95da3abdac86c889b51477c708721d9f4e96c",
+    "patch_sha256": "16802138df326ef1f47612784756cdad4ad79c9010d4bd9fb866c18c137126a5",
+    "candidate_count": 10,
+    "controller_candidate_count": 5,
+    "test_candidate_count": 5,
+    "existing_context_count": 10,
+    "write_files": []
+  },
+  "runtime_probe": {
+    "candidate_command": "python3 tools/ia.py --project ipanema orchestrate doctor",
+    "executed": true,
+    "claude_cli": "2.1.326",
+    "codex_cli": "0.169.0",
+    "bubblewrap_probe": "passed",
+    "authentication": "not checked",
+    "model_access": "not checked",
+    "providers_invoked": false
+  },
+  "read_only_fs_probe": {
+    "provider": "qa",
+    "network": false,
+    "synthetic_fixture_only": true,
+    "write_attempt": "denied",
+    "fixture_hash_unchanged": true,
+    "providers_invoked": false
+  },
+  "process_cancel_probe": {
+    "provider": "qa",
+    "network": false,
+    "synthetic_fixture_only": true,
+    "cancelled": true,
+    "process_reaped": true,
+    "descendant_completion_marker_seen": false,
+    "elapsed_seconds": 0.503,
+    "providers_invoked": false
+  },
+  "prompt_size": {
+    "full_previous_read_set_source_bytes": 298028,
+    "full_previous_set_serialized_prompt_bytes_without_diff_context": 327945,
+    "patch_bytes": 54361,
+    "test_candidate_source_bytes_omitted_as_redundant_with_patch": 66923,
+    "optimized_read_set_source_bytes": 285466,
+    "source_limit_bytes": 300000,
+    "optimized_serialized_prompt_bytes_measurement_only_no_run_receipts": 313687,
+    "engine_worker_limit_bytes": 900000,
+    "run_isolated_input_limit_bytes": 1000000,
+    "native_schema_json_bytes": 6268,
+    "source_windows_shrink_cap_counter": false,
+    "qualification": "Measured from local prompt_for in isolated candidate with frozen sources and no provider/controller ledger receipts. Actual run adds run binding/evidence and must be measured immediately pre-provider; model-token limits and provider-side envelope are not exposed by this local measurement."
+  },
+  "safety_findings": [
+    {
+      "severity": "BLOCKER",
+      "finding": "Codex child-command credential visibility",
+      "evidence": "The candidate mounts only the explicit host ~/.codex/auth.json into /worker-home/.codex/auth.json. Codex argv enables shell/tool execution (codex exec), sets approval never and sandbox read-only, but does not disable the shell tool. Codex read-only permits reading files; the mounted auth file is therefore potentially readable by model-invoked commands. No token was read.",
+      "resolution": "Do not run Codex through this bootstrap until credentials are kept outside the command-visible filesystem (for example a separately reviewed credential broker or a supported no-tools review mode with provider authentication outside the worker)."
+    },
+    {
+      "severity": "HIGH",
+      "finding": "Provider egress is not destination-filtered",
+      "evidence": "Outer bubblewrap invocation uses shared network for inference; code reports network enabled with no destination firewall. Claude has tools/MCP disabled. Codex uses an inner read-only sandbox, but this invocation did not verify the effective network policy of child commands.",
+      "resolution": "Keep this as unverified; require an enforceable egress allowlist or an externally controlled review path and verify effective Codex permissions before any provider call."
+    },
+    {
+      "severity": "HIGH",
+      "finding": "Candidate CLI package needs a Git root",
+      "evidence": "The isolated candidate directory has no .git; git rev-parse returns “not a git repository”. The workspace snapshot path calls git ls-files.",
+      "resolution": "Prepare a fresh disposable bootstrap copy and initialize a local Git repository there; never initialize or write the operational repository."
+    },
+    {
+      "severity": "MEDIUM",
+      "finding": "Read-only council gate semantics",
+      "evidence": "The candidate execute path still sends council output through council_gate, which requires status approved/approved_with_conditions and implementation_allowed=true, even for a read_only plan.",
+      "resolution": "Before bootstrap, demonstrate that this means only technical eligibility and cannot authorize integration; otherwise keep blocked or request a separately reviewed read-only gate contract."
+    },
+    {
+      "severity": "MEDIUM",
+      "finding": "One review run is multiple model turns",
+      "evidence": "Dual council policy includes independent proposal, cross-examination and defense. Default CallBudget permits up to six provider calls. Supervisor configuration may allow retries unless a run-local max_retries=0 is verified.",
+      "resolution": "For a genuinely one-shot run, ensure the isolated run config allows no retries and cap the controller call budget to the intended council stages; do not alter global policy."
+    }
+  ],
+  "qa": {
+    "mandatory": "Before any council provider call, workspace central_qa uses network-disabled Bubblewrap and runs `python -m unittest discover -s tests/unit -v` against an offline synthetic project view.",
+    "timeout_seconds": 180,
+    "repeat_prior_125": false,
+    "full_count_known": false,
+    "suite_repeated": false,
+    "policy_changed": false,
+    "repeat_prior_focused_unit_tests": 113,
+    "detail": "La corrida conservada de 125 incluyó 113 pruebas unitarias y 12 de integración. central_qa repite las 113 unitarias de esa corrida y descubre además todas las demás tests/unit; no repite por sí mismo las 12 de integración."
+  },
+  "status": "needs_evidence_no_provider_execution"
+}

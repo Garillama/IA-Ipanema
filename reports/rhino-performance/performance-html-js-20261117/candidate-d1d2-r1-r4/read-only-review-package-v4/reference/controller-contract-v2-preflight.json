@@ -1,0 +1,78 @@
+{
+  "kind": "synthetic-controller-contract-preflight",
+  "contract_version": 2,
+  "candidate_files": [
+    "sections/hero.tpl",
+    "snippets/image.tpl"
+  ],
+  "context_files": [
+    "blocks/banner.tpl",
+    "blocks/image.tpl",
+    "blocks/slide.tpl",
+    "layouts/layout.tpl",
+    "sections/category-hero.tpl",
+    "sections/hero-divided.tpl",
+    "static/js/libraries-standalone.js"
+  ],
+  "write_files": [],
+  "reviewer_tasks": [
+    {
+      "agent": "claude",
+      "read_files": [
+        "sections/hero.tpl",
+        "snippets/image.tpl",
+        "blocks/banner.tpl",
+        "blocks/image.tpl",
+        "blocks/slide.tpl",
+        "layouts/layout.tpl",
+        "sections/category-hero.tpl",
+        "sections/hero-divided.tpl",
+        "static/js/libraries-standalone.js"
+      ],
+      "allowed_files": []
+    },
+    {
+      "agent": "codex",
+      "read_files": [
+        "sections/hero.tpl",
+        "snippets/image.tpl",
+        "blocks/banner.tpl",
+        "blocks/image.tpl",
+        "blocks/slide.tpl",
+        "layouts/layout.tpl",
+        "sections/category-hero.tpl",
+        "sections/hero-divided.tpl",
+        "static/js/libraries-standalone.js"
+      ],
+      "allowed_files": []
+    }
+  ],
+  "checks": {
+    "candidate_list_matches_frozen_candidate_paths": true,
+    "context_read_only_and_disjoint": true,
+    "read_only_write_files_empty": true,
+    "context_cannot_enter_proposal_files_or_worker_diff": true,
+    "source_evidence_references_bound_to_run_and_files": true,
+    "unknown_cross_run_and_cross_candidate_references_rejected": true,
+    "modified_contract_without_resealing_rejected_before_provider_or_qa": true,
+    "historical_receipt_binding_remains_readable": true,
+    "dual_council_tasks_read_only": true
+  },
+  "provider_calls": false,
+  "network": false,
+  "production_accessed": false,
+  "limitations": [
+    "file_contract_sha256 es un sello de integridad no autenticado; no es firma criptográfica ni autorización. El archivo de plan puede ser editado y recalculado por quien pueda modificarlo. La revisión futura debe inspeccionar el contrato exacto antes de --execute."
+  ],
+  "snapshot_read_files": [
+    "sections/hero.tpl",
+    "snippets/image.tpl",
+    "blocks/banner.tpl",
+    "blocks/image.tpl",
+    "blocks/slide.tpl",
+    "layouts/layout.tpl",
+    "sections/category-hero.tpl",
+    "sections/hero-divided.tpl",
+    "static/js/libraries-standalone.js"
+  ]
+}

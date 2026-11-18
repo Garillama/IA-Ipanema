@@ -1,0 +1,30 @@
+{
+  "kind": "local-orchestration-contract-preflight",
+  "providers_invoked": false,
+  "controller_modified": false,
+  "allowed_files": [
+    "sections/hero.tpl",
+    "snippets/image.tpl"
+  ],
+  "candidate_hashes": {
+    "sections/hero.tpl": "1e70c54c4c5bc38711272284843d8881c4354ac7725e9de56c0223b599c3e65d",
+    "snippets/image.tpl": "e4e622e0c561c4450138e7717a1e5af95cf19d0184aee5cbcb89990f7ada767e"
+  },
+  "source_binding_sha256": "42e2cbf3bb88cf1b8cc94f755d16e17e0ce04e59112465dec4c589d132f37c76",
+  "checks": [
+    "logical paths contain the exact corrected file hashes",
+    "candidate citations with logical names are accepted",
+    "out-of-scope file citation is rejected",
+    "binding binds both files to their exact hashes and run id",
+    "objection schema accepts controller evidence ids tied to candidate file hashes",
+    "read-only audit cannot propose file modifications",
+    "read-only dependency source cannot be supplied as read_file while global allowed_files is exactly the two candidates"
+  ],
+  "dependency_context": {
+    "example_dependency": "blocks/slide.tpl",
+    "readable_under_exact_two_global_allowed_files": false,
+    "read_only_tasks_have_write_allowance": [],
+    "controller_invariant": "task read_files and task allowed_files must be members of plan.allowed_files"
+  },
+  "status": "candidate_binding_and_out_of_scope_guards_pass; dependency-source-context blocked"
+}

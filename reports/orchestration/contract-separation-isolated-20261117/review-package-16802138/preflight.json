@@ -1,0 +1,84 @@
+{
+  "performed_at_local": "2026-11-17",
+  "providers_invoked": false,
+  "production_accessed": false,
+  "operational_controller_modified": false,
+  "candidate_patch_sha256": "16802138df326ef1f47612784756cdad4ad79c9010d4bd9fb866c18c137126a5",
+  "checks": [
+    {
+      "id": "valid_typed_readonly_contract",
+      "result": "passed",
+      "detail": "10 candidate_files; 10 context_files; write_files=[]; two read-only review tasks with empty allowed_files; hashes bound using isolated controller contract function."
+    },
+    {
+      "id": "context_cannot_become_write",
+      "result": "passed",
+      "detail": "Mutating write_files with a context path was rejected by validate_file_contract."
+    },
+    {
+      "id": "task_write_rejected",
+      "result": "passed",
+      "detail": "Adding a candidate path to a reviewer task allowed_files was rejected."
+    },
+    {
+      "id": "unlisted_read_rejected",
+      "result": "passed",
+      "detail": "Adding an unlisted path to task.read_files was rejected."
+    },
+    {
+      "id": "incomplete_legacy_contract_rejected",
+      "result": "passed",
+      "detail": "Removing typed contract fields from a saved plan was rejected."
+    },
+    {
+      "id": "candidate_patch_route_identity",
+      "result": "passed",
+      "detail": "Unified diff route headers equal the ten candidate paths exactly."
+    },
+    {
+      "id": "candidate_and_base_hashes",
+      "result": "passed",
+      "detail": "10 candidate hashes match isolated_sha256; 9 existing base copies match base_sha256; one new test has no preimage."
+    },
+    {
+      "id": "context_integrity",
+      "result": "passed",
+      "detail": "10 packaged context files match current local source hashes."
+    },
+    {
+      "id": "operational_cli_compatibility",
+      "result": "blocked",
+      "detail": "Current operational CLI only exposes legacy --file; it lacks --candidate-file/--context-file/--write-file. No provider command is safe before a separately authorized integration."
+    },
+    {
+      "id": "central_qa_scope",
+      "result": "known_cost",
+      "detail": "Future workspace execute runs central_qa -> unittest discover -s tests/unit; it can repeat and expand beyond the 125 focused tests. This behavior was not changed."
+    }
+  ],
+  "evidence_ref_coverage": {
+    "test_file": "tests/unit/test_orchestration_file_contract.py",
+    "existing_125_test_run_not_repeated": true,
+    "covered_cases_from_preserved_test_source": [
+      "context source accepted as evidence but not as affected file",
+      "invented evidence ID rejected",
+      "receipt from other run rejected",
+      "receipt bound to different candidate rejected",
+      "normalized map not trusted as controller ledger",
+      "current candidate evidence accepted in questions and defense",
+      "read-only and plan changes cannot expand writes"
+    ],
+    "meaning": "Estas son referencias a fixtures de QA local conservados, no recibos de proveedor ni aprobaciones humanas."
+  },
+  "counts": {
+    "candidate_routes": 10,
+    "controller_files": 5,
+    "test_files": 5,
+    "context_routes": 10,
+    "write_routes": 0,
+    "base_backups": 9,
+    "new_files_without_base": 1,
+    "focused_tests_previously_passed": 125,
+    "focused_tests_rerun": 0
+  }
+}

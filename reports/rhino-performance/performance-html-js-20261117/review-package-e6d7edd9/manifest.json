@@ -1,0 +1,31 @@
+{
+  "candidate_patch_sha256_expected": "e6d7edd9bb3590b0909cd71a9245bf5a92cbd7034f24fc57bb00389d0ec3f841",
+  "candidate_files": {
+    "sections/hero.tpl": {
+      "base_sha256": "36b7f21aed77378f5b5b378c74dd7768bd2717159a1f1d80ae70079fa80b5542",
+      "candidate_sha256": "5362f1b4ddab56feabc95ad23486cc1b439b02d06a0479a2fcb8deb96fa8861c"
+    },
+    "snippets/image.tpl": {
+      "base_sha256": "9e6b1624ee75d6d0a9899d7af25cd799b1e59bde31962c98e4fea3aca404ed3b",
+      "candidate_sha256": "f45641d2f4cd4e9fea775cf1aa19f806686130f79cb191e2a2140436919e178b"
+    },
+    "templates/pages/home.json": {
+      "sha256_unchanged": "960f96de25d81f54fba64f40e796157bb559b478b51a3271cb7c2c06cb2a6bb3"
+    }
+  },
+  "artifacts": {
+    "candidate/sections/hero.tpl": "5362f1b4ddab56feabc95ad23486cc1b439b02d06a0479a2fcb8deb96fa8861c",
+    "candidate/snippets/image.tpl": "f45641d2f4cd4e9fea775cf1aa19f806686130f79cb191e2a2140436919e178b",
+    "candidate.patch": "e6d7edd9bb3590b0909cd71a9245bf5a92cbd7034f24fc57bb00389d0ec3f841",
+    "config/home-hero.json": "960f96de25d81f54fba64f40e796157bb559b478b51a3271cb7c2c06cb2a6bb3",
+    "contracts/image-loading.md": "0cdb4b384a3c2162173d46284d864d22e73128a96efe895d6ce2cd7b5e4f23fd",
+    "evidence/desktop-response-body.html": "7da336fc86f03ba9d618000d3d4ea56125e2b1cc4957f8495a91b671f1852fc8",
+    "evidence/hero-responsive-browser-results.json": "5f2a0e5f4547ae2f68444f9f24e514aa77b1d6eff14c63d31c5cbb1148375b2c",
+    "evidence/hero-responsive.browser.mjs": "68c609b876a9d1ce4e5d2febc3d8ebb7c818773527f1e78022474856e7b7216f",
+    "evidence/offline-comparative-analysis.json": "08f80166b69ac79a0e970f0ec5224005eeabdf5c100b8177439ab05ec22e4438",
+    "review-brief.md": "1f316ef5137fe8a9c87791a0df546eeb4ed913cacafef327a1dd4391190e3c4c"
+  },
+  "production_access": "No new requests performed; desktop capture is previously authorized evidence.",
+  "review_status": "needs_evidence; no external reviewers called because existing orchestrator unconditionally runs central_qa before council.",
+  "review_brief_sha256": "1f316ef5137fe8a9c87791a0df546eeb4ed913cacafef327a1dd4391190e3c4c"
+}

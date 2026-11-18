@@ -1,0 +1,55 @@
+{
+  "kind": "isolated-focused-h1-s1-browser-check",
+  "network": "loopback-only synthetic SVG fixtures; no production or external requests",
+  "staticAssertions": 12,
+  "browserViewports": 2,
+  "checks": [
+    "responsive branch has no LazySizes fade classes",
+    "secondary responsive images use native lazy loading",
+    "responsive branch has no contradictory class or sibling placeholder",
+    "helper emits the native loading attribute for this contract",
+    "raw direct art-direction URLs do not receive fabricated width descriptors",
+    "valid platform AVIF/WebP sets remain emitted",
+    "platform original responsive set remains the desktop fallback",
+    "platform original responsive set remains the mobile fallback",
+    "D1 mobile-only fallback remains present",
+    "D2 unresolved media references remain suppressed",
+    "R1/R4 art-direction validity gates remain present",
+    "first hero priority contract remains unchanged"
+  ],
+  "browserResults": [
+    {
+      "viewport": 412,
+      "currentSrc": "http://127.0.0.1:39769/mobile.svg",
+      "loading": "lazy",
+      "className": "",
+      "opacity": "1",
+      "placeholders": 0,
+      "alt": "Mismo mensaje visual",
+      "imageHeight": 502.4375,
+      "sectionHeight": 502.4375,
+      "layoutShifts": [],
+      "requests": {
+        "mobile": 1,
+        "desktop": 0
+      }
+    },
+    {
+      "viewport": 1440,
+      "currentSrc": "http://127.0.0.1:39769/desktop.svg",
+      "loading": "lazy",
+      "className": "",
+      "opacity": "1",
+      "placeholders": 0,
+      "alt": "Mismo mensaje visual",
+      "imageHeight": 675,
+      "sectionHeight": 675,
+      "layoutShifts": [],
+      "requests": {
+        "mobile": 0,
+        "desktop": 1
+      }
+    }
+  ],
+  "limitation": "This exercises representative emitted HTML/CSS in Chromium, not the Tiendanube Twig renderer or resolve_media implementation."
+}

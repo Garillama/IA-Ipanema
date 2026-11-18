@@ -1,0 +1,18 @@
+--- a/sections/hero.tpl
++++ b/sections/hero.tpl
+@@ -59,6 +59,7 @@
+   <div class="{% if parallax %}js-hero-parallax{% endif %} media-visual">
+     {# A mobile art-directed image is emitted as one picture so the browser selects only one source. #}
+     {% if has_responsive_images %}
++      {# Native loading=lazy is used here; do not attach LazySizes-only fade/placeholder states. #}
+       {% include 'snippets/image.tpl' with {
+         image_src: hero.image,
+         image_resolved_media: desktop_media_url_valid ? desktop_media : null,
+@@ -67,7 +68,6 @@
+         image_mobile_media_query: '(max-width: 767.98px)',
+         image_alt: image_alt,
+         image_mobile_alt: image_mobile_alt,
+-        {# Native loading=lazy is used here; do not attach LazySizes-only fade/placeholder states. #}
+         image_classes: '',
+         image_priority_high: is_priority_section,
+         image_lazy: not is_priority_section,

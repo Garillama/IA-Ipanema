@@ -1,0 +1,30 @@
+{
+  "kind": "static-template-reproduction",
+  "network": "none",
+  "reproduced": [
+    "D1",
+    "D2"
+  ],
+  "limitations": [
+    "Source-level reproduction; no Tiendanube Twig renderer available."
+  ],
+  "cases": [
+    {
+      "input": {
+        "desktop": null,
+        "mobile": "@media-lib:valid-mobile"
+      },
+      "priorDesktopSource": "images/placeholders/hero/hero.webp",
+      "expected": "mobile image at both viewport classes"
+    },
+    {
+      "input": {
+        "mobile": "@media-lib:orphan",
+        "resolve_media": null
+      },
+      "priorGuard": true,
+      "priorMarkup": "<source srcset=\"@media-lib:orphan\">",
+      "expected": "reject internal ref and emit no invalid URL"
+    }
+  ]
+}

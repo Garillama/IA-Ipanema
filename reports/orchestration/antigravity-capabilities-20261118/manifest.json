@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-11-18",
+  "agy_version": "1.5.10",
+  "help_exit_code": 0,
+  "help_stdout_bytes": 0,
+  "network_or_inference_invoked": false,
+  "inference_invoked": false,
+  "candidate_patch_sha256": "ca071456b9cc972fb6c0c43d4d63734be7a4f424e7be1d3991a3f7eeac3b0d83",
+  "artifacts": [
+    {
+      "path": "README.md",
+      "sha256": "72eb02b412c5e036395dccd28c32c2c292a3c73295dfcec410131ba6f9f0a82d",
+      "bytes": 13470
+    },
+    {
+      "path": "executable-identity.txt",
+      "sha256": "e8c75bf18198935f9b986051fc74b03d4d3a3ef26b5aad73915626ea7e29f93a",
+      "bytes": 818
+    },
+    {
+      "path": "version.stdout",
+      "sha256": "f8870f77108009b2204cef9d4193a35a90e50a0c4decdc034fb255a5c2b59d25",
+      "bytes": 7
+    },
+    {
+      "path": "version.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "version.exit",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "bytes": 2
+    },
+    {
+      "path": "help.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "help.stderr",
+      "sha256": "e92946f85cec63eca61f93014ca49f53b1e84277eac7954e7fac7d8d712940fd",
+      "bytes": 3319
+    },
+    {
+      "path": "help.exit",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "bytes": 2
+    },
+    {
+      "path": "/home/alanrichard/.local/bin/agy",
+      "sha256": "20d6f74672ce28084f50296a26860c143590b76d128d422919ef4931fbb83432",
+      "bytes": 267322056,
+      "evidence": "local executable fingerprint only; not provenance/authentication"
+    }
+  ],
+  "official_docs": [
+    "https://antigravity.google/docs/cli/headless/",
+    "https://antigravity.google/docs/cli/reference",
+    "https://antigravity.google/docs/permissions?tab=cli",
+    "https://antigravity.google/docs/features?tab=cli",
+    "https://antigravity.google/docs/install"
+  ],
+  "status": "needs_evidence"
+}

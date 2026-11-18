@@ -1,0 +1,27 @@
+{
+  "schema": "ipanema-bootstrap-correction-design-external-manifest/v1",
+  "package": "bootstrap-correction-design-20261117",
+  "status": "design_only_needs_evidence",
+  "files": [
+    {
+      "path": "reports/orchestration/contract-separation-isolated-20261117/bootstrap-correction-design-20261117/README.md",
+      "sha256": "057a69ef61f0d5c7b1244c4f081c98ac0129d2012fcb5c0a2472e5df19d10d32",
+      "bytes": 13332
+    },
+    {
+      "path": "reports/orchestration/contract-separation-isolated-20261117/bootstrap-correction-design-20261117/evidence.json",
+      "sha256": "cf2cf9f7b3649d5f80623c5413caf754c00cd88a707ce758e42dda1e0b127f19",
+      "bytes": 1330
+    },
+    {
+      "path": "reports/orchestration/contract-separation-isolated-20261117/bootstrap-correction-design-20261117/synthetic-probes.py",
+      "sha256": "b02e9a445c5b13ae6d03cc1f2ad1333356619a9da4a86598e04c2455c13663ff",
+      "bytes": 2560
+    }
+  ],
+  "internal_manifest": {
+    "path": "reports/orchestration/contract-separation-isolated-20261117/bootstrap-correction-design-20261117/manifest.json",
+    "sha256": "7500f5bb58991d976b71744f7192831a2b8261a48ad7ebe1b9cf3d13328c1bbc",
+    "bytes": 763
+  }
+}

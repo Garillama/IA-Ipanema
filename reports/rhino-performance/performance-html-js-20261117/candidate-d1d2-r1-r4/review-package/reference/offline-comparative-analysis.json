@@ -1,0 +1,1886 @@
+[
+  {
+    "device": "mobile",
+    "kind": "initial",
+    "file": "mobile-response-body.html",
+    "bytes": 1174783,
+    "sha256": "512595da3d71a9b85f1fc14b9e1972ea51c480c5281bc9a912133ef2863235fa",
+    "metrics": {
+      "nodes": 8367,
+      "elements": 3218,
+      "maxDepth": 22,
+      "scripts": {
+        "total": 66,
+        "inline": 51,
+        "inlineBytes": 235772,
+        "json": 21,
+        "jsonBytes": 23468,
+        "jsonByType": [
+          {
+            "type": "application/ld+json",
+            "bytes": 1136
+          },
+          {
+            "type": "application/ld+json",
+            "bytes": 668
+          },
+          {
+            "type": "application/ld+json",
+            "bytes": 1188
+          },
+          {
+            "type": "application/ld+json",
+            "bytes": 1120
+          },
+          {
+            "type": "application/ld+json",
+            "bytes": 1172
+          },
+          {
+            "type": "application/ld+json",
+            "bytes": 1122
+          },
+          {
+            "type": "application/ld+json",
+            "bytes": 1120
+          },
+          {
+            "type": "application/ld+json",
+            "bytes": 1147
+          },
+          {
+            "type": "application/ld+json",
+            "bytes": 1188
+          },
+          {
+            "type": "application/ld+json",
+            "bytes": 1172
+          },
+          {
+            "type": "application/ld+json",
+            "bytes": 1147
+          },
+          {
+            "type": "application/ld+json",
+            "bytes": 1122
+          },
+          {
+            "type": "application/ld+json",
+            "bytes": 1120
+          },
+          {
+            "type": "application/ld+json",
+            "bytes": 1120
+          },
+          {
+            "type": "application/ld+json",
+            "bytes": 1145
+          },
+          {
+            "type": "application/ld+json",
+            "bytes": 1130
+          },
+          {
+            "type": "application/ld+json",
+            "bytes": 1127
+          },
+          {
+            "type": "application/ld+json",
+            "bytes": 1144
+          },
+          {
+            "type": "application/ld+json",
+            "bytes": 1122
+          },
+          {
+            "type": "application/ld+json",
+            "bytes": 1146
+          },
+          {
+            "type": "application/ld+json",
+            "bytes": 1112
+          }
+        ]
+      },
+      "forms": {
+        "total": 22,
+        "collection": 19,
+        "collectionBytes": 60958,
+        "uniqueProductIds": 13,
+        "exactDuplicateFormBytesBeyondFirst": 18897,
+        "repeatedProductIdFormCount": 6,
+        "methodCounts": {
+          "POST": 19
+        }
+      },
+      "variants": {
+        "count": 19,
+        "payloadBytes": 166960,
+        "repeatedPayloadBytesSameProduct": 57192
+      },
+      "collection": {
+        "panelCount": 6,
+        "panels": [
+          {
+            "index": "0",
+            "label": "Todos",
+            "hidden": false,
+            "cardCount": 6,
+            "productIds": [
+              "355908446",
+              "355908325",
+              "355908537",
+              "355908340",
+              "355908349",
+              "355908653"
+            ]
+          },
+          {
+            "index": "1",
+            "label": "PRESOTERAPIA",
+            "hidden": true,
+            "cardCount": 3,
+            "productIds": [
+              "355908446",
+              "355908537",
+              "355908653"
+            ]
+          },
+          {
+            "index": "2",
+            "label": "PISTOLAS DE MASAJE",
+            "hidden": true,
+            "cardCount": 2,
+            "productIds": [
+              "355908340",
+              "355908325"
+            ]
+          },
+          {
+            "index": "3",
+            "label": "TERAPIA FRÍA",
+            "hidden": true,
+            "cardCount": 1,
+            "productIds": [
+              "355908349"
+            ]
+          },
+          {
+            "index": "4",
+            "label": "COMPRESIÓN FRÍO Y CALOR",
+            "hidden": true,
+            "cardCount": 3,
+            "productIds": [
+              "355908602",
+              "355908507",
+              "355908492"
+            ]
+          },
+          {
+            "index": "5",
+            "label": "ACCESORIOS",
+            "hidden": true,
+            "cardCount": 4,
+            "productIds": [
+              "355908698",
+              "355908421",
+              "355908629",
+              "355908372"
+            ]
+          }
+        ],
+        "cardCount": 19,
+        "uniqueProducts": 13,
+        "repeatedAppearances": 6,
+        "frequency": {
+          "355908325": 2,
+          "355908340": 2,
+          "355908349": 2,
+          "355908372": 1,
+          "355908421": 1,
+          "355908446": 2,
+          "355908492": 1,
+          "355908507": 1,
+          "355908537": 2,
+          "355908602": 1,
+          "355908629": 1,
+          "355908653": 2,
+          "355908698": 1
+        },
+        "cardHtmlBytes": 566740,
+        "exactDuplicateCardBytesBeyondFirst": 185845
+      },
+      "duplicateHtmlIds": [
+        {
+          "id": "ns-block-navigation",
+          "count": 2,
+          "els": [
+            {
+              "tag": "DIV",
+              "className": "nav-desktop-container nav-desktop-mobile-visible mobile-sub-nav mobile-nav-count-3 nav-inside-header-container",
+              "productId": null,
+              "panel": null,
+              "section": "header"
+            },
+            {
+              "tag": "DIV",
+              "className": "nav-desktop-container nav-desktop-mobile-visible nav-desktop-mobile-only mobile-sub-nav d-block d-md-none mobile-nav-count-3 nav-inside-header-container",
+              "productId": null,
+              "panel": null,
+              "section": "header"
+            }
+          ]
+        },
+        {
+          "id": "variation_1",
+          "count": 11,
+          "els": [
+            {
+              "tag": "SELECT",
+              "className": "form-select js-variation-option js-refresh-installment-data ",
+              "productId": "355908446",
+              "panel": "0",
+              "section": "featured_collection"
+            },
+            {
+              "tag": "SELECT",
+              "className": "form-select js-variation-option js-refresh-installment-data ",
+              "productId": "355908537",
+              "panel": "0",
+              "section": "featured_collection"
+            },
+            {
+              "tag": "SELECT",
+              "className": "form-select js-variation-option js-refresh-installment-data ",
+              "productId": "355908653",
+              "panel": "0",
+              "section": "featured_collection"
+            },
+            {
+              "tag": "SELECT",
+              "className": "form-select js-variation-option js-refresh-installment-data ",
+              "productId": "355908446",
+              "panel": "1",
+              "section": "featured_collection"
+            },
+            {
+              "tag": "SELECT",
+              "className": "form-select js-variation-option js-refresh-installment-data ",
+              "productId": "355908537",
+              "panel": "1",
+              "section": "featured_collection"
+            },
+            {
+              "tag": "SELECT",
+              "className": "form-select js-variation-option js-refresh-installment-data ",
+              "productId": "355908653",
+              "panel": "1",
+              "section": "featured_collection"
+            },
+            {
+              "tag": "SELECT",
+              "className": "form-select js-variation-option js-refresh-installment-data ",
+              "productId": "355908602",
+              "panel": "4",
+              "section": "featured_collection"
+            },
+            {
+              "tag": "SELECT",
+              "className": "form-select js-variation-option js-refresh-installment-data ",
+              "productId": "355908507",
+              "panel": "4",
+              "section": "featured_collection"
+            },
+            {
+              "tag": "SELECT",
+              "className": "form-select js-variation-option js-refresh-installment-data ",
+              "productId": "355908492",
+              "panel": "4",
+              "section": "featured_collection"
+            },
+            {
+              "tag": "SELECT",
+              "className": "form-select js-variation-option js-refresh-installment-data ",
+              "productId": "355908698",
+              "panel": "5",
+              "section": "featured_collection"
+            },
+            {
+              "tag": "SELECT",
+              "className": "form-select js-variation-option js-refresh-installment-data ",
+              "productId": "355908629",
+              "panel": "5",
+              "section": "featured_collection"
+            }
+          ]
+        },
+        {
+          "id": "ns-block-main-product-item_3k1e",
+          "count": 3,
+          "els": [
+            {
+              "tag": "DIV",
+              "className": "product-carousel-slide main-product-slide",
+              "productId": null,
+              "panel": null,
+              "section": "main_products"
+            },
+            {
+              "tag": "DIV",
+              "className": "product-carousel-slide main-product-slide",
+              "productId": null,
+              "panel": null,
+              "section": "main_products"
+            },
+            {
+              "tag": "DIV",
+              "className": "product-carousel-slide main-product-slide",
+              "productId": null,
+              "panel": null,
+              "section": "main_products"
+            }
+          ]
+        }
+      ],
+      "heroImages": [
+        {
+          "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+          "dataSrc": null,
+          "srcset": null,
+          "dataSrcset": "https://acdn-us.mitiendanube.com/stores/007/400/935/media/95cbfc17-rhino-performance-bf/original/50.jpg 50w, https://acdn-us.mitiendanube.com/stores/007/400/935/media/95cbfc17-rhino-performance-bf/original/100.jpg 100w, https://acdn-us.mitiendanube.com/stores/007/400/935/media/95cbfc17-rhino-performance-bf/original/240.jpg 240w, https://acdn-us.mitiendanube.com/stores/007/400/935/media/95cbfc17-rhino-performance-bf/original/320.jpg 320w, https://acdn-us.mitiendanube.com/stores/007/400/935/media/95cbfc17-rhino-performance-bf/original/480.jpg 480w, https://acdn-us.mitiendanube.com/stores/007/400/935/media/95cbfc17-rhino-performance-bf/original/640.jpg 640w, https://acdn-us.mitiendanube.com/stores/007/400/935/media/95cbfc17-rhino-performance-bf/original/1024.jpg 1024w, https://acdn-us.mitiendanube.com/stores/007/400/935/media/95cbfc17-rhino-performance-bf/original/1400.jpg 1400w, https://acdn-us.mitiendanube.com/stores/007/400/935/media/95cbfc17-rhino-performance-bf/original/1920.jpg 1920w",
+          "sizes": null,
+          "loading": null,
+          "fetchpriority": null,
+          "width": "1920",
+          "height": "900",
+          "className": "lazyload d-none d-md-block fade-in",
+          "sources": [
+            {
+              "type": "image/avif",
+              "media": "",
+              "hasSrcset": false,
+              "hasDataSrcset": true
+            },
+            {
+              "type": "image/webp",
+              "media": "",
+              "hasSrcset": false,
+              "hasDataSrcset": true
+            }
+          ]
+        },
+        {
+          "src": "https://acdn-us.mitiendanube.com/stores/007/400/935/media/fc9598f3-rhino-performance-bfm/source.jpg",
+          "dataSrc": null,
+          "srcset": "https://acdn-us.mitiendanube.com/stores/007/400/935/media/fc9598f3-rhino-performance-bfm/original/50.jpg 50w, https://acdn-us.mitiendanube.com/stores/007/400/935/media/fc9598f3-rhino-performance-bfm/original/100.jpg 100w, https://acdn-us.mitiendanube.com/stores/007/400/935/media/fc9598f3-rhino-performance-bfm/original/240.jpg 240w, https://acdn-us.mitiendanube.com/stores/007/400/935/media/fc9598f3-rhino-performance-bfm/original/320.jpg 320w, https://acdn-us.mitiendanube.com/stores/007/400/935/media/fc9598f3-rhino-performance-bfm/original/480.jpg 480w, https://acdn-us.mitiendanube.com/stores/007/400/935/media/fc9598f3-rhino-performance-bfm/original/640.jpg 640w, https://acdn-us.mitiendanube.com/stores/007/400/935/media/fc9598f3-rhino-performance-bfm/original/820.jpg 820w",
+          "dataSrcset": null,
+          "sizes": null,
+          "loading": null,
+          "fetchpriority": "high",
+          "width": "820",
+          "height": "1000",
+          "className": " image-priority-high d-md-none ",
+          "sources": [
+            {
+              "type": "image/avif",
+              "media": "",
+              "hasSrcset": true,
+              "hasDataSrcset": false
+            },
+            {
+              "type": "image/webp",
+              "media": "",
+              "hasSrcset": true,
+              "hasDataSrcset": false
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "device": "mobile",
+    "kind": "rendered",
+    "file": "mobile-rendered-dom.html",
+    "bytes": 1313258,
+    "sha256": "5a2e75935c1749e2a18fb7f7e3e1122e9ff4afed905081e66cdfcdff4767bd7b",
+    "metrics": {
+      "nodes": 8854,
+      "elements": 3518,
+      "maxDepth": 22,
+      "scripts": {
+        "total": 83,
+        "inline": 55,
+        "inlineBytes": 342291,
+        "json": 23,
+        "jsonBytes": 128000,
+        "jsonByType": [
+          {
+            "type": "application/ld+json",
+            "bytes": 1136
+          },
+          {
+            "type": "application/ld+json",
+            "bytes": 668
+          },
+          {
+            "type": "application/json",
+            "bytes": 104355
+          },
+          {
+            "type": "application/json",
+            "bytes": 177
+          },
+          {
+            "type": "application/ld+json",
+            "bytes": 1188
+          },
+          {
+            "type": "application/ld+json",
+            "bytes": 1120
+          },
+          {
+            "type": "application/ld+json",
+            "bytes": 1172
+          },
+          {
+            "type": "application/ld+json",
+            "bytes": 1122
+          },
+          {
+            "type": "application/ld+json",
+            "bytes": 1120
+          },
+          {
+            "type": "application/ld+json",
+            "bytes": 1147
+          },
+          {
+            "type": "application/ld+json",
+            "bytes": 1188
+          },
+          {
+            "type": "application/ld+json",
+            "bytes": 1172
+          },
+          {
+            "type": "application/ld+json",
+            "bytes": 1147
+          },
+          {
+            "type": "application/ld+json",
+            "bytes": 1122
+          },
+          {
+            "type": "application/ld+json",
+            "bytes": 1120
+          },
+          {
+            "type": "application/ld+json",
+            "bytes": 1120
+          },
+          {
+            "type": "application/ld+json",
+            "bytes": 1145
+          },
+          {
+            "type": "application/ld+json",
+            "bytes": 1130
+          },
+          {
+            "type": "application/ld+json",
+            "bytes": 1127
+          },
+          {
+            "type": "application/ld+json",
+            "bytes": 1144
+          },
+          {
+            "type": "application/ld+json",
+            "bytes": 1122
+          },
+          {
+            "type": "application/ld+json",
+            "bytes": 1146
+          },
+          {
+            "type": "application/ld+json",
+            "bytes": 1112
+          }
+        ]
+      },
+      "forms": {
+        "total": 22,
+        "collection": 19,
+        "collectionBytes": 60958,
+        "uniqueProductIds": 13,
+        "exactDuplicateFormBytesBeyondFirst": 18897,
+        "repeatedProductIdFormCount": 6,
+        "methodCounts": {
+          "POST": 19
+        }
+      },
+      "variants": {
+        "count": 19,
+        "payloadBytes": 166960,
+        "repeatedPayloadBytesSameProduct": 57192
+      },
+      "collection": {
+        "panelCount": 6,
+        "panels": [
+          {
+            "index": "0",
+            "label": "Todos",
+            "hidden": false,
+            "cardCount": 6,
+            "productIds": [
+              "355908446",
+              "355908325",
+              "355908537",
+              "355908340",
+              "355908349",
+              "355908653"
+            ]
+          },
+          {
+            "index": "1",
+            "label": "PRESOTERAPIA",
+            "hidden": true,
+            "cardCount": 3,
+            "productIds": [
+              "355908446",
+              "355908537",
+              "355908653"
+            ]
+          },
+          {
+            "index": "2",
+            "label": "PISTOLAS DE MASAJE",
+            "hidden": true,
+            "cardCount": 2,
+            "productIds": [
+              "355908340",
+              "355908325"
+            ]
+          },
+          {
+            "index": "3",
+            "label": "TERAPIA FRÍA",
+            "hidden": true,
+            "cardCount": 1,
+            "productIds": [
+              "355908349"
+            ]
+          },
+          {
+            "index": "4",
+            "label": "COMPRESIÓN FRÍO Y CALOR",
+            "hidden": true,
+            "cardCount": 3,
+            "productIds": [
+              "355908602",
+              "355908507",
+              "355908492"
+            ]
+          },
+          {
+            "index": "5",
+            "label": "ACCESORIOS",
+            "hidden": true,
+            "cardCount": 4,
+            "productIds": [
+              "355908698",
+              "355908421",
+              "355908629",
+              "355908372"
+            ]
+          }
+        ],
+        "cardCount": 19,
+        "uniqueProducts": 13,
+        "repeatedAppearances": 6,
+        "frequency": {
+          "355908325": 2,
+          "355908340": 2,
+          "355908349": 2,
+          "355908372": 1,
+          "355908421": 1,
+          "355908446": 2,
+          "355908492": 1,
+          "355908507": 1,
+          "355908537": 2,
+          "355908602": 1,
+          "355908629": 1,
+          "355908653": 2,
+          "355908698": 1
+        },
+        "cardHtmlBytes": 578379,
+        "exactDuplicateCardBytesBeyondFirst": 81778
+      },
+      "duplicateHtmlIds": [
+        {
+          "id": "ns-block-announcement_8ypd",
+          "count": 2,
+          "els": [
+            {
+              "tag": "DIV",
+              "className": "js-adbar-item adbar-item",
+              "productId": null,
+              "panel": null,
+              "section": "announcement-bar_1790202972611"
+            },
+            {
+              "tag": "DIV",
+              "className": "js-adbar-item adbar-item",
+              "productId": null,
+              "panel": null,
+              "section": "announcement-bar_1790202972611"
+            }
+          ]
+        },
+        {
+          "id": "ns-block-announcement_d6eo",
+          "count": 2,
+          "els": [
+            {
+              "tag": "DIV",
+              "className": "js-adbar-item adbar-item",
+              "productId": null,
+              "panel": null,
+              "section": "announcement-bar_1790202972611"
+            },
+            {
+              "tag": "DIV",
+              "className": "js-adbar-item adbar-item",
+              "productId": null,
+              "panel": null,
+              "section": "announcement-bar_1790202972611"
+            }
+          ]
+        },
+        {
+          "id": "ns-block-announcement_z7l8",
+          "count": 2,
+          "els": [
+            {
+              "tag": "DIV",
+              "className": "js-adbar-item adbar-item",
+              "productId": null,
+              "panel": null,
+              "section": "announcement-bar_1790202972611"
+            },
+            {
+              "tag": "DIV",
+              "className": "js-adbar-item adbar-item",
+              "productId": null,
+              "panel": null,
+              "section": "announcement-bar_1790202972611"
+            }
+          ]
+        },
+        {
+          "id": "ns-block-announcement_h4uo",
+          "count": 2,
+          "els": [
+            {
+              "tag": "DIV",
+              "className": "js-adbar-item adbar-item",
+              "productId": null,
+              "panel": null,
+              "section": "announcement-bar_1790202972611"
+            },
+            {
+              "tag": "DIV",
+              "className": "js-adbar-item adbar-item",
+              "productId": null,
+              "panel": null,
+              "section": "announcement-bar_1790202972611"
+            }
+          ]
+        },
+        {
+          "id": "ns-block-navigation",
+          "count": 2,
+          "els": [
+            {
+              "tag": "DIV",
+              "className": "nav-desktop-container nav-desktop-mobile-visible mobile-sub-nav mobile-nav-count-3 nav-inside-header-container",
+              "productId": null,
+              "panel": null,
+              "section": "header"
+            },
+            {
+              "tag": "DIV",
+              "className": "nav-desktop-container nav-desktop-mobile-visible nav-desktop-mobile-only mobile-sub-nav d-block d-md-none mobile-nav-count-3 nav-inside-header-container",
+              "productId": null,
+              "panel": null,
+              "section": "header"
+            }
+          ]
+        },
+        {
+          "id": "variation_1",
+          "count": 11,
+          "els": [
+            {
+              "tag": "SELECT",
+              "className": "form-select js-variation-option js-refresh-installment-data ",
+              "productId": "355908446",
+              "panel": "0",
+              "section": "featured_collection"
+            },
+            {
+              "tag": "SELECT",
+              "className": "form-select js-variation-option js-refresh-installment-data ",
+              "productId": "355908537",
+              "panel": "0",
+              "section": "featured_collection"
+            },
+            {
+              "tag": "SELECT",
+              "className": "form-select js-variation-option js-refresh-installment-data ",
+              "productId": "355908653",
+              "panel": "0",
+              "section": "featured_collection"
+            },
+            {
+              "tag": "SELECT",
+              "className": "form-select js-variation-option js-refresh-installment-data ",
+              "productId": "355908446",
+              "panel": "1",
+              "section": "featured_collection"
+            },
+            {
+              "tag": "SELECT",
+              "className": "form-select js-variation-option js-refresh-installment-data ",
+              "productId": "355908537",
+              "panel": "1",
+              "section": "featured_collection"
+            },
+            {
+              "tag": "SELECT",
+              "className": "form-select js-variation-option js-refresh-installment-data ",
+              "productId": "355908653",
+              "panel": "1",
+              "section": "featured_collection"
+            },
+            {
+              "tag": "SELECT",
+              "className": "form-select js-variation-option js-refresh-installment-data ",
+              "productId": "355908602",
+              "panel": "4",
+              "section": "featured_collection"
+            },
+            {
+              "tag": "SELECT",
+              "className": "form-select js-variation-option js-refresh-installment-data ",
+              "productId": "355908507",
+              "panel": "4",
+              "section": "featured_collection"
+            },
+            {
+              "tag": "SELECT",
+              "className": "form-select js-variation-option js-refresh-installment-data ",
+              "productId": "355908492",
+              "panel": "4",
+              "section": "featured_collection"
+            },
+            {
+              "tag": "SELECT",
+              "className": "form-select js-variation-option js-refresh-installment-data ",
+              "productId": "355908698",
+              "panel": "5",
+              "section": "featured_collection"
+            },
+            {
+              "tag": "SELECT",
+              "className": "form-select js-variation-option js-refresh-installment-data ",
+              "productId": "355908629",
+              "panel": "5",
+              "section": "featured_collection"
+            }
+          ]
+        },
+        {
+          "id": "ns-block-main-product-item_3k1e",
+          "count": 3,
+          "els": [
+            {
+              "tag": "DIV",
+              "className": "product-carousel-slide main-product-slide",
+              "productId": null,
+              "panel": null,
+              "section": "main_products"
+            },
+            {
+              "tag": "DIV",
+              "className": "product-carousel-slide main-product-slide",
+              "productId": null,
+              "panel": null,
+              "section": "main_products"
+            },
+            {
+              "tag": "DIV",
+              "className": "product-carousel-slide main-product-slide",
+              "productId": null,
+              "panel": null,
+              "section": "main_products"
+            }
+          ]
+        }
+      ],
+      "heroImages": [
+        {
+          "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+          "dataSrc": null,
+          "srcset": null,
+          "dataSrcset": "https://acdn-us.mitiendanube.com/stores/007/400/935/media/95cbfc17-rhino-performance-bf/original/50.jpg 50w, https://acdn-us.mitiendanube.com/stores/007/400/935/media/95cbfc17-rhino-performance-bf/original/100.jpg 100w, https://acdn-us.mitiendanube.com/stores/007/400/935/media/95cbfc17-rhino-performance-bf/original/240.jpg 240w, https://acdn-us.mitiendanube.com/stores/007/400/935/media/95cbfc17-rhino-performance-bf/original/320.jpg 320w, https://acdn-us.mitiendanube.com/stores/007/400/935/media/95cbfc17-rhino-performance-bf/original/480.jpg 480w, https://acdn-us.mitiendanube.com/stores/007/400/935/media/95cbfc17-rhino-performance-bf/original/640.jpg 640w, https://acdn-us.mitiendanube.com/stores/007/400/935/media/95cbfc17-rhino-performance-bf/original/1024.jpg 1024w, https://acdn-us.mitiendanube.com/stores/007/400/935/media/95cbfc17-rhino-performance-bf/original/1400.jpg 1400w, https://acdn-us.mitiendanube.com/stores/007/400/935/media/95cbfc17-rhino-performance-bf/original/1920.jpg 1920w",
+          "sizes": null,
+          "loading": null,
+          "fetchpriority": null,
+          "width": "1920",
+          "height": "900",
+          "className": "lazyload d-none d-md-block fade-in",
+          "sources": [
+            {
+              "type": "image/avif",
+              "media": "",
+              "hasSrcset": false,
+              "hasDataSrcset": true
+            },
+            {
+              "type": "image/webp",
+              "media": "",
+              "hasSrcset": false,
+              "hasDataSrcset": true
+            }
+          ]
+        },
+        {
+          "src": "https://acdn-us.mitiendanube.com/stores/007/400/935/media/fc9598f3-rhino-performance-bfm/source.jpg",
+          "dataSrc": null,
+          "srcset": "https://acdn-us.mitiendanube.com/stores/007/400/935/media/fc9598f3-rhino-performance-bfm/original/50.jpg 50w, https://acdn-us.mitiendanube.com/stores/007/400/935/media/fc9598f3-rhino-performance-bfm/original/100.jpg 100w, https://acdn-us.mitiendanube.com/stores/007/400/935/media/fc9598f3-rhino-performance-bfm/original/240.jpg 240w, https://acdn-us.mitiendanube.com/stores/007/400/935/media/fc9598f3-rhino-performance-bfm/original/320.jpg 320w, https://acdn-us.mitiendanube.com/stores/007/400/935/media/fc9598f3-rhino-performance-bfm/original/480.jpg 480w, https://acdn-us.mitiendanube.com/stores/007/400/935/media/fc9598f3-rhino-performance-bfm/original/640.jpg 640w, https://acdn-us.mitiendanube.com/stores/007/400/935/media/fc9598f3-rhino-performance-bfm/original/820.jpg 820w",
+          "dataSrcset": null,
+          "sizes": null,
+          "loading": null,
+          "fetchpriority": "high",
+          "width": "820",
+          "height": "1000",
+          "className": " image-priority-high d-md-none ",
+          "sources": [
+            {
+              "type": "image/avif",
+              "media": "",
+              "hasSrcset": true,
+              "hasDataSrcset": false
+            },
+            {
+              "type": "image/webp",
+              "media": "",
+              "hasSrcset": true,
+              "hasDataSrcset": false
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "device": "desktop",
+    "kind": "initial",
+    "file": "desktop-response-body.html",
+    "bytes": 1174783,
+    "sha256": "7da336fc86f03ba9d618000d3d4ea56125e2b1cc4957f8495a91b671f1852fc8",
+    "metrics": {
+      "nodes": 8367,
+      "elements": 3218,
+      "maxDepth": 22,
+      "scripts": {
+        "total": 66,
+        "inline": 51,
+        "inlineBytes": 235772,
+        "json": 21,
+        "jsonBytes": 23468,
+        "jsonByType": [
+          {
+            "type": "application/ld+json",
+            "bytes": 1136
+          },
+          {
+            "type": "application/ld+json",
+            "bytes": 668
+          },
+          {
+            "type": "application/ld+json",
+            "bytes": 1188
+          },
+          {
+            "type": "application/ld+json",
+            "bytes": 1120
+          },
+          {
+            "type": "application/ld+json",
+            "bytes": 1172
+          },
+          {
+            "type": "application/ld+json",
+            "bytes": 1122
+          },
+          {
+            "type": "application/ld+json",
+            "bytes": 1120
+          },
+          {
+            "type": "application/ld+json",
+            "bytes": 1147
+          },
+          {
+            "type": "application/ld+json",
+            "bytes": 1188
+          },
+          {
+            "type": "application/ld+json",
+            "bytes": 1172
+          },
+          {
+            "type": "application/ld+json",
+            "bytes": 1147
+          },
+          {
+            "type": "application/ld+json",
+            "bytes": 1122
+          },
+          {
+            "type": "application/ld+json",
+            "bytes": 1120
+          },
+          {
+            "type": "application/ld+json",
+            "bytes": 1120
+          },
+          {
+            "type": "application/ld+json",
+            "bytes": 1145
+          },
+          {
+            "type": "application/ld+json",
+            "bytes": 1130
+          },
+          {
+            "type": "application/ld+json",
+            "bytes": 1127
+          },
+          {
+            "type": "application/ld+json",
+            "bytes": 1144
+          },
+          {
+            "type": "application/ld+json",
+            "bytes": 1122
+          },
+          {
+            "type": "application/ld+json",
+            "bytes": 1146
+          },
+          {
+            "type": "application/ld+json",
+            "bytes": 1112
+          }
+        ]
+      },
+      "forms": {
+        "total": 22,
+        "collection": 19,
+        "collectionBytes": 60958,
+        "uniqueProductIds": 13,
+        "exactDuplicateFormBytesBeyondFirst": 18897,
+        "repeatedProductIdFormCount": 6,
+        "methodCounts": {
+          "POST": 19
+        }
+      },
+      "variants": {
+        "count": 19,
+        "payloadBytes": 166960,
+        "repeatedPayloadBytesSameProduct": 57192
+      },
+      "collection": {
+        "panelCount": 6,
+        "panels": [
+          {
+            "index": "0",
+            "label": "Todos",
+            "hidden": false,
+            "cardCount": 6,
+            "productIds": [
+              "355908446",
+              "355908325",
+              "355908537",
+              "355908340",
+              "355908349",
+              "355908653"
+            ]
+          },
+          {
+            "index": "1",
+            "label": "PRESOTERAPIA",
+            "hidden": true,
+            "cardCount": 3,
+            "productIds": [
+              "355908446",
+              "355908537",
+              "355908653"
+            ]
+          },
+          {
+            "index": "2",
+            "label": "PISTOLAS DE MASAJE",
+            "hidden": true,
+            "cardCount": 2,
+            "productIds": [
+              "355908340",
+              "355908325"
+            ]
+          },
+          {
+            "index": "3",
+            "label": "TERAPIA FRÍA",
+            "hidden": true,
+            "cardCount": 1,
+            "productIds": [
+              "355908349"
+            ]
+          },
+          {
+            "index": "4",
+            "label": "COMPRESIÓN FRÍO Y CALOR",
+            "hidden": true,
+            "cardCount": 3,
+            "productIds": [
+              "355908602",
+              "355908507",
+              "355908492"
+            ]
+          },
+          {
+            "index": "5",
+            "label": "ACCESORIOS",
+            "hidden": true,
+            "cardCount": 4,
+            "productIds": [
+              "355908698",
+              "355908421",
+              "355908629",
+              "355908372"
+            ]
+          }
+        ],
+        "cardCount": 19,
+        "uniqueProducts": 13,
+        "repeatedAppearances": 6,
+        "frequency": {
+          "355908325": 2,
+          "355908340": 2,
+          "355908349": 2,
+          "355908372": 1,
+          "355908421": 1,
+          "355908446": 2,
+          "355908492": 1,
+          "355908507": 1,
+          "355908537": 2,
+          "355908602": 1,
+          "355908629": 1,
+          "355908653": 2,
+          "355908698": 1
+        },
+        "cardHtmlBytes": 566740,
+        "exactDuplicateCardBytesBeyondFirst": 185845
+      },
+      "duplicateHtmlIds": [
+        {
+          "id": "ns-block-navigation",
+          "count": 2,
+          "els": [
+            {
+              "tag": "DIV",
+              "className": "nav-desktop-container nav-desktop-mobile-visible mobile-sub-nav mobile-nav-count-3 nav-inside-header-container",
+              "productId": null,
+              "panel": null,
+              "section": "header"
+            },
+            {
+              "tag": "DIV",
+              "className": "nav-desktop-container nav-desktop-mobile-visible nav-desktop-mobile-only mobile-sub-nav d-block d-md-none mobile-nav-count-3 nav-inside-header-container",
+              "productId": null,
+              "panel": null,
+              "section": "header"
+            }
+          ]
+        },
+        {
+          "id": "variation_1",
+          "count": 11,
+          "els": [
+            {
+              "tag": "SELECT",
+              "className": "form-select js-variation-option js-refresh-installment-data ",
+              "productId": "355908446",
+              "panel": "0",
+              "section": "featured_collection"
+            },
+            {
+              "tag": "SELECT",
+              "className": "form-select js-variation-option js-refresh-installment-data ",
+              "productId": "355908537",
+              "panel": "0",
+              "section": "featured_collection"
+            },
+            {
+              "tag": "SELECT",
+              "className": "form-select js-variation-option js-refresh-installment-data ",
+              "productId": "355908653",
+              "panel": "0",
+              "section": "featured_collection"
+            },
+            {
+              "tag": "SELECT",
+              "className": "form-select js-variation-option js-refresh-installment-data ",
+              "productId": "355908446",
+              "panel": "1",
+              "section": "featured_collection"
+            },
+            {
+              "tag": "SELECT",
+              "className": "form-select js-variation-option js-refresh-installment-data ",
+              "productId": "355908537",
+              "panel": "1",
+              "section": "featured_collection"
+            },
+            {
+              "tag": "SELECT",
+              "className": "form-select js-variation-option js-refresh-installment-data ",
+              "productId": "355908653",
+              "panel": "1",
+              "section": "featured_collection"
+            },
+            {
+              "tag": "SELECT",
+              "className": "form-select js-variation-option js-refresh-installment-data ",
+              "productId": "355908602",
+              "panel": "4",
+              "section": "featured_collection"
+            },
+            {
+              "tag": "SELECT",
+              "className": "form-select js-variation-option js-refresh-installment-data ",
+              "productId": "355908507",
+              "panel": "4",
+              "section": "featured_collection"
+            },
+            {
+              "tag": "SELECT",
+              "className": "form-select js-variation-option js-refresh-installment-data ",
+              "productId": "355908492",
+              "panel": "4",
+              "section": "featured_collection"
+            },
+            {
+              "tag": "SELECT",
+              "className": "form-select js-variation-option js-refresh-installment-data ",
+              "productId": "355908698",
+              "panel": "5",
+              "section": "featured_collection"
+            },
+            {
+              "tag": "SELECT",
+              "className": "form-select js-variation-option js-refresh-installment-data ",
+              "productId": "355908629",
+              "panel": "5",
+              "section": "featured_collection"
+            }
+          ]
+        },
+        {
+          "id": "ns-block-main-product-item_3k1e",
+          "count": 3,
+          "els": [
+            {
+              "tag": "DIV",
+              "className": "product-carousel-slide main-product-slide",
+              "productId": null,
+              "panel": null,
+              "section": "main_products"
+            },
+            {
+              "tag": "DIV",
+              "className": "product-carousel-slide main-product-slide",
+              "productId": null,
+              "panel": null,
+              "section": "main_products"
+            },
+            {
+              "tag": "DIV",
+              "className": "product-carousel-slide main-product-slide",
+              "productId": null,
+              "panel": null,
+              "section": "main_products"
+            }
+          ]
+        }
+      ],
+      "heroImages": [
+        {
+          "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+          "dataSrc": null,
+          "srcset": null,
+          "dataSrcset": "https://acdn-us.mitiendanube.com/stores/007/400/935/media/95cbfc17-rhino-performance-bf/original/50.jpg 50w, https://acdn-us.mitiendanube.com/stores/007/400/935/media/95cbfc17-rhino-performance-bf/original/100.jpg 100w, https://acdn-us.mitiendanube.com/stores/007/400/935/media/95cbfc17-rhino-performance-bf/original/240.jpg 240w, https://acdn-us.mitiendanube.com/stores/007/400/935/media/95cbfc17-rhino-performance-bf/original/320.jpg 320w, https://acdn-us.mitiendanube.com/stores/007/400/935/media/95cbfc17-rhino-performance-bf/original/480.jpg 480w, https://acdn-us.mitiendanube.com/stores/007/400/935/media/95cbfc17-rhino-performance-bf/original/640.jpg 640w, https://acdn-us.mitiendanube.com/stores/007/400/935/media/95cbfc17-rhino-performance-bf/original/1024.jpg 1024w, https://acdn-us.mitiendanube.com/stores/007/400/935/media/95cbfc17-rhino-performance-bf/original/1400.jpg 1400w, https://acdn-us.mitiendanube.com/stores/007/400/935/media/95cbfc17-rhino-performance-bf/original/1920.jpg 1920w",
+          "sizes": null,
+          "loading": null,
+          "fetchpriority": null,
+          "width": "1920",
+          "height": "900",
+          "className": "lazyload d-none d-md-block fade-in",
+          "sources": [
+            {
+              "type": "image/avif",
+              "media": "",
+              "hasSrcset": false,
+              "hasDataSrcset": true
+            },
+            {
+              "type": "image/webp",
+              "media": "",
+              "hasSrcset": false,
+              "hasDataSrcset": true
+            }
+          ]
+        },
+        {
+          "src": "https://acdn-us.mitiendanube.com/stores/007/400/935/media/fc9598f3-rhino-performance-bfm/source.jpg",
+          "dataSrc": null,
+          "srcset": "https://acdn-us.mitiendanube.com/stores/007/400/935/media/fc9598f3-rhino-performance-bfm/original/50.jpg 50w, https://acdn-us.mitiendanube.com/stores/007/400/935/media/fc9598f3-rhino-performance-bfm/original/100.jpg 100w, https://acdn-us.mitiendanube.com/stores/007/400/935/media/fc9598f3-rhino-performance-bfm/original/240.jpg 240w, https://acdn-us.mitiendanube.com/stores/007/400/935/media/fc9598f3-rhino-performance-bfm/original/320.jpg 320w, https://acdn-us.mitiendanube.com/stores/007/400/935/media/fc9598f3-rhino-performance-bfm/original/480.jpg 480w, https://acdn-us.mitiendanube.com/stores/007/400/935/media/fc9598f3-rhino-performance-bfm/original/640.jpg 640w, https://acdn-us.mitiendanube.com/stores/007/400/935/media/fc9598f3-rhino-performance-bfm/original/820.jpg 820w",
+          "dataSrcset": null,
+          "sizes": null,
+          "loading": null,
+          "fetchpriority": "high",
+          "width": "820",
+          "height": "1000",
+          "className": " image-priority-high d-md-none ",
+          "sources": [
+            {
+              "type": "image/avif",
+              "media": "",
+              "hasSrcset": true,
+              "hasDataSrcset": false
+            },
+            {
+              "type": "image/webp",
+              "media": "",
+              "hasSrcset": true,
+              "hasDataSrcset": false
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "device": "desktop",
+    "kind": "rendered",
+    "file": "desktop-rendered-dom.html",
+    "bytes": 1328894,
+    "sha256": "8b903c5147344e7c7c3131d20b5ddb60bc3e71db43289731ff7c1a9ad212191a",
+    "metrics": {
+      "nodes": 9056,
+      "elements": 3620,
+      "maxDepth": 22,
+      "scripts": {
+        "total": 83,
+        "inline": 55,
+        "inlineBytes": 342291,
+        "json": 23,
+        "jsonBytes": 128000,
+        "jsonByType": [
+          {
+            "type": "application/ld+json",
+            "bytes": 1136
+          },
+          {
+            "type": "application/ld+json",
+            "bytes": 668
+          },
+          {
+            "type": "application/json",
+            "bytes": 104355
+          },
+          {
+            "type": "application/json",
+            "bytes": 177
+          },
+          {
+            "type": "application/ld+json",
+            "bytes": 1188
+          },
+          {
+            "type": "application/ld+json",
+            "bytes": 1120
+          },
+          {
+            "type": "application/ld+json",
+            "bytes": 1172
+          },
+          {
+            "type": "application/ld+json",
+            "bytes": 1122
+          },
+          {
+            "type": "application/ld+json",
+            "bytes": 1120
+          },
+          {
+            "type": "application/ld+json",
+            "bytes": 1147
+          },
+          {
+            "type": "application/ld+json",
+            "bytes": 1188
+          },
+          {
+            "type": "application/ld+json",
+            "bytes": 1172
+          },
+          {
+            "type": "application/ld+json",
+            "bytes": 1147
+          },
+          {
+            "type": "application/ld+json",
+            "bytes": 1122
+          },
+          {
+            "type": "application/ld+json",
+            "bytes": 1120
+          },
+          {
+            "type": "application/ld+json",
+            "bytes": 1120
+          },
+          {
+            "type": "application/ld+json",
+            "bytes": 1145
+          },
+          {
+            "type": "application/ld+json",
+            "bytes": 1130
+          },
+          {
+            "type": "application/ld+json",
+            "bytes": 1127
+          },
+          {
+            "type": "application/ld+json",
+            "bytes": 1144
+          },
+          {
+            "type": "application/ld+json",
+            "bytes": 1122
+          },
+          {
+            "type": "application/ld+json",
+            "bytes": 1146
+          },
+          {
+            "type": "application/ld+json",
+            "bytes": 1112
+          }
+        ]
+      },
+      "forms": {
+        "total": 22,
+        "collection": 19,
+        "collectionBytes": 60958,
+        "uniqueProductIds": 13,
+        "exactDuplicateFormBytesBeyondFirst": 18897,
+        "repeatedProductIdFormCount": 6,
+        "methodCounts": {
+          "POST": 19
+        }
+      },
+      "variants": {
+        "count": 19,
+        "payloadBytes": 166960,
+        "repeatedPayloadBytesSameProduct": 57192
+      },
+      "collection": {
+        "panelCount": 6,
+        "panels": [
+          {
+            "index": "0",
+            "label": "Todos",
+            "hidden": false,
+            "cardCount": 6,
+            "productIds": [
+              "355908446",
+              "355908325",
+              "355908537",
+              "355908340",
+              "355908349",
+              "355908653"
+            ]
+          },
+          {
+            "index": "1",
+            "label": "PRESOTERAPIA",
+            "hidden": true,
+            "cardCount": 3,
+            "productIds": [
+              "355908446",
+              "355908537",
+              "355908653"
+            ]
+          },
+          {
+            "index": "2",
+            "label": "PISTOLAS DE MASAJE",
+            "hidden": true,
+            "cardCount": 2,
+            "productIds": [
+              "355908340",
+              "355908325"
+            ]
+          },
+          {
+            "index": "3",
+            "label": "TERAPIA FRÍA",
+            "hidden": true,
+            "cardCount": 1,
+            "productIds": [
+              "355908349"
+            ]
+          },
+          {
+            "index": "4",
+            "label": "COMPRESIÓN FRÍO Y CALOR",
+            "hidden": true,
+            "cardCount": 3,
+            "productIds": [
+              "355908602",
+              "355908507",
+              "355908492"
+            ]
+          },
+          {
+            "index": "5",
+            "label": "ACCESORIOS",
+            "hidden": true,
+            "cardCount": 4,
+            "productIds": [
+              "355908698",
+              "355908421",
+              "355908629",
+              "355908372"
+            ]
+          }
+        ],
+        "cardCount": 19,
+        "uniqueProducts": 13,
+        "repeatedAppearances": 6,
+        "frequency": {
+          "355908325": 2,
+          "355908340": 2,
+          "355908349": 2,
+          "355908372": 1,
+          "355908421": 1,
+          "355908446": 2,
+          "355908492": 1,
+          "355908507": 1,
+          "355908537": 2,
+          "355908602": 1,
+          "355908629": 1,
+          "355908653": 2,
+          "355908698": 1
+        },
+        "cardHtmlBytes": 582439,
+        "exactDuplicateCardBytesBeyondFirst": 0
+      },
+      "duplicateHtmlIds": [
+        {
+          "id": "ns-block-announcement_8ypd",
+          "count": 6,
+          "els": [
+            {
+              "tag": "DIV",
+              "className": "js-adbar-item adbar-item",
+              "productId": null,
+              "panel": null,
+              "section": "announcement-bar_1790202972611"
+            },
+            {
+              "tag": "DIV",
+              "className": "js-adbar-item adbar-item",
+              "productId": null,
+              "panel": null,
+              "section": "announcement-bar_1790202972611"
+            },
+            {
+              "tag": "DIV",
+              "className": "js-adbar-item adbar-item",
+              "productId": null,
+              "panel": null,
+              "section": "announcement-bar_1790202972611"
+            },
+            {
+              "tag": "DIV",
+              "className": "js-adbar-item adbar-item",
+              "productId": null,
+              "panel": null,
+              "section": "announcement-bar_1790202972611"
+            },
+            {
+              "tag": "DIV",
+              "className": "js-adbar-item adbar-item",
+              "productId": null,
+              "panel": null,
+              "section": "announcement-bar_1790202972611"
+            },
+            {
+              "tag": "DIV",
+              "className": "js-adbar-item adbar-item",
+              "productId": null,
+              "panel": null,
+              "section": "announcement-bar_1790202972611"
+            }
+          ]
+        },
+        {
+          "id": "ns-block-announcement_d6eo",
+          "count": 6,
+          "els": [
+            {
+              "tag": "DIV",
+              "className": "js-adbar-item adbar-item",
+              "productId": null,
+              "panel": null,
+              "section": "announcement-bar_1790202972611"
+            },
+            {
+              "tag": "DIV",
+              "className": "js-adbar-item adbar-item",
+              "productId": null,
+              "panel": null,
+              "section": "announcement-bar_1790202972611"
+            },
+            {
+              "tag": "DIV",
+              "className": "js-adbar-item adbar-item",
+              "productId": null,
+              "panel": null,
+              "section": "announcement-bar_1790202972611"
+            },
+            {
+              "tag": "DIV",
+              "className": "js-adbar-item adbar-item",
+              "productId": null,
+              "panel": null,
+              "section": "announcement-bar_1790202972611"
+            },
+            {
+              "tag": "DIV",
+              "className": "js-adbar-item adbar-item",
+              "productId": null,
+              "panel": null,
+              "section": "announcement-bar_1790202972611"
+            },
+            {
+              "tag": "DIV",
+              "className": "js-adbar-item adbar-item",
+              "productId": null,
+              "panel": null,
+              "section": "announcement-bar_1790202972611"
+            }
+          ]
+        },
+        {
+          "id": "ns-block-announcement_z7l8",
+          "count": 6,
+          "els": [
+            {
+              "tag": "DIV",
+              "className": "js-adbar-item adbar-item",
+              "productId": null,
+              "panel": null,
+              "section": "announcement-bar_1790202972611"
+            },
+            {
+              "tag": "DIV",
+              "className": "js-adbar-item adbar-item",
+              "productId": null,
+              "panel": null,
+              "section": "announcement-bar_1790202972611"
+            },
+            {
+              "tag": "DIV",
+              "className": "js-adbar-item adbar-item",
+              "productId": null,
+              "panel": null,
+              "section": "announcement-bar_1790202972611"
+            },
+            {
+              "tag": "DIV",
+              "className": "js-adbar-item adbar-item",
+              "productId": null,
+              "panel": null,
+              "section": "announcement-bar_1790202972611"
+            },
+            {
+              "tag": "DIV",
+              "className": "js-adbar-item adbar-item",
+              "productId": null,
+              "panel": null,
+              "section": "announcement-bar_1790202972611"
+            },
+            {
+              "tag": "DIV",
+              "className": "js-adbar-item adbar-item",
+              "productId": null,
+              "panel": null,
+              "section": "announcement-bar_1790202972611"
+            }
+          ]
+        },
+        {
+          "id": "ns-block-announcement_h4uo",
+          "count": 6,
+          "els": [
+            {
+              "tag": "DIV",
+              "className": "js-adbar-item adbar-item",
+              "productId": null,
+              "panel": null,
+              "section": "announcement-bar_1790202972611"
+            },
+            {
+              "tag": "DIV",
+              "className": "js-adbar-item adbar-item",
+              "productId": null,
+              "panel": null,
+              "section": "announcement-bar_1790202972611"
+            },
+            {
+              "tag": "DIV",
+              "className": "js-adbar-item adbar-item",
+              "productId": null,
+              "panel": null,
+              "section": "announcement-bar_1790202972611"
+            },
+            {
+              "tag": "DIV",
+              "className": "js-adbar-item adbar-item",
+              "productId": null,
+              "panel": null,
+              "section": "announcement-bar_1790202972611"
+            },
+            {
+              "tag": "DIV",
+              "className": "js-adbar-item adbar-item",
+              "productId": null,
+              "panel": null,
+              "section": "announcement-bar_1790202972611"
+            },
+            {
+              "tag": "DIV",
+              "className": "js-adbar-item adbar-item",
+              "productId": null,
+              "panel": null,
+              "section": "announcement-bar_1790202972611"
+            }
+          ]
+        },
+        {
+          "id": "ns-block-navigation",
+          "count": 2,
+          "els": [
+            {
+              "tag": "DIV",
+              "className": "nav-desktop-container nav-desktop-mobile-visible mobile-sub-nav mobile-nav-count-3 nav-inside-header-container",
+              "productId": null,
+              "panel": null,
+              "section": "header"
+            },
+            {
+              "tag": "DIV",
+              "className": "nav-desktop-container nav-desktop-mobile-visible nav-desktop-mobile-only mobile-sub-nav d-block d-md-none mobile-nav-count-3 nav-inside-header-container",
+              "productId": null,
+              "panel": null,
+              "section": "header"
+            }
+          ]
+        },
+        {
+          "id": "variation_1",
+          "count": 11,
+          "els": [
+            {
+              "tag": "SELECT",
+              "className": "form-select js-variation-option js-refresh-installment-data ",
+              "productId": "355908446",
+              "panel": "0",
+              "section": "featured_collection"
+            },
+            {
+              "tag": "SELECT",
+              "className": "form-select js-variation-option js-refresh-installment-data ",
+              "productId": "355908537",
+              "panel": "0",
+              "section": "featured_collection"
+            },
+            {
+              "tag": "SELECT",
+              "className": "form-select js-variation-option js-refresh-installment-data ",
+              "productId": "355908653",
+              "panel": "0",
+              "section": "featured_collection"
+            },
+            {
+              "tag": "SELECT",
+              "className": "form-select js-variation-option js-refresh-installment-data ",
+              "productId": "355908446",
+              "panel": "1",
+              "section": "featured_collection"
+            },
+            {
+              "tag": "SELECT",
+              "className": "form-select js-variation-option js-refresh-installment-data ",
+              "productId": "355908537",
+              "panel": "1",
+              "section": "featured_collection"
+            },
+            {
+              "tag": "SELECT",
+              "className": "form-select js-variation-option js-refresh-installment-data ",
+              "productId": "355908653",
+              "panel": "1",
+              "section": "featured_collection"
+            },
+            {
+              "tag": "SELECT",
+              "className": "form-select js-variation-option js-refresh-installment-data ",
+              "productId": "355908602",
+              "panel": "4",
+              "section": "featured_collection"
+            },
+            {
+              "tag": "SELECT",
+              "className": "form-select js-variation-option js-refresh-installment-data ",
+              "productId": "355908507",
+              "panel": "4",
+              "section": "featured_collection"
+            },
+            {
+              "tag": "SELECT",
+              "className": "form-select js-variation-option js-refresh-installment-data ",
+              "productId": "355908492",
+              "panel": "4",
+              "section": "featured_collection"
+            },
+            {
+              "tag": "SELECT",
+              "className": "form-select js-variation-option js-refresh-installment-data ",
+              "productId": "355908698",
+              "panel": "5",
+              "section": "featured_collection"
+            },
+            {
+              "tag": "SELECT",
+              "className": "form-select js-variation-option js-refresh-installment-data ",
+              "productId": "355908629",
+              "panel": "5",
+              "section": "featured_collection"
+            }
+          ]
+        },
+        {
+          "id": "ns-block-main-product-item_3k1e",
+          "count": 3,
+          "els": [
+            {
+              "tag": "DIV",
+              "className": "product-carousel-slide main-product-slide",
+              "productId": null,
+              "panel": null,
+              "section": "main_products"
+            },
+            {
+              "tag": "DIV",
+              "className": "product-carousel-slide main-product-slide",
+              "productId": null,
+              "panel": null,
+              "section": "main_products"
+            },
+            {
+              "tag": "DIV",
+              "className": "product-carousel-slide main-product-slide",
+              "productId": null,
+              "panel": null,
+              "section": "main_products"
+            }
+          ]
+        }
+      ],
+      "heroImages": [
+        {
+          "src": "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+          "dataSrc": null,
+          "srcset": "https://acdn-us.mitiendanube.com/stores/007/400/935/media/95cbfc17-rhino-performance-bf/original/50.jpg 50w, https://acdn-us.mitiendanube.com/stores/007/400/935/media/95cbfc17-rhino-performance-bf/original/100.jpg 100w, https://acdn-us.mitiendanube.com/stores/007/400/935/media/95cbfc17-rhino-performance-bf/original/240.jpg 240w, https://acdn-us.mitiendanube.com/stores/007/400/935/media/95cbfc17-rhino-performance-bf/original/320.jpg 320w, https://acdn-us.mitiendanube.com/stores/007/400/935/media/95cbfc17-rhino-performance-bf/original/480.jpg 480w, https://acdn-us.mitiendanube.com/stores/007/400/935/media/95cbfc17-rhino-performance-bf/original/640.jpg 640w, https://acdn-us.mitiendanube.com/stores/007/400/935/media/95cbfc17-rhino-performance-bf/original/1024.jpg 1024w, https://acdn-us.mitiendanube.com/stores/007/400/935/media/95cbfc17-rhino-performance-bf/original/1400.jpg 1400w, https://acdn-us.mitiendanube.com/stores/007/400/935/media/95cbfc17-rhino-performance-bf/original/1920.jpg 1920w",
+          "dataSrcset": "https://acdn-us.mitiendanube.com/stores/007/400/935/media/95cbfc17-rhino-performance-bf/original/50.jpg 50w, https://acdn-us.mitiendanube.com/stores/007/400/935/media/95cbfc17-rhino-performance-bf/original/100.jpg 100w, https://acdn-us.mitiendanube.com/stores/007/400/935/media/95cbfc17-rhino-performance-bf/original/240.jpg 240w, https://acdn-us.mitiendanube.com/stores/007/400/935/media/95cbfc17-rhino-performance-bf/original/320.jpg 320w, https://acdn-us.mitiendanube.com/stores/007/400/935/media/95cbfc17-rhino-performance-bf/original/480.jpg 480w, https://acdn-us.mitiendanube.com/stores/007/400/935/media/95cbfc17-rhino-performance-bf/original/640.jpg 640w, https://acdn-us.mitiendanube.com/stores/007/400/935/media/95cbfc17-rhino-performance-bf/original/1024.jpg 1024w, https://acdn-us.mitiendanube.com/stores/007/400/935/media/95cbfc17-rhino-performance-bf/original/1400.jpg 1400w, https://acdn-us.mitiendanube.com/stores/007/400/935/media/95cbfc17-rhino-performance-bf/original/1920.jpg 1920w",
+          "sizes": null,
+          "loading": null,
+          "fetchpriority": null,
+          "width": "1920",
+          "height": "900",
+          "className": "d-none d-md-block fade-in lazyloaded",
+          "sources": [
+            {
+              "type": "image/avif",
+              "media": "",
+              "hasSrcset": true,
+              "hasDataSrcset": true
+            },
+            {
+              "type": "image/webp",
+              "media": "",
+              "hasSrcset": true,
+              "hasDataSrcset": true
+            }
+          ]
+        },
+        {
+          "src": "https://acdn-us.mitiendanube.com/stores/007/400/935/media/fc9598f3-rhino-performance-bfm/source.jpg",
+          "dataSrc": null,
+          "srcset": "https://acdn-us.mitiendanube.com/stores/007/400/935/media/fc9598f3-rhino-performance-bfm/original/50.jpg 50w, https://acdn-us.mitiendanube.com/stores/007/400/935/media/fc9598f3-rhino-performance-bfm/original/100.jpg 100w, https://acdn-us.mitiendanube.com/stores/007/400/935/media/fc9598f3-rhino-performance-bfm/original/240.jpg 240w, https://acdn-us.mitiendanube.com/stores/007/400/935/media/fc9598f3-rhino-performance-bfm/original/320.jpg 320w, https://acdn-us.mitiendanube.com/stores/007/400/935/media/fc9598f3-rhino-performance-bfm/original/480.jpg 480w, https://acdn-us.mitiendanube.com/stores/007/400/935/media/fc9598f3-rhino-performance-bfm/original/640.jpg 640w, https://acdn-us.mitiendanube.com/stores/007/400/935/media/fc9598f3-rhino-performance-bfm/original/820.jpg 820w",
+          "dataSrcset": null,
+          "sizes": null,
+          "loading": null,
+          "fetchpriority": "high",
+          "width": "820",
+          "height": "1000",
+          "className": " image-priority-high d-md-none ",
+          "sources": [
+            {
+              "type": "image/avif",
+              "media": "",
+              "hasSrcset": true,
+              "hasDataSrcset": false
+            },
+            {
+              "type": "image/webp",
+              "media": "",
+              "hasSrcset": true,
+              "hasDataSrcset": false
+            }
+          ]
+        }
+      ]
+    }
+  }
+]
