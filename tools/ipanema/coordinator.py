@@ -72,7 +72,45 @@ EXTERNAL_SKILLS = {
         "skill_path": ".agents/skills/seo-audit/SKILL.md",
         "reuses": ["ipanema-seo-expert", "web-quality-audit"],
     },
+    "schema": {
+        "name": "schema",
+        "domain": "schema",
+        "role": "primary",
+        "source_repo": "https://github.com/coreyhaines31/marketingskills",
+        "source_path": "skills/schema/SKILL.md",
+        "source_commit": "73573e94a06a39965978b3fa1f9c1eace8cebc7c",
+        "source_sha1": "a152e5e59496740caf18ba0f0c74f4ef0e383c39",
+        "references_sha1": {"schema-examples.md": "014b5292ce46184a5cde223d3a528b3e48397b8f"},
+        "evals_sha1": {"evals.json": "c679cb253c26f81166b068b4e52cf04acd0cb093"},
+        "license": "MIT",
+        "skill_path": ".agents/skills/schema/SKILL.md",
+        "reuses": ["ipanema-seo-expert", "seo-audit"],
+    },
 }
+
+SCHEMA_MARKUP_TERMS = (
+    "json-ld",
+    "jsonld",
+    "application/ld+json",
+    "schema.org",
+    "datos estructurados",
+    "structured data",
+    "schema markup",
+    "productgroup",
+    "aggregateoffer",
+    "aggregaterating",
+    "merchantreturnpolicy",
+    "offershippingdetails",
+    "breadcrumblist",
+    "blogposting",
+    "localbusiness",
+    "faqpage",
+    "searchaction",
+    "microdata",
+    "rdfa",
+    "rich results",
+    "resultados enriquecidos",
+)
 
 EXPLICIT_QUALITY_TERMS = (
     "web-quality-audit",
@@ -130,18 +168,49 @@ def detect_context(request: str, project: Project | None = None) -> dict:
     return {"framework": framework, "on_demand_loading": True}
 
 
+def _detect_schema_matches(text: str) -> list[str]:
+    if "en el editor" in text or "settings_schema" in text:
+        return []
+    matches = [t for t in SCHEMA_MARKUP_TERMS if t in text]
+    if "schema" in text and any(
+        t in text
+        for t in (
+            "product", "producto", "offer", "oferta", "blog", "article", "articulo",
+            "organization", "website", "webpage", "breadcrumb", "review", "rating",
+            "variant", "variante", "markup", "marcado", "duplicad", "shopify",
+            "hydrogen", "pdp", "json", "localbusiness",
+        )
+    ):
+        matches.append("schema")
+    return list(dict.fromkeys(matches))
+
+
 def route(request: str):
     text = normal(request)
     selected, reasons = [], {}
     explicit_quality = [t for t in EXPLICIT_QUALITY_TERMS if t in text]
     general_quality = [t for t in GENERAL_AUDIT_TERMS if t in text]
-    seo_scoped = bool(re.search(r"(?<![\w-])(?:seo|seo-audit|hreflang|canonical|sitemap|robots|noindex|indexa|rastre)", text))
+    schema_matches = _detect_schema_matches(text)
+    general_seo_scoped = bool(
+        re.search(
+            r"(?<![\w-])(?:seo-audit|hreflang|sitemap|robots|noindex|nofollow|rastre|indexa|meta description|meta title|title tag)",
+            text,
+        )
+        or ("seo" in text and not schema_matches)
+    )
+    seo_scoped = general_seo_scoped or bool(schema_matches) or ("canonical" in text)
     perf_scoped = bool(re.search(r"(?<![\w-])(?:rendimiento|performance|web-perf|lcp|cls|tbt|inp|ttfb|fcp|cwv|core web vitals)", text))
     quality_matches = explicit_quality + ([] if (seo_scoped or perf_scoped) and not explicit_quality else general_quality)
+    ui_commerce_explicit = any(t in text for t in ("carrito", "checkout", "compra", "descuento", "tarjeta", "card"))
+    ui_component_explicit = any(t in text for t in ("hero", "seccion", "bloque", "componente", "snippet", "tarjeta", "card", "carrusel"))
     for key, spec in SPECIALTIES.items():
         if key == "performance" and quality_matches and not any(
             t in text for t in ("cloudflare-web-perf", "lcp", "cls", "tbt", "inp", "ttfb", "fcp", "cwv", "core web vitals")
         ):
+            continue
+        if schema_matches and key == "commerce" and not ui_commerce_explicit:
+            continue
+        if schema_matches and key == "component-builder" and not ui_component_explicit:
             continue
         matches = [t for t in spec["terms"] if re.search(r"(?<![\w-])" + re.escape(t) + (r"\b" if len(t) <= 3 else ""), text)]
         if matches:
@@ -150,9 +219,9 @@ def route(request: str):
     if "motion" in selected and "performance" not in selected:
         selected.append("performance")
         reasons["performance"] = ["coste de animación"]
-    if 'schema' in text and any(t in text for t in ('product','offer','blog','article','organization','webpage')) and 'seo-expert' not in selected:
-        selected.append('seo-expert')
-        reasons['seo-expert']=['schema de una entidad comercial/editorial; comprobar si es datos estructurados o schema de editor']
+    if schema_matches and "seo-expert" not in selected:
+        selected.append("seo-expert")
+        reasons["seo-expert"] = schema_matches
     if any(t in text for t in ("tarjeta", "card")) and "architect" not in selected:
         selected.append("architect")
         reasons["architect"] = ["consumidores de tarjeta compartida"]
@@ -180,20 +249,34 @@ def route(request: str):
             skills.append("seo-audit")
             primary_skills["seo"] = "seo-audit"
             external_active.append(EXTERNAL_SKILLS["seo-audit"])
+        if "schema" in schema_matches and "schema" in text:
+            skills.append("schema")
+            primary_skills["schema"] = "schema"
+            external_active.append(EXTERNAL_SKILLS["schema"])
     for s in selected:
         if s == "performance" and not quality_matches:
             skills.append("cloudflare-web-perf")
             primary_skills["performance"] = "cloudflare-web-perf"
             external_active.append(EXTERNAL_SKILLS["cloudflare-web-perf"])
         if s == "seo-expert" and not quality_matches:
-            skills.append("seo-audit")
-            primary_skills["seo"] = "seo-audit"
-            external_active.append(EXTERNAL_SKILLS["seo-audit"])
-            reused_engines.append("ipanema-seo-expert")
+            if schema_matches and not general_seo_scoped:
+                skills.append("schema")
+                primary_skills["schema"] = "schema"
+                external_active.append(EXTERNAL_SKILLS["schema"])
+                reused_engines.extend(["ipanema-seo-expert", "seo-audit"])
+            else:
+                skills.append("seo-audit")
+                primary_skills["seo"] = "seo-audit"
+                external_active.append(EXTERNAL_SKILLS["seo-audit"])
+                reused_engines.append("ipanema-seo-expert")
+                if schema_matches:
+                    skills.append("schema")
+                    primary_skills["schema"] = "schema"
+                    external_active.append(EXTERNAL_SKILLS["schema"])
         skills.append("ipanema-" + s)
     ctx = detect_context(request)
     return {"skills": skills, "primary_skills": primary_skills, "external_skills": external_active,
-            "reused_engines": reused_engines, "framework": ctx["framework"], "reasons": reasons,
+            "reused_engines": list(dict.fromkeys(reused_engines)), "framework": ctx["framework"], "reasons": reasons,
             "selection_method": "deterministic_assistance", "parallel_agents_invoked": False}
 
 

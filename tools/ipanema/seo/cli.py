@@ -11,6 +11,7 @@ from .extractor import extract
 from .generator import generate, repair_trailing_json
 from .intelligence import compare_periods, correlate
 from .page_audit import PAGE_SCHEMAS, comprehensive_seo_audit
+from .schema_validator import audit_and_propose_schema
 
 
 def add_parser(sub):
@@ -60,6 +61,16 @@ def add_parser(sub):
     tech.add_argument('--framework', choices=('shopify-liquid', 'shopify-hydrogen', 'react-web', 'tiendanube-ipanema'))
     tech.add_argument('--source-file', type=Path, action='append', default=[])
     tech.add_argument('--quality-report', type=Path)
+    sch = commands.add_parser('schema-skill', help='Auditoría, validación en 5 dimensiones y propuesta segura Schema Markup (JSON-LD).')
+    sch.add_argument('--html', type=Path, required=True)
+    sch.add_argument('--url', required=True)
+    sch.add_argument('--type', choices=list(PAGE_SCHEMAS), default='product')
+    sch.add_argument('--rendered', type=Path)
+    sch.add_argument('--facts', type=Path)
+    sch.add_argument('--propose')
+    sch.add_argument('--mode', choices=['missing', 'update'], default='missing')
+    sch.add_argument('--framework', choices=('shopify-liquid', 'shopify-hydrogen', 'react-web', 'tiendanube-ipanema'))
+    sch.add_argument('--source-file', type=Path, action='append', default=[])
 
 
 def execute(project, args):
@@ -152,17 +163,39 @@ def execute(project, args):
             framework=args.framework,
         )
         inputs = [p for p in (args.html, args.rendered, args.no_js, args.robots, args.sitemap, args.quality_report) if p] + list(args.source_file)
+    elif command == 'schema-skill':
+        authorize_url(project, args.url)
+        allowed_roots = [project.root] + ([project.theme_root] if project.theme_root else [])
+        source_files = {}
+        for sf in args.source_file:
+            resolved = sf.resolve()
+            if not any(beneath(resolved, r) for r in allowed_roots) or not resolved.is_file():
+                raise IpanemaError('Archivo fuente fuera del alcance autorizado o inexistente.')
+            source_files[sf.name] = reports.read_text(resolved)
+        result = audit_and_propose_schema(
+            project,
+            reports.read_text(args.html),
+            args.url,
+            args.type,
+            rendered_html=reports.read_text(args.rendered) if args.rendered else None,
+            facts_doc=read_json(args.facts) if args.facts else None,
+            source_files=source_files,
+            propose_target=args.propose,
+            propose_mode=args.mode,
+            framework=args.framework,
+        )
+        inputs = [p for p in (args.html, args.rendered, args.facts) if p] + list(args.source_file)
     else:
         raise IpanemaError('Comando SEO desconocido.')
     saved = reports.save_report(project, result, 'seo-' + command, inputs)
     if result.get('kind') == 'seo-agent-evals':
         saved.update({'outcome': result['outcome'], 'cases': len(result['cases'])})
         return saved, 0 if result['outcome'] == 'passed' else 1
-    if result.get('kind') == 'seo-technical-audit':
+    if result.get('kind') in ('seo-technical-audit', 'schema-skill-audit'):
         saved.update({'skill': result['skill'], 'framework': result['framework'], 'counts': result['counts']})
     if result.get('status') and result['status'] not in ('observed', 'imported_observation', 'already_parseable', 'repaired_artifact_only'):
         return {**saved, 'status': result['status']}, 2
     # Findings are reported, not swallowed by a successful process exit.
-    finding_rows = result.get('verified_by_tool') if result.get('kind') == 'seo-technical-audit' else result.get('findings', [])
+    finding_rows = result.get('verified_by_tool') if result.get('kind') in ('seo-technical-audit', 'schema-skill-audit') else result.get('findings', [])
     errors = sum(f['severity'] == 'error' for f in finding_rows)
     return {**saved, 'error_findings': errors}, 1 if errors else 0

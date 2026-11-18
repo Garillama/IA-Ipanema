@@ -5,7 +5,7 @@ description: Auditar y corregir localmente SEO de Ipanema, JSON-LD, microdata, v
 
 # Ipanema seo-expert
 
-Activa esta especialidad cuando la petición requiera su responsabilidad descrita arriba. El proyecto y permisos provienen de [AGENTS.md](../../../AGENTS.md); la coordinadora está en el directorio hermano ipanema-storefront. Coordina el diagnóstico de SEO técnico, on-page, internacional (`hreflang`) y de comercio electrónico multi-framework con la skill principal [seo-audit](../seo-audit/SKILL.md) sin duplicar análisis. No cargues otras especialidades por defecto.
+Activa esta especialidad cuando la petición requiera su responsabilidad descrita arriba. El proyecto y permisos provienen de [AGENTS.md](../../../AGENTS.md); la coordinadora está en el directorio hermano ipanema-storefront. Coordina el diagnóstico de SEO técnico, on-page, internacional (`hreflang`) y de comercio electrónico multi-framework con [seo-audit](../seo-audit/SKILL.md), y los datos estructurados Schema.org / JSON-LD con [schema](../schema/SKILL.md) sin duplicar análisis. No cargues otras especialidades por defecto.
 
 Fuentes principales, con carga selectiva: [technical-seo](../../../ipanema-discovery/04-seo/technical-seo.md) · [carousel-seo](../../../ipanema-discovery/04-seo/carousel-seo.md) · [structured-data](../../../ipanema-discovery/04-seo/structured-data.md) · [category-seo](../../../ipanema-discovery/04-seo/category-seo.md). El discovery es evidencia fechada; confirma archivo actual, compatibilidad y límites antes de usar una conclusión.
 

@@ -381,3 +381,415 @@ def validate(snap: dict, page_type: str, facts: dict | None = None):
             'unchecked_properties':unchecked,'semantic_scope':'Vocabulario acotado; no expansión JSON-LD ni RDFa completa.',
             "graph": {k: graph[k] for k in ("entities", "edges", "duplicates", "conflicts", "dangling_references", "repeated_singletons", "identity_split", "types")},
             "requirements": {"retrieved_at": REQ["retrieved_at"], "file": "tools/ipanema/seo/google_requirements.json"}}
+
+
+SCHEMA_FRAMEWORK_CANDIDATES = {
+    "shopify-liquid": [
+        "sections/main-product.liquid",
+        "snippets/product-schema.liquid",
+        "layout/theme.liquid",
+        "templates/product.json",
+    ],
+    "shopify-hydrogen": [
+        "app/routes/products.$handle.tsx",
+        "app/root.tsx",
+        "app/lib/seo.server.ts",
+    ],
+    "react-web": [
+        "src/pages/Product.tsx",
+        "src/components/JsonLd.tsx",
+        "index.html",
+    ],
+    "tiendanube-ipanema": [
+        "snippets/structured-data/structured-data.tpl",
+        "layouts/layout.tpl",
+        "templates/product.tpl",
+    ],
+}
+
+EXTERNAL_APP_MARKERS = re.compile(
+    r"(judge\.?me|jdgm|loox|yotpo|stamped|smart.?seo|json-?ld.?for.?seo|sherpas|booster.?seo|yoast|avada|okendo|reviews\.io)",
+    re.I,
+)
+
+PLACEHOLDER_VALUE_RE = re.compile(r"^(?:tbd|n/a|todo|null|undefined|none|\{\{.*\}\}|\{%.*%\})$", re.I)
+
+RETIRED_GOOGLE_FEATURES = {
+    "FAQPage": "FAQ rich results fueron retirados de forma general por Google el 2026-05-07; válido en Schema.org si refleja FAQs visibles, pero no promete rich result.",
+    "HowTo": "HowTo rich results fueron retirados por Google en septiembre de 2023; válido en Schema.org, sin elegibilidad de rich result.",
+    "SearchAction": "Sitelinks search box fue retirado por Google en noviembre de 2024; WebSite sigue siendo válido para site name.",
+}
+
+
+def _scan_unbacked_or_placeholder_values(obj, path="$"):
+    found = []
+    if isinstance(obj, dict):
+        for k, v in obj.items():
+            if k == "@context":
+                continue
+            found.extend(_scan_unbacked_or_placeholder_values(v, f"{path}.{k}"))
+    elif isinstance(obj, list):
+        for idx, item in enumerate(obj):
+            found.extend(_scan_unbacked_or_placeholder_values(item, f"{path}[{idx}]"))
+    elif isinstance(obj, str) and PLACEHOLDER_VALUE_RE.match(obj.strip()):
+        found.append({"path": path, "value": obj.strip()})
+    return found
+
+
+def audit_and_propose_schema(
+    project,
+    html: str,
+    url: str,
+    page_type: str = "product",
+    *,
+    rendered_html: str | None = None,
+    facts_doc: dict | None = None,
+    source_files: dict[str, str] | None = None,
+    propose_target: str | None = None,
+    propose_mode: str = "missing",
+    framework: str | None = None,
+    fixture: bool = False,
+) -> dict:
+    """Auditoría y propuesta especializada Schema Markup (Etapa 4): reutiliza motor SEO y separa 5 estados y 3 niveles de evidencia."""
+    from ..core import redact
+    from ..performance.model import infer_framework
+    from .extractor import extract
+    from .generator import checked_facts, generate, repair_trailing_json, validation_facts
+
+    detected_fw = infer_framework(framework, source_files)
+    candidate_files = SCHEMA_FRAMEWORK_CANDIDATES.get(detected_fw, SCHEMA_FRAMEWORK_CANDIDATES["tiendanube-ipanema"])
+
+    facts_data = None
+    val_facts = {}
+    if facts_doc is not None:
+        checked, _ = checked_facts(project, facts_doc, fixture=fixture)
+        facts_data = checked
+        val_facts = validation_facts(checked)
+
+    effective_html = rendered_html if rendered_html is not None else html
+    initial_snap = extract(html, url)
+    snap = extract(effective_html, url)
+    val_report = validate(snap, page_type, val_facts if val_facts else None)
+    graph = build_graph(snap)
+
+    verified_by_tool = []
+    code_hypothesis = []
+    requires_external_verification = []
+
+    def add_verified(rule_id, severity, title, impact, evidence, fix, files=None):
+        verified_by_tool.append({
+            "id": rule_id,
+            "severity": severity,
+            "evidence_type": "verified_by_tool",
+            "title": title,
+            "impact": impact,
+            "evidence": redact(evidence),
+            "candidate_files": files or candidate_files,
+            "fix": fix,
+        })
+
+    def add_hypothesis(rule_id, severity, title, impact, evidence, fix, files):
+        code_hypothesis.append({
+            "id": rule_id,
+            "severity": severity,
+            "evidence_type": "code_hypothesis",
+            "title": title,
+            "impact": impact,
+            "evidence": redact(evidence),
+            "candidate_files": files,
+            "fix": fix,
+        })
+
+    def add_external(rule_id, title, reason, required_source, evidence=None):
+        requires_external_verification.append({
+            "id": rule_id,
+            "evidence_type": "requires_external_verification",
+            "title": title,
+            "reason": reason,
+            "required_source": required_source,
+            "evidence": redact(evidence or {}),
+        })
+
+    # 1. Inventario de bloques JSON-LD y detección de procedencia (tema, snippet, metafield, Hydrogen o app externa)
+    initial_raws = {b["raw"].strip() for b in initial_snap.get("json_ld", []) if b.get("raw")}
+    blocks_inventory = []
+    external_app_blocks = []
+    for block in snap.get("json_ld", []):
+        comp = str(block.get("component") or "")
+        raw_text = str(block.get("raw") or "")
+        app_match = EXTERNAL_APP_MARKERS.search(comp) or EXTERNAL_APP_MARKERS.search(raw_text[:400])
+        is_js_injected = rendered_html is not None and raw_text.strip() not in initial_raws
+        if app_match:
+            origin_kind = "external_seo_app"
+            app_name = app_match.group(0)
+            external_app_blocks.append({"block": block["index"], "app": app_name})
+        elif is_js_injected:
+            origin_kind = "client_js_injected"
+            app_name = None
+        else:
+            origin_kind = "theme_or_template"
+            app_name = None
+        blocks_inventory.append({
+            "index": block["index"],
+            "component": block.get("component"),
+            "line": block.get("line"),
+            "bytes": block.get("bytes"),
+            "syntax_valid": block.get("error") is None,
+            "error": block.get("error"),
+            "origin_kind": origin_kind,
+            "external_app": app_name,
+            "auto_modify_allowed": origin_kind == "theme_or_template",
+        })
+
+    if external_app_blocks:
+        add_external(
+            "SCHEMA-EXT-APP-OWNERSHIP",
+            "Marcado JSON-LD generado por aplicación SEO/reseñas externa",
+            "No se deben eliminar ni modificar automáticamente bloques inyectados por apps externas sin autorización explícita; revisar la configuración de la app o enlazar por @id.",
+            "Configuración de la app en el panel de la tienda (Shopify/Tiendanube)",
+            {"external_app_blocks": external_app_blocks},
+        )
+
+    # 2. Incorporar hallazgos del validador A–D (respetando la regla de no afirmar falta de Schema en HTML estático sin DOM renderizado)
+    for f in val_report["findings"]:
+        if rendered_html is None and f["rule"] in ("C100", "C221", "C300") and not snap.get("json_ld") and not snap.get("microdata"):
+            continue
+        add_verified(
+            f["rule"],
+            f["severity"],
+            f["message"],
+            f"Nivel {f['level']} de validación de datos estructurados.",
+            {"entity": f.get("entity"), "path": f.get("path"), "details": f.get("evidence")},
+            f.get("fix") or "Ajustar la propiedad en el generador o plantilla correspondiente con datos reales.",
+        )
+
+    # 3. Validaciones adicionales de tipos prioritarios: AggregateOffer, LocalBusiness, Review y Placeholders sin respaldo real
+    for ent in graph["raw_entities"]:
+        if ent["ref_only"]:
+            continue
+        obj, types = ent["obj"], ent["types"]
+        label = f"{'/'.join(types) or '?'}@{ent['component'] or ent['block']}"
+
+        # Placeholders o plantillas sin resolver en JSON-LD
+        placeholders = _scan_unbacked_or_placeholder_values(obj)
+        if placeholders:
+            add_verified(
+                "SCHEMA-UNBACKED-PLACEHOLDER",
+                "error",
+                "Propiedad JSON-LD con valor placeholder o variable de plantilla sin resolver",
+                "Publica datos ficticios o expresiones Liquid/Twig crudas en el marcado estructurado.",
+                {"entity": label, "placeholders": placeholders},
+                "Condicionar la emisión de la propiedad a que exista un valor real en el objeto del catálogo.",
+            )
+
+        if "AggregateOffer" in types:
+            low = amount(obj.get("lowPrice"))
+            high = amount(obj.get("highPrice"))
+            if low is None or low <= 0:
+                add_verified(
+                    "SCHEMA-AGGOFFER-LOWPRICE",
+                    "error",
+                    "AggregateOffer sin lowPrice numérico positivo",
+                    "Google requiere lowPrice y priceCurrency válidos para evaluar rangos de precios.",
+                    {"entity": label, "lowPrice": obj.get("lowPrice")},
+                    "Asignar el precio mínimo real de las variantes activas (ej. product.price_min).",
+                )
+            if low is not None and high is not None and high < low:
+                add_verified(
+                    "SCHEMA-AGGOFFER-RANGE-INVALID",
+                    "error",
+                    f"AggregateOffer con highPrice ({high}) menor que lowPrice ({low})",
+                    "Contradicción numérica en el rango de ofertas del producto.",
+                    {"entity": label, "lowPrice": low, "highPrice": high},
+                    "Asegurar que lowPrice corresponda al mínimo y highPrice al máximo.",
+                )
+
+        if "LocalBusiness" in types:
+            if not present(obj, "name") or not present(obj, "address"):
+                add_verified(
+                    "SCHEMA-LOCALBUSINESS-REQUIRED",
+                    "error",
+                    "LocalBusiness sin name o address requeridos",
+                    "Las entidades de negocio local requieren nombre y dirección postal verificable.",
+                    {"entity": label, "has_name": present(obj, "name"), "has_address": present(obj, "address")},
+                    "Incluir name y PostalAddress real del negocio sin inventar datos de ubicación.",
+                )
+
+        if "Review" in types:
+            if not present(obj, "author") or not present(obj, "reviewRating"):
+                add_verified(
+                    "SCHEMA-REVIEW-INCOMPLETE",
+                    "error",
+                    "Entidad Review sin author o reviewRating",
+                    "Una reseña estructurada requiere autor real y calificación.",
+                    {"entity": label},
+                    "Emitir Review solo cuando provenga de reseñas reales con autor y puntuación.",
+                )
+
+    # 4. Tipos retirados en Google Rich Results (FAQPage, HowTo, SearchAction)
+    retired_present = {
+        t: note for t, note in RETIRED_GOOGLE_FEATURES.items() if t in graph["types"]
+    }
+
+    # 5. Inspección de archivos fuente (Shopify Liquid, Hydrogen, React, Tiendanube) -> code_hypothesis
+    source_architecture = []
+    for path, content in sorted((source_files or {}).items()):
+        if not isinstance(content, str):
+            continue
+        lower = content.lower()
+        uses_structured_data_filter = "structured_data" in lower and "{{" in content
+        uses_metafields = "metafields." in lower
+        uses_liquid_product = "product." in lower or "selected_or_first_available_variant" in lower
+        uses_hydrogen_seo = "<seo" in lower or "getseometa" in lower or "storefront.query" in lower
+        has_manual_product_ld = bool(re.search(r'"@type"\s*:\s*"Product"', content))
+
+        source_architecture.append({
+            "file": path,
+            "uses_shopify_structured_data_filter": uses_structured_data_filter,
+            "uses_metafields": uses_metafields,
+            "uses_liquid_objects": uses_liquid_product,
+            "uses_hydrogen_storefront": uses_hydrogen_seo,
+            "has_manual_product_jsonld": has_manual_product_ld,
+        })
+
+        if uses_structured_data_filter and has_manual_product_ld:
+            add_hypothesis(
+                "SCHEMA-SRC-DUPLICATE-PRODUCT-FILTER",
+                "warning",
+                "La plantilla combina `{{ product | structured_data }}` con un bloque JSON-LD `Product` manual",
+                "Generará entidades Product duplicadas en el HTML final si ambos bloques se renderizan sin unificar @id.",
+                {"file": path},
+                "Conservar una única fuente de Product o referenciar mediante @id.",
+                [path],
+            )
+        if re.search(r'"ratingValue"\s*:\s*"?[45](?:\.\d+)?"?', content) and "metafield" not in lower and "review" not in lower.split("ratingvalue")[0][-120:]:
+            add_hypothesis(
+                "SCHEMA-SRC-HARDCODED-RATING",
+                "error",
+                "Posible calificación aggregateRating hardcodeada en plantilla",
+                "Inventar o fijar valoraciones estáticas en el código infringe las directrices de calidad de datos estructurados.",
+                {"file": path},
+                "Eliminar calificaciones estáticas y emitir aggregateRating solo desde datos reales verificados.",
+                [path],
+            )
+        if re.search(r'"availability"\s*:\s*"https?://schema\.org/InStock"', content) and "available" not in lower and "outofstock" not in lower:
+            add_hypothesis(
+                "SCHEMA-SRC-HARDCODED-INSTOCK",
+                "warning",
+                "Disponibilidad `InStock` fija en plantilla sin comprobar inventario real (`available`)",
+                "Puede declarar en stock productos agotados, causando discrepancias con el contenido visible y Merchant Center.",
+                {"file": path},
+                "Condicionar availability al estado real de la variante o producto (`product.selected_or_first_available_variant.available`).",
+                [path],
+            )
+        if re.search(r'"(?:name|description)"\s*:\s*"\{\{(?![^}]*\|\s*json\b)[^}]+\}\}"', content):
+            add_hypothesis(
+                "SCHEMA-SRC-UNESCAPED-LIQUID-JSON",
+                "warning",
+                "Interpolación Liquid dentro de comillas JSON sin filtro `| json`",
+                "Si el título o descripción contiene comillas o saltos de línea, romperá la sintaxis del bloque JSON-LD.",
+                {"file": path},
+                "Usar el filtro `| json` de Liquid (sin comillas externas duplicadas) o `structured_data`.",
+                [path],
+            )
+
+    # 6. Verificaciones externas obligatorias
+    if rendered_html is None and not snap.get("json_ld") and not snap.get("microdata"):
+        add_external(
+            "SCHEMA-EXT-RENDERED-DOM-REQUIRED",
+            "Inspección de datos estructurados en el DOM renderizado con JavaScript",
+            "No se observaron bloques JSON-LD en el HTML estático; no se afirma que falte Schema hasta verificar el DOM renderizado.",
+            "Captura de navegador renderizada (--rendered / qa_browser.mjs)",
+            {"url": url, "static_json_ld_count": 0},
+        )
+    add_external(
+        "SCHEMA-EXT-GOOGLE-RRT-AND-GSC",
+        "Confirmación en Google Rich Results Test y reportes de Search Console",
+        "La validez local de sintaxis, vocabulario y consistencia no garantiza la aparición de resultados enriquecidos en Google.",
+        "Google Rich Results Test / Search Console Enhancements",
+        {"url": url},
+    )
+
+    # 7. Propuesta segura de corrección JSON-LD (cuando hay facts autorizados + propose_target, o reparación de coma final)
+    proposal = None
+    if propose_target and facts_doc is not None:
+        # Si el único error de sintaxis es una coma final, reparamos el snapshot temporalmente para poder proponer actualización segura
+        clean_snap = snap
+        if any(b["error"] and b["error"].get("hint") == "trailing_comma" for b in snap.get("json_ld", [])):
+            repaired_blocks = []
+            for b in snap["json_ld"]:
+                if b["error"] and b["error"].get("hint") == "trailing_comma":
+                    rep = repair_trailing_json(b["raw"])
+                    repaired_blocks.append(f'<script type="application/ld+json">{rep["json"]}</script>')
+                elif not b["error"]:
+                    repaired_blocks.append(f'<script type="application/ld+json">{b["raw"]}</script>')
+            clean_snap = extract("".join(repaired_blocks), url)
+        # Resolver modo automáticamente si la entidad ya existe
+        target_exists = any(propose_target in e["types"] and not e["ref_only"] for e in build_graph(clean_snap)["raw_entities"])
+        effective_mode = "update" if target_exists and propose_mode == "missing" else propose_mode
+        # Si hay duplicados conflictivos en el HTML actual, construir propuesta limpia sobre un snapshot de referencia para reemplazar la fuente
+        if build_graph(clean_snap)["conflicts"]:
+            clean_snap = extract("", url)
+            effective_mode = "missing"
+        proposal = generate(project, facts_doc, propose_target, snapshot=clean_snap, mode=effective_mode, fixture=fixture)
+    elif any(b["error"] and b["error"].get("hint") == "trailing_comma" for b in snap.get("json_ld", [])):
+        for b in snap["json_ld"]:
+            if b["error"] and b["error"].get("hint") == "trailing_comma":
+                proposal = {
+                    "kind": "schema-syntax-repair-proposal",
+                    "action": "repair_trailing_comma_at_source",
+                    "block": b["index"],
+                    **repair_trailing_json(b["raw"]),
+                }
+                break
+
+    validation_dimensions = {
+        "syntactic_validity": val_report["states"]["syntax_valid"],
+        "semantic_validity": val_report["states"]["semantic_valid_for_checked_rules"],
+        "visible_and_fact_consistency": val_report["states"]["consistency"],
+        "documented_google_eligibility": {
+            "features": val_report["states"]["google_requirements_met_by_feature"],
+            "retired_google_features_present": retired_present,
+            "note": "Validez en Schema.org no equivale a elegibilidad para rich results en Google.",
+        },
+        "search_console_real_result": "requires_external_verification",
+    }
+
+    return redact({
+        "kind": "schema-skill-audit",
+        "skill": "schema",
+        "reused_engines": ["ipanema-seo-expert", "seo-audit"],
+        "project": project.id,
+        "url": url,
+        "page_type": page_type,
+        "framework": detected_fw,
+        "inventory": {
+            "json_ld_blocks": blocks_inventory,
+            "microdata_count": len(snap.get("microdata", [])),
+            "rdfa_entities_count": len(snap.get("rdfa_entities", [])),
+            "detected_types": graph["types"],
+            "duplicates": graph["duplicates"],
+            "conflicts": graph["conflicts"],
+            "source_architecture": source_architecture,
+        },
+        "validation_dimensions": validation_dimensions,
+        "json_parse_alone_sufficient": False,
+        "rich_results_promised": False,
+        "untrusted_page_data_ignored": True,
+        "verified_by_tool": verified_by_tool,
+        "code_hypothesis": code_hypothesis,
+        "requires_external_verification": requires_external_verification,
+        "proposal": proposal,
+        "counts": {
+            "verified_by_tool": len(verified_by_tool),
+            "code_hypothesis": len(code_hypothesis),
+            "requires_external_verification": len(requires_external_verification),
+            "errors": sum(1 for i in verified_by_tool if i["severity"] == "error"),
+            "warnings": sum(1 for i in verified_by_tool if i["severity"] == "warning"),
+        },
+        "limitations": [
+            "Que un bloque sea JSON válido no demuestra validez semántica ni coincidencia con el contenido visible.",
+            "No se eliminan ni sobrescriben automáticamente bloques generados por aplicaciones externas.",
+            "No se prometen resultados enriquecidos ni mejoras de posicionamiento.",
+        ],
+    })
