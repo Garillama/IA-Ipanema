@@ -37,7 +37,7 @@ def relevant_constraints(request,scope):
     skills=route(request)['skills']
     if 'web-quality-audit' in skills:
         return ['accessibility', 'performance', 'responsive', 'seo']
-    names={'ipanema-seo-expert':'seo','ipanema-performance':'performance',
+    names={'ipanema-seo-expert':'seo','seo-audit':'seo','ipanema-performance':'performance',
            'cloudflare-web-perf':'performance',
            'ipanema-responsive':'responsive','ipanema-visual-qa':'accessibility'}
     return sorted({criterion for skill,criterion in names.items() if skill in skills})

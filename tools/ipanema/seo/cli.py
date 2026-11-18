@@ -4,13 +4,13 @@ from __future__ import annotations
 import os
 from pathlib import Path
 
-from ..core import IpanemaError, read_json, write_json
+from ..core import IpanemaError, beneath, read_json, write_json
 from . import reports
-from .adapters import OPERATIONS, OfficialREST, ReadOnlyAdapter, import_observation
+from .adapters import OPERATIONS, OfficialREST, ReadOnlyAdapter, authorize_url, import_observation
 from .extractor import extract
 from .generator import generate, repair_trailing_json
 from .intelligence import compare_periods, correlate
-from .page_audit import PAGE_SCHEMAS
+from .page_audit import PAGE_SCHEMAS, comprehensive_seo_audit
 
 
 def add_parser(sub):
@@ -48,6 +48,18 @@ def add_parser(sub):
     comp = commands.add_parser('compare-periods')
     comp.add_argument('before', type=Path); comp.add_argument('after', type=Path)
     commands.add_parser('evals')
+    tech = commands.add_parser('technical-audit', help='Auditoría SEO integral (seo-audit) separando evidencia, hipótesis y verificación externa.')
+    tech.add_argument('--html', type=Path, required=True)
+    tech.add_argument('--url', required=True)
+    tech.add_argument('--type', choices=list(PAGE_SCHEMAS), default='page')
+    tech.add_argument('--rendered', type=Path)
+    tech.add_argument('--no-js', type=Path)
+    tech.add_argument('--robots', type=Path)
+    tech.add_argument('--sitemap', type=Path)
+    tech.add_argument('--status', type=int, default=200)
+    tech.add_argument('--framework', choices=('shopify-liquid', 'shopify-hydrogen', 'react-web', 'tiendanube-ipanema'))
+    tech.add_argument('--source-file', type=Path, action='append', default=[])
+    tech.add_argument('--quality-report', type=Path)
 
 
 def execute(project, args):
@@ -116,14 +128,41 @@ def execute(project, args):
     elif command == 'evals':
         from .evals import evaluate
         result = evaluate()
+    elif command == 'technical-audit':
+        authorize_url(project, args.url)
+        allowed_roots = [project.root] + ([project.theme_root] if project.theme_root else [])
+        source_files = {}
+        for sf in args.source_file:
+            resolved = sf.resolve()
+            if not any(beneath(resolved, r) for r in allowed_roots) or not resolved.is_file():
+                raise IpanemaError('Archivo fuente fuera del alcance autorizado o inexistente.')
+            source_files[sf.name] = reports.read_text(resolved)
+        result = comprehensive_seo_audit(
+            project,
+            reports.read_text(args.html),
+            args.url,
+            args.type,
+            status=args.status,
+            rendered_html=reports.read_text(args.rendered) if args.rendered else None,
+            no_js_html=reports.read_text(args.no_js) if args.no_js else None,
+            robots_text=reports.read_text(args.robots) if args.robots else None,
+            sitemap_xml=reports.read_text(args.sitemap) if args.sitemap else None,
+            source_files=source_files,
+            quality_audit_report=read_json(args.quality_report) if args.quality_report else None,
+            framework=args.framework,
+        )
+        inputs = [p for p in (args.html, args.rendered, args.no_js, args.robots, args.sitemap, args.quality_report) if p] + list(args.source_file)
     else:
         raise IpanemaError('Comando SEO desconocido.')
     saved = reports.save_report(project, result, 'seo-' + command, inputs)
     if result.get('kind') == 'seo-agent-evals':
         saved.update({'outcome': result['outcome'], 'cases': len(result['cases'])})
         return saved, 0 if result['outcome'] == 'passed' else 1
+    if result.get('kind') == 'seo-technical-audit':
+        saved.update({'skill': result['skill'], 'framework': result['framework'], 'counts': result['counts']})
     if result.get('status') and result['status'] not in ('observed', 'imported_observation', 'already_parseable', 'repaired_artifact_only'):
         return {**saved, 'status': result['status']}, 2
     # Findings are reported, not swallowed by a successful process exit.
-    errors = sum(f['severity'] == 'error' for f in result.get('findings', []))
+    finding_rows = result.get('verified_by_tool') if result.get('kind') == 'seo-technical-audit' else result.get('findings', [])
+    errors = sum(f['severity'] == 'error' for f in finding_rows)
     return {**saved, 'error_findings': errors}, 1 if errors else 0

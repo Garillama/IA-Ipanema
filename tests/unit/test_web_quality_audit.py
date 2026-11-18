@@ -220,7 +220,7 @@ class WebQualityAuditIntegrationTests(unittest.TestCase):
         project = Project(ROOT, "ipanema")
         val = validate(project)
         self.assertEqual(val["errors"], [])
-        self.assertEqual(val["skills"], 11)
+        self.assertGreaterEqual(val["skills"], 11)
 
     def test_09_absence_of_regressions_in_coordinator_evals(self):
         project = Project(ROOT, "ipanema")

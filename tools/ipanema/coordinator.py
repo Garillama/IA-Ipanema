@@ -12,7 +12,12 @@ SPECIALTIES = {
                   "docs": ["01-architecture/dependency-map.md", "01-architecture/platform-limitations.md"]},
     "component-builder": {"terms": ["hero", "seccion", "bloque", "componente", "snippet", "schema", "tarjeta", "card", "carrusel"],
                           "docs": ["02-native-components/component-inventory.md", "12-playbooks/build-new-section.md"]},
-    "seo-expert": {"terms": ["seo", "google", "rastre", "index", "canonical", "h1", "heading", "enlace", "sitemap", "robots", "json-ld", "jsonld", "schema.org", "estructurad", "productgroup", "merchant", "search console", "analytics", "ctr", "blogposting", "breadcrumb"],
+    "seo-expert": {"terms": ["seo", "seo-audit", "google", "rastre", "index", "noindex", "nofollow", "canonical", "h1",
+                             "heading", "enlace", "sitemap", "robots", "hreflang", "meta description", "meta title",
+                             "title tag", "redireccion", "redirect", "paginacion", "pagination", "canibalizacion",
+                             "cannibalization", "thin content", "contenido duplicado", "duplicate content", "faceted",
+                             "parametro", "json-ld", "jsonld", "schema.org", "estructurad", "productgroup", "merchant",
+                             "search console", "analytics", "ctr", "blogposting", "breadcrumb"],
                    "docs": ["04-seo/seo-engine.md", "04-seo/structured-data.md"]},
     "performance": {"terms": ["rendimiento", "performance", "web-perf", "lento", "velocidad", "core web vitals", "cwv",
                               "lcp", "cls", "tbt", "inp", "ttfb", "fcp", "speed index", "lighthouse", "pagespeed", "crux",
@@ -55,22 +60,27 @@ EXTERNAL_SKILLS = {
         "skill_path": ".agents/skills/web-quality-audit/SKILL.md",
         "reuses": ["cloudflare-web-perf"],
     },
+    "seo-audit": {
+        "name": "seo-audit",
+        "domain": "seo",
+        "role": "primary",
+        "source_repo": "https://github.com/coreyhaines31/marketingskills",
+        "source_path": "skills/seo-audit/SKILL.md",
+        "source_commit": "73573e94a06a39965978b3fa1f9c1eace8cebc7c",
+        "source_sha1": "b33eecef416f2c5e5e2ae49eeafc3c81f88f445e",
+        "license": "MIT",
+        "skill_path": ".agents/skills/seo-audit/SKILL.md",
+        "reuses": ["ipanema-seo-expert", "web-quality-audit"],
+    },
 }
 
-QUALITY_AUDIT_TERMS = (
+EXPLICIT_QUALITY_TERMS = (
     "web-quality-audit",
     "calidad web",
     "web quality",
     "page quality",
     "calidad de pagina",
     "calidad de la pagina",
-    "auditoria completa",
-    "auditoria integral",
-    "auditoria general",
-    "revision general",
-    "revision integral",
-    "diagnostico tecnico",
-    "diagnostico integral",
     "buenas practicas",
     "best practices",
     "best-practices",
@@ -81,6 +91,18 @@ QUALITY_AUDIT_TERMS = (
     "auditoria de lighthouse",
     "lighthouse audit",
 )
+
+GENERAL_AUDIT_TERMS = (
+    "auditoria completa",
+    "auditoria integral",
+    "auditoria general",
+    "revision general",
+    "revision integral",
+    "diagnostico tecnico",
+    "diagnostico integral",
+)
+
+QUALITY_AUDIT_TERMS = EXPLICIT_QUALITY_TERMS + GENERAL_AUDIT_TERMS
 
 AUTHORIZED_SKILLS = frozenset([
     "ipanema-storefront",
@@ -111,7 +133,11 @@ def detect_context(request: str, project: Project | None = None) -> dict:
 def route(request: str):
     text = normal(request)
     selected, reasons = [], {}
-    quality_matches = [t for t in QUALITY_AUDIT_TERMS if t in text]
+    explicit_quality = [t for t in EXPLICIT_QUALITY_TERMS if t in text]
+    general_quality = [t for t in GENERAL_AUDIT_TERMS if t in text]
+    seo_scoped = bool(re.search(r"(?<![\w-])(?:seo|seo-audit|hreflang|canonical|sitemap|robots|noindex|indexa|rastre)", text))
+    perf_scoped = bool(re.search(r"(?<![\w-])(?:rendimiento|performance|web-perf|lcp|cls|tbt|inp|ttfb|fcp|cwv|core web vitals)", text))
+    quality_matches = explicit_quality + ([] if (seo_scoped or perf_scoped) and not explicit_quality else general_quality)
     for key, spec in SPECIALTIES.items():
         if key == "performance" and quality_matches and not any(
             t in text for t in ("cloudflare-web-perf", "lcp", "cls", "tbt", "inp", "ttfb", "fcp", "cwv", "core web vitals")
@@ -150,11 +176,20 @@ def route(request: str):
             skills.append("cloudflare-web-perf")
             primary_skills["performance"] = "cloudflare-web-perf"
             external_active.append(EXTERNAL_SKILLS["cloudflare-web-perf"])
+        if "seo-audit" in text:
+            skills.append("seo-audit")
+            primary_skills["seo"] = "seo-audit"
+            external_active.append(EXTERNAL_SKILLS["seo-audit"])
     for s in selected:
         if s == "performance" and not quality_matches:
             skills.append("cloudflare-web-perf")
             primary_skills["performance"] = "cloudflare-web-perf"
             external_active.append(EXTERNAL_SKILLS["cloudflare-web-perf"])
+        if s == "seo-expert" and not quality_matches:
+            skills.append("seo-audit")
+            primary_skills["seo"] = "seo-audit"
+            external_active.append(EXTERNAL_SKILLS["seo-audit"])
+            reused_engines.append("ipanema-seo-expert")
         skills.append("ipanema-" + s)
     ctx = detect_context(request)
     return {"skills": skills, "primary_skills": primary_skills, "external_skills": external_active,
