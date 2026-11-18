@@ -30,6 +30,10 @@ def add_parser(sub):
     compare.add_argument('before', type=Path)
     compare.add_argument('after', type=Path)
     compare.add_argument('--source', choices=('pagespeed','lighthouse_local'), default='pagespeed')
+    diagnose = commands.add_parser('diagnose', help='Diagnóstico offline Cloudflare Web Performance sobre evidencia capturada.')
+    diagnose.add_argument('report', type=Path)
+    diagnose.add_argument('--rendered', type=Path)
+    diagnose.add_argument('--preconnect', action='append', default=[])
 
 
 def execute(project, args):
@@ -41,6 +45,11 @@ def execute(project, args):
         return {'project':project.id, 'credentials':credentials, 'network_tested':False,
                 'local_lighthouse':'Usa doctor general para versiones instaladas.',
                 'production_operations':False}, 0
+    if op == 'diagnose':
+        payload = read_json(args.report)
+        rendered = read_json(args.rendered) if args.rendered else payload.get('rendered')
+        network = payload.get('navigation_network') or (rendered.get('navigation_network') if isinstance(rendered, dict) else None)
+        return model.diagnose_web_perf(payload, network_records=network, rendered=rendered, preconnect_origins=args.preconnect), 0
     if op == 'compare':
         before, after = read_json(args.before), read_json(args.after)
         result = model.compare(before.get('sources',{}).get(args.source,before), after.get('sources',{}).get(args.source,after))

@@ -14,7 +14,11 @@ SPECIALTIES = {
                           "docs": ["02-native-components/component-inventory.md", "12-playbooks/build-new-section.md"]},
     "seo-expert": {"terms": ["seo", "google", "rastre", "index", "canonical", "h1", "heading", "enlace", "sitemap", "robots", "json-ld", "jsonld", "schema.org", "estructurad", "productgroup", "merchant", "search console", "analytics", "ctr", "blogposting", "breadcrumb"],
                    "docs": ["04-seo/seo-engine.md", "04-seo/structured-data.md"]},
-    "performance": {"terms": ["rendimiento", "lento", "velocidad", "lcp", "cls", "tbt", "inp", "imagen", "descarg", "recurso", "fuente", "javascript"],
+    "performance": {"terms": ["rendimiento", "performance", "web-perf", "lento", "velocidad", "core web vitals", "cwv",
+                              "lcp", "cls", "tbt", "inp", "ttfb", "fcp", "speed index", "lighthouse", "pagespeed", "crux",
+                              "render-blocking", "bloqueante", "waterfall", "preload", "preconnect", "fetchpriority",
+                              "currentsrc", "srcset", "bundle", "tree-shaking", "polyfill", "imagen", "descarg", "recurso",
+                              "fuente", "javascript"],
                     "docs": ["05-performance/image-loading.md", "05-performance/core-web-vitals.md"]},
     "responsive": {"terms": ["responsive", "mobile", "movil", "desktop", "tablet", "overflow", "breakpoint", "layout", "espaciado", "columna", "tarjeta", "card"],
                    "docs": ["03-editor/responsive-controls.md", "08-design-system/responsive-system.md"]},
@@ -25,6 +29,45 @@ SPECIALTIES = {
     "commerce": {"terms": ["tarjeta", "card", "pdp", "variante", "precio", "stock", "carrito", "checkout", "compra", "descuento"],
                  "docs": ["07-commerce/product-cards.md", "07-commerce/cart.md"]},
 }
+
+EXTERNAL_SKILLS = {
+    "cloudflare-web-perf": {
+        "name": "cloudflare-web-perf",
+        "domain": "performance",
+        "role": "primary",
+        "source_repo": "https://github.com/cloudflare/skills",
+        "source_path": "skills/web-perf/SKILL.md",
+        "source_commit": "5108325ecceabc899c761e07aa617b09c02445ee",
+        "source_sha1": "9c70b7079aef1fbac9af3669bd38d5dfb712f4b7",
+        "license": "Apache-2.0",
+        "skill_path": ".agents/skills/cloudflare-web-perf/SKILL.md",
+    },
+}
+
+AUTHORIZED_SKILLS = frozenset([
+    "ipanema-storefront",
+    *(f"ipanema-{k}" for k in SPECIALTIES),
+    *EXTERNAL_SKILLS.keys(),
+])
+
+
+def detect_context(request: str, project: Project | None = None) -> dict:
+    text = normal(request)
+    if any(t in text for t in ("hydrogen", "remix")):
+        framework = "shopify-hydrogen"
+    elif any(t in text for t in ("shopify", "liquid")):
+        framework = "shopify-liquid"
+    elif any(t in text for t in ("nextjs", "next.js", "react", "vite", "webpack", "rollup", "esbuild", "astro")):
+        framework = "react-web"
+    elif any(t in text for t in ("ipanema", "tiendanube", "nuvemshop")):
+        framework = "tiendanube-ipanema"
+    elif project and project.theme_root and (project.theme_root / "layouts/layout.tpl").is_file():
+        framework = "tiendanube-ipanema"
+    elif project and project.theme_root and (project.theme_root / "layout/theme.liquid").is_file():
+        framework = "shopify-liquid"
+    else:
+        framework = "tiendanube-ipanema" if project else "generic-web"
+    return {"framework": framework, "on_demand_loading": True}
 
 
 def route(request: str):
@@ -46,7 +89,18 @@ def route(request: str):
         reasons["architect"] = ["consumidores de tarjeta compartida"]
     if not selected:
         selected, reasons = ["architect"], {"architect": ["alcance desconocido: investigar antes de afirmar"]}
-    return {"skills": ["ipanema-" + s for s in selected], "reasons": reasons,
+    skills = []
+    primary_skills = {}
+    external_active = []
+    for s in selected:
+        if s == "performance":
+            skills.append("cloudflare-web-perf")
+            primary_skills["performance"] = "cloudflare-web-perf"
+            external_active.append(EXTERNAL_SKILLS["cloudflare-web-perf"])
+        skills.append("ipanema-" + s)
+    ctx = detect_context(request)
+    return {"skills": skills, "primary_skills": primary_skills, "external_skills": external_active,
+            "framework": ctx["framework"], "reasons": reasons,
             "selection_method": "deterministic_assistance", "parallel_agents_invoked": False}
 
 
@@ -74,7 +128,8 @@ def plan(project: Project, request: str, action="read", authorized_local=False):
                   "Consultar entidades nativas antes de generar; no inventar precio, disponibilidad, reviews o políticas."]
     if "performance" in selection["reasons"]:
         tests += ["Capturar solicitudes/bytes y currentSrc; DOM no equivale a descarga.",
-                  "Lighthouse antes/después, mismo perfil; TBT no es INP de usuarios."]
+                  "Lighthouse antes/después, mismo perfil; TBT no es INP de usuarios.",
+                  "cloudflare-web-perf: analizar LCP/CLS/INP (campo) y TTFB/FCP/TBT (laboratorio), recursos bloqueantes (>0 ms), cadenas de red e imágenes responsivas."]
     if "responsive" in selection["reasons"]:
         tests += ["360, 390, 768, 1024, 1440 y 1920 px; overflow y orden de lectura sin duplicar contenido."]
     if "commerce" in selection["reasons"]:
@@ -104,6 +159,7 @@ def plan(project: Project, request: str, action="read", authorized_local=False):
     if "motion" in selection["reasons"]:
         required_checks += ["reduced-motion"]
     return {"agent_version": "2.0.0", "at": now(), "project": project.id, "objective": request,
+            "context": detect_context(request, project),
             "problem": "Confirmar la causa en la implementación real; la petición sola no demuestra un defecto.",
             "selection": selection, "permission": safety(action, authorized_local),
             "investigation": investigation, "evidence": context,

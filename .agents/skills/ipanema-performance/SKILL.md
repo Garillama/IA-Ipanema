@@ -5,7 +5,7 @@ description: Medir y optimizar carga, imágenes, CSS, JavaScript, fuentes y terc
 
 # Ipanema performance
 
-Activa esta especialidad cuando la petición requiera su responsabilidad descrita arriba. El proyecto y permisos provienen de [AGENTS.md](../../../AGENTS.md); la coordinadora está en el directorio hermano ipanema-storefront. No cargues otras especialidades por defecto.
+Activa esta especialidad cuando la petición requiera su responsabilidad descrita arriba. El proyecto y permisos provienen de [AGENTS.md](../../../AGENTS.md); la coordinadora está en el directorio hermano ipanema-storefront. Coordina el diagnóstico de Core Web Vitals, trazas DevTools, cascadas de red y bundlers con la skill principal de rendimiento [cloudflare-web-perf](../cloudflare-web-perf/SKILL.md) sin duplicar mediciones. No cargues otras especialidades por defecto.
 
 Fuentes principales, con carga selectiva: [image-loading](../../../ipanema-discovery/05-performance/image-loading.md) · [javascript](../../../ipanema-discovery/05-performance/javascript.md) · [performance-budgets](../../../ipanema-discovery/05-performance/performance-budgets.md) · [performance-checklist](../../../ipanema-discovery/12-playbooks/performance-checklist.md). El discovery es evidencia fechada; confirma archivo actual, compatibilidad y límites antes de usar una conclusión.
 

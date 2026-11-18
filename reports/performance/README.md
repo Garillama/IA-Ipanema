@@ -1,6 +1,6 @@
 # Performance Intelligence — uso y verificación
 
-Integra PageSpeed primero y CrUX actual/History después, conservando el motor Lighthouse y Chrome DevTools MCP. No instala dependencias, conecta cuentas ni modifica tiendas. [Decisión y objeciones reales](ADR-001.md). Estado: implementación local; QA y revisión se registran en [verification.json](verification.json). Conectividad Google no comprobada sin claves.
+Integra PageSpeed primero y CrUX actual/History después, conservando el motor Lighthouse y Chrome DevTools MCP. No instala dependencias, conecta cuentas ni modifica tiendas. [Decisión y objeciones reales](ADR-001.md) · [Integración Cloudflare Web Performance](cloudflare-web-perf-integration.md). Estado: implementación local; QA y revisión se registran en [verification.json](verification.json). Conectividad Google no comprobada sin claves.
 
 ## Fuentes y alcance
 

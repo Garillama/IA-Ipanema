@@ -139,8 +139,10 @@ def config(project):
 
 def instruction_context(project,plan):
     skills={}
+    from ..coordinator import AUTHORIZED_SKILLS
     for name in plan['skills']:
-        if not __import__('re').fullmatch('ipanema-[a-z-]+',name):raise IpanemaError('Skill fuera del catálogo.')
+        if not (__import__('re').fullmatch('ipanema-[a-z-]+',name) or name in AUTHORIZED_SKILLS):
+            raise IpanemaError('Skill fuera del catálogo.')
         path=project.root/'.agents/skills'/name/'SKILL.md'
         if not beneath(path,project.root/'.agents/skills'):raise IpanemaError('Skill fuera de la raíz autorizada.')
         if path.is_file():skills[name]=path.read_text()

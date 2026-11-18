@@ -22,7 +22,8 @@ def classify(request,files=()):
     critical=[t for t in ('precio','price','stock','inventory','carrito','cart','checkout','cupon','discount','descuento','pago','payment','credencial','autenticacion') if re.search(r'(?<!\w)'+t,text)]
     production=[t for t in ('publicar','publish','deploy','push remoto','sincronizar','watch','produccion') if t in text]
     complex_terms=[t for t in ('arquitectura','migracion','global','compartido','carrusel','carousel','refactor','variante') if t in text]
-    specialties=route(request)['skills']
+    routed=route(request)
+    specialties=routed.get('reasons') or routed['skills']
     level=4 if critical or production else 3 if complex_terms or len(files)>3 else 2 if len(specialties)>2 or len(files)>1 else 1
     return {'level':'L'+str(level),'risk':'critical' if level==4 else 'high' if level==3 else 'normal',
             'reasons':critical+production+complex_terms or ['Alcance acotado según petición y archivos'],
@@ -35,6 +36,7 @@ def relevant_constraints(request,scope):
     if scope=='theme':return ['seo','performance','accessibility','responsive']
     skills=route(request)['skills']
     names={'ipanema-seo-expert':'seo','ipanema-performance':'performance',
+           'cloudflare-web-perf':'performance',
            'ipanema-responsive':'responsive','ipanema-visual-qa':'accessibility'}
     return sorted({criterion for skill,criterion in names.items() if skill in skills})
 

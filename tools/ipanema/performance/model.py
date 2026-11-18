@@ -204,3 +204,213 @@ def findings(result, url, device):
                      'risks': ['Regresión fuera del alcance de una auditoría automática.'], 'estimated_cost': None,
                      'required_tests': ['Perfil comparable antes/después', 'QA funcional, SEO, accesibilidad y revisión independiente']})
     return rows
+
+
+CWV_THRESHOLDS = {
+    'ttfb': (800.0, 1800.0, 'ms'),
+    'fcp': (1800.0, 3000.0, 'ms'),
+    'lcp': (2500.0, 4000.0, 'ms'),
+    'inp': (200.0, 500.0, 'ms'),
+    'tbt': (200.0, 600.0, 'ms'),
+    'cls': (0.1, 0.25, 'unitless'),
+    'speed_index': (3400.0, 5800.0, 'ms'),
+}
+
+
+def rate_metric(metric: str, value) -> str:
+    num = numeric(value)
+    if num is None or metric not in CWV_THRESHOLDS or num < 0:
+        return 'not_measured'
+    good_max, poor_min, _ = CWV_THRESHOLDS[metric]
+    if num <= good_max:
+        return 'good'
+    if num <= poor_min:
+        return 'needs-improvement'
+    return 'poor'
+
+
+def _extract_origin(url: str) -> str | None:
+    if not isinstance(url, str) or not url.startswith(('http://', 'https://')):
+        return None
+    try:
+        u = urlsplit(url)
+        return f'{u.scheme}://{u.netloc}' if u.hostname else None
+    except ValueError:
+        return None
+
+
+def diagnose_web_perf(payload: dict, *, network_records: list | None = None, rendered: dict | None = None, preconnect_origins: list | None = None) -> dict:
+    """Diagnóstico Cloudflare Web Performance: separa campo/laboratorio, filtra 0ms y analiza red/imágenes."""
+    sources = payload.get('sources') if isinstance(payload.get('sources'), dict) else {}
+    if not sources and isinstance(payload.get('measurement'), str):
+        sources = {payload.get('source', 'primary'): payload}
+
+    field_summary = {}
+    lab_summary = {}
+    audits = {}
+
+    for src_name, src in sources.items():
+        if not isinstance(src, dict):
+            continue
+        kind = src.get('measurement')
+        if kind == 'field':
+            for m, data in (src.get('metrics') or {}).items():
+                val = numeric(data.get('p75')) if isinstance(data, dict) else numeric(data)
+                field_summary[m] = {
+                    'value': val,
+                    'unit': CWV_THRESHOLDS.get(m, (0, 0, 'ms'))[2],
+                    'rating': rate_metric(m, val),
+                    'source': src_name,
+                }
+        elif kind in ('laboratory', 'lighthouse-laboratory'):
+            obs_audits = (src.get('observations') or {}).get('audits') or src.get('audits') or {}
+            if isinstance(obs_audits, dict) and not audits:
+                audits = obs_audits
+            metrics = dict(src.get('metrics') or {})
+            if metrics.get('ttfb') is None:
+                srv = obs_audits.get('server-response-time') or {}
+                lcp_b = ((obs_audits.get('lcp-breakdown-insight') or {}).get('details') or {}).get('items') or []
+                metrics['ttfb'] = numeric(srv.get('numericValue'))
+                if metrics['ttfb'] is None and lcp_b and isinstance(lcp_b[0], dict):
+                    metrics['ttfb'] = numeric(lcp_b[0].get('ttfb'))
+            for m in ('ttfb', 'fcp', 'lcp', 'tbt', 'cls', 'speed_index'):
+                val = numeric(metrics.get(m))
+                lab_summary[m] = {
+                    'value': val,
+                    'unit': CWV_THRESHOLDS[m][2],
+                    'rating': rate_metric(m, val),
+                    'source': src_name,
+                }
+
+    if rendered and isinstance(rendered, dict):
+        nav = rendered.get('navigation') or []
+        if nav and isinstance(nav[0], dict) and ('ttfb' not in lab_summary or lab_summary['ttfb']['value'] is None):
+            req_s = numeric(nav[0].get('requestStart'))
+            res_s = numeric(nav[0].get('responseStart'))
+            if req_s is not None and res_s is not None and res_s >= req_s:
+                ttfb_val = round(res_s - req_s, 2)
+                lab_summary['ttfb'] = {'value': ttfb_val, 'unit': 'ms', 'rating': rate_metric('ttfb', ttfb_val), 'source': 'navigation_timing'}
+
+    # 1. Render-blocking resources (skip 0ms impact per Cloudflare web-perf guideline)
+    rb_audit = audits.get('render-blocking-resources') or audits.get('render-blocking-insight') or {}
+    rb_items = ((rb_audit.get('details') or {}).get('items')) or []
+    actionable_rb, skipped_zero_rb = [], []
+    for item in rb_items:
+        if not isinstance(item, dict):
+            continue
+        wasted_ms = numeric(item.get('wastedMs')) or 0.0
+        entry = {
+            'url': sanitize(item.get('url', '')),
+            'wasted_ms': wasted_ms,
+            'total_bytes': numeric(item.get('totalBytes')),
+        }
+        if wasted_ms > 0:
+            actionable_rb.append(entry)
+        else:
+            skipped_zero_rb.append(entry)
+    actionable_rb.sort(key=lambda r: r['wasted_ms'], reverse=True)
+
+    # 2. Network analysis: duplicate resources, redirects, unused preconnects
+    net_rows = list(network_records or [])
+    if not net_rows:
+        net_audit_items = (((audits.get('network-requests') or {}).get('details') or {}).get('items')) or []
+        for item in net_audit_items:
+            if isinstance(item, dict) and item.get('url'):
+                net_rows.append({
+                    'url': item.get('url'),
+                    'type': item.get('resourceType'),
+                    'status': item.get('statusCode'),
+                    'encoded_bytes': numeric(item.get('transferSize')),
+                    'redirect_hop': 0,
+                })
+    url_counts = {}
+    redirects = []
+    observed_origins = set()
+    large_resources = []
+    for row in net_rows:
+        if not isinstance(row, dict):
+            continue
+        clean_u = sanitize(row.get('url', ''))
+        orig = _extract_origin(clean_u)
+        if orig:
+            observed_origins.add(orig)
+        if row.get('redirect') or (numeric(row.get('redirect_hop')) or 0) > 0:
+            redirects.append({'url': clean_u, 'hop': row.get('redirect_hop', 0), 'status': row.get('status')})
+        else:
+            if clean_u:
+                url_counts[clean_u] = url_counts.get(clean_u, 0) + 1
+            size = numeric(row.get('encoded_bytes'))
+            if size is not None and size >= 150_000:
+                large_resources.append({'url': clean_u, 'type': row.get('type'), 'encoded_bytes': size})
+
+    duplicate_resources = [{'url': u, 'count': c} for u, c in sorted(url_counts.items()) if c > 1]
+    large_resources.sort(key=lambda r: r['encoded_bytes'], reverse=True)
+
+    declared_preconnects = set()
+    for orig in (preconnect_origins or []):
+        extracted = _extract_origin(orig) or orig
+        if isinstance(extracted, str) and extracted:
+            declared_preconnects.add(extracted)
+    unused_preconnects = sorted(o for o in declared_preconnects if o not in observed_origins)
+    verified_preconnects = sorted(o for o in declared_preconnects if o in observed_origins)
+
+    # 3. Network dependency chains & LCP breakdown
+    lcp_breakdown_items = (((audits.get('lcp-breakdown-insight') or {}).get('details') or {}).get('items')) or []
+    lcp_breakdown = lcp_breakdown_items[0] if lcp_breakdown_items and isinstance(lcp_breakdown_items[0], dict) else None
+    lcp_discovery_items = (((audits.get('lcp-discovery-insight') or {}).get('details') or {}).get('items')) or []
+    chains_details = (audits.get('critical-request-chains') or audits.get('network-dependency-tree-insight') or {}).get('details') or {}
+
+    # 4. Responsive images and loading priorities
+    image_issues = {'lcp_lazy_loaded': False, 'lcp_missing_high_priority': False, 'unsized_images': [], 'oversized_images': []}
+    if rendered and isinstance(rendered, dict):
+        perf_obs = rendered.get('performance') or {}
+        lcp_entries = perf_obs.get('lcp') or []
+        if lcp_entries and isinstance(lcp_entries[-1], dict):
+            last_lcp = lcp_entries[-1]
+            if last_lcp.get('tag') == 'IMG':
+                if str(last_lcp.get('loading') or '').lower() == 'lazy':
+                    image_issues['lcp_lazy_loaded'] = True
+                if str(last_lcp.get('fetchPriority') or '').lower() != 'high':
+                    image_issues['lcp_missing_high_priority'] = True
+        for img in rendered.get('images') or []:
+            if not isinstance(img, dict):
+                continue
+            src = sanitize(img.get('currentSrc') or img.get('src') or '')
+            w, h = numeric(img.get('width')), numeric(img.get('height'))
+            nw = numeric(img.get('naturalWidth'))
+            if img.get('visible') and (not w or not h):
+                image_issues['unsized_images'].append({'src': src, 'width': w, 'height': h})
+            if w and nw and nw > w * 1.5 and (nw - w) >= 200:
+                image_issues['oversized_images'].append({
+                    'src': src,
+                    'rendered_width': w,
+                    'natural_width': nw,
+                    'has_srcset': bool(img.get('srcset')),
+                    'sizes': img.get('sizes'),
+                })
+
+    return {
+        'skill': 'cloudflare-web-perf',
+        'field_vs_lab_separated': True,
+        'field_metrics': field_summary,
+        'lab_metrics': lab_summary,
+        'render_blocking': {
+            'actionable': actionable_rb,
+            'zero_impact_skipped': skipped_zero_rb,
+        },
+        'network': {
+            'duplicate_resources': duplicate_resources,
+            'redirects': redirects,
+            'large_resources': large_resources,
+            'unused_preconnects': unused_preconnects,
+            'verified_preconnects': verified_preconnects,
+            'lcp_breakdown': lcp_breakdown,
+            'lcp_discovery': lcp_discovery_items,
+            'dependency_chains_present': bool(chains_details),
+        },
+        'images': image_issues,
+        'limitations': [
+            'TBT es métrica de laboratorio y nunca sustituye a INP de campo.',
+            'Recursos con 0ms de impacto estimado se registran pero no se recomiendan como cambios.',
+        ],
+    }
