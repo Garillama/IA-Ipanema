@@ -35,6 +35,8 @@ def relevant_constraints(request,scope):
     # Recomputed by the controller; a saved plan cannot silently remove these.
     if scope=='theme':return ['seo','performance','accessibility','responsive']
     skills=route(request)['skills']
+    if 'web-quality-audit' in skills:
+        return ['accessibility', 'performance', 'responsive', 'seo']
     names={'ipanema-seo-expert':'seo','ipanema-performance':'performance',
            'cloudflare-web-perf':'performance',
            'ipanema-responsive':'responsive','ipanema-visual-qa':'accessibility'}

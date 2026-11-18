@@ -414,3 +414,508 @@ def diagnose_web_perf(payload: dict, *, network_records: list | None = None, ren
             'Recursos con 0ms de impacto estimado se registran pero no se recomiendan como cambios.',
         ],
     }
+
+
+FRAMEWORK_CANDIDATES = {
+    'shopify-liquid': {
+        'performance': ['layout/theme.liquid', 'sections/hero.liquid', 'snippets/image.liquid'],
+        'accessibility': ['layout/theme.liquid', 'sections/header.liquid', 'snippets/product-card.liquid'],
+        'seo': ['layout/theme.liquid', 'templates/product.json', 'sections/main-product.liquid'],
+        'best-practices': ['layout/theme.liquid', 'config/settings_schema.json'],
+        'interaction': ['assets/global.js', 'sections/header.liquid'],
+    },
+    'shopify-hydrogen': {
+        'performance': ['app/root.tsx', 'app/routes/_index.tsx', 'vite.config.ts'],
+        'accessibility': ['app/root.tsx', 'app/components/Header.tsx'],
+        'seo': ['app/root.tsx', 'app/routes/products.$handle.tsx'],
+        'best-practices': ['app/entry.server.tsx', 'vite.config.ts'],
+        'interaction': ['app/components/CartMain.tsx', 'app/root.tsx'],
+    },
+    'react-web': {
+        'performance': ['index.html', 'vite.config.ts', 'src/App.tsx'],
+        'accessibility': ['index.html', 'src/App.tsx'],
+        'seo': ['index.html', 'src/main.tsx'],
+        'best-practices': ['index.html', 'package.json'],
+        'interaction': ['src/App.tsx'],
+    },
+    'tiendanube-ipanema': {
+        'performance': ['layouts/layout.tpl', 'sections/hero.tpl', 'snippets/image.tpl'],
+        'accessibility': ['layouts/layout.tpl', 'snippets/product-list/product-item/item.tpl'],
+        'seo': ['layouts/layout.tpl', 'templates/product.tpl'],
+        'best-practices': ['layouts/layout.tpl', 'config/settings_schema.json'],
+        'interaction': ['static/js/store.js.tpl', 'layouts/layout.tpl'],
+    },
+}
+
+GENERIC_LINK_LABELS = frozenset({
+    'click here', 'read more', 'learn more', 'more', 'here', 'link',
+    'clic aqui', 'clic aquí', 'leer mas', 'leer más', 'ver mas', 'ver más', 'aqui', 'aquí',
+})
+
+
+def infer_framework(framework: str | None = None, source_files: dict[str, str] | None = None) -> str:
+    if framework in FRAMEWORK_CANDIDATES:
+        return framework
+    paths = [p.lower() for p in (source_files or {})]
+    joined = ' '.join(paths)
+    contents = ' '.join((source_files or {}).values()).lower()
+    if any(p.endswith('.liquid') for p in paths) or 'content_for_header' in contents:
+        return 'shopify-liquid'
+    if '@shopify/hydrogen' in contents or ('app/routes/' in joined and any(p.endswith(('.tsx', '.jsx')) for p in paths)):
+        return 'shopify-hydrogen'
+    if any(p.endswith('.tpl') for p in paths) or 'snippets/image.tpl' in joined:
+        return 'tiendanube-ipanema'
+    if any(p.endswith(('.tsx', '.jsx')) for p in paths) or 'vite.config' in joined or 'webpack.config' in joined:
+        return 'react-web'
+    return framework or 'tiendanube-ipanema'
+
+
+def audit_web_quality(
+    payload: dict | None = None,
+    *,
+    network_records: list | None = None,
+    rendered: dict | None = None,
+    console_messages: list | None = None,
+    source_files: dict[str, str] | None = None,
+    preconnect_origins: list | None = None,
+    framework: str | None = None,
+) -> dict:
+    """Auditoría integral Web Quality Audit: reutiliza diagnose_web_perf y separa evidencia de hipótesis."""
+    data = payload if isinstance(payload, dict) else {}
+    detected_fw = infer_framework(framework, source_files)
+    candidates_map = FRAMEWORK_CANDIDATES.get(detected_fw, FRAMEWORK_CANDIDATES['tiendanube-ipanema'])
+
+    # Reutilizar directamente el motor de Cloudflare Web Performance sin duplicar cálculos
+    perf = diagnose_web_perf(
+        data,
+        network_records=network_records,
+        rendered=rendered,
+        preconnect_origins=preconnect_origins,
+    )
+
+    verified_issues = []
+    code_hypotheses = []
+
+    def add_verified(issue_id, category, severity, title, impact, evidence, fix, files=None):
+        verified_issues.append({
+            'id': issue_id,
+            'category': category,
+            'severity': severity,
+            'confidence': 'high',
+            'evidence_type': 'verified_by_tool',
+            'title': title,
+            'impact': impact,
+            'evidence': sanitize(evidence),
+            'candidate_files': files or candidates_map.get(category, []),
+            'fix': fix,
+        })
+
+    def add_hypothesis(issue_id, category, severity, title, impact, evidence, fix, files):
+        code_hypotheses.append({
+            'id': issue_id,
+            'category': category,
+            'severity': severity,
+            'confidence': 'medium',
+            'evidence_type': 'code_hypothesis',
+            'title': title,
+            'impact': impact,
+            'evidence': sanitize(evidence),
+            'candidate_files': files,
+            'fix': fix,
+        })
+
+    # 1. Performance (delegado en cloudflare-web-perf)
+    for m_name, m_info in perf['field_metrics'].items():
+        if m_info['rating'] in ('poor', 'needs-improvement'):
+            sev = 'high' if m_info['rating'] == 'poor' else 'medium'
+            add_verified(
+                f'WQA-PERF-FIELD-{m_name.upper()}',
+                'performance',
+                sev,
+                f'Métrica de campo {m_name.upper()} en estado {m_info["rating"]} ({m_info["value"]} {m_info["unit"]})',
+                'Afecta directamente la experiencia de usuarios reales (CrUX p75).',
+                m_info,
+                f'Optimizar {m_name.upper()} siguiendo el desglose de cloudflare-web-perf.',
+            )
+    for m_name, m_info in perf['lab_metrics'].items():
+        if m_info['rating'] in ('poor', 'needs-improvement'):
+            sev = 'high' if m_info['rating'] == 'poor' else 'medium'
+            add_verified(
+                f'WQA-PERF-LAB-{m_name.upper()}',
+                'performance',
+                sev,
+                f'Métrica de laboratorio {m_name.upper()} en estado {m_info["rating"]} ({m_info["value"]} {m_info["unit"]})',
+                'Retrasa la carga o bloquea el hilo principal en laboratorio.',
+                m_info,
+                f'Reducir {m_name.upper()} eliminando bloqueos o recursos pesados.',
+            )
+    for rb in perf['render_blocking']['actionable']:
+        sev = 'high' if rb['wasted_ms'] >= 300 else 'medium'
+        add_verified(
+            'WQA-PERF-RENDER-BLOCKING',
+            'performance',
+            sev,
+            f'Recurso bloqueante de renderizado ({rb["wasted_ms"]} ms)',
+            f'Retrasa FCP/LCP en aproximadamente {rb["wasted_ms"]} ms.',
+            rb,
+            'Añadir defer/async al script o extraer CSS crítico y diferir el resto.',
+        )
+    if perf['images']['lcp_lazy_loaded']:
+        add_verified(
+            'WQA-PERF-LCP-LAZY',
+            'performance',
+            'high',
+            'Imagen LCP tiene loading="lazy"',
+            'Retrasa el descubrimiento y la descarga del elemento principal de la página.',
+            {'lcp_lazy_loaded': True},
+            'Usar loading="eager" y fetchpriority="high" en la imagen LCP.',
+        )
+    if perf['images']['lcp_missing_high_priority']:
+        add_verified(
+            'WQA-PERF-LCP-PRIORITY',
+            'performance',
+            'medium',
+            'Imagen LCP sin fetchpriority="high"',
+            'El navegador puede no priorizar la imagen principal frente a otros activos.',
+            {'lcp_missing_high_priority': True},
+            'Añadir fetchpriority="high" al elemento <img> del LCP.',
+        )
+
+    # Extraer scores de categorías Lighthouse si existen
+    sources = data.get('sources') if isinstance(data.get('sources'), dict) else {}
+    if not sources and isinstance(data.get('measurement'), str):
+        sources = {data.get('source', 'primary'): data}
+    category_scores = {}
+    for src in sources.values():
+        if isinstance(src, dict) and isinstance(src.get('scores'), dict):
+            for k, v in src['scores'].items():
+                if numeric(v) is not None:
+                    category_scores[k] = numeric(v)
+
+    # 2. Accessibility, 3. SEO, 4. Best Practices, 5. Interaction & Rendered HTML
+    if isinstance(rendered, dict):
+        lang = str(rendered.get('lang') or '').strip()
+        if not lang:
+            add_verified(
+                'WQA-A11Y-MISSING-LANG',
+                'accessibility',
+                'high',
+                'Elemento <html> sin atributo lang válido',
+                'Los lectores de pantalla no pueden determinar el idioma de lectura.',
+                {'lang': rendered.get('lang')},
+                'Definir el atributo lang en la etiqueta raíz <html lang="es">.',
+            )
+        for img in rendered.get('images') or []:
+            if not isinstance(img, dict):
+                continue
+            if img.get('alt') is None:
+                add_verified(
+                    'WQA-A11Y-IMG-MISSING-ALT',
+                    'accessibility',
+                    'high',
+                    'Imagen renderizada sin atributo alt',
+                    'Usuarios de tecnologías de asistencia no reciben alternativa textual.',
+                    {'src': img.get('currentSrc') or img.get('src')},
+                    'Añadir alt descriptivo o alt="" si la imagen es puramente decorativa.',
+                )
+        for form in rendered.get('forms') or []:
+            if not isinstance(form, dict):
+                continue
+            for inp in form.get('inputs') or []:
+                if not isinstance(inp, dict):
+                    continue
+                itype = str(inp.get('type') or '').lower()
+                if itype in ('hidden', 'submit', 'button', 'reset', 'image'):
+                    continue
+                if not inp.get('hasLabel') and not inp.get('ariaLabel'):
+                    add_verified(
+                        'WQA-A11Y-FORM-UNLABELED',
+                        'accessibility',
+                        'high',
+                        'Campo de formulario sin etiqueta <label> ni aria-label',
+                        'Impide identificar el propósito del campo con lector de pantalla o navegación asistida.',
+                        {'tag': inp.get('tag'), 'type': itype, 'name': inp.get('name')},
+                        'Asociar un elemento <label for="..."> explícito o atributo aria-label.',
+                    )
+        axe_violations = (rendered.get('axe') or {}).get('violations') or []
+        for v in axe_violations:
+            if isinstance(v, dict):
+                impact_map = {'critical': 'critical', 'serious': 'high', 'moderate': 'medium', 'minor': 'low'}
+                sev = impact_map.get(str(v.get('impact') or '').lower(), 'medium')
+                add_verified(
+                    'WQA-A11Y-AXE-' + str(v.get('id') or 'VIOLATION').upper(),
+                    'accessibility',
+                    sev,
+                    f'Violación axe-core: {v.get("id")}',
+                    v.get('description') or v.get('help') or 'Barrera de accesibilidad detectada por axe-core.',
+                    {'id': v.get('id'), 'impact': v.get('impact')},
+                    v.get('help') or 'Corregir estructura semántica o contraste según regla WCAG.',
+                )
+
+        # SEO sobre DOM renderizado
+        title = str(rendered.get('title') or '').strip()
+        if not title:
+            add_verified(
+                'WQA-SEO-MISSING-TITLE',
+                'seo',
+                'high',
+                'Página renderizada sin etiqueta <title>',
+                'Afecta la identificación del documento en pestañas, historial y resultados de búsqueda.',
+                {'title': rendered.get('title')},
+                'Incluir un <title> único y descriptivo en <head>.',
+            )
+        meta_list = [m for m in (rendered.get('metadata') or []) if isinstance(m, dict)]
+        has_desc = any(str(m.get('name') or '').lower() == 'description' and str(m.get('content') or '').strip() for m in meta_list)
+        if not has_desc:
+            add_verified(
+                'WQA-SEO-MISSING-DESCRIPTION',
+                'seo',
+                'medium',
+                'Página sin meta description',
+                'Reduce el control sobre el resumen descriptivo de la página.',
+                {'metadata_count': len(meta_list)},
+                'Añadir <meta name="description" content="..."> específico para la plantilla.',
+            )
+        has_canonical = any(str(m.get('name') or '').lower() == 'canonical' and str(m.get('href') or '').strip() for m in meta_list)
+        if not has_canonical:
+            add_verified(
+                'WQA-SEO-MISSING-CANONICAL',
+                'seo',
+                'medium',
+                'Página sin enlace canonical',
+                'Dificulta la consolidación de URLs duplicadas o con parámetros.',
+                {'canonical_present': False},
+                'Añadir <link rel="canonical" href="..."> con la URL canónica autorizada.',
+            )
+        for m in meta_list:
+            if str(m.get('name') or '').lower() == 'robots' and 'noindex' in str(m.get('content') or '').lower():
+                add_verified(
+                    'WQA-SEO-NOINDEX-DETECTED',
+                    'seo',
+                    'critical',
+                    'Directiva noindex detectada en meta robots',
+                    'Impide que los motores de búsqueda indexen la página si es una ruta pública comercial.',
+                    {'robots': m.get('content')},
+                    'Verificar si la página debe indexarse y retirar noindex si es accidental.',
+                )
+        headings = [h for h in (rendered.get('headings') or []) if isinstance(h, dict)]
+        h1s = [h for h in headings if str(h.get('tag') or '').upper() == 'H1' and str(h.get('text') or '').strip()]
+        if not h1s:
+            add_verified(
+                'WQA-SEO-MISSING-H1',
+                'seo',
+                'medium',
+                'Página sin encabezado principal <h1> con texto',
+                'Debilita la jerarquía semántica del contenido principal.',
+                {'headings_count': len(headings)},
+                'Asegurar un encabezado <h1> descriptivo para el contenido primario.',
+            )
+        for link in rendered.get('links') or []:
+            if not isinstance(link, dict):
+                continue
+            ltext = str(link.get('text') or '').strip()
+            aria = str(link.get('ariaLabel') or '').strip()
+            effective = (ltext or aria).lower()
+            if not effective:
+                add_verified(
+                    'WQA-INT-EMPTY-LINK',
+                    'interaction',
+                    'high',
+                    'Enlace interactivo sin texto ni aria-label',
+                    'Inaccesible para lectores de pantalla y navegación agéntica.',
+                    {'href': link.get('href')},
+                    'Añadir texto visible descriptivo o atributo aria-label al enlace.',
+                )
+            elif effective in GENERIC_LINK_LABELS:
+                add_verified(
+                    'WQA-SEO-GENERIC-LINK-TEXT',
+                    'seo',
+                    'low',
+                    f'Texto de enlace genérico ("{ltext or aria}")',
+                    'Aporta poco contexto semántico a usuarios con lectores de pantalla y buscadores.',
+                    {'href': link.get('href'), 'text': ltext or aria},
+                    'Reemplazar por un texto que describa el destino del enlace.',
+                )
+        for jld in rendered.get('jsonld') or []:
+            if isinstance(jld, dict) and jld.get('error'):
+                add_verified(
+                    'WQA-SEO-INVALID-JSONLD',
+                    'seo',
+                    'high',
+                    'Bloque JSON-LD con error de sintaxis',
+                    'Impide el procesamiento de datos estructurados.',
+                    {'component': jld.get('component'), 'error': jld.get('error')},
+                    'Corregir el JSON-LD generado en la plantilla para que sea JSON válido.',
+                )
+
+        # Interaction / Layout stability
+        vp = rendered.get('viewport') or {}
+        iw, sw = numeric(vp.get('innerWidth')), numeric(vp.get('scrollWidth'))
+        if iw and sw and sw > iw:
+            add_verified(
+                'WQA-INT-HORIZONTAL-OVERFLOW',
+                'interaction',
+                'high',
+                f'Desbordamiento horizontal detectado (scrollWidth {int(sw)}px > innerWidth {int(iw)}px)',
+                'Rompe la navegación táctil y el layout móvil/responsivo.',
+                {'innerWidth': iw, 'scrollWidth': sw},
+                'Inspeccionar elementos con ancho fijo o márgenes negativos fuera del contenedor.',
+            )
+
+    # 4. Best Practices (Consola, HTTPS, Source Maps)
+    for msg in (console_messages or []):
+        if isinstance(msg, dict) and str(msg.get('type') or msg.get('level') or '').lower() == 'error':
+            add_verified(
+                'WQA-BP-CONSOLE-ERROR',
+                'best-practices',
+                'high',
+                'Error de ejecución en consola del navegador',
+                'Puede interrumpir interacciones de usuario, carrito o componentes dinámicos.',
+                {'text': msg.get('text') or msg.get('message')},
+                'Depurar y corregir la excepción JavaScript o recurso fallido.',
+            )
+    for row in (network_records or []):
+        if not isinstance(row, dict):
+            continue
+        r_url = sanitize(str(row.get('url') or ''))
+        if r_url.startswith('http://') and not any(h in r_url for h in ('http://127.0.0.1', 'http://localhost', 'http://[::1]')):
+            add_verified(
+                'WQA-BP-INSECURE-HTTP-RESOURCE',
+                'best-practices',
+                'critical',
+                'Solicitud de red insegura por HTTP (contenido mixto)',
+                'Compromete la seguridad del documento HTTPS y puede ser bloqueada por el navegador.',
+                {'url': r_url, 'type': row.get('type')},
+                'Actualizar la referencia del recurso a HTTPS.',
+            )
+        if r_url.split('?', 1)[0].endswith('.map') and row.get('status') == 200:
+            add_verified(
+                'WQA-BP-EXPOSED-SOURCEMAP',
+                'best-practices',
+                'medium',
+                'Source map expuesto públicamente en producción',
+                'Expone estructura interna del código fuente y aumenta descargas si se solicita.',
+                {'url': r_url},
+                'Desactivar o restringir la publicación de archivos .map en builds de producción.',
+            )
+
+    # 5. Inspección estática de código fuente (reemplazo seguro en Python de scripts/analyze.sh -> code_hypothesis)
+    for path, content in sorted((source_files or {}).items()):
+        if not isinstance(content, str):
+            continue
+        lower = content.lower()
+        is_full_doc = '<html' in lower or '<head' in lower or path.endswith(('layout.tpl', 'theme.liquid', 'index.html', 'root.tsx'))
+        if is_full_doc:
+            if '<!doctype html>' not in lower and not path.endswith(('.tsx', '.jsx')):
+                add_hypothesis(
+                    'WQA-SRC-MISSING-DOCTYPE',
+                    'best-practices',
+                    'medium',
+                    'Falta declaración <!DOCTYPE html> en plantilla base',
+                    'Puede activar quirks mode en el navegador si el documento se sirve sin doctype.',
+                    {'file': path, 'line': 1},
+                    'Añadir <!DOCTYPE html> en la primera línea del layout.',
+                    [path],
+                )
+            if 'charset' not in lower and 'utf-8' not in lower:
+                add_hypothesis(
+                    'WQA-SRC-MISSING-CHARSET',
+                    'best-practices',
+                    'low',
+                    'No se observa declaración explícita de charset UTF-8 en plantilla base',
+                    'Riesgo de codificación incorrecta de caracteres si las cabeceras HTTP no lo especifican.',
+                    {'file': path, 'line': 1},
+                    'Incluir <meta charset="UTF-8"> al inicio de <head>.',
+                    [path],
+                )
+            if 'name="viewport"' not in lower and "name='viewport'" not in lower and 'viewport' not in lower:
+                add_hypothesis(
+                    'WQA-SRC-MISSING-VIEWPORT',
+                    'seo',
+                    'high',
+                    'Falta meta viewport en plantilla base',
+                    'Impide el escalado adaptable en dispositivos móviles.',
+                    {'file': path, 'line': 1},
+                    'Añadir <meta name="viewport" content="width=device-width, initial-scale=1">.',
+                    [path],
+                )
+        for idx, line in enumerate(content.splitlines(), start=1):
+            for img_match in re.finditer(r'<img\b[^>]*>', line, re.I):
+                tag = img_match.group(0)
+                if not re.search(r'\balt\s*=', tag, re.I):
+                    add_hypothesis(
+                        'WQA-SRC-IMG-WITHOUT-ALT',
+                        'accessibility',
+                        'medium',
+                        'Etiqueta <img> en código fuente sin atributo alt explícito',
+                        'Si se renderiza sin alt en el DOM final, generará una barrera de accesibilidad.',
+                        {'file': path, 'line': idx, 'snippet': sanitize(tag[:120])},
+                        'Añadir alt="{{ ... | escape }}" o alt="" en la plantilla.',
+                        [path],
+                    )
+            if 'document.write(' in line:
+                add_hypothesis(
+                    'WQA-SRC-DOCUMENT-WRITE',
+                    'best-practices',
+                    'high',
+                    'Uso de API obsoleta y bloqueante document.write()',
+                    'Bloquea el parser HTML y degrada severamente el rendimiento y las buenas prácticas.',
+                    {'file': path, 'line': idx},
+                    'Reemplazar document.write() por manipulación DOM asíncrona o carga diferida.',
+                    [path],
+                )
+            for http_match in re.finditer(r'http://[^\s"\'<>)]+', line, re.I):
+                raw_http = http_match.group(0)
+                if any(raw_http.lower().startswith(allow) for allow in (
+                    'http://www.w3.org', 'http://schema.org', 'http://localhost', 'http://127.0.0.1'
+                )):
+                    continue
+                add_hypothesis(
+                    'WQA-SRC-INSECURE-HTTP-URL',
+                    'best-practices',
+                    'medium',
+                    'Referencia http:// detectada en código fuente',
+                    'Si corresponde a un activo o enlace en producción, puede causar contenido mixto o redirección.',
+                    {'file': path, 'line': idx, 'url': sanitize(raw_http)},
+                    'Cambiar el esquema de la URL a https://.',
+                    [path],
+                )
+
+    severity_rank = {'critical': 0, 'high': 1, 'medium': 2, 'low': 3}
+    verified_issues.sort(key=lambda x: (severity_rank.get(x['severity'], 9), x['category'], x['id']))
+    code_hypotheses.sort(key=lambda x: (severity_rank.get(x['severity'], 9), x['category'], x['id']))
+
+    categories_summary = {}
+    for cat in ('performance', 'accessibility', 'seo', 'best-practices', 'interaction'):
+        v_count = sum(1 for i in verified_issues if i['category'] == cat)
+        h_count = sum(1 for i in code_hypotheses if i['category'] == cat)
+        categories_summary[cat] = {
+            'lighthouse_score': category_scores.get(cat),
+            'verified_issues_count': v_count,
+            'code_hypotheses_count': h_count,
+            'status': 'needs_attention' if v_count > 0 else 'hypothesis_only' if h_count > 0 else 'passed_observed_checks',
+        }
+
+    return {
+        'skill': 'web-quality-audit',
+        'reused_engine': 'cloudflare-web-perf',
+        'framework': detected_fw,
+        'evidence_vs_hypothesis_separated': True,
+        'performance_diagnosis': perf,
+        'categories_summary': categories_summary,
+        'verified_issues': verified_issues,
+        'code_hypotheses': code_hypotheses,
+        'counts': {
+            'verified_by_tool': len(verified_issues),
+            'code_hypothesis': len(code_hypotheses),
+            'critical': sum(1 for i in verified_issues if i['severity'] == 'critical'),
+            'high': sum(1 for i in verified_issues if i['severity'] == 'high'),
+            'medium': sum(1 for i in verified_issues if i['severity'] == 'medium'),
+            'low': sum(1 for i in verified_issues if i['severity'] == 'low'),
+        },
+        'limitations': [
+            'Una ejecución correcta de la auditoría no equivale a una mejora comprobada del sitio.',
+            'Las hipótesis en código (code_hypothesis) deben confirmarse en el DOM/red renderizados antes de declararlas fallos reales.',
+            'La ausencia de violaciones automatizadas no certifica cumplimiento total WCAG 2.2 AA ni indexación en Google.',
+        ],
+    }

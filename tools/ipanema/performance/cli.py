@@ -2,7 +2,7 @@
 import json
 import os
 from pathlib import Path
-from ..core import IpanemaError, read_json
+from ..core import IpanemaError, beneath, read_json
 from . import model
 from .service import Service, local, persist
 
@@ -34,6 +34,12 @@ def add_parser(sub):
     diagnose.add_argument('report', type=Path)
     diagnose.add_argument('--rendered', type=Path)
     diagnose.add_argument('--preconnect', action='append', default=[])
+    qaudit = commands.add_parser('quality-audit', help='Auditoría integral offline Web Quality Audit reutilizando Cloudflare Web Performance.')
+    qaudit.add_argument('report', type=Path)
+    qaudit.add_argument('--rendered', type=Path)
+    qaudit.add_argument('--source-file', type=Path, action='append', default=[])
+    qaudit.add_argument('--framework', choices=('shopify-liquid', 'shopify-hydrogen', 'react-web', 'tiendanube-ipanema'))
+    qaudit.add_argument('--preconnect', action='append', default=[])
 
 
 def execute(project, args):
@@ -50,6 +56,27 @@ def execute(project, args):
         rendered = read_json(args.rendered) if args.rendered else payload.get('rendered')
         network = payload.get('navigation_network') or (rendered.get('navigation_network') if isinstance(rendered, dict) else None)
         return model.diagnose_web_perf(payload, network_records=network, rendered=rendered, preconnect_origins=args.preconnect), 0
+    if op == 'quality-audit':
+        payload = read_json(args.report)
+        rendered = read_json(args.rendered) if args.rendered else payload.get('rendered')
+        network = payload.get('navigation_network') or (rendered.get('navigation_network') if isinstance(rendered, dict) else None)
+        console_msgs = payload.get('console_messages') or (rendered.get('console_messages') if isinstance(rendered, dict) else None)
+        allowed_roots = [project.root] + ([project.theme_root] if project.theme_root else [])
+        source_files = {}
+        for sf in args.source_file:
+            resolved = sf.resolve()
+            if not any(beneath(resolved, r) for r in allowed_roots) or not resolved.is_file():
+                raise IpanemaError('Archivo fuente fuera del alcance autorizado o inexistente.')
+            source_files[sf.name] = resolved.read_text(encoding='utf-8')
+        return model.audit_web_quality(
+            payload,
+            network_records=network,
+            rendered=rendered,
+            console_messages=console_msgs,
+            source_files=source_files,
+            preconnect_origins=args.preconnect,
+            framework=args.framework,
+        ), 0
     if op == 'compare':
         before, after = read_json(args.before), read_json(args.after)
         result = model.compare(before.get('sources',{}).get(args.source,before), after.get('sources',{}).get(args.source,after))

@@ -42,7 +42,45 @@ EXTERNAL_SKILLS = {
         "license": "Apache-2.0",
         "skill_path": ".agents/skills/cloudflare-web-perf/SKILL.md",
     },
+    "web-quality-audit": {
+        "name": "web-quality-audit",
+        "domain": "quality-audit",
+        "role": "primary",
+        "source_repo": "https://github.com/addyosmani/web-quality-skills",
+        "source_path": "skills/web-quality-audit/SKILL.md",
+        "source_commit": "afa8da942115f2961fdbfa80807ea0b232ff6c00",
+        "source_sha1": "581ec7c5e8e05e6ac93d99d872906595581efc42",
+        "script_sha1": "62b066467d30ed5fa52fc36130a05699e09dd2bb",
+        "license": "MIT",
+        "skill_path": ".agents/skills/web-quality-audit/SKILL.md",
+        "reuses": ["cloudflare-web-perf"],
+    },
 }
+
+QUALITY_AUDIT_TERMS = (
+    "web-quality-audit",
+    "calidad web",
+    "web quality",
+    "page quality",
+    "calidad de pagina",
+    "calidad de la pagina",
+    "auditoria completa",
+    "auditoria integral",
+    "auditoria general",
+    "revision general",
+    "revision integral",
+    "diagnostico tecnico",
+    "diagnostico integral",
+    "buenas practicas",
+    "best practices",
+    "best-practices",
+    "agentic browsing",
+    "audit my site",
+    "check page quality",
+    "evaluacion de lighthouse",
+    "auditoria de lighthouse",
+    "lighthouse audit",
+)
 
 AUTHORIZED_SKILLS = frozenset([
     "ipanema-storefront",
@@ -73,7 +111,12 @@ def detect_context(request: str, project: Project | None = None) -> dict:
 def route(request: str):
     text = normal(request)
     selected, reasons = [], {}
+    quality_matches = [t for t in QUALITY_AUDIT_TERMS if t in text]
     for key, spec in SPECIALTIES.items():
+        if key == "performance" and quality_matches and not any(
+            t in text for t in ("cloudflare-web-perf", "lcp", "cls", "tbt", "inp", "ttfb", "fcp", "cwv", "core web vitals")
+        ):
+            continue
         matches = [t for t in spec["terms"] if re.search(r"(?<![\w-])" + re.escape(t) + (r"\b" if len(t) <= 3 else ""), text)]
         if matches:
             selected.append(key)
@@ -87,20 +130,35 @@ def route(request: str):
     if any(t in text for t in ("tarjeta", "card")) and "architect" not in selected:
         selected.append("architect")
         reasons["architect"] = ["consumidores de tarjeta compartida"]
+    if quality_matches and not selected:
+        selected = ["performance", "seo-expert", "visual-qa"]
+        reasons["performance"] = quality_matches
+        reasons["seo-expert"] = ["auditoría técnica de calidad web"]
+        reasons["visual-qa"] = ["accesibilidad e interacción de calidad web"]
     if not selected:
         selected, reasons = ["architect"], {"architect": ["alcance desconocido: investigar antes de afirmar"]}
     skills = []
     primary_skills = {}
     external_active = []
+    reused_engines = []
+    if quality_matches:
+        skills.append("web-quality-audit")
+        primary_skills["quality-audit"] = "web-quality-audit"
+        external_active.append(EXTERNAL_SKILLS["web-quality-audit"])
+        reused_engines.append("cloudflare-web-perf")
+        if "cloudflare-web-perf" in text:
+            skills.append("cloudflare-web-perf")
+            primary_skills["performance"] = "cloudflare-web-perf"
+            external_active.append(EXTERNAL_SKILLS["cloudflare-web-perf"])
     for s in selected:
-        if s == "performance":
+        if s == "performance" and not quality_matches:
             skills.append("cloudflare-web-perf")
             primary_skills["performance"] = "cloudflare-web-perf"
             external_active.append(EXTERNAL_SKILLS["cloudflare-web-perf"])
         skills.append("ipanema-" + s)
     ctx = detect_context(request)
     return {"skills": skills, "primary_skills": primary_skills, "external_skills": external_active,
-            "framework": ctx["framework"], "reasons": reasons,
+            "reused_engines": reused_engines, "framework": ctx["framework"], "reasons": reasons,
             "selection_method": "deterministic_assistance", "parallel_agents_invoked": False}
 
 
