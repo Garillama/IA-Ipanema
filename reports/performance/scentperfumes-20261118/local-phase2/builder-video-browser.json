@@ -1,0 +1,924 @@
+{
+  "at": "2026-11-18T21:30:54.460Z",
+  "scope": "isolated exact media functions and original local MP4s, synthetic DOM; not builder/cart/storefront QA",
+  "samples": [
+    {
+      "width": 390,
+      "run": 0,
+      "version": "before",
+      "offscreen": {
+        "paused": false,
+        "time": 0.225707,
+        "offscreen": true,
+        "error": null,
+        "frames": 8
+      },
+      "later": {
+        "paused": false,
+        "time": 0.884636,
+        "frames": 21
+      },
+      "offscreen_media_progress_s": 0.658929,
+      "offscreen_decoded_frames": 13,
+      "errors": []
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "after",
+      "offscreen": {
+        "paused": true,
+        "time": 0.017856,
+        "offscreen": true,
+        "error": null,
+        "frames": 5
+      },
+      "later": {
+        "paused": true,
+        "time": 0.017856,
+        "frames": 5
+      },
+      "offscreen_media_progress_s": 0,
+      "offscreen_decoded_frames": 0,
+      "errors": []
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "before",
+      "offscreen": {
+        "paused": false,
+        "time": 0.255055,
+        "offscreen": true,
+        "error": null,
+        "frames": 9
+      },
+      "later": {
+        "paused": false,
+        "time": 0.903616,
+        "frames": 21
+      },
+      "offscreen_media_progress_s": 0.6485609999999999,
+      "offscreen_decoded_frames": 12,
+      "errors": []
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "after",
+      "offscreen": {
+        "paused": true,
+        "time": 0.014745,
+        "offscreen": true,
+        "error": null,
+        "frames": 4
+      },
+      "later": {
+        "paused": true,
+        "time": 0.014745,
+        "frames": 4
+      },
+      "offscreen_media_progress_s": 0,
+      "offscreen_decoded_frames": 0,
+      "errors": []
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "before",
+      "offscreen": {
+        "paused": false,
+        "time": 0.24795,
+        "offscreen": true,
+        "error": null,
+        "frames": 9
+      },
+      "later": {
+        "paused": false,
+        "time": 0.891466,
+        "frames": 21
+      },
+      "offscreen_media_progress_s": 0.643516,
+      "offscreen_decoded_frames": 12,
+      "errors": []
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "after",
+      "offscreen": {
+        "paused": true,
+        "time": 0.020102,
+        "offscreen": true,
+        "error": null,
+        "frames": 4
+      },
+      "later": {
+        "paused": true,
+        "time": 0.020102,
+        "frames": 4
+      },
+      "offscreen_media_progress_s": 0,
+      "offscreen_decoded_frames": 0,
+      "errors": []
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "before",
+      "offscreen": {
+        "paused": false,
+        "time": 0.197223,
+        "offscreen": true,
+        "error": null,
+        "frames": 4
+      },
+      "later": {
+        "paused": false,
+        "time": 0.848316,
+        "frames": 20
+      },
+      "offscreen_media_progress_s": 0.6510929999999999,
+      "offscreen_decoded_frames": 16,
+      "errors": []
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "after",
+      "offscreen": {
+        "paused": true,
+        "time": 0.00849,
+        "offscreen": true,
+        "error": null,
+        "frames": 4
+      },
+      "later": {
+        "paused": true,
+        "time": 0.00849,
+        "frames": 4
+      },
+      "offscreen_media_progress_s": 0,
+      "offscreen_decoded_frames": 0,
+      "errors": []
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "version": "before",
+      "offscreen": {
+        "paused": false,
+        "time": 0.197223,
+        "offscreen": true,
+        "error": null,
+        "frames": 8
+      },
+      "later": {
+        "paused": false,
+        "time": 0.835903,
+        "frames": 20
+      },
+      "offscreen_media_progress_s": 0.6386799999999999,
+      "offscreen_decoded_frames": 12,
+      "errors": []
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "version": "after",
+      "offscreen": {
+        "paused": true,
+        "time": 0,
+        "offscreen": true,
+        "error": null,
+        "frames": 4
+      },
+      "later": {
+        "paused": true,
+        "time": 0,
+        "frames": 4
+      },
+      "offscreen_media_progress_s": 0,
+      "offscreen_decoded_frames": 0,
+      "errors": []
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "version": "before",
+      "offscreen": {
+        "paused": false,
+        "time": 0.208279,
+        "offscreen": true,
+        "error": null,
+        "frames": 4
+      },
+      "later": {
+        "paused": false,
+        "time": 0.846495,
+        "frames": 20
+      },
+      "offscreen_media_progress_s": 0.638216,
+      "offscreen_decoded_frames": 16,
+      "errors": []
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "version": "after",
+      "offscreen": {
+        "paused": true,
+        "time": 0,
+        "offscreen": true,
+        "error": null,
+        "frames": 4
+      },
+      "later": {
+        "paused": true,
+        "time": 0,
+        "frames": 4
+      },
+      "offscreen_media_progress_s": 0,
+      "offscreen_decoded_frames": 0,
+      "errors": []
+    }
+  ],
+  "checks": [
+    {
+      "width": 390,
+      "run": 0,
+      "version": "before",
+      "name": "first-autoplays-muted",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "before",
+      "name": "second-does-not-autoplay",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "before",
+      "name": "manual-video-unmuted-controls",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "before",
+      "name": "other-video-stopped",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "before",
+      "name": "confirmed-offscreen",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "before",
+      "name": "expected-original-defect-or-fixed",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "before",
+      "name": "manual-replay-works",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "before",
+      "name": "no-errors",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "after",
+      "name": "first-autoplays-muted",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "after",
+      "name": "second-does-not-autoplay",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "after",
+      "name": "manual-video-unmuted-controls",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "after",
+      "name": "other-video-stopped",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "after",
+      "name": "confirmed-offscreen",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "after",
+      "name": "expected-original-defect-or-fixed",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "after",
+      "name": "manual-replay-works",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "after",
+      "name": "no-errors",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "before",
+      "name": "first-autoplays-muted",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "before",
+      "name": "second-does-not-autoplay",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "before",
+      "name": "manual-video-unmuted-controls",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "before",
+      "name": "other-video-stopped",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "before",
+      "name": "confirmed-offscreen",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "before",
+      "name": "expected-original-defect-or-fixed",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "before",
+      "name": "manual-replay-works",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "before",
+      "name": "no-errors",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "after",
+      "name": "first-autoplays-muted",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "after",
+      "name": "second-does-not-autoplay",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "after",
+      "name": "manual-video-unmuted-controls",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "after",
+      "name": "other-video-stopped",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "after",
+      "name": "confirmed-offscreen",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "after",
+      "name": "expected-original-defect-or-fixed",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "after",
+      "name": "manual-replay-works",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "after",
+      "name": "no-errors",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "before",
+      "name": "first-autoplays-muted",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "before",
+      "name": "second-does-not-autoplay",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "before",
+      "name": "manual-video-unmuted-controls",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "before",
+      "name": "other-video-stopped",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "before",
+      "name": "confirmed-offscreen",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "before",
+      "name": "expected-original-defect-or-fixed",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "before",
+      "name": "manual-replay-works",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "before",
+      "name": "no-errors",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "after",
+      "name": "first-autoplays-muted",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "after",
+      "name": "second-does-not-autoplay",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "after",
+      "name": "manual-video-unmuted-controls",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "after",
+      "name": "other-video-stopped",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "after",
+      "name": "confirmed-offscreen",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "after",
+      "name": "expected-original-defect-or-fixed",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "after",
+      "name": "manual-replay-works",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "after",
+      "name": "no-errors",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "before",
+      "name": "first-autoplays-muted",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "before",
+      "name": "second-does-not-autoplay",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "before",
+      "name": "manual-video-unmuted-controls",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "before",
+      "name": "other-video-stopped",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "before",
+      "name": "confirmed-offscreen",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "before",
+      "name": "expected-original-defect-or-fixed",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "before",
+      "name": "manual-replay-works",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "before",
+      "name": "no-errors",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "after",
+      "name": "first-autoplays-muted",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "after",
+      "name": "second-does-not-autoplay",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "after",
+      "name": "manual-video-unmuted-controls",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "after",
+      "name": "other-video-stopped",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "after",
+      "name": "confirmed-offscreen",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "after",
+      "name": "expected-original-defect-or-fixed",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "after",
+      "name": "manual-replay-works",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "after",
+      "name": "no-errors",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "version": "before",
+      "name": "first-autoplays-muted",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "version": "before",
+      "name": "second-does-not-autoplay",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "version": "before",
+      "name": "manual-video-unmuted-controls",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "version": "before",
+      "name": "other-video-stopped",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "version": "before",
+      "name": "confirmed-offscreen",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "version": "before",
+      "name": "expected-original-defect-or-fixed",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "version": "before",
+      "name": "manual-replay-works",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "version": "before",
+      "name": "no-errors",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "version": "after",
+      "name": "first-autoplays-muted",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "version": "after",
+      "name": "second-does-not-autoplay",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "version": "after",
+      "name": "manual-video-unmuted-controls",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "version": "after",
+      "name": "other-video-stopped",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "version": "after",
+      "name": "confirmed-offscreen",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "version": "after",
+      "name": "expected-original-defect-or-fixed",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "version": "after",
+      "name": "manual-replay-works",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "version": "after",
+      "name": "no-errors",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "version": "before",
+      "name": "first-autoplays-muted",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "version": "before",
+      "name": "second-does-not-autoplay",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "version": "before",
+      "name": "manual-video-unmuted-controls",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "version": "before",
+      "name": "other-video-stopped",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "version": "before",
+      "name": "confirmed-offscreen",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "version": "before",
+      "name": "expected-original-defect-or-fixed",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "version": "before",
+      "name": "manual-replay-works",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "version": "before",
+      "name": "no-errors",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "version": "after",
+      "name": "first-autoplays-muted",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "version": "after",
+      "name": "second-does-not-autoplay",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "version": "after",
+      "name": "manual-video-unmuted-controls",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "version": "after",
+      "name": "other-video-stopped",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "version": "after",
+      "name": "confirmed-offscreen",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "version": "after",
+      "name": "expected-original-defect-or-fixed",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "version": "after",
+      "name": "manual-replay-works",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "version": "after",
+      "name": "no-errors",
+      "passed": true
+    }
+  ],
+  "browser": "Chrome/155.0.8059.84",
+  "passed": true,
+  "remote_requests": 0,
+  "commercial_requests": []
+}

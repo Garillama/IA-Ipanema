@@ -1,0 +1,22 @@
+test_invalid_non_markdown_source_records_blocked_before_qa (test_skill_execution_contract.SkillExecutionContract.test_invalid_non_markdown_source_records_blocked_before_qa) ... ERROR
+
+======================================================================
+ERROR: test_invalid_non_markdown_source_records_blocked_before_qa (test_skill_execution_contract.SkillExecutionContract.test_invalid_non_markdown_source_records_blocked_before_qa)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/alanrichard/Escritorio/IA inversa/.local/scent-skill-contract-candidate/tests/unit/test_skill_execution_contract.py", line 108, in test_invalid_non_markdown_source_records_blocked_before_qa
+    result=engine.execute(self.project,plan,authorize=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/alanrichard/Escritorio/IA inversa/tools/ipanema/orchestration/engine.py", line 460, in execute
+    initial_content={name:(snapshot/name).read_text() if (snapshot/name).is_file() else '' for name in plan['allowed_files']}
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1030, in read_text
+    return f.read()
+           ^^^^^^^^
+  File "<frozen codecs>", line 322, in decode
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0xff in position 0: invalid start byte
+
+----------------------------------------------------------------------
+Ran 1 test in 0.050s
+
+FAILED (errors=1)

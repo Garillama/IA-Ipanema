@@ -1,0 +1,182 @@
+test_business_multiple_objects (tests.unit.test_structured_response_transport.Transport.test_business_multiple_objects) ... ok
+test_business_text_after_json (tests.unit.test_structured_response_transport.Transport.test_business_text_after_json) ... ok
+test_duplicate_keys_rejected_in_both_modes (tests.unit.test_structured_response_transport.Transport.test_duplicate_keys_rejected_in_both_modes) ... 
+  test_duplicate_keys_rejected_in_both_modes (tests.unit.test_structured_response_transport.Transport.test_duplicate_keys_rejected_in_both_modes) (strict=False) ... FAIL
+test_incomplete_business_json (tests.unit.test_structured_response_transport.Transport.test_incomplete_business_json) ... ok
+test_last_invalid_payload_cannot_hide_behind_earlier_valid_payload (tests.unit.test_structured_response_transport.Transport.test_last_invalid_payload_cannot_hide_behind_earlier_valid_payload) ... FAIL
+test_markdown_is_not_business_json_in_either_mode (tests.unit.test_structured_response_transport.Transport.test_markdown_is_not_business_json_in_either_mode) ... 
+  test_markdown_is_not_business_json_in_either_mode (tests.unit.test_structured_response_transport.Transport.test_markdown_is_not_business_json_in_either_mode) (strict=False) ... FAIL
+test_multiple_final_envelopes_ambiguous (tests.unit.test_structured_response_transport.Transport.test_multiple_final_envelopes_ambiguous) ... FAIL
+test_native_invalid_structured_output_not_text_fallback (tests.unit.test_structured_response_transport.Transport.test_native_invalid_structured_output_not_text_fallback) ... FAIL
+test_native_structured_output_authoritative_over_free_text (tests.unit.test_structured_response_transport.Transport.test_native_structured_output_authoritative_over_free_text) ... ok
+test_nested_truncation_signal_rejected (tests.unit.test_structured_response_transport.Transport.test_nested_truncation_signal_rejected) ... FAIL
+test_nonfinite_numbers_rejected_in_both_modes (tests.unit.test_structured_response_transport.Transport.test_nonfinite_numbers_rejected_in_both_modes) ... 
+  test_nonfinite_numbers_rejected_in_both_modes (tests.unit.test_structured_response_transport.Transport.test_nonfinite_numbers_rejected_in_both_modes) (strict=False) ... FAIL
+test_provider_error_after_good_result (tests.unit.test_structured_response_transport.Transport.test_provider_error_after_good_result) ... ok
+test_schema_mismatch_remains_separate_from_syntax (tests.unit.test_structured_response_transport.Transport.test_schema_mismatch_remains_separate_from_syntax) ... ok
+test_tool_execution_after_good_result (tests.unit.test_structured_response_transport.Transport.test_tool_execution_after_good_result) ... ok
+test_transport_garbage_after_envelope (tests.unit.test_structured_response_transport.Transport.test_transport_garbage_after_envelope) ... FAIL
+test_transport_incomplete_tail (tests.unit.test_structured_response_transport.Transport.test_transport_incomplete_tail) ... FAIL
+test_transport_multiple_bare_objects (tests.unit.test_structured_response_transport.Transport.test_transport_multiple_bare_objects) ... FAIL
+test_valid_pretty_envelope (tests.unit.test_structured_response_transport.Transport.test_valid_pretty_envelope) ... ok
+test_valid_provider_event_sequence (tests.unit.test_structured_response_transport.Transport.test_valid_provider_event_sequence) ... ok
+test_extra_fields_rejected (tests.integration.test_smoke_structured_contract.SmokeContract.test_extra_fields_rejected) ... FAIL
+test_invalid_json_text_never_bypasses_pipeline (tests.integration.test_smoke_structured_contract.SmokeContract.test_invalid_json_text_never_bypasses_pipeline) ... FAIL
+test_missing_required_field_rejected_by_worker (tests.integration.test_smoke_structured_contract.SmokeContract.test_missing_required_field_rejected_by_worker) ... FAIL
+test_smoke_cannot_return_writes (tests.integration.test_smoke_structured_contract.SmokeContract.test_smoke_cannot_return_writes) ... FAIL
+test_smoke_uses_native_schema_and_same_safety_flags (tests.integration.test_smoke_structured_contract.SmokeContract.test_smoke_uses_native_schema_and_same_safety_flags) ... FAIL
+
+======================================================================
+FAIL: test_duplicate_keys_rejected_in_both_modes (tests.unit.test_structured_response_transport.Transport.test_duplicate_keys_rejected_in_both_modes) (strict=False)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/alanrichard/Escritorio/IA inversa/.local/scent-json-contract-20261118/tests/unit/test_structured_response_transport.py", line 32, in test_duplicate_keys_rejected_in_both_modes
+    with self.subTest(strict=strict):self.reject(frame('{"decision":"blocked","decision":"approve","changes":[]}'),strict)
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/alanrichard/Escritorio/IA inversa/.local/scent-json-contract-20261118/tests/unit/test_structured_response_transport.py", line 10, in reject
+    with self.assertRaises(adapters.ResponseContractError):adapters.parse_response('claude',raw,strict=strict)
+AssertionError: ResponseContractError not raised
+
+======================================================================
+FAIL: test_last_invalid_payload_cannot_hide_behind_earlier_valid_payload (tests.unit.test_structured_response_transport.Transport.test_last_invalid_payload_cannot_hide_behind_earlier_valid_payload)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/alanrichard/Escritorio/IA inversa/.local/scent-json-contract-20261118/tests/unit/test_structured_response_transport.py", line 29, in test_last_invalid_payload_cannot_hide_behind_earlier_valid_payload
+    def test_last_invalid_payload_cannot_hide_behind_earlier_valid_payload(self):self.reject(frame(json.dumps(GOOD))+'\n'+frame('{"decision":'))
+                                                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/alanrichard/Escritorio/IA inversa/.local/scent-json-contract-20261118/tests/unit/test_structured_response_transport.py", line 10, in reject
+    with self.assertRaises(adapters.ResponseContractError):adapters.parse_response('claude',raw,strict=strict)
+AssertionError: ResponseContractError not raised
+
+======================================================================
+FAIL: test_markdown_is_not_business_json_in_either_mode (tests.unit.test_structured_response_transport.Transport.test_markdown_is_not_business_json_in_either_mode) (strict=False)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/alanrichard/Escritorio/IA inversa/.local/scent-json-contract-20261118/tests/unit/test_structured_response_transport.py", line 21, in test_markdown_is_not_business_json_in_either_mode
+    with self.subTest(strict=strict):self.reject(frame('```json\n'+json.dumps(GOOD)+'\n```'),strict)
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/alanrichard/Escritorio/IA inversa/.local/scent-json-contract-20261118/tests/unit/test_structured_response_transport.py", line 10, in reject
+    with self.assertRaises(adapters.ResponseContractError):adapters.parse_response('claude',raw,strict=strict)
+AssertionError: ResponseContractError not raised
+
+======================================================================
+FAIL: test_multiple_final_envelopes_ambiguous (tests.unit.test_structured_response_transport.Transport.test_multiple_final_envelopes_ambiguous)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/alanrichard/Escritorio/IA inversa/.local/scent-json-contract-20261118/tests/unit/test_structured_response_transport.py", line 28, in test_multiple_final_envelopes_ambiguous
+    def test_multiple_final_envelopes_ambiguous(self):self.reject(frame(json.dumps(GOOD))+'\n'+frame(json.dumps(GOOD)))
+                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/alanrichard/Escritorio/IA inversa/.local/scent-json-contract-20261118/tests/unit/test_structured_response_transport.py", line 10, in reject
+    with self.assertRaises(adapters.ResponseContractError):adapters.parse_response('claude',raw,strict=strict)
+AssertionError: ResponseContractError not raised
+
+======================================================================
+FAIL: test_native_invalid_structured_output_not_text_fallback (tests.unit.test_structured_response_transport.Transport.test_native_invalid_structured_output_not_text_fallback)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/alanrichard/Escritorio/IA inversa/.local/scent-json-contract-20261118/tests/unit/test_structured_response_transport.py", line 39, in test_native_invalid_structured_output_not_text_fallback
+    def test_native_invalid_structured_output_not_text_fallback(self):self.reject(json.dumps({'type':'result','structured_output':'invalid','result':json.dumps(GOOD)}))
+                                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/alanrichard/Escritorio/IA inversa/.local/scent-json-contract-20261118/tests/unit/test_structured_response_transport.py", line 10, in reject
+    with self.assertRaises(adapters.ResponseContractError):adapters.parse_response('claude',raw,strict=strict)
+AssertionError: ResponseContractError not raised
+
+======================================================================
+FAIL: test_nested_truncation_signal_rejected (tests.unit.test_structured_response_transport.Transport.test_nested_truncation_signal_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/alanrichard/Escritorio/IA inversa/.local/scent-json-contract-20261118/tests/unit/test_structured_response_transport.py", line 38, in test_nested_truncation_signal_rejected
+    self.reject(json.dumps(delta)+'\n'+frame(json.dumps(GOOD)))
+  File "/home/alanrichard/Escritorio/IA inversa/.local/scent-json-contract-20261118/tests/unit/test_structured_response_transport.py", line 10, in reject
+    with self.assertRaises(adapters.ResponseContractError):adapters.parse_response('claude',raw,strict=strict)
+AssertionError: ResponseContractError not raised
+
+======================================================================
+FAIL: test_nonfinite_numbers_rejected_in_both_modes (tests.unit.test_structured_response_transport.Transport.test_nonfinite_numbers_rejected_in_both_modes) (strict=False)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/alanrichard/Escritorio/IA inversa/.local/scent-json-contract-20261118/tests/unit/test_structured_response_transport.py", line 35, in test_nonfinite_numbers_rejected_in_both_modes
+    with self.subTest(strict=strict):self.reject(frame('{"decision":"approve","confidence":NaN,"changes":[]}'),strict)
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/alanrichard/Escritorio/IA inversa/.local/scent-json-contract-20261118/tests/unit/test_structured_response_transport.py", line 10, in reject
+    with self.assertRaises(adapters.ResponseContractError):adapters.parse_response('claude',raw,strict=strict)
+AssertionError: ResponseContractError not raised
+
+======================================================================
+FAIL: test_transport_garbage_after_envelope (tests.unit.test_structured_response_transport.Transport.test_transport_garbage_after_envelope)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/alanrichard/Escritorio/IA inversa/.local/scent-json-contract-20261118/tests/unit/test_structured_response_transport.py", line 26, in test_transport_garbage_after_envelope
+    def test_transport_garbage_after_envelope(self):self.reject(frame(json.dumps(GOOD))+'\nPrivate trailing text')
+                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/alanrichard/Escritorio/IA inversa/.local/scent-json-contract-20261118/tests/unit/test_structured_response_transport.py", line 10, in reject
+    with self.assertRaises(adapters.ResponseContractError):adapters.parse_response('claude',raw,strict=strict)
+AssertionError: ResponseContractError not raised
+
+======================================================================
+FAIL: test_transport_incomplete_tail (tests.unit.test_structured_response_transport.Transport.test_transport_incomplete_tail)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/alanrichard/Escritorio/IA inversa/.local/scent-json-contract-20261118/tests/unit/test_structured_response_transport.py", line 27, in test_transport_incomplete_tail
+    def test_transport_incomplete_tail(self):self.reject(frame(json.dumps(GOOD))+'\n{"type":')
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/alanrichard/Escritorio/IA inversa/.local/scent-json-contract-20261118/tests/unit/test_structured_response_transport.py", line 10, in reject
+    with self.assertRaises(adapters.ResponseContractError):adapters.parse_response('claude',raw,strict=strict)
+AssertionError: ResponseContractError not raised
+
+======================================================================
+FAIL: test_transport_multiple_bare_objects (tests.unit.test_structured_response_transport.Transport.test_transport_multiple_bare_objects)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/alanrichard/Escritorio/IA inversa/.local/scent-json-contract-20261118/tests/unit/test_structured_response_transport.py", line 25, in test_transport_multiple_bare_objects
+    def test_transport_multiple_bare_objects(self):self.reject(json.dumps(GOOD)+'\n'+json.dumps(GOOD))
+                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/alanrichard/Escritorio/IA inversa/.local/scent-json-contract-20261118/tests/unit/test_structured_response_transport.py", line 10, in reject
+    with self.assertRaises(adapters.ResponseContractError):adapters.parse_response('claude',raw,strict=strict)
+AssertionError: ResponseContractError not raised
+
+======================================================================
+FAIL: test_extra_fields_rejected (tests.integration.test_smoke_structured_contract.SmokeContract.test_extra_fields_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/alanrichard/Escritorio/IA inversa/.local/scent-json-contract-20261118/tests/integration/test_smoke_structured_contract.py", line 33, in test_extra_fields_rejected
+    with self.assertRaises(adapters.ResponseContractError):self.invoke({'type':'result','structured_output':{**GOOD,'private':'must not be accepted'}})
+AssertionError: ResponseContractError not raised
+
+======================================================================
+FAIL: test_invalid_json_text_never_bypasses_pipeline (tests.integration.test_smoke_structured_contract.SmokeContract.test_invalid_json_text_never_bypasses_pipeline)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/alanrichard/Escritorio/IA inversa/.local/scent-json-contract-20261118/tests/integration/test_smoke_structured_contract.py", line 31, in test_invalid_json_text_never_bypasses_pipeline
+    with self.assertRaises(adapters.ResponseContractError):self.invoke({'type':'result','result':'```json\n{}\n```'})
+AssertionError: ResponseContractError not raised
+
+======================================================================
+FAIL: test_missing_required_field_rejected_by_worker (tests.integration.test_smoke_structured_contract.SmokeContract.test_missing_required_field_rejected_by_worker)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/alanrichard/Escritorio/IA inversa/.local/scent-json-contract-20261118/tests/integration/test_smoke_structured_contract.py", line 27, in test_missing_required_field_rejected_by_worker
+    with self.assertRaises(adapters.ResponseContractError):self.invoke({'type':'result','structured_output':{'decision':'approve','changes':[]}})
+AssertionError: ResponseContractError not raised
+
+======================================================================
+FAIL: test_smoke_cannot_return_writes (tests.integration.test_smoke_structured_contract.SmokeContract.test_smoke_cannot_return_writes)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/alanrichard/Escritorio/IA inversa/.local/scent-json-contract-20261118/tests/integration/test_smoke_structured_contract.py", line 29, in test_smoke_cannot_return_writes
+    with self.assertRaises(adapters.ResponseContractError):self.invoke({'type':'result','structured_output':{**GOOD,'changes':['forbidden']}})
+AssertionError: ResponseContractError not raised
+
+======================================================================
+FAIL: test_smoke_uses_native_schema_and_same_safety_flags (tests.integration.test_smoke_structured_contract.SmokeContract.test_smoke_uses_native_schema_and_same_safety_flags)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/alanrichard/Escritorio/IA inversa/.local/scent-json-contract-20261118/tests/integration/test_smoke_structured_contract.py", line 24, in test_smoke_uses_native_schema_and_same_safety_flags
+    self.assertEqual(result,GOOD);self.assertIn('--json-schema',seen['args']);self.assertTrue(seen['schema_exists'])
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '--json-schema' not found in ['/usr/bin/true', '-p', '--model', 'claude-haiku-5-5', '--output-format', 'json', '--tools', '', '--restricted', '--permission-mode', 'dontAsk', '--permission-prompts', 'none', '--strict-mcp-config', '--mcp-config', '{"mcpServers":{}}', '--setting-sources', '', '--no-session-persistence', '--effort', 'low']
+
+----------------------------------------------------------------------
+Ran 24 tests in 0.028s
+
+FAILED (failures=15)

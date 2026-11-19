@@ -1,0 +1,843 @@
+--- a/tools/ipanema/orchestration/planner.py
++++ b/tools/ipanema/orchestration/planner.py
+@@ -2,6 +2,8 @@
+ from pathlib import PurePosixPath
+ import re
+ import uuid
++import hashlib
++import json
+ 
+ from ..core import IpanemaError, now, read_json
+ from ..coordinator import route, plan as technical_plan
+@@ -9,6 +11,7 @@
+ 
+ 
+ def safe_path(value):
++    if not isinstance(value,str):raise IpanemaError('Archivo permitido inválido o privado.')
+     p=PurePosixPath(value)
+     if not value or not p.parts or p.is_absolute() or '..' in p.parts or '\\' in value or any(part.startswith('.') for part in p.parts):
+         raise IpanemaError('Archivo permitido inválido o privado.')
+@@ -39,16 +42,124 @@
+     return sorted({criterion for skill,criterion in names.items() if skill in skills})
+ 
+ 
+-def make_plan(project,request,*,files=None,scope='theme',read_only=False,council_mode='auto',council_rounds=2,implementation_agent='codex'):
++FILE_CONTRACT_VERSION=2
++
++
++def _file_list(values, label):
++    if not isinstance(values, (list, tuple)):
++        raise IpanemaError(label+' debe ser una lista de rutas.')
++    normalized=[]
++    for value in values:
++        if not isinstance(value,str):raise IpanemaError(label+' contiene una ruta no textual.')
++        path=safe_path(value)
++        if path in normalized:raise IpanemaError(label+' contiene rutas duplicadas.')
++        normalized.append(path)
++    return normalized
++
++
++def file_contract_projection(plan):
++    """Fields that define file authority; intentionally excludes descriptive metadata."""
++    tasks=plan.get('tasks',[])
++    return {'version':plan.get('file_contract_version'),
++            'project':plan.get('project'),'objective':plan.get('objective'),
++            'scope':plan.get('scope'),'read_only':plan.get('read_only'),
++            'candidate_files':plan.get('candidate_files'),
++            'context_files':plan.get('context_files'),
++            'write_files':plan.get('write_files'),
++            'allowed_files':plan.get('allowed_files'),
++            'tasks':[{'id':t.get('id'),'role':t.get('role'),'read_files':t.get('read_files'),
++                      'allowed_files':t.get('allowed_files')} for t in tasks]}
++
++
++def file_contract_sha256(plan):
++    raw=json.dumps(file_contract_projection(plan),ensure_ascii=False,sort_keys=True,separators=(',',':'))
++    return hashlib.sha256(raw.encode()).hexdigest()
++
++
++def validate_file_contract(plan, *, allow_legacy=False):
++    """Validate explicit candidate/context/write sets; migrate only unambiguous V1 plans."""
++    if not isinstance(plan,dict) or type(plan.get('read_only')) is not bool:
++        raise IpanemaError('El plan debe declarar read_only como booleano.')
++    if not isinstance(plan.get('tasks'),list) or any(not isinstance(task,dict) for task in plan['tasks']):
++        raise IpanemaError('El plan debe declarar tareas como lista de objetos.')
++    typed=('candidate_files','context_files','write_files')
++    present=[key in plan for key in typed]
++    if not all(present):
++        if any(present) or not allow_legacy:
++            raise IpanemaError('Plan de archivos incompleto/obsoleto; vuelve a generarlo.')
++        legacy=_file_list(plan.get('allowed_files'), 'allowed_files')
++        task_writes=[]
++        for task in plan.get('tasks',[]):
++            for path in _file_list(task.get('allowed_files',[]),'task.allowed_files'):
++                if path not in task_writes:task_writes.append(path)
++        if set(task_writes)-set(legacy):raise IpanemaError('El plan legado intenta ampliar archivos modificables.')
++        if plan.get('read_only') and (task_writes or any(t.get('role')=='implementation' for t in plan.get('tasks',[]))):
++            raise IpanemaError('Plan legado read-only con permisos de escritura; requiere regeneración.')
++        plan['candidate_files']=legacy
++        plan['context_files']=[]
++        plan['write_files']=task_writes
++        plan['allowed_files']=legacy
++        plan['file_contract_version']=FILE_CONTRACT_VERSION
++        plan['file_contract_migration']='legacy-all-allowed-files-as-candidates'
++        plan['file_contract_sha256']=file_contract_sha256(plan)
++    else:
++        if plan.get('file_contract_version')!=FILE_CONTRACT_VERSION:
++            raise IpanemaError('Versión de contrato de archivos no soportada; regenera el plan.')
++        candidates=_file_list(plan['candidate_files'],'candidate_files')
++        context=_file_list(plan['context_files'],'context_files')
++        writes=_file_list(plan['write_files'],'write_files')
++        if set(candidates)&set(context):raise IpanemaError('candidate_files y context_files deben ser disjuntos.')
++        if set(writes)-set(candidates):raise IpanemaError('write_files debe ser subconjunto de candidate_files.')
++        union=candidates+context
++        if plan.get('allowed_files')!=union:
++            raise IpanemaError('allowed_files debe coincidir exactamente con candidate_files + context_files.')
++        if plan.get('read_only') and writes:
++            raise IpanemaError('Un plan read-only requiere write_files=[].')
++        if plan.get('file_contract_sha256')!=file_contract_sha256(plan):
++            raise IpanemaError('El contrato de archivos cambió después de planificar; regenera y revisa el alcance.')
++    candidates=set(plan['candidate_files']);context=set(plan['context_files']);writes=set(plan['write_files'])
++    if plan.get('read_only') and writes:
++        raise IpanemaError('Un plan read-only requiere write_files=[].')
++    if plan.get('read_only') and any(task.get('role') == 'implementation' for task in plan.get('tasks', [])):
++        raise IpanemaError('Un plan read-only no puede incluir tareas de implementación.')
++    task_write_union=set()
++    for task in plan.get('tasks',[]):
++        reads=set(_file_list(task.get('read_files',[]),'task.read_files'))
++        task_writes=set(_file_list(task.get('allowed_files',[]),'task.allowed_files'))
++        if reads-(candidates|context):raise IpanemaError('Tarea lee archivos fuera de candidate_files/context_files.')
++        if task_writes-writes:raise IpanemaError('Tarea amplía write_files.')
++        if task.get('role')!='implementation' and task_writes:
++            raise IpanemaError('Una tarea no implementadora no puede escribir.')
++        if plan.get('read_only') and task_writes:
++            raise IpanemaError('Tarea read-only con permisos de escritura.')
++        task_write_union.update(task_writes)
++    if task_write_union!=writes:
++        raise IpanemaError('write_files debe coincidir con la unión de permisos de tareas implementadoras.')
++    return plan
++
++
++def make_plan(project,request,*,files=None,candidate_files=None,context_files=None,write_files=None,
++              scope='theme',read_only=False,council_mode='auto',council_rounds=2,implementation_agent='codex'):
+     if scope not in ('theme','workspace'):raise IpanemaError('Scope no soportado.')
+     selection=route(request);knowledge=None;discovery=None
+     try:
+         discovery=technical_plan(project,request)
+         knowledge=discovery['evidence']
+     except IpanemaError:pass
+-    candidates=[x['path'] for x in (knowledge or {}).get('components',[])]
+-    allowed=list(dict.fromkeys(safe_path(f) for f in (files or (candidates[:1] if scope=='theme' else []))))
+-    risk=classify(request,allowed);level=int(risk['level'][1]);tasks=[]
++    discovered=[x['path'] for x in (knowledge or {}).get('components',[])]
++    if files is not None and candidate_files is not None:
++        raise IpanemaError('Usa --file legado o candidate_files, no ambos.')
++    candidates=_file_list(candidate_files if candidate_files is not None else
++                          files if files is not None else (discovered[:1] if scope=='theme' else []),
++                          'candidate_files')
++    context=_file_list(context_files or [],'context_files')
++    if set(candidates)&set(context):raise IpanemaError('candidate_files y context_files deben ser disjuntos.')
++    writes=_file_list(write_files if write_files is not None else ([] if read_only else candidates),'write_files')
++    if read_only and writes:raise IpanemaError('Un plan read-only requiere write_files=[].')
++    if set(writes)-set(candidates):raise IpanemaError('write_files debe ser subconjunto de candidate_files.')
++    all_files=candidates+context
++    # Context files are for evidence only; their count must not change candidate risk.
++    risk=classify(request,candidates);level=int(risk['level'][1]);tasks=[]
+     from .adapters import enabled_agents,require_agent
+     require_agent(implementation_agent)
+     if implementation_agent not in ('claude','codex'):raise IpanemaError('Implementador debe ser Claude o Codex.')
+@@ -59,8 +170,8 @@
+     tier='critical' if level==4 else 'strong' if level==3 else 'balanced' if level==2 else 'fast'
+     def add(ident,role,agent,dependencies,write=False):
+         task_tier='balanced' if role in ('review','audit') and level<3 else tier
+-        tasks.append({'id':ident,'objective':request,'role':role,'agent':agent,'tier':task_tier,'allowed_files':allowed if write else [],
+-                      'read_files':allowed,'dependencies':dependencies,'tests':['central-qa'],'state':'pending','result':None})
++        tasks.append({'id':ident,'objective':request,'role':role,'agent':agent,'tier':task_tier,'allowed_files':writes if write else [],
++                      'read_files':all_files,'dependencies':dependencies,'tests':['central-qa'],'state':'pending','result':None})
+     if level>=3:
+         add('architecture','architecture','claude',[])
+     if read_only:
+@@ -69,9 +180,10 @@
+         add('implementation','implementation',implementation_agent,['architecture'] if level>=3 else [],True)
+         if level>=2:add('review','review',review_agent,['implementation'])
+         if level==4 and not dual:add('independent-review','review',next(a for a in enabled_agents()if a not in (implementation_agent,review_agent)),['implementation'])
+-    return {'kind':'orchestration-plan','id':'orch-'+uuid.uuid4().hex[:12],'project':project.id,'at':now(),'objective':request,
++    result={'kind':'orchestration-plan','id':'orch-'+uuid.uuid4().hex[:12],'project':project.id,'at':now(),'objective':request,
+             'scope':scope,'read_only':read_only,'classification':risk,'skills':selection['skills'],
+-            'knowledge':knowledge,'candidate_files':candidates,'allowed_files':allowed,'tasks':tasks,
++            'knowledge':knowledge,'candidate_files':candidates,'context_files':context,'write_files':writes,
++            'allowed_files':all_files,'file_contract_version':FILE_CONTRACT_VERSION,'tasks':tasks,
+             'required_validation':discovery['required_checks'] if discovery else ['source-investigation'],
+             'validation_plan':discovery['tests'] if discovery else ['Comprobar fuente y pruebas del alcance antes de aprobar.'],
+             'consumers':discovery['consumers'] if discovery else {},
+@@ -81,6 +193,8 @@
+             'council':council_policy,'council_checks':[],
+             'council_required_constraints':relevant_constraints(request,scope),
+             'limitations':['Candidatos deben comprobarse en fuente actual.','El modelo no eleva permisos ni publica.','Una revisión de IA no sustituye QA ejecutado.']}
++    result['file_contract_sha256']=file_contract_sha256(result)
++    return result
+ 
+ 
+ def ready_wave(tasks,completed):
+--- a/tools/ipanema/orchestration/cli.py
++++ b/tools/ipanema/orchestration/cli.py
+@@ -12,14 +12,20 @@
+     commands=parser.add_subparsers(dest='orchestration_command',required=True)
+     commands.add_parser('doctor')
+     plan=commands.add_parser('plan');plan.add_argument('request')
+-    plan.add_argument('--file',action='append');plan.add_argument('--scope',choices=['theme','workspace'],default='theme')
++    plan.add_argument('--file',action='append',help='Alias legado de --candidate-file')
++    plan.add_argument('--candidate-file',action='append');plan.add_argument('--context-file',action='append')
++    plan.add_argument('--write-file',action='append',help='Subset modificable de candidate_files')
++    plan.add_argument('--scope',choices=['theme','workspace'],default='theme')
+     plan.add_argument('--read-only',action='store_true')
+     plan.add_argument('--implementer',choices=['claude','codex'],default='codex')
+     plan.add_argument('--council',choices=['auto','full','off'],default='auto')
+     plan.add_argument('--council-rounds',type=int,choices=[1,2],default=2)
+     plan.add_argument('--council-checks',type=Path,help='JSON de predicados/QA del controlador; nunca comandos de modelos')
+     task=commands.add_parser('task',help='Petición natural: plan y ejecución opcional')
+-    task.add_argument('request');task.add_argument('--file',action='append');task.add_argument('--scope',choices=['theme','workspace'],default='theme')
++    task.add_argument('request');task.add_argument('--file',action='append',help='Alias legado de --candidate-file')
++    task.add_argument('--candidate-file',action='append');task.add_argument('--context-file',action='append')
++    task.add_argument('--write-file',action='append',help='Subset modificable de candidate_files')
++    task.add_argument('--scope',choices=['theme','workspace'],default='theme')
+     task.add_argument('--read-only',action='store_true');task.add_argument('--execute',action='store_true')
+     task.add_argument('--implementer',choices=['claude','codex'],default='codex')
+     task.add_argument('--council',choices=['auto','full','off'],default='auto')
+@@ -40,7 +46,9 @@
+         return {'project':project.id,'at':now(),'sandbox':probe(),'participation':agent_policy(),'runtimes':{name:health_check(name) for name in ('claude','codex','commandcode')},
+                 'no_unsafe_fallback':True,'production_executor':False},0
+     if op in ('plan','task'):
+-        plan=make_plan(project,args.request,files=args.file,scope=args.scope,read_only=args.read_only,
++        plan=make_plan(project,args.request,files=args.file,candidate_files=args.candidate_file,
++                       context_files=args.context_file,write_files=args.write_file,
++                       scope=args.scope,read_only=args.read_only,
+                        council_mode=args.council,council_rounds=args.council_rounds,implementation_agent=args.implementer)
+         if args.council_checks:
+             if args.council_checks.stat().st_size>100_000:raise IpanemaError('Configuración de comprobaciones demasiado grande.')
+@@ -54,7 +62,10 @@
+         if op=='task' and args.execute:
+             result=execute(project,plan,authorize=True)
+             return {k:result.get(k) for k in ('run','state','error','patch','original_still_matches','production_modified')},0 if result['state'].startswith('reviewable') else 2
+-        return {'plan':str(path),'classification':plan['classification'],'skills':plan['skills'],'files':plan['allowed_files'],'tasks':plan['tasks'],'execution_performed':False},0
++        return {'plan':str(path),'classification':plan['classification'],'skills':plan['skills'],
++                'candidate_files':plan['candidate_files'],'context_files':plan['context_files'],
++                'write_files':plan['write_files'],'files':plan['allowed_files'],'tasks':plan['tasks'],
++                'execution_performed':False},0
+     if op=='run':
+         result=execute(project,read_json(args.plan),authorize=args.execute)
+         return {k:result.get(k) for k in ('run','state','error','patch','original_still_matches','production_modified')},0 if result['state'].startswith('reviewable') else 2
+--- a/tools/ipanema/orchestration/engine.py
++++ b/tools/ipanema/orchestration/engine.py
+@@ -11,7 +11,7 @@
+ import time
+ 
+ from ..core import IpanemaError, Project, beneath, digest, now, read_json, write_json
+-from .planner import safe_path, ready_wave, classify
++from .planner import safe_path, ready_wave, classify, validate_file_contract
+ from .adapters import argv,parse_response,model_for,usage_metrics
+ 
+ 
+@@ -144,7 +144,11 @@
+         path=project.root/'.agents/skills'/name/'SKILL.md'
+         if not beneath(path,project.root/'.agents/skills'):raise IpanemaError('Skill fuera de la raíz autorizada.')
+         if path.is_file():skills[name]=path.read_text()
+-    return {'rules':(project.root/'AGENTS.md').read_text(),'skills':skills}
++    return {'rules':(project.root/'AGENTS.md').read_text(),'skills':skills,
++            'file_contract':{'candidate_files':plan.get('candidate_files',[]),
++                             'context_files':plan.get('context_files',[]),
++                             'write_files':plan.get('write_files',[]),
++                             'read_only':plan.get('read_only') is True}}
+ 
+ 
+ def sanitized_view(source,destination,names=None):
+@@ -371,8 +375,8 @@
+         if not isinstance(condition,dict) or condition.get('required',True) and condition.get('status')!='passed':
+             raise IpanemaError('El ADR tiene condiciones obligatorias pendientes.')
+     files=adr.get('files',adr.get('allowed_files'))
+-    if not isinstance(files,list) or any(f not in plan['allowed_files'] for f in files):
+-        raise IpanemaError('El ADR no puede ampliar el alcance autorizado.')
++    if not isinstance(files,list) or any(f not in plan['candidate_files'] for f in files):
++        raise IpanemaError('El ADR solo puede declarar archivos candidatos, no dependencias de contexto.')
+     if adr.get('binding')!=bound:raise IpanemaError('ADR sin binding verificable o de otra fuente/objetivo/proyecto.')
+     if bound.get('require_defense') and (adr.get('coverage',{}).get('defense_complete')is not True or
+                                         adr.get('coverage',{}).get('deliberation_complete')is not True):
+@@ -382,9 +386,10 @@
+ def execute(project,plan,*,authorize=False):
+     if plan.get('project')!=project.id or plan.get('kind')!='orchestration-plan':raise IpanemaError('Plan de otro proyecto o formato.')
+     if not authorize:raise IpanemaError('Ejecutar modelos y cambios aislados requiere --execute.')
++    validate_file_contract(plan)
+     if plan['classification']['production_request']:raise IpanemaError('Este ejecutor no realiza operaciones de producción.')
+     if not plan['allowed_files']:raise IpanemaError('Faltan archivos verificables; selecciona --file antes de ejecutar.')
+-    actual_risk=classify(plan['objective'],plan['allowed_files'])
++    actual_risk=classify(plan['objective'],plan['candidate_files'])
+     if actual_risk['production_request']:raise IpanemaError('No hay ejecutor de producción.')
+     declared=plan['classification']
+     plan.setdefault('declared_classification',dict(declared))
+@@ -532,7 +537,7 @@
+         if not result['original_still_matches']:
+             result['state']='blocked';result['error']='El original cambió durante la ejecución; conservar cambios ajenos y revisar diff del baseline.'
+         patches=[]
+-        for name in plan['allowed_files']:
++        for name in plan['write_files']:
+             a=initial_content[name];b=(snapshot/name).read_text() if (snapshot/name).is_file() else ''
+             patches.extend(difflib.unified_diff(a.splitlines(True),b.splitlines(True),fromfile='a/'+name,tofile='b/'+name))
+         (run/'changes.patch').write_text(''.join(patches));result['patch']=str(run/'changes.patch')
+--- a/tools/ipanema/orchestration/council.py
++++ b/tools/ipanema/orchestration/council.py
+@@ -206,7 +206,49 @@
+     return {'status': value['status'], 'evidence_refs': _strings(value.get('evidence_refs', []), 'evidence_refs')}
+ 
+ 
+-def validate_proposal(response, allowed_files):
++def _reference_ids(value):
++    refs=[]
++    if isinstance(value,dict):
++        for key,child in value.items():
++            if key.endswith('evidence_refs'):
++                if isinstance(child,list):refs.extend(child)
++            elif key.endswith('evidence_ref') and isinstance(child,str):refs.append(child)
++            refs.extend(_reference_ids(child))
++    elif isinstance(value,list):
++        for child in value:refs.extend(_reference_ids(child))
++    return refs
++
++
++def _validate_evidence_references(value, evidence_ledger=None, evidence_context=None):
++    refs=_reference_ids(value)
++    if not refs:return
++    if evidence_ledger is None or evidence_context is None:
++        raise IpanemaError('Falta ledger del controlador ligado al run para validar referencias de evidencia.')
++    if isinstance(evidence_ledger,dict):
++        # Revalidate normalized ledgers too; never trust an arbitrary caller map.
++        if any(not isinstance(row,dict) or row.get('id')!=key for key,row in evidence_ledger.items()):
++            raise IpanemaError('Ledger normalizado con identidad de referencia inconsistente.')
++        valid,invalid=_ledger(list(evidence_ledger.values()),evidence_context)
++        if invalid:
++            raise IpanemaError('Ledger con evidencia inválida; referencias pendientes de verificación.')
++    else:
++        valid,invalid=_ledger(evidence_ledger,evidence_context)
++        if invalid:
++            raise IpanemaError('Ledger con evidencia inválida; referencias pendientes de verificación.')
++    missing=sorted(set(refs)-set(valid))
++    if missing:raise IpanemaError('La respuesta cita IDs de evidencia inexistentes o ajenos al run: '+', '.join(missing))
++    for ident in set(refs):
++        row=valid[ident]
++        if row.get('context')!=evidence_context:
++            raise IpanemaError('La evidencia no pertenece al binding de este run/candidato.')
++        if row.get('kind')=='source' and 'candidate_files' in evidence_context:
++            files=evidence_context.get('files',{})
++            subject=row.get('subject')
++            if not isinstance(files,dict) or row.get('id')!='source:'+str(subject) or files.get(subject)!=row.get('sha256'):
++                raise IpanemaError('La identidad/hash de la fuente no coincide con el candidato y contexto ligados.')
++
++
++def validate_proposal(response, candidate_files, *, evidence_ledger=None, evidence_context=None):
+     result = _base(response)
+     analysis = response.get('analysis')
+     if not isinstance(analysis, dict):
+@@ -216,7 +258,7 @@
+         normal[k] = _strings(analysis.get(k), k)
+     if not normal['tests']:
+         raise IpanemaError('La propuesta debe declarar pruebas de aceptación.')
+-    normal['files'] = _files(analysis.get('files'), allowed_files)
++    normal['files'] = _files(analysis.get('files'), candidate_files)
+     impacts = analysis.get('impacts')
+     if not isinstance(impacts, dict):
+         raise IpanemaError('Faltan impactos de la propuesta.')
+@@ -249,15 +291,16 @@
+             raise IpanemaError('Cada alternativa debe declarar pruebas.')
+         normal['alternatives'].append({'id': alt['id'], 'description': _text(alt.get('description'), 'description'),
+                                        'constraints': criteria,
+-                                       'files': _files(alt.get('files', normal['files']), allowed_files),
++                                       'files': _files(alt.get('files', normal['files']), candidate_files),
+                                        'tests': tests})
+     if normal['recommendation'] not in ids:
+         raise IpanemaError('La recomendación debe referir una alternativa incluida.')
+     result['analysis'] = normal
++    _validate_evidence_references(result,evidence_ledger,evidence_context)
+     return result
+ 
+ 
+-def validate_objections(response, allowed_files=()):
++def validate_objections(response, candidate_files=(), *, evidence_ledger=None, evidence_context=None):
+     result = _base(response)
+     rows = response.get('objections')
+     if not isinstance(rows, list) or len(rows) > 100:
+@@ -293,6 +336,7 @@
+             seen.add(q['id'])
+             result['questions'].append({k:_text(q.get(k),k)for k in ('id','to_agent','alternative_id','question')}|
+                                        {'evidence_refs':_strings(q.get('evidence_refs'),'evidence_refs')})
++    _validate_evidence_references(result,evidence_ledger,evidence_context)
+     return result
+ 
+ 
+@@ -300,8 +344,8 @@
+     return {(e['requested_agent'],q['id'])for e in examinations for q in e.get('response',{}).get('questions',[])if q['to_agent']==agent}
+ 
+ 
+-def validate_defense(response,allowed_files=(),*,expected_answers=None):
+-    result=validate_objections(response,allowed_files)
++def validate_defense(response,candidate_files=(),*,expected_answers=None,evidence_ledger=None,evidence_context=None):
++    result=validate_objections(response,candidate_files,evidence_ledger=evidence_ledger,evidence_context=evidence_context)
+     rows=response.get('answers')
+     if not isinstance(rows,list)or len(rows)>8:raise IpanemaError('Respuestas de defensa inválidas.')
+     result['answers']=[];seen=set()
+@@ -317,6 +361,7 @@
+         raise IpanemaError('La defensa debe responder exactamente las preguntas asignadas al participante.')
+     result['withdrawn_alternatives']=_strings(response.get('withdrawn_alternatives'),'withdrawn_alternatives')
+     result['revision_notes']=_strings(response.get('revision_notes'),'revision_notes')
++    _validate_evidence_references(result,evidence_ledger,evidence_context)
+     return result
+ 
+ 
+@@ -334,6 +379,15 @@
+             invalid.append(ident); continue
+         if receipt.get('kind') not in ('source', 'constraint', 'resolution', 'qa'):
+             invalid.append(ident); continue
++        if receipt.get('kind')=='source' and isinstance(context,dict) and 'candidate_files' in context:
++            files=context.get('files',{}) if isinstance(context,dict) else {}
++            subject=receipt.get('subject')
++            expected=files.get(subject) if isinstance(files,dict) else None
++            if expected is None and isinstance(files,dict) and subject in files:
++                expected=hashlib.sha256(b'absent').hexdigest()
++            if (not isinstance(files,dict) or not isinstance(subject,str) or ident!='source:'+subject or
++                    expected!=receipt.get('sha256')):
++                invalid.append(ident);continue
+         if receipt.get('kind') in ('constraint', 'resolution') and not re.fullmatch(
+                 r'[a-f0-9]{64}', str(receipt.get('alternative_sha256', ''))):
+             invalid.append(ident); continue
+@@ -385,7 +439,13 @@
+     scoped_files = (context or {}).get('files', [])
+     if not isinstance(scoped_files, (list, dict)):
+         raise IpanemaError('El controlador debe declarar archivos autorizados en context.files.')
+-    known_files = set(scoped_files)
++    candidate_files=(context or {}).get('candidate_files')
++    if candidate_files is None:
++        # V1 bindings had a single undifferentiated file set; preserve that exact legacy meaning.
++        candidate_files=list(scoped_files) if isinstance(scoped_files,dict) else scoped_files
++    if not isinstance(candidate_files,list) or any(not isinstance(path,str) for path in candidate_files):
++        raise IpanemaError('El binding debe declarar candidate_files como lista explícita.')
++    known_files = set(candidate_files)
+     # Never derive authority from a model's own analysis.files declaration.
+     participants, seen, effective, reasons = [], set(), set(), []
+     candidates = {}
+@@ -402,7 +462,7 @@
+         if actual not in AGENTS or not env.get('response'):
+             item['error'] = env.get('error', 'missing_response'); participants.append(item); continue
+         try:
+-            proposal = validate_proposal(env['response'], known_files)
++            proposal = validate_proposal(env['response'], known_files,evidence_ledger=ledger,evidence_context=context)
+         except (IpanemaError, TypeError, ValueError):
+             item.update(status='invalid', error='invalid_proposal_contract'); participants.append(item); continue
+         item.update(status='available', proposal=proposal)
+@@ -441,7 +501,7 @@
+         participant = next((p for p in available if p['requested_agent'] == requested), None)
+         if not participant or actual != participant['effective_agent'] or not env.get('response'):
+             reasons.append('Objeciones ausentes o sustitución no independiente: ' + requested); continue
+-        try: debate = validate_objections(env['response'], known_files)
++        try: debate = validate_objections(env['response'], known_files,evidence_ledger=ledger,evidence_context=context)
+         except (IpanemaError, TypeError, ValueError):
+             reasons.append('Contrato de objeciones inválido: ' + requested); continue
+         valid_debate_speakers.add(requested)
+@@ -478,7 +538,9 @@
+             speaker=env.get('requested_agent')
+             if speaker not in required or speaker in defense_speakers or env.get('effective_agent')!=speaker or 'response'not in env:
+                 reasons.append('Defensa ausente/duplicada/no independiente');continue
+-            try:response=validate_defense(env['response'],known_files,expected_answers={(q['from_agent'],q['id'])for q in questions if q['to_agent']==speaker})
++            try:response=validate_defense(env['response'],known_files,
++                expected_answers={(q['from_agent'],q['id'])for q in questions if q['to_agent']==speaker},
++                evidence_ledger=ledger,evidence_context=context)
+             except (IpanemaError,ValueError,TypeError):reasons.append('Contrato de defensa inválido: '+speaker);continue
+             defense_speakers.add(speaker)
+             expected={q['key']:q for q in questions if q['to_agent']==speaker};seen_answers=set()
+--- a/tools/ipanema/orchestration/council_runtime.py
++++ b/tools/ipanema/orchestration/council_runtime.py
+@@ -29,6 +29,9 @@
+     return {'project':project.id,'run_id':run.name,
+             'source_sha256':hashlib.sha256(json.dumps(files,sort_keys=True).encode()).hexdigest(),
+             'objective_sha256':hashlib.sha256(plan['objective'].encode()).hexdigest(),'files':files,
++            'candidate_files':list(plan['candidate_files']),'context_files':list(plan['context_files']),
++            'write_files':list(plan['write_files']),'file_contract_version':plan['file_contract_version'],
++            'file_contract_sha256':plan['file_contract_sha256'],
+             'required_constraints':list(plan.get('council_required_constraints',[])),
+             'instructions_sha256':hashlib.sha256(json.dumps(plan.get('_controller_instructions',{}),sort_keys=True).encode()).hexdigest(),
+             'require_objections':plan.get('council',{}).get('max_rounds',2)>=2,
+@@ -136,12 +139,16 @@
+                           'passed':baseline.get('passed') is True,'sha256':hashlib.sha256(json.dumps(baseline,sort_keys=True).encode()).hexdigest(),
+                           'context':context,'measurement_scope':baseline.get('kind')})
+     metadata={'permissions':{'scope':plan['scope'],'allowed_files':plan['allowed_files'],
++                'candidate_files':plan['candidate_files'],'context_files':plan['context_files'],
++                'write_files':plan['write_files'],
+                 'council_read_only':True,'production_allowed':False,'remote_accounts_used':False,'connection_status':'not_checked'},
+               'project':project.id,'source_binding':context,'baseline_qa':baseline,
+               'verification_plan':plan.get('council_checks',[]),
+               'dependencies':plan.get('consumers',{}),'required_validation':plan.get('required_validation',[]),
+               'store_state':{'environment':project.data.get('environment'),'remote_reverified':False},
+-              'components_available_from_current_sources':context['files'],
++                'components_available_from_current_sources':context['files'],
++                'file_contract':{'candidate_files':context['candidate_files'],'context_files':context['context_files'],
++                                 'write_files':context['write_files'],'authorized_diff_files':context['candidate_files']},
+               'controller_evidence':source_ledger,
+               'version':{'status':'not_available'}}
+     manifest=snapshot/'manifest.json'
+@@ -167,7 +174,8 @@
+                     schema['required'].remove('evidence')
+                     env['normalization_note']='Legacy controller omitted root evidence; native validation passed. analysis.evidence_refs preserved; omitted value not recreated.'
+                 validate_schema(env['response'],schema)
+-                council.validate_proposal(env['response'],plan['allowed_files'])
++                council.validate_proposal(env['response'],plan['candidate_files'],
++                    evidence_ledger=source_ledger,evidence_context=context)
+                 cached[env['requested_agent']]=env
+         if (directory/'objections.json').exists():
+             for env in read_json(directory/'objections.json'):
+@@ -179,7 +187,8 @@
+                         schema['required'].remove('evidence')
+                         env['normalization_note']='Legacy normalizer omitted root evidence after native validation; no values recreated.'
+                     validate_schema(env['response'],schema)
+-                    council.validate_objections(env['response'],plan['allowed_files'])
++                    council.validate_objections(env['response'],plan['candidate_files'],
++                        evidence_ledger=source_ledger,evidence_context=context)
+                     cached_debate[env['requested_agent']]=env
+         if (directory/'adr.json').exists():
+             old_adr=read_json(directory/'adr.json');budget.used=old_adr.get('worker_attempt_budget',{}).get('used',0)
+@@ -192,7 +201,9 @@
+                 if env.get('requested_agent')==env.get('effective_agent') and 'response'in env:
+                     validate_schema(env['response'],council.response_schema('council_defense'))
+                     try:
+-                        council.validate_defense(env['response'],plan['allowed_files'],expected_answers=council.assigned_defense_answers(list(cached_debate.values()),env['requested_agent']))
++                        council.validate_defense(env['response'],plan['candidate_files'],
++                            expected_answers=council.assigned_defense_answers(list(cached_debate.values()),env['requested_agent']),
++                            evidence_ledger=source_ledger,evidence_context=context)
+                     except IpanemaError:
+                         # Keep the rejected checkpoint; recover only this provider's defense.
+                         continue
+@@ -223,7 +234,9 @@
+             from .adapters import validate_schema
+             validate_schema(response,council.response_schema(task['role']))
+             normalizer=council.validate_defense if defense else council.validate_proposal if round_index==0 else council.validate_objections
+-            normalized=normalizer(response,plan['allowed_files'],**({'expected_answers':council.assigned_defense_answers(objections,agent)}if defense else{}))
++            normalized=normalizer(response,plan['candidate_files'],
++                evidence_ledger=source_ledger,evidence_context=context,
++                **({'expected_answers':council.assigned_defense_answers(objections,agent)}if defense else{}))
+             task['state']='completed';task['result']=normalized
+             envelope['response']=normalized
+         except (IpanemaError,OSError,ValueError) as exc:
+--- /dev/null
++++ b/tests/unit/test_orchestration_file_contract.py
+@@ -0,0 +1,218 @@
++"""Focused synthetic tests for explicit candidate/context/write contracts."""
++import copy
++import hashlib
++import tempfile
++import unittest
++from pathlib import Path
++from unittest.mock import patch
++
++from tests.support import make_project
++from ipanema.core import IpanemaError, Project, digest
++from ipanema.orchestration import council, engine, planner
++
++
++class FileContractTests(unittest.TestCase):
++    def setUp(self):
++        self.tmp = tempfile.TemporaryDirectory()
++        self.root = make_project(Path(self.tmp.name), theme=False)
++        for name in ('candidate/a.tpl', 'candidate/b.tpl',
++                     'context/one.tpl', 'context/two.tpl', 'context/three.tpl',
++                     'context/four.tpl', 'context/five.tpl', 'context/six.tpl',
++                     'context/seven.tpl'):
++            path = self.root / name
++            path.parent.mkdir(parents=True, exist_ok=True)
++            path.write_text('fixture ' + name + '\n')
++        self.project = Project(self.root)
++
++    def tearDown(self):
++        self.tmp.cleanup()
++
++    def plan(self, *, read_only=True):
++        return planner.make_plan(
++            self.project, 'Revisión de solo lectura de dos candidatos y sus dependencias',
++            candidate_files=['candidate/a.tpl', 'candidate/b.tpl'],
++            context_files=[f'context/{n}.tpl' for n in
++                           ('one', 'two', 'three', 'four', 'five', 'six', 'seven')],
++            scope='workspace', read_only=read_only, council_mode='full')
++
++    def test_two_candidates_seven_context_and_dual_council_are_read_only(self):
++        plan = self.plan()
++        self.assertEqual(plan['candidate_files'], ['candidate/a.tpl', 'candidate/b.tpl'])
++        self.assertEqual(len(plan['context_files']), 7)
++        self.assertEqual(plan['write_files'], [])
++        self.assertEqual(plan['allowed_files'], plan['candidate_files'] + plan['context_files'])
++        self.assertEqual(plan['classification']['level'], 'L2')
++        self.assertTrue(all(t['read_files'] == plan['allowed_files'] for t in plan['tasks']))
++        self.assertTrue(all(t['allowed_files'] == [] for t in plan['tasks']))
++        self.assertEqual(planner.validate_file_contract(plan), plan)
++
++    def test_context_count_does_not_promote_candidate_risk(self):
++        small = planner.make_plan(self.project, 'Revisa dos archivos',
++            candidate_files=['candidate/a.tpl', 'candidate/b.tpl'], context_files=[],
++            scope='workspace', read_only=True)
++        many = self.plan()
++        self.assertEqual(small['classification']['level'], many['classification']['level'])
++
++    def test_write_subset_is_limited_to_candidates_and_context_sets_are_disjoint(self):
++        plan = planner.make_plan(
++            self.project, 'Edit only the first fixture candidate',
++            candidate_files=['candidate/a.tpl', 'candidate/b.tpl'],
++            context_files=['context/one.tpl'], write_files=['candidate/a.tpl'],
++            scope='workspace', read_only=False, council_mode='full')
++        self.assertEqual(plan['write_files'], ['candidate/a.tpl'])
++        implementation = next(task for task in plan['tasks'] if task['role'] == 'implementation')
++        self.assertEqual(implementation['allowed_files'], ['candidate/a.tpl'])
++        self.assertTrue(all(task['allowed_files'] == [] for task in plan['tasks'] if task is not implementation))
++        planner.validate_file_contract(plan)
++        with self.assertRaises(IpanemaError):
++            planner.make_plan(self.project, 'Invalid overlapping sets', candidate_files=['candidate/a.tpl'],
++                context_files=['candidate/a.tpl'], write_files=[], scope='workspace', read_only=True)
++
++    def test_context_can_be_cited_as_evidence_but_not_as_candidate_diff(self):
++        plan = self.plan()
++        binding = {
++            'project': self.project.id, 'run_id': 'synthetic-run',
++            'candidate_files': plan['candidate_files'], 'context_files': plan['context_files'],
++            'write_files': [],
++            'files': {name: digest(self.root / name) for name in plan['allowed_files']},
++        }
++        ledger = [{
++            'id': 'source:' + name, 'kind': 'source', 'subject': name,
++            'executed': True, 'passed': True, 'sha256': binding['files'][name],
++            'context': binding,
++        } for name in plan['allowed_files']]
++        proposal = copy.deepcopy(council.contract('council_proposal')['example'])
++        proposal['analysis'].update(
++            problem='Fixture', cause='Fixture', recommendation='native',
++            evidence_refs=['source:context/one.tpl'], files=['candidate/a.tpl'],
++        )
++        proposal['analysis']['alternatives'][0]['files'] = ['candidate/a.tpl']
++        normalized = council.validate_proposal(
++            proposal, plan['candidate_files'], evidence_ledger=ledger, evidence_context=binding)
++        self.assertIn('source:context/one.tpl', normalized['analysis']['evidence_refs'])
++        proposal['analysis']['files'] = ['context/one.tpl']
++        with self.assertRaises(IpanemaError):
++            council.validate_proposal(
++                proposal, plan['candidate_files'], evidence_ledger=ledger, evidence_context=binding)
++        write = {'role': 'implementation', 'allowed_files': plan['candidate_files']}
++        context_diff = {'decision': 'proposed', 'changes': [{'path': 'context/one.tpl',
++                        'before_sha256': digest(self.root / 'context/one.tpl'), 'content': 'mutated'}]}
++        with self.assertRaises(IpanemaError):
++            engine.validate_response(write, context_diff, self.root)
++
++    def test_nonexistent_and_other_run_evidence_references_are_rejected(self):
++        plan = self.plan()
++        candidate = plan['candidate_files'][0]
++        current = {'project': 'sample', 'run_id': 'run-current', 'candidate_files': [candidate],
++                   'context_files': [], 'write_files': [],
++                   'files': {candidate: digest(self.root / candidate)}}
++        receipt = {'id': 'source:' + candidate, 'kind': 'source', 'subject': candidate,
++                   'executed': True, 'passed': True, 'sha256': current['files'][candidate],
++                   'context': current}
++        base = copy.deepcopy(council.contract('council_objection')['example'])
++        base['objections'][0]['evidence_refs'] = ['invented-id']
++        with self.assertRaises(IpanemaError):
++            council.validate_objections(base, [candidate], evidence_ledger=[receipt], evidence_context=current)
++
++        old_run = copy.deepcopy(current)
++        old_run['run_id'] = 'run-previous'
++        old_receipt = {**receipt, 'context': old_run}
++        base['objections'][0]['evidence_refs'] = [receipt['id']]
++        with self.assertRaises(IpanemaError):
++            council.validate_objections(base, [candidate], evidence_ledger=[old_receipt], evidence_context=current)
++
++        another_candidate = copy.deepcopy(current)
++        another_candidate['candidate_files'] = ['candidate/b.tpl']
++        another_candidate['files'] = {'candidate/b.tpl': digest(self.root / 'candidate/b.tpl')}
++        old_candidate_receipt = {**receipt, 'context': another_candidate}
++        with self.assertRaises(IpanemaError):
++            council.validate_objections(base, [candidate], evidence_ledger=[old_candidate_receipt],
++                                        evidence_context=current)
++
++    def test_arbitrary_normalized_map_is_not_trusted_as_controller_ledger(self):
++        candidate = 'candidate/a.tpl'
++        binding = {'project': 'sample', 'run_id': 'run-current', 'candidate_files': [candidate],
++                   'context_files': [], 'write_files': [], 'files': {candidate: 'a' * 64}}
++        forged = {'invented': {'id': 'source:' + candidate, 'kind': 'source', 'subject': candidate,
++                   'executed': True, 'passed': True, 'sha256': 'a' * 64, 'context': binding}}
++        response = copy.deepcopy(council.contract('council_objection')['example'])
++        response['objections'][0]['evidence_refs'] = ['source:' + candidate]
++        with self.assertRaises(IpanemaError):
++            council.validate_objections(response, [candidate], evidence_ledger=forged, evidence_context=binding)
++
++    def test_valid_current_candidate_evidence_is_accepted_in_questions_and_defense(self):
++        candidate = 'candidate/a.tpl'
++        binding = {'project': 'sample', 'run_id': 'run-current', 'candidate_files': [candidate],
++                   'context_files': [], 'write_files': [],
++                   'files': {candidate: hashlib.sha256(b'fixture candidate/a.tpl\n').hexdigest()}}
++        ledger = [{'id': 'source:' + candidate, 'kind': 'source', 'subject': candidate,
++                   'executed': True, 'passed': True, 'sha256': binding['files'][candidate],
++                   'context': binding}]
++        response = copy.deepcopy(council.contract('council_objection')['example'])
++        response['objections'][0]['evidence_refs'] = ['source:' + candidate]
++        response['questions'] = [{'id': 'Q1', 'to_agent': 'codex', 'alternative_id': 'native',
++                                  'question': 'Revisar fuente', 'evidence_refs': ['source:' + candidate]}]
++        council.validate_objections(response, [candidate], evidence_ledger=ledger, evidence_context=binding)
++
++        defense = copy.deepcopy(council.contract('council_defense')['example'])
++        defense['objections'][0]['evidence_refs'] = ['source:' + candidate]
++        defense['answers'] = [{'question_id': 'Q1', 'from_agent': 'claude', 'answer': 'Revisado',
++                               'evidence_refs': ['source:' + candidate], 'disposition': 'defend'}]
++        council.validate_defense(defense, [candidate], expected_answers={('claude', 'Q1')},
++                                 evidence_ledger=ledger, evidence_context=binding)
++
++    def test_read_only_and_modified_plan_cannot_expand_write_set_without_regeneration(self):
++        plan = self.plan()
++        altered = copy.deepcopy(plan)
++        altered['write_files'] = ['context/one.tpl']
++        altered['tasks'][0]['allowed_files'] = ['context/one.tpl']
++        with self.assertRaises(IpanemaError):
++            planner.validate_file_contract(altered)
++
++        changed_task = copy.deepcopy(plan['tasks'][0])
++        changed_task['allowed_files'] = ['candidate/a.tpl']
++        with self.assertRaises(IpanemaError):
++            planner.validate_file_contract({**plan, 'tasks': [changed_task] + plan['tasks'][1:]})
++
++    def test_legacy_plan_is_rejected_explicitly_and_old_receipt_contract_still_parses(self):
++        plan = self.plan()
++        legacy = {k: v for k, v in plan.items()
++                  if k not in ('candidate_files', 'context_files', 'write_files',
++                               'file_contract_version', 'file_contract_sha256')}
++        with self.assertRaisesRegex(IpanemaError, 'obsoleto'):
++            planner.validate_file_contract(legacy)
++        with patch('ipanema.orchestration.engine.worker') as worker, \
++             patch('ipanema.orchestration.engine.central_qa') as qa:
++            with self.assertRaisesRegex(IpanemaError, 'obsoleto'):
++                engine.execute(self.project, legacy, authorize=True)
++        worker.assert_not_called()
++        qa.assert_not_called()
++        # Historical untyped evidence bindings remain readable under their original meaning.
++        legacy_binding = {'project': 'sample', 'run_id': 'legacy-run', 'files': ['fixture.txt']}
++        historical = [{'id': 'legacy-check', 'kind': 'constraint', 'subject': 'native',
++                       'constraint': 'security', 'executed': True, 'passed': True,
++                       'sha256': 'a' * 64, 'context': legacy_binding,
++                       'alternative_sha256': 'b' * 64}]
++        valid, invalid = council._ledger(historical, legacy_binding)
++        self.assertEqual(set(valid), {'legacy-check'})
++        self.assertEqual(invalid, [])
++
++    def test_engine_rejects_read_only_write_attempt_before_provider_or_qa(self):
++        plan = self.plan()
++        task = {'role': 'audit', 'allowed_files': []}
++        response = {'decision': 'proposed', 'changes': [{'path': 'candidate/a.tpl',
++                   'before_sha256': digest(self.root / 'candidate/a.tpl'), 'content': 'changed'}]}
++        with self.assertRaises(IpanemaError):
++            engine.validate_response(task, response, self.root)
++        altered = copy.deepcopy(plan)
++        altered['tasks'][0]['allowed_files'] = ['candidate/a.tpl']
++        with patch('ipanema.orchestration.engine.worker') as worker, \
++             patch('ipanema.orchestration.engine.central_qa') as qa:
++            with self.assertRaises(IpanemaError):
++                engine.execute(self.project, altered, authorize=True)
++        worker.assert_not_called()
++        qa.assert_not_called()
++
++
++if __name__ == '__main__':
++    unittest.main()
+--- a/tests/unit/test_council_receipts.py
++++ b/tests/unit/test_council_receipts.py
+@@ -8,7 +8,7 @@
+ 
+ from tests.support import make_project
+ from ipanema.core import IpanemaError,Project,digest,now,write_json
+-from ipanema.orchestration import council_runtime,engine
++from ipanema.orchestration import council_runtime,engine,planner
+ 
+ 
+ class Receipts(unittest.TestCase):
+@@ -19,8 +19,8 @@
+         self.project=Project(self.root)
+         (self.root/'copy.txt').write_text('before\n')
+         (self.root/'AGENTS.md').write_text('Frozen fixture rules A\n')
+-        self.plan={'objective':'Inspect a fixture','scope':'workspace','allowed_files':['copy.txt'],'skills':[],
+-                   'council':{'max_rounds':2},'council_required_constraints':[]}
++        self.plan=planner.make_plan(self.project,'Inspect a fixture',candidate_files=['copy.txt'],
++                   context_files=[],write_files=[],scope='workspace',read_only=True,council_mode='full')
+         self.run=self.project.new_run('fixture')
+         self.context=council_runtime.binding(self.project,self.plan,self.root,self.run)
+         self.ids={'native':'1'*64}
+--- a/tests/unit/test_council_dual.py
++++ b/tests/unit/test_council_dual.py
+@@ -71,6 +71,7 @@
+    project=Project(make_project(Path(folder),theme=False))
+    p=planner.make_plan(project,'Ajuste compartido',files=['a.txt'],scope='workspace')
+    p['classification']['level']='L2';p['tasks']=[t for t in p['tasks']if t['role']!='review']
++   p['file_contract_sha256']=planner.file_contract_sha256(p)
+    with patch.object(engine,'central_qa')as qa:
+     with self.assertRaisesRegex(IpanemaError,'revisiones independientes'):engine.execute(project,p,authorize=True)
+     qa.assert_not_called()
+--- a/tests/unit/test_council_policy.py
++++ b/tests/unit/test_council_policy.py
+@@ -151,6 +151,13 @@
+         self.proposals[0]['response']['analysis']['evidence_refs'] = ['invented-source']
+         adr = self.decide()
+         self.assertEqual(adr['status'], 'needs_evidence')
++
++    def test_unknown_objection_reference_cannot_be_ignored_during_aggregation(self):
++        obj=objection(resolved=False)
++        obj['response']['objections'][0]['evidence_refs']=['invented-objection-source']
++        adr=self.decide(objections=[obj])
++        self.assertEqual(adr['status'],'needs_evidence')
++        self.assertFalse(adr['implementation_allowed'])
+ 
+     def test_required_seo_and_performance_need_own_receipts(self):
+         ctx = context(required_constraints=['seo', 'performance'])
+--- a/tests/integration/test_orchestration_cli.py
++++ b/tests/integration/test_orchestration_cli.py
+@@ -51,6 +51,21 @@
+         denied=self.cli('run',result['plan'])
+         self.assertEqual(denied.returncode,2);self.assertIn('--execute',denied.stderr)
+ 
++    def test_cli_separates_two_candidates_and_seven_read_only_context_files(self):
++        args=['plan','Review two candidates','--scope','workspace','--read-only',
++              '--candidate-file','sections/hero.tpl','--candidate-file','snippets/image.tpl']
++        for path in ('blocks/slide.tpl','blocks/banner.tpl','blocks/image.tpl','layouts/layout.tpl',
++                     'sections/category-hero.tpl','sections/hero-divided.tpl','static/js/libraries-standalone.js'):
++            args.extend(['--context-file',path])
++        run=self.cli(*args)
++        self.assertEqual(run.returncode,0,run.stderr)
++        output=json.loads(run.stdout)
++        self.assertEqual(output['candidate_files'],['sections/hero.tpl','snippets/image.tpl'])
++        self.assertEqual(len(output['context_files']),7)
++        self.assertEqual(output['write_files'],[])
++        saved=json.loads(Path(output['plan']).read_text())
++        self.assertTrue(all(task['allowed_files']==[] for task in saved['tasks']))
++
+     def test_smoke_cannot_start_without_execute(self):
+         run=self.cli('smoke','--agent','codex')
+         self.assertEqual(run.returncode,2);self.assertIn('--execute',run.stderr)
+@@ -89,6 +104,7 @@
+              'read_files':['beta.txt'],'allowed_files':['beta.txt'],'dependencies':[],'tests':['mock-central-qa'],'result':None}]
+         plan['tasks'].append({'id':'review','objective':'Independent fixture review','agent':'claude','tier':'fast','role':'review','state':'pending',
+              'read_files':['alpha.txt','beta.txt'],'allowed_files':[],'dependencies':['alpha','beta'],'tests':['mock-central-qa'],'result':None})
++        plan['file_contract_sha256']=planner.file_contract_sha256(plan)
+         barrier=threading.Barrier(2);trees=[];guard=threading.Lock()
+         def mock_worker(project,plan,task,tree,history,settings):
+             if task['role']=='review':
+@@ -127,6 +143,8 @@
+         reviewer=next(t for t in plan['tasks']if t['role']=='review')
+         reviewer['dependencies']=[first['id'],'duplicate']
+         plan['tasks']=[first,{**first,'id':'duplicate'},reviewer]
++        plan['write_files']=['alpha.txt']
++        plan['file_contract_sha256']=planner.file_contract_sha256(plan)
+         with patch('ipanema.orchestration.engine.worker') as mock,patch('ipanema.orchestration.engine.central_qa',side_effect=self.mock_qa),patch('ipanema.orchestration.isolation.probe',return_value={'available':True}):
+             result=engine.execute(self.p,plan,authorize=True)
+         self.assertEqual(result['state'],'blocked');mock.assert_not_called()
+@@ -229,6 +247,7 @@
+         self.assertEqual(plan['classification']['level'],'L4')
+         plan['classification']={'level':'L1','risk':'normal','production_request':False}
+         plan['tasks']=[task for task in plan['tasks'] if task['role']!='review']
++        plan['file_contract_sha256']=planner.file_contract_sha256(plan)
+         with patch('ipanema.orchestration.engine.worker') as worker,patch('ipanema.orchestration.engine.central_qa') as qa:
+             with self.assertRaisesRegex(IpanemaError,'revisiones independientes'):
+                 engine.execute(self.p,plan,authorize=True)

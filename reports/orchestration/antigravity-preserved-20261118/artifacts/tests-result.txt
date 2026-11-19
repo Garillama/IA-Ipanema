@@ -1,0 +1,9 @@
+Command: PYTHONPATH=tools python3 -m unittest tests.unit.test_antigravity_json_contract -v
+
+Ran 10 tests in 0.002s
+OK
+
+Tests: success envelope/schema; Claude and Codex parser compatibility; documented effort enum; error and cancellation statuses; identity claim rejection; incomplete payload; malformed/truncated/duplicate JSON; missing status/structured output; schema mismatch; JSON response mode and rejection of unexpected structured output.
+
+Additional check: git diff --check — PASS.
+No historical 107-test suite or provider was run.

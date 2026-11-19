@@ -1,0 +1,15 @@
+{
+  "status": "isolated_candidate_not_applied_or_approved",
+  "files": {
+    "static/js/sc-global.js": {
+      "base_sha256": "9741346cfd1641c64b49d7a44ad8e3db16042af7139dcde567b8a49620ca2195",
+      "candidate_sha256": "1605d7ce1c69de3739f7da124079e5e7c5df99a4410a66f4f5f0968c7bf2d2de"
+    },
+    "static/js/sc-search-refinement.js": {
+      "base_sha256": "d1cf6dca220b4f87a4ca43d0aab8a8086db647f2a1a2136b93fa26ccacbf441e",
+      "candidate_sha256": "d885988c2faec6c056a416c85485ffe5ac5d054b61cb66740ff07244aa51eaac"
+    }
+  },
+  "patch_sha256": "95bad94590b5e4e5585b8fb29c6e32b3a4ae4432e1fd08c37b0ea6791efe6594",
+  "note": "Preserves retry when a component receives its children incrementally."
+}

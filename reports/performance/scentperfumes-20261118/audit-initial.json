@@ -1,0 +1,210 @@
+{
+  "site": "https://scentperfumes.mx/",
+  "at": "2026-11-18T19:39:22.310823+00:00",
+  "status": "partial_blocked_not_completed",
+  "branch": "audit/performance-20261118",
+  "theme_changes": 0,
+  "production_changes": 0,
+  "live_pages_audited": 0,
+  "source_files_inventoried": 860,
+  "templates_inventoried": 23,
+  "static_assets": 330,
+  "static_asset_bytes": 27901158,
+  "metrics": {
+    "performance_score": {
+      "before": null,
+      "after": null,
+      "status": "not_measured"
+    },
+    "LCP": {
+      "before": null,
+      "after": null,
+      "status": "not_measured"
+    },
+    "INP_field_p75": {
+      "before": null,
+      "after": null,
+      "status": "not_measured"
+    },
+    "CLS": {
+      "before": null,
+      "after": null,
+      "status": "not_measured"
+    },
+    "FCP": {
+      "before": null,
+      "after": null,
+      "status": "not_measured"
+    },
+    "speed_index": {
+      "before": null,
+      "after": null,
+      "status": "not_measured"
+    },
+    "TBT": {
+      "before": null,
+      "after": null,
+      "status": "not_measured"
+    },
+    "TTFB": {
+      "before": null,
+      "after": null,
+      "status": "not_measured"
+    },
+    "accessibility_score": {
+      "before": null,
+      "after": null,
+      "status": "not_measured"
+    },
+    "best_practices_score": {
+      "before": null,
+      "after": null,
+      "status": "not_measured"
+    },
+    "SEO_score": {
+      "before": null,
+      "after": null,
+      "status": "not_measured"
+    }
+  },
+  "findings": [
+    {
+      "id": "SCENT-01",
+      "priority": "alta",
+      "status": "reproducido_en_fixture",
+      "component": "layouts/layout.tpl:14-26",
+      "finding": "Dos precargas CSS redundantes con inclusiones static_inline conservadas.",
+      "evidence": "css-preload-experiment.json",
+      "proposed_change": "Retirar únicamente dos líneas preload; candidato preparado y sin aplicar.",
+      "production_impact": "Pendiente: no se midió CDN ni LCP real."
+    },
+    {
+      "id": "SCENT-02",
+      "priority": "media",
+      "status": "hipotesis_parcialmente_refutada",
+      "component": "snippets/scent/landing-prueba-primero.tpl:107,115",
+      "finding": "Dos videos autoplay loop sin controlador propio de visibilidad. Chrome probado sí los pausa fuera de pantalla.",
+      "evidence": "offscreen-video-experiment.json",
+      "proposed_change": "Validar Safari/Firefox, solicitudes y visibilidad de pestaña antes de modificar.",
+      "production_impact": "No se confirmó reproducción continua fuera de pantalla; no se implementa una corrección sin evidencia."
+    },
+    {
+      "id": "SCENT-03",
+      "priority": "alta_por_validar",
+      "status": "confirmado_en_fuente_no_medido_en_vivo",
+      "component": "static/js/sc-social-video.js:31-44",
+      "finding": "Se instancian previews YouTube para cada tarjeta visible además del reproductor activo.",
+      "evidence": "source audit",
+      "proposed_change": "Comparar un reproductor activo con previews simultáneos preservando botones; requiere decisión visual.",
+      "production_impact": "No se atribuye carga antes de entrar en sección: ya existe IntersectionObserver."
+    },
+    {
+      "id": "SCENT-04",
+      "priority": "media",
+      "status": "confirmado_en_fuente_no_medido_en_vivo",
+      "component": "static/js/sc-armador3.js:398-409",
+      "finding": "El observador sigue solo primera tarjeta y su rama de pausa solo cubre is-auto.",
+      "evidence": "source audit",
+      "proposed_change": "Reproducir salida de pantalla de videos iniciados por usuario; observar todos solo si se demuestra problema.",
+      "production_impact": "Depende también de políticas nativas del navegador."
+    },
+    {
+      "id": "SCENT-05",
+      "priority": "media",
+      "status": "confirmado_en_fuente_impacto_no_cuantificado",
+      "component": "static/js/sc-global.js:166-171; static/js/sc-search-refinement.js:159-161",
+      "finding": "Observers de mutaciones vuelven a buscar componentes globalmente.",
+      "evidence": "source audit",
+      "proposed_change": "Medir escaneos en actividad normal y editor; filtrar mutaciones y agrupar sin perder reinicialización.",
+      "production_impact": "Sin perfil CPU real; no se declara INP afectado."
+    },
+    {
+      "id": "SCENT-06",
+      "priority": "media",
+      "status": "declaraciones_confirmadas_descargas_no_medidas",
+      "component": "layouts/resources/style-tokens.tpl:110-111; static/css/sc-fonts.css",
+      "finding": "Google Fonts y ocho TTF locales declaran las familias configuradas; 523576 bytes locales.",
+      "evidence": "assets.csv",
+      "proposed_change": "Comprobar fuentes efectivamente usadas/descargadas y glifos antes de retirar proveedores o convertir.",
+      "production_impact": "No demuestra descarga duplicada. No se instalaron convertidores."
+    },
+    {
+      "id": "SCENT-07",
+      "priority": "por_determinar",
+      "status": "inventario_sin_descargas",
+      "component": "static/images; static/videos",
+      "finding": "281 imágenes y 7 archivos en videos; archivos grandes no implican peso de cada página.",
+      "evidence": "assets.csv",
+      "proposed_change": "Contrastar currentSrc, tamaño visible y red por plantilla cuando se permita navegación.",
+      "production_impact": "No se recomprimieron imágenes sin verificar uso y calidad."
+    }
+  ],
+  "candidate": {
+    "status": "candidate_not_applied",
+    "base_sha256": "843211c3ad7ab54446b4c5feea39b7310911ae009b9abc595c56412f79f8f3ca",
+    "candidate_sha256": "2ded82fb94bdc796c80a4e0038bd1e3f2445b479f9d9a0644f8ec0171b4322a8",
+    "patch_sha256": "97ca9fe2111dcfa25acb35b017928da9b41ab1fe124af3b40f03bf33c7144e41",
+    "files": [
+      "layouts/layout.tpl"
+    ],
+    "council": "blocked_skill_catalog_validation",
+    "network": "stopped_http_403"
+  },
+  "tests": {
+    "node_syntax": "14 passed",
+    "source_qa": "passed; reports/runs/scentperfumes/20261118T193415-source-8e1eb805/report.json",
+    "quick_qa": "passed; reports/runs/scentperfumes/20261118T193502-quick-f95675a1/report.json",
+    "css_fixture": {
+      "navigations": 16,
+      "checks_passed": 32,
+      "visual_pairs_identical": 8,
+      "before_css_requests": 2,
+      "after_css_requests": 0,
+      "before_css_encoded_bytes": 150499,
+      "after_css_encoded_bytes": 0
+    },
+    "video_fixture": "2 viewports,6observations,native pause offscreen; local MP4 replaces remote src"
+  },
+  "blockers": [
+    {
+      "id": "network",
+      "evidence": "GET https://scentperfumes.mx/robots.txt returned HTTP403; Python urllib default request. No retry or browser substitution.",
+      "affected": "sitemap,crawl,real browser navigation,console,network,PSI LHR comparisons,interaction QA",
+      "action": "Obtener acceso de lectura permitido por el sitio o un preview autorizado; no evadir acceso."
+    },
+    {
+      "id": "orchestration",
+      "evidence": "Skill fuera de catálogo: planner selects cloudflare-web-perf; tools/ipanema/orchestration/engine.py:427 only accepts ipanema-[a-z-]+. Plan levelL3. Runtimes not started.",
+      "affected": "mandatory dual council and integration of proposed changes",
+      "action": "Corregir compatibilidad del catálogo mediante cambio separado revisado; repetir consejo sin debilitar controles."
+    },
+    {
+      "id": "google",
+      "evidence": "Performance doctor: PSI/CrUX credentials not configured for Scent; PSI network_attempts0.",
+      "affected": "PSI and field CrUX p75",
+      "action": "Configurar fuentes autorizadas propias de Scent; no reutilizar accesos de otras tiendas."
+    }
+  ],
+  "execution_errors": [
+    "Initial CSS fixture path encoded spaces; corrected using fileURLToPath and rerun32checks pass.",
+    "Initial video expectation of offscreen autoplay timed out; revised observational experiment refuted claim for current Chrome.",
+    "Concurrent Lighthouse job began before robots failure; cancelled; no valid LHR or scores used."
+  ],
+  "reproducibility": [
+    "node reports/performance/scentperfumes-20261118/verify-css-preloads.mjs",
+    "node reports/performance/scentperfumes-20261118/verify-offscreen-videos.mjs",
+    "python3 tools/ia.py --project scentperfumes qa --suite source",
+    "python3 tools/ia.py --project scentperfumes qa --suite quick"
+  ],
+  "backup": ".local/scent-audit-20261118/baseline-source.tar.gz (private,ignored,without store credentials)",
+  "limitations": [
+    "No full Tiendanube renderer or local storefront preview validated.",
+    "No commercial forms submitted,no cart mutation,no checkout.",
+    "Local corpus includes previous unrelated changes preserved by hash.",
+    "No installed dependencies,no production operations,no approval consensus."
+  ],
+  "sources": [
+    "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/rel/preload",
+    "https://web.dev/articles/fast-playback-with-preload"
+  ]
+}

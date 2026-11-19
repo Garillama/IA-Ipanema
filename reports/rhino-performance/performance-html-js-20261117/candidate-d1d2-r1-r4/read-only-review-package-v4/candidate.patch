@@ -1,0 +1,204 @@
+--- a/sections/hero.tpl
++++ b/sections/hero.tpl
+@@ -6,9 +6,19 @@
+ {% set hero = section.settings %}
+ 
+ {# Images #}
+-{% set has_mobile_image = hero.use_mobile_image and hero.image_mobile %}
+-{% set has_responsive_images = hero.image and has_mobile_image %}
+-{% set show_placeholder = not hero.image %}
++{% set desktop_is_media_ref = hero.image and hero.image starts with '@media-lib:' %}
++{% set desktop_media = desktop_is_media_ref ? (hero.image | resolve_media) : null %}
++{% set desktop_media_url_valid = desktop_media and desktop_media.type == 'image' and desktop_media.sourceUrl matches '#^https?://(?:[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?[.])*[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?(?::[0-9]{1,5})?(?:/|[?#]|$)#' %}
++{% set desktop_url_valid = hero.image and not desktop_is_media_ref and hero.image matches '#^https?://(?:[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?[.])*[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?(?::[0-9]{1,5})?(?:/|[?#]|$)#' %}
++{% set has_desktop_image = desktop_media_url_valid or desktop_url_valid %}
++
++{% set mobile_is_media_ref = hero.use_mobile_image and hero.image_mobile and hero.image_mobile starts with '@media-lib:' %}
++{% set mobile_media = mobile_is_media_ref ? (hero.image_mobile | resolve_media) : null %}
++{% set mobile_media_url_valid = mobile_media and mobile_media.type == 'image' and mobile_media.sourceUrl matches '#^https?://(?:[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?[.])*[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?(?::[0-9]{1,5})?(?:/|[?#]|$)#' %}
++{% set mobile_url_valid = hero.use_mobile_image and hero.image_mobile and not mobile_is_media_ref and hero.image_mobile matches '#^https?://(?:[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?[.])*[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?(?::[0-9]{1,5})?(?:/|[?#]|$)#' %}
++{% set has_mobile_image = mobile_media_url_valid or mobile_url_valid %}
++{% set has_responsive_images = has_desktop_image and has_mobile_image %}
++{% set show_placeholder = not has_desktop_image and not has_mobile_image %}
+ {% set image_alt = hero.image | media_alt | default('accessibility.hero' | t) %}
+ {% set image_mobile_alt = hero.image_mobile | media_alt | default('accessibility.hero' | t) %}
+ 
+@@ -48,18 +58,20 @@
+   {% set is_priority_section = section.index <= (template in ['home', 'product'] ? 1 : 2) %}
+   <div class="{% if parallax %}js-hero-parallax{% endif %} media-visual">
+     {# A mobile art-directed image is emitted as one picture so the browser selects only one source. #}
+-    {% if has_mobile_image %}
+-      {% set desktop_image = hero.image ? hero.image : ('images/placeholders/hero/hero.webp' | static_url) %}
++    {% if has_responsive_images %}
+       {% include 'snippets/image.tpl' with {
+-        image_src: desktop_image,
++        image_src: hero.image,
++        image_resolved_media: desktop_media_url_valid ? desktop_media : null,
+         image_mobile_src: hero.image_mobile,
++        image_mobile_resolved_media: mobile_media_url_valid ? mobile_media : null,
+         image_mobile_media_query: '(max-width: 767.98px)',
+-        image_alt: hero.image ? image_alt : image_mobile_alt,
++        image_alt: image_alt,
++        image_mobile_alt: image_mobile_alt,
+         image_classes: not is_priority_section ? 'fade-in lazyload',
+         image_priority_high: is_priority_section,
+         image_lazy: not is_priority_section,
+         image_lazy_js: false,
+-        image_thumbs: not hero.image ? false : null,
++        image_sizes: '100vw',
+         image_width: hero.image ? hero.image_width : 1280,
+         image_height: hero.image ? hero.image_height : 700,
+         image_mobile_width: hero.image_mobile_width,
+@@ -69,11 +81,12 @@
+       {% if not is_priority_section %}
+         <div class="placeholder placeholder-fade"></div>
+       {% endif %}
+-    {% elseif hero.image %}
++    {% elseif has_desktop_image %}
+       {# Preserve the current single-image path when no mobile alternative is configured. #}
+       {% set desktop_lazy = not is_priority_section %}
+       {% include 'snippets/image.tpl' with {
+         image_src: hero.image,
++        image_resolved_media: desktop_media_url_valid ? desktop_media : null,
+         image_alt: image_alt,
+         image_classes: desktop_lazy ? 'fade-in',
+         image_priority_high: is_priority_section,
+@@ -83,6 +96,25 @@
+         image_aspect_ratio: hero.image_width and hero.image_height,
+       } %}
+       {% if desktop_lazy %}
++        <div class="placeholder placeholder-fade"></div>
++      {% endif %}
++    {% elseif has_mobile_image %}
++      {# With no valid desktop image, reuse the mobile asset at every width. #}
++      {% set mobile_lazy = not is_priority_section %}
++      {% include 'snippets/image.tpl' with {
++        image_src: hero.image_mobile,
++        image_resolved_media: mobile_media_url_valid ? mobile_media : null,
++        image_alt: image_mobile_alt,
++        image_classes: mobile_lazy ? 'fade-in',
++        image_priority_high: is_priority_section,
++        image_lazy: mobile_lazy,
++        image_lazy_js: false,
++        image_thumbs: mobile_media_url_valid ? null : false,
++        image_width: hero.image_mobile_width,
++        image_height: hero.image_mobile_height,
++        image_aspect_ratio: hero.image_mobile_width and hero.image_mobile_height,
++      } %}
++      {% if mobile_lazy %}
+         <div class="placeholder placeholder-fade"></div>
+       {% endif %}
+     {% elseif show_placeholder %}
+--- a/snippets/image.tpl
++++ b/snippets/image.tpl
+@@ -25,18 +25,49 @@
+ {% endif %}
+ 
+ {# Resolve media library references (theme editor image_picker settings or product metafields) into image data with srcsets #}
+-{% set media = image_src is defined and image_src starts with '@media-lib:' ? (image_src | resolve_media) : null %}
+-
+-{# Optional art direction for one responsive <picture>. This path is opt-in; callers
+-   without image_mobile_src keep the existing markup below unchanged. #}
+-{% set mobile_media = image_mobile_src is defined and image_mobile_src starts with '@media-lib:' ? (image_mobile_src | resolve_media) : null %}
+-{% set has_art_direction = image_mobile_src is defined and image_mobile_src and (not mobile_media or mobile_media.type == 'image') %}
+-{% if mobile_media and mobile_media.type == 'image' %}
+-	{% set image_mobile_src = mobile_media.sourceUrl %}
++{# Resolve editor media once in the section and pass the result when available. #}
++{% set image_src_is_media_ref = image_src is defined and image_src and image_src starts with '@media-lib:' %}
++{% set media = image_resolved_media is defined ? image_resolved_media : (image_src_is_media_ref ? (image_src | resolve_media) : null) %}
++{% set image_media_url_valid = media and media.type == 'image' and media.sourceUrl matches '#^https?://(?:[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?[.])*[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?(?::[0-9]{1,5})?(?:/|[?#]|$)#' %}
++{% set image_raw_url_valid = image_src is defined and image_src and not image_src_is_media_ref and image_src matches '#^https?://(?:[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?[.])*[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?(?::[0-9]{1,5})?(?:/|[?#]|$)#' %}
++{% set image_art_direction_requested = image_mobile_src is defined and image_mobile_src %}
++{% set image_desktop_url_valid = image_media_url_valid or (image_art_direction_requested and image_raw_url_valid) %}
++{% set image_source_invalid = image_src_is_media_ref and not image_media_url_valid %}
++
++{# The mobile input is accepted only as a resolved image or an absolute HTTP(S) URL. #}
++{% set mobile_src_is_media_ref = image_mobile_src is defined and image_mobile_src and image_mobile_src starts with '@media-lib:' %}
++{% set mobile_media = image_mobile_resolved_media is defined ? image_mobile_resolved_media : (mobile_src_is_media_ref ? (image_mobile_src | resolve_media) : null) %}
++{% set mobile_media_url_valid = mobile_media and mobile_media.type == 'image' and mobile_media.sourceUrl matches '#^https?://(?:[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?[.])*[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?(?::[0-9]{1,5})?(?:/|[?#]|$)#' %}
++{% set mobile_raw_url_valid = image_mobile_src is defined and image_mobile_src and not mobile_src_is_media_ref and image_mobile_src matches '#^https?://(?:[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?[.])*[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?(?::[0-9]{1,5})?(?:/|[?#]|$)#' %}
++{% set mobile_source_url_valid = mobile_media_url_valid or mobile_raw_url_valid %}
++{% set image_mobile_src = mobile_media_url_valid ? mobile_media.sourceUrl : (mobile_raw_url_valid ? image_mobile_src : null) %}
++{% if mobile_media_url_valid %}
+ 	{% if not image_mobile_width %}{% set image_mobile_width = mobile_media.sourceWidth %}{% endif %}
+ 	{% if not image_mobile_height %}{% set image_mobile_height = mobile_media.sourceHeight %}{% endif %}
+ 	{% if not image_mobile_alt and mobile_media.altText %}{% set image_mobile_alt = mobile_media.altText %}{% endif %}
+ {% endif %}
++
++{# If desktop is unavailable, use the valid mobile image alone at every width. #}
++{% if image_art_direction_requested and not image_desktop_url_valid and mobile_source_url_valid %}
++	{% set image_src = image_mobile_src %}
++	{% set media = mobile_media_url_valid ? mobile_media : null %}
++	{% set image_width = image_mobile_width %}
++	{% set image_height = image_mobile_height %}
++	{% set image_alt = image_mobile_alt is defined and image_mobile_alt ? image_mobile_alt : image_alt %}
++	{% set image_thumbs = mobile_media_url_valid ? image_thumbs : false %}
++	{% set image_source_invalid = false %}
++	{% set image_mobile_src = null %}
++{% elseif image_art_direction_requested and not image_desktop_url_valid %}
++	{% set image_src = null %}
++	{% set media = null %}
++	{% set image_source_invalid = true %}
++{% elseif image_media_url_valid %}
++	{% set image_src = media.sourceUrl %}
++{% elseif image_source_invalid %}
++	{% set image_src = null %}
++{% endif %}
++
++{% set has_art_direction = image_art_direction_requested and image_desktop_url_valid and mobile_source_url_valid %}
+ 
+ {% if media %}
+ 	{% set image_src = media.sourceUrl %}
+@@ -144,13 +175,23 @@
+ 	{% set image_aspect_ratio = true %}
+ {% endif %}
+ 
++{# Preserve Tiendanube's original responsive widths for the mobile art-direction fallback. #}
++{% set mobile_original_srcset = '' %}
++{% if has_art_direction and mobile_media_url_valid %}
++	{% for srcSet in mobile_media.srcSets if srcSet.format == 'original' %}
++		{% for size in srcSet.sizes %}
++			{% set mobile_original_srcset = mobile_original_srcset ~ (mobile_original_srcset ? ', ' : '') ~ srcSet.baseUrl ~ size.w ~ '.' ~ mobile_media.extension ~ ' ' ~ size.w ~ 'w' %}
++		{% endfor %}
++	{% endfor %}
++{% endif %}
++
+ {# Resolve data-src fallback for non-media images #}
+ {% set data_src = image_src ? image_src : default_image_url %}
+ 
+ {# @media-lib references with processed thumbnails get <picture> with AVIF/WebP <source> elements.
+    Everything else (products, categories, blog, or images still processing) uses a plain <img>.
+    Bail when a @media-lib ref resolves to non-image media (e.g. video or orphan uuid from a metafield). #}
+-{% if not media or media.type == 'image' %}
++{% if (not media or media.type == 'image') and not image_source_invalid %}
+ 	{% if has_art_direction %}
+ 		<picture>
+ 			{# Sources are ordered mobile-first and only the matching media source is eligible. #}
+@@ -171,7 +212,8 @@
+ 				{% endfor %}
+ 				<source
+ 					media="{{ image_mobile_media_query | default('(max-width: 767.98px)') }}"
+-					{% if image_lazy_js %}data-{% endif %}srcset="{{ image_mobile_src }}"
++					{% if image_lazy_js %}data-{% endif %}srcset="{{ mobile_original_srcset ? mobile_original_srcset : image_mobile_src }}"
++					{% if image_sizes %}sizes="{{ image_sizes }}"{% endif %}
+ 					{% if image_mobile_width %}width="{{ image_mobile_width }}"{% endif %}
+ 					{% if image_mobile_height %}height="{{ image_mobile_height }}"{% endif %}
+ 				/>
+@@ -179,6 +221,7 @@
+ 				<source
+ 					media="{{ image_mobile_media_query | default('(max-width: 767.98px)') }}"
+ 					{% if image_lazy_js %}data-{% endif %}srcset="{{ image_mobile_src }}"
++					{% if image_sizes %}sizes="{{ image_sizes }}"{% endif %}
+ 					{% if image_mobile_width %}width="{{ image_mobile_width }}"{% endif %}
+ 					{% if image_mobile_height %}height="{{ image_mobile_height }}"{% endif %}
+ 				/>
+@@ -199,7 +242,8 @@
+ 				{% endfor %}
+ 			{% endif %}
+ 			<source
+-				{% if image_lazy_js %}data-{% endif %}srcset="{{ media ? media.sourceUrl : image_src }}"
++				{% if image_lazy_js %}data-{% endif %}srcset="{{ media and srcset ? srcset : image_src }}"
++				{% if image_sizes %}sizes="{{ image_sizes }}"{% endif %}
+ 				{% if image_width %}width="{{ image_width }}"{% endif %}
+ 				{% if image_height %}height="{{ image_height }}"{% endif %}
+ 			/>

@@ -1,0 +1,13 @@
+{
+  "kind": "controller-evidence-reference-audit",
+  "run_id": "20261117T212443-orchestration-6161880c",
+  "binding_present": true,
+  "ledger_entries": 3,
+  "unique_ids": 3,
+  "duplicate_ids": [],
+  "ledger_binding_mismatches": [],
+  "reviewer_reference_count": 88,
+  "unknown_or_malformed_references": [],
+  "status": "pass_for_this_recorded_run",
+  "scope_note": "Audits only this persisted run; it does not enforce validation inside the active orchestration route."
+}

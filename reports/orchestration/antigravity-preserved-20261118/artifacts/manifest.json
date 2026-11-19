@@ -1,0 +1,32 @@
+{
+  "status": "isolated_candidate_needs_evidence",
+  "base_frozen_patch_sha256": "ca071456b9cc972fb6c0c43d4d63734be7a4f424e7be1d3991a3f7eeac3b0d83",
+  "base_files": {
+    "tools/ipanema/orchestration/adapters.py": "686415165431b1230048fb4a180e9601aa51c4f772aaf007773109a3f6d40dc0",
+    "tools/ipanema/orchestration/engine.py": "5af12509a4c1451094d1fcc8930a0b1f51cef924f68dd27cc912eddd7a38f134",
+    "tests/unit/test_antigravity_integration.py": "b07247cae7282ec1b1176ab1b8e1e6d86db793f2cc8bf34b617ba7458533491a"
+  },
+  "candidate_files": {
+    "tools/ipanema/orchestration/adapters.py": "05dc41629b41965ad46f6f03dfb67ef0ec72d03028aa33763ba5fc9013973443",
+    "tools/ipanema/orchestration/engine.py": "a018b15d73ba139f8e61e7aa4b3b1ef878686e663f46114c6ab9b23f3f335662",
+    "tests/unit/test_antigravity_integration.py": "da933299b9350f368af29693142ca7d1aa5abbcea676cf37be848d60d6a89405",
+    "tests/unit/test_antigravity_json_contract.py": "9f78f7918f2db2f3c66ac0c081f15f2f2cf708702330286b4ef14b7b95c55ee8"
+  },
+  "patches": {
+    "candidate-ca071.patch": "ca071456b9cc972fb6c0c43d4d63734be7a4f424e7be1d3991a3f7eeac3b0d83",
+    "incremental-over-ca071.patch": "bfe6add93b28b034b8beb87d07dd42aaed418866f6b61c26bf791dc4c8b4ddd0",
+    "full-candidate.patch": "8a0685f35de7391e5f421b202d566c771b5e54d4e46b92a9d4cd08f98c2e43be"
+  },
+  "evidence_files": {
+    "README.md": "04e5e7d3749a3f943df5be7331de6519ebb3f2e59649e67e6a538a3d250ec177",
+    "tests-result.txt": "067beec1c21b3b7cc596e3180096716184a08ec29af5e63330e15e3ceaf96538"
+  },
+  "validation": {
+    "command": "PYTHONPATH=tools python3 -m unittest tests.unit.test_antigravity_json_contract -v",
+    "new_focused_tests_passed": 10,
+    "git_diff_check": "PASS",
+    "historical_107_tests_repeated": false,
+    "provider_invoked": false,
+    "network_requested": false
+  }
+}

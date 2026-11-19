@@ -1,0 +1,118 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-11-18",
+  "workspace_base_commit": "cb4bcca8b3de409ff6f40cd83e2de4de4158bfe6",
+  "isolated_base_commit": "b91a85445cb750d5f6482c936cf631919242b5c1",
+  "isolated_root": "/tmp/ia-ipanema-antigravity-isolated-20261118",
+  "files": [
+    {
+      "path": "tools/ipanema/orchestration/adapters.py",
+      "base_sha256": "bae25bee06cf7574ee35f65e9f9055dfa8a495336f80615165ddd5232359d01d",
+      "candidate_sha256": "686415165431b1230048fb4a180e9601aa51c4f772aaf007773109a3f6d40dc0",
+      "change": "modified"
+    },
+    {
+      "path": "tools/ipanema/orchestration/planner.py",
+      "base_sha256": "b09a3bc644618502680e8804ed7f135eaa074e7b82812d2013c5293ef909117e",
+      "candidate_sha256": "792047ce088f864d59cabe67b4ea85279af27c10e9befe7a03bc4e58662a9307",
+      "change": "modified"
+    },
+    {
+      "path": "tools/ipanema/orchestration/engine.py",
+      "base_sha256": "74885e94f8f9cbf8f7a6e71c0cc8f5f44eec032fac8892f7507e2eb06879319f",
+      "candidate_sha256": "5af12509a4c1451094d1fcc8930a0b1f51cef924f68dd27cc912eddd7a38f134",
+      "change": "modified"
+    },
+    {
+      "path": "tools/ipanema/orchestration/council.py",
+      "base_sha256": "4ec261a0d84fbdc12d5abf85eab489d21cf85f30af57eac9769c722d17541261",
+      "candidate_sha256": "5d164dec66b7e08615c1dce3b486d9fc39d441222fbe40138a96407417b0774f",
+      "change": "modified"
+    },
+    {
+      "path": "tools/ipanema/orchestration/council_runtime.py",
+      "base_sha256": "92b6e47eb8942c26161c240a3258e481ae108b42ee2894cd0577403ea0d49635",
+      "candidate_sha256": "b546de7b58019ddb6436bde2194cbefd043a7984e7e4da6e702fe8151976881b",
+      "change": "modified"
+    },
+    {
+      "path": "tools/ipanema/orchestration/isolation.py",
+      "base_sha256": "0d734fcbf6d10e839d2a7cb46f3416ca60f0751e1491974d73186a8d56408079",
+      "candidate_sha256": "f28a9ec6dc3819f2d79658345c813cb44e6486fba59f8173830bd2e69ad6c281",
+      "change": "modified"
+    },
+    {
+      "path": "tools/ipanema/orchestration/recovery.py",
+      "base_sha256": "1d8b3a4d0e22bb0c8507f036ab7ff1b285e6517d8fbe670b70d679a0c317f12c",
+      "candidate_sha256": "55c42b6c6663b8a64ad674a94813414933d860ff6a195fe52f56d438f0557a88",
+      "change": "modified"
+    },
+    {
+      "path": "tools/ipanema/orchestration/cli.py",
+      "base_sha256": "04e661d92b687da162887aaca8ad5c7905359e7c8376cc0ddec2370d9d58c99b",
+      "candidate_sha256": "8ff03c762dc96adfe51dea4474eb3cd7372df499b6f34f674b042df6b4a91ea1",
+      "change": "modified"
+    },
+    {
+      "path": "tools/ipanema/orchestration/models.json",
+      "base_sha256": "14fede6b13b294a8e685b8ce1072777959850d8ae05bf3270f5dd9ea527aba39",
+      "candidate_sha256": "401338eac7fa4c9079316ad1f842794b379c8a496a6d31664bfd7dba50638ae6",
+      "change": "modified"
+    },
+    {
+      "path": "tests/unit/test_antigravity_integration.py",
+      "base_sha256": null,
+      "candidate_sha256": "b07247cae7282ec1b1176ab1b8e1e6d86db793f2cc8bf34b617ba7458533491a",
+      "change": "added"
+    },
+    {
+      "path": "tests/unit/test_orchestration.py",
+      "base_sha256": "09af703985525402a79a40748d2d6e30ae2696fc02cd08addb7d860358e46fc9",
+      "candidate_sha256": "7d3282ff8307c7c99eecd084737f269a5fe9bd5291487a324b3ef642b9df8be0",
+      "change": "modified"
+    },
+    {
+      "path": "tests/unit/test_council_dual.py",
+      "base_sha256": "b2c9c5145ae205ddcc8bc77fdf7303986c24e000d64cb2772a92e5633d6287cb",
+      "candidate_sha256": "d8d570c848a1c23a0b4b00b1fef7620d99a3fa962ffc5965c9f5a301615e7dde",
+      "change": "modified"
+    },
+    {
+      "path": "tests/unit/test_council_engine.py",
+      "base_sha256": "ae6ea30b1a752f98ace42bac7c9a192bf48117f8aa4dcbfa9776e9e3b32dccc9",
+      "candidate_sha256": "a8115223893c2cfc6844a1c1644dd8861513b6b1e9f0d165193008bb0b07f789",
+      "change": "modified"
+    },
+    {
+      "path": "tests/unit/test_council_policy.py",
+      "base_sha256": "9a65f6a4537ce963e9c1e105f09fe14a43813459fabc351d5571431ccece17f8",
+      "candidate_sha256": "e71026b82c6e465f7ad579d8943d569c523a388cc1e8d63fffa65b729bb42ca0",
+      "change": "modified"
+    }
+  ],
+  "patch": {
+    "path": "candidate.patch",
+    "sha256": "ca071456b9cc972fb6c0c43d4d63734be7a4f424e7be1d3991a3f7eeac3b0d83",
+    "bytes": 60627
+  },
+  "readme": {
+    "path": "README.md",
+    "sha256": "6a29c70ea1336cd43b389bf663fdfff82ce27e00b85d017a5947d2c01d69676a",
+    "bytes": 9803
+  },
+  "local_cli_help": {
+    "path": "agy-local-help.txt",
+    "sha256": "1a9526a7d1041e23891b5014a8ddefeea4dd0d3567fa0433ada52907a5caff25",
+    "bytes": 88
+  },
+  "test_receipt": {
+    "path": "qa-focused.log",
+    "sha256": "42337a9d1d5858f8da7ac1a06ccd74e65b91c6ff8f91cb0154439f0cd2c6ec89",
+    "bytes": 18107
+  },
+  "test_command": "PYTHONPATH=tools python3 -m unittest tests.unit.test_antigravity_integration tests.unit.test_orchestration tests.unit.test_council_dual tests.unit.test_council_engine tests.unit.test_council_policy tests.unit.test_council_protocol tests.unit.test_council_protocol.PhaseTiming.test_first_response_and_inactivity_are_distinct -v",
+  "test_result": "107 tests OK",
+  "provider_calls": 0,
+  "inference_network_calls": 0,
+  "status": "needs_evidence"
+}

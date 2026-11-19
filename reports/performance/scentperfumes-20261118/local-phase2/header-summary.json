@@ -1,0 +1,69 @@
+{
+  "pixel_pairs": [
+    {
+      "width": 390,
+      "run": 0,
+      "equal": true
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "equal": true
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "equal": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "equal": true
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "equal": true
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "equal": true
+    }
+  ],
+  "profiles": {
+    "390": {
+      "before": {
+        "median_task_ms": 40.645,
+        "median_script_ms": 13.831000000000001,
+        "redundant_writes": [
+          90
+        ]
+      },
+      "after": {
+        "median_task_ms": 42.952000000000005,
+        "median_script_ms": 9.626,
+        "redundant_writes": [
+          0
+        ]
+      }
+    },
+    "1440": {
+      "before": {
+        "median_task_ms": 14.620999999999999,
+        "median_script_ms": 4.575000000000001,
+        "redundant_writes": [
+          90
+        ]
+      },
+      "after": {
+        "median_task_ms": 14.341000000000003,
+        "median_script_ms": 4.240000000000001,
+        "redundant_writes": [
+          0
+        ]
+      }
+    }
+  },
+  "interpretation": "Operation count confirmed; tiny timings are diagnostic/noise-prone and not CWV, INP, TBT or storefront improvement."
+}

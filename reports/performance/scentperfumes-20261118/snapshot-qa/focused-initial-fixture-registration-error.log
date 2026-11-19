@@ -1,0 +1,165 @@
+test_00_upstream_provenance_git_sha1_and_sha256_integrity (tests.unit.test_better_accessibility.BetterAccessibilityIntegrationTests.test_00_upstream_provenance_git_sha1_and_sha256_integrity) ... ok
+test_17_absence_of_regressions_and_b1_b2_unchanged (tests.unit.test_better_accessibility.BetterAccessibilityIntegrationTests.test_17_absence_of_regressions_and_b1_b2_unchanged) ... ERROR
+test_1_structure_and_configuration_validation (tests.unit.test_cloudflare_web_perf.CloudflareWebPerfIntegrationTests.test_1_structure_and_configuration_validation) ... ERROR
+test_17_regression_tests_across_previous_stages (tests.unit.test_schema_markup_skill.SchemaMarkupSkillIntegrationTests.test_17_regression_tests_across_previous_stages) ... ERROR
+test_13_absence_of_regressions_in_repo_coordinator_and_seo_evals (tests.unit.test_seo_audit_skill.SEOAuditSkillIntegrationTests.test_13_absence_of_regressions_in_repo_coordinator_and_seo_evals) ... ERROR
+test_11_absence_of_regressions_across_all_suites (tests.unit.test_vercel_react_best_practices.VercelReactBestPracticesIntegrationTests.test_11_absence_of_regressions_across_all_suites) ... ERROR
+test_14_absence_of_regressions_across_all_suites (tests.unit.test_web_design_guidelines.WebDesignGuidelinesIntegrationTests.test_14_absence_of_regressions_across_all_suites) ... ERROR
+test_08_compatibility_with_existing_skills (tests.unit.test_web_quality_audit.WebQualityAuditIntegrationTests.test_08_compatibility_with_existing_skills) ... ERROR
+test_changed_document_rejected (tests.unit.test_snapshot_offline_inputs.HistoricalInputs.test_changed_document_rejected) ... ok
+test_escape_rejected (tests.unit.test_snapshot_offline_inputs.HistoricalInputs.test_escape_rejected) ... ok
+test_manipulated_target_rejected (tests.unit.test_snapshot_offline_inputs.HistoricalInputs.test_manipulated_target_rejected) ... ok
+test_missing_source_never_generates_receipt (tests.unit.test_snapshot_offline_inputs.HistoricalInputs.test_missing_source_never_generates_receipt) ... ok
+test_missing_target_rejected (tests.unit.test_snapshot_offline_inputs.HistoricalInputs.test_missing_target_rejected) ... ok
+test_symlink_target_rejected (tests.unit.test_snapshot_offline_inputs.HistoricalInputs.test_symlink_target_rejected) ... ok
+test_valid_identity_receipt_with_excluded_content (tests.unit.test_snapshot_offline_inputs.HistoricalInputs.test_valid_identity_receipt_with_excluded_content) ... ok
+test_wrong_destination_hash_rejected (tests.unit.test_snapshot_offline_inputs.HistoricalInputs.test_wrong_destination_hash_rejected) ... ok
+test_missing_fixture_rejected (tests.unit.test_snapshot_offline_inputs.UpstreamFixture.test_missing_fixture_rejected) ... ok
+test_no_extra_files_or_paths_accepted (tests.unit.test_snapshot_offline_inputs.UpstreamFixture.test_no_extra_files_or_paths_accepted) ... ok
+test_symlink_rejected (tests.unit.test_snapshot_offline_inputs.UpstreamFixture.test_symlink_rejected) ... ok
+test_tampered_reference_rejected (tests.unit.test_snapshot_offline_inputs.UpstreamFixture.test_tampered_reference_rejected) ... ok
+test_tampered_skill_rejected (tests.unit.test_snapshot_offline_inputs.UpstreamFixture.test_tampered_skill_rejected) ... ok
+test_valid_pinned_fixture_without_host_local (tests.unit.test_snapshot_offline_inputs.UpstreamFixture.test_valid_pinned_fixture_without_host_local) ... ok
+test_wrong_manifest_hash_rejected (tests.unit.test_snapshot_offline_inputs.UpstreamFixture.test_wrong_manifest_hash_rejected) ... ok
+test_wrong_source_commit_rejected (tests.unit.test_snapshot_offline_inputs.UpstreamFixture.test_wrong_source_commit_rejected) ... ok
+test_central_qa_rejects_empty_all_skipped_or_interrupted_results (tests.unit.test_skill_execution_contract.SkillExecutionContract.test_central_qa_rejects_empty_all_skipped_or_interrupted_results) ... ok
+test_central_qa_runs_both_suites_and_ignores_source_manifest (tests.unit.test_skill_execution_contract.SkillExecutionContract.test_central_qa_runs_both_suites_and_ignores_source_manifest) ... ok
+test_controller_manifest_cannot_be_declared_editable (tests.unit.test_skill_execution_contract.SkillExecutionContract.test_controller_manifest_cannot_be_declared_editable) ... ok
+test_execute_reaches_configuration_only_after_catalog_validation (tests.unit.test_skill_execution_contract.SkillExecutionContract.test_execute_reaches_configuration_only_after_catalog_validation) ... ok
+test_execute_unknown_skill_never_dispatches (tests.unit.test_skill_execution_contract.SkillExecutionContract.test_execute_unknown_skill_never_dispatches) ... ok
+test_external_ancestor_symlink_rejected_in_context_and_qa (tests.unit.test_skill_execution_contract.SkillExecutionContract.test_external_ancestor_symlink_rejected_in_context_and_qa) ... ok
+test_git_timeout_records_blocked_before_dispatch (tests.unit.test_skill_execution_contract.SkillExecutionContract.test_git_timeout_records_blocked_before_dispatch) ... ok
+test_internal_and_external_file_symlinks_rejected (tests.unit.test_skill_execution_contract.SkillExecutionContract.test_internal_and_external_file_symlinks_rejected) ... ok
+test_internal_directory_symlink_rejected (tests.unit.test_skill_execution_contract.SkillExecutionContract.test_internal_directory_symlink_rejected) ... ok
+test_invalid_non_markdown_source_records_blocked_before_qa (tests.unit.test_skill_execution_contract.SkillExecutionContract.test_invalid_non_markdown_source_records_blocked_before_qa) ... ok
+test_invalid_rules_utf8_is_project_error (tests.unit.test_skill_execution_contract.SkillExecutionContract.test_invalid_rules_utf8_is_project_error) ... ok
+test_invalid_snapshot_records_blocked_before_qa_or_worker (tests.unit.test_skill_execution_contract.SkillExecutionContract.test_invalid_snapshot_records_blocked_before_qa_or_worker) ... ok
+test_invalid_utf8_fails_closed (tests.unit.test_skill_execution_contract.SkillExecutionContract.test_invalid_utf8_fails_closed) ... ok
+test_list_type_entries_and_duplicates_rejected (tests.unit.test_skill_execution_contract.SkillExecutionContract.test_list_type_entries_and_duplicates_rejected) ... ok
+test_missing_authorized_skill_fails_closed (tests.unit.test_skill_execution_contract.SkillExecutionContract.test_missing_authorized_skill_fails_closed) ... ok
+test_private_configuration_never_supplies_controller_state (tests.unit.test_skill_execution_contract.SkillExecutionContract.test_private_configuration_never_supplies_controller_state) ... ok
+test_qa_exception_records_blocked_and_never_dispatches (tests.unit.test_skill_execution_contract.SkillExecutionContract.test_qa_exception_records_blocked_and_never_dispatches) ... ok
+test_registered_skills_load_for_all_catalog_entries (tests.unit.test_skill_execution_contract.SkillExecutionContract.test_registered_skills_load_for_all_catalog_entries) ... ok
+test_router_discovery_external_names_are_authorized (tests.unit.test_skill_execution_contract.SkillExecutionContract.test_router_discovery_external_names_are_authorized) ... ok
+test_rules_symlink_rejected (tests.unit.test_skill_execution_contract.SkillExecutionContract.test_rules_symlink_rejected) ... ok
+test_sanitizer_keeps_private_default_and_explicit_qa_documents (tests.unit.test_skill_execution_contract.SkillExecutionContract.test_sanitizer_keeps_private_default_and_explicit_qa_documents) ... ok
+test_unknown_names_including_ipanema_prefix_rejected (tests.unit.test_skill_execution_contract.SkillExecutionContract.test_unknown_names_including_ipanema_prefix_rejected) ... ok
+test_catalog_identity_not_only_count_is_validated (tests.unit.test_skill_execution_contract.SnapshotLinkContract.test_catalog_identity_not_only_count_is_validated) ... ok
+test_changed_document_cannot_reuse_receipt (tests.unit.test_skill_execution_contract.SnapshotLinkContract.test_changed_document_cannot_reuse_receipt) ... ok
+test_default_real_project_validation_remains_strict (tests.unit.test_skill_execution_contract.SnapshotLinkContract.test_default_real_project_validation_remains_strict) ... ok
+test_full_validator_preserves_error_for_uninventoried_links (tests.unit.test_skill_execution_contract.SnapshotLinkContract.test_full_validator_preserves_error_for_uninventoried_links) ... ok
+test_internal_link_symlinks_and_zero_line_are_rejected (tests.unit.test_skill_execution_contract.SnapshotLinkContract.test_internal_link_symlinks_and_zero_line_are_rejected) ... ok
+test_malformed_manifest_fails_closed (tests.unit.test_skill_execution_contract.SnapshotLinkContract.test_malformed_manifest_fails_closed) ... ok
+test_missing_or_symlinked_evidence_never_invented (tests.unit.test_skill_execution_contract.SnapshotLinkContract.test_missing_or_symlinked_evidence_never_invented) ... ok
+test_new_private_unknown_and_forged_targets_rejected (tests.unit.test_skill_execution_contract.SnapshotLinkContract.test_new_private_unknown_and_forged_targets_rejected) ... ok
+test_plain_receipt_never_certifies_lines_or_anchors (tests.unit.test_skill_execution_contract.SnapshotLinkContract.test_plain_receipt_never_certifies_lines_or_anchors) ... ok
+test_receipt_is_identity_only_and_content_stays_excluded (tests.unit.test_skill_execution_contract.SnapshotLinkContract.test_receipt_is_identity_only_and_content_stays_excluded) ... ok
+test_relative_external_markdown_is_not_read (tests.unit.test_skill_execution_contract.SnapshotLinkContract.test_relative_external_markdown_is_not_read) ... ok
+test_strict_source_or_configured_theme_never_excludes (tests.unit.test_skill_execution_contract.SnapshotLinkContract.test_strict_source_or_configured_theme_never_excludes) ... ok
+test_unindexed_receipt_never_matches (tests.unit.test_skill_execution_contract.SnapshotLinkContract.test_unindexed_receipt_never_matches) ... ok
+test_business_multiple_objects (tests.unit.test_structured_response_transport.Transport.test_business_multiple_objects) ... ok
+test_business_text_after_json (tests.unit.test_structured_response_transport.Transport.test_business_text_after_json) ... ok
+test_duplicate_keys_rejected_in_both_modes (tests.unit.test_structured_response_transport.Transport.test_duplicate_keys_rejected_in_both_modes) ... ok
+test_incomplete_business_json (tests.unit.test_structured_response_transport.Transport.test_incomplete_business_json) ... ok
+test_last_invalid_payload_cannot_hide_behind_earlier_valid_payload (tests.unit.test_structured_response_transport.Transport.test_last_invalid_payload_cannot_hide_behind_earlier_valid_payload) ... ok
+test_markdown_is_not_business_json_in_either_mode (tests.unit.test_structured_response_transport.Transport.test_markdown_is_not_business_json_in_either_mode) ... ok
+test_multiple_final_envelopes_ambiguous (tests.unit.test_structured_response_transport.Transport.test_multiple_final_envelopes_ambiguous) ... ok
+test_native_invalid_structured_output_not_text_fallback (tests.unit.test_structured_response_transport.Transport.test_native_invalid_structured_output_not_text_fallback) ... ok
+test_native_structured_output_authoritative_over_free_text (tests.unit.test_structured_response_transport.Transport.test_native_structured_output_authoritative_over_free_text) ... ok
+test_nested_truncation_signal_rejected (tests.unit.test_structured_response_transport.Transport.test_nested_truncation_signal_rejected) ... ok
+test_nonfinite_numbers_rejected_in_both_modes (tests.unit.test_structured_response_transport.Transport.test_nonfinite_numbers_rejected_in_both_modes) ... ok
+test_provider_error_after_good_result (tests.unit.test_structured_response_transport.Transport.test_provider_error_after_good_result) ... ok
+test_schema_mismatch_remains_separate_from_syntax (tests.unit.test_structured_response_transport.Transport.test_schema_mismatch_remains_separate_from_syntax) ... ok
+test_tool_execution_after_good_result (tests.unit.test_structured_response_transport.Transport.test_tool_execution_after_good_result) ... ok
+test_transport_garbage_after_envelope (tests.unit.test_structured_response_transport.Transport.test_transport_garbage_after_envelope) ... ok
+test_transport_incomplete_tail (tests.unit.test_structured_response_transport.Transport.test_transport_incomplete_tail) ... ok
+test_transport_multiple_bare_objects (tests.unit.test_structured_response_transport.Transport.test_transport_multiple_bare_objects) ... ok
+test_valid_pretty_envelope (tests.unit.test_structured_response_transport.Transport.test_valid_pretty_envelope) ... ok
+test_valid_provider_event_sequence (tests.unit.test_structured_response_transport.Transport.test_valid_provider_event_sequence) ... ok
+test_extra_fields_rejected (tests.integration.test_smoke_structured_contract.SmokeContract.test_extra_fields_rejected) ... ok
+test_invalid_json_text_never_bypasses_pipeline (tests.integration.test_smoke_structured_contract.SmokeContract.test_invalid_json_text_never_bypasses_pipeline) ... ok
+test_missing_required_field_rejected_by_worker (tests.integration.test_smoke_structured_contract.SmokeContract.test_missing_required_field_rejected_by_worker) ... ok
+test_smoke_cannot_return_writes (tests.integration.test_smoke_structured_contract.SmokeContract.test_smoke_cannot_return_writes) ... ok
+test_smoke_uses_native_schema_and_same_safety_flags (tests.integration.test_smoke_structured_contract.SmokeContract.test_smoke_uses_native_schema_and_same_safety_flags) ... ok
+
+======================================================================
+ERROR: test_17_absence_of_regressions_and_b1_b2_unchanged (tests.unit.test_better_accessibility.BetterAccessibilityIntegrationTests.test_17_absence_of_regressions_and_b1_b2_unchanged)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/alanrichard/Escritorio/IA inversa/.local/scent-snapshot-qa-20261119/tests/unit/test_better_accessibility.py", line 366, in test_17_absence_of_regressions_and_b1_b2_unchanged
+    repo_project = Project(ROOT, "ipanema")
+                   ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/alanrichard/Escritorio/IA inversa/.local/scent-snapshot-qa-20261119/tools/ipanema/core.py", line 142, in __init__
+    raise IpanemaError(f"Proyecto no registrado: {self.id}.")
+ipanema.core.IpanemaError: Proyecto no registrado: ipanema.
+
+======================================================================
+ERROR: test_1_structure_and_configuration_validation (tests.unit.test_cloudflare_web_perf.CloudflareWebPerfIntegrationTests.test_1_structure_and_configuration_validation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/alanrichard/Escritorio/IA inversa/.local/scent-snapshot-qa-20261119/tests/unit/test_cloudflare_web_perf.py", line 33, in test_1_structure_and_configuration_validation
+    project = Project(ROOT, "ipanema")
+              ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/alanrichard/Escritorio/IA inversa/.local/scent-snapshot-qa-20261119/tools/ipanema/core.py", line 142, in __init__
+    raise IpanemaError(f"Proyecto no registrado: {self.id}.")
+ipanema.core.IpanemaError: Proyecto no registrado: ipanema.
+
+======================================================================
+ERROR: test_17_regression_tests_across_previous_stages (tests.unit.test_schema_markup_skill.SchemaMarkupSkillIntegrationTests.test_17_regression_tests_across_previous_stages)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/alanrichard/Escritorio/IA inversa/.local/scent-snapshot-qa-20261119/tests/unit/test_schema_markup_skill.py", line 368, in test_17_regression_tests_across_previous_stages
+    repo_project = Project(ROOT, "ipanema")
+                   ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/alanrichard/Escritorio/IA inversa/.local/scent-snapshot-qa-20261119/tools/ipanema/core.py", line 142, in __init__
+    raise IpanemaError(f"Proyecto no registrado: {self.id}.")
+ipanema.core.IpanemaError: Proyecto no registrado: ipanema.
+
+======================================================================
+ERROR: test_13_absence_of_regressions_in_repo_coordinator_and_seo_evals (tests.unit.test_seo_audit_skill.SEOAuditSkillIntegrationTests.test_13_absence_of_regressions_in_repo_coordinator_and_seo_evals)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/alanrichard/Escritorio/IA inversa/.local/scent-snapshot-qa-20261119/tests/unit/test_seo_audit_skill.py", line 352, in test_13_absence_of_regressions_in_repo_coordinator_and_seo_evals
+    repo_project = Project(ROOT, "ipanema")
+                   ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/alanrichard/Escritorio/IA inversa/.local/scent-snapshot-qa-20261119/tools/ipanema/core.py", line 142, in __init__
+    raise IpanemaError(f"Proyecto no registrado: {self.id}.")
+ipanema.core.IpanemaError: Proyecto no registrado: ipanema.
+
+======================================================================
+ERROR: test_11_absence_of_regressions_across_all_suites (tests.unit.test_vercel_react_best_practices.VercelReactBestPracticesIntegrationTests.test_11_absence_of_regressions_across_all_suites)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/alanrichard/Escritorio/IA inversa/.local/scent-snapshot-qa-20261119/tests/unit/test_vercel_react_best_practices.py", line 282, in test_11_absence_of_regressions_across_all_suites
+    repo_project = Project(ROOT, "ipanema")
+                   ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/alanrichard/Escritorio/IA inversa/.local/scent-snapshot-qa-20261119/tools/ipanema/core.py", line 142, in __init__
+    raise IpanemaError(f"Proyecto no registrado: {self.id}.")
+ipanema.core.IpanemaError: Proyecto no registrado: ipanema.
+
+======================================================================
+ERROR: test_14_absence_of_regressions_across_all_suites (tests.unit.test_web_design_guidelines.WebDesignGuidelinesIntegrationTests.test_14_absence_of_regressions_across_all_suites)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/alanrichard/Escritorio/IA inversa/.local/scent-snapshot-qa-20261119/tests/unit/test_web_design_guidelines.py", line 318, in test_14_absence_of_regressions_across_all_suites
+    repo_project = Project(ROOT, "ipanema")
+                   ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/alanrichard/Escritorio/IA inversa/.local/scent-snapshot-qa-20261119/tools/ipanema/core.py", line 142, in __init__
+    raise IpanemaError(f"Proyecto no registrado: {self.id}.")
+ipanema.core.IpanemaError: Proyecto no registrado: ipanema.
+
+======================================================================
+ERROR: test_08_compatibility_with_existing_skills (tests.unit.test_web_quality_audit.WebQualityAuditIntegrationTests.test_08_compatibility_with_existing_skills)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/alanrichard/Escritorio/IA inversa/.local/scent-snapshot-qa-20261119/tests/unit/test_web_quality_audit.py", line 220, in test_08_compatibility_with_existing_skills
+    project = Project(ROOT, "ipanema")
+              ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/alanrichard/Escritorio/IA inversa/.local/scent-snapshot-qa-20261119/tools/ipanema/core.py", line 142, in __init__
+    raise IpanemaError(f"Proyecto no registrado: {self.id}.")
+ipanema.core.IpanemaError: Proyecto no registrado: ipanema.
+
+----------------------------------------------------------------------
+Ran 83 tests in 1.087s
+
+FAILED (errors=7)

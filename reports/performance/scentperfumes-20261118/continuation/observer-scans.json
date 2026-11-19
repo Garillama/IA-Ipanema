@@ -1,0 +1,32 @@
+{
+  "scope": "actual source scripts, unrelated mutation fixture; no navigation functionality or INP claim",
+  "samples": [
+    {
+      "width": 390,
+      "before": {
+        "[data-sc-header]": 1,
+        "[data-sc-search-refinement]": 1
+      },
+      "after": {
+        "[data-sc-header]": 21,
+        "[data-sc-search-refinement]": 21
+      },
+      "mutations": 20,
+      "js_errors": []
+    },
+    {
+      "width": 1440,
+      "before": {
+        "[data-sc-header]": 1,
+        "[data-sc-search-refinement]": 1
+      },
+      "after": {
+        "[data-sc-header]": 21,
+        "[data-sc-search-refinement]": 21
+      },
+      "mutations": 20,
+      "js_errors": []
+    }
+  ],
+  "browser": "Chrome/155.0.8059.84"
+}

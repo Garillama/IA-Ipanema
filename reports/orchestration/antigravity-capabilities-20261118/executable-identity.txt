@@ -1,0 +1,17 @@
+which: /home/alanrichard/.local/bin/agy
+
+resolved path:
+/home/alanrichard/.local/bin/agy
+
+symlink/file info:
+-rwxr-xr-x 1 alanrichard alanrichard 267322056 Nov 17 09:54 /home/alanrichard/.local/bin/agy
+/home/alanrichard/.local/bin/agy: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, for GNU/Linux 3.2.0, BuildID[md5/uuid]=abf8a2e123d2705c3b3c7e01e79d75c1, stripped
+mode=-rwxr-xr-x size=267322056 bytes mtime=2026-11-17 09:54:24.619543081 -0600 inode=21397735
+
+package ownership probes (non-zero means not owned by that package manager):
+dpkg-query: no path found matching pattern /home/alanrichard/.local/bin/agy
+dpkg_query_exit=1
+/bin/bash: line 8: rpm: command not found
+rpm_exit=127
+/bin/bash: line 9: pacman: command not found
+pacman_exit=127

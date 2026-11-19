@@ -1,0 +1,193 @@
+diff --git a/sections/hero.tpl b/sections/hero.tpl
+index 4888797b..1615294c 100644
+--- a/sections/hero.tpl
++++ b/sections/hero.tpl
+@@ -47,21 +47,43 @@
+ <div class="hero section-full-width media {{ auto_height ? 'media-auto' : 'media-full-width' }} {% if parallax %}hero-parallax{% endif %}" style="{% if not auto_height %}min-height: {{ height }}vh; {% endif %}{% if show_overlay %}--media-overlay-color: {{ overlay_color }}; --media-overlay-opacity: {{ overlay_opacity }};{% endif %} {% if text_color %}color: {{ text_color }};{% endif %}">
+   {% set is_priority_section = section.index <= (template in ['home', 'product'] ? 1 : 2) %}
+   <div class="{% if parallax %}js-hero-parallax{% endif %} media-visual">
+-    {# Desktop image #}
+-    {% if hero.image %}
+-      {% set desktop_lazy = has_responsive_images or not is_priority_section %}
++    {# A mobile art-directed image is emitted as one picture so the browser selects only one source. #}
++    {% if has_mobile_image %}
++      {% set desktop_image = hero.image ? hero.image : ('images/placeholders/hero/hero.webp' | static_url) %}
++      {% include 'snippets/image.tpl' with {
++        image_src: desktop_image,
++        image_mobile_src: hero.image_mobile,
++        image_mobile_media_query: '(max-width: 767.98px)',
++        image_alt: hero.image ? image_alt : image_mobile_alt,
++        image_classes: not is_priority_section ? 'fade-in lazyload',
++        image_priority_high: is_priority_section,
++        image_lazy: not is_priority_section,
++        image_lazy_js: false,
++        image_thumbs: not hero.image ? false : null,
++        image_width: hero.image ? hero.image_width : 1280,
++        image_height: hero.image ? hero.image_height : 700,
++        image_mobile_width: hero.image_mobile_width,
++        image_mobile_height: hero.image_mobile_height,
++        image_aspect_ratio: hero.image ? (hero.image_width and hero.image_height) : true,
++      } %}
++      {% if not is_priority_section %}
++        <div class="placeholder placeholder-fade"></div>
++      {% endif %}
++    {% elseif hero.image %}
++      {# Preserve the current single-image path when no mobile alternative is configured. #}
++      {% set desktop_lazy = not is_priority_section %}
+       {% include 'snippets/image.tpl' with {
+         image_src: hero.image,
+         image_alt: image_alt,
+-        image_classes: (has_responsive_images ? 'd-none d-md-block ') ~ (desktop_lazy ? 'fade-in'),
+-        image_priority_high: not has_responsive_images and is_priority_section,
++        image_classes: desktop_lazy ? 'fade-in',
++        image_priority_high: is_priority_section,
+         image_lazy_js: desktop_lazy,
+         image_width: hero.image_width,
+         image_height: hero.image_height,
+         image_aspect_ratio: hero.image_width and hero.image_height,
+       } %}
+       {% if desktop_lazy %}
+-        <div class="placeholder placeholder-fade {{ has_responsive_images ? 'd-none d-md-block' }}"></div>
++        <div class="placeholder placeholder-fade"></div>
+       {% endif %}
+     {% elseif show_placeholder %}
+       {% include 'snippets/image.tpl' with {
+@@ -77,23 +99,6 @@
+       <div class="placeholder placeholder-fade"></div>
+     {% endif %}
+ 
+-    {# Mobile image #}
+-    {% if has_mobile_image %}
+-      {% include 'snippets/image.tpl' with {
+-        image_src: hero.image_mobile,
+-        image_alt: image_mobile_alt,
+-        image_classes: (has_responsive_images ? 'd-md-none ') ~ (not is_priority_section ? 'fade-in'),
+-        image_priority_high: is_priority_section,
+-        image_lazy_js: not is_priority_section,
+-        image_width: hero.image_mobile_width,
+-        image_height: hero.image_mobile_height,
+-        image_aspect_ratio: hero.image_mobile_width and hero.image_mobile_height,
+-      } %}
+-      {% if not is_priority_section %}
+-        <div class="placeholder placeholder-fade {{ has_responsive_images ? 'd-md-none' }}"></div>
+-      {% endif %}
+-    {% endif %}
+-
+     {# Overlay #}
+     {% if show_overlay %}
+       <div class="media-overlay"></div>
+diff --git a/snippets/image.tpl b/snippets/image.tpl
+index af9d09d6..c45c18ec 100644
+--- a/snippets/image.tpl
++++ b/snippets/image.tpl
+@@ -27,6 +27,17 @@
+ {# Resolve media library references (theme editor image_picker settings or product metafields) into image data with srcsets #}
+ {% set media = image_src is defined and image_src starts with '@media-lib:' ? (image_src | resolve_media) : null %}
+ 
++{# Optional art direction for one responsive <picture>. This path is opt-in; callers
++   without image_mobile_src keep the existing markup below unchanged. #}
++{% set mobile_media = image_mobile_src is defined and image_mobile_src starts with '@media-lib:' ? (image_mobile_src | resolve_media) : null %}
++{% set has_art_direction = image_mobile_src is defined and image_mobile_src and (not mobile_media or mobile_media.type == 'image') %}
++{% if mobile_media and mobile_media.type == 'image' %}
++	{% set image_mobile_src = mobile_media.sourceUrl %}
++	{% if not image_mobile_width %}{% set image_mobile_width = mobile_media.sourceWidth %}{% endif %}
++	{% if not image_mobile_height %}{% set image_mobile_height = mobile_media.sourceHeight %}{% endif %}
++	{% if not image_mobile_alt and mobile_media.altText %}{% set image_mobile_alt = mobile_media.altText %}{% endif %}
++{% endif %}
++
+ {% if media %}
+ 	{% set image_src = media.sourceUrl %}
+ 	{% if not image_width and not image_height %}
+@@ -96,10 +107,10 @@
+ 	{% if image_priority_high %}
+ 		fetchpriority="high"
+ 	{% endif %}
+-	{% if image_width %}
++	{% if image_width and not has_art_direction %}
+ 		width="{{ image_width }}"
+ 	{% endif %}
+-	{% if image_height %}
++	{% if image_height and not has_art_direction %}
+ 		height="{{ image_height }}"
+ 	{% endif %}
+ 	{% if image_lazy and not image_lazy_js %}
+@@ -140,6 +151,73 @@
+    Everything else (products, categories, blog, or images still processing) uses a plain <img>.
+    Bail when a @media-lib ref resolves to non-image media (e.g. video or orphan uuid from a metafield). #}
+ {% if not media or media.type == 'image' %}
++	{% if has_art_direction %}
++		<picture>
++			{# Sources are ordered mobile-first and only the matching media source is eligible. #}
++			{% if mobile_media and mobile_media.type == 'image' %}
++				{% for srcSet in mobile_media.srcSets if srcSet.format != 'original' %}
++					{% set mobile_source_srcset = '' %}
++					{% for size in srcSet.sizes %}
++						{% set mobile_source_srcset = mobile_source_srcset ~ (mobile_source_srcset ? ', ' : '') ~ srcSet.baseUrl ~ size.w ~ '.' ~ srcSet.format ~ ' ' ~ size.w ~ 'w' %}
++					{% endfor %}
++					<source
++						media="{{ image_mobile_media_query | default('(max-width: 767.98px)') }}"
++						type="image/{{ srcSet.format }}"
++						{% if image_lazy_js %}data-{% endif %}srcset="{{ mobile_source_srcset }}"
++						{% if image_sizes %}sizes="{{ image_sizes }}"{% endif %}
++						{% if image_mobile_width %}width="{{ image_mobile_width }}"{% endif %}
++						{% if image_mobile_height %}height="{{ image_mobile_height }}"{% endif %}
++					/>
++				{% endfor %}
++				<source
++					media="{{ image_mobile_media_query | default('(max-width: 767.98px)') }}"
++					{% if image_lazy_js %}data-{% endif %}srcset="{{ image_mobile_src }}"
++					{% if image_mobile_width %}width="{{ image_mobile_width }}"{% endif %}
++					{% if image_mobile_height %}height="{{ image_mobile_height }}"{% endif %}
++				/>
++			{% else %}
++				<source
++					media="{{ image_mobile_media_query | default('(max-width: 767.98px)') }}"
++					{% if image_lazy_js %}data-{% endif %}srcset="{{ image_mobile_src }}"
++					{% if image_mobile_width %}width="{{ image_mobile_width }}"{% endif %}
++					{% if image_mobile_height %}height="{{ image_mobile_height }}"{% endif %}
++				/>
++			{% endif %}
++			{% if has_media_library_srcsets %}
++				{% for srcSet in media.srcSets if srcSet.format != 'original' %}
++					{% set source_srcset = '' %}
++					{% for size in srcSet.sizes %}
++						{% set source_srcset = source_srcset ~ (source_srcset ? ', ' : '') ~ srcSet.baseUrl ~ size.w ~ '.' ~ srcSet.format ~ ' ' ~ size.w ~ 'w' %}
++					{% endfor %}
++					<source
++						type="image/{{ srcSet.format }}"
++						{% if image_lazy_js %}data-{% endif %}srcset="{{ source_srcset }}"
++						{% if image_sizes %}sizes="{{ image_sizes }}"{% endif %}
++						{% if image_width %}width="{{ image_width }}"{% endif %}
++						{% if image_height %}height="{{ image_height }}"{% endif %}
++					/>
++				{% endfor %}
++			{% endif %}
++			<source
++				{% if image_lazy_js %}data-{% endif %}srcset="{{ media ? media.sourceUrl : image_src }}"
++				{% if image_width %}width="{{ image_width }}"{% endif %}
++				{% if image_height %}height="{{ image_height }}"{% endif %}
++			/>
++			<img
++				{{ img_attrs }}
++				{% if image_lazy_js %}
++					{% if image_width and image_height %}src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="{% endif %}
++					{% if srcset %}data-srcset="{{ srcset }}"{% else %}data-src="{{ data_src }}"{% endif %}
++				{% else %}
++					src="{{ src }}"
++					{% if srcset %}srcset="{{ srcset }}"{% endif %}
++				{% endif %}
++				{% if image_aspect_ratio and image_width and image_height and not has_art_direction %}
++					style="aspect-ratio: {{ image_width }} / {{ image_height }}"
++				{% endif %}
++			/>
++		</picture>
++	{% else %}
+ 	{% if has_media_library_srcsets %}
+ 		<picture>
+ 			{% for srcSet in media.srcSets if srcSet.format != 'original' %}
+@@ -177,4 +255,5 @@
+ 	{% if has_media_library_srcsets %}
+ 		</picture>
+ 	{% endif %}
++	{% endif %}
+ {% endif %}

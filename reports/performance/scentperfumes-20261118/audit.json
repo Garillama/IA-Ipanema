@@ -1,0 +1,1342 @@
+{
+  "site": "https://scentperfumes.mx/",
+  "at": "2026-11-18T21:20:55.458006+00:00",
+  "status": "audit_incomplete_review_rate_limit_rechecked_patches_preserved",
+  "branch": "audit/performance-20261118",
+  "theme_changes": 0,
+  "production_changes": 0,
+  "live_pages_audited": 0,
+  "source_files_inventoried": 860,
+  "templates_inventoried": 23,
+  "static_assets": 330,
+  "static_asset_bytes": 27901158,
+  "metrics": {
+    "performance_score": {
+      "before": null,
+      "after": null,
+      "status": "not_measured"
+    },
+    "LCP": {
+      "before": null,
+      "after": null,
+      "status": "not_measured"
+    },
+    "INP_field_p75": {
+      "before": null,
+      "after": null,
+      "status": "not_measured"
+    },
+    "CLS": {
+      "before": null,
+      "after": null,
+      "status": "not_measured"
+    },
+    "FCP": {
+      "before": null,
+      "after": null,
+      "status": "not_measured"
+    },
+    "speed_index": {
+      "before": null,
+      "after": null,
+      "status": "not_measured"
+    },
+    "TBT": {
+      "before": null,
+      "after": null,
+      "status": "not_measured"
+    },
+    "TTFB": {
+      "before": null,
+      "after": null,
+      "status": "not_measured"
+    },
+    "accessibility_score": {
+      "before": null,
+      "after": null,
+      "status": "not_measured"
+    },
+    "best_practices_score": {
+      "before": null,
+      "after": null,
+      "status": "not_measured"
+    },
+    "SEO_score": {
+      "before": null,
+      "after": null,
+      "status": "not_measured"
+    }
+  },
+  "findings": [
+    {
+      "id": "SCENT-01",
+      "priority": "alta",
+      "status": "reproducido_en_fixture",
+      "component": "layouts/layout.tpl:14-26",
+      "finding": "Dos precargas CSS redundantes con inclusiones static_inline conservadas.",
+      "evidence": "css-preload-experiment.json",
+      "proposed_change": "Retirar únicamente dos líneas preload; candidato preparado y sin aplicar.",
+      "production_impact": "Pendiente: no se midió CDN ni LCP real."
+    },
+    {
+      "id": "SCENT-02",
+      "priority": "media",
+      "status": "hipotesis_parcialmente_refutada",
+      "component": "snippets/scent/landing-prueba-primero.tpl:107,115",
+      "finding": "Dos videos autoplay loop sin controlador propio de visibilidad. Chrome probado sí los pausa fuera de pantalla.",
+      "evidence": "offscreen-video-experiment.json",
+      "proposed_change": "Validar Safari/Firefox, solicitudes y visibilidad de pestaña antes de modificar.",
+      "production_impact": "No se confirmó reproducción continua fuera de pantalla; no se implementa una corrección sin evidencia."
+    },
+    {
+      "id": "SCENT-03",
+      "priority": "alta_por_validar",
+      "status": "confirmado_en_fuente_no_medido_en_vivo",
+      "component": "static/js/sc-social-video.js:31-44",
+      "finding": "Se instancian previews YouTube para cada tarjeta visible además del reproductor activo.",
+      "evidence": "source audit",
+      "proposed_change": "Comparar un reproductor activo con previews simultáneos preservando botones; requiere decisión visual.",
+      "production_impact": "No se atribuye carga antes de entrar en sección: ya existe IntersectionObserver."
+    },
+    {
+      "id": "SCENT-04",
+      "priority": "media",
+      "status": "reproducido_y_candidato_verificado_en_fixture_sin_aplicar",
+      "component": "static/js/sc-armador3.js:398-409",
+      "finding": "El observador sigue solo primera tarjeta y su rama de pausa solo cubre is-auto.",
+      "evidence": {
+        "previous": "source audit",
+        "new": "local-phase2/builder-video-original-failure.json; builder-video-browser.json; builder-video-additional.json"
+      },
+      "proposed_change": "Candidato independiente de visibilidad; pendiente consejo, integración y QA real.",
+      "production_impact": "No medido. Reproducción y decodificación detenidas solo en prueba local de funciones de medios."
+    },
+    {
+      "id": "SCENT-05",
+      "priority": "media",
+      "status": "confirmado_en_fuente_impacto_no_cuantificado",
+      "component": "static/js/sc-global.js:166-171; static/js/sc-search-refinement.js:159-161",
+      "finding": "Observers de mutaciones vuelven a buscar componentes globalmente.",
+      "evidence": "source audit",
+      "proposed_change": "Medir escaneos en actividad normal y editor; filtrar mutaciones y agrupar sin perder reinicialización.",
+      "production_impact": "Sin perfil CPU real; no se declara INP afectado."
+    },
+    {
+      "id": "SCENT-06",
+      "priority": "media",
+      "status": "declaraciones_confirmadas_descargas_no_medidas",
+      "component": "layouts/resources/style-tokens.tpl:110-111; static/css/sc-fonts.css",
+      "finding": "Google Fonts y ocho TTF locales declaran las familias configuradas; 523576 bytes locales.",
+      "evidence": "assets.csv",
+      "proposed_change": "Comprobar fuentes efectivamente usadas/descargadas y glifos antes de retirar proveedores o convertir.",
+      "production_impact": "No demuestra descarga duplicada. No se instalaron convertidores."
+    },
+    {
+      "id": "SCENT-07",
+      "priority": "por_determinar",
+      "status": "inventario_sin_descargas",
+      "component": "static/images; static/videos",
+      "finding": "281 imágenes y 7 archivos en videos; archivos grandes no implican peso de cada página.",
+      "evidence": "assets.csv",
+      "proposed_change": "Contrastar currentSrc, tamaño visible y red por plantilla cuando se permita navegación.",
+      "production_impact": "No se recomprimieron imágenes sin verificar uso y calidad."
+    }
+  ],
+  "candidate": {
+    "status": "candidate_not_applied",
+    "base_sha256": "843211c3ad7ab54446b4c5feea39b7310911ae009b9abc595c56412f79f8f3ca",
+    "candidate_sha256": "2ded82fb94bdc796c80a4e0038bd1e3f2445b479f9d9a0644f8ec0171b4322a8",
+    "patch_sha256": "97ca9fe2111dcfa25acb35b017928da9b41ab1fe124af3b40f03bf33c7144e41",
+    "files": [
+      "layouts/layout.tpl"
+    ],
+    "council": "blocked_skill_catalog_validation",
+    "network": "stopped_http_403"
+  },
+  "tests": {
+    "node_syntax": "14 passed",
+    "source_qa": "passed; reports/runs/scentperfumes/20261118T193415-source-8e1eb805/report.json",
+    "quick_qa": "passed; reports/runs/scentperfumes/20261118T193502-quick-f95675a1/report.json",
+    "css_fixture": {
+      "navigations": 16,
+      "checks_passed": 32,
+      "visual_pairs_identical": 8,
+      "before_css_requests": 2,
+      "after_css_requests": 0,
+      "before_css_encoded_bytes": 150499,
+      "after_css_encoded_bytes": 0
+    },
+    "video_fixture": "2 viewports,6observations,native pause offscreen; local MP4 replaces remote src"
+  },
+  "blockers": [
+    {
+      "id": "final_independent_review",
+      "status": "rate_limit_stop",
+      "detail": "Mandatory council did not review the current final hash; cannot integrate protected changes."
+    },
+    {
+      "id": "storefront",
+      "status": "http403_stop_no_staging",
+      "detail": "Owner confirmed no preview; no new requests to blocked origin."
+    },
+    {
+      "id": "field_sources",
+      "status": "not_configured",
+      "detail": "Scent PSI/CrUX credentials were not configured; no account from another store used."
+    }
+  ],
+  "execution_errors": [
+    "Initial CSS fixture path encoded spaces; corrected using fileURLToPath and rerun32checks pass.",
+    "Initial video expectation of offscreen autoplay timed out; revised observational experiment refuted claim for current Chrome.",
+    "Concurrent Lighthouse job began before robots failure; cancelled; no valid LHR or scores used."
+  ],
+  "reproducibility": [
+    "node reports/performance/scentperfumes-20261118/verify-css-preloads.mjs",
+    "node reports/performance/scentperfumes-20261118/verify-offscreen-videos.mjs",
+    "python3 tools/ia.py --project scentperfumes qa --suite source",
+    "python3 tools/ia.py --project scentperfumes qa --suite quick"
+  ],
+  "backup": ".local/scent-audit-20261118/baseline-source.tar.gz (private,ignored,without store credentials)",
+  "limitations": [
+    "No full Tiendanube renderer or local storefront preview validated.",
+    "No commercial forms submitted,no cart mutation,no checkout.",
+    "Local corpus includes previous unrelated changes preserved by hash.",
+    "No installed dependencies,no production operations,no approval consensus."
+  ],
+  "sources": [
+    "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/rel/preload",
+    "https://web.dev/articles/fast-playback-with-preload",
+    "https://tiendanube.dev/es-AR/themes/twig-reference/filters-methods"
+  ],
+  "applied_patches": [],
+  "continuation": {
+    "user_confirmed_no_staging": true,
+    "new_requests_to_blocked_origin": 0,
+    "no_production_operations": true,
+    "phases": {
+      "1_skills_orchestrator": "candidate_corrected_and_tested_not_integrated_final_review_blocked",
+      "2_http403": "available_evidence_diagnosed_stop_preserved_no_preview",
+      "3_css": "candidate_tested_not_applied",
+      "4_local_optimization": "observer_candidate_tested_not_applied_other_findings_scoped",
+      "5_live_metrics": "blocked_no_authorized_access",
+      "6_validation": "local_fixtures_and_source_passed_real_storefront_pending"
+    },
+    "engine_candidate": {
+      "status": "tested_candidate_unapplied_final_independent_review_pending",
+      "files": {
+        "tools/ipanema/orchestration/engine.py": {
+          "before_sha256": "bfd372402d6ee7372fffccefb5321bffc7f8b877f9ad24100db3c0ebbcf5ef85",
+          "candidate_sha256": "09347e00e317fc1e02a6b980aa7a71f97880f808f7d89087a293f51d429c8abb"
+        },
+        "tools/ipanema/validation.py": {
+          "before_sha256": "edca78f96a550aad0ccfa682a3d89fe3ad61c5c88be6620f053ac97474af0ef2",
+          "candidate_sha256": "e66f8ca6c7a7934b9920fb3ca2d0b0bfe404ef1f567cb9ca6fdd105fbd91afba"
+        },
+        "tools/ipanema/snapshot_links.py": {
+          "before_sha256": null,
+          "candidate_sha256": "de9f7f0a43a22dbc13e6050ebf1a2dfa8feaea799df9c3692277a0f49ebcb1dc"
+        },
+        "tests/support.py": {
+          "before_sha256": "4912d8b74a2fc4bc51644f51ab2918873bd07aa8a56911c0e8b62a0cae16968f",
+          "candidate_sha256": "81ea5b48b6065a38a7d3335f592c443f87a066b5fd62e9b19515d532ea1e056a"
+        },
+        "tests/unit/test_skill_execution_contract.py": {
+          "before_sha256": null,
+          "candidate_sha256": "4b8b964d0ef07b55928ef0f77836e00feb3ad07d199281e56cafce12cdc763c8"
+        },
+        "tests/integration/test_orchestration_cli.py": {
+          "before_sha256": "aeb259dac03373c9383f7cbeca0603c61770624dd86d999f79a5f2239b1d8e71",
+          "candidate_sha256": "d5313b6d8d08ef90791beb8dbd59a89d255c5bd593fd5a62dcb10cb5094666b6"
+        },
+        "tests/unit/test_cloudflare_web_perf.py": {
+          "before_sha256": "13bad5b035932022198678b92c43e5a6ee92f5431f2f68c5c560dcc2602eb5da",
+          "candidate_sha256": "6594b0dad3db8f762ee67bf2dcdb9283a78f206b01d34c577568f2b5adf7f960"
+        },
+        "tests/unit/test_web_quality_audit.py": {
+          "before_sha256": "fbc4099fdd365042612d1aef85610d9e834afb42c0accbea77929c5ddc8579d7",
+          "candidate_sha256": "89f145b17e797f96ef987e1b8fb05d7ca7b4f2d02fa9181c877bbeca5ee4bf16"
+        },
+        "tests/unit/test_schema_markup_skill.py": {
+          "before_sha256": "63c30c08ac5d91f783f8088e3df3641888543624c1601ba72208fffb044ea2d6",
+          "candidate_sha256": "fe3908bfb875b50b2ec422e8730cd29f6b0a3f30f7b32cfa9355d8b3fd2ad19d"
+        },
+        "tests/unit/test_seo_audit_skill.py": {
+          "before_sha256": "97a180024f8bdfc392c504ce4866b2d383d6a5d41aabb461aaa9bfb750fdd25a",
+          "candidate_sha256": "5dd2d27df4311b5433a5df7e2cec68d24326a988aa0af2fc5a556eb3e0065e57"
+        },
+        "tests/unit/test_orchestration_recovery.py": {
+          "before_sha256": "8fb806fcf62c35d8b69bfda71bff0513242abfb4104e128a7e5dba027997d3f8",
+          "candidate_sha256": "7cba737866a7cc5e6cf4191e46e89a23828298d9f55f912973d13120e24e14b8"
+        },
+        "tests/unit/test_vercel_react_best_practices.py": {
+          "before_sha256": "fd0c169ab8df82d70217d3b90df600d39685866fae9974b588f54d614878d6d2",
+          "candidate_sha256": "f213b4ad4f7487f2a916c46e1ec3242c92322a58a9704b81f2d45b13cf5e71f0"
+        },
+        "tests/unit/test_web_design_guidelines.py": {
+          "before_sha256": "a38858148837321921e0bb81056f6841508e6dfb6f6b6d0ad57144de7946b6e7",
+          "candidate_sha256": "a0e4192448f2c0e00dd726e13ac2e04968431619109e4c7cacc41947d13bfc73"
+        }
+      },
+      "patch_sha256": "ceef24d8385e3cdec811908c1526ee7bdbf41c5bc2887f0146fb8e145600fbed",
+      "AGENTS_modified": false,
+      "readonly_source": {
+        "tools/ipanema/coordinator.py": "dbe75cc5aadddbf60f12688ed4f37c2a86538756316b54d06dafe0cff72fb444"
+      }
+    },
+    "css_candidate": {
+      "status": "candidate_not_applied",
+      "base_sha256": "843211c3ad7ab54446b4c5feea39b7310911ae009b9abc595c56412f79f8f3ca",
+      "candidate_sha256": "2ded82fb94bdc796c80a4e0038bd1e3f2445b479f9d9a0644f8ec0171b4322a8",
+      "patch_sha256": "97ca9fe2111dcfa25acb35b017928da9b41ab1fe124af3b40f03bf33c7144e41",
+      "files": [
+        "layouts/layout.tpl"
+      ],
+      "council": "blocked_skill_catalog_validation",
+      "network": "stopped_http_403"
+    },
+    "observer_candidate": {
+      "status": "isolated_candidate_not_applied_or_approved",
+      "files": {
+        "static/js/sc-global.js": {
+          "base_sha256": "9741346cfd1641c64b49d7a44ad8e3db16042af7139dcde567b8a49620ca2195",
+          "candidate_sha256": "1605d7ce1c69de3739f7da124079e5e7c5df99a4410a66f4f5f0968c7bf2d2de"
+        },
+        "static/js/sc-search-refinement.js": {
+          "base_sha256": "d1cf6dca220b4f87a4ca43d0aab8a8086db647f2a1a2136b93fa26ccacbf441e",
+          "candidate_sha256": "d885988c2faec6c056a416c85485ffe5ac5d054b61cb66740ff07244aa51eaac"
+        }
+      },
+      "patch_sha256": "95bad94590b5e4e5585b8fb29c6e32b3a4ae4432e1fd08c37b0ea6791efe6594",
+      "note": "Preserves retry when a component receives its children incrementally."
+    },
+    "qa_latest_context": {
+      "kind": "private_source_copy_on_host",
+      "unit_cases": 550,
+      "unit_skipped": 0,
+      "integration_cases": 56,
+      "integration_skipped": 1,
+      "outcome": "passed",
+      "report": "continuation/final-local-quick-report.json",
+      "reused_without_rerun": true,
+      "original_dependency_changed": [
+        "tools/ipanema/coordinator.py"
+      ]
+    },
+    "qa_earlier_os_sandbox": {
+      "unit_cases": 534,
+      "unit_skipped": 11,
+      "integration_cases": 56,
+      "integration_skipped": 2,
+      "scope": "earlier source context before 16 concurrent foreign Web Design tests were mirrored",
+      "report": "continuation/candidate-final-isolated-qa.json"
+    },
+    "css_browser": {
+      "navigations": 16,
+      "checks": 32,
+      "visual_pairs_identical": 8,
+      "extra_css_requests_before": 2,
+      "after": 0,
+      "scope": "local preload plus inline reproduction only"
+    },
+    "observer_browser": {
+      "navigations": 12,
+      "checks": 108,
+      "passed": true,
+      "queries_per_component_for_20_unrelated_updates": {
+        "before": 20,
+        "after": 0
+      },
+      "visual_pairs_identical": 6,
+      "accessibility_tree_node_counts_equal_pairs": 6,
+      "axe_violations_in_fixture": 0,
+      "axe_incomplete_mobile": 1,
+      "scope": "controlled component DOM; synthetic search GET; not Tiendanube renderer, real commerce or field INP"
+    },
+    "source_qa": {
+      "files": 826,
+      "templates": 23,
+      "json_schema_errors": [],
+      "rendered": false
+    },
+    "review": {
+      "current_hash_approved": false,
+      "dual_consensus": false,
+      "final_attempt": "20261118T204113-orchestration-ae10d405",
+      "classification": "Claude rate_limit; Codex run_cancelled",
+      "raw_http_status_available": false,
+      "retry_after_stop": false,
+      "prior_reviews": "preserved, do not authorize current hash",
+      "latest_availability_check": "continuation/resume-claude-smoke.json",
+      "latest_availability_category": "rate_limit",
+      "authorized_alternative": null
+    },
+    "objections": [
+      {
+        "id": "CAT-01",
+        "objection": "Dos validaciones incompatibles: catálogo frente a prefijo ipanema-*",
+        "solution_or_evidence": "instruction_context y execute usan el catálogo explícito; una única carga valida antes del despacho.",
+        "tests": "test_execute_reaches_configuration_only_after_catalog_validation; test_unknown_names_including_ipanema_prefix_rejected",
+        "evidence": "contract-before.txt; final-contract-and-sandbox.txt",
+        "status": "corregida_en_candidato_revisión_final_pendiente"
+      },
+      {
+        "id": "CAT-02",
+        "objection": "Skills ausentes, duplicadas o ilegibles no deben aceptarse",
+        "solution_or_evidence": "Lista tipada y única; archivo obligatorio, UTF-8 y errores controlados.",
+        "tests": "test_missing_authorized_skill_fails_closed; test_list_type_entries_and_duplicates_rejected; test_invalid_utf8_fails_closed",
+        "evidence": "final-contract-and-sandbox.txt",
+        "status": "corregida_en_candidato_revisión_final_pendiente"
+      },
+      {
+        "id": "PATH-01",
+        "objection": "Un symlink de directorio externo podía escapar de la comprobación",
+        "solution_or_evidence": "Recorrido léxico de componentes antes de resolver enlaces; también protege reglas y copias.",
+        "tests": "test_external_ancestor_symlink_rejected_in_context_and_qa; test_rules_symlink_rejected",
+        "evidence": "v1-symlink-before.txt; final-contract-and-sandbox.txt",
+        "status": "reproducida_y_corregida_en_candidato"
+      },
+      {
+        "id": "QA-01",
+        "objection": "El snapshot quitaba skills y documentación necesarias",
+        "solution_or_evidence": "QA recibe exclusivamente SKILL.md autorizados y README de proyectos; configuración de tienda sintética.",
+        "tests": "test_sanitizer_keeps_private_default_and_explicit_qa_documents; WorkspaceQA",
+        "evidence": "candidate-final-isolated-qa.json; final-local-quick-report.json",
+        "status": "verificado_localmente_no_integrado"
+      },
+      {
+        "id": "LINK-01",
+        "objection": "No inventar informes para satisfacer referencias históricas excluidas",
+        "solution_or_evidence": "Recibos del controlador con documento, destino y hashes; no se copian todos los informes ni se crean stubs.",
+        "tests": "SnapshotLinkContract; test_changed_document_cannot_reuse_receipt",
+        "evidence": "final-contract-and-sandbox.txt",
+        "status": "verificado_localmente_no_integrado"
+      },
+      {
+        "id": "LINK-02",
+        "objection": "Un campo editable del proyecto no debe relajar validate()",
+        "solution_or_evidence": "Opción explícita snapshot_receipts para llamadores de QA; comportamiento normal estricto, incluido JSON offline-test.",
+        "tests": "test_default_real_project_validation_remains_strict; test_strict_source_or_configured_theme_never_excludes",
+        "evidence": "final-contract-and-sandbox.txt",
+        "status": "corregida_en_candidato"
+      },
+      {
+        "id": "LINK-03",
+        "objection": "Un recibo simple aceptaba indebidamente :línea o #ancla",
+        "solution_or_evidence": "No se consulta el recibo cuando el enlace contiene línea o ancla. Antes: cuatro exclusiones; después: dos exclusiones y dos errores.",
+        "tests": "test_plain_receipt_never_certifies_lines_or_anchors",
+        "evidence": "qualified-receipt-before.txt; qualified-receipt-after.txt",
+        "status": "reproducida_y_corregida_en_candidato"
+      },
+      {
+        "id": "STATE-01",
+        "objection": "Fallos antes del try dejaban running o no registraban bloqueo",
+        "solution_or_evidence": "Guardas para preparación, lectura de archivos, hash original y QA; se escribe blocked y finished_at antes de inferencia.",
+        "tests": "test_invalid_non_markdown_source_records_blocked_before_qa; test_qa_exception_records_blocked_and_never_dispatches; test_git_timeout_records_blocked_before_dispatch",
+        "evidence": "v2-decode-before.txt; v2-qa-exception-before.txt; final-contract-and-sandbox.txt",
+        "status": "reproducida_y_corregida_en_candidato"
+      },
+      {
+        "id": "META-01",
+        "objection": "Colisión del nombre del manifiesto y metadatos aportados por configuración",
+        "solution_or_evidence": "Nombre reservado; manifiesto generado desde estado congelado; claves internas de settings rechazadas.",
+        "tests": "test_central_qa_runs_both_suites_and_ignores_source_manifest; test_controller_manifest_cannot_be_declared_editable; test_private_configuration_never_supplies_controller_state",
+        "evidence": "v2-manifest-before.txt; final-contract-and-sandbox.txt",
+        "status": "corregida_en_candidato"
+      },
+      {
+        "id": "QA-02",
+        "objection": "El QA del consejo no ejecutaba integración",
+        "solution_or_evidence": "Se ejecutan ambas suites sin red externa y se registran conteos y omisiones por separado.",
+        "tests": "central_qa; suite_results",
+        "evidence": "candidate-final-isolated-qa.json; final-local-quick-report.json",
+        "status": "verificado_con_ejecuciones_reales"
+      },
+      {
+        "id": "QA-03",
+        "objection": "Hipótesis de suites vacías o resultados interrumpidos aceptados",
+        "solution_or_evidence": "En Python 3.12.3 una suite vacía devuelve 5: esa hipótesis no se reprodujo. Se añadieron además conteos y rechazo explícito de cancelación, inactividad y salida limitada.",
+        "tests": "test_central_qa_rejects_empty_all_skipped_or_interrupted_results",
+        "evidence": "empty-suite-observation.json; final-contract-and-sandbox.txt",
+        "status": "hipótesis_vacía_refutada_en_runtime_guardas_probadas_con_fixtures"
+      },
+      {
+        "id": "CAT-03",
+        "objection": "Contar carpetas no demuestra identidad del catálogo",
+        "solution_or_evidence": "validate compara conjuntos de nombres y detecta sustituciones, faltantes, desconocidas y symlinks.",
+        "tests": "test_catalog_identity_not_only_count_is_validated",
+        "evidence": "final-contract-and-sandbox.txt",
+        "status": "corregida_en_candidato"
+      },
+      {
+        "id": "PATH-02",
+        "objection": "Enlaces de documentación podían leer Markdown fuera de raíz",
+        "solution_or_evidence": "Referencias externas se registran sin leer contenido; se rechazan symlinks internos y líneas cero.",
+        "tests": "test_relative_external_markdown_is_not_read; test_internal_link_symlinks_and_zero_line_are_rejected",
+        "evidence": "final-contract-and-sandbox.txt",
+        "status": "verificado_localmente"
+      },
+      {
+        "id": "REV-01",
+        "objection": "Revisión final y aplicación protegida",
+        "solution_or_evidence": "La última ejecución clasificó Claude como rate_limit y canceló Codex. No se transfieren aprobaciones de hashes anteriores.",
+        "tests": "AGENTS.md: participación original y revisión obligatorias",
+        "evidence": "council-final-stop/adr.json",
+        "status": "bloqueada_no_aplicar"
+      }
+    ],
+    "preservation": {
+      "at": "2026-11-18T20:56:32.513947+00:00",
+      "theme_branch": "audit/performance-20261118",
+      "theme_files_checked": 860,
+      "theme_changed_since_initial": [],
+      "original_engine_targets_unchanged": true,
+      "AGENTS_unchanged_from_private_baseline": true,
+      "models_policy_unchanged_from_private_baseline": true,
+      "applied_patches": [],
+      "transaction": "not_started_mandatory_review_unmet",
+      "foreign_changes": "preserved; copied read-only as test context, never overwritten in original"
+    },
+    "transaction": "not_started_mandatory_approval_unmet",
+    "backups": [
+      ".local/scent-audit-20261118/baseline-source.tar.gz",
+      ".local/scent-audit-20261118/engine-protected-baseline-final.tar.gz"
+    ],
+    "limitations": [
+      "No native Twig/server renderer or live storefront navigation.",
+      "Counts/bytes/timings from fixtures do not establish site CWV changes.",
+      "Component axe reports do not certify WCAG compliance.",
+      "Final independent review pending; no earlier approval reused.",
+      "Concurrent foreign skill additions were mirrored read-only; original changes preserved."
+    ]
+  },
+  "review_resumption_history": [
+    {
+      "at": "2026-11-18T21:20:55.458006+00:00",
+      "objective": "Check recovery/authorized reviewer and preserve proven work without rerunning unchanged suites",
+      "provider_check": {
+        "at": "2026-11-18T21:20:55.458006+00:00",
+        "kind": "official_orchestrator_availability_check",
+        "agent": "claude",
+        "model": {
+          "model": "claude-haiku-5-5",
+          "effort": "low",
+          "reason": "fast según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+          "verified_at": "2026-11-08"
+        },
+        "passed": false,
+        "category": "rate_limit",
+        "duration_s": 2.924,
+        "exit_code": 1,
+        "process_reaped": true,
+        "timed_out": false,
+        "attempts": [
+          {
+            "agent": "claude",
+            "retry": 0,
+            "status": "failed",
+            "category": "rate_limit"
+          }
+        ],
+        "fallback": false,
+        "new_storefront_requests": 0,
+        "review_or_approval": false,
+        "source_report": "/home/alanrichard/Escritorio/IA inversa/.local/scent-skill-contract-candidate/reports/runs/scentperfumes/20261118T211252-orchestration-smoke-ef919359/smoke.json"
+      },
+      "recovery_contract": {
+        "at": "2026-11-18T21:14:56.709550+00:00",
+        "public_resume_command": false,
+        "internal_readonly_recovery": true,
+        "current_binding_matches_checkpoint": false,
+        "changed_bound_files": [
+          "tools/ipanema/coordinator.py"
+        ],
+        "valid_cached_proposals": 0,
+        "old_calls_used": 2,
+        "old_calls_limit": 6,
+        "remaining_calls": 4,
+        "calls_required_without_cached_phases": 6,
+        "inference_attempted": false,
+        "recovery_refusal": "Recuperación solo de lectura con el mismo binding de fuente/objetivo/instrucciones.",
+        "checkpoint_artifacts_unchanged": true
+      },
+      "reviewer_policy": {
+        "members": [
+          "claude",
+          "codex"
+        ],
+        "disabled": [
+          "commandcode"
+        ],
+        "authorized_substitute_for_missing_original_member": null,
+        "same_provider_session_counts_as_distinct": false,
+        "source": "AGENTS.md:50-56; tools/ipanema/orchestration/models.json:council"
+      },
+      "patch_integrity": {
+        "at": "2026-11-18T21:12:53.547091+00:00",
+        "checks": [
+          {
+            "candidate": "engine",
+            "sha256": "ceef24d8385e3cdec811908c1526ee7bdbf41c5bc2887f0146fb8e145600fbed",
+            "manifest_match": true,
+            "base_files_match": true,
+            "candidate_files_match": true,
+            "git_apply_check": 0,
+            "status": "prepared",
+            "approved": false,
+            "applied": false
+          },
+          {
+            "candidate": "css",
+            "sha256": "97ca9fe2111dcfa25acb35b017928da9b41ab1fe124af3b40f03bf33c7144e41",
+            "manifest_match": true,
+            "base_files_match": true,
+            "candidate_files_match": true,
+            "git_apply_check": 0,
+            "status": "prepared",
+            "approved": false,
+            "applied": false
+          },
+          {
+            "candidate": "observers",
+            "sha256": "95bad94590b5e4e5585b8fb29c6e32b3a4ae4432e1fd08c37b0ea6791efe6594",
+            "manifest_match": true,
+            "base_files_match": true,
+            "candidate_files_match": true,
+            "git_apply_check": 0,
+            "status": "prepared",
+            "approved": false,
+            "applied": false
+          }
+        ]
+      },
+      "readonly_dependencies_changed_during_check": [
+        "tools/ipanema/coordinator.py"
+      ],
+      "additional_patch_targets_missing_from_last_attempt_scope": [
+        "tests/unit/test_web_design_guidelines.py"
+      ],
+      "targeted_current_catalog_check": {
+        "at": "2026-11-18T21:17:53.071063+00:00",
+        "kind": "targeted_candidate_overlay_contract_test",
+        "scope": "candidate instruction loader with current original registry, synthetic filesystem only",
+        "original_registry_sha256": "8d8b653f9497acbc719ac474caaf6b8c0246828cbc7b732d5bb97964f5ec8666",
+        "candidate_engine_sha256": "09347e00e317fc1e02a6b980aa7a71f97880f808f7d89087a293f51d429c8abb",
+        "authorized_skills_loaded": [
+          "better-accessibility",
+          "cloudflare-web-perf",
+          "ipanema-architect",
+          "ipanema-commerce",
+          "ipanema-component-builder",
+          "ipanema-motion",
+          "ipanema-performance",
+          "ipanema-responsive",
+          "ipanema-seo-expert",
+          "ipanema-storefront",
+          "ipanema-visual-qa",
+          "schema",
+          "seo-audit",
+          "vercel-react-best-practices",
+          "web-design-guidelines",
+          "web-quality-audit"
+        ],
+        "unknown_prefixed_skill_rejected": true,
+        "provider_calls": 0,
+        "original_files_modified": false,
+        "approval": false,
+        "limitations": "Does not replace complete regression QA or final independent review on the updated dependency context."
+      },
+      "qa_reuse": {
+        "full_suites_rerun": false,
+        "existing_candidate_qa_source_hashes_match": true,
+        "scope": "Frozen tested candidate only. Current original coordinator dependency changed; targeted loader compatibility passed, remaining affected dependency checks must be included in future final review/integration.",
+        "old_approval_reused": false
+      },
+      "states": [
+        {
+          "candidate": "engine",
+          "sha256": "ceef24d8385e3cdec811908c1526ee7bdbf41c5bc2887f0146fb8e145600fbed",
+          "prepared": true,
+          "verified_local_candidate": true,
+          "approved_current_hash": false,
+          "applied_original": false,
+          "verified_after_application": false
+        },
+        {
+          "candidate": "css",
+          "sha256": "97ca9fe2111dcfa25acb35b017928da9b41ab1fe124af3b40f03bf33c7144e41",
+          "prepared": true,
+          "verified_local_candidate": true,
+          "approved_current_hash": false,
+          "applied_original": false,
+          "verified_after_application": false
+        },
+        {
+          "candidate": "observers",
+          "sha256": "95bad94590b5e4e5585b8fb29c6e32b3a4ae4432e1fd08c37b0ea6791efe6594",
+          "prepared": true,
+          "verified_local_candidate": true,
+          "approved_current_hash": false,
+          "applied_original": false,
+          "verified_after_application": false
+        }
+      ],
+      "local_research": {
+        "font_files": 8,
+        "unique_glyf_table_hashes": 8,
+        "files_with_fvar": 0,
+        "exact_duplicate_asset_groups": 24,
+        "network_duplicate_transfer_observed": false,
+        "additional_optimization_prepared": false,
+        "decision": "Retain fonts/assets. File identity alone does not justify removing resources or claiming network savings."
+      },
+      "production_changed": false,
+      "new_storefront_requests": 0,
+      "audit_complete": false,
+      "next_review": "New authorized read-only review on the current complete source binding when provider availability is restored; reuse exact valid QA, do not alter old checkpoints or expand their budget."
+    }
+  ],
+  "current_candidate_states": [
+    {
+      "candidate": "engine",
+      "sha256": "ceef24d8385e3cdec811908c1526ee7bdbf41c5bc2887f0146fb8e145600fbed",
+      "prepared": true,
+      "verified_local_candidate": true,
+      "approved_current_hash": false,
+      "applied_original": false,
+      "verified_after_application": false,
+      "applied_in_combined_private_copy": false,
+      "role": "operational_dependency_separate"
+    },
+    {
+      "candidate": "css",
+      "sha256": "97ca9fe2111dcfa25acb35b017928da9b41ab1fe124af3b40f03bf33c7144e41",
+      "prepared": true,
+      "verified_local_candidate": true,
+      "approved_current_hash": false,
+      "applied_original": false,
+      "verified_after_application": false,
+      "applied_in_combined_private_copy": true
+    },
+    {
+      "candidate": "observers",
+      "sha256": "95bad94590b5e4e5585b8fb29c6e32b3a4ae4432e1fd08c37b0ea6791efe6594",
+      "prepared": true,
+      "verified_local_candidate": true,
+      "approved_current_hash": false,
+      "applied_original": false,
+      "verified_after_application": false,
+      "applied_in_combined_private_copy": true
+    },
+    {
+      "candidate": "SCENT-04-video-visibility",
+      "sha256": "fe6311c8004ba5610ef444575dd56456726978ef1ec06bf930ea3912f6286faa",
+      "prepared": true,
+      "verified_local_candidate": true,
+      "performance_benefit_confirmed": true,
+      "approved_current_hash": false,
+      "applied_original": false,
+      "verified_after_application": false,
+      "applied_in_combined_private_copy": true
+    },
+    {
+      "candidate": "header-css-writes",
+      "sha256": "70c17278517e9409539534e6e5f6dddc228ca7aa0e0db3e015c5a883e2adcc95",
+      "prepared": true,
+      "verified_local_candidate": true,
+      "performance_benefit_confirmed": false,
+      "approved_current_hash": false,
+      "applied_original": false,
+      "verified_after_application": false,
+      "applied_in_combined_private_copy": false,
+      "role": "experimental_excluded"
+    }
+  ],
+  "local_phase2": {
+    "at": "2026-11-18T21:34:41.323481+00:00",
+    "status": "local_preparation_complete_storefront_audit_incomplete",
+    "council": "Blocked rate_limit; zero new provider/review attempts; no alternative reviewer substituted",
+    "remote_access": "HTTP 403 stop preserved; no external requests or storefront navigation",
+    "new_candidates": [
+      {
+        "id": "SCENT-04-video-visibility",
+        "priority": 1,
+        "files": [
+          "static/js/sc-armador3.js"
+        ],
+        "patch": "candidate-builder-video-visibility.patch",
+        "manifest": "builder-video-manifest.json",
+        "status": "prepared_unapproved_unapplied",
+        "functional_local_passed": true,
+        "impact_scope": "12 sample runs, 3 before/after per mobile/desktop; exact isolated media functions with original local MP4s",
+        "measured_before": "12–16 decoded frames and 0.638–0.659 s media progression while offscreen in ~650 ms intervals",
+        "measured_after": "0 additional decoded frames; 0 s media progression in all six candidate samples",
+        "checks": 112,
+        "additional_checks_detail": "96 comparative checks + 16 targeted checks including a fresh document without IntersectionObserver; 16 original-defect checks preserved separately",
+        "risk": "Medium: alters manual playback when less than 60% of the card is visible. Does not resume manual playback automatically. No IO support retains manual fallback, without added offscreen guarantee. Background-tab policy unchanged.",
+        "pending": [
+          "Dual council approval of exact candidate",
+          "Full builder/native cart functionality",
+          "Actual storefront mobile/desktop and Safari",
+          "Combined QA with any other approved patches"
+        ],
+        "sha256": "fe6311c8004ba5610ef444575dd56456726978ef1ec06bf930ea3912f6286faa",
+        "approved": false,
+        "applied": false,
+        "verified_after_integration": false
+      },
+      {
+        "id": "header-css-writes",
+        "priority": 4,
+        "files": [
+          "static/js/sc-scent-extras.js"
+        ],
+        "patch": "candidate-header-css-writes.patch",
+        "manifest": "header-manifest.json",
+        "status": "prepared_unapproved_unapplied",
+        "functional_local_passed": true,
+        "performance_benefit_confirmed": false,
+        "measured_before": "90 calls to setProperty for 30 stable scroll events",
+        "measured_after": "0 redundant calls in all six candidate runs; geometry reads retained",
+        "checks": 96,
+        "pixel_pairs_identical": 6,
+        "timings": {
+          "390": {
+            "before": {
+              "median_task_ms": 40.645,
+              "median_script_ms": 13.831000000000001,
+              "redundant_writes": [
+                90
+              ]
+            },
+            "after": {
+              "median_task_ms": 42.952000000000005,
+              "median_script_ms": 9.626,
+              "redundant_writes": [
+                0
+              ]
+            }
+          },
+          "1440": {
+            "before": {
+              "median_task_ms": 14.620999999999999,
+              "median_script_ms": 4.575000000000001,
+              "redundant_writes": [
+                90
+              ]
+            },
+            "after": {
+              "median_task_ms": 14.341000000000003,
+              "median_script_ms": 4.240000000000001,
+              "redundant_writes": [
+                0
+              ]
+            }
+          }
+        },
+        "risk": "Low implementation risk, unproven net CPU benefit. Mobile median total TaskDuration rises 40.645 to 42.952 ms in this fixture. Do not prioritize integration on a performance claim; reduced calls do not prove fewer reflows.",
+        "pending": [
+          "Dual council review",
+          "Representative full-page measurement before accepting for performance",
+          "Combined header/editor QA"
+        ],
+        "sha256": "70c17278517e9409539534e6e5f6dddc228ca7aa0e0db3e015c5a883e2adcc95",
+        "approved": false,
+        "applied": false,
+        "verified_after_integration": false
+      }
+    ],
+    "additional_diagnosis": {
+      "id": "cart-idle-work",
+      "files": [
+        "static/js/sc-scent-cart-recs.js",
+        "static/js/sc-cart-related.js",
+        "snippets/cart/sc-cart-related.tpl"
+      ],
+      "status": "reproduced_fixture_no_patch",
+      "original_catalog_bytes": 125082,
+      "items": 125,
+      "samples": [
+        {
+          "width": 390,
+          "closed": true,
+          "unrelated_mutations": 8,
+          "selection_runs": 8,
+          "index_requests": 1,
+          "rendered_cards": 8,
+          "long_tasks": [
+            123
+          ]
+        },
+        {
+          "width": 1440,
+          "closed": true,
+          "unrelated_mutations": 8,
+          "selection_runs": 8,
+          "index_requests": 1,
+          "rendered_cards": 8,
+          "long_tasks": []
+        }
+      ],
+      "risk": "Medium/high: both native and override scripts control recommendation state. Need native LS/editor/variants interactions before changing load timing or invalidation.",
+      "long_task_limit": "123 ms observed in one mobile fixture load; no trace attribution to recommendations or evidence of production long tasks."
+    },
+    "other_components": {
+      "css": "Existing CSS candidate kept frozen; no blanket unused-CSS removal without representative coverage.",
+      "images": "Existing responsive/LCP candidates still need actual currentSrc/viewport/LCP attribution. No asset compression or quality changes.",
+      "fonts": "Existing static font-table evidence retained; no removal/deduplication or new downloads.",
+      "youtube": "Existing visibility/player lifecycle retained; no removal of visible previews or tracking.",
+      "third_parties": "Analytics and native integrations retained; source inventory is not network execution or transfer evidence.",
+      "dependencies": "Standalone libraries own Swiper/lazysizes; store.js follows LS.ready. Blanket defer or dropping dependencies has not been justified."
+    },
+    "tests": {
+      "header_samples": 12,
+      "header_checks": 96,
+      "header_pixel_pairs_equal": 6,
+      "video_comparative_samples": 12,
+      "video_comparative_checks": 96,
+      "video_targeted_samples": 4,
+      "video_targeted_checks": 16,
+      "original_defect_samples": 2,
+      "original_defect_checks": 16,
+      "cart_baseline_samples": 2,
+      "syntax_checks": [
+        "sc-scent-extras.js",
+        "sc-armador3.js"
+      ],
+      "isolated_scope": "Controlled DOM and source functions, no Twig/native storefront render, no purchase actions",
+      "field_metrics": null,
+      "storefront_before_after_metrics": null,
+      "old_suites_repeated": false
+    },
+    "integrity": {
+      "at": "2026-11-18T21:33:13.288885+00:00",
+      "checks": [
+        {
+          "patch": "continuation/skill-contract-candidate.patch",
+          "sha256": "ceef24d8385e3cdec811908c1526ee7bdbf41c5bc2887f0146fb8e145600fbed",
+          "matches_frozen_identity": true,
+          "base_files_unchanged": true,
+          "applied": false,
+          "review_attempted": false
+        },
+        {
+          "patch": "candidate-remove-inline-css-preloads.patch",
+          "sha256": "97ca9fe2111dcfa25acb35b017928da9b41ab1fe124af3b40f03bf33c7144e41",
+          "matches_frozen_identity": true,
+          "base_files_unchanged": true,
+          "applied": false,
+          "review_attempted": false
+        },
+        {
+          "patch": "continuation/observer-candidate.patch",
+          "sha256": "95bad94590b5e4e5585b8fb29c6e32b3a4ae4432e1fd08c37b0ea6791efe6594",
+          "matches_frozen_identity": true,
+          "base_files_unchanged": true,
+          "applied": false,
+          "review_attempted": false
+        },
+        {
+          "candidate": "header",
+          "patch_sha256_matches": true,
+          "base_matches": true,
+          "candidate_matches": true,
+          "git_apply_check_exit": 0,
+          "applied": false
+        },
+        {
+          "candidate": "builder-video",
+          "patch_sha256_matches": true,
+          "base_matches": true,
+          "candidate_matches": true,
+          "git_apply_check_exit": 0,
+          "applied": false
+        }
+      ],
+      "baseline_files_checked": 860,
+      "baseline_changed": [],
+      "theme_git_clean": true,
+      "branch": "audit/performance-20261118",
+      "builder_outside_media_function_identical": true,
+      "AGENTS_modified": false,
+      "new_council_requests": 0,
+      "remote_storefront_requests": 0,
+      "passed": true
+    },
+    "local_decisions": "decision.json",
+    "risks_remaining": [
+      "Claude mandatory approval missing",
+      "No origin access following HTTP 403",
+      "No real Lighthouse/PageSpeed comparison or CrUX p75",
+      "No full navigation/cart/variants/editor/Safari QA",
+      "New media candidate has not been integrated"
+    ],
+    "source_integration": false,
+    "production_changes": false
+  },
+  "updated_at": "2026-11-19T16:18:39.673144+00:00",
+  "combined_local_version": {
+    "status": "implemented_and_component_tested_in_private_copy_ready_for_mandatory_review",
+    "path": "/home/alanrichard/Escritorio/IA inversa/.local/scent-combined-20261118/theme",
+    "archive": {
+      "path": "/home/alanrichard/Escritorio/IA inversa/.local/scent-combined-20261118/optimized-theme.tar.gz",
+      "sha256": "45c3cfb5d53f06fe26aee8d1decd2c3bc453ce88de3e49d617e6f87735df8f85",
+      "source_files": 860,
+      "excludes": ".git, .nuvem, original manifest, credentials and local metadata"
+    },
+    "review_package": {
+      "path": "/home/alanrichard/Escritorio/IA inversa/reports/performance/scentperfumes-20261118/combined/review-package.zip",
+      "sha256": "07cac118951d43d86db461349945e8bbc1132a86096bcfba808994346b20252f"
+    },
+    "component_checks_passed": 168,
+    "visual_pairs_equal": 6,
+    "syntax_checks_passed": 6,
+    "cart_simulation_profiles_passed": 2,
+    "original_changes": false,
+    "approved": false,
+    "pending": "combined/integration-pending.json"
+  },
+  "current_review_status": {
+    "at": "2026-11-19T16:18:39.673144+00:00",
+    "status": "QA_unblocked_in_private_composition_integration_blocked_rate_limit",
+    "entrypoint": "snapshot-qa/status.json",
+    "protected_originals_applied": false,
+    "performance_optimizations_applied": false,
+    "QA": {
+      "original_eight_failures_passed": true,
+      "targeted_tests_passed": 83,
+      "original_json_contract_tests_preserved": 24,
+      "new_adversarial_offline_tests": 16,
+      "context_window_tests": 5,
+      "latest_full_run": "/home/alanrichard/Escritorio/IA inversa/.local/scent-snapshot-qa-20261119/reports/runs/sample/20261119T161454-orchestration-78d94eb5",
+      "suites": [
+        {
+          "suite": "unit",
+          "exit_code": 0,
+          "passed": true,
+          "tests_run": 619,
+          "skipped": 11,
+          "skipped_tests": [
+            "test_commandcode_progress_does_not_consume_final_response_budget (test_council_protocol.PhaseTiming.test_commandcode_progress_does_not_consume_final_response_budget) ... skipped 'Actual sandbox unavailable; not simulated'",
+            "test_first_response_and_inactivity_are_distinct (test_council_protocol.PhaseTiming.test_first_response_and_inactivity_are_distinct) ... skipped 'Actual sandbox unavailable; not simulated'",
+            "test_real_prompt_stdin_and_auth_file_mounted_read_only (test_orchestration_isolation.Isolation.test_real_prompt_stdin_and_auth_file_mounted_read_only) ... skipped 'bwrap/user namespaces unavailable; no insecure fallback'",
+            "test_real_qa_json_stdout_and_private_artifacts (test_orchestration_isolation.Isolation.test_real_qa_json_stdout_and_private_artifacts) ... skipped 'bwrap/user namespaces unavailable; no insecure fallback'",
+            "test_real_snapshot_read_only_host_hidden_and_tmp_writable (test_orchestration_isolation.Isolation.test_real_snapshot_read_only_host_hidden_and_tmp_writable) ... skipped 'bwrap/user namespaces unavailable; no insecure fallback'",
+            "test_real_time_and_output_limits (test_orchestration_isolation.Isolation.test_real_time_and_output_limits) ... skipped 'bwrap/user namespaces unavailable; no insecure fallback'",
+            "test_cancel_event_kills_active_process_and_blocks_pre_cancelled_start (test_orchestration_recovery.ActualWatchdog.test_cancel_event_kills_active_process_and_blocks_pre_cancelled_start) ... skipped 'Bubblewrap no disponible; no simular prueba real'",
+            "test_context_complete_and_process_exit_are_observed (test_orchestration_recovery.ActualWatchdog.test_context_complete_and_process_exit_are_observed) ... skipped 'Bubblewrap no disponible; no simular prueba real'",
+            "test_silent_process_killed_and_reaped_before_reassignment (test_orchestration_recovery.ActualWatchdog.test_silent_process_killed_and_reaped_before_reassignment) ... skipped 'Bubblewrap no disponible; no simular prueba real'",
+            "test_workspace_qa_gets_synthetic_registry_and_knowledge (test_orchestration_recovery.WorkspaceQA.test_workspace_qa_gets_synthetic_registry_and_knowledge) ... skipped 'Bubblewrap no disponible; no simular QA de workspace'",
+            "test_browser_records_navigation_and_image_redirects (test_performance_evidence.PerformanceEvidenceTests.test_browser_records_navigation_and_image_redirects) ... skipped 'Optional browser runtime unavailable'"
+          ]
+        },
+        {
+          "suite": "integration",
+          "exit_code": 0,
+          "passed": true,
+          "tests_run": 61,
+          "skipped": 2,
+          "skipped_tests": [
+            "test_worker_only_sees_bound_socket_not_policy_or_other_project (test_access_broker.BrokerBoundary.test_worker_only_sees_bound_socket_not_policy_or_other_project) ... skipped 'Bubblewrap no disponible'",
+            "test_real_120_second_process_group_cancellation (test_seo_pilot_cli_v4.PilotCLI.test_real_120_second_process_group_cancellation) ... skipped 'explicit real 120-second fixture only'"
+          ]
+        }
+      ],
+      "passed": true,
+      "snapshot_validation": "snapshot-verification.json",
+      "host_local_mounted": false,
+      "historical_links_verified_by_receipts": 26,
+      "identity_only_not_contents": true
+    },
+    "operational_composition": {
+      "files": 31,
+      "review_scope_files": 33,
+      "candidate_root": "/home/alanrichard/Escritorio/IA inversa/.local/scent-snapshot-qa-20261119",
+      "manifest": "operational-manifest.json",
+      "patch": "operational-composition-final.patch",
+      "sha256": "9055a4028fd55b9c414c3a9ea054e448896219126b4672428f0bc45cf79c180e",
+      "review_binding_matches_all_changed_files": true
+    },
+    "official_council": {
+      "run": "/home/alanrichard/Escritorio/IA inversa/.local/scent-snapshot-qa-20261119/reports/runs/sample/20261119T161454-orchestration-78d94eb5",
+      "ADR_status": "needs_evidence",
+      "implementation_allowed": false,
+      "participants": [
+        {
+          "agent": "claude",
+          "effective_agent": "claude",
+          "model": {
+            "model": "claude-fable-5-1",
+            "effort": "high",
+            "reason": "critical según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+            "verified_at": "2026-11-08"
+          },
+          "error": {
+            "category": "rate_limit",
+            "summary": "No se recibió una propuesta válida; no cuenta como participación completa."
+          },
+          "process_reaped": true,
+          "category": "rate_limit",
+          "duration_s": 4.103,
+          "valid_proposal": false,
+          "retries": 0,
+          "usage": {
+            "provider_reported": {
+              "total_cost_usd": 0,
+              "duration_ms": 1290,
+              "input_tokens": 0,
+              "cache_creation_input_tokens": 0,
+              "cache_read_input_tokens": 0,
+              "output_tokens": 0
+            },
+            "measured_cost_available": true,
+            "estimated_cost": null
+          }
+        },
+        {
+          "agent": "codex",
+          "effective_agent": "codex",
+          "model": {
+            "model": "gpt-6-astra",
+            "effort": "high",
+            "reason": "critical según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+            "verified_at": "2026-11-08"
+          },
+          "error": {
+            "category": "run_cancelled",
+            "summary": "No se recibió una propuesta válida; no cuenta como participación completa."
+          },
+          "process_reaped": true,
+          "category": "run_cancelled",
+          "duration_s": 4.204,
+          "valid_proposal": false,
+          "retries": 0,
+          "usage": {
+            "provider_reported": {},
+            "measured_cost_available": false,
+            "estimated_cost": null
+          }
+        }
+      ],
+      "worker_attempt_budget": {
+        "limit": 6,
+        "used": 2,
+        "includes_retries_and_substitutions": true,
+        "provider_internal_api_call_count": "not_available"
+      },
+      "valid_proposals": 0,
+      "consensus": false,
+      "fallback_used": false,
+      "new_retries_scheduled": false
+    },
+    "blocker": "Claude rate_limit in original critical-tier council; supervisor cancelled Codex. No substitute participant or model; no approval from smokes.",
+    "next_permitted_step": [
+      "Wait until the official provider limit allows a valid review; do not retry now.",
+      "Use the official recovery rules. This run has no valid proposals and only four of its six calls remaining, insufficient for the six-call protocol. When provider capacity returns, invoke a fresh run within the user’s existing authorization and normal budget; never silently enlarge or reuse the old budget.",
+      "Preserve exact 31-file source hashes and full scope; recheck all before any future run. If bindings change, revalidate only affected dependencies.",
+      "After complete council and mandatory independent review, transact approved operational files with backups and post-integration QA.",
+      "Then review and, only after its own approval, transact unchanged CSS/MutationObserver/video storefront package."
+    ],
+    "preserved": {
+      "all_five_old_patches_unchanged": true,
+      "performance_zip_sha256": "07cac118951d43d86db461349945e8bbc1132a86096bcfba808994346b20252f",
+      "theme_archive_sha256": "45c3cfb5d53f06fe26aee8d1decd2c3bc453ce88de3e49d617e6f87735df8f85",
+      "checks_168_and_visual_pairs_6_preserved": true,
+      "performance_tests_repeated": false,
+      "storefront_http403_stop": true,
+      "storefront_requests": 0,
+      "production_changed": false,
+      "AGENTS_and_model_registry_changed": false
+    },
+    "unrelated_stage12_action": "Before user corrected the task, exact reference fix/stage11-clean-clone-portability was imported. Active branch, index and all 44267 preexisting files stayed unchanged; no checkout/merge. Reference retained separately, not used as Scent source."
+  },
+  "review_status_history": [
+    {
+      "at": "2026-11-18T21:50:53.939498+00:00",
+      "status": "blocked_mandatory_review_response_contract",
+      "integrity": {
+        "at": "2026-11-18T21:49:01.369749+00:00",
+        "archive_sha256": "45c3cfb5d53f06fe26aee8d1decd2c3bc453ce88de3e49d617e6f87735df8f85",
+        "review_zip_sha256": "07cac118951d43d86db461349945e8bbc1132a86096bcfba808994346b20252f",
+        "all_original_files_unchanged": true,
+        "isolated_version_and_archive_match": true,
+        "changed_files": [
+          "static/js/sc-global.js",
+          "static/js/sc-search-refinement.js",
+          "layouts/layout.tpl",
+          "static/js/sc-armador3.js"
+        ],
+        "patches_match": true,
+        "preserved_checks": 168,
+        "preserved_visual_pairs": 6,
+        "evidence_hashes_valid": true,
+        "policy_binding_drift": [],
+        "tests_repeated": false,
+        "approved": false,
+        "source_applied": false
+      },
+      "availability_check": {
+        "official_command": "python3 tools/ia.py --project scentperfumes orchestrate smoke --agent claude --execute",
+        "source_report": "/home/alanrichard/Escritorio/IA inversa/reports/runs/scentperfumes/20261118T214907-orchestration-smoke-95e3ad5f/smoke.json",
+        "source_report_sha256": "faa613818a9ab715b489c7aa8a8287d174a5995449acaf998a96e067d553873b",
+        "provider": "claude",
+        "model": "claude-haiku-5-5",
+        "attempts_this_turn": 1,
+        "passed": false,
+        "process_exit_code": 0,
+        "process_reaped": true,
+        "error_category": "json_syntax",
+        "error_line": 11,
+        "error_column": 1,
+        "duration_s": 4.905,
+        "reported_cost_usd": 0.0015458900000000003,
+        "rate_limit_observed_this_check": false,
+        "rate_limit_resolved_for_all_models": null,
+        "retries": 0,
+        "fallback": false
+      },
+      "mandatory_review": {
+        "claude_accepted_review": false,
+        "codex_independent_review": false,
+        "dual_approval": false,
+        "full_council_started": false,
+        "codex_probe_attempted": false,
+        "why_stopped": "Official availability smoke failed response validation. Exit 0 does not mean an accepted structured response or review. Do not manually repair untrusted output, switch participant or weaken validation.",
+        "policy": "AGENTS.md:48,54; reports/orchestration/README.md:117-123"
+      },
+      "continuation_conditions": [
+        "Official runtime must return a valid accepted response from Claude, within its documented budgets and retry rules. No automatic retries scheduled.",
+        "Complete fresh full Claude/Codex council and independent review tied to unchanged patch/source/policy hashes. Do not reuse availability smoke as review approval.",
+        "Only after mandatory approvals, use protected transaction/backups for four approved files, followed by QA on actual integrated hashes.",
+        "Storefront reading and real before/after validation remain blocked at the HTTP403 origin pending separately authorized working access."
+      ],
+      "limitations": [
+        "No raw provider stdout retained, so the underlying malformed-response content or exact provider/adaptor cause cannot be reconstructed from this sanitized error alone.",
+        "Operational orchestrator patch remains separate, frozen and unapproved. No code/config/model/security-policy changes made.",
+        "Mixed component CPU measurements unchanged; no overall performance/PageSpeed improvement claimed."
+      ],
+      "artifacts_preserved": {
+        "review_zip_sha256": "07cac118951d43d86db461349945e8bbc1132a86096bcfba808994346b20252f",
+        "theme_archive_sha256": "45c3cfb5d53f06fe26aee8d1decd2c3bc453ce88de3e49d617e6f87735df8f85",
+        "joint_checks": 168,
+        "visual_pairs": 6,
+        "tests_repeated": false
+      },
+      "original_theme_changed": false,
+      "production_changed": false,
+      "new_storefront_requests": 0,
+      "new_candidates": 0
+    },
+    {
+      "at": "2026-11-18T22:10:04.398998+00:00",
+      "status": "structured_contract_fixed_in_private_candidate_review_blocked_by_full_snapshot_QA",
+      "patch_sha256": "2f1e08ff1734d4ab2bebf104e7c2fa237f5b7b64a0525231954d35a491bae03e",
+      "patch": "structured-contract-candidate.patch",
+      "scope": "Five original-bound files; standalone candidate unapproved/unapplied. Additional composition with existing unchanged operational patch was tested only in another private root.",
+      "new_tests": 24,
+      "before_failures": 15,
+      "selected_regression_tests_passed": 160,
+      "real_runtime_checks": {
+        "claude": {
+          "passed": true,
+          "requested_mode": "native_schema",
+          "validation": {
+            "status": "passed",
+            "duration_s": 0.001486
+          },
+          "model": "claude-haiku-5-5",
+          "report": "/home/alanrichard/Escritorio/IA inversa/.local/scent-json-contract-20261118/reports/runs/sample/20261118T220001-orchestration-smoke-b69d606f/smoke.json",
+          "duration_s": 7.046,
+          "usage": {
+            "provider_reported": {
+              "total_cost_usd": 0.0019464999999999999,
+              "duration_ms": 3692,
+              "input_tokens": 2,
+              "cache_creation_input_tokens": 8119,
+              "cache_read_input_tokens": 0,
+              "output_tokens": 645
+            },
+            "measured_cost_available": true,
+            "estimated_cost": null
+          }
+        },
+        "codex": {
+          "passed": true,
+          "requested_mode": "native_schema",
+          "validation": {
+            "status": "passed",
+            "duration_s": 0.000117
+          },
+          "model": "gpt-6-luna",
+          "report": "/home/alanrichard/Escritorio/IA inversa/.local/scent-json-contract-20261118/reports/runs/sample/20261118T220038-orchestration-smoke-ba5ebddb/smoke.json",
+          "duration_s": 16.327,
+          "usage": {
+            "provider_reported": {
+              "input_tokens": 16633,
+              "cached_input_tokens": 0,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 78,
+              "reasoning_output_tokens": 0
+            },
+            "measured_cost_available": false,
+            "estimated_cost": null
+          }
+        }
+      },
+      "historical_provider_cause": "Unknown; no original raw response retained. Successful new executions do not prove what caused the old response.",
+      "official_review": {
+        "first_attempt": "review-execution.json",
+        "composition_attempt": "composed-review-execution.json",
+        "participants_requested": [
+          "claude",
+          "codex"
+        ],
+        "council_provider_inferences": 0,
+        "accepted_proposals": 0,
+        "independent_approval": false,
+        "why": "Controller refused before deliberation because full baseline QA failed. Native smoke approvals refer only to synthetic fixture.",
+        "latest_baseline": {
+          "ran": 598,
+          "failures": 8,
+          "errors": 0,
+          "skipped": 11,
+          "failing_test_names": [
+            "test_00_upstream_provenance_git_sha1_and_sha256_integrity (test_better_accessibility.BetterAccessibilityIntegrationTests.test_00_upstream_provenance_git_sha1_and_sha256_integrity)",
+            "test_17_absence_of_regressions_and_b1_b2_unchanged (test_better_accessibility.BetterAccessibilityIntegrationTests.test_17_absence_of_regressions_and_b1_b2_unchanged)",
+            "test_1_structure_and_configuration_validation (test_cloudflare_web_perf.CloudflareWebPerfIntegrationTests.test_1_structure_and_configuration_validation)",
+            "test_17_regression_tests_across_previous_stages (test_schema_markup_skill.SchemaMarkupSkillIntegrationTests.test_17_regression_tests_across_previous_stages)",
+            "test_13_absence_of_regressions_in_repo_coordinator_and_seo_evals (test_seo_audit_skill.SEOAuditSkillIntegrationTests.test_13_absence_of_regressions_in_repo_coordinator_and_seo_evals)",
+            "test_11_absence_of_regressions_across_all_suites (test_vercel_react_best_practices.VercelReactBestPracticesIntegrationTests.test_11_absence_of_regressions_across_all_suites)",
+            "test_14_absence_of_regressions_across_all_suites (test_web_design_guidelines.WebDesignGuidelinesIntegrationTests.test_14_absence_of_regressions_across_all_suites)",
+            "test_08_compatibility_with_existing_skills (test_web_quality_audit.WebQualityAuditIntegrationTests.test_08_compatibility_with_existing_skills)"
+          ],
+          "run": "/home/alanrichard/Escritorio/IA inversa/.local/scent-runtime-review-20261118/reports/runs/sample/20261118T220551-orchestration-535e395c"
+        },
+        "reproduced_remaining_blockers": [
+          "Provenance test requires .local/upstream/better-accessibility in a sandbox that intentionally excludes .local.",
+          "Seven broad validation checks fail on 26 historical document links not evidenced in this isolated copy. These are local repository artifact links, not broken storefront links."
+        ],
+        "not_done": [
+          "No test skipped or rewritten to turn failure into approval.",
+          "No credential/private-directory mounts added.",
+          "No invalid response manually repaired.",
+          "No policies/models/participants changed."
+        ]
+      },
+      "next_permitted_step": [
+        "Prepare and review a narrow offline fixture/snapshot contract for the better-accessibility provenance data, preserving expected hashes and isolation. Do not mount host .local.",
+        "Restore or explicitly prove omitted historical link provenance using existing controller receipts, from an authorized complete source; do not fabricate receipts for absent artifacts.",
+        "After the full offline baseline passes, start a fresh official bound read-only council over the complete operational composition; replan scope to cover every changed file, including inherited test changes.",
+        "After approvals, transact only approved original-source changes, revalidate approved hashes and run post-integration QA.",
+        "Then complete the separate council/review of the unchanged storefront bundle before its protected local integration; real storefront performance remains pending HTTP403 access."
+      ],
+      "performance_package_unchanged": true,
+      "checks_168_and_visual_pairs_6_preserved": true,
+      "performance_tests_repeated": false,
+      "new_storefront_requests": 0,
+      "original_source_integrated": false,
+      "production_changed": false
+    }
+  ],
+  "structured_contract_diagnosis": "json-contract/diagnosis.json",
+  "snapshot_preparation": "snapshot-qa/status.json"
+}

@@ -1,0 +1,13 @@
+{
+  "kind": "t1-static-structural-comparison",
+  "previous_hero_sha256": "e7353ebcac1ac0dfe50b965456f89de7168d18bf0a003214c8629a112f13067f",
+  "corrected_hero_sha256": "06dded46e359d68648c05253eff315e5c124e9c1d30313b0ea0b8e2c7ac7062c",
+  "diff_scope": "single exact Twig comment moved from within include parameter mapping to immediately before include tag",
+  "parameter_block_after_removing_comment_identical": true,
+  "parameters_order_and_values_unchanged": true,
+  "no_Twig_comment_inside_include_mapping": true,
+  "comment_immediately_precedes_include": true,
+  "snippet_unchanged_sha256": "447a9b23e2cbe7ac752f804a754d8e99ad87cd32449c41aa658fa919e18a32b5",
+  "tests_repeated": false,
+  "platform_renderer_validated": false
+}

@@ -1,0 +1,167 @@
+{
+  "kind": "antigravity-candidate-preservation/v1",
+  "candidate_patch_sha256": "87fa69da25a220ab604b324ee55a4ae75be97dfa925a8f4e209b24fdc584e5cb",
+  "base_git_commit": "b91a85445cb750d5f6482c936cf631919242b5c1",
+  "changed_candidate_files": [
+    "tests/unit/test_antigravity_integration.py",
+    "tests/unit/test_antigravity_json_contract.py",
+    "tests/unit/test_council_dual.py",
+    "tests/unit/test_council_engine.py",
+    "tests/unit/test_council_policy.py",
+    "tests/unit/test_orchestration.py",
+    "tools/ipanema/orchestration/adapters.py",
+    "tools/ipanema/orchestration/cli.py",
+    "tools/ipanema/orchestration/council.py",
+    "tools/ipanema/orchestration/council_runtime.py",
+    "tools/ipanema/orchestration/engine.py",
+    "tools/ipanema/orchestration/isolation.py",
+    "tools/ipanema/orchestration/models.json",
+    "tools/ipanema/orchestration/planner.py",
+    "tools/ipanema/orchestration/recovery.py"
+  ],
+  "archived_files": [
+    {
+      "path": "HOST-VIRTUALIZATION-REVIEW.md",
+      "bytes": 4534,
+      "sha256": "6c757a45c86a7264c59fdf41df7a6a866f3492f2e2bf9a498b233bf9cbb90847"
+    },
+    {
+      "path": "artifacts/README-h1h4-final.md",
+      "bytes": 6585,
+      "sha256": "bcceec92a8b964c3b686991fdc3666515067a3c4413db86c806201174affacad"
+    },
+    {
+      "path": "artifacts/README.md",
+      "bytes": 4233,
+      "sha256": "04e5e7d3749a3f943df5be7331de6519ebb3f2e59649e67e6a538a3d250ec177"
+    },
+    {
+      "path": "artifacts/candidate-ca071.patch",
+      "bytes": 60627,
+      "sha256": "ca071456b9cc972fb6c0c43d4d63734be7a4f424e7be1d3991a3f7eeac3b0d83"
+    },
+    {
+      "path": "artifacts/closure-status-b1-b2.md",
+      "bytes": 4220,
+      "sha256": "1ef836607eaca46c25de9aa07469226d5dafe4e2f51644ab2506443bf97160ef"
+    },
+    {
+      "path": "artifacts/full-candidate.patch",
+      "bytes": 82735,
+      "sha256": "87fa69da25a220ab604b324ee55a4ae75be97dfa925a8f4e209b24fdc584e5cb"
+    },
+    {
+      "path": "artifacts/incremental-over-8a0685f.patch",
+      "bytes": 36658,
+      "sha256": "3e20abe6d62b5d4d9640382d9846f5322bde04598c89ca2f5fb9b9832c649a07"
+    },
+    {
+      "path": "artifacts/incremental-over-ca071.patch",
+      "bytes": 14257,
+      "sha256": "bfe6add93b28b034b8beb87d07dd42aaed418866f6b61c26bf791dc4c8b4ddd0"
+    },
+    {
+      "path": "artifacts/manifest-h1h4.json",
+      "bytes": 2028,
+      "sha256": "90c6fc4d9a90f2c7fdfb5924ffc158a7e0815040ba4d8f555235d90136de01e8"
+    },
+    {
+      "path": "artifacts/manifest.json",
+      "bytes": 1825,
+      "sha256": "f67c27b092ebae773fe149bfd65bfc67012d88c5e5d8574d6f6e2488463de1b5"
+    },
+    {
+      "path": "artifacts/tests-result-h1h4.txt",
+      "bytes": 375,
+      "sha256": "a2beacd86008038a04c7c4def840e26981be54ce468c0223eb6f63a8c1cc75c0"
+    },
+    {
+      "path": "artifacts/tests-result.txt",
+      "bytes": 542,
+      "sha256": "067beec1c21b3b7cc596e3180096716184a08ec29af5e63330e15e3ceaf96538"
+    },
+    {
+      "path": "candidate-files/tests/unit/test_antigravity_integration.py",
+      "bytes": 16554,
+      "sha256": "7d2a8884ce6cc562e6aea3f2d139e828d6286b79ff754c89b4f29ffe3e151378"
+    },
+    {
+      "path": "candidate-files/tests/unit/test_antigravity_json_contract.py",
+      "bytes": 13305,
+      "sha256": "ca28f78b22f67d3222a0ad362a66df9c0fc048843762a5903db0e62471392079"
+    },
+    {
+      "path": "candidate-files/tests/unit/test_council_dual.py",
+      "bytes": 16058,
+      "sha256": "d8d570c848a1c23a0b4b00b1fef7620d99a3fa962ffc5965c9f5a301615e7dde"
+    },
+    {
+      "path": "candidate-files/tests/unit/test_council_engine.py",
+      "bytes": 24348,
+      "sha256": "a8115223893c2cfc6844a1c1644dd8861513b6b1e9f0d165193008bb0b07f789"
+    },
+    {
+      "path": "candidate-files/tests/unit/test_council_policy.py",
+      "bytes": 17219,
+      "sha256": "e71026b82c6e465f7ad579d8943d569c523a388cc1e8d63fffa65b729bb42ca0"
+    },
+    {
+      "path": "candidate-files/tests/unit/test_orchestration.py",
+      "bytes": 9367,
+      "sha256": "7d3282ff8307c7c99eecd084737f269a5fe9bd5291487a324b3ef642b9df8be0"
+    },
+    {
+      "path": "candidate-files/tools/ipanema/orchestration/adapters.py",
+      "bytes": 17597,
+      "sha256": "83a89bbdb8f2cd8a840578e7ed47a92be7a9647cb2920d23bce50e13b718945d"
+    },
+    {
+      "path": "candidate-files/tools/ipanema/orchestration/cli.py",
+      "bytes": 6029,
+      "sha256": "8ff03c762dc96adfe51dea4474eb3cd7372df499b6f34f674b042df6b4a91ea1"
+    },
+    {
+      "path": "candidate-files/tools/ipanema/orchestration/council.py",
+      "bytes": 44864,
+      "sha256": "5d164dec66b7e08615c1dce3b486d9fc39d441222fbe40138a96407417b0774f"
+    },
+    {
+      "path": "candidate-files/tools/ipanema/orchestration/council_runtime.py",
+      "bytes": 22518,
+      "sha256": "b546de7b58019ddb6436bde2194cbefd043a7984e7e4da6e702fe8151976881b"
+    },
+    {
+      "path": "candidate-files/tools/ipanema/orchestration/engine.py",
+      "bytes": 42942,
+      "sha256": "f5bb876cc93cce50ee8508d8cce67bb00fcfaedc9b8a88f9f62cae049a530c4e"
+    },
+    {
+      "path": "candidate-files/tools/ipanema/orchestration/isolation.py",
+      "bytes": 16403,
+      "sha256": "f28a9ec6dc3819f2d79658345c813cb44e6486fba59f8173830bd2e69ad6c281"
+    },
+    {
+      "path": "candidate-files/tools/ipanema/orchestration/models.json",
+      "bytes": 3667,
+      "sha256": "307086f9d3da828e8fec44513042fe6eeb24e1d7b18f9224bf5e4fc29b187d50"
+    },
+    {
+      "path": "candidate-files/tools/ipanema/orchestration/planner.py",
+      "bytes": 7052,
+      "sha256": "792047ce088f864d59cabe67b4ea85279af27c10e9befe7a03bc4e58662a9307"
+    },
+    {
+      "path": "candidate-files/tools/ipanema/orchestration/recovery.py",
+      "bytes": 11761,
+      "sha256": "55c42b6c6663b8a64ad674a94813414933d860ff6a195fe52f56d438f0557a88"
+    }
+  ],
+  "operations": {
+    "providers_invoked": false,
+    "real_credentials_used": false,
+    "vm_created": false,
+    "network_rules_modified": false,
+    "operational_controller_modified": false,
+    "rhino_accessed": false
+  }
+}

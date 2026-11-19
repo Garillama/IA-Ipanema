@@ -1,0 +1,51 @@
+{
+  "artifact": "Rhino Performance native validation offline preflight",
+  "status": "needs_evidence",
+  "network_performed": false,
+  "cli_invoked": false,
+  "candidate": [
+    {
+      "path": "sections/hero.tpl",
+      "sha256": "06dded46e359d68648c05253eff315e5c124e9c1d30313b0ea0b8e2c7ac7062c"
+    },
+    {
+      "path": "snippets/image.tpl",
+      "sha256": "447a9b23e2cbe7ac752f804a754d8e99ad87cd32449c41aa658fa919e18a32b5"
+    }
+  ],
+  "cli": {
+    "version": "2.5.1",
+    "entrypoint_sha256": "0e5b412e40613a7c2521dccf4651e83b52404d23def4c997b6b9504c69b6558c",
+    "package_sha256": "08d303ae04caebfb12f708af05bdaf4153fd698d70c3b1f30e23750378b19242"
+  },
+  "configured_theme_original": [
+    {
+      "path": "sections/hero.tpl",
+      "sha256": "5362f1b4ddab56feabc95ad23486cc1b439b02d06a0479a2fcb8deb96fa8861c"
+    },
+    {
+      "path": "snippets/image.tpl",
+      "sha256": "f45641d2f4cd4e9fea775cf6aa19f806686130f79cb191e2a2140436919e178b"
+    }
+  ],
+  "files": [
+    {
+      "path": "offline-preflight.mjs",
+      "sha256": "dc1c837e05f65ad7237a4c00d760a3e53f5d8bb82925410b4abc6e8255994313"
+    },
+    {
+      "path": "offline-preflight-results.json",
+      "sha256": "ec0d47dcd11f61f7cee8147aa76bf8ab8769e71dd14538f03ce27afa69631f6d"
+    },
+    {
+      "path": "virtual-workspace/sections/hero.tpl",
+      "sha256": "06dded46e359d68648c05253eff315e5c124e9c1d30313b0ea0b8e2c7ac7062c"
+    },
+    {
+      "path": "virtual-workspace/snippets/image.tpl",
+      "sha256": "447a9b23e2cbe7ac752f804a754d8e99ad87cd32449c41aa658fa919e18a32b5"
+    }
+  ],
+  "offline_result": "offline-preflight-results.json",
+  "limitation": "No remote hashes read; exact two-file POST, retry/redirect isolation, and current endpoint availability remain unverified."
+}

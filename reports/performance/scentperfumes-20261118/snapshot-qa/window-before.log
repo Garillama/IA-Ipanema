@@ -1,0 +1,22 @@
+test_combined_excerpt_budget_rejected (tests.unit.test_source_window_budget.WindowBudget.test_combined_excerpt_budget_rejected) ... ok
+test_excerpts_over_original_cap_rejected (tests.unit.test_source_window_budget.WindowBudget.test_excerpts_over_original_cap_rejected) ... ok
+test_full_source_without_window_still_rejected (tests.unit.test_source_window_budget.WindowBudget.test_full_source_without_window_still_rejected) ... ok
+test_invalid_windows_still_rejected (tests.unit.test_source_window_budget.WindowBudget.test_invalid_windows_still_rejected) ... ok
+test_valid_excerpt_under_cap_with_complete_source_hash (tests.unit.test_source_window_budget.WindowBudget.test_valid_excerpt_under_cap_with_complete_source_hash) ... ERROR
+
+======================================================================
+ERROR: test_valid_excerpt_under_cap_with_complete_source_hash (tests.unit.test_source_window_budget.WindowBudget.test_valid_excerpt_under_cap_with_complete_source_hash)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/alanrichard/Escritorio/IA inversa/.local/scent-snapshot-qa-20261119/tests/unit/test_source_window_budget.py", line 14, in test_valid_excerpt_under_cap_with_complete_source_hash
+    self.plan['source_windows']={'large.txt':[[1,2]]};value=json.loads(prompt_for(Project(ROOT),self.plan,self.task,self.tree,[]));file=value['files']['large.txt'];self.assertFalse(file['full_content_in_prompt']);self.assertEqual(file['total_lines'],1000);self.assertEqual(len(file['sha256']),64);self.assertEqual(file['excerpts'][0]['content'],'x'*500+'\n'+'x'*500)
+                                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/alanrichard/Escritorio/IA inversa/.local/scent-snapshot-qa-20261119/tools/ipanema/orchestration/engine.py", line 59, in prompt_for
+    if total>300_000:raise IpanemaError('Contexto excede 300 KB; acota la tarea.')
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ipanema.core.IpanemaError: Contexto excede 300 KB; acota la tarea.
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.024s
+
+FAILED (errors=1)

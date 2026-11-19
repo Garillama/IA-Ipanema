@@ -1,0 +1,26 @@
+{
+  "kind": "synthetic-bootstrap-security-probes",
+  "candidate_patch_sha256": "16802138df326ef1f47612784756cdad4ad79c9010d4bd9fb866c18c137126a5",
+  "review_package_manifest_sha256": "d32d4dd0ef5a9b50996cec5bb4e95da3abdac86c889b51477c708721d9f4e96c",
+  "operational_controller_unchanged": true,
+  "existing_operational_base_files_checked": 9,
+  "providers_invoked": false,
+  "real_credentials_used": false,
+  "production_accessed": false,
+  "results": {
+    "fake_auth_canary_mount_read": {
+      "passed_as_reproduction": true,
+      "security_expected_behavior": "must be denied after correction",
+      "observed": "child command read dummy canary from explicit auth mount"
+    },
+    "network_off_local_sentinel": {
+      "passed_as_reproduction": true,
+      "security_expected_behavior": "denied",
+      "observed": "network-disabled namespace could not reach host loopback sentinel; sentinel accepted zero connections"
+    },
+    "destination_allowlist_when_broker_network_enabled": {
+      "status": "not_implemented_not_tested"
+    }
+  },
+  "command": "IPANEMA_CANDIDATE_ROOT=/tmp/ia-ipanema-contract-separation-20261117/repo PYTHONPATH=/tmp/ia-ipanema-contract-separation-20261117/repo/tools python3 reports/orchestration/contract-separation-isolated-20261117/bootstrap-correction-design-20261117/synthetic-probes.py"
+}

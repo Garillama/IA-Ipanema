@@ -1,0 +1,11 @@
+--- a/layouts/layout.tpl
++++ b/layouts/layout.tpl
+@@ -11,8 +11,6 @@
+     {# Preload critical assets #}
+     <link rel="preload" as="style" href="{{ ([settings.font_headings, settings.font_rest] | merge(additional_fonts)) | google_fonts_url('400,700') }}" />
+     <link rel="preload" href="{{ 'js/libraries-standalone.js' | static_url }}" as="script" />
+-    <link rel="preload" href="{{ 'css/style-critical.css' | static_url }}" as="style" />
+-    <link rel="preload" href="{{ 'css/style-utilities.css' | static_url }}" as="style" />
+ 
+     {# Style Tokens (fonts + CSS custom properties) #}
+     <style>

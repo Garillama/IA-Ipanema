@@ -1,0 +1,23 @@
+{
+  "schema": "ipanema-bootstrap-correction-design/v1",
+  "status": "design_only_needs_evidence",
+  "candidate_patch_sha256": "16802138df326ef1f47612784756cdad4ad79c9010d4bd9fb866c18c137126a5",
+  "review_package_manifest_sha256": "d32d4dd0ef5a9b50996cec5bb4e95da3abdac86c889b51477c708721d9f4e96c",
+  "files": [
+    {
+      "path": "README.md",
+      "sha256": "057a69ef61f0d5c7b1244c4f081c98ac0129d2012fcb5c0a2472e5df19d10d32",
+      "bytes": 13332
+    },
+    {
+      "path": "evidence.json",
+      "sha256": "cf2cf9f7b3649d5f80623c5413caf754c00cd88a707ce758e42dda1e0b127f19",
+      "bytes": 1330
+    },
+    {
+      "path": "synthetic-probes.py",
+      "sha256": "b02e9a445c5b13ae6d03cc1f2ad1333356619a9da4a86598e04c2455c13663ff",
+      "bytes": 2560
+    }
+  ]
+}

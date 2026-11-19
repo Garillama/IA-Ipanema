@@ -1,0 +1,27 @@
+{
+  "origin": "https://scentperfumes.mx",
+  "endpoint": "/robots.txt",
+  "method": "GET",
+  "client": "Python3 urllib.request.urlopen with default opener/headers",
+  "timeout_seconds": 25,
+  "response": "urllib.error.HTTPError:HTTP403 Forbidden",
+  "at_source": "2026-11-18 original audit tool output",
+  "response_headers_retained": false,
+  "body_retained": false,
+  "cause_attribution": "insufficient_evidence: cannot distinguish origin/CDN/WAF/network intermediary",
+  "new_requests_to_origin": 0,
+  "preview_evidence": {
+    "registered_qa_base_url": null,
+    "project_pages": [
+      "/"
+    ],
+    "theme_local_renderer": "not available: Twig/platform components require Tiendanube",
+    "local_fixtures": [
+      "CSSpreload reproduction",
+      "native video reproduction"
+    ],
+    "official_preview": "Local theme documentation describes tiendanube theme preview; preview link requires installation/origin. No existing distinct staging origin verified. No CLI preview/auth/network invoked; same-origin parameter would not override stop policy."
+  },
+  "status": "stopped403_preserved",
+  "next_requirement": "An existing independently authorized preview/staging or operator resolution of blocked read access; no retry/identity/header changes."
+}

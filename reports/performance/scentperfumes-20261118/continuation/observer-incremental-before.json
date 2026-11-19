@@ -1,0 +1,1010 @@
+{
+  "scope": "component JS fixture only; not full storefront or INP",
+  "samples": [
+    {
+      "width": 390,
+      "run": 0,
+      "version": "before",
+      "scans": {
+        "before": {
+          "[data-sc-header]": 1,
+          "[data-sc-search-refinement]": 1
+        },
+        "after": {
+          "[data-sc-header]": 21,
+          "[data-sc-search-refinement]": 21
+        }
+      },
+      "task_ms": 221.44599999999997,
+      "errors": [],
+      "ax_nodes": 12020,
+      "screenshot": "observer-before-390-0.png",
+      "axe": {
+        "violations": [],
+        "incomplete": 1
+      }
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "after",
+      "scans": {
+        "before": {
+          "[data-sc-header]": 1,
+          "[data-sc-search-refinement]": 1
+        },
+        "after": {
+          "[data-sc-header]": 1,
+          "[data-sc-search-refinement]": 1
+        }
+      },
+      "task_ms": 153.46500000000003,
+      "errors": [],
+      "ax_nodes": 12020,
+      "screenshot": "observer-after-390-0.png",
+      "axe": {
+        "violations": [],
+        "incomplete": 1
+      }
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "before",
+      "scans": {
+        "before": {
+          "[data-sc-header]": 1,
+          "[data-sc-search-refinement]": 1
+        },
+        "after": {
+          "[data-sc-header]": 21,
+          "[data-sc-search-refinement]": 21
+        }
+      },
+      "task_ms": 168.64100000000005,
+      "errors": [],
+      "ax_nodes": 12020,
+      "screenshot": "observer-before-390-1.png"
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "after",
+      "scans": {
+        "before": {
+          "[data-sc-header]": 1,
+          "[data-sc-search-refinement]": 1
+        },
+        "after": {
+          "[data-sc-header]": 1,
+          "[data-sc-search-refinement]": 1
+        }
+      },
+      "task_ms": 159.30899999999997,
+      "errors": [],
+      "ax_nodes": 12020,
+      "screenshot": "observer-after-390-1.png"
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "before",
+      "scans": {
+        "before": {
+          "[data-sc-header]": 1,
+          "[data-sc-search-refinement]": 1
+        },
+        "after": {
+          "[data-sc-header]": 21,
+          "[data-sc-search-refinement]": 21
+        }
+      },
+      "task_ms": 195.15699999999998,
+      "errors": [],
+      "ax_nodes": 12020,
+      "screenshot": "observer-before-390-2.png"
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "after",
+      "scans": {
+        "before": {
+          "[data-sc-header]": 1,
+          "[data-sc-search-refinement]": 1
+        },
+        "after": {
+          "[data-sc-header]": 1,
+          "[data-sc-search-refinement]": 1
+        }
+      },
+      "task_ms": 191.33800000000002,
+      "errors": [],
+      "ax_nodes": 12020,
+      "screenshot": "observer-after-390-2.png"
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "before",
+      "scans": {
+        "before": {
+          "[data-sc-header]": 1,
+          "[data-sc-search-refinement]": 1
+        },
+        "after": {
+          "[data-sc-header]": 21,
+          "[data-sc-search-refinement]": 21
+        }
+      },
+      "task_ms": 66.83600000000001,
+      "errors": [],
+      "ax_nodes": 12026,
+      "screenshot": "observer-before-1440-0.png",
+      "axe": {
+        "violations": [],
+        "incomplete": 0
+      }
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "after",
+      "scans": {
+        "before": {
+          "[data-sc-header]": 1,
+          "[data-sc-search-refinement]": 1
+        },
+        "after": {
+          "[data-sc-header]": 1,
+          "[data-sc-search-refinement]": 1
+        }
+      },
+      "task_ms": 44.26700000000002,
+      "errors": [],
+      "ax_nodes": 12026,
+      "screenshot": "observer-after-1440-0.png",
+      "axe": {
+        "violations": [],
+        "incomplete": 0
+      }
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "version": "before",
+      "scans": {
+        "before": {
+          "[data-sc-header]": 1,
+          "[data-sc-search-refinement]": 1
+        },
+        "after": {
+          "[data-sc-header]": 21,
+          "[data-sc-search-refinement]": 21
+        }
+      },
+      "task_ms": 47.86800000000001,
+      "errors": [],
+      "ax_nodes": 12026,
+      "screenshot": "observer-before-1440-1.png"
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "version": "after",
+      "scans": {
+        "before": {
+          "[data-sc-header]": 1,
+          "[data-sc-search-refinement]": 1
+        },
+        "after": {
+          "[data-sc-header]": 1,
+          "[data-sc-search-refinement]": 1
+        }
+      },
+      "task_ms": 39.83099999999999,
+      "errors": [],
+      "ax_nodes": 12026,
+      "screenshot": "observer-after-1440-1.png"
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "version": "before",
+      "scans": {
+        "before": {
+          "[data-sc-header]": 1,
+          "[data-sc-search-refinement]": 1
+        },
+        "after": {
+          "[data-sc-header]": 21,
+          "[data-sc-search-refinement]": 21
+        }
+      },
+      "task_ms": 45.182000000000016,
+      "errors": [],
+      "ax_nodes": 12026,
+      "screenshot": "observer-before-1440-2.png"
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "version": "after",
+      "scans": {
+        "before": {
+          "[data-sc-header]": 1,
+          "[data-sc-search-refinement]": 1
+        },
+        "after": {
+          "[data-sc-header]": 1,
+          "[data-sc-search-refinement]": 1
+        }
+      },
+      "task_ms": 42.749999999999986,
+      "errors": [],
+      "ax_nodes": 12026,
+      "screenshot": "observer-after-1440-2.png"
+    }
+  ],
+  "checks": [
+    {
+      "width": 390,
+      "run": 0,
+      "version": "before",
+      "name": "unrelated-mutations-expected-scan-count",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "before",
+      "name": "mobile-menu-opens",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "before",
+      "name": "escape-closes-menu-restores-focus",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "before",
+      "name": "search-results-keyboard",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "before",
+      "name": "search-escape-restores-focus",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "before",
+      "name": "editor-addition-initializes",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "before",
+      "name": "detached-component-listeners-cleaned",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "before",
+      "name": "incremental-header-initializes",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "before",
+      "name": "incremental-search-initializes",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "before",
+      "name": "no-js-errors",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "after",
+      "name": "unrelated-mutations-expected-scan-count",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "after",
+      "name": "mobile-menu-opens",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "after",
+      "name": "escape-closes-menu-restores-focus",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "after",
+      "name": "search-results-keyboard",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "after",
+      "name": "search-escape-restores-focus",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "after",
+      "name": "editor-addition-initializes",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "after",
+      "name": "detached-component-listeners-cleaned",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "after",
+      "name": "incremental-header-initializes",
+      "passed": false
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "after",
+      "name": "incremental-search-initializes",
+      "passed": false
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "after",
+      "name": "no-js-errors",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "before",
+      "name": "unrelated-mutations-expected-scan-count",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "before",
+      "name": "mobile-menu-opens",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "before",
+      "name": "escape-closes-menu-restores-focus",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "before",
+      "name": "search-results-keyboard",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "before",
+      "name": "search-escape-restores-focus",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "before",
+      "name": "editor-addition-initializes",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "before",
+      "name": "detached-component-listeners-cleaned",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "before",
+      "name": "incremental-header-initializes",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "before",
+      "name": "incremental-search-initializes",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "before",
+      "name": "no-js-errors",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "after",
+      "name": "unrelated-mutations-expected-scan-count",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "after",
+      "name": "mobile-menu-opens",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "after",
+      "name": "escape-closes-menu-restores-focus",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "after",
+      "name": "search-results-keyboard",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "after",
+      "name": "search-escape-restores-focus",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "after",
+      "name": "editor-addition-initializes",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "after",
+      "name": "detached-component-listeners-cleaned",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "after",
+      "name": "incremental-header-initializes",
+      "passed": false
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "after",
+      "name": "incremental-search-initializes",
+      "passed": false
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "after",
+      "name": "no-js-errors",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "before",
+      "name": "unrelated-mutations-expected-scan-count",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "before",
+      "name": "mobile-menu-opens",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "before",
+      "name": "escape-closes-menu-restores-focus",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "before",
+      "name": "search-results-keyboard",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "before",
+      "name": "search-escape-restores-focus",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "before",
+      "name": "editor-addition-initializes",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "before",
+      "name": "detached-component-listeners-cleaned",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "before",
+      "name": "incremental-header-initializes",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "before",
+      "name": "incremental-search-initializes",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "before",
+      "name": "no-js-errors",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "after",
+      "name": "unrelated-mutations-expected-scan-count",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "after",
+      "name": "mobile-menu-opens",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "after",
+      "name": "escape-closes-menu-restores-focus",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "after",
+      "name": "search-results-keyboard",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "after",
+      "name": "search-escape-restores-focus",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "after",
+      "name": "editor-addition-initializes",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "after",
+      "name": "detached-component-listeners-cleaned",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "after",
+      "name": "incremental-header-initializes",
+      "passed": false
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "after",
+      "name": "incremental-search-initializes",
+      "passed": false
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "after",
+      "name": "no-js-errors",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "before",
+      "name": "unrelated-mutations-expected-scan-count",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "before",
+      "name": "search-results-keyboard",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "before",
+      "name": "search-escape-restores-focus",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "before",
+      "name": "editor-addition-initializes",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "before",
+      "name": "detached-component-listeners-cleaned",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "before",
+      "name": "incremental-header-initializes",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "before",
+      "name": "incremental-search-initializes",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "before",
+      "name": "no-js-errors",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "after",
+      "name": "unrelated-mutations-expected-scan-count",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "after",
+      "name": "search-results-keyboard",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "after",
+      "name": "search-escape-restores-focus",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "after",
+      "name": "editor-addition-initializes",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "after",
+      "name": "detached-component-listeners-cleaned",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "after",
+      "name": "incremental-header-initializes",
+      "passed": false
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "after",
+      "name": "incremental-search-initializes",
+      "passed": false
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "after",
+      "name": "no-js-errors",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "version": "before",
+      "name": "unrelated-mutations-expected-scan-count",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "version": "before",
+      "name": "search-results-keyboard",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "version": "before",
+      "name": "search-escape-restores-focus",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "version": "before",
+      "name": "editor-addition-initializes",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "version": "before",
+      "name": "detached-component-listeners-cleaned",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "version": "before",
+      "name": "incremental-header-initializes",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "version": "before",
+      "name": "incremental-search-initializes",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "version": "before",
+      "name": "no-js-errors",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "version": "after",
+      "name": "unrelated-mutations-expected-scan-count",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "version": "after",
+      "name": "search-results-keyboard",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "version": "after",
+      "name": "search-escape-restores-focus",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "version": "after",
+      "name": "editor-addition-initializes",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "version": "after",
+      "name": "detached-component-listeners-cleaned",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "version": "after",
+      "name": "incremental-header-initializes",
+      "passed": false
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "version": "after",
+      "name": "incremental-search-initializes",
+      "passed": false
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "version": "after",
+      "name": "no-js-errors",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "version": "before",
+      "name": "unrelated-mutations-expected-scan-count",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "version": "before",
+      "name": "search-results-keyboard",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "version": "before",
+      "name": "search-escape-restores-focus",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "version": "before",
+      "name": "editor-addition-initializes",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "version": "before",
+      "name": "detached-component-listeners-cleaned",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "version": "before",
+      "name": "incremental-header-initializes",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "version": "before",
+      "name": "incremental-search-initializes",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "version": "before",
+      "name": "no-js-errors",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "version": "after",
+      "name": "unrelated-mutations-expected-scan-count",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "version": "after",
+      "name": "search-results-keyboard",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "version": "after",
+      "name": "search-escape-restores-focus",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "version": "after",
+      "name": "editor-addition-initializes",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "version": "after",
+      "name": "detached-component-listeners-cleaned",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "version": "after",
+      "name": "incremental-header-initializes",
+      "passed": false
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "version": "after",
+      "name": "incremental-search-initializes",
+      "passed": false
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "version": "after",
+      "name": "no-js-errors",
+      "passed": true
+    }
+  ],
+  "at": "2026-11-18T20:46:00.837Z",
+  "browser": "Chrome/155.0.8059.84",
+  "passed": false
+}

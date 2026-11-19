@@ -1,0 +1,473 @@
+{
+  "requested_agent": "claude",
+  "effective_agent": "claude",
+  "round": 0,
+  "response": {
+    "decision": "changes_requested",
+    "summary": "El enfoque es correcto: un solo <picture> con fuentes por media, con un único img y alt, y opt-in en el helper. Así se evita la doble descarga, y la rama sin imagen móvil queda igual a la original. Pido cambios por dos defectos concretos y un riesgo. D1, solo imagen móvil: en escritorio ahora se muestra y se descarga con prioridad el placeholder genérico, cuando antes se veía la imagen móvil. D2: la guarda de image.tpl no impide emitir '@media-lib:' como srcset si resolve_media devuelve null. R1: si el medio de escritorio no es una imagen, tampoco se muestra la móvil. Faltan las pruebas de plataforma: Twig real, filtro resolve_media, red/currentSrc y Lighthouse.",
+    "changes": [],
+    "evidence": [
+      "source:sections/hero.tpl",
+      "source:snippets/image.tpl",
+      "qa:baseline"
+    ],
+    "analysis": {
+      "problem": "En HOME, la hero de escritorio usaba data-srcset con LazySizes y no se descubría en el HTML. La móvil tenía prioridad, pero quedaba oculta en escritorio. Resultado: descubrimiento tardío del LCP de escritorio y descarga de la variante oculta. El candidato lo resuelve con art direction en un solo <picture> dentro del helper compartido.",
+      "cause": "sections/hero.tpl original pintaba dos img alternadas con d-none/d-md-block. Para no descargar la oculta, la de escritorio se volvía lazy por JS (desktop_lazy = has_responsive_images or ...) y perdía fetchpriority. Las clases de visibilidad de CSS no evitan que el navegador descargue la imagen.",
+      "recommendation": "claude-picture-con-correcciones",
+      "evidence_refs": [
+        "source:sections/hero.tpl",
+        "source:snippets/image.tpl",
+        "qa:baseline"
+      ],
+      "hypotheses": [
+        "D1 (defecto, hero.tpl rama has_mobile_image): sin hero.image, desktop_image pasa a ser el placeholder estático con image_priority_high. Antes, el placeholder era lazy y la imagen móvil se pintaba sin d-md-none en todos los anchos. Ahora, en escritorio con 768 px o más se ve y se descarga con prioridad alta el placeholder genérico, en lugar de la imagen del comerciante.",
+        "D2 (defecto condicional al contrato, image.tpl has_art_direction): con una referencia '@media-lib:' huérfana, si resolve_media devuelve null, 'not mobile_media' es true. En ese caso, la rama else emite <source srcset=\"@media-lib:...\">. La guarda debe distinguir 'no es media-lib' de 'media-lib no resuelta'.",
+        "R1 (riesgo, image.tpl): si media (escritorio) no es de tipo image, el bloque externo 'if not media or media.type == image' omite todo el picture, incluida la imagen móvil válida. Antes, la imagen móvil se pintaba de forma independiente. Con image_picker es poco probable, pero conviene un fallback.",
+        "R2 (riesgo): el include sin 'only' hereda el contexto del padre. Si algún consumidor (slide, banner, hero-divided, category-hero) define image_mobile_src o image_mobile_media_query en su contexto, activaría art direction sin querer. Hay que comprobarlo con rg.",
+        "R3 (riesgo, alt): el único img usa image_alt de escritorio. En móvil se pierde el alt propio de la imagen móvil, y image_mobile_alt se calcula en el snippet pero no se usa en la salida (código muerto). Es una limitación inherente a picture; hay que documentarla.",
+        "R4 (riesgo, rendimiento heredado): la fuente final sin type usa media.sourceUrl, una URL única a tamaño original sin descriptores w. En navegadores sin AVIF/WebP sustituye al srcset original responsive del img, que nunca se usa. Lo mismo ocurre con la fuente original móvil.",
+        "R5 (riesgo, CLS con auto_height): el img pierde width/height y aspect-ratio, que pasan a los <source>. Depende de que el navegador soporte width/height en source. Con media-full-width/min-height no afecta, pero con auto_height=true sí.",
+        "Observación baja: las secciones posteriores llevan 'fade-in lazyload' sin data-srcset y con loading=lazy nativo. LazySizes puede marcar lazyloaded antes de que termine la carga nativa y hacer el fade-in sobre un hueco. Es solo visual; los fixtures no lo comprueban."
+      ],
+      "native_components": [
+        "snippets/image.tpl (helper unificado, picture AVIF/WebP)",
+        "filtro resolve_media (plataforma)",
+        "LazySizes (lazyClass lazyload, data-srcset)",
+        "sections/hero.tpl schema image_picker image/image_mobile/use_mobile_image"
+      ],
+      "risks": [
+        "D1: en la configuración solo móvil, el escritorio muestra el placeholder genérico con fetchpriority alto.",
+        "D2: posible emisión de '@media-lib:' como srcset si resolve_media devuelve null.",
+        "R1: un medio de escritorio que no sea imagen oculta también la imagen móvil.",
+        "R2: la herencia del contexto del include puede activar art direction en otros consumidores; pendiente de rg.",
+        "R3: un solo alt; la imagen móvil se describe con el texto de escritorio.",
+        "R4: la fuente final sourceUrl a tamaño original sustituye al srcset original responsive en navegadores sin AVIF/WebP.",
+        "R5: CLS con auto_height si el navegador ignora width/height en source.",
+        "Pendiente de plataforma: Twig real, contrato de resolve_media, editor/preview, red externa y Lighthouse; los fixtures no renderizan Twig."
+      ],
+      "tests": [
+        "Render con Twig real/preview de los seis casos y aserción de ausencia de '@media-lib' en src/srcset.",
+        "Referencias huérfanas o de vídeo en image e image_mobile.",
+        "Solo móvil en escritorio: currentSrc móvil y sin petición a hero.webp.",
+        "rg de image_mobile_* en todos los consumidores de snippets/image.tpl y en layouts/layout.tpl (preload del hero).",
+        "Red/currentSrc en 360/390/412/768/1024/1440/1920 y en el límite 767/768: una sola petición.",
+        "Lighthouse antes/después con el mismo perfil, N≥5, móvil y escritorio.",
+        "CLS con auto_height=true y proporciones distintas.",
+        "Hero posterior: secuencia de clases lazyload/lazyloaded y momento real de carga nativa."
+      ],
+      "files": [
+        "sections/hero.tpl",
+        "snippets/image.tpl"
+      ],
+      "impacts": {
+        "seo": "Neutro o positivo: un solo img con alt y src indexable. La imagen móvil solo figura en source srcset. No cambian los datos estructurados ni el schema.",
+        "performance": "Positivo esperado: descubrimiento en HTML, una petición por viewport y AVIF/WebP. No se ha medido en plataforma; D1 añade una descarga innecesaria del placeholder.",
+        "responsive": "El breakpoint 767.98/768 coincide con d-md-*. La proporción depende de width/height en source; falta validar en el límite y con auto_height.",
+        "accessibility": "Un img y un alt sin duplicar contenido. Se pierde el alt específico de la imagen móvil.",
+        "uiux": "Mismo resultado visual con ambas imágenes; en el caso solo móvil cambia lo que ve el usuario en escritorio (D1). Posible fade-in prematuro en heroes posteriores.",
+        "commerce": "Sin impacto en precio, stock, variantes, carrito ni checkout."
+      },
+      "confidence": 0.72,
+      "alternatives": [
+        {
+          "id": "claude-picture-con-correcciones",
+          "description": "Mantener el candidato con cuatro correcciones acotadas. (1) En hero.tpl, si no hay hero.image, pintar hero.image_mobile por la ruta de imagen única, sin art direction ni placeholder de escritorio, para conservar el comportamiento visible anterior. (2) En image.tpl, usar has_art_direction = image_mobile_src starts with '@media-lib:' ? (mobile_media and mobile_media.type == 'image') : image_mobile_src. (3) Si media no es una imagen, degradar a la imagen móvil. (4) Comprobar con rg que ningún consumidor define image_mobile_* en su contexto. Opcional: usar srcSets 'original' en la fuente final en lugar de sourceUrl.",
+          "constraints": {
+            "functional": {
+              "status": "unknown",
+              "evidence_refs": [
+                "source:sections/hero.tpl",
+                "source:snippets/image.tpl"
+              ]
+            },
+            "security": {
+              "status": "pass",
+              "evidence_refs": [
+                "source:snippets/image.tpl"
+              ]
+            },
+            "compatibility": {
+              "status": "unknown",
+              "evidence_refs": [
+                "source:snippets/image.tpl"
+              ]
+            },
+            "native_reuse": {
+              "status": "pass",
+              "evidence_refs": [
+                "source:snippets/image.tpl"
+              ]
+            },
+            "seo": {
+              "status": "unknown",
+              "evidence_refs": []
+            },
+            "performance": {
+              "status": "unknown",
+              "evidence_refs": []
+            },
+            "accessibility": {
+              "status": "unknown",
+              "evidence_refs": [
+                "source:sections/hero.tpl"
+              ]
+            },
+            "responsive": {
+              "status": "unknown",
+              "evidence_refs": []
+            },
+            "maintainability": {
+              "status": "pass",
+              "evidence_refs": [
+                "source:snippets/image.tpl"
+              ]
+            },
+            "reversibility": {
+              "status": "pass",
+              "evidence_refs": [
+                "source:sections/hero.tpl",
+                "source:snippets/image.tpl"
+              ]
+            },
+            "complexity": {
+              "status": "pass",
+              "evidence_refs": [
+                "source:snippets/image.tpl"
+              ]
+            },
+            "development_cost": {
+              "status": "pass",
+              "evidence_refs": []
+            },
+            "execution_cost": {
+              "status": "unknown",
+              "evidence_refs": []
+            }
+          },
+          "files": [
+            "sections/hero.tpl",
+            "snippets/image.tpl"
+          ],
+          "tests": [
+            "Render con Twig real o preview de plataforma, sin publicar, de los casos ambas, solo escritorio, solo móvil, sin imagen, primera hero y hero posterior. Asertar que ninguna salida contiene 'srcset=\"@media-lib' ni 'src=\"@media-lib'.",
+            "Caso de referencia huérfana o de vídeo en image_mobile y en image: ni URL @media-lib ni picture vacío, y la otra variante sigue visible.",
+            "Solo móvil en 1024/1440/1920: currentSrc debe ser la imagen móvil y no hero.webp; ninguna petición al placeholder.",
+            "rg de image_mobile_src, image_mobile_media_query e image_mobile_width en todo el tema: solo debe aparecer hero.tpl.",
+            "Red/currentSrc en 360/390/412/768/1024/1440/1920: una sola petición de hero por viewport, con el formato esperado AVIF/WebP y en el límite 767/768.",
+            "Lighthouse antes/después con el mismo perfil (móvil y escritorio, N≥5): descubrimiento del LCP en el HTML inicial, fetchpriority y CLS. No presentar TBT como INP.",
+            "auto_height=true: CLS en 360 y 1440 con imagen de distinta proporción por viewport."
+          ]
+        },
+        {
+          "id": "claude-picture-local-en-hero",
+          "description": "Construir el <picture> directamente en sections/hero.tpl sin tocar snippets/image.tpl. Así se elimina el riesgo sobre unos 50 consumidores, pero se duplica la lógica de srcSets, el formato y la resolución de media-lib que ya vive en el helper.",
+          "constraints": {
+            "functional": {
+              "status": "unknown",
+              "evidence_refs": [
+                "source:sections/hero.tpl"
+              ]
+            },
+            "security": {
+              "status": "pass",
+              "evidence_refs": []
+            },
+            "compatibility": {
+              "status": "pass",
+              "evidence_refs": [
+                "source:snippets/image.tpl"
+              ]
+            },
+            "native_reuse": {
+              "status": "fail",
+              "evidence_refs": [
+                "source:snippets/image.tpl"
+              ]
+            },
+            "seo": {
+              "status": "unknown",
+              "evidence_refs": []
+            },
+            "performance": {
+              "status": "unknown",
+              "evidence_refs": []
+            },
+            "accessibility": {
+              "status": "unknown",
+              "evidence_refs": []
+            },
+            "responsive": {
+              "status": "unknown",
+              "evidence_refs": []
+            },
+            "maintainability": {
+              "status": "fail",
+              "evidence_refs": [
+                "source:snippets/image.tpl"
+              ]
+            },
+            "reversibility": {
+              "status": "pass",
+              "evidence_refs": [
+                "source:sections/hero.tpl"
+              ]
+            },
+            "complexity": {
+              "status": "pass",
+              "evidence_refs": []
+            },
+            "development_cost": {
+              "status": "pass",
+              "evidence_refs": []
+            },
+            "execution_cost": {
+              "status": "unknown",
+              "evidence_refs": []
+            }
+          },
+          "files": [
+            "sections/hero.tpl"
+          ],
+          "tests": [
+            "Las mismas pruebas de render, red y Lighthouse que la alternativa recomendada.",
+            "Diff de snippets/image.tpl vacío; regresión nula en consumidores."
+          ]
+        },
+        {
+          "id": "claude-candidato-sin-cambios",
+          "description": "Aceptar el patch e6d7edd9 tal como está. Resuelve el caso actual de HOME (ambas imágenes con @media-lib), pero mantiene D1, D2 y R1.",
+          "constraints": {
+            "functional": {
+              "status": "fail",
+              "evidence_refs": [
+                "source:sections/hero.tpl",
+                "source:snippets/image.tpl"
+              ]
+            },
+            "security": {
+              "status": "pass",
+              "evidence_refs": []
+            },
+            "compatibility": {
+              "status": "unknown",
+              "evidence_refs": [
+                "source:snippets/image.tpl"
+              ]
+            },
+            "native_reuse": {
+              "status": "pass",
+              "evidence_refs": [
+                "source:snippets/image.tpl"
+              ]
+            },
+            "seo": {
+              "status": "unknown",
+              "evidence_refs": []
+            },
+            "performance": {
+              "status": "unknown",
+              "evidence_refs": []
+            },
+            "accessibility": {
+              "status": "unknown",
+              "evidence_refs": []
+            },
+            "responsive": {
+              "status": "unknown",
+              "evidence_refs": []
+            },
+            "maintainability": {
+              "status": "pass",
+              "evidence_refs": []
+            },
+            "reversibility": {
+              "status": "pass",
+              "evidence_refs": []
+            },
+            "complexity": {
+              "status": "pass",
+              "evidence_refs": []
+            },
+            "development_cost": {
+              "status": "pass",
+              "evidence_refs": []
+            },
+            "execution_cost": {
+              "status": "unknown",
+              "evidence_refs": []
+            }
+          },
+          "files": [
+            "sections/hero.tpl",
+            "snippets/image.tpl"
+          ],
+          "tests": [
+            "Reproducir el caso solo móvil en escritorio y la referencia @media-lib no resuelta para confirmar o descartar D1 y D2."
+          ]
+        }
+      ]
+    }
+  },
+  "model": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "reason": "strong según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+    "verified_at": "2026-11-08"
+  },
+  "execution": {
+    "exit_code": 0,
+    "timed_out": false,
+    "output_limited": false,
+    "idle_timed_out": false,
+    "cancelled": false,
+    "process_started": true,
+    "process_reaped": true,
+    "stdin_bytes_written": 79166,
+    "context_complete": true,
+    "duration_s": 137.778,
+    "timing": {
+      "spawn_s": 0.000368,
+      "input_complete_s": 0.63292,
+      "first_stdout_s": 1.643881,
+      "first_stderr_s": null,
+      "timeout_phase": null,
+      "event_counts": {
+        "system": 72,
+        "stream_event": 932,
+        "event:message_start": 1,
+        "event:content_block_start": 2,
+        "event:content_block_delta": 925,
+        "assistant": 2,
+        "event:content_block_stop": 2,
+        "user": 1,
+        "event:message_delta": 1,
+        "event:message_stop": 1,
+        "rate_limit_event": 1,
+        "result": 1
+      },
+      "inference_vs_initialization": "not_separable_without_provider_events"
+    },
+    "output_accounting": {
+      "transport_bytes": 456743,
+      "retained_bytes": 456743,
+      "discarded_progress_bytes": 0,
+      "transport_limit_bytes": 20000000,
+      "retained_limit_bytes": 2000000
+    },
+    "isolation": {
+      "backend": "bubblewrap",
+      "snapshot_read_only": true,
+      "host_home_mounted": false,
+      "network": "enabled_no_destination_firewall",
+      "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+    },
+    "started_at": "2026-11-17T21:24:44.329153+00:00",
+    "prompt_bytes": 79166,
+    "prompt_sha256": "9849fe75db4c06ddf1da5c9e16594768d0d11734ad05e58caea514ee0a652884",
+    "usage": {
+      "provider_reported": {
+        "total_cost_usd": 0.602624,
+        "duration_ms": 135927,
+        "input_tokens": 2,
+        "cache_creation_input_tokens": 41247,
+        "cache_read_input_tokens": 0,
+        "output_tokens": 13632
+      },
+      "measured_cost_available": true,
+      "estimated_cost": null
+    },
+    "limits": {
+      "timeout": 360,
+      "idle_timeout": 90,
+      "startup_timeout": 30,
+      "first_response_timeout": 240
+    },
+    "structured_output": "native_schema",
+    "contract_validation": {
+      "status": "passed",
+      "duration_s": 0.008798
+    }
+  },
+  "recovery_attempts": [
+    {
+      "agent": "claude",
+      "retry": 0,
+      "status": "completed",
+      "execution": {
+        "exit_code": 0,
+        "timed_out": false,
+        "output_limited": false,
+        "idle_timed_out": false,
+        "cancelled": false,
+        "process_started": true,
+        "process_reaped": true,
+        "stdin_bytes_written": 79166,
+        "context_complete": true,
+        "duration_s": 137.778,
+        "timing": {
+          "spawn_s": 0.000368,
+          "input_complete_s": 0.63292,
+          "first_stdout_s": 1.643881,
+          "first_stderr_s": null,
+          "timeout_phase": null,
+          "event_counts": {
+            "system": 72,
+            "stream_event": 932,
+            "event:message_start": 1,
+            "event:content_block_start": 2,
+            "event:content_block_delta": 925,
+            "assistant": 2,
+            "event:content_block_stop": 2,
+            "user": 1,
+            "event:message_delta": 1,
+            "event:message_stop": 1,
+            "rate_limit_event": 1,
+            "result": 1
+          },
+          "inference_vs_initialization": "not_separable_without_provider_events"
+        },
+        "output_accounting": {
+          "transport_bytes": 456743,
+          "retained_bytes": 456743,
+          "discarded_progress_bytes": 0,
+          "transport_limit_bytes": 20000000,
+          "retained_limit_bytes": 2000000
+        },
+        "isolation": {
+          "backend": "bubblewrap",
+          "snapshot_read_only": true,
+          "host_home_mounted": false,
+          "network": "enabled_no_destination_firewall",
+          "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+        },
+        "started_at": "2026-11-17T21:24:44.329153+00:00",
+        "prompt_bytes": 79166,
+        "prompt_sha256": "9849fe75db4c06ddf1da5c9e16594768d0d11734ad05e58caea514ee0a652884",
+        "usage": {
+          "provider_reported": {
+            "total_cost_usd": 0.602624,
+            "duration_ms": 135927,
+            "input_tokens": 2,
+            "cache_creation_input_tokens": 41247,
+            "cache_read_input_tokens": 0,
+            "output_tokens": 13632
+          },
+          "measured_cost_available": true,
+          "estimated_cost": null
+        },
+        "limits": {
+          "timeout": 360,
+          "idle_timeout": 90,
+          "startup_timeout": 30,
+          "first_response_timeout": 240
+        },
+        "structured_output": "native_schema",
+        "contract_validation": {
+          "status": "passed",
+          "duration_s": 0.008798
+        }
+      }
+    }
+  ]
+}

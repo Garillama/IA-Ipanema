@@ -1,0 +1,134 @@
+{
+  "requested_agent": "codex",
+  "effective_agent": "codex",
+  "round": 0,
+  "error": {
+    "category": "run_cancelled",
+    "summary": "No se recibió una propuesta válida; no cuenta como participación completa."
+  },
+  "model": {
+    "model": "gpt-6-astra",
+    "effort": "high",
+    "reason": "critical según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+    "verified_at": "2026-11-08"
+  },
+  "execution": {
+    "exit_code": -9,
+    "timed_out": false,
+    "output_limited": false,
+    "idle_timed_out": false,
+    "cancelled": true,
+    "process_started": true,
+    "process_reaped": true,
+    "stdin_bytes_written": 342548,
+    "context_complete": true,
+    "duration_s": 4.204,
+    "timing": {
+      "spawn_s": 0.001044,
+      "input_complete_s": 0.270907,
+      "first_stdout_s": 2.627037,
+      "first_stderr_s": null,
+      "timeout_phase": null,
+      "event_counts": {
+        "thread.started": 1,
+        "item.completed": 1,
+        "turn.started": 1
+      },
+      "inference_vs_initialization": "not_separable_without_provider_events"
+    },
+    "output_accounting": {
+      "transport_bytes": 483,
+      "retained_bytes": 483,
+      "discarded_progress_bytes": 0,
+      "transport_limit_bytes": 20000000,
+      "retained_limit_bytes": 2000000
+    },
+    "isolation": {
+      "backend": "bubblewrap",
+      "snapshot_read_only": true,
+      "host_home_mounted": false,
+      "network": "enabled_no_destination_firewall",
+      "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+    },
+    "started_at": "2026-11-19T16:16:28.710055+00:00",
+    "prompt_bytes": 342548,
+    "prompt_sha256": "d339e77edcfd42902431915f913710d0d8fb857aaa63c18e48a07b95a6621d09",
+    "usage": {
+      "provider_reported": {},
+      "measured_cost_available": false,
+      "estimated_cost": null
+    },
+    "limits": {
+      "timeout": 600,
+      "idle_timeout": 90,
+      "startup_timeout": 30,
+      "first_response_timeout": 300
+    },
+    "structured_output": "native_schema",
+    "error_category": "run_cancelled"
+  },
+  "recovery_attempts": [
+    {
+      "agent": "codex",
+      "retry": 0,
+      "status": "failed",
+      "category": "run_cancelled",
+      "process_reaped": true,
+      "execution": {
+        "exit_code": -9,
+        "timed_out": false,
+        "output_limited": false,
+        "idle_timed_out": false,
+        "cancelled": true,
+        "process_started": true,
+        "process_reaped": true,
+        "stdin_bytes_written": 342548,
+        "context_complete": true,
+        "duration_s": 4.204,
+        "timing": {
+          "spawn_s": 0.001044,
+          "input_complete_s": 0.270907,
+          "first_stdout_s": 2.627037,
+          "first_stderr_s": null,
+          "timeout_phase": null,
+          "event_counts": {
+            "thread.started": 1,
+            "item.completed": 1,
+            "turn.started": 1
+          },
+          "inference_vs_initialization": "not_separable_without_provider_events"
+        },
+        "output_accounting": {
+          "transport_bytes": 483,
+          "retained_bytes": 483,
+          "discarded_progress_bytes": 0,
+          "transport_limit_bytes": 20000000,
+          "retained_limit_bytes": 2000000
+        },
+        "isolation": {
+          "backend": "bubblewrap",
+          "snapshot_read_only": true,
+          "host_home_mounted": false,
+          "network": "enabled_no_destination_firewall",
+          "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+        },
+        "started_at": "2026-11-19T16:16:28.710055+00:00",
+        "prompt_bytes": 342548,
+        "prompt_sha256": "d339e77edcfd42902431915f913710d0d8fb857aaa63c18e48a07b95a6621d09",
+        "usage": {
+          "provider_reported": {},
+          "measured_cost_available": false,
+          "estimated_cost": null
+        },
+        "limits": {
+          "timeout": 600,
+          "idle_timeout": 90,
+          "startup_timeout": 30,
+          "first_response_timeout": 300
+        },
+        "structured_output": "native_schema",
+        "error_category": "run_cancelled"
+      }
+    }
+  ]
+}

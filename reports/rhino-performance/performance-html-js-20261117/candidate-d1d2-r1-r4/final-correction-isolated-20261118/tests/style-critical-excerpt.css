@@ -1,0 +1,41 @@
+.placeholder-fade {
+  -moz-animation: placeholder-fade 1.5s infinite;
+  -webkit-animation: placeholder-fade 1.5s infinite;
+  animation: placeholder-fade 1.5s infinite;
+}
+
+@keyframes placeholder-fade {
+  0% {
+    opacity: 0.2;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+
+  100% {
+    opacity: 0.2;
+  }
+}
+
+.lazyloaded+.placeholder-shine,
+.lazyloaded+.placeholder-fade,
+.swiper-lazy-loaded+.placeholder-shine,
+.swiper-lazy-loaded+.placeholder-fade,
+picture:has(.lazyloaded)+.placeholder-shine,
+picture:has(.lazyloaded)+.placeholder-fade,
+picture:has(.swiper-lazy-loaded)+.placeholder-shine,
+picture:has(.swiper-lazy-loaded)+.placeholder-fade {
+  display: none !important;
+}
+
+.fade-in {
+  opacity: 0;
+  transition: opacity .2s;
+}
+
+.fade-in.lazyloaded,
+.fade-in.swiper-lazy-loaded,
+.fade-in.image-priority-high {
+  opacity: 1;
+}

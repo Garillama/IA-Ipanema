@@ -1,0 +1,30 @@
+{
+  "status": "proposed_tested_not_approved",
+  "decision": "Reuse existing native response-schema flags for a dedicated read-only smoke role; make transport parsing complete and unambiguous, with no JSON repair.",
+  "alternatives": [
+    {
+      "option": "Strip Markdown or fix provider JSON until approved",
+      "outcome": "Rejected: changes meaning/acceptance and conceals defects."
+    },
+    {
+      "option": "Change model, participants, schema validators or retry budgets",
+      "outcome": "Rejected: not needed and cannot substitute mandatory review."
+    },
+    {
+      "option": "Request native schema and validate every response locally",
+      "outcome": "Prepared and successfully exercised once per existing runtime/model."
+    },
+    {
+      "option": "Choose last apparent valid answer or ignore malformed stream tail",
+      "outcome": "Rejected by reproducible negative tests."
+    }
+  ],
+  "known_limits": [
+    "Historical response unknown.",
+    "Legacy callers that emitted wrapped Markdown or ambiguous multiple answers now fail closed.",
+    "Provider compatibility proven only by these two current synthetic smokes, not all versions/responses.",
+    "Full snapshot QA and independent review remain mandatory and blocked."
+  ],
+  "rollback": "No protected integration occurred. Delete/discard only private proposals if needed; original hashes recorded in manifest.",
+  "policy": "AGENTS.md unchanged; original dual council and original participants retained."
+}

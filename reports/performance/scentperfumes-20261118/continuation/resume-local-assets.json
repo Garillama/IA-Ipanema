@@ -1,0 +1,481 @@
+{
+  "at": "2026-11-18T21:13:39.112335+00:00",
+  "scope": "local asset identity; not observed network traffic",
+  "fonts": [
+    {
+      "file": "static/fonts/sc-font-0.ttf",
+      "bytes": 82192,
+      "sha256": "b56db40c26850f83ba2ebffa1f7faa01e5ee4e55ac63decee1433de520a38483",
+      "tables": {
+        "glyf": {
+          "bytes": 33732,
+          "sha256": "827f25fb3cac3453bfa35dc234a0ef6c1d3acc909ec06133caed54dfcb736083"
+        },
+        "cmap": {
+          "bytes": 1580,
+          "sha256": "9f167e14a3d563abbe97202cbfbf1896c22e9cef11ba47ddb3e4235f4c83625f"
+        },
+        "name": {
+          "bytes": 808,
+          "sha256": "47f60d945f80d24708546a1a982261612a68e5f6e73fddec8b03e20567abdeb8"
+        },
+        "OS/2": {
+          "bytes": 96,
+          "sha256": "277fe5ddda4b80f6b062d2717e2365540dec655c577a038633a93051cb9851ef"
+        }
+      }
+    },
+    {
+      "file": "static/fonts/sc-font-1.ttf",
+      "bytes": 82244,
+      "sha256": "e1b454f5469f3d0d98c117651a4d15a8345ad77b50f09540b5cf61e82511b563",
+      "tables": {
+        "glyf": {
+          "bytes": 33738,
+          "sha256": "a17b0ede76b9a9d05c468e0508e1020371ac1b0f2d2c4e7383e14fb553b70721"
+        },
+        "cmap": {
+          "bytes": 1580,
+          "sha256": "9f167e14a3d563abbe97202cbfbf1896c22e9cef11ba47ddb3e4235f4c83625f"
+        },
+        "name": {
+          "bytes": 838,
+          "sha256": "52c4e7b94a71df9674f3a6800dd96e3033f750d2dbb73457425b6dd27a115fe6"
+        },
+        "OS/2": {
+          "bytes": 96,
+          "sha256": "56ed0066028bbdd5c8f4d7413a5e88cdf4b7c6877585e0bf5090550d6d6d8e09"
+        }
+      }
+    },
+    {
+      "file": "static/fonts/sc-font-2.ttf",
+      "bytes": 82304,
+      "sha256": "284891c74c258cff7233962e048d9470bfb9fc326b53dd0bca408789297c3409",
+      "tables": {
+        "glyf": {
+          "bytes": 33750,
+          "sha256": "6ba761971d63bcd25d9c7937d28692fdce6ad8e2b24b2de8ebd94a4104d66aaf"
+        },
+        "cmap": {
+          "bytes": 1580,
+          "sha256": "9f167e14a3d563abbe97202cbfbf1896c22e9cef11ba47ddb3e4235f4c83625f"
+        },
+        "name": {
+          "bytes": 854,
+          "sha256": "5e5af90673caae62b4c55c2ec6ee0751f059292fda522799dd19c50b36f1692c"
+        },
+        "OS/2": {
+          "bytes": 96,
+          "sha256": "f0b84dca563ea26404b67acf6d00bec66514ec3d17a7026be8aa05fdd1ca8c55"
+        }
+      }
+    },
+    {
+      "file": "static/fonts/sc-font-3.ttf",
+      "bytes": 82204,
+      "sha256": "913ee3631949ee1b4fb2601269412fca5775eb994d4f87be2c366c94ac123dc5",
+      "tables": {
+        "glyf": {
+          "bytes": 33734,
+          "sha256": "b721e1760a7aadb8bd69e0a8f4c3472daa31bd74a5966e91664853932f5ad51c"
+        },
+        "cmap": {
+          "bytes": 1580,
+          "sha256": "9f167e14a3d563abbe97202cbfbf1896c22e9cef11ba47ddb3e4235f4c83625f"
+        },
+        "name": {
+          "bytes": 784,
+          "sha256": "d0c0f0f9cb05e22ba0a85754d0e0e933426f0ab3c968026aef4f4f81631c06e8"
+        },
+        "OS/2": {
+          "bytes": 96,
+          "sha256": "1e01cd97b48ee55675595b9c1b1cd4f4b9b458511901ddd1bf2d86466b96a7f1"
+        }
+      }
+    },
+    {
+      "file": "static/fonts/sc-font-4.ttf",
+      "bytes": 48616,
+      "sha256": "01689ad055025ff1891607b077513c9389f73360d471dcffa036e326af179b00",
+      "tables": {
+        "glyf": {
+          "bytes": 19174,
+          "sha256": "0f836b27100f729e101713a72c58c4ab0f1cd897ceb4113f7cd0c642486d915d"
+        },
+        "cmap": {
+          "bytes": 1062,
+          "sha256": "ce83ce48b6c36cceef135b5db892e44159931705c579ec0ddecc036bf400f5b3"
+        },
+        "name": {
+          "bytes": 738,
+          "sha256": "f7e9c4286c7e39003c4e16468bec2c8d186c4a4e16b323eeb16d6e820dba30f7"
+        },
+        "OS/2": {
+          "bytes": 96,
+          "sha256": "687fdecbca9acc0d3e7e39daf6ae1028c4f14c11f64d249ec0e7915785d14a7a"
+        }
+      }
+    },
+    {
+      "file": "static/fonts/sc-font-5.ttf",
+      "bytes": 48732,
+      "sha256": "a7bcb84cb01f6e33eecdd2cbff3f97ff1674c0e8e37c6921b6cd717b8c854d98",
+      "tables": {
+        "glyf": {
+          "bytes": 19176,
+          "sha256": "d593b58654ab0b1065d1c997051043ba53502927e10b6502c979ddca5ee7f986"
+        },
+        "cmap": {
+          "bytes": 1062,
+          "sha256": "ce83ce48b6c36cceef135b5db892e44159931705c579ec0ddecc036bf400f5b3"
+        },
+        "name": {
+          "bytes": 768,
+          "sha256": "b561ac5647aa3b08b8b6d4a694b3b72009375793d2f559d2470920a867171fa8"
+        },
+        "OS/2": {
+          "bytes": 96,
+          "sha256": "605a3f333f63a2f271eede73a16ed68459d026a38f98da4e95aebed6be6576ae"
+        }
+      }
+    },
+    {
+      "file": "static/fonts/sc-font-6.ttf",
+      "bytes": 48732,
+      "sha256": "5e39a358a65a72b6b74b56b384bbe17a61d8899d33cc255d49112e6522e3df0d",
+      "tables": {
+        "glyf": {
+          "bytes": 19170,
+          "sha256": "ff2c987179b58bf5d1d863a7074be0c497835702f981c9ce516fb223ee8b59cb"
+        },
+        "cmap": {
+          "bytes": 1062,
+          "sha256": "ce83ce48b6c36cceef135b5db892e44159931705c579ec0ddecc036bf400f5b3"
+        },
+        "name": {
+          "bytes": 784,
+          "sha256": "aae016c9d76271eedcd5ddc60b954da45c8840f7b9e64b96496dda15a470bc8b"
+        },
+        "OS/2": {
+          "bytes": 96,
+          "sha256": "8fbda8f4f1c08390ff29f23beddbc306c247f68863db76b3987900a8f38d3e16"
+        }
+      }
+    },
+    {
+      "file": "static/fonts/sc-font-7.ttf",
+      "bytes": 48552,
+      "sha256": "d25efe5b0dcf3b36607d9a0fb046932547a5dfec407ea17162ca126d63b33d42",
+      "tables": {
+        "glyf": {
+          "bytes": 19176,
+          "sha256": "9b7797a104ca90786c59c08cc2bd4d9021f1972ed4e8e9086921f3fd2a84d426"
+        },
+        "cmap": {
+          "bytes": 1062,
+          "sha256": "ce83ce48b6c36cceef135b5db892e44159931705c579ec0ddecc036bf400f5b3"
+        },
+        "name": {
+          "bytes": 714,
+          "sha256": "585d373e522f2a7cdd7f1807e4747414ad6b033477a4cd9b88818d11e5840dcc"
+        },
+        "OS/2": {
+          "bytes": 96,
+          "sha256": "516af3645af4ceb4f881d4edfc3c4aea5aae75438e4f7c5ac32d661804989e7a"
+        }
+      }
+    }
+  ],
+  "exact_duplicate_asset_groups": [
+    [
+      {
+        "path": "static/images/placeholders/banners/banner-2.webp",
+        "bytes": 5562
+      },
+      {
+        "path": "static/images/placeholders/hero/hero-2.webp",
+        "bytes": 5562
+      }
+    ],
+    [
+      {
+        "path": "static/images/placeholders/banners/banner-4.webp",
+        "bytes": 5332
+      },
+      {
+        "path": "static/images/placeholders/hero/hero-1.webp",
+        "bytes": 5332
+      }
+    ],
+    [
+      {
+        "path": "static/images/placeholders/carrousel/slide-1.webp",
+        "bytes": 10284
+      },
+      {
+        "path": "static/images/placeholders/hero/hero.webp",
+        "bytes": 10284
+      }
+    ],
+    [
+      {
+        "path": "static/images/sc-global/footer-imgScentLogoOficial.png",
+        "bytes": 159
+      },
+      {
+        "path": "static/images/sc-home/2823b.png",
+        "bytes": 159
+      },
+      {
+        "path": "static/images/sc-pdp/2823b.png",
+        "bytes": 159
+      }
+    ],
+    [
+      {
+        "path": "static/images/sc-global/header-desktop-imgChevron.svg",
+        "bytes": 321
+      },
+      {
+        "path": "static/images/sc-home/92214.svg",
+        "bytes": 321
+      },
+      {
+        "path": "static/images/sc-pdp/92214.svg",
+        "bytes": 321
+      }
+    ],
+    [
+      {
+        "path": "static/images/sc-global/header-desktop-imgLogoPng.png",
+        "bytes": 21349
+      },
+      {
+        "path": "static/images/sc-global/header-imgLogoPng.png",
+        "bytes": 21349
+      },
+      {
+        "path": "static/images/sc-home/77b83.png",
+        "bytes": 21349
+      },
+      {
+        "path": "static/images/sc-pdp/77b83.png",
+        "bytes": 21349
+      }
+    ],
+    [
+      {
+        "path": "static/images/sc-global/header-desktop-imgScentIconBag.svg",
+        "bytes": 690
+      },
+      {
+        "path": "static/images/sc-home/45c6d.svg",
+        "bytes": 690
+      },
+      {
+        "path": "static/images/sc-pdp/45c6d.svg",
+        "bytes": 690
+      }
+    ],
+    [
+      {
+        "path": "static/images/sc-global/header-desktop-imgScentIconSearch.svg",
+        "bytes": 651
+      },
+      {
+        "path": "static/images/sc-home/4c991.svg",
+        "bytes": 651
+      },
+      {
+        "path": "static/images/sc-pdp/4c991.svg",
+        "bytes": 651
+      }
+    ],
+    [
+      {
+        "path": "static/images/sc-global/header-imgIconBag.svg",
+        "bytes": 684
+      },
+      {
+        "path": "static/images/sc-home/10dc5.svg",
+        "bytes": 684
+      },
+      {
+        "path": "static/images/sc-pdp/10dc5.svg",
+        "bytes": 684
+      }
+    ],
+    [
+      {
+        "path": "static/images/sc-global/header-imgIconMenu.svg",
+        "bytes": 354
+      },
+      {
+        "path": "static/images/sc-home/e1b31.svg",
+        "bytes": 354
+      },
+      {
+        "path": "static/images/sc-pdp/b1b13.svg",
+        "bytes": 354
+      }
+    ],
+    [
+      {
+        "path": "static/images/sc-global/header-imgIconSearch.svg",
+        "bytes": 645
+      },
+      {
+        "path": "static/images/sc-home/483e6.svg",
+        "bytes": 645
+      },
+      {
+        "path": "static/images/sc-pdp/483e6.svg",
+        "bytes": 645
+      }
+    ],
+    [
+      {
+        "path": "static/images/sc-global/menu-imgHombreFotografiaOficial.png",
+        "bytes": 32250
+      },
+      {
+        "path": "static/images/sc-menu-mobile/hombre.png",
+        "bytes": 32250
+      }
+    ],
+    [
+      {
+        "path": "static/images/sc-global/menu-unisex.png",
+        "bytes": 32637
+      },
+      {
+        "path": "static/images/sc-menu-mobile/unisex.png",
+        "bytes": 32637
+      }
+    ],
+    [
+      {
+        "path": "static/images/sc-global/menu-woman.png",
+        "bytes": 42839
+      },
+      {
+        "path": "static/images/sc-menu-mobile/mujer.png",
+        "bytes": 42839
+      }
+    ],
+    [
+      {
+        "path": "static/images/sc-global/mobile-imgFrame2.svg",
+        "bytes": 314
+      },
+      {
+        "path": "static/images/sc-menu-mobile/arrow.svg",
+        "bytes": 314
+      }
+    ],
+    [
+      {
+        "path": "static/images/sc-home/0fa7f.png",
+        "bytes": 32814
+      },
+      {
+        "path": "static/images/sc-pdp/0fa7f.png",
+        "bytes": 32814
+      }
+    ],
+    [
+      {
+        "path": "static/images/sc-home/1c5c6.png",
+        "bytes": 58259
+      },
+      {
+        "path": "static/images/sc-pdp/1c5c6.png",
+        "bytes": 58259
+      }
+    ],
+    [
+      {
+        "path": "static/images/sc-home/282bd.png",
+        "bytes": 25005
+      },
+      {
+        "path": "static/images/sc-pdp/282bd.png",
+        "bytes": 25005
+      }
+    ],
+    [
+      {
+        "path": "static/images/sc-home/58209.svg",
+        "bytes": 250
+      },
+      {
+        "path": "static/images/sc-home/6b47f.svg",
+        "bytes": 250
+      },
+      {
+        "path": "static/images/sc-home/b965d.svg",
+        "bytes": 250
+      }
+    ],
+    [
+      {
+        "path": "static/images/sc-home/5db5e.png",
+        "bytes": 30901
+      },
+      {
+        "path": "static/images/sc-pdp/5db5e.png",
+        "bytes": 30901
+      }
+    ],
+    [
+      {
+        "path": "static/images/sc-home/9a5fa.svg",
+        "bytes": 316
+      },
+      {
+        "path": "static/images/sc-pdp/9a5fa.svg",
+        "bytes": 316
+      }
+    ],
+    [
+      {
+        "path": "static/images/sc-home/d6e5d.svg",
+        "bytes": 315
+      },
+      {
+        "path": "static/images/sc-pdp/d6e5d.svg",
+        "bytes": 315
+      }
+    ],
+    [
+      {
+        "path": "static/images/sc-pdp/0d7cd.svg",
+        "bytes": 233
+      },
+      {
+        "path": "static/images/sc-pdp/263d0.svg",
+        "bytes": 233
+      },
+      {
+        "path": "static/images/sc-pdp/6686b.svg",
+        "bytes": 233
+      }
+    ],
+    [
+      {
+        "path": "static/images/sc-pdp/20f9a.svg",
+        "bytes": 327
+      },
+      {
+        "path": "static/images/sc-pdp/e2cd7.svg",
+        "bytes": 327
+      }
+    ]
+  ],
+  "conclusions": [
+    "Distinct font files are not automatically removable; glyf/cmap identity does not establish equal appearance or font metadata.",
+    "Duplicate files on disk do not prove duplicate transfer on a page. No assets or font declarations changed."
+  ],
+  "new_optimization_prepared": false
+}

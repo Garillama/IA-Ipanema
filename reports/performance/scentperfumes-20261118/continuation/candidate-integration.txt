@@ -1,0 +1,46 @@
+======================================================================
+ERROR: test_doctor_reports_capabilities_without_model_inference (test_orchestration_cli.PortableOrchestrationCLI.test_doctor_reports_capabilities_without_model_inference)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/alanrichard/Escritorio/IA inversa/.local/scent-skill-contract-candidate/tests/integration/test_orchestration_cli.py", line 29, in setUp
+    shutil.copytree(ROOT/'.agents',self.root/'.agents')
+  File "/usr/lib/python3.12/shutil.py", line 600, in copytree
+    return _copytree(entries=entries, src=src, dst=dst, symlinks=symlinks,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/shutil.py", line 498, in _copytree
+    os.makedirs(dst, exist_ok=dirs_exist_ok)
+  File "<frozen os>", line 225, in makedirs
+FileExistsError: [Errno 17] File exists: '/tmp/orchestration portable cq_rkhoq/agent with spaces/.agents'
+
+======================================================================
+ERROR: test_plan_runs_from_another_directory_without_theme_or_knowledge (test_orchestration_cli.PortableOrchestrationCLI.test_plan_runs_from_another_directory_without_theme_or_knowledge)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/alanrichard/Escritorio/IA inversa/.local/scent-skill-contract-candidate/tests/integration/test_orchestration_cli.py", line 29, in setUp
+    shutil.copytree(ROOT/'.agents',self.root/'.agents')
+  File "/usr/lib/python3.12/shutil.py", line 600, in copytree
+    return _copytree(entries=entries, src=src, dst=dst, symlinks=symlinks,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/shutil.py", line 498, in _copytree
+    os.makedirs(dst, exist_ok=dirs_exist_ok)
+  File "<frozen os>", line 225, in makedirs
+FileExistsError: [Errno 17] File exists: '/tmp/orchestration portable q2eg9i7z/agent with spaces/.agents'
+
+======================================================================
+ERROR: test_smoke_cannot_start_without_execute (test_orchestration_cli.PortableOrchestrationCLI.test_smoke_cannot_start_without_execute)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/alanrichard/Escritorio/IA inversa/.local/scent-skill-contract-candidate/tests/integration/test_orchestration_cli.py", line 29, in setUp
+    shutil.copytree(ROOT/'.agents',self.root/'.agents')
+  File "/usr/lib/python3.12/shutil.py", line 600, in copytree
+    return _copytree(entries=entries, src=src, dst=dst, symlinks=symlinks,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/shutil.py", line 498, in _copytree
+    os.makedirs(dst, exist_ok=dirs_exist_ok)
+  File "<frozen os>", line 225, in makedirs
+FileExistsError: [Errno 17] File exists: '/tmp/orchestration portable 6u_9vr5r/agent with spaces/.agents'
+
+----------------------------------------------------------------------
+Ran 56 tests in 21.381s
+
+FAILED (errors=3, skipped=1)

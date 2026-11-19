@@ -1,0 +1,14 @@
+test_external_ancestor_symlink_rejected_in_context_and_qa (test_skill_execution_contract.SkillExecutionContract.test_external_ancestor_symlink_rejected_in_context_and_qa) ... FAIL
+
+======================================================================
+FAIL: test_external_ancestor_symlink_rejected_in_context_and_qa (test_skill_execution_contract.SkillExecutionContract.test_external_ancestor_symlink_rejected_in_context_and_qa)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/alanrichard/Escritorio/IA inversa/.local/scent-skill-contract-candidate/tests/unit/test_skill_execution_contract.py", line 84, in test_external_ancestor_symlink_rejected_in_context_and_qa
+    with self.assertRaises(IpanemaError):engine.instruction_context(self.project,{'skills':['cloudflare-web-perf']})
+AssertionError: IpanemaError not raised
+
+----------------------------------------------------------------------
+Ran 1 test in 0.005s
+
+FAILED (failures=1)

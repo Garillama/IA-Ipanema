@@ -1,0 +1,1618 @@
+{
+  "kind": "engineering-council-adr",
+  "version": 1,
+  "id": "ADR-7ae025a6e3ae",
+  "at": "2026-11-18T20:05:51.487949+00:00",
+  "project": "scentperfumes",
+  "objective": "Revisar arquitectura del contrato de catálogo de skills y QA aislado. Candidato preparado: catálogo exacto único, rechazo de archivos ausentes y symlinks, copia explícita de SKILL.md autorizados para QA, registro sintético y recibos de identidad de enlaces históricos omitidos ligados al hash del documento. Cuestionar seguridad y regresiones, revisar los cinco archivos completos, conservar validadores estrictos en contexto normal y consejo dual. Emisión de revisión y ADR solamente.",
+  "problem": [
+    "Hay que revisar la seguridad y las posibles regresiones del contrato del catálogo de skills y de la vista de QA aislada. En el contexto normal, el validador estricto de enlaces y el consejo dual deben conservarse sin cambios."
+  ],
+  "context": {
+    "project": "scentperfumes",
+    "run_id": "20261118T200144-orchestration-24ebace1",
+    "source_sha256": "0ff346232673c96f01edc1ea340a897dbb1b57fbf9b6575cdc3ec2671675d223",
+    "objective_sha256": "2c960594bcf2d8b00979ba7b4b5a7517584e747286f7da3796b0dd919166727d",
+    "files": {
+      "tools/ipanema/orchestration/engine.py": "5457069b77eca890369b3d15041390a8f6312991eb2155f0825d97c925b9ce11",
+      "tools/ipanema/validation.py": "7668d26c46790026ee8540b032a7d8980eee07bc5dd354636d2c306712ab1899",
+      "tools/ipanema/snapshot_links.py": "5287cf3ee950f9379da18d10007807fd685150e62fe5682577a1e7640fb137e7",
+      "tests/support.py": "5a3607d39443ccba7b358f41188b4f984eef324fce503f087ee3d99653c4a696",
+      "tests/unit/test_skill_execution_contract.py": "90fcd5889716a1d6dd1596b9671638a62fe3282e947d9b499898aa35e535cde9"
+    },
+    "required_constraints": [
+      "accessibility",
+      "seo"
+    ],
+    "instructions_sha256": "547f1965bc6e0a912d9308dba0910096693c4815b6268f9122ffd7c52fa80946",
+    "require_objections": true,
+    "require_defense": true,
+    "participation_sha256": "9ff597857187450dc19d945e8124e6a50c9a76a12101de1d08f41ada93399d8c"
+  },
+  "status": "needs_evidence",
+  "implementation_allowed": false,
+  "production_authorized": false,
+  "approval_scope": "local_implementation_only",
+  "coverage": {
+    "required_agents": [
+      "claude",
+      "codex"
+    ],
+    "participants": [
+      {
+        "requested_agent": "claude",
+        "effective_agent": "claude",
+        "status": "available"
+      },
+      {
+        "requested_agent": "codex",
+        "effective_agent": "codex",
+        "status": "unavailable",
+        "error": {
+          "category": "inactivity",
+          "summary": "No se recibió una propuesta válida; no cuenta como participación completa."
+        }
+      }
+    ],
+    "effective_agents": [
+      "claude"
+    ],
+    "complete": false,
+    "objections_complete": false,
+    "deliberation_complete": false,
+    "defense_complete": false,
+    "agreement": "incomplete",
+    "consensus": "incomplete_or_disagreement"
+  },
+  "proposals": [
+    {
+      "requested_agent": "claude",
+      "effective_agent": "claude",
+      "status": "available",
+      "proposal": {
+        "decision": "proposed",
+        "summary": "Revisé los cinco archivos completos. El candidato cumple la mayor parte del objetivo: catálogo exacto, rechazo de skills ausentes o con UTF-8 inválido, copia explícita solo de SKILL.md autorizados en la vista de QA, registro sintético y recibos ligados al hash del documento. Propongo aprobarlo con condiciones, sin cambios en esta auditoría. Hay tres puntos que corregir: (1) Posible fallo, sin verificar: si beneath() resuelve rutas, el filtro beneath(parent, root) deja sin revisar los enlaces simbólicos que apuntan fuera de la raíz, como .agents -> /otro. Esto afectaría a instruction_context, sanitized_view y prepare_snapshot. (2) Los validadores estrictos dependen de que un JSON de proyecto modificable no declare environment == 'offline-test'. (3) prepare_snapshot y capture_omitted_links se ejecutan fuera del try de execute, así que un .md con UTF-8 inválido deja el run sin estado blocked. La única prueba aportada es qa:baseline sobre el candidato; no ejecuté pruebas.",
+        "changes": [],
+        "evidence": [
+          "source:tools/ipanema/orchestration/engine.py",
+          "source:tools/ipanema/validation.py",
+          "source:tools/ipanema/snapshot_links.py",
+          "source:tests/support.py",
+          "source:tests/unit/test_skill_execution_contract.py",
+          "qa:baseline"
+        ],
+        "analysis": {
+          "problem": "Hay que revisar la seguridad y las posibles regresiones del contrato del catálogo de skills y de la vista de QA aislada. En el contexto normal, el validador estricto de enlaces y el consejo dual deben conservarse sin cambios.",
+          "cause": "Hallazgos del código: (a) instruction_context, sanitized_view, prepare_snapshot y capture_omitted_links filtran los ancestros con beneath(q, root) antes de llamar a is_symlink(). Si beneath resuelve rutas, un ancestro enlazado fuera de la raíz se excluye del filtro y nunca se comprueba (pendiente de confirmar en core.beneath). (b) omitted_link_receipt se activa solo con project.data['environment'] y qa.snapshot_omissions, dos valores editables en projects/<id>.json, sin ninguna señal que dependa del controlador. (c) execute no elimina '_controller_link_receipts' recibido del llamador; prepare_snapshot solo lo sobrescribe con scope workspace. (d) prepare_snapshot se ejecuta antes del try de execute, y read_text(utf-8) en capture puede lanzar una excepción que no se captura. (e) AGENTS.md se lee sin encoding explícito y sin comprobar si es un enlace simbólico.",
+          "recommendation": "claude-harden-lexical-binding",
+          "evidence_refs": [
+            "source:tools/ipanema/orchestration/engine.py",
+            "source:tools/ipanema/snapshot_links.py",
+            "source:tools/ipanema/validation.py",
+            "qa:baseline"
+          ],
+          "hypotheses": [
+            "Si core.beneath usa resolve(), un enlace .agents o .agents/skills hacia un directorio externo supera la comprobación de enlaces simbólicos de instruction_context. El test actual solo reubica la carpeta dentro de la raíz.",
+            "Si la raíz del sandbox contiene un enlace simbólico, destination.relative_to(project.root) en omitted_link_receipt puede lanzar ValueError aunque beneath sea verdadero, y validate fallaría.",
+            "Un SKILL.md futuro que enlace a references/*.md de su propia carpeta fallaría en el QA aislado, porque solo se copia SKILL.md. Sería un falso negativo, no un riesgo de seguridad.",
+            "En la vista de QA, la validación de frontmatter solo recorre las skills autorizadas. Una skill no registrada en disco solo se detecta con la validación normal."
+          ],
+          "native_components": [
+            "AUTHORIZED_SKILLS (ipanema.coordinator)",
+            "core.beneath/digest",
+            "isolation.run_isolated",
+            "validation.validate"
+          ],
+          "risks": [
+            "Posible omisión de la comprobación de enlaces simbólicos en ancestros externos, según cómo esté implementado beneath (alta si se confirma).",
+            "Los validadores estrictos se pueden relajar editando projects/<id>.json con environment 'offline-test' (baja: solo afecta a enlaces .md/.json en reports/runs).",
+            "Un run sin estado final si prepare_snapshot o capture lanzan una excepción fuera del try (media, operativa).",
+            "Falsos negativos de QA si una skill enlaza a archivos de su carpeta distintos de SKILL.md.",
+            "Duplicación de fixtures de skills entre support.make_project y setUp (baja, mantenibilidad).",
+            "El consenso y qa:baseline no certifican producción, SEO ni rendimiento."
+          ],
+          "tests": [
+            "Prueba de enlaces simbólicos en ancestros externos (.agents → directorio temporal) en instruction_context, sanitized_view y prepare_snapshot.",
+            "Prueba de que un plan con '_controller_link_receipts' falsificado no se propaga al registro sintético.",
+            "Prueba de que un proyecto real con 'offline-test' y reports/runs presente mantiene los errores de enlace.",
+            "Prueba de estado blocked ante un .md con UTF-8 inválido durante el snapshot.",
+            "Prueba de que los enlaces con ancla o sufijo :línea nunca reciben recibo.",
+            "qa --suite quick y central_qa aislado antes y después, con el mismo perfil."
+          ],
+          "files": [
+            "tools/ipanema/orchestration/engine.py",
+            "tools/ipanema/validation.py",
+            "tools/ipanema/snapshot_links.py",
+            "tests/support.py",
+            "tests/unit/test_skill_execution_contract.py"
+          ],
+          "impacts": {
+            "seo": "No aplica: el alcance son herramientas del controlador y tests, sin archivos del tema ni salida del storefront.",
+            "performance": "Sin medir. capture_omitted_links calcula el hash de cada .md del snapshot, con un coste lineal que se espera menor.",
+            "responsive": "No aplica: no se modifica HTML/CSS del storefront.",
+            "accessibility": "No aplica: no hay cambios de interfaz del storefront.",
+            "uiux": "Sin impacto en la tienda. En el operador, los avisos de enlaces históricos excluidos quedan explícitos en la salida de validate.",
+            "commerce": "Ninguno: no toca catálogo, checkout, credenciales ni publicación."
+          },
+          "confidence": 0.7,
+          "alternatives": [
+            {
+              "id": "claude-harden-lexical-binding",
+              "description": "Aceptar el diseño del candidato con condiciones obligatorias. 1) Un helper léxico compartido recorre las partes relativas de la ruta, desde la raíz y sin resolve(), y rechaza cualquier componente que sea enlace simbólico. Se usa en instruction_context (también para AGENTS.md, leído con encoding utf-8), sanitized_view, prepare_snapshot y snapshot_links. 2) execute elimina '_controller_link_receipts' junto con las demás claves _controller_*. 3) omitted_link_receipt exige también que no exista project.root/'reports/runs', que theme_root sea None y que strict_source sea False. 4) prepare_snapshot pasa a ejecutarse dentro del manejo de errores, para que un fallo deje el run en estado blocked. Los validadores normales no cambian.",
+              "constraints": {
+                "functional": {
+                  "status": "unknown",
+                  "evidence_refs": [
+                    "qa:baseline"
+                  ]
+                },
+                "security": {
+                  "status": "unknown",
+                  "evidence_refs": [
+                    "source:tools/ipanema/orchestration/engine.py",
+                    "source:tools/ipanema/snapshot_links.py"
+                  ]
+                },
+                "compatibility": {
+                  "status": "unknown",
+                  "evidence_refs": [
+                    "source:tools/ipanema/validation.py"
+                  ]
+                },
+                "native_reuse": {
+                  "status": "pass",
+                  "evidence_refs": [
+                    "source:tools/ipanema/orchestration/engine.py"
+                  ]
+                },
+                "seo": {
+                  "status": "pass",
+                  "evidence_refs": [
+                    "source:tools/ipanema/orchestration/engine.py"
+                  ]
+                },
+                "performance": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "accessibility": {
+                  "status": "pass",
+                  "evidence_refs": [
+                    "source:tools/ipanema/orchestration/engine.py"
+                  ]
+                },
+                "responsive": {
+                  "status": "pass",
+                  "evidence_refs": [
+                    "source:tools/ipanema/orchestration/engine.py"
+                  ]
+                },
+                "maintainability": {
+                  "status": "pass",
+                  "evidence_refs": [
+                    "source:tools/ipanema/snapshot_links.py"
+                  ]
+                },
+                "reversibility": {
+                  "status": "pass",
+                  "evidence_refs": [
+                    "qa:baseline"
+                  ]
+                },
+                "complexity": {
+                  "status": "pass",
+                  "evidence_refs": [
+                    "source:tools/ipanema/orchestration/engine.py"
+                  ]
+                },
+                "development_cost": {
+                  "status": "pass",
+                  "evidence_refs": []
+                },
+                "execution_cost": {
+                  "status": "pass",
+                  "evidence_refs": []
+                }
+              },
+              "files": [
+                "tools/ipanema/orchestration/engine.py",
+                "tools/ipanema/snapshot_links.py",
+                "tools/ipanema/validation.py",
+                "tests/unit/test_skill_execution_contract.py"
+              ],
+              "tests": [
+                "Enlazar .agents y .agents/skills a un directorio temporal externo: instruction_context, sanitized_view(include_skills=True) y prepare_snapshot deben rechazarlo u omitirlo.",
+                "Si AGENTS.md es un enlace simbólico, instruction_context debe fallar de forma cerrada.",
+                "Un plan con '_controller_link_receipts' falsificado no debe llegar a projects/ipanema.json con scope theme ni con workspace (el valor del controlador sustituye o elimina el del llamador).",
+                "Un proyecto real con environment 'offline-test', un manifiesto válido y reports/runs presente debe seguir dando 'Enlace roto'.",
+                "Un .md con UTF-8 inválido en el workspace debe dejar el run.json en estado blocked, sin una excepción sin capturar.",
+                "capture_omitted_links omite los enlaces con ancla o sufijo :línea, y validate los sigue reportando como rotos.",
+                "Ejecutar qa --suite quick y central_qa aislado antes y después, con el mismo perfil, y comparar."
+              ]
+            },
+            {
+              "id": "claude-accept-as-is",
+              "description": "Aceptar el candidato tal como está, con qa:baseline como única prueba. Funciona con los fixtures actuales, pero no cubre los enlaces externos en ancestros, el disparador editable 'offline-test' ni el error de snapshot fuera del try.",
+              "constraints": {
+                "functional": {
+                  "status": "pass",
+                  "evidence_refs": [
+                    "qa:baseline"
+                  ]
+                },
+                "security": {
+                  "status": "unknown",
+                  "evidence_refs": [
+                    "source:tools/ipanema/orchestration/engine.py",
+                    "source:tools/ipanema/snapshot_links.py"
+                  ]
+                },
+                "compatibility": {
+                  "status": "pass",
+                  "evidence_refs": [
+                    "qa:baseline"
+                  ]
+                },
+                "native_reuse": {
+                  "status": "pass",
+                  "evidence_refs": [
+                    "source:tools/ipanema/orchestration/engine.py"
+                  ]
+                },
+                "seo": {
+                  "status": "pass",
+                  "evidence_refs": [
+                    "source:tools/ipanema/orchestration/engine.py"
+                  ]
+                },
+                "performance": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "accessibility": {
+                  "status": "pass",
+                  "evidence_refs": [
+                    "source:tools/ipanema/orchestration/engine.py"
+                  ]
+                },
+                "responsive": {
+                  "status": "pass",
+                  "evidence_refs": [
+                    "source:tools/ipanema/orchestration/engine.py"
+                  ]
+                },
+                "maintainability": {
+                  "status": "pass",
+                  "evidence_refs": [
+                    "source:tests/unit/test_skill_execution_contract.py"
+                  ]
+                },
+                "reversibility": {
+                  "status": "pass",
+                  "evidence_refs": [
+                    "qa:baseline"
+                  ]
+                },
+                "complexity": {
+                  "status": "pass",
+                  "evidence_refs": []
+                },
+                "development_cost": {
+                  "status": "pass",
+                  "evidence_refs": []
+                },
+                "execution_cost": {
+                  "status": "pass",
+                  "evidence_refs": []
+                }
+              },
+              "files": [
+                "tools/ipanema/orchestration/engine.py",
+                "tools/ipanema/validation.py",
+                "tools/ipanema/snapshot_links.py",
+                "tests/support.py",
+                "tests/unit/test_skill_execution_contract.py"
+              ],
+              "tests": [
+                "Confirmar la implementación de core.beneath; si resuelve rutas, esta alternativa no es admisible.",
+                "Repetir qa:baseline y qa --suite quick sobre los hashes ligados."
+              ]
+            },
+            {
+              "id": "claude-runtime-flag-receipts",
+              "description": "Igual que claude-harden-lexical-binding, pero los recibos se habilitan con un argumento explícito del controlador, validate(project, snapshot_receipts=manifest), que el runner de QA aislado lee de un archivo fuera de projects/. Así no dependen de environment/qa en la configuración del proyecto. Cambia la firma de validate y sus consumidores.",
+              "constraints": {
+                "functional": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "security": {
+                  "status": "unknown",
+                  "evidence_refs": [
+                    "source:tools/ipanema/validation.py"
+                  ]
+                },
+                "compatibility": {
+                  "status": "unknown",
+                  "evidence_refs": [
+                    "source:tools/ipanema/validation.py"
+                  ]
+                },
+                "native_reuse": {
+                  "status": "pass",
+                  "evidence_refs": []
+                },
+                "seo": {
+                  "status": "pass",
+                  "evidence_refs": [
+                    "source:tools/ipanema/orchestration/engine.py"
+                  ]
+                },
+                "performance": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "accessibility": {
+                  "status": "pass",
+                  "evidence_refs": [
+                    "source:tools/ipanema/orchestration/engine.py"
+                  ]
+                },
+                "responsive": {
+                  "status": "pass",
+                  "evidence_refs": [
+                    "source:tools/ipanema/orchestration/engine.py"
+                  ]
+                },
+                "maintainability": {
+                  "status": "unknown",
+                  "evidence_refs": []
+                },
+                "reversibility": {
+                  "status": "pass",
+                  "evidence_refs": []
+                },
+                "complexity": {
+                  "status": "fail",
+                  "evidence_refs": [
+                    "source:tools/ipanema/validation.py"
+                  ]
+                },
+                "development_cost": {
+                  "status": "fail",
+                  "evidence_refs": []
+                },
+                "execution_cost": {
+                  "status": "pass",
+                  "evidence_refs": []
+                }
+              },
+              "files": [
+                "tools/ipanema/validation.py",
+                "tools/ipanema/snapshot_links.py",
+                "tools/ipanema/orchestration/engine.py",
+                "tests/unit/test_skill_execution_contract.py"
+              ],
+              "tests": [
+                "Llamar a validate sin argumento con un manifiesto presente en la configuración debe dar error estricto.",
+                "Revisar todos los consumidores de validate (CLI doctor/qa) con rg antes de cambiar la firma."
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "requested_agent": "codex",
+      "effective_agent": "codex",
+      "status": "unavailable",
+      "error": {
+        "category": "inactivity",
+        "summary": "No se recibió una propuesta válida; no cuenta como participación completa."
+      }
+    }
+  ],
+  "objections": [],
+  "matrix": [
+    {
+      "alternative_id": "claude-accept-as-is",
+      "fingerprint": "e5194f2694b080268f79c14c28e76de8f44232d0307c8a636bd06e15b2009117",
+      "identity_ambiguous": false,
+      "descriptions": [
+        "Aceptar el candidato tal como está, con qa:baseline como única prueba. Funciona con los fixtures actuales, pero no cubre los enlaces externos en ancestros, el disparador editable 'offline-test' ni el error de snapshot fuera del try."
+      ],
+      "proposed_by": [
+        "claude"
+      ],
+      "criteria": {
+        "functional": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "security": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "unknown"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "compatibility": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "native_reuse": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "seo": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "performance": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "unknown"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "accessibility": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "responsive": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "maintainability": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "reversibility": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "complexity": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "development_cost": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "execution_cost": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        }
+      },
+      "blocked_by": [],
+      "needs_evidence": [
+        "restricción sin comprobar: functional",
+        "restricción sin comprobar: security",
+        "restricción sin comprobar: compatibility",
+        "restricción sin comprobar: native_reuse",
+        "restricción sin comprobar: seo",
+        "restricción sin comprobar: accessibility"
+      ],
+      "eligible": false,
+      "files": [
+        "tests/support.py",
+        "tests/unit/test_skill_execution_contract.py",
+        "tools/ipanema/orchestration/engine.py",
+        "tools/ipanema/snapshot_links.py",
+        "tools/ipanema/validation.py"
+      ],
+      "tests": [
+        "Confirmar la implementación de core.beneath; si resuelve rutas, esta alternativa no es admisible.",
+        "Repetir qa:baseline y qa --suite quick sobre los hashes ligados."
+      ]
+    },
+    {
+      "alternative_id": "claude-harden-lexical-binding",
+      "fingerprint": "e4949ab82d6b131857581f329228d8f7fc9ab7491e5427f99fca44cbe8405cfa",
+      "identity_ambiguous": false,
+      "descriptions": [
+        "Aceptar el diseño del candidato con condiciones obligatorias. 1) Un helper léxico compartido recorre las partes relativas de la ruta, desde la raíz y sin resolve(), y rechaza cualquier componente que sea enlace simbólico. Se usa en instruction_context (también para AGENTS.md, leído con encoding utf-8), sanitized_view, prepare_snapshot y snapshot_links. 2) execute elimina '_controller_link_receipts' junto con las demás claves _controller_*. 3) omitted_link_receipt exige también que no exista project.root/'reports/runs', que theme_root sea None y que strict_source sea False. 4) prepare_snapshot pasa a ejecutarse dentro del manejo de errores, para que un fallo deje el run en estado blocked. Los validadores normales no cambian."
+      ],
+      "proposed_by": [
+        "claude"
+      ],
+      "criteria": {
+        "functional": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "unknown"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "security": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "unknown"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "compatibility": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "unknown"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "native_reuse": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "seo": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "performance": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "unknown"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "accessibility": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "responsive": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "maintainability": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "reversibility": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "complexity": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "development_cost": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "execution_cost": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        }
+      },
+      "blocked_by": [],
+      "needs_evidence": [
+        "restricción sin comprobar: functional",
+        "restricción sin comprobar: security",
+        "restricción sin comprobar: compatibility",
+        "restricción sin comprobar: native_reuse",
+        "restricción sin comprobar: seo",
+        "restricción sin comprobar: accessibility"
+      ],
+      "eligible": false,
+      "files": [
+        "tests/unit/test_skill_execution_contract.py",
+        "tools/ipanema/orchestration/engine.py",
+        "tools/ipanema/snapshot_links.py",
+        "tools/ipanema/validation.py"
+      ],
+      "tests": [
+        "Enlazar .agents y .agents/skills a un directorio temporal externo: instruction_context, sanitized_view(include_skills=True) y prepare_snapshot deben rechazarlo u omitirlo.",
+        "Si AGENTS.md es un enlace simbólico, instruction_context debe fallar de forma cerrada.",
+        "Un plan con '_controller_link_receipts' falsificado no debe llegar a projects/ipanema.json con scope theme ni con workspace (el valor del controlador sustituye o elimina el del llamador).",
+        "Un proyecto real con environment 'offline-test', un manifiesto válido y reports/runs presente debe seguir dando 'Enlace roto'.",
+        "Un .md con UTF-8 inválido en el workspace debe dejar el run.json en estado blocked, sin una excepción sin capturar.",
+        "capture_omitted_links omite los enlaces con ancla o sufijo :línea, y validate los sigue reportando como rotos.",
+        "Ejecutar qa --suite quick y central_qa aislado antes y después, con el mismo perfil, y comparar."
+      ]
+    },
+    {
+      "alternative_id": "claude-runtime-flag-receipts",
+      "fingerprint": "2801f74506ca4f607a4162f9d11bacd8002bc6109bda06b99dbf1c350fd87c90",
+      "identity_ambiguous": false,
+      "descriptions": [
+        "Igual que claude-harden-lexical-binding, pero los recibos se habilitan con un argumento explícito del controlador, validate(project, snapshot_receipts=manifest), que el runner de QA aislado lee de un archivo fuera de projects/. Así no dependen de environment/qa en la configuración del proyecto. Cambia la firma de validate y sus consumidores."
+      ],
+      "proposed_by": [
+        "claude"
+      ],
+      "criteria": {
+        "functional": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "unknown"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "security": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "unknown"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "compatibility": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "unknown"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "native_reuse": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "seo": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "performance": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "unknown"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "accessibility": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "responsive": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "maintainability": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "unknown"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "reversibility": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "complexity": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "fail"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "development_cost": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "fail"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "execution_cost": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        }
+      },
+      "blocked_by": [],
+      "needs_evidence": [
+        "restricción sin comprobar: functional",
+        "restricción sin comprobar: security",
+        "restricción sin comprobar: compatibility",
+        "restricción sin comprobar: native_reuse",
+        "restricción sin comprobar: seo",
+        "restricción sin comprobar: accessibility"
+      ],
+      "eligible": false,
+      "files": [
+        "tests/unit/test_skill_execution_contract.py",
+        "tools/ipanema/orchestration/engine.py",
+        "tools/ipanema/snapshot_links.py",
+        "tools/ipanema/validation.py"
+      ],
+      "tests": [
+        "Llamar a validate sin argumento con un manifiesto presente en la configuración debe dar error estricto.",
+        "Revisar todos los consumidores de validate (CLI doctor/qa) con rg antes de cambiar la firma."
+      ]
+    }
+  ],
+  "questions": [],
+  "answers": [],
+  "defenses": [],
+  "withdrawn_alternatives": [],
+  "contradictions": [],
+  "final_preferences": {},
+  "preference_source": "final_debate",
+  "mandatory_constraints": [
+    "functional",
+    "security",
+    "compatibility",
+    "native_reuse",
+    "accessibility",
+    "seo"
+  ],
+  "selected_alternative": null,
+  "files": [],
+  "required_tests": [],
+  "post_implementation_requirements": [],
+  "discarded_alternatives": [
+    {
+      "alternative_id": "claude-accept-as-is",
+      "fingerprint": "e5194f2694b080268f79c14c28e76de8f44232d0307c8a636bd06e15b2009117",
+      "identity_ambiguous": false,
+      "descriptions": [
+        "Aceptar el candidato tal como está, con qa:baseline como única prueba. Funciona con los fixtures actuales, pero no cubre los enlaces externos en ancestros, el disparador editable 'offline-test' ni el error de snapshot fuera del try."
+      ],
+      "proposed_by": [
+        "claude"
+      ],
+      "criteria": {
+        "functional": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "security": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "unknown"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "compatibility": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "native_reuse": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "seo": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "performance": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "unknown"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "accessibility": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "responsive": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "maintainability": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "reversibility": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "complexity": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "development_cost": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "execution_cost": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        }
+      },
+      "blocked_by": [],
+      "needs_evidence": [
+        "restricción sin comprobar: functional",
+        "restricción sin comprobar: security",
+        "restricción sin comprobar: compatibility",
+        "restricción sin comprobar: native_reuse",
+        "restricción sin comprobar: seo",
+        "restricción sin comprobar: accessibility"
+      ],
+      "eligible": false,
+      "files": [
+        "tests/support.py",
+        "tests/unit/test_skill_execution_contract.py",
+        "tools/ipanema/orchestration/engine.py",
+        "tools/ipanema/snapshot_links.py",
+        "tools/ipanema/validation.py"
+      ],
+      "tests": [
+        "Confirmar la implementación de core.beneath; si resuelve rutas, esta alternativa no es admisible.",
+        "Repetir qa:baseline y qa --suite quick sobre los hashes ligados."
+      ]
+    },
+    {
+      "alternative_id": "claude-harden-lexical-binding",
+      "fingerprint": "e4949ab82d6b131857581f329228d8f7fc9ab7491e5427f99fca44cbe8405cfa",
+      "identity_ambiguous": false,
+      "descriptions": [
+        "Aceptar el diseño del candidato con condiciones obligatorias. 1) Un helper léxico compartido recorre las partes relativas de la ruta, desde la raíz y sin resolve(), y rechaza cualquier componente que sea enlace simbólico. Se usa en instruction_context (también para AGENTS.md, leído con encoding utf-8), sanitized_view, prepare_snapshot y snapshot_links. 2) execute elimina '_controller_link_receipts' junto con las demás claves _controller_*. 3) omitted_link_receipt exige también que no exista project.root/'reports/runs', que theme_root sea None y que strict_source sea False. 4) prepare_snapshot pasa a ejecutarse dentro del manejo de errores, para que un fallo deje el run en estado blocked. Los validadores normales no cambian."
+      ],
+      "proposed_by": [
+        "claude"
+      ],
+      "criteria": {
+        "functional": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "unknown"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "security": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "unknown"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "compatibility": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "unknown"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "native_reuse": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "seo": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "performance": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "unknown"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "accessibility": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "responsive": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "maintainability": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "reversibility": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "complexity": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "development_cost": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "execution_cost": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        }
+      },
+      "blocked_by": [],
+      "needs_evidence": [
+        "restricción sin comprobar: functional",
+        "restricción sin comprobar: security",
+        "restricción sin comprobar: compatibility",
+        "restricción sin comprobar: native_reuse",
+        "restricción sin comprobar: seo",
+        "restricción sin comprobar: accessibility"
+      ],
+      "eligible": false,
+      "files": [
+        "tests/unit/test_skill_execution_contract.py",
+        "tools/ipanema/orchestration/engine.py",
+        "tools/ipanema/snapshot_links.py",
+        "tools/ipanema/validation.py"
+      ],
+      "tests": [
+        "Enlazar .agents y .agents/skills a un directorio temporal externo: instruction_context, sanitized_view(include_skills=True) y prepare_snapshot deben rechazarlo u omitirlo.",
+        "Si AGENTS.md es un enlace simbólico, instruction_context debe fallar de forma cerrada.",
+        "Un plan con '_controller_link_receipts' falsificado no debe llegar a projects/ipanema.json con scope theme ni con workspace (el valor del controlador sustituye o elimina el del llamador).",
+        "Un proyecto real con environment 'offline-test', un manifiesto válido y reports/runs presente debe seguir dando 'Enlace roto'.",
+        "Un .md con UTF-8 inválido en el workspace debe dejar el run.json en estado blocked, sin una excepción sin capturar.",
+        "capture_omitted_links omite los enlaces con ancla o sufijo :línea, y validate los sigue reportando como rotos.",
+        "Ejecutar qa --suite quick y central_qa aislado antes y después, con el mismo perfil, y comparar."
+      ]
+    },
+    {
+      "alternative_id": "claude-runtime-flag-receipts",
+      "fingerprint": "2801f74506ca4f607a4162f9d11bacd8002bc6109bda06b99dbf1c350fd87c90",
+      "identity_ambiguous": false,
+      "descriptions": [
+        "Igual que claude-harden-lexical-binding, pero los recibos se habilitan con un argumento explícito del controlador, validate(project, snapshot_receipts=manifest), que el runner de QA aislado lee de un archivo fuera de projects/. Así no dependen de environment/qa en la configuración del proyecto. Cambia la firma de validate y sus consumidores."
+      ],
+      "proposed_by": [
+        "claude"
+      ],
+      "criteria": {
+        "functional": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "unknown"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "security": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "unknown"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "compatibility": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "unknown"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "native_reuse": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "seo": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "performance": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "unknown"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "accessibility": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "responsive": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "maintainability": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "unknown"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "reversibility": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "complexity": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "fail"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "development_cost": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "fail"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        },
+        "execution_cost": {
+          "status": "unknown",
+          "claimed_statuses": [
+            "pass"
+          ],
+          "controller_receipts": [],
+          "conflict_resolutions": []
+        }
+      },
+      "blocked_by": [],
+      "needs_evidence": [
+        "restricción sin comprobar: functional",
+        "restricción sin comprobar: security",
+        "restricción sin comprobar: compatibility",
+        "restricción sin comprobar: native_reuse",
+        "restricción sin comprobar: seo",
+        "restricción sin comprobar: accessibility"
+      ],
+      "eligible": false,
+      "files": [
+        "tests/unit/test_skill_execution_contract.py",
+        "tools/ipanema/orchestration/engine.py",
+        "tools/ipanema/snapshot_links.py",
+        "tools/ipanema/validation.py"
+      ],
+      "tests": [
+        "Llamar a validate sin argumento con un manifiesto presente en la configuración debe dar error estricto.",
+        "Revisar todos los consumidores de validate (CLI doctor/qa) con rg antes de cambiar la firma."
+      ]
+    }
+  ],
+  "justification": "Implementación detenida hasta disponer de evidencia suficiente y deliberación independiente completa.",
+  "conditions": [
+    {
+      "id": "claude-accept-as-is-evidence-0",
+      "required": true,
+      "status": "pending",
+      "detail": "restricción sin comprobar: functional"
+    },
+    {
+      "id": "claude-accept-as-is-evidence-1",
+      "required": true,
+      "status": "pending",
+      "detail": "restricción sin comprobar: security"
+    },
+    {
+      "id": "claude-accept-as-is-evidence-2",
+      "required": true,
+      "status": "pending",
+      "detail": "restricción sin comprobar: compatibility"
+    },
+    {
+      "id": "claude-accept-as-is-evidence-3",
+      "required": true,
+      "status": "pending",
+      "detail": "restricción sin comprobar: native_reuse"
+    },
+    {
+      "id": "claude-accept-as-is-evidence-4",
+      "required": true,
+      "status": "pending",
+      "detail": "restricción sin comprobar: seo"
+    },
+    {
+      "id": "claude-accept-as-is-evidence-5",
+      "required": true,
+      "status": "pending",
+      "detail": "restricción sin comprobar: accessibility"
+    },
+    {
+      "id": "claude-harden-lexical-binding-evidence-0",
+      "required": true,
+      "status": "pending",
+      "detail": "restricción sin comprobar: functional"
+    },
+    {
+      "id": "claude-harden-lexical-binding-evidence-1",
+      "required": true,
+      "status": "pending",
+      "detail": "restricción sin comprobar: security"
+    },
+    {
+      "id": "claude-harden-lexical-binding-evidence-2",
+      "required": true,
+      "status": "pending",
+      "detail": "restricción sin comprobar: compatibility"
+    },
+    {
+      "id": "claude-harden-lexical-binding-evidence-3",
+      "required": true,
+      "status": "pending",
+      "detail": "restricción sin comprobar: native_reuse"
+    },
+    {
+      "id": "claude-harden-lexical-binding-evidence-4",
+      "required": true,
+      "status": "pending",
+      "detail": "restricción sin comprobar: seo"
+    },
+    {
+      "id": "claude-harden-lexical-binding-evidence-5",
+      "required": true,
+      "status": "pending",
+      "detail": "restricción sin comprobar: accessibility"
+    },
+    {
+      "id": "claude-runtime-flag-receipts-evidence-0",
+      "required": true,
+      "status": "pending",
+      "detail": "restricción sin comprobar: functional"
+    },
+    {
+      "id": "claude-runtime-flag-receipts-evidence-1",
+      "required": true,
+      "status": "pending",
+      "detail": "restricción sin comprobar: security"
+    },
+    {
+      "id": "claude-runtime-flag-receipts-evidence-2",
+      "required": true,
+      "status": "pending",
+      "detail": "restricción sin comprobar: compatibility"
+    },
+    {
+      "id": "claude-runtime-flag-receipts-evidence-3",
+      "required": true,
+      "status": "pending",
+      "detail": "restricción sin comprobar: native_reuse"
+    },
+    {
+      "id": "claude-runtime-flag-receipts-evidence-4",
+      "required": true,
+      "status": "pending",
+      "detail": "restricción sin comprobar: seo"
+    },
+    {
+      "id": "claude-runtime-flag-receipts-evidence-5",
+      "required": true,
+      "status": "pending",
+      "detail": "restricción sin comprobar: accessibility"
+    }
+  ],
+  "reasons": [
+    "Deliberación incompleta: faltan participantes originales o proveedores independientes",
+    "Falta contraste de objeciones de todos los participantes requeridos",
+    "Falta defensa de ambos participantes originales"
+  ],
+  "accepted_risks": [],
+  "evidence_receipts": [
+    {
+      "id": "source:tools/ipanema/orchestration/engine.py",
+      "kind": "source",
+      "subject": "tools/ipanema/orchestration/engine.py",
+      "executed": true,
+      "passed": true,
+      "sha256": "5457069b77eca890369b3d15041390a8f6312991eb2155f0825d97c925b9ce11",
+      "context": {
+        "project": "scentperfumes",
+        "run_id": "20261118T200144-orchestration-24ebace1",
+        "source_sha256": "0ff346232673c96f01edc1ea340a897dbb1b57fbf9b6575cdc3ec2671675d223",
+        "objective_sha256": "2c960594bcf2d8b00979ba7b4b5a7517584e747286f7da3796b0dd919166727d",
+        "files": {
+          "tools/ipanema/orchestration/engine.py": "5457069b77eca890369b3d15041390a8f6312991eb2155f0825d97c925b9ce11",
+          "tools/ipanema/validation.py": "7668d26c46790026ee8540b032a7d8980eee07bc5dd354636d2c306712ab1899",
+          "tools/ipanema/snapshot_links.py": "5287cf3ee950f9379da18d10007807fd685150e62fe5682577a1e7640fb137e7",
+          "tests/support.py": "5a3607d39443ccba7b358f41188b4f984eef324fce503f087ee3d99653c4a696",
+          "tests/unit/test_skill_execution_contract.py": "90fcd5889716a1d6dd1596b9671638a62fe3282e947d9b499898aa35e535cde9"
+        },
+        "required_constraints": [
+          "accessibility",
+          "seo"
+        ],
+        "instructions_sha256": "547f1965bc6e0a912d9308dba0910096693c4815b6268f9122ffd7c52fa80946",
+        "require_objections": true,
+        "require_defense": true,
+        "participation_sha256": "9ff597857187450dc19d945e8124e6a50c9a76a12101de1d08f41ada93399d8c"
+      },
+      "measurement_scope": "Source existence/hash only, not execution or correctness"
+    },
+    {
+      "id": "source:tools/ipanema/validation.py",
+      "kind": "source",
+      "subject": "tools/ipanema/validation.py",
+      "executed": true,
+      "passed": true,
+      "sha256": "7668d26c46790026ee8540b032a7d8980eee07bc5dd354636d2c306712ab1899",
+      "context": {
+        "project": "scentperfumes",
+        "run_id": "20261118T200144-orchestration-24ebace1",
+        "source_sha256": "0ff346232673c96f01edc1ea340a897dbb1b57fbf9b6575cdc3ec2671675d223",
+        "objective_sha256": "2c960594bcf2d8b00979ba7b4b5a7517584e747286f7da3796b0dd919166727d",
+        "files": {
+          "tools/ipanema/orchestration/engine.py": "5457069b77eca890369b3d15041390a8f6312991eb2155f0825d97c925b9ce11",
+          "tools/ipanema/validation.py": "7668d26c46790026ee8540b032a7d8980eee07bc5dd354636d2c306712ab1899",
+          "tools/ipanema/snapshot_links.py": "5287cf3ee950f9379da18d10007807fd685150e62fe5682577a1e7640fb137e7",
+          "tests/support.py": "5a3607d39443ccba7b358f41188b4f984eef324fce503f087ee3d99653c4a696",
+          "tests/unit/test_skill_execution_contract.py": "90fcd5889716a1d6dd1596b9671638a62fe3282e947d9b499898aa35e535cde9"
+        },
+        "required_constraints": [
+          "accessibility",
+          "seo"
+        ],
+        "instructions_sha256": "547f1965bc6e0a912d9308dba0910096693c4815b6268f9122ffd7c52fa80946",
+        "require_objections": true,
+        "require_defense": true,
+        "participation_sha256": "9ff597857187450dc19d945e8124e6a50c9a76a12101de1d08f41ada93399d8c"
+      },
+      "measurement_scope": "Source existence/hash only, not execution or correctness"
+    },
+    {
+      "id": "source:tools/ipanema/snapshot_links.py",
+      "kind": "source",
+      "subject": "tools/ipanema/snapshot_links.py",
+      "executed": true,
+      "passed": true,
+      "sha256": "5287cf3ee950f9379da18d10007807fd685150e62fe5682577a1e7640fb137e7",
+      "context": {
+        "project": "scentperfumes",
+        "run_id": "20261118T200144-orchestration-24ebace1",
+        "source_sha256": "0ff346232673c96f01edc1ea340a897dbb1b57fbf9b6575cdc3ec2671675d223",
+        "objective_sha256": "2c960594bcf2d8b00979ba7b4b5a7517584e747286f7da3796b0dd919166727d",
+        "files": {
+          "tools/ipanema/orchestration/engine.py": "5457069b77eca890369b3d15041390a8f6312991eb2155f0825d97c925b9ce11",
+          "tools/ipanema/validation.py": "7668d26c46790026ee8540b032a7d8980eee07bc5dd354636d2c306712ab1899",
+          "tools/ipanema/snapshot_links.py": "5287cf3ee950f9379da18d10007807fd685150e62fe5682577a1e7640fb137e7",
+          "tests/support.py": "5a3607d39443ccba7b358f41188b4f984eef324fce503f087ee3d99653c4a696",
+          "tests/unit/test_skill_execution_contract.py": "90fcd5889716a1d6dd1596b9671638a62fe3282e947d9b499898aa35e535cde9"
+        },
+        "required_constraints": [
+          "accessibility",
+          "seo"
+        ],
+        "instructions_sha256": "547f1965bc6e0a912d9308dba0910096693c4815b6268f9122ffd7c52fa80946",
+        "require_objections": true,
+        "require_defense": true,
+        "participation_sha256": "9ff597857187450dc19d945e8124e6a50c9a76a12101de1d08f41ada93399d8c"
+      },
+      "measurement_scope": "Source existence/hash only, not execution or correctness"
+    },
+    {
+      "id": "source:tests/support.py",
+      "kind": "source",
+      "subject": "tests/support.py",
+      "executed": true,
+      "passed": true,
+      "sha256": "5a3607d39443ccba7b358f41188b4f984eef324fce503f087ee3d99653c4a696",
+      "context": {
+        "project": "scentperfumes",
+        "run_id": "20261118T200144-orchestration-24ebace1",
+        "source_sha256": "0ff346232673c96f01edc1ea340a897dbb1b57fbf9b6575cdc3ec2671675d223",
+        "objective_sha256": "2c960594bcf2d8b00979ba7b4b5a7517584e747286f7da3796b0dd919166727d",
+        "files": {
+          "tools/ipanema/orchestration/engine.py": "5457069b77eca890369b3d15041390a8f6312991eb2155f0825d97c925b9ce11",
+          "tools/ipanema/validation.py": "7668d26c46790026ee8540b032a7d8980eee07bc5dd354636d2c306712ab1899",
+          "tools/ipanema/snapshot_links.py": "5287cf3ee950f9379da18d10007807fd685150e62fe5682577a1e7640fb137e7",
+          "tests/support.py": "5a3607d39443ccba7b358f41188b4f984eef324fce503f087ee3d99653c4a696",
+          "tests/unit/test_skill_execution_contract.py": "90fcd5889716a1d6dd1596b9671638a62fe3282e947d9b499898aa35e535cde9"
+        },
+        "required_constraints": [
+          "accessibility",
+          "seo"
+        ],
+        "instructions_sha256": "547f1965bc6e0a912d9308dba0910096693c4815b6268f9122ffd7c52fa80946",
+        "require_objections": true,
+        "require_defense": true,
+        "participation_sha256": "9ff597857187450dc19d945e8124e6a50c9a76a12101de1d08f41ada93399d8c"
+      },
+      "measurement_scope": "Source existence/hash only, not execution or correctness"
+    },
+    {
+      "id": "source:tests/unit/test_skill_execution_contract.py",
+      "kind": "source",
+      "subject": "tests/unit/test_skill_execution_contract.py",
+      "executed": true,
+      "passed": true,
+      "sha256": "90fcd5889716a1d6dd1596b9671638a62fe3282e947d9b499898aa35e535cde9",
+      "context": {
+        "project": "scentperfumes",
+        "run_id": "20261118T200144-orchestration-24ebace1",
+        "source_sha256": "0ff346232673c96f01edc1ea340a897dbb1b57fbf9b6575cdc3ec2671675d223",
+        "objective_sha256": "2c960594bcf2d8b00979ba7b4b5a7517584e747286f7da3796b0dd919166727d",
+        "files": {
+          "tools/ipanema/orchestration/engine.py": "5457069b77eca890369b3d15041390a8f6312991eb2155f0825d97c925b9ce11",
+          "tools/ipanema/validation.py": "7668d26c46790026ee8540b032a7d8980eee07bc5dd354636d2c306712ab1899",
+          "tools/ipanema/snapshot_links.py": "5287cf3ee950f9379da18d10007807fd685150e62fe5682577a1e7640fb137e7",
+          "tests/support.py": "5a3607d39443ccba7b358f41188b4f984eef324fce503f087ee3d99653c4a696",
+          "tests/unit/test_skill_execution_contract.py": "90fcd5889716a1d6dd1596b9671638a62fe3282e947d9b499898aa35e535cde9"
+        },
+        "required_constraints": [
+          "accessibility",
+          "seo"
+        ],
+        "instructions_sha256": "547f1965bc6e0a912d9308dba0910096693c4815b6268f9122ffd7c52fa80946",
+        "require_objections": true,
+        "require_defense": true,
+        "participation_sha256": "9ff597857187450dc19d945e8124e6a50c9a76a12101de1d08f41ada93399d8c"
+      },
+      "measurement_scope": "Source existence/hash only, not execution or correctness"
+    },
+    {
+      "id": "qa:baseline",
+      "kind": "qa",
+      "subject": "baseline",
+      "executed": true,
+      "passed": true,
+      "sha256": "bb12befb646da0d721d58e36239f2a16bf779985c157ae777ed360c28e73290b",
+      "context": {
+        "project": "scentperfumes",
+        "run_id": "20261118T200144-orchestration-24ebace1",
+        "source_sha256": "0ff346232673c96f01edc1ea340a897dbb1b57fbf9b6575cdc3ec2671675d223",
+        "objective_sha256": "2c960594bcf2d8b00979ba7b4b5a7517584e747286f7da3796b0dd919166727d",
+        "files": {
+          "tools/ipanema/orchestration/engine.py": "5457069b77eca890369b3d15041390a8f6312991eb2155f0825d97c925b9ce11",
+          "tools/ipanema/validation.py": "7668d26c46790026ee8540b032a7d8980eee07bc5dd354636d2c306712ab1899",
+          "tools/ipanema/snapshot_links.py": "5287cf3ee950f9379da18d10007807fd685150e62fe5682577a1e7640fb137e7",
+          "tests/support.py": "5a3607d39443ccba7b358f41188b4f984eef324fce503f087ee3d99653c4a696",
+          "tests/unit/test_skill_execution_contract.py": "90fcd5889716a1d6dd1596b9671638a62fe3282e947d9b499898aa35e535cde9"
+        },
+        "required_constraints": [
+          "accessibility",
+          "seo"
+        ],
+        "instructions_sha256": "547f1965bc6e0a912d9308dba0910096693c4815b6268f9122ffd7c52fa80946",
+        "require_objections": true,
+        "require_defense": true,
+        "participation_sha256": "9ff597857187450dc19d945e8124e6a50c9a76a12101de1d08f41ada93399d8c"
+      },
+      "measurement_scope": "unit-tests-isolated"
+    }
+  ],
+  "limits": [
+    "Los hashes de fuente no prueban ejecución ni corrección.",
+    "La aprobación del consejo no sustituye QA posterior ni autoriza producción.",
+    "Las opiniones y confidence del modelo no son mediciones."
+  ],
+  "binding": {
+    "project": "scentperfumes",
+    "run_id": "20261118T200144-orchestration-24ebace1",
+    "source_sha256": "0ff346232673c96f01edc1ea340a897dbb1b57fbf9b6575cdc3ec2671675d223",
+    "objective_sha256": "2c960594bcf2d8b00979ba7b4b5a7517584e747286f7da3796b0dd919166727d",
+    "files": {
+      "tools/ipanema/orchestration/engine.py": "5457069b77eca890369b3d15041390a8f6312991eb2155f0825d97c925b9ce11",
+      "tools/ipanema/validation.py": "7668d26c46790026ee8540b032a7d8980eee07bc5dd354636d2c306712ab1899",
+      "tools/ipanema/snapshot_links.py": "5287cf3ee950f9379da18d10007807fd685150e62fe5682577a1e7640fb137e7",
+      "tests/support.py": "5a3607d39443ccba7b358f41188b4f984eef324fce503f087ee3d99653c4a696",
+      "tests/unit/test_skill_execution_contract.py": "90fcd5889716a1d6dd1596b9671638a62fe3282e947d9b499898aa35e535cde9"
+    },
+    "required_constraints": [
+      "accessibility",
+      "seo"
+    ],
+    "instructions_sha256": "547f1965bc6e0a912d9308dba0910096693c4815b6268f9122ffd7c52fa80946",
+    "require_objections": true,
+    "require_defense": true,
+    "participation_sha256": "9ff597857187450dc19d945e8124e6a50c9a76a12101de1d08f41ada93399d8c"
+  },
+  "alternative_identities": {
+    "claude-harden-lexical-binding": "e4949ab82d6b131857581f329228d8f7fc9ab7491e5427f99fca44cbe8405cfa",
+    "claude-accept-as-is": "e5194f2694b080268f79c14c28e76de8f44232d0307c8a636bd06e15b2009117",
+    "claude-runtime-flag-receipts": "2801f74506ca4f607a4162f9d11bacd8002bc6109bda06b99dbf1c350fd87c90"
+  },
+  "worker_attempt_budget": {
+    "limit": 6,
+    "used": 3,
+    "includes_retries_and_substitutions": true,
+    "provider_internal_api_call_count": "not_available"
+  },
+  "rounds_executed": 1,
+  "protocol_version": 2,
+  "phases_executed": [
+    "independent_proposals"
+  ],
+  "deliberation_rounds_executed": 0,
+  "reused_valid_proposals": [],
+  "reused_valid_objections": [],
+  "controller_probes_limit": "Predicates prove only their recorded scope. Stronger claims require appropriate tests; no live SEO/performance certification."
+}

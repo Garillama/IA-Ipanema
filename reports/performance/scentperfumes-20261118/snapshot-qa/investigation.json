@@ -1,0 +1,58 @@
+{
+  "at": "2026-11-19T16:11:09.472238+00:00",
+  "status": "QA_unblocked_mandatory_council_running_no_integration",
+  "source_state": "Composition prepared in private candidate; no operational source changes. Stage12 ref import was already completed before user correction, with active branch and files preserved; it is not used as a source for this composition.",
+  "cause": {
+    "upstream": "Test assumed an unmounted host .local path for immutable public provenance data.",
+    "history": "Private composition omitted the real source artifacts before controller capture, so no truthful receipts could be generated for the validator links."
+  },
+  "decision": {
+    "upstream": "Store only verified original public bytes under tests/fixtures; retain all original hash assertions and add catalog-bound verifier with no optional skips.",
+    "history": "Reuse existing capture mechanism on real authorized source, copy exact referenced artifacts into private controller preparation only, then recheck receipt hashes/existence immediately before offline QA; exclude contents from sandbox/models.",
+    "security": "Do not change mounts, egress, AGENTS, model registry or participant policy; fail closed for missing/tampered/invalid inputs."
+  },
+  "alternatives_rejected": [
+    "Mount host .local or host HOME into QA.",
+    "Ignore or downgrade arbitrary broken links.",
+    "Generate placeholder files or substitute test fixtures for missing historical records.",
+    "Skip failing provenance test or change its expected hashes."
+  ],
+  "evidence": {
+    "targeted_tests": 83,
+    "original_failures_fixed": 8,
+    "existing_contract_tests_preserved": 24,
+    "new_negative_tests": 16,
+    "unit": {
+      "exit_code": 0,
+      "passed": true,
+      "tests_run": 614,
+      "skipped": 11
+    },
+    "integration": {
+      "exit_code": 0,
+      "passed": true,
+      "tests_run": 61,
+      "skipped": 2
+    },
+    "controller_receipts": 89,
+    "unique_real_artifacts": 84
+  },
+  "review": {
+    "modified_files": 30,
+    "patch_sha256": "95cbbadc752d26b6e28bed66875f6b7d70358b50a6360602ab5b30620b73ee7a",
+    "read_scope": 32,
+    "native_original_participants": [
+      "claude",
+      "codex"
+    ],
+    "approved": false
+  },
+  "performance_bundle": {
+    "zip_sha256": "07cac118951d43d86db461349945e8bbc1132a86096bcfba808994346b20252f",
+    "original_expected": "07cac118951d43d86db461349945e8bbc1132a86096bcfba808994346b20252f",
+    "tests_repeated": false,
+    "source_applied": false,
+    "domain_accessed": false
+  },
+  "preparation_error": "First host-targeted run used registry containing sample only, so 7 explicit ipanema tests could not register. Added only synthetic ipanema config to private root; no operational registry changes. Initial log preserved."
+}

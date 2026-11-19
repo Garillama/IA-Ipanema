@@ -1,0 +1,184 @@
+{
+  "at": "2026-11-18T21:20:55.458006+00:00",
+  "objective": "Check recovery/authorized reviewer and preserve proven work without rerunning unchanged suites",
+  "provider_check": {
+    "at": "2026-11-18T21:20:55.458006+00:00",
+    "kind": "official_orchestrator_availability_check",
+    "agent": "claude",
+    "model": {
+      "model": "claude-haiku-5-5",
+      "effort": "low",
+      "reason": "fast según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+      "verified_at": "2026-11-08"
+    },
+    "passed": false,
+    "category": "rate_limit",
+    "duration_s": 2.924,
+    "exit_code": 1,
+    "process_reaped": true,
+    "timed_out": false,
+    "attempts": [
+      {
+        "agent": "claude",
+        "retry": 0,
+        "status": "failed",
+        "category": "rate_limit"
+      }
+    ],
+    "fallback": false,
+    "new_storefront_requests": 0,
+    "review_or_approval": false,
+    "source_report": "/home/alanrichard/Escritorio/IA inversa/.local/scent-skill-contract-candidate/reports/runs/scentperfumes/20261118T211252-orchestration-smoke-ef919359/smoke.json"
+  },
+  "recovery_contract": {
+    "at": "2026-11-18T21:14:56.709550+00:00",
+    "public_resume_command": false,
+    "internal_readonly_recovery": true,
+    "current_binding_matches_checkpoint": false,
+    "changed_bound_files": [
+      "tools/ipanema/coordinator.py"
+    ],
+    "valid_cached_proposals": 0,
+    "old_calls_used": 2,
+    "old_calls_limit": 6,
+    "remaining_calls": 4,
+    "calls_required_without_cached_phases": 6,
+    "inference_attempted": false,
+    "recovery_refusal": "Recuperación solo de lectura con el mismo binding de fuente/objetivo/instrucciones.",
+    "checkpoint_artifacts_unchanged": true
+  },
+  "reviewer_policy": {
+    "members": [
+      "claude",
+      "codex"
+    ],
+    "disabled": [
+      "commandcode"
+    ],
+    "authorized_substitute_for_missing_original_member": null,
+    "same_provider_session_counts_as_distinct": false,
+    "source": "AGENTS.md:50-56; tools/ipanema/orchestration/models.json:council"
+  },
+  "patch_integrity": {
+    "at": "2026-11-18T21:12:53.547091+00:00",
+    "checks": [
+      {
+        "candidate": "engine",
+        "sha256": "ceef24d8385e3cdec811908c1526ee7bdbf41c5bc2887f0146fb8e145600fbed",
+        "manifest_match": true,
+        "base_files_match": true,
+        "candidate_files_match": true,
+        "git_apply_check": 0,
+        "status": "prepared",
+        "approved": false,
+        "applied": false
+      },
+      {
+        "candidate": "css",
+        "sha256": "97ca9fe2111dcfa25acb35b017928da9b41ab1fe124af3b40f03bf33c7144e41",
+        "manifest_match": true,
+        "base_files_match": true,
+        "candidate_files_match": true,
+        "git_apply_check": 0,
+        "status": "prepared",
+        "approved": false,
+        "applied": false
+      },
+      {
+        "candidate": "observers",
+        "sha256": "95bad94590b5e4e5585b8fb29c6e32b3a4ae4432e1fd08c37b0ea6791efe6594",
+        "manifest_match": true,
+        "base_files_match": true,
+        "candidate_files_match": true,
+        "git_apply_check": 0,
+        "status": "prepared",
+        "approved": false,
+        "applied": false
+      }
+    ]
+  },
+  "readonly_dependencies_changed_during_check": [
+    "tools/ipanema/coordinator.py"
+  ],
+  "additional_patch_targets_missing_from_last_attempt_scope": [
+    "tests/unit/test_web_design_guidelines.py"
+  ],
+  "targeted_current_catalog_check": {
+    "at": "2026-11-18T21:17:53.071063+00:00",
+    "kind": "targeted_candidate_overlay_contract_test",
+    "scope": "candidate instruction loader with current original registry, synthetic filesystem only",
+    "original_registry_sha256": "8d8b653f9497acbc719ac474caaf6b8c0246828cbc7b732d5bb97964f5ec8666",
+    "candidate_engine_sha256": "09347e00e317fc1e02a6b980aa7a71f97880f808f7d89087a293f51d429c8abb",
+    "authorized_skills_loaded": [
+      "better-accessibility",
+      "cloudflare-web-perf",
+      "ipanema-architect",
+      "ipanema-commerce",
+      "ipanema-component-builder",
+      "ipanema-motion",
+      "ipanema-performance",
+      "ipanema-responsive",
+      "ipanema-seo-expert",
+      "ipanema-storefront",
+      "ipanema-visual-qa",
+      "schema",
+      "seo-audit",
+      "vercel-react-best-practices",
+      "web-design-guidelines",
+      "web-quality-audit"
+    ],
+    "unknown_prefixed_skill_rejected": true,
+    "provider_calls": 0,
+    "original_files_modified": false,
+    "approval": false,
+    "limitations": "Does not replace complete regression QA or final independent review on the updated dependency context."
+  },
+  "qa_reuse": {
+    "full_suites_rerun": false,
+    "existing_candidate_qa_source_hashes_match": true,
+    "scope": "Frozen tested candidate only. Current original coordinator dependency changed; targeted loader compatibility passed, remaining affected dependency checks must be included in future final review/integration.",
+    "old_approval_reused": false
+  },
+  "states": [
+    {
+      "candidate": "engine",
+      "sha256": "ceef24d8385e3cdec811908c1526ee7bdbf41c5bc2887f0146fb8e145600fbed",
+      "prepared": true,
+      "verified_local_candidate": true,
+      "approved_current_hash": false,
+      "applied_original": false,
+      "verified_after_application": false
+    },
+    {
+      "candidate": "css",
+      "sha256": "97ca9fe2111dcfa25acb35b017928da9b41ab1fe124af3b40f03bf33c7144e41",
+      "prepared": true,
+      "verified_local_candidate": true,
+      "approved_current_hash": false,
+      "applied_original": false,
+      "verified_after_application": false
+    },
+    {
+      "candidate": "observers",
+      "sha256": "95bad94590b5e4e5585b8fb29c6e32b3a4ae4432e1fd08c37b0ea6791efe6594",
+      "prepared": true,
+      "verified_local_candidate": true,
+      "approved_current_hash": false,
+      "applied_original": false,
+      "verified_after_application": false
+    }
+  ],
+  "local_research": {
+    "font_files": 8,
+    "unique_glyf_table_hashes": 8,
+    "files_with_fvar": 0,
+    "exact_duplicate_asset_groups": 24,
+    "network_duplicate_transfer_observed": false,
+    "additional_optimization_prepared": false,
+    "decision": "Retain fonts/assets. File identity alone does not justify removing resources or claiming network savings."
+  },
+  "production_changed": false,
+  "new_storefront_requests": 0,
+  "audit_complete": false,
+  "next_review": "New authorized read-only review on the current complete source binding when provider availability is restored; reuse exact valid QA, do not alter old checkpoints or expand their budget."
+}

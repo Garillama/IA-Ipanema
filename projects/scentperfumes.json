@@ -1,0 +1,25 @@
+{
+  "schema_version": 2,
+  "id": "scentperfumes",
+  "name": "Scent Perfumes",
+  "theme_root": null,
+  "environment": "production-read-only",
+  "public_url": "https://scentperfumes.mx/",
+  "discovery_root": "ipanema-discovery",
+  "knowledge_reference_project": "ipanema",
+  "evidence_dir": "reports/runs/scentperfumes",
+  "remote_observation": null,
+  "qa": {
+    "pages": {
+      "home": "/"
+    },
+    "widths": [
+      360,
+      390,
+      768,
+      1024,
+      1440,
+      1920
+    ]
+  }
+}

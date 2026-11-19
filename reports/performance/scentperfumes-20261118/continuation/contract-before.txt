@@ -1,0 +1,197 @@
+test_execute_reaches_configuration_only_after_catalog_validation (test_skill_execution_contract.SkillExecutionContract.test_execute_reaches_configuration_only_after_catalog_validation) ... ERROR
+test_execute_unknown_skill_never_dispatches (test_skill_execution_contract.SkillExecutionContract.test_execute_unknown_skill_never_dispatches) ... FAIL
+test_internal_and_external_file_symlinks_rejected (test_skill_execution_contract.SkillExecutionContract.test_internal_and_external_file_symlinks_rejected) ... ok
+test_internal_directory_symlink_rejected (test_skill_execution_contract.SkillExecutionContract.test_internal_directory_symlink_rejected) ... ok
+test_invalid_utf8_fails_closed (test_skill_execution_contract.SkillExecutionContract.test_invalid_utf8_fails_closed) ... ERROR
+test_list_type_entries_and_duplicates_rejected (test_skill_execution_contract.SkillExecutionContract.test_list_type_entries_and_duplicates_rejected) ... 
+  test_list_type_entries_and_duplicates_rejected (test_skill_execution_contract.SkillExecutionContract.test_list_type_entries_and_duplicates_rejected) (value={}) ... FAIL
+  test_list_type_entries_and_duplicates_rejected (test_skill_execution_contract.SkillExecutionContract.test_list_type_entries_and_duplicates_rejected) (value=[None]) ... ERROR
+  test_list_type_entries_and_duplicates_rejected (test_skill_execution_contract.SkillExecutionContract.test_list_type_entries_and_duplicates_rejected) (value=[[]]) ... ERROR
+  test_list_type_entries_and_duplicates_rejected (test_skill_execution_contract.SkillExecutionContract.test_list_type_entries_and_duplicates_rejected) (value=['ipanema-architect', 'ipanema-architect']) ... FAIL
+test_missing_authorized_skill_fails_closed (test_skill_execution_contract.SkillExecutionContract.test_missing_authorized_skill_fails_closed) ... FAIL
+test_registered_skills_load_for_all_catalog_entries (test_skill_execution_contract.SkillExecutionContract.test_registered_skills_load_for_all_catalog_entries) ... ok
+test_router_discovery_external_names_are_authorized (test_skill_execution_contract.SkillExecutionContract.test_router_discovery_external_names_are_authorized) ... ok
+test_sanitizer_keeps_private_default_and_explicit_qa_documents (test_skill_execution_contract.SkillExecutionContract.test_sanitizer_keeps_private_default_and_explicit_qa_documents) ... ERROR
+test_unknown_names_including_ipanema_prefix_rejected (test_skill_execution_contract.SkillExecutionContract.test_unknown_names_including_ipanema_prefix_rejected) ... 
+  test_unknown_names_including_ipanema_prefix_rejected (test_skill_execution_contract.SkillExecutionContract.test_unknown_names_including_ipanema_prefix_rejected) (name='ipanema-invented') ... FAIL
+test_changed_document_cannot_reuse_receipt (test_skill_execution_contract.SnapshotLinkContract.test_changed_document_cannot_reuse_receipt) ... ERROR
+test_default_real_project_validation_remains_strict (test_skill_execution_contract.SnapshotLinkContract.test_default_real_project_validation_remains_strict) ... ERROR
+test_full_validator_preserves_error_for_uninventoried_links (test_skill_execution_contract.SnapshotLinkContract.test_full_validator_preserves_error_for_uninventoried_links) ... ERROR
+test_missing_or_symlinked_evidence_never_invented (test_skill_execution_contract.SnapshotLinkContract.test_missing_or_symlinked_evidence_never_invented) ... ERROR
+test_new_private_unknown_and_forged_targets_rejected (test_skill_execution_contract.SnapshotLinkContract.test_new_private_unknown_and_forged_targets_rejected) ... ERROR
+test_receipt_is_identity_only_and_content_stays_excluded (test_skill_execution_contract.SnapshotLinkContract.test_receipt_is_identity_only_and_content_stays_excluded) ... ERROR
+test_unindexed_receipt_never_matches (test_skill_execution_contract.SnapshotLinkContract.test_unindexed_receipt_never_matches) ... ERROR
+
+======================================================================
+ERROR: test_execute_reaches_configuration_only_after_catalog_validation (test_skill_execution_contract.SkillExecutionContract.test_execute_reaches_configuration_only_after_catalog_validation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/alanrichard/Escritorio/IA inversa/.local/scent-skill-contract-candidate/tests/unit/test_skill_execution_contract.py", line 63, in test_execute_reaches_configuration_only_after_catalog_validation
+    with patch.object(engine,'config',side_effect=DispatchReached),self.assertRaises(DispatchReached):engine.execute(self.project,plan,authorize=True)
+                                                                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/alanrichard/Escritorio/IA inversa/tools/ipanema/orchestration/engine.py", line 427, in execute
+    if not __import__('re').fullmatch(r'ipanema-[a-z-]+',skill):raise IpanemaError('Skill fuera de catálogo.')
+                                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ipanema.core.IpanemaError: Skill fuera de catálogo.
+
+======================================================================
+ERROR: test_invalid_utf8_fails_closed (test_skill_execution_contract.SkillExecutionContract.test_invalid_utf8_fails_closed)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/alanrichard/Escritorio/IA inversa/.local/scent-skill-contract-candidate/tests/unit/test_skill_execution_contract.py", line 58, in test_invalid_utf8_fails_closed
+    with self.assertRaises(IpanemaError):engine.instruction_context(self.project,{'skills':['cloudflare-web-perf']})
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/alanrichard/Escritorio/IA inversa/tools/ipanema/orchestration/engine.py", line 148, in instruction_context
+    if path.is_file():skills[name]=path.read_text()
+                                   ^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1030, in read_text
+    return f.read()
+           ^^^^^^^^
+  File "<frozen codecs>", line 322, in decode
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0xff in position 0: invalid start byte
+
+======================================================================
+ERROR: test_list_type_entries_and_duplicates_rejected (test_skill_execution_contract.SkillExecutionContract.test_list_type_entries_and_duplicates_rejected) (value=[None])
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/alanrichard/Escritorio/IA inversa/.local/scent-skill-contract-candidate/tests/unit/test_skill_execution_contract.py", line 38, in test_list_type_entries_and_duplicates_rejected
+    with self.subTest(value=value),self.assertRaises(IpanemaError):engine.instruction_context(self.project,{'skills':value})
+                                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/alanrichard/Escritorio/IA inversa/tools/ipanema/orchestration/engine.py", line 144, in instruction_context
+    if not (__import__('re').fullmatch('ipanema-[a-z-]+',name) or name in AUTHORIZED_SKILLS):
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/re/__init__.py", line 172, in fullmatch
+    return _compile(pattern, flags).fullmatch(string)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: expected string or bytes-like object, got 'NoneType'
+
+======================================================================
+ERROR: test_list_type_entries_and_duplicates_rejected (test_skill_execution_contract.SkillExecutionContract.test_list_type_entries_and_duplicates_rejected) (value=[[]])
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/alanrichard/Escritorio/IA inversa/.local/scent-skill-contract-candidate/tests/unit/test_skill_execution_contract.py", line 38, in test_list_type_entries_and_duplicates_rejected
+    with self.subTest(value=value),self.assertRaises(IpanemaError):engine.instruction_context(self.project,{'skills':value})
+                                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/alanrichard/Escritorio/IA inversa/tools/ipanema/orchestration/engine.py", line 144, in instruction_context
+    if not (__import__('re').fullmatch('ipanema-[a-z-]+',name) or name in AUTHORIZED_SKILLS):
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/re/__init__.py", line 172, in fullmatch
+    return _compile(pattern, flags).fullmatch(string)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: expected string or bytes-like object, got 'list'
+
+======================================================================
+ERROR: test_sanitizer_keeps_private_default_and_explicit_qa_documents (test_skill_execution_contract.SkillExecutionContract.test_sanitizer_keeps_private_default_and_explicit_qa_documents)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/alanrichard/Escritorio/IA inversa/.local/scent-skill-contract-candidate/tests/unit/test_skill_execution_contract.py", line 76, in test_sanitizer_keeps_private_default_and_explicit_qa_documents
+    view=engine.sanitized_view(self.root,self.root/'qa-view',names=['.agents/skills/cloudflare-web-perf/SKILL.md','.agents/skills/ipanema-invented/SKILL.md','.nuvem','shop.local.json'],include_skills=True)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: sanitized_view() got an unexpected keyword argument 'include_skills'
+
+======================================================================
+ERROR: test_changed_document_cannot_reuse_receipt (test_skill_execution_contract.SnapshotLinkContract.test_changed_document_cannot_reuse_receipt)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/alanrichard/Escritorio/IA inversa/.local/scent-skill-contract-candidate/tests/unit/test_skill_execution_contract.py", line 81, in setUp
+    from ipanema.snapshot_links import capture_omitted_links
+ModuleNotFoundError: No module named 'ipanema.snapshot_links'
+
+======================================================================
+ERROR: test_default_real_project_validation_remains_strict (test_skill_execution_contract.SnapshotLinkContract.test_default_real_project_validation_remains_strict)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/alanrichard/Escritorio/IA inversa/.local/scent-skill-contract-candidate/tests/unit/test_skill_execution_contract.py", line 81, in setUp
+    from ipanema.snapshot_links import capture_omitted_links
+ModuleNotFoundError: No module named 'ipanema.snapshot_links'
+
+======================================================================
+ERROR: test_full_validator_preserves_error_for_uninventoried_links (test_skill_execution_contract.SnapshotLinkContract.test_full_validator_preserves_error_for_uninventoried_links)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/alanrichard/Escritorio/IA inversa/.local/scent-skill-contract-candidate/tests/unit/test_skill_execution_contract.py", line 81, in setUp
+    from ipanema.snapshot_links import capture_omitted_links
+ModuleNotFoundError: No module named 'ipanema.snapshot_links'
+
+======================================================================
+ERROR: test_missing_or_symlinked_evidence_never_invented (test_skill_execution_contract.SnapshotLinkContract.test_missing_or_symlinked_evidence_never_invented)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/alanrichard/Escritorio/IA inversa/.local/scent-skill-contract-candidate/tests/unit/test_skill_execution_contract.py", line 81, in setUp
+    from ipanema.snapshot_links import capture_omitted_links
+ModuleNotFoundError: No module named 'ipanema.snapshot_links'
+
+======================================================================
+ERROR: test_new_private_unknown_and_forged_targets_rejected (test_skill_execution_contract.SnapshotLinkContract.test_new_private_unknown_and_forged_targets_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/alanrichard/Escritorio/IA inversa/.local/scent-skill-contract-candidate/tests/unit/test_skill_execution_contract.py", line 81, in setUp
+    from ipanema.snapshot_links import capture_omitted_links
+ModuleNotFoundError: No module named 'ipanema.snapshot_links'
+
+======================================================================
+ERROR: test_receipt_is_identity_only_and_content_stays_excluded (test_skill_execution_contract.SnapshotLinkContract.test_receipt_is_identity_only_and_content_stays_excluded)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/alanrichard/Escritorio/IA inversa/.local/scent-skill-contract-candidate/tests/unit/test_skill_execution_contract.py", line 81, in setUp
+    from ipanema.snapshot_links import capture_omitted_links
+ModuleNotFoundError: No module named 'ipanema.snapshot_links'
+
+======================================================================
+ERROR: test_unindexed_receipt_never_matches (test_skill_execution_contract.SnapshotLinkContract.test_unindexed_receipt_never_matches)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/alanrichard/Escritorio/IA inversa/.local/scent-skill-contract-candidate/tests/unit/test_skill_execution_contract.py", line 81, in setUp
+    from ipanema.snapshot_links import capture_omitted_links
+ModuleNotFoundError: No module named 'ipanema.snapshot_links'
+
+======================================================================
+FAIL: test_execute_unknown_skill_never_dispatches (test_skill_execution_contract.SkillExecutionContract.test_execute_unknown_skill_never_dispatches)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/alanrichard/Escritorio/IA inversa/.local/scent-skill-contract-candidate/tests/unit/test_skill_execution_contract.py", line 69, in test_execute_unknown_skill_never_dispatches
+    dispatch.assert_not_called()
+  File "/usr/lib/python3.12/unittest/mock.py", line 905, in assert_not_called
+    raise AssertionError(msg)
+AssertionError: Expected 'config' to not have been called. Called 1 times.
+Calls: [call(<ipanema.core.Project object at 0x7cd7752bf4d0>),
+ call().get('recovery', {}),
+ call().get().get('max_retries', 1),
+ call().get().get('circuit_failures', 2)].
+
+======================================================================
+FAIL: test_list_type_entries_and_duplicates_rejected (test_skill_execution_contract.SkillExecutionContract.test_list_type_entries_and_duplicates_rejected) (value={})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/alanrichard/Escritorio/IA inversa/.local/scent-skill-contract-candidate/tests/unit/test_skill_execution_contract.py", line 38, in test_list_type_entries_and_duplicates_rejected
+    with self.subTest(value=value),self.assertRaises(IpanemaError):engine.instruction_context(self.project,{'skills':value})
+AssertionError: IpanemaError not raised
+
+======================================================================
+FAIL: test_list_type_entries_and_duplicates_rejected (test_skill_execution_contract.SkillExecutionContract.test_list_type_entries_and_duplicates_rejected) (value=['ipanema-architect', 'ipanema-architect'])
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/alanrichard/Escritorio/IA inversa/.local/scent-skill-contract-candidate/tests/unit/test_skill_execution_contract.py", line 38, in test_list_type_entries_and_duplicates_rejected
+    with self.subTest(value=value),self.assertRaises(IpanemaError):engine.instruction_context(self.project,{'skills':value})
+AssertionError: IpanemaError not raised
+
+======================================================================
+FAIL: test_missing_authorized_skill_fails_closed (test_skill_execution_contract.SkillExecutionContract.test_missing_authorized_skill_fails_closed)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/alanrichard/Escritorio/IA inversa/.local/scent-skill-contract-candidate/tests/unit/test_skill_execution_contract.py", line 42, in test_missing_authorized_skill_fails_closed
+    with self.assertRaises(IpanemaError):engine.instruction_context(self.project,{'skills':['cloudflare-web-perf']})
+AssertionError: IpanemaError not raised
+
+======================================================================
+FAIL: test_unknown_names_including_ipanema_prefix_rejected (test_skill_execution_contract.SkillExecutionContract.test_unknown_names_including_ipanema_prefix_rejected) (name='ipanema-invented')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/alanrichard/Escritorio/IA inversa/.local/scent-skill-contract-candidate/tests/unit/test_skill_execution_contract.py", line 34, in test_unknown_names_including_ipanema_prefix_rejected
+    with self.subTest(name=name),self.assertRaises(IpanemaError):engine.instruction_context(self.project,{'skills':[name]})
+AssertionError: IpanemaError not raised
+
+----------------------------------------------------------------------
+Ran 18 tests in 0.110s
+
+FAILED (failures=5, errors=12)

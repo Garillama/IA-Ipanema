@@ -1,0 +1,19 @@
+{
+  "kind": "read-only-logical-candidate-snapshot",
+  "base_incremental_patch_sha256": "ff73a41106aa153e30f0b84bf018ce89f80d693a68551eb39ab021ce1c09406b",
+  "allowed_files": [
+    "sections/hero.tpl",
+    "snippets/image.tpl"
+  ],
+  "files_sha256": {
+    "sections/hero.tpl": "1e70c54c4c5bc38711272284843d8881c4354ac7725e9de56c0223b599c3e65d",
+    "snippets/image.tpl": "e4e622e0c561c4450138e7717a1e5af95cf19d0184aee5cbcb89990f7ada767e"
+  },
+  "readonly_mode_octal": {
+    "root": "0555",
+    "directories": "0555",
+    "files": "0444"
+  },
+  "includes_dependency_source_files": false,
+  "purpose": "Demonstrate logical-path and candidate-hash binding only; no provider execution."
+}

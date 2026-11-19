@@ -1,0 +1,62 @@
+[
+  {
+    "path": "tools/ipanema/orchestration/planner.py",
+    "base_sha256": "b09a3bc644618502680e8804ed7f135eaa074e7b82812d2013c5293ef909117e",
+    "isolated_sha256": "9547eea26c01b976177378d60d5d8defe5550c70f91b9b88e25fa2161e079185",
+    "change": "modified"
+  },
+  {
+    "path": "tools/ipanema/orchestration/cli.py",
+    "base_sha256": "04e661d92b687da162887aaca8ad5c7905359e7c8376cc0ddec2370d9d58c99b",
+    "isolated_sha256": "5bd2ebcebd83822c495b036c4f864dfbd8d91735f821b213133e8badba08620e",
+    "change": "modified"
+  },
+  {
+    "path": "tools/ipanema/orchestration/engine.py",
+    "base_sha256": "74885e94f8f9cbf8f7a6e71c0cc8f5f44eec032fac8892f7507e2eb06879319f",
+    "isolated_sha256": "927a9292bd997c7f8ce4c04dc1b331b5d29620a3d52d79a0f8f280febadff496",
+    "change": "modified"
+  },
+  {
+    "path": "tools/ipanema/orchestration/council.py",
+    "base_sha256": "4ec261a0d84fbdc12d5abf85eab489d21cf85f30af57eac9769c722d17541261",
+    "isolated_sha256": "1ef7e6bc0f6a4f3cd7e45b882fdf5a411360b127b089452b24466c8b983fb403",
+    "change": "modified"
+  },
+  {
+    "path": "tools/ipanema/orchestration/council_runtime.py",
+    "base_sha256": "92b6e47eb8942c26161c240a3258e481ae108b42ee2894cd0577403ea0d49635",
+    "isolated_sha256": "1117f9c776feb9516a4601ff25d6dbebb3657f2bc005fc151c80205ae2f570e8",
+    "change": "modified"
+  },
+  {
+    "path": "tests/unit/test_orchestration_file_contract.py",
+    "base_sha256": null,
+    "isolated_sha256": "c439a4b0e6471b0d91053df2931b58c489e4f091a3e48fe88ebd58352ab250a8",
+    "change": "added"
+  },
+  {
+    "path": "tests/unit/test_council_receipts.py",
+    "base_sha256": "a70bffee039ef3e5e901eabb2f2add4ad8e28535445a90d5291aaec1274942ff",
+    "isolated_sha256": "b57b286835e82814edd964b0e1c9b7a6537a1e5b73f9c5c6891d5ce5b10c7de4",
+    "change": "modified"
+  },
+  {
+    "path": "tests/unit/test_council_dual.py",
+    "base_sha256": "b2c9c5145ae205ddcc8bc77fdf7303986c24e000d64cb2772a92e5633d6287cb",
+    "isolated_sha256": "9d6eb9735d2fb75a7ab2a6d5765f888dfb1e5925c40c6e0d2b45436d144f5996",
+    "change": "modified"
+  },
+  {
+    "path": "tests/unit/test_council_policy.py",
+    "base_sha256": "9a65f6a4537ce963e9c1e105f09fe14a43813459fabc351d5571431ccece17f8",
+    "isolated_sha256": "dacdf83b7289cda44768d27a2f6c6262d1725cb4b5c088e86e3463c0986b44d2",
+    "change": "modified"
+  },
+  {
+    "path": "tests/integration/test_orchestration_cli.py",
+    "base_sha256": "aeb259dac03373c9383f7cbeca0603c61770624dd86d999f79a5f2239b1d8e71",
+    "isolated_sha256": "6769c17078e6f39f7dc99e8f406bfdf90b1d132972dae53ed326164d21de7fa8",
+    "change": "modified"
+  }
+]

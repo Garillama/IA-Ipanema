@@ -1,0 +1,46 @@
+{
+  "schema": "ipanema-bootstrap-security-preflight/v1",
+  "status": "blocked_needs_evidence",
+  "authorized_candidate_controller_patch_sha256": "16802138df326ef1f47612784756cdad4ad79c9010d4bd9fb866c18c137126a5",
+  "design_manifest_sha256": "293799aa0dc78534e5f21c2d5d2b40568e7d287aec4e61d798daecd17a255716",
+  "providers_invoked": false,
+  "real_credentials_used": false,
+  "candidate_v3_modified": false,
+  "operational_controller_modified": false,
+  "production_accessed": false,
+  "implementation_files_edited": [],
+  "observations": [
+    {
+      "id": "B1-network-namespace",
+      "command": "unshare -n true",
+      "result": "exit 1: unshare: unshare failed: Operation not permitted"
+    },
+    {
+      "id": "B1-nftables",
+      "command": "nft list ruleset",
+      "result": "Operation not permitted (you must be root)"
+    },
+    {
+      "id": "B1-iptables",
+      "command": "iptables -S",
+      "result": "Could not fetch rule set generation id: Permission denied"
+    },
+    {
+      "id": "B2-secret-mount-design",
+      "source": "Previously recorded synthetic probe in bootstrap-correction-design-20261117/evidence.json",
+      "result": "A child process read the dummy canary from the auth mount; no real credentials were used"
+    },
+    {
+      "id": "B2-identity-transport",
+      "source": "Isolated checkout code inspection",
+      "result": "Current CLI auth is mounted into the worker; removing it breaks that auth path. No equivalent broker transport/identity was demonstrated."
+    }
+  ],
+  "isolated_checkout_hashes": {
+    "tools/ipanema/orchestration/isolation.py": "0d734fcbf6d10e839d2a7cb46f3416ca60f0751e1491974d73186a8d56408079",
+    "tools/ipanema/orchestration/engine.py": "927a9292bd997c7f8ce4c04dc1b331b5d29620a3d52d79a0f8f280febadff496",
+    "tools/ipanema/orchestration/adapters.py": "bae25bee06cf7574ee35f65e9f9055dfa8a495336f80615165ddd5232359d01d"
+  },
+  "tests_run_for_implementation": [],
+  "reason": "Stop condition: cannot prove destination-level network egress enforcement in this sandbox, and current provider CLI credential flow is coupled to the tool-capable worker."
+}

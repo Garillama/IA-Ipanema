@@ -1,0 +1,462 @@
+{
+  "sections": {
+    "athletes_carousel": {
+      "type": "athletes-carousel",
+      "settings": {
+        "heading": "EMBAJADORES RHINO",
+        "description": "Conoce a nuestros embajadores y descubre cómo usan nuestros productos en su recuperación.",
+        "section_width": "page",
+        "text_alignment": "left",
+        "gap": 35,
+        "card_size_mobile": 70,
+        "show_instagram_handle": false
+      },
+      "blocks": {
+        "athletes_group": {
+          "type": "athletes-group",
+          "settings": {
+            "gap": 20
+          },
+          "blocks": {
+            "item_1": {
+              "type": "athletes-item",
+              "settings": {
+                "name": "Norma Coker",
+                "instagram_handle": "@normacoker",
+                "badge": "Triatleta",
+                "image": "@media-lib:439ee58f-b57a-4686-8291-3cf2a7e1cb29",
+                "profile_url": "https://www.instagram.com/normacoker/"
+              }
+            },
+            "athletes-item_sm5x": {
+              "type": "athletes-item",
+              "settings": {
+                "name": "Alexia Torres Landa",
+                "instagram_handle": "@aletla",
+                "badge": "Triatleta",
+                "image": "@media-lib:3da9775c-a176-4532-a575-bf9b60cbaf84",
+                "profile_url": "https://www.instagram.com/aletla/"
+              }
+            },
+            "athletes-item_zl9i": {
+              "type": "athletes-item",
+              "settings": {
+                "name": "Vanessa Herrera",
+                "instagram_handle": "Runner",
+                "badge": "Runner",
+                "image": "@media-lib:7ee0b4dd-02d4-45ee-bd66-b052310de866",
+                "profile_url": "https://www.instagram.com/_vanessahe/"
+              }
+            },
+            "athletes-item_3whq": {
+              "type": "athletes-item",
+              "settings": {
+                "name": "Javi Vázquez",
+                "instagram_handle": "@javivaaz",
+                "badge": "Runner",
+                "image": "@media-lib:8ef5fd53-3f11-4778-ae94-40b951007370",
+                "profile_url": "https://www.instagram.com/javivaaz/"
+              }
+            },
+            "athletes-item_uqin": {
+              "type": "athletes-item",
+              "settings": {
+                "name": "Natalia Blanco",
+                "instagram_handle": "@natblanco",
+                "badge": "Padelista",
+                "image": "@media-lib:3baadb79-91a8-4671-bae4-5e9d28777174",
+                "profile_url": "https://www.instagram.com/natblanco/"
+              }
+            },
+            "athletes-item_er35": {
+              "type": "athletes-item",
+              "settings": {
+                "name": "Alondra González",
+                "instagram_handle": "@alondraglez0",
+                "badge": "Deportista",
+                "image": "@media-lib:35fb17dc-93f5-4b9e-8c78-20b6ecee1269",
+                "profile_url": "https://www.instagram.com/alondraglez0/"
+              }
+            },
+            "athletes-item_lfd4": {
+              "type": "athletes-item",
+              "settings": {
+                "name": "Paola Navarrete",
+                "instagram_handle": "",
+                "badge": "Fisioterapeuta",
+                "image": "@media-lib:2ed0e49e-f22d-413c-b00e-d589067e78ec",
+                "profile_url": "https://www.instagram.com/newfisio_/"
+              }
+            },
+            "athletes-item_c4n3": {
+              "type": "athletes-item",
+              "settings": {
+                "name": "Club Pachuca",
+                "instagram_handle": "@tuzosoficial",
+                "badge": "SPONSOR",
+                "image": "@media-lib:eba4cc6b-d8ed-4f48-ab10-c3c9df46f145",
+                "profile_url": "https://www.instagram.com/tuzosoficial/"
+              }
+            },
+            "athletes-item_b63f": {
+              "type": "athletes-item",
+              "settings": {
+                "name": "Cancún Challenger",
+                "instagram_handle": "@cancuncountryopen",
+                "badge": "SPONSOR",
+                "image": "@media-lib:3bb1876f-02fe-4863-b87e-12598e5ecf5a",
+                "profile_url": "https://www.instagram.com/cancuncountryopen/"
+              }
+            },
+            "athletes-item_84tz": {
+              "type": "athletes-item",
+              "settings": {
+                "name": "Andrés Pirela",
+                "instagram_handle": "@andres.afit",
+                "badge": "Triatleta",
+                "image": "@media-lib:e5265a19-2e98-4690-955d-fe3e1f573571",
+                "profile_url": "https://www.instagram.com/andres.afit/"
+              }
+            },
+            "athletes-item_hfwh": {
+              "type": "athletes-item",
+              "settings": {
+                "name": "Paola Catena",
+                "instagram_handle": "@pao.catena",
+                "badge": "Atleta",
+                "image": "@media-lib:ca5f91a2-09e1-4235-9e03-d98f0cef8791",
+                "profile_url": "https://www.instagram.com/pao.catena/"
+              }
+            }
+          },
+          "block_order": [
+            "item_1",
+            "athletes-item_sm5x",
+            "athletes-item_zl9i",
+            "athletes-item_3whq",
+            "athletes-item_uqin",
+            "athletes-item_er35",
+            "athletes-item_lfd4",
+            "athletes-item_c4n3",
+            "athletes-item_b63f",
+            "athletes-item_84tz",
+            "athletes-item_hfwh"
+          ]
+        }
+      },
+      "block_order": [
+        "athletes_group"
+      ]
+    },
+    "home_news": {
+      "type": "home-news",
+      "settings": {
+        "title": "t:defaults.home_news.title",
+        "title_size": 32,
+        "title_size_mobile": 24,
+        "title_uppercase": true,
+        "title_alignment": "left",
+        "show_button": true,
+        "button_label": "t:defaults.home_news.button",
+        "button_link": "/blog",
+        "button_variant": "outline",
+        "show_button_mobile": false,
+        "hero_count": 3,
+        "hero_image_ratio": "4-3",
+        "hero_image_radius": 20,
+        "hero_image_position": "left",
+        "hero_show_tags": true,
+        "hero_show_summary": true,
+        "hero_show_read_more": true,
+        "read_more_label": "t:defaults.home_news.read_more",
+        "hero_title_size": 40,
+        "hero_title_lines": 2,
+        "hero_summary_lines": 6,
+        "hero_summary_justify": true,
+        "hero_navigation": "none",
+        "hero_autoplay": false,
+        "hero_autoplay_speed": 5,
+        "columns_desktop": "3",
+        "columns_tablet": "3",
+        "card_peek_mobile": 91,
+        "gap": 30,
+        "gap_mobile": 12,
+        "show_arrows": true,
+        "show_dots": "always",
+        "loop": true,
+        "autoplay": true,
+        "autoplay_speed": 3,
+        "pause_on_hover": true,
+        "card_show_summary": true,
+        "card_show_tags": true,
+        "card_title_lines": 1,
+        "card_max_tags": 4,
+        "card_summary_size": 13,
+        "card_summary_size_mobile": 12,
+        "card_summary_margin": 20,
+        "card_summary_margin_mobile": 12,
+        "section_width": "page",
+        "vertical_padding": 15,
+        "vertical_padding_mobile": 10,
+        "background_color": "#FFFFFF",
+        "text_color": "#666666",
+        "tag_color": "#111111",
+        "tag_background_color": "#FFFFFF",
+        "tag_hover_color": "#000000",
+        "card_background_color": "#FFFFFF",
+        "card_border_color": "#EAEAEA",
+        "dot_color": "#E5E5E5",
+        "dot_active_color": "#000000"
+      },
+      "blocks": {
+        "home_news_posts": {
+          "type": "blog-posts-list",
+          "settings": {
+            "posts_count": 7
+          }
+        }
+      },
+      "block_order": [
+        "home_news_posts"
+      ]
+    },
+    "featured_collection": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "t:defaults.category_tabs.title",
+        "show_all_label": "t:defaults.category_tabs.show_all",
+        "show_all_source": {
+          "kind": "category",
+          "id": "0"
+        },
+        "button_label": "t:defaults.featured_collection.button"
+      },
+      "blocks": {
+        "featured_collection_tab_presoterapia": {
+          "type": "featured-collection-tab",
+          "settings": {
+            "category": {
+              "kind": "category",
+              "id": "39843484"
+            },
+            "label": ""
+          }
+        },
+        "featured_collection_tab_pistolas": {
+          "type": "featured-collection-tab",
+          "settings": {
+            "category": {
+              "kind": "category",
+              "id": "39843616"
+            },
+            "label": ""
+          }
+        },
+        "featured_collection_tab_compresion": {
+          "type": "featured-collection-tab",
+          "settings": {
+            "category": {
+              "kind": "category",
+              "id": "39861848"
+            },
+            "label": ""
+          }
+        },
+        "featured_collection_tab_terapia_fria": {
+          "type": "featured-collection-tab",
+          "settings": {
+            "category": {
+              "kind": "category",
+              "id": "39861840"
+            },
+            "label": ""
+          }
+        },
+        "featured_collection_tab_accesorios": {
+          "type": "featured-collection-tab",
+          "settings": {
+            "category": {
+              "kind": "category",
+              "id": "39861831"
+            },
+            "label": ""
+          }
+        }
+      },
+      "block_order": [
+        "featured_collection_tab_presoterapia",
+        "featured_collection_tab_pistolas",
+        "featured_collection_tab_compresion",
+        "featured_collection_tab_terapia_fria",
+        "featured_collection_tab_accesorios"
+      ]
+    },
+    "rhino-benefits_1790494499183": {
+      "type": "rhino-benefits",
+      "settings": [],
+      "blocks": {
+        "rhino-benefit-item_85b6": {
+          "type": "rhino-benefit-item",
+          "settings": {
+            "icon_source": "custom",
+            "icon": "shield",
+            "title": "Garantía",
+            "description": "De 12 meses",
+            "custom_image": "@media-lib:72dfe6af-ce25-4226-8f5e-deba0902e282"
+          }
+        },
+        "rhino-benefit-item_qbqh": {
+          "type": "rhino-benefit-item",
+          "settings": {
+            "icon_source": "custom",
+            "icon": "shipping",
+            "title": "Envíos Gratis",
+            "description": "A todo México",
+            "custom_image": "@media-lib:36372a87-12ea-4f98-9885-da93058f3dd3"
+          }
+        },
+        "rhino-benefit-item_pyci": {
+          "type": "rhino-benefit-item",
+          "settings": {
+            "icon_source": "custom",
+            "icon": "card",
+            "title": "Pagos flexibles",
+            "description": "12 MSI, débito, efectivo",
+            "custom_image": "@media-lib:c5160b73-9d1c-43ad-8436-56ff5f14627e"
+          }
+        }
+      },
+      "block_order": [
+        "rhino-benefit-item_85b6",
+        "rhino-benefit-item_qbqh",
+        "rhino-benefit-item_pyci"
+      ]
+    },
+    "video_1790516939240": {
+      "type": "video",
+      "settings": {
+        "media_source": "sectionfy_video",
+        "gap": 16,
+        "vertical_padding": 32,
+        "horizontal_padding": 0,
+        "use_legacy_data_store": true,
+        "video_url": "https://www.youtube.com/watch?v=we6rl2Q8AxI",
+        "video_height": 750,
+        "trust_pill_vertical_alignment": "bottom",
+        "trust_pill_text_color": "#ffffff",
+        "trust_pill_bg_opacity": 30,
+        "trust_pill_bg_color": "#000000",
+        "trust_pill_width": "full",
+        "trust_pill_spacing_left": 40,
+        "video_height_mobile": 380,
+        "trust_pill_scale_mobile": 80,
+        "cover_image": "@media-lib:9caac2fb-23d2-4539-8197-24a353f51cae"
+      },
+      "blocks": {
+        "trust-benefit_qht5": {
+          "type": "trust-benefit",
+          "settings": {
+            "icon_source": "design",
+            "icon": "bolt",
+            "text": "Acelera tu recuperación",
+            "icon_size": 18,
+            "text_size": 12.5,
+            "icon_filled": true
+          }
+        },
+        "trust-benefit_zghn": {
+          "type": "trust-benefit",
+          "settings": {
+            "icon_source": "design",
+            "icon": "shield",
+            "text": "Reduce el riesgo de lesiones",
+            "icon_size": 18,
+            "text_size": 12.5,
+            "icon_filled": true
+          }
+        },
+        "trust-benefit_g9w8": {
+          "type": "trust-benefit",
+          "settings": {
+            "icon_source": "design",
+            "icon": "biceps",
+            "text": "Mejora tu rendimiento físico ",
+            "icon_size": 18,
+            "text_size": 12.5,
+            "icon_filled": true
+          }
+        }
+      },
+      "block_order": [
+        "trust-benefit_qht5",
+        "trust-benefit_zghn",
+        "trust-benefit_g9w8"
+      ],
+      "disabled": true
+    },
+    "google_reviews": {
+      "type": "google-reviews",
+      "settings": {
+        "padding_top": 20,
+        "padding_bottom": 52
+      }
+    },
+    "main_products": {
+      "type": "main-products",
+      "settings": {
+        "promo_title_size": 40,
+        "promo_description_size": 14,
+        "feature_text_size": 14,
+        "price_size": 16,
+        "compare_price_size": 13,
+        "button_text_size": 14,
+        "subtitle_size": 18,
+        "promo_description_size_mobile": 14,
+        "feature_text_size_mobile": 14,
+        "price_size_mobile": 26,
+        "compare_price_size_mobile": 14
+      },
+      "blocks": {
+        "main-product-item_3k1e": {
+          "type": "main-product-item",
+          "settings": {
+            "product_source": {
+              "kind": "collection",
+              "id": "primary"
+            }
+          }
+        }
+      },
+      "block_order": [
+        "main-product-item_3k1e"
+      ]
+    },
+    "hero_1794546525965": {
+      "type": "hero",
+      "settings": {
+        "horizontal_padding": 32,
+        "image": "@media-lib:95cbfc17-3ab4-4e7c-bb93-b8c1afd06717",
+        "use_mobile_image": true,
+        "image_mobile": "@media-lib:fc9598f3-4bc6-437f-9f2a-641ff6d0d0ad",
+        "gap": 16,
+        "vertical_padding": 32,
+        "content_animation": "none",
+        "auto_height": false,
+        "height": 80,
+        "custom_css": "@media (max-width: 767px) {\n  .hero.media-full-width {\n    min-height: 55vh !important;\n  }\n}"
+      },
+      "blocks": [],
+      "block_order": []
+    }
+  },
+  "order": [
+    "hero_1794546525965",
+    "video_1790516939240",
+    "rhino-benefits_1790494499183",
+    "featured_collection",
+    "main_products",
+    "google_reviews",
+    "athletes_carousel",
+    "home_news"
+  ]
+}

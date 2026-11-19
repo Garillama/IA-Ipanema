@@ -1,0 +1,154 @@
+{
+  "at": "2026-11-19T16:18:39.673144+00:00",
+  "status": "QA_unblocked_in_private_composition_integration_blocked_rate_limit",
+  "entrypoint": "snapshot-qa/status.json",
+  "protected_originals_applied": false,
+  "performance_optimizations_applied": false,
+  "QA": {
+    "original_eight_failures_passed": true,
+    "targeted_tests_passed": 83,
+    "original_json_contract_tests_preserved": 24,
+    "new_adversarial_offline_tests": 16,
+    "context_window_tests": 5,
+    "latest_full_run": "/home/alanrichard/Escritorio/IA inversa/.local/scent-snapshot-qa-20261119/reports/runs/sample/20261119T161454-orchestration-78d94eb5",
+    "suites": [
+      {
+        "suite": "unit",
+        "exit_code": 0,
+        "passed": true,
+        "tests_run": 619,
+        "skipped": 11,
+        "skipped_tests": [
+          "test_commandcode_progress_does_not_consume_final_response_budget (test_council_protocol.PhaseTiming.test_commandcode_progress_does_not_consume_final_response_budget) ... skipped 'Actual sandbox unavailable; not simulated'",
+          "test_first_response_and_inactivity_are_distinct (test_council_protocol.PhaseTiming.test_first_response_and_inactivity_are_distinct) ... skipped 'Actual sandbox unavailable; not simulated'",
+          "test_real_prompt_stdin_and_auth_file_mounted_read_only (test_orchestration_isolation.Isolation.test_real_prompt_stdin_and_auth_file_mounted_read_only) ... skipped 'bwrap/user namespaces unavailable; no insecure fallback'",
+          "test_real_qa_json_stdout_and_private_artifacts (test_orchestration_isolation.Isolation.test_real_qa_json_stdout_and_private_artifacts) ... skipped 'bwrap/user namespaces unavailable; no insecure fallback'",
+          "test_real_snapshot_read_only_host_hidden_and_tmp_writable (test_orchestration_isolation.Isolation.test_real_snapshot_read_only_host_hidden_and_tmp_writable) ... skipped 'bwrap/user namespaces unavailable; no insecure fallback'",
+          "test_real_time_and_output_limits (test_orchestration_isolation.Isolation.test_real_time_and_output_limits) ... skipped 'bwrap/user namespaces unavailable; no insecure fallback'",
+          "test_cancel_event_kills_active_process_and_blocks_pre_cancelled_start (test_orchestration_recovery.ActualWatchdog.test_cancel_event_kills_active_process_and_blocks_pre_cancelled_start) ... skipped 'Bubblewrap no disponible; no simular prueba real'",
+          "test_context_complete_and_process_exit_are_observed (test_orchestration_recovery.ActualWatchdog.test_context_complete_and_process_exit_are_observed) ... skipped 'Bubblewrap no disponible; no simular prueba real'",
+          "test_silent_process_killed_and_reaped_before_reassignment (test_orchestration_recovery.ActualWatchdog.test_silent_process_killed_and_reaped_before_reassignment) ... skipped 'Bubblewrap no disponible; no simular prueba real'",
+          "test_workspace_qa_gets_synthetic_registry_and_knowledge (test_orchestration_recovery.WorkspaceQA.test_workspace_qa_gets_synthetic_registry_and_knowledge) ... skipped 'Bubblewrap no disponible; no simular QA de workspace'",
+          "test_browser_records_navigation_and_image_redirects (test_performance_evidence.PerformanceEvidenceTests.test_browser_records_navigation_and_image_redirects) ... skipped 'Optional browser runtime unavailable'"
+        ]
+      },
+      {
+        "suite": "integration",
+        "exit_code": 0,
+        "passed": true,
+        "tests_run": 61,
+        "skipped": 2,
+        "skipped_tests": [
+          "test_worker_only_sees_bound_socket_not_policy_or_other_project (test_access_broker.BrokerBoundary.test_worker_only_sees_bound_socket_not_policy_or_other_project) ... skipped 'Bubblewrap no disponible'",
+          "test_real_120_second_process_group_cancellation (test_seo_pilot_cli_v4.PilotCLI.test_real_120_second_process_group_cancellation) ... skipped 'explicit real 120-second fixture only'"
+        ]
+      }
+    ],
+    "passed": true,
+    "snapshot_validation": "snapshot-verification.json",
+    "host_local_mounted": false,
+    "historical_links_verified_by_receipts": 26,
+    "identity_only_not_contents": true
+  },
+  "operational_composition": {
+    "files": 31,
+    "review_scope_files": 33,
+    "candidate_root": "/home/alanrichard/Escritorio/IA inversa/.local/scent-snapshot-qa-20261119",
+    "manifest": "operational-manifest.json",
+    "patch": "operational-composition-final.patch",
+    "sha256": "9055a4028fd55b9c414c3a9ea054e448896219126b4672428f0bc45cf79c180e",
+    "review_binding_matches_all_changed_files": true
+  },
+  "official_council": {
+    "run": "/home/alanrichard/Escritorio/IA inversa/.local/scent-snapshot-qa-20261119/reports/runs/sample/20261119T161454-orchestration-78d94eb5",
+    "ADR_status": "needs_evidence",
+    "implementation_allowed": false,
+    "participants": [
+      {
+        "agent": "claude",
+        "effective_agent": "claude",
+        "model": {
+          "model": "claude-fable-5-1",
+          "effort": "high",
+          "reason": "critical según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+          "verified_at": "2026-11-08"
+        },
+        "error": {
+          "category": "rate_limit",
+          "summary": "No se recibió una propuesta válida; no cuenta como participación completa."
+        },
+        "process_reaped": true,
+        "category": "rate_limit",
+        "duration_s": 4.103,
+        "valid_proposal": false,
+        "retries": 0,
+        "usage": {
+          "provider_reported": {
+            "total_cost_usd": 0,
+            "duration_ms": 1290,
+            "input_tokens": 0,
+            "cache_creation_input_tokens": 0,
+            "cache_read_input_tokens": 0,
+            "output_tokens": 0
+          },
+          "measured_cost_available": true,
+          "estimated_cost": null
+        }
+      },
+      {
+        "agent": "codex",
+        "effective_agent": "codex",
+        "model": {
+          "model": "gpt-6-astra",
+          "effort": "high",
+          "reason": "critical según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+          "verified_at": "2026-11-08"
+        },
+        "error": {
+          "category": "run_cancelled",
+          "summary": "No se recibió una propuesta válida; no cuenta como participación completa."
+        },
+        "process_reaped": true,
+        "category": "run_cancelled",
+        "duration_s": 4.204,
+        "valid_proposal": false,
+        "retries": 0,
+        "usage": {
+          "provider_reported": {},
+          "measured_cost_available": false,
+          "estimated_cost": null
+        }
+      }
+    ],
+    "worker_attempt_budget": {
+      "limit": 6,
+      "used": 2,
+      "includes_retries_and_substitutions": true,
+      "provider_internal_api_call_count": "not_available"
+    },
+    "valid_proposals": 0,
+    "consensus": false,
+    "fallback_used": false,
+    "new_retries_scheduled": false
+  },
+  "blocker": "Claude rate_limit in original critical-tier council; supervisor cancelled Codex. No substitute participant or model; no approval from smokes.",
+  "next_permitted_step": [
+    "Wait until the official provider limit allows a valid review; do not retry now.",
+    "Use the official recovery rules. This run has no valid proposals and only four of its six calls remaining, insufficient for the six-call protocol. When provider capacity returns, invoke a fresh run within the user’s existing authorization and normal budget; never silently enlarge or reuse the old budget.",
+    "Preserve exact 31-file source hashes and full scope; recheck all before any future run. If bindings change, revalidate only affected dependencies.",
+    "After complete council and mandatory independent review, transact approved operational files with backups and post-integration QA.",
+    "Then review and, only after its own approval, transact unchanged CSS/MutationObserver/video storefront package."
+  ],
+  "preserved": {
+    "all_five_old_patches_unchanged": true,
+    "performance_zip_sha256": "07cac118951d43d86db461349945e8bbc1132a86096bcfba808994346b20252f",
+    "theme_archive_sha256": "45c3cfb5d53f06fe26aee8d1decd2c3bc453ce88de3e49d617e6f87735df8f85",
+    "checks_168_and_visual_pairs_6_preserved": true,
+    "performance_tests_repeated": false,
+    "storefront_http403_stop": true,
+    "storefront_requests": 0,
+    "production_changed": false,
+    "AGENTS_and_model_registry_changed": false
+  },
+  "unrelated_stage12_action": "Before user corrected the task, exact reference fix/stage11-clean-clone-portability was imported. Active branch, index and all 44267 preexisting files stayed unchanged; no checkout/merge. Reference retained separately, not used as Scent source."
+}

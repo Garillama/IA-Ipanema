@@ -1,0 +1,37 @@
+{
+  "kind": "qa",
+  "suite": "quick",
+  "at": "2026-11-18T20:49:09.826248+00:00",
+  "outcome": "passed",
+  "report": "/home/alanrichard/Escritorio/IA inversa/.local/scent-skill-contract-candidate/reports/runs/scentperfumes/20261118T204909-quick-01b281a6/report.json",
+  "limitations": [
+    "Evaluación del coordinador determinista; evaluación externa del modelo no ejecutada.",
+    "Evaluaciones SEO con fixtures, sin conexión real a cuentas Google."
+  ],
+  "checks": [
+    {
+      "name": "repository",
+      "status": "passed"
+    },
+    {
+      "name": "unit-tests",
+      "status": "passed"
+    },
+    {
+      "name": "integration-tests",
+      "status": "passed"
+    },
+    {
+      "name": "coordinator-evals",
+      "status": "passed"
+    },
+    {
+      "name": "seo-action-evals",
+      "status": "passed"
+    },
+    {
+      "name": "sources-stable-during-qa",
+      "status": "passed"
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "at": "2026-11-18T21:15:53.399289+00:00",
+  "authorized_catalog": [
+    "better-accessibility",
+    "cloudflare-web-perf",
+    "ipanema-architect",
+    "ipanema-commerce",
+    "ipanema-component-builder",
+    "ipanema-motion",
+    "ipanema-performance",
+    "ipanema-responsive",
+    "ipanema-seo-expert",
+    "ipanema-storefront",
+    "ipanema-visual-qa",
+    "schema",
+    "seo-audit",
+    "vercel-react-best-practices",
+    "web-design-guidelines",
+    "web-quality-audit"
+  ],
+  "disk_documents": [
+    "better-accessibility",
+    "cloudflare-web-perf",
+    "ipanema-architect",
+    "ipanema-commerce",
+    "ipanema-component-builder",
+    "ipanema-motion",
+    "ipanema-performance",
+    "ipanema-responsive",
+    "ipanema-seo-expert",
+    "ipanema-storefront",
+    "ipanema-visual-qa",
+    "schema",
+    "seo-audit",
+    "vercel-react-best-practices",
+    "web-design-guidelines",
+    "web-quality-audit"
+  ],
+  "unregistered_documents": [],
+  "missing_authorized_documents": [],
+  "additional_patch_targets_not_in_last_review_scope": [
+    "tests/unit/test_web_design_guidelines.py"
+  ],
+  "note": "Read-only inventory; no directories registered, renamed, deleted or modified. A new document outside the executable catalog does not authorize runtime execution."
+}

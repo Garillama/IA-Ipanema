@@ -1,0 +1,164 @@
+{
+  "at": "2026-11-18T21:30:18.501Z",
+  "scope": "isolated exact media functions and original local MP4s, synthetic DOM; not builder/cart/storefront QA",
+  "samples": [
+    {
+      "width": 390,
+      "run": 0,
+      "version": "before",
+      "offscreen": {
+        "paused": false,
+        "time": 0.230811,
+        "offscreen": true,
+        "error": null,
+        "frames": 6
+      },
+      "later": {
+        "paused": false,
+        "time": 0.897117,
+        "frames": 21
+      },
+      "offscreen_media_progress_s": 0.6663060000000001,
+      "offscreen_decoded_frames": 15,
+      "errors": []
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "before",
+      "offscreen": {
+        "paused": false,
+        "time": 0.21082,
+        "offscreen": true,
+        "error": null,
+        "frames": 4
+      },
+      "later": {
+        "paused": false,
+        "time": 0.860141,
+        "frames": 21
+      },
+      "offscreen_media_progress_s": 0.649321,
+      "offscreen_decoded_frames": 17,
+      "errors": []
+    }
+  ],
+  "checks": [
+    {
+      "width": 390,
+      "run": 0,
+      "version": "before",
+      "name": "first-autoplays-muted",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "before",
+      "name": "second-does-not-autoplay",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "before",
+      "name": "manual-video-unmuted-controls",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "before",
+      "name": "other-video-stopped",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "before",
+      "name": "confirmed-offscreen",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "before",
+      "name": "expected-original-defect-or-fixed",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "before",
+      "name": "manual-replay-works",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "before",
+      "name": "no-errors",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "before",
+      "name": "first-autoplays-muted",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "before",
+      "name": "second-does-not-autoplay",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "before",
+      "name": "manual-video-unmuted-controls",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "before",
+      "name": "other-video-stopped",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "before",
+      "name": "confirmed-offscreen",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "before",
+      "name": "expected-original-defect-or-fixed",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "before",
+      "name": "manual-replay-works",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "before",
+      "name": "no-errors",
+      "passed": true
+    }
+  ],
+  "browser": "Chrome/155.0.8059.84",
+  "passed": true,
+  "remote_requests": 0,
+  "commercial_requests": []
+}

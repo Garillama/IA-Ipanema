@@ -1,0 +1,29 @@
+--- a/static/js/sc-global.js
++++ b/static/js/sc-global.js
+@@ -168,7 +168,11 @@
+   document.querySelectorAll('[data-sc-header]').forEach(init);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded',scan,{once:true}); else scan();
+- new MutationObserver(scan).observe(document.documentElement,{childList:true,subtree:true});
++ new MutationObserver(records=>{
++  const detached=[...controllers.keys()].some(root=>!root.isConnected);
++  const relevant=records.some(record=>[...record.addedNodes,...record.removedNodes].some(node=>node.nodeType===1&&(node.matches('[data-sc-header]')||node.querySelector('[data-sc-header]'))));
++  if(detached||relevant)scan();
++ }).observe(document.documentElement,{childList:true,subtree:true});
+  document.addEventListener('nube:section:unload',event => { if (event.target.matches?.('[data-sc-header]')) event.target._scCleanup?.(); event.target.querySelectorAll?.('[data-sc-header]').forEach(root => root._scCleanup?.()); });
+ })();
+ 
+--- a/static/js/sc-search-refinement.js
++++ b/static/js/sc-search-refinement.js
+@@ -158,6 +158,10 @@
+  }
+  function scan(){controllers.forEach((cleanup,root)=>{if(!root.isConnected)cleanup();});document.querySelectorAll('[data-sc-search-refinement]').forEach(init);}
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',scan,{once:true});else scan();
+- new MutationObserver(scan).observe(document.documentElement,{childList:true,subtree:true});
++ new MutationObserver(records=>{
++  const detached=[...controllers.keys()].some(root=>!root.isConnected);
++  const relevant=records.some(record=>[...record.addedNodes,...record.removedNodes].some(node=>node.nodeType===1&&(node.matches('[data-sc-search-refinement]')||node.querySelector('[data-sc-search-refinement]'))));
++  if(detached||relevant)scan();
++ }).observe(document.documentElement,{childList:true,subtree:true});
+  document.addEventListener('nube:section:unload',event=>{controllers.forEach((cleanup,root)=>{if(event.target===root||event.target.contains?.(root))cleanup();});});
+ })();

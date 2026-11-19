@@ -1,0 +1,68 @@
+{
+  "at": "2026-11-18T21:45:50.112732+00:00",
+  "deliverable": "Complete isolated source version with exactly three unchanged priority patches applied; no new candidates",
+  "version_path": "/home/alanrichard/Escritorio/IA inversa/.local/scent-combined-20261118/theme",
+  "archive": {
+    "path": "/home/alanrichard/Escritorio/IA inversa/.local/scent-combined-20261118/optimized-theme.tar.gz",
+    "sha256": "45c3cfb5d53f06fe26aee8d1decd2c3bc453ce88de3e49d617e6f87735df8f85",
+    "source_files": 860,
+    "excludes": ".git, .nuvem, original manifest, credentials and local metadata"
+  },
+  "included_files": {
+    "static/js/sc-global.js": {
+      "base_sha256": "9741346cfd1641c64b49d7a44ad8e3db16042af7139dcde567b8a49620ca2195",
+      "combined_sha256": "1605d7ce1c69de3739f7da124079e5e7c5df99a4410a66f4f5f0968c7bf2d2de"
+    },
+    "static/js/sc-search-refinement.js": {
+      "base_sha256": "d1cf6dca220b4f87a4ca43d0aab8a8086db647f2a1a2136b93fa26ccacbf441e",
+      "combined_sha256": "d885988c2faec6c056a416c85485ffe5ac5d054b61cb66740ff07244aa51eaac"
+    },
+    "layouts/layout.tpl": {
+      "base_sha256": "843211c3ad7ab54446b4c5feea39b7310911ae009b9abc595c56412f79f8f3ca",
+      "combined_sha256": "2ded82fb94bdc796c80a4e0038bd1e3f2445b479f9d9a0644f8ec0171b4322a8"
+    },
+    "static/js/sc-armador3.js": {
+      "base_sha256": "fe58a099760da4d81228092ad5a00e2b32ab3abfb5ca70aef336d9a4d1f04f85",
+      "combined_sha256": "3f529b7b4c99a4e88c16bd1fca8bd20b969ba0532fed0ac8a0fa765677c4b947"
+    }
+  },
+  "excluded_candidates": {
+    "orchestrator": "Operational dependency, frozen, unapproved, not integrated in this version",
+    "header": "Experimental, no proven net CPU improvement, excluded",
+    "cart_recommendations": "Diagnosis/contracts only; no candidate or coordination change"
+  },
+  "required_review": {
+    "participants": [
+      "claude",
+      "codex"
+    ],
+    "claude": "Blocked by last observed rate_limit. No new attempts this phase.",
+    "codex": "Implementation/controller checks and exact diff inspection completed; not independent approval or dual consensus.",
+    "current_hashes_approved": false,
+    "critical_questions": [
+      "Retain actual static_inline CSS application and avoid dependency on removed preload side effects.",
+      "Validate relevance filtering, partial editor insertion, detached cleanup and all native consumers.",
+      "Confirm manual pause at <60% card visibility, first-only autoplay, fallback and manual replay semantics.",
+      "Confirm no commerce, tracking, schema, navigation links or design changes outside the four files."
+    ],
+    "binding": "review-binding.json",
+    "official_procedure": "Only resume/start the authorized local orchestrator protocol when provider limits and its binding/budgets permit. No alternate provider or reuse of old approvals."
+  },
+  "integration_still_required": [
+    "Mandatory council and independent reviewer approval for exact included hashes, with mandatory objections resolved.",
+    "Recheck source/policy/controller hashes immediately before protected integration; preserve foreign changes.",
+    "Operational skill-contract dependency must independently satisfy its original gate if required to run the official workflow; it is not approved by this package.",
+    "After approval, use original attempt begin/apply on only these four files with backups; rerun QA against those actual post-application hashes before accept. Current fixture results are not transaction acceptance evidence.",
+    "Full storefront/native LS/editor/responsive/SEO/accessibility and real before/after lab/field validation still require separately authorized access; current origin remains stopped at HTTP403."
+  ],
+  "results_limits": {
+    "component_work": "Confirmed: CSS requests 2→0; global header/search scans 20→0 each; offscreen decoded frames 12–15→0 in combined tests.",
+    "measured_local_time": "20 unrelated updates: mobile TaskDuration median 167.213→164.038 ms; desktop 43.088→47.239 ms. Three samples/profile; mixed timing outcome, no consistent net CPU gain established.",
+    "storefront": "No PageSpeed, Lighthouse storefront, CWV or CrUX improvement claimed.",
+    "cart": "Both unmodified scripts pass local variant/exclusion presentation tests with stub LS. This does not authorize changing native cart coordination."
+  },
+  "new_external_requests": 0,
+  "new_provider_attempts": 0,
+  "protected_files_written": 0,
+  "production_changes": false
+}

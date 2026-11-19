@@ -1,0 +1,34 @@
+{
+  "policy_and_controller_hashes": {
+    "AGENTS.md": "af67cb5269b39a340e35e6cdb187a8d706b9529ec87321b363ea22d2d6e71f22",
+    "tools/ipanema/orchestration/models.json": "14fede6b13b294a8e685b8ce1072777959850d8ae05bf3270f5dd9ea527aba39",
+    "tools/ipanema/orchestration/engine.py": "bfd372402d6ee7372fffccefb5321bffc7f8b877f9ad24100db3c0ebbcf5ef85",
+    "tools/ipanema/transactions.py": "28ab767ea14182768cdb2478b59ad63b26c723c4994aa19b55d1e538954ebba7",
+    "tools/ipanema/coordinator.py": "d8451685f25d945cee73945f3ea241d5a00a195553af04d8c9cec50ad431243c",
+    ".agents/skills/ipanema-storefront/SKILL.md": "380a0dbbbbe38642862fa6b0acbcf301da1e043b389da656459b233bd765097e"
+  },
+  "source_files": {
+    "static/js/sc-global.js": {
+      "base_sha256": "9741346cfd1641c64b49d7a44ad8e3db16042af7139dcde567b8a49620ca2195",
+      "combined_sha256": "1605d7ce1c69de3739f7da124079e5e7c5df99a4410a66f4f5f0968c7bf2d2de"
+    },
+    "static/js/sc-search-refinement.js": {
+      "base_sha256": "d1cf6dca220b4f87a4ca43d0aab8a8086db647f2a1a2136b93fa26ccacbf441e",
+      "combined_sha256": "d885988c2faec6c056a416c85485ffe5ac5d054b61cb66740ff07244aa51eaac"
+    },
+    "layouts/layout.tpl": {
+      "base_sha256": "843211c3ad7ab54446b4c5feea39b7310911ae009b9abc595c56412f79f8f3ca",
+      "combined_sha256": "2ded82fb94bdc796c80a4e0038bd1e3f2445b479f9d9a0644f8ec0171b4322a8"
+    },
+    "static/js/sc-armador3.js": {
+      "base_sha256": "fe58a099760da4d81228092ad5a00e2b32ab3abfb5ca70aef336d9a4d1f04f85",
+      "combined_sha256": "3f529b7b4c99a4e88c16bd1fca8bd20b969ba0532fed0ac8a0fa765677c4b947"
+    }
+  },
+  "precondition": "Invalidate binding/review if any listed policy, controller, source or candidate hash changes. No review has been requested or granted.",
+  "frozen_hashes": {
+    "reports/performance/scentperfumes-20261118/candidate-remove-inline-css-preloads.patch": "97ca9fe2111dcfa25acb35b017928da9b41ab1fe124af3b40f03bf33c7144e41",
+    "reports/performance/scentperfumes-20261118/continuation/observer-candidate.patch": "95bad94590b5e4e5585b8fb29c6e32b3a4ae4432e1fd08c37b0ea6791efe6594",
+    "reports/performance/scentperfumes-20261118/local-phase2/candidate-builder-video-visibility.patch": "fe6311c8004ba5610ef444575dd56456726978ef1ec06bf930ea3912f6286faa"
+  }
+}

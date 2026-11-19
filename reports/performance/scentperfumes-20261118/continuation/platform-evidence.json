@@ -1,0 +1,9 @@
+{
+  "at": "2026-11-18T20:30:02.801241+00:00",
+  "context7": "not available in enabled tool catalog; official docs fallback",
+  "source": "https://tiendanube.dev/es-AR/themes/twig-reference/filters-methods",
+  "concept": "static_inline inserts static file content directly into page rather than linking it; source already uses helper, no new API introduced",
+  "applicability": "Existing sectionable Tiendanube layout; both helper expressions preserved by CSS candidate",
+  "limitations": "Does not observe actual HTML/CDN transfer on blocked Scent origin",
+  "new_requests_to_blocked_origin": 0
+}

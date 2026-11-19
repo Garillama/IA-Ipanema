@@ -1,0 +1,10 @@
+{
+  "command": "PYTHONPATH=tools python3 -m unittest tests.unit.test_orchestration_file_contract tests.unit.test_orchestration tests.unit.test_council_policy tests.unit.test_council_protocol tests.unit.test_council_dual tests.unit.test_council_receipts tests.unit.test_council_engine tests.integration.test_orchestration_cli -v",
+  "result": "passed",
+  "tests": 125,
+  "failures": 0,
+  "errors": 0,
+  "providers_invoked": false,
+  "production_accessed": false,
+  "stdout_stderr_log_sha256": "43c45bc8c3721bf3e6fa2c33302cdf9a191fede4b275ae65b0fdc6929ac5f54f"
+}

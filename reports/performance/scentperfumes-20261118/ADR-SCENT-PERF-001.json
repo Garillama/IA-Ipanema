@@ -1,0 +1,32 @@
+{
+  "status": "proposed_blocked",
+  "decision": "Preparar candidato mínimo de dos líneas y validarlo solo en reproducción local; conservar tema íntegro hasta consejo y QA de preview.",
+  "alternatives": [
+    {
+      "option": "retirar CSS inline",
+      "rejected": "Podría retrasar render y cambiar diseño."
+    },
+    {
+      "option": "defer todos scripts y retirar terceros",
+      "rejected": "Dependencias comerciales e integraciones sin pruebas."
+    },
+    {
+      "option": "eliminar únicamente precargas CSS inline",
+      "selected_for_candidate": true,
+      "evidence": "16navegaciones,32checks,8pares idénticos;sin efecto LCP demostrado"
+    }
+  ],
+  "authorization": "local work authorized; no production; mandatory council not completed",
+  "rollback": "No aplicado; respaldo fuente y hashes privados disponibles.",
+  "patch": {
+    "status": "candidate_not_applied",
+    "base_sha256": "843211c3ad7ab54446b4c5feea39b7310911ae009b9abc595c56412f79f8f3ca",
+    "candidate_sha256": "2ded82fb94bdc796c80a4e0038bd1e3f2445b479f9d9a0644f8ec0171b4322a8",
+    "patch_sha256": "97ca9fe2111dcfa25acb35b017928da9b41ab1fe124af3b40f03bf33c7144e41",
+    "files": [
+      "layouts/layout.tpl"
+    ],
+    "council": "blocked_skill_catalog_validation",
+    "network": "stopped_http_403"
+  }
+}

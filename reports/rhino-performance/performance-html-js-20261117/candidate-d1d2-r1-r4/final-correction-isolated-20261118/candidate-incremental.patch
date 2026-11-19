@@ -1,0 +1,33 @@
+--- a/sections/hero.tpl
++++ b/sections/hero.tpl
+@@ -67,7 +67,8 @@
+         image_mobile_media_query: '(max-width: 767.98px)',
+         image_alt: image_alt,
+         image_mobile_alt: image_mobile_alt,
+-        image_classes: not is_priority_section ? 'fade-in lazyload',
++        {# Native loading=lazy is used here; do not attach LazySizes-only fade/placeholder states. #}
++        image_classes: '',
+         image_priority_high: is_priority_section,
+         image_lazy: not is_priority_section,
+         image_lazy_js: false,
+@@ -78,9 +79,6 @@
+         image_mobile_height: hero.image_mobile_height,
+         image_aspect_ratio: hero.image ? (hero.image_width and hero.image_height) : true,
+       } %}
+-      {% if not is_priority_section %}
+-        <div class="placeholder placeholder-fade"></div>
+-      {% endif %}
+     {% elseif has_desktop_image %}
+       {# Preserve the current single-image path when no mobile alternative is configured. #}
+       {% set desktop_lazy = not is_priority_section %}
+--- a/snippets/image.tpl
++++ b/snippets/image.tpl
+@@ -115,7 +115,7 @@
+ {% set image_lazy = image_lazy == 'false' ? false : true %}
+ 
+ {# srcset for non-media-library images (products, categories, blog posts, store logo) #}
+-{% if image_thumbs is not same as(false) and not media %}
++{% if image_thumbs is not same as(false) and not media and not (has_art_direction and image_raw_url_valid) %}
+ 	{% for thumb, size in sizes %}
+ 		{% if thumb in image_thumbs %}
+ 			{% set image_url =

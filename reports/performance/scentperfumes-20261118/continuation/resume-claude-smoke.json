@@ -1,0 +1,29 @@
+{
+  "at": "2026-11-18T21:20:55.458006+00:00",
+  "kind": "official_orchestrator_availability_check",
+  "agent": "claude",
+  "model": {
+    "model": "claude-haiku-5-5",
+    "effort": "low",
+    "reason": "fast según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+    "verified_at": "2026-11-08"
+  },
+  "passed": false,
+  "category": "rate_limit",
+  "duration_s": 2.924,
+  "exit_code": 1,
+  "process_reaped": true,
+  "timed_out": false,
+  "attempts": [
+    {
+      "agent": "claude",
+      "retry": 0,
+      "status": "failed",
+      "category": "rate_limit"
+    }
+  ],
+  "fallback": false,
+  "new_storefront_requests": 0,
+  "review_or_approval": false,
+  "source_report": "/home/alanrichard/Escritorio/IA inversa/.local/scent-skill-contract-candidate/reports/runs/scentperfumes/20261118T211252-orchestration-smoke-ef919359/smoke.json"
+}
