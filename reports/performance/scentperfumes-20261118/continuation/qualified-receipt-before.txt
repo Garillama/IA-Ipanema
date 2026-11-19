@@ -1,0 +1,6 @@
+receipt_rows 2 excluded 4 errors []
+Traceback (most recent call last):
+  File "/home/alanrichard/Escritorio/IA inversa/reports/performance/scentperfumes-20261118/continuation/verify-qualified-receipt.py", line 20, in <module>
+    assert len(result['errors'])==2,'Qualified links incorrectly inherited plain-link identity receipts'
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Qualified links incorrectly inherited plain-link identity receipts

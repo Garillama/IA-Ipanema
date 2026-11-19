@@ -1,0 +1,310 @@
+{
+  "requested_agent": "codex",
+  "effective_agent": "codex",
+  "round": 0,
+  "response": {
+    "decision": "changes_requested",
+    "summary": "La integración es coherente, pero la aprobación debe quedar pendiente: existe una salida por decodificación fuera del registro de bloqueo y el baseline aportado no acredita las regresiones de integración.",
+    "changes": [],
+    "evidence": [
+      "qa:baseline acredita éxito de unit-tests-isolated; no aporta resultados individuales ni ejecución de tests/integration.",
+      "engine.py: instruction_context valida catálogo, duplicados, existencia, UTF-8 y componentes léxicos de symlinks para las skills seleccionadas; también rechaza AGENTS.md enlazado.",
+      "engine.py: central_qa conserva documentos autorizados y sustituye la configuración de proyectos por un registro sintético sin tema.",
+      "snapshot_links.py y validation.py: las exclusiones requieren manifest explícito y hash vigente del documento; la configuración del proyecto no habilita la excepción.",
+      "engine.py: initial_content decodifica los archivos autorizados después del checkpoint y antes del bloque try que registra errores de ejecución.",
+      "test_skill_execution_contract.py cubre Markdown inválido durante prepare_snapshot; no cubre un archivo autorizado no Markdown con UTF-8 inválido.",
+      "test_orchestration_cli.py contiene regresiones con Git real y workers/QA simulados, pero central_qa descubre únicamente tests/unit."
+    ],
+    "analysis": {
+      "problem": "Determinar si el contrato estricto de instrucciones y la vista QA aislada cumplen el objetivo completo, manteniendo el consejo dual, los límites de lectura y la trazabilidad de fallos.",
+      "cause": "El bloqueo registrado cubre excepciones de prepare_snapshot, pero initial_content queda fuera de esa protección. Un archivo autorizado como copy.txt con bytes UTF-8 inválidos puede copiarse al snapshot y provocar UnicodeDecodeError después de registrar state=running, sin actualizarlo a blocked. Además, el selector del QA central excluye las pruebas de integración aportadas.",
+      "recommendation": "codex-adr-pendiente",
+      "evidence_refs": [
+        "source:tools/ipanema/orchestration/engine.py",
+        "source:tools/ipanema/validation.py",
+        "source:tools/ipanema/snapshot_links.py",
+        "source:tests/support.py",
+        "source:tests/unit/test_skill_execution_contract.py",
+        "source:tests/integration/test_orchestration_cli.py",
+        "qa:baseline"
+      ],
+      "hypotheses": [
+        "La ruta de archivo autorizado no Markdown con UTF-8 inválido dejaría run.json en running; es una deducción estática pendiente de recibo específico del controlador.",
+        "La unicidad completa del catálogo no puede comprobarse directamente porque coordinator.py no está incluido; las pruebas aportadas comprueban consumidores y determinadas entradas."
+      ],
+      "native_components": [
+        "AUTHORIZED_SKILLS como referencia común de carga y filtrado",
+        "instruction_context",
+        "symlink_free",
+        "sanitized_view y central_qa",
+        "capture_omitted_links y omitted_link_receipt",
+        "validate con snapshot_receipts explícito",
+        "Consejo dual, binding y council_gate existentes"
+      ],
+      "risks": [
+        "Alta: una decodificación fallida en initial_content puede dejar un registro running en lugar del bloqueo exigido.",
+        "Media: atribuir al baseline unitario la validación de regresiones CLI/Git que están en tests/integration.",
+        "Media: la definición del catálogo no está entre las fuentes entregadas; su unicidad completa sigue sin inspección directa.",
+        "Baja: make_project genera skills sintéticas, pero sus consumidores deben aportar AGENTS.md explícitamente.",
+        "Los recibos históricos acreditan identidad y existencia al capturar; no validan contenido, anclas, líneas ni vigencia de resultados."
+      ],
+      "tests": [
+        "qa:baseline: aprobado por el controlador, alcance unit-tests-isolated.",
+        "Fixtures inspeccionados: catálogo, symlinks, UTF-8 de skills, reglas enlazadas, recibos históricos y Markdown inválido.",
+        "Regresiones de skills externas presentes en las fuentes; el recibo agregado no identifica sus resultados individuales.",
+        "Regresiones de integración CLI/Git presentes en código, sin recibo de ejecución aportado.",
+        "Caso pendiente: decodificación inválida de archivo autorizado fuera de prepare_snapshot."
+      ],
+      "files": [
+        "tools/ipanema/orchestration/engine.py",
+        "tools/ipanema/validation.py",
+        "tools/ipanema/snapshot_links.py",
+        "tests/support.py",
+        "tests/unit/test_skill_execution_contract.py",
+        "tests/integration/test_orchestration_cli.py"
+      ],
+      "impacts": {
+        "seo": "Sin modificación de storefront. El baseline no acredita HTML renderizado, indexación ni requisitos de Google.",
+        "performance": "Sin medición de tiempos, memoria o costes; no se deduce mejora de rendimiento.",
+        "responsive": "Sin cambios de interfaz ni verificación responsive aportada.",
+        "accessibility": "Sin auditoría de accesibilidad aportada; las pruebas unitarias no certifican conformidad.",
+        "uiux": "El registro running ante un fallo terminal puede dificultar la interpretación del estado por operadores.",
+        "commerce": "La vista QA utiliza configuración sintética sin tema; esta revisión no autoriza operaciones comerciales ni publicación."
+      },
+      "confidence": 0.89,
+      "alternatives": [
+        {
+          "id": "codex-adr-pendiente",
+          "description": "Registrar un ADR de lectura pendiente de aprobación. Conservar la arquitectura existente y documentar el defecto de registro, la cobertura parcial de regresiones y el límite de inspección del catálogo. La defensa y el baseline agregado no sustituyen los recibos específicos pendientes.",
+          "constraints": {
+            "functional": {
+              "status": "unknown",
+              "evidence_refs": [
+                "source:tools/ipanema/orchestration/engine.py",
+                "source:tests/unit/test_skill_execution_contract.py",
+                "qa:baseline"
+              ]
+            },
+            "security": {
+              "status": "unknown",
+              "evidence_refs": [
+                "source:tools/ipanema/snapshot_links.py",
+                "source:tools/ipanema/orchestration/engine.py",
+                "qa:baseline"
+              ]
+            },
+            "compatibility": {
+              "status": "unknown",
+              "evidence_refs": [
+                "source:tests/integration/test_orchestration_cli.py",
+                "qa:baseline"
+              ]
+            },
+            "native_reuse": {
+              "status": "pass",
+              "evidence_refs": [
+                "source:tools/ipanema/orchestration/engine.py",
+                "source:tools/ipanema/validation.py"
+              ]
+            },
+            "seo": {
+              "status": "unknown",
+              "evidence_refs": []
+            },
+            "performance": {
+              "status": "unknown",
+              "evidence_refs": []
+            },
+            "accessibility": {
+              "status": "unknown",
+              "evidence_refs": []
+            },
+            "responsive": {
+              "status": "unknown",
+              "evidence_refs": []
+            },
+            "maintainability": {
+              "status": "unknown",
+              "evidence_refs": []
+            },
+            "reversibility": {
+              "status": "pass",
+              "evidence_refs": [
+                "source:tools/ipanema/orchestration/engine.py"
+              ]
+            },
+            "complexity": {
+              "status": "unknown",
+              "evidence_refs": []
+            },
+            "development_cost": {
+              "status": "unknown",
+              "evidence_refs": []
+            },
+            "execution_cost": {
+              "status": "unknown",
+              "evidence_refs": []
+            }
+          },
+          "files": [
+            "tools/ipanema/orchestration/engine.py",
+            "tools/ipanema/validation.py",
+            "tools/ipanema/snapshot_links.py",
+            "tests/support.py",
+            "tests/unit/test_skill_execution_contract.py",
+            "tests/integration/test_orchestration_cli.py"
+          ],
+          "tests": [
+            "Recibo disponible: qa:baseline, aprobado con alcance unit-tests-isolated.",
+            "Pendiente: archivo autorizado no Markdown con UTF-8 inválido debe registrar blocked y no iniciar QA ni inferencia.",
+            "Pendiente: resultados del controlador para tests/integration/test_orchestration_cli.py, identificando workers y QA simulados.",
+            "Pendiente: comprobación directa del catálogo único y sus consumidores."
+          ]
+        }
+      ]
+    }
+  },
+  "model": {
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "reason": "strong según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+    "verified_at": "2026-11-08"
+  },
+  "execution": {
+    "exit_code": 0,
+    "timed_out": false,
+    "output_limited": false,
+    "idle_timed_out": false,
+    "cancelled": false,
+    "process_started": true,
+    "process_reaped": true,
+    "stdin_bytes_written": 207549,
+    "context_complete": true,
+    "duration_s": 106.349,
+    "timing": {
+      "spawn_s": 0.000644,
+      "input_complete_s": 0.092954,
+      "first_stdout_s": 1.207417,
+      "first_stderr_s": null,
+      "timeout_phase": null,
+      "event_counts": {
+        "thread.started": 1,
+        "item.completed": 2,
+        "turn.started": 1,
+        "turn.completed": 1
+      },
+      "inference_vs_initialization": "not_separable_without_provider_events"
+    },
+    "output_accounting": {
+      "transport_bytes": 9806,
+      "retained_bytes": 9806,
+      "discarded_progress_bytes": 0,
+      "transport_limit_bytes": 20000000,
+      "retained_limit_bytes": 2000000
+    },
+    "isolation": {
+      "backend": "bubblewrap",
+      "snapshot_read_only": true,
+      "host_home_mounted": false,
+      "network": "enabled_no_destination_firewall",
+      "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+    },
+    "started_at": "2026-11-18T20:11:51.139270+00:00",
+    "prompt_bytes": 207549,
+    "prompt_sha256": "980d1c93515b953fc1b41fa2e2059299a62505375230511f62d6d1c17239ba4d",
+    "usage": {
+      "provider_reported": {
+        "input_tokens": 67147,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 3903,
+        "reasoning_output_tokens": 2070
+      },
+      "measured_cost_available": false,
+      "estimated_cost": null
+    },
+    "limits": {
+      "timeout": 300,
+      "idle_timeout": 180,
+      "startup_timeout": 30,
+      "first_response_timeout": 300
+    },
+    "structured_output": "native_schema",
+    "contract_validation": {
+      "status": "passed",
+      "duration_s": 0.001234
+    }
+  },
+  "recovery_attempts": [
+    {
+      "agent": "codex",
+      "retry": 0,
+      "status": "completed",
+      "execution": {
+        "exit_code": 0,
+        "timed_out": false,
+        "output_limited": false,
+        "idle_timed_out": false,
+        "cancelled": false,
+        "process_started": true,
+        "process_reaped": true,
+        "stdin_bytes_written": 207549,
+        "context_complete": true,
+        "duration_s": 106.349,
+        "timing": {
+          "spawn_s": 0.000644,
+          "input_complete_s": 0.092954,
+          "first_stdout_s": 1.207417,
+          "first_stderr_s": null,
+          "timeout_phase": null,
+          "event_counts": {
+            "thread.started": 1,
+            "item.completed": 2,
+            "turn.started": 1,
+            "turn.completed": 1
+          },
+          "inference_vs_initialization": "not_separable_without_provider_events"
+        },
+        "output_accounting": {
+          "transport_bytes": 9806,
+          "retained_bytes": 9806,
+          "discarded_progress_bytes": 0,
+          "transport_limit_bytes": 20000000,
+          "retained_limit_bytes": 2000000
+        },
+        "isolation": {
+          "backend": "bubblewrap",
+          "snapshot_read_only": true,
+          "host_home_mounted": false,
+          "network": "enabled_no_destination_firewall",
+          "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+        },
+        "started_at": "2026-11-18T20:11:51.139270+00:00",
+        "prompt_bytes": 207549,
+        "prompt_sha256": "980d1c93515b953fc1b41fa2e2059299a62505375230511f62d6d1c17239ba4d",
+        "usage": {
+          "provider_reported": {
+            "input_tokens": 67147,
+            "cached_input_tokens": 0,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 3903,
+            "reasoning_output_tokens": 2070
+          },
+          "measured_cost_available": false,
+          "estimated_cost": null
+        },
+        "limits": {
+          "timeout": 300,
+          "idle_timeout": 180,
+          "startup_timeout": 30,
+          "first_response_timeout": 300
+        },
+        "structured_output": "native_schema",
+        "contract_validation": {
+          "status": "passed",
+          "duration_s": 0.001234
+        }
+      }
+    }
+  ]
+}

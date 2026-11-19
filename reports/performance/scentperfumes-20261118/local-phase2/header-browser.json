@@ -1,0 +1,958 @@
+{
+  "at": "2026-11-18T21:27:56.236Z",
+  "scope": "local synthetic header DOM with full original/candidate extras script; no storefront measurements",
+  "profiles": {
+    "390": {
+      "height": 844,
+      "cpu": 4
+    },
+    "1440": {
+      "height": 844,
+      "cpu": 1
+    }
+  },
+  "samples": [
+    {
+      "width": 390,
+      "run": 0,
+      "version": "before",
+      "writes": 90,
+      "metrics": {
+        "TaskDuration": 0.040645,
+        "ScriptDuration": 0.010969000000000001,
+        "LayoutDuration": 0,
+        "RecalcStyleDuration": 0,
+        "LayoutCount": 0,
+        "RecalcStyleCount": 0
+      },
+      "long_tasks": [],
+      "errors": [],
+      "screenshot": "header-390-0-before.png",
+      "final_state": [
+        "32px",
+        "100px",
+        "132px"
+      ]
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "after",
+      "writes": 0,
+      "metrics": {
+        "TaskDuration": 0.044404,
+        "ScriptDuration": 0.010595999999999998,
+        "LayoutDuration": 0,
+        "RecalcStyleDuration": 0,
+        "LayoutCount": 0,
+        "RecalcStyleCount": 0
+      },
+      "long_tasks": [],
+      "errors": [],
+      "screenshot": "header-390-0-after.png",
+      "final_state": [
+        "32px",
+        "100px",
+        "132px"
+      ]
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "after",
+      "writes": 0,
+      "metrics": {
+        "TaskDuration": 0.03446300000000001,
+        "ScriptDuration": 0.009031,
+        "LayoutDuration": 0,
+        "RecalcStyleDuration": 0,
+        "LayoutCount": 0,
+        "RecalcStyleCount": 0
+      },
+      "long_tasks": [],
+      "errors": [],
+      "screenshot": "header-390-1-after.png",
+      "final_state": [
+        "32px",
+        "100px",
+        "132px"
+      ]
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "before",
+      "writes": 90,
+      "metrics": {
+        "TaskDuration": 0.040482000000000004,
+        "ScriptDuration": 0.013831000000000001,
+        "LayoutDuration": 0,
+        "RecalcStyleDuration": 0,
+        "LayoutCount": 0,
+        "RecalcStyleCount": 0
+      },
+      "long_tasks": [],
+      "errors": [],
+      "screenshot": "header-390-1-before.png",
+      "final_state": [
+        "32px",
+        "100px",
+        "132px"
+      ]
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "before",
+      "writes": 90,
+      "metrics": {
+        "TaskDuration": 0.04945400000000001,
+        "ScriptDuration": 0.015337,
+        "LayoutDuration": 0,
+        "RecalcStyleDuration": 0,
+        "LayoutCount": 0,
+        "RecalcStyleCount": 0
+      },
+      "long_tasks": [],
+      "errors": [],
+      "screenshot": "header-390-2-before.png",
+      "final_state": [
+        "32px",
+        "100px",
+        "132px"
+      ]
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "after",
+      "writes": 0,
+      "metrics": {
+        "TaskDuration": 0.042952000000000004,
+        "ScriptDuration": 0.009626,
+        "LayoutDuration": 0,
+        "RecalcStyleDuration": 0,
+        "LayoutCount": 0,
+        "RecalcStyleCount": 0
+      },
+      "long_tasks": [],
+      "errors": [],
+      "screenshot": "header-390-2-after.png",
+      "final_state": [
+        "32px",
+        "100px",
+        "132px"
+      ]
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "before",
+      "writes": 90,
+      "metrics": {
+        "TaskDuration": 0.014620999999999999,
+        "ScriptDuration": 0.004575000000000001,
+        "LayoutDuration": 0,
+        "RecalcStyleDuration": 0,
+        "LayoutCount": 0,
+        "RecalcStyleCount": 0
+      },
+      "long_tasks": [],
+      "errors": [],
+      "screenshot": "header-1440-0-before.png",
+      "final_state": [
+        "32px",
+        "100px",
+        "132px"
+      ]
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "after",
+      "writes": 0,
+      "metrics": {
+        "TaskDuration": 0.014681999999999997,
+        "ScriptDuration": 0.004418,
+        "LayoutDuration": 0,
+        "RecalcStyleDuration": 0,
+        "LayoutCount": 0,
+        "RecalcStyleCount": 0
+      },
+      "long_tasks": [],
+      "errors": [],
+      "screenshot": "header-1440-0-after.png",
+      "final_state": [
+        "32px",
+        "100px",
+        "132px"
+      ]
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "version": "after",
+      "writes": 0,
+      "metrics": {
+        "TaskDuration": 0.013613000000000004,
+        "ScriptDuration": 0.003695,
+        "LayoutDuration": 0,
+        "RecalcStyleDuration": 0,
+        "LayoutCount": 0,
+        "RecalcStyleCount": 0
+      },
+      "long_tasks": [],
+      "errors": [],
+      "screenshot": "header-1440-1-after.png",
+      "final_state": [
+        "32px",
+        "100px",
+        "132px"
+      ]
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "version": "before",
+      "writes": 90,
+      "metrics": {
+        "TaskDuration": 0.016632,
+        "ScriptDuration": 0.0049510000000000005,
+        "LayoutDuration": 0,
+        "RecalcStyleDuration": 0,
+        "LayoutCount": 0,
+        "RecalcStyleCount": 0
+      },
+      "long_tasks": [],
+      "errors": [],
+      "screenshot": "header-1440-1-before.png",
+      "final_state": [
+        "32px",
+        "100px",
+        "132px"
+      ]
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "version": "before",
+      "writes": 90,
+      "metrics": {
+        "TaskDuration": 0.014619000000000004,
+        "ScriptDuration": 0.004365,
+        "LayoutDuration": 0,
+        "RecalcStyleDuration": 0,
+        "LayoutCount": 0,
+        "RecalcStyleCount": 0
+      },
+      "long_tasks": [],
+      "errors": [],
+      "screenshot": "header-1440-2-before.png",
+      "final_state": [
+        "32px",
+        "100px",
+        "132px"
+      ]
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "version": "after",
+      "writes": 0,
+      "metrics": {
+        "TaskDuration": 0.014341000000000003,
+        "ScriptDuration": 0.004240000000000001,
+        "LayoutDuration": 0,
+        "RecalcStyleDuration": 0,
+        "LayoutCount": 0,
+        "RecalcStyleCount": 0
+      },
+      "long_tasks": [],
+      "errors": [],
+      "screenshot": "header-1440-2-after.png",
+      "final_state": [
+        "32px",
+        "100px",
+        "132px"
+      ]
+    }
+  ],
+  "checks": [
+    {
+      "width": 390,
+      "run": 0,
+      "version": "before",
+      "name": "initial-draft-offset",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "before",
+      "name": "stable-scroll-write-count",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "before",
+      "name": "collapsed-draft",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "before",
+      "name": "resize-observer-keeps-offsets",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "before",
+      "name": "expanded-draft",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "before",
+      "name": "repairs-external-inline-write",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "before",
+      "name": "keyboard-focus-preserved",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "before",
+      "name": "no-script-errors",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "after",
+      "name": "initial-draft-offset",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "after",
+      "name": "stable-scroll-write-count",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "after",
+      "name": "collapsed-draft",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "after",
+      "name": "resize-observer-keeps-offsets",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "after",
+      "name": "expanded-draft",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "after",
+      "name": "repairs-external-inline-write",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "after",
+      "name": "keyboard-focus-preserved",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "after",
+      "name": "no-script-errors",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "after",
+      "name": "initial-draft-offset",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "after",
+      "name": "stable-scroll-write-count",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "after",
+      "name": "collapsed-draft",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "after",
+      "name": "resize-observer-keeps-offsets",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "after",
+      "name": "expanded-draft",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "after",
+      "name": "repairs-external-inline-write",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "after",
+      "name": "keyboard-focus-preserved",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "after",
+      "name": "no-script-errors",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "before",
+      "name": "initial-draft-offset",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "before",
+      "name": "stable-scroll-write-count",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "before",
+      "name": "collapsed-draft",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "before",
+      "name": "resize-observer-keeps-offsets",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "before",
+      "name": "expanded-draft",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "before",
+      "name": "repairs-external-inline-write",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "before",
+      "name": "keyboard-focus-preserved",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "before",
+      "name": "no-script-errors",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "before",
+      "name": "initial-draft-offset",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "before",
+      "name": "stable-scroll-write-count",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "before",
+      "name": "collapsed-draft",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "before",
+      "name": "resize-observer-keeps-offsets",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "before",
+      "name": "expanded-draft",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "before",
+      "name": "repairs-external-inline-write",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "before",
+      "name": "keyboard-focus-preserved",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "before",
+      "name": "no-script-errors",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "after",
+      "name": "initial-draft-offset",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "after",
+      "name": "stable-scroll-write-count",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "after",
+      "name": "collapsed-draft",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "after",
+      "name": "resize-observer-keeps-offsets",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "after",
+      "name": "expanded-draft",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "after",
+      "name": "repairs-external-inline-write",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "after",
+      "name": "keyboard-focus-preserved",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "after",
+      "name": "no-script-errors",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "before",
+      "name": "initial-draft-offset",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "before",
+      "name": "stable-scroll-write-count",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "before",
+      "name": "collapsed-draft",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "before",
+      "name": "resize-observer-keeps-offsets",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "before",
+      "name": "expanded-draft",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "before",
+      "name": "repairs-external-inline-write",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "before",
+      "name": "keyboard-focus-preserved",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "before",
+      "name": "no-script-errors",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "after",
+      "name": "initial-draft-offset",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "after",
+      "name": "stable-scroll-write-count",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "after",
+      "name": "collapsed-draft",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "after",
+      "name": "resize-observer-keeps-offsets",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "after",
+      "name": "expanded-draft",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "after",
+      "name": "repairs-external-inline-write",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "after",
+      "name": "keyboard-focus-preserved",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "after",
+      "name": "no-script-errors",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "version": "after",
+      "name": "initial-draft-offset",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "version": "after",
+      "name": "stable-scroll-write-count",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "version": "after",
+      "name": "collapsed-draft",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "version": "after",
+      "name": "resize-observer-keeps-offsets",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "version": "after",
+      "name": "expanded-draft",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "version": "after",
+      "name": "repairs-external-inline-write",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "version": "after",
+      "name": "keyboard-focus-preserved",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "version": "after",
+      "name": "no-script-errors",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "version": "before",
+      "name": "initial-draft-offset",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "version": "before",
+      "name": "stable-scroll-write-count",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "version": "before",
+      "name": "collapsed-draft",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "version": "before",
+      "name": "resize-observer-keeps-offsets",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "version": "before",
+      "name": "expanded-draft",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "version": "before",
+      "name": "repairs-external-inline-write",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "version": "before",
+      "name": "keyboard-focus-preserved",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "version": "before",
+      "name": "no-script-errors",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "version": "before",
+      "name": "initial-draft-offset",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "version": "before",
+      "name": "stable-scroll-write-count",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "version": "before",
+      "name": "collapsed-draft",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "version": "before",
+      "name": "resize-observer-keeps-offsets",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "version": "before",
+      "name": "expanded-draft",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "version": "before",
+      "name": "repairs-external-inline-write",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "version": "before",
+      "name": "keyboard-focus-preserved",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "version": "before",
+      "name": "no-script-errors",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "version": "after",
+      "name": "initial-draft-offset",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "version": "after",
+      "name": "stable-scroll-write-count",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "version": "after",
+      "name": "collapsed-draft",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "version": "after",
+      "name": "resize-observer-keeps-offsets",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "version": "after",
+      "name": "expanded-draft",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "version": "after",
+      "name": "repairs-external-inline-write",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "version": "after",
+      "name": "keyboard-focus-preserved",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "version": "after",
+      "name": "no-script-errors",
+      "passed": true
+    }
+  ],
+  "remote_requests": 0,
+  "browser": "Chrome/155.0.8059.84",
+  "passed": true,
+  "request_count": 25
+}

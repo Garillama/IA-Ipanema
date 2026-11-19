@@ -1,0 +1,660 @@
+{
+  "kind": "engineering-council-adr",
+  "version": 1,
+  "id": "ADR-a914063f4752",
+  "at": "2026-11-18T20:42:21.023451+00:00",
+  "project": "scentperfumes",
+  "objective": "Revisión independiente del parche de compatibilidad del catálogo y QA del agente. Revisar los archivos completos y el catálogo incluido. Verificar que se conservan consejo, participantes, aislamiento y validadores; las claves internas del controlador están reservadas; las suites deben ejecutar pruebas reales y se registran conteos y skips; errores iniciales quedan bloqueados; los recibos históricos solo acreditan identidad y nunca líneas ni anclas. Analizar evidencia y condiciones concretas dentro del alcance del parche, distinguir defectos reproducidos de hipótesis o mejoras futuras. Solo lectura del workspace del agente.",
+  "problem": [],
+  "context": {
+    "project": "scentperfumes",
+    "run_id": "20261118T204113-orchestration-ae10d405",
+    "source_sha256": "fae363340b32d76cebca02d3ec57836cc5ace2120a22e6d776da10002a4ec4f0",
+    "objective_sha256": "813e63fe8a20231eedb5a6cbf2007d10a539c428ca440d1ca8f6beed9c58feb3",
+    "files": {
+      "tools/ipanema/coordinator.py": "ea5bbfe14bee4f536a4ec12034d83626c557940c38ca5a62ef716b4efbbdb3d9",
+      "tools/ipanema/orchestration/engine.py": "09347e00e317fc1e02a6b980aa7a71f97880f808f7d89087a293f51d429c8abb",
+      "tools/ipanema/validation.py": "e66f8ca6c7a7934b9920fb3ca2d0b0bfe404ef1f567cb9ca6fdd105fbd91afba",
+      "tools/ipanema/snapshot_links.py": "de9f7f0a43a22dbc13e6050ebf1a2dfa8feaea799df9c3692277a0f49ebcb1dc",
+      "tests/support.py": "81ea5b48b6065a38a7d3335f592c443f87a066b5fd62e9b19515d532ea1e056a",
+      "tests/unit/test_skill_execution_contract.py": "4b8b964d0ef07b55928ef0f77836e00feb3ad07d199281e56cafce12cdc763c8",
+      "tests/integration/test_orchestration_cli.py": "d5313b6d8d08ef90791beb8dbd59a89d255c5bd593fd5a62dcb10cb5094666b6",
+      "tests/unit/test_cloudflare_web_perf.py": "6594b0dad3db8f762ee67bf2dcdb9283a78f206b01d34c577568f2b5adf7f960",
+      "tests/unit/test_web_quality_audit.py": "89f145b17e797f96ef987e1b8fb05d7ca7b4f2d02fa9181c877bbeca5ee4bf16",
+      "tests/unit/test_schema_markup_skill.py": "fe3908bfb875b50b2ec422e8730cd29f6b0a3f30f7b32cfa9355d8b3fd2ad19d",
+      "tests/unit/test_seo_audit_skill.py": "5dd2d27df4311b5433a5df7e2cec68d24326a988aa0af2fc5a556eb3e0065e57",
+      "tests/unit/test_orchestration_recovery.py": "7cba737866a7cc5e6cf4191e46e89a23828298d9f55f912973d13120e24e14b8",
+      "tests/unit/test_vercel_react_best_practices.py": "f213b4ad4f7487f2a916c46e1ec3242c92322a58a9704b81f2d45b13cf5e71f0"
+    },
+    "required_constraints": [],
+    "instructions_sha256": "a30a6d4de71e279e4dd63cd3b1917150ecc217fc2d6fea96dc25f7db968f72e6",
+    "require_objections": true,
+    "require_defense": true,
+    "participation_sha256": "9ff597857187450dc19d945e8124e6a50c9a76a12101de1d08f41ada93399d8c"
+  },
+  "status": "needs_evidence",
+  "implementation_allowed": false,
+  "production_authorized": false,
+  "approval_scope": "local_implementation_only",
+  "coverage": {
+    "required_agents": [
+      "claude",
+      "codex"
+    ],
+    "participants": [
+      {
+        "requested_agent": "claude",
+        "effective_agent": "claude",
+        "status": "unavailable",
+        "error": {
+          "category": "rate_limit",
+          "summary": "No se recibió una propuesta válida; no cuenta como participación completa."
+        }
+      },
+      {
+        "requested_agent": "codex",
+        "effective_agent": "codex",
+        "status": "unavailable",
+        "error": {
+          "category": "run_cancelled",
+          "summary": "No se recibió una propuesta válida; no cuenta como participación completa."
+        }
+      }
+    ],
+    "effective_agents": [],
+    "complete": false,
+    "objections_complete": false,
+    "deliberation_complete": false,
+    "defense_complete": false,
+    "agreement": "incomplete",
+    "consensus": "incomplete_or_disagreement"
+  },
+  "proposals": [
+    {
+      "requested_agent": "claude",
+      "effective_agent": "claude",
+      "status": "unavailable",
+      "error": {
+        "category": "rate_limit",
+        "summary": "No se recibió una propuesta válida; no cuenta como participación completa."
+      }
+    },
+    {
+      "requested_agent": "codex",
+      "effective_agent": "codex",
+      "status": "unavailable",
+      "error": {
+        "category": "run_cancelled",
+        "summary": "No se recibió una propuesta válida; no cuenta como participación completa."
+      }
+    }
+  ],
+  "objections": [],
+  "matrix": [],
+  "questions": [],
+  "answers": [],
+  "defenses": [],
+  "withdrawn_alternatives": [],
+  "contradictions": [],
+  "final_preferences": {},
+  "preference_source": "final_debate",
+  "mandatory_constraints": [
+    "functional",
+    "security",
+    "compatibility",
+    "native_reuse"
+  ],
+  "selected_alternative": null,
+  "files": [],
+  "required_tests": [],
+  "post_implementation_requirements": [],
+  "discarded_alternatives": [],
+  "justification": "Implementación detenida hasta disponer de evidencia suficiente y deliberación independiente completa.",
+  "conditions": [],
+  "reasons": [
+    "Deliberación incompleta: faltan participantes originales o proveedores independientes",
+    "Falta contraste de objeciones de todos los participantes requeridos",
+    "Falta defensa de ambos participantes originales",
+    "No hay alternativas válidas para contrastar"
+  ],
+  "accepted_risks": [],
+  "evidence_receipts": [
+    {
+      "id": "source:tools/ipanema/coordinator.py",
+      "kind": "source",
+      "subject": "tools/ipanema/coordinator.py",
+      "executed": true,
+      "passed": true,
+      "sha256": "ea5bbfe14bee4f536a4ec12034d83626c557940c38ca5a62ef716b4efbbdb3d9",
+      "context": {
+        "project": "scentperfumes",
+        "run_id": "20261118T204113-orchestration-ae10d405",
+        "source_sha256": "fae363340b32d76cebca02d3ec57836cc5ace2120a22e6d776da10002a4ec4f0",
+        "objective_sha256": "813e63fe8a20231eedb5a6cbf2007d10a539c428ca440d1ca8f6beed9c58feb3",
+        "files": {
+          "tools/ipanema/coordinator.py": "ea5bbfe14bee4f536a4ec12034d83626c557940c38ca5a62ef716b4efbbdb3d9",
+          "tools/ipanema/orchestration/engine.py": "09347e00e317fc1e02a6b980aa7a71f97880f808f7d89087a293f51d429c8abb",
+          "tools/ipanema/validation.py": "e66f8ca6c7a7934b9920fb3ca2d0b0bfe404ef1f567cb9ca6fdd105fbd91afba",
+          "tools/ipanema/snapshot_links.py": "de9f7f0a43a22dbc13e6050ebf1a2dfa8feaea799df9c3692277a0f49ebcb1dc",
+          "tests/support.py": "81ea5b48b6065a38a7d3335f592c443f87a066b5fd62e9b19515d532ea1e056a",
+          "tests/unit/test_skill_execution_contract.py": "4b8b964d0ef07b55928ef0f77836e00feb3ad07d199281e56cafce12cdc763c8",
+          "tests/integration/test_orchestration_cli.py": "d5313b6d8d08ef90791beb8dbd59a89d255c5bd593fd5a62dcb10cb5094666b6",
+          "tests/unit/test_cloudflare_web_perf.py": "6594b0dad3db8f762ee67bf2dcdb9283a78f206b01d34c577568f2b5adf7f960",
+          "tests/unit/test_web_quality_audit.py": "89f145b17e797f96ef987e1b8fb05d7ca7b4f2d02fa9181c877bbeca5ee4bf16",
+          "tests/unit/test_schema_markup_skill.py": "fe3908bfb875b50b2ec422e8730cd29f6b0a3f30f7b32cfa9355d8b3fd2ad19d",
+          "tests/unit/test_seo_audit_skill.py": "5dd2d27df4311b5433a5df7e2cec68d24326a988aa0af2fc5a556eb3e0065e57",
+          "tests/unit/test_orchestration_recovery.py": "7cba737866a7cc5e6cf4191e46e89a23828298d9f55f912973d13120e24e14b8",
+          "tests/unit/test_vercel_react_best_practices.py": "f213b4ad4f7487f2a916c46e1ec3242c92322a58a9704b81f2d45b13cf5e71f0"
+        },
+        "required_constraints": [],
+        "instructions_sha256": "a30a6d4de71e279e4dd63cd3b1917150ecc217fc2d6fea96dc25f7db968f72e6",
+        "require_objections": true,
+        "require_defense": true,
+        "participation_sha256": "9ff597857187450dc19d945e8124e6a50c9a76a12101de1d08f41ada93399d8c"
+      },
+      "measurement_scope": "Source existence/hash only, not execution or correctness"
+    },
+    {
+      "id": "source:tools/ipanema/orchestration/engine.py",
+      "kind": "source",
+      "subject": "tools/ipanema/orchestration/engine.py",
+      "executed": true,
+      "passed": true,
+      "sha256": "09347e00e317fc1e02a6b980aa7a71f97880f808f7d89087a293f51d429c8abb",
+      "context": {
+        "project": "scentperfumes",
+        "run_id": "20261118T204113-orchestration-ae10d405",
+        "source_sha256": "fae363340b32d76cebca02d3ec57836cc5ace2120a22e6d776da10002a4ec4f0",
+        "objective_sha256": "813e63fe8a20231eedb5a6cbf2007d10a539c428ca440d1ca8f6beed9c58feb3",
+        "files": {
+          "tools/ipanema/coordinator.py": "ea5bbfe14bee4f536a4ec12034d83626c557940c38ca5a62ef716b4efbbdb3d9",
+          "tools/ipanema/orchestration/engine.py": "09347e00e317fc1e02a6b980aa7a71f97880f808f7d89087a293f51d429c8abb",
+          "tools/ipanema/validation.py": "e66f8ca6c7a7934b9920fb3ca2d0b0bfe404ef1f567cb9ca6fdd105fbd91afba",
+          "tools/ipanema/snapshot_links.py": "de9f7f0a43a22dbc13e6050ebf1a2dfa8feaea799df9c3692277a0f49ebcb1dc",
+          "tests/support.py": "81ea5b48b6065a38a7d3335f592c443f87a066b5fd62e9b19515d532ea1e056a",
+          "tests/unit/test_skill_execution_contract.py": "4b8b964d0ef07b55928ef0f77836e00feb3ad07d199281e56cafce12cdc763c8",
+          "tests/integration/test_orchestration_cli.py": "d5313b6d8d08ef90791beb8dbd59a89d255c5bd593fd5a62dcb10cb5094666b6",
+          "tests/unit/test_cloudflare_web_perf.py": "6594b0dad3db8f762ee67bf2dcdb9283a78f206b01d34c577568f2b5adf7f960",
+          "tests/unit/test_web_quality_audit.py": "89f145b17e797f96ef987e1b8fb05d7ca7b4f2d02fa9181c877bbeca5ee4bf16",
+          "tests/unit/test_schema_markup_skill.py": "fe3908bfb875b50b2ec422e8730cd29f6b0a3f30f7b32cfa9355d8b3fd2ad19d",
+          "tests/unit/test_seo_audit_skill.py": "5dd2d27df4311b5433a5df7e2cec68d24326a988aa0af2fc5a556eb3e0065e57",
+          "tests/unit/test_orchestration_recovery.py": "7cba737866a7cc5e6cf4191e46e89a23828298d9f55f912973d13120e24e14b8",
+          "tests/unit/test_vercel_react_best_practices.py": "f213b4ad4f7487f2a916c46e1ec3242c92322a58a9704b81f2d45b13cf5e71f0"
+        },
+        "required_constraints": [],
+        "instructions_sha256": "a30a6d4de71e279e4dd63cd3b1917150ecc217fc2d6fea96dc25f7db968f72e6",
+        "require_objections": true,
+        "require_defense": true,
+        "participation_sha256": "9ff597857187450dc19d945e8124e6a50c9a76a12101de1d08f41ada93399d8c"
+      },
+      "measurement_scope": "Source existence/hash only, not execution or correctness"
+    },
+    {
+      "id": "source:tools/ipanema/validation.py",
+      "kind": "source",
+      "subject": "tools/ipanema/validation.py",
+      "executed": true,
+      "passed": true,
+      "sha256": "e66f8ca6c7a7934b9920fb3ca2d0b0bfe404ef1f567cb9ca6fdd105fbd91afba",
+      "context": {
+        "project": "scentperfumes",
+        "run_id": "20261118T204113-orchestration-ae10d405",
+        "source_sha256": "fae363340b32d76cebca02d3ec57836cc5ace2120a22e6d776da10002a4ec4f0",
+        "objective_sha256": "813e63fe8a20231eedb5a6cbf2007d10a539c428ca440d1ca8f6beed9c58feb3",
+        "files": {
+          "tools/ipanema/coordinator.py": "ea5bbfe14bee4f536a4ec12034d83626c557940c38ca5a62ef716b4efbbdb3d9",
+          "tools/ipanema/orchestration/engine.py": "09347e00e317fc1e02a6b980aa7a71f97880f808f7d89087a293f51d429c8abb",
+          "tools/ipanema/validation.py": "e66f8ca6c7a7934b9920fb3ca2d0b0bfe404ef1f567cb9ca6fdd105fbd91afba",
+          "tools/ipanema/snapshot_links.py": "de9f7f0a43a22dbc13e6050ebf1a2dfa8feaea799df9c3692277a0f49ebcb1dc",
+          "tests/support.py": "81ea5b48b6065a38a7d3335f592c443f87a066b5fd62e9b19515d532ea1e056a",
+          "tests/unit/test_skill_execution_contract.py": "4b8b964d0ef07b55928ef0f77836e00feb3ad07d199281e56cafce12cdc763c8",
+          "tests/integration/test_orchestration_cli.py": "d5313b6d8d08ef90791beb8dbd59a89d255c5bd593fd5a62dcb10cb5094666b6",
+          "tests/unit/test_cloudflare_web_perf.py": "6594b0dad3db8f762ee67bf2dcdb9283a78f206b01d34c577568f2b5adf7f960",
+          "tests/unit/test_web_quality_audit.py": "89f145b17e797f96ef987e1b8fb05d7ca7b4f2d02fa9181c877bbeca5ee4bf16",
+          "tests/unit/test_schema_markup_skill.py": "fe3908bfb875b50b2ec422e8730cd29f6b0a3f30f7b32cfa9355d8b3fd2ad19d",
+          "tests/unit/test_seo_audit_skill.py": "5dd2d27df4311b5433a5df7e2cec68d24326a988aa0af2fc5a556eb3e0065e57",
+          "tests/unit/test_orchestration_recovery.py": "7cba737866a7cc5e6cf4191e46e89a23828298d9f55f912973d13120e24e14b8",
+          "tests/unit/test_vercel_react_best_practices.py": "f213b4ad4f7487f2a916c46e1ec3242c92322a58a9704b81f2d45b13cf5e71f0"
+        },
+        "required_constraints": [],
+        "instructions_sha256": "a30a6d4de71e279e4dd63cd3b1917150ecc217fc2d6fea96dc25f7db968f72e6",
+        "require_objections": true,
+        "require_defense": true,
+        "participation_sha256": "9ff597857187450dc19d945e8124e6a50c9a76a12101de1d08f41ada93399d8c"
+      },
+      "measurement_scope": "Source existence/hash only, not execution or correctness"
+    },
+    {
+      "id": "source:tools/ipanema/snapshot_links.py",
+      "kind": "source",
+      "subject": "tools/ipanema/snapshot_links.py",
+      "executed": true,
+      "passed": true,
+      "sha256": "de9f7f0a43a22dbc13e6050ebf1a2dfa8feaea799df9c3692277a0f49ebcb1dc",
+      "context": {
+        "project": "scentperfumes",
+        "run_id": "20261118T204113-orchestration-ae10d405",
+        "source_sha256": "fae363340b32d76cebca02d3ec57836cc5ace2120a22e6d776da10002a4ec4f0",
+        "objective_sha256": "813e63fe8a20231eedb5a6cbf2007d10a539c428ca440d1ca8f6beed9c58feb3",
+        "files": {
+          "tools/ipanema/coordinator.py": "ea5bbfe14bee4f536a4ec12034d83626c557940c38ca5a62ef716b4efbbdb3d9",
+          "tools/ipanema/orchestration/engine.py": "09347e00e317fc1e02a6b980aa7a71f97880f808f7d89087a293f51d429c8abb",
+          "tools/ipanema/validation.py": "e66f8ca6c7a7934b9920fb3ca2d0b0bfe404ef1f567cb9ca6fdd105fbd91afba",
+          "tools/ipanema/snapshot_links.py": "de9f7f0a43a22dbc13e6050ebf1a2dfa8feaea799df9c3692277a0f49ebcb1dc",
+          "tests/support.py": "81ea5b48b6065a38a7d3335f592c443f87a066b5fd62e9b19515d532ea1e056a",
+          "tests/unit/test_skill_execution_contract.py": "4b8b964d0ef07b55928ef0f77836e00feb3ad07d199281e56cafce12cdc763c8",
+          "tests/integration/test_orchestration_cli.py": "d5313b6d8d08ef90791beb8dbd59a89d255c5bd593fd5a62dcb10cb5094666b6",
+          "tests/unit/test_cloudflare_web_perf.py": "6594b0dad3db8f762ee67bf2dcdb9283a78f206b01d34c577568f2b5adf7f960",
+          "tests/unit/test_web_quality_audit.py": "89f145b17e797f96ef987e1b8fb05d7ca7b4f2d02fa9181c877bbeca5ee4bf16",
+          "tests/unit/test_schema_markup_skill.py": "fe3908bfb875b50b2ec422e8730cd29f6b0a3f30f7b32cfa9355d8b3fd2ad19d",
+          "tests/unit/test_seo_audit_skill.py": "5dd2d27df4311b5433a5df7e2cec68d24326a988aa0af2fc5a556eb3e0065e57",
+          "tests/unit/test_orchestration_recovery.py": "7cba737866a7cc5e6cf4191e46e89a23828298d9f55f912973d13120e24e14b8",
+          "tests/unit/test_vercel_react_best_practices.py": "f213b4ad4f7487f2a916c46e1ec3242c92322a58a9704b81f2d45b13cf5e71f0"
+        },
+        "required_constraints": [],
+        "instructions_sha256": "a30a6d4de71e279e4dd63cd3b1917150ecc217fc2d6fea96dc25f7db968f72e6",
+        "require_objections": true,
+        "require_defense": true,
+        "participation_sha256": "9ff597857187450dc19d945e8124e6a50c9a76a12101de1d08f41ada93399d8c"
+      },
+      "measurement_scope": "Source existence/hash only, not execution or correctness"
+    },
+    {
+      "id": "source:tests/support.py",
+      "kind": "source",
+      "subject": "tests/support.py",
+      "executed": true,
+      "passed": true,
+      "sha256": "81ea5b48b6065a38a7d3335f592c443f87a066b5fd62e9b19515d532ea1e056a",
+      "context": {
+        "project": "scentperfumes",
+        "run_id": "20261118T204113-orchestration-ae10d405",
+        "source_sha256": "fae363340b32d76cebca02d3ec57836cc5ace2120a22e6d776da10002a4ec4f0",
+        "objective_sha256": "813e63fe8a20231eedb5a6cbf2007d10a539c428ca440d1ca8f6beed9c58feb3",
+        "files": {
+          "tools/ipanema/coordinator.py": "ea5bbfe14bee4f536a4ec12034d83626c557940c38ca5a62ef716b4efbbdb3d9",
+          "tools/ipanema/orchestration/engine.py": "09347e00e317fc1e02a6b980aa7a71f97880f808f7d89087a293f51d429c8abb",
+          "tools/ipanema/validation.py": "e66f8ca6c7a7934b9920fb3ca2d0b0bfe404ef1f567cb9ca6fdd105fbd91afba",
+          "tools/ipanema/snapshot_links.py": "de9f7f0a43a22dbc13e6050ebf1a2dfa8feaea799df9c3692277a0f49ebcb1dc",
+          "tests/support.py": "81ea5b48b6065a38a7d3335f592c443f87a066b5fd62e9b19515d532ea1e056a",
+          "tests/unit/test_skill_execution_contract.py": "4b8b964d0ef07b55928ef0f77836e00feb3ad07d199281e56cafce12cdc763c8",
+          "tests/integration/test_orchestration_cli.py": "d5313b6d8d08ef90791beb8dbd59a89d255c5bd593fd5a62dcb10cb5094666b6",
+          "tests/unit/test_cloudflare_web_perf.py": "6594b0dad3db8f762ee67bf2dcdb9283a78f206b01d34c577568f2b5adf7f960",
+          "tests/unit/test_web_quality_audit.py": "89f145b17e797f96ef987e1b8fb05d7ca7b4f2d02fa9181c877bbeca5ee4bf16",
+          "tests/unit/test_schema_markup_skill.py": "fe3908bfb875b50b2ec422e8730cd29f6b0a3f30f7b32cfa9355d8b3fd2ad19d",
+          "tests/unit/test_seo_audit_skill.py": "5dd2d27df4311b5433a5df7e2cec68d24326a988aa0af2fc5a556eb3e0065e57",
+          "tests/unit/test_orchestration_recovery.py": "7cba737866a7cc5e6cf4191e46e89a23828298d9f55f912973d13120e24e14b8",
+          "tests/unit/test_vercel_react_best_practices.py": "f213b4ad4f7487f2a916c46e1ec3242c92322a58a9704b81f2d45b13cf5e71f0"
+        },
+        "required_constraints": [],
+        "instructions_sha256": "a30a6d4de71e279e4dd63cd3b1917150ecc217fc2d6fea96dc25f7db968f72e6",
+        "require_objections": true,
+        "require_defense": true,
+        "participation_sha256": "9ff597857187450dc19d945e8124e6a50c9a76a12101de1d08f41ada93399d8c"
+      },
+      "measurement_scope": "Source existence/hash only, not execution or correctness"
+    },
+    {
+      "id": "source:tests/unit/test_skill_execution_contract.py",
+      "kind": "source",
+      "subject": "tests/unit/test_skill_execution_contract.py",
+      "executed": true,
+      "passed": true,
+      "sha256": "4b8b964d0ef07b55928ef0f77836e00feb3ad07d199281e56cafce12cdc763c8",
+      "context": {
+        "project": "scentperfumes",
+        "run_id": "20261118T204113-orchestration-ae10d405",
+        "source_sha256": "fae363340b32d76cebca02d3ec57836cc5ace2120a22e6d776da10002a4ec4f0",
+        "objective_sha256": "813e63fe8a20231eedb5a6cbf2007d10a539c428ca440d1ca8f6beed9c58feb3",
+        "files": {
+          "tools/ipanema/coordinator.py": "ea5bbfe14bee4f536a4ec12034d83626c557940c38ca5a62ef716b4efbbdb3d9",
+          "tools/ipanema/orchestration/engine.py": "09347e00e317fc1e02a6b980aa7a71f97880f808f7d89087a293f51d429c8abb",
+          "tools/ipanema/validation.py": "e66f8ca6c7a7934b9920fb3ca2d0b0bfe404ef1f567cb9ca6fdd105fbd91afba",
+          "tools/ipanema/snapshot_links.py": "de9f7f0a43a22dbc13e6050ebf1a2dfa8feaea799df9c3692277a0f49ebcb1dc",
+          "tests/support.py": "81ea5b48b6065a38a7d3335f592c443f87a066b5fd62e9b19515d532ea1e056a",
+          "tests/unit/test_skill_execution_contract.py": "4b8b964d0ef07b55928ef0f77836e00feb3ad07d199281e56cafce12cdc763c8",
+          "tests/integration/test_orchestration_cli.py": "d5313b6d8d08ef90791beb8dbd59a89d255c5bd593fd5a62dcb10cb5094666b6",
+          "tests/unit/test_cloudflare_web_perf.py": "6594b0dad3db8f762ee67bf2dcdb9283a78f206b01d34c577568f2b5adf7f960",
+          "tests/unit/test_web_quality_audit.py": "89f145b17e797f96ef987e1b8fb05d7ca7b4f2d02fa9181c877bbeca5ee4bf16",
+          "tests/unit/test_schema_markup_skill.py": "fe3908bfb875b50b2ec422e8730cd29f6b0a3f30f7b32cfa9355d8b3fd2ad19d",
+          "tests/unit/test_seo_audit_skill.py": "5dd2d27df4311b5433a5df7e2cec68d24326a988aa0af2fc5a556eb3e0065e57",
+          "tests/unit/test_orchestration_recovery.py": "7cba737866a7cc5e6cf4191e46e89a23828298d9f55f912973d13120e24e14b8",
+          "tests/unit/test_vercel_react_best_practices.py": "f213b4ad4f7487f2a916c46e1ec3242c92322a58a9704b81f2d45b13cf5e71f0"
+        },
+        "required_constraints": [],
+        "instructions_sha256": "a30a6d4de71e279e4dd63cd3b1917150ecc217fc2d6fea96dc25f7db968f72e6",
+        "require_objections": true,
+        "require_defense": true,
+        "participation_sha256": "9ff597857187450dc19d945e8124e6a50c9a76a12101de1d08f41ada93399d8c"
+      },
+      "measurement_scope": "Source existence/hash only, not execution or correctness"
+    },
+    {
+      "id": "source:tests/integration/test_orchestration_cli.py",
+      "kind": "source",
+      "subject": "tests/integration/test_orchestration_cli.py",
+      "executed": true,
+      "passed": true,
+      "sha256": "d5313b6d8d08ef90791beb8dbd59a89d255c5bd593fd5a62dcb10cb5094666b6",
+      "context": {
+        "project": "scentperfumes",
+        "run_id": "20261118T204113-orchestration-ae10d405",
+        "source_sha256": "fae363340b32d76cebca02d3ec57836cc5ace2120a22e6d776da10002a4ec4f0",
+        "objective_sha256": "813e63fe8a20231eedb5a6cbf2007d10a539c428ca440d1ca8f6beed9c58feb3",
+        "files": {
+          "tools/ipanema/coordinator.py": "ea5bbfe14bee4f536a4ec12034d83626c557940c38ca5a62ef716b4efbbdb3d9",
+          "tools/ipanema/orchestration/engine.py": "09347e00e317fc1e02a6b980aa7a71f97880f808f7d89087a293f51d429c8abb",
+          "tools/ipanema/validation.py": "e66f8ca6c7a7934b9920fb3ca2d0b0bfe404ef1f567cb9ca6fdd105fbd91afba",
+          "tools/ipanema/snapshot_links.py": "de9f7f0a43a22dbc13e6050ebf1a2dfa8feaea799df9c3692277a0f49ebcb1dc",
+          "tests/support.py": "81ea5b48b6065a38a7d3335f592c443f87a066b5fd62e9b19515d532ea1e056a",
+          "tests/unit/test_skill_execution_contract.py": "4b8b964d0ef07b55928ef0f77836e00feb3ad07d199281e56cafce12cdc763c8",
+          "tests/integration/test_orchestration_cli.py": "d5313b6d8d08ef90791beb8dbd59a89d255c5bd593fd5a62dcb10cb5094666b6",
+          "tests/unit/test_cloudflare_web_perf.py": "6594b0dad3db8f762ee67bf2dcdb9283a78f206b01d34c577568f2b5adf7f960",
+          "tests/unit/test_web_quality_audit.py": "89f145b17e797f96ef987e1b8fb05d7ca7b4f2d02fa9181c877bbeca5ee4bf16",
+          "tests/unit/test_schema_markup_skill.py": "fe3908bfb875b50b2ec422e8730cd29f6b0a3f30f7b32cfa9355d8b3fd2ad19d",
+          "tests/unit/test_seo_audit_skill.py": "5dd2d27df4311b5433a5df7e2cec68d24326a988aa0af2fc5a556eb3e0065e57",
+          "tests/unit/test_orchestration_recovery.py": "7cba737866a7cc5e6cf4191e46e89a23828298d9f55f912973d13120e24e14b8",
+          "tests/unit/test_vercel_react_best_practices.py": "f213b4ad4f7487f2a916c46e1ec3242c92322a58a9704b81f2d45b13cf5e71f0"
+        },
+        "required_constraints": [],
+        "instructions_sha256": "a30a6d4de71e279e4dd63cd3b1917150ecc217fc2d6fea96dc25f7db968f72e6",
+        "require_objections": true,
+        "require_defense": true,
+        "participation_sha256": "9ff597857187450dc19d945e8124e6a50c9a76a12101de1d08f41ada93399d8c"
+      },
+      "measurement_scope": "Source existence/hash only, not execution or correctness"
+    },
+    {
+      "id": "source:tests/unit/test_cloudflare_web_perf.py",
+      "kind": "source",
+      "subject": "tests/unit/test_cloudflare_web_perf.py",
+      "executed": true,
+      "passed": true,
+      "sha256": "6594b0dad3db8f762ee67bf2dcdb9283a78f206b01d34c577568f2b5adf7f960",
+      "context": {
+        "project": "scentperfumes",
+        "run_id": "20261118T204113-orchestration-ae10d405",
+        "source_sha256": "fae363340b32d76cebca02d3ec57836cc5ace2120a22e6d776da10002a4ec4f0",
+        "objective_sha256": "813e63fe8a20231eedb5a6cbf2007d10a539c428ca440d1ca8f6beed9c58feb3",
+        "files": {
+          "tools/ipanema/coordinator.py": "ea5bbfe14bee4f536a4ec12034d83626c557940c38ca5a62ef716b4efbbdb3d9",
+          "tools/ipanema/orchestration/engine.py": "09347e00e317fc1e02a6b980aa7a71f97880f808f7d89087a293f51d429c8abb",
+          "tools/ipanema/validation.py": "e66f8ca6c7a7934b9920fb3ca2d0b0bfe404ef1f567cb9ca6fdd105fbd91afba",
+          "tools/ipanema/snapshot_links.py": "de9f7f0a43a22dbc13e6050ebf1a2dfa8feaea799df9c3692277a0f49ebcb1dc",
+          "tests/support.py": "81ea5b48b6065a38a7d3335f592c443f87a066b5fd62e9b19515d532ea1e056a",
+          "tests/unit/test_skill_execution_contract.py": "4b8b964d0ef07b55928ef0f77836e00feb3ad07d199281e56cafce12cdc763c8",
+          "tests/integration/test_orchestration_cli.py": "d5313b6d8d08ef90791beb8dbd59a89d255c5bd593fd5a62dcb10cb5094666b6",
+          "tests/unit/test_cloudflare_web_perf.py": "6594b0dad3db8f762ee67bf2dcdb9283a78f206b01d34c577568f2b5adf7f960",
+          "tests/unit/test_web_quality_audit.py": "89f145b17e797f96ef987e1b8fb05d7ca7b4f2d02fa9181c877bbeca5ee4bf16",
+          "tests/unit/test_schema_markup_skill.py": "fe3908bfb875b50b2ec422e8730cd29f6b0a3f30f7b32cfa9355d8b3fd2ad19d",
+          "tests/unit/test_seo_audit_skill.py": "5dd2d27df4311b5433a5df7e2cec68d24326a988aa0af2fc5a556eb3e0065e57",
+          "tests/unit/test_orchestration_recovery.py": "7cba737866a7cc5e6cf4191e46e89a23828298d9f55f912973d13120e24e14b8",
+          "tests/unit/test_vercel_react_best_practices.py": "f213b4ad4f7487f2a916c46e1ec3242c92322a58a9704b81f2d45b13cf5e71f0"
+        },
+        "required_constraints": [],
+        "instructions_sha256": "a30a6d4de71e279e4dd63cd3b1917150ecc217fc2d6fea96dc25f7db968f72e6",
+        "require_objections": true,
+        "require_defense": true,
+        "participation_sha256": "9ff597857187450dc19d945e8124e6a50c9a76a12101de1d08f41ada93399d8c"
+      },
+      "measurement_scope": "Source existence/hash only, not execution or correctness"
+    },
+    {
+      "id": "source:tests/unit/test_web_quality_audit.py",
+      "kind": "source",
+      "subject": "tests/unit/test_web_quality_audit.py",
+      "executed": true,
+      "passed": true,
+      "sha256": "89f145b17e797f96ef987e1b8fb05d7ca7b4f2d02fa9181c877bbeca5ee4bf16",
+      "context": {
+        "project": "scentperfumes",
+        "run_id": "20261118T204113-orchestration-ae10d405",
+        "source_sha256": "fae363340b32d76cebca02d3ec57836cc5ace2120a22e6d776da10002a4ec4f0",
+        "objective_sha256": "813e63fe8a20231eedb5a6cbf2007d10a539c428ca440d1ca8f6beed9c58feb3",
+        "files": {
+          "tools/ipanema/coordinator.py": "ea5bbfe14bee4f536a4ec12034d83626c557940c38ca5a62ef716b4efbbdb3d9",
+          "tools/ipanema/orchestration/engine.py": "09347e00e317fc1e02a6b980aa7a71f97880f808f7d89087a293f51d429c8abb",
+          "tools/ipanema/validation.py": "e66f8ca6c7a7934b9920fb3ca2d0b0bfe404ef1f567cb9ca6fdd105fbd91afba",
+          "tools/ipanema/snapshot_links.py": "de9f7f0a43a22dbc13e6050ebf1a2dfa8feaea799df9c3692277a0f49ebcb1dc",
+          "tests/support.py": "81ea5b48b6065a38a7d3335f592c443f87a066b5fd62e9b19515d532ea1e056a",
+          "tests/unit/test_skill_execution_contract.py": "4b8b964d0ef07b55928ef0f77836e00feb3ad07d199281e56cafce12cdc763c8",
+          "tests/integration/test_orchestration_cli.py": "d5313b6d8d08ef90791beb8dbd59a89d255c5bd593fd5a62dcb10cb5094666b6",
+          "tests/unit/test_cloudflare_web_perf.py": "6594b0dad3db8f762ee67bf2dcdb9283a78f206b01d34c577568f2b5adf7f960",
+          "tests/unit/test_web_quality_audit.py": "89f145b17e797f96ef987e1b8fb05d7ca7b4f2d02fa9181c877bbeca5ee4bf16",
+          "tests/unit/test_schema_markup_skill.py": "fe3908bfb875b50b2ec422e8730cd29f6b0a3f30f7b32cfa9355d8b3fd2ad19d",
+          "tests/unit/test_seo_audit_skill.py": "5dd2d27df4311b5433a5df7e2cec68d24326a988aa0af2fc5a556eb3e0065e57",
+          "tests/unit/test_orchestration_recovery.py": "7cba737866a7cc5e6cf4191e46e89a23828298d9f55f912973d13120e24e14b8",
+          "tests/unit/test_vercel_react_best_practices.py": "f213b4ad4f7487f2a916c46e1ec3242c92322a58a9704b81f2d45b13cf5e71f0"
+        },
+        "required_constraints": [],
+        "instructions_sha256": "a30a6d4de71e279e4dd63cd3b1917150ecc217fc2d6fea96dc25f7db968f72e6",
+        "require_objections": true,
+        "require_defense": true,
+        "participation_sha256": "9ff597857187450dc19d945e8124e6a50c9a76a12101de1d08f41ada93399d8c"
+      },
+      "measurement_scope": "Source existence/hash only, not execution or correctness"
+    },
+    {
+      "id": "source:tests/unit/test_schema_markup_skill.py",
+      "kind": "source",
+      "subject": "tests/unit/test_schema_markup_skill.py",
+      "executed": true,
+      "passed": true,
+      "sha256": "fe3908bfb875b50b2ec422e8730cd29f6b0a3f30f7b32cfa9355d8b3fd2ad19d",
+      "context": {
+        "project": "scentperfumes",
+        "run_id": "20261118T204113-orchestration-ae10d405",
+        "source_sha256": "fae363340b32d76cebca02d3ec57836cc5ace2120a22e6d776da10002a4ec4f0",
+        "objective_sha256": "813e63fe8a20231eedb5a6cbf2007d10a539c428ca440d1ca8f6beed9c58feb3",
+        "files": {
+          "tools/ipanema/coordinator.py": "ea5bbfe14bee4f536a4ec12034d83626c557940c38ca5a62ef716b4efbbdb3d9",
+          "tools/ipanema/orchestration/engine.py": "09347e00e317fc1e02a6b980aa7a71f97880f808f7d89087a293f51d429c8abb",
+          "tools/ipanema/validation.py": "e66f8ca6c7a7934b9920fb3ca2d0b0bfe404ef1f567cb9ca6fdd105fbd91afba",
+          "tools/ipanema/snapshot_links.py": "de9f7f0a43a22dbc13e6050ebf1a2dfa8feaea799df9c3692277a0f49ebcb1dc",
+          "tests/support.py": "81ea5b48b6065a38a7d3335f592c443f87a066b5fd62e9b19515d532ea1e056a",
+          "tests/unit/test_skill_execution_contract.py": "4b8b964d0ef07b55928ef0f77836e00feb3ad07d199281e56cafce12cdc763c8",
+          "tests/integration/test_orchestration_cli.py": "d5313b6d8d08ef90791beb8dbd59a89d255c5bd593fd5a62dcb10cb5094666b6",
+          "tests/unit/test_cloudflare_web_perf.py": "6594b0dad3db8f762ee67bf2dcdb9283a78f206b01d34c577568f2b5adf7f960",
+          "tests/unit/test_web_quality_audit.py": "89f145b17e797f96ef987e1b8fb05d7ca7b4f2d02fa9181c877bbeca5ee4bf16",
+          "tests/unit/test_schema_markup_skill.py": "fe3908bfb875b50b2ec422e8730cd29f6b0a3f30f7b32cfa9355d8b3fd2ad19d",
+          "tests/unit/test_seo_audit_skill.py": "5dd2d27df4311b5433a5df7e2cec68d24326a988aa0af2fc5a556eb3e0065e57",
+          "tests/unit/test_orchestration_recovery.py": "7cba737866a7cc5e6cf4191e46e89a23828298d9f55f912973d13120e24e14b8",
+          "tests/unit/test_vercel_react_best_practices.py": "f213b4ad4f7487f2a916c46e1ec3242c92322a58a9704b81f2d45b13cf5e71f0"
+        },
+        "required_constraints": [],
+        "instructions_sha256": "a30a6d4de71e279e4dd63cd3b1917150ecc217fc2d6fea96dc25f7db968f72e6",
+        "require_objections": true,
+        "require_defense": true,
+        "participation_sha256": "9ff597857187450dc19d945e8124e6a50c9a76a12101de1d08f41ada93399d8c"
+      },
+      "measurement_scope": "Source existence/hash only, not execution or correctness"
+    },
+    {
+      "id": "source:tests/unit/test_seo_audit_skill.py",
+      "kind": "source",
+      "subject": "tests/unit/test_seo_audit_skill.py",
+      "executed": true,
+      "passed": true,
+      "sha256": "5dd2d27df4311b5433a5df7e2cec68d24326a988aa0af2fc5a556eb3e0065e57",
+      "context": {
+        "project": "scentperfumes",
+        "run_id": "20261118T204113-orchestration-ae10d405",
+        "source_sha256": "fae363340b32d76cebca02d3ec57836cc5ace2120a22e6d776da10002a4ec4f0",
+        "objective_sha256": "813e63fe8a20231eedb5a6cbf2007d10a539c428ca440d1ca8f6beed9c58feb3",
+        "files": {
+          "tools/ipanema/coordinator.py": "ea5bbfe14bee4f536a4ec12034d83626c557940c38ca5a62ef716b4efbbdb3d9",
+          "tools/ipanema/orchestration/engine.py": "09347e00e317fc1e02a6b980aa7a71f97880f808f7d89087a293f51d429c8abb",
+          "tools/ipanema/validation.py": "e66f8ca6c7a7934b9920fb3ca2d0b0bfe404ef1f567cb9ca6fdd105fbd91afba",
+          "tools/ipanema/snapshot_links.py": "de9f7f0a43a22dbc13e6050ebf1a2dfa8feaea799df9c3692277a0f49ebcb1dc",
+          "tests/support.py": "81ea5b48b6065a38a7d3335f592c443f87a066b5fd62e9b19515d532ea1e056a",
+          "tests/unit/test_skill_execution_contract.py": "4b8b964d0ef07b55928ef0f77836e00feb3ad07d199281e56cafce12cdc763c8",
+          "tests/integration/test_orchestration_cli.py": "d5313b6d8d08ef90791beb8dbd59a89d255c5bd593fd5a62dcb10cb5094666b6",
+          "tests/unit/test_cloudflare_web_perf.py": "6594b0dad3db8f762ee67bf2dcdb9283a78f206b01d34c577568f2b5adf7f960",
+          "tests/unit/test_web_quality_audit.py": "89f145b17e797f96ef987e1b8fb05d7ca7b4f2d02fa9181c877bbeca5ee4bf16",
+          "tests/unit/test_schema_markup_skill.py": "fe3908bfb875b50b2ec422e8730cd29f6b0a3f30f7b32cfa9355d8b3fd2ad19d",
+          "tests/unit/test_seo_audit_skill.py": "5dd2d27df4311b5433a5df7e2cec68d24326a988aa0af2fc5a556eb3e0065e57",
+          "tests/unit/test_orchestration_recovery.py": "7cba737866a7cc5e6cf4191e46e89a23828298d9f55f912973d13120e24e14b8",
+          "tests/unit/test_vercel_react_best_practices.py": "f213b4ad4f7487f2a916c46e1ec3242c92322a58a9704b81f2d45b13cf5e71f0"
+        },
+        "required_constraints": [],
+        "instructions_sha256": "a30a6d4de71e279e4dd63cd3b1917150ecc217fc2d6fea96dc25f7db968f72e6",
+        "require_objections": true,
+        "require_defense": true,
+        "participation_sha256": "9ff597857187450dc19d945e8124e6a50c9a76a12101de1d08f41ada93399d8c"
+      },
+      "measurement_scope": "Source existence/hash only, not execution or correctness"
+    },
+    {
+      "id": "source:tests/unit/test_orchestration_recovery.py",
+      "kind": "source",
+      "subject": "tests/unit/test_orchestration_recovery.py",
+      "executed": true,
+      "passed": true,
+      "sha256": "7cba737866a7cc5e6cf4191e46e89a23828298d9f55f912973d13120e24e14b8",
+      "context": {
+        "project": "scentperfumes",
+        "run_id": "20261118T204113-orchestration-ae10d405",
+        "source_sha256": "fae363340b32d76cebca02d3ec57836cc5ace2120a22e6d776da10002a4ec4f0",
+        "objective_sha256": "813e63fe8a20231eedb5a6cbf2007d10a539c428ca440d1ca8f6beed9c58feb3",
+        "files": {
+          "tools/ipanema/coordinator.py": "ea5bbfe14bee4f536a4ec12034d83626c557940c38ca5a62ef716b4efbbdb3d9",
+          "tools/ipanema/orchestration/engine.py": "09347e00e317fc1e02a6b980aa7a71f97880f808f7d89087a293f51d429c8abb",
+          "tools/ipanema/validation.py": "e66f8ca6c7a7934b9920fb3ca2d0b0bfe404ef1f567cb9ca6fdd105fbd91afba",
+          "tools/ipanema/snapshot_links.py": "de9f7f0a43a22dbc13e6050ebf1a2dfa8feaea799df9c3692277a0f49ebcb1dc",
+          "tests/support.py": "81ea5b48b6065a38a7d3335f592c443f87a066b5fd62e9b19515d532ea1e056a",
+          "tests/unit/test_skill_execution_contract.py": "4b8b964d0ef07b55928ef0f77836e00feb3ad07d199281e56cafce12cdc763c8",
+          "tests/integration/test_orchestration_cli.py": "d5313b6d8d08ef90791beb8dbd59a89d255c5bd593fd5a62dcb10cb5094666b6",
+          "tests/unit/test_cloudflare_web_perf.py": "6594b0dad3db8f762ee67bf2dcdb9283a78f206b01d34c577568f2b5adf7f960",
+          "tests/unit/test_web_quality_audit.py": "89f145b17e797f96ef987e1b8fb05d7ca7b4f2d02fa9181c877bbeca5ee4bf16",
+          "tests/unit/test_schema_markup_skill.py": "fe3908bfb875b50b2ec422e8730cd29f6b0a3f30f7b32cfa9355d8b3fd2ad19d",
+          "tests/unit/test_seo_audit_skill.py": "5dd2d27df4311b5433a5df7e2cec68d24326a988aa0af2fc5a556eb3e0065e57",
+          "tests/unit/test_orchestration_recovery.py": "7cba737866a7cc5e6cf4191e46e89a23828298d9f55f912973d13120e24e14b8",
+          "tests/unit/test_vercel_react_best_practices.py": "f213b4ad4f7487f2a916c46e1ec3242c92322a58a9704b81f2d45b13cf5e71f0"
+        },
+        "required_constraints": [],
+        "instructions_sha256": "a30a6d4de71e279e4dd63cd3b1917150ecc217fc2d6fea96dc25f7db968f72e6",
+        "require_objections": true,
+        "require_defense": true,
+        "participation_sha256": "9ff597857187450dc19d945e8124e6a50c9a76a12101de1d08f41ada93399d8c"
+      },
+      "measurement_scope": "Source existence/hash only, not execution or correctness"
+    },
+    {
+      "id": "source:tests/unit/test_vercel_react_best_practices.py",
+      "kind": "source",
+      "subject": "tests/unit/test_vercel_react_best_practices.py",
+      "executed": true,
+      "passed": true,
+      "sha256": "f213b4ad4f7487f2a916c46e1ec3242c92322a58a9704b81f2d45b13cf5e71f0",
+      "context": {
+        "project": "scentperfumes",
+        "run_id": "20261118T204113-orchestration-ae10d405",
+        "source_sha256": "fae363340b32d76cebca02d3ec57836cc5ace2120a22e6d776da10002a4ec4f0",
+        "objective_sha256": "813e63fe8a20231eedb5a6cbf2007d10a539c428ca440d1ca8f6beed9c58feb3",
+        "files": {
+          "tools/ipanema/coordinator.py": "ea5bbfe14bee4f536a4ec12034d83626c557940c38ca5a62ef716b4efbbdb3d9",
+          "tools/ipanema/orchestration/engine.py": "09347e00e317fc1e02a6b980aa7a71f97880f808f7d89087a293f51d429c8abb",
+          "tools/ipanema/validation.py": "e66f8ca6c7a7934b9920fb3ca2d0b0bfe404ef1f567cb9ca6fdd105fbd91afba",
+          "tools/ipanema/snapshot_links.py": "de9f7f0a43a22dbc13e6050ebf1a2dfa8feaea799df9c3692277a0f49ebcb1dc",
+          "tests/support.py": "81ea5b48b6065a38a7d3335f592c443f87a066b5fd62e9b19515d532ea1e056a",
+          "tests/unit/test_skill_execution_contract.py": "4b8b964d0ef07b55928ef0f77836e00feb3ad07d199281e56cafce12cdc763c8",
+          "tests/integration/test_orchestration_cli.py": "d5313b6d8d08ef90791beb8dbd59a89d255c5bd593fd5a62dcb10cb5094666b6",
+          "tests/unit/test_cloudflare_web_perf.py": "6594b0dad3db8f762ee67bf2dcdb9283a78f206b01d34c577568f2b5adf7f960",
+          "tests/unit/test_web_quality_audit.py": "89f145b17e797f96ef987e1b8fb05d7ca7b4f2d02fa9181c877bbeca5ee4bf16",
+          "tests/unit/test_schema_markup_skill.py": "fe3908bfb875b50b2ec422e8730cd29f6b0a3f30f7b32cfa9355d8b3fd2ad19d",
+          "tests/unit/test_seo_audit_skill.py": "5dd2d27df4311b5433a5df7e2cec68d24326a988aa0af2fc5a556eb3e0065e57",
+          "tests/unit/test_orchestration_recovery.py": "7cba737866a7cc5e6cf4191e46e89a23828298d9f55f912973d13120e24e14b8",
+          "tests/unit/test_vercel_react_best_practices.py": "f213b4ad4f7487f2a916c46e1ec3242c92322a58a9704b81f2d45b13cf5e71f0"
+        },
+        "required_constraints": [],
+        "instructions_sha256": "a30a6d4de71e279e4dd63cd3b1917150ecc217fc2d6fea96dc25f7db968f72e6",
+        "require_objections": true,
+        "require_defense": true,
+        "participation_sha256": "9ff597857187450dc19d945e8124e6a50c9a76a12101de1d08f41ada93399d8c"
+      },
+      "measurement_scope": "Source existence/hash only, not execution or correctness"
+    },
+    {
+      "id": "qa:baseline",
+      "kind": "qa",
+      "subject": "baseline",
+      "executed": true,
+      "passed": true,
+      "sha256": "667b6c364e8a2eb12800d676d48f5c98a9acc37c8998187f985199fc7e2dad2b",
+      "context": {
+        "project": "scentperfumes",
+        "run_id": "20261118T204113-orchestration-ae10d405",
+        "source_sha256": "fae363340b32d76cebca02d3ec57836cc5ace2120a22e6d776da10002a4ec4f0",
+        "objective_sha256": "813e63fe8a20231eedb5a6cbf2007d10a539c428ca440d1ca8f6beed9c58feb3",
+        "files": {
+          "tools/ipanema/coordinator.py": "ea5bbfe14bee4f536a4ec12034d83626c557940c38ca5a62ef716b4efbbdb3d9",
+          "tools/ipanema/orchestration/engine.py": "09347e00e317fc1e02a6b980aa7a71f97880f808f7d89087a293f51d429c8abb",
+          "tools/ipanema/validation.py": "e66f8ca6c7a7934b9920fb3ca2d0b0bfe404ef1f567cb9ca6fdd105fbd91afba",
+          "tools/ipanema/snapshot_links.py": "de9f7f0a43a22dbc13e6050ebf1a2dfa8feaea799df9c3692277a0f49ebcb1dc",
+          "tests/support.py": "81ea5b48b6065a38a7d3335f592c443f87a066b5fd62e9b19515d532ea1e056a",
+          "tests/unit/test_skill_execution_contract.py": "4b8b964d0ef07b55928ef0f77836e00feb3ad07d199281e56cafce12cdc763c8",
+          "tests/integration/test_orchestration_cli.py": "d5313b6d8d08ef90791beb8dbd59a89d255c5bd593fd5a62dcb10cb5094666b6",
+          "tests/unit/test_cloudflare_web_perf.py": "6594b0dad3db8f762ee67bf2dcdb9283a78f206b01d34c577568f2b5adf7f960",
+          "tests/unit/test_web_quality_audit.py": "89f145b17e797f96ef987e1b8fb05d7ca7b4f2d02fa9181c877bbeca5ee4bf16",
+          "tests/unit/test_schema_markup_skill.py": "fe3908bfb875b50b2ec422e8730cd29f6b0a3f30f7b32cfa9355d8b3fd2ad19d",
+          "tests/unit/test_seo_audit_skill.py": "5dd2d27df4311b5433a5df7e2cec68d24326a988aa0af2fc5a556eb3e0065e57",
+          "tests/unit/test_orchestration_recovery.py": "7cba737866a7cc5e6cf4191e46e89a23828298d9f55f912973d13120e24e14b8",
+          "tests/unit/test_vercel_react_best_practices.py": "f213b4ad4f7487f2a916c46e1ec3242c92322a58a9704b81f2d45b13cf5e71f0"
+        },
+        "required_constraints": [],
+        "instructions_sha256": "a30a6d4de71e279e4dd63cd3b1917150ecc217fc2d6fea96dc25f7db968f72e6",
+        "require_objections": true,
+        "require_defense": true,
+        "participation_sha256": "9ff597857187450dc19d945e8124e6a50c9a76a12101de1d08f41ada93399d8c"
+      },
+      "measurement_scope": "unit-and-integration-isolated"
+    }
+  ],
+  "limits": [
+    "Los hashes de fuente no prueban ejecución ni corrección.",
+    "La aprobación del consejo no sustituye QA posterior ni autoriza producción.",
+    "Las opiniones y confidence del modelo no son mediciones."
+  ],
+  "binding": {
+    "project": "scentperfumes",
+    "run_id": "20261118T204113-orchestration-ae10d405",
+    "source_sha256": "fae363340b32d76cebca02d3ec57836cc5ace2120a22e6d776da10002a4ec4f0",
+    "objective_sha256": "813e63fe8a20231eedb5a6cbf2007d10a539c428ca440d1ca8f6beed9c58feb3",
+    "files": {
+      "tools/ipanema/coordinator.py": "ea5bbfe14bee4f536a4ec12034d83626c557940c38ca5a62ef716b4efbbdb3d9",
+      "tools/ipanema/orchestration/engine.py": "09347e00e317fc1e02a6b980aa7a71f97880f808f7d89087a293f51d429c8abb",
+      "tools/ipanema/validation.py": "e66f8ca6c7a7934b9920fb3ca2d0b0bfe404ef1f567cb9ca6fdd105fbd91afba",
+      "tools/ipanema/snapshot_links.py": "de9f7f0a43a22dbc13e6050ebf1a2dfa8feaea799df9c3692277a0f49ebcb1dc",
+      "tests/support.py": "81ea5b48b6065a38a7d3335f592c443f87a066b5fd62e9b19515d532ea1e056a",
+      "tests/unit/test_skill_execution_contract.py": "4b8b964d0ef07b55928ef0f77836e00feb3ad07d199281e56cafce12cdc763c8",
+      "tests/integration/test_orchestration_cli.py": "d5313b6d8d08ef90791beb8dbd59a89d255c5bd593fd5a62dcb10cb5094666b6",
+      "tests/unit/test_cloudflare_web_perf.py": "6594b0dad3db8f762ee67bf2dcdb9283a78f206b01d34c577568f2b5adf7f960",
+      "tests/unit/test_web_quality_audit.py": "89f145b17e797f96ef987e1b8fb05d7ca7b4f2d02fa9181c877bbeca5ee4bf16",
+      "tests/unit/test_schema_markup_skill.py": "fe3908bfb875b50b2ec422e8730cd29f6b0a3f30f7b32cfa9355d8b3fd2ad19d",
+      "tests/unit/test_seo_audit_skill.py": "5dd2d27df4311b5433a5df7e2cec68d24326a988aa0af2fc5a556eb3e0065e57",
+      "tests/unit/test_orchestration_recovery.py": "7cba737866a7cc5e6cf4191e46e89a23828298d9f55f912973d13120e24e14b8",
+      "tests/unit/test_vercel_react_best_practices.py": "f213b4ad4f7487f2a916c46e1ec3242c92322a58a9704b81f2d45b13cf5e71f0"
+    },
+    "required_constraints": [],
+    "instructions_sha256": "a30a6d4de71e279e4dd63cd3b1917150ecc217fc2d6fea96dc25f7db968f72e6",
+    "require_objections": true,
+    "require_defense": true,
+    "participation_sha256": "9ff597857187450dc19d945e8124e6a50c9a76a12101de1d08f41ada93399d8c"
+  },
+  "alternative_identities": {},
+  "worker_attempt_budget": {
+    "limit": 6,
+    "used": 2,
+    "includes_retries_and_substitutions": true,
+    "provider_internal_api_call_count": "not_available"
+  },
+  "rounds_executed": 1,
+  "protocol_version": 2,
+  "phases_executed": [
+    "independent_proposals"
+  ],
+  "deliberation_rounds_executed": 0,
+  "reused_valid_proposals": [],
+  "reused_valid_objections": [],
+  "controller_probes_limit": "Predicates prove only their recorded scope. Stronger claims require appropriate tests; no live SEO/performance certification."
+}

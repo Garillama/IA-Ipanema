@@ -1,0 +1,33 @@
+{
+  "task": "IA-Ipanema V3 isolated Antigravity H1-H4 correction",
+  "state": "needs_evidence",
+  "base_cumulative_patch_sha256": "8a0685f35de7391e5f421b202d566c771b5e54d4e46b92a9d4cd08f98c2e43be",
+  "previous_json_incremental_sha256": "bfe6add93b28b034b8beb87d07dd42aaed418866f6b61c26bf791dc4c8b4ddd0",
+  "incremental_patch": {
+    "path": "artifacts/incremental-over-8a0685f.patch",
+    "sha256": "3e20abe6d62b5d4d9640382d9846f5322bde04598c89ca2f5fb9b9832c649a07"
+  },
+  "cumulative_candidate_patch": {
+    "path": "artifacts/full-candidate.patch",
+    "sha256": "87fa69da25a220ab604b324ee55a4ae75be97dfa925a8f4e209b24fdc584e5cb"
+  },
+  "files": [
+    {"path":"tools/ipanema/orchestration/models.json","sha256":"307086f9d3da828e8fec44513042fe6eeb24e1d7b18f9224bf5e4fc29b187d50","role":"candidate"},
+    {"path":"tools/ipanema/orchestration/adapters.py","sha256":"83a89bbdb8f2cd8a840578e7ed47a92be7a9647cb2920d23bce50e13b718945d","role":"candidate"},
+    {"path":"tools/ipanema/orchestration/engine.py","sha256":"f5bb876cc93cce50ee8508d8cce67bb00fcfaedc9b8a88f9f62cae049a530c4e","role":"candidate"},
+    {"path":"tests/unit/test_antigravity_integration.py","sha256":"7d2a8884ce6cc562e6aea3f2d139e828d6286b79ff754c89b4f29ffe3e151378","role":"tests"},
+    {"path":"tests/unit/test_antigravity_json_contract.py","sha256":"ca28f78b22f67d3222a0ad362a66df9c0fc048843762a5903db0e62471392079","role":"tests"},
+    {"path":"artifacts/README-h1h4-final.md","sha256":"bcceec92a8b964c3b686991fdc3666515067a3c4413db86c806201174affacad","role":"report"},
+    {"path":"artifacts/tests-result-h1h4.txt","sha256":"a2beacd86008038a04c7c4def840e26981be54ce468c0223eb6f63a8c1cc75c0","role":"test_receipt"}
+  ],
+  "verification": {
+    "focused_tests": "22 passed",
+    "py_compile": "passed",
+    "git_diff_check": "passed",
+    "incremental_apply_check_against_exact_base": "passed",
+    "external_providers_invoked": false,
+    "production_or_rhino_accessed": false,
+    "operational_controller_modified": false,
+    "v3_activated": false
+  }
+}

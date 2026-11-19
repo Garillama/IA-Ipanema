@@ -1,0 +1,2462 @@
+{
+  "scope": "combined real CSS + full header/search/extras scripts + exact media slice on controlled DOM; not Twig renderer, LS commerce, CWV or storefront",
+  "samples": [
+    {
+      "width": 390,
+      "run": 0,
+      "version": "before",
+      "scans": {
+        "before": {
+          "[data-sc-header]": 1,
+          "[data-sc-search-refinement]": 1
+        },
+        "after": {
+          "[data-sc-header]": 21,
+          "[data-sc-search-refinement]": 21
+        }
+      },
+      "css_requests": 2,
+      "offscreen": {
+        "paused": false,
+        "time": 0.280029,
+        "frames": 10,
+        "offscreen": true
+      },
+      "later": {
+        "paused": false,
+        "time": 0.942124,
+        "frames": 22
+      },
+      "requests": [
+        {
+          "url": "/before",
+          "method": "GET"
+        },
+        {
+          "url": "/critical.css",
+          "method": "GET"
+        },
+        {
+          "url": "/utilities.css",
+          "method": "GET"
+        },
+        {
+          "url": "/before/sc-global.js",
+          "method": "GET"
+        },
+        {
+          "url": "/before/sc-search-refinement.js",
+          "method": "GET"
+        },
+        {
+          "url": "/before/sc-scent-extras.js",
+          "method": "GET"
+        },
+        {
+          "url": "/before/media-slice.js",
+          "method": "GET"
+        },
+        {
+          "url": "/sc-set-guey.mp4",
+          "method": "GET"
+        },
+        {
+          "url": "/favicon.ico",
+          "method": "GET"
+        },
+        {
+          "url": "/search/",
+          "method": "GET"
+        },
+        {
+          "url": "/sc-set-hector.mp4",
+          "method": "GET"
+        },
+        {
+          "url": "image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjIuMSwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCAxOTYgMTk2IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAxOTYgMTk2OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik05OCw0OXY0Yy0yNC45LDAtNDUsMjAuMS00NSw0NQoJYzAsMTgsMTAuNiwzMy42LDI1LjksNDAuOGwtMS43LDMuNmMwLjEsMCwwLjIsMC4xLDAuMywwLjFjLTAuMSwwLTAuMi0wLjEtMC4zLTAuMWwwLDBDNjAuNSwxMzQuNSw0OSwxMTcuNiw0OSw5OAoJQzQ5LDcwLjksNzAuOSw0OSw5OCw0OXoiLz4KPC9zdmc+Cg==",
+          "method": "GET"
+        },
+        {
+          "url": "image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjIuMSwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCAxOTYgMTk2IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAxOTYgMTk2OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0xNDcsOThjMCwxOS42LTExLjUsMzYuNS0yOC4yLDQ0LjRsMCwwYy0wLjEsMC0wLjIsMC4xLTAuMywwLjEKCWMwLjEsMCwwLjItMC4xLDAuMy0wLjFsLTEuNy0zLjZDMTMyLjQsMTMxLjYsMTQzLDExNiwxNDMsOThjMC0yNC45LTIwLjEtNDUtNDUtNDV2LTRDMTI1LjEsNDksMTQ3LDcwLjksMTQ3LDk4eiIvPgo8L3N2Zz4K",
+          "method": "GET"
+        },
+        {
+          "url": "image/svg+xml;base64,PHN2ZyBmaWxsPSJXaW5kb3ciIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgPHBhdGggZD0iTTYgMTloNFY1SDZ2MTR6bTgtMTR2MTRoNFY1aC00eiIvPgogICAgPHBhdGggZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPgo8L3N2Zz4K",
+          "method": "GET"
+        },
+        {
+          "url": "image/svg+xml;base64,PHN2ZyBmaWxsPSJXaW5kb3ciIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgPHBhdGggZD0iTTMgOXY2aDRsNSA1VjRMNyA5SDN6bTEzLjUgM2MwLTEuNzctMS4wMi0zLjI5LTIuNS00LjAzdjguMDVjMS40OC0uNzMgMi41LTIuMjUgMi41LTQuMDJ6TTE0IDMuMjN2Mi4wNmMyLjg5Ljg2IDUgMy41NCA1IDYuNzFzLTIuMTEgNS44NS01IDYuNzF2Mi4wNmM0LjAxLS45MSA3LTQuNDkgNy04Ljc3cy0yLjk5LTcuODYtNy04Ljc3eiIvPgogICAgPHBhdGggZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPgo8L3N2Zz4K",
+          "method": "GET"
+        },
+        {
+          "url": "image/svg+xml;base64,PHN2ZyBmaWxsPSJXaW5kb3ciIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgPHBhdGggZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPgogICAgPHBhdGggZD0iTTcgMTRINXY1aDV2LTJIN3YtM3ptLTItNGgyVjdoM1Y1SDV2NXptMTIgN2gtM3YyaDV2LTVoLTJ2M3pNMTQgNXYyaDN2M2gyVjVoLTV6Ii8+Cjwvc3ZnPgo=",
+          "method": "GET"
+        },
+        {
+          "url": "image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJMYXllcl8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCIKCSB2aWV3Qm94PSIwIDAgMjQgMjQiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDI1NSAyNTU7IiB4bWw6c3BhY2U9InByZXNlcnZlIiBmaWxsPSJXaW5kb3ciPgo8Zz4KCTxjaXJjbGUgY3g9IjEyIiBjeT0iNiIgcj0iMiIvPgoJPGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMiIvPgoJPGNpcmNsZSBjeD0iMTIiIGN5PSIxOCIgcj0iMiIvPgo8L2c+Cjwvc3ZnPgo=",
+          "method": "GET"
+        },
+        {
+          "url": "image/svg+xml;base64,PHN2ZyBmaWxsPSJXaW5kb3ciIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgPHBhdGggZD0iTTggNXYxNGwxMS03eiIvPgogICAgPHBhdGggZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPgo8L3N2Zz4K",
+          "method": "GET"
+        },
+        {
+          "url": "/favicon.ico",
+          "method": "GET"
+        }
+      ],
+      "task_ms": 169.28600000000006,
+      "errors": [],
+      "ax_nodes": 12026,
+      "screenshot": "combined-before-390-0.png",
+      "axe": {
+        "violations": [],
+        "incomplete": 1
+      }
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "after",
+      "scans": {
+        "before": {
+          "[data-sc-header]": 1,
+          "[data-sc-search-refinement]": 1
+        },
+        "after": {
+          "[data-sc-header]": 1,
+          "[data-sc-search-refinement]": 1
+        }
+      },
+      "css_requests": 0,
+      "offscreen": {
+        "paused": true,
+        "time": 0.013681,
+        "frames": 5,
+        "offscreen": true
+      },
+      "later": {
+        "paused": true,
+        "time": 0.013681,
+        "frames": 5
+      },
+      "requests": [
+        {
+          "url": "/after",
+          "method": "GET"
+        },
+        {
+          "url": "/after/sc-global.js",
+          "method": "GET"
+        },
+        {
+          "url": "/after/sc-search-refinement.js",
+          "method": "GET"
+        },
+        {
+          "url": "/after/sc-scent-extras.js",
+          "method": "GET"
+        },
+        {
+          "url": "/after/media-slice.js",
+          "method": "GET"
+        },
+        {
+          "url": "/sc-set-guey.mp4",
+          "method": "GET"
+        },
+        {
+          "url": "/favicon.ico",
+          "method": "GET"
+        },
+        {
+          "url": "/search/",
+          "method": "GET"
+        },
+        {
+          "url": "/sc-set-hector.mp4",
+          "method": "GET"
+        },
+        {
+          "url": "image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjIuMSwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCAxOTYgMTk2IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAxOTYgMTk2OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik05OCw0OXY0Yy0yNC45LDAtNDUsMjAuMS00NSw0NQoJYzAsMTgsMTAuNiwzMy42LDI1LjksNDAuOGwtMS43LDMuNmMwLjEsMCwwLjIsMC4xLDAuMywwLjFjLTAuMSwwLTAuMi0wLjEtMC4zLTAuMWwwLDBDNjAuNSwxMzQuNSw0OSwxMTcuNiw0OSw5OAoJQzQ5LDcwLjksNzAuOSw0OSw5OCw0OXoiLz4KPC9zdmc+Cg==",
+          "method": "GET"
+        },
+        {
+          "url": "image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjIuMSwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCAxOTYgMTk2IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAxOTYgMTk2OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0xNDcsOThjMCwxOS42LTExLjUsMzYuNS0yOC4yLDQ0LjRsMCwwYy0wLjEsMC0wLjIsMC4xLTAuMywwLjEKCWMwLjEsMCwwLjItMC4xLDAuMy0wLjFsLTEuNy0zLjZDMTMyLjQsMTMxLjYsMTQzLDExNiwxNDMsOThjMC0yNC45LTIwLjEtNDUtNDUtNDV2LTRDMTI1LjEsNDksMTQ3LDcwLjksMTQ3LDk4eiIvPgo8L3N2Zz4K",
+          "method": "GET"
+        },
+        {
+          "url": "image/svg+xml;base64,PHN2ZyBmaWxsPSJXaW5kb3ciIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgPHBhdGggZD0iTTYgMTloNFY1SDZ2MTR6bTgtMTR2MTRoNFY1aC00eiIvPgogICAgPHBhdGggZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPgo8L3N2Zz4K",
+          "method": "GET"
+        },
+        {
+          "url": "image/svg+xml;base64,PHN2ZyBmaWxsPSJXaW5kb3ciIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgPHBhdGggZD0iTTMgOXY2aDRsNSA1VjRMNyA5SDN6bTEzLjUgM2MwLTEuNzctMS4wMi0zLjI5LTIuNS00LjAzdjguMDVjMS40OC0uNzMgMi41LTIuMjUgMi41LTQuMDJ6TTE0IDMuMjN2Mi4wNmMyLjg5Ljg2IDUgMy41NCA1IDYuNzFzLTIuMTEgNS44NS01IDYuNzF2Mi4wNmM0LjAxLS45MSA3LTQuNDkgNy04Ljc3cy0yLjk5LTcuODYtNy04Ljc3eiIvPgogICAgPHBhdGggZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPgo8L3N2Zz4K",
+          "method": "GET"
+        },
+        {
+          "url": "image/svg+xml;base64,PHN2ZyBmaWxsPSJXaW5kb3ciIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgPHBhdGggZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPgogICAgPHBhdGggZD0iTTcgMTRINXY1aDV2LTJIN3YtM3ptLTItNGgyVjdoM1Y1SDV2NXptMTIgN2gtM3YyaDV2LTVoLTJ2M3pNMTQgNXYyaDN2M2gyVjVoLTV6Ii8+Cjwvc3ZnPgo=",
+          "method": "GET"
+        },
+        {
+          "url": "image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJMYXllcl8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCIKCSB2aWV3Qm94PSIwIDAgMjQgMjQiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDI1NSAyNTU7IiB4bWw6c3BhY2U9InByZXNlcnZlIiBmaWxsPSJXaW5kb3ciPgo8Zz4KCTxjaXJjbGUgY3g9IjEyIiBjeT0iNiIgcj0iMiIvPgoJPGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMiIvPgoJPGNpcmNsZSBjeD0iMTIiIGN5PSIxOCIgcj0iMiIvPgo8L2c+Cjwvc3ZnPgo=",
+          "method": "GET"
+        },
+        {
+          "url": "image/svg+xml;base64,PHN2ZyBmaWxsPSJXaW5kb3ciIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgPHBhdGggZD0iTTggNXYxNGwxMS03eiIvPgogICAgPHBhdGggZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPgo8L3N2Zz4K",
+          "method": "GET"
+        },
+        {
+          "url": "/favicon.ico",
+          "method": "GET"
+        }
+      ],
+      "task_ms": 196.80700000000002,
+      "errors": [],
+      "ax_nodes": 12026,
+      "screenshot": "combined-after-390-0.png",
+      "axe": {
+        "violations": [],
+        "incomplete": 1
+      }
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "after",
+      "scans": {
+        "before": {
+          "[data-sc-header]": 1,
+          "[data-sc-search-refinement]": 1
+        },
+        "after": {
+          "[data-sc-header]": 1,
+          "[data-sc-search-refinement]": 1
+        }
+      },
+      "css_requests": 0,
+      "offscreen": {
+        "paused": true,
+        "time": 0.02322,
+        "frames": 6,
+        "offscreen": true
+      },
+      "later": {
+        "paused": true,
+        "time": 0.02322,
+        "frames": 6
+      },
+      "requests": [
+        {
+          "url": "/after",
+          "method": "GET"
+        },
+        {
+          "url": "/after/sc-global.js",
+          "method": "GET"
+        },
+        {
+          "url": "/after/sc-search-refinement.js",
+          "method": "GET"
+        },
+        {
+          "url": "/after/sc-scent-extras.js",
+          "method": "GET"
+        },
+        {
+          "url": "/after/media-slice.js",
+          "method": "GET"
+        },
+        {
+          "url": "/sc-set-guey.mp4",
+          "method": "GET"
+        },
+        {
+          "url": "/favicon.ico",
+          "method": "GET"
+        },
+        {
+          "url": "/search/",
+          "method": "GET"
+        },
+        {
+          "url": "/sc-set-hector.mp4",
+          "method": "GET"
+        },
+        {
+          "url": "image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjIuMSwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCAxOTYgMTk2IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAxOTYgMTk2OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik05OCw0OXY0Yy0yNC45LDAtNDUsMjAuMS00NSw0NQoJYzAsMTgsMTAuNiwzMy42LDI1LjksNDAuOGwtMS43LDMuNmMwLjEsMCwwLjIsMC4xLDAuMywwLjFjLTAuMSwwLTAuMi0wLjEtMC4zLTAuMWwwLDBDNjAuNSwxMzQuNSw0OSwxMTcuNiw0OSw5OAoJQzQ5LDcwLjksNzAuOSw0OSw5OCw0OXoiLz4KPC9zdmc+Cg==",
+          "method": "GET"
+        },
+        {
+          "url": "image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjIuMSwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCAxOTYgMTk2IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAxOTYgMTk2OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0xNDcsOThjMCwxOS42LTExLjUsMzYuNS0yOC4yLDQ0LjRsMCwwYy0wLjEsMC0wLjIsMC4xLTAuMywwLjEKCWMwLjEsMCwwLjItMC4xLDAuMy0wLjFsLTEuNy0zLjZDMTMyLjQsMTMxLjYsMTQzLDExNiwxNDMsOThjMC0yNC45LTIwLjEtNDUtNDUtNDV2LTRDMTI1LjEsNDksMTQ3LDcwLjksMTQ3LDk4eiIvPgo8L3N2Zz4K",
+          "method": "GET"
+        },
+        {
+          "url": "image/svg+xml;base64,PHN2ZyBmaWxsPSJXaW5kb3ciIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgPHBhdGggZD0iTTYgMTloNFY1SDZ2MTR6bTgtMTR2MTRoNFY1aC00eiIvPgogICAgPHBhdGggZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPgo8L3N2Zz4K",
+          "method": "GET"
+        },
+        {
+          "url": "image/svg+xml;base64,PHN2ZyBmaWxsPSJXaW5kb3ciIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgPHBhdGggZD0iTTMgOXY2aDRsNSA1VjRMNyA5SDN6bTEzLjUgM2MwLTEuNzctMS4wMi0zLjI5LTIuNS00LjAzdjguMDVjMS40OC0uNzMgMi41LTIuMjUgMi41LTQuMDJ6TTE0IDMuMjN2Mi4wNmMyLjg5Ljg2IDUgMy41NCA1IDYuNzFzLTIuMTEgNS44NS01IDYuNzF2Mi4wNmM0LjAxLS45MSA3LTQuNDkgNy04Ljc3cy0yLjk5LTcuODYtNy04Ljc3eiIvPgogICAgPHBhdGggZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPgo8L3N2Zz4K",
+          "method": "GET"
+        },
+        {
+          "url": "image/svg+xml;base64,PHN2ZyBmaWxsPSJXaW5kb3ciIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgPHBhdGggZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPgogICAgPHBhdGggZD0iTTcgMTRINXY1aDV2LTJIN3YtM3ptLTItNGgyVjdoM1Y1SDV2NXptMTIgN2gtM3YyaDV2LTVoLTJ2M3pNMTQgNXYyaDN2M2gyVjVoLTV6Ii8+Cjwvc3ZnPgo=",
+          "method": "GET"
+        },
+        {
+          "url": "image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJMYXllcl8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCIKCSB2aWV3Qm94PSIwIDAgMjQgMjQiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDI1NSAyNTU7IiB4bWw6c3BhY2U9InByZXNlcnZlIiBmaWxsPSJXaW5kb3ciPgo8Zz4KCTxjaXJjbGUgY3g9IjEyIiBjeT0iNiIgcj0iMiIvPgoJPGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMiIvPgoJPGNpcmNsZSBjeD0iMTIiIGN5PSIxOCIgcj0iMiIvPgo8L2c+Cjwvc3ZnPgo=",
+          "method": "GET"
+        },
+        {
+          "url": "image/svg+xml;base64,PHN2ZyBmaWxsPSJXaW5kb3ciIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgPHBhdGggZD0iTTggNXYxNGwxMS03eiIvPgogICAgPHBhdGggZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPgo8L3N2Zz4K",
+          "method": "GET"
+        },
+        {
+          "url": "/favicon.ico",
+          "method": "GET"
+        }
+      ],
+      "task_ms": 164.03799999999995,
+      "errors": [],
+      "ax_nodes": 12026,
+      "screenshot": "combined-after-390-1.png"
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "before",
+      "scans": {
+        "before": {
+          "[data-sc-header]": 1,
+          "[data-sc-search-refinement]": 1
+        },
+        "after": {
+          "[data-sc-header]": 21,
+          "[data-sc-search-refinement]": 21
+        }
+      },
+      "css_requests": 2,
+      "offscreen": {
+        "paused": false,
+        "time": 0.211195,
+        "frames": 6,
+        "offscreen": true
+      },
+      "later": {
+        "paused": false,
+        "time": 0.872138,
+        "frames": 21
+      },
+      "requests": [
+        {
+          "url": "/before",
+          "method": "GET"
+        },
+        {
+          "url": "/critical.css",
+          "method": "GET"
+        },
+        {
+          "url": "/utilities.css",
+          "method": "GET"
+        },
+        {
+          "url": "/before/sc-global.js",
+          "method": "GET"
+        },
+        {
+          "url": "/before/sc-search-refinement.js",
+          "method": "GET"
+        },
+        {
+          "url": "/before/sc-scent-extras.js",
+          "method": "GET"
+        },
+        {
+          "url": "/before/media-slice.js",
+          "method": "GET"
+        },
+        {
+          "url": "/sc-set-guey.mp4",
+          "method": "GET"
+        },
+        {
+          "url": "/favicon.ico",
+          "method": "GET"
+        },
+        {
+          "url": "/search/",
+          "method": "GET"
+        },
+        {
+          "url": "/sc-set-hector.mp4",
+          "method": "GET"
+        },
+        {
+          "url": "image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjIuMSwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCAxOTYgMTk2IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAxOTYgMTk2OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik05OCw0OXY0Yy0yNC45LDAtNDUsMjAuMS00NSw0NQoJYzAsMTgsMTAuNiwzMy42LDI1LjksNDAuOGwtMS43LDMuNmMwLjEsMCwwLjIsMC4xLDAuMywwLjFjLTAuMSwwLTAuMi0wLjEtMC4zLTAuMWwwLDBDNjAuNSwxMzQuNSw0OSwxMTcuNiw0OSw5OAoJQzQ5LDcwLjksNzAuOSw0OSw5OCw0OXoiLz4KPC9zdmc+Cg==",
+          "method": "GET"
+        },
+        {
+          "url": "image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjIuMSwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCAxOTYgMTk2IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAxOTYgMTk2OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0xNDcsOThjMCwxOS42LTExLjUsMzYuNS0yOC4yLDQ0LjRsMCwwYy0wLjEsMC0wLjIsMC4xLTAuMywwLjEKCWMwLjEsMCwwLjItMC4xLDAuMy0wLjFsLTEuNy0zLjZDMTMyLjQsMTMxLjYsMTQzLDExNiwxNDMsOThjMC0yNC45LTIwLjEtNDUtNDUtNDV2LTRDMTI1LjEsNDksMTQ3LDcwLjksMTQ3LDk4eiIvPgo8L3N2Zz4K",
+          "method": "GET"
+        },
+        {
+          "url": "image/svg+xml;base64,PHN2ZyBmaWxsPSJXaW5kb3ciIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgPHBhdGggZD0iTTYgMTloNFY1SDZ2MTR6bTgtMTR2MTRoNFY1aC00eiIvPgogICAgPHBhdGggZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPgo8L3N2Zz4K",
+          "method": "GET"
+        },
+        {
+          "url": "image/svg+xml;base64,PHN2ZyBmaWxsPSJXaW5kb3ciIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgPHBhdGggZD0iTTMgOXY2aDRsNSA1VjRMNyA5SDN6bTEzLjUgM2MwLTEuNzctMS4wMi0zLjI5LTIuNS00LjAzdjguMDVjMS40OC0uNzMgMi41LTIuMjUgMi41LTQuMDJ6TTE0IDMuMjN2Mi4wNmMyLjg5Ljg2IDUgMy41NCA1IDYuNzFzLTIuMTEgNS44NS01IDYuNzF2Mi4wNmM0LjAxLS45MSA3LTQuNDkgNy04Ljc3cy0yLjk5LTcuODYtNy04Ljc3eiIvPgogICAgPHBhdGggZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPgo8L3N2Zz4K",
+          "method": "GET"
+        },
+        {
+          "url": "image/svg+xml;base64,PHN2ZyBmaWxsPSJXaW5kb3ciIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgPHBhdGggZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPgogICAgPHBhdGggZD0iTTcgMTRINXY1aDV2LTJIN3YtM3ptLTItNGgyVjdoM1Y1SDV2NXptMTIgN2gtM3YyaDV2LTVoLTJ2M3pNMTQgNXYyaDN2M2gyVjVoLTV6Ii8+Cjwvc3ZnPgo=",
+          "method": "GET"
+        },
+        {
+          "url": "image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJMYXllcl8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCIKCSB2aWV3Qm94PSIwIDAgMjQgMjQiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDI1NSAyNTU7IiB4bWw6c3BhY2U9InByZXNlcnZlIiBmaWxsPSJXaW5kb3ciPgo8Zz4KCTxjaXJjbGUgY3g9IjEyIiBjeT0iNiIgcj0iMiIvPgoJPGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMiIvPgoJPGNpcmNsZSBjeD0iMTIiIGN5PSIxOCIgcj0iMiIvPgo8L2c+Cjwvc3ZnPgo=",
+          "method": "GET"
+        },
+        {
+          "url": "image/svg+xml;base64,PHN2ZyBmaWxsPSJXaW5kb3ciIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgPHBhdGggZD0iTTggNXYxNGwxMS03eiIvPgogICAgPHBhdGggZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPgo8L3N2Zz4K",
+          "method": "GET"
+        },
+        {
+          "url": "/favicon.ico",
+          "method": "GET"
+        }
+      ],
+      "task_ms": 125.06200000000001,
+      "errors": [],
+      "ax_nodes": 12026,
+      "screenshot": "combined-before-390-1.png"
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "before",
+      "scans": {
+        "before": {
+          "[data-sc-header]": 1,
+          "[data-sc-search-refinement]": 1
+        },
+        "after": {
+          "[data-sc-header]": 21,
+          "[data-sc-search-refinement]": 21
+        }
+      },
+      "css_requests": 2,
+      "offscreen": {
+        "paused": false,
+        "time": 0.206384,
+        "frames": 9,
+        "offscreen": true
+      },
+      "later": {
+        "paused": false,
+        "time": 0.867911,
+        "frames": 21
+      },
+      "requests": [
+        {
+          "url": "/before",
+          "method": "GET"
+        },
+        {
+          "url": "/critical.css",
+          "method": "GET"
+        },
+        {
+          "url": "/utilities.css",
+          "method": "GET"
+        },
+        {
+          "url": "/before/sc-global.js",
+          "method": "GET"
+        },
+        {
+          "url": "/before/sc-search-refinement.js",
+          "method": "GET"
+        },
+        {
+          "url": "/before/sc-scent-extras.js",
+          "method": "GET"
+        },
+        {
+          "url": "/before/media-slice.js",
+          "method": "GET"
+        },
+        {
+          "url": "/sc-set-guey.mp4",
+          "method": "GET"
+        },
+        {
+          "url": "/favicon.ico",
+          "method": "GET"
+        },
+        {
+          "url": "/search/",
+          "method": "GET"
+        },
+        {
+          "url": "/sc-set-hector.mp4",
+          "method": "GET"
+        },
+        {
+          "url": "image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjIuMSwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCAxOTYgMTk2IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAxOTYgMTk2OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik05OCw0OXY0Yy0yNC45LDAtNDUsMjAuMS00NSw0NQoJYzAsMTgsMTAuNiwzMy42LDI1LjksNDAuOGwtMS43LDMuNmMwLjEsMCwwLjIsMC4xLDAuMywwLjFjLTAuMSwwLTAuMi0wLjEtMC4zLTAuMWwwLDBDNjAuNSwxMzQuNSw0OSwxMTcuNiw0OSw5OAoJQzQ5LDcwLjksNzAuOSw0OSw5OCw0OXoiLz4KPC9zdmc+Cg==",
+          "method": "GET"
+        },
+        {
+          "url": "image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjIuMSwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCAxOTYgMTk2IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAxOTYgMTk2OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0xNDcsOThjMCwxOS42LTExLjUsMzYuNS0yOC4yLDQ0LjRsMCwwYy0wLjEsMC0wLjIsMC4xLTAuMywwLjEKCWMwLjEsMCwwLjItMC4xLDAuMy0wLjFsLTEuNy0zLjZDMTMyLjQsMTMxLjYsMTQzLDExNiwxNDMsOThjMC0yNC45LTIwLjEtNDUtNDUtNDV2LTRDMTI1LjEsNDksMTQ3LDcwLjksMTQ3LDk4eiIvPgo8L3N2Zz4K",
+          "method": "GET"
+        },
+        {
+          "url": "image/svg+xml;base64,PHN2ZyBmaWxsPSJXaW5kb3ciIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgPHBhdGggZD0iTTYgMTloNFY1SDZ2MTR6bTgtMTR2MTRoNFY1aC00eiIvPgogICAgPHBhdGggZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPgo8L3N2Zz4K",
+          "method": "GET"
+        },
+        {
+          "url": "image/svg+xml;base64,PHN2ZyBmaWxsPSJXaW5kb3ciIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgPHBhdGggZD0iTTMgOXY2aDRsNSA1VjRMNyA5SDN6bTEzLjUgM2MwLTEuNzctMS4wMi0zLjI5LTIuNS00LjAzdjguMDVjMS40OC0uNzMgMi41LTIuMjUgMi41LTQuMDJ6TTE0IDMuMjN2Mi4wNmMyLjg5Ljg2IDUgMy41NCA1IDYuNzFzLTIuMTEgNS44NS01IDYuNzF2Mi4wNmM0LjAxLS45MSA3LTQuNDkgNy04Ljc3cy0yLjk5LTcuODYtNy04Ljc3eiIvPgogICAgPHBhdGggZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPgo8L3N2Zz4K",
+          "method": "GET"
+        },
+        {
+          "url": "image/svg+xml;base64,PHN2ZyBmaWxsPSJXaW5kb3ciIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgPHBhdGggZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPgogICAgPHBhdGggZD0iTTcgMTRINXY1aDV2LTJIN3YtM3ptLTItNGgyVjdoM1Y1SDV2NXptMTIgN2gtM3YyaDV2LTVoLTJ2M3pNMTQgNXYyaDN2M2gyVjVoLTV6Ii8+Cjwvc3ZnPgo=",
+          "method": "GET"
+        },
+        {
+          "url": "image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJMYXllcl8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCIKCSB2aWV3Qm94PSIwIDAgMjQgMjQiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDI1NSAyNTU7IiB4bWw6c3BhY2U9InByZXNlcnZlIiBmaWxsPSJXaW5kb3ciPgo8Zz4KCTxjaXJjbGUgY3g9IjEyIiBjeT0iNiIgcj0iMiIvPgoJPGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMiIvPgoJPGNpcmNsZSBjeD0iMTIiIGN5PSIxOCIgcj0iMiIvPgo8L2c+Cjwvc3ZnPgo=",
+          "method": "GET"
+        },
+        {
+          "url": "image/svg+xml;base64,PHN2ZyBmaWxsPSJXaW5kb3ciIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgPHBhdGggZD0iTTggNXYxNGwxMS03eiIvPgogICAgPHBhdGggZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPgo8L3N2Zz4K",
+          "method": "GET"
+        },
+        {
+          "url": "/favicon.ico",
+          "method": "GET"
+        }
+      ],
+      "task_ms": 167.213,
+      "errors": [],
+      "ax_nodes": 12026,
+      "screenshot": "combined-before-390-2.png"
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "after",
+      "scans": {
+        "before": {
+          "[data-sc-header]": 1,
+          "[data-sc-search-refinement]": 1
+        },
+        "after": {
+          "[data-sc-header]": 1,
+          "[data-sc-search-refinement]": 1
+        }
+      },
+      "css_requests": 0,
+      "offscreen": {
+        "paused": true,
+        "time": 0.015653,
+        "frames": 4,
+        "offscreen": true
+      },
+      "later": {
+        "paused": true,
+        "time": 0.015653,
+        "frames": 4
+      },
+      "requests": [
+        {
+          "url": "/after",
+          "method": "GET"
+        },
+        {
+          "url": "/after/sc-global.js",
+          "method": "GET"
+        },
+        {
+          "url": "/after/sc-search-refinement.js",
+          "method": "GET"
+        },
+        {
+          "url": "/after/sc-scent-extras.js",
+          "method": "GET"
+        },
+        {
+          "url": "/after/media-slice.js",
+          "method": "GET"
+        },
+        {
+          "url": "/sc-set-guey.mp4",
+          "method": "GET"
+        },
+        {
+          "url": "/favicon.ico",
+          "method": "GET"
+        },
+        {
+          "url": "/search/",
+          "method": "GET"
+        },
+        {
+          "url": "/sc-set-hector.mp4",
+          "method": "GET"
+        },
+        {
+          "url": "image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjIuMSwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCAxOTYgMTk2IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAxOTYgMTk2OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik05OCw0OXY0Yy0yNC45LDAtNDUsMjAuMS00NSw0NQoJYzAsMTgsMTAuNiwzMy42LDI1LjksNDAuOGwtMS43LDMuNmMwLjEsMCwwLjIsMC4xLDAuMywwLjFjLTAuMSwwLTAuMi0wLjEtMC4zLTAuMWwwLDBDNjAuNSwxMzQuNSw0OSwxMTcuNiw0OSw5OAoJQzQ5LDcwLjksNzAuOSw0OSw5OCw0OXoiLz4KPC9zdmc+Cg==",
+          "method": "GET"
+        },
+        {
+          "url": "image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjIuMSwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCAxOTYgMTk2IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAxOTYgMTk2OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0xNDcsOThjMCwxOS42LTExLjUsMzYuNS0yOC4yLDQ0LjRsMCwwYy0wLjEsMC0wLjIsMC4xLTAuMywwLjEKCWMwLjEsMCwwLjItMC4xLDAuMy0wLjFsLTEuNy0zLjZDMTMyLjQsMTMxLjYsMTQzLDExNiwxNDMsOThjMC0yNC45LTIwLjEtNDUtNDUtNDV2LTRDMTI1LjEsNDksMTQ3LDcwLjksMTQ3LDk4eiIvPgo8L3N2Zz4K",
+          "method": "GET"
+        },
+        {
+          "url": "image/svg+xml;base64,PHN2ZyBmaWxsPSJXaW5kb3ciIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgPHBhdGggZD0iTTYgMTloNFY1SDZ2MTR6bTgtMTR2MTRoNFY1aC00eiIvPgogICAgPHBhdGggZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPgo8L3N2Zz4K",
+          "method": "GET"
+        },
+        {
+          "url": "image/svg+xml;base64,PHN2ZyBmaWxsPSJXaW5kb3ciIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgPHBhdGggZD0iTTMgOXY2aDRsNSA1VjRMNyA5SDN6bTEzLjUgM2MwLTEuNzctMS4wMi0zLjI5LTIuNS00LjAzdjguMDVjMS40OC0uNzMgMi41LTIuMjUgMi41LTQuMDJ6TTE0IDMuMjN2Mi4wNmMyLjg5Ljg2IDUgMy41NCA1IDYuNzFzLTIuMTEgNS44NS01IDYuNzF2Mi4wNmM0LjAxLS45MSA3LTQuNDkgNy04Ljc3cy0yLjk5LTcuODYtNy04Ljc3eiIvPgogICAgPHBhdGggZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPgo8L3N2Zz4K",
+          "method": "GET"
+        },
+        {
+          "url": "image/svg+xml;base64,PHN2ZyBmaWxsPSJXaW5kb3ciIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgPHBhdGggZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPgogICAgPHBhdGggZD0iTTcgMTRINXY1aDV2LTJIN3YtM3ptLTItNGgyVjdoM1Y1SDV2NXptMTIgN2gtM3YyaDV2LTVoLTJ2M3pNMTQgNXYyaDN2M2gyVjVoLTV6Ii8+Cjwvc3ZnPgo=",
+          "method": "GET"
+        },
+        {
+          "url": "image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJMYXllcl8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCIKCSB2aWV3Qm94PSIwIDAgMjQgMjQiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDI1NSAyNTU7IiB4bWw6c3BhY2U9InByZXNlcnZlIiBmaWxsPSJXaW5kb3ciPgo8Zz4KCTxjaXJjbGUgY3g9IjEyIiBjeT0iNiIgcj0iMiIvPgoJPGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMiIvPgoJPGNpcmNsZSBjeD0iMTIiIGN5PSIxOCIgcj0iMiIvPgo8L2c+Cjwvc3ZnPgo=",
+          "method": "GET"
+        },
+        {
+          "url": "image/svg+xml;base64,PHN2ZyBmaWxsPSJXaW5kb3ciIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgPHBhdGggZD0iTTggNXYxNGwxMS03eiIvPgogICAgPHBhdGggZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPgo8L3N2Zz4K",
+          "method": "GET"
+        },
+        {
+          "url": "/favicon.ico",
+          "method": "GET"
+        }
+      ],
+      "task_ms": 162.092,
+      "errors": [],
+      "ax_nodes": 12026,
+      "screenshot": "combined-after-390-2.png"
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "before",
+      "scans": {
+        "before": {
+          "[data-sc-header]": 1,
+          "[data-sc-search-refinement]": 1
+        },
+        "after": {
+          "[data-sc-header]": 21,
+          "[data-sc-search-refinement]": 21
+        }
+      },
+      "css_requests": 2,
+      "offscreen": {
+        "paused": false,
+        "time": 0.169086,
+        "frames": 6,
+        "offscreen": true
+      },
+      "later": {
+        "paused": false,
+        "time": 0.824623,
+        "frames": 20
+      },
+      "requests": [
+        {
+          "url": "/before",
+          "method": "GET"
+        },
+        {
+          "url": "/critical.css",
+          "method": "GET"
+        },
+        {
+          "url": "/utilities.css",
+          "method": "GET"
+        },
+        {
+          "url": "/before/sc-global.js",
+          "method": "GET"
+        },
+        {
+          "url": "/before/sc-search-refinement.js",
+          "method": "GET"
+        },
+        {
+          "url": "/before/sc-scent-extras.js",
+          "method": "GET"
+        },
+        {
+          "url": "/before/media-slice.js",
+          "method": "GET"
+        },
+        {
+          "url": "/sc-set-guey.mp4",
+          "method": "GET"
+        },
+        {
+          "url": "/favicon.ico",
+          "method": "GET"
+        },
+        {
+          "url": "/search/",
+          "method": "GET"
+        },
+        {
+          "url": "/sc-set-hector.mp4",
+          "method": "GET"
+        },
+        {
+          "url": "image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjIuMSwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCAxOTYgMTk2IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAxOTYgMTk2OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik05OCw0OXY0Yy0yNC45LDAtNDUsMjAuMS00NSw0NQoJYzAsMTgsMTAuNiwzMy42LDI1LjksNDAuOGwtMS43LDMuNmMwLjEsMCwwLjIsMC4xLDAuMywwLjFjLTAuMSwwLTAuMi0wLjEtMC4zLTAuMWwwLDBDNjAuNSwxMzQuNSw0OSwxMTcuNiw0OSw5OAoJQzQ5LDcwLjksNzAuOSw0OSw5OCw0OXoiLz4KPC9zdmc+Cg==",
+          "method": "GET"
+        },
+        {
+          "url": "image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjIuMSwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCAxOTYgMTk2IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAxOTYgMTk2OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0xNDcsOThjMCwxOS42LTExLjUsMzYuNS0yOC4yLDQ0LjRsMCwwYy0wLjEsMC0wLjIsMC4xLTAuMywwLjEKCWMwLjEsMCwwLjItMC4xLDAuMy0wLjFsLTEuNy0zLjZDMTMyLjQsMTMxLjYsMTQzLDExNiwxNDMsOThjMC0yNC45LTIwLjEtNDUtNDUtNDV2LTRDMTI1LjEsNDksMTQ3LDcwLjksMTQ3LDk4eiIvPgo8L3N2Zz4K",
+          "method": "GET"
+        },
+        {
+          "url": "image/svg+xml;base64,PHN2ZyBmaWxsPSJXaW5kb3ciIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgPHBhdGggZD0iTTYgMTloNFY1SDZ2MTR6bTgtMTR2MTRoNFY1aC00eiIvPgogICAgPHBhdGggZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPgo8L3N2Zz4K",
+          "method": "GET"
+        },
+        {
+          "url": "image/svg+xml;base64,PHN2ZyBmaWxsPSJXaW5kb3ciIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgPHBhdGggZD0iTTMgOXY2aDRsNSA1VjRMNyA5SDN6bTEzLjUgM2MwLTEuNzctMS4wMi0zLjI5LTIuNS00LjAzdjguMDVjMS40OC0uNzMgMi41LTIuMjUgMi41LTQuMDJ6TTE0IDMuMjN2Mi4wNmMyLjg5Ljg2IDUgMy41NCA1IDYuNzFzLTIuMTEgNS44NS01IDYuNzF2Mi4wNmM0LjAxLS45MSA3LTQuNDkgNy04Ljc3cy0yLjk5LTcuODYtNy04Ljc3eiIvPgogICAgPHBhdGggZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPgo8L3N2Zz4K",
+          "method": "GET"
+        },
+        {
+          "url": "image/svg+xml;base64,PHN2ZyBmaWxsPSJXaW5kb3ciIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgPHBhdGggZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPgogICAgPHBhdGggZD0iTTcgMTRINXY1aDV2LTJIN3YtM3ptLTItNGgyVjdoM1Y1SDV2NXptMTIgN2gtM3YyaDV2LTVoLTJ2M3pNMTQgNXYyaDN2M2gyVjVoLTV6Ii8+Cjwvc3ZnPgo=",
+          "method": "GET"
+        },
+        {
+          "url": "image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJMYXllcl8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCIKCSB2aWV3Qm94PSIwIDAgMjQgMjQiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDI1NSAyNTU7IiB4bWw6c3BhY2U9InByZXNlcnZlIiBmaWxsPSJXaW5kb3ciPgo8Zz4KCTxjaXJjbGUgY3g9IjEyIiBjeT0iNiIgcj0iMiIvPgoJPGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMiIvPgoJPGNpcmNsZSBjeD0iMTIiIGN5PSIxOCIgcj0iMiIvPgo8L2c+Cjwvc3ZnPgo=",
+          "method": "GET"
+        },
+        {
+          "url": "/favicon.ico",
+          "method": "GET"
+        },
+        {
+          "url": "image/svg+xml;base64,PHN2ZyBmaWxsPSJXaW5kb3ciIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgPHBhdGggZD0iTTggNXYxNGwxMS03eiIvPgogICAgPHBhdGggZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPgo8L3N2Zz4K",
+          "method": "GET"
+        }
+      ],
+      "task_ms": 43.088000000000015,
+      "errors": [],
+      "ax_nodes": 12033,
+      "screenshot": "combined-before-1440-0.png",
+      "axe": {
+        "violations": [],
+        "incomplete": 0
+      }
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "after",
+      "scans": {
+        "before": {
+          "[data-sc-header]": 1,
+          "[data-sc-search-refinement]": 1
+        },
+        "after": {
+          "[data-sc-header]": 1,
+          "[data-sc-search-refinement]": 1
+        }
+      },
+      "css_requests": 0,
+      "offscreen": {
+        "paused": true,
+        "time": 0.02322,
+        "frames": 5,
+        "offscreen": true
+      },
+      "later": {
+        "paused": true,
+        "time": 0.02322,
+        "frames": 5
+      },
+      "requests": [
+        {
+          "url": "/after",
+          "method": "GET"
+        },
+        {
+          "url": "/after/sc-global.js",
+          "method": "GET"
+        },
+        {
+          "url": "/after/sc-search-refinement.js",
+          "method": "GET"
+        },
+        {
+          "url": "/after/sc-scent-extras.js",
+          "method": "GET"
+        },
+        {
+          "url": "/after/media-slice.js",
+          "method": "GET"
+        },
+        {
+          "url": "/sc-set-guey.mp4",
+          "method": "GET"
+        },
+        {
+          "url": "/favicon.ico",
+          "method": "GET"
+        },
+        {
+          "url": "/search/",
+          "method": "GET"
+        },
+        {
+          "url": "/sc-set-hector.mp4",
+          "method": "GET"
+        },
+        {
+          "url": "image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjIuMSwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCAxOTYgMTk2IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAxOTYgMTk2OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik05OCw0OXY0Yy0yNC45LDAtNDUsMjAuMS00NSw0NQoJYzAsMTgsMTAuNiwzMy42LDI1LjksNDAuOGwtMS43LDMuNmMwLjEsMCwwLjIsMC4xLDAuMywwLjFjLTAuMSwwLTAuMi0wLjEtMC4zLTAuMWwwLDBDNjAuNSwxMzQuNSw0OSwxMTcuNiw0OSw5OAoJQzQ5LDcwLjksNzAuOSw0OSw5OCw0OXoiLz4KPC9zdmc+Cg==",
+          "method": "GET"
+        },
+        {
+          "url": "image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjIuMSwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCAxOTYgMTk2IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAxOTYgMTk2OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0xNDcsOThjMCwxOS42LTExLjUsMzYuNS0yOC4yLDQ0LjRsMCwwYy0wLjEsMC0wLjIsMC4xLTAuMywwLjEKCWMwLjEsMCwwLjItMC4xLDAuMy0wLjFsLTEuNy0zLjZDMTMyLjQsMTMxLjYsMTQzLDExNiwxNDMsOThjMC0yNC45LTIwLjEtNDUtNDUtNDV2LTRDMTI1LjEsNDksMTQ3LDcwLjksMTQ3LDk4eiIvPgo8L3N2Zz4K",
+          "method": "GET"
+        },
+        {
+          "url": "image/svg+xml;base64,PHN2ZyBmaWxsPSJXaW5kb3ciIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgPHBhdGggZD0iTTYgMTloNFY1SDZ2MTR6bTgtMTR2MTRoNFY1aC00eiIvPgogICAgPHBhdGggZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPgo8L3N2Zz4K",
+          "method": "GET"
+        },
+        {
+          "url": "image/svg+xml;base64,PHN2ZyBmaWxsPSJXaW5kb3ciIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgPHBhdGggZD0iTTMgOXY2aDRsNSA1VjRMNyA5SDN6bTEzLjUgM2MwLTEuNzctMS4wMi0zLjI5LTIuNS00LjAzdjguMDVjMS40OC0uNzMgMi41LTIuMjUgMi41LTQuMDJ6TTE0IDMuMjN2Mi4wNmMyLjg5Ljg2IDUgMy41NCA1IDYuNzFzLTIuMTEgNS44NS01IDYuNzF2Mi4wNmM0LjAxLS45MSA3LTQuNDkgNy04Ljc3cy0yLjk5LTcuODYtNy04Ljc3eiIvPgogICAgPHBhdGggZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPgo8L3N2Zz4K",
+          "method": "GET"
+        },
+        {
+          "url": "image/svg+xml;base64,PHN2ZyBmaWxsPSJXaW5kb3ciIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgPHBhdGggZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPgogICAgPHBhdGggZD0iTTcgMTRINXY1aDV2LTJIN3YtM3ptLTItNGgyVjdoM1Y1SDV2NXptMTIgN2gtM3YyaDV2LTVoLTJ2M3pNMTQgNXYyaDN2M2gyVjVoLTV6Ii8+Cjwvc3ZnPgo=",
+          "method": "GET"
+        },
+        {
+          "url": "image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJMYXllcl8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCIKCSB2aWV3Qm94PSIwIDAgMjQgMjQiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDI1NSAyNTU7IiB4bWw6c3BhY2U9InByZXNlcnZlIiBmaWxsPSJXaW5kb3ciPgo8Zz4KCTxjaXJjbGUgY3g9IjEyIiBjeT0iNiIgcj0iMiIvPgoJPGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMiIvPgoJPGNpcmNsZSBjeD0iMTIiIGN5PSIxOCIgcj0iMiIvPgo8L2c+Cjwvc3ZnPgo=",
+          "method": "GET"
+        },
+        {
+          "url": "image/svg+xml;base64,PHN2ZyBmaWxsPSJXaW5kb3ciIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgPHBhdGggZD0iTTggNXYxNGwxMS03eiIvPgogICAgPHBhdGggZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPgo8L3N2Zz4K",
+          "method": "GET"
+        },
+        {
+          "url": "/favicon.ico",
+          "method": "GET"
+        }
+      ],
+      "task_ms": 45.529,
+      "errors": [],
+      "ax_nodes": 12033,
+      "screenshot": "combined-after-1440-0.png",
+      "axe": {
+        "violations": [],
+        "incomplete": 0
+      }
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "version": "after",
+      "scans": {
+        "before": {
+          "[data-sc-header]": 1,
+          "[data-sc-search-refinement]": 1
+        },
+        "after": {
+          "[data-sc-header]": 1,
+          "[data-sc-search-refinement]": 1
+        }
+      },
+      "css_requests": 0,
+      "offscreen": {
+        "paused": true,
+        "time": 0.02322,
+        "frames": 5,
+        "offscreen": true
+      },
+      "later": {
+        "paused": true,
+        "time": 0.02322,
+        "frames": 5
+      },
+      "requests": [
+        {
+          "url": "/after",
+          "method": "GET"
+        },
+        {
+          "url": "/after/sc-global.js",
+          "method": "GET"
+        },
+        {
+          "url": "/after/sc-search-refinement.js",
+          "method": "GET"
+        },
+        {
+          "url": "/after/sc-scent-extras.js",
+          "method": "GET"
+        },
+        {
+          "url": "/after/media-slice.js",
+          "method": "GET"
+        },
+        {
+          "url": "/sc-set-guey.mp4",
+          "method": "GET"
+        },
+        {
+          "url": "/favicon.ico",
+          "method": "GET"
+        },
+        {
+          "url": "/search/",
+          "method": "GET"
+        },
+        {
+          "url": "/sc-set-hector.mp4",
+          "method": "GET"
+        },
+        {
+          "url": "image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjIuMSwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCAxOTYgMTk2IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAxOTYgMTk2OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik05OCw0OXY0Yy0yNC45LDAtNDUsMjAuMS00NSw0NQoJYzAsMTgsMTAuNiwzMy42LDI1LjksNDAuOGwtMS43LDMuNmMwLjEsMCwwLjIsMC4xLDAuMywwLjFjLTAuMSwwLTAuMi0wLjEtMC4zLTAuMWwwLDBDNjAuNSwxMzQuNSw0OSwxMTcuNiw0OSw5OAoJQzQ5LDcwLjksNzAuOSw0OSw5OCw0OXoiLz4KPC9zdmc+Cg==",
+          "method": "GET"
+        },
+        {
+          "url": "image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjIuMSwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCAxOTYgMTk2IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAxOTYgMTk2OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0xNDcsOThjMCwxOS42LTExLjUsMzYuNS0yOC4yLDQ0LjRsMCwwYy0wLjEsMC0wLjIsMC4xLTAuMywwLjEKCWMwLjEsMCwwLjItMC4xLDAuMy0wLjFsLTEuNy0zLjZDMTMyLjQsMTMxLjYsMTQzLDExNiwxNDMsOThjMC0yNC45LTIwLjEtNDUtNDUtNDV2LTRDMTI1LjEsNDksMTQ3LDcwLjksMTQ3LDk4eiIvPgo8L3N2Zz4K",
+          "method": "GET"
+        },
+        {
+          "url": "image/svg+xml;base64,PHN2ZyBmaWxsPSJXaW5kb3ciIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgPHBhdGggZD0iTTYgMTloNFY1SDZ2MTR6bTgtMTR2MTRoNFY1aC00eiIvPgogICAgPHBhdGggZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPgo8L3N2Zz4K",
+          "method": "GET"
+        },
+        {
+          "url": "image/svg+xml;base64,PHN2ZyBmaWxsPSJXaW5kb3ciIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgPHBhdGggZD0iTTMgOXY2aDRsNSA1VjRMNyA5SDN6bTEzLjUgM2MwLTEuNzctMS4wMi0zLjI5LTIuNS00LjAzdjguMDVjMS40OC0uNzMgMi41LTIuMjUgMi41LTQuMDJ6TTE0IDMuMjN2Mi4wNmMyLjg5Ljg2IDUgMy41NCA1IDYuNzFzLTIuMTEgNS44NS01IDYuNzF2Mi4wNmM0LjAxLS45MSA3LTQuNDkgNy04Ljc3cy0yLjk5LTcuODYtNy04Ljc3eiIvPgogICAgPHBhdGggZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPgo8L3N2Zz4K",
+          "method": "GET"
+        },
+        {
+          "url": "image/svg+xml;base64,PHN2ZyBmaWxsPSJXaW5kb3ciIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgPHBhdGggZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPgogICAgPHBhdGggZD0iTTcgMTRINXY1aDV2LTJIN3YtM3ptLTItNGgyVjdoM1Y1SDV2NXptMTIgN2gtM3YyaDV2LTVoLTJ2M3pNMTQgNXYyaDN2M2gyVjVoLTV6Ii8+Cjwvc3ZnPgo=",
+          "method": "GET"
+        },
+        {
+          "url": "image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJMYXllcl8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCIKCSB2aWV3Qm94PSIwIDAgMjQgMjQiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDI1NSAyNTU7IiB4bWw6c3BhY2U9InByZXNlcnZlIiBmaWxsPSJXaW5kb3ciPgo8Zz4KCTxjaXJjbGUgY3g9IjEyIiBjeT0iNiIgcj0iMiIvPgoJPGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMiIvPgoJPGNpcmNsZSBjeD0iMTIiIGN5PSIxOCIgcj0iMiIvPgo8L2c+Cjwvc3ZnPgo=",
+          "method": "GET"
+        },
+        {
+          "url": "image/svg+xml;base64,PHN2ZyBmaWxsPSJXaW5kb3ciIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgPHBhdGggZD0iTTggNXYxNGwxMS03eiIvPgogICAgPHBhdGggZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPgo8L3N2Zz4K",
+          "method": "GET"
+        },
+        {
+          "url": "/favicon.ico",
+          "method": "GET"
+        }
+      ],
+      "task_ms": 55.436,
+      "errors": [],
+      "ax_nodes": 12033,
+      "screenshot": "combined-after-1440-1.png"
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "version": "before",
+      "scans": {
+        "before": {
+          "[data-sc-header]": 1,
+          "[data-sc-search-refinement]": 1
+        },
+        "after": {
+          "[data-sc-header]": 21,
+          "[data-sc-search-refinement]": 21
+        }
+      },
+      "css_requests": 2,
+      "offscreen": {
+        "paused": false,
+        "time": 0.166987,
+        "frames": 6,
+        "offscreen": true
+      },
+      "later": {
+        "paused": false,
+        "time": 0.821892,
+        "frames": 20
+      },
+      "requests": [
+        {
+          "url": "/before",
+          "method": "GET"
+        },
+        {
+          "url": "/critical.css",
+          "method": "GET"
+        },
+        {
+          "url": "/utilities.css",
+          "method": "GET"
+        },
+        {
+          "url": "/before/sc-global.js",
+          "method": "GET"
+        },
+        {
+          "url": "/before/sc-search-refinement.js",
+          "method": "GET"
+        },
+        {
+          "url": "/before/sc-scent-extras.js",
+          "method": "GET"
+        },
+        {
+          "url": "/before/media-slice.js",
+          "method": "GET"
+        },
+        {
+          "url": "/sc-set-guey.mp4",
+          "method": "GET"
+        },
+        {
+          "url": "/favicon.ico",
+          "method": "GET"
+        },
+        {
+          "url": "/search/",
+          "method": "GET"
+        },
+        {
+          "url": "/sc-set-hector.mp4",
+          "method": "GET"
+        },
+        {
+          "url": "image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjIuMSwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCAxOTYgMTk2IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAxOTYgMTk2OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik05OCw0OXY0Yy0yNC45LDAtNDUsMjAuMS00NSw0NQoJYzAsMTgsMTAuNiwzMy42LDI1LjksNDAuOGwtMS43LDMuNmMwLjEsMCwwLjIsMC4xLDAuMywwLjFjLTAuMSwwLTAuMi0wLjEtMC4zLTAuMWwwLDBDNjAuNSwxMzQuNSw0OSwxMTcuNiw0OSw5OAoJQzQ5LDcwLjksNzAuOSw0OSw5OCw0OXoiLz4KPC9zdmc+Cg==",
+          "method": "GET"
+        },
+        {
+          "url": "image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjIuMSwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCAxOTYgMTk2IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAxOTYgMTk2OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0xNDcsOThjMCwxOS42LTExLjUsMzYuNS0yOC4yLDQ0LjRsMCwwYy0wLjEsMC0wLjIsMC4xLTAuMywwLjEKCWMwLjEsMCwwLjItMC4xLDAuMy0wLjFsLTEuNy0zLjZDMTMyLjQsMTMxLjYsMTQzLDExNiwxNDMsOThjMC0yNC45LTIwLjEtNDUtNDUtNDV2LTRDMTI1LjEsNDksMTQ3LDcwLjksMTQ3LDk4eiIvPgo8L3N2Zz4K",
+          "method": "GET"
+        },
+        {
+          "url": "image/svg+xml;base64,PHN2ZyBmaWxsPSJXaW5kb3ciIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgPHBhdGggZD0iTTYgMTloNFY1SDZ2MTR6bTgtMTR2MTRoNFY1aC00eiIvPgogICAgPHBhdGggZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPgo8L3N2Zz4K",
+          "method": "GET"
+        },
+        {
+          "url": "image/svg+xml;base64,PHN2ZyBmaWxsPSJXaW5kb3ciIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgPHBhdGggZD0iTTMgOXY2aDRsNSA1VjRMNyA5SDN6bTEzLjUgM2MwLTEuNzctMS4wMi0zLjI5LTIuNS00LjAzdjguMDVjMS40OC0uNzMgMi41LTIuMjUgMi41LTQuMDJ6TTE0IDMuMjN2Mi4wNmMyLjg5Ljg2IDUgMy41NCA1IDYuNzFzLTIuMTEgNS44NS01IDYuNzF2Mi4wNmM0LjAxLS45MSA3LTQuNDkgNy04Ljc3cy0yLjk5LTcuODYtNy04Ljc3eiIvPgogICAgPHBhdGggZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPgo8L3N2Zz4K",
+          "method": "GET"
+        },
+        {
+          "url": "image/svg+xml;base64,PHN2ZyBmaWxsPSJXaW5kb3ciIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgPHBhdGggZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPgogICAgPHBhdGggZD0iTTcgMTRINXY1aDV2LTJIN3YtM3ptLTItNGgyVjdoM1Y1SDV2NXptMTIgN2gtM3YyaDV2LTVoLTJ2M3pNMTQgNXYyaDN2M2gyVjVoLTV6Ii8+Cjwvc3ZnPgo=",
+          "method": "GET"
+        },
+        {
+          "url": "image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJMYXllcl8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCIKCSB2aWV3Qm94PSIwIDAgMjQgMjQiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDI1NSAyNTU7IiB4bWw6c3BhY2U9InByZXNlcnZlIiBmaWxsPSJXaW5kb3ciPgo8Zz4KCTxjaXJjbGUgY3g9IjEyIiBjeT0iNiIgcj0iMiIvPgoJPGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMiIvPgoJPGNpcmNsZSBjeD0iMTIiIGN5PSIxOCIgcj0iMiIvPgo8L2c+Cjwvc3ZnPgo=",
+          "method": "GET"
+        },
+        {
+          "url": "/favicon.ico",
+          "method": "GET"
+        },
+        {
+          "url": "image/svg+xml;base64,PHN2ZyBmaWxsPSJXaW5kb3ciIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgPHBhdGggZD0iTTggNXYxNGwxMS03eiIvPgogICAgPHBhdGggZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPgo8L3N2Zz4K",
+          "method": "GET"
+        }
+      ],
+      "task_ms": 38.92699999999999,
+      "errors": [],
+      "ax_nodes": 12033,
+      "screenshot": "combined-before-1440-1.png"
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "version": "before",
+      "scans": {
+        "before": {
+          "[data-sc-header]": 1,
+          "[data-sc-search-refinement]": 1
+        },
+        "after": {
+          "[data-sc-header]": 21,
+          "[data-sc-search-refinement]": 21
+        }
+      },
+      "css_requests": 2,
+      "offscreen": {
+        "paused": false,
+        "time": 0.193015,
+        "frames": 8,
+        "offscreen": true
+      },
+      "later": {
+        "paused": false,
+        "time": 0.8493,
+        "frames": 20
+      },
+      "requests": [
+        {
+          "url": "/before",
+          "method": "GET"
+        },
+        {
+          "url": "/critical.css",
+          "method": "GET"
+        },
+        {
+          "url": "/utilities.css",
+          "method": "GET"
+        },
+        {
+          "url": "/before/sc-global.js",
+          "method": "GET"
+        },
+        {
+          "url": "/before/sc-search-refinement.js",
+          "method": "GET"
+        },
+        {
+          "url": "/before/sc-scent-extras.js",
+          "method": "GET"
+        },
+        {
+          "url": "/before/media-slice.js",
+          "method": "GET"
+        },
+        {
+          "url": "/sc-set-guey.mp4",
+          "method": "GET"
+        },
+        {
+          "url": "/favicon.ico",
+          "method": "GET"
+        },
+        {
+          "url": "/search/",
+          "method": "GET"
+        },
+        {
+          "url": "/sc-set-hector.mp4",
+          "method": "GET"
+        },
+        {
+          "url": "image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjIuMSwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCAxOTYgMTk2IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAxOTYgMTk2OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik05OCw0OXY0Yy0yNC45LDAtNDUsMjAuMS00NSw0NQoJYzAsMTgsMTAuNiwzMy42LDI1LjksNDAuOGwtMS43LDMuNmMwLjEsMCwwLjIsMC4xLDAuMywwLjFjLTAuMSwwLTAuMi0wLjEtMC4zLTAuMWwwLDBDNjAuNSwxMzQuNSw0OSwxMTcuNiw0OSw5OAoJQzQ5LDcwLjksNzAuOSw0OSw5OCw0OXoiLz4KPC9zdmc+Cg==",
+          "method": "GET"
+        },
+        {
+          "url": "image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjIuMSwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCAxOTYgMTk2IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAxOTYgMTk2OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0xNDcsOThjMCwxOS42LTExLjUsMzYuNS0yOC4yLDQ0LjRsMCwwYy0wLjEsMC0wLjIsMC4xLTAuMywwLjEKCWMwLjEsMCwwLjItMC4xLDAuMy0wLjFsLTEuNy0zLjZDMTMyLjQsMTMxLjYsMTQzLDExNiwxNDMsOThjMC0yNC45LTIwLjEtNDUtNDUtNDV2LTRDMTI1LjEsNDksMTQ3LDcwLjksMTQ3LDk4eiIvPgo8L3N2Zz4K",
+          "method": "GET"
+        },
+        {
+          "url": "image/svg+xml;base64,PHN2ZyBmaWxsPSJXaW5kb3ciIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgPHBhdGggZD0iTTYgMTloNFY1SDZ2MTR6bTgtMTR2MTRoNFY1aC00eiIvPgogICAgPHBhdGggZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPgo8L3N2Zz4K",
+          "method": "GET"
+        },
+        {
+          "url": "image/svg+xml;base64,PHN2ZyBmaWxsPSJXaW5kb3ciIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgPHBhdGggZD0iTTMgOXY2aDRsNSA1VjRMNyA5SDN6bTEzLjUgM2MwLTEuNzctMS4wMi0zLjI5LTIuNS00LjAzdjguMDVjMS40OC0uNzMgMi41LTIuMjUgMi41LTQuMDJ6TTE0IDMuMjN2Mi4wNmMyLjg5Ljg2IDUgMy41NCA1IDYuNzFzLTIuMTEgNS44NS01IDYuNzF2Mi4wNmM0LjAxLS45MSA3LTQuNDkgNy04Ljc3cy0yLjk5LTcuODYtNy04Ljc3eiIvPgogICAgPHBhdGggZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPgo8L3N2Zz4K",
+          "method": "GET"
+        },
+        {
+          "url": "image/svg+xml;base64,PHN2ZyBmaWxsPSJXaW5kb3ciIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgPHBhdGggZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPgogICAgPHBhdGggZD0iTTcgMTRINXY1aDV2LTJIN3YtM3ptLTItNGgyVjdoM1Y1SDV2NXptMTIgN2gtM3YyaDV2LTVoLTJ2M3pNMTQgNXYyaDN2M2gyVjVoLTV6Ii8+Cjwvc3ZnPgo=",
+          "method": "GET"
+        },
+        {
+          "url": "image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJMYXllcl8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCIKCSB2aWV3Qm94PSIwIDAgMjQgMjQiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDI1NSAyNTU7IiB4bWw6c3BhY2U9InByZXNlcnZlIiBmaWxsPSJXaW5kb3ciPgo8Zz4KCTxjaXJjbGUgY3g9IjEyIiBjeT0iNiIgcj0iMiIvPgoJPGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMiIvPgoJPGNpcmNsZSBjeD0iMTIiIGN5PSIxOCIgcj0iMiIvPgo8L2c+Cjwvc3ZnPgo=",
+          "method": "GET"
+        },
+        {
+          "url": "image/svg+xml;base64,PHN2ZyBmaWxsPSJXaW5kb3ciIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgPHBhdGggZD0iTTggNXYxNGwxMS03eiIvPgogICAgPHBhdGggZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPgo8L3N2Zz4K",
+          "method": "GET"
+        },
+        {
+          "url": "/favicon.ico",
+          "method": "GET"
+        }
+      ],
+      "task_ms": 49.449999999999996,
+      "errors": [],
+      "ax_nodes": 12033,
+      "screenshot": "combined-before-1440-2.png"
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "version": "after",
+      "scans": {
+        "before": {
+          "[data-sc-header]": 1,
+          "[data-sc-search-refinement]": 1
+        },
+        "after": {
+          "[data-sc-header]": 1,
+          "[data-sc-search-refinement]": 1
+        }
+      },
+      "css_requests": 0,
+      "offscreen": {
+        "paused": true,
+        "time": 0.02322,
+        "frames": 5,
+        "offscreen": true
+      },
+      "later": {
+        "paused": true,
+        "time": 0.02322,
+        "frames": 5
+      },
+      "requests": [
+        {
+          "url": "/after",
+          "method": "GET"
+        },
+        {
+          "url": "/after/sc-global.js",
+          "method": "GET"
+        },
+        {
+          "url": "/after/sc-search-refinement.js",
+          "method": "GET"
+        },
+        {
+          "url": "/after/sc-scent-extras.js",
+          "method": "GET"
+        },
+        {
+          "url": "/after/media-slice.js",
+          "method": "GET"
+        },
+        {
+          "url": "/sc-set-guey.mp4",
+          "method": "GET"
+        },
+        {
+          "url": "/favicon.ico",
+          "method": "GET"
+        },
+        {
+          "url": "/search/",
+          "method": "GET"
+        },
+        {
+          "url": "/sc-set-hector.mp4",
+          "method": "GET"
+        },
+        {
+          "url": "image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjIuMSwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCAxOTYgMTk2IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAxOTYgMTk2OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik05OCw0OXY0Yy0yNC45LDAtNDUsMjAuMS00NSw0NQoJYzAsMTgsMTAuNiwzMy42LDI1LjksNDAuOGwtMS43LDMuNmMwLjEsMCwwLjIsMC4xLDAuMywwLjFjLTAuMSwwLTAuMi0wLjEtMC4zLTAuMWwwLDBDNjAuNSwxMzQuNSw0OSwxMTcuNiw0OSw5OAoJQzQ5LDcwLjksNzAuOSw0OSw5OCw0OXoiLz4KPC9zdmc+Cg==",
+          "method": "GET"
+        },
+        {
+          "url": "image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjIuMSwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCAxOTYgMTk2IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAxOTYgMTk2OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0xNDcsOThjMCwxOS42LTExLjUsMzYuNS0yOC4yLDQ0LjRsMCwwYy0wLjEsMC0wLjIsMC4xLTAuMywwLjEKCWMwLjEsMCwwLjItMC4xLDAuMy0wLjFsLTEuNy0zLjZDMTMyLjQsMTMxLjYsMTQzLDExNiwxNDMsOThjMC0yNC45LTIwLjEtNDUtNDUtNDV2LTRDMTI1LjEsNDksMTQ3LDcwLjksMTQ3LDk4eiIvPgo8L3N2Zz4K",
+          "method": "GET"
+        },
+        {
+          "url": "image/svg+xml;base64,PHN2ZyBmaWxsPSJXaW5kb3ciIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgPHBhdGggZD0iTTYgMTloNFY1SDZ2MTR6bTgtMTR2MTRoNFY1aC00eiIvPgogICAgPHBhdGggZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPgo8L3N2Zz4K",
+          "method": "GET"
+        },
+        {
+          "url": "image/svg+xml;base64,PHN2ZyBmaWxsPSJXaW5kb3ciIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgPHBhdGggZD0iTTMgOXY2aDRsNSA1VjRMNyA5SDN6bTEzLjUgM2MwLTEuNzctMS4wMi0zLjI5LTIuNS00LjAzdjguMDVjMS40OC0uNzMgMi41LTIuMjUgMi41LTQuMDJ6TTE0IDMuMjN2Mi4wNmMyLjg5Ljg2IDUgMy41NCA1IDYuNzFzLTIuMTEgNS44NS01IDYuNzF2Mi4wNmM0LjAxLS45MSA3LTQuNDkgNy04Ljc3cy0yLjk5LTcuODYtNy04Ljc3eiIvPgogICAgPHBhdGggZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPgo8L3N2Zz4K",
+          "method": "GET"
+        },
+        {
+          "url": "image/svg+xml;base64,PHN2ZyBmaWxsPSJXaW5kb3ciIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgPHBhdGggZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPgogICAgPHBhdGggZD0iTTcgMTRINXY1aDV2LTJIN3YtM3ptLTItNGgyVjdoM1Y1SDV2NXptMTIgN2gtM3YyaDV2LTVoLTJ2M3pNMTQgNXYyaDN2M2gyVjVoLTV6Ii8+Cjwvc3ZnPgo=",
+          "method": "GET"
+        },
+        {
+          "url": "image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJMYXllcl8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCIKCSB2aWV3Qm94PSIwIDAgMjQgMjQiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDI1NSAyNTU7IiB4bWw6c3BhY2U9InByZXNlcnZlIiBmaWxsPSJXaW5kb3ciPgo8Zz4KCTxjaXJjbGUgY3g9IjEyIiBjeT0iNiIgcj0iMiIvPgoJPGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMiIvPgoJPGNpcmNsZSBjeD0iMTIiIGN5PSIxOCIgcj0iMiIvPgo8L2c+Cjwvc3ZnPgo=",
+          "method": "GET"
+        },
+        {
+          "url": "image/svg+xml;base64,PHN2ZyBmaWxsPSJXaW5kb3ciIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgPHBhdGggZD0iTTggNXYxNGwxMS03eiIvPgogICAgPHBhdGggZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPgo8L3N2Zz4K",
+          "method": "GET"
+        },
+        {
+          "url": "/favicon.ico",
+          "method": "GET"
+        }
+      ],
+      "task_ms": 47.239000000000004,
+      "errors": [],
+      "ax_nodes": 12033,
+      "screenshot": "combined-after-1440-2.png"
+    }
+  ],
+  "checks": [
+    {
+      "width": 390,
+      "run": 0,
+      "version": "before",
+      "name": "unrelated-mutations-expected-scan-count",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "before",
+      "name": "mobile-menu-opens",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "before",
+      "name": "escape-closes-menu-restores-focus",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "before",
+      "name": "search-results-keyboard",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "before",
+      "name": "search-escape-restores-focus",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "before",
+      "name": "editor-addition-initializes",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "before",
+      "name": "detached-component-listeners-cleaned",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "before",
+      "name": "incremental-header-initializes",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "before",
+      "name": "incremental-search-initializes",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "before",
+      "name": "combined-css-request-count",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "before",
+      "name": "combined-manual-video-controls",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "before",
+      "name": "combined-video-offscreen",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "before",
+      "name": "combined-video-original-fails-after-passes",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "before",
+      "name": "no-commercial-request",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "before",
+      "name": "no-js-errors",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "after",
+      "name": "unrelated-mutations-expected-scan-count",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "after",
+      "name": "mobile-menu-opens",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "after",
+      "name": "escape-closes-menu-restores-focus",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "after",
+      "name": "search-results-keyboard",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "after",
+      "name": "search-escape-restores-focus",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "after",
+      "name": "editor-addition-initializes",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "after",
+      "name": "detached-component-listeners-cleaned",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "after",
+      "name": "incremental-header-initializes",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "after",
+      "name": "incremental-search-initializes",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "after",
+      "name": "combined-css-request-count",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "after",
+      "name": "combined-manual-video-controls",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "after",
+      "name": "combined-video-offscreen",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "after",
+      "name": "combined-video-original-fails-after-passes",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "after",
+      "name": "no-commercial-request",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "after",
+      "name": "no-js-errors",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "after",
+      "name": "unrelated-mutations-expected-scan-count",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "after",
+      "name": "mobile-menu-opens",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "after",
+      "name": "escape-closes-menu-restores-focus",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "after",
+      "name": "search-results-keyboard",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "after",
+      "name": "search-escape-restores-focus",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "after",
+      "name": "editor-addition-initializes",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "after",
+      "name": "detached-component-listeners-cleaned",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "after",
+      "name": "incremental-header-initializes",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "after",
+      "name": "incremental-search-initializes",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "after",
+      "name": "combined-css-request-count",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "after",
+      "name": "combined-manual-video-controls",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "after",
+      "name": "combined-video-offscreen",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "after",
+      "name": "combined-video-original-fails-after-passes",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "after",
+      "name": "no-commercial-request",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "after",
+      "name": "no-js-errors",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "before",
+      "name": "unrelated-mutations-expected-scan-count",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "before",
+      "name": "mobile-menu-opens",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "before",
+      "name": "escape-closes-menu-restores-focus",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "before",
+      "name": "search-results-keyboard",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "before",
+      "name": "search-escape-restores-focus",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "before",
+      "name": "editor-addition-initializes",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "before",
+      "name": "detached-component-listeners-cleaned",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "before",
+      "name": "incremental-header-initializes",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "before",
+      "name": "incremental-search-initializes",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "before",
+      "name": "combined-css-request-count",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "before",
+      "name": "combined-manual-video-controls",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "before",
+      "name": "combined-video-offscreen",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "before",
+      "name": "combined-video-original-fails-after-passes",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "before",
+      "name": "no-commercial-request",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "version": "before",
+      "name": "no-js-errors",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "before",
+      "name": "unrelated-mutations-expected-scan-count",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "before",
+      "name": "mobile-menu-opens",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "before",
+      "name": "escape-closes-menu-restores-focus",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "before",
+      "name": "search-results-keyboard",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "before",
+      "name": "search-escape-restores-focus",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "before",
+      "name": "editor-addition-initializes",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "before",
+      "name": "detached-component-listeners-cleaned",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "before",
+      "name": "incremental-header-initializes",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "before",
+      "name": "incremental-search-initializes",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "before",
+      "name": "combined-css-request-count",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "before",
+      "name": "combined-manual-video-controls",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "before",
+      "name": "combined-video-offscreen",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "before",
+      "name": "combined-video-original-fails-after-passes",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "before",
+      "name": "no-commercial-request",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "before",
+      "name": "no-js-errors",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "after",
+      "name": "unrelated-mutations-expected-scan-count",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "after",
+      "name": "mobile-menu-opens",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "after",
+      "name": "escape-closes-menu-restores-focus",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "after",
+      "name": "search-results-keyboard",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "after",
+      "name": "search-escape-restores-focus",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "after",
+      "name": "editor-addition-initializes",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "after",
+      "name": "detached-component-listeners-cleaned",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "after",
+      "name": "incremental-header-initializes",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "after",
+      "name": "incremental-search-initializes",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "after",
+      "name": "combined-css-request-count",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "after",
+      "name": "combined-manual-video-controls",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "after",
+      "name": "combined-video-offscreen",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "after",
+      "name": "combined-video-original-fails-after-passes",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "after",
+      "name": "no-commercial-request",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "version": "after",
+      "name": "no-js-errors",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "before",
+      "name": "unrelated-mutations-expected-scan-count",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "before",
+      "name": "search-results-keyboard",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "before",
+      "name": "search-escape-restores-focus",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "before",
+      "name": "editor-addition-initializes",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "before",
+      "name": "detached-component-listeners-cleaned",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "before",
+      "name": "incremental-header-initializes",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "before",
+      "name": "incremental-search-initializes",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "before",
+      "name": "combined-css-request-count",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "before",
+      "name": "combined-manual-video-controls",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "before",
+      "name": "combined-video-offscreen",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "before",
+      "name": "combined-video-original-fails-after-passes",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "before",
+      "name": "no-commercial-request",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "before",
+      "name": "no-js-errors",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "after",
+      "name": "unrelated-mutations-expected-scan-count",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "after",
+      "name": "search-results-keyboard",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "after",
+      "name": "search-escape-restores-focus",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "after",
+      "name": "editor-addition-initializes",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "after",
+      "name": "detached-component-listeners-cleaned",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "after",
+      "name": "incremental-header-initializes",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "after",
+      "name": "incremental-search-initializes",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "after",
+      "name": "combined-css-request-count",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "after",
+      "name": "combined-manual-video-controls",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "after",
+      "name": "combined-video-offscreen",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "after",
+      "name": "combined-video-original-fails-after-passes",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "after",
+      "name": "no-commercial-request",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "after",
+      "name": "no-js-errors",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "version": "after",
+      "name": "unrelated-mutations-expected-scan-count",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "version": "after",
+      "name": "search-results-keyboard",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "version": "after",
+      "name": "search-escape-restores-focus",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "version": "after",
+      "name": "editor-addition-initializes",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "version": "after",
+      "name": "detached-component-listeners-cleaned",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "version": "after",
+      "name": "incremental-header-initializes",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "version": "after",
+      "name": "incremental-search-initializes",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "version": "after",
+      "name": "combined-css-request-count",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "version": "after",
+      "name": "combined-manual-video-controls",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "version": "after",
+      "name": "combined-video-offscreen",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "version": "after",
+      "name": "combined-video-original-fails-after-passes",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "version": "after",
+      "name": "no-commercial-request",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "version": "after",
+      "name": "no-js-errors",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "version": "before",
+      "name": "unrelated-mutations-expected-scan-count",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "version": "before",
+      "name": "search-results-keyboard",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "version": "before",
+      "name": "search-escape-restores-focus",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "version": "before",
+      "name": "editor-addition-initializes",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "version": "before",
+      "name": "detached-component-listeners-cleaned",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "version": "before",
+      "name": "incremental-header-initializes",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "version": "before",
+      "name": "incremental-search-initializes",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "version": "before",
+      "name": "combined-css-request-count",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "version": "before",
+      "name": "combined-manual-video-controls",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "version": "before",
+      "name": "combined-video-offscreen",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "version": "before",
+      "name": "combined-video-original-fails-after-passes",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "version": "before",
+      "name": "no-commercial-request",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "version": "before",
+      "name": "no-js-errors",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "version": "before",
+      "name": "unrelated-mutations-expected-scan-count",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "version": "before",
+      "name": "search-results-keyboard",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "version": "before",
+      "name": "search-escape-restores-focus",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "version": "before",
+      "name": "editor-addition-initializes",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "version": "before",
+      "name": "detached-component-listeners-cleaned",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "version": "before",
+      "name": "incremental-header-initializes",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "version": "before",
+      "name": "incremental-search-initializes",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "version": "before",
+      "name": "combined-css-request-count",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "version": "before",
+      "name": "combined-manual-video-controls",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "version": "before",
+      "name": "combined-video-offscreen",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "version": "before",
+      "name": "combined-video-original-fails-after-passes",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "version": "before",
+      "name": "no-commercial-request",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "version": "before",
+      "name": "no-js-errors",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "version": "after",
+      "name": "unrelated-mutations-expected-scan-count",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "version": "after",
+      "name": "search-results-keyboard",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "version": "after",
+      "name": "search-escape-restores-focus",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "version": "after",
+      "name": "editor-addition-initializes",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "version": "after",
+      "name": "detached-component-listeners-cleaned",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "version": "after",
+      "name": "incremental-header-initializes",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "version": "after",
+      "name": "incremental-search-initializes",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "version": "after",
+      "name": "combined-css-request-count",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "version": "after",
+      "name": "combined-manual-video-controls",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "version": "after",
+      "name": "combined-video-offscreen",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "version": "after",
+      "name": "combined-video-original-fails-after-passes",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "version": "after",
+      "name": "no-commercial-request",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "version": "after",
+      "name": "no-js-errors",
+      "passed": true
+    }
+  ],
+  "at": "2026-11-18T21:39:24.466Z",
+  "browser": "Chrome/155.0.8059.84",
+  "passed": true
+}

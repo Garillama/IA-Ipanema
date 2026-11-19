@@ -1,0 +1,150 @@
+{
+  "requested_agent": "claude",
+  "effective_agent": "claude",
+  "round": 0,
+  "error": {
+    "category": "rate_limit",
+    "summary": "No se recibió una propuesta válida; no cuenta como participación completa."
+  },
+  "model": {
+    "model": "claude-fable-5-1",
+    "effort": "high",
+    "reason": "critical según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+    "verified_at": "2026-11-08"
+  },
+  "execution": {
+    "exit_code": 1,
+    "timed_out": false,
+    "output_limited": false,
+    "idle_timed_out": false,
+    "cancelled": false,
+    "process_started": true,
+    "process_reaped": true,
+    "stdin_bytes_written": 342553,
+    "context_complete": true,
+    "duration_s": 4.103,
+    "timing": {
+      "spawn_s": 0.001157,
+      "input_complete_s": 0.899589,
+      "first_stdout_s": 2.00405,
+      "first_stderr_s": null,
+      "timeout_phase": null,
+      "event_counts": {
+        "system": 2,
+        "rate_limit_event": 1,
+        "assistant": 1,
+        "result": 1
+      },
+      "inference_vs_initialization": "not_separable_without_provider_events"
+    },
+    "output_accounting": {
+      "transport_bytes": 6066,
+      "retained_bytes": 6066,
+      "discarded_progress_bytes": 0,
+      "transport_limit_bytes": 20000000,
+      "retained_limit_bytes": 2000000
+    },
+    "isolation": {
+      "backend": "bubblewrap",
+      "snapshot_read_only": true,
+      "host_home_mounted": false,
+      "network": "enabled_no_destination_firewall",
+      "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+    },
+    "started_at": "2026-11-19T16:16:28.486831+00:00",
+    "prompt_bytes": 342553,
+    "prompt_sha256": "4773e86976f2dc1c5a50fdb00c5389f342f17f1dcb02258a7cd33a090123fc6d",
+    "usage": {
+      "provider_reported": {
+        "total_cost_usd": 0,
+        "duration_ms": 1290,
+        "input_tokens": 0,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "output_tokens": 0
+      },
+      "measured_cost_available": true,
+      "estimated_cost": null
+    },
+    "limits": {
+      "timeout": 600,
+      "idle_timeout": 90,
+      "startup_timeout": 30,
+      "first_response_timeout": 240
+    },
+    "structured_output": "native_schema",
+    "error_category": "rate_limit"
+  },
+  "recovery_attempts": [
+    {
+      "agent": "claude",
+      "retry": 0,
+      "status": "failed",
+      "category": "rate_limit",
+      "process_reaped": true,
+      "execution": {
+        "exit_code": 1,
+        "timed_out": false,
+        "output_limited": false,
+        "idle_timed_out": false,
+        "cancelled": false,
+        "process_started": true,
+        "process_reaped": true,
+        "stdin_bytes_written": 342553,
+        "context_complete": true,
+        "duration_s": 4.103,
+        "timing": {
+          "spawn_s": 0.001157,
+          "input_complete_s": 0.899589,
+          "first_stdout_s": 2.00405,
+          "first_stderr_s": null,
+          "timeout_phase": null,
+          "event_counts": {
+            "system": 2,
+            "rate_limit_event": 1,
+            "assistant": 1,
+            "result": 1
+          },
+          "inference_vs_initialization": "not_separable_without_provider_events"
+        },
+        "output_accounting": {
+          "transport_bytes": 6066,
+          "retained_bytes": 6066,
+          "discarded_progress_bytes": 0,
+          "transport_limit_bytes": 20000000,
+          "retained_limit_bytes": 2000000
+        },
+        "isolation": {
+          "backend": "bubblewrap",
+          "snapshot_read_only": true,
+          "host_home_mounted": false,
+          "network": "enabled_no_destination_firewall",
+          "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+        },
+        "started_at": "2026-11-19T16:16:28.486831+00:00",
+        "prompt_bytes": 342553,
+        "prompt_sha256": "4773e86976f2dc1c5a50fdb00c5389f342f17f1dcb02258a7cd33a090123fc6d",
+        "usage": {
+          "provider_reported": {
+            "total_cost_usd": 0,
+            "duration_ms": 1290,
+            "input_tokens": 0,
+            "cache_creation_input_tokens": 0,
+            "cache_read_input_tokens": 0,
+            "output_tokens": 0
+          },
+          "measured_cost_available": true,
+          "estimated_cost": null
+        },
+        "limits": {
+          "timeout": 600,
+          "idle_timeout": 90,
+          "startup_timeout": 30,
+          "first_response_timeout": 240
+        },
+        "structured_output": "native_schema",
+        "error_category": "rate_limit"
+      }
+    }
+  ]
+}

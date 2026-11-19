@@ -1,0 +1,54 @@
+{
+  "before": [
+    {
+      "id": "offline-claude-functional",
+      "kind": "baseline_qa",
+      "alternative": "claude-snapshot-current",
+      "constraint": "functional"
+    },
+    {
+      "id": "offline-claude-security",
+      "kind": "baseline_qa",
+      "alternative": "claude-snapshot-current",
+      "constraint": "security"
+    },
+    {
+      "id": "offline-claude-compatibility",
+      "kind": "baseline_qa",
+      "alternative": "claude-snapshot-current",
+      "constraint": "compatibility"
+    },
+    {
+      "id": "offline-claude-native-reuse",
+      "kind": "baseline_qa",
+      "alternative": "claude-snapshot-current",
+      "constraint": "native_reuse"
+    },
+    {
+      "id": "offline-codex-functional",
+      "kind": "baseline_qa",
+      "alternative": "codex-snapshot-current",
+      "constraint": "functional"
+    },
+    {
+      "id": "offline-codex-security",
+      "kind": "baseline_qa",
+      "alternative": "codex-snapshot-current",
+      "constraint": "security"
+    },
+    {
+      "id": "offline-codex-compatibility",
+      "kind": "baseline_qa",
+      "alternative": "codex-snapshot-current",
+      "constraint": "compatibility"
+    },
+    {
+      "id": "offline-codex-native-reuse",
+      "kind": "baseline_qa",
+      "alternative": "codex-snapshot-current",
+      "constraint": "native_reuse"
+    }
+  ],
+  "after": [],
+  "required_constraints": []
+}

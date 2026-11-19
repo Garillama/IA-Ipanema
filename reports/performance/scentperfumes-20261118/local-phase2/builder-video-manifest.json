@@ -1,0 +1,16 @@
+{
+  "at": "2026-11-18T21:30:54.330558+00:00",
+  "status": "prepared_unapproved_unapplied",
+  "files": [
+    {
+      "path": "static/js/sc-armador3.js",
+      "base_sha256": "fe58a099760da4d81228092ad5a00e2b32ab3abfb5ca70aef336d9a4d1f04f85",
+      "candidate_sha256": "3f529b7b4c99a4e88c16bd1fca8bd20b969ba0532fed0ac8a0fa765677c4b947"
+    }
+  ],
+  "patch_sha256": "fe6311c8004ba5610ef444575dd56456726978ef1ec06bf930ea3912f6286faa",
+  "scope": "only autoVideo media function; no commerce execution or edits",
+  "baseline_evidence": "builder-video-original-failure.json",
+  "review": "Mandatory original Claude/Codex council pending; no review attempted",
+  "rollback": "Discard private candidate; original untouched"
+}

@@ -1,0 +1,14 @@
+--- a/static/js/sc-scent-extras.js
++++ b/static/js/sc-scent-extras.js
+@@ -23,8 +23,9 @@
+ 
+ /* Vista previa TN: la barra "Borrador" (fija, z-index máximo) tapa el header fijo → lo desplazamos su altura. Píldoras sticky justo debajo del header real. */
+ (function(){ var h=document.querySelector('.js-head-main')||document.querySelector('.js-header.header'); if(!h) return; var root=document.documentElement;
+-  function set(){ var db=document.querySelector('.draft-bar'); var dh=0; if(db&&getComputedStyle(db).position==='fixed'&&!db.classList.contains('is-collapsed')){ var rb=db.getBoundingClientRect(); var e=document.elementFromPoint(Math.round(window.innerWidth/2),Math.max(1,Math.round(rb.bottom)-2)); if(rb.top<=1&&e&&db.contains(e)) dh=Math.round(rb.bottom); } root.style.setProperty('--scent-draft-h',dh+'px');
+-    var r=h.getBoundingClientRect(); root.style.setProperty('--scent-hdr-h',Math.round(r.height)+'px'); var w=h.closest('.sticky-header-wrapper'); var fixed=w&&w.classList.contains('is-fixed'); root.style.setProperty('--scent-pills-top',(fixed?Math.max(dh,Math.round(r.bottom)):Math.round(r.height)+dh)+'px'); }
++  function setPx(name,value){ value=value+'px'; if(root.style.getPropertyValue(name)!==value) root.style.setProperty(name,value); }
++  function set(){ var db=document.querySelector('.draft-bar'); var dh=0; if(db&&getComputedStyle(db).position==='fixed'&&!db.classList.contains('is-collapsed')){ var rb=db.getBoundingClientRect(); var e=document.elementFromPoint(Math.round(window.innerWidth/2),Math.max(1,Math.round(rb.bottom)-2)); if(rb.top<=1&&e&&db.contains(e)) dh=Math.round(rb.bottom); } setPx('--scent-draft-h',dh);
++    var r=h.getBoundingClientRect(); setPx('--scent-hdr-h',Math.round(r.height)); var w=h.closest('.sticky-header-wrapper'); var fixed=w&&w.classList.contains('is-fixed'); setPx('--scent-pills-top',fixed?Math.max(dh,Math.round(r.bottom)):Math.round(r.height)+dh); }
+   set(); window.addEventListener('resize',set); var t=false; window.addEventListener('scroll',function(){ if(t) return; t=true; requestAnimationFrame(function(){ set(); t=false; }); },{passive:true}); setTimeout(set,600); setTimeout(set,2000); if(window.ResizeObserver) new ResizeObserver(set).observe(h); var db0=document.querySelector('.draft-bar'); if(db0&&window.MutationObserver) new MutationObserver(function(){ set(); setTimeout(set,350); }).observe(db0,{attributes:true,attributeFilter:['class']}); if(db0) db0.addEventListener('click',function(){ setTimeout(set,50); setTimeout(set,400); });
+ })();
+ 

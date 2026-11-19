@@ -1,0 +1,30 @@
+{
+  "at": "2026-11-18T21:17:53.071063+00:00",
+  "kind": "targeted_candidate_overlay_contract_test",
+  "scope": "candidate instruction loader with current original registry, synthetic filesystem only",
+  "original_registry_sha256": "8d8b653f9497acbc719ac474caaf6b8c0246828cbc7b732d5bb97964f5ec8666",
+  "candidate_engine_sha256": "09347e00e317fc1e02a6b980aa7a71f97880f808f7d89087a293f51d429c8abb",
+  "authorized_skills_loaded": [
+    "better-accessibility",
+    "cloudflare-web-perf",
+    "ipanema-architect",
+    "ipanema-commerce",
+    "ipanema-component-builder",
+    "ipanema-motion",
+    "ipanema-performance",
+    "ipanema-responsive",
+    "ipanema-seo-expert",
+    "ipanema-storefront",
+    "ipanema-visual-qa",
+    "schema",
+    "seo-audit",
+    "vercel-react-best-practices",
+    "web-design-guidelines",
+    "web-quality-audit"
+  ],
+  "unknown_prefixed_skill_rejected": true,
+  "provider_calls": 0,
+  "original_files_modified": false,
+  "approval": false,
+  "limitations": "Does not replace complete regression QA or final independent review on the updated dependency context."
+}

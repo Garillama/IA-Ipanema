@@ -1,0 +1,175 @@
+{
+  "scope": "native video autoplay offscreen reproduction only; replacement local media, original attrs",
+  "samples": [
+    {
+      "width": 390,
+      "phase": "initial-offscreen",
+      "videos": [
+        {
+          "paused": true,
+          "currentTime": 0,
+          "readyState": 4,
+          "error": null,
+          "autoplay": true,
+          "loop": true,
+          "preload": "metadata",
+          "offscreen": true
+        },
+        {
+          "paused": true,
+          "currentTime": 0,
+          "readyState": 4,
+          "error": null,
+          "autoplay": true,
+          "loop": true,
+          "preload": "metadata",
+          "offscreen": true
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "phase": "visible",
+      "videos": [
+        {
+          "paused": false,
+          "currentTime": 1.433585,
+          "readyState": 4,
+          "error": null,
+          "autoplay": true,
+          "loop": true,
+          "preload": "metadata",
+          "offscreen": false
+        },
+        {
+          "paused": false,
+          "currentTime": 1.433604,
+          "readyState": 4,
+          "error": null,
+          "autoplay": true,
+          "loop": true,
+          "preload": "metadata",
+          "offscreen": false
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "phase": "after-scrolling-past",
+      "videos": [
+        {
+          "paused": true,
+          "currentTime": 1.435636,
+          "readyState": 4,
+          "error": null,
+          "autoplay": true,
+          "loop": true,
+          "preload": "metadata",
+          "offscreen": true
+        },
+        {
+          "paused": true,
+          "currentTime": 1.435485,
+          "readyState": 4,
+          "error": null,
+          "autoplay": true,
+          "loop": true,
+          "preload": "metadata",
+          "offscreen": true
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "phase": "initial-offscreen",
+      "videos": [
+        {
+          "paused": true,
+          "currentTime": 0,
+          "readyState": 4,
+          "error": null,
+          "autoplay": true,
+          "loop": true,
+          "preload": "metadata",
+          "offscreen": true
+        },
+        {
+          "paused": true,
+          "currentTime": 0,
+          "readyState": 4,
+          "error": null,
+          "autoplay": true,
+          "loop": true,
+          "preload": "metadata",
+          "offscreen": true
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "phase": "visible",
+      "videos": [
+        {
+          "paused": false,
+          "currentTime": 1.403055,
+          "readyState": 4,
+          "error": null,
+          "autoplay": true,
+          "loop": true,
+          "preload": "metadata",
+          "offscreen": false
+        },
+        {
+          "paused": false,
+          "currentTime": 1.405678,
+          "readyState": 4,
+          "error": null,
+          "autoplay": true,
+          "loop": true,
+          "preload": "metadata",
+          "offscreen": false
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "phase": "after-scrolling-past",
+      "videos": [
+        {
+          "paused": true,
+          "currentTime": 1.405497,
+          "readyState": 4,
+          "error": null,
+          "autoplay": true,
+          "loop": true,
+          "preload": "metadata",
+          "offscreen": true
+        },
+        {
+          "paused": true,
+          "currentTime": 1.408232,
+          "readyState": 4,
+          "error": null,
+          "autoplay": true,
+          "loop": true,
+          "preload": "metadata",
+          "offscreen": true
+        }
+      ]
+    }
+  ],
+  "checks": [
+    {
+      "width": 390,
+      "name": "local-media-decodes",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "name": "local-media-decodes",
+      "passed": true
+    }
+  ],
+  "browser": "Chrome/155.0.8059.84",
+  "passed": true
+}

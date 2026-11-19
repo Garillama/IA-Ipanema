@@ -1,0 +1,395 @@
+{
+  "scope": "all locally inventoried theme files; no live URL crawl",
+  "files": 860,
+  "assets": 330,
+  "asset_bytes": 27901158,
+  "templates": [
+    {
+      "path": "templates/layout/footer.json",
+      "sections": [
+        "sc-footer"
+      ],
+      "order": [
+        "footer"
+      ]
+    },
+    {
+      "path": "templates/layout/header.json",
+      "sections": [
+        "announcement-bar",
+        "sc-header"
+      ],
+      "order": [
+        "announcement",
+        "header"
+      ]
+    },
+    {
+      "path": "templates/pages/404.json",
+      "sections": [
+        "main-404",
+        "product-list"
+      ],
+      "order": [
+        "main_404",
+        "featured_products"
+      ]
+    },
+    {
+      "path": "templates/pages/account/address.json",
+      "sections": [
+        "page-header",
+        "main-account-address"
+      ],
+      "order": [
+        "heading",
+        "account_address"
+      ]
+    },
+    {
+      "path": "templates/pages/account/addresses.json",
+      "sections": [
+        "page-header",
+        "main-account-addresses"
+      ],
+      "order": [
+        "heading",
+        "account_addresses"
+      ]
+    },
+    {
+      "path": "templates/pages/account/info.json",
+      "sections": [
+        "page-header",
+        "main-account-info"
+      ],
+      "order": [
+        "heading",
+        "account_info"
+      ]
+    },
+    {
+      "path": "templates/pages/account/login.json",
+      "sections": [
+        "page-header",
+        "main-login"
+      ],
+      "order": [
+        "heading",
+        "login_form"
+      ]
+    },
+    {
+      "path": "templates/pages/account/newpass.json",
+      "sections": [
+        "page-header",
+        "main-newpass"
+      ],
+      "order": [
+        "heading",
+        "newpass_form"
+      ]
+    },
+    {
+      "path": "templates/pages/account/order.json",
+      "sections": [
+        "page-header",
+        "main-account-order"
+      ],
+      "order": [
+        "heading",
+        "account_order"
+      ]
+    },
+    {
+      "path": "templates/pages/account/orders.json",
+      "sections": [
+        "page-header",
+        "main-account-orders"
+      ],
+      "order": [
+        "heading",
+        "account_orders"
+      ]
+    },
+    {
+      "path": "templates/pages/account/register.json",
+      "sections": [
+        "page-header",
+        "main-register"
+      ],
+      "order": [
+        "heading",
+        "register_form"
+      ]
+    },
+    {
+      "path": "templates/pages/account/reset.json",
+      "sections": [
+        "page-header",
+        "main-reset"
+      ],
+      "order": [
+        "heading",
+        "reset_form"
+      ]
+    },
+    {
+      "path": "templates/pages/account/subscription-address.json",
+      "sections": [
+        "page-header",
+        "main-account-subscription-address"
+      ],
+      "order": [
+        "heading",
+        "account_subscription_address"
+      ]
+    },
+    {
+      "path": "templates/pages/blog-post.json",
+      "sections": [
+        "page-header",
+        "main-blog-post"
+      ],
+      "order": [
+        "heading",
+        "blog_post_content"
+      ]
+    },
+    {
+      "path": "templates/pages/blog.json",
+      "sections": [
+        "page-header",
+        "main-blog"
+      ],
+      "order": [
+        "heading",
+        "blog_posts"
+      ]
+    },
+    {
+      "path": "templates/pages/cart.json",
+      "sections": [
+        "page-header",
+        "main-cart"
+      ],
+      "order": [
+        "heading",
+        "cart_form"
+      ]
+    },
+    {
+      "path": "templates/pages/category.json",
+      "sections": [
+        "category-hero",
+        "page-header",
+        "main-products-grid"
+      ],
+      "order": [
+        "category_hero",
+        "heading",
+        "product_list"
+      ]
+    },
+    {
+      "path": "templates/pages/contact.json",
+      "sections": [
+        "page-header",
+        "main-contact"
+      ],
+      "order": [
+        "heading",
+        "contact_form"
+      ]
+    },
+    {
+      "path": "templates/pages/home.json",
+      "sections": [
+        "sc-home-hero",
+        "sc-home-products",
+        "sc-home-editorial",
+        "sc-home-families",
+        "sc-home-whatsapp",
+        "sc-home-process",
+        "sc-home-social",
+        "sc-home-faq"
+      ],
+      "order": [
+        "sc_hero",
+        "sc_products",
+        "sc_editorial",
+        "sc_families",
+        "sc_whatsapp",
+        "sc_process",
+        "sc_social",
+        "sc_faq"
+      ]
+    },
+    {
+      "path": "templates/pages/page.json",
+      "sections": [
+        "page-header",
+        "main-page"
+      ],
+      "order": [
+        "heading",
+        "page_content"
+      ]
+    },
+    {
+      "path": "templates/pages/password.json",
+      "sections": [
+        "password-logo",
+        "main-password"
+      ],
+      "order": [
+        "logo",
+        "content"
+      ]
+    },
+    {
+      "path": "templates/pages/product.json",
+      "sections": [
+        "main-product",
+        "product-description",
+        "related-products",
+        "sc-pdp-faq",
+        "sc-pdp-reviews",
+        "sc-trust-benefits"
+      ],
+      "order": [
+        "main_product",
+        "product_description",
+        "sc_pdp_faq",
+        "sc_pdp_reviews",
+        "alternative_products",
+        "sc_trust_benefits"
+      ]
+    },
+    {
+      "path": "templates/pages/search.json",
+      "sections": [
+        "page-header",
+        "main-products-grid"
+      ],
+      "order": [
+        "heading",
+        "product_list"
+      ]
+    }
+  ],
+  "syntax_checks": [
+    {
+      "file": "static/js/libraries-standalone.js",
+      "check": "node-syntax",
+      "passed": true,
+      "error": null
+    },
+    {
+      "file": "static/js/sc-armador.js",
+      "check": "node-syntax",
+      "passed": true,
+      "error": null
+    },
+    {
+      "file": "static/js/sc-armador2.js",
+      "check": "node-syntax",
+      "passed": true,
+      "error": null
+    },
+    {
+      "file": "static/js/sc-armador3.js",
+      "check": "node-syntax",
+      "passed": true,
+      "error": null
+    },
+    {
+      "file": "static/js/sc-cart-related.js",
+      "check": "node-syntax",
+      "passed": true,
+      "error": null
+    },
+    {
+      "file": "static/js/sc-global.js",
+      "check": "node-syntax",
+      "passed": true,
+      "error": null
+    },
+    {
+      "file": "static/js/sc-home.js",
+      "check": "node-syntax",
+      "passed": true,
+      "error": null
+    },
+    {
+      "file": "static/js/sc-pdp.js",
+      "check": "node-syntax",
+      "passed": true,
+      "error": null
+    },
+    {
+      "file": "static/js/sc-plp.js",
+      "check": "node-syntax",
+      "passed": true,
+      "error": null
+    },
+    {
+      "file": "static/js/sc-scent-cart-recs.js",
+      "check": "node-syntax",
+      "passed": true,
+      "error": null
+    },
+    {
+      "file": "static/js/sc-scent-extras.js",
+      "check": "node-syntax",
+      "passed": true,
+      "error": null
+    },
+    {
+      "file": "static/js/sc-search-refinement.js",
+      "check": "node-syntax",
+      "passed": true,
+      "error": null
+    },
+    {
+      "file": "static/js/sc-social-video.js",
+      "check": "node-syntax",
+      "passed": true,
+      "error": null
+    },
+    {
+      "file": "static/js/store.js",
+      "check": "node-syntax",
+      "passed": true,
+      "error": null
+    }
+  ],
+  "source_origins": [
+    "https://cdn.shopify.com",
+    "https://embed.cloudflarestream.com",
+    "https://fonts.googleapis.com",
+    "https://fonts.gstatic.com",
+    "https://i.ytimg.com",
+    "https://img.youtube.com",
+    "https://maps.google.",
+    "https://player.vimeo.com",
+    "https://review-images.judgeme.com",
+    "https://scentperfumes-internal.vercel.app",
+    "https://scentperfumes.mx",
+    "https://schema.org",
+    "https://static.klaviyo.com",
+    "https://twitter.com",
+    "https://vimeo.com",
+    "https://wa.me",
+    "https://www.argentina.gob.ar",
+    "https://www.clarity.ms",
+    "https://www.correoargentino.com.ar",
+    "https://www.correosdemexico.gob.mx",
+    "https://www.facebook.com",
+    "https://www.googletagmanager.com",
+    "https://www.youtube-nocookie.com",
+    "https://www.youtube.com"
+  ],
+  "network": "HTTP403 on robots.txt; stopped",
+  "commercial_actions": 0
+}

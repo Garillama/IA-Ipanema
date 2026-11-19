@@ -1,0 +1,5 @@
+Final focused run (after the last test-fixture correction):
+- py_compile: tools/ipanema/orchestration/adapters.py, engine.py, test_antigravity_json_contract.py, test_antigravity_integration.py — passed.
+- unittest: 22 focused tests — passed.
+- git diff --check — passed.
+- No provider processes, external requests, production access, or operational-controller changes.

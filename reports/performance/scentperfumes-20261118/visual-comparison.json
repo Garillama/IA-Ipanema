@@ -1,0 +1,54 @@
+{
+  "scope": "isolated CSS fixture only",
+  "pairs": [
+    {
+      "width": 390,
+      "javascript": true,
+      "run": 0,
+      "identical_pixels": true
+    },
+    {
+      "width": 390,
+      "javascript": true,
+      "run": 1,
+      "identical_pixels": true
+    },
+    {
+      "width": 390,
+      "javascript": true,
+      "run": 2,
+      "identical_pixels": true
+    },
+    {
+      "width": 390,
+      "javascript": false,
+      "run": 0,
+      "identical_pixels": true
+    },
+    {
+      "width": 1440,
+      "javascript": true,
+      "run": 0,
+      "identical_pixels": true
+    },
+    {
+      "width": 1440,
+      "javascript": true,
+      "run": 1,
+      "identical_pixels": true
+    },
+    {
+      "width": 1440,
+      "javascript": true,
+      "run": 2,
+      "identical_pixels": true
+    },
+    {
+      "width": 1440,
+      "javascript": false,
+      "run": 0,
+      "identical_pixels": true
+    }
+  ],
+  "passed": true
+}

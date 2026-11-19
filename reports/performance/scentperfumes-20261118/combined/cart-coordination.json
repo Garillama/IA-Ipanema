@@ -1,0 +1,49 @@
+{
+  "at": "2026-11-18T21:44:18.821Z",
+  "scope": "unmodified native and override recommendation scripts together with stub LS; local presentation only, no real LS commerce or storefront validation",
+  "original_catalog_bytes": 125082,
+  "catalog_items": 125,
+  "url_substitution": "Only image/product URLs replaced with loopback paths; no commercial values changed",
+  "samples": [
+    {
+      "width": 390,
+      "closed": true,
+      "unrelated_mutations": 8,
+      "selection_runs": 8,
+      "index_requests": 1,
+      "rendered_cards": 8,
+      "long_tasks": [
+        130
+      ],
+      "local_contracts": {
+        "width": 390,
+        "has_variant": true,
+        "variant_change": true,
+        "cart_line_excluded": true,
+        "recommendations_visible": true,
+        "native_write_calls": 0
+      }
+    },
+    {
+      "width": 1440,
+      "closed": true,
+      "unrelated_mutations": 8,
+      "selection_runs": 8,
+      "index_requests": 1,
+      "rendered_cards": 8,
+      "long_tasks": [],
+      "local_contracts": {
+        "width": 1440,
+        "has_variant": true,
+        "variant_change": true,
+        "cart_line_excluded": true,
+        "recommendations_visible": true,
+        "native_write_calls": 0
+      }
+    }
+  ],
+  "browser": "Chrome/155.0.8059.84",
+  "passed": true,
+  "remote_requests": 0,
+  "commercial_requests": []
+}

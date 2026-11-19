@@ -1,0 +1,222 @@
+{
+  "at": "2026-11-18T21:34:41.323481+00:00",
+  "status": "local_preparation_complete_storefront_audit_incomplete",
+  "council": "Blocked rate_limit; zero new provider/review attempts; no alternative reviewer substituted",
+  "remote_access": "HTTP 403 stop preserved; no external requests or storefront navigation",
+  "new_candidates": [
+    {
+      "id": "SCENT-04-video-visibility",
+      "priority": 1,
+      "files": [
+        "static/js/sc-armador3.js"
+      ],
+      "patch": "candidate-builder-video-visibility.patch",
+      "manifest": "builder-video-manifest.json",
+      "status": "prepared_unapproved_unapplied",
+      "functional_local_passed": true,
+      "impact_scope": "12 sample runs, 3 before/after per mobile/desktop; exact isolated media functions with original local MP4s",
+      "measured_before": "12–16 decoded frames and 0.638–0.659 s media progression while offscreen in ~650 ms intervals",
+      "measured_after": "0 additional decoded frames; 0 s media progression in all six candidate samples",
+      "checks": 112,
+      "additional_checks_detail": "96 comparative checks + 16 targeted checks including a fresh document without IntersectionObserver; 16 original-defect checks preserved separately",
+      "risk": "Medium: alters manual playback when less than 60% of the card is visible. Does not resume manual playback automatically. No IO support retains manual fallback, without added offscreen guarantee. Background-tab policy unchanged.",
+      "pending": [
+        "Dual council approval of exact candidate",
+        "Full builder/native cart functionality",
+        "Actual storefront mobile/desktop and Safari",
+        "Combined QA with any other approved patches"
+      ],
+      "sha256": "fe6311c8004ba5610ef444575dd56456726978ef1ec06bf930ea3912f6286faa",
+      "approved": false,
+      "applied": false,
+      "verified_after_integration": false
+    },
+    {
+      "id": "header-css-writes",
+      "priority": 4,
+      "files": [
+        "static/js/sc-scent-extras.js"
+      ],
+      "patch": "candidate-header-css-writes.patch",
+      "manifest": "header-manifest.json",
+      "status": "prepared_unapproved_unapplied",
+      "functional_local_passed": true,
+      "performance_benefit_confirmed": false,
+      "measured_before": "90 calls to setProperty for 30 stable scroll events",
+      "measured_after": "0 redundant calls in all six candidate runs; geometry reads retained",
+      "checks": 96,
+      "pixel_pairs_identical": 6,
+      "timings": {
+        "390": {
+          "before": {
+            "median_task_ms": 40.645,
+            "median_script_ms": 13.831000000000001,
+            "redundant_writes": [
+              90
+            ]
+          },
+          "after": {
+            "median_task_ms": 42.952000000000005,
+            "median_script_ms": 9.626,
+            "redundant_writes": [
+              0
+            ]
+          }
+        },
+        "1440": {
+          "before": {
+            "median_task_ms": 14.620999999999999,
+            "median_script_ms": 4.575000000000001,
+            "redundant_writes": [
+              90
+            ]
+          },
+          "after": {
+            "median_task_ms": 14.341000000000003,
+            "median_script_ms": 4.240000000000001,
+            "redundant_writes": [
+              0
+            ]
+          }
+        }
+      },
+      "risk": "Low implementation risk, unproven net CPU benefit. Mobile median total TaskDuration rises 40.645 to 42.952 ms in this fixture. Do not prioritize integration on a performance claim; reduced calls do not prove fewer reflows.",
+      "pending": [
+        "Dual council review",
+        "Representative full-page measurement before accepting for performance",
+        "Combined header/editor QA"
+      ],
+      "sha256": "70c17278517e9409539534e6e5f6dddc228ca7aa0e0db3e015c5a883e2adcc95",
+      "approved": false,
+      "applied": false,
+      "verified_after_integration": false
+    }
+  ],
+  "additional_diagnosis": {
+    "id": "cart-idle-work",
+    "files": [
+      "static/js/sc-scent-cart-recs.js",
+      "static/js/sc-cart-related.js",
+      "snippets/cart/sc-cart-related.tpl"
+    ],
+    "status": "reproduced_fixture_no_patch",
+    "original_catalog_bytes": 125082,
+    "items": 125,
+    "samples": [
+      {
+        "width": 390,
+        "closed": true,
+        "unrelated_mutations": 8,
+        "selection_runs": 8,
+        "index_requests": 1,
+        "rendered_cards": 8,
+        "long_tasks": [
+          123
+        ]
+      },
+      {
+        "width": 1440,
+        "closed": true,
+        "unrelated_mutations": 8,
+        "selection_runs": 8,
+        "index_requests": 1,
+        "rendered_cards": 8,
+        "long_tasks": []
+      }
+    ],
+    "risk": "Medium/high: both native and override scripts control recommendation state. Need native LS/editor/variants interactions before changing load timing or invalidation.",
+    "long_task_limit": "123 ms observed in one mobile fixture load; no trace attribution to recommendations or evidence of production long tasks."
+  },
+  "other_components": {
+    "css": "Existing CSS candidate kept frozen; no blanket unused-CSS removal without representative coverage.",
+    "images": "Existing responsive/LCP candidates still need actual currentSrc/viewport/LCP attribution. No asset compression or quality changes.",
+    "fonts": "Existing static font-table evidence retained; no removal/deduplication or new downloads.",
+    "youtube": "Existing visibility/player lifecycle retained; no removal of visible previews or tracking.",
+    "third_parties": "Analytics and native integrations retained; source inventory is not network execution or transfer evidence.",
+    "dependencies": "Standalone libraries own Swiper/lazysizes; store.js follows LS.ready. Blanket defer or dropping dependencies has not been justified."
+  },
+  "tests": {
+    "header_samples": 12,
+    "header_checks": 96,
+    "header_pixel_pairs_equal": 6,
+    "video_comparative_samples": 12,
+    "video_comparative_checks": 96,
+    "video_targeted_samples": 4,
+    "video_targeted_checks": 16,
+    "original_defect_samples": 2,
+    "original_defect_checks": 16,
+    "cart_baseline_samples": 2,
+    "syntax_checks": [
+      "sc-scent-extras.js",
+      "sc-armador3.js"
+    ],
+    "isolated_scope": "Controlled DOM and source functions, no Twig/native storefront render, no purchase actions",
+    "field_metrics": null,
+    "storefront_before_after_metrics": null,
+    "old_suites_repeated": false
+  },
+  "integrity": {
+    "at": "2026-11-18T21:33:13.288885+00:00",
+    "checks": [
+      {
+        "patch": "continuation/skill-contract-candidate.patch",
+        "sha256": "ceef24d8385e3cdec811908c1526ee7bdbf41c5bc2887f0146fb8e145600fbed",
+        "matches_frozen_identity": true,
+        "base_files_unchanged": true,
+        "applied": false,
+        "review_attempted": false
+      },
+      {
+        "patch": "candidate-remove-inline-css-preloads.patch",
+        "sha256": "97ca9fe2111dcfa25acb35b017928da9b41ab1fe124af3b40f03bf33c7144e41",
+        "matches_frozen_identity": true,
+        "base_files_unchanged": true,
+        "applied": false,
+        "review_attempted": false
+      },
+      {
+        "patch": "continuation/observer-candidate.patch",
+        "sha256": "95bad94590b5e4e5585b8fb29c6e32b3a4ae4432e1fd08c37b0ea6791efe6594",
+        "matches_frozen_identity": true,
+        "base_files_unchanged": true,
+        "applied": false,
+        "review_attempted": false
+      },
+      {
+        "candidate": "header",
+        "patch_sha256_matches": true,
+        "base_matches": true,
+        "candidate_matches": true,
+        "git_apply_check_exit": 0,
+        "applied": false
+      },
+      {
+        "candidate": "builder-video",
+        "patch_sha256_matches": true,
+        "base_matches": true,
+        "candidate_matches": true,
+        "git_apply_check_exit": 0,
+        "applied": false
+      }
+    ],
+    "baseline_files_checked": 860,
+    "baseline_changed": [],
+    "theme_git_clean": true,
+    "branch": "audit/performance-20261118",
+    "builder_outside_media_function_identical": true,
+    "AGENTS_modified": false,
+    "new_council_requests": 0,
+    "remote_storefront_requests": 0,
+    "passed": true
+  },
+  "local_decisions": "decision.json",
+  "risks_remaining": [
+    "Claude mandatory approval missing",
+    "No origin access following HTTP 403",
+    "No real Lighthouse/PageSpeed comparison or CrUX p75",
+    "No full navigation/cart/variants/editor/Safari QA",
+    "New media candidate has not been integrated"
+  ],
+  "source_integration": false,
+  "production_changes": false
+}

@@ -1,0 +1,561 @@
+[
+  {
+    "requested_agent": "claude",
+    "effective_agent": "claude",
+    "round": 1,
+    "response": {
+      "decision": "changes_requested",
+      "summary": "Defensa de claude: retiro claude-aceptar-con-observaciones y adopto codex-adr-pendiente. La lectura confirma que en execute() se ejecutan después de checkpoint(), que ya escribió state=running, y fuera del try que registra blocked: initial_content (read_text), original (digest) y el baseline (central_qa). Un archivo autorizado que no sea .md y tenga UTF-8 inválido, o una excepción en central_qa/run_isolated, dejaría run.json en running. qa:baseline solo cubre unit-tests-isolated (discover -s tests/unit): no acredita tests/integration ni la ausencia de skips. Corrijo esas afirmaciones de mi propuesta y dejo compatibility en unknown. Mantengo claude-endurecer-reglas-y-manifiesto como complemento revisado, sujeto a una nueva autorización. Esta defensa no ejecuta pruebas ni resuelve objeciones.",
+      "changes": [],
+      "evidence": [
+        "source:tools/ipanema/orchestration/engine.py",
+        "source:tools/ipanema/snapshot_links.py",
+        "source:tests/unit/test_skill_execution_contract.py",
+        "source:tests/integration/test_orchestration_cli.py",
+        "source:tests/support.py",
+        "qa:baseline"
+      ],
+      "objections": [
+        {
+          "id": "claude-def-obj-1",
+          "alternative_id": "claude-aceptar-con-observaciones",
+          "category": "functional",
+          "severity": "high",
+          "claim": "Acepto codex-o1. En execute(), checkpoint() escribe running y después se ejecutan initial_content=read_text(), original=digest() y baseline=central_qa(), todo fuera del try. Un copy.txt autorizado con bytes inválidos se copia con copyfile, y capture_omitted_links no lo lee porque solo procesa .md, así que el fallo ocurre después del checkpoint. El fixture bad.md solo cubre prepare_snapshot. No hay inferencia, pero tampoco queda registrado blocked. Reproducción: unknown.",
+          "status": "open",
+          "evidence_refs": [
+            "source:tools/ipanema/orchestration/engine.py",
+            "source:tools/ipanema/snapshot_links.py",
+            "source:tests/unit/test_skill_execution_contract.py"
+          ],
+          "resolution_evidence_refs": []
+        },
+        {
+          "id": "claude-def-obj-2",
+          "alternative_id": "claude-aceptar-con-observaciones",
+          "category": "verification",
+          "severity": "medium",
+          "claim": "Acepto codex-o2. central_qa ejecuta 'unittest discover -s tests/unit', así que qa:baseline no acredita test_orchestration_cli.py y el recibo agregado no permite afirmar que no hubo skips. Retiro esas afirmaciones.",
+          "status": "open",
+          "evidence_refs": [
+            "qa:baseline",
+            "source:tools/ipanema/orchestration/engine.py",
+            "source:tests/integration/test_orchestration_cli.py"
+          ],
+          "resolution_evidence_refs": []
+        },
+        {
+          "id": "claude-def-obj-3",
+          "alternative_id": "codex-adr-pendiente",
+          "category": "maintainability",
+          "severity": "medium",
+          "claim": "El ADR pendiente necesita criterios de salida verificables: (a) llevar initial_content, original y baseline a un bloque protegido que escriba blocked con finished_at; (b) una prueba con copy.txt de bytes inválidos que exija run.json=blocked, sin llamar a worker ni a central_qa; (c) un caso en que central_qa lance una excepción y el estado quede blocked; (d) un recibo del controlador para ambas pruebas.",
+          "status": "open",
+          "evidence_refs": [
+            "source:tools/ipanema/orchestration/engine.py",
+            "source:tests/unit/test_skill_execution_contract.py"
+          ],
+          "resolution_evidence_refs": []
+        },
+        {
+          "id": "claude-def-obj-4",
+          "alternative_id": "codex-adr-pendiente",
+          "category": "coverage",
+          "severity": "low",
+          "claim": "Acepto codex-o3. coordinator.py no está entre las fuentes, así que no está demostrado que el catálogo esté definido en un solo lugar ni que haya correspondencia exacta entre las carpetas .agents/skills y AUTHORIZED_SKILLS. Los tests usan assertGreaterEqual. Queda unknown.",
+          "status": "open",
+          "evidence_refs": [
+            "source:tools/ipanema/orchestration/engine.py",
+            "source:tests/unit/test_cloudflare_web_perf.py",
+            "source:tests/unit/test_schema_markup_skill.py"
+          ],
+          "resolution_evidence_refs": []
+        },
+        {
+          "id": "claude-def-obj-5",
+          "alternative_id": "codex-adr-pendiente",
+          "category": "security",
+          "severity": "low",
+          "claim": "Hipótesis no medida: sanitized_view copia a la vista de QA un qa-snapshot-links.json que exista en el árbol, y central_qa llama a write_json sin overwrite=True. Si write_json no sobrescribe por defecto, el baseline fallaría fuera del try. Si sobrescribe, no hay riesgo. Hay que confirmarlo y excluir ese nombre de la vista.",
+          "status": "open",
+          "evidence_refs": [
+            "source:tools/ipanema/orchestration/engine.py"
+          ],
+          "resolution_evidence_refs": []
+        },
+        {
+          "id": "claude-def-obj-6",
+          "alternative_id": "codex-adr-pendiente",
+          "category": "maintainability",
+          "severity": "low",
+          "claim": "SnapshotLinkContract.setUp todavía asigna project.data['environment'] y project.qa['snapshot_omissions'], que ya no tienen efecto porque la exclusión solo se activa con el argumento explícito. Esto confunde al leer el contrato. Además, setUp de SkillExecutionContract vuelve a escribir las skills que make_project ya generó.",
+          "status": "open",
+          "evidence_refs": [
+            "source:tests/unit/test_skill_execution_contract.py",
+            "source:tools/ipanema/snapshot_links.py",
+            "source:tests/support.py"
+          ],
+          "resolution_evidence_refs": []
+        }
+      ],
+      "preferred_alternative": "codex-adr-pendiente",
+      "answers": [
+        {
+          "question_id": "codex-q1",
+          "from_agent": "codex",
+          "answer": "Ninguna. En execute(), initial_content se lee después de checkpoint(), que deja run.json en running, y fuera del try/except que registra blocked. Solo prepare_snapshot tiene su propio try. bad.md falla dentro de prepare_snapshot porque capture_omitted_links lee los .md; un copy.txt con bytes inválidos se copia con copyfile, no se lee ahí y falla después en read_text. Lo mismo ocurre con original y con central_qa. Retiro la aceptación.",
+          "disposition": "withdraw",
+          "evidence_refs": [
+            "source:tools/ipanema/orchestration/engine.py",
+            "source:tools/ipanema/snapshot_links.py",
+            "source:tests/unit/test_skill_execution_contract.py"
+          ]
+        },
+        {
+          "question_id": "codex-q2",
+          "from_agent": "codex",
+          "answer": "No existe ese recibo. qa:baseline tiene alcance unit-tests-isolated y central_qa descubre solo tests/unit. Retiro que se ejecutaran las regresiones de test_orchestration_cli.py y que no hubiera skips inesperados, y dejo compatibility en unknown. Hay que decidir entre un recibo separado del controlador para tests/integration o ampliar el discover, pero en ese caso hay que comprobar antes que PortableOrchestrationCLI funciona sin red en la vista aislada.",
+          "disposition": "revise",
+          "evidence_refs": [
+            "qa:baseline",
+            "source:tools/ipanema/orchestration/engine.py",
+            "source:tests/integration/test_orchestration_cli.py"
+          ]
+        }
+      ],
+      "withdrawn_alternatives": [
+        "claude-aceptar-con-observaciones"
+      ],
+      "revision_notes": [
+        "Preferencia: paso de claude-aceptar-con-observaciones a codex-adr-pendiente.",
+        "claude-endurecer-reglas-y-manifiesto se revisa: añade como prioridad llevar initial_content, original y baseline al bloque protegido que registra blocked, más las pruebas con copy.txt inválido y con una excepción en central_qa.",
+        "Corrijo mi propuesta: tests/integration y la ausencia de skips no están acreditados por qa:baseline; compatibility pasa a unknown.",
+        "La unicidad del catálogo queda unknown hasta inspeccionar coordinator.py.",
+        "SEO y accesibilidad: el alcance solo incluye herramientas y tests, no la tienda. Propongo registrarlas como no aplicables, sin afirmar que se verificaron.",
+        "La defensa no ejecuta pruebas y no resuelve las objeciones abiertas; se necesitan recibos del controlador."
+      ]
+    },
+    "model": {
+      "model": "claude-opus-5-5",
+      "effort": "high",
+      "reason": "strong según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+      "verified_at": "2026-11-08"
+    },
+    "execution": {
+      "exit_code": 0,
+      "timed_out": false,
+      "output_limited": false,
+      "idle_timed_out": false,
+      "cancelled": false,
+      "process_started": true,
+      "process_reaped": true,
+      "stdin_bytes_written": 245363,
+      "context_complete": true,
+      "duration_s": 32.228,
+      "timing": {
+        "spawn_s": 0.000891,
+        "input_complete_s": 0.683311,
+        "first_stdout_s": 1.720303,
+        "first_stderr_s": null,
+        "timeout_phase": null,
+        "event_counts": {
+          "system": 7,
+          "stream_event": 468,
+          "event:message_start": 1,
+          "event:content_block_start": 2,
+          "event:content_block_delta": 461,
+          "assistant": 2,
+          "event:content_block_stop": 2,
+          "user": 1,
+          "event:message_delta": 1,
+          "event:message_stop": 1,
+          "rate_limit_event": 1,
+          "result": 1
+        },
+        "inference_vs_initialization": "not_separable_without_provider_events"
+      },
+      "output_accounting": {
+        "transport_bytes": 192490,
+        "retained_bytes": 192490,
+        "discarded_progress_bytes": 0,
+        "transport_limit_bytes": 20000000,
+        "retained_limit_bytes": 2000000
+      },
+      "isolation": {
+        "backend": "bubblewrap",
+        "snapshot_read_only": true,
+        "host_home_mounted": false,
+        "network": "enabled_no_destination_firewall",
+        "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+      },
+      "started_at": "2026-11-18T20:14:30.959389+00:00",
+      "prompt_bytes": 245363,
+      "prompt_sha256": "ab357de435120a85c0e664c80f9f92ec5e6aaff528f4b08692317dd0e14f7117",
+      "usage": {
+        "provider_reported": {
+          "total_cost_usd": 0.928832,
+          "duration_ms": 30274,
+          "input_tokens": 2,
+          "cache_creation_input_tokens": 106858,
+          "cache_read_input_tokens": 0,
+          "output_tokens": 3698
+        },
+        "measured_cost_available": true,
+        "estimated_cost": null
+      },
+      "limits": {
+        "timeout": 300,
+        "idle_timeout": 180,
+        "startup_timeout": 30,
+        "first_response_timeout": 240
+      },
+      "structured_output": "native_schema",
+      "contract_validation": {
+        "status": "passed",
+        "duration_s": 0.00683
+      }
+    },
+    "recovery_attempts": [
+      {
+        "agent": "claude",
+        "retry": 0,
+        "status": "completed",
+        "execution": {
+          "exit_code": 0,
+          "timed_out": false,
+          "output_limited": false,
+          "idle_timed_out": false,
+          "cancelled": false,
+          "process_started": true,
+          "process_reaped": true,
+          "stdin_bytes_written": 245363,
+          "context_complete": true,
+          "duration_s": 32.228,
+          "timing": {
+            "spawn_s": 0.000891,
+            "input_complete_s": 0.683311,
+            "first_stdout_s": 1.720303,
+            "first_stderr_s": null,
+            "timeout_phase": null,
+            "event_counts": {
+              "system": 7,
+              "stream_event": 468,
+              "event:message_start": 1,
+              "event:content_block_start": 2,
+              "event:content_block_delta": 461,
+              "assistant": 2,
+              "event:content_block_stop": 2,
+              "user": 1,
+              "event:message_delta": 1,
+              "event:message_stop": 1,
+              "rate_limit_event": 1,
+              "result": 1
+            },
+            "inference_vs_initialization": "not_separable_without_provider_events"
+          },
+          "output_accounting": {
+            "transport_bytes": 192490,
+            "retained_bytes": 192490,
+            "discarded_progress_bytes": 0,
+            "transport_limit_bytes": 20000000,
+            "retained_limit_bytes": 2000000
+          },
+          "isolation": {
+            "backend": "bubblewrap",
+            "snapshot_read_only": true,
+            "host_home_mounted": false,
+            "network": "enabled_no_destination_firewall",
+            "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+          },
+          "started_at": "2026-11-18T20:14:30.959389+00:00",
+          "prompt_bytes": 245363,
+          "prompt_sha256": "ab357de435120a85c0e664c80f9f92ec5e6aaff528f4b08692317dd0e14f7117",
+          "usage": {
+            "provider_reported": {
+              "total_cost_usd": 0.928832,
+              "duration_ms": 30274,
+              "input_tokens": 2,
+              "cache_creation_input_tokens": 106858,
+              "cache_read_input_tokens": 0,
+              "output_tokens": 3698
+            },
+            "measured_cost_available": true,
+            "estimated_cost": null
+          },
+          "limits": {
+            "timeout": 300,
+            "idle_timeout": 180,
+            "startup_timeout": 30,
+            "first_response_timeout": 240
+          },
+          "structured_output": "native_schema",
+          "contract_validation": {
+            "status": "passed",
+            "duration_s": 0.00683
+          }
+        }
+      }
+    ]
+  },
+  {
+    "requested_agent": "codex",
+    "effective_agent": "codex",
+    "round": 1,
+    "response": {
+      "decision": "changes_requested",
+      "summary": "Mantengo codex-adr-pendiente y concreto sus criterios de cierre. El registro de fallos y la cobertura de integración siguen pendientes; esta defensa no ejecuta pruebas ni resuelve objeciones mediante consenso.",
+      "changes": [],
+      "evidence": [
+        "source:tools/ipanema/orchestration/engine.py",
+        "source:tools/ipanema/snapshot_links.py",
+        "source:tests/unit/test_skill_execution_contract.py",
+        "source:tests/integration/test_orchestration_cli.py",
+        "source:tests/support.py",
+        "qa:baseline"
+      ],
+      "objections": [
+        {
+          "id": "codex-o1",
+          "alternative_id": "claude-aceptar-con-observaciones",
+          "category": "functional",
+          "severity": "high",
+          "claim": "initial_content decodifica archivos después del checkpoint y fuera del bloque protegido. Un archivo autorizado no Markdown con UTF-8 inválido puede dejar run.json en running. La coincidencia entre participantes no sustituye una reproducción y un recibo posterior del controlador; ambos siguen unknown.",
+          "status": "open",
+          "evidence_refs": [
+            "source:tools/ipanema/orchestration/engine.py",
+            "source:tools/ipanema/snapshot_links.py",
+            "source:tests/unit/test_skill_execution_contract.py"
+          ],
+          "resolution_evidence_refs": []
+        },
+        {
+          "id": "codex-o2",
+          "alternative_id": "claude-aceptar-con-observaciones",
+          "category": "verification",
+          "severity": "medium",
+          "claim": "qa:baseline acredita únicamente unit-tests-isolated. No acredita ejecución de tests/integration/test_orchestration_cli.py ni resultados individuales o ausencia de skips. Esos resultados permanecen unknown.",
+          "status": "open",
+          "evidence_refs": [
+            "qa:baseline",
+            "source:tools/ipanema/orchestration/engine.py",
+            "source:tests/integration/test_orchestration_cli.py"
+          ],
+          "resolution_evidence_refs": []
+        },
+        {
+          "id": "codex-o3",
+          "alternative_id": "claude-aceptar-con-observaciones",
+          "category": "coverage",
+          "severity": "low",
+          "claim": "Los consumidores aportados reutilizan AUTHORIZED_SKILLS, pero falta su definición para acreditar directamente el catálogo único completo. La existencia de carpetas adicionales no demuestra autorización: el cargador y el filtro ya rechazan nombres no catalogados.",
+          "status": "open",
+          "evidence_refs": [
+            "source:tools/ipanema/orchestration/engine.py",
+            "source:tests/unit/test_skill_execution_contract.py"
+          ],
+          "resolution_evidence_refs": []
+        },
+        {
+          "id": "codex-o4",
+          "alternative_id": "codex-adr-pendiente",
+          "category": "security",
+          "severity": "low",
+          "claim": "central_qa puede copiar qa-snapshot-links.json desde el árbol antes de escribir el manifiesto del controlador. El efecto de la colisión es unknown porque no se aportó write_json. Debe quedar explícita la reserva de ese nombre y comprobarse que el contenido del árbol nunca proporciona los recibos consumidos.",
+          "status": "open",
+          "evidence_refs": [
+            "source:tools/ipanema/orchestration/engine.py",
+            "source:tests/support.py"
+          ],
+          "resolution_evidence_refs": []
+        }
+      ],
+      "preferred_alternative": "codex-adr-pendiente",
+      "answers": [
+        {
+          "question_id": "claude-q-1",
+          "from_agent": "claude",
+          "answer": "Acepto proteger original, initial_content y baseline con una ruta que registre blocked y finished_at antes de propagar el fallo, sin depender de variables todavía no inicializadas. Precisión: original se calcula antes del primer checkpoint; initial_content y baseline, después. Exijo dos casos: copy.txt con UTF-8 inválido debe registrar blocked sin llamar a central_qa ni worker; una excepción controlada de central_qa debe registrar blocked sin llamar a worker. El primer recibo cierra la ruta de decodificación, pero no acredita el segundo caso. Ambos necesitan recibos del controlador ligados a la fuente revisada.",
+          "disposition": "revise",
+          "evidence_refs": [
+            "source:tools/ipanema/orchestration/engine.py",
+            "source:tests/unit/test_skill_execution_contract.py"
+          ]
+        },
+        {
+          "question_id": "claude-q-2",
+          "from_agent": "claude",
+          "answer": "Prefiero un recibo separado del controlador, conservando explícito el alcance unitario de central_qa. MockWorkersRealGit es imprescindible para aislamiento Git, conservación del original, correcciones y revisión independiente; PortableOrchestrationCLI también lo es para portabilidad y gates del CLI. El recibo debe identificar ambas clases, hashes, resultados y skips, manteniendo visibles los workers y QA simulados. No exige inferencia real de proveedores. Su ejecución dentro del aislamiento autorizado permanece unknown; un bloqueo debe registrarse sin ampliar permisos ni usar un fallback inseguro.",
+          "disposition": "revise",
+          "evidence_refs": [
+            "source:tests/integration/test_orchestration_cli.py",
+            "source:tools/ipanema/orchestration/engine.py",
+            "qa:baseline"
+          ]
+        },
+        {
+          "question_id": "claude-q-3",
+          "from_agent": "claude",
+          "answer": "Sí: el ADR debe justificar que SEO y accesibilidad del storefront no aplican a estos archivos de herramientas y tests, sin declarar verificaciones de la tienda. Si el contrato solo admite pass/fail/unknown, conservar unknown y explicar la no aplicabilidad; no eliminar restricciones obligatorias. La procedencia de qa-snapshot-links.json pertenece al objetivo: el diseño de cierre debe excluir ese nombre del material copiado a la vista QA y crear allí únicamente el manifiesto del controlador. Debe comprobarse con una colisión sintética. No afirmo que hoy se reutilice un manifiesto ajeno: falta conocer write_json.",
+          "disposition": "revise",
+          "evidence_refs": [
+            "source:tools/ipanema/orchestration/engine.py",
+            "source:tests/support.py"
+          ]
+        }
+      ],
+      "withdrawn_alternatives": [],
+      "revision_notes": [
+        "El ADR pendiente incorpora criterios verificables de salida; esta auditoría continúa siendo de solo lectura y no autoriza implementar correcciones.",
+        "Cierre funcional: fuente revisada y recibos específicos para decodificación inválida y excepción del baseline, con bloqueo persistido, ausencia de inferencia y original conservado.",
+        "Cierre de compatibilidad: recibo separado para ambas clases de integración; qa:baseline conserva exclusivamente su alcance unitario.",
+        "Cierre de procedencia: comprobar una colisión de qa-snapshot-links.json y que la vista consume exclusivamente recibos generados por el controlador.",
+        "Mantener pendiente la inspección directa de la definición del catálogo. No exigir igualdad entre carpetas y catálogo como sustituto de comprobar autorización efectiva.",
+        "Registrar SEO y accesibilidad del storefront como no aplicables al alcance, sin convertirlo en certificación ni retirar controles obligatorios.",
+        "Conservar consejo dual, binding, revisión independiente, QA del controlador y prohibición de publicación. Ninguna objeción queda resuelta solo por estas respuestas."
+      ]
+    },
+    "model": {
+      "model": "gpt-6.1-sol",
+      "effort": "high",
+      "reason": "strong según complejidad/riesgo; sin escalado automático por fallo de autenticación.",
+      "verified_at": "2026-11-08"
+    },
+    "execution": {
+      "exit_code": 0,
+      "timed_out": false,
+      "output_limited": false,
+      "idle_timed_out": false,
+      "cancelled": false,
+      "process_started": true,
+      "process_reaped": true,
+      "stdin_bytes_written": 245358,
+      "context_complete": true,
+      "duration_s": 47.349,
+      "timing": {
+        "spawn_s": 0.000756,
+        "input_complete_s": 0.098309,
+        "first_stdout_s": 0.988404,
+        "first_stderr_s": null,
+        "timeout_phase": null,
+        "event_counts": {
+          "thread.started": 1,
+          "item.completed": 2,
+          "turn.started": 1,
+          "turn.completed": 1
+        },
+        "inference_vs_initialization": "not_separable_without_provider_events"
+      },
+      "output_accounting": {
+        "transport_bytes": 8310,
+        "retained_bytes": 8310,
+        "discarded_progress_bytes": 0,
+        "transport_limit_bytes": 20000000,
+        "retained_limit_bytes": 2000000
+      },
+      "isolation": {
+        "backend": "bubblewrap",
+        "snapshot_read_only": true,
+        "host_home_mounted": false,
+        "network": "enabled_no_destination_firewall",
+        "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+      },
+      "started_at": "2026-11-18T20:14:30.820756+00:00",
+      "prompt_bytes": 245358,
+      "prompt_sha256": "57917f913a66d6079d720d2e955fbe52b20bb11402647bc18a9d31b487358779",
+      "usage": {
+        "provider_reported": {
+          "input_tokens": 75665,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 1956,
+          "reasoning_output_tokens": 321
+        },
+        "measured_cost_available": false,
+        "estimated_cost": null
+      },
+      "limits": {
+        "timeout": 300,
+        "idle_timeout": 180,
+        "startup_timeout": 30,
+        "first_response_timeout": 300
+      },
+      "structured_output": "native_schema",
+      "contract_validation": {
+        "status": "passed",
+        "duration_s": 0.000577
+      }
+    },
+    "recovery_attempts": [
+      {
+        "agent": "codex",
+        "retry": 0,
+        "status": "completed",
+        "execution": {
+          "exit_code": 0,
+          "timed_out": false,
+          "output_limited": false,
+          "idle_timed_out": false,
+          "cancelled": false,
+          "process_started": true,
+          "process_reaped": true,
+          "stdin_bytes_written": 245358,
+          "context_complete": true,
+          "duration_s": 47.349,
+          "timing": {
+            "spawn_s": 0.000756,
+            "input_complete_s": 0.098309,
+            "first_stdout_s": 0.988404,
+            "first_stderr_s": null,
+            "timeout_phase": null,
+            "event_counts": {
+              "thread.started": 1,
+              "item.completed": 2,
+              "turn.started": 1,
+              "turn.completed": 1
+            },
+            "inference_vs_initialization": "not_separable_without_provider_events"
+          },
+          "output_accounting": {
+            "transport_bytes": 8310,
+            "retained_bytes": 8310,
+            "discarded_progress_bytes": 0,
+            "transport_limit_bytes": 20000000,
+            "retained_limit_bytes": 2000000
+          },
+          "isolation": {
+            "backend": "bubblewrap",
+            "snapshot_read_only": true,
+            "host_home_mounted": false,
+            "network": "enabled_no_destination_firewall",
+            "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+          },
+          "started_at": "2026-11-18T20:14:30.820756+00:00",
+          "prompt_bytes": 245358,
+          "prompt_sha256": "57917f913a66d6079d720d2e955fbe52b20bb11402647bc18a9d31b487358779",
+          "usage": {
+            "provider_reported": {
+              "input_tokens": 75665,
+              "cached_input_tokens": 0,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 1956,
+              "reasoning_output_tokens": 321
+            },
+            "measured_cost_available": false,
+            "estimated_cost": null
+          },
+          "limits": {
+            "timeout": 300,
+            "idle_timeout": 180,
+            "startup_timeout": 30,
+            "first_response_timeout": 300
+          },
+          "structured_output": "native_schema",
+          "contract_validation": {
+            "status": "passed",
+            "duration_s": 0.000577
+          }
+        }
+      }
+    ]
+  }
+]

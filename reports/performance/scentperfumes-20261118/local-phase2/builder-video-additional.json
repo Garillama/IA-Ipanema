@@ -1,0 +1,152 @@
+{
+  "at": "2026-11-18T21:35:03.254Z",
+  "scope": "isolated exact media functions and original local MP4s, synthetic DOM; not builder/cart/storefront QA",
+  "samples": [
+    {
+      "width": 390,
+      "run": 0,
+      "version": "before",
+      "checks_only": "first manual offscreen and existing no-IO fallback",
+      "errors": []
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "after",
+      "checks_only": "first manual offscreen and existing no-IO fallback",
+      "errors": []
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "before",
+      "checks_only": "first manual offscreen and existing no-IO fallback",
+      "errors": []
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "after",
+      "checks_only": "first manual offscreen and existing no-IO fallback",
+      "errors": []
+    }
+  ],
+  "checks": [
+    {
+      "width": 390,
+      "run": 0,
+      "version": "before",
+      "name": "first-manual-video-original-defect-or-fixed",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "before",
+      "name": "fallback-starts-without-observer",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "before",
+      "name": "manual-fallback-without-intersection-observer",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "before",
+      "name": "no-errors",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "after",
+      "name": "first-manual-video-original-defect-or-fixed",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "after",
+      "name": "fallback-starts-without-observer",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "after",
+      "name": "manual-fallback-without-intersection-observer",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "run": 0,
+      "version": "after",
+      "name": "no-errors",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "before",
+      "name": "first-manual-video-original-defect-or-fixed",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "before",
+      "name": "fallback-starts-without-observer",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "before",
+      "name": "manual-fallback-without-intersection-observer",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "before",
+      "name": "no-errors",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "after",
+      "name": "first-manual-video-original-defect-or-fixed",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "after",
+      "name": "fallback-starts-without-observer",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "after",
+      "name": "manual-fallback-without-intersection-observer",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "version": "after",
+      "name": "no-errors",
+      "passed": true
+    }
+  ],
+  "browser": "Chrome/155.0.8059.84",
+  "passed": true,
+  "remote_requests": 0,
+  "commercial_requests": []
+}

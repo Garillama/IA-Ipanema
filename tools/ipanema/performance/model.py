@@ -454,18 +454,24 @@ GENERIC_LINK_LABELS = frozenset({
 
 
 def infer_framework(framework: str | None = None, source_files: dict[str, str] | None = None) -> str:
-    if framework in FRAMEWORK_CANDIDATES:
+    if framework in (*FRAMEWORK_CANDIDATES, 'remix', 'nextjs'):
         return framework
     paths = [p.lower() for p in (source_files or {})]
     joined = ' '.join(paths)
     contents = ' '.join((source_files or {}).values()).lower()
     if any(p.endswith('.liquid') for p in paths) or 'content_for_header' in contents:
         return 'shopify-liquid'
-    if '@shopify/hydrogen' in contents or ('app/routes/' in joined and any(p.endswith(('.tsx', '.jsx')) for p in paths)):
+    if '@shopify/hydrogen' in contents or ('app/routes/' in joined and 'storefront' in contents):
+        return 'shopify-hydrogen'
+    if '@remix-run/' in contents or ('app/routes/' in joined and 'loader' in contents and '@shopify/hydrogen' not in contents):
+        return 'remix'
+    if 'next/dynamic' in contents or 'next/server' in contents or 'next/image' in contents or 'next.config' in joined:
+        return 'nextjs'
+    if any(p.endswith(('.tsx', '.jsx')) for p in paths) and 'app/routes/' in joined:
         return 'shopify-hydrogen'
     if any(p.endswith('.tpl') for p in paths) or 'snippets/image.tpl' in joined:
         return 'tiendanube-ipanema'
-    if any(p.endswith(('.tsx', '.jsx')) for p in paths) or 'vite.config' in joined or 'webpack.config' in joined:
+    if any(p.endswith(('.tsx', '.jsx')) for p in paths) or 'from "react"' in contents or "from 'react'" in contents or 'vite.config' in joined or 'webpack.config' in joined:
         return 'react-web'
     return framework or 'tiendanube-ipanema'
 
@@ -919,3 +925,877 @@ def audit_web_quality(
             'La ausencia de violaciones automatizadas no certifica cumplimiento total WCAG 2.2 AA ni indexación en Google.',
         ],
     }
+
+
+REACT_COMPATIBLE_FRAMEWORKS = frozenset({'shopify-hydrogen', 'remix', 'nextjs', 'react-web'})
+
+COMMERCE_CRITICAL_MARKERS = re.compile(
+    r'\b(CartForm|cartLinesAdd|cartLinesUpdate|cartLinesRemove|checkoutUrl|customerAccessToken|session\.commit|useOptimisticCart)\b'
+)
+
+
+def audit_react_best_practices(
+    source_files: dict[str, str] | None = None,
+    *,
+    framework: str | None = None,
+    perf_report: dict | None = None,
+) -> dict:
+    """Auditoría Vercel React Best Practices (Etapa 5): waterfalls, bundles, re-renders y adaptación por framework."""
+    files = source_files or {}
+    detected_fw = infer_framework(framework, files)
+    has_react_files = any(
+        p.lower().endswith(('.tsx', '.jsx', '.ts', '.js', '.mjs'))
+        and not p.lower().endswith(('.liquid', '.tpl'))
+        for p in files
+    )
+    applicable = detected_fw in REACT_COMPATIBLE_FRAMEWORKS or has_react_files
+    if detected_fw in ('shopify-liquid', 'tiendanube-ipanema') and not has_react_files:
+        applicable = False
+
+    findings = []
+    protected_flows = []
+
+    def add_finding(rule_id, vercel_rule, category, priority, title, impact, evidence, fix, file_path):
+        findings.append({
+            'id': rule_id,
+            'vercel_rule': vercel_rule,
+            'category': category,
+            'priority': priority,
+            'evidence_type': 'code_hypothesis',
+            'title': title,
+            'impact': impact,
+            'evidence': sanitize(evidence),
+            'candidate_files': [file_path],
+            'fix': fix,
+        })
+
+    if applicable:
+        dynamic_import_rec = (
+            "Usar `next/dynamic` (`dynamic(() => import('./Component'))`)"
+            if detected_fw == 'nextjs'
+            else "Usar `React.lazy(() => import('./Component'))` envuelto en `<Suspense fallback={...}>` (no usar `next/dynamic` fuera de Next.js)."
+        )
+        server_cache_rec = (
+            "Usar `React.cache()` para deduplicación por request y `after()` de `next/server` para tareas no bloqueantes."
+            if detected_fw == 'nextjs'
+            else "En Hydrogen/Remix usar `context.storefront.CacheShort()`/`CacheLong()` en consultas GraphQL, `defer()` para datos secundarios y `context.waitUntil()` para trabajo no bloqueante."
+        )
+
+        for path, content in sorted(files.items()):
+            if not isinstance(content, str):
+                continue
+
+            # Protección de flujos comerciales críticos (carrito, checkout, auth, sesión)
+            commerce_hits = sorted(set(COMMERCE_CRITICAL_MARKERS.findall(content)))
+            if commerce_hits:
+                protected_flows.append({'file': path, 'markers': commerce_hits})
+
+            # 0. Incompatibilidad de APIs de Next.js en Hydrogen / Remix / React Vite
+            if detected_fw in ('shopify-hydrogen', 'remix', 'react-web'):
+                next_imports = re.findall(r'from\s+["\'](next/[a-zA-Z0-9_/-]+)["\']', content)
+                if next_imports:
+                    add_finding(
+                        'RBP-FW-INCOMPATIBLE-NEXT-API',
+                        'bundle-dynamic-imports',
+                        'framework-compatibility',
+                        'CRITICAL',
+                        f'Importación de API exclusiva de Next.js ({", ".join(next_imports)}) en proyecto {detected_fw}',
+                        'Romperá la compilación o el runtime en Hydrogen/Remix/Vite.',
+                        {'file': path, 'imports': next_imports, 'framework': detected_fw},
+                        f'Reemplazar {next_imports[0]} por primitivas compatibles con {detected_fw}: {dynamic_import_rec}',
+                        path,
+                    )
+
+            # 1. Waterfalls: sequential awaits in loader / async function
+            await_matches = list(re.finditer(r'(?:const|let)\s+(\w+)\s*=\s*await\s+([a-zA-Z0-9_.$]+)\s*\(([^;\n]*)\)', content))
+            if len(await_matches) >= 2:
+                for first, second in zip(await_matches, await_matches[1:]):
+                    first_var = first.group(1)
+                    second_args = second.group(3)
+                    # Si la segunda llamada no usa la variable de la primera, son independientes -> waterfall
+                    if not re.search(r'\b' + re.escape(first_var) + r'\b', second_args):
+                        add_finding(
+                            'RBP-ASYNC-SEQUENTIAL-WATERFALL',
+                            'async-parallel',
+                            'eliminating-waterfalls',
+                            'CRITICAL',
+                            f'Waterfall secuencial detectado entre `await {first.group(2)}(...)` y `await {second.group(2)}(...)`',
+                            'Suma las latencias de red en serie y retrasa el TTFB/FCP de la ruta.',
+                            {'file': path, 'first_await': first.group(0), 'second_await': second.group(0)},
+                            'Ejecutar operaciones independientes en paralelo con `await Promise.all([...])` o diferir datos secundarios con `defer()` y `<Suspense><Await>`.',
+                            path,
+                        )
+                        break
+
+            # Waterfall en cliente: fetch dentro de useEffect
+            if re.search(r'useEffect\s*\(\s*\(\s*\)\s*=>\s*\{[^}]*\bfetch\s*\(', content, re.S):
+                add_finding(
+                    'RBP-ASYNC-EFFECT-FETCH-WATERFALL',
+                    'server-parallel-fetching',
+                    'eliminating-waterfalls',
+                    'HIGH',
+                    'Fetching de datos dentro de `useEffect` tras el montaje del componente',
+                    'Crea una cascada documento -> JS -> hidratación -> fetch que retrasa el LCP.',
+                    {'file': path},
+                    'Mover la carga de datos al `loader` de la ruta (Hydrogen/Remix) o iniciar la promesa antes del renderizado.',
+                    path,
+                )
+
+            # 2. Bundle Size Optimization: barrel / wholesale imports & heavy components
+            barrel_hits = re.findall(
+                r'import\s+(?:\*\s+as\s+\w+|\w+|\{[^}]+\})\s+from\s+["\'](lodash|moment|lucide-react|@mui/icons-material|date-fns|\.\.?/[^"\']*index)["\']',
+                content,
+            )
+            if barrel_hits:
+                add_finding(
+                    'RBP-BUNDLE-BARREL-IMPORT',
+                    'bundle-barrel-imports',
+                    'bundle-size',
+                    'CRITICAL',
+                    f'Importación de archivo barril o librería monolítica ({", ".join(sorted(set(barrel_hits)))})',
+                    'Impide un tree-shaking eficiente e infla el bundle de JavaScript enviado al cliente.',
+                    {'file': path, 'modules': sorted(set(barrel_hits))},
+                    'Importar directamente desde el submódulo específico (ej. `lodash/debounce` o el componente directo sin pasar por `index`).',
+                    path,
+                )
+
+            heavy_imports = re.findall(
+                r'import\s+(\w+)\s+from\s+["\']([^"\']*(?:Modal|Chart|Editor|Carousel3D|VideoPlayer|Map|Drawer)[^"\']*)["\']',
+                content,
+            )
+            if heavy_imports and 'React.lazy' not in content and 'lazy(' not in content and 'dynamic(' not in content:
+                add_finding(
+                    'RBP-BUNDLE-DYNAMIC-IMPORT',
+                    'bundle-dynamic-imports',
+                    'bundle-size',
+                    'HIGH',
+                    f'Componente pesado importado de forma ansiosa ({heavy_imports[0][0]})',
+                    'Incluye código de interfaz secundaria o interactiva en el bundle inicial de la página.',
+                    {'file': path, 'component': heavy_imports[0][0], 'source': heavy_imports[0][1]},
+                    dynamic_import_rec,
+                    path,
+                )
+
+            # 3. Server-Side Performance: module-level mutable state
+            if re.search(r'(?m)^\s*let\s+(?:current|shared|cached|active|global)[A-Za-z0-9_]*\s*=', content):
+                add_finding(
+                    'RBP-SERVER-SHARED-MODULE-STATE',
+                    'server-no-shared-module-state',
+                    'server-performance',
+                    'CRITICAL',
+                    'Estado mutable a nivel de módulo detectado en archivo SSR/ruta',
+                    'En entornos SSR concurrentes (Hydrogen/Oxygen, Remix, Node/Workers) puede filtrar datos de sesión o carrito entre usuarios distintos.',
+                    {'file': path},
+                    f'Encapsular el estado dentro del contexto del request (`loader`/`action`). {server_cache_rec}',
+                    path,
+                )
+
+            # 4. Re-render Optimization: derived state in useEffect, inline components, lazy state init
+            if re.search(r'useEffect\s*\(\s*\(\s*\)\s*=>\s*\{\s*set[A-Z]\w*\s*\(', content):
+                add_finding(
+                    'RBP-RERENDER-DERIVED-STATE-EFFECT',
+                    'rerender-derived-state-no-effect',
+                    'rerender-optimization',
+                    'MEDIUM',
+                    'Actualización de estado derivado dentro de `useEffect` (`setState` síncrono)',
+                    'Fuerza un pase de renderizado adicional innecesario con valores intermedios obsoletos.',
+                    {'file': path},
+                    'Calcular el estado derivado directamente durante el renderizado o mediante `useMemo` sin `useEffect`.',
+                    path,
+                )
+
+            # Inline component inside another component
+            func_comps = list(re.finditer(r'(?:export\s+default\s+|export\s+)?function\s+([A-Z]\w*)\s*\([^)]*\)\s*\{', content))
+            if len(func_comps) >= 1:
+                outer_start = func_comps[0].end()
+                inner_comp = re.search(r'\b(?:function\s+[A-Z]\w*\s*\(|const\s+[A-Z]\w*\s*=\s*\([^)]*\)\s*=>\s*[<({])', content[outer_start:])
+                if inner_comp:
+                    add_finding(
+                        'RBP-RERENDER-INLINE-COMPONENT',
+                        'rerender-no-inline-components',
+                        'rerender-optimization',
+                        'HIGH',
+                        'Definición de componente anidado dentro del cuerpo de otro componente',
+                        'Recrea el tipo de componente en cada render, desmontando el DOM y perdiendo el foco y el estado local.',
+                        {'file': path, 'outer_component': func_comps[0].group(1)},
+                        'Extraer el subcomponente al nivel superior del módulo y pasarle los datos necesarios mediante props.',
+                        path,
+                    )
+
+            if re.search(r'useState\s*\(\s*(?:JSON\.parse|localStorage\.getItem|sessionStorage\.getItem)\s*\(', content):
+                add_finding(
+                    'RBP-RERENDER-LAZY-STATE-INIT',
+                    'rerender-lazy-state-init',
+                    'rerender-optimization',
+                    'MEDIUM',
+                    'Inicialización costosa ejecutada en cada render dentro de `useState(...)`',
+                    'Ejecuta `JSON.parse` o lectura de storage en todos los re-renderizados aunque solo se use en el montaje inicial.',
+                    {'file': path},
+                    'Pasar una función inicializadora perezosa: `useState(() => JSON.parse(...))`.',
+                    path,
+                )
+
+            # 5. Rendering & JS performance: `.length && <JSX>`, O(n^2) `.includes` in `.filter/.map`, non-passive scroll
+            if re.search(r'\.\s*length\s*&&\s*<[A-Za-z]', content):
+                add_finding(
+                    'RBP-RENDERING-AND-ZERO-LEAK',
+                    'rendering-conditional-render',
+                    'rendering-performance',
+                    'MEDIUM',
+                    'Renderizado condicional con `.length && <Componente />`',
+                    'Cuando la lista está vacía (`length === 0`), React renderiza el número literal `0` en el DOM.',
+                    {'file': path},
+                    'Usar una comparación booleana explícita o ternario: `items.length > 0 ? <Componente /> : null`.',
+                    path,
+                )
+
+            if re.search(r'\.(?:filter|map)\s*\([^)]*=>[^)]*\.(?:includes|find)\s*\(', content):
+                add_finding(
+                    'RBP-JS-SET-MAP-LOOKUP',
+                    'js-set-map-lookups',
+                    'js-performance',
+                    'LOW-MEDIUM',
+                    'Búsqueda lineal `.includes()` / `.find()` dentro de `.filter()` o `.map()` (complejidad O(n²))',
+                    'Incrementa el tiempo de bloqueo del hilo principal (TBT/INP) al procesar listas de productos o variantes.',
+                    {'file': path},
+                    'Construir un `Set` o `Map` previo fuera del bucle para búsquedas en tiempo constante `O(1)`.',
+                    path,
+                )
+
+            if re.search(r'addEventListener\s*\(\s*["\'](?:scroll|touchstart|wheel)["\']\s*,\s*[^,)]+\)', content):
+                add_finding(
+                    'RBP-CLIENT-PASSIVE-LISTENER',
+                    'client-passive-event-listeners',
+                    'client-fetching-and-events',
+                    'MEDIUM',
+                    'Listener de `scroll`/`touchstart`/`wheel` sin `{ passive: true }`',
+                    'Obliga al compositor del navegador a esperar al hilo principal antes de desplazar la página.',
+                    {'file': path},
+                    'Añadir `{ passive: true }` como tercer argumento de `addEventListener`.',
+                    path,
+                )
+
+    perf_correlation = None
+    if isinstance(perf_report, dict):
+        diag = perf_report if perf_report.get('skill') == 'cloudflare-web-perf' else diagnose_web_perf(perf_report)
+        perf_correlation = {
+            'reused_skill': 'cloudflare-web-perf',
+            'lab_metrics': diag.get('lab_metrics', {}),
+            'field_metrics': diag.get('field_metrics', {}),
+            'large_resources_count': len((diag.get('network') or {}).get('large_resources', [])),
+        }
+
+    priority_rank = {'CRITICAL': 0, 'HIGH': 1, 'MEDIUM-HIGH': 2, 'MEDIUM': 3, 'LOW-MEDIUM': 4, 'LOW': 5}
+    findings.sort(key=lambda x: (priority_rank.get(x['priority'], 9), x['id']))
+
+    return sanitize({
+        'kind': 'react-best-practices-audit',
+        'skill': 'vercel-react-best-practices',
+        'applicable': applicable,
+        'framework': detected_fw,
+        'reused_engines': ['cloudflare-web-perf'] if perf_correlation else [],
+        'performance_correlation': perf_correlation,
+        'commercial_safety_guards': {
+            'preserve_cart_checkout_auth_state': True,
+            'protected_commerce_files': protected_flows,
+            'note': 'Ninguna optimización modifica reglas de negocio, mutaciones de carrito, precios, checkout, autenticación ni sesión.',
+        },
+        'findings': findings,
+        'counts': {
+            'total': len(findings),
+            'critical': sum(1 for f in findings if f['priority'] == 'CRITICAL'),
+            'high': sum(1 for f in findings if f['priority'] == 'HIGH'),
+            'medium': sum(1 for f in findings if f['priority'] in ('MEDIUM-HIGH', 'MEDIUM')),
+            'low': sum(1 for f in findings if f['priority'] in ('LOW-MEDIUM', 'LOW')),
+        },
+        'limitations': [
+            'No aplicar reglas de React/Next.js a plantillas Shopify Liquid o Tiendanube sin React.',
+            'Las hipótesis de código deben verificarse con pruebas funcionales y mediciones antes/después.',
+        ],
+    })
+
+
+AMBIGUOUS_CTA_LABELS = frozenset({
+    'continue', 'continuar', 'submit', 'enviar', 'click', 'click here', 'ok', 'go', 'more', 'ver',
+})
+
+DESIGN_COMMERCE_CONTRACT_MARKERS = re.compile(
+    r'(?:(?<!\w)(?:js-[a-zA-Z0-9_-]+|data-store|LS\.[a-zA-Z0-9_]+|CartForm|cartLinesAdd|cartLinesUpdate|cartLinesRemove|checkoutUrl|product_form)\b|/cart/add)'
+)
+
+
+def audit_web_design_guidelines(
+    source_files: dict[str, str] | None = None,
+    *,
+    rendered: dict | None = None,
+    framework: str | None = None,
+    quality_audit_report: dict | None = None,
+    accessibility_report: dict | None = None,
+    delegate_accessibility: bool = True,
+) -> dict:
+    """Auditoría Vercel Web Design Guidelines (Etapa 6): jerarquía visual, UX e-commerce, estados interactivos, responsive y consistencia visual sin descarga dinámica."""
+    files = source_files or {}
+    detected_fw = infer_framework(framework, files)
+    candidates_map = FRAMEWORK_CANDIDATES.get(detected_fw, FRAMEWORK_CANDIDATES['tiendanube-ipanema'])
+
+    verified_by_tool = []
+    code_hypothesis = []
+    requires_external_verification = []
+    reused_wqa_ids = []
+
+    def add_verified(issue_id, category, vercel_rule, severity, title, impact, evidence, fix, candidate_files=None):
+        verified_by_tool.append({
+            'id': issue_id,
+            'category': category,
+            'vercel_rule': vercel_rule,
+            'severity': severity,
+            'evidence_type': 'verified_by_tool',
+            'title': title,
+            'impact': impact,
+            'evidence': sanitize(evidence),
+            'candidate_files': candidate_files or list(files.keys())[:2] or candidates_map.get('accessibility', []),
+            'fix': fix,
+        })
+
+    def add_hypothesis(issue_id, category, vercel_rule, severity, title, impact, evidence, fix, file_path, line=1):
+        code_hypothesis.append({
+            'id': issue_id,
+            'category': category,
+            'vercel_rule': vercel_rule,
+            'severity': severity,
+            'evidence_type': 'code_hypothesis',
+            'title': title,
+            'impact': impact,
+            'evidence': sanitize({**evidence, 'file': file_path, 'line': line, 'location': f'{file_path}:{line}'}),
+            'candidate_files': [file_path],
+            'fix': fix,
+        })
+
+    def add_external(issue_id, category, title, reason, required_check):
+        requires_external_verification.append({
+            'id': issue_id,
+            'category': category,
+            'evidence_type': 'requires_external_verification',
+            'title': title,
+            'reason': reason,
+            'required_check': required_check,
+        })
+
+    # Reutilizar hallazgos de web-quality-audit cuando se suministra un informe previo
+    if isinstance(quality_audit_report, dict) and quality_audit_report.get('skill') == 'web-quality-audit':
+        for item in quality_audit_report.get('verified_issues') or []:
+            if isinstance(item, dict) and item.get('category') in ('accessibility', 'interaction'):
+                reused_wqa_ids.append(item.get('id'))
+
+    # 1. Evidencia verificada por herramienta en DOM/viewport renderizado
+    if isinstance(rendered, dict):
+        vp = rendered.get('viewport') or {}
+        iw, sw = numeric(vp.get('innerWidth')), numeric(vp.get('scrollWidth'))
+        if iw and sw and sw > iw:
+            add_verified(
+                'WDG-RESP-HORIZONTAL-OVERFLOW',
+                'responsive',
+                'safe-areas-and-layout',
+                'high',
+                f'Desbordamiento horizontal medido en viewport ({int(sw)}px > {int(iw)}px)',
+                'Rompe la experiencia móvil, genera scroll lateral no deseado y desplaza controles táctiles.',
+                {'innerWidth': iw, 'scrollWidth': sw},
+                'Corregir elementos con ancho fijo mayor al contenedor y aplicar min-w-0 en hijos flexibles.',
+            )
+
+        meta_list = [m for m in (rendered.get('metadata') or []) if isinstance(m, dict)]
+        for m in meta_list:
+            if str(m.get('name') or '').lower() == 'viewport':
+                v_content = str(m.get('content') or '').lower()
+                if 'user-scalable=no' in v_content or 'user-scalable=0' in v_content or re.search(r'maximum-scale\s*=\s*1(?:\.0)?\b', v_content):
+                    add_verified(
+                        'WDG-RESP-ZOOM-DISABLED',
+                        'responsive',
+                        'anti-patterns:user-scalable',
+                        'critical',
+                        'Meta viewport bloquea el zoom del usuario (user-scalable=no / maximum-scale=1)',
+                        'Impide ampliar texto e imágenes en móvil y viola principios de accesibilidad e interfaz.',
+                        {'viewport': m.get('content')},
+                        'Permitir escalado del usuario en <meta name="viewport" content="width=device-width, initial-scale=1">.',
+                    )
+
+        headings = [h for h in (rendered.get('headings') or []) if isinstance(h, dict)]
+        h1_count = sum(1 for h in headings if str(h.get('tag') or '').upper() == 'H1' and str(h.get('text') or '').strip())
+        if headings and h1_count == 0:
+            add_verified(
+                'WDG-VH-MISSING-PRIMARY-HEADING',
+                'visual-hierarchy',
+                'accessibility:headings-hierarchical',
+                'high',
+                'Página renderizada sin encabezado primario <h1> visible',
+                'Debilita la jerarquía visual y la orientación inmediata del usuario en la página.',
+                {'headings_count': len(headings)},
+                'Definir un único encabezado principal <h1> claro para el título de página o producto.',
+            )
+        prev_level = 0
+        for h in headings:
+            tag = str(h.get('tag') or '').upper()
+            if tag.startswith('H') and tag[1:].isdigit():
+                lvl = int(tag[1:])
+                if prev_level and lvl > prev_level + 1:
+                    add_verified(
+                        'WDG-VH-HEADING-LEVEL-SKIP',
+                        'visual-hierarchy',
+                        'accessibility:headings-hierarchical',
+                        'medium',
+                        f'Salto en jerarquía de encabezados (H{prev_level} -> H{lvl})',
+                        'Rompe la progresión visual y semántica de secciones de la interfaz.',
+                        {'from': f'H{prev_level}', 'to': f'H{lvl}', 'text': h.get('text')},
+                        'Mantener orden jerárquico secuencial h1 -> h2 -> h3 y ajustar el tamaño visual mediante clases CSS del sistema de diseño.',
+                    )
+                    break
+                prev_level = lvl
+
+        for btn in (rendered.get('buttons') or []):
+            if not isinstance(btn, dict):
+                continue
+            btext = str(btn.get('text') or '').strip()
+            baria = str(btn.get('ariaLabel') or '').strip()
+            if not btext and not baria:
+                add_verified(
+                    'WDG-INT-ICON-BUTTON-MISSING-LABEL',
+                    'interactive-states',
+                    'accessibility:icon-button-aria-label',
+                    'high',
+                    'Botón interactivo (solo icono) sin texto visible ni aria-label',
+                    'Los usuarios no pueden identificar la acción del botón (ej. cerrar drawer, abrir carrito, buscar).',
+                    {'id': btn.get('id'), 'class': btn.get('class')},
+                    'Añadir aria-label descriptivo de la acción al elemento <button>.',
+                )
+            elif (btext or baria).lower() in AMBIGUOUS_CTA_LABELS:
+                add_verified(
+                    'WDG-VH-AMBIGUOUS-CTA-LABEL',
+                    'visual-hierarchy',
+                    'content-and-copy:specific-button-labels',
+                    'medium',
+                    f'Etiqueta de botón ambigua o poco específica ("{btext or baria}")',
+                    'Reduce la claridad de la acción primaria o secundaria en flujos de compra.',
+                    {'label': btext or baria},
+                    'Usar etiquetas de acción explícitas (ej. "Agregar al carrito", "Guardar dirección", "Aplicar cupón") respetando el tono de la marca.',
+                )
+            w, h = numeric(btn.get('width')), numeric(btn.get('height'))
+            if (w is not None and 0 < w < 44) or (h is not None and 0 < h < 44):
+                add_verified(
+                    'WDG-RESP-SMALL-TOUCH-TARGET',
+                    'responsive',
+                    'touch-and-interaction',
+                    'medium',
+                    f'Área táctil de control interactivo menor a 44x44px ({w}x{h}px)',
+                    'Dificulta la pulsación precisa en pantallas móviles (selectores de talla/color o cantidad).',
+                    {'label': btext or baria, 'width': w, 'height': h},
+                    'Aumentar el área clicable/táctil a mínimo 44x44px usando padding o min-height/min-width sin alterar la estética de la marca.',
+                )
+
+        for form in (rendered.get('forms') or []):
+            if not isinstance(form, dict):
+                continue
+            for inp in (form.get('inputs') or []):
+                if not isinstance(inp, dict):
+                    continue
+                itype = str(inp.get('type') or '').lower()
+                if itype in ('hidden', 'submit', 'button', 'reset', 'image'):
+                    continue
+                if not inp.get('hasLabel') and not inp.get('ariaLabel'):
+                    add_verified(
+                        'WDG-ECOM-FORM-UNLABELED-CONTROL',
+                        'ecommerce-ux',
+                        'forms:form-controls-need-label',
+                        'high',
+                        'Campo de formulario sin <label> asociado ni aria-label',
+                        'Genera fricción en formularios de compra, búsqueda, cupón o contacto.',
+                        {'name': inp.get('name'), 'type': itype},
+                        'Asociar un <label for="..."> clicable o aria-label descriptivo.',
+                    )
+
+        for img in (rendered.get('images') or []):
+            if not isinstance(img, dict):
+                continue
+            if img.get('visible') and (not numeric(img.get('width')) or not numeric(img.get('height'))):
+                add_verified(
+                    'WDG-ECOM-IMG-MISSING-DIMENSIONS',
+                    'ecommerce-ux',
+                    'images:explicit-width-height',
+                    'medium',
+                    'Imagen visible sin width y height explícitos',
+                    'Provoca saltos visuales de layout (CLS) al cargar galerías de producto o tarjetas de colección.',
+                    {'src': img.get('currentSrc') or img.get('src')},
+                    'Definir atributos width y height explícitos o aspect-ratio consistente en el contenedor.',
+                )
+    else:
+        add_external(
+            'WDG-EXT-RENDERED-VIEWPORT-AND-COMPUTED-STYLES',
+            'responsive',
+            'Verificación visual en navegador real (mobile 360/390px y desktop 1440px)',
+            'Solo se analizaron archivos fuente estáticos; no se midió el DOM/CSS computado en un viewport real.',
+            'Ejecutar QA visual/browser en 360px, 390px, 768px y 1440px para confirmar ausencia de overflow, contraste real y visibilidad de :focus-visible.',
+        )
+
+    # 2. Inspección estática de archivos fuente (code_hypothesis en formato file:line)
+    protected_contracts = []
+    detected_design_tokens = set()
+
+    for path, content in sorted(files.items()):
+        if not isinstance(content, str):
+            continue
+        lines = content.splitlines()
+        lower = content.lower()
+
+        # Inventario de tokens del sistema de diseño y contratos comerciales para proteger identidad visual
+        tokens_in_file = re.findall(r'--(?:color|font|space|radius|shadow|btn|text|bg)-[a-zA-Z0-9_-]+', content)
+        detected_design_tokens.update(tokens_in_file)
+        contracts_in_file = sorted(set(DESIGN_COMMERCE_CONTRACT_MARKERS.findall(content)))
+        if contracts_in_file:
+            protected_contracts.append({'file': path, 'contracts': contracts_in_file})
+
+        has_focus_visible = ':focus-visible' in lower or 'focus-visible:' in lower
+        has_reduced_motion = 'prefers-reduced-motion' in lower
+        has_tabular_nums = 'tabular-nums' in lower
+
+        for idx, line in enumerate(lines, start=1):
+            llower = line.lower()
+
+            # Anti-patrón: user-scalable=no o maximum-scale=1 en fuente
+            if 'user-scalable=no' in llower or 'user-scalable=0' in llower or re.search(r'maximum-scale\s*=\s*1(?:\.0)?\b', llower):
+                add_hypothesis(
+                    'WDG-SRC-ZOOM-DISABLED',
+                    'responsive',
+                    'anti-patterns:user-scalable',
+                    'critical',
+                    'Meta viewport deshabilita el zoom en plantilla fuente',
+                    'Impide hacer zoom en dispositivos táctiles.',
+                    {'snippet': line.strip()[:120]},
+                    'Retirar user-scalable=no y maximum-scale=1 del meta viewport.',
+                    path,
+                    idx,
+                )
+
+            # Anti-patrón: outline: none / outline-none sin reemplazo :focus-visible
+            if ('outline: none' in llower or 'outline:none' in llower or 'outline: 0' in llower or 'outline-none' in llower) and 'focus-visible' not in llower and not has_focus_visible:
+                add_hypothesis(
+                    'WDG-SRC-OUTLINE-NONE-NO-FOCUS-VISIBLE',
+                    'interactive-states',
+                    'focus-states:never-outline-none-without-replacement',
+                    'high',
+                    'Eliminación de contorno de foco (outline: none / outline-none) sin reemplazo :focus-visible',
+                    'Oculta el indicador de foco para navegación por teclado en botones, enlaces o selectores de variantes.',
+                    {'snippet': line.strip()[:120]},
+                    'Reemplazar por estilos `:focus-visible` (ej. `focus-visible:ring-2` o `outline: 2px solid var(--color-primary)`).',
+                    path,
+                    idx,
+                )
+
+            # Anti-patrón: transition: all / transition-all
+            if re.search(r'transition\s*:\s*all\b', llower) or re.search(r'(?<![\w-])transition-all(?![\w-])', llower):
+                add_hypothesis(
+                    'WDG-SRC-TRANSITION-ALL',
+                    'interactive-states',
+                    'animation:never-transition-all',
+                    'medium',
+                    'Uso de `transition: all` / `transition-all` en lugar de propiedades explícitas',
+                    'Anima propiedades de layout no deseadas y degrada la fluidez visual; animar solo `transform`, `opacity` o `color`.',
+                    {'snippet': line.strip()[:120]},
+                    'Especificar explícitamente las propiedades a transicionar (ej. `transition: opacity 150ms ease, transform 150ms ease`).',
+                    path,
+                    idx,
+                )
+
+            # Anti-patrón: <div onClick> o <span onClick>
+            if re.search(r'<(?:div|span)\b[^>]*\bonclick\s*=', llower):
+                add_hypothesis(
+                    'WDG-SRC-NON-SEMANTIC-CLICK-HANDLER',
+                    'interactive-states',
+                    'accessibility:button-for-actions-link-for-nav',
+                    'high',
+                    'Elemento no semántico `<div>`/`<span>` con manejador `onClick`',
+                    'Carece de foco por teclado, rol semántico, activación con Enter/Espacio y soporte de clic central si es navegación.',
+                    {'snippet': line.strip()[:120]},
+                    'Usar `<button type="button">` para acciones (ej. seleccionar variante, abrir modal) o `<a href="...">` para navegación.',
+                    path,
+                    idx,
+                )
+
+            # Anti-patrón: bloqueo de pegado onPaste + preventDefault
+            if 'onpaste' in llower and ('preventdefault' in llower or 'return false' in llower):
+                add_hypothesis(
+                    'WDG-SRC-PASTE-BLOCKED',
+                    'interactive-states',
+                    'forms:never-block-paste',
+                    'high',
+                    'Bloqueo de pegado (`onPaste` con `preventDefault`) en campo de formulario',
+                    'Impide pegar contraseñas, códigos de descuento, correos o direcciones desde gestores.',
+                    {'snippet': line.strip()[:120]},
+                    'Eliminar el bloqueo de `onPaste` y validar el formato del valor ingresado sin impedir pegar.',
+                    path,
+                    idx,
+                )
+
+            # Anti-patrón: botón de solo icono sin aria-label en la misma línea
+            for btn_match in re.finditer(r'<button\b([^>]*)>\s*(?:<(?:svg|i|img)\b[^>]*>(?:</(?:svg|i)>)?)\s*</button>', line, re.I):
+                attrs = btn_match.group(1)
+                if 'aria-label' not in attrs.lower() and 'aria-labelledby' not in attrs.lower():
+                    add_hypothesis(
+                        'WDG-SRC-ICON-BUTTON-MISSING-ARIA-LABEL',
+                        'interactive-states',
+                        'accessibility:icon-button-aria-label',
+                        'high',
+                        'Botón de solo icono sin atributo `aria-label`',
+                        'El propósito del botón (cerrar, carrito, búsqueda, favorito) queda oculto para tecnologías de asistencia.',
+                        {'snippet': btn_match.group(0)[:120]},
+                        'Añadir `aria-label="..."` descriptivo en `<button>` y `aria-hidden="true"` en el icono decorativo.',
+                        path,
+                        idx,
+                    )
+
+            # Anti-patrón: <img> sin width o height explícitos
+            for img_match in re.finditer(r'<img\b([^>]*)>', line, re.I):
+                attrs = img_match.group(1).lower()
+                if 'width=' not in attrs or 'height=' not in attrs:
+                    add_hypothesis(
+                        'WDG-SRC-IMG-MISSING-DIMENSIONS',
+                        'ecommerce-ux',
+                        'images:explicit-width-height',
+                        'medium',
+                        'Etiqueta `<img>` sin atributos `width` y `height` explícitos',
+                        'Puede causar desplazamiento acumulativo de diseño (CLS) al cargar imágenes de producto o banners.',
+                        {'snippet': img_match.group(0)[:120]},
+                        'Añadir atributos `width` y `height` explícitos acordes a la proporción de la imagen.',
+                        path,
+                        idx,
+                    )
+
+            # Anti-patrón: <input> visible sin label en línea ni aria-label
+            for inp_match in re.finditer(r'<input\b([^>]*)>', line, re.I):
+                attrs = inp_match.group(1)
+                alower = attrs.lower()
+                if any(t in alower for t in ('type="hidden"', "type='hidden'", 'type="submit"', "type='submit'", 'type="button"', "type='button'")):
+                    continue
+                has_aria = 'aria-label' in alower or 'aria-labelledby' in alower
+                has_id = re.search(r'\bid\s*=\s*["\']([^"\']+)["\']', attrs, re.I)
+                linked_label = bool(has_id and re.search(r'for\s*=\s*["\']' + re.escape(has_id.group(1)) + r'["\']', content, re.I)) or bool(has_id and re.search(r'htmlFor\s*=\s*["\']' + re.escape(has_id.group(1)) + r'["\']', content, re.I))
+                if not has_aria and not linked_label and '<label' not in llower:
+                    add_hypothesis(
+                        'WDG-SRC-INPUT-MISSING-LABEL',
+                        'ecommerce-ux',
+                        'forms:form-controls-need-label',
+                        'high',
+                        'Control `<input>` sin `<label>` vinculado ni `aria-label`',
+                        'Dificulta completar formularios de cantidad, variantes, búsqueda, cupón o newsletter.',
+                        {'snippet': inp_match.group(0)[:120]},
+                        'Vincular un `<label for="...">` clicable o añadir `aria-label` y `autocomplete`/`name` apropiados.',
+                        path,
+                        idx,
+                    )
+
+            # Anti-patrón: autoFocus sin restricción desktop
+            if re.search(r'\bautofocus\b', llower):
+                add_hypothesis(
+                    'WDG-SRC-UNRESTRICTED-AUTOFOCUS',
+                    'responsive',
+                    'touch-and-interaction:autofocus-sparingly',
+                    'low',
+                    'Uso de `autoFocus` que puede abrir el teclado virtual abruptamente en móvil',
+                    'En dispositivos móviles desplaza el viewport y cubre el contenido principal al abrir un drawer o página.',
+                    {'snippet': line.strip()[:120]},
+                    'Evitar `autoFocus` en vistas móviles o restringirlo únicamente a entradas primarias en desktop.',
+                    path,
+                    idx,
+                )
+
+            # Anti-patrón: lectura síncrona de layout en render
+            if any(m in line for m in ('getBoundingClientRect(', '.offsetWidth', '.offsetHeight')):
+                add_hypothesis(
+                    'WDG-SRC-LAYOUT-READ-IN-UI',
+                    'responsive',
+                    'performance:no-layout-reads-in-render',
+                    'medium',
+                    'Medición de layout con JS (`getBoundingClientRect` / `offsetWidth` / `offsetHeight`)',
+                    'Puede provocar forced synchronous layout (thrashing) y saltos visuales al redimensionar.',
+                    {'snippet': line.strip()[:120]},
+                    'Preferir CSS Flex/Grid, Container Queries o CSS custom properties en lugar de medir layout en JS durante el render.',
+                    path,
+                    idx,
+                )
+
+            # Anti-patrón tipográfico: "..." en lugar de "…" en estados de carga o placeholders
+            if re.search(r'(?:loading|cargando|saving|guardando|buscar|search|placeholder\s*=\s*["\'][^"\']*)\.\.\.', llower):
+                add_hypothesis(
+                    'WDG-SRC-STRAIGHT-ELLIPSIS',
+                    'visual-hierarchy',
+                    'typography:ellipsis-character',
+                    'low',
+                    'Uso de tres puntos `...` en lugar del carácter tipográfico de elipsis `…` en estado de carga o placeholder',
+                    'Detalle de pulido tipográfico en microcopy de estados de carga y placeholders.',
+                    {'snippet': line.strip()[:120]},
+                    'Sustituir `...` por el carácter de elipsis `…` (ej. `"Cargando…"`).',
+                    path,
+                    idx,
+                )
+
+        # Chequeos a nivel de archivo (animación sin prefers-reduced-motion, precios sin tabular-nums, drawers sin overscroll-behavior)
+        if ('@keyframes' in lower or 'animation:' in lower or 'animate-' in lower) and not has_reduced_motion:
+            add_hypothesis(
+                'WDG-SRC-MISSING-PREFERS-REDUCED-MOTION',
+                'interactive-states',
+                'animation:honor-prefers-reduced-motion',
+                'medium',
+                'Animación CSS/UI sin soporte para `prefers-reduced-motion`',
+                'No ofrece variante reducida o desactivada para usuarios con sensibilidad al movimiento.',
+                {'has_animation': True, 'prefers_reduced_motion': False},
+                'Añadir `@media (prefers-reduced-motion: reduce)` o utilidades `motion-reduce:` para atenuar o desactivar la animación.',
+                path,
+                1,
+            )
+
+        if any(k in lower for k in ('drawer', 'modal', 'cart-drawer', 'sheet', 'dialog')) and 'overscroll-behavior' not in lower:
+            add_hypothesis(
+                'WDG-SRC-DRAWER-MISSING-OVERSCROLL-CONTAIN',
+                'ecommerce-ux',
+                'touch-and-interaction:overscroll-behavior-contain',
+                'medium',
+                'Modal o drawer de carrito sin `overscroll-behavior: contain`',
+                'El desplazamiento dentro del drawer o modal se propaga al fondo de la página en móvil y trackpads.',
+                {'component_kind': 'modal_or_drawer'},
+                'Añadir `overscroll-behavior: contain` (o `overscroll-contain`) al contenedor desplazable del drawer/modal.',
+                path,
+                1,
+            )
+
+        if any(k in lower for k in ('price', 'precio', 'compare-at', 'subtotal', 'total')) and (path.endswith(('.css', '.scss')) or '<style' in lower) and not has_tabular_nums:
+            add_hypothesis(
+                'WDG-SRC-PRICE-MISSING-TABULAR-NUMS',
+                'visual-hierarchy',
+                'typography:tabular-nums',
+                'low',
+                'Estilos de precios o totales sin `font-variant-numeric: tabular-nums`',
+                'Dificulta comparar precios, descuentos y cantidades alineadas verticalmente o durante actualizaciones dinámicas.',
+                {'has_price_styles': True},
+                'Añadir `font-variant-numeric: tabular-nums` (o `tabular-nums`) en selectores de precios, descuentos y contadores.',
+                path,
+                1,
+            )
+
+        # Consistencia visual: colores hex hardcodeados cuando existen tokens CSS del tema
+        hex_colors = re.findall(r'#[0-9a-fA-F]{3,6}\b', content)
+        if tokens_in_file and hex_colors:
+            add_hypothesis(
+                'WDG-SRC-HARDCODED-COLOR-BYPASSING-TOKENS',
+                'visual-consistency',
+                'theming:preserve-design-tokens',
+                'low',
+                f'Valores de color hexadecimales hardcodeados ({", ".join(sorted(set(hex_colors))[:3])}) en archivo que ya utiliza variables CSS de marca',
+                'Puede generar inconsistencias visuales con la paleta oficial configurada en el tema o en modo oscuro.',
+                {'hardcoded_colors': sorted(set(hex_colors))[:5], 'available_css_vars_sample': sorted(tokens_in_file)[:5]},
+                'Reutilizar las variables CSS existentes del sistema de diseño de la tienda sin alterar su paleta de marca.',
+                path,
+                1,
+            )
+
+    severity_rank = {'critical': 0, 'high': 1, 'medium': 2, 'low': 3}
+    verified_by_tool.sort(key=lambda x: (severity_rank.get(x['severity'], 9), x['category'], x['id']))
+    code_hypothesis.sort(key=lambda x: (severity_rank.get(x['severity'], 9), x['category'], x['id']))
+
+    # Generar resumen terse file:line al estilo Web Interface Guidelines
+    terse_report = []
+    for h in code_hypothesis:
+        loc = (h.get('evidence') or {}).get('location') or f"{h['candidate_files'][0]}:1"
+        terse_report.append(f"{loc} - [{h['id']}] {h['title']}")
+
+    categories = ('visual-hierarchy', 'ecommerce-ux', 'interactive-states', 'responsive', 'visual-consistency')
+    categories_summary = {}
+    for cat in categories:
+        v_c = sum(1 for i in verified_by_tool if i['category'] == cat)
+        h_c = sum(1 for i in code_hypothesis if i['category'] == cat)
+        categories_summary[cat] = {
+            'verified_by_tool': v_c,
+            'code_hypothesis': h_c,
+            'status': 'needs_attention' if v_c > 0 else 'hypothesis_only' if h_c > 0 else 'passed_observed_checks',
+        }
+
+    accessibility_issue_rules = (
+        'accessibility:', 'focus-states:', 'forms:', 'anti-patterns:user-scalable',
+        'animation:honor-prefers-reduced-motion', 'touch-and-interaction',
+    )
+    has_a11y_signals = any(
+        str(item.get('vercel_rule') or '').startswith(accessibility_issue_rules)
+        for item in verified_by_tool + code_hypothesis
+    )
+    delegated_a11y = None
+    if isinstance(accessibility_report, dict) and accessibility_report.get('skill') == 'better-accessibility':
+        delegated_a11y = accessibility_report
+    elif delegate_accessibility and has_a11y_signals:
+        delegated_a11y = audit_better_accessibility(
+            files,
+            rendered=rendered,
+            framework=detected_fw,
+            quality_audit_report=quality_audit_report,
+        )
+
+    reused_list = (['web-quality-audit'] if reused_wqa_ids else [])
+    if delegated_a11y is not None:
+        reused_list.append('better-accessibility')
+    reused_list.extend(['ipanema-responsive', 'ipanema-visual-qa'])
+
+    return sanitize({
+        'kind': 'web-design-guidelines-audit',
+        'skill': 'web-design-guidelines',
+        'framework': detected_fw,
+        'rules_source': {
+            'skill_repo': 'vercel-labs/agent-skills',
+            'skill_commit': '1a2c79d4e6c4a2283dc2c614b6538cbe1ed5ca62',
+            'skill_git_blob_sha1': 'ceae92ab319216a68274168fba9b63b998b65997',
+            'rules_repo': 'vercel-labs/web-interface-guidelines',
+            'rules_commit': '434b7f91364665f2f733b310ec54809bf8f37937',
+            'rules_git_blob_sha1': '3eb3a212b7b89493922ea418489d4c6f67ae8bd5',
+            'dynamic_fetch_performed': False,
+        },
+        'reused_engines': list(dict.fromkeys(reused_list)),
+        'reused_web_quality_findings': reused_wqa_ids,
+        'delegated_accessibility': (
+            {
+                'skill': 'better-accessibility',
+                'verdict': delegated_a11y.get('verdict'),
+                'counts': delegated_a11y.get('counts'),
+                'wcag_criteria_breakdown': delegated_a11y.get('wcag_criteria_breakdown'),
+            }
+            if delegated_a11y is not None
+            else None
+        ),
+        'brand_and_commerce_guards': {
+            'preserve_brand_identity': True,
+            'arbitrary_redesign_prohibited': True,
+            'detected_css_variables': sorted(detected_design_tokens),
+            'protected_commerce_contracts': protected_contracts,
+            'note': 'Las mejoras de interfaz deben reutilizar las variables CSS, colores, fuentes y contratos funcionales (js-*, data-store, LS.*, CartForm) del proyecto.',
+        },
+        'categories_summary': categories_summary,
+        'verified_by_tool': verified_by_tool,
+        'code_hypothesis': code_hypothesis,
+        'requires_external_verification': requires_external_verification,
+        'terse_file_line_findings': terse_report,
+        'counts': {
+            'verified_by_tool': len(verified_by_tool),
+            'code_hypothesis': len(code_hypothesis),
+            'requires_external_verification': len(requires_external_verification),
+            'critical': sum(1 for i in verified_by_tool + code_hypothesis if i['severity'] == 'critical'),
+            'high': sum(1 for i in verified_by_tool + code_hypothesis if i['severity'] == 'high'),
+            'medium': sum(1 for i in verified_by_tool + code_hypothesis if i['severity'] == 'medium'),
+            'low': sum(1 for i in verified_by_tool + code_hypothesis if i['severity'] == 'low'),
+        },
+        'limitations': [
+            'Las reglas de Web Interface Guidelines se evalúan desde la versión estática fijada (commit 434b7f91364665f2f733b310ec54809bf8f37937); no se realizan descargas dinámicas.',
+            'Las hipótesis de código (code_hypothesis) deben confirmarse en el DOM/CSS renderizado antes de modificar estilos compartidos.',
+            'Ninguna recomendación autoriza rediseñar arbitrariamente la identidad visual de la marca ni alterar precios, variantes, carrito o checkout.',
+        ],
+    })
+
+
+from .accessibility import (  # noqa: E402, F401
+    audit_better_accessibility,
+    contrast_ratio,
+    propose_safe_accessibility_fixes,
+)

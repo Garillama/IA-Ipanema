@@ -1,0 +1,16 @@
+{
+  "at": "2026-11-18T21:27:09.661066+00:00",
+  "status": "prepared_unapproved_unapplied",
+  "scope": "private draft only, not theme integration",
+  "files": [
+    {
+      "path": "static/js/sc-scent-extras.js",
+      "base_sha256": "f5f2bccac3474861ac71244ce230c68e6c7e0faa4fc1602a1bfc5f44a9bac75a",
+      "candidate_sha256": "d62eb74b4c972acb148f4b781658eb660432b36363d74ae08dd85517f702dc97"
+    }
+  ],
+  "patch_sha256": "70c17278517e9409539534e6e5f6dddc228ca7aa0e0db3e015c5a883e2adcc95",
+  "pending_review": "Original Claude and Codex council mandatory; no new attempts while rate-limited",
+  "rollback": "Discard private candidate only; original theme unchanged",
+  "plan": "reports/runs/scentperfumes/20261118T212615-plan-12815862/plan.json"
+}

@@ -1,0 +1,234 @@
+--- a/tools/ipanema/orchestration/adapters.py
++++ b/tools/ipanema/orchestration/adapters.py
+@@ -99,7 +99,19 @@
+     return args
+ 
+ 
++def smoke_response_schema():
++    """Controller-owned read-only health contract; never an approval of real code."""
++    return {'type':'object','required':['decision','summary','evidence','changes'],
++            'additionalProperties':False,'properties':{
++                'decision':{'type':'string','enum':['approve','blocked']},
++                'summary':{'type':'string','minLength':1,'maxLength':1000},
++                'evidence':{'type':'array','items':{'type':'string'},'maxItems':8},
++                'changes':{'type':'array','items':{'type':'string'},'maxItems':0}}}
++
++
+ def parse_response(agent,stdout,*,strict=False):
++    # Keep the public argument for callers; neither mode permits malformed JSON,
++    # duplicate keys, discarded transport bytes or more than one business answer.
+     def unique_object(pairs):
+         obj={}
+         for key,value in pairs:
+@@ -108,45 +120,57 @@
+         return obj
+     def invalid_constant(value):raise ResponseContractError('json_syntax')
+     def decode(text):
+-        return json.loads(text,**({'object_pairs_hook':unique_object,'parse_constant':invalid_constant} if strict else {}))
+-    candidates=[]
++        return json.loads(text,object_pairs_hook=unique_object,parse_constant=invalid_constant)
+     try:
+-        value=decode(stdout)
+-        candidates.append(value)
+-    except ValueError:
+-        for line in stdout.splitlines():
+-            try:candidates.append(decode(line))
+-            except ValueError:continue
+-    texts=[];direct=[]
++        candidates=[decode(stdout)]
++    except json.JSONDecodeError:
++        candidates=[]
++        for number,line in enumerate(stdout.splitlines(),1):
++            if not line.strip():continue
++            try:value=decode(line)
++            except json.JSONDecodeError as exc:
++                raise ResponseContractError('json_syntax',line=number,column=exc.colno) from None
++            if not isinstance(value,dict) or not isinstance(value.get('type'),str):
++                raise ResponseContractError('adapter_envelope')
++            candidates.append(value)
++    # Inspect the complete transport before considering any apparent success.
+     for value in candidates:
+-        if not isinstance(value,dict):continue
+-        if value.get('stop_reason') in ('max_tokens','length') or value.get('finish_reason')=='length':raise ResponseContractError('output_truncation')
+-        if value.get('subtype')=='max_turns' or value.get('stopReason')=='max_turns':raise ResponseContractError('incomplete_response')
+-        if 'decision' in value and 'changes' in value:direct.append(value)
++        if not isinstance(value,dict):raise ResponseContractError('adapter_envelope')
++        event=value.get('event',{})
++        delta=event.get('delta',{}) if isinstance(event,dict) else {}
++        if (value.get('stop_reason') in ('max_tokens','length') or value.get('finish_reason')=='length'
++            or isinstance(delta,dict) and delta.get('stop_reason') in ('max_tokens','length')):
++            raise ResponseContractError('output_truncation')
++        if value.get('subtype')=='max_turns' or value.get('stopReason')=='max_turns':
++            raise ResponseContractError('incomplete_response')
+         if value.get('is_error'):raise ResponseContractError('provider_error')
+-        if isinstance(value.get('structured_output'),dict):direct.append(value['structured_output'])
+         if value.get('type')=='result' and value.get('subtype') not in (None,'success'):
+             raise ResponseContractError('provider_error')
+         if value.get('type')=='item.completed' and value.get('item',{}).get('type') in ('command_execution','mcp_tool_call'):
+             raise ResponseContractError('unexpected_tool_execution')
+-        if value.get('type')=='event' and isinstance(value.get('event'),dict) and 'tool' in str(value['event'].get('type','')).lower():
++        if value.get('type')=='event' and isinstance(event,dict) and 'tool' in str(event.get('type','')).lower():
+             raise ResponseContractError('unexpected_tool_execution')
+-        for key in ('result','text','output','finalText'):
+-            if isinstance(value.get(key),str):texts.append(value[key])
++    responses=[]
++    for value in candidates:
++        if 'decision' in value and 'changes' in value:
++            responses.append(value)
++            continue
++        if 'structured_output' in value:
++            if not isinstance(value['structured_output'],dict):
++                raise ResponseContractError('schema_type',expected_type='object')
++            responses.append(value['structured_output'])
++            continue  # Official structured result is distinct from free-text result metadata.
++        texts=[value[key] for key in ('result','text','output','finalText') if isinstance(value.get(key),str)]
+         item=value.get('item',{})
+         if isinstance(item,dict) and item.get('type')=='agent_message':texts.append(item.get('text',''))
+-    if direct:return direct[-1]
+-    last_error=None
+-    for text in reversed(texts):
+-        text=text.strip()
+-        if text.startswith('```') and not strict:
+-            text='\n'.join(text.splitlines()[1:-1])
+-        try:
+-            value=decode(text)
+-            if isinstance(value,dict):return value
+-            raise ResponseContractError('schema_type',expected_type='object')
+-        except json.JSONDecodeError as exc:last_error=exc
+-    if last_error:raise ResponseContractError('json_syntax',line=last_error.lineno,column=last_error.colno)
++        for text in texts:
++            try:response=decode(text)
++            except json.JSONDecodeError as exc:
++                raise ResponseContractError('json_syntax',line=exc.lineno,column=exc.colno) from None
++            if not isinstance(response,dict):raise ResponseContractError('schema_type',expected_type='object')
++            responses.append(response)
++    if len(responses)>1:raise ResponseContractError('ambiguous_response')
++    if responses:return responses[0]
+     raise ResponseContractError('missing_final_response' if candidates else 'adapter_envelope')
+ 
+ 
+--- a/tools/ipanema/orchestration/engine.py
++++ b/tools/ipanema/orchestration/engine.py
+@@ -12,7 +12,7 @@
+ 
+ from ..core import IpanemaError, Project, beneath, digest, now, read_json, write_json
+ from .planner import safe_path, ready_wave, classify
+-from .adapters import argv,parse_response,model_for,usage_metrics
++from .adapters import argv,parse_response,model_for,usage_metrics,smoke_response_schema
+ 
+ 
+ def git_environment():
+@@ -127,7 +127,7 @@
+         'knowledge':plan.get('knowledge'),'files':files,'previous_results':history,
+         'council_context':task.get('council_context'),
+         'approved_adr':plan.get('_controller_adr_context'),
+-        'contract':task.get('council_context',{}).get('response_contract',{'decision':'approve|changes_requested|blocked|proposed','summary':'texto breve','evidence':[],'changes':[]})},ensure_ascii=False)
++        'contract':smoke_response_schema() if task['role']=='smoke' else task.get('council_context',{}).get('response_contract',{'decision':'approve|changes_requested|blocked|proposed','summary':'texto breve','evidence':[],'changes':[]})},ensure_ascii=False)
+ 
+ 
+ def config(project):
+@@ -197,7 +197,7 @@
+     from .isolation import run_isolated
+     selected=model_for(project.root,task['agent'],task['tier']);task['model']=selected
+     agent_cfg={**runtime_defaults(task['agent']),**settings.get('runtimes',{}).get(task['agent'],{})}
+-    native_schema=None
++    native_schema=smoke_response_schema() if task['role']=='smoke' else None
+     if task['role'] in ('council_proposal','council_objection','council_defense'):
+         from .council import response_schema
+         native_schema=response_schema(task['role'])
+--- a/tools/ipanema/orchestration/cli.py
++++ b/tools/ipanema/orchestration/cli.py
+@@ -68,7 +68,7 @@
+     run=project.new_run('orchestration-smoke');tree=run/'fixture';tree.mkdir();(tree/'fixture.txt').write_text('synthetic fixture; reply approve with no changes\n')
+     plan={'scope':'workspace','skills':[],'knowledge':None}
+     task={'id':'smoke','objective':'Solo confirma lectura del fixture devolviendo JSON decision approve, summary, evidence y changes vacío.',
+-          'role':'audit','agent':args.agent,'tier':'fast','read_files':['fixture.txt'],'allowed_files':[]}
++          'role':'smoke','agent':args.agent,'tier':'fast','read_files':['fixture.txt'],'allowed_files':[]}
+     result={'kind':'orchestration-smoke','project':project.id,'at':now(),'task':task,'real_inference_attempted':True,'passed':False}
+     try:
+         settings=config(project)
+--- /dev/null
++++ b/tests/unit/test_structured_response_transport.py
+@@ -0,0 +1,46 @@
++"""Synthetic transport boundaries; never provider responses or approval evidence."""
++import json,unittest
++from tests.support import ROOT
++from ipanema.orchestration import adapters
++
++GOOD={'decision':'approve','summary':'Synthetic','evidence':[],'changes':[]}
++def frame(text):return json.dumps({'type':'result','subtype':'success','result':text})
++class Transport(unittest.TestCase):
++ def reject(self,raw,strict=True):
++  with self.assertRaises(adapters.ResponseContractError):adapters.parse_response('claude',raw,strict=strict)
++ def test_valid_pretty_envelope(self):
++  self.assertEqual(adapters.parse_response('claude',json.dumps({'type':'result','result':json.dumps(GOOD,indent=2)},indent=2),strict=True),GOOD)
++ def test_valid_provider_event_sequence(self):
++  raw=json.dumps({'type':'system','subtype':'init'})+'\n'+frame(json.dumps(GOOD))
++  self.assertEqual(adapters.parse_response('claude',raw,strict=True),GOOD)
++ def test_native_structured_output_authoritative_over_free_text(self):
++  raw=json.dumps({'type':'result','subtype':'success','result':'Non-JSON metadata','structured_output':GOOD})
++  self.assertEqual(adapters.parse_response('claude',raw,strict=True),GOOD)
++ def test_markdown_is_not_business_json_in_either_mode(self):
++  for strict in [True,False]:
++   with self.subTest(strict=strict):self.reject(frame('```json\n'+json.dumps(GOOD)+'\n```'),strict)
++ def test_incomplete_business_json(self):self.reject(frame('{"decision":"approve",'))
++ def test_business_text_after_json(self):self.reject(frame(json.dumps(GOOD)+'\nExtra text'))
++ def test_business_multiple_objects(self):self.reject(frame(json.dumps(GOOD)+'\n'+json.dumps(GOOD)))
++ def test_transport_multiple_bare_objects(self):self.reject(json.dumps(GOOD)+'\n'+json.dumps(GOOD))
++ def test_transport_garbage_after_envelope(self):self.reject(frame(json.dumps(GOOD))+'\nPrivate trailing text')
++ def test_transport_incomplete_tail(self):self.reject(frame(json.dumps(GOOD))+'\n{"type":')
++ def test_multiple_final_envelopes_ambiguous(self):self.reject(frame(json.dumps(GOOD))+'\n'+frame(json.dumps(GOOD)))
++ def test_last_invalid_payload_cannot_hide_behind_earlier_valid_payload(self):self.reject(frame(json.dumps(GOOD))+'\n'+frame('{"decision":'))
++ def test_duplicate_keys_rejected_in_both_modes(self):
++  for strict in [True,False]:
++   with self.subTest(strict=strict):self.reject(frame('{"decision":"blocked","decision":"approve","changes":[]}'),strict)
++ def test_nonfinite_numbers_rejected_in_both_modes(self):
++  for strict in [True,False]:
++   with self.subTest(strict=strict):self.reject(frame('{"decision":"approve","confidence":NaN,"changes":[]}'),strict)
++ def test_nested_truncation_signal_rejected(self):
++  delta={'type':'stream_event','event':{'type':'message_delta','delta':{'stop_reason':'max_tokens'}}}
++  self.reject(json.dumps(delta)+'\n'+frame(json.dumps(GOOD)))
++ def test_native_invalid_structured_output_not_text_fallback(self):self.reject(json.dumps({'type':'result','structured_output':'invalid','result':json.dumps(GOOD)}))
++ def test_provider_error_after_good_result(self):self.reject(frame(json.dumps(GOOD))+'\n'+json.dumps({'type':'result','is_error':True}))
++ def test_tool_execution_after_good_result(self):
++  self.reject(frame(json.dumps(GOOD))+'\n'+json.dumps({'type':'item.completed','item':{'type':'command_execution'}}))
++ def test_schema_mismatch_remains_separate_from_syntax(self):
++  value=adapters.parse_response('claude',frame(json.dumps({'decision':'approve','changes':[]})),strict=True)
++  with self.assertRaises(adapters.ResponseContractError)as cm:adapters.validate_schema(value,{'type':'object','required':['summary'],'properties':{}})
++  self.assertEqual(cm.exception.diagnostic['category'],'missing_field')
+--- /dev/null
++++ b/tests/integration/test_smoke_structured_contract.py
+@@ -0,0 +1,33 @@
++"""Worker/adapter/schema pipeline with mocked transport: zero model or store access."""
++import json,tempfile,unittest
++from pathlib import Path
++from unittest.mock import patch
++from tests.support import ROOT
++from ipanema.core import Project
++from ipanema.orchestration import adapters,engine
++
++GOOD={'decision':'approve','summary':'Synthetic','evidence':[],'changes':[]}
++class SmokeContract(unittest.TestCase):
++ def invoke(self,payload):
++  with tempfile.TemporaryDirectory()as tmp:
++   tree=Path(tmp)/'fixture';tree.mkdir();(tree/'fixture.txt').write_text('Synthetic')
++   task={'id':'smoke','role':'smoke','agent':'claude','tier':'fast','read_files':['fixture.txt'],'allowed_files':[]}
++   observed={}
++   def fake(args,prompt,view,**kwargs):
++    observed['args']=args;observed['schema_exists']=(view/'council-response.schema.json').is_file()
++    return {'exit_code':0,'stdout':json.dumps(payload),'stderr':'','process_reaped':True,'context_complete':True}
++   with patch.object(adapters.shutil,'which',return_value='/usr/bin/true'),patch('ipanema.orchestration.isolation.run_isolated',side_effect=fake):
++    result=engine._worker_once(Project(ROOT),{},task,tree,[],{},frozen_prompt='Synthetic fixture')
++   return result,task,observed
++ def test_smoke_uses_native_schema_and_same_safety_flags(self):
++  result,task,seen=self.invoke({'type':'result','subtype':'success','structured_output':GOOD})
++  self.assertEqual(result,GOOD);self.assertIn('--json-schema',seen['args']);self.assertTrue(seen['schema_exists'])
++  self.assertIn('--restricted',seen['args']);self.assertIn('--strict-mcp-config',seen['args']);self.assertEqual(task['execution']['structured_output'],'native_schema')
++ def test_missing_required_field_rejected_by_worker(self):
++  with self.assertRaises(adapters.ResponseContractError):self.invoke({'type':'result','structured_output':{'decision':'approve','changes':[]}})
++ def test_smoke_cannot_return_writes(self):
++  with self.assertRaises(adapters.ResponseContractError):self.invoke({'type':'result','structured_output':{**GOOD,'changes':['forbidden']}})
++ def test_invalid_json_text_never_bypasses_pipeline(self):
++  with self.assertRaises(adapters.ResponseContractError):self.invoke({'type':'result','result':'```json\n{}\n```'})
++ def test_extra_fields_rejected(self):
++  with self.assertRaises(adapters.ResponseContractError):self.invoke({'type':'result','structured_output':{**GOOD,'private':'must not be accepted'}})

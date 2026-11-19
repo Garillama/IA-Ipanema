@@ -1,0 +1,33 @@
+{
+  "at": "2026-11-18T21:31:54.124Z",
+  "scope": "baseline single recommendations override script; no native LS/cart, not full storefront",
+  "original_catalog_bytes": 125082,
+  "catalog_items": 125,
+  "url_substitution": "Only image/product URLs replaced with loopback paths; no commercial values changed",
+  "samples": [
+    {
+      "width": 390,
+      "closed": true,
+      "unrelated_mutations": 8,
+      "selection_runs": 8,
+      "index_requests": 1,
+      "rendered_cards": 8,
+      "long_tasks": [
+        123
+      ]
+    },
+    {
+      "width": 1440,
+      "closed": true,
+      "unrelated_mutations": 8,
+      "selection_runs": 8,
+      "index_requests": 1,
+      "rendered_cards": 8,
+      "long_tasks": []
+    }
+  ],
+  "browser": "Chrome/155.0.8059.84",
+  "passed": true,
+  "remote_requests": 0,
+  "commercial_requests": []
+}

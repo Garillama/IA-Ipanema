@@ -1,0 +1,110 @@
+{
+  "at": "2026-11-18T22:10:04.398998+00:00",
+  "status": "structured_contract_fixed_in_private_candidate_review_blocked_by_full_snapshot_QA",
+  "patch_sha256": "2f1e08ff1734d4ab2bebf104e7c2fa237f5b7b64a0525231954d35a491bae03e",
+  "patch": "structured-contract-candidate.patch",
+  "scope": "Five original-bound files; standalone candidate unapproved/unapplied. Additional composition with existing unchanged operational patch was tested only in another private root.",
+  "new_tests": 24,
+  "before_failures": 15,
+  "selected_regression_tests_passed": 160,
+  "real_runtime_checks": {
+    "claude": {
+      "passed": true,
+      "requested_mode": "native_schema",
+      "validation": {
+        "status": "passed",
+        "duration_s": 0.001486
+      },
+      "model": "claude-haiku-5-5",
+      "report": "/home/alanrichard/Escritorio/IA inversa/.local/scent-json-contract-20261118/reports/runs/sample/20261118T220001-orchestration-smoke-b69d606f/smoke.json",
+      "duration_s": 7.046,
+      "usage": {
+        "provider_reported": {
+          "total_cost_usd": 0.0019464999999999999,
+          "duration_ms": 3692,
+          "input_tokens": 2,
+          "cache_creation_input_tokens": 8119,
+          "cache_read_input_tokens": 0,
+          "output_tokens": 645
+        },
+        "measured_cost_available": true,
+        "estimated_cost": null
+      }
+    },
+    "codex": {
+      "passed": true,
+      "requested_mode": "native_schema",
+      "validation": {
+        "status": "passed",
+        "duration_s": 0.000117
+      },
+      "model": "gpt-6-luna",
+      "report": "/home/alanrichard/Escritorio/IA inversa/.local/scent-json-contract-20261118/reports/runs/sample/20261118T220038-orchestration-smoke-ba5ebddb/smoke.json",
+      "duration_s": 16.327,
+      "usage": {
+        "provider_reported": {
+          "input_tokens": 16633,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 78,
+          "reasoning_output_tokens": 0
+        },
+        "measured_cost_available": false,
+        "estimated_cost": null
+      }
+    }
+  },
+  "historical_provider_cause": "Unknown; no original raw response retained. Successful new executions do not prove what caused the old response.",
+  "official_review": {
+    "first_attempt": "review-execution.json",
+    "composition_attempt": "composed-review-execution.json",
+    "participants_requested": [
+      "claude",
+      "codex"
+    ],
+    "council_provider_inferences": 0,
+    "accepted_proposals": 0,
+    "independent_approval": false,
+    "why": "Controller refused before deliberation because full baseline QA failed. Native smoke approvals refer only to synthetic fixture.",
+    "latest_baseline": {
+      "ran": 598,
+      "failures": 8,
+      "errors": 0,
+      "skipped": 11,
+      "failing_test_names": [
+        "test_00_upstream_provenance_git_sha1_and_sha256_integrity (test_better_accessibility.BetterAccessibilityIntegrationTests.test_00_upstream_provenance_git_sha1_and_sha256_integrity)",
+        "test_17_absence_of_regressions_and_b1_b2_unchanged (test_better_accessibility.BetterAccessibilityIntegrationTests.test_17_absence_of_regressions_and_b1_b2_unchanged)",
+        "test_1_structure_and_configuration_validation (test_cloudflare_web_perf.CloudflareWebPerfIntegrationTests.test_1_structure_and_configuration_validation)",
+        "test_17_regression_tests_across_previous_stages (test_schema_markup_skill.SchemaMarkupSkillIntegrationTests.test_17_regression_tests_across_previous_stages)",
+        "test_13_absence_of_regressions_in_repo_coordinator_and_seo_evals (test_seo_audit_skill.SEOAuditSkillIntegrationTests.test_13_absence_of_regressions_in_repo_coordinator_and_seo_evals)",
+        "test_11_absence_of_regressions_across_all_suites (test_vercel_react_best_practices.VercelReactBestPracticesIntegrationTests.test_11_absence_of_regressions_across_all_suites)",
+        "test_14_absence_of_regressions_across_all_suites (test_web_design_guidelines.WebDesignGuidelinesIntegrationTests.test_14_absence_of_regressions_across_all_suites)",
+        "test_08_compatibility_with_existing_skills (test_web_quality_audit.WebQualityAuditIntegrationTests.test_08_compatibility_with_existing_skills)"
+      ],
+      "run": "/home/alanrichard/Escritorio/IA inversa/.local/scent-runtime-review-20261118/reports/runs/sample/20261118T220551-orchestration-535e395c"
+    },
+    "reproduced_remaining_blockers": [
+      "Provenance test requires .local/upstream/better-accessibility in a sandbox that intentionally excludes .local.",
+      "Seven broad validation checks fail on 26 historical document links not evidenced in this isolated copy. These are local repository artifact links, not broken storefront links."
+    ],
+    "not_done": [
+      "No test skipped or rewritten to turn failure into approval.",
+      "No credential/private-directory mounts added.",
+      "No invalid response manually repaired.",
+      "No policies/models/participants changed."
+    ]
+  },
+  "next_permitted_step": [
+    "Prepare and review a narrow offline fixture/snapshot contract for the better-accessibility provenance data, preserving expected hashes and isolation. Do not mount host .local.",
+    "Restore or explicitly prove omitted historical link provenance using existing controller receipts, from an authorized complete source; do not fabricate receipts for absent artifacts.",
+    "After the full offline baseline passes, start a fresh official bound read-only council over the complete operational composition; replan scope to cover every changed file, including inherited test changes.",
+    "After approvals, transact only approved original-source changes, revalidate approved hashes and run post-integration QA.",
+    "Then complete the separate council/review of the unchanged storefront bundle before its protected local integration; real storefront performance remains pending HTTP403 access."
+  ],
+  "performance_package_unchanged": true,
+  "checks_168_and_visual_pairs_6_preserved": true,
+  "performance_tests_repeated": false,
+  "new_storefront_requests": 0,
+  "original_source_integrated": false,
+  "production_changed": false
+}

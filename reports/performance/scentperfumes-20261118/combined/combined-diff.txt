@@ -1,0 +1,71 @@
+--- a/layouts/layout.tpl
++++ b/layouts/layout.tpl
+@@ -11,8 +11,6 @@
+     {# Preload critical assets #}
+     <link rel="preload" as="style" href="{{ ([settings.font_headings, settings.font_rest] | merge(additional_fonts)) | google_fonts_url('400,700') }}" />
+     <link rel="preload" href="{{ 'js/libraries-standalone.js' | static_url }}" as="script" />
+-    <link rel="preload" href="{{ 'css/style-critical.css' | static_url }}" as="style" />
+-    <link rel="preload" href="{{ 'css/style-utilities.css' | static_url }}" as="style" />
+ 
+     {# Style Tokens (fonts + CSS custom properties) #}
+     <style>
+--- a/static/js/sc-armador3.js
++++ b/static/js/sc-armador3.js
+@@ -398,15 +398,23 @@
+   function autoVideo() {
+     var card = root.querySelector('.scc-vid'); if (!card || !('IntersectionObserver' in window)) return;
+     var v = card.querySelector('video');
+-    new IntersectionObserver(function (es) {
++    var observer = new IntersectionObserver(function (es) {
+       es.forEach(function (e) {
++        if (e.target !== card) {
++          var other = e.target.querySelector('video');
++          if (other && (!e.isIntersecting || e.intersectionRatio < 0.6)) other.pause();
++          return;
++        }
+         if (e.isIntersecting && e.intersectionRatio >= 0.6) {
+           if (card.classList.contains('is-playing') || root.querySelector('.scc-vid.is-playing')) return;
+           v.muted = true; v.loop = true; v.setAttribute('muted', ''); card._auto = true; card.classList.add('is-auto');
+           var p = v.play(); if (p && p.catch) p.catch(function () { card.classList.remove('is-auto'); });
+-        } else if (card.classList.contains('is-auto')) { v.pause(); }
++        } else { v.pause(); }
+       });
+-    }, { threshold: [0, 0.6] }).observe(card);
++    }, { threshold: [0, 0.6] });
++    [].forEach.call(root.querySelectorAll('.scc-vid'), function (item) {
++      if (item.querySelector('video')) observer.observe(item);
++    });
+   }
+ 
+   /* ---------- animaciones de entrada y contadores ---------- */
+--- a/static/js/sc-global.js
++++ b/static/js/sc-global.js
+@@ -168,7 +168,12 @@
+   document.querySelectorAll('[data-sc-header]').forEach(init);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded',scan,{once:true}); else scan();
+- new MutationObserver(scan).observe(document.documentElement,{childList:true,subtree:true});
++ new MutationObserver(records=>{
++  const detached=[...controllers.keys()].some(root=>!root.isConnected);
++  const pending=records.some(({target})=>{const root=target.nodeType===1&&target.closest('[data-sc-header]');return root&&!controllers.has(root);});
++  const relevant=records.some(record=>[...record.addedNodes,...record.removedNodes].some(node=>node.nodeType===1&&(node.matches('[data-sc-header]')||node.querySelector('[data-sc-header]'))));
++  if(detached||pending||relevant)scan();
++ }).observe(document.documentElement,{childList:true,subtree:true});
+  document.addEventListener('nube:section:unload',event => { if (event.target.matches?.('[data-sc-header]')) event.target._scCleanup?.(); event.target.querySelectorAll?.('[data-sc-header]').forEach(root => root._scCleanup?.()); });
+ })();
+ 
+--- a/static/js/sc-search-refinement.js
++++ b/static/js/sc-search-refinement.js
+@@ -158,6 +158,11 @@
+  }
+  function scan(){controllers.forEach((cleanup,root)=>{if(!root.isConnected)cleanup();});document.querySelectorAll('[data-sc-search-refinement]').forEach(init);}
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',scan,{once:true});else scan();
+- new MutationObserver(scan).observe(document.documentElement,{childList:true,subtree:true});
++ new MutationObserver(records=>{
++  const detached=[...controllers.keys()].some(root=>!root.isConnected);
++  const pending=records.some(({target})=>{const root=target.nodeType===1&&target.closest('[data-sc-search-refinement]');return root&&!controllers.has(root);});
++  const relevant=records.some(record=>[...record.addedNodes,...record.removedNodes].some(node=>node.nodeType===1&&(node.matches('[data-sc-search-refinement]')||node.querySelector('[data-sc-search-refinement]'))));
++  if(detached||pending||relevant)scan();
++ }).observe(document.documentElement,{childList:true,subtree:true});
+  document.addEventListener('nube:section:unload',event=>{controllers.forEach((cleanup,root)=>{if(event.target===root||event.target.contains?.(root))cleanup();});});
+ })();

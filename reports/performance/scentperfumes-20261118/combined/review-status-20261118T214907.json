@@ -1,0 +1,76 @@
+{
+  "at": "2026-11-18T21:50:53.939498+00:00",
+  "status": "blocked_mandatory_review_response_contract",
+  "integrity": {
+    "at": "2026-11-18T21:49:01.369749+00:00",
+    "archive_sha256": "45c3cfb5d53f06fe26aee8d1decd2c3bc453ce88de3e49d617e6f87735df8f85",
+    "review_zip_sha256": "07cac118951d43d86db461349945e8bbc1132a86096bcfba808994346b20252f",
+    "all_original_files_unchanged": true,
+    "isolated_version_and_archive_match": true,
+    "changed_files": [
+      "static/js/sc-global.js",
+      "static/js/sc-search-refinement.js",
+      "layouts/layout.tpl",
+      "static/js/sc-armador3.js"
+    ],
+    "patches_match": true,
+    "preserved_checks": 168,
+    "preserved_visual_pairs": 6,
+    "evidence_hashes_valid": true,
+    "policy_binding_drift": [],
+    "tests_repeated": false,
+    "approved": false,
+    "source_applied": false
+  },
+  "availability_check": {
+    "official_command": "python3 tools/ia.py --project scentperfumes orchestrate smoke --agent claude --execute",
+    "source_report": "/home/alanrichard/Escritorio/IA inversa/reports/runs/scentperfumes/20261118T214907-orchestration-smoke-95e3ad5f/smoke.json",
+    "source_report_sha256": "faa613818a9ab715b489c7aa8a8287d174a5995449acaf998a96e067d553873b",
+    "provider": "claude",
+    "model": "claude-haiku-5-5",
+    "attempts_this_turn": 1,
+    "passed": false,
+    "process_exit_code": 0,
+    "process_reaped": true,
+    "error_category": "json_syntax",
+    "error_line": 11,
+    "error_column": 1,
+    "duration_s": 4.905,
+    "reported_cost_usd": 0.0015458900000000003,
+    "rate_limit_observed_this_check": false,
+    "rate_limit_resolved_for_all_models": null,
+    "retries": 0,
+    "fallback": false
+  },
+  "mandatory_review": {
+    "claude_accepted_review": false,
+    "codex_independent_review": false,
+    "dual_approval": false,
+    "full_council_started": false,
+    "codex_probe_attempted": false,
+    "why_stopped": "Official availability smoke failed response validation. Exit 0 does not mean an accepted structured response or review. Do not manually repair untrusted output, switch participant or weaken validation.",
+    "policy": "AGENTS.md:48,54; reports/orchestration/README.md:117-123"
+  },
+  "continuation_conditions": [
+    "Official runtime must return a valid accepted response from Claude, within its documented budgets and retry rules. No automatic retries scheduled.",
+    "Complete fresh full Claude/Codex council and independent review tied to unchanged patch/source/policy hashes. Do not reuse availability smoke as review approval.",
+    "Only after mandatory approvals, use protected transaction/backups for four approved files, followed by QA on actual integrated hashes.",
+    "Storefront reading and real before/after validation remain blocked at the HTTP403 origin pending separately authorized working access."
+  ],
+  "limitations": [
+    "No raw provider stdout retained, so the underlying malformed-response content or exact provider/adaptor cause cannot be reconstructed from this sanitized error alone.",
+    "Operational orchestrator patch remains separate, frozen and unapproved. No code/config/model/security-policy changes made.",
+    "Mixed component CPU measurements unchanged; no overall performance/PageSpeed improvement claimed."
+  ],
+  "artifacts_preserved": {
+    "review_zip_sha256": "07cac118951d43d86db461349945e8bbc1132a86096bcfba808994346b20252f",
+    "theme_archive_sha256": "45c3cfb5d53f06fe26aee8d1decd2c3bc453ce88de3e49d617e6f87735df8f85",
+    "joint_checks": 168,
+    "visual_pairs": 6,
+    "tests_repeated": false
+  },
+  "original_theme_changed": false,
+  "production_changed": false,
+  "new_storefront_requests": 0,
+  "new_candidates": 0
+}

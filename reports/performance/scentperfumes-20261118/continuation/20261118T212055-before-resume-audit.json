@@ -1,0 +1,502 @@
+{
+  "site": "https://scentperfumes.mx/",
+  "at": "2026-11-18T21:02:53.544127+00:00",
+  "status": "audit_incomplete_local_candidates_tested_integration_blocked",
+  "branch": "audit/performance-20261118",
+  "theme_changes": 0,
+  "production_changes": 0,
+  "live_pages_audited": 0,
+  "source_files_inventoried": 860,
+  "templates_inventoried": 23,
+  "static_assets": 330,
+  "static_asset_bytes": 27901158,
+  "metrics": {
+    "performance_score": {
+      "before": null,
+      "after": null,
+      "status": "not_measured"
+    },
+    "LCP": {
+      "before": null,
+      "after": null,
+      "status": "not_measured"
+    },
+    "INP_field_p75": {
+      "before": null,
+      "after": null,
+      "status": "not_measured"
+    },
+    "CLS": {
+      "before": null,
+      "after": null,
+      "status": "not_measured"
+    },
+    "FCP": {
+      "before": null,
+      "after": null,
+      "status": "not_measured"
+    },
+    "speed_index": {
+      "before": null,
+      "after": null,
+      "status": "not_measured"
+    },
+    "TBT": {
+      "before": null,
+      "after": null,
+      "status": "not_measured"
+    },
+    "TTFB": {
+      "before": null,
+      "after": null,
+      "status": "not_measured"
+    },
+    "accessibility_score": {
+      "before": null,
+      "after": null,
+      "status": "not_measured"
+    },
+    "best_practices_score": {
+      "before": null,
+      "after": null,
+      "status": "not_measured"
+    },
+    "SEO_score": {
+      "before": null,
+      "after": null,
+      "status": "not_measured"
+    }
+  },
+  "findings": [
+    {
+      "id": "SCENT-01",
+      "priority": "alta",
+      "status": "reproducido_en_fixture",
+      "component": "layouts/layout.tpl:14-26",
+      "finding": "Dos precargas CSS redundantes con inclusiones static_inline conservadas.",
+      "evidence": "css-preload-experiment.json",
+      "proposed_change": "Retirar únicamente dos líneas preload; candidato preparado y sin aplicar.",
+      "production_impact": "Pendiente: no se midió CDN ni LCP real."
+    },
+    {
+      "id": "SCENT-02",
+      "priority": "media",
+      "status": "hipotesis_parcialmente_refutada",
+      "component": "snippets/scent/landing-prueba-primero.tpl:107,115",
+      "finding": "Dos videos autoplay loop sin controlador propio de visibilidad. Chrome probado sí los pausa fuera de pantalla.",
+      "evidence": "offscreen-video-experiment.json",
+      "proposed_change": "Validar Safari/Firefox, solicitudes y visibilidad de pestaña antes de modificar.",
+      "production_impact": "No se confirmó reproducción continua fuera de pantalla; no se implementa una corrección sin evidencia."
+    },
+    {
+      "id": "SCENT-03",
+      "priority": "alta_por_validar",
+      "status": "confirmado_en_fuente_no_medido_en_vivo",
+      "component": "static/js/sc-social-video.js:31-44",
+      "finding": "Se instancian previews YouTube para cada tarjeta visible además del reproductor activo.",
+      "evidence": "source audit",
+      "proposed_change": "Comparar un reproductor activo con previews simultáneos preservando botones; requiere decisión visual.",
+      "production_impact": "No se atribuye carga antes de entrar en sección: ya existe IntersectionObserver."
+    },
+    {
+      "id": "SCENT-04",
+      "priority": "media",
+      "status": "confirmado_en_fuente_no_medido_en_vivo",
+      "component": "static/js/sc-armador3.js:398-409",
+      "finding": "El observador sigue solo primera tarjeta y su rama de pausa solo cubre is-auto.",
+      "evidence": "source audit",
+      "proposed_change": "Reproducir salida de pantalla de videos iniciados por usuario; observar todos solo si se demuestra problema.",
+      "production_impact": "Depende también de políticas nativas del navegador."
+    },
+    {
+      "id": "SCENT-05",
+      "priority": "media",
+      "status": "confirmado_en_fuente_impacto_no_cuantificado",
+      "component": "static/js/sc-global.js:166-171; static/js/sc-search-refinement.js:159-161",
+      "finding": "Observers de mutaciones vuelven a buscar componentes globalmente.",
+      "evidence": "source audit",
+      "proposed_change": "Medir escaneos en actividad normal y editor; filtrar mutaciones y agrupar sin perder reinicialización.",
+      "production_impact": "Sin perfil CPU real; no se declara INP afectado."
+    },
+    {
+      "id": "SCENT-06",
+      "priority": "media",
+      "status": "declaraciones_confirmadas_descargas_no_medidas",
+      "component": "layouts/resources/style-tokens.tpl:110-111; static/css/sc-fonts.css",
+      "finding": "Google Fonts y ocho TTF locales declaran las familias configuradas; 523576 bytes locales.",
+      "evidence": "assets.csv",
+      "proposed_change": "Comprobar fuentes efectivamente usadas/descargadas y glifos antes de retirar proveedores o convertir.",
+      "production_impact": "No demuestra descarga duplicada. No se instalaron convertidores."
+    },
+    {
+      "id": "SCENT-07",
+      "priority": "por_determinar",
+      "status": "inventario_sin_descargas",
+      "component": "static/images; static/videos",
+      "finding": "281 imágenes y 7 archivos en videos; archivos grandes no implican peso de cada página.",
+      "evidence": "assets.csv",
+      "proposed_change": "Contrastar currentSrc, tamaño visible y red por plantilla cuando se permita navegación.",
+      "production_impact": "No se recomprimieron imágenes sin verificar uso y calidad."
+    }
+  ],
+  "candidate": {
+    "status": "candidate_not_applied",
+    "base_sha256": "843211c3ad7ab54446b4c5feea39b7310911ae009b9abc595c56412f79f8f3ca",
+    "candidate_sha256": "2ded82fb94bdc796c80a4e0038bd1e3f2445b479f9d9a0644f8ec0171b4322a8",
+    "patch_sha256": "97ca9fe2111dcfa25acb35b017928da9b41ab1fe124af3b40f03bf33c7144e41",
+    "files": [
+      "layouts/layout.tpl"
+    ],
+    "council": "blocked_skill_catalog_validation",
+    "network": "stopped_http_403"
+  },
+  "tests": {
+    "node_syntax": "14 passed",
+    "source_qa": "passed; reports/runs/scentperfumes/20261118T193415-source-8e1eb805/report.json",
+    "quick_qa": "passed; reports/runs/scentperfumes/20261118T193502-quick-f95675a1/report.json",
+    "css_fixture": {
+      "navigations": 16,
+      "checks_passed": 32,
+      "visual_pairs_identical": 8,
+      "before_css_requests": 2,
+      "after_css_requests": 0,
+      "before_css_encoded_bytes": 150499,
+      "after_css_encoded_bytes": 0
+    },
+    "video_fixture": "2 viewports,6observations,native pause offscreen; local MP4 replaces remote src"
+  },
+  "blockers": [
+    {
+      "id": "final_independent_review",
+      "status": "rate_limit_stop",
+      "detail": "Mandatory council did not review the current final hash; cannot integrate protected changes."
+    },
+    {
+      "id": "storefront",
+      "status": "http403_stop_no_staging",
+      "detail": "Owner confirmed no preview; no new requests to blocked origin."
+    },
+    {
+      "id": "field_sources",
+      "status": "not_configured",
+      "detail": "Scent PSI/CrUX credentials were not configured; no account from another store used."
+    }
+  ],
+  "execution_errors": [
+    "Initial CSS fixture path encoded spaces; corrected using fileURLToPath and rerun32checks pass.",
+    "Initial video expectation of offscreen autoplay timed out; revised observational experiment refuted claim for current Chrome.",
+    "Concurrent Lighthouse job began before robots failure; cancelled; no valid LHR or scores used."
+  ],
+  "reproducibility": [
+    "node reports/performance/scentperfumes-20261118/verify-css-preloads.mjs",
+    "node reports/performance/scentperfumes-20261118/verify-offscreen-videos.mjs",
+    "python3 tools/ia.py --project scentperfumes qa --suite source",
+    "python3 tools/ia.py --project scentperfumes qa --suite quick"
+  ],
+  "backup": ".local/scent-audit-20261118/baseline-source.tar.gz (private,ignored,without store credentials)",
+  "limitations": [
+    "No full Tiendanube renderer or local storefront preview validated.",
+    "No commercial forms submitted,no cart mutation,no checkout.",
+    "Local corpus includes previous unrelated changes preserved by hash.",
+    "No installed dependencies,no production operations,no approval consensus."
+  ],
+  "sources": [
+    "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/rel/preload",
+    "https://web.dev/articles/fast-playback-with-preload",
+    "https://tiendanube.dev/es-AR/themes/twig-reference/filters-methods"
+  ],
+  "applied_patches": [],
+  "continuation": {
+    "user_confirmed_no_staging": true,
+    "new_requests_to_blocked_origin": 0,
+    "no_production_operations": true,
+    "phases": {
+      "1_skills_orchestrator": "candidate_corrected_and_tested_not_integrated_final_review_blocked",
+      "2_http403": "available_evidence_diagnosed_stop_preserved_no_preview",
+      "3_css": "candidate_tested_not_applied",
+      "4_local_optimization": "observer_candidate_tested_not_applied_other_findings_scoped",
+      "5_live_metrics": "blocked_no_authorized_access",
+      "6_validation": "local_fixtures_and_source_passed_real_storefront_pending"
+    },
+    "engine_candidate": {
+      "status": "tested_candidate_unapplied_final_independent_review_pending",
+      "files": {
+        "tools/ipanema/orchestration/engine.py": {
+          "before_sha256": "bfd372402d6ee7372fffccefb5321bffc7f8b877f9ad24100db3c0ebbcf5ef85",
+          "candidate_sha256": "09347e00e317fc1e02a6b980aa7a71f97880f808f7d89087a293f51d429c8abb"
+        },
+        "tools/ipanema/validation.py": {
+          "before_sha256": "edca78f96a550aad0ccfa682a3d89fe3ad61c5c88be6620f053ac97474af0ef2",
+          "candidate_sha256": "e66f8ca6c7a7934b9920fb3ca2d0b0bfe404ef1f567cb9ca6fdd105fbd91afba"
+        },
+        "tools/ipanema/snapshot_links.py": {
+          "before_sha256": null,
+          "candidate_sha256": "de9f7f0a43a22dbc13e6050ebf1a2dfa8feaea799df9c3692277a0f49ebcb1dc"
+        },
+        "tests/support.py": {
+          "before_sha256": "4912d8b74a2fc4bc51644f51ab2918873bd07aa8a56911c0e8b62a0cae16968f",
+          "candidate_sha256": "81ea5b48b6065a38a7d3335f592c443f87a066b5fd62e9b19515d532ea1e056a"
+        },
+        "tests/unit/test_skill_execution_contract.py": {
+          "before_sha256": null,
+          "candidate_sha256": "4b8b964d0ef07b55928ef0f77836e00feb3ad07d199281e56cafce12cdc763c8"
+        },
+        "tests/integration/test_orchestration_cli.py": {
+          "before_sha256": "aeb259dac03373c9383f7cbeca0603c61770624dd86d999f79a5f2239b1d8e71",
+          "candidate_sha256": "d5313b6d8d08ef90791beb8dbd59a89d255c5bd593fd5a62dcb10cb5094666b6"
+        },
+        "tests/unit/test_cloudflare_web_perf.py": {
+          "before_sha256": "13bad5b035932022198678b92c43e5a6ee92f5431f2f68c5c560dcc2602eb5da",
+          "candidate_sha256": "6594b0dad3db8f762ee67bf2dcdb9283a78f206b01d34c577568f2b5adf7f960"
+        },
+        "tests/unit/test_web_quality_audit.py": {
+          "before_sha256": "fbc4099fdd365042612d1aef85610d9e834afb42c0accbea77929c5ddc8579d7",
+          "candidate_sha256": "89f145b17e797f96ef987e1b8fb05d7ca7b4f2d02fa9181c877bbeca5ee4bf16"
+        },
+        "tests/unit/test_schema_markup_skill.py": {
+          "before_sha256": "63c30c08ac5d91f783f8088e3df3641888543624c1601ba72208fffb044ea2d6",
+          "candidate_sha256": "fe3908bfb875b50b2ec422e8730cd29f6b0a3f30f7b32cfa9355d8b3fd2ad19d"
+        },
+        "tests/unit/test_seo_audit_skill.py": {
+          "before_sha256": "97a180024f8bdfc392c504ce4866b2d383d6a5d41aabb461aaa9bfb750fdd25a",
+          "candidate_sha256": "5dd2d27df4311b5433a5df7e2cec68d24326a988aa0af2fc5a556eb3e0065e57"
+        },
+        "tests/unit/test_orchestration_recovery.py": {
+          "before_sha256": "8fb806fcf62c35d8b69bfda71bff0513242abfb4104e128a7e5dba027997d3f8",
+          "candidate_sha256": "7cba737866a7cc5e6cf4191e46e89a23828298d9f55f912973d13120e24e14b8"
+        },
+        "tests/unit/test_vercel_react_best_practices.py": {
+          "before_sha256": "fd0c169ab8df82d70217d3b90df600d39685866fae9974b588f54d614878d6d2",
+          "candidate_sha256": "f213b4ad4f7487f2a916c46e1ec3242c92322a58a9704b81f2d45b13cf5e71f0"
+        },
+        "tests/unit/test_web_design_guidelines.py": {
+          "before_sha256": "a38858148837321921e0bb81056f6841508e6dfb6f6b6d0ad57144de7946b6e7",
+          "candidate_sha256": "a0e4192448f2c0e00dd726e13ac2e04968431619109e4c7cacc41947d13bfc73"
+        }
+      },
+      "patch_sha256": "ceef24d8385e3cdec811908c1526ee7bdbf41c5bc2887f0146fb8e145600fbed",
+      "AGENTS_modified": false,
+      "readonly_source": {
+        "tools/ipanema/coordinator.py": "dbe75cc5aadddbf60f12688ed4f37c2a86538756316b54d06dafe0cff72fb444"
+      }
+    },
+    "css_candidate": {
+      "status": "candidate_not_applied",
+      "base_sha256": "843211c3ad7ab54446b4c5feea39b7310911ae009b9abc595c56412f79f8f3ca",
+      "candidate_sha256": "2ded82fb94bdc796c80a4e0038bd1e3f2445b479f9d9a0644f8ec0171b4322a8",
+      "patch_sha256": "97ca9fe2111dcfa25acb35b017928da9b41ab1fe124af3b40f03bf33c7144e41",
+      "files": [
+        "layouts/layout.tpl"
+      ],
+      "council": "blocked_skill_catalog_validation",
+      "network": "stopped_http_403"
+    },
+    "observer_candidate": {
+      "status": "isolated_candidate_not_applied_or_approved",
+      "files": {
+        "static/js/sc-global.js": {
+          "base_sha256": "9741346cfd1641c64b49d7a44ad8e3db16042af7139dcde567b8a49620ca2195",
+          "candidate_sha256": "1605d7ce1c69de3739f7da124079e5e7c5df99a4410a66f4f5f0968c7bf2d2de"
+        },
+        "static/js/sc-search-refinement.js": {
+          "base_sha256": "d1cf6dca220b4f87a4ca43d0aab8a8086db647f2a1a2136b93fa26ccacbf441e",
+          "candidate_sha256": "d885988c2faec6c056a416c85485ffe5ac5d054b61cb66740ff07244aa51eaac"
+        }
+      },
+      "patch_sha256": "95bad94590b5e4e5585b8fb29c6e32b3a4ae4432e1fd08c37b0ea6791efe6594",
+      "note": "Preserves retry when a component receives its children incrementally."
+    },
+    "qa_latest_context": {
+      "kind": "private_source_copy_on_host",
+      "unit_cases": 550,
+      "unit_skipped": 0,
+      "integration_cases": 56,
+      "integration_skipped": 1,
+      "outcome": "passed",
+      "report": "continuation/final-local-quick-report.json"
+    },
+    "qa_earlier_os_sandbox": {
+      "unit_cases": 534,
+      "unit_skipped": 11,
+      "integration_cases": 56,
+      "integration_skipped": 2,
+      "scope": "earlier source context before 16 concurrent foreign Web Design tests were mirrored",
+      "report": "continuation/candidate-final-isolated-qa.json"
+    },
+    "css_browser": {
+      "navigations": 16,
+      "checks": 32,
+      "visual_pairs_identical": 8,
+      "extra_css_requests_before": 2,
+      "after": 0,
+      "scope": "local preload plus inline reproduction only"
+    },
+    "observer_browser": {
+      "navigations": 12,
+      "checks": 108,
+      "passed": true,
+      "queries_per_component_for_20_unrelated_updates": {
+        "before": 20,
+        "after": 0
+      },
+      "visual_pairs_identical": 6,
+      "accessibility_tree_node_counts_equal_pairs": 6,
+      "axe_violations_in_fixture": 0,
+      "axe_incomplete_mobile": 1,
+      "scope": "controlled component DOM; synthetic search GET; not Tiendanube renderer, real commerce or field INP"
+    },
+    "source_qa": {
+      "files": 826,
+      "templates": 23,
+      "json_schema_errors": [],
+      "rendered": false
+    },
+    "review": {
+      "current_hash_approved": false,
+      "dual_consensus": false,
+      "final_attempt": "20261118T204113-orchestration-ae10d405",
+      "classification": "Claude rate_limit; Codex run_cancelled",
+      "raw_http_status_available": false,
+      "retry_after_stop": false,
+      "prior_reviews": "preserved, do not authorize current hash"
+    },
+    "objections": [
+      {
+        "id": "CAT-01",
+        "objection": "Dos validaciones incompatibles: catálogo frente a prefijo ipanema-*",
+        "solution_or_evidence": "instruction_context y execute usan el catálogo explícito; una única carga valida antes del despacho.",
+        "tests": "test_execute_reaches_configuration_only_after_catalog_validation; test_unknown_names_including_ipanema_prefix_rejected",
+        "evidence": "contract-before.txt; final-contract-and-sandbox.txt",
+        "status": "corregida_en_candidato_revisión_final_pendiente"
+      },
+      {
+        "id": "CAT-02",
+        "objection": "Skills ausentes, duplicadas o ilegibles no deben aceptarse",
+        "solution_or_evidence": "Lista tipada y única; archivo obligatorio, UTF-8 y errores controlados.",
+        "tests": "test_missing_authorized_skill_fails_closed; test_list_type_entries_and_duplicates_rejected; test_invalid_utf8_fails_closed",
+        "evidence": "final-contract-and-sandbox.txt",
+        "status": "corregida_en_candidato_revisión_final_pendiente"
+      },
+      {
+        "id": "PATH-01",
+        "objection": "Un symlink de directorio externo podía escapar de la comprobación",
+        "solution_or_evidence": "Recorrido léxico de componentes antes de resolver enlaces; también protege reglas y copias.",
+        "tests": "test_external_ancestor_symlink_rejected_in_context_and_qa; test_rules_symlink_rejected",
+        "evidence": "v1-symlink-before.txt; final-contract-and-sandbox.txt",
+        "status": "reproducida_y_corregida_en_candidato"
+      },
+      {
+        "id": "QA-01",
+        "objection": "El snapshot quitaba skills y documentación necesarias",
+        "solution_or_evidence": "QA recibe exclusivamente SKILL.md autorizados y README de proyectos; configuración de tienda sintética.",
+        "tests": "test_sanitizer_keeps_private_default_and_explicit_qa_documents; WorkspaceQA",
+        "evidence": "candidate-final-isolated-qa.json; final-local-quick-report.json",
+        "status": "verificado_localmente_no_integrado"
+      },
+      {
+        "id": "LINK-01",
+        "objection": "No inventar informes para satisfacer referencias históricas excluidas",
+        "solution_or_evidence": "Recibos del controlador con documento, destino y hashes; no se copian todos los informes ni se crean stubs.",
+        "tests": "SnapshotLinkContract; test_changed_document_cannot_reuse_receipt",
+        "evidence": "final-contract-and-sandbox.txt",
+        "status": "verificado_localmente_no_integrado"
+      },
+      {
+        "id": "LINK-02",
+        "objection": "Un campo editable del proyecto no debe relajar validate()",
+        "solution_or_evidence": "Opción explícita snapshot_receipts para llamadores de QA; comportamiento normal estricto, incluido JSON offline-test.",
+        "tests": "test_default_real_project_validation_remains_strict; test_strict_source_or_configured_theme_never_excludes",
+        "evidence": "final-contract-and-sandbox.txt",
+        "status": "corregida_en_candidato"
+      },
+      {
+        "id": "LINK-03",
+        "objection": "Un recibo simple aceptaba indebidamente :línea o #ancla",
+        "solution_or_evidence": "No se consulta el recibo cuando el enlace contiene línea o ancla. Antes: cuatro exclusiones; después: dos exclusiones y dos errores.",
+        "tests": "test_plain_receipt_never_certifies_lines_or_anchors",
+        "evidence": "qualified-receipt-before.txt; qualified-receipt-after.txt",
+        "status": "reproducida_y_corregida_en_candidato"
+      },
+      {
+        "id": "STATE-01",
+        "objection": "Fallos antes del try dejaban running o no registraban bloqueo",
+        "solution_or_evidence": "Guardas para preparación, lectura de archivos, hash original y QA; se escribe blocked y finished_at antes de inferencia.",
+        "tests": "test_invalid_non_markdown_source_records_blocked_before_qa; test_qa_exception_records_blocked_and_never_dispatches; test_git_timeout_records_blocked_before_dispatch",
+        "evidence": "v2-decode-before.txt; v2-qa-exception-before.txt; final-contract-and-sandbox.txt",
+        "status": "reproducida_y_corregida_en_candidato"
+      },
+      {
+        "id": "META-01",
+        "objection": "Colisión del nombre del manifiesto y metadatos aportados por configuración",
+        "solution_or_evidence": "Nombre reservado; manifiesto generado desde estado congelado; claves internas de settings rechazadas.",
+        "tests": "test_central_qa_runs_both_suites_and_ignores_source_manifest; test_controller_manifest_cannot_be_declared_editable; test_private_configuration_never_supplies_controller_state",
+        "evidence": "v2-manifest-before.txt; final-contract-and-sandbox.txt",
+        "status": "corregida_en_candidato"
+      },
+      {
+        "id": "QA-02",
+        "objection": "El QA del consejo no ejecutaba integración",
+        "solution_or_evidence": "Se ejecutan ambas suites sin red externa y se registran conteos y omisiones por separado.",
+        "tests": "central_qa; suite_results",
+        "evidence": "candidate-final-isolated-qa.json; final-local-quick-report.json",
+        "status": "verificado_con_ejecuciones_reales"
+      },
+      {
+        "id": "QA-03",
+        "objection": "Hipótesis de suites vacías o resultados interrumpidos aceptados",
+        "solution_or_evidence": "En Python 3.12.3 una suite vacía devuelve 5: esa hipótesis no se reprodujo. Se añadieron además conteos y rechazo explícito de cancelación, inactividad y salida limitada.",
+        "tests": "test_central_qa_rejects_empty_all_skipped_or_interrupted_results",
+        "evidence": "empty-suite-observation.json; final-contract-and-sandbox.txt",
+        "status": "hipótesis_vacía_refutada_en_runtime_guardas_probadas_con_fixtures"
+      },
+      {
+        "id": "CAT-03",
+        "objection": "Contar carpetas no demuestra identidad del catálogo",
+        "solution_or_evidence": "validate compara conjuntos de nombres y detecta sustituciones, faltantes, desconocidas y symlinks.",
+        "tests": "test_catalog_identity_not_only_count_is_validated",
+        "evidence": "final-contract-and-sandbox.txt",
+        "status": "corregida_en_candidato"
+      },
+      {
+        "id": "PATH-02",
+        "objection": "Enlaces de documentación podían leer Markdown fuera de raíz",
+        "solution_or_evidence": "Referencias externas se registran sin leer contenido; se rechazan symlinks internos y líneas cero.",
+        "tests": "test_relative_external_markdown_is_not_read; test_internal_link_symlinks_and_zero_line_are_rejected",
+        "evidence": "final-contract-and-sandbox.txt",
+        "status": "verificado_localmente"
+      },
+      {
+        "id": "REV-01",
+        "objection": "Revisión final y aplicación protegida",
+        "solution_or_evidence": "La última ejecución clasificó Claude como rate_limit y canceló Codex. No se transfieren aprobaciones de hashes anteriores.",
+        "tests": "AGENTS.md: participación original y revisión obligatorias",
+        "evidence": "council-final-stop/adr.json",
+        "status": "bloqueada_no_aplicar"
+      }
+    ],
+    "preservation": {
+      "at": "2026-11-18T20:56:32.513947+00:00",
+      "theme_branch": "audit/performance-20261118",
+      "theme_files_checked": 860,
+      "theme_changed_since_initial": [],
+      "original_engine_targets_unchanged": true,
+      "AGENTS_unchanged_from_private_baseline": true,
+      "models_policy_unchanged_from_private_baseline": true,
+      "applied_patches": [],
+      "transaction": "not_started_mandatory_review_unmet",
+      "foreign_changes": "preserved; copied read-only as test context, never overwritten in original"
+    },
+    "transaction": "not_started_mandatory_gate_unmet",
+    "backups": [
+      ".local/scent-audit-20261118/baseline-source.tar.gz",
+      ".local/scent-audit-20261118/engine-protected-baseline-final.tar.gz"
+    ],
+    "limitations": [
+      "No native Twig/server renderer or live storefront navigation.",
+      "Counts/bytes/timings from fixtures do not establish site CWV changes.",
+      "Component axe reports do not certify WCAG compliance.",
+      "Final independent review pending; no earlier approval reused.",
+      "Concurrent foreign skill additions were mirrored read-only; original changes preserved."
+    ]
+  }
+}

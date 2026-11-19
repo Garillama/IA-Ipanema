@@ -1,0 +1,24 @@
+template,sections,validation,live_urls
+templates/layout/footer.json,sc-footer,source_inventory_only,not_discovered_http403
+templates/layout/header.json,announcement-bar | sc-header,source_inventory_only,not_discovered_http403
+templates/pages/404.json,main-404 | product-list,source_inventory_only,not_discovered_http403
+templates/pages/account/address.json,page-header | main-account-address,source_inventory_only,not_discovered_http403
+templates/pages/account/addresses.json,page-header | main-account-addresses,source_inventory_only,not_discovered_http403
+templates/pages/account/info.json,page-header | main-account-info,source_inventory_only,not_discovered_http403
+templates/pages/account/login.json,page-header | main-login,source_inventory_only,not_discovered_http403
+templates/pages/account/newpass.json,page-header | main-newpass,source_inventory_only,not_discovered_http403
+templates/pages/account/order.json,page-header | main-account-order,source_inventory_only,not_discovered_http403
+templates/pages/account/orders.json,page-header | main-account-orders,source_inventory_only,not_discovered_http403
+templates/pages/account/register.json,page-header | main-register,source_inventory_only,not_discovered_http403
+templates/pages/account/reset.json,page-header | main-reset,source_inventory_only,not_discovered_http403
+templates/pages/account/subscription-address.json,page-header | main-account-subscription-address,source_inventory_only,not_discovered_http403
+templates/pages/blog-post.json,page-header | main-blog-post,source_inventory_only,not_discovered_http403
+templates/pages/blog.json,page-header | main-blog,source_inventory_only,not_discovered_http403
+templates/pages/cart.json,page-header | main-cart,source_inventory_only,not_discovered_http403
+templates/pages/category.json,category-hero | page-header | main-products-grid,source_inventory_only,not_discovered_http403
+templates/pages/contact.json,page-header | main-contact,source_inventory_only,not_discovered_http403
+templates/pages/home.json,sc-home-hero | sc-home-products | sc-home-editorial | sc-home-families | sc-home-whatsapp | sc-home-process | sc-home-social | sc-home-faq,source_inventory_only,not_discovered_http403
+templates/pages/page.json,page-header | main-page,source_inventory_only,not_discovered_http403
+templates/pages/password.json,password-logo | main-password,source_inventory_only,not_discovered_http403
+templates/pages/product.json,main-product | product-description | related-products | sc-pdp-faq | sc-pdp-reviews | sc-trust-benefits,source_inventory_only,not_discovered_http403
+templates/pages/search.json,page-header | main-products-grid,source_inventory_only,not_discovered_http403

@@ -1,0 +1,185 @@
+{
+  "profiles": {
+    "390": {
+      "before": {
+        "samples": 3,
+        "median_task_ms": 167.213,
+        "css_requests": [
+          2
+        ],
+        "header_scan_increments": [
+          20,
+          20,
+          20
+        ],
+        "search_scan_increments": [
+          20,
+          20,
+          20
+        ],
+        "offscreen_decoded_frames": [
+          12,
+          15,
+          12
+        ],
+        "offscreen_media_progress_s": [
+          0.662095,
+          0.660943,
+          0.661527
+        ]
+      },
+      "after": {
+        "samples": 3,
+        "median_task_ms": 164.03799999999995,
+        "css_requests": [
+          0
+        ],
+        "header_scan_increments": [
+          0,
+          0,
+          0
+        ],
+        "search_scan_increments": [
+          0,
+          0,
+          0
+        ],
+        "offscreen_decoded_frames": [
+          0,
+          0,
+          0
+        ],
+        "offscreen_media_progress_s": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "1440": {
+      "before": {
+        "samples": 3,
+        "median_task_ms": 43.088000000000015,
+        "css_requests": [
+          2
+        ],
+        "header_scan_increments": [
+          20,
+          20,
+          20
+        ],
+        "search_scan_increments": [
+          20,
+          20,
+          20
+        ],
+        "offscreen_decoded_frames": [
+          14,
+          14,
+          12
+        ],
+        "offscreen_media_progress_s": [
+          0.655537,
+          0.654905,
+          0.656285
+        ]
+      },
+      "after": {
+        "samples": 3,
+        "median_task_ms": 47.239000000000004,
+        "css_requests": [
+          0
+        ],
+        "header_scan_increments": [
+          0,
+          0,
+          0
+        ],
+        "search_scan_increments": [
+          0,
+          0,
+          0
+        ],
+        "offscreen_decoded_frames": [
+          0,
+          0,
+          0
+        ],
+        "offscreen_media_progress_s": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    }
+  },
+  "visual_pairs": [
+    {
+      "width": 390,
+      "run": 0,
+      "pixels_identical": true,
+      "mask": "Both video elements hidden before screenshot to exclude nondeterministic video frames; no content/layout mask otherwise."
+    },
+    {
+      "width": 390,
+      "run": 1,
+      "pixels_identical": true,
+      "mask": "Both video elements hidden before screenshot to exclude nondeterministic video frames; no content/layout mask otherwise."
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "pixels_identical": true,
+      "mask": "Both video elements hidden before screenshot to exclude nondeterministic video frames; no content/layout mask otherwise."
+    },
+    {
+      "width": 1440,
+      "run": 0,
+      "pixels_identical": true,
+      "mask": "Both video elements hidden before screenshot to exclude nondeterministic video frames; no content/layout mask otherwise."
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "pixels_identical": true,
+      "mask": "Both video elements hidden before screenshot to exclude nondeterministic video frames; no content/layout mask otherwise."
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "pixels_identical": true,
+      "mask": "Both video elements hidden before screenshot to exclude nondeterministic video frames; no content/layout mask otherwise."
+    }
+  ],
+  "axe": [
+    {
+      "width": 390,
+      "version": "before",
+      "violations": [],
+      "incomplete": 1
+    },
+    {
+      "width": 390,
+      "version": "after",
+      "violations": [],
+      "incomplete": 1
+    },
+    {
+      "width": 1440,
+      "version": "before",
+      "violations": [],
+      "incomplete": 0
+    },
+    {
+      "width": 1440,
+      "version": "after",
+      "violations": [],
+      "incomplete": 0
+    }
+  ],
+  "checks": 168,
+  "all_checks_passed": true,
+  "all_visual_pairs_identical": true,
+  "scope": "Controlled DOM includes 4000 artificial divs. TaskDuration covers 20 unrelated updates only, not page load, video decode interval, LCP/TBT/INP or whole-site performance.",
+  "storefront_metrics": null
+}

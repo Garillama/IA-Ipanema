@@ -1,0 +1,28 @@
+{
+  "status": "isolated_candidate_unapplied",
+  "files": {
+    "tools/ipanema/orchestration/engine.py": {
+      "before_sha256": "bfd372402d6ee7372fffccefb5321bffc7f8b877f9ad24100db3c0ebbcf5ef85",
+      "candidate_sha256": "5457069b77eca890369b3d15041390a8f6312991eb2155f0825d97c925b9ce11"
+    },
+    "tools/ipanema/validation.py": {
+      "before_sha256": "edca78f96a550aad0ccfa682a3d89fe3ad61c5c88be6620f053ac97474af0ef2",
+      "candidate_sha256": "7668d26c46790026ee8540b032a7d8980eee07bc5dd354636d2c306712ab1899"
+    },
+    "tools/ipanema/snapshot_links.py": {
+      "before_sha256": null,
+      "candidate_sha256": "5287cf3ee950f9379da18d10007807fd685150e62fe5682577a1e7640fb137e7"
+    },
+    "tests/support.py": {
+      "before_sha256": "4912d8b74a2fc4bc51644f51ab2918873bd07aa8a56911c0e8b62a0cae16968f",
+      "candidate_sha256": "5a3607d39443ccba7b358f41188b4f984eef324fce503f087ee3d99653c4a696"
+    },
+    "tests/unit/test_skill_execution_contract.py": {
+      "before_sha256": null,
+      "candidate_sha256": "90fcd5889716a1d6dd1596b9671638a62fe3282e947d9b499898aa35e535cde9"
+    }
+  },
+  "patch_sha256": "377826330e2680908ef281fc3db4c9d3a191f01b51a9d818c65de123e840b79e",
+  "AGENTS_modified": false,
+  "council_pending": true
+}

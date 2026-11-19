@@ -1,0 +1,226 @@
+diff --git a/tests/unit/test_antigravity_integration.py b/tests/unit/test_antigravity_integration.py
+index 0283cb4..e218022 100644
+--- a/tests/unit/test_antigravity_integration.py
++++ b/tests/unit/test_antigravity_integration.py
+@@ -51,21 +51,29 @@ class AntigravityAdapterTests(unittest.TestCase):
+         self.assertNotIn('--remote-agent', args)
+         with self.assertRaisesRegex(IpanemaError, '[Mm]odelo.*no verificado'):
+             adapters.argv('antigravity', None, prompt='synthetic')
++        effort_args=adapters.argv('antigravity', 'synthetic-model', 'high', prompt='synthetic')
++        self.assertIn('--effort',effort_args);self.assertEqual(effort_args[effort_args.index('--effort')+1],'high')
+         with self.assertRaisesRegex(IpanemaError, 'esfuerzo'):
+-            adapters.argv('antigravity', 'synthetic-model', 'high', prompt='synthetic')
++            adapters.argv('antigravity', 'synthetic-model', 'turbo', prompt='synthetic')
+ 
+     def test_output_parser_accepts_only_direct_structured_json_and_rejects_unknown_envelopes(self):
+-        fixture = {'decision': 'proposed', 'changes': [], 'summary': 'synthetic'}
+-        self.assertEqual(adapters.parse_response('antigravity', json.dumps(fixture)), fixture)
+-        with self.assertRaisesRegex(adapters.ResponseContractError, 'antigravity_json_envelope_unverified'):
++        fixture = {'decision': 'proposed', 'changes': []}
++        envelope={'status':'SUCCESS','response':'validated','structured_output':fixture}
++        self.assertEqual(adapters.parse_response('antigravity', json.dumps(envelope),
++                         expected_schema={'type':'object','required':['decision','changes'],
++                                          'properties':{'decision':{'type':'string'},'changes':{'type':'array'}},
++                                          'additionalProperties':False}), fixture)
++        with self.assertRaisesRegex(adapters.ResponseContractError, 'antigravity_execution_status'):
+             adapters.parse_response('antigravity', json.dumps({'result': json.dumps(fixture)}))
+         with self.assertRaisesRegex(adapters.ResponseContractError, 'antigravity_json_invalid'):
+             adapters.parse_response('antigravity', '{broken')
+ 
+     def test_incomplete_json_and_synthetic_auth_failure_are_classified_without_provider(self):
+-        incomplete=adapters.parse_response('antigravity',json.dumps({'decision':'proposed','changes':[]}))
++        incomplete={'decision':'proposed','changes':[]}
+         with self.assertRaises(adapters.ResponseContractError):
+-            adapters.validate_schema(incomplete,council.response_schema('council_proposal'))
++            adapters.parse_response('antigravity',json.dumps({'status':'SUCCESS','response':'partial',
++                                   'structured_output':incomplete}),
++                                   expected_schema=council.response_schema('council_proposal'))
+         self.assertEqual(recovery.classify_failure({'stderr':'401 unauthorized','stdout':''}),'authentication')
+ 
+     def test_runtime_has_no_credential_mount_or_env_and_real_worker_is_blocked(self):
+diff --git a/tests/unit/test_antigravity_json_contract.py b/tests/unit/test_antigravity_json_contract.py
+new file mode 100644
+index 0000000..67149e6
+--- /dev/null
++++ b/tests/unit/test_antigravity_json_contract.py
+@@ -0,0 +1,100 @@
++"""Focused offline contract tests for the documented Antigravity JSON envelope."""
++import json
++import unittest
++
++from ipanema.orchestration import adapters
++from ipanema.core import IpanemaError
++
++
++class AntigravityJsonContractTests(unittest.TestCase):
++    schema = {
++        'type': 'object',
++        'required': ['decision', 'changes'],
++        'properties': {
++            'decision': {'type': 'string', 'enum': ['proposed', 'approve']},
++            'changes': {'type': 'array', 'maxItems': 0},
++        },
++        'additionalProperties': False,
++    }
++    payload = {'decision': 'proposed', 'changes': []}
++
++    def envelope(self, *, status='SUCCESS', structured_output=None, response='validated'):
++        value = {'status': status, 'response': response,
++                 'duration_seconds': 0.01, 'usage': {}}
++        if structured_output is not None:
++            value['structured_output'] = structured_output
++        return json.dumps(value)
++
++    def test_accepts_success_envelope_and_validates_structured_output(self):
++        result = adapters.parse_response(
++            'antigravity', self.envelope(structured_output=self.payload),
++            expected_schema=self.schema)
++        self.assertEqual(result, self.payload)
++
++    def test_rejects_error_and_cancelled_execution_statuses(self):
++        for status in ('ERROR', 'CANCELED', 'INTERRUPTED', 'INVALID', 'RUNNING'):
++            with self.subTest(status=status), self.assertRaisesRegex(
++                    adapters.ResponseContractError, 'antigravity_execution_status'):
++                adapters.parse_response('antigravity', self.envelope(
++                    status=status, structured_output=self.payload), expected_schema=self.schema)
++
++    def test_rejects_missing_status_and_missing_structured_output(self):
++        with self.assertRaisesRegex(adapters.ResponseContractError, 'antigravity_execution_status'):
++            adapters.parse_response('antigravity', json.dumps({'response': 'ok'}),
++                                    expected_schema=self.schema)
++        with self.assertRaisesRegex(adapters.ResponseContractError, 'antigravity_structured_output_missing'):
++            adapters.parse_response('antigravity', self.envelope(), expected_schema=self.schema)
++        with self.assertRaisesRegex(adapters.ResponseContractError, 'antigravity_json_invalid'):
++            adapters.parse_response('antigravity', '', expected_schema=self.schema)
++        with self.assertRaisesRegex(adapters.ResponseContractError, 'antigravity_response_missing'):
++            adapters.parse_response('antigravity', json.dumps({'status': 'SUCCESS', 'response': '  ',
++                                    'structured_output': self.payload}), expected_schema=self.schema)
++
++    def test_rejects_incomplete_schema_payload(self):
++        with self.assertRaisesRegex(adapters.ResponseContractError, 'missing_field'):
++            adapters.parse_response('antigravity', self.envelope(
++                structured_output={'decision': 'proposed'}), expected_schema=self.schema)
++
++    def test_rejects_malformed_truncated_and_duplicate_key_json(self):
++        for raw in ('{broken', '{"status":"SUCCESS"',
++                    '{"status":"SUCCESS","status":"ERROR"}'):
++            with self.subTest(raw=raw), self.assertRaises(adapters.ResponseContractError):
++                adapters.parse_response('antigravity', raw, expected_schema=self.schema)
++
++    def test_rejects_schema_incompatible_output(self):
++        with self.assertRaisesRegex(adapters.ResponseContractError, 'schema_enum'):
++            adapters.parse_response('antigravity', self.envelope(
++                structured_output={'decision': 'unknown', 'changes': []}),
++                expected_schema=self.schema)
++
++    def test_rejects_identity_claim_in_schema_bound_payload(self):
++        payload = {**self.payload, 'agent': 'codex'}
++        with self.assertRaisesRegex(adapters.ResponseContractError, 'identity_claim_rejected'):
++            adapters.parse_response('antigravity', self.envelope(
++                structured_output=payload), expected_schema=self.schema)
++
++    def test_unstructured_mode_requires_json_response_and_rejects_identity_claim(self):
++        result = adapters.parse_response('antigravity', self.envelope(
++            response=json.dumps(self.payload)))
++        self.assertEqual(result, self.payload)
++        with self.assertRaisesRegex(adapters.ResponseContractError, 'identity_claim_rejected'):
++            adapters.parse_response('antigravity', self.envelope(
++                response=json.dumps({**self.payload, 'agent': 'codex'})))
++        with self.assertRaisesRegex(adapters.ResponseContractError, 'unexpected_structured_output'):
++            adapters.parse_response('antigravity', self.envelope(
++                structured_output=self.payload))
++
++    def test_effort_flag_matches_confirmed_cli_enum(self):
++        args = adapters.argv('antigravity', 'synthetic-model', 'xhigh', prompt='synthetic')
++        self.assertEqual(args[args.index('--effort') + 1], 'xhigh')
++        with self.assertRaisesRegex(IpanemaError, '[Ee]sfuerzo'):
++            adapters.argv('antigravity', 'synthetic-model', 'turbo', prompt='synthetic')
++
++    def test_claude_and_codex_parser_contracts_are_unchanged(self):
++        raw = json.dumps({'decision': 'approve', 'changes': []})
++        self.assertEqual(adapters.parse_response('claude', raw), json.loads(raw))
++        self.assertEqual(adapters.parse_response('codex', raw), json.loads(raw))
++
++
++if __name__ == '__main__':
++    unittest.main()
+diff --git a/tools/ipanema/orchestration/adapters.py b/tools/ipanema/orchestration/adapters.py
+index 438fb66..353d6dd 100644
+--- a/tools/ipanema/orchestration/adapters.py
++++ b/tools/ipanema/orchestration/adapters.py
+@@ -127,11 +127,13 @@ def argv(agent,model,effort=None,*,response_schema=None,prompt=None):
+             raise IpanemaError('Modelo Antigravity no verificado; no se utilizará un default implícito.')
+         if not isinstance(prompt,str) or not prompt.strip() or len(prompt.encode('utf-8'))>96_000:
+             raise IpanemaError('Prompt agy vacío o supera el límite de transporte por argumento de esta integración.')
+-        if effort:
+-            raise IpanemaError('agy --help no documenta un parámetro de esfuerzo compatible con los perfiles V2.')
++        if effort is not None:
++            if effort not in ('low','medium','high','xhigh','max'):
++                raise IpanemaError('Esfuerzo Antigravity no admitido por el contrato del CLI.')
+         # Flags are limited to those exposed by installed agy --help; this builder does not authorize execution.
+         args=[binary,'--model',model,'--output-format','json',
+               '--mode','plan','--sandbox','--disable-slash-commands']
++        if effort is not None:args+=['--effort',effort]
+         if response_schema is not None:
+             args+=['--json-schema','/workspace/council-response.schema.json']
+         args+=['-p',prompt]
+@@ -148,13 +150,37 @@ def argv(agent,model,effort=None,*,response_schema=None,prompt=None):
+     return args
+ 
+ 
+-def parse_response(agent,stdout,*,strict=False):
++def parse_response(agent,stdout,*,strict=False,expected_schema=None):
+     if agent=='antigravity':
+-        try:value=json.loads(stdout,object_pairs_hook=lambda pairs:_unique_pairs(pairs),parse_constant=lambda _:(_ for _ in ()).throw(ValueError('invalid constant')))
+-        except (ValueError,TypeError):raise ResponseContractError('antigravity_json_invalid') from None
+-        if not isinstance(value,dict) or not {'decision','changes'}<=set(value):
+-            raise ResponseContractError('antigravity_json_envelope_unverified')
+-        return value
++        def decode(text,category):
++            if not isinstance(text,str) or not text.strip():raise ResponseContractError(category)
++            try:
++                return json.loads(text,object_pairs_hook=_unique_pairs,
++                                  parse_constant=lambda _:(_ for _ in ()).throw(ValueError('invalid constant')))
++            except (ValueError,TypeError):
++                raise ResponseContractError(category) from None
++        envelope=decode(stdout,'antigravity_json_invalid')
++        if not isinstance(envelope,dict):raise ResponseContractError('antigravity_json_envelope_invalid')
++        status=envelope.get('status')
++        if status!='SUCCESS':
++            raise ResponseContractError('antigravity_execution_status',status=status if isinstance(status,str) else 'missing_or_invalid')
++        if not isinstance(envelope.get('response'),str) or not envelope['response'].strip():
++            raise ResponseContractError('antigravity_response_missing')
++        if expected_schema is not None:
++            if 'structured_output' not in envelope:
++                raise ResponseContractError('antigravity_structured_output_missing')
++            result=envelope['structured_output']
++            if not isinstance(result,dict):raise ResponseContractError('antigravity_structured_output_invalid')
++        else:
++            if 'structured_output' in envelope:
++                raise ResponseContractError('antigravity_unexpected_structured_output')
++            result=decode(envelope.get('response'),'antigravity_response_json_invalid')
++            if not isinstance(result,dict):raise ResponseContractError('antigravity_response_object_required')
++        # Provider-supplied identity is never authoritative, regardless of schema.
++        if {'agent','identity','provider'} & set(result):
++            raise ResponseContractError('antigravity_identity_claim_rejected')
++        if expected_schema is not None:validate_schema(result,expected_schema)
++        return result
+     def unique_object(pairs):
+         obj={}
+         for key,value in pairs:
+diff --git a/tools/ipanema/orchestration/engine.py b/tools/ipanema/orchestration/engine.py
+index 345a7a7..3c1c4e5 100644
+--- a/tools/ipanema/orchestration/engine.py
++++ b/tools/ipanema/orchestration/engine.py
+@@ -268,8 +268,9 @@ def _worker_once(project,plan,task,tree,history,settings,*,frozen_prompt=None):
+     checked=time.monotonic()
+     from .adapters import ResponseContractError,validate_schema
+     try:
+-        response=parse_response(task['agent'],raw['stdout'],strict=native_schema is not None)
+-        if native_schema:validate_schema(response,native_schema)
++        response=parse_response(task['agent'],raw['stdout'],strict=native_schema is not None,
++                                expected_schema=native_schema if task['agent']=='antigravity' else None)
++        if native_schema and task['agent']!='antigravity':validate_schema(response,native_schema)
+         task['execution']['contract_validation']={'status':'passed','duration_s':round(time.monotonic()-checked,6)}
+         return response
+     except ResponseContractError as exc:

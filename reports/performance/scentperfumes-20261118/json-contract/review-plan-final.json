@@ -1,0 +1,71 @@
+{
+  "plan": "/home/alanrichard/Escritorio/IA inversa/.local/scent-json-contract-20261118/reports/runs/sample/20261118T220206-orchestration-plan-1d494281/plan.json",
+  "classification": {
+    "level": "L4",
+    "risk": "critical",
+    "reasons": [
+      "credencial",
+      "arquitectura"
+    ],
+    "production_request": false,
+    "independent_review_required": true,
+    "method": "Reglas conservadoras revisables; la longitud del diff no reduce riesgo comercial."
+  },
+  "skills": [
+    "ipanema-architect"
+  ],
+  "files": [
+    "tools/ipanema/orchestration/adapters.py",
+    "tools/ipanema/orchestration/engine.py",
+    "tools/ipanema/orchestration/cli.py",
+    "tests/unit/test_structured_response_transport.py",
+    "tests/integration/test_smoke_structured_contract.py"
+  ],
+  "tasks": [
+    {
+      "id": "architecture",
+      "objective": "Auditoría de arquitectura del protocolo de respuesta del worker y del aislamiento de credenciales. Solo lectura del parser y smoke existentes: verificar rechazo de respuestas ambiguas o incompletas, límites, manejo de errores y compatibilidad de consumidores; contrastar alternativas y pruebas.",
+      "role": "architecture",
+      "agent": "claude",
+      "tier": "critical",
+      "allowed_files": [],
+      "read_files": [
+        "tools/ipanema/orchestration/adapters.py",
+        "tools/ipanema/orchestration/engine.py",
+        "tools/ipanema/orchestration/cli.py",
+        "tests/unit/test_structured_response_transport.py",
+        "tests/integration/test_smoke_structured_contract.py"
+      ],
+      "dependencies": [],
+      "tests": [
+        "central-qa"
+      ],
+      "state": "pending",
+      "result": null
+    },
+    {
+      "id": "audit",
+      "objective": "Auditoría de arquitectura del protocolo de respuesta del worker y del aislamiento de credenciales. Solo lectura del parser y smoke existentes: verificar rechazo de respuestas ambiguas o incompletas, límites, manejo de errores y compatibilidad de consumidores; contrastar alternativas y pruebas.",
+      "role": "audit",
+      "agent": "codex",
+      "tier": "critical",
+      "allowed_files": [],
+      "read_files": [
+        "tools/ipanema/orchestration/adapters.py",
+        "tools/ipanema/orchestration/engine.py",
+        "tools/ipanema/orchestration/cli.py",
+        "tests/unit/test_structured_response_transport.py",
+        "tests/integration/test_smoke_structured_contract.py"
+      ],
+      "dependencies": [
+        "architecture"
+      ],
+      "tests": [
+        "central-qa"
+      ],
+      "state": "pending",
+      "result": null
+    }
+  ],
+  "execution_performed": false
+}

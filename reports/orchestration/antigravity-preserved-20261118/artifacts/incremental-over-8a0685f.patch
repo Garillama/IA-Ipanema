@@ -1,0 +1,541 @@
+--- a/tools/ipanema/orchestration/adapters.py
++++ b/tools/ipanema/orchestration/adapters.py
+@@ -1,5 +1,6 @@
+ """Interfaces verificadas de CLIs; salida no confiable, sin herramientas de edición."""
+ import json
++import math
+ import re
+ import shutil
+ from pathlib import Path
+@@ -7,6 +8,8 @@
+ from ..core import IpanemaError, read_json
+ 
+ NAMES={'claude':'claude','codex':'codex','commandcode':'commandcode','antigravity':'agy'}
++ANTIGRAVITY_MAX_PROMPT_BYTES=96_000
++ANTIGRAVITY_SCHEMA_ROLES=frozenset(('council_proposal','council_objection','council_defense'))
+ 
+ 
+ def agent_policy(root=None):
+@@ -125,11 +128,16 @@
+     elif agent=='antigravity':
+         if not isinstance(model,str) or not model.strip():
+             raise IpanemaError('Modelo Antigravity no verificado; no se utilizará un default implícito.')
+-        if not isinstance(prompt,str) or not prompt.strip() or len(prompt.encode('utf-8'))>96_000:
+-            raise IpanemaError('Prompt agy vacío o supera el límite de transporte por argumento de esta integración.')
++        if response_schema is None:
++            raise IpanemaError('Antigravity requiere un rol con JSON Schema verificado; salida sin schema bloqueada.')
++        if not isinstance(prompt,str) or not prompt.strip() or len(prompt.encode('utf-8'))>ANTIGRAVITY_MAX_PROMPT_BYTES:
++            raise IpanemaError('Prompt Antigravity vacío o supera el límite explícito de '+str(ANTIGRAVITY_MAX_PROMPT_BYTES)+' bytes; no se truncó ni se inició el worker.')
+         if effort is not None:
+             if effort not in ('low','medium','high','xhigh','max'):
+                 raise IpanemaError('Esfuerzo Antigravity no admitido por el contrato del CLI.')
++        # Linux limits one argv string to 32 pages (128 KiB at the verified 4 KiB
++        # page size); 96 KB is a conservative per-argument cap. agy stdin requires
++        # stream-json output too, so switching transport also needs a new parser.
+         # Flags are limited to those exposed by installed agy --help; this builder does not authorize execution.
+         args=[binary,'--model',model,'--output-format','json',
+               '--mode','plan','--sandbox','--disable-slash-commands']
+@@ -161,25 +169,54 @@
+                 raise ResponseContractError(category) from None
+         envelope=decode(stdout,'antigravity_json_invalid')
+         if not isinstance(envelope,dict):raise ResponseContractError('antigravity_json_envelope_invalid')
++        required=('conversation_id','status','response','duration_seconds','num_turns','usage')
++        missing=[key for key in required if key not in envelope]
++        if missing:raise ResponseContractError('antigravity_envelope_incomplete',missing=missing)
+         status=envelope.get('status')
+         if status!='SUCCESS':
+             raise ResponseContractError('antigravity_execution_status',status=status if isinstance(status,str) else 'missing_or_invalid')
++        if 'error' in envelope:
++            raise ResponseContractError('antigravity_success_with_error')
++        if not isinstance(envelope['conversation_id'],str) or not envelope['conversation_id'].strip():
++            raise ResponseContractError('antigravity_conversation_id_invalid')
+         if not isinstance(envelope.get('response'),str) or not envelope['response'].strip():
+             raise ResponseContractError('antigravity_response_missing')
++        def finite_number(value):
++            return type(value) is int or type(value) is float and math.isfinite(value)
++        duration=envelope['duration_seconds'];turns=envelope['num_turns'];usage=envelope['usage']
++        if not finite_number(duration) or duration<0:
++            raise ResponseContractError('antigravity_duration_invalid')
++        if not finite_number(turns) or turns<1:
++            raise ResponseContractError('antigravity_num_turns_invalid')
++        if not isinstance(usage,dict):raise ResponseContractError('antigravity_usage_invalid')
++        documented_usage=('input_tokens','output_tokens','thinking_tokens','cache_read_tokens','total_tokens')
++        if any(key not in usage or not finite_number(usage[key]) or usage[key]<0 for key in documented_usage):
++            raise ResponseContractError('antigravity_usage_incomplete')
++        if {'agent','identity','provider'} & set(envelope):
++            raise ResponseContractError('antigravity_identity_claim_rejected')
+         if expected_schema is not None:
+             if 'structured_output' not in envelope:
+                 raise ResponseContractError('antigravity_structured_output_missing')
++            if not isinstance(envelope.get('json_schema'),dict):
++                raise ResponseContractError('antigravity_json_schema_missing')
++            if envelope['json_schema']!=expected_schema:
++                raise ResponseContractError('antigravity_json_schema_mismatch')
+             result=envelope['structured_output']
+             if not isinstance(result,dict):raise ResponseContractError('antigravity_structured_output_invalid')
+         else:
+-            if 'structured_output' in envelope:
+-                raise ResponseContractError('antigravity_unexpected_structured_output')
+-            result=decode(envelope.get('response'),'antigravity_response_json_invalid')
+-            if not isinstance(result,dict):raise ResponseContractError('antigravity_response_object_required')
++            raise ResponseContractError('antigravity_schema_required')
+         # Provider-supplied identity is never authoritative, regardless of schema.
+-        if {'agent','identity','provider'} & set(result):
++        def has_identity_claim(value):
++            if isinstance(value,dict):
++                return bool({'agent','identity','provider'} & set(value)) or any(has_identity_claim(item) for item in value.values())
++            if isinstance(value,list):return any(has_identity_claim(item) for item in value)
++            return False
++        if has_identity_claim(result):
+             raise ResponseContractError('antigravity_identity_claim_rejected')
+-        if expected_schema is not None:validate_schema(result,expected_schema)
++        echoed=decode(envelope['response'],'antigravity_response_json_invalid')
++        if echoed!=result:
++            raise ResponseContractError('antigravity_response_structured_mismatch')
++        validate_schema(result,expected_schema)
+         return result
+     def unique_object(pairs):
+         obj={}
+--- a/tools/ipanema/orchestration/engine.py
++++ b/tools/ipanema/orchestration/engine.py
+@@ -196,7 +196,9 @@
+ 
+ def _worker_once(project,plan,task,tree,history,settings,*,frozen_prompt=None):
+     from .isolation import run_isolated
+-    from .adapters import require_execution_agent
++    from .adapters import require_execution_agent,ANTIGRAVITY_SCHEMA_ROLES
++    if task['agent']=='antigravity' and task.get('role') not in ANTIGRAVITY_SCHEMA_ROLES:
++        raise IpanemaError('Rol Antigravity bloqueado: no existe JSON Schema verificado para este rol.')
+     require_execution_agent(task['agent'],project.root)
+     selected=model_for(project.root,task['agent'],task['tier']);task['model']=selected
+     default_cfg=runtime_defaults(task['agent'])
+@@ -436,6 +438,11 @@
+         details={a:execution_policy(a,project.root)['blockers'] for a in blocked_runtime}
+         raise IpanemaError('Run detenido antes de QA/proveedores: runtimes requeridos sin preflight de seguridad/modelo: '+
+                            json.dumps(details,ensure_ascii=False,sort_keys=True))
++    if policy.get('enabled') and policy.get('system_mode')=='multi-agent':
++        from .adapters import runtime_binary
++        unavailable=[a for a in policy.get('required_agents',[]) if not runtime_binary(a)]
++        if unavailable:
++            raise IpanemaError('Consejo triádico detenido antes de QA/proveedores: faltan runtimes requeridos: '+','.join(unavailable))
+     additional=plan.get('council_required_constraints',[])
+     if not isinstance(additional,list) or any(c not in CRITERIA for c in additional):
+         raise IpanemaError('Restricciones adicionales del consejo inválidas.')
+--- a/tools/ipanema/orchestration/models.json
++++ b/tools/ipanema/orchestration/models.json
+@@ -87,15 +87,15 @@
+     "change": "CommandCode strong/critical use official case-sensitive Kimi ID; no automatic premium escalation."
+   },
+   "council": {
+-    "mode": "multi-agent",
++    "mode": "dual-agent",
+     "enabled": true,
+     "members": [
+       "claude",
+-      "codex",
+-      "antigravity"
++      "codex"
+     ],
+     "disabled": [
+-      "commandcode"
++      "commandcode",
++      "antigravity"
+     ],
+     "require_both_for_major_decisions": true,
+     "independent_proposals": true,
+--- a/tests/unit/test_antigravity_integration.py
++++ b/tests/unit/test_antigravity_integration.py
+@@ -16,7 +16,13 @@
+ 
+ 
+ class AntigravityAdapterTests(unittest.TestCase):
+-    agents = ('claude', 'codex', 'antigravity')
++    agents = ('claude', 'codex')
++    triad = ('claude', 'codex', 'antigravity')
++
++    def triad_policy(self):
++        value=copy.deepcopy(adapters.agent_policy())
++        value.update(mode='multi-agent',members=list(self.triad),disabled=['commandcode'])
++        return value
+ 
+     def test_registry_and_profiles_are_separate_from_runtime_readiness(self):
+         self.assertEqual(adapters.enabled_agents(), self.agents)
+@@ -24,7 +30,7 @@
+         self.assertIsNone(selected['model'])
+         self.assertEqual(selected['selection_status'], 'unverified')
+         self.assertFalse(adapters.execution_policy('antigravity')['enabled'])
+-        with self.assertRaisesRegex(IpanemaError, 'B1_.*B2_'):
++        with self.assertRaisesRegex(IpanemaError, 'Agente deshabilitado por política: antigravity'):
+             adapters.require_execution_agent('antigravity')
+ 
+     def test_local_registry_cannot_clear_code_level_security_blockers(self):
+@@ -38,7 +44,9 @@
+             self.assertIn('B1_cli_authentication_not_separated_from_tool_capable_worker',status['blockers'])
+             self.assertIn('B2_destination_egress_not_enforced',status['blockers'])
+ 
+-    def test_cli_argv_uses_only_help_documented_interface_and_closed_json(self):
++    @patch('ipanema.orchestration.adapters.enabled_agents',return_value=('claude','codex','antigravity'))
++    @patch('ipanema.orchestration.adapters.shutil.which',return_value='/synthetic/agy')
++    def test_cli_argv_uses_only_help_documented_interface_and_closed_json(self, _binary, _agents):
+         schema = council.response_schema('council_proposal')
+         args = adapters.argv('antigravity', 'synthetic-model', response_schema=schema,
+                              prompt='synthetic review only')
+@@ -51,29 +59,38 @@
+         self.assertNotIn('--remote-agent', args)
+         with self.assertRaisesRegex(IpanemaError, '[Mm]odelo.*no verificado'):
+             adapters.argv('antigravity', None, prompt='synthetic')
+-        effort_args=adapters.argv('antigravity', 'synthetic-model', 'high', prompt='synthetic')
++        effort_args=adapters.argv('antigravity', 'synthetic-model', 'high', response_schema=schema,prompt='synthetic')
+         self.assertIn('--effort',effort_args);self.assertEqual(effort_args[effort_args.index('--effort')+1],'high')
+-        with self.assertRaisesRegex(IpanemaError, 'esfuerzo'):
+-            adapters.argv('antigravity', 'synthetic-model', 'turbo', prompt='synthetic')
++        with self.assertRaisesRegex(IpanemaError, '[Ee]sfuerzo'):
++            adapters.argv('antigravity', 'synthetic-model', 'turbo', response_schema=schema,prompt='synthetic')
+ 
+     def test_output_parser_accepts_only_direct_structured_json_and_rejects_unknown_envelopes(self):
+         fixture = {'decision': 'proposed', 'changes': []}
+-        envelope={'status':'SUCCESS','response':'validated','structured_output':fixture}
++        schema={'type':'object','required':['decision','changes'],
++                'properties':{'decision':{'type':'string'},'changes':{'type':'array'}},
++                'additionalProperties':False}
++        envelope={'conversation_id':'fixture','status':'SUCCESS','response':json.dumps(fixture),
++                  'duration_seconds':0.1,'num_turns':1,
++                  'usage':{'input_tokens':1,'output_tokens':1,'thinking_tokens':0,'cache_read_tokens':0,'total_tokens':2},
++                  'structured_output':fixture,'json_schema':schema}
+         self.assertEqual(adapters.parse_response('antigravity', json.dumps(envelope),
+-                         expected_schema={'type':'object','required':['decision','changes'],
+-                                          'properties':{'decision':{'type':'string'},'changes':{'type':'array'}},
+-                                          'additionalProperties':False}), fixture)
++                         expected_schema=schema), fixture)
++        failed={'conversation_id':'fixture','status':'ERROR','response':'failure',
++                'duration_seconds':0.1,'num_turns':1,
++                'usage':{'input_tokens':0,'output_tokens':0,'thinking_tokens':0,'cache_read_tokens':0,'total_tokens':0}}
+         with self.assertRaisesRegex(adapters.ResponseContractError, 'antigravity_execution_status'):
+-            adapters.parse_response('antigravity', json.dumps({'result': json.dumps(fixture)}))
++            adapters.parse_response('antigravity', json.dumps(failed),expected_schema=schema)
+         with self.assertRaisesRegex(adapters.ResponseContractError, 'antigravity_json_invalid'):
+             adapters.parse_response('antigravity', '{broken')
+ 
+     def test_incomplete_json_and_synthetic_auth_failure_are_classified_without_provider(self):
+-        incomplete={'decision':'proposed','changes':[]}
++        incomplete={'decision':'proposed'}
++        schema=council.response_schema('council_proposal')
+         with self.assertRaises(adapters.ResponseContractError):
+-            adapters.parse_response('antigravity',json.dumps({'status':'SUCCESS','response':'partial',
+-                                   'structured_output':incomplete}),
+-                                   expected_schema=council.response_schema('council_proposal'))
++            adapters.parse_response('antigravity',json.dumps({'conversation_id':'fixture','status':'SUCCESS',
++                'response':json.dumps(incomplete),'duration_seconds':0.1,'num_turns':1,
++                'usage':{'input_tokens':1,'output_tokens':1,'thinking_tokens':0,'cache_read_tokens':0,'total_tokens':2},
++                'structured_output':incomplete,'json_schema':schema}),expected_schema=schema)
+         self.assertEqual(recovery.classify_failure({'stderr':'401 unauthorized','stdout':''}),'authentication')
+ 
+     def test_runtime_has_no_credential_mount_or_env_and_real_worker_is_blocked(self):
+@@ -111,21 +128,21 @@
+         with tempfile.TemporaryDirectory() as folder:
+             project = Project(make_project(Path(folder), theme=False))
+             (project.root / 'AGENTS.md').write_text('Synthetic fixture only')
+-            plan = planner.make_plan(project, 'Revisión crítica de seguridad de credenciales',
+-                                     files=['fixture.txt'], scope='workspace', implementation_agent='codex')
+-            self.assertEqual(plan['council']['required_agents'], list(self.agents))
++            with patch('ipanema.orchestration.adapters.agent_policy',return_value=self.triad_policy()):
++                plan = planner.make_plan(project, 'Revisión crítica de seguridad de credenciales',
++                                         files=['fixture.txt'], scope='workspace', implementation_agent='codex')
++                self.assertEqual(plan['council']['required_agents'], list(self.triad))
+             reviewers = [t['agent'] for t in plan['tasks'] if t['role'] == 'review']
+             implementation = next(t['agent'] for t in plan['tasks'] if t['role'] == 'implementation')
+             self.assertEqual(implementation, 'codex')
+             self.assertEqual(len(set(reviewers)), 2)
+             self.assertNotIn(implementation, reviewers)
+             self.assertEqual(set(reviewers), {'claude', 'antigravity'})
+-            for agent in self.agents:
++            for agent in self.triad:
+                 task = council.participant_task(agent, 0, ['fixture.txt'], 'critical', 'synthetic')
+                 self.assertEqual(task['allowed_files'], [])
+                 self.assertNotIn('peer_proposals', task['council_context'])
+-                if agent=='antigravity':
+-                    self.assertIn('rendimiento', task['council_context']['specialty'])
++                if agent=='antigravity':self.assertIn('rendimiento', task['council_context']['specialty'])
+ 
+     def test_evidence_controls_selection_not_majority_preference(self):
+         ctx = context()
+@@ -134,7 +151,7 @@
+                      proposal('antigravity', alternative='other')]
+         proof = receipts(ctx, alternative='native') + receipts(ctx, alternative='other')
+         next(r for r in proof if r['subject'] == 'native' and r['constraint'] == 'security')['passed'] = False
+-        adr = council.aggregate(proposals, [], evidence=proof, required_agents=list(self.agents),
++        adr = council.aggregate(proposals, [], evidence=proof, required_agents=list(self.triad),
+                                 context=ctx, project='fixture', objective='synthetic')
+         self.assertEqual(adr['selected_alternative'], 'other')
+         self.assertFalse(adr['production_authorized'])
+@@ -144,13 +161,13 @@
+             project = Project(make_project(Path(folder), theme=False))
+             (project.root / 'AGENTS.md').write_text('Synthetic fixture only')
+             (project.root / 'fixture.txt').write_text('synthetic')
+-            plan = planner.make_plan(project, 'Revisión crítica de seguridad de credenciales',
+-                                     files=['fixture.txt'], scope='workspace', implementation_agent='codex')
+-            with patch.object(engine, 'central_qa') as qa, patch.object(engine, 'run_council') as run_council:
+-                with self.assertRaisesRegex(IpanemaError, 'antes de QA/proveedores'):
+-                    engine.execute(project, plan, authorize=True)
+-                qa.assert_not_called()
+-                run_council.assert_not_called()
++            with patch('ipanema.orchestration.adapters.agent_policy',return_value=self.triad_policy()):
++                plan = planner.make_plan(project, 'Revisión crítica de seguridad de credenciales',
++                                         files=['fixture.txt'], scope='workspace', implementation_agent='codex')
++                with patch.object(engine, 'central_qa') as qa, patch.object(engine, 'run_council') as run_council:
++                    with self.assertRaisesRegex(IpanemaError, 'antes de QA/proveedores'):
++                        engine.execute(project, plan, authorize=True)
++                    qa.assert_not_called();run_council.assert_not_called()
+ 
+     def test_readonly_and_dual_v2_policy_contract_remain_representable(self):
+         base = json.loads((Path(__file__).resolve().parents[2] / 'tools/ipanema/orchestration/models.json').read_text())
+@@ -162,7 +179,12 @@
+             self.assertEqual(adapters.agent_policy(root)['mode'], 'dual-agent')
+ 
+ 
+-    def test_mocked_three_agent_council_runs_independent_proposals_debate_and_defense(self):
++    @patch('ipanema.orchestration.adapters.agent_policy')
++    def test_mocked_three_agent_council_runs_independent_proposals_debate_and_defense(self, agent_policy):
++        catalog=json.loads((Path(__file__).resolve().parents[2]/'tools/ipanema/orchestration/models.json').read_text())
++        triad_policy=copy.deepcopy(catalog['council'])
++        triad_policy.update(mode='multi-agent',members=list(self.triad),disabled=['commandcode'])
++        agent_policy.return_value=triad_policy
+         with tempfile.TemporaryDirectory() as folder:
+             root=make_project(Path(folder),theme=False)
+             (root/'AGENTS.md').write_text('Synthetic fixture only')
+@@ -183,7 +205,7 @@
+                 elif task['role']=='council_objection':
+                     response['preferred_alternative']='native'
+                     response['objections']=[]
+-                    peer=next(a for a in self.agents if a!=task['agent'])
++                    peer=next(a for a in self.triad if a!=task['agent'])
+                     response['questions']=[{'id':'Q-'+task['agent'],'to_agent':peer,'alternative_id':'native',
+                                             'question':'What evidence supports this exact claim?','evidence_refs':[]}]
+                 else:
+@@ -207,9 +229,9 @@
+             proposals=[row for row in calls if row[0]=='council_proposal']
+             objections=[row for row in calls if row[0]=='council_objection']
+             defenses=[row for row in calls if row[0]=='council_defense']
+-            self.assertEqual({row[1] for row in proposals},set(self.agents))
+-            self.assertEqual({row[1] for row in objections},set(self.agents))
+-            self.assertEqual({row[1] for row in defenses},set(self.agents))
++            self.assertEqual({row[1] for row in proposals},set(self.triad))
++            self.assertEqual({row[1] for row in objections},set(self.triad))
++            self.assertEqual({row[1] for row in defenses},set(self.triad))
+             self.assertEqual(len(proposals),3);self.assertEqual(len(objections),3);self.assertEqual(len(defenses),3)
+             self.assertTrue(all(row[2]==[] for row in proposals))
+             self.assertEqual(adr['phases_executed'],['independent_proposals','cross_examination','defense'])
+--- a/tests/unit/test_antigravity_json_contract.py
++++ b/tests/unit/test_antigravity_json_contract.py
+@@ -1,9 +1,13 @@
+ """Focused offline contract tests for the documented Antigravity JSON envelope."""
+ import json
++import tempfile
+ import unittest
++from pathlib import Path
++from unittest.mock import patch
+ 
+-from ipanema.orchestration import adapters
+-from ipanema.core import IpanemaError
++from ipanema.orchestration import adapters,engine,planner
++from ipanema.core import IpanemaError,Project
++from tests.support import make_project
+ 
+ 
+ class AntigravityJsonContractTests(unittest.TestCase):
+@@ -18,16 +22,25 @@
+     }
+     payload = {'decision': 'proposed', 'changes': []}
+ 
+-    def envelope(self, *, status='SUCCESS', structured_output=None, response='validated'):
+-        value = {'status': status, 'response': response,
+-                 'duration_seconds': 0.01, 'usage': {}}
++    def envelope(self, *, status='SUCCESS', structured_output=None, response=None,
++                 schema=None, conversation_id='synthetic-conversation', duration_seconds=0.01,
++                 num_turns=1, usage=None, extra=None):
++        payload=structured_output if structured_output is not None else self.payload
++        value = {'conversation_id':conversation_id,'status': status,
++                 'response':response if response is not None else json.dumps(payload),
++                 'duration_seconds':duration_seconds,'num_turns':num_turns,
++                 'usage':usage if usage is not None else {'input_tokens':1,'output_tokens':1,
++                     'thinking_tokens':0,'cache_read_tokens':0,'total_tokens':2}}
+         if structured_output is not None:
+             value['structured_output'] = structured_output
++        if schema is not None:
++            value['json_schema']=schema
++        if extra:value.update(extra)
+         return json.dumps(value)
+ 
+     def test_accepts_success_envelope_and_validates_structured_output(self):
+         result = adapters.parse_response(
+-            'antigravity', self.envelope(structured_output=self.payload),
++            'antigravity', self.envelope(structured_output=self.payload,schema=self.schema),
+             expected_schema=self.schema)
+         self.assertEqual(result, self.payload)
+ 
+@@ -36,24 +49,24 @@
+             with self.subTest(status=status), self.assertRaisesRegex(
+                     adapters.ResponseContractError, 'antigravity_execution_status'):
+                 adapters.parse_response('antigravity', self.envelope(
+-                    status=status, structured_output=self.payload), expected_schema=self.schema)
++                    status=status, structured_output=self.payload,schema=self.schema), expected_schema=self.schema)
+ 
+     def test_rejects_missing_status_and_missing_structured_output(self):
+-        with self.assertRaisesRegex(adapters.ResponseContractError, 'antigravity_execution_status'):
+-            adapters.parse_response('antigravity', json.dumps({'response': 'ok'}),
+-                                    expected_schema=self.schema)
++        with self.assertRaisesRegex(adapters.ResponseContractError, 'envelope_incomplete'):
++            adapters.parse_response('antigravity', json.dumps({'response': 'ok'}), expected_schema=self.schema)
+         with self.assertRaisesRegex(adapters.ResponseContractError, 'antigravity_structured_output_missing'):
+-            adapters.parse_response('antigravity', self.envelope(), expected_schema=self.schema)
++            adapters.parse_response('antigravity', self.envelope(schema=self.schema), expected_schema=self.schema)
+         with self.assertRaisesRegex(adapters.ResponseContractError, 'antigravity_json_invalid'):
+             adapters.parse_response('antigravity', '', expected_schema=self.schema)
++        empty_response=json.loads(self.envelope(structured_output=self.payload,schema=self.schema))
++        empty_response['response']='  '
+         with self.assertRaisesRegex(adapters.ResponseContractError, 'antigravity_response_missing'):
+-            adapters.parse_response('antigravity', json.dumps({'status': 'SUCCESS', 'response': '  ',
+-                                    'structured_output': self.payload}), expected_schema=self.schema)
++            adapters.parse_response('antigravity', json.dumps(empty_response), expected_schema=self.schema)
+ 
+     def test_rejects_incomplete_schema_payload(self):
+         with self.assertRaisesRegex(adapters.ResponseContractError, 'missing_field'):
+             adapters.parse_response('antigravity', self.envelope(
+-                structured_output={'decision': 'proposed'}), expected_schema=self.schema)
++                structured_output={'decision': 'proposed'},schema=self.schema), expected_schema=self.schema)
+ 
+     def test_rejects_malformed_truncated_and_duplicate_key_json(self):
+         for raw in ('{broken', '{"status":"SUCCESS"',
+@@ -64,31 +77,116 @@
+     def test_rejects_schema_incompatible_output(self):
+         with self.assertRaisesRegex(adapters.ResponseContractError, 'schema_enum'):
+             adapters.parse_response('antigravity', self.envelope(
+-                structured_output={'decision': 'unknown', 'changes': []}),
++                structured_output={'decision': 'unknown', 'changes': []},schema=self.schema),
+                 expected_schema=self.schema)
+ 
+     def test_rejects_identity_claim_in_schema_bound_payload(self):
+         payload = {**self.payload, 'agent': 'codex'}
+         with self.assertRaisesRegex(adapters.ResponseContractError, 'identity_claim_rejected'):
+             adapters.parse_response('antigravity', self.envelope(
+-                structured_output=payload), expected_schema=self.schema)
++                structured_output=payload,schema=self.schema), expected_schema=self.schema)
+ 
+-    def test_unstructured_mode_requires_json_response_and_rejects_identity_claim(self):
+-        result = adapters.parse_response('antigravity', self.envelope(
+-            response=json.dumps(self.payload)))
+-        self.assertEqual(result, self.payload)
+-        with self.assertRaisesRegex(adapters.ResponseContractError, 'identity_claim_rejected'):
+-            adapters.parse_response('antigravity', self.envelope(
+-                response=json.dumps({**self.payload, 'agent': 'codex'})))
+-        with self.assertRaisesRegex(adapters.ResponseContractError, 'unexpected_structured_output'):
+-            adapters.parse_response('antigravity', self.envelope(
+-                structured_output=self.payload))
++    def test_requires_schema_for_antigravity_and_rejects_unsupported_roles(self):
++        with patch('ipanema.orchestration.adapters.enabled_agents',return_value=('claude','codex','antigravity')), \
++             patch('ipanema.orchestration.adapters.shutil.which',return_value='/synthetic/agy'):
++            with self.assertRaisesRegex(IpanemaError,'JSON Schema verificado'):
++                adapters.argv('antigravity','synthetic-model',prompt='synthetic')
++        with self.assertRaisesRegex(adapters.ResponseContractError,'antigravity_schema_required'):
++            adapters.parse_response('antigravity',self.envelope())
++        self.assertEqual(adapters.ANTIGRAVITY_SCHEMA_ROLES,
++                         frozenset(('council_proposal','council_objection','council_defense')))
++
++    def test_prompt_byte_limit_boundaries_do_not_start_a_provider(self):
++        with patch('ipanema.orchestration.adapters.enabled_agents',return_value=('claude','codex','antigravity')), \
++             patch('ipanema.orchestration.adapters.shutil.which',return_value='/synthetic/agy'):
++            args=adapters.argv('antigravity','synthetic-model',response_schema=self.schema,
++                               prompt='x'*(adapters.ANTIGRAVITY_MAX_PROMPT_BYTES-1))
++            self.assertEqual(len(args[-1].encode()),adapters.ANTIGRAVITY_MAX_PROMPT_BYTES-1)
++            args=adapters.argv('antigravity','synthetic-model',response_schema=self.schema,
++                               prompt='x'*adapters.ANTIGRAVITY_MAX_PROMPT_BYTES)
++            self.assertEqual(len(args[-1].encode()),adapters.ANTIGRAVITY_MAX_PROMPT_BYTES)
++            with self.assertRaisesRegex(IpanemaError,'límite explícito'):
++                adapters.argv('antigravity','synthetic-model',response_schema=self.schema,
++                              prompt='x'*(adapters.ANTIGRAVITY_MAX_PROMPT_BYTES+1))
++            with self.assertRaisesRegex(IpanemaError,'límite explícito'):
++                adapters.argv('antigravity','synthetic-model',response_schema=self.schema,
++                              prompt='é'*(adapters.ANTIGRAVITY_MAX_PROMPT_BYTES//2+1))
++
++    def test_success_envelope_required_fields_types_and_identity_fail_closed(self):
++        valid=self.envelope(structured_output=self.payload,schema=self.schema)
++        for field in ('conversation_id','duration_seconds','num_turns','usage'):
++            value=json.loads(valid);value.pop(field)
++            with self.subTest(missing=field), self.assertRaisesRegex(
++                    adapters.ResponseContractError,'antigravity_envelope_incomplete'):
++                adapters.parse_response('antigravity',json.dumps(value),expected_schema=self.schema)
++        invalid=[{'conversation_id':''},{'duration_seconds':'0.2'},{'duration_seconds':float('inf')},
++                 {'num_turns':0},{'usage':[]},{'usage':{'input_tokens':0}},
++                 {'response':''},{'error':'failed'}, {'agent':'codex'},
++                 {'json_schema':{'type':'string'}}]
++        for change in invalid:
++            value=json.loads(valid);value.update(change)
++            with self.subTest(change=change), self.assertRaises(adapters.ResponseContractError):
++                adapters.parse_response('antigravity',json.dumps(value),expected_schema=self.schema)
++        with self.assertRaisesRegex(adapters.ResponseContractError,'antigravity_identity_claim_rejected'):
++            adapters.parse_response('antigravity',self.envelope(
++                structured_output={'decision':'proposed','changes':[],'nested':{'identity':'codex'}},
++                schema=self.schema),expected_schema=self.schema)
++        with self.assertRaisesRegex(adapters.ResponseContractError,'response_structured_mismatch'):
++            adapters.parse_response('antigravity',self.envelope(
++                structured_output=self.payload,response='{}',schema=self.schema),expected_schema=self.schema)
++
++    def test_l3_l4_default_plans_keep_the_v2_dual_council(self):
++        self.assertEqual(adapters.enabled_agents(),('claude','codex'))
++        policy=adapters.agent_policy()
++        self.assertEqual(policy['mode'],'dual-agent')
++        self.assertEqual(set(policy['disabled']),{'commandcode','antigravity'})
++        with tempfile.TemporaryDirectory() as folder:
++            project=Project(make_project(Path(folder),theme=False))
++            (project.root/'AGENTS.md').write_text('Synthetic test rules')
++            for objective in ('Revisión de arquitectura compartida','Revisión crítica de autenticación'):
++                plan=planner.make_plan(project,objective,files=['fixture.txt'],scope='workspace',read_only=True)
++                self.assertEqual(plan['classification']['level'],'L3' if 'arquitectura' in objective else 'L4')
++                self.assertTrue(plan['council']['enabled'])
++                self.assertEqual(plan['council']['required_agents'],['claude','codex'])
++                self.assertTrue({task['agent'] for task in plan['tasks']} <= {'claude','codex'})
++
++    def test_explicit_triad_fails_before_workers_when_b1_b2_remain(self):
++        with tempfile.TemporaryDirectory() as folder:
++            project=Project(make_project(Path(folder),theme=False))
++            (project.root/'AGENTS.md').write_text('Synthetic test rules')
++            triad=adapters.agent_policy().copy()
++            triad.update(mode='multi-agent',members=['claude','codex','antigravity'],disabled=['commandcode'])
++            with patch('ipanema.orchestration.adapters.agent_policy',return_value=triad):
++                plan=planner.make_plan(project,'Revisión de arquitectura compartida',files=['fixture.txt'],
++                                       scope='workspace',read_only=True)
++                with patch.object(engine,'central_qa') as qa, patch.object(engine,'run_council') as council_run:
++                    with self.assertRaisesRegex(IpanemaError,'B1_cli_authentication.*B2_destination_egress'):
++                        engine.execute(project,plan,authorize=True)
++                    qa.assert_not_called();council_run.assert_not_called()
++
++    def test_future_triad_preflights_all_three_runtime_binaries(self):
++        with tempfile.TemporaryDirectory() as folder:
++            project=Project(make_project(Path(folder),theme=False))
++            (project.root/'AGENTS.md').write_text('Synthetic test rules')
++            triad=adapters.agent_policy().copy()
++            triad.update(mode='multi-agent',members=['claude','codex','antigravity'],disabled=['commandcode'])
++            with patch('ipanema.orchestration.adapters.agent_policy',return_value=triad):
++                plan=planner.make_plan(project,'Revisión de arquitectura compartida',files=['fixture.txt'],
++                                       scope='workspace',read_only=True)
++                with patch('ipanema.orchestration.adapters.execution_policy',return_value={'enabled':True,'blockers':[]}), \
++                     patch('ipanema.orchestration.adapters.runtime_binary',side_effect=lambda agent: None if agent=='antigravity' else '/bin/'+agent), \
++                     patch.object(engine,'central_qa') as qa, patch.object(engine,'run_council') as council_run:
++                    with self.assertRaisesRegex(IpanemaError,'faltan runtimes requeridos: antigravity'):
++                        engine.execute(project,plan,authorize=True)
++                    qa.assert_not_called();council_run.assert_not_called()
+ 
+     def test_effort_flag_matches_confirmed_cli_enum(self):
+-        args = adapters.argv('antigravity', 'synthetic-model', 'xhigh', prompt='synthetic')
+-        self.assertEqual(args[args.index('--effort') + 1], 'xhigh')
+-        with self.assertRaisesRegex(IpanemaError, '[Ee]sfuerzo'):
+-            adapters.argv('antigravity', 'synthetic-model', 'turbo', prompt='synthetic')
++        with patch('ipanema.orchestration.adapters.enabled_agents',return_value=('claude','codex','antigravity')), \
++             patch('ipanema.orchestration.adapters.shutil.which',return_value='/synthetic/agy'):
++            args = adapters.argv('antigravity', 'synthetic-model', 'xhigh', response_schema=self.schema,prompt='synthetic')
++            self.assertEqual(args[args.index('--effort') + 1], 'xhigh')
++            with self.assertRaisesRegex(IpanemaError, '[Ee]sfuerzo'):
++                adapters.argv('antigravity', 'synthetic-model', 'turbo', response_schema=self.schema,prompt='synthetic')
+ 
+     def test_claude_and_codex_parser_contracts_are_unchanged(self):
+         raw = json.dumps({'decision': 'approve', 'changes': []})

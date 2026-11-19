@@ -1,0 +1,54 @@
+{
+  "at": "2026-11-18T21:33:13.288885+00:00",
+  "checks": [
+    {
+      "patch": "continuation/skill-contract-candidate.patch",
+      "sha256": "ceef24d8385e3cdec811908c1526ee7bdbf41c5bc2887f0146fb8e145600fbed",
+      "matches_frozen_identity": true,
+      "base_files_unchanged": true,
+      "applied": false,
+      "review_attempted": false
+    },
+    {
+      "patch": "candidate-remove-inline-css-preloads.patch",
+      "sha256": "97ca9fe2111dcfa25acb35b017928da9b41ab1fe124af3b40f03bf33c7144e41",
+      "matches_frozen_identity": true,
+      "base_files_unchanged": true,
+      "applied": false,
+      "review_attempted": false
+    },
+    {
+      "patch": "continuation/observer-candidate.patch",
+      "sha256": "95bad94590b5e4e5585b8fb29c6e32b3a4ae4432e1fd08c37b0ea6791efe6594",
+      "matches_frozen_identity": true,
+      "base_files_unchanged": true,
+      "applied": false,
+      "review_attempted": false
+    },
+    {
+      "candidate": "header",
+      "patch_sha256_matches": true,
+      "base_matches": true,
+      "candidate_matches": true,
+      "git_apply_check_exit": 0,
+      "applied": false
+    },
+    {
+      "candidate": "builder-video",
+      "patch_sha256_matches": true,
+      "base_matches": true,
+      "candidate_matches": true,
+      "git_apply_check_exit": 0,
+      "applied": false
+    }
+  ],
+  "baseline_files_checked": 860,
+  "baseline_changed": [],
+  "theme_git_clean": true,
+  "branch": "audit/performance-20261118",
+  "builder_outside_media_function_identical": true,
+  "AGENTS_modified": false,
+  "new_council_requests": 0,
+  "remote_storefront_requests": 0,
+  "passed": true
+}

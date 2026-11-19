@@ -1,0 +1,80 @@
+{
+  "report": "/home/alanrichard/Escritorio/IA inversa/.local/scent-json-contract-20261118/reports/runs/sample/20261118T220001-orchestration-smoke-b69d606f/smoke.json",
+  "agent": "claude",
+  "passed": true,
+  "error": null,
+  "execution": {
+    "exit_code": 0,
+    "timed_out": false,
+    "output_limited": false,
+    "idle_timed_out": false,
+    "cancelled": false,
+    "process_started": true,
+    "process_reaped": true,
+    "stdin_bytes_written": 12273,
+    "context_complete": true,
+    "duration_s": 7.046,
+    "timing": {
+      "spawn_s": 0.000406,
+      "input_complete_s": 0.000465,
+      "first_stdout_s": 1.73894,
+      "first_stderr_s": null,
+      "timeout_phase": null,
+      "event_counts": {
+        "system": 4,
+        "stream_event": 81,
+        "event:message_start": 1,
+        "event:content_block_start": 2,
+        "event:content_block_delta": 74,
+        "assistant": 2,
+        "event:content_block_stop": 2,
+        "event:message_delta": 1,
+        "event:message_stop": 1,
+        "user": 1,
+        "rate_limit_event": 1,
+        "result": 1
+      },
+      "inference_vs_initialization": "not_separable_without_provider_events"
+    },
+    "output_accounting": {
+      "transport_bytes": 41362,
+      "retained_bytes": 41362,
+      "discarded_progress_bytes": 0,
+      "transport_limit_bytes": 20000000,
+      "retained_limit_bytes": 2000000
+    },
+    "isolation": {
+      "backend": "bubblewrap",
+      "snapshot_read_only": true,
+      "host_home_mounted": false,
+      "network": "enabled_no_destination_firewall",
+      "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+    },
+    "started_at": "2026-11-18T22:00:01.061954+00:00",
+    "prompt_bytes": 12273,
+    "prompt_sha256": "6d09c6e5299b98555b9107c174acc67dabcd9d32f501f10e04649b2b73b302d2",
+    "usage": {
+      "provider_reported": {
+        "total_cost_usd": 0.0019464999999999999,
+        "duration_ms": 3692,
+        "input_tokens": 2,
+        "cache_creation_input_tokens": 8119,
+        "cache_read_input_tokens": 0,
+        "output_tokens": 645
+      },
+      "measured_cost_available": true,
+      "estimated_cost": null
+    },
+    "limits": {
+      "timeout": 120,
+      "idle_timeout": 90,
+      "startup_timeout": 30,
+      "first_response_timeout": 120
+    },
+    "structured_output": "native_schema",
+    "contract_validation": {
+      "status": "passed",
+      "duration_s": 0.001486
+    }
+  }
+}

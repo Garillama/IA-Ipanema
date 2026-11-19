@@ -1,0 +1,26 @@
+test_qa_exception_records_blocked_and_never_dispatches (test_skill_execution_contract.SkillExecutionContract.test_qa_exception_records_blocked_and_never_dispatches) ... ERROR
+
+======================================================================
+ERROR: test_qa_exception_records_blocked_and_never_dispatches (test_skill_execution_contract.SkillExecutionContract.test_qa_exception_records_blocked_and_never_dispatches)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/alanrichard/Escritorio/IA inversa/.local/scent-skill-contract-candidate/tests/unit/test_skill_execution_contract.py", line 116, in test_qa_exception_records_blocked_and_never_dispatches
+    result=engine.execute(self.project,plan,authorize=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/alanrichard/Escritorio/IA inversa/tools/ipanema/orchestration/engine.py", line 461, in execute
+    baseline=central_qa(project,plan,snapshot,settings);result['baseline']=baseline
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/mock.py", line 1134, in __call__
+    return self._mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/mock.py", line 1138, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/mock.py", line 1193, in _execute_mock_call
+    raise effect
+ipanema.core.IpanemaError: Synthetic QA failure
+
+----------------------------------------------------------------------
+Ran 1 test in 0.049s
+
+FAILED (errors=1)

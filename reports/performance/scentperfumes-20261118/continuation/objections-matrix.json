@@ -1,0 +1,114 @@
+[
+  {
+    "id": "CAT-01",
+    "objection": "Dos validaciones incompatibles: catálogo frente a prefijo ipanema-*",
+    "solution_or_evidence": "instruction_context y execute usan el catálogo explícito; una única carga valida antes del despacho.",
+    "tests": "test_execute_reaches_configuration_only_after_catalog_validation; test_unknown_names_including_ipanema_prefix_rejected",
+    "evidence": "contract-before.txt; final-contract-and-sandbox.txt",
+    "status": "corregida_en_candidato_revisión_final_pendiente"
+  },
+  {
+    "id": "CAT-02",
+    "objection": "Skills ausentes, duplicadas o ilegibles no deben aceptarse",
+    "solution_or_evidence": "Lista tipada y única; archivo obligatorio, UTF-8 y errores controlados.",
+    "tests": "test_missing_authorized_skill_fails_closed; test_list_type_entries_and_duplicates_rejected; test_invalid_utf8_fails_closed",
+    "evidence": "final-contract-and-sandbox.txt",
+    "status": "corregida_en_candidato_revisión_final_pendiente"
+  },
+  {
+    "id": "PATH-01",
+    "objection": "Un symlink de directorio externo podía escapar de la comprobación",
+    "solution_or_evidence": "Recorrido léxico de componentes antes de resolver enlaces; también protege reglas y copias.",
+    "tests": "test_external_ancestor_symlink_rejected_in_context_and_qa; test_rules_symlink_rejected",
+    "evidence": "v1-symlink-before.txt; final-contract-and-sandbox.txt",
+    "status": "reproducida_y_corregida_en_candidato"
+  },
+  {
+    "id": "QA-01",
+    "objection": "El snapshot quitaba skills y documentación necesarias",
+    "solution_or_evidence": "QA recibe exclusivamente SKILL.md autorizados y README de proyectos; configuración de tienda sintética.",
+    "tests": "test_sanitizer_keeps_private_default_and_explicit_qa_documents; WorkspaceQA",
+    "evidence": "candidate-final-isolated-qa.json; final-local-quick-report.json",
+    "status": "verificado_localmente_no_integrado"
+  },
+  {
+    "id": "LINK-01",
+    "objection": "No inventar informes para satisfacer referencias históricas excluidas",
+    "solution_or_evidence": "Recibos del controlador con documento, destino y hashes; no se copian todos los informes ni se crean stubs.",
+    "tests": "SnapshotLinkContract; test_changed_document_cannot_reuse_receipt",
+    "evidence": "final-contract-and-sandbox.txt",
+    "status": "verificado_localmente_no_integrado"
+  },
+  {
+    "id": "LINK-02",
+    "objection": "Un campo editable del proyecto no debe relajar validate()",
+    "solution_or_evidence": "Opción explícita snapshot_receipts para llamadores de QA; comportamiento normal estricto, incluido JSON offline-test.",
+    "tests": "test_default_real_project_validation_remains_strict; test_strict_source_or_configured_theme_never_excludes",
+    "evidence": "final-contract-and-sandbox.txt",
+    "status": "corregida_en_candidato"
+  },
+  {
+    "id": "LINK-03",
+    "objection": "Un recibo simple aceptaba indebidamente :línea o #ancla",
+    "solution_or_evidence": "No se consulta el recibo cuando el enlace contiene línea o ancla. Antes: cuatro exclusiones; después: dos exclusiones y dos errores.",
+    "tests": "test_plain_receipt_never_certifies_lines_or_anchors",
+    "evidence": "qualified-receipt-before.txt; qualified-receipt-after.txt",
+    "status": "reproducida_y_corregida_en_candidato"
+  },
+  {
+    "id": "STATE-01",
+    "objection": "Fallos antes del try dejaban running o no registraban bloqueo",
+    "solution_or_evidence": "Guardas para preparación, lectura de archivos, hash original y QA; se escribe blocked y finished_at antes de inferencia.",
+    "tests": "test_invalid_non_markdown_source_records_blocked_before_qa; test_qa_exception_records_blocked_and_never_dispatches; test_git_timeout_records_blocked_before_dispatch",
+    "evidence": "v2-decode-before.txt; v2-qa-exception-before.txt; final-contract-and-sandbox.txt",
+    "status": "reproducida_y_corregida_en_candidato"
+  },
+  {
+    "id": "META-01",
+    "objection": "Colisión del nombre del manifiesto y metadatos aportados por configuración",
+    "solution_or_evidence": "Nombre reservado; manifiesto generado desde estado congelado; claves internas de settings rechazadas.",
+    "tests": "test_central_qa_runs_both_suites_and_ignores_source_manifest; test_controller_manifest_cannot_be_declared_editable; test_private_configuration_never_supplies_controller_state",
+    "evidence": "v2-manifest-before.txt; final-contract-and-sandbox.txt",
+    "status": "corregida_en_candidato"
+  },
+  {
+    "id": "QA-02",
+    "objection": "El QA del consejo no ejecutaba integración",
+    "solution_or_evidence": "Se ejecutan ambas suites sin red externa y se registran conteos y omisiones por separado.",
+    "tests": "central_qa; suite_results",
+    "evidence": "candidate-final-isolated-qa.json; final-local-quick-report.json",
+    "status": "verificado_con_ejecuciones_reales"
+  },
+  {
+    "id": "QA-03",
+    "objection": "Hipótesis de suites vacías o resultados interrumpidos aceptados",
+    "solution_or_evidence": "En Python 3.12.3 una suite vacía devuelve 5: esa hipótesis no se reprodujo. Se añadieron además conteos y rechazo explícito de cancelación, inactividad y salida limitada.",
+    "tests": "test_central_qa_rejects_empty_all_skipped_or_interrupted_results",
+    "evidence": "empty-suite-observation.json; final-contract-and-sandbox.txt",
+    "status": "hipótesis_vacía_refutada_en_runtime_guardas_probadas_con_fixtures"
+  },
+  {
+    "id": "CAT-03",
+    "objection": "Contar carpetas no demuestra identidad del catálogo",
+    "solution_or_evidence": "validate compara conjuntos de nombres y detecta sustituciones, faltantes, desconocidas y symlinks.",
+    "tests": "test_catalog_identity_not_only_count_is_validated",
+    "evidence": "final-contract-and-sandbox.txt",
+    "status": "corregida_en_candidato"
+  },
+  {
+    "id": "PATH-02",
+    "objection": "Enlaces de documentación podían leer Markdown fuera de raíz",
+    "solution_or_evidence": "Referencias externas se registran sin leer contenido; se rechazan symlinks internos y líneas cero.",
+    "tests": "test_relative_external_markdown_is_not_read; test_internal_link_symlinks_and_zero_line_are_rejected",
+    "evidence": "final-contract-and-sandbox.txt",
+    "status": "verificado_localmente"
+  },
+  {
+    "id": "REV-01",
+    "objection": "Revisión final y aplicación protegida",
+    "solution_or_evidence": "La última ejecución clasificó Claude como rate_limit y canceló Codex. No se transfieren aprobaciones de hashes anteriores.",
+    "tests": "AGENTS.md: participación original y revisión obligatorias",
+    "evidence": "council-final-stop/adr.json",
+    "status": "bloqueada_no_aplicar"
+  }
+]

@@ -1,0 +1,29 @@
+{
+  "private_root": "/home/alanrichard/Escritorio/IA inversa/.local/scent-runtime-review-20261118",
+  "dependencies": [
+    "unchanged skill-contract-candidate.patch",
+    "structured-contract-candidate.patch"
+  ],
+  "overlap": "engine.py only; three exact smoke changes replayed over frozen engine; both standalone patches remain unchanged",
+  "files": {
+    "tests/integration/test_orchestration_cli.py": "d5313b6d8d08ef90791beb8dbd59a89d255c5bd593fd5a62dcb10cb5094666b6",
+    "tests/integration/test_smoke_structured_contract.py": "6daf07ed07c6caf8ebbabce025d8356751f02a6e608f5af7b869f85dfb1ae62c",
+    "tests/support.py": "81ea5b48b6065a38a7d3335f592c443f87a066b5fd62e9b19515d532ea1e056a",
+    "tests/unit/test_cloudflare_web_perf.py": "6594b0dad3db8f762ee67bf2dcdb9283a78f206b01d34c577568f2b5adf7f960",
+    "tests/unit/test_orchestration_recovery.py": "7cba737866a7cc5e6cf4191e46e89a23828298d9f55f912973d13120e24e14b8",
+    "tests/unit/test_schema_markup_skill.py": "fe3908bfb875b50b2ec422e8730cd29f6b0a3f30f7b32cfa9355d8b3fd2ad19d",
+    "tests/unit/test_seo_audit_skill.py": "5dd2d27df4311b5433a5df7e2cec68d24326a988aa0af2fc5a556eb3e0065e57",
+    "tests/unit/test_skill_execution_contract.py": "4b8b964d0ef07b55928ef0f77836e00feb3ad07d199281e56cafce12cdc763c8",
+    "tests/unit/test_structured_response_transport.py": "c9700df6f81403fbea471ffa90350fdceb2e53c080ae258d214f6d069e04d195",
+    "tests/unit/test_vercel_react_best_practices.py": "f213b4ad4f7487f2a916c46e1ec3242c92322a58a9704b81f2d45b13cf5e71f0",
+    "tests/unit/test_web_design_guidelines.py": "a0e4192448f2c0e00dd726e13ac2e04968431619109e4c7cacc41947d13bfc73",
+    "tests/unit/test_web_quality_audit.py": "89f145b17e797f96ef987e1b8fb05d7ca7b4f2d02fa9181c877bbeca5ee4bf16",
+    "tools/ipanema/orchestration/adapters.py": "717f09b1ec681988e641e09835e6cb35f6d48508334f14c809cf4f5735e34df8",
+    "tools/ipanema/orchestration/cli.py": "664220aaa36f1a177c1a8b42eb08c4f8c5cf2a8db77890f1c2236ab563f12c76",
+    "tools/ipanema/orchestration/engine.py": "a43b3f6f09bcfebdbb46e1511901c1998e7e46eca60a8a4a480434da45d487ef",
+    "tools/ipanema/snapshot_links.py": "de9f7f0a43a22dbc13e6050ebf1a2dfa8feaea799df9c3692277a0f49ebcb1dc",
+    "tools/ipanema/validation.py": "e66f8ca6c7a7934b9920fb3ca2d0b0bfe404ef1f567cb9ca6fdd105fbd91afba"
+  },
+  "original_modified": false,
+  "approved": false
+}

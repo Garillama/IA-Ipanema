@@ -1,0 +1,71 @@
+{
+  "report": "/home/alanrichard/Escritorio/IA inversa/.local/scent-json-contract-20261118/reports/runs/sample/20261118T220038-orchestration-smoke-ba5ebddb/smoke.json",
+  "agent": "codex",
+  "passed": true,
+  "error": null,
+  "execution": {
+    "exit_code": 0,
+    "timed_out": false,
+    "output_limited": false,
+    "idle_timed_out": false,
+    "cancelled": false,
+    "process_started": true,
+    "process_reaped": true,
+    "stdin_bytes_written": 12273,
+    "context_complete": true,
+    "duration_s": 16.327,
+    "timing": {
+      "spawn_s": 0.000333,
+      "input_complete_s": 0.000386,
+      "first_stdout_s": 2.183059,
+      "first_stderr_s": null,
+      "timeout_phase": null,
+      "event_counts": {
+        "thread.started": 1,
+        "item.completed": 2,
+        "turn.started": 1,
+        "turn.completed": 1
+      },
+      "inference_vs_initialization": "not_separable_without_provider_events"
+    },
+    "output_accounting": {
+      "transport_bytes": 1071,
+      "retained_bytes": 1071,
+      "discarded_progress_bytes": 0,
+      "transport_limit_bytes": 20000000,
+      "retained_limit_bytes": 2000000
+    },
+    "isolation": {
+      "backend": "bubblewrap",
+      "snapshot_read_only": true,
+      "host_home_mounted": false,
+      "network": "enabled_no_destination_firewall",
+      "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+    },
+    "started_at": "2026-11-18T22:00:38.713192+00:00",
+    "prompt_bytes": 12273,
+    "prompt_sha256": "6d09c6e5299b98555b9107c174acc67dabcd9d32f501f10e04649b2b73b302d2",
+    "usage": {
+      "provider_reported": {
+        "input_tokens": 16633,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 78,
+        "reasoning_output_tokens": 0
+      },
+      "measured_cost_available": false,
+      "estimated_cost": null
+    },
+    "limits": {
+      "timeout": 120,
+      "idle_timeout": 90,
+      "startup_timeout": 30,
+      "first_response_timeout": 150
+    },
+    "structured_output": "native_schema",
+    "contract_validation": {
+      "status": "passed",
+      "duration_s": 0.000117
+    }
+  }
+}

@@ -1,0 +1,29 @@
+test_business_multiple_objects (tests.unit.test_structured_response_transport.Transport.test_business_multiple_objects) ... ok
+test_business_text_after_json (tests.unit.test_structured_response_transport.Transport.test_business_text_after_json) ... ok
+test_duplicate_keys_rejected_in_both_modes (tests.unit.test_structured_response_transport.Transport.test_duplicate_keys_rejected_in_both_modes) ... ok
+test_incomplete_business_json (tests.unit.test_structured_response_transport.Transport.test_incomplete_business_json) ... ok
+test_last_invalid_payload_cannot_hide_behind_earlier_valid_payload (tests.unit.test_structured_response_transport.Transport.test_last_invalid_payload_cannot_hide_behind_earlier_valid_payload) ... ok
+test_markdown_is_not_business_json_in_either_mode (tests.unit.test_structured_response_transport.Transport.test_markdown_is_not_business_json_in_either_mode) ... ok
+test_multiple_final_envelopes_ambiguous (tests.unit.test_structured_response_transport.Transport.test_multiple_final_envelopes_ambiguous) ... ok
+test_native_invalid_structured_output_not_text_fallback (tests.unit.test_structured_response_transport.Transport.test_native_invalid_structured_output_not_text_fallback) ... ok
+test_native_structured_output_authoritative_over_free_text (tests.unit.test_structured_response_transport.Transport.test_native_structured_output_authoritative_over_free_text) ... ok
+test_nested_truncation_signal_rejected (tests.unit.test_structured_response_transport.Transport.test_nested_truncation_signal_rejected) ... ok
+test_nonfinite_numbers_rejected_in_both_modes (tests.unit.test_structured_response_transport.Transport.test_nonfinite_numbers_rejected_in_both_modes) ... ok
+test_provider_error_after_good_result (tests.unit.test_structured_response_transport.Transport.test_provider_error_after_good_result) ... ok
+test_schema_mismatch_remains_separate_from_syntax (tests.unit.test_structured_response_transport.Transport.test_schema_mismatch_remains_separate_from_syntax) ... ok
+test_tool_execution_after_good_result (tests.unit.test_structured_response_transport.Transport.test_tool_execution_after_good_result) ... ok
+test_transport_garbage_after_envelope (tests.unit.test_structured_response_transport.Transport.test_transport_garbage_after_envelope) ... ok
+test_transport_incomplete_tail (tests.unit.test_structured_response_transport.Transport.test_transport_incomplete_tail) ... ok
+test_transport_multiple_bare_objects (tests.unit.test_structured_response_transport.Transport.test_transport_multiple_bare_objects) ... ok
+test_valid_pretty_envelope (tests.unit.test_structured_response_transport.Transport.test_valid_pretty_envelope) ... ok
+test_valid_provider_event_sequence (tests.unit.test_structured_response_transport.Transport.test_valid_provider_event_sequence) ... ok
+test_extra_fields_rejected (tests.integration.test_smoke_structured_contract.SmokeContract.test_extra_fields_rejected) ... ok
+test_invalid_json_text_never_bypasses_pipeline (tests.integration.test_smoke_structured_contract.SmokeContract.test_invalid_json_text_never_bypasses_pipeline) ... ok
+test_missing_required_field_rejected_by_worker (tests.integration.test_smoke_structured_contract.SmokeContract.test_missing_required_field_rejected_by_worker) ... ok
+test_smoke_cannot_return_writes (tests.integration.test_smoke_structured_contract.SmokeContract.test_smoke_cannot_return_writes) ... ok
+test_smoke_uses_native_schema_and_same_safety_flags (tests.integration.test_smoke_structured_contract.SmokeContract.test_smoke_uses_native_schema_and_same_safety_flags) ... ok
+
+----------------------------------------------------------------------
+Ran 24 tests in 0.022s
+
+OK

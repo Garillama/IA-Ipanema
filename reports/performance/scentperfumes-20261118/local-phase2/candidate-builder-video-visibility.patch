@@ -1,0 +1,29 @@
+--- a/static/js/sc-armador3.js
++++ b/static/js/sc-armador3.js
+@@ -398,15 +398,23 @@
+   function autoVideo() {
+     var card = root.querySelector('.scc-vid'); if (!card || !('IntersectionObserver' in window)) return;
+     var v = card.querySelector('video');
+-    new IntersectionObserver(function (es) {
++    var observer = new IntersectionObserver(function (es) {
+       es.forEach(function (e) {
++        if (e.target !== card) {
++          var other = e.target.querySelector('video');
++          if (other && (!e.isIntersecting || e.intersectionRatio < 0.6)) other.pause();
++          return;
++        }
+         if (e.isIntersecting && e.intersectionRatio >= 0.6) {
+           if (card.classList.contains('is-playing') || root.querySelector('.scc-vid.is-playing')) return;
+           v.muted = true; v.loop = true; v.setAttribute('muted', ''); card._auto = true; card.classList.add('is-auto');
+           var p = v.play(); if (p && p.catch) p.catch(function () { card.classList.remove('is-auto'); });
+-        } else if (card.classList.contains('is-auto')) { v.pause(); }
++        } else { v.pause(); }
+       });
+-    }, { threshold: [0, 0.6] }).observe(card);
++    }, { threshold: [0, 0.6] });
++    [].forEach.call(root.querySelectorAll('.scc-vid'), function (item) {
++      if (item.querySelector('video')) observer.observe(item);
++    });
+   }
+ 
+   /* ---------- animaciones de entrada y contadores ---------- */

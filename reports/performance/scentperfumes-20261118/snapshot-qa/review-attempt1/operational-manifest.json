@@ -1,0 +1,225 @@
+{
+  "at": "2026-11-19T16:08:21.570187+00:00",
+  "status": "isolated_QA_passed_pending_full_original_council",
+  "files": {
+    "tests/fixtures/upstream/better-accessibility/SKILL.md": {
+      "base_sha256": null,
+      "candidate_sha256": "6a6465c044783968bae9896fd9e2e78437b90578fe3309b6dee6ef6a920e45f9",
+      "bytes": 10452
+    },
+    "tests/fixtures/upstream/better-accessibility/agents/openai.yaml": {
+      "base_sha256": null,
+      "candidate_sha256": "98699206d4fb00b72bcaf69bb446f541644cc0cc3d23967e266731e100a55563",
+      "bytes": 121
+    },
+    "tests/fixtures/upstream/better-accessibility/focus-and-keyboard.md": {
+      "base_sha256": null,
+      "candidate_sha256": "ace66413242a31df97f1d5101bddc98d871c97716cbc936a439291ea5fda7e54",
+      "bytes": 6356
+    },
+    "tests/fixtures/upstream/better-accessibility/forms.md": {
+      "base_sha256": null,
+      "candidate_sha256": "ed63f7424eb1d3515e4261504467d77840317dda7c0df86c965ee334b3499589",
+      "bytes": 3628
+    },
+    "tests/fixtures/upstream/better-accessibility/hit-areas.md": {
+      "base_sha256": null,
+      "candidate_sha256": "c723a5c5a0935148dbf54dcc1b9fa140251f50a6e953ed79f77af498eae3b615",
+      "bytes": 3385
+    },
+    "tests/fixtures/upstream/better-accessibility/motion-and-zoom.md": {
+      "base_sha256": null,
+      "candidate_sha256": "743bae6a93843ff07ebb283d8de31e3ecd184e04f8de639b0e3b0949088fc13a",
+      "bytes": 2055
+    },
+    "tests/fixtures/upstream/better-accessibility/provenance.json": {
+      "base_sha256": null,
+      "candidate_sha256": "a2a139f926f0fccbbb0cea6a7bbaf45a03df2f644e885c8110be89cb56c06e78",
+      "bytes": 2118
+    },
+    "tests/fixtures/upstream/better-accessibility/reporting.md": {
+      "base_sha256": null,
+      "candidate_sha256": "6203f74162d308d844bd6db8b677502757da922b274ef72cacdba63819073659",
+      "bytes": 1174
+    },
+    "tests/fixtures/upstream/better-accessibility/screen-readers.md": {
+      "base_sha256": null,
+      "candidate_sha256": "a65faa6f28ef972b71328d5aaafb1c13fc9796b02bfa0557ae23a02569267c3b",
+      "bytes": 4450
+    },
+    "tests/fixtures/upstream/better-accessibility/semantics-and-aria.md": {
+      "base_sha256": null,
+      "candidate_sha256": "dfbadab983f65cd5f666ee4e1aecdf9a243ea206876a3f575a12f0b1314f6e37",
+      "bytes": 4380
+    },
+    "tests/integration/test_orchestration_cli.py": {
+      "base_sha256": "aeb259dac03373c9383f7cbeca0603c61770624dd86d999f79a5f2239b1d8e71",
+      "candidate_sha256": "d5313b6d8d08ef90791beb8dbd59a89d255c5bd593fd5a62dcb10cb5094666b6",
+      "bytes": 15657
+    },
+    "tests/integration/test_smoke_structured_contract.py": {
+      "base_sha256": null,
+      "candidate_sha256": "6daf07ed07c6caf8ebbabce025d8356751f02a6e608f5af7b869f85dfb1ae62c",
+      "bytes": 2421
+    },
+    "tests/support.py": {
+      "base_sha256": "4912d8b74a2fc4bc51644f51ab2918873bd07aa8a56911c0e8b62a0cae16968f",
+      "candidate_sha256": "81ea5b48b6065a38a7d3335f592c443f87a066b5fd62e9b19515d532ea1e056a",
+      "bytes": 3126
+    },
+    "tests/unit/test_better_accessibility.py": {
+      "base_sha256": "75b092852031c04ab22c2c59022699d2c0879ad3e6d50f178e1d1f2f2305b396",
+      "candidate_sha256": "77a05cd587f0767251635898f4ea386821f31b2ebcd3c55c97e06e5e0df07d42",
+      "bytes": 26425
+    },
+    "tests/unit/test_cloudflare_web_perf.py": {
+      "base_sha256": "13bad5b035932022198678b92c43e5a6ee92f5431f2f68c5c560dcc2602eb5da",
+      "candidate_sha256": "6594b0dad3db8f762ee67bf2dcdb9283a78f206b01d34c577568f2b5adf7f960",
+      "bytes": 12436
+    },
+    "tests/unit/test_orchestration_recovery.py": {
+      "base_sha256": "8fb806fcf62c35d8b69bfda71bff0513242abfb4104e128a7e5dba027997d3f8",
+      "candidate_sha256": "7cba737866a7cc5e6cf4191e46e89a23828298d9f55f912973d13120e24e14b8",
+      "bytes": 16298
+    },
+    "tests/unit/test_schema_markup_skill.py": {
+      "base_sha256": "63c30c08ac5d91f783f8088e3df3641888543624c1601ba72208fffb044ea2d6",
+      "candidate_sha256": "fe3908bfb875b50b2ec422e8730cd29f6b0a3f30f7b32cfa9355d8b3fd2ad19d",
+      "bytes": 21619
+    },
+    "tests/unit/test_seo_audit_skill.py": {
+      "base_sha256": "97a180024f8bdfc392c504ce4866b2d383d6a5d41aabb461aaa9bfb750fdd25a",
+      "candidate_sha256": "5dd2d27df4311b5433a5df7e2cec68d24326a988aa0af2fc5a556eb3e0065e57",
+      "bytes": 19239
+    },
+    "tests/unit/test_skill_execution_contract.py": {
+      "base_sha256": null,
+      "candidate_sha256": "4b8b964d0ef07b55928ef0f77836e00feb3ad07d199281e56cafce12cdc763c8",
+      "bytes": 19854
+    },
+    "tests/unit/test_snapshot_offline_inputs.py": {
+      "base_sha256": null,
+      "candidate_sha256": "021ff9ff0540a96242a1ee25ef076946565349f9712c21a5052c4d93668a2f3b",
+      "bytes": 4730
+    },
+    "tests/unit/test_structured_response_transport.py": {
+      "base_sha256": null,
+      "candidate_sha256": "c9700df6f81403fbea471ffa90350fdceb2e53c080ae258d214f6d069e04d195",
+      "bytes": 3697
+    },
+    "tests/unit/test_vercel_react_best_practices.py": {
+      "base_sha256": "fd0c169ab8df82d70217d3b90df600d39685866fae9974b588f54d614878d6d2",
+      "candidate_sha256": "f213b4ad4f7487f2a916c46e1ec3242c92322a58a9704b81f2d45b13cf5e71f0",
+      "bytes": 18626
+    },
+    "tests/unit/test_web_design_guidelines.py": {
+      "base_sha256": "a38858148837321921e0bb81056f6841508e6dfb6f6b6d0ad57144de7946b6e7",
+      "candidate_sha256": "a0e4192448f2c0e00dd726e13ac2e04968431619109e4c7cacc41947d13bfc73",
+      "bytes": 19729
+    },
+    "tests/unit/test_web_quality_audit.py": {
+      "base_sha256": "fbc4099fdd365042612d1aef85610d9e834afb42c0accbea77929c5ddc8579d7",
+      "candidate_sha256": "89f145b17e797f96ef987e1b8fb05d7ca7b4f2d02fa9181c877bbeca5ee4bf16",
+      "bytes": 13795
+    },
+    "tools/ipanema/orchestration/adapters.py": {
+      "base_sha256": "bae25bee06cf7574ee35f65e9f9055dfa8a495336f80615165ddd5232359d01d",
+      "candidate_sha256": "717f09b1ec681988e641e09835e6cb35f6d48508334f14c809cf4f5735e34df8",
+      "bytes": 11294
+    },
+    "tools/ipanema/orchestration/cli.py": {
+      "base_sha256": "04e661d92b687da162887aaca8ad5c7905359e7c8376cc0ddec2370d9d58c99b",
+      "candidate_sha256": "664220aaa36f1a177c1a8b42eb08c4f8c5cf2a8db77890f1c2236ab563f12c76",
+      "bytes": 6015
+    },
+    "tools/ipanema/orchestration/engine.py": {
+      "base_sha256": "bfd372402d6ee7372fffccefb5321bffc7f8b877f9ad24100db3c0ebbcf5ef85",
+      "candidate_sha256": "8458e0f55bee94f5c34934caec3a5f463d0edab252c552eaebfd63ad849649db",
+      "bytes": 45227
+    },
+    "tools/ipanema/qa_fixtures.py": {
+      "base_sha256": null,
+      "candidate_sha256": "c9a2c847f7004c3c2a6ce067c56d2be16c0bd4b530f32ae90f40d8d6d2e66155",
+      "bytes": 2382
+    },
+    "tools/ipanema/snapshot_links.py": {
+      "base_sha256": null,
+      "candidate_sha256": "f7807527a479391f300ba4a35fd93125b2a6d5f8714db2a5e48f44b0d6e7836e",
+      "bytes": 5791
+    },
+    "tools/ipanema/validation.py": {
+      "base_sha256": "edca78f96a550aad0ccfa682a3d89fe3ad61c5c88be6620f053ac97474af0ef2",
+      "candidate_sha256": "e66f8ca6c7a7934b9920fb3ca2d0b0bfe404ef1f567cb9ca6fdd105fbd91afba",
+      "bytes": 8320
+    }
+  },
+  "source_windows_for_unchanged_test_context": {
+    "tests/integration/test_orchestration_cli.py": [
+      [
+        17,
+        41
+      ]
+    ],
+    "tests/support.py": [
+      [
+        17,
+        54
+      ]
+    ],
+    "tests/unit/test_better_accessibility.py": [
+      [
+        9,
+        54
+      ]
+    ],
+    "tests/unit/test_cloudflare_web_perf.py": [
+      [
+        22,
+        47
+      ]
+    ],
+    "tests/unit/test_orchestration_recovery.py": [
+      [
+        212,
+        239
+      ]
+    ],
+    "tests/unit/test_schema_markup_skill.py": [
+      [
+        357,
+        382
+      ]
+    ],
+    "tests/unit/test_seo_audit_skill.py": [
+      [
+        341,
+        366
+      ]
+    ],
+    "tests/unit/test_vercel_react_best_practices.py": [
+      [
+        271,
+        296
+      ]
+    ],
+    "tests/unit/test_web_design_guidelines.py": [
+      [
+        307,
+        332
+      ]
+    ],
+    "tests/unit/test_web_quality_audit.py": [
+      [
+        209,
+        234
+      ]
+    ]
+  },
+  "review_source_bytes_estimate": 163552,
+  "patch_sha256": "95cbbadc752d26b6e28bed66875f6b7d70358b50a6360602ab5b30620b73ee7a",
+  "original_root": "/home/alanrichard/Escritorio/IA inversa",
+  "candidate_root": "/home/alanrichard/Escritorio/IA inversa/.local/scent-snapshot-qa-20261119",
+  "original_applied": false,
+  "AGENTS_or_models_changed": false,
+  "workspace_registry_not_modified": true
+}

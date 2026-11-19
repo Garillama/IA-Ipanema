@@ -1,0 +1,146 @@
+{
+  "at": "2026-11-18T22:07:29.675270+00:00",
+  "historical_cause": "Undetermined. Sanitized json_syntax at line 11 column 1 does not reveal original response. No provider blame or retroactive reconstruction.",
+  "reproduced_local_causes": [
+    "Smoke was a legacy audit task with prompt-only JSON contract, while council roles requested native schemas.",
+    "Transport fallback discarded malformed NDJSON lines and silently chose among multiple apparent answers.",
+    "Legacy mode accepted fenced JSON, duplicate keys and nonfinite constants; explicit nested truncation not checked."
+  ],
+  "minimal_changes": [
+    "Controller-owned read-only smoke schema, same existing native flags/models/sandbox and budgets.",
+    "Complete JSON or framed NDJSON parsing without discarding malformed lines.",
+    "Single business response required; duplicate/NaN/Markdown rejected; no invalid structured-output fallback."
+  ],
+  "matrix": [
+    {
+      "case": "Valid pretty JSON envelope",
+      "before": "accepted",
+      "candidate": "accepted",
+      "evidence": "before-tests.txt; after-tests.txt"
+    },
+    {
+      "case": "Valid framed provider NDJSON with one final answer",
+      "before": "accepted",
+      "candidate": "accepted",
+      "evidence": "before-tests.txt; after-tests.txt"
+    },
+    {
+      "case": "Native structured_output plus non-JSON free-text metadata",
+      "before": "accepted",
+      "candidate": "accepted",
+      "evidence": "before-tests.txt; after-tests.txt"
+    },
+    {
+      "case": "Markdown inside business result",
+      "before": "strict rejected; legacy accepted fenced JSON",
+      "candidate": "rejected in both modes",
+      "evidence": "before-tests.txt; after-tests.txt"
+    },
+    {
+      "case": "Incomplete business JSON",
+      "before": "rejected; truncation cause unproven without signal",
+      "candidate": "rejected; no automatic repair",
+      "evidence": "before-tests.txt; after-tests.txt"
+    },
+    {
+      "case": "Multiple JSON objects inside business result",
+      "before": "rejected",
+      "candidate": "rejected",
+      "evidence": "before-tests.txt; after-tests.txt"
+    },
+    {
+      "case": "Trailing text inside business result",
+      "before": "rejected",
+      "candidate": "rejected",
+      "evidence": "before-tests.txt; after-tests.txt"
+    },
+    {
+      "case": "Multiple bare transport objects",
+      "before": "last answer could be selected",
+      "candidate": "rejected as unframed/ambiguous",
+      "evidence": "before-tests.txt; after-tests.txt"
+    },
+    {
+      "case": "Garbage or incomplete event after valid transport envelope",
+      "before": "trailing data ignored",
+      "candidate": "rejected",
+      "evidence": "before-tests.txt; after-tests.txt"
+    },
+    {
+      "case": "Multiple final result events",
+      "before": "last valid answer could be selected",
+      "candidate": "rejected as ambiguous",
+      "evidence": "before-tests.txt; after-tests.txt"
+    },
+    {
+      "case": "Last malformed response after earlier valid response",
+      "before": "earlier success could be selected",
+      "candidate": "rejected",
+      "evidence": "before-tests.txt; after-tests.txt"
+    },
+    {
+      "case": "Duplicate keys or NaN",
+      "before": "strict rejected; legacy accepted",
+      "candidate": "rejected in both modes",
+      "evidence": "before-tests.txt; after-tests.txt"
+    },
+    {
+      "case": "Nested explicit max_tokens signal",
+      "before": "not detected",
+      "candidate": "rejected as output_truncation",
+      "evidence": "before-tests.txt; after-tests.txt"
+    },
+    {
+      "case": "Invalid structured_output field with valid text fallback",
+      "before": "accepted text fallback",
+      "candidate": "rejected",
+      "evidence": "before-tests.txt; after-tests.txt"
+    },
+    {
+      "case": "Schema mismatch in smoke response",
+      "before": "native schema absent; missing summary accepted by worker",
+      "candidate": "required fields/types/enums/no-writes/extra-fields enforced",
+      "evidence": "before-tests.txt; after-tests.txt"
+    },
+    {
+      "case": "Provider error or tool execution after apparent success",
+      "before": "rejected",
+      "candidate": "rejected",
+      "evidence": "before-tests.txt; after-tests.txt"
+    }
+  ],
+  "tests": {
+    "new": 24,
+    "failures_before": 15,
+    "after_passed": 24,
+    "selected_regression_passed": 160,
+    "first_official_central_QA": {
+      "tests": 563,
+      "failures": 21,
+      "errors": 1,
+      "skipped": 11,
+      "passed": false,
+      "scope": "sandboxed full unit baseline; existing snapshot/skill/link failures visible; full error context truncated in controller log",
+      "gate_respected": "No council inference consumed; zero participant proposals."
+    }
+  },
+  "native_support": {
+    "installed_claude": "2.1.327",
+    "local_help": "--json-schema and stream-json flags confirmed",
+    "context7": "Not available in current tool catalog; official documentation fallback used.",
+    "official_sources": [
+      "https://code.claude.com/docs/en/headless",
+      "https://code.claude.com/docs/en/cli-reference"
+    ],
+    "council_flags": "Already present in original adapter; no model or participant changes.",
+    "limits": "Native schema request is not approval; local validation, review and transaction remain mandatory."
+  },
+  "root_protected_sources_modified": false,
+  "performance_evidence_repeated": false,
+  "storefront_http403_stop": true,
+  "errors_during_preparation": [
+    "Initial test-output relative path was incorrect; command rerun from isolated root with absolute output.",
+    "Runtime-settings reuse helper used wrong working-directory prefix; no configuration was copied. Original has no overrides, so both roots used the same default configuration.",
+    "Initial review request wording caused router false positives; no execution used those plans. Final plan retained L4 and both participants with ipanema-architect; no policies changed."
+  ]
+}

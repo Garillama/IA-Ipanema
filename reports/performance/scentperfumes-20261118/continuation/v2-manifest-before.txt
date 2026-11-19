@@ -1,0 +1,21 @@
+test_central_qa_runs_both_suites_and_ignores_source_manifest (test_skill_execution_contract.SkillExecutionContract.test_central_qa_runs_both_suites_and_ignores_source_manifest) ... FAIL
+
+======================================================================
+FAIL: test_central_qa_runs_both_suites_and_ignores_source_manifest (test_skill_execution_contract.SkillExecutionContract.test_central_qa_runs_both_suites_and_ignores_source_manifest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/alanrichard/Escritorio/IA inversa/.local/scent-skill-contract-candidate/tests/unit/test_skill_execution_contract.py", line 129, in test_central_qa_runs_both_suites_and_ignores_source_manifest
+    self.assertEqual([call.args[0][5] for call in runner.call_args_list],['tests/unit','tests/integration'])
+AssertionError: Lists differ: ['tests/unit'] != ['tests/unit', 'tests/integration']
+
+Second list contains 1 additional elements.
+First extra element 1:
+'tests/integration'
+
+- ['tests/unit']
++ ['tests/unit', 'tests/integration']
+
+----------------------------------------------------------------------
+Ran 1 test in 0.009s
+
+FAILED (failures=1)

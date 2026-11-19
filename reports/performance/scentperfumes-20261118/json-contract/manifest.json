@@ -1,0 +1,37 @@
+{
+  "at": "2026-11-18T22:00:39.773181+00:00",
+  "status": "private_candidate_tested_pending_mandatory_review",
+  "source_files": {
+    "tools/ipanema/orchestration/adapters.py": {
+      "base_sha256": "bae25bee06cf7574ee35f65e9f9055dfa8a495336f80615165ddd5232359d01d",
+      "candidate_sha256": "717f09b1ec681988e641e09835e6cb35f6d48508334f14c809cf4f5735e34df8"
+    },
+    "tools/ipanema/orchestration/engine.py": {
+      "base_sha256": "bfd372402d6ee7372fffccefb5321bffc7f8b877f9ad24100db3c0ebbcf5ef85",
+      "candidate_sha256": "66fc2a2863221a3367f2552481f811fae72cf4f0c18c7a6514098bed1d7c7c31"
+    },
+    "tools/ipanema/orchestration/cli.py": {
+      "base_sha256": "04e661d92b687da162887aaca8ad5c7905359e7c8376cc0ddec2370d9d58c99b",
+      "candidate_sha256": "664220aaa36f1a177c1a8b42eb08c4f8c5cf2a8db77890f1c2236ab563f12c76"
+    },
+    "tests/unit/test_structured_response_transport.py": {
+      "base_sha256": null,
+      "candidate_sha256": "c9700df6f81403fbea471ffa90350fdceb2e53c080ae258d214f6d069e04d195"
+    },
+    "tests/integration/test_smoke_structured_contract.py": {
+      "base_sha256": null,
+      "candidate_sha256": "6daf07ed07c6caf8ebbabce025d8356751f02a6e608f5af7b869f85dfb1ae62c"
+    }
+  },
+  "patch_sha256": "2f1e08ff1734d4ab2bebf104e7c2fa237f5b7b64a0525231954d35a491bae03e",
+  "AGENTS_modified": false,
+  "models_changed": false,
+  "protected_source_applied": false,
+  "storefront_package_modified": false,
+  "regression_tests": 160,
+  "tests_new": 24,
+  "tests_failing_before": 15,
+  "claude_smoke": "candidate-smoke.json",
+  "codex_smoke": "candidate-codex-smoke.json",
+  "provider_historical_cause": "Not determined; original response not retained. Synthetic cases show local defects, not proof of past provider output."
+}

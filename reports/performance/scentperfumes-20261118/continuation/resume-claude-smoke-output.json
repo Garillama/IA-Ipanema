@@ -1,0 +1,66 @@
+{
+  "report": "/home/alanrichard/Escritorio/IA inversa/.local/scent-skill-contract-candidate/reports/runs/scentperfumes/20261118T211252-orchestration-smoke-ef919359/smoke.json",
+  "agent": "claude",
+  "passed": false,
+  "error": "Proveedor denegó acceso/cuota o run cancelado; sin reintentos ni evasión.",
+  "execution": {
+    "exit_code": 1,
+    "timed_out": false,
+    "output_limited": false,
+    "idle_timed_out": false,
+    "cancelled": false,
+    "process_started": true,
+    "process_reaped": true,
+    "stdin_bytes_written": 11991,
+    "context_complete": true,
+    "duration_s": 2.924,
+    "timing": {
+      "spawn_s": 0.000339,
+      "input_complete_s": 0.000389,
+      "first_stdout_s": 1.581832,
+      "first_stderr_s": null,
+      "timeout_phase": null,
+      "event_counts": {
+        "result": 1
+      },
+      "inference_vs_initialization": "not_separable_without_provider_events"
+    },
+    "output_accounting": {
+      "transport_bytes": 1405,
+      "retained_bytes": 1405,
+      "discarded_progress_bytes": 0,
+      "transport_limit_bytes": 20000000,
+      "retained_limit_bytes": 2000000
+    },
+    "isolation": {
+      "backend": "bubblewrap",
+      "snapshot_read_only": true,
+      "host_home_mounted": false,
+      "network": "enabled_no_destination_firewall",
+      "limitation": "Provider CLI must disable tools/hooks/MCP. Inference network is not API-only egress enforcement."
+    },
+    "started_at": "2026-11-18T21:12:52.444020+00:00",
+    "prompt_bytes": 11991,
+    "prompt_sha256": "d5ef1f1748c4c16382dc79333ff6b7408ef5eb5f23c543e144573e02ab4e8e5f",
+    "usage": {
+      "provider_reported": {
+        "total_cost_usd": 0,
+        "duration_ms": 751,
+        "input_tokens": 0,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "output_tokens": 0
+      },
+      "measured_cost_available": true,
+      "estimated_cost": null
+    },
+    "limits": {
+      "timeout": 300,
+      "idle_timeout": 180,
+      "startup_timeout": 30,
+      "first_response_timeout": 120
+    },
+    "structured_output": "legacy_contract",
+    "error_category": "rate_limit"
+  }
+}

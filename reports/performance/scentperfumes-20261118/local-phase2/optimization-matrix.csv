@@ -1,0 +1,6 @@
+prioridad,optimización,archivos,impacto_local,evidencia,estado,limitación
+1-nuevo,Videos fuera de pantalla,static/js/sc-armador3.js,12–16 fotogramas adicionales → 0 por intervalo local ~650 ms,112 checks; 6 pares antes/después,preparado; no aprobado; no aplicado,No medición de tienda; QA comercial/Safari pendiente
+previo,Observadores cabecera/búsqueda,static/js/sc-global.js; static/js/sc-search-refinement.js,20 búsquedas globales por componente → 0 para 20 mutaciones ajenas,108 checks de evidencia anterior conservada,congelado; no aprobado; no aplicado,DOM artificial; no INP real
+previo,Preloads CSS redundantes,layouts/layout.tpl,2 solicitudes CSS → 0 en fixture,32 checks y 8 pares visuales anteriores conservados,congelado; no aprobado; no aplicado,No ahorro de CDN/storefront demostrado
+baja,Escrituras CSS cabecera,static/js/sc-scent-extras.js,90 llamadas repetidas → 0; beneficio neto CPU no demostrado,96 checks; 6 pares visuales idénticos,experimental; no aprobado; no aplicado,Mediana TaskDuration móvil 40.645 → 42.952 ms; no mejora total concluyente
+investigar,Recomendaciones con carrito cerrado,static/js/sc-scent-cart-recs.js; static/js/sc-cart-related.js,1 carga índice; 8 mutaciones ajenas → 8 selecciones en fixture,2 perfiles diagnósticos sin parche,diagnóstico solamente,No alterar coordinación nativa/variantes sin validación

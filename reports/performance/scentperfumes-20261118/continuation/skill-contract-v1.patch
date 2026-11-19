@@ -1,0 +1,321 @@
+--- a/tools/ipanema/orchestration/engine.py
++++ b/tools/ipanema/orchestration/engine.py
+@@ -140,20 +140,34 @@
+ def instruction_context(project,plan):
+     skills={}
+     from ..coordinator import AUTHORIZED_SKILLS
+-    for name in plan['skills']:
+-        if not (__import__('re').fullmatch('ipanema-[a-z-]+',name) or name in AUTHORIZED_SKILLS):
++    names=plan.get('skills')
++    if not isinstance(names,list) or any(not isinstance(name,str) for name in names) or len(names)!=len(set(names)):
++        raise IpanemaError('Lista de skills inválida.')
++    for name in names:
++        if name not in AUTHORIZED_SKILLS:
+             raise IpanemaError('Skill fuera del catálogo.')
+         path=project.root/'.agents/skills'/name/'SKILL.md'
+         if not beneath(path,project.root/'.agents/skills'):raise IpanemaError('Skill fuera de la raíz autorizada.')
+-        if path.is_file():skills[name]=path.read_text()
++        if any(parent.is_symlink() for parent in (path, *path.parents) if parent!=project.root and beneath(parent,project.root)):
++            raise IpanemaError('No se permiten enlaces simbólicos en skills.')
++        if not path.is_file():raise IpanemaError('Skill autorizada ausente: '+name)
++        try:skills[name]=path.read_text(encoding='utf-8')
++        except (OSError,UnicodeError) as exc:raise IpanemaError('Skill autorizada ilegible: '+name) from exc
+     return {'rules':(project.root/'AGENTS.md').read_text(),'skills':skills}
+ 
+ 
+-def sanitized_view(source,destination,names=None):
++def authorized_skill_document(name):
++    from ..coordinator import AUTHORIZED_SKILLS
++    parts=Path(name).parts
++    return len(parts)==4 and parts[:2]==('.agents','skills') and parts[2] in AUTHORIZED_SKILLS and parts[3]=='SKILL.md'
++
++
++def sanitized_view(source,destination,names=None,*,include_skills=False):
+     destination.mkdir()
+     for path in source.rglob('*') if names is None else [source/name for name in names]:
+         rel=path.relative_to(source)
+-        if path.is_symlink() or not path.is_file() or any(p.startswith('.') for p in rel.parts) or path.name.endswith('.local.json') or 'node_modules' in rel.parts:continue
++        skill=include_skills and authorized_skill_document(rel)
++        if path.is_symlink() or any(q.is_symlink() for q in path.parents if beneath(q,source)) or not path.is_file() or any(p.startswith('.') for p in rel.parts) and not skill or path.name.endswith('.local.json') or 'node_modules' in rel.parts:continue
+         if path.stat().st_size>5_000_000:continue
+         target=destination/rel;target.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(path,target)
+     return destination
+@@ -178,8 +192,8 @@
+     else:names=[str(p.relative_to(source)) for p in source.rglob('*') if p.is_file()]
+     for name in names:
+         path=source/name
+-        if any(part.startswith('.') for part in Path(name).parts) and not name.startswith('.agents/'):continue
+-        if name.startswith(('node_modules/','reports/runs/','projects/')) or path.is_symlink() or not path.is_file():continue
++        if any(part.startswith('.') for part in Path(name).parts) and not authorized_skill_document(name):continue
++        if name.startswith(('node_modules/','reports/runs/')) or name.startswith('projects/') and name!='projects/README.md' or path.is_symlink() or any(q.is_symlink() for q in path.parents if beneath(q,source)) or not path.is_file():continue
+         if path.stat().st_size>5_000_000:continue
+         dest=snapshot/name;dest.parent.mkdir(parents=True,exist_ok=True)
+         if plan['scope']=='theme' and name=='manifest.json':
+@@ -187,6 +201,9 @@
+             manifest=read_json(path)
+             write_json(dest,{k:manifest.get(k) for k in ('theme','theme_version','forked')})
+         else:shutil.copyfile(path,dest)
++    if plan['scope']=='workspace':
++        from ..snapshot_links import capture_omitted_links
++        plan['_controller_link_receipts']=capture_omitted_links(source,snapshot)
+     for name in plan['allowed_files']:safe_path(name)
+     git(snapshot,'init','-q');git(snapshot,'add','.')
+     git(snapshot,'-c','user.name=IA-Ipanema','-c','user.email=local@invalid','commit','--allow-empty','-qm','Snapshot local sin credenciales')
+@@ -344,15 +361,16 @@
+     from .isolation import run_isolated
+     # Tests run without network, provider credentials or access to the original repo.
+     # QA needs a project registry for knowledge tests, but never a real store's configuration.
+-    names=[str(p.relative_to(tree)) for p in tree.rglob('*') if p.is_file() and p.relative_to(tree).parts[0]!='projects']
+-    view=sanitized_view(tree,tree.parent/('qa-view-'+str(time.time_ns())),names)
++    names=[str(p.relative_to(tree)) for p in tree.rglob('*') if p.is_file() and (p.relative_to(tree).parts[0]!='projects' or p.relative_to(tree).as_posix()=='projects/README.md')]
++    view=sanitized_view(tree,tree.parent/('qa-view-'+str(time.time_ns())),names,include_skills=True)
+     write_json(view/'projects/registry.json',{'schema_version':2,'default':'ipanema','projects':{'ipanema':'projects/ipanema.json'}})
+     write_json(view/'projects/ipanema.json',{'schema_version':2,'id':'ipanema','name':'Offline QA fixture',
+         'theme_root':None,'discovery_root':'ipanema-discovery','knowledge_reference_project':'ipanema',
+         'evidence_dir':'reports/runs/ipanema','public_url':'https://example.invalid','environment':'offline-test',
+-        'qa':{'pages':{'home':'/'}}})
++        'qa':{'pages':{'home':'/'},'snapshot_omissions':plan.get('_controller_link_receipts')}})
+     r=run_isolated(['/usr/bin/python3','-m','unittest','discover','-s','tests/unit','-v'],'',view,provider='qa',timeout=180,network=False)
+     return {'name':'central-qa','executed_by':'controller','executed':True,'passed':r.get('exit_code')==0 and not r.get('timed_out'),'kind':'unit-tests-isolated','exit_code':r.get('exit_code'),
++            'snapshot_links':'Controller-verified historical targets excluded; contents not inspected in sandbox.',
+             'project_configuration':'synthetic_offline_no_theme','summary':r.get('stderr','')[-10000:],'skips_observed':'skipped' in r.get('stderr',''),
+             'limitations':['Pruebas de integración/navegador pueden necesitar preparación adicional; no se aprueban automáticamente.']}
+ 
+@@ -423,8 +441,6 @@
+     plan.pop('_controller_instructions',None)
+     plan['_controller_instructions']=instruction_context(project,plan)
+     for name in plan['allowed_files']:safe_path(name)
+-    for skill in plan['skills']:
+-        if not __import__('re').fullmatch(r'ipanema-[a-z-]+',skill):raise IpanemaError('Skill fuera de catálogo.')
+     ids={t['id'] for t in plan['tasks']}
+     if len(ids)!=len(plan['tasks']):raise IpanemaError('IDs de tareas repetidos.')
+     for task in plan['tasks']:
+--- a/tools/ipanema/validation.py
++++ b/tools/ipanema/validation.py
+@@ -13,6 +13,7 @@
+     root, doc = project.root, project.knowledge_root
+     base = doc / "13-evidence/measurements/source-baseline"
+     errors, warnings = [], []
++    excluded_links = 0
+     summary = read_json(base / "source-summary.json")
+     files = read_json(base / "source-inventory.json")
+     checked, unchanged, unavailable_links, links = 0, 0, 0, 0
+@@ -84,6 +85,12 @@
+                 continue
+             destination = (path.parent / raw).resolve() if raw else path.resolve()
+             if not destination.exists():
++                from .snapshot_links import omitted_link_receipt
++                receipt = omitted_link_receipt(project, path, destination)
++                if receipt is not None:
++                    excluded_links += 1
++                    warnings.append("Referencia histórica verificada por controlador; contenido excluido del snapshot: " + receipt['destination'])
++                    continue
+                 errors.append(f"Enlace roto {path.relative_to(root)} -> {raw}")
+                 continue
+             if line and destination.is_file():
+@@ -113,6 +120,6 @@
+         if not re.search(r"^description: .+", text, re.M):
+             errors.append("Skill sin descripción: " + path.parent.name)
+     return {"source_status": source_status, "source_files_unchanged": unchanged, "source_files_checked": checked,
+-            "markdown_links_checked": links, "historical_external_links_unavailable": unavailable_links,
++            "markdown_links_checked": links, "snapshot_links_excluded": excluded_links, "historical_external_links_unavailable": unavailable_links,
+             "component_sheets": len(sheets), "settings": len(settings), "skills": len(skills),
+             "errors": errors, "warnings": warnings}
+--- /dev/null
++++ b/tools/ipanema/snapshot_links.py
+@@ -0,0 +1,49 @@
++"""Explicit receipts for historical evidence intentionally excluded from offline QA.
++
++Receipts assert identity/existence only. They never validate evidence contents,
++Google state, runtime results, new links or a changed document.
++"""
++from pathlib import Path
++import re
++from urllib.parse import unquote
++from .core import beneath, digest, now
++
++
++def capture_omitted_links(source, snapshot):
++    rows=[]
++    for document in snapshot.rglob('*.md'):
++        rel=document.relative_to(snapshot)
++        original=source/rel
++        if not original.is_file() or original.is_symlink() or digest(original)!=digest(document):continue
++        for match in re.finditer(r'(?<!!)\[[^\]]+\]\((<[^>]+>|[^\s)]+)\)',document.read_text(encoding='utf-8')):
++            raw=unquote(match.group(1).strip('<>').partition('#')[0])
++            if re.match(r'^[a-zA-Z]+://|^mailto:|^app:',raw) or Path(raw).is_absolute():continue
++            # Line/anchor semantics cannot be established from identity receipts.
++            if re.search(r':\d+$',raw) or '#' in match.group(1):continue
++            target=(document.parent/raw).resolve()
++            if not beneath(target,snapshot/'reports/runs') or target.exists():continue
++            relative=target.relative_to(snapshot)
++            if any(part.startswith('.') for part in relative.parts) or target.name.endswith('.local.json') or target.suffix not in ('.md','.json'):continue
++            original_target=source/relative
++            if not original_target.is_file() or original_target.is_symlink() or any(q.is_symlink() for q in original_target.parents if beneath(q,source)):continue
++            rows.append({'source':rel.as_posix(),'source_sha256':digest(document),'destination':relative.as_posix(),
++                         'destination_sha256':digest(original_target),'exists_at_capture':True})
++    return {'kind':'controller-offline-snapshot-links','at':now(),'scope':'identity_only_contents_excluded','links':rows}
++
++
++def omitted_link_receipt(project, document, destination):
++    # The controller supplies this only in the synthetic, read-only sandbox config.
++    # Normal validation remains strict, even if metadata happens to be present.
++    if project.data.get('environment')!='offline-test':return None
++    manifest=project.qa.get('snapshot_omissions')
++    if not isinstance(manifest,dict) or manifest.get('kind')!='controller-offline-snapshot-links' or manifest.get('scope')!='identity_only_contents_excluded':return None
++    if not beneath(document,project.root) or not beneath(destination,project.root/'reports/runs'):return None
++    rel=destination.relative_to(project.root)
++    if any(part.startswith('.') for part in rel.parts) or destination.name.endswith('.local.json') or destination.suffix not in ('.md','.json'):return None
++    relative=document.relative_to(project.root).as_posix(); target=rel.as_posix()
++    for row in manifest.get('links',[]):
++        if not isinstance(row,dict):continue
++        if row.get('source')!=relative or row.get('destination')!=target or row.get('exists_at_capture')is not True:continue
++        if not all(isinstance(row.get(k),str) and re.fullmatch('[0-9a-f]{64}',row[k]) for k in ('source_sha256','destination_sha256')):continue
++        if digest(document)==row['source_sha256']:return row
++    return None
+--- a/tests/support.py
++++ b/tests/support.py
+@@ -26,6 +26,12 @@
+         put(root / "theme/templates/pages/home.json", {"sections": {"hero": {"type": "hero", "settings": {}}}, "order": ["hero"]})
+         put(root / "theme/sections/hero.tpl", '<section><h1>Fixture</h1></section>\n{% schema %}{"name":"Hero","settings":[{"id":"title","type":"setting","setting_type":"text","default":"Fixture"}]}{% endschema %}')
+         put(root / "theme/manifest.json", {"theme": "fixture", "theme_version": "1", "forked": True})
++    # Synthetic instructions keep strict production loading testable offline.
++    # These do not authorize real provider execution or copy store information.
++    from ipanema.coordinator import AUTHORIZED_SKILLS
++    for skill in AUTHORIZED_SKILLS:
++        put(root / ".agents/skills" / skill / "SKILL.md",
++            "---\nname: " + skill + "\ndescription: Synthetic offline fixture\n---\n")
+     return root
+ 
+ 
+--- /dev/null
++++ b/tests/unit/test_skill_execution_contract.py
+@@ -0,0 +1,128 @@
++"""Offline controller contracts; mocked dispatch is not provider approval."""
++import json
++from pathlib import Path
++import tempfile
++import unittest
++from unittest.mock import patch
++from tests.support import make_project
++from ipanema.core import Project,IpanemaError
++from ipanema.coordinator import AUTHORIZED_SKILLS,EXTERNAL_SKILLS,route
++from ipanema.orchestration import engine,planner
++
++class SkillExecutionContract(unittest.TestCase):
++    def setUp(self):
++        self.tmp=tempfile.TemporaryDirectory();self.root=make_project(Path(self.tmp.name),theme=False)
++        self.addCleanup(self.tmp.cleanup)
++        (self.root/'AGENTS.md').write_text('Fixture rules. No remote actions.\n')
++        (self.root/'copy.txt').write_text('Fixture content\n')
++        for name in AUTHORIZED_SKILLS:
++            p=self.root/'.agents/skills'/name/'SKILL.md';p.parent.mkdir(parents=True,exist_ok=True);p.write_text('---\nname: '+name+'\ndescription: fixture\n---\n')
++        self.project=Project(self.root)
++
++    def test_registered_skills_load_for_all_catalog_entries(self):
++        names=sorted(AUTHORIZED_SKILLS)
++        self.assertEqual(set(engine.instruction_context(self.project,{'skills':names})['skills']),set(names))
++
++    def test_router_discovery_external_names_are_authorized(self):
++        for request in ['Optimiza LCP','Auditoría integral de calidad web','Audita SEO canonical','Schema.org ProductGroup']:
++            with self.subTest(request=request):
++                names=route(request)['skills'];self.assertTrue(set(names)<=AUTHORIZED_SKILLS)
++                self.assertEqual(set(engine.instruction_context(self.project,{'skills':names})['skills']),set(names))
++
++    def test_unknown_names_including_ipanema_prefix_rejected(self):
++        for name in ['ipanema-invented','cloudflare-unknown','unknown','../ipanema-architect','/etc/passwd','ipanema-architect/../../secret']:
++            with self.subTest(name=name),self.assertRaises(IpanemaError):engine.instruction_context(self.project,{'skills':[name]})
++
++    def test_list_type_entries_and_duplicates_rejected(self):
++        for value in ['ipanema-architect',{},[None],[[]],['ipanema-architect','ipanema-architect']]:
++            with self.subTest(value=value),self.assertRaises(IpanemaError):engine.instruction_context(self.project,{'skills':value})
++
++    def test_missing_authorized_skill_fails_closed(self):
++        (self.root/'.agents/skills/cloudflare-web-perf/SKILL.md').unlink()
++        with self.assertRaises(IpanemaError):engine.instruction_context(self.project,{'skills':['cloudflare-web-perf']})
++
++    def test_internal_and_external_file_symlinks_rejected(self):
++        p=self.root/'.agents/skills/cloudflare-web-perf/SKILL.md';p.unlink()
++        for dest in [self.root/'copy.txt',Path('/etc/hosts')]:
++            with self.subTest(dest=str(dest)):
++                p.symlink_to(dest)
++                with self.assertRaises(IpanemaError):engine.instruction_context(self.project,{'skills':['cloudflare-web-perf']})
++                p.unlink()
++
++    def test_internal_directory_symlink_rejected(self):
++        folder=self.root/'.agents/skills/cloudflare-web-perf';real=self.root/'relocated';folder.rename(real);folder.symlink_to(real,target_is_directory=True)
++        with self.assertRaises(IpanemaError):engine.instruction_context(self.project,{'skills':['cloudflare-web-perf']})
++
++    def test_invalid_utf8_fails_closed(self):
++        (self.root/'.agents/skills/cloudflare-web-perf/SKILL.md').write_bytes(b'\xff')
++        with self.assertRaises(IpanemaError):engine.instruction_context(self.project,{'skills':['cloudflare-web-perf']})
++
++    def test_execute_reaches_configuration_only_after_catalog_validation(self):
++        plan=planner.make_plan(self.project,'Optimiza LCP',files=['copy.txt'],scope='workspace',read_only=True)
++        class DispatchReached(Exception):pass
++        with patch.object(engine,'config',side_effect=DispatchReached),self.assertRaises(DispatchReached):engine.execute(self.project,plan,authorize=True)
++
++    def test_execute_unknown_skill_never_dispatches(self):
++        plan=planner.make_plan(self.project,'Revisa un texto',files=['copy.txt'],scope='workspace',read_only=True);plan['skills']=['ipanema-invented']
++        with patch.object(engine,'config') as dispatch:
++            with self.assertRaises(IpanemaError):engine.execute(self.project,plan,authorize=True)
++            dispatch.assert_not_called()
++
++    def test_sanitizer_keeps_private_default_and_explicit_qa_documents(self):
++        (self.root/'.nuvem').write_text('synthetic-private');(self.root/'shop.local.json').write_text('{}')
++        p=self.root/'.agents/skills/ipanema-invented/SKILL.md';p.parent.mkdir();p.write_text('Unregistered')
++        view=engine.sanitized_view(self.root,self.root/'default-view',names=['.agents/skills/cloudflare-web-perf/SKILL.md','.nuvem','shop.local.json'])
++        self.assertFalse((view/'.agents').exists());self.assertFalse((view/'.nuvem').exists())
++        view=engine.sanitized_view(self.root,self.root/'qa-view',names=['.agents/skills/cloudflare-web-perf/SKILL.md','.agents/skills/ipanema-invented/SKILL.md','.nuvem','shop.local.json'],include_skills=True)
++        self.assertTrue((view/'.agents/skills/cloudflare-web-perf/SKILL.md').is_file());self.assertFalse((view/'.agents/skills/ipanema-invented').exists());self.assertFalse((view/'.nuvem').exists());self.assertFalse((view/'shop.local.json').exists())
++
++class SnapshotLinkContract(unittest.TestCase):
++    def setUp(self):
++        from ipanema.snapshot_links import capture_omitted_links
++        self.tmp=tempfile.TemporaryDirectory();self.addCleanup(self.tmp.cleanup)
++        root=Path(self.tmp.name);self.source=make_project(root/'source',theme=False);self.snapshot=make_project(root/'snapshot',theme=False)
++        for r in [self.source,self.snapshot]:(r/'README.md').write_text('[History](reports/runs/old/report.json)\n')
++        target=self.source/'reports/runs/old/report.json';target.parent.mkdir(parents=True);target.write_text('{"synthetic":true}')
++        self.index=capture_omitted_links(self.source,self.snapshot);self.project=Project(self.snapshot);self.project.data['environment']='offline-test';self.project.qa['snapshot_omissions']=self.index
++
++    def receipt(self,name='reports/runs/old/report.json'):
++        from ipanema.snapshot_links import omitted_link_receipt
++        return omitted_link_receipt(self.project,self.snapshot/'README.md',self.snapshot/name)
++
++    def test_receipt_is_identity_only_and_content_stays_excluded(self):
++        self.assertEqual(len(self.index['links']),1);self.assertIsNotNone(self.receipt());self.assertFalse((self.snapshot/'reports/runs').exists());self.assertEqual(self.index['scope'],'identity_only_contents_excluded')
++
++    def test_default_real_project_validation_remains_strict(self):
++        self.project.data['environment']='production-read-only';self.assertIsNone(self.receipt())
++
++    def test_changed_document_cannot_reuse_receipt(self):
++        (self.snapshot/'README.md').write_text('Changed source [History](reports/runs/old/report.json)');self.assertIsNone(self.receipt())
++
++    def test_new_private_unknown_and_forged_targets_rejected(self):
++        for name in ['reports/runs/new/report.json','reports/runs/.env','projects/private.local.json','../outside.json']:
++            with self.subTest(name=name):self.assertIsNone(self.receipt(name))
++        self.index['links'][0]['destination_sha256']='not-a-hash';self.assertIsNone(self.receipt())
++
++    def test_missing_or_symlinked_evidence_never_invented(self):
++        from ipanema.snapshot_links import capture_omitted_links
++        target=self.source/'reports/runs/old/report.json';target.unlink();self.assertEqual(capture_omitted_links(self.source,self.snapshot)['links'],[])
++        target.symlink_to('/etc/hosts');self.assertEqual(capture_omitted_links(self.source,self.snapshot)['links'],[])
++
++    def test_unindexed_receipt_never_matches(self):
++        # Exercise full default validator on the real repository in its usual suite;
++        # here this assertion checks the explicit exclusion predicate only.
++        self.project.qa['snapshot_omissions']={};self.assertIsNone(self.receipt())
++
++    def test_full_validator_preserves_error_for_uninventoried_links(self):
++        from ipanema.validation import validate
++        from tests.support import put
++        evidence=self.snapshot/'ipanema-discovery/13-evidence/measurements/source-baseline'
++        for name,value in [('source-summary.json',{'settings':0}),('source-inventory.json',[]),('components.json',[]),('settings.json',[])]:put(evidence/name,value)
++        (self.snapshot/'AGENTS.md').write_text('Fixture rules')
++        approved=validate(self.project)
++        self.assertEqual(approved['errors'],[]);self.assertEqual(approved['snapshot_links_excluded'],1)
++        self.project.data['environment']='production-read-only'
++        self.assertTrue(any('Enlace roto' in e for e in validate(self.project)['errors']))
++        self.project.data['environment']='offline-test'
++        (self.snapshot/'README.md').write_text('[Unknown](reports/runs/new/report.json)')
++        self.assertTrue(any('Enlace roto' in e for e in validate(self.project)['errors']))

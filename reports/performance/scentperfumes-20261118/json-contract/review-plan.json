@@ -1,0 +1,71 @@
+{
+  "plan": "/home/alanrichard/Escritorio/IA inversa/.local/scent-json-contract-20261118/reports/runs/sample/20261118T220106-orchestration-plan-94b7bb42/plan.json",
+  "classification": {
+    "level": "L4",
+    "risk": "critical",
+    "reasons": [
+      "produccion"
+    ],
+    "production_request": true,
+    "independent_review_required": true,
+    "method": "Reglas conservadoras revisables; la longitud del diff no reduce riesgo comercial."
+  },
+  "skills": [
+    "seo-audit",
+    "ipanema-seo-expert"
+  ],
+  "files": [
+    "tools/ipanema/orchestration/adapters.py",
+    "tools/ipanema/orchestration/engine.py",
+    "tools/ipanema/orchestration/cli.py",
+    "tests/unit/test_structured_response_transport.py",
+    "tests/integration/test_smoke_structured_contract.py"
+  ],
+  "tasks": [
+    {
+      "id": "architecture",
+      "objective": "Revisión independiente de seguridad del parser JSON y smoke estructurado, solo lectura. Evaluar código candidato existente frente a contratos de transporte, ambigüedad, respuestas malformadas y esquema nativo; sin escribir código ni afirmar aprobación de producción.",
+      "role": "architecture",
+      "agent": "claude",
+      "tier": "critical",
+      "allowed_files": [],
+      "read_files": [
+        "tools/ipanema/orchestration/adapters.py",
+        "tools/ipanema/orchestration/engine.py",
+        "tools/ipanema/orchestration/cli.py",
+        "tests/unit/test_structured_response_transport.py",
+        "tests/integration/test_smoke_structured_contract.py"
+      ],
+      "dependencies": [],
+      "tests": [
+        "central-qa"
+      ],
+      "state": "pending",
+      "result": null
+    },
+    {
+      "id": "audit",
+      "objective": "Revisión independiente de seguridad del parser JSON y smoke estructurado, solo lectura. Evaluar código candidato existente frente a contratos de transporte, ambigüedad, respuestas malformadas y esquema nativo; sin escribir código ni afirmar aprobación de producción.",
+      "role": "audit",
+      "agent": "codex",
+      "tier": "critical",
+      "allowed_files": [],
+      "read_files": [
+        "tools/ipanema/orchestration/adapters.py",
+        "tools/ipanema/orchestration/engine.py",
+        "tools/ipanema/orchestration/cli.py",
+        "tests/unit/test_structured_response_transport.py",
+        "tests/integration/test_smoke_structured_contract.py"
+      ],
+      "dependencies": [
+        "architecture"
+      ],
+      "tests": [
+        "central-qa"
+      ],
+      "state": "pending",
+      "result": null
+    }
+  ],
+  "execution_performed": false
+}
